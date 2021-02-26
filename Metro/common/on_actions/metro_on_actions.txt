@@ -1,0 +1,100 @@
+on_actions = {
+    on_startup = {
+        effect = {
+            ### Welcome ### 
+            every_country = {
+				limit = {
+					is_ai = no
+				}
+                country_event = nf_metro.1
+            }
+        }
+
+        effect = {	
+            ### Spartans ###
+			every_country = {
+				if = {
+					limit = {
+						TAG = SPT
+					}
+					add_manpower = 150
+				}   
+			}  
+### Nazi ###
+	    every_country = {
+		    limit = {
+			    tag = RCH
+		    }
+
+		    every_country = {
+		        limit = {
+			        NOT = { tag = RCH }
+		        }
+		        reverse_add_opinion_modifier = {
+			        target = PREV
+			        modifier = mutant
+		        }
+
+		        add_opinion_modifier = {
+		            target = PREV
+		            modifier = fascist
+		        }
+	        }
+        }
+### Fanatics ###
+	    every_country = {
+		limit = {
+			tag = GWC
+		}
+		    every_country = {
+		        limit = {
+			        NOT = { tag = GWC }
+		        }
+		        reverse_add_opinion_modifier = {
+			        target = PREV
+			        modifier = nonbelivers
+		        }
+
+		        add_opinion_modifier = {
+		            target = PREV
+		            modifier = fanatics
+		        }
+	        }
+        }
+### Mutants ###
+	    every_country = {
+		limit = {
+			tag = MUT
+		}
+		    every_country = {
+		        limit = {
+			        NOT = { tag = MUT }
+		        }
+		        reverse_add_opinion_modifier = {
+			        target = PREV
+			        modifier = incapable_of_reason 
+		        }
+
+		        add_opinion_modifier = {
+		            target = PREV
+		            modifier = mutant
+		        }
+	        }
+        }
+### Communist ###
+	    every_country = {
+		limit = {
+			tag = RED
+		}
+		    every_country = {
+		        limit = {
+			        NOT = { tag = RED }
+		        }
+		        add_opinion_modifier = {
+		            target = PREV
+		            modifier = communist
+		        }
+	        }
+        }
+    }
+}

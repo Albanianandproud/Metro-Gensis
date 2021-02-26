@@ -1,0 +1,355 @@
+sancity_of_life = {
+
+	ration_food = {
+
+		icon = generic_industry
+
+		available = {
+		    num_of_civilian_factories_available_for_projects > 2
+			has_stability < 0.8
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		modifier = {
+		    civilian_factory_use = 2
+			stability_weekly = 0.005
+			consumer_goods_factor = 0.05
+			political_power_gain = -0.1
+		}
+
+		days_remove = 90
+		days_re_enable = 100
+
+		cost = 90
+
+		complete_effect = {
+
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				has_stability < 0.6
+			}
+		}
+	}
+
+	hygiene_education = {
+
+		icon = generic_industry
+
+		available = {
+			has_stability < 1.0
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		modifier = {
+		    political_power_gain = -0.1
+			research_speed_factor = -0.05
+			stability_weekly = 0.0025
+		}
+
+		days_remove = 90
+		days_re_enable = 100
+
+		cost = 90
+
+		complete_effect = {
+
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 25
+				has_stability < 0.3
+			}
+		}
+	}
+
+	rouse_the_people = {
+
+		icon = generic_industry
+
+		available = {
+			has_war_support < 0.6
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		modifier = {
+		    war_support_weekly = 0.005
+			stability_weekly = -0.0025
+		}
+
+		days_remove = 90
+		days_re_enable = 100
+
+		cost = 90
+
+		complete_effect = {
+
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 35
+				has_war_support < 0.7
+			}
+		}
+	}
+}
+
+scavenging_expeditions = {
+
+	scavenge_scrap = {
+
+		icon = steel
+
+		available = {
+		    has_manpower > 10
+			NOT = { has_country_flag = scavenging_scrap }
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -10
+			civilian_factory_use = 2
+			set_country_flag = scavenging_scrap
+		}
+
+		days_remove = 45
+		days_re_enable = 45
+
+		cost = 45
+
+		remove_effect = {
+		    add_manpower = 10 
+			random_owned_controlled_state = {
+		        limit = {
+			        NOT = {
+			            has_state_category = pastoral
+				    }
+		        }
+			    add_resource = {
+			        type = steel
+			        amount = 4
+			    }
+		    }
+
+			clr_country_flag = scavenging_scrap
+		}
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 15
+				steel < 5
+			}
+			modifier = {
+				factor = 10
+				steel < 10
+			}
+			modifier = {
+				factor = 0.1
+				manpower < 30
+			}
+		}
+    }
+
+	scavenge_aluminium = {
+
+		icon = aluminium
+
+		available = {
+		    has_manpower > 10
+			NOT = { has_country_flag = scavenging_aluminium }
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -10
+			civilian_factory_use = 2
+			set_country_flag = scavenging_aluminium
+		}
+
+		days_remove = 45
+		days_re_enable = 45
+
+		cost = 45
+
+		remove_effect = {
+		    add_manpower = 10 
+			random_owned_controlled_state = {
+		        limit = {
+			        NOT = {
+			            has_state_category = pastoral
+				    }
+		        }
+			    add_resource = {
+			        type = aluminium
+			        amount = 4
+			    }
+		    }
+
+			clr_country_flag = scavenging_aluminium
+		}
+		ai_will_do = {
+			factor = 11
+			modifier = {
+				factor = 11
+				aluminium < 5
+			}
+			modifier = {
+				factor = 8
+				aluminium < 10
+			}
+			modifier = {
+				factor = 0.1
+				manpower < 30
+			}
+		}
+    }
+
+	scavenge_tungsten = {
+
+		icon = tungsten
+
+		available = {
+		    has_manpower > 10
+			NOT = { has_country_flag = scavenging_tungsten }
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -10
+			civilian_factory_use = 2
+			set_country_flag = scavenging_tungsten
+		}
+
+		days_remove = 45
+		days_re_enable = 45
+
+		cost = 45
+
+		remove_effect = {
+		    add_manpower = 10 
+			random_owned_controlled_state = {
+		        limit = {
+			        NOT = {
+			            has_state_category = pastoral
+				    }
+		        }
+			    add_resource = {
+			        type = tungsten
+			        amount = 2
+			    }
+		    }
+
+			clr_country_flag = scavenging_tungsten
+		}
+		ai_will_do = {
+			factor = 11
+			modifier = {
+				factor = 11
+				tungsten < 4
+			}
+			modifier = {
+				factor = 8
+				tungsten < 8
+			}
+			modifier = {
+				factor = 0.1
+				manpower < 30
+			}
+		}
+    }
+
+	scavenge_rubber = {
+
+		icon = rubber
+
+		available = {
+		    has_manpower > 10
+			NOT = { has_country_flag = scavenging_rubber }
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -10
+			civilian_factory_use = 2
+			set_country_flag = scavenging_rubber
+		}
+
+		days_remove = 45
+		days_re_enable = 45
+
+		cost = 45
+
+		remove_effect = {
+		    add_manpower = 10 
+			random_owned_controlled_state = {
+		        limit = {
+			        NOT = {
+			            has_state_category = pastoral
+				    }
+		        }
+			    add_resource = {
+			        type = rubber
+			        amount = 2
+			    }
+		    }
+
+			clr_country_flag = scavenging_rubber
+		}
+		ai_will_do = {
+			factor = 11
+			modifier = {
+				factor = 11
+				rubber < 4
+			}
+			modifier = {
+				factor = 8
+				rubber < 8
+			}
+			modifier = {
+				factor = 0.1
+				manpower < 30
+			}
+		}
+    }

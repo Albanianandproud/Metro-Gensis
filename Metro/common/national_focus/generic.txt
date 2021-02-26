@@ -1,0 +1,1504 @@
+focus_tree = {
+	id = generic_focus
+	continuous_focus_position = { x = 1850 y = 550 }
+	country = {
+		factor = 1
+	}
+	default = yes
+	reset_on_civilwar = no
+
+	focus = {
+		id = militia_formation
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 3
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = militia_funding
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = military_doctrine
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = militia_formation
+		}
+		x = -2
+		y = 1
+		relative_position_id = militia_formation
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = military_leader_boost
+		icon = GFX_goal_generic_more_territorial_claims
+		cost = 6.5
+
+		prerequisite = {
+			focus = military_doctrine
+		}
+		x = -1
+		y = 1
+		relative_position_id = military_doctrine
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = military_leader_boost
+		}
+	}
+
+	focus = {
+		id = military_doctrine_II
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = military_leader_boost
+		}
+		x = 0
+		y = 1
+		relative_position_id = military_leader_boost
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = militia_experience
+		icon = GFX_focus_generic_military_mission
+		cost = 6.5
+
+		prerequisite = {
+			focus = militia_formation
+		}
+		x = 0
+		y = 1
+		relative_position_id = militia_formation
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    army_experience = 20
+		}
+	}
+
+	focus = {
+		id = bolstering_forces
+		icon = GFX_focus_secret_rearmament
+		cost = 6.5
+
+		prerequisite = {
+			focus = militia_experience
+		}
+		x = 0
+		y = 1
+		relative_position_id = militia_experience
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    remove_ideas = militia_funding
+            add_ideas = home_guard
+		}
+	}
+
+	focus = {
+		id = regimental_training
+		icon = GFX_focus_generic_manpower
+		cost = 6.5
+
+		prerequisite = {
+			focus = bolstering_forces
+		}
+		x = -1
+		y = 1
+		relative_position_id = bolstering_forces
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = regimental_training
+		}
+	}
+
+	focus = {
+		id = guerilla_tactics
+		icon = GFX_equipment_gasmask
+		cost = 6.5
+
+		prerequisite = {
+			focus = bolstering_forces
+		}
+		x = 1
+		y = 1
+		relative_position_id = bolstering_forces
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = guerilla_militias
+		}
+	}
+
+	focus = {
+		id = military_tactics
+		icon = GFX_focus_generic_little_entente
+		cost = 6.5
+
+		prerequisite = {
+			focus = regimental_training
+		}
+		prerequisite = {
+			focus = guerilla_tactics
+		}
+		x = 0
+		y = 2
+		relative_position_id = bolstering_forces
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = new_world_army
+		}
+	}
+
+	focus = {
+		id = militia_equipment
+		icon = GFX_medium_arms_4
+		cost = 6.5
+
+		prerequisite = {
+			focus = militia_formation
+		}
+		x = 2
+		y = 1
+		relative_position_id = militia_formation
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_equipment_to_stockpile = {
+		        type = infantry_equipment_0
+		        amount = 50
+		    }
+		}
+	}
+
+	focus = {
+		id = gun_research_boost
+		icon = GFX_goal_generic_air_production
+		cost = 6.5
+
+		prerequisite = {
+			focus = militia_equipment
+		}
+		x = 1
+		y = 1
+		relative_position_id = militia_equipment
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = gun_production_boost
+		icon = GFX_equipment_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = gun_research_boost
+		}
+		x = 0
+		y = 1
+		relative_position_id = gun_research_boost
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = gun_production_boost
+		}
+	}
+
+	focus = {
+		id = clearing_clutter
+		icon = GFX_station_entrance
+		x = 10
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = infrastructure
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = infrastructure
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = industrial_research_effort
+		icon = GFX_goal_generic_production
+		cost = 6.5
+
+		prerequisite = {
+			focus = clearing_clutter
+		}
+		x = -1
+		y = 1
+		relative_position_id = clearing_clutter
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = infrastructure_effort
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 6.5
+
+		prerequisite = {
+			focus = clearing_clutter
+		}
+		x = 1
+		y = 1
+		relative_position_id = clearing_clutter
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = workshops
+		icon = GFX_workshop_1
+		cost = 6.5
+
+		prerequisite = {
+			focus = industrial_research_effort
+		}
+		x = -1
+		y = 1
+		relative_position_id = industrial_research_effort
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = workshops_2
+		icon = GFX_workshop_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = workshops
+		}
+		x = 0
+		y = 1
+		relative_position_id = workshops
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = gunsmith
+		icon = GFX_bullets_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = industrial_research_effort
+		}
+		x = 1
+		y = 1
+		relative_position_id = industrial_research_effort
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = gunsmith_2
+		icon = GFX_small_arms_1
+		cost = 6.5
+
+		prerequisite = {
+			focus = gunsmith
+		}
+		x = 0
+		y = 1
+		relative_position_id = gunsmith
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = infrastructure_focus
+		icon = GFX_workstation_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = workshops_2
+		}
+		prerequisite = {
+			focus = gunsmith_2
+		}
+		prerequisite = {
+			focus = hiring_militia
+		}
+		x = 0
+		y = 3
+		relative_position_id = industrial_research_effort
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = gunsmith_3
+		icon = GFX_focus_generic_tank_production
+		cost = 6.5
+
+		prerequisite = {
+			focus = infrastructure_focus
+		}
+		mutually_exclusive = {
+			focus = workshops_3
+		}
+		x = 1
+		y = 1
+		relative_position_id = infrastructure_focus
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = gunsmith_construction
+		}
+	}
+
+	focus = {
+		id = gunsmith_4
+		icon = GFX_tunnel_surplus
+		cost = 6.5
+
+		prerequisite = {
+			focus = gunsmith_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = gunsmith_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 3
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 3
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = workshops_3
+		icon = GFX_goal_generic_construct_civ_factory
+		cost = 6.5
+
+		prerequisite = {
+			focus = infrastructure_focus
+		}
+		mutually_exclusive = {
+			focus = gunsmith_3
+		}
+		x = -1
+		y = 1
+		relative_position_id = infrastructure_focus
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = workshop_construction
+		}
+	}
+
+	focus = {
+		id = workshops_4
+		icon = GFX_workstation
+		cost = 6.5
+
+		prerequisite = {
+			focus = workshops_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = workshops_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 3
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 3
+					    instant_build = yes
+				    }
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 2
+				    add_building_construction = {
+					    type = industrial_complex
+					    level = 2
+					    instant_build = yes
+				    }
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = workforce
+		icon = GFX_mobilise_workforce
+		cost = 6.5
+
+		prerequisite = {
+			focus = clearing_clutter
+		}
+		x = 3
+		y = 1
+		relative_position_id = clearing_clutter
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_manpower = 50
+		}
+	}
+
+	focus = {
+		id = industry_boost
+		icon = GFX_metro_industry
+		cost = 6.5
+
+		prerequisite = {
+			focus = workforce
+		}
+		x = 0
+		y = 1
+		relative_position_id = workforce
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = industry_boost
+		}
+	}
+
+	focus = {
+		id = infrastructure_projects
+		icon = GFX_metro_infrastructure
+		cost = 6.5
+
+		prerequisite = {
+			focus = industry_boost
+		}
+		x = -1
+		y = 1
+		relative_position_id = industry_boost
+
+		mutually_exclusive = {
+		    focus = mobilise_the_labour
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = mobilise_the_labour
+		icon = GFX_mobilise_workforce
+		cost = 6.5
+
+		prerequisite = {
+			focus = industry_boost
+		}
+		x = 1
+		y = 1
+		relative_position_id = industry_boost
+
+		mutually_exclusive = {
+		    focus = infrastructure_projects
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = labour_mobilise
+		}
+	}
+
+	focus = {
+		id = strongarm_caravans
+		icon = GFX_tunnel_patrol
+		cost = 6.5
+
+		prerequisite = {
+			focus = infrastructure_projects
+		}
+		x = 0
+		y = 1
+		relative_position_id = infrastructure_projects
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_manpower = 50
+		}
+	}
+
+	focus = {
+		id = bastion_of_trade
+		icon = GFX_tunnel_bunker
+		cost = 6.5
+
+		prerequisite = {
+			focus = mobilise_the_labour
+		}
+		x = 0
+		y = 1
+		relative_position_id = mobilise_the_labour
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = laboratory
+		icon = GFX_focus_research
+		cost = 6.5
+
+		prerequisite = {
+			focus = strongarm_caravans
+			focus = bastion_of_trade
+			focus = infrastructure_focus
+			focus = scavenging_fuel
+		}
+		x = 0
+		y = 3
+		relative_position_id = industry_boost
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = scavenging_efforts
+		icon = GFX_volunteer_expedition
+		cost = 6.5
+
+		prerequisite = {
+			focus = clearing_clutter
+		}
+		x = 6
+		y = 1
+		relative_position_id = clearing_clutter
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = scavenging_efforts
+		}
+	}
+
+	focus = {
+		id = scavenging_scrap
+		icon = GFX_scrap
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_efforts
+		}
+		x = -1
+		y = 1
+		relative_position_id = scavenging_efforts
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = steel
+			        amount = 16
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = scavenging_electronics
+		icon = GFX_electronics
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_efforts
+		}
+		x = 1
+		y = 1
+		relative_position_id = scavenging_efforts
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = tungsten
+			        amount = 16
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = scavenging_electricity
+		icon = GFX_battery
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_scrap
+		}
+		prerequisite = {
+			focus = scavenging_electronics
+		}
+		x = 0
+		y = 2
+		relative_position_id = scavenging_efforts
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = aluminium
+			        amount = 16
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = scavenging_fuel
+		icon = GFX_Fuel #Capital 'F' because i'm an idiot lol
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_electricity
+		}
+		x = 0
+		y = 1
+		relative_position_id = scavenging_electricity
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = rubber
+			        amount = 16
+			    }
+			}
+		}
+	}
+
+	## Political ##
+
+	focus = {
+		id = political_effort
+		icon = GFX_focus_generic_support_the_left_right
+		x = 22
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_political_power = 150
+		}
+	}
+    ## community ##
+
+	focus = {
+		id = community_1
+		icon = GFX_goal_generic_national_unity
+		cost = 6.5
+
+		prerequisite = {
+			focus = political_effort 
+		}
+
+		mutually_exclusive = {
+		    focus = council_1
+		}
+		mutually_exclusive = {
+		    focus = dictatorial_1
+		}
+		mutually_exclusive = {
+		    focus = oligarch_1
+		}
+
+		x = -3
+		y = 1
+		relative_position_id = political_effort
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = community }
+			}
+		}
+
+		completion_reward = {
+			add_ideas = community
+		    add_political_power = 60
+		}
+	}
+
+	focus = {
+		id = community_2
+		icon = GFX_goal_generic_national_unity
+		cost = 6.5
+
+		prerequisite = {
+			focus = community_1
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = community_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = immigrants
+		}
+	}
+
+	focus = {
+		id = community_3
+		icon = GFX_goal_generic_national_unity
+		cost = 6.5
+
+		prerequisite = {
+			focus = community_2
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = community_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    remove_ideas = immigrants
+		    add_ideas = free_ideals
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+    ## council ##
+
+	focus = {
+		id = council_1
+		icon = GFX_goal_anschluss
+		cost = 6.5
+
+		prerequisite = {
+			focus = political_effort 
+		}
+
+		mutually_exclusive = {
+		    focus = community_1
+		}
+		mutually_exclusive = {
+		    focus = dictatorial_1
+		}
+		mutually_exclusive = {
+		    focus = oligarch_1
+		}
+		
+		x = -1
+		y = 1
+		relative_position_id = political_effort
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = council }
+			}
+		}
+
+		completion_reward = {
+			add_ideas = council
+		    add_political_power = 60
+		}
+	}
+
+	focus = {
+		id = council_2
+		icon = GFX_goal_anschluss
+		cost = 6.5
+
+		prerequisite = {
+			focus = council_1
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = council_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = council_unions
+		}
+	}
+
+	focus = {
+		id = council_3
+		icon = GFX_goal_anschluss
+		cost = 6.5
+
+		prerequisite = {
+			focus = council_2
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = council_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = council_progress
+		}
+	}
+
+    ## oligarch ##
+
+	focus = {
+		id = oligarch_1
+		icon = GFX_goal_generic_major_alliance
+		cost = 6.5
+
+		prerequisite = {
+			focus = political_effort 
+		}
+
+		mutually_exclusive = {
+		    focus = community_1
+		}
+		mutually_exclusive = {
+		    focus = dictatorial_1
+		}
+		mutually_exclusive = {
+		    focus = council_1
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = political_effort
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = oligarch }
+			}
+		}
+
+		completion_reward = {
+			add_ideas = oligarch
+		    add_political_power = 60
+		}
+	}
+
+	focus = {
+		id = oligarch_2
+		icon = GFX_goal_generic_major_alliance
+		cost = 6.5
+
+		prerequisite = {
+			focus = oligarch_1
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = oligarch_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = oligarch_3
+		icon = GFX_goal_generic_major_alliance
+		cost = 6.5
+
+		prerequisite = {
+			focus = oligarch_2
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = oligarch_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = wealth
+		}
+	}
+
+    ## dictatorial ##
+
+	focus = {
+		id = dictatorial_1
+		icon = GFX_goal_demand_sudetenland
+		cost = 6.5
+
+		prerequisite = {
+			focus = political_effort 
+		}
+
+		mutually_exclusive = {
+		    focus = community_1
+		}
+		mutually_exclusive = {
+		    focus = oligarch_1
+		}
+		mutually_exclusive = {
+		    focus = council_1
+		}
+		
+		x = 3
+		y = 1
+		relative_position_id = political_effort
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = dictatorial }
+			}
+		}
+
+		completion_reward = {
+			add_ideas = dictatorial
+		    add_political_power = 60
+		}
+	}
+
+	focus = {
+		id = dictatorial_2
+		icon = GFX_goal_demand_sudetenland
+		cost = 6.5
+
+		prerequisite = {
+			focus = dictatorial_1
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = dictatorial_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = dictatorial_3
+		icon = GFX_goal_demand_sudetenland
+		cost = 6.5
+
+		prerequisite = {
+			focus = dictatorial_2
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = dictatorial_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = do_or_die
+		    add_war_support = 0.1
+		}
+	}
+}
