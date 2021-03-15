@@ -1,0 +1,734 @@
+focus_tree = {
+	id = hanza
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = HNZ
+		}
+	}
+	continuous_focus_position = { x = 1 y = 1}
+	default = no
+
+	focus = {
+		id = HNZ_intro
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 13
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    country_event = nf_HNZ.1
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_1
+		icon = GFX_gasmask_3
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_intro
+		}
+
+		relative_position_id = HNZ_intro
+
+		mutually_exclusive = {
+		    focus = HNZ_industry_2
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_2
+		icon = GFX_metro_infrastructure
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_intro
+		}
+
+		relative_position_id = HNZ_intro
+
+		mutually_exclusive = {
+		    focus = HNZ_industry_1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_3
+		icon = GFX_workstation
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_2
+		}
+
+		relative_position_id = HNZ_industry_2
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_12
+		icon = GFX_helmet
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_2
+		}
+
+		relative_position_id = HNZ_industry_2
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_8
+		icon = GFX_workshop_1
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_3
+			focus = HNZ_industry_5
+		}
+
+		relative_position_id = HNZ_industry_3
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_9
+		icon = GFX_workstation_2
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_8
+			focus = HNZ_industry_10
+		}
+
+		relative_position_id = HNZ_industry_8
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_10
+		icon = GFX_medium_arms_1
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_3
+		}
+
+	    mutually_exclusive = {
+		    focus = HNZ_industry_8
+		}
+
+		relative_position_id = HNZ_industry_3
+
+		ai_will_do = {
+			factor = 2
+		}
+
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_4
+		icon = GFX_barscene
+		x = 2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_1
+		}
+
+		relative_position_id = HNZ_industry_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_11
+		icon = GFX_crate
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_4
+		}
+
+		relative_position_id = HNZ_industry_4
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_5
+		icon = GFX_soldier_1
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_1
+		}
+
+		relative_position_id = HNZ_industry_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_surface_excavation
+		icon = GFX_cityruins
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_5
+			focus = HNZ_industry_3
+		}
+
+		relative_position_id = HNZ_industry_5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_clear_skies
+		icon = GFX_clearsky
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_surface_excavation
+			focus = HNZ_industry_4
+		}
+
+		relative_position_id = HNZ_surface_excavation
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_neighbours
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		available = {
+		    has_completed_focus = HNZ_intro
+		}
+
+		cost = 6.5
+		x = 22
+		y = 1
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_arbat_1
+		icon = GFX_clearsky
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_neighbours
+		}
+
+		relative_position_id = HNZ_neighbours
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_arbat_2
+		icon = GFX_clearsky
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_arbat_1
+		}
+
+		mutually_exclusive = {
+		    focus = HNZ_arbat_3
+		}
+
+		relative_position_id = HNZ_arbat_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_arbat_3
+		icon = GFX_clearsky
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_arbat_1
+		}
+
+		mutually_exclusive = {
+		    focus = HNZ_arbat_2
+		}
+
+		relative_position_id = HNZ_arbat_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_arbat_4
+		icon = GFX_clearsky
+		x = -1
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_arbat_3
+			focus = HNZ_arbat_2
+		}
+
+		relative_position_id = HNZ_arbat_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_arbat_4
+		icon = GFX_clearsky
+		x = 1
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_arbat_3
+			focus = HNZ_arbat_2
+		}
+
+		relative_position_id = HNZ_arbat_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_1
+		icon = GFX_clearsky
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_neighbours
+		}
+
+		relative_position_id = HNZ_neighbours
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_VDNK
+		icon = GFX_clearsky
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_neighbours
+		}
+
+		relative_position_id = HNZ_neighbours
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_1905
+		icon = GFX_clearsky
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_neighbours
+		}
+
+		relative_position_id = HNZ_neighbours
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_farms_and_factories
+		icon = GFX_clearsky
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_1905
+		}
+
+		prerequisite = {
+			focus = HNZ_VDNK
+		}
+
+		relative_position_id = HNZ_neighbours
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_2
+		icon = GFX_clearsky
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_sevastopol_1
+		}
+
+		mutually_exclusive = {
+		    focus = HNZ_sevastopol_3
+		}
+
+		relative_position_id = HNZ_sevastopol_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_3
+		icon = GFX_clearsky
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_sevastopol_1
+		}
+
+		mutually_exclusive = {
+		    focus = HNZ_sevastopol_2
+		}
+
+		relative_position_id = HNZ_sevastopol_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_4
+		icon = GFX_clearsky
+		x = -1
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_sevastopol_3
+			focus = HNZ_sevastopol_2
+		}
+
+		relative_position_id = HNZ_sevastopol_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_4
+		icon = GFX_clearsky
+		x = 1
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_sevastopol_3
+			focus = HNZ_sevastopol_2
+		}
+
+		relative_position_id = HNZ_sevastopol_1
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_polis
+		icon = GFX_clearsky
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_farms_and_factories
+		}
+
+		relative_position_id = HNZ_farms_and_factories
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+}
