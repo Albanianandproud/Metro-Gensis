@@ -7,7 +7,7 @@ focus_tree = {
 			tag = HNZ
 		}
 	}
-	continuous_focus_position = { x = 1 y = 1}
+	continuous_focus_position = { x = 3000 y = 1}
 	default = no
 
 	focus = {
@@ -48,6 +48,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    add_ideas = trade_economy
 		}
 	}
 
@@ -73,6 +74,17 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
 		}
 	}
 
@@ -141,6 +153,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    army_experience = 10
+		    add_equipment_to_stockpile = {
+		        type = infantry_equipment_0
+		        amount = 75
+		    }
 		}
 	}
 
@@ -310,6 +327,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = scrap
+			        amount = 8
+			    }
+			}
 		}
 	}
 
@@ -331,6 +354,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 1
+				category = infantry_weapons
+			}
 		}
 	}
 
@@ -352,6 +381,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    load_oob = HNZ_guards
 		}
 	}
 
@@ -374,6 +404,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    country_event = nf_HNZ.2
 		}
 	}
 
@@ -396,6 +427,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+            country_event = nf_HNZ.3
 		}
 	}
 
@@ -408,9 +440,11 @@ focus_tree = {
 		}
 
 		cost = 6.5
-		x = 22
+		x = 4
 		y = 1
 		completion_reward = {
+		    add_ideas = HNZ_trade_relations
+		    add_political_power = 100
 		}
 	}
 
@@ -729,6 +763,54 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = HNZ_industry_8
+		icon = GFX_workshop_1
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_industry_3
+			focus = HNZ_industry_5
+		}
+
+		relative_position_id = HNZ_industry_3
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 }
