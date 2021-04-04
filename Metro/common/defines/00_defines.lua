@@ -603,9 +603,9 @@ NMilitary = {
 	RECON_SKILL_IMPACT = 5, -- how many skillpoints is a recon advantage worth when picking a tactic.
 
 	MAX_DIVISION_BRIGADE_WIDTH = 5,			-- Max width of regiments in division designer.
-	MAX_DIVISION_BRIGADE_HEIGHT = 5,		-- Max height of regiments in division designer.
+	MAX_DIVISION_BRIGADE_HEIGHT = 1,		-- Max height of regiments in division designer.
 	MAX_DIVISION_SUPPORT_WIDTH = 1,			-- Max width of support in division designer.
-	MAX_DIVISION_SUPPORT_HEIGHT = 5,		-- Max height of support in division designer.
+	MAX_DIVISION_SUPPORT_HEIGHT = 3,		-- Max height of support in division designer.
 	
 	BASE_DIVISION_BRIGADE_GROUP_COST = 20, 	--Base cost to unlock a regiment slot,
 	BASE_DIVISION_BRIGADE_CHANGE_COST = 5,	--Base cost to change a regiment column.

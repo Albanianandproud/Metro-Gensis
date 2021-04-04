@@ -13,7 +13,7 @@ focus_tree = {
 	focus = {
 		id = RED_introduction
 		icon = GFX_focus_generic_join_comintern
-		x = 14
+		x = 8
 		y = 0
 		cost = 6.5
 
@@ -22,38 +22,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
-		    country_event = nf_RED.1 ## 
+		    country_event = nf_RED.1
 		}
 	}
 
 	focus = {
-		id = RED_revolution_triumphant
-		icon = GFX_focus_generic_join_comintern
-		x = 1
-		y = 0
-		cost = 6.5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		## Should become avaliable after chosing leaders
-
-		completion_reward = {
-	        add_political_power = 135
-	        add_stability = 0.04 
-		}
-	}
-	### Industrial Path ###
-
-	focus = {
-		id = RED_left_branch_1
-		icon = GFX_focus_prc_agrarian_socialism
+		id = RED_expansion
+		icon = GFX_station_entrance
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_revolution_triumphant
+			focus = RED_introduction
 		}
+
+		relative_position_id = RED_introduction
 		x = 3
 		y = 1
 
@@ -61,24 +43,34 @@ focus_tree = {
 			factor = 3
 		}
 
+		available = {
+			338 = {
+                is_owned_by = RUI
+			}
+			ROOT = {
+			    has_manpower > 10
+			}
+		}
+
 		completion_reward = {
-		    add_political_power = 90
-	        ## Event should introduce rationing and famine mechanic
-	        custom_effect_tooltip = future_update_tt
+		    add_manpower = -10
+		    transfer_state = 338
+		    338 = { add_core_of = ROOT }
 		}
 	}
 
 	focus = {
-		id = RED_left_branch_2a
-		icon = GFX_focus_por_workers_of_iberia
+		id = RED_economy
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_left_branch_1
+			focus = RED_introduction
 		}
-		x = -1
+
+		relative_position_id = RED_introduction
+		x = 9
 		y = 1
-		relative_position_id = RED_left_branch_1
 
 		ai_will_do = {
 			factor = 3
@@ -86,484 +78,115 @@ focus_tree = {
 
 		completion_reward = {
 		    add_stability = 0.05
-		   	custom_effect_tooltip = future_update_tt
+		    add_political_power = 90
 		}
 	}
 
 	focus = {
-		id = RED_left_branch_2b
-		icon = GFX_focus_generic_soviet_politics
+		id = RED_economy_2
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_left_branch_1
-		}
-		x = 1
-		y = 1
-		relative_position_id = RED_left_branch_1
-
-		ai_will_do = {
-			factor = 3
+			focus = RED_economy
 		}
 
-		completion_reward = {
-		    add_war_support = 0.05
-		    custom_effect_tooltip = future_update_tt
-		}
-	}
-
-	focus = {
-		id = RED_left_branch_3
-		icon = GFX_equipment_medical
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_left_branch_2b
-		}
-		prerequisite = {
-			focus = RED_left_branch_2a
-		}
-		x = 0
-		y = 2
-		relative_position_id = RED_left_branch_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = clothing
-				bonus = 0.5
-				uses = 1
-				category = clothing_kits
-			}
-		    custom_effect_tooltip = future_update_tt
-		}
-	}
-
-	focus = {
-		id = RED_left_branch_4
-		icon = GFX_focus_generic_soviet_politics
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_left_branch_3
-		}
+		relative_position_id = RED_economy
 		x = 0
 		y = 1
-		relative_position_id = RED_left_branch_3
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-		    add_stability = 0.1
-		    custom_effect_tooltip = future_update_tt
 		}
 	}
 
 	focus = {
-		id = RED_left_branch_5
-		icon = GFX_focus_generic_soviet_politics
+		id = RED_economy_5
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_left_branch_4
-		}
-		x = 0
-		y = 1
-		relative_position_id = RED_left_branch_4
-
-		ai_will_do = {
-			factor = 3
+			focus = RED_economy
 		}
 
-		completion_reward = {
-		    add_war_support = 0.1
-		    custom_effect_tooltip = future_update_tt
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_1
-		icon = GFX_focus_ger_great_red_menace
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_revolution_triumphant
-		}
-		x = -5
-		y = 1
-
-		ai_will_do = {
-			factor = 3
+		mutually_exclusive = {
+		    focus = RED_economy_11
 		}
 
-		completion_reward = {
-		    # Unlock a decision to build infrastructure in 'TUNNEL' states#
-			custom_effect_tooltip = RED_build_tunnel_tt
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_2a
-		icon = GFX_metro_infrastructure
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_right_branch_1
-		}
-		x = -1
-		y = 1
-		relative_position_id = RED_right_branch_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_2b
-		icon = GFX_metro_infrastructure
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_right_branch_1
-		}
-		x = 1
-		y = 1
-		relative_position_id = RED_right_branch_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_3
-		icon = GFX_metro_industry
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_right_branch_2a
-		}
-		prerequisite = {
-			focus = RED_right_branch_2b
-		}
-		x = 0
-		y = 2
-		relative_position_id = RED_right_branch_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		    # Unlock Decision to construct Infastructure on states
-		    add_political_power = 135
-
-			custom_effect_tooltip = RED_station_infrastructure_tt
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_4
-		icon = GFX_workstation
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_right_branch_3
-		}
-		x = 0
-		y = 1
-		relative_position_id = RED_right_branch_3
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-
-			custom_effect_tooltip = RED_station_civilian_tt
-
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-			    add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-		        }
-			}
-		}
-	}
-
-	focus = {
-		id = RED_right_branch_5
-		icon = GFX_workstation_2
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_right_branch_4
-		}
-		x = 0
-		y = 1
-		relative_position_id = RED_right_branch_4
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-
-			custom_effect_tooltip = RED_station_military_tt
-
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-			    add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-		        }
-			}
-		}
-	}
-
-	focus = {
-		id = RED_central_branch_1
-		icon = GFX_goal_generic_production
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_revolution_triumphant
-		}
-		x = -1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.5
-				uses = 3
-				category = industry
-			}
-		}
-	}
-
-	focus = {
-		id = RED_central_branch_2
-		icon = GFX_focus_fra_loyalty_stalin
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_central_branch_1
-		}
-		x = 0
-		y = 1
-		relative_position_id = RED_central_branch_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		    # reduce the 'hansa-war-losers' modifier somewhat
-		    remove_ideas = hanza_red_war_loser
-                    add_ideas = hanza_red_war_loser_2
-		}
-	}
-
-	focus = {
-		id = RED_central_branch_3a
-		icon = GFX_focus_generic_industry_2
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_central_branch_2
-		}
-		prerequisite = {
-			focus = RED_right_branch_2b
-		}
+		relative_position_id = RED_economy
 		x = -2
 		y = 1
-		relative_position_id = RED_central_branch_2
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-			    add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-		        }
-			}
 		}
 	}
 
 	focus = {
-		id = RED_central_branch_3b
-		icon = GFX_focus_generic_industry_2
+		id = RED_economy_11
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_2
+			focus = RED_economy
 		}
-		prerequisite = {
-			focus = RED_left_branch_2a
+
+		mutually_exclusive = {
+		    focus = RED_economy_5
 		}
-		x = 2
+
+		relative_position_id = RED_economy
+		x = -4
 		y = 1
-		relative_position_id = RED_central_branch_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_economy_6
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_5
+			focus = RED_economy_11
+		}
+
+		relative_position_id = RED_economy_5
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_economy_9
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_6
+		}
+
+		relative_position_id = RED_economy_6
+		x = 1
+		y = 1
 
 		ai_will_do = {
 			factor = 3
@@ -576,10 +199,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-			    add_extra_state_shared_building_slots = 2
+			    add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 		        }
 			}
@@ -587,40 +210,248 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_central_branch_3c
-		icon = GFX_focus_generic_socialist_science
+		id = RED_economy_16
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_2
+			focus = RED_economy_9
 		}
+
+		relative_position_id = RED_economy_9
 		x = 0
 		y = 1
-		relative_position_id = RED_central_branch_2
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_research_slot = 1
+		    red_hanza_war_recovery = yes
 		}
 	}
 
 	focus = {
-		id = RED_central_branch_4a
+		id = RED_economy_12
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_6
+		}
+
+		relative_position_id = RED_economy_6
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_economy_7
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy
+		}
+
+		mutually_exclusive = {
+		    focus = RED_economy_13
+		}
+
+		relative_position_id = RED_economy
+		x = 2
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_economy_13
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy
+		}
+
+		mutually_exclusive = {
+		    focus = RED_economy_7
+		}
+
+		relative_position_id = RED_economy
+		x = 4
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_economy_8
+        icon = GFX_metro_infrastructure
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_7
+			focus = RED_economy_13
+		}
+
+		relative_position_id = RED_economy_7
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_economy_10
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_8
+		}
+
+		relative_position_id = RED_economy_8
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+			    add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+		        }
+			}
+		}
+	}
+
+	focus = {
+		id = RED_economy_17
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_10
+		}
+
+		relative_position_id = RED_economy_10
+		x = 0
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    red_hanza_war_recovery = yes
+		}
+	}
+
+	focus = {
+		id = RED_economy_14
 		icon = GFX_scrap
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_3a
+			focus = RED_economy_8
 		}
-		prerequisite = {
-			focus = RED_central_branch_3b
-		}
-		x = -1
-		y = 2
-		relative_position_id = RED_central_branch_2
+
+		relative_position_id = RED_economy_8
+		x = 1
+		y = 1
 
 		ai_will_do = {
 			factor = 3
@@ -635,7 +466,7 @@ focus_tree = {
 		    }
 			    add_resource = {
 			        type = scrap
-			        amount = 18
+			        amount = 6
 			    }
 			    add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -646,149 +477,179 @@ focus_tree = {
 			}
 		}
 	}
+
 	focus = {
-		id = RED_central_branch_5a
-		icon = GFX_Fuel
+		id = RED_economy_3
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_4a
+			focus = RED_economy_2
 		}
-		x = 0
+
+		mutually_exclusive = {
+			focus = RED_economy_4
+		}
+
+		relative_position_id = RED_economy_2
+		x = -1
 		y = 1
-		relative_position_id = RED_central_branch_4a
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-		    limit = {
-			    NOT = {
-			        has_state_category = pastoral
-				}
-		    }
-			    add_resource = {
-			        type = electronics
-			        amount = 18
-			    }
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-		        }
-			}
+		    add_ideas = RED_industrial_output
 		}
 	}
 
 	focus = {
-		id = RED_central_branch_4b
-		icon = GFX_electronics
+		id = RED_economy_4
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_3a
+			focus = RED_economy_2
 		}
-		prerequisite = {
-			focus = RED_central_branch_3b
+
+		mutually_exclusive = {
+			focus = RED_economy_3
 		}
+
+		relative_position_id = RED_economy_2
 		x = 1
-		y = 2
-		relative_position_id = RED_central_branch_2
+		y = 1
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-		    limit = {
-			    NOT = {
-			        has_state_category = pastoral
-				}
-		    }
-			    add_resource = {
-			        type = components
-			        amount = 18
-			    }
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-		        }
-			}
+		    add_ideas = RED_industrial_efficency
 		}
 	}
 
 	focus = {
-		id = RED_central_branch_5b
-		icon = GFX_battery
+		id = RED_economy_15
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_central_branch_4b
+			focus = RED_economy_3
+			focus = RED_economy_4
 		}
+
+		relative_position_id = RED_economy_2
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = RED_economy_18
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_economy_15
+		}
+
+		relative_position_id = RED_economy_15
 		x = 0
 		y = 1
-		relative_position_id = RED_central_branch_4b
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-		    limit = {
-			    NOT = {
-			        has_state_category = pastoral
-				}
-		    }
-			    add_resource = {
-			        type = alloys
-			        amount = 18
-			    }
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-		        }
-			}
+		    red_hanza_war_recovery = yes
 		}
 	}
 
 	focus = {
-		id = RED_expansion
-		icon = GFX_station_entrance
+		id = RED_election
+		icon = GFX_focus_prc_agrarian_socialism
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_revolution_triumphant
+			focus = RED_introduction
 		}
-		x = 7
+
+		available = {
+			has_country_flag = RED_election
+		}
+
+		relative_position_id = RED_introduction
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_political_power = 90
+		}
+	}
+
+	focus = {
+		id = RED_election_andrey
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_election
+		}
+
+		mutually_exclusive = {
+			focus = RED_election_maxim
+		}
+
+		relative_position_id = RED_election
+		x = 1
 		y = 1
 
 		ai_will_do = {
 			factor = 3
 		}
-		available = {
-			338 = {
-                is_owned_by = RUI
-			}
-		}
-		bypass = {
-		    NOT = {
-			    338 = {
-                    is_owned_by = RUI
-			    }
-			}
-	    }
+
 		completion_reward = {
-		    transfer_state = 338
-		    338 = { add_core_of = ROOT }
+		    add_political_power = 90
+		}
+	}
+
+	focus = {
+		id = RED_election_maxim
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_election
+		}
+
+		mutually_exclusive = {
+			focus = RED_election_andrey
+		}
+
+		relative_position_id = RED_election
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_political_power = 90
 		}
 	}
 }
