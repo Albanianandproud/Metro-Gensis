@@ -1,6 +1,6 @@
 focus_tree = {
 	id = generic_focus
-	continuous_focus_position = { x = 1850 y = 550 }
+	continuous_focus_position = { x = 1950 y = 550 }
 	country = {
 		factor = 1
 	}
@@ -377,7 +377,7 @@ focus_tree = {
 		prerequisite = {
 			focus = clearing_clutter
 		}
-		x = 1
+		x = 2
 		y = 1
 		relative_position_id = clearing_clutter
 
@@ -385,7 +385,175 @@ focus_tree = {
 			factor = 3
 		}
 
+		available = {
+		    num_of_controlled_states > 4
+		}
+
 		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = building_slot_effort
+		icon = GFX_workshop_1
+		cost = 6.5
+
+		prerequisite = {
+			focus = infrastructure_effort
+		}
+		x = 0
+		y = 1
+		relative_position_id = infrastructure_effort
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = { 
+				    is_major = yes
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			}
+			if = {
+				limit = { 
+				    is_major = no
+				}
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			    random_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = infrastructure_effort_2
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 6.5
+
+		prerequisite = {
+			focus = building_slot_effort
+		}
+		x = 0
+		y = 1
+		relative_position_id = building_slot_effort
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = infrastructure_effort_3
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 6.5
+
+		prerequisite = {
+			focus = infrastructure_effort_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = infrastructure_effort_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available = {
+		    num_of_controlled_states > 6
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
 			random_owned_controlled_state = {
 				add_building_construction = {
 					type = infrastructure
@@ -645,6 +813,9 @@ focus_tree = {
 		prerequisite = {
 			focus = hiring_militia
 		}
+		prerequisite = {
+			focus = infrastructure_effort_2
+		}
 		x = 0
 		y = 3
 		relative_position_id = industrial_research_effort
@@ -833,7 +1004,7 @@ focus_tree = {
 		prerequisite = {
 			focus = clearing_clutter
 		}
-		x = 3
+		x = 5
 		y = 1
 		relative_position_id = clearing_clutter
 
@@ -1009,7 +1180,7 @@ focus_tree = {
 		prerequisite = {
 			focus = clearing_clutter
 		}
-		x = 6
+		x = 8
 		y = 1
 		relative_position_id = clearing_clutter
 
@@ -1134,7 +1305,7 @@ focus_tree = {
 	focus = {
 		id = political_effort
 		icon = GFX_focus_generic_support_the_left_right
-		x = 22
+		x = 24
 		y = 0
 		cost = 6.5
 

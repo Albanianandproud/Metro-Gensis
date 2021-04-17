@@ -15,7 +15,7 @@ focus_tree = {
 		icon = GFX_focus_generic_join_comintern
 		x = 8
 		y = 0
-		cost = 6.5
+		cost = 1
 
 		ai_will_do = {
 			factor = 2
@@ -36,7 +36,7 @@ focus_tree = {
 		}
 
 		relative_position_id = RED_introduction
-		x = 3
+		x = -3
 		y = 1
 
 		ai_will_do = {
@@ -49,6 +49,9 @@ focus_tree = {
 			}
 			ROOT = {
 			    has_manpower > 10
+			    has_army_manpower = {
+                    size > 324
+                }
 			}
 		}
 
@@ -60,8 +63,8 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_economy
-		icon = GFX_focus_prc_agrarian_socialism
+		id = RED_kuznetsky
+		icon = GFX_barscene
 		cost = 6.5
 
 		prerequisite = {
@@ -69,7 +72,145 @@ focus_tree = {
 		}
 
 		relative_position_id = RED_introduction
-		x = 9
+		x = 3
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+		    add_political_power = 60
+		}
+	}
+
+	focus = {
+		id = RED_kuznetsky_annex
+		icon = GFX_goal_generic_major_war
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_kuznetsky
+		}
+
+		relative_position_id = RED_kuznetsky
+		x = -1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		mutually_exclusive = {
+            focus = RED_kuznetsky_puppet
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+		    349 = { add_core_of = ROOT }
+		}
+	}
+
+	focus = {
+		id = RED_kuznetsky_puppet
+		icon = GFX_goal_demand_sudetenland
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_kuznetsky
+		}
+
+		relative_position_id = RED_kuznetsky
+		x = 1
+		y = 1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		mutually_exclusive = {
+            focus = RED_kuznetsky_annex
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+			country_event = nf_RED.2
+		}
+	}
+
+	focus = {
+		id = RED_kuznetsky_factory
+		icon = GFX_workshop_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_kuznetsky_annex
+			focus = RED_kuznetsky_puppet
+		}
+
+		relative_position_id = RED_kuznetsky
+		x = 0
+		y = 2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		mutually_exclusive = {
+            focus = RED_kuznetsky_annex
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+			349 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			350 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_economy
+		icon = GFX_focus_generic_soviet_politics
+		cost = 6.5
+
+		prerequisite = {
+			focus = RED_introduction
+		}
+
+		relative_position_id = RED_introduction
+		x = 10
 		y = 1
 
 		ai_will_do = {
@@ -84,7 +225,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_2
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_focus_por_workers_of_iberia
 		cost = 6.5
 
 		prerequisite = {
@@ -100,12 +241,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
 		}
 	}
 
 	focus = {
 		id = RED_economy_5
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_goal_generic_construct_mil_factory
 		cost = 6.5
 
 		prerequisite = {
@@ -125,12 +272,25 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+			    add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+		        }
+			}
 		}
 	}
 
 	focus = {
 		id = RED_economy_11
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_goal_generic_construct_civ_factory
 		cost = 6.5
 
 		prerequisite = {
@@ -150,12 +310,25 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+			    add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+		        }
+			}
 		}
 	}
 
 	focus = {
 		id = RED_economy_6
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_metro_infrastructure
 		cost = 6.5
 
 		prerequisite = {
@@ -172,12 +345,72 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = RED_economy_9
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_workstation_2
 		cost = 6.5
 
 		prerequisite = {
@@ -199,10 +432,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-			    add_extra_state_shared_building_slots = 3
+			    add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 3
+					level = 2
 					instant_build = yes
 		        }
 			}
@@ -233,7 +466,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_12
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_crate
 		cost = 6.5
 
 		prerequisite = {
@@ -249,12 +482,31 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_controlled_state = {
+		        limit = {
+			        NOT = {
+			            has_state_category = pastoral
+				    }
+		        }
+			    add_resource = {
+			        type = components
+			        amount = 3
+			    }
+			    add_resource = {
+			        type = alloys
+			        amount = 3
+			    }
+			    add_resource = {
+			        type = electronics
+			        amount = 3
+			    }
+			}
 		}
 	}
 
 	focus = {
 		id = RED_economy_7
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_goal_generic_soviet_construction
 		cost = 6.5
 
 		prerequisite = {
@@ -274,12 +526,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    add_ideas = RED_great_leap
 		}
 	}
 
 	focus = {
 		id = RED_economy_13
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_goal_generic_construction
 		cost = 6.5
 
 		prerequisite = {
@@ -299,6 +552,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    add_ideas = RED_austerity_effort
 		}
 	}
 
@@ -386,7 +640,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_10
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_workstation
 		cost = 6.5
 
 		prerequisite = {
@@ -408,10 +662,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-			    add_extra_state_shared_building_slots = 3
+			    add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 3
+					level = 2
 					instant_build = yes
 		        }
 			}
@@ -464,10 +718,10 @@ focus_tree = {
 			        has_state_category = pastoral
 				}
 		    }
-			    add_resource = {
-			        type = scrap
-			        amount = 6
-			    }
+			add_resource = {
+			    type = scrap
+			    amount = 8
+			}
 			    add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -480,7 +734,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_3
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_metro_industry
 		cost = 6.5
 
 		prerequisite = {
@@ -506,7 +760,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_4
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_mobilise_workforce
 		cost = 6.5
 
 		prerequisite = {
@@ -532,7 +786,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_economy_15
-		icon = GFX_focus_prc_agrarian_socialism
+		icon = GFX_goal_generic_scientific_exchange
 		cost = 6.5
 
 		prerequisite = {

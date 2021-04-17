@@ -440,8 +440,10 @@ focus_tree = {
 		}
 
 		cost = 6.5
-		x = 4
-		y = 1
+		x = 0
+		y = 5
+		relative_position_id = HNZ_intro
+
 		completion_reward = {
 		    add_ideas = HNZ_trade_relations
 		    add_political_power = 100
@@ -449,11 +451,20 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_arbat_1
-		icon = GFX_clearsky
+		id = HNZ_arbat_economic_aid
+		icon = GFX_HNZ_weapons_deal
 		x = -3
 		y = 1
 		cost = 6.5
+
+		available = {
+			ARB = {
+                exists = yes
+			}
+			398 = {
+                is_owned_by = ROOT
+            }
+        }
 
 		prerequisite = {
 			focus = HNZ_neighbours
@@ -466,106 +477,163 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    country_event = nf_HNZ.2 #Arbat Economic Deal
 		}
 	}
 
 	focus = {
-		id = HNZ_arbat_2
-		icon = GFX_clearsky
+		id = HNZ_permit_arbat_recruitment
+		icon = GFX_HNZ_soldier
 		x = -1
 		y = 1
 		cost = 6.5
 
+		available = {
+			ARB = {
+                exists = yes
+			}
+        }
+
 		prerequisite = {
-			focus = HNZ_arbat_1
+			focus = HNZ_arbat_economic_aid
 		}
 
-		mutually_exclusive = {
-		    focus = HNZ_arbat_3
-		}
-
-		relative_position_id = HNZ_arbat_1
+		relative_position_id = HNZ_arbat_economic_aid
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
+		    country_event = nf_HNZ.5 #Stalkers for techniques
 		}
 	}
 
 	focus = {
 		id = HNZ_arbat_3
-		icon = GFX_clearsky
+		icon = GFX_equipment_2
 		x = 1
 		y = 1
 		cost = 6.5
 
+		available = {
+			ARB = {
+                exists = yes
+			}
+			398 = {
+                is_owned_by = ROOT
+            }
+        }
+
 		prerequisite = {
-			focus = HNZ_arbat_1
+			focus = HNZ_arbat_economic_aid
 		}
 
-		mutually_exclusive = {
-		    focus = HNZ_arbat_2
-		}
-
-		relative_position_id = HNZ_arbat_1
+		relative_position_id = HNZ_arbat_economic_aid
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
+		    398 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		    ARB = {
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+		    }
 		}
 	}
 
 	focus = {
 		id = HNZ_arbat_4
-		icon = GFX_clearsky
-		x = -1
+		icon = GFX_goal_generic_improve_relations
+		x = 0
 		y = 2
 		cost = 6.5
 
+		available = {
+			ARB = {
+                exists = yes
+			}
+        }
+
+		prerequisite = {
+			focus = HNZ_permit_arbat_recruitment
+		}
 		prerequisite = {
 			focus = HNZ_arbat_3
-			focus = HNZ_arbat_2
 		}
 
-		relative_position_id = HNZ_arbat_1
+		relative_position_id = HNZ_arbat_economic_aid
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
+		    add_ideas = HNZ_mutual_help
+		    ARB = {
+		        add_ideas = HNZ_mutual_help
+		    }
 		}
 	}
 
 	focus = {
-		id = HNZ_arbat_4
-		icon = GFX_clearsky
-		x = 1
-		y = 2
+		id = HNZ_arbat_puppet
+		icon = GFX_HNZ_control_trade
+		x = 0
+		y = 1
 		cost = 6.5
 
+		available = {
+			ARB = {
+                exists = yes
+			}
+			date > 2030.1.1
+			ROOT = {
+			    ic_ratio = {
+                tag = ARB
+                ratio > 2
+                }
+            }                 
+        }
+
 		prerequisite = {
-			focus = HNZ_arbat_3
-			focus = HNZ_arbat_2
+			focus = HNZ_arbat_4
 		}
 
-		relative_position_id = HNZ_arbat_1
+		relative_position_id = HNZ_arbat_4
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
+		    if = {
+		        ARB = {
+		            ai = yes
+		        }
+		        puppet = ARB
+		    }
 		}
 	}
 
 	focus = {
-		id = HNZ_sevastopol_1
-		icon = GFX_clearsky
+		id = HNZ_help_defensive_construction
+		icon = GFX_HNZ_emplacements
 		x = 3
 		y = 1
 		cost = 6.5
@@ -585,8 +653,156 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_VDNK
+		id = HNZ_send_military_aid
+		icon = GFX_soldier_3
+		x = -1
+		y = 1
+		cost = 6.5
+
+		available = {
+			SEV = {
+                exists = yes
+			}
+			ROOT = {
+			    has_manpower > 39
+			}                
+        }
+
+		prerequisite = {
+			focus = HNZ_help_defensive_construction
+		}
+
+		relative_position_id = HNZ_help_defensive_construction
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    SEV = {
+		        add_manpower = 40
+		    }
+		    add_manpower = -40
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_3
+		icon = GFX_tunnel_surplus
+		x = 1
+		y = 1
+		cost = 6.5
+
+		available = {
+			SEV = {
+                exists = yes
+			}              
+        }
+
+		prerequisite = {
+			focus = HNZ_help_defensive_construction
+		}
+
+		relative_position_id = HNZ_help_defensive_construction
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    405 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		    SEV = {
+			    capital_scope = {
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+		    }
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_4
 		icon = GFX_clearsky
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = HNZ_send_military_aid
+		}
+
+		prerequisite = {
+			focus = HNZ_sevastopol_3
+		}
+
+		relative_position_id = HNZ_help_defensive_construction
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = SEV_construction
+		    SEV = {
+		        add_ideas = SEV_construction
+		    }
+		}
+	}
+
+	focus = {
+		id = HNZ_sevastopol_puppet
+		icon = GFX_HNZ_control_trade
+		x = 0
+		y = 1
+		cost = 6.5
+
+		available = {
+			SEV = {
+                exists = yes
+			}
+			date > 2030.1.1
+			ROOT = {
+			    ic_ratio = {
+                tag = SEV
+                ratio > 2
+                }
+            }                 
+        }
+
+		prerequisite = {
+			focus = HNZ_sevastopol_4
+		}
+
+		relative_position_id = HNZ_sevastopol_4
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    if = {
+		        SEV = {
+		            ai = yes
+		        }
+		        puppet = SEV
+		    }
+		}
+	}
+
+	focus = {
+		id = HNZ_VDNK
+		icon = GFX_mushroom
 		x = -1
 		y = 1
 		cost = 6.5
@@ -602,12 +818,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    diplomatic_relation = {
+                country = VDN
+                relation = non_aggression_pact
+                active = yes
+            }
+            add_political_power = 60
 		}
 	}
 
 	focus = {
 		id = HNZ_1905
-		icon = GFX_clearsky
+		icon = GFX_station_entrance
 		x = 1
 		y = 1
 		cost = 6.5
@@ -623,12 +845,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		    diplomatic_relation = {
+                country = ULI
+                relation = non_aggression_pact
+                active = yes
+            }
+            add_political_power = 60
 		}
 	}
 
 	focus = {
 		id = HNZ_farms_and_factories
-		icon = GFX_clearsky
+		icon = GFX_pig
 		x = 0
 		y = 2
 		cost = 6.5
@@ -648,100 +876,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_2
-		icon = GFX_clearsky
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = HNZ_sevastopol_1
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_sevastopol_3
-		}
-
-		relative_position_id = HNZ_sevastopol_1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_3
-		icon = GFX_clearsky
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = HNZ_sevastopol_1
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_sevastopol_2
-		}
-
-		relative_position_id = HNZ_sevastopol_1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_4
-		icon = GFX_clearsky
-		x = -1
-		y = 2
-		cost = 6.5
-
-		prerequisite = {
-			focus = HNZ_sevastopol_3
-			focus = HNZ_sevastopol_2
-		}
-
-		relative_position_id = HNZ_sevastopol_1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_4
-		icon = GFX_clearsky
-		x = 1
-		y = 2
-		cost = 6.5
-
-		prerequisite = {
-			focus = HNZ_sevastopol_3
-			focus = HNZ_sevastopol_2
-		}
-
-		relative_position_id = HNZ_sevastopol_1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
+		    BRK = {
+			    every_owned_state = {
+				    limit = {
+					    NOT = {
+					        has_state_category = pastoral
+					    }
+				    }
+				    add_extra_state_shared_building_slots = 1
+				    add_building_construction = {
+					    type = infrastructure
+					    level = 1
+				    }
+			    }
+			}
 		}
 	}
 

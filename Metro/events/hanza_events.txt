@@ -1,14 +1,129 @@
-add_namespace = nf_hanza
+add_namespace = nf_HNZ
 
 country_event = {
-    id = nf_hanza.1  
-    title = nf_hanza.1.t
-    desc = nf_hanza.1.d
+    id = nf_HNZ.1  
+    title = nf_HNZ.1.t
+    desc = nf_HNZ.1.d
     picture = ccc_mutant
 
 	fire_only_once = yes
 	option = {
-		name = nf_hanza.1.a
+		name = nf_HNZ.1.a
 		#introduction to Hanza
+	}
+}
+
+country_event = { #Arbat Economic Deal
+    id = nf_HNZ.2 
+    title = nf_HNZ.2.t
+    desc = nf_HNZ.2.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { # We will send them an offer to recieve resources and trade.
+		name = nf_HNZ.2.a
+		ARB = {
+		    country_event = nf_ARB.1
+		}
+	}
+}
+
+country_event = { #Took only the resources
+    id = nf_HNZ.3
+    title = nf_HNZ.3.t
+    desc = nf_HNZ.3.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { 
+		name = nf_HNZ.3.a
+
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 5
+			}
+			add_resource = {
+			    type = components
+			    amount = 5
+			}
+			add_resource = {
+			    type = electronics
+			    amount = 5
+			}
+		}	
+	}
+}
+
+country_event = { #Took resources & factory
+    id = nf_HNZ.4
+    title = nf_HNZ.4.t
+    desc = nf_HNZ.4.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { 
+		name = nf_HNZ.4.a
+
+		398 = {
+			add_resource = {
+			    type = scrap
+			    amount = 5
+			}
+			add_resource = {
+			    type = components
+			    amount = 5
+			}
+			add_resource = {
+			    type = electronics
+			    amount = 5
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+	}
+}
+
+country_event = { #Ask Arbat to help teach us stalker techniques
+    id = nf_HNZ.5
+    title = nf_HNZ.5.t
+    desc = nf_HNZ.5.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { 
+		name = nf_HNZ.5.a
+		ARB = {
+		    country_event = nf_ARB.2
+		}
+	}
+}
+
+country_event = { #Ask Arbat to help teach us stalker techniques
+    id = nf_HNZ.6
+    title = nf_HNZ.6.t
+    desc = nf_HNZ.6.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { 
+		name = nf_HNZ.6.a
+		add_ideas = HNZ_stalker_techniques
+	}
+}
+
+country_event = { #Rejected
+    id = nf_HNZ.7
+    title = nf_HNZ.7.t
+    desc = nf_HNZ.7.d
+    picture = ccc_mutant
+
+	fire_only_once = yes
+	option = { 
+		name = nf_HNZ.7.a
 	}
 }
