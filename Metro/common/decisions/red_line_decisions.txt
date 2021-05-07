@@ -18,7 +18,7 @@ RED_politburo_category = {
 		complete_effect = {
 			add_timed_idea = {
 			    idea = RED_placate_ministers
-			    days = 60
+			    days = 49
 			}
 		}
 		
@@ -57,11 +57,33 @@ RED_politburo_category = {
 	    }
 	}
 
+    RED_appeal_politburo_3 = {
+
+		icon = decision_recruit_operative
+		fire_only_once = yes
+		cost = 30
+		days_remove = 89
+		days_re_enable = 0
+
+        ai_will_do = {
+			factor = 0
+		}
+
+		available = {
+			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		}
+		
+		remove_effect = {
+			add_to_variable = { var = politburo_happiness value = 1 }
+			custom_effect_tooltip = RED_politburo_happiness_increase
+	    }
+	}
+
     RED_politburo_korbut = {
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
-		cost = 45
+		cost = 30
 		days_remove = 60
 		days_re_enable = 0
 
@@ -96,7 +118,7 @@ RED_politburo_category = {
 		days_re_enable = 0
 
         ai_will_do = {
-			factor = 0
+			factor = 3
 		}
 
 		available = {
@@ -108,6 +130,97 @@ RED_politburo_category = {
 		
 		remove_effect = {
 		    add_political_power = 100
+			add_to_variable = { var = politburo_happiness value = -1 }
+			custom_effect_tooltip = RED_politburo_happiness_decrease
+	    }
+	}
+
+    RED_use_politburo_2 = {
+
+		icon = decision_recruit_operative
+		fire_only_once = yes
+		cost = 20
+		days_remove = 49
+		days_re_enable = 0
+
+        ai_will_do = {
+			factor = 3
+		}
+
+		available = {
+			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		}
+
+		complete_effect = {
+			add_timed_idea = {
+			    idea = RED_gearing_for_war
+			    days = 49
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { var = politburo_happiness value = -1 }
+			custom_effect_tooltip = RED_politburo_happiness_decrease
+	    }
+	}
+
+    RED_use_politburo_3 = {
+
+		icon = decision_recruit_operative
+		fire_only_once = yes
+		cost = 20
+		days_remove = 20
+		days_re_enable = 8000
+
+        ai_will_do = {
+			factor = 3
+		}
+
+		available = {
+			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		}
+
+		complete_effect = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.66
+				uses = 1
+				category = industry
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { var = politburo_happiness value = -1 }
+			custom_effect_tooltip = RED_politburo_happiness_decrease
+	    }
+	}
+
+    RED_use_politburo_4 = {
+
+		icon = decision_recruit_operative
+		fire_only_once = yes
+		cost = 20
+		days_remove = 20
+		days_re_enable = 8000
+
+        ai_will_do = {
+			factor = 3
+		}
+
+		available = {
+			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		}
+
+		complete_effect = {
+			add_offsite_building = { type = arms_factory level = 1 }
+		    add_equipment_to_stockpile = {
+		        type = infantry_equipment_0
+		        amount = 50
+		    }
+		    add_stability = -0.04
+		}
+		
+		remove_effect = {
 			add_to_variable = { var = politburo_happiness value = -1 }
 			custom_effect_tooltip = RED_politburo_happiness_decrease
 	    }
