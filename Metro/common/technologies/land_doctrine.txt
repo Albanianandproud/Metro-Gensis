@@ -1,26 +1,34 @@
 technologies = {
     # Doctrine is something IDK much about. Modern military tactics perhaps? Reich, Red line and mutants each having unique doctines possibly?
-	mass_assault = {
-		doctrine_name = "MASS_ASSAULT_DOCTRINE"
+
+	elite_doctrine = {
+		doctrine_name = "ELITE_DOCTRINE"
+
+	    xor = { balanced_doctrine overwhelm_doctrine } 
 		
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
 		path = {
-			leads_to_tech = pocket_defence 
+			leads_to_tech = elite_doctrine_2
 			research_cost_coeff = 1
 		}
-		
-		land_reinforce_rate = 0.02
-		minimum_training_level = -0.1		
+
+		category_light_infantry = {
+			default_morale = 0.05
+		}
+
+		land_reinforce_rate = 0.03
+		minimum_training_level = 0.1
+		experience_loss_factor = -0.1		
 
 		doctrine = yes	
-		research_cost = 3v
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
 
 		
@@ -33,37 +41,43 @@ technologies = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
 	}
-	
-	pocket_defence = {
 
+	elite_doctrine_2 = {
+		
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		no_supply_grace = 48 # more hours before supply penalty changes
-		out_of_supply_factor = -0.10
-				
 		path = {
-			leads_to_tech = defence_in_depth
+			leads_to_tech = elite_doctrine_3a
 			research_cost_coeff = 1
 		}
 
+		path = {
+			leads_to_tech = elite_doctrine_3b
+			research_cost_coeff = 1
+		}
+
+		category_light_infantry = {
+			soft_attack = 0.04
+			hard_attack = 0.04
+		}
+
+		recon_factor = 0.04
+
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
 
 		
@@ -76,175 +90,218 @@ technologies = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
 	}
-	
-	defence_in_depth = {
+
+	elite_doctrine_3a = {
+
+	    xor = { elite_doctrine_3b } 
+		
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		max_dig_in = 5
+		path = {
+			leads_to_tech = elite_doctrine_4
+			research_cost_coeff = 1
+		}
+
+		max_planning_factor = 0.04
+
+		planning_speed = 0.04
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_elite
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	elite_doctrine_3b = {
+
+	    xor = { elite_doctrine_3a } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = elite_doctrine_4
+			research_cost_coeff = 1
+		}
+
+		army_speed_factor = 0.03
+
+		planning_speed = 0.03
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_elite
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	elite_doctrine_4 = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = elite_doctrine_5
+			research_cost_coeff = 1
+		}
+
+		experience_gain_army_unit_factor = 0.1
+
+
+		experience_loss_factor = -0.1
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_elite
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	elite_doctrine_5 = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = elite_doctrine_6a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = elite_doctrine_6b
+			research_cost_coeff = 1
+		}
+
+		land_reinforce_rate = 0.05
+
+		org_loss_when_moving = -0.1
 
 		category_light_infantry = {
 			max_organisation = 5
 		}
-		
-		
-		path = {
-			leads_to_tech = large_front_operations
-			research_cost_coeff = 1
-		}
-		path = {
-			leads_to_tech = peoples_army
-			research_cost_coeff = 1
-		}
 
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
 
 		
 		folder = {
 			name = land_doctrine_folder
-			position = { x = 0 y = 4 }
+			position = { x = 0 y = 8 }
 		}
 		
 		ai_will_do = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
 	}
-	
-	large_front_operations = {
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-		xor = {
-			peoples_army
-		}
 
+	elite_doctrine_6a = {
 
-
-		supply_consumption_factor = -0.10
-
-		enable_tactic = tactic_relentless_assault
+	    xor = { elite_doctrine_6b } 
 		
-		path = {
-			leads_to_tech = deep_operations
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 6 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	deep_operations = {
-
-		enable_tactic = tactic_blitz
-		
-		
-		path = {
-			leads_to_tech = operational_concentration
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 8 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	operational_concentration = {
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		max_planning = 0.10
-		land_reinforce_rate = 0.05
-
-		enable_tactic = tactic_elastic_defense
-		
 		path = {
-			leads_to_tech = vast_offensives
+			leads_to_tech = elite_doctrine_7a
 			research_cost_coeff = 1
 		}
 
+		attrition = -0.1
+
+		category_light_infantry = {
+			soft_attack = 0.04
+			hard_attack = 0.04
+		}
+
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
 
 		
@@ -257,319 +314,40 @@ technologies = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
 	}
-	
-	vast_offensives = {
+
+	elite_doctrine_6b = {
+
+	    xor = { elite_doctrine_6a } 
+		
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		supply_consumption_factor = -0.10
-		
-		infantry = {
-			combat_width = -0.4
-		}
-
-		
-		enable_tactic = tactic_overwhelming_fire
-		
 		path = {
-			leads_to_tech = breakthrough_priority
+			leads_to_tech = elite_doctrine_7b
 			research_cost_coeff = 1
 		}
 
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
+		breakthrough_factor = 0.1
 
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 12 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	breakthrough_priority = {
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-
-		category_all_infantry = {
-			max_organisation = 5
-			breakthrough = 0.10
-		}
-		
-		enable_tactic = tactic_breakthrough
-		
-		path = {
-			leads_to_tech = mechanized_wave
-			research_cost_coeff = 1
+	    category_light_infantry = {
+			soft_attack = 0.04
+			hard_attack = 0.04
 		}
 
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 14 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	mechanized_wave = {
-		category_tanks = {
-			max_organisation = 2
-		}
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-
-		category_all_armor = {
-			default_morale = 0.1
-		}
-		
-		path = {
-			leads_to_tech = continuous_offensive
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 16 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-			cat_mechanized_equipment = 3.0
-		}
-	}
-	
-	continuous_offensive = {
-
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-
-		org_loss_when_moving = -0.25
-		land_reinforce_rate = 0.05
-		
-		enable_tactic = tactic_backhand_blow
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = -2 y = 18 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	peoples_army = {
-	
-		xor = {
-			large_front_operations
-		}
-
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-		
-		#Increased Partisan effect on your land occupied by others
-		resistance_damage_to_garrison_on_our_occupied_states = 0.1 #10% more partisan effects 
-		#Land Units take less attrition
-		attrition = -0.1 #take 10% less attrition losses
-		
-		enable_tactic = tactic_human_wave_tactics
-		
-		
-		path = {
-			leads_to_tech = human_infantry_offensive
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = 2 y = 6 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	human_infantry_offensive = {
-
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-
-		infantry = {
-			default_morale = 0.30
-		}
-		land_reinforce_rate = 0.05		
-		
-		path = {
-			leads_to_tech = large_front_offensive
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
-		}
-
-		
-		folder = {
-			name = land_doctrine_folder
-			position = { x = 2 y = 8 }
-		}
-		
-		ai_will_do = {
-			factor = 20
-			modifier = {
-				not = {
-					has_army_experience > 120
-				}
-				factor = 0.8
-			}
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
-	}
-	
-	large_front_offensive = {
-
-		xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1.00
-
-		category_all_infantry = {
-			max_organisation = 10
-		}
-		category_tanks = {
-			max_organisation = 2
-		}
-		
-		path = {
-			leads_to_tech = human_wave_offensive
-			research_cost_coeff = 1
-		}
-
-		doctrine = yes	
-		research_cost = 3
-		
-		categories = {
-			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
 
 		
@@ -582,42 +360,75 @@ technologies = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			industry = 2.0
-		}
 	}
-	
-	human_wave_offensive = {
 
-		conscription = 0.03
-
+	elite_doctrine_7a = {
+		
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		infantry = {
-			combat_width = -1
-		}
-
-		land_reinforce_rate = 0.15		
-		
 		path = {
-			leads_to_tech = guerilla_warfare
+			leads_to_tech = elite_doctrine_8
 			research_cost_coeff = 1
 		}
 
+		terrain_penalty_reduction = 0.05
+		supply_consumption_factor = -0.05
+
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 12 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	elite_doctrine_7b = {
+	
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = elite_doctrine_8
+			research_cost_coeff = 1
+		}
+
+		max_planning_factor = 0.04
+
+		planning_speed = 0.04
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_elite
 		}
 
 		
@@ -630,40 +441,648 @@ technologies = {
 			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = SPT
 			}
 		}
-		
-		ai_research_weights = {
-			infantry_weapons = 1.0
-			industry = 2.0
-		}
 	}
-	
-	guerilla_warfare = {
 
+	elite_doctrine_8 = {
+	
 		xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 1.00
 
-		out_of_supply_factor = -0.30
-		category_army = {
-			default_morale = 0.2
+		path = {
+			leads_to_tech = elite_doctrine_9
+			research_cost_coeff = 1
 		}
-		
-		resistance_growth_on_our_occupied_states = 0.25 
-		
-		enable_tactic = tactic_guerrilla_tactics
-		
+
+		minimum_training_level = 0.1	
+
+	    army_attack_factor = 0.05
+
+	    army_defence_factor = 0.05
+
+	    category_light_infantry = {
+			default_morale = 0.05
+		}
+
 		doctrine = yes	
-		research_cost = 3
+		research_cost = 2.85
 		
 		categories = {
 			land_doctrine
-			cat_mass_assault
+			doctrine_elite
 		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	elite_doctrine_9 = {
+	
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		
+
+	    army_attack_factor = 0.05
+
+	    army_defence_factor = 0.05
+
+	    land_reinforce_rate = 0.05
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_elite
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 16 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = SPT
+			}
+		}
+	}
+
+	balanced_doctrine = {
+		doctrine_name = "BALANCED_DOCTRINE"
+
+		xor = { elite_doctrine overwhelm_doctrine } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		planning_speed = 0.1
+        max_planning_factor = 0.05
+
+		path = {
+			leads_to_tech = balanced_doctrine_2a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = balanced_doctrine_2c
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 0 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_2a = {
+
+		xor = { balanced_doctrine_2c } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		max_dig_in = 2
+		dig_in_speed_factor = 0.25
+		
+		path = {
+			leads_to_tech = balanced_doctrine_3
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_2c = {
+
+		xor = { balanced_doctrine_2a } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		terrain_penalty_reduction = 0.1
+		supply_consumption_factor = -0.1
+		
+		path = {
+			leads_to_tech = balanced_doctrine_3
+			research_cost_coeff = 1
+		}		
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_3 = {
+	
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		land_reinforce_rate = 0.05
+		recon_factor = 0.05
+		
+		path = {
+			leads_to_tech = balanced_doctrine_4a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = balanced_doctrine_4b
+			research_cost_coeff = 1
+		}		
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_4a = {
+
+		xor = { balanced_doctrine_4b } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+        army_org_regain = 0.1
+		category_light_infantry = {
+			soft_attack = 0.05
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_5a
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_4b = {
+
+		xor = { balanced_doctrine_4a } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		army_org_regain = 0.1
+		category_light_infantry = {
+			breakthrough = 0.1
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_5b
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_5a = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		recruitable_population_factor = 0.1
+
+		category_light_infantry = {
+			default_morale = 0.05
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_6a
+			research_cost_coeff = 1
+		}
+	
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_5b = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		army_org_factor = 0.1
+
+		category_light_infantry = {
+			soft_attack = 0.05
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_6b
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_6a = {
+
+	
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		category_light_infantry = {
+			soft_attack = 0.05
+			hard_attack = 0.05
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_7
+			research_cost_coeff = 1
+		}
+	
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_6b = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		org_loss_when_moving = -0.05
+		defence = 0.05
+		
+		path = {
+			leads_to_tech = balanced_doctrine_7
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_7 = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		army_speed_factor = 0.03
+		experience_gain_army_unit_factor = 0.1
+		
+		path = {
+			leads_to_tech = balanced_doctrine_8a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = balanced_doctrine_8b
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 12 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_8a = {
+
+		xor = { balanced_doctrine_8b } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+		
+		path = {
+			leads_to_tech = balanced_doctrine_9a
+			research_cost_coeff = 1
+		}
+
+		industrial_capacity_factory = 0.07
+	
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_8b = {
+
+		xor = { balanced_doctrine_8a } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		land_reinforce_rate = 0.05
+
+		category_army = {
+			max_organisation = 2
+		}
+		
+		path = {
+			leads_to_tech = balanced_doctrine_9b
+			research_cost_coeff = 1
+		}	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
 		
 		folder = {
 			name = land_doctrine_folder
@@ -671,18 +1090,646 @@ technologies = {
 		}
 		
 		ai_will_do = {
+			factor = 20
 			modifier = {
 				not = {
-					has_army_experience > 120
+					has_army_experience > 50
 				}
-				factor = 0.8
+				factor = 20
+				TAG = HNZ
 			}
-			factor = 20
-		}
-		
-		ai_research_weights = {
-			industry = 2.0
 		}
 	}
+
+	balanced_doctrine_9a = {
+
 	
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+		
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		industrial_capacity_factory = 0.08
+
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 16 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	balanced_doctrine_9b = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		planning_speed = 0.1
+        max_planning_factor = 0.1
+		
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_balanced
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 16 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = HNZ
+			}
+		}
+	}
+
+	overwhelm_doctrine = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+
+		xor = { balanced_doctrine elite_doctrine } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_2
+			research_cost_coeff = 1
+		}
+
+		minimum_training_level = -0.1
+		training_time_factor = -0.1	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 0 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_2 = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_3
+			research_cost_coeff = 1
+		}
+
+		land_reinforce_rate = 0.05
+		supply_consumption_factor = -0.1	
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_3 = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_4a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_4b
+			research_cost_coeff = 1
+		}
+
+		attrition = -0.1
+		category_light_infantry = {
+			soft_attack = 0.05
+		}
+			
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_4a = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+
+		xor = { overwhelm_doctrine_4b } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		weekly_manpower = 5
+
+		army_speed_factor = 0.05
+
+		recon_factor = 0.1
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_5a
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_4b = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+
+		xor = { overwhelm_doctrine_4a } 
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		land_reinforce_rate = 0.1
+
+		org_loss_when_moving = -0.1
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_5b
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_5a = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		land_night_attack = 0.2
+
+		planning_speed = 0.1
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_6a
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_5b = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		army_org_regain = 0.1
+
+		terrain_penalty_reduction = 0.1
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_6b
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_6a = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		weekly_manpower = 5
+
+		no_supply_grace = 24
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_7
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_6b = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		army_org_factor = 0.05
+
+		category_light_infantry = {
+			maximum_speed = 0.1
+		}
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_7
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_7 = {
+		doctrine_name = "OVERWHELM_DOCTRINE"
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		max_planning_factor = 0.15
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_8a
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_8b
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 12 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_8a = {
+
+		xor = { overwhelm_doctrine_8b }
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		offence = 0.05
+
+		land_reinforce_rate = 0.05
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_9
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 2 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_8b = {
+
+		xor = { overwhelm_doctrine_8a }
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		defence = 0.05
+
+		recon_factor = 0.05
+
+		path = {
+			leads_to_tech = overwhelm_doctrine_9
+			research_cost_coeff = 1
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = -2 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
+
+	overwhelm_doctrine_9 = {
+		
+		xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 1.00
+
+		category_light_infantry = {
+			soft_attack = 0.1
+			hard_attack = 0.1
+			max_organisation = 5
+		}
+
+		doctrine = yes	
+		research_cost = 2.85
+		
+		categories = {
+			land_doctrine
+			doctrine_overwhelm
+		}
+
+		
+		folder = {
+			name = land_doctrine_folder
+			position = { x = 0 y = 16 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+			modifier = {
+				not = {
+					has_army_experience > 50
+				}
+				factor = 20
+				TAG = RED
+			}
+		}
+	}
 }

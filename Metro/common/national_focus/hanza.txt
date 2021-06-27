@@ -10,34 +10,12 @@ focus_tree = {
 	continuous_focus_position = { x = 3000 y = 1}
 	default = no
 
-	focus = {
-		id = HNZ_intro
-		icon = GFX_gasmask_2
-		x = 11
-		y = 0
-		cost = 1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    country_event = nf_HNZ.1
-		}
-	}
-
-	focus = {
+    focus = {
 		id = HNZ_station_hearth
 		icon = GFX_campfire
-		x = 1
+		x = 10
 		y = 1
 		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_intro
-		}
-
-		relative_position_id = HNZ_intro
 
 		mutually_exclusive = {
 		    focus = HNZ_reinforce_tunnels
@@ -55,15 +33,11 @@ focus_tree = {
 	focus = {
 		id = HNZ_reinforce_tunnels
 		icon = GFX_metro_infrastructure
-		x = -1
+		x = 8
 		y = 1
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_intro
-		}
 
-		relative_position_id = HNZ_intro
 
 		mutually_exclusive = {
 		    focus = HNZ_station_hearth
@@ -310,7 +284,7 @@ focus_tree = {
 	focus = {
 		id = HNZ_military_sector
 		icon = GFX_medium_arms_1
-		x = 1
+		x = 10
 		y = 3
 		cost = 4.4
 
@@ -321,8 +295,6 @@ focus_tree = {
 		mutually_exclusive = {
 		    focus = HNZ_civilian_sector
 		}
-
-		relative_position_id = HNZ_intro
 
 		ai_will_do = {
 			factor = 2
@@ -367,7 +339,15 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = scrap
-			        amount = 10
+			        amount = 3
+			    }
+			    add_resource = {
+			        type = electronics
+			        amount = 3
+			    }
+			    add_resource = {
+			        type = chemicals
+			        amount = 3
 			    }
 			}
 		}
@@ -419,7 +399,19 @@ focus_tree = {
 		}
 
 		completion_reward = {
-		    load_oob = HNZ_guards
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -476,7 +468,7 @@ focus_tree = {
 		}
 
 		cost = 4.4
-		x = 0
+		x = 1
 		y = 6
 		relative_position_id = HNZ_intro
 
@@ -873,6 +865,14 @@ focus_tree = {
                 active = yes
             }
             add_political_power = 60
+			add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = VDN
+			}
+			reverse_add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = VDN
+			}
 		}
 	}
 
@@ -900,6 +900,14 @@ focus_tree = {
                 active = yes
             }
             add_political_power = 60
+			add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = ULI
+			}
+			reverse_add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = ULI
+			}
 		}
 	}
 
@@ -939,6 +947,14 @@ focus_tree = {
 				    }
 			    }
 			}
+			add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = BRK
+			}
+			reverse_add_opinion_modifier = {
+				modifier = trade_relations_1
+				target = BRK
+			}
 		}
 	}
 
@@ -973,15 +989,11 @@ focus_tree = {
 	focus = {
 		id = HNZ_station_refurbishment
 		icon = GFX_crate
-		x = 7
+		x = 1
 		y = 1
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_intro
-		}
 
-		relative_position_id = HNZ_intro
 
 		ai_will_do = {
 			factor = 2
@@ -1350,7 +1362,7 @@ focus_tree = {
 	focus = {
 		id = HNZ_ring_of_steel
 		icon = GFX_cog_infrastructure
-		x = 14
+		x = 17
 		y = 1
 		cost = 4.4
 
@@ -1957,15 +1969,11 @@ focus_tree = {
 	focus = {
 		id = HNZ_military
 		icon = GFX_HNZ_colonel
-		x = -7
+		x = -6
 		y = 1
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_intro
-		}
 
-		relative_position_id = HNZ_intro
 
 		ai_will_do = {
 			factor = 2
@@ -2339,6 +2347,106 @@ focus_tree = {
 
 		completion_reward = {
 		   hanza_war_mobilize = yes
+		}
+	}
+
+	## Politics ##
+
+	focus = {
+		id = HNZ_politics_1
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		available = {
+		    has_completed_focus = HNZ_intro
+		}
+
+		cost = 4.4
+		x = 14
+		y = 6
+		relative_position_id = HNZ_intro
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = HNZ_politics_adam_smith_teaching
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		prerequisite = {
+			focus = HNZ_politics_1
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_politics_moderate_capitalism
+		}
+
+		cost = 4.4
+		x = -3
+		y = 1
+		relative_position_id = HNZ_politics_1
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = HNZ_politics_adam_smith_guiding_hand
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		prerequisite = {
+			focus = HNZ_politics_adam_smith_teaching
+		}
+
+		cost = 4.4
+		x = -1
+		y = 1
+		relative_position_id = HNZ_politics_adam_smith_teaching
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = HNZ_politics_adam_smith_guiding_hand_2
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		prerequisite = {
+			focus = HNZ_politics_adam_smith_guiding_hand
+		}
+
+		cost = 4.4
+		x = 0
+		y = 1
+		relative_position_id = HNZ_politics_adam_smith_guiding_hand
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = HNZ_politics_moderate_capitalism
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		prerequisite = {
+			focus = HNZ_politics_1
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_politics_adam_smith_teaching
+		}
+
+		cost = 4.4
+		x = 4
+		y = 1
+		relative_position_id = HNZ_politics_1
+
+		completion_reward = {
+		    add_political_power = 100
 		}
 	}
 }

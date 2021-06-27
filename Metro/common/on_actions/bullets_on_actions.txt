@@ -1,6 +1,79 @@
+## Created by Albanian for Metro | Genesis ##
 on_actions = {
 	on_startup = {
-	    effect = {
-	    }
+		effect = {
+			every_country={
+				set_variable = { total_expenses = 0 }
+			}
+        }
+    }
+    on_weekly = {
+		effect = {
+			clear_variable = num_controlled_stations
+			clear_variable = num_controlled_civ
+			clear_variable = num_total_battalion
+			clear_variable = num_controlled_infrastructure
+
+            clear_variable = total_expenses
+            clear_variable = gross_income
+            clear_variable = net_income
+
+			set_variable = { gross_income = 0}
+
+            set_variable = { num_controlled_civ = num_of_available_civilian_factories } multiply_variable = { num_controlled_stations  = 2 }
+
+			set_variable = { num_controlled_stations = num_owned_controlled_states}
+			multiply_variable = { num_controlled_stations  = 5 }
+
+			set_variable = { num_controlled_battalion = num_battalions }
+
+			### Every day expenses, gross and net income is set to zero
+
+			set_variable = { total_expenses = 0 }
+			set_variable = { gross_income = 0 }
+			set_variable = { net_income = 0 }
+
+			### Number of states, and civilian factories are added up and calculated
+
+			add_to_variable = {  gross_income  = num_controlled_stations }
+			add_to_variable = {  gross_income  = num_controlled_civ }
+			add_to_variable = {  gross_income  = num_controlled_infrastructure }
+
+			### All expenses are caculated and added up
+
+			add_to_variable = { total_expenses = num_controlled_battalion }
+
+			# Income is added up
+
+			subtract_from_variable = { gross_income = total_expenses }
+
+			### The Final tally ###
+
+			add_to_variable = {  net_income  = gross_income  }
+
+			### Final Tally ##
+
+			set variable = {  net_income  = gross_income  }
+
+			## What the amount is ## 
+
+			set_variable = {  bullet  = net_income }
+		}
 	}
 }
+
+
+
+## num_controlled_stations : amount of stations which can be calculated
+## num_controlled_civ : amount of CG you gain tax from
+## num_controlled_inf : amount of infrastructure you gain tax from
+## num_controlled_battalion : manpower cost (per battalion)
+
+## total_expenses : the total expense 
+## bullet : how much money in stockpile
+## gross_income : total income before deductions 
+## net_income : after deductions equates to net
+
+
+
+
