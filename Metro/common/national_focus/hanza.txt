@@ -357,14 +357,14 @@ focus_tree = {
 		id = HNZ_amongst_wreckage
 		icon = GFX_crate
 		x = -1
-		y = 2
+		y = 3
 		cost = 4.4
 
 		prerequisite = {
-			focus = HNZ_surface_excavation
+			focus = HNZ_salvage_hauls
 		}
 
-		relative_position_id = HNZ_surface_excavation
+		relative_position_id = HNZ_salvage_hauls
 
 		ai_will_do = {
 			factor = 2
@@ -462,10 +462,6 @@ focus_tree = {
 	focus = {
 		id = HNZ_neighbours
 		icon = GFX_focus_hol_the_foundations_of_defense
-
-		available = {
-		    has_completed_focus = HNZ_intro
-		}
 
 		cost = 4.4
 		x = 1
@@ -655,7 +651,7 @@ focus_tree = {
 		completion_reward = {
 		    if = {
 		        ARB = {
-		            ai = yes
+		            player = no
 		        }
 		        puppet = ARB
 		    }
@@ -834,7 +830,7 @@ focus_tree = {
 		completion_reward = {
 		    if = {
 		        SEV = {
-		            ai = yes
+		            player = no
 		        }
 		        puppet = SEV
 		    }
@@ -1150,7 +1146,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			365 = {
@@ -1165,7 +1161,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			355 = {
@@ -1180,7 +1176,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 		}
@@ -1209,7 +1205,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			365 = {
@@ -1217,7 +1213,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			355 = {
@@ -1225,7 +1221,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = infrastructure
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 		}
@@ -1254,7 +1250,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = arms_factory
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			365 = {
@@ -1262,7 +1258,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = arms_factory
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 			355 = {
@@ -1270,7 +1266,7 @@ focus_tree = {
 				add_building_construction = {
 				    type = arms_factory
 				    level = 1
-				    instand_build = yes
+				    instant_build = yes
 				}
 			}
 		}
@@ -1360,15 +1356,89 @@ focus_tree = {
 	}
 
 	focus = {
+		id = HNZ_gunsmith_quaters
+		icon = GFX_bullets_4
+		x = 0
+		y = 1
+		cost = 4.4
+
+		prerequisite = {
+			focus = HNZ_station_refurbishment_10
+		}
+
+		relative_position_id = HNZ_station_refurbishment_10
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				 add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HNZ_labour_mobilise
+		icon = GFX_goal_generic_production
+		x = 0
+		y = 1
+		cost = 4.4
+
+		prerequisite = {
+			focus = HNZ_station_refurbishment_9
+		}
+
+		relative_position_id = HNZ_station_refurbishment_9
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = mobilise
+		}
+	}
+
+	focus = {
+		id = HNZ_gunsmith_construction
+		icon = GFX_goal_generic_build_tank
+		x = 0
+		y = 1
+		cost = 4.4
+
+		prerequisite = {
+			focus = HNZ_station_refurbishment_8
+		}
+
+		relative_position_id = HNZ_station_refurbishment_8
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = gunsmith_construction
+		}
+	}
+
+	focus = {
 		id = HNZ_ring_of_steel
 		icon = GFX_cog_infrastructure
 		x = 17
 		y = 1
 		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_intro
-		}
 
 		available = { 
 		    owns_state = 106
@@ -2355,10 +2425,6 @@ focus_tree = {
 	focus = {
 		id = HNZ_politics_1
 		icon = GFX_focus_hol_the_foundations_of_defense
-
-		available = {
-		    has_completed_focus = HNZ_intro
-		}
 
 		cost = 4.4
 		x = 14

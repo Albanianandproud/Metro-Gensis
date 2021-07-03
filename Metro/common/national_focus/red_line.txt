@@ -13,7 +13,7 @@ focus_tree = {
 	focus = {
 		id = RED_introduction
 		icon = GFX_focus_generic_join_comintern
-		x = 16
+		x = 20
 		y = 0
 		cost = 1
 
@@ -27,20 +27,42 @@ focus_tree = {
 	}
 
 	focus = {
+		id = RED_adress_the_situation
+		icon = GFX_focus_generic_join_comintern
+		cost = 1
+
+		relative_position_id = RED_introduction
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_introduction
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    country_event = nf_RED.4
+		}
+	}
+
+	focus = {
 		id = RED_shut_down_mutinies
 		icon = GFX_lenin
 		cost = 3.6
 
 		prerequisite = {
-			focus = RED_introduction
+			focus = RED_adress_the_situation
 		}
 
 		mutually_exclusive = {
 			focus = RED_use_korbut
 		}
 
-		relative_position_id = RED_introduction
-		x = -3
+		relative_position_id = RED_adress_the_situation
+		x = -4
 		y = 1
 
 		ai_will_do = {
@@ -152,11 +174,11 @@ focus_tree = {
 
 	focus = {
 		id = RED_use_korbut
-		icon = GFX_focus_generic_soviet_politics
+		icon = GFX_RED_NKVD_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = RED_introduction
+			focus = RED_adress_the_situation
 		}
 
 		mutually_exclusive = {
@@ -166,7 +188,7 @@ focus_tree = {
 			focus = RED_shut_down_mutinies
 		}
 
-		relative_position_id = RED_introduction
+		relative_position_id = RED_adress_the_situation
 		x = 0
 		y = 1
 
@@ -182,7 +204,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_reintroduce_chekists
-		icon = GFX_RED_troops2
+		icon = GFX_RED_NKVD
 		cost = 6.5
 
 		prerequisite = {
@@ -210,7 +232,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_infiltrate_workers_culture
-		icon = GFX_RED_spy_on_citizens
+		icon = GFX_RED_infiltration
 		cost = 6.5
 
 		prerequisite = {
@@ -265,15 +287,15 @@ focus_tree = {
 		cost = 3.6
 
 		prerequisite = {
-			focus = RED_introduction
+			focus = RED_adress_the_situation
 		}
 
 		mutually_exclusive = {
 			focus = RED_use_korbut
 		}
 
-		relative_position_id = RED_introduction
-		x = 3
+		relative_position_id = RED_adress_the_situation
+		x = 4
 		y = 1
 
 		ai_will_do = {
@@ -283,7 +305,7 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 			    idea = RED_placate_ministers
-			    days = 180
+			    days = 90
 			}
 			custom_effect_tooltip = RED_placate_ministry
 		}
@@ -467,10 +489,6 @@ focus_tree = {
 		icon = GFX_helmet
 		cost = 6.5
 
-		prerequisite = {
-			focus = RED_introduction
-		}
-
 		available = {
 		    NOT = {
 		        has_idea = RED_mutinies
@@ -479,9 +497,9 @@ focus_tree = {
 		    has_completed_focus = RED_crisis_averted
 		}
 
-		relative_position_id = RED_introduction
-		x = -10
-		y = 1
+		relative_position_id = RED_adress_the_situation
+		x = -14
+		y = 0
 
 		ai_will_do = {
 			factor = 3
@@ -988,92 +1006,23 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = RED_industry_starting
-		icon = GFX_RED_will_of_proletariat
-		cost = 6.5
+	### Political Branch ###
 
-		prerequisite = {
-			focus = RED_introduction
-		}
+	focus = {
+		id = RED_restructuring
+		icon = GFX_RED_handshake
+		cost = 1
 
 		relative_position_id = RED_introduction
-		x = 16
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-    ### Central Plan ###
-
-	focus = {
-		id = RED_industry_starting1
-		icon = GFX_goal_generic_construct_civ_factory
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap
-			focus = RED_industry_methodical_leap
-		}
-
-		relative_position_id = RED_industry_starting
 		x = 0
-		y = 2
+		y = 7
+
+		available = {
+			has_completed_focus = RED_crises_averted
+		}
 
 		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = RED_industry_starting2
-		icon = GFX_goal_generic_production2
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_starting1
-		}
-
-		relative_position_id = RED_industry_starting1
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
+			factor = 2
 		}
 
 		completion_reward = {
@@ -1081,476 +1030,560 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_industry_starting3a
-		icon = GFX_RED_breakthrough
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_starting2
-		}
-
-		mutually_exclusive = {
-			focus = RED_industry_starting3b
-		}
-
-		relative_position_id = RED_industry_starting2
-		x = -1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_starting3b
-		icon = GFX_RED_breakthrough
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_starting2
-		}
-
-		mutually_exclusive = {
-			focus = RED_industry_starting3a
-		}
-
-		relative_position_id = RED_industry_starting2
-		x = 1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	### Methodical Leap
-
-	focus = {
-		id = RED_industry_methodical_leap
-		icon = GFX_goal_generic_soviet_construction
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_starting
-		}
-
-		mutually_exclusive = {
-		    focus = RED_industry_great_leap
-		}
-
-		relative_position_id = RED_industry_starting
-		x = -3
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_methodical_leap_1
-		icon = GFX_focus_generic_join_comintern
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_methodical_leap
-		}
-
-		relative_position_id = RED_industry_methodical_leap
-		x = -1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_methodical_leap_2
-		icon = GFX_RED_bread
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_methodical_leap_1
-		}
-
-		relative_position_id = RED_industry_methodical_leap_1
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_methodical_leap_3
-		icon = GFX_goal_generic_construct_infrastructure
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_methodical_leap
-		}
-
-		relative_position_id = RED_industry_methodical_leap
-		x = 1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_methodical_leap_4
-		icon = GFX_cog_factories
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_methodical_leap_3
-		}
-
-		relative_position_id = RED_industry_methodical_leap_3
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-    ### Great Leap
-
-	focus = {
-		id = RED_industry_great_leap
-		icon = GFX_RED_propaganda_1
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_starting
-		}
-
-		mutually_exclusive = {
-		    focus = RED_industry_methodical_leap_
-		}
-
-		relative_position_id = RED_industry_starting
-		x = 3
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_1
-		icon = GFX_RED_soviet_industry
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap
-		}
-
-		relative_position_id = RED_industry_great_leap
-		x = -1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_2
-		icon = GFX_RED_soviet_industry
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_1
-		}
-
-		relative_position_id = RED_industry_great_leap_1
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_3
-		icon = GFX_RED_soviet_industry
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap
-		}
-
-		relative_position_id = RED_industry_great_leap
-		x = 1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_4
-		icon = GFX_RED_soviet_industry
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_3
-		}
-
-		relative_position_id = RED_industry_great_leap_3
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_5
-		icon = GFX_RED_rodina
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_4
-		}
-
-		prerequisite = {
-			focus = RED_industry_great_leap_2
-		}
-
-		relative_position_id = RED_industry_great_leap
-		x = 0
-		y = 3
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_1
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap
-		}
-
-		relative_position_id = RED_industry_great_leap
-		x = 4
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_2
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_1
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_1
-		x = -1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_6
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_1
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_1
-		x = 2
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_7
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_6
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_6
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_3
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_1
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_1
-		x = 0
-		y = 2
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_4
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_3
-			focus = RED_industry_great_leap_unique_7
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_3
-		x = 2
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_5
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_3
-		}
-
-		mutually_exclusive = {
-		    focus = RED_industry_great_leap_unique_8
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_3
-		x = 0
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_industry_great_leap_unique_8
-		icon = GFX_crate
-		cost = 6.5
-
-		prerequisite = {
-			focus = RED_industry_great_leap_unique_3
-		}
-
-		mutually_exclusive = {
-		    focus = RED_industry_great_leap_unique_5
-		}
-
-		relative_position_id = RED_industry_great_leap_unique_3
+		id = RED_establish_gosplan
+		icon = GFX_RED_gosplan
+		cost = 1
+
+		relative_position_id = RED_restructuring
 		x = -2
 		y = 1
 
+		prerequisite = {
+			focus = RED_restructuring
+		}
+
 		ai_will_do = {
-			factor = 3
+			factor = 2
 		}
 
 		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_developement
+		icon = GFX_metro_infrastructure
+		cost = 1
+
+		relative_position_id = RED_establish_gosplan
+		x = -1
+		y = 1
+
+		prerequisite = {
+			focus = RED_establish_gosplan
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_developement2
+		icon = GFX_RED_infrastructure
+		cost = 1
+
+		relative_position_id = RED_developement
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_developement
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					    has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_arts_culture
+		icon = GFX_RED_megaphone_politburo
+		cost = 1
+
+		relative_position_id = RED_restructuring
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_restructuring
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_liquidate_private_sector
+		icon = GFX_smash_capitalist
+		cost = 1
+
+		relative_position_id = RED_restructuring
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = RED_restructuring
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_communal_urbanisation
+		icon = GFX_RED_station
+		cost = 1
+
+		relative_position_id = RED_liquidate_private_sector
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus = RED_liquidate_private_sector
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = RED_communal_urbanisation2
+		icon = GFX_RED_infrastructure
+		cost = 1
+
+		relative_position_id = RED_communal_urbanisation
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_communal_urbanisation
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_economic_plan
+		icon = GFX_RED_gosplan_2
+		cost = 1
+
+		relative_position_id = RED_restructuring
+		x = 0
+		y = 2
+
+		prerequisite = {
+			focus = RED_establish_gosplan
+		}
+		prerequisite = {
+			focus = RED_liquidate_private_sector
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_great_leap
+		icon = GFX_RED_propaganda_1
+		cost = 1
+
+		relative_position_id = RED_economic_plan
+		x = -1
+		y = 1
+
+		mutually_exclusive = {
+			focus = RED_methodical_leap
+		}
+
+		prerequisite = {
+			focus = RED_economic_plan
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = RED_great_leap
+		}
+	}
+
+	focus = {
+		id = RED_methodical_leap
+		icon = GFX_RED_megaphone_politburo
+		cost = 1
+
+		relative_position_id = RED_economic_plan
+		x = 1
+		y = 1
+
+		mutually_exclusive = {
+			focus = RED_great_leap
+		}
+
+		prerequisite = {
+			focus = RED_economic_plan
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		    add_ideas = RED_austerity_effort
+		}
+	}
+
+	focus = {
+		id = RED_great_leap_2
+		icon = GFX_RED_megaphone_politburo
+		cost = 1
+
+		relative_position_id = RED_great_leap
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_great_leap
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_methodical_leap_2
+		icon = GFX_RED_station
+		cost = 1
+
+		relative_position_id = RED_methodical_leap
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_methodical_leap
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RED_factories_1
+		icon = GFX_RED_factories
+		cost = 1
+
+		relative_position_id = RED_economic_plan
+		x = 0
+		y = 3
+
+		prerequisite = {
+			focus = RED_methodical_leap_2
+			focus = RED_great_leap_2
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RED_factories_2
+		icon = GFX_RED_soviet_industry
+		cost = 1
+
+		relative_position_id = RED_factories_1
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_factories_1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 }

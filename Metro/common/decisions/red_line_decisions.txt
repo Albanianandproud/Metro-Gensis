@@ -1,5 +1,5 @@
 RED_politburo_category = {
-    RED_appeal_politburo_1 = {
+    RED_appeal_politburo_1 = { # Placate Ministers with amenities and decadent goods
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
@@ -11,8 +11,13 @@ RED_politburo_category = {
 			factor = 0
 		}
 
+		visible = {
+		    has_completed_focus = RED_placate_ministers
+		}
+
 		available = {
-			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		    has_completed_focus = RED_placate_ministers
+			NOT = { has_idea = RED_placate_ministers  }
 		}
 
 		complete_effect = {
@@ -28,7 +33,7 @@ RED_politburo_category = {
 	    }
 	}
 
-    RED_appeal_politburo_2 = {
+    RED_appeal_politburo_2 = { # Gather their support, get in their 'good books'
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
@@ -40,8 +45,17 @@ RED_politburo_category = {
 			factor = 0
 		}
 
+		visible = {
+		    has_completed_focus = RED_gather_politburo_support
+		}
+
 		available = {
-			NOT = { has_country_flag = RED_placate_ministers_underway  }
+		    has_completed_focus = RED_gather_politburo_support
+			NOT = { has_idea = RED_gather_politburo_support  }
+		}
+
+		available = {
+			NOT = { has_country_flag = RED_gather_politburo_support  }
 		}
 
 		complete_effect = {
@@ -57,7 +71,7 @@ RED_politburo_category = {
 	    }
 	}
 
-    RED_appeal_politburo_3 = {
+    RED_appeal_politburo_3 = { # Make connections with them. Long time to do, but wont have any downsides. 
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
@@ -113,7 +127,7 @@ RED_politburo_category = {
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
-		cost = 20
+		cost = 25
 		days_remove = 49
 		days_re_enable = 0
 
@@ -122,7 +136,7 @@ RED_politburo_category = {
 		}
 
 		available = {
-			NOT = { has_country_flag = RED_placate_ministers_underway  }
+			NOT = { has_country_flag = RED_placate_ministers_underway  }			
 		}
 
 		complete_effect = {
@@ -130,8 +144,8 @@ RED_politburo_category = {
 		
 		remove_effect = {
 		    add_political_power = 100
-			add_to_variable = { var = politburo_happiness value = -1 }
-			custom_effect_tooltip = RED_politburo_happiness_decrease
+			add_to_variable = { var = politburo_happiness value = -2 }
+			custom_effect_tooltip = RED_politburo_happiness_decrease_2
 	    }
 	}
 
@@ -139,7 +153,7 @@ RED_politburo_category = {
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
-		cost = 20
+		cost = 25
 		days_remove = 49
 		days_re_enable = 0
 
@@ -168,8 +182,8 @@ RED_politburo_category = {
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
-		cost = 20
-		days_remove = 20
+		cost = 49
+		days_remove = 25
 		days_re_enable = 8000
 
         ai_will_do = {
@@ -183,7 +197,7 @@ RED_politburo_category = {
 		complete_effect = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.66
+				bonus = 1
 				uses = 1
 				category = industry
 			}
@@ -199,9 +213,9 @@ RED_politburo_category = {
 
 		icon = decision_recruit_operative
 		fire_only_once = yes
-		cost = 20
-		days_remove = 20
-		days_re_enable = 8000
+		cost = 49
+		days_remove = 25
+		days_re_enable = 180
 
         ai_will_do = {
 			factor = 3
@@ -217,7 +231,7 @@ RED_politburo_category = {
 		        type = infantry_equipment_0
 		        amount = 50
 		    }
-		    add_stability = -0.04
+		    add_stability = -0.03
 		}
 		
 		remove_effect = {
