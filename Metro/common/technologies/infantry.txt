@@ -1,15 +1,20 @@
 technologies = {
 
-	infantry_weapons_2027 = {
+	basic_infantry_equipment_tech = {
 
 		enable_equipments = {
-			infantry_equipment_0
+			basic_infantry_equipment
 		}
 
 		path = {
-			leads_to_tech = infantry_weapons_2028
+			leads_to_tech = scrap_infantry_equipment_tech_1
 			research_cost_coeff = 1
-		}	
+		}
+
+		path = {
+			leads_to_tech = shotgun_infantry_equipment_tech_1
+			research_cost_coeff = 1
+		}		
 		
 		enable_subunits = {
 			infantry
@@ -20,7 +25,7 @@ technologies = {
 		xp_research_cost = 50
 		xp_research_bonus = 0.5
 
-		start_year = 2027
+		start_year = 2020
 		folder = {
 			name = infantry_folder
 			position = { x = 0 y = 0 }
@@ -35,48 +40,21 @@ technologies = {
 		}
 	}
 
-	infantry_weapons_2028 = {
-
-		category_light_infantry = {
-			defense = 0.04
-		}	
-
-		path = {
-			leads_to_tech = infantry_weapons_2029
-			research_cost_coeff = 1
-		}	
-				
-		research_cost = 1.5
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 0.5
-
-		start_year = 2028
-		folder = {
-			name = infantry_folder
-			position = { x = 0 y = 2 }
-		}
-		
-		categories = {
-			infantry_weapons
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	infantry_weapons_2029 = {
+	scrap_infantry_equipment_tech_1 = {
 
 		enable_equipments = {
-			infantry_equipment_1
+			scrap_infantry_equipment_1
 		}
 
 		path = {
-			leads_to_tech = infantry_weapons_2030
+			leads_to_tech = scrap_infantry_equipment_tech_2
 			research_cost_coeff = 1
-		}	
+		}
 
+		XOR = {
+			shotgun_infantry_equipment_tech_1
+		}
+				
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
@@ -85,7 +63,7 @@ technologies = {
 		start_year = 2029
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 5 }
+			position = { x = -1 y = 4 }
 		}
 		
 		categories = {
@@ -94,31 +72,51 @@ technologies = {
 		
 		ai_will_do = {
 			factor = 50
-						
-			modifier = {
-				factor = 25
-				date > "2028.10.10"
-			}
 		}
 	}
 
-	infantry_weapons_2030 = {
+	scrap_infantry_equipment_tech_2 = {
 
 		category_light_infantry = {
-			soft_attack = 0.03
-			hard_attack = 0.03
+			reliability = 0.03
 		}	
 
 		path = {
-			leads_to_tech = infantry_weapons_2031
+			leads_to_tech = scrap_infantry_equipment_tech_3
 			research_cost_coeff = 1
+		}	
+				
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2029
+		folder = {
+			name = infantry_folder
+			position = { x = -1 y = 6 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	scrap_infantry_equipment_tech_3 = {
+
+		enable_equipments = {
+			scrap_infantry_equipment_2
 		}
 
 		path = {
-			leads_to_tech = night_vision
+			leads_to_tech = conventional_infantry_equipment_tech_1
 			research_cost_coeff = 1
-		}		
-
+		}
+				
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
@@ -127,7 +125,7 @@ technologies = {
 		start_year = 2030
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 7 }
+			position = { x = -1 y = 9 }
 		}
 		
 		categories = {
@@ -139,17 +137,114 @@ technologies = {
 		}
 	}
 
-	infantry_weapons_2031 = {
+	shotgun_infantry_equipment_tech_1 = {
 
 		enable_equipments = {
-			infantry_equipment_2
+			shotgun_infantry_equipment_1
 		}
 
 		path = {
-			leads_to_tech = infantry_weapons_2032
+			leads_to_tech = shotgun_infantry_equipment_tech_2
+			research_cost_coeff = 1
+		}
+
+		XOR = {
+			scrap_infantry_equipment_tech_1
+		}
+				
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2029
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 4 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	shotgun_infantry_equipment_tech_2 = {
+
+		category_light_infantry = {
+			breakthrough = 0.03
+		}
+
+		path = {
+			leads_to_tech = shotgun_infantry_equipment_tech_3
 			research_cost_coeff = 1
 		}	
+				
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
 
+		start_year = 2029
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 6 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	shotgun_infantry_equipment_tech_3 = {
+
+		enable_equipments = {
+			shotgun_infantry_equipment_2
+		}
+
+		path = {
+			leads_to_tech = conventional_infantry_equipment_tech_1
+			research_cost_coeff = 1
+		}	
+				
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2030
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 9 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	conventional_infantry_equipment_tech_1 = {
+
+		enable_equipments = {
+			conventional_infantry_equipment_1
+		}
+
+		path = {
+			leads_to_tech = conventional_infantry_equipment_tech_2
+			research_cost_coeff = 1
+		}		
+				
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
@@ -158,7 +253,7 @@ technologies = {
 		start_year = 2031
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 10 }
+			position = { x = 0 y = 13 }
 		}
 		
 		categories = {
@@ -167,63 +262,32 @@ technologies = {
 		
 		ai_will_do = {
 			factor = 50
-						
-			modifier = {
-				factor = 25
-				date > "2030.10.10"
-			}
 		}
 	}
 
-	infantry_weapons_2032 = {
+	conventional_infantry_equipment_tech_2 = {
 
-		category_light_infantry = {
-			reliability = 0.03
-		}	
+		infantry = {
+			defense = 0.02
+			ap_attack = 0.02
+		}
 
 		path = {
-			leads_to_tech = infantry_weapons_2033
+			leads_to_tech = conventional_infantry_equipment_tech_3
 			research_cost_coeff = 1
-		}	
+		}
 
+		path = {
+			leads_to_tech = pheumatic_infantry_equipment_tech_1
+			research_cost_coeff = 1
+		}		
+				
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 0.5
 
 		start_year = 2032
-		folder = {
-			name = infantry_folder
-			position = { x = 0 y = 12 }
-		}
-		
-		categories = {
-			infantry_weapons
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	infantry_weapons_2033 = {
-
-		enable_equipments = {
-			infantry_equipment_3
-		}
-
-		path = {
-			leads_to_tech = infantry_weapons_2034
-			research_cost_coeff = 1
-		}
-
-
-		research_cost = 1.5
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 0.5
-
-		start_year = 2033
 		folder = {
 			name = infantry_folder
 			position = { x = 0 y = 15 }
@@ -235,34 +299,33 @@ technologies = {
 		
 		ai_will_do = {
 			factor = 50
-						
-			modifier = {
-				factor = 25
-				date > "2032.10.10"
-			}
 		}
 	}
 
-	infantry_weapons_2034 = {
+	conventional_infantry_equipment_tech_3 = {
 
-		category_light_infantry = {
-			max_organisation = 2
-		}	
+		enable_equipments = {
+			conventional_infantry_equipment_2
+		}
 
 		path = {
-			leads_to_tech = infantry_weapons_2035
+			leads_to_tech = conventional_infantry_equipment_tech_4
 			research_cost_coeff = 1
-		}	
+		}
 
+		XOR = {
+			pheumatic_infantry_equipment_tech_1
+		}
+					
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
 		xp_research_bonus = 0.5
 
-		start_year = 2034
+		start_year = 2033
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 17 }
+			position = { x = -1 y = 18 }
 		}
 		
 		categories = {
@@ -274,13 +337,44 @@ technologies = {
 		}
 	}
 
-	infantry_weapons_2035 = {
+	conventional_infantry_equipment_tech_4 = {
 
 		category_light_infantry = {
-			soft_attack = 0.04
-			hard_attack = 0.04
-		}		
+			soft_attack = 0.03
+			hard_attack = 0.03
+		}
+
+		path = {
+			leads_to_tech = conventional_infantry_equipment_tech_5
+			research_cost_coeff = 1
+		}
+					
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2034
+		folder = {
+			name = infantry_folder
+			position = { x = -1 y = 21 }
+		}
 		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	conventional_infantry_equipment_tech_5 = {
+
+		enable_equipments = {
+			conventional_infantry_equipment_3
+		}
+					
 		research_cost = 1.5
 	    xp_research_type = army
 		xp_research_cost = 50
@@ -289,7 +383,99 @@ technologies = {
 		start_year = 2035
 		folder = {
 			name = infantry_folder
-			position = { x = 0 y = 20 }
+			position = { x = -1 y = 24 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	pheumatic_infantry_equipment_tech_1 = {
+
+		enable_equipments = {
+			pheumatic_infantry_equipment_2
+		}
+
+		path = {
+			leads_to_tech = pheumatic_infantry_equipment_tech_2
+			research_cost_coeff = 1
+		}
+
+		XOR = {
+			conventional_infantry_equipment_tech_3
+		}
+					
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2033
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 18 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	pheumatic_infantry_equipment_tech_2 = {
+
+		infantry = {
+			breakthrough = 0.02
+		}
+
+		path = {
+			leads_to_tech = pheumatic_infantry_equipment_tech_3
+			research_cost_coeff = 1
+		}
+					
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2034
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 21 }
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	pheumatic_infantry_equipment_tech_3 = {
+
+		enable_equipments = {
+			pheumatic_infantry_equipment_2
+		}
+					
+		research_cost = 1.5
+	    xp_research_type = army
+		xp_research_cost = 50
+		xp_research_bonus = 0.5
+
+		start_year = 2035
+		folder = {
+			name = infantry_folder
+			position = { x = 1 y = 24 }
 		}
 		
 		categories = {
@@ -304,8 +490,8 @@ technologies = {
 	entrench_kits_2027 = {
 
 		infantry = {
-			defense = 0.04
-			ap_attack = 0.05
+			defense = 0.02
+			ap_attack = 0.02
 		}
 
 		path = {
@@ -313,7 +499,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -336,8 +522,8 @@ technologies = {
 	entrench_kits_2028 = {
 
 		infantry = {
-			defense = 0.04
-			breakthrough = 0.03
+			defense = 0.02
+			breakthrough = 0.015
 		}
 
 		path = {
@@ -345,7 +531,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -373,8 +559,8 @@ technologies = {
 	entrench_kits_2029 = {
 
 		infantry = {
-			defense = 0.04
-			ap_attack = 0.05
+			defense = 0.02
+			ap_attack = 0.02
 		}
 
 		path = {
@@ -382,7 +568,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -410,8 +596,8 @@ technologies = {
 	entrench_kits_2030 = {
 
 		infantry = {
-			defense = 0.04
-			breakthrough = 0.04
+			defense = 0.02
+			breakthrough = 0.02
 		}
 
 		path = {
@@ -419,7 +605,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -447,8 +633,8 @@ technologies = {
 	entrench_kits_2031 = {
 
 		infantry = {
-			defense = 0.04
-			ap_attack = 0.05
+			defense = 0.02
+			ap_attack = 0.03
 		}
 
 		path = {
@@ -456,7 +642,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -484,8 +670,8 @@ technologies = {
 	entrench_kits_2032 = {
 
 		infantry = {
-			defense = 0.04
-			breakthrough = 0.04
+			defense = 0.02
+			breakthrough = 0.02
 		}
 
 		path = {
@@ -493,7 +679,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -521,8 +707,8 @@ technologies = {
 	entrench_kits_2033 = {
 
 		infantry = {
-			defense = 0.04
-			ap_attack = 0.05
+			defense = 0.02
+			ap_attack = 0.03
 		}
 
 		path = {
@@ -530,7 +716,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -558,8 +744,8 @@ technologies = {
 	entrench_kits_2034 = {
 
 		infantry = {
-			defense = 0.04
-			breakthrough = 0.04
+			defense = 0.02
+			breakthrough = 0.02
 		}
 
 		path = {
@@ -567,7 +753,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -595,11 +781,11 @@ technologies = {
 	entrench_kits_2035 = {
 
 		infantry = {
-			defense = 0.04
-			breakthrough = 0.04
+			defense = 0.02
+			breakthrough = 0.02
 		}
 
-		research_cost = 1.5
+		research_cost = 1
 	    xp_research_type = army
 		xp_research_cost = 35
 		xp_research_bonus = 0.5
@@ -627,8 +813,8 @@ technologies = {
 	night_vision  = {
 
 		land_night_attack = 0.1
-		offence = 0.04
-		defence = 0.04
+		offence = 0.02
+		defence = 0.02
 		
 		path = {
 			leads_to_tech = night_vision2
@@ -658,8 +844,8 @@ technologies = {
 	night_vision2  = {
 
 		land_night_attack = 0.1
-		offence = 0.04
-		defence = 0.04
+		offence = 0.02
+		defence = 0.02
 		
 		research_cost = 1
 	    xp_research_type = army
@@ -688,7 +874,7 @@ technologies = {
 		}
 
         attrition = -0.02
-		winter_attrition_factor = -0.05
+		winter_attrition_factor = -0.03
 
 		path = {
 			leads_to_tech = clothing_kits_2029
@@ -728,7 +914,7 @@ technologies = {
 		}
 
         attrition = -0.02
-		winter_attrition_factor = -0.05
+		winter_attrition_factor = -0.03
 
 		path = {
 			leads_to_tech = clothing_kits_2031
@@ -768,7 +954,7 @@ technologies = {
 		}
 
         attrition = -0.02
-		winter_attrition_factor = -0.05
+		winter_attrition_factor = -0.03
 
 		path = {
 			leads_to_tech = clothing_kits_2033
@@ -808,7 +994,7 @@ technologies = {
 		}
 
         attrition = -0.02
-		winter_attrition_factor = -0.05
+		winter_attrition_factor = -0.03
 
 		path = {
 			leads_to_tech = clothing_kits_2035
@@ -848,7 +1034,7 @@ technologies = {
 		}
 
         attrition = -0.02
-		winter_attrition_factor = -0.05
+		winter_attrition_factor = -0.03
 
 		research_cost = 1.2
 	    xp_research_type = army
@@ -879,7 +1065,7 @@ technologies = {
 	gas_mask_2013 = {
 
 		army_org_factor = 0.02
-		terrain_penalty_reduction = 0.04
+		terrain_penalty_reduction = 0.03
 
 		research_cost = 1
 	    xp_research_type = army
@@ -910,7 +1096,7 @@ technologies = {
 	gas_mask_2029 = {
 
 		army_org_factor = 0.02
-		terrain_penalty_reduction = 0.04
+		terrain_penalty_reduction = 0.03
 
 		research_cost = 1
 	    xp_research_type = army
@@ -941,7 +1127,7 @@ technologies = {
 	gas_mask_2030 = {
 
 		army_org_factor = 0.02
-		terrain_penalty_reduction = 0.04
+		terrain_penalty_reduction = 0.03
 
 		research_cost = 1
 	    xp_research_type = army
@@ -972,7 +1158,7 @@ technologies = {
 	gas_mask_2031 = {
 
 		army_org_factor = 0.02
-		terrain_penalty_reduction = 0.04
+		terrain_penalty_reduction = 0.03
 
 		research_cost = 1
 	    xp_research_type = army
@@ -1003,7 +1189,7 @@ technologies = {
 	gas_mask_2032 = {
 
 		army_org_factor = 0.02
-		terrain_penalty_reduction = 0.04
+		terrain_penalty_reduction = 0.03
 
 		research_cost = 1
 	    xp_research_type = army

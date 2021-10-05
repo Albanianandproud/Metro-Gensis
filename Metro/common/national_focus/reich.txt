@@ -43,6 +43,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = anti_mutant_rhetoric
+			add_stability = -0.05
 		}
 	}
 
@@ -64,6 +65,7 @@ focus_tree = {
 
 		completion_reward = {
 		    add_ideas = purge_mutant
+		    add_stability = -0.05
 		}
 	}
 
@@ -434,7 +436,7 @@ focus_tree = {
 		id = RCH_lebensraum
 		icon = GFX_RCH_lebensraum
 		cost = 6.5
-		x = 37
+		x = 39
 		y = 0
 
 		available = {
@@ -580,13 +582,197 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = RCH_defense_against_bolsheviks
+		icon = GFX_RCH_military_army
+		cost = 4.3
+		x = 16
+		y = 0
+		
+		completion_reward = {
+		 	custom_effect_tooltip = RED_reich_border
+		    if = {
+		        owns_state = 337
+				337 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		        	owns_state = 430
+		        }
+				430 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		        	owns_state = 431
+		        }
+				431  = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
 
+		    if = {
+				limit = {
+		        	owns_state = 214
+		        }
+				214 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		}
+	}
+
+	focus = {
+		id = RCH_stockpile_vanguard
+		icon = GFX_RCH_stockpile
+		cost = 4.3
+		x = 1
+		y = 1
+		relative_position_id = RCH_defense_against_bolsheviks
+
+		prerequisite = {
+			focus = RCH_defense_against_bolsheviks
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = infantry_equipment 
+		        amount = 50
+		    }
+		    add_equipment_to_stockpile = {
+		        type = gatling_equipment
+		        amount = 15
+		    }
+		}
+	}
+
+	focus = {
+		id = RCH_new_divisions
+		icon = GFX_RCH_anticommunist
+		cost = 4.3
+		x = -1
+		y = 1
+		relative_position_id = RCH_defense_against_bolsheviks
+
+		prerequisite = {
+			focus = RCH_defense_against_bolsheviks
+		}
+		
+		completion_reward = {
+			load_oob = RCH_metromacht
+		}
+	}
+
+	focus = {
+		id = RCH_send_in_the_deathsquads
+		icon = GFX_RCH_stalker_deathsquad
+		cost = 4.3
+		x = 0
+		y = 2
+		relative_position_id = RCH_defense_against_bolsheviks
+
+		available = {
+			has_war_with = RED
+			AND = {
+    			has_manpower > 24
+			}
+		}
+
+		prerequisite = {
+			focus = RCH_defense_against_bolsheviks
+		}
+		
+		completion_reward = {
+			add_manpower = -25
+			350 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+			214 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+			213 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+			362 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+			218 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+		}
+	}
 
 	focus = {
 		id = RCH_industry_left_1
 		icon = GFX_RCH_infrastructure
 		cost = 4.4
-		x = 19
+		x = 21
 		y = 0
 
 		ai_will_do = {
@@ -653,7 +839,7 @@ focus_tree = {
 		icon = GFX_RCH_infrastructure
 		cost = 4.4
 
-		x = 17
+		x = 19
 		y = 0
 
 		ai_will_do = {
@@ -770,7 +956,7 @@ focus_tree = {
 			}
 		    add_equipment_to_stockpile = {
 		        type = infantry_equipment_0
-		        amount = 50
+		        amount = 25
 		    }
 		}
 	}
@@ -960,17 +1146,11 @@ focus_tree = {
 		id = RCH_military
 		icon = GFX_RCH_commander4
 		cost = 4.4
-		x = 27
+		x = 29
 		y = 0
 
 		completion_reward = {
 		    army_experience = 25
-			add_tech_bonus = {
-				name = land_doc_bonus
-				bonus = 1.0
-				uses = 1
-				category = land_doctrine
-			}
 			random_owned_state = {
 				limit = {
 					NOT = {
@@ -1351,7 +1531,7 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = electronics
-			        amount = 16
+			        amount = 8
 			    }
 			}
 		}
@@ -1373,8 +1553,8 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.66
-				uses = 3
+				bonus = 0.35
+				uses = 2
 				category = industry
 			}
 		}
@@ -1397,7 +1577,7 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = scrap
-			        amount = 16
+			        amount = 8
 			    }
 			}
 		}
