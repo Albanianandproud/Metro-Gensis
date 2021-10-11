@@ -7,2512 +7,316 @@ focus_tree = {
 			tag = HNZ
 		}
 	}
-	continuous_focus_position = { x = 3000 y = 1}
+	continuous_focus_position = { x = 3000 y = 2000}
 	default = no
 
     focus = {
-		id = HNZ_station_hearth
-		icon = GFX_campfire
-		x = 10
-		y = 1
-		cost = 4.4
-
-		mutually_exclusive = {
-		    focus = HNZ_reinforce_tunnels
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = trade_economy
-		}
-	}
-
-	focus = {
-		id = HNZ_reinforce_tunnels
-		icon = GFX_metro_infrastructure
-		x = 8
-		y = 1
-		cost = 4.4
-
-
-
-		mutually_exclusive = {
-		    focus = HNZ_station_hearth
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			every_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_economic_investment
-		icon = GFX_workstation
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_reinforce_tunnels
-			focus = HNZ_station_hearth
-		}
-
-		relative_position_id = HNZ_reinforce_tunnels
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_hearth2
-		icon = GFX_cog_bulletfactories
-		x = -2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_reinforce_tunnels
-		}
-
-		relative_position_id = HNZ_reinforce_tunnels
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    army_experience = 10
-		    add_equipment_to_stockpile = {
-		        type = infantry_equipment_0
-		        amount = 75
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_station_hearth3
-		icon = GFX_cog_idea
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_hearth2
-		}
-
-		relative_position_id = HNZ_station_hearth2
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = land_doc_bonus
-				bonus = 0.66
-				uses = 2
-				category = land_doctrine
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_hearth4
-		icon = GFX_gasmask_2
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_hearth3
-		}
-
-		relative_position_id = HNZ_station_hearth3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    army_experience = 35
-		}
-	}
-
-	focus = {
-		id = HNZ_station_hearth5
-		icon = GFX_tunnel_patrol
-		x = 1
-		y = 2
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_hearth3
-		}
-
-		relative_position_id = HNZ_station_hearth3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_emulate_stalker_tactics
-		}
-	}
-
-	focus = {
-		id = HNZ_civilian_sector
-		icon = GFX_workshop_1
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_economic_investment
-			focus = HNZ_military_investment
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_military_sector
-		}
-
-		relative_position_id = HNZ_economic_investment
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_replicate_industry
-		icon = GFX_workstation_2
-		x = 1
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_civilian_sector
-			focus = HNZ_military_sector
-		}
-
-		relative_position_id = HNZ_civilian_sector
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_military_sector
-		icon = GFX_medium_arms_1
-		x = 10
-		y = 3
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military_investment
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_civilian_sector
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_salvage_hauls
-		icon = GFX_barscene
-		x = 2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_hearth
-		}
-
-		relative_position_id = HNZ_station_hearth
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			capital_scope = {
-			    add_resource = {
-			        type = scrap
-			        amount = 3
-			    }
-			    add_resource = {
-			        type = electronics
-			        amount = 3
-			    }
-			    add_resource = {
-			        type = chemicals
-			        amount = 3
-			    }
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_amongst_wreckage
-		icon = GFX_crate
-		x = -1
-		y = 3
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_salvage_hauls
-		}
-
-		relative_position_id = HNZ_salvage_hauls
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_military_investment
-		icon = GFX_soldier_1
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_reinforce_tunnels
-			focus = HNZ_station_hearth
-		}
-
-		relative_position_id = HNZ_station_hearth
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_surface_excavation
-		icon = GFX_cityruins
-		x = 2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_salvage_hauls
-		}
-
-		relative_position_id = HNZ_military_investment
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    country_event = nf_HNZ.11
-		}
-	}
-
-	focus = {
-		id = HNZ_clear_skies
-		icon = GFX_clearsky
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_surface_excavation
-		}
-
-		relative_position_id = HNZ_surface_excavation
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-            country_event = nf_HNZ.12
-		}
-	}
-
-	focus = {
-		id = HNZ_neighbours
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		cost = 4.4
-		x = 1
-		y = 6
-		relative_position_id = HNZ_intro
-
-		completion_reward = {
-		    add_ideas = HNZ_trade_relations
-		    add_political_power = 100
-		}
-	}
-
-	focus = {
-		id = HNZ_arbat_economic_aid
-		icon = GFX_HNZ_weapons_deal
-		x = -3
-		y = 1
-		cost = 4.4
-
-		available = {
-			ARB = {
-                exists = yes
-			}
-			398 = {
-                is_owned_by = ROOT
-            }
-        }
-
-		prerequisite = {
-			focus = HNZ_neighbours
-		}
-
-		relative_position_id = HNZ_neighbours
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    country_event = nf_HNZ.2 #Arbat Economic Deal
-		}
-	}
-
-	focus = {
-		id = HNZ_permit_arbat_recruitment
+		id = HNZ_the_ring_line
 		icon = GFX_HNZ_soldier
-		x = -1
+		x = 15
+		y = 0
+		cost = 4.4
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = { id = HNZ_focus.1 }
+		}
+	}
+	
+	focus = {
+		id = HNZ_internal_affairs
+		icon = GFX_HNZ_internal_affairs
+		x = -5
 		y = 1
+		relative_position_id = HNZ_the_ring_line
 		cost = 4.4
 
-		available = {
-			ARB = {
-                exists = yes
-			}
-        }
-
-		prerequisite = {
-			focus = HNZ_arbat_economic_aid
+		prerequisite  = {
+			focus = HNZ_the_ring_line
 		}
-
-		relative_position_id = HNZ_arbat_economic_aid
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
-		    country_event = nf_HNZ.5 #Stalkers for techniques
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_arbat_3
-		icon = GFX_equipment_2
-		x = 1
-		y = 1
-		cost = 4.4
-
-		available = {
-			ARB = {
-                exists = yes
-			}
-			398 = {
-                is_owned_by = ROOT
-            }
-        }
-
-		prerequisite = {
-			focus = HNZ_arbat_economic_aid
-		}
-
-		relative_position_id = HNZ_arbat_economic_aid
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    398 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		    ARB = {
-			    capital_scope = {
-				    add_extra_state_shared_building_slots = 1
-				    add_building_construction = {
-					    type = arms_factory
-					    level = 1
-					    instant_build = yes
-				    }
-				}
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_arbat_4
-		icon = GFX_goal_generic_improve_relations
-		x = 0
-		y = 2
-		cost = 4.4
-
-		available = {
-			ARB = {
-                exists = yes
-			}
-        }
-
-		prerequisite = {
-			focus = HNZ_permit_arbat_recruitment
-		}
-		prerequisite = {
-			focus = HNZ_arbat_3
-		}
-
-		relative_position_id = HNZ_arbat_economic_aid
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_mutual_help
-		    ARB = {
-		        add_ideas = HNZ_mutual_help
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_arbat_puppet
-		icon = GFX_HNZ_control_trade
-		x = 0
-		y = 1
-		cost = 4.4
-
-		available = {
-			ARB = {
-                exists = yes
-                AND = {
-                    has_idea = hanza_satellite_3
-                }
-			}
-			date > 2030.1.1
-			ROOT = {
-			    ic_ratio = {
-                tag = ARB
-                ratio > 2
-                }
-            }                 
-        }
-
-		prerequisite = {
-			focus = HNZ_arbat_4
-		}
-
-		relative_position_id = HNZ_arbat_4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    if = {
-		        ARB = {
-		            player = no
-		        }
-		        puppet = ARB
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_help_defensive_construction
-		icon = GFX_HNZ_emplacements
-		x = 3
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_neighbours
-		}
-
-		relative_position_id = HNZ_neighbours
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    country_event = nf_HNZ.8
-		}
-	}
-
-	focus = {
-		id = HNZ_send_military_aid
-		icon = GFX_soldier_3
-		x = -1
-		y = 1
-		cost = 4.4
-
-		available = {
-			SEV = {
-                exists = yes
-			}
-			ROOT = {
-			    has_manpower > 39
-			}                
-        }
-
-		prerequisite = {
-			focus = HNZ_help_defensive_construction
-		}
-
-		relative_position_id = HNZ_help_defensive_construction
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    SEV = {
-		        add_manpower = 40
-		    }
-		    add_manpower = -40
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_3
-		icon = GFX_tunnel_surplus
-		x = 1
-		y = 1
-		cost = 4.4
-
-		available = {
-			SEV = {
-                exists = yes
-			}              
-        }
-
-		prerequisite = {
-			focus = HNZ_help_defensive_construction
-		}
-
-		relative_position_id = HNZ_help_defensive_construction
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    405 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		    SEV = {
-			    capital_scope = {
-				    add_extra_state_shared_building_slots = 1
-				    add_building_construction = {
-					    type = arms_factory
-					    level = 1
-					    instant_build = yes
-				    }
-				}
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_4
-		icon = GFX_clearsky
-		x = 0
-		y = 2
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_send_military_aid
-		}
-
-		prerequisite = {
-			focus = HNZ_sevastopol_3
-		}
-
-		available = {
-			SEV = {
-                exists = yes
-			}
-        }
-
-		relative_position_id = HNZ_help_defensive_construction
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = SEV_construction
-		    SEV = {
-		        add_ideas = SEV_construction
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_sevastopol_puppet
-		icon = GFX_HNZ_control_trade
-		x = 0
-		y = 1
-		cost = 4.4
-
-		available = {
-			SEV = {
-                exists = yes
-                AND = {
-                    has_idea = hanza_satellite_3
-                }
-			}
-			date > 2030.1.1
-			ROOT = {
-			    ic_ratio = {
-                tag = SEV
-                ratio > 2
-                }
-            }                 
-        }
-
-		prerequisite = {
-			focus = HNZ_sevastopol_4
-		}
-
-		relative_position_id = HNZ_sevastopol_4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    if = {
-		        SEV = {
-		            player = no
-		        }
-		        puppet = SEV
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_VDNK
-		icon = GFX_mushroom
-		x = -1
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_neighbours
-		}
-
-		relative_position_id = HNZ_neighbours
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    diplomatic_relation = {
-                country = VDN
-                relation = non_aggression_pact
-                active = yes
-            }
-            add_political_power = 60
-			add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = VDN
-			}
-			reverse_add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = VDN
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_1905
-		icon = GFX_station_entrance
-		x = 1
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_neighbours
-		}
-
-		relative_position_id = HNZ_neighbours
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    diplomatic_relation = {
-                country = ULI
-                relation = non_aggression_pact
-                active = yes
-            }
-            add_political_power = 60
-			add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = ULI
-			}
-			reverse_add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = ULI
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_farms_and_factories
-		icon = GFX_pig
-		x = 0
-		y = 2
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_1905
-		}
-
-		prerequisite = {
-			focus = HNZ_VDNK
-		}
-
-		relative_position_id = HNZ_neighbours
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    BRK = {
-			    every_owned_state = {
-				    limit = {
-					    NOT = {
-					        has_state_category = pastoral
-					    }
-				    }
-				    add_extra_state_shared_building_slots = 1
-				    add_building_construction = {
-					    type = infrastructure
-					    level = 1
-				    }
-			    }
-			}
-			add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = BRK
-			}
-			reverse_add_opinion_modifier = {
-				modifier = trade_relations_1
-				target = BRK
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_polis
-		icon = GFX_clearsky
-		x = 0
-		y = 2
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_farms_and_factories
-		}
-		prerequisite = {
-			focus = HNZ_arbat_4
-		}
-		prerequisite = {
-			focus = HNZ_sevastopol_4
-		}
-
-		relative_position_id = HNZ_farms_and_factories
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_research_slot = 1
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment
-		icon = GFX_crate
-		x = 1
-		y = 1
-		cost = 4.4
-
-
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_timed_idea = {
-		        idea = HNZ_construction_refurbishment
-		        days = 360
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_2
-		icon = GFX_reinforcement
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment
-		}
-
-		relative_position_id = HNZ_station_refurbishment
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_recruitment_surge
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_6
-		icon = GFX_goal_generic_army_motorized
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_2
-		}
-
-		relative_position_id = HNZ_station_refurbishment_2
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    army_experience = 15
-		    add_equipment_to_stockpile = {
-		        type = rail_cart_equipment
-		        amount = 30
-		    }
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_9
-		icon = GFX_mobilise_workforce
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_6
-		}
-
-		relative_position_id = HNZ_station_refurbishment_6
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    random_owned_state = {
-				    limit = {
-					    NOT = {
-					        has_state_category = pastoral
-					    }
-				    }
-			    add_resource = {
-			        type = electronics
-			        amount = 8
-			    }
-			}
-		    random_owned_state = {
-				    limit = {
-					    NOT = {
-					        has_state_category = pastoral
-					    }
-				    }
-			    add_resource = {
-			        type = alloys
-			        amount = 8
-			    }
-			}
-		    random_owned_state = {
-				    limit = {
-					    NOT = {
-					        has_state_category = pastoral
-					    }
-				    }
-			    add_resource = {
-			        type = components
-			        amount = 8
-			    }
-			}
-		    random_owned_state = {
-				    limit = {
-					    NOT = {
-					        has_state_category = pastoral
-					    }
-				    }
-			    add_resource = {
-			        type = chemicals
-			        amount = 8
-			    }
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_taganskaya_defence
-		icon = GFX_tunnel_bunker
+		id = HNZ_the_puppetmaster
+		icon = GFX_HNZ_the_puppetmaster
 		x = -2
 		y = 1
+		relative_position_id = HNZ_internal_affairs
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_station_refurbishment
-		}
-
-		relative_position_id = HNZ_station_refurbishment
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			308 = {
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 1876
-					}
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			365 = {
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 1826
-					}
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			355 = {
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 1744
-					}
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_7
-		icon = GFX_camp
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_taganskaya_defence
-		}
-
-		relative_position_id = HNZ_taganskaya_defence
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			308 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			365 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			355 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = infrastructure
-				    level = 1
-				    instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_8
-		icon = GFX_workstation
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_7
-		}
-
-		relative_position_id = HNZ_station_refurbishment_7
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			308 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = arms_factory
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			365 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = arms_factory
-				    level = 1
-				    instant_build = yes
-				}
-			}
-			355 = {
-			    add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-				    type = arms_factory
-				    level = 1
-				    instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_4
-		icon = GFX_cog_factories
-		x = 2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment
-		}
-
-		relative_position_id = HNZ_station_refurbishment
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_5
-		icon = GFX_barscene
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_4
-		}
-
-		relative_position_id = HNZ_station_refurbishment_4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.66
-				uses = 1
-				category = industry
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_station_refurbishment_10
-		icon = GFX_equipment_2
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_5
-		}
-
-		relative_position_id = HNZ_station_refurbishment_5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_armament_production
-		}
-	}
-
-	focus = {
-		id = HNZ_gunsmith_quaters
-		icon = GFX_bullets_4
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_10
-		}
-
-		relative_position_id = HNZ_station_refurbishment_10
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_labour_mobilise
-		icon = GFX_goal_generic_production
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_9
-		}
-
-		relative_position_id = HNZ_station_refurbishment_9
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = mobilise
-		}
-	}
-
-	focus = {
-		id = HNZ_gunsmith_construction
-		icon = GFX_goal_generic_build_tank
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_station_refurbishment_8
-		}
-
-		relative_position_id = HNZ_station_refurbishment_8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = gunsmith_construction
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel
-		icon = GFX_cog_infrastructure
-		x = 17
-		y = 1
-		cost = 4.4
-
-		available = { 
-		    owns_state = 106
-		    owns_state = 105
-		    owns_state = 258
-		    owns_state = 9
-		    owns_state = 304
-		    owns_state = 16
-		    owns_state = 259
-		    owns_state = 67
-		    owns_state = 69
-		    owns_state = 365
-		    owns_state = 433
-		    owns_state = 72
-		    owns_state = 296
-		    owns_state = 73
-		    owns_state = 231
-		    owns_state = 94
-		    owns_state = 396
-		    owns_state = 130
-		    owns_state = 274
-		    owns_state = 137
-		    owns_state = 398
-		    owns_state = 176
-		    owns_state = 147
-		    owns_state = 285
-		    owns_state = 122
-		    owns_state = 401
-		    owns_state = 119
-		    owns_state = 376
-		}
-
-		relative_position_id = HNZ_intro
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   hidden_effect = {
-            106 = { 
-                add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            105 = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            258  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            9  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            304  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            16  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            259  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            67  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            69  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            365  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            433  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            72  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            } 
-            296  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            73  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            231  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            94  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            396  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            130  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            274  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            137  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            398  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            176  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            147  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            285  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            122  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            401  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-            119  = { 
-               add_building_construction = {
-    	            type = infrastructure
-    	            level = 1
-    	            instant_build = yes
-    	        }
-            }
-		}
-		custom_effect_tooltip = HNZ_ring_line
-		}
-	}
-
-	focus = {
-		id = HNZ_prospekt_mira
-		icon = GFX_station_entrance
-		x = 1
-		y = 1
-		cost = 4.4
+		mutually_exclusive = { focus = HNZ_the_puppet }
 
 		prerequisite  = {
-			focus = HNZ_ring_of_steel
+			focus = HNZ_internal_affairs
 		}
-
-		relative_position_id = HNZ_ring_of_steel
 
 		ai_will_do = {
 			factor = 2
 		}
 
-		available = { 
-		    owns_state = 359
-		    owns_state = 230
-		    owns_state = 258
-		}
-
 		completion_reward = {
-            359  = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 2976
-					}
-					level = 1
-					instant_build = yes
-				}
-            }
-            258 = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 2928
-					}
-					level = 1
-					instant_build = yes
-				}
-            }
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_ring_of_steel2
-		icon = GFX_focus_generic_tungsten
+		id = HNZ_pulling_the_strings
+		icon = GFX_
 		x = -1
 		y = 1
+		relative_position_id = HNZ_the_puppetmaster
 		cost = 4.4
 
 		prerequisite  = {
-			focus = HNZ_ring_of_steel
+			focus = HNZ_the_puppetmaster
 		}
-
-		relative_position_id = HNZ_ring_of_steel
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
-		    add_ideas = HNZ_metal_detectors
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_ring_of_steel3
-		icon = GFX_goal_generic_radar
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel2
-		}
-
-		relative_position_id = HNZ_ring_of_steel2
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = electronics
-				bonus = 0.5
-				uses = 2
-				category = electronics
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel4
-		icon = GFX_volunteer_expedition
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel3
-		}
-
-		available = {
-			193 = {
-                is_owned_by = RUI
-			}
-			195 = {
-                is_owned_by = RUI
-			}
-			196 = {
-                is_owned_by = RUI
-			}
-			369 = {
-                is_owned_by = RUI
-			}
-			has_manpower > 35
-		}
-
-		relative_position_id = HNZ_ring_of_steel3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    transfer_state = 193
-		    193 = { add_core_of = ROOT }
-		    transfer_state = 195
-		    195 = { add_core_of = ROOT }
-		    transfer_state = 196
-		    196 = { add_core_of = ROOT }
-		    transfer_state = 369
-		    369 = { add_core_of = ROOT }
-		    add_manpower = -35
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel9
-		icon = GFX_goal_generic_propaganda
-		x = -2
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel3
-		}
-
-		available = {
-			193 = {
-                is_owned_by = ROOT
-			}
-			195 = {
-                is_owned_by = ROOT
-			}
-			196 = {
-                is_owned_by = ROOT
-			}
-			369 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		relative_position_id = HNZ_ring_of_steel3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-            369 = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = radar_station
-					level = 1
-					instant_build = yes
-				}
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 1785
-					}
-					level = 1
-					instant_build = yes
-				}
-            }
-		}
-	}
-
-	focus = {
-		id = HNZ_prospekt_mira0
-		icon = GFX_goal_generic_construction2
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel9
-		}
-
-		relative_position_id = HNZ_ring_of_steel9
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_political_power = 100
-            369 = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-			    add_building_construction = {
-				type = bunker
-					province = {
-						id = 1785
-					}
-					level = 1
-					instant_build = yes
-				}
-            }
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel5
-		icon = GFX_goal_generic_army_motorized
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_prospekt_mira
-		}
-
-		relative_position_id = HNZ_prospekt_mira
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = motorized_tech
-				bonus = 0.5
-				uses = 2
-				category = motorized_tech
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel6
-		icon = GFX_goal_generic_production
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel5
-		}
-
-		relative_position_id = HNZ_ring_of_steel5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_retrofitting
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel7
-		icon = GFX_tunnel_patrol
-		x = 2
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel5
-		}
-
-		relative_position_id = HNZ_ring_of_steel5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_stability = 0.05
-		    add_war_support = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_ring_of_steel8
-		icon = GFX_reinforcement
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel7
-		}
-
-		relative_position_id = HNZ_ring_of_steel7
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_ideas = HNZ_transport
-		}
-	}
-
-	focus = {
-		id = HNZ_civilian_final
-		icon = GFX_goal_generic_scientific_exchange
-		x = 0
-		y = 4
-		cost = 4.4
-
-		prerequisite  = {
-			focus = HNZ_ring_of_steel4
-		}
-		prerequisite  = {
-			focus = HNZ_ring_of_steel6
-		}
-
-		relative_position_id = HNZ_ring_of_steel
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_research_slot = 1
-		}
-	}
-
-	focus = {
-		id = HNZ_military
-		icon = GFX_HNZ_colonel
-		x = -6
-		y = 1
-		cost = 4.4
-
-
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   army_experience = 30
-			add_tech_bonus = {
-				name = land_doc_bonus
-				bonus = 0.66
-				uses = 2
-				category = land_doctrine
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_military1
+		id = HNZ_get_military_support
 		icon = GFX_HNZ_troops
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_military7
-		}
-		mutually_exclusive = {
-		    focus = HNZ_military4
-		}
-
-		relative_position_id = HNZ_military
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_mass_army
-		}
-	}
-
-	focus = {
-		id = HNZ_military2
-		icon = GFX_sandbag_reinforcement
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military1
-		}
-
-		relative_position_id = HNZ_military1
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_entrench
-		}
-	}
-
-	focus = {
-		id = HNZ_military3
-		icon = GFX_tunnel_patrol
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military2
-		}
-
-		relative_position_id = HNZ_military2
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_gun_improvement
-		}
-	}
-
-	focus = {
-		id = HNZ_military4
-		icon = GFX_soldier_1
-		x = 2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_military7
-		}
-		mutually_exclusive = {
-		    focus = HNZ_military1
-		}
-
-		relative_position_id = HNZ_military
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_elite_army
-		}
-	}
-
-	focus = {
-		id = HNZ_military5
-		icon = GFX_gasmask_2
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military4
-		}
-
-		relative_position_id = HNZ_military4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_attrition
-		}
-	}
-
-	focus = {
-		id = HNZ_military6
-		icon = GFX_HNZ_tank
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military5
-		}
-
-		relative_position_id = HNZ_military5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_tank_production
-		}
-	}
-
-	focus = {
-		id = HNZ_military7
-		icon = GFX_HNZ_soldier
-		x = -2
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military
-		}
-
-		mutually_exclusive = {
-		    focus = HNZ_military1
-		}
-		mutually_exclusive = {
-		    focus = HNZ_military4
-		}
-
-		relative_position_id = HNZ_military
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_improved_infantry
-		}
-	}
-
-	focus = {
-		id = HNZ_military8
-		icon = GFX_HNZ_radio
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military7
-		}
-
-		relative_position_id = HNZ_military7
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_radio_support
-		}
-	}
-
-	focus = {
-		id = HNZ_military9
-		icon = GFX_HNZ_emplacements
-		x = 0
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military8
-		}
-
-		relative_position_id = HNZ_military8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_ideas = HNZ_minigun_support
-		}
-	}
-
-	focus = {
-		id = HNZ_military10
-		icon = GFX_goal_generic_construct_mil_factory
-		x = -1
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military3
-			focus = HNZ_military6
-			focus = HNZ_military9
-		}
-
-		relative_position_id = HNZ_military3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-			    limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				 add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-			add_war_support = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_military11
-		icon = GFX_goal_generic_secret_weapon
 		x = 1
 		y = 1
+		relative_position_id = HNZ_the_puppetmaster
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_military3
-			focus = HNZ_military6
-			focus = HNZ_military9
+		prerequisite  = {
+			focus = HNZ_the_puppetmaster
 		}
-
-		relative_position_id = HNZ_military3
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
-		   army_experience = 45
-		   add_war_support = 0.05
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_military12
-		icon = GFX_focus_generic_little_entente
-		x = -3
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military3
-			focus = HNZ_military6
-			focus = HNZ_military9
-		}
-
-		relative_position_id = HNZ_military3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		   add_manpower = 50
-		   add_war_support = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_military13
-		icon = GFX_goal_generic_small_arms
-		x = 3
-		y = 1
-		cost = 4.4
-
-		prerequisite = {
-			focus = HNZ_military3
-			focus = HNZ_military6
-			focus = HNZ_military9
-		}
-
-		relative_position_id = HNZ_military3
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    army_experience = 20
-		    add_equipment_to_stockpile = {
-		        type = infantry_equipment_0
-		        amount = 50
-		    }
-		    add_war_support = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_gearing_for_war
-		icon = GFX_focus_generic_manpower
+		id = HNZ_loginov_is_to_blame
+		icon = GFX_HNZ_skull_spike
 		x = 0
 		y = 2
+		relative_position_id = HNZ_the_puppetmaster
 		cost = 4.4
 
-		prerequisite = {
-			focus = HNZ_military13
-			focus = HNZ_military12
-			focus = HNZ_military11
-			focus = HNZ_military10
+		prerequisite  = {
+			focus = HNZ_pulling_the_strings
+		}
+		prerequisite  = {
+			focus = HNZ_get_military_support
+		}
+		
+		ai_will_do = {
+			factor = 2
 		}
 
-		relative_position_id = HNZ_military3
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = HNZ_the_puppet
+		icon = GFX_HNZ_the_puppet
+		x = 2
+		y = 1
+		relative_position_id = HNZ_internal_affairs
+		cost = 4.4
+
+		mutually_exclusive = { focus = HNZ_the_puppetmaster }
+
+		prerequisite  = {
+			focus = HNZ_internal_affairs
+		}
 
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
-		   hanza_war_mobilize = yes
 		}
 	}
-
-	## Politics ##
-
+	
 	focus = {
-		id = HNZ_politics_1
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		cost = 4.4
-		x = 14
-		y = 6
-		relative_position_id = HNZ_intro
-
-		completion_reward = {
-		    add_political_power = 100
-		}
-	}
-
-	focus = {
-		id = HNZ_politics_adam_smith_teaching
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		prerequisite = {
-			focus = HNZ_politics_1
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_politics_moderate_capitalism
-		}
-
-		cost = 4.4
-		x = -3
+		id = HNZ_imprisoning_traitors
+		icon = GFX_HNZ_imprisoning_traitors
+		x = 1
 		y = 1
-		relative_position_id = HNZ_politics_1
+		relative_position_id = HNZ_the_puppet
+		cost = 4.4
+
+		prerequisite  = {
+			focus = HNZ_the_puppet
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
 
 		completion_reward = {
-		    add_political_power = 100
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_politics_adam_smith_guiding_hand
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		prerequisite = {
-			focus = HNZ_politics_adam_smith_teaching
-		}
-
-		cost = 4.4
+		id = HNZ_maintain_control
+		icon = GFX_
 		x = -1
 		y = 1
-		relative_position_id = HNZ_politics_adam_smith_teaching
+		relative_position_id = HNZ_the_puppet
+		cost = 4.4
+
+		prerequisite  = {
+			focus = HNZ_the_puppet
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
 
 		completion_reward = {
-		    add_political_power = 100
 		}
 	}
-
+	
 	focus = {
-		id = HNZ_politics_adam_smith_guiding_hand_2
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		prerequisite = {
-			focus = HNZ_politics_adam_smith_guiding_hand
-		}
-
-		cost = 4.4
+		id = HNZ_the_managers_last_shift
+		icon = GFX_HNZ_the_managers_last_shift
 		x = 0
-		y = 1
-		relative_position_id = HNZ_politics_adam_smith_guiding_hand
-
-		completion_reward = {
-		    add_political_power = 100
-		}
-	}
-
-	focus = {
-		id = HNZ_politics_moderate_capitalism
-		icon = GFX_focus_hol_the_foundations_of_defense
-
-		prerequisite = {
-			focus = HNZ_politics_1
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_politics_adam_smith_teaching
-		}
-
+		y = 2
+		relative_position_id = HNZ_the_puppet
 		cost = 4.4
-		x = 4
-		y = 1
-		relative_position_id = HNZ_politics_1
+
+		prerequisite  = {
+			focus = HNZ_maintain_control
+		}
+		prerequisite  = {
+			focus = HNZ_imprisoning_traitors
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
 
 		completion_reward = {
-		    add_political_power = 100
 		}
 	}
+	
+	focus = {
+		id = HNZ_external_affairs
+		icon = GFX_HNZ_external_affairs
+		x = 18
+		y = 1
+		cost = 4.4
+
+		prerequisite  = {
+			focus = HNZ_the_ring_line
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = HNZ_the_fascist_threat
+		icon = GFX_HNZ_the_fascist_threat
+		x = -1
+		y = 1
+		relative_position_id = HNZ_external_affairs
+		cost = 4.4
+
+		mutually_exclusive = { focus = HNZ_the_communist_menace }
+
+		prerequisite  = {
+			focus = HNZ_external_affairs
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = HNZ_the_enemy_of_my_enemy
+		icon = GFX_HNZ_generic_agreement
+		x = -1
+		y = 2
+		relative_position_id = HNZ_external_affairs
+		cost = 4.4
+
+		prerequisite  = {
+			focus = HNZ_the_fascist_threat
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = HNZ_the_communist_menace
+		icon = GFX_HNZ_the_communist_menace
+		x = 1
+		y = 1
+		relative_position_id = HNZ_external_affairs
+		cost = 4.4
+
+		mutually_exclusive = { focus = HNZ_the_fascist_threat }
+
+		prerequisite  = {
+			focus = HNZ_external_affairs
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		
+		}
+	}
+	focus = {
+		id = HNZ_a_ring_of_steel
+		icon = GFX_HNZ_a_ring_of_steel
+		x = 1
+		y = 2
+		relative_position_id = HNZ_external_affairs
+		cost = 4.4
+
+		prerequisite  = {
+			focus = HNZ_the_communist_menace
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+		}
+	}
+	
 }
