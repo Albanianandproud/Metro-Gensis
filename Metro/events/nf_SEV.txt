@@ -1,0 +1,63 @@
+add_namespace = nf_SEV
+
+country_event = { #Construction Aid from Hanza
+    id = nf_SEV.1  
+    title = nf_SEV.1.t
+    desc = nf_SEV.1.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	option = { # Take only the resources
+		name = nf_SEV.1.a
+
+		capital_scope = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+					type = infrastructure
+					level = 1
+			}
+		}	
+
+		HNZ = {
+		    country_event = nf_HNZ.9
+		}
+		ai_chance = {
+			factor = 50
+		}
+	}
+
+	option = { # Take more!
+		name = nf_SEV.1.b
+
+			every_owned_state = {
+			    limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		    arbat_hanza_satellite = yes
+		    ai_chance = {
+			    factor = 45
+		    }
+		HNZ = {
+		    country_event = nf_HNZ.9
+		}
+	}
+
+	option = { # We don't need your support!
+		name = nf_SEV.1.c
+		    ai_chance = {
+			    factor = 5
+		    }
+		HNZ = {
+		    country_event = nf_HNZ.10
+		}
+	}
+}
