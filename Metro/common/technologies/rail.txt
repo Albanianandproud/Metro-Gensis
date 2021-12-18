@@ -1,33 +1,30 @@
 technologies = {
 
-	rc_equipment_tech_1 = {
+	rail_cart_tech_2020 = {
 
 		enable_equipments = {
 			rail_cart_equipment_1
 		}
+
 		enable_subunits = {
 			rail_cart
 		}
 
 		path = {
-		    leads_to_tech = rc_tech_2
+		    leads_to_tech = rail_cart_storage_compartment
 			research_cost_coeff = 1
 		}
 
-		path = {
-		    leads_to_tech = automobile_salvaging
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 1.2
+		research_cost = 1.85
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2020
+
 		folder = {
 			name = rail_folder
-			position = { x = -3 y = 0 }
+			position = { x = -4 y = 0 }
 		}
 		
 		categories = {
@@ -40,26 +37,32 @@ technologies = {
 		}
 	}
 
-	rc_tech_2 = {
+	rail_cart_storage_compartment = {
 
 		category_rail_cart = {
-			defense = 0.05
+			supply_consumption = -0.02
 		}	
 
 		path = {
-		    leads_to_tech = rc_equipment_tech_2
+		    leads_to_tech = rail_cart_tech_2029
 			research_cost_coeff = 1
 		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
 
-		start_year = 2027
+		path = {
+		    leads_to_tech = rail_fuel_storage		## Reduces supply usage of rail cart equipment
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2028
+
 		folder = {
 			name = rail_folder
-			position = { x = -3 y = 3 }
+			position = { x = -4 y = 3 }
 		}
 		
 		categories = {
@@ -72,31 +75,32 @@ technologies = {
 		}
 	}
 
-	rc_equipment_tech_2 = {
+	rail_cart_tech_2029 = {
 
 		enable_equipments = {
 			rail_cart_equipment_2
-		}
-
-		path = {
-		    leads_to_tech = rc_tech_3
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rc_tech_4
-			research_cost_coeff = 1
 		}	
-				
-		research_cost = 2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
 
-		start_year = 2028
+		path = {
+		    leads_to_tech = rail_cart_jurry_rigged_handcrank
+			research_cost_coeff = 1
+		}
+
+		path = {
+		    leads_to_tech = rail_automobile_salvaging
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.85
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2029
+
 		folder = {
 			name = rail_folder
-			position = { x = -3 y = 6 }
+			position = { x = -4 y = 6 }
 		}
 		
 		categories = {
@@ -109,23 +113,29 @@ technologies = {
 		}
 	}
 
-	rc_tech_3 = {
+	rail_cart_jurry_rigged_handcrank = {
 
 		category_rail_cart = {
-			reliability = 0.05
+			reliability = 0.02
+			maximum_speed = 0.03
 		}
+
+		dependencies = {
+            rail_military_vehicle_salvaging = 1
+        }	
 
 		path = {
-		    leads_to_tech = rc_equipment_tech_3
+		    leads_to_tech = rail_cart_durable_chassis
 			research_cost_coeff = 1
 		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
 
-		start_year = 2029
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2030
+
 		folder = {
 			name = rail_folder
 			position = { x = -4 y = 9 }
@@ -141,23 +151,213 @@ technologies = {
 		}
 	}
 
-	rc_tech_4 = {
+	rail_cart_durable_chassis = {
 
 		category_rail_cart = {
-			armor_value = 0.05
+			armor_value = 0.1
+			max_organisation = 2
+		}	
+
+		path = {
+		    leads_to_tech = rail_cart_tech_2032
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2031
+
+		folder = {
+			name = rail_folder
+			position = { x = -4 y = 12 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_cart_tech_2032 = {
+
+		enable_equipments = {
+			rail_cart_equipment_3
+		}	
+
+		path = {
+		    leads_to_tech = rail_cart_mounted_emplacement_tech
+			research_cost_coeff = 1
 		}
 
 		path = {
-		    leads_to_tech = rc_equipment_tech_3
+		    leads_to_tech = rail_reinforced_chassis
 			research_cost_coeff = 1
 		}
-				
-		research_cost = 1.2
+
+		research_cost = 1.35
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2032
+
+		folder = {
+			name = rail_folder
+			position = { x = -4 y = 15 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_cart_mounted_emplacement_tech = {
+
+		category_rail_cart = {
+			soft_attack = 0.05
+			hard_attack = 0.05
+			breakthrough = 0.05
+		}	
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2033
+
+		folder = {
+			name = rail_folder
+			position = { x = -4 y = 18 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_fuel_storage = {
+
+		category_rail_cart = {
+			supply_consumption = -0.03
+		}	
+
+		path = {
+		    leads_to_tech = rail_improved_fuel_storage
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2028
+
+		folder = {
+			name = rail_folder
+			position = { x = -2 y = 3 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_automobile_salvaging = {
+
+		category_rail_vehicles = {
+			reliability = 0.02
+			maximum_speed = 0.01 
+		}	
+
+		path = {
+		    leads_to_tech = rail_car_tech_2029
+			research_cost_coeff = 1
+		}
+
+		path = {
+		    leads_to_tech = rail_military_vehicle_salvaging		## improves reliability
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2029
+
+		folder = {
+			name = rail_folder
+			position = { x = -2 y = 6 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_military_vehicle_salvaging = {
+
+		category_rail_vehicles = {
+			reliability = 0.02
+			maximum_speed = 0.01 
+		}
+
+		dependencies = {
+            rail_automobile_salvaging = 1
+        }	
+
+		path = {
+		    leads_to_tech = rail_industrial_vehicle_salvaging		## improves reliability
+			research_cost_coeff = 1
+		}
+
+		path = {
+		    leads_to_tech = rail_car_turret
+			research_cost_coeff = 1
+		}
+
+		path = {
+		    leads_to_tech = rail_cart_jurry_rigged_handcrank
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2030
+
 		folder = {
 			name = rail_folder
 			position = { x = -2 y = 9 }
@@ -173,63 +373,23 @@ technologies = {
 		}
 	}
 
-	rc_equipment_tech_3 = {
+	rail_industrial_vehicle_salvaging = {
 
-		enable_equipments = {
-			rail_cart_equipment_3
-		}
-
-		path = {
-		    leads_to_tech = rc_tech_5
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rc_tech_6
-			research_cost_coeff = 1
-		}
-
-		path = {
-		   leads_to_tech = rc_tech_7
-			research_cost_coeff = 1
+		category_rail_vehicles = {
+			reliability = 0.02
+			maximum_speed = 0.01 
 		}	
-				
-		research_cost = 2
+
+		research_cost = 1.35
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2030
-		folder = {
-			name = rail_folder
-			position = { x = -3 y = 12 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	rc_tech_5 = {
-
-		category_rail_cart = {
-			soft_attack = 0.05
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1	
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2031
+
 		folder = {
 			name = rail_folder
-			position = { x = -5 y = 15 }
+			position = { x = -2 y = 12 }
 		}
 		
 		categories = {
@@ -242,138 +402,31 @@ technologies = {
 		}
 	}
 
-	rc_tech_6 = {
-
-		category_rail_cart = {
-			hard_attack = 0.05
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2031
-		folder = {
-			name = rail_folder
-			position = { x = -3 y = 15 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	rc_tech_7 = {
-
-		category_rail_cart = {
-			breakthrough = 0.05
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2031
-		folder = {
-			name = rail_folder
-			position = { x = -1 y = 15 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	automobile_salvaging = {
-
-		category_rail_panzer = {
-			maximum_speed = 0.034
-			supply_consumption = -0.04
-		}
-
-		category_rail_car = {
-			maximum_speed = 0.04
-			supply_consumption = -0.04
-		}
-
-        path = {
-		    leads_to_tech = rc_equipment_tech_2
-			research_cost_coeff = 1
-        }
-
-		path = {
-		    leads_to_tech = rb_equipment_tech_1
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = panzer_tech_1
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2028
-		folder = {
-			name = rail_folder
-			position = { x = 4 y = 6 }
-		}
-		
-		categories = {
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	rb_equipment_tech_1 = {
+	rail_car_tech_2029 = {
 
 		enable_equipments = {
 			rail_car_equipment_1
 		}
-		enable_subunits = {
-			rail_car
-		}
 
 		path = {
-		    leads_to_tech = rb_tech_1
+		    leads_to_tech = rail_car_turret
 			research_cost_coeff = 1
 		}
 
-		path = {
-		    leads_to_tech = rb_tech_2
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 2
+		research_cost = 1.85
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2029
+
 		folder = {
 			name = rail_folder
-			position = { x = 2 y = 9 }
+			position = { x = 0 y = 6 }
 		}
 		
 		categories = {
+		    rail_car
 			armor
 		}
 		
@@ -382,90 +435,323 @@ technologies = {
 		}
 	}
 
-	rb_tech_1 = {
+	rail_car_turret = {
+
+		category_rail_car = {
+			breakthrough = 0.04
+			soft_attack = 0.04 
+		}	
+
+		dependencies = {
+            rail_military_vehicle_salvaging = 1
+        }
 
 		path = {
-		    leads_to_tech = tc_equipment_tech_1
+		    leads_to_tech = rail_car_tech_2032
 			research_cost_coeff = 1
 		}
 
-		category_rail_car = {
-			defense = 0.04
-			soft_attack = 0.04
-			breakthrough = 0.04
-		}	
-				
-		research_cost = 1.2
+		path = {
+		    leads_to_tech = rail_panzer_tech_2030
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2030
+
 		folder = {
 			name = rail_folder
-			position = { x = 1 y = 12 }
+			position = { x = 0 y = 9 }
 		}
 		
 		categories = {
+		    rail_car
 			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
-	rb_tech_2 = {
+	rail_car_tech_2032 = {
+
+		enable_equipments = {
+			rail_car_equipment_2
+		}
+
+		path = {
+		    leads_to_tech = rail_car_mounted_ammo_box
+			research_cost_coeff = 1
+		}
+
+		path = {
+		    leads_to_tech = rail_reinforced_chassis		## improve hardness / armor to cars and carts
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.85
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2032
+
+		folder = {
+			name = rail_folder
+			position = { x = 0 y = 15 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_car_mounted_ammo_box = {
 
 		category_rail_car = {
-			maximum_speed = 0.03
-			supply_consumption = -0.03
+			soft_attack = 0.03
+			reliability = 0.02
+		}
+
+		path = {
+		    leads_to_tech = rail_car_reinforced_rollers
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2033
+
+		folder = {
+			name = rail_folder
+			position = { x = 0 y = 18 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_car_reinforced_rollers = {
+
+		category_rail_car = {
+			breakthrough = 0.03
+			maximum_speed = 0.02
+		}	
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2034
+
+		folder = {
+			name = rail_folder
+			position = { x = 0 y = 21 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_reinforced_chassis = {
+
+		category_rail_cart = {
+			armor_value = 0.1
+			hardness = 0.1
+		}
+
+		category_rail_car = {
+			armor_value = 0.1
+			hardness = 0.1
 		}	
 
 		path = {
-		    leads_to_tech = tc_equipment_tech_1
+		    leads_to_tech = rail_alloy_chassis		
 			research_cost_coeff = 1
 		}
-				
-		research_cost = 1.2
+
+		research_cost = 1.35
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2032
+
+		folder = {
+			name = rail_folder
+			position = { x = -2 y = 15 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_alloy_chassis	 = {
+
+		category_rail_cart = {
+			armor_value = 0.1
+			hardness = 0.1
+		}
+
+		category_rail_car = {
+			armor_value = 0.1
+			hardness = 0.1
+		}	
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2033
+
+		folder = {
+			name = rail_folder
+			position = { x = -2 y = 18 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_improved_fuel_storage = {
+
+		category_rail_cart = {
+			supply_consumption = -0.04
+		}	
+
+		path = {
+		    leads_to_tech = rail_panzer_tech_2030		## Prerequesite tech for Panzer equipment
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2028
+
+		folder = {
+			name = rail_folder
+			position = { x = 0 y = 3 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_panzer_tech_2030 = {
+
+		enable_equipments = {
+			rail_panzer_equipment_1
+		}
+
+		dependencies = {
+            rail_car_turret = 1
+        }	
+
+        dependencies = {
+            rail_improved_fuel_storage = 1
+        }	
+
+		path = {
+		    leads_to_tech = rail_panzer_tech_2031
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.85
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2030
+
+		folder = {
+			name = rail_folder
+			position = { x = 3 y = 9 }
+		}
+		
+		categories = {
+		    rail_car
+			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	rail_panzer_tech_2031 = {
+
+		category_rail_panzer = {
+			hard_attack = 0.1
+			ap_attack = 0.1
+		}	
+
+		path = {
+		    leads_to_tech = rail_panzer_sloped_armor_tech
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2031
+
 		folder = {
 			name = rail_folder
 			position = { x = 3 y = 12 }
 		}
 		
 		categories = {
-			armor
-		}
-	}
-
-	tc_equipment_tech_1 = {
-
-		enable_equipments = {
-			rail_car_equipment_2
-		}
-		path = {
-		    leads_to_tech = tc_tech_1
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = tc_tech_2
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2031
-		folder = {
-			name = rail_folder
-			position = { x = 2 y = 15 }
-		}
-		
-		categories = {
+		    rail_car
 			armor
 		}
 		
@@ -474,76 +760,64 @@ technologies = {
 		}
 	}
 
-	tc_tech_1 = {
+	rail_panzer_sloped_armor_tech = {
 
-		category_rail_car = {
-			maximum_speed = 0.02
-			breakthrough = 0.03
-		}	
-				
-		research_cost = 1.2
+		category_rail_cart = {
+			armor_value = 0.1
+		}
+
+		path = {
+		    leads_to_tech = rail_panzer_tech_2033
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
 		start_year = 2032
+
 		folder = {
 			name = rail_folder
-			position = { x = 1 y = 18 }
+			position = { x = 3 y = 15 }
 		}
 		
 		categories = {
+		    rail_car
 			armor
+		}
+		
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
-	tc_tech_2 = {
+	rail_panzer_tech_2033 = {
 
-		category_rail_car = {
-			defense = 0.05
-			hardness = 0.05
-		}	
-				
-		research_cost = 1.2
+		enable_equipments = {
+			rail_panzer_equipment_2
+		}
+
+		path = {
+		    leads_to_tech = rail_panzer_periscope
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.85
 	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
 
-		start_year = 2032
+		start_year = 2033
+
 		folder = {
 			name = rail_folder
 			position = { x = 3 y = 18 }
 		}
 		
 		categories = {
-			armor
-		}
-	}
-
-	panzer_tech_1 = {
-
-		category_rail_panzer = {
-			soft_attack = 0.07
-			hard_attack = 0.07
-		}
-
-		path = {
-		    leads_to_tech = panzer_equipment_tech_1
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2029
-		folder = {
-			name = rail_folder
-			position = { x = 6 y = 9 }
-		}
-		
-		categories = {
+		    rail_car
 			armor
 		}
 		
@@ -552,99 +826,31 @@ technologies = {
 		}
 	}
 
-	panzer_equipment_tech_1 = {
-
-		enable_equipments = {
-			rail_panzer_equipment_1
-		}
-		enable_subunits = {
-			rail_panzer
-		}
-		path = {
-		    leads_to_tech = panzer_tech_2
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = panzer_tech_3
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 1.6
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2030
-		folder = {
-			name = rail_folder
-			position = { x = 6 y = 12 }
-		}
-		
-		categories = {
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	panzer_tech_2 = {
-
-		category_rail_panzer = {
-			defense = 0.05
-			hardness = 0.04
-		}
-
-		path = {
-		    leads_to_tech = panzer_equipment_tech_2
-			research_cost_coeff = 1
-		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
-
-		start_year = 2031
-		folder = {
-			name = rail_folder
-			position = { x = 5 y = 15 }
-		}
-		
-		categories = {
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	panzer_tech_3 = {
+	rail_panzer_periscope  = {
 
 		category_rail_panzer = {
 			max_organisation = 2
 		}
 
 		path = {
-		    leads_to_tech = panzer_equipment_tech_2
+		    leads_to_tech = rail_panzer_tech_2035
 			research_cost_coeff = 1
 		}
-				
-		research_cost = 1.2
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
 
-		start_year = 2031
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2034
+
 		folder = {
 			name = rail_folder
-			position = { x = 7 y = 15 }
+			position = { x = 3 y = 21 }
 		}
 		
 		categories = {
+		    rail_car
 			armor
 		}
 		
@@ -653,24 +859,26 @@ technologies = {
 		}
 	}
 
-	panzer_equipment_tech_2 = {
+	rail_panzer_tech_2035  = {
 
 		enable_equipments = {
-			rail_panzer_equipment_2
+			rail_panzer_equipment_3
 		}
-				
-		research_cost = 1.6
-	    xp_research_type = army
-		xp_research_cost = 50
-		xp_research_bonus = 1
 
-		start_year = 2032
+		research_cost = 1.35
+	    xp_research_type = army
+		xp_boost_cost = 40
+		xp_research_bonus = 0.4
+
+		start_year = 2035
+
 		folder = {
 			name = rail_folder
-			position = { x = 6 y = 18 }
+			position = { x = 3 y = 24 }
 		}
 		
 		categories = {
+		    rail_car
 			armor
 		}
 		

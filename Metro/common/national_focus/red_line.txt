@@ -7,7 +7,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 10
+			add = 0
 			tag = RED
 		}
 	}
@@ -142,7 +142,7 @@ focus_tree = {
 			factor = 3
 		}
 		completion_reward = {
-			add_political_power = 75
+			add_political_power = 60
 			add_popularity = {
 				ideology = community
 				popularity = 0.05
@@ -225,7 +225,7 @@ focus_tree = {
 			}
 			add_timed_idea = {
 			    idea = RED_kgb_patrols
-			    days = 400
+			    days = 480
 			}
 		}
 	}
@@ -386,7 +386,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = 0.05
-			add_political_power = 100
+			add_political_power = 35
+			add_ideas = RED_recovering_economy 	
 		}
 	}
 
@@ -565,6 +566,7 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
+			add_political_power = 10
 		}
 	}
 	###	Gosplan / Industry Branch ###
@@ -582,13 +584,15 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### PP / Unique Advisor
+			add_political_power = 45
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RED_gosplan
 		}
 	}
 	focus = {
 		id = RED_unionize_trades
 		icon = GFX_mobilise_workforce
-		cost = 4
+		cost = 6.5
 		relative_position_id = RED_establish_gosplan
 		x = -1
 		y = 1
@@ -599,13 +603,69 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Gain Factories
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+					    NOT = {
+					    	has_state_category = pastoral
+						}
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+					    NOT = {
+					    	has_state_category = pastoral
+						}
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+					    NOT = {
+					    	has_state_category = pastoral
+						}
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+			}
 		}
 	}
 	focus = {
 		id = RED_centralised_planning
 		icon = GFX_RED_gosplan
-		cost = 4
+		cost = 6.5
 		relative_position_id = RED_establish_gosplan
 		x = 1
 		y = 1
@@ -616,7 +676,54 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Gain Building Slots
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 		}
 	}
 	focus = {
@@ -636,7 +743,8 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### More CG / stability and Production buffs
+			add_stability= 0.05
+			add_ideas = RED_private_market
 		}
 	}
 	focus = {
@@ -656,7 +764,7 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Lose Stability / less CG
+			add_ideas = RED_fixed_rates
 		}
 	}
 	focus = {
@@ -674,7 +782,7 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Give Civilian construction boost
+			add_ideas = RED_prodrazvyorstka
 		}
 	}
 	focus = {
@@ -691,12 +799,13 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Bulding Slots / Factory Output
+			add_stability = -0.05
+			add_ideas = RED_collectivization_efforts
 		}
 	}
 	focus = {
 		id = RED_infrastructure_developement
-		icon = GFX_RED_planned infrastructure
+		icon = GFX_RED_planned_infrastructure
 		cost = 6.5
 		relative_position_id = RED_centralised_planning
 		x = 6
@@ -708,13 +817,17 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Idea to build Infrastructure
+			add_timed_idea = {
+				idea = RED_infrastructure_developement
+				days = 120
+			}
+			custom_effect_tooltip = RED_rebuilding_the_line
 		}
 	}
 	focus = {
 		id = RED_infrastructure_developement_inner_line
-		icon = GFX_RED_planned infrastructure
-		cost = 7.2
+		icon = GFX_RED_planned_infrastructure
+		cost = 3
 		relative_position_id = RED_infrastructure_developement
 		x = 0
 		y = 1
@@ -728,12 +841,16 @@ focus_tree = {
 			### Decision to build infra on inner line 
 			### Extra decisions to construct
 			### Defense against fascists
+			modify_timed_idea = {
+				idea = RED_rebuilding_the_line
+				days = 60
+			}
 		}
 	}
 	focus = {
 		id = RED_infrastructure_developement_northern_line
-		icon = GFX_RED_planned infrastructure
-		cost = 7.2
+		icon = GFX_RED_planned_infrastructure
+		cost = 3
 		relative_position_id = RED_infrastructure_developement
 		x = 2
 		y = 1
@@ -747,12 +864,16 @@ focus_tree = {
 			### Decision to build infra on northern 
 			### Extra decisions to construct
 			### Develope prison station
+			modify_timed_idea = {
+				idea = RED_rebuilding_the_line
+				days = 60
+			}
 		}
 	}
 	focus = {
 		id = RED_infrastructure_developement_southern_line
-		icon = GFX_RED_planned infrastructure
-		cost = 7.2
+		icon = GFX_RED_planned_infrastructure
+		cost = 3
 		relative_position_id = RED_infrastructure_developement
 		x = -2
 		y = 1
@@ -766,12 +887,16 @@ focus_tree = {
 			### Decision to build infra on southern
 			### Extra decisions to construct
 			### Listening post against Emerald City
+			modify_timed_idea = {
+				idea = RED_rebuilding_the_line
+				days = 60
+			}
 		}
 	}
 	focus = {
 		id = RED_infrastructure_developement_electricity
 		icon = GFX_battery
-		cost = 6.5
+		cost = 4
 		relative_position_id = RED_infrastructure_developement
 		x = -1
 		y = 2
@@ -826,6 +951,7 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
+			add_ideas = RED_great_leap
 			### Unlock Advisor
 			### Idea buff
 		}
@@ -845,6 +971,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			### Idea
+			add_ideas = RED_industrial_output
 		}
 	}
 	focus = {
@@ -906,8 +1033,7 @@ focus_tree = {
 			factor = 2
 		}
 		completion_reward = {
-			### Begins in 2030 / after Andrey dies
-			### Choices beforehand will determine path of focuses
+			add_ideas = RED_four_year_plan
 		}
 	}
 	focus = {
@@ -1218,7 +1344,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_conscription_reforms
-		icon = GFX_RED_uraaaaa
+		icon = GFX_RED_standardisation
 		cost = 1
 
 		relative_position_id = RED_might_of_the_red_line
@@ -1231,6 +1357,95 @@ focus_tree = {
 
 		prerequisite = {
 			focus = RED_might_of_the_red_line
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Smaller, reformed army
+		}
+	}
+
+	focus = {
+		id = RED_standards
+		icon = GFX_RED_rifles
+		cost = 1
+
+		relative_position_id = RED_conscription_reforms
+		x = 0
+		y = 2
+
+		prerequisite = {
+			focus = RED_conscription_reforms
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Smaller, reformed army
+		}
+	}
+
+	focus = {
+		id = RED_cohesive_tactics
+		icon = GFX_RED_soldier_bust
+		cost = 1
+
+		relative_position_id = RED_conscription_reforms
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = RED_conscription_reforms
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Smaller, reformed army
+		}
+	}
+
+	focus = {
+		id = RED_adaptability
+		icon = GFX_RED_generic_revolution_2
+		cost = 1
+
+		relative_position_id = RED_cohesive_tactics
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = RED_cohesive_tactics
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Smaller, reformed army
+		}
+	}
+
+	focus = {
+		id = RED_elite_military
+		icon = GFX_soldier_3
+		cost = 1
+
+		relative_position_id = RED_standards
+		x = -1
+		y = 1
+
+		prerequisite = {
+			focus = RED_standards
+			focus = RED_adaptability
 		}
 
 		ai_will_do = {
@@ -1257,6 +1472,95 @@ focus_tree = {
 
 		prerequisite = {
 			focus = RED_might_of_the_red_line
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Bigger Army, more disorganised and crude
+		}
+	}
+
+	focus = {
+		id = RED_mass_recruitment
+		icon = GFX_RED_troops2
+		cost = 1
+
+		relative_position_id = RED_soviet_soldier_myth
+		x = 2
+		y = 1
+
+		prerequisite = {
+			focus = RED_soviet_soldier_myth
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Bigger Army, more disorganised and crude
+		}
+	}
+
+	focus = {
+		id = RED_cartridge
+		icon = GFX_bullets_2
+		cost = 1
+
+		relative_position_id =  RED_mass_recruitment
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus =  RED_mass_recruitment
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Bigger Army, more disorganised and crude
+		}
+	}
+
+	focus = {
+		id = RED_no_victory_without_sacrifice
+		icon = GFX_helmet
+		cost = 1
+
+		relative_position_id =  RED_soviet_soldier_myth
+		x = 0
+		y = 2
+
+		prerequisite = {
+			focus =  RED_soviet_soldier_myth
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			### Bigger Army, more disorganised and crude
+		}
+	}
+
+	focus = {
+		id = RED_uraaaa
+		icon = GFX_RED_uraaaaa
+		cost = 1
+
+		relative_position_id =  RED_no_victory_without_sacrifice
+		x = 1
+		y = 1
+
+		prerequisite = {
+			focus =  RED_no_victory_without_sacrifice
+			focus =  RED_cartridge
 		}
 
 		ai_will_do = {

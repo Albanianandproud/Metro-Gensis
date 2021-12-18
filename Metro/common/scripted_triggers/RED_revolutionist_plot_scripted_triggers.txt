@@ -1,0 +1,31 @@
+RED_revolutionist_plot_foiled = {
+	if = {
+		has_completed_focus = RED_crisis_averted
+		AND = {
+        	limit = {
+       			AVT = {
+                	exists = no
+            	}
+            	HUL = {
+               		exists = no
+           		}
+        	}
+        }
+        country_event = nf_RED.5
+    }
+    else_if = { ### Breakaways dealt with
+       	has_completed_focus = RED_unbreakable_bond
+       	AND = {
+       		is_in_faction_with = HUL
+       		is_in_faction_with = AVT
+       	}
+       	country_event = nf_RED.5
+    }
+    else = { ### Korbut on the job
+    	limit = {
+    		has_completed_focus = RED_anti_corruption_force
+    		has_completed_focus = RED_give_korbut_general
+    	}
+    	country_event = nf_RED.5
+    }
+}
