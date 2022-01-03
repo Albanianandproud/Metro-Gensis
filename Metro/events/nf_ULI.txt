@@ -1,0 +1,43 @@
+add_namespace = nf_ULI
+# peace with reich
+country_event = {
+    id = nf_ULI.1
+    title = nf_ULI.1.t
+    desc = nf_ULI.1.d
+    picture = GFX_report_event_african_soldiers
+	trigger = {
+		RCH = {
+			controls_state = 418
+		}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = { # accept
+		name = nf_ULI.1.a
+		ai_chance = {
+			base = 50
+		}
+		RCH = {
+            transfer_state = 418
+            transfer_state = 149
+            transfer_state = 148
+            white_peace = ULI
+			country_event = { id = nf_RCH.2 days = 1 }
+		}
+	}
+
+	option = { # refuse
+		name = nf_ULI.1.b
+		ai_chance = {
+			base = 25
+		}
+		RCH = {
+			country_event = { id = nf_RCH.3 days = 1 }
+		}
+	}
+}
