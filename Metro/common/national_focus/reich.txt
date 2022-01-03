@@ -468,6 +468,10 @@ focus_tree = {
 			}
 		}
 
+		available = {
+			has_war = no
+		}
+
         will_lead_to_war_with = DIM
 		completion_reward = {
 			create_wargoal = {
@@ -476,6 +480,40 @@ focus_tree = {
  				expire = 0
  				generator = { 28 }
  			}
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_barrikadnaya_core
+		icon = GFX_mutant_death
+		cost = 6.5
+
+		x = 0
+		y = 2
+		relative_position_id = RCH_expansion
+
+		prerequisite = {
+			focus = RCH_expansion
+		}
+
+		available = {
+			418 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			418 = { add_core_of = ROOT }
+		    418 = { 
+		    	add_manpower = -50 
+		    	add_extra_state_shared_building_slots = 2
+		    	add_building_construction = {
+    				type = infrastructure
+    				level = 2
+    				instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -498,6 +536,10 @@ focus_tree = {
 				has_war_with = ULI
 			}
 		}
+
+		available = {
+			has_war = no
+		}
 		
         will_lead_to_war_with = ULI
 		completion_reward = {
@@ -507,6 +549,40 @@ focus_tree = {
  				expire = 0
  				generator = { 28 }
  			}
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_trubnaya_core
+		icon = GFX_mutant_death
+		cost = 6.5
+
+		x = 0
+		y = 2
+		relative_position_id = RCH_expansion2
+
+		prerequisite = {
+			focus = RCH_expansion2
+		}
+
+		available = {
+			312 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			312 = { add_core_of = ROOT }
+		    312 = { 
+		    	add_manpower = -50 
+		    	add_extra_state_shared_building_slots = 2
+		    	add_building_construction = {
+    				type = infrastructure
+    				level = 2
+    				instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -590,7 +666,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion3
-		icon = GFX_RCH_propaganda
+		icon = GFX_HNZ_destroy_communism
 		cost = 6.5
 
 		x = 1
@@ -608,6 +684,10 @@ focus_tree = {
 				has_war_with = RED
 			}
 		}
+
+		available = {
+			has_war = no
+		}
 		
         will_lead_to_war_with = RED
 		completion_reward = {
@@ -617,6 +697,75 @@ focus_tree = {
  				expire = 0
  				generator = { 28 }
  			}
+		}
+	}
+
+    focus = {
+		id = RCH_expansion_pls_tunnel
+		icon = GFX_RCH_tunnel_excavation
+		cost = 6.5
+
+		x = 3
+		y = 1
+		relative_position_id = RCH_lebensraum
+
+		prerequisite = {
+			focus = RCH_lebensraum
+		}
+
+        available = {
+			429 = {
+                is_owned_by = RUI
+			}
+			220 = {
+                is_owned_by = RUI
+			}
+		}
+		bypass = {
+		    NOT = {
+			    429 = {
+                    is_owned_by = RUI
+			    }
+			    220 = {
+                    is_owned_by = RUI
+			    }
+			}
+	    }
+		completion_reward = {
+		    transfer_state = 429
+		    429 = { add_core_of = ROOT }
+
+		    transfer_state = 220
+		    220 = { add_core_of = ROOT }
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_pls_annex
+		icon = GFX_station_entrance
+		cost = 6.5
+
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion_pls_tunnel
+
+		prerequisite = {
+			focus = RCH_expansion_pls_tunnel
+		}
+
+		available = {
+			has_war = no
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PLS }
+				has_war_with = PLS
+			}
+		}
+
+		completion_reward = {
+		    244 = { add_core_of = ROOT }
 		}
 	}
 
@@ -630,9 +779,11 @@ focus_tree = {
 		completion_reward = {
 		 	custom_effect_tooltip = RED_reich_border
 		    if = {
-		    	ROOT = {
-		    		owns_state = 337
-		    	}
+		    	limit = {
+		    		337 = {
+                		is_owned_by = RCH
+					}
+				}
 				337 = {
 			    	add_building_construction = {
     					type = bunker
@@ -651,8 +802,10 @@ focus_tree = {
 		    }
 		    if = {
 				limit = {
-		        	owns_state = 430
-		        }
+		    		430 = {
+                		is_owned_by = RCH
+					}
+				}
 				430 = {
 			    	add_building_construction = {
     					type = bunker
@@ -671,8 +824,10 @@ focus_tree = {
 		    }
 		    if = {
 				limit = {
-		        	owns_state = 431
-		        }
+		    		431 = {
+                		is_owned_by = RCH
+					}
+				}
 				431  = {
 			    	add_building_construction = {
     					type = bunker
@@ -692,8 +847,10 @@ focus_tree = {
 
 		    if = {
 				limit = {
-		        	owns_state = 214
-		        }
+		    		214 = {
+                		is_owned_by = RCH
+					}
+				}
 				214 = {
 			    	add_building_construction = {
     					type = bunker
@@ -1196,7 +1353,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_military
-		icon = GFX_RCH_commander4
+		icon = GFX_RCH_commander2
 		cost = 4.4
 		x = 29
 		y = 0

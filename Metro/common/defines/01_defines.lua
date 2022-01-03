@@ -23,6 +23,7 @@ NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
 NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.05
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.5
 NDefines.NCountry.ATTACHE_XP_SHARE = 0.334
+NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5, 
 
 ---Production Stuff---
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
@@ -71,16 +72,20 @@ NDefines.NAI.WANTED_UNITS_MANPOWER_DIVISOR = 5000
 
 ---Supply Stuff---
 NDefines.NSupply.MAX_RAILWAY_LEVEL = 3		--- Base is 5. Pending Change.
-NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.5
-NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.5
+NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.6
+NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.6
 
-NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.65 		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
+NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.55 		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
 
-NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.25		--- Base is 0.3
+NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.20		--- Base is 0.3
 
-NDefines.NSupply.INFRA_TO_SUPPLY = 0.45
-NDefines.NSupply.VP_TO_SUPPLY_BASE = 0.35
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.1
+NDefines.NSupply.INFRA_TO_SUPPLY = 0.75
+NDefines.NSupply.VP_TO_SUPPLY_BASE = 0.75
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.2
 NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.5
 
-NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.5		--- Base is 0.35. Attrition is bad in the Metro yo,
+NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.25		--- Base is 0.35. Attrition is bad in the Metro yo,
+
+--La Resistance--
+NDefines.NOperatives.AGENCY_CREATION_DAYS = 9999			--- No more Espionage!
+NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 999		--- No more Espionage!

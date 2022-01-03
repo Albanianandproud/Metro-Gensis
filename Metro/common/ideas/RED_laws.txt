@@ -129,9 +129,6 @@ ideas = {
 				offensive_war_stability_factor = 0.1
 			}
 			available = {
-				tag = RED 		## Red Line uses their own unique conscription law. 
-			}
-			available = {
 				OR = {
 					AND = {
 						has_war_with = HNZ
@@ -162,13 +159,9 @@ ideas = {
 			}
 			picture = broken_lightbulb
 
-			allowed_to_remove = {
-				custom_trigger_tooltip = {
-					tooltip = RED_exhausted_economy_tt
-					always = no
-				}
-			}
-
+			#allowed_to_remove = {
+			#	num_of_factories > 54
+			#}
 			modifier = {
 				consumer_goods_factor = 0.4
 				conversion_cost_civ_to_mil_factor = 0.5
@@ -187,6 +180,7 @@ ideas = {
 			removal_cost = -1
 			available = {
 				tag = RED
+				num_of_factories > 54
 			}
 			visible = {
 				tag = RED
@@ -200,13 +194,14 @@ ideas = {
 			}
 
 			available = {
-				NOT = { has_idea = RED_disintergrating_military }
-				NOT = { has_idea = RED_mutinies }
+			#	NOT = { has_idea = RED_disintergrating_military }
+			#	NOT = { has_idea = RED_mutinies }
 			}
 
-			available = {
-				has_completed_focus = RED_crisis_averted
-			}
+			#available = {
+			#	has_completed_focus = RED_crisis_averted
+			#}
+
 			ai_will_do = {
 				factor = 0
 			}
@@ -226,12 +221,14 @@ ideas = {
 
 			modifier = {
 				consumer_goods_factor = 0.25
-				production_speed_buildings_factor = 0.15
+				production_speed_buildings_factor = 0.1
 			}
 
 			available = {
-				has_completed_focus = RED_begin_the_4_year_plan
+				## has_completed_focus = RED_begin_the_4_year_plan
+				has_idea = RED_gosplan
 			}
+
 			ai_will_do = {
 				factor = 200    ## Red Line should ALWAYS try getting this ASAP!
 				modifier = {
@@ -259,7 +256,7 @@ ideas = {
 			}
 
 			available = {
-				has_war_support > 0.84
+				has_war_support > 0.74
 				OR = {
 					AND = {
 						has_war_with = HNZ
@@ -268,6 +265,7 @@ ideas = {
 				NOT = { has_idea = RED_disintergrating_military }
 				NOT = { has_idea = RED_mutinies }
 			}
+
 			ai_will_do = {
 				factor = 200    ## Red Line should get this ASAP if at war with HNZ
 				modifier = {
