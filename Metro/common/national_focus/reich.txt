@@ -13,8 +13,8 @@ focus_tree = {
 		id = RCH_terror_campaigns
 		icon = GFX_RCH_commander
 
-		available = {
-		    has_completed_focus = RCH_proclaim_slavic_unity
+		mutually_exclusive = {
+			focus = RCH_inner_reforms
 		}
 
 		cost = 6.5
@@ -22,6 +22,8 @@ focus_tree = {
 		y = 0
 		completion_reward = {
 			add_ideas = terror_campaigns 
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_chief_of_police
 		}
 	}
 
@@ -169,17 +171,28 @@ focus_tree = {
 		icon = GFX_RCH_russian_unity
 		cost = 6.5
 		x = 7
-		y = 0
+		y = 1
 
-		mutually_exclusive = {
-			focus = RCH_inner_reforms
+		prerequisite = {
+			focus = RCH_terror_campaigns
+			focus =	RCH_inner_reforms
 		}
 
 		completion_reward = {
-		    add_political_power = 90
+		    add_political_power = 100
 		    add_war_support = 0.1
 
-			#country_event = nf_RCH.1 
+			337 = {		## Tverskaya
+				set_state_name = "Darvinovskaya"
+			}
+			275 = {		## Pushkinskaya
+				set_state_name = "Wagnerovskaya"
+			}
+			306 = {		## Chekhovskaya
+				set_state_name = "Schillerovskaya"
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_karl_krainer
 		}
 	}
 
@@ -199,6 +212,8 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_political_power = 90
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_chairman_of_ministry
 		}
 	}
 
@@ -302,7 +317,7 @@ focus_tree = {
 		y = 0
 
 		mutually_exclusive = {
-			focus = RCH_proclaim_slavic_unity
+			focus = RCH_terror_campaigns
 		}
 		
 		completion_reward = {
