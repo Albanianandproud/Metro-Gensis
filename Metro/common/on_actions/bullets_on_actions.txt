@@ -1,7 +1,34 @@
-## Created by Albanian for Metro | Genesis ##
+## Created by Albanian for Metro Genesis ##
+
+### Make sure savage nations do not use station economy ###
+on_actions = {
+    on_startup = {
+        effect = {
+            ### Welcome ### 
+            every_country = {
+				limit = {
+					NOT = {
+						tag = GWC
+						tag = MUT
+						tag = PAG
+						tag = RUI
+						tag = SAT#
+					}
+				}
+                set_global_flag = bullets_enabled_global_flag
+            }
+        }
+    }
+}
+
+### Make sure every other nation uses station economy ###
 on_actions = {
 	on_startup = {
 		effect = {
+		if = {
+			limit = {
+				has_global_flag = bullets_enabled_global_flag
+			}
 			every_country={
 				set_variable = { total_expenses = 0 }
 			}

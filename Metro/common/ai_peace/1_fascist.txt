@@ -10,7 +10,6 @@ fascist_peace = {
 			has_government = dictatorial
 			AND = {
 				NOT = { has_government = council }
-				NOT = { has_government = community }
 				OR = {
 					any_country = {
 						is_in_faction_with = ROOT
@@ -22,14 +21,12 @@ fascist_peace = {
 				}
 			}
 		}
-		#These guys have their own special peace conference AI
-		#NOT = { tag = GER }
 	}
 
-	annex_randomness = 0 #400
+	annex_randomness = 400 #400
 	liberate_randomness = 0 #100
 	puppet_randomness = 0 #200
-	take_states_randomness = 0 #250
+	take_states_randomness = 250 #250
 	force_government_randomness = 0 #50
 	
 	# ROOT = Taker, FROM = Giver
@@ -44,22 +41,7 @@ fascist_peace = {
 			NOT = {
 				has_annex_war_goal = FROM
 			}
-		}
-		#modifier = { #
-		#	factor = 0
-		#	FROM = {
-		#		any_owned_state = { 
-		#			NOT = {
-		#				OR = { 
-		#					is_claimed_by = ROOT
-		#					is_core_of = ROOT
-		#					has_claimed_state_in_peace_conference = ROOT
-		#				}
-		#			}
-		#		}
-		#	}
-		#}
-		
+		}	
 		modifier = {
 			factor = 0
 			is_puppet = yes
@@ -166,25 +148,6 @@ fascist_peace = {
 				NOT = { any_owned_state = { OR = { is_coastal = yes is_island_state = yes } } }
 			}
 		}
-		# modifier = { #Don't release Chinese warlords - Japan has a focus to take care of them and is allowed to annex them directly...
-		# 	factor = 0
-		# 	FROM = {
-		# 		OR = {
-		# 			tag = PRC
-		# 			tag = GXC
-		# 			tag = YUN
-		# 			tag = SHX
-		# 			tag = XSM
-		# 			tag = SIK
-		# 			original_tag = PRC
-		# 			original_tag = GXC
-		# 			original_tag = YUN
-		# 			original_tag = SHX
-		# 			original_tag = XSM
-		# 			original_tag = SIK					
-		# 		}
-		# 	}
-		# }
 		modifier = { #Don't puppet nations in civil war... this is too buggy.
 			factor = 0
 			FROM = { has_civil_war = yes }
@@ -201,54 +164,8 @@ fascist_peace = {
 						NOT = { has_claimed_state_in_peace_conference = ROOT }
 					} 
 				}
-				#any_country = {
-				#	is_in_faction_with = ROOT
-				#	is_puppet = no
-				#	FROM = {
-				#		any_owned_state = { #PREVPREV doesn't work!!!
-				#			OR = {
-				#				is_claimed_by = PREVPREV
-				#				is_core_of = PREVPREV
-				#			}
-				#		}
-				#	}
-				#}
 			}
 		}
-		modifier = { #Deter expansion outside of continent - puppet on continent first
-			factor = 0.1
-			OR = {
-				AND = {
-					capital_scope = { is_on_continent = europe }
-					NOT = { FROM = { capital_scope = { is_on_continent = europe } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = north_america }
-					NOT = { FROM = { capital_scope = { is_on_continent = north_america } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = south_america }
-					NOT = { FROM = { capital_scope = { is_on_continent = south_america } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = australia }
-					NOT = { FROM = { capital_scope = { is_on_continent = australia } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = africa }
-					NOT = { FROM = { capital_scope = { is_on_continent = africa } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = asia }
-					NOT = { FROM = { capital_scope = { is_on_continent = asia } } }
-				}
-				AND = {
-					capital_scope = { is_on_continent = middle_east }
-					NOT = { FROM = { capital_scope = { is_on_continent = middle_east } } }
-				}
-			}
-		}
-
 		modifier = { #Not if we or a faction member have a stated interest to wipe them off the map
 			factor = 0
 			OR = {
@@ -531,7 +448,7 @@ fascist_peace = {
 			}
 		}
 		modifier = { #Fascists will want to keep their spoils...
-			factor = 3
+			factor = 500
 			FROM = { controller = { tag = ROOT } }
 		}
 		modifier = {
@@ -549,52 +466,9 @@ fascist_peace = {
 					any_neighbor_state = {
 						OR = {
 							owner = { tag = ROOT }
-							has_claimed_state_in_peace_conference = ROOT
-							#AND = {
-							#	controller = {
-							#		tag = ROOT
-							#	}
-							#	owner = {
-							#		is_in_peace_conference = no
-							#		has_capitulated = yes
-							#	}
-							#}					
+							has_claimed_state_in_peace_conference = ROOT					
 						}
 					}
-				}
-			}
-		}
-
-		modifier = { #Deter expansion outside of continent
-			factor = 0.1
-			OR = {
-				AND = {
-					capital_scope = { is_on_continent = europe }
-					NOT = { FROM = {is_on_continent = europe } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = north_america }
-					NOT = { FROM = { is_on_continent = north_america } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = south_america }
-					NOT = { FROM = { is_on_continent = south_america } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = australia }
-					NOT = { FROM = { is_on_continent = australia } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = africa }
-					NOT = { FROM = { is_on_continent = africa } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = asia }
-					NOT = { FROM = { is_on_continent = asia } } 
-				}
-				AND = {
-					capital_scope = { is_on_continent = middle_east }
-					NOT = { FROM =  { is_on_continent = middle_east } } 
 				}
 			}
 		}
