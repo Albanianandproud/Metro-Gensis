@@ -1,11 +1,41 @@
 sancity_of_life = {
 
+	allow_creation_faction = {
+
+		icon = generic_form_nation
+
+		visible = {
+			is_ai = no
+		}
+		available = {
+			is_ai = no
+		}
+		visible = {
+			is_in_faction = no
+			AND = {
+    			num_of_military_factories > 19
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+		complete_effect = {
+
+		set_rule = { can_create_factions = yes }
+		
+		}
+	}
+
 	ration_food = {
 
 		icon = decision_hol_war_on_pacifism
 
 		available = {
-			has_stability < 0.79
+			has_stability < 0.49
 		}
 
 		visible = {
@@ -15,13 +45,13 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-			stability_weekly = 0.015
+			stability_weekly = 0.005
 			consumer_goods_factor = 0.05
-			political_power_gain = -0.15
+			political_power_gain = -0.2
 		}
 
 		days_remove = 64
-		days_re_enable = 14
+		days_re_enable = 128
 
 		cost = 50
 
@@ -33,7 +63,7 @@ sancity_of_life = {
 			base = 5
 			modifier = {
 				add = 15
-				has_stability < 0.8
+				has_stability < 0.39
 			}
 		}
 	}
@@ -43,7 +73,7 @@ sancity_of_life = {
 		icon = decision_generic_research
 
 		available = {
-			has_stability < 0.8
+			has_stability < 0.59
 		}
 
 		visible = {
@@ -55,11 +85,11 @@ sancity_of_life = {
 		modifier = {
 		    political_power_gain = -0.2
 			research_speed_factor = -0.1
-			stability_weekly = 0.02
+			stability_weekly = 0.005
 		}
 
 		days_remove = 84
-		days_re_enable = 21
+		days_re_enable = 168
 
 		cost = 60
 
@@ -71,7 +101,7 @@ sancity_of_life = {
 			base = 5
 			modifier = {
 				add = 25
-				has_stability < 0.3
+				has_stability < 0.49
 			}
 		}
 	}
@@ -81,7 +111,7 @@ sancity_of_life = {
 		icon = decision_category_spr_the_seeds_of_revolution
 
 		available = {
-			has_war_support < 0.8
+			has_war_support < 0.69
 		}
 
 		visible = {
@@ -91,12 +121,12 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-		    war_support_weekly = 0.015
+		    war_support_weekly = 0.005
 			stability_weekly = -0.005
 		}
 
 		days_remove = 84
-		days_re_enable = 7
+		days_re_enable = 168
 
 		cost = 50
 
@@ -108,14 +138,14 @@ sancity_of_life = {
 			base = 5
 			modifier = {
 				add = 35
-				has_war_support < 0.78
+				has_war_support < 0.59
 			}
 		}
 	}
 
 	rouse_the_people_2 = {
 
-		icon = decision_category_spr_the_seeds_of_revolution
+		icon = decision_generic_speech
 
 		available = {
 			has_war_support < 0.59
@@ -128,11 +158,11 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-		    war_support_weekly = 0.01
+		    war_support_weekly = 0.005
 		}
 
 		days_remove = 70
-		days_re_enable = 35
+		days_re_enable = 140
 
 		cost = 50
 
@@ -147,6 +177,121 @@ sancity_of_life = {
 			}
 		}
 	}
+}
+
+warfare_drastic_measures = {
+        draw_short_straws = {
+        	icon = decision_ger_military_buildup
+
+        	available = {
+		    	any_state = { 
+		    		state_population > 49
+		    	}
+		    	has_war_support < 0.29
+		    	has_stability < 0.39
+			}
+
+			days_remove = 21
+			days_re_enable = 42
+			cost = 20
+
+			modifier = {
+               stability_weekly = -0.02
+               war_support_weekly = -0.02
+          	}
+
+			complete_effect = {
+				random_owned_state = {
+					limit = {
+						NOT = {
+					    	has_state_category = pastoral
+						}
+					}
+		    		add_manpower = 25
+				}
+				add_manpower = 25
+			}
+        }
+
+        siphon_equipment = {
+        	icon = decision_generic_prepare_civil_war
+
+        	available = {
+				all_state = {
+		    		has_resources_amount = {
+    					resource = scrap 
+    					amount > 2
+					}
+				}	
+				all_state = {
+		    		has_resources_amount = {
+    					resource = alloys 
+    					amount > 1
+					}
+				}
+			}
+
+			days_remove = 21
+			days_re_enable = 42
+			cost = 20
+
+			modifier = {
+               stability_weekly = -0.02
+               war_support_weekly = -0.02
+          	}
+
+          	complete_effect = {
+				random_owned_state = {
+					limit = {
+		    			has_resources_amount = {
+    						resource = scrap
+    						amount > 1
+						}
+					}
+		    		add_resource = {
+    					type = scrap 
+    					amount = -2
+    				}
+				}
+				random_owned_state = {
+					limit = {
+		    			has_resources_amount = {
+    						resource = alloys 
+    						amount > 1
+						}
+					}
+					add_resource = {
+    					type = alloys
+    					amount = -1
+    				}
+    			}
+    			add_equipment_to_stockpile = {
+		        type = infantry_equipment 
+		        amount = 30
+		        }
+			}
+        }
+
+        extended_shifts = {
+        	icon = decision_ger_military_buildup
+
+        	available = {
+		    	has_war_support < 0.29
+		    	has_stability < 0.39
+			}
+
+        	days_remove = 80
+			days_re_enable = 140
+			cost = 45
+
+			modifier = {
+               stability_weekly = -0.02
+               war_support_weekly = -0.02
+               consumer_goods_factor = 0.1
+               production_factory_efficiency_gain_factor = 0.1
+               production_factory_start_efficiency_factor = 0.1
+          	}
+        }
 }
 
 scavenging_expeditions = {
@@ -186,7 +331,7 @@ scavenging_expeditions = {
 		        }
 			    add_resource = {
 			        type = scrap
-			        amount = 3
+			        amount = 2
 			    }
 		    }
 
@@ -245,7 +390,7 @@ scavenging_expeditions = {
 		        }
 			    add_resource = {
 			        type = alloys
-			        amount = 3
+			        amount = 2
 			    }
 		    }
 
@@ -304,25 +449,25 @@ scavenging_expeditions = {
 		        }
 			    add_resource = {
 			        type = components
-			        amount = 3
+			        amount = 2
 			    }
 		    }
 
 			clr_country_flag = scavenging_components
 		}
 		ai_will_do = {
-			factor = 11
+			factor = 2
 			modifier = {
-				factor = 11
-				components < 4
+				factor = 5
+				components < 3
 			}
 			modifier = {
-				factor = 8
-				components < 8
+				factor = 7
+				components < 6
 			}
 			modifier = {
 				factor = 0.1
-				has_manpower < 30
+				has_manpower < 40
 			}
 		}
     }
@@ -370,18 +515,18 @@ scavenging_expeditions = {
 			clr_country_flag = scavenging_electronics
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 1
 			modifier = {
-				factor = 6
+				factor = 3
 				electronics < 4
 			}
 			modifier = {
-				factor = 8
+				factor = 4
 				electronics < 8
 			}
 			modifier = {
 				factor = 0
-				has_manpower < 30
+				has_manpower < 40
 			}
 		}
     }
