@@ -16,10 +16,11 @@ focus_tree = {
 	#############
 
 	focus = {
-		id = PLS_Supporting_Peace
+		id = PLS_SUPPORTING_PEACE
+		icon = GFX_HNZ_external_affairs
 		mutually_exclusive = { focus = PLS_CIVIL_WAR }
 
-		x = 0
+		x = 7
 		y = 0
 		cost = 5
 
@@ -29,27 +30,75 @@ focus_tree = {
 
 		allow_branch = {
 			if = {
+				limit {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
 				NOT {
 					has_completed_focus = PLS_CIVIL_WAR
 				}
 			}
 		}
 
+		completion_reward = {
+			hidden_effect = {
+				load_focus_tree = {
+					tree = nf_PLS
+					keep_completed = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
 	}
 
+	#################
+	###ALTERNATIVE###
+	#################
+
 	focus = {
 		id = PLS_CIVIL_WAR
-		mutually_exclusive = { focus = PLS_Supporting_Peace }
+		icon = GFX_soldier_3
+		mutually_exclusive = { focus = PLS_SUPPORTING_PEACE }
 
-		allow_branch = { has_country_flag = council_will_fall }
+		allow_branch = { 
+			if {
+				limit {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				AND {
+					has_country_flag = council_will_fall
+					NOT {
+						has_completed_focus = PLS_SUPPORTING_PEACE
+					}
+				}
+			}
+		}
 
-		x = 4
+		x = 14
 		y = 0
 		cost = 5
 
 		ai_will_do = {
 			factor = 1
+		}
+		
+		offset = {
+			x = -7
+			y = 0
+			trigger = {
+				has_completed_focus = PLS_CIVIL_WAR
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+			}
 		}
 
 		completion_reward = {
