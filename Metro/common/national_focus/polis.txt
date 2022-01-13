@@ -11,4 +11,58 @@ focus_tree = {
 	}
 	default = no
 
+	#############
+	###HISTORY###
+	#############
+
+	focus = {
+		id = PLS_Supporting_Peace
+		mutually_exclusive = { focus = PLS_CIVIL_WAR }
+
+		x = 0
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		allow_branch = {
+			if = {
+				NOT {
+					has_completed_focus = PLS_CIVIL_WAR
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+	}
+
+	focus = {
+		id = PLS_CIVIL_WAR
+		mutually_exclusive = { focus = PLS_Supporting_Peace }
+
+		allow_branch = { has_country_flag = council_will_fall }
+
+		x = 4
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				load_focus_tree = {
+					tree = nf_PLS
+					keep_completed = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+
+	}
 }
