@@ -1,10 +1,25 @@
 ### Reclaimation Decisions ###
-    reclaim_metro = {
-    	icon = generic_prospect_for_resources
-        visible = {
-            is_neighbor_of = RUI
-        }
-        priority = {
-		    base = 0
-	    }
+reclaim_metro = {
+    icon = generic_prospect_for_resources
+    visible = {
+        always = yes
     }
+    allowed = {
+        always = yes
+    }
+    priority = 1
+    highlight_states = {
+        highlight_states_trigger = {
+            AND = {
+                is_owned_by = RUI  
+            }
+            NOT = {
+                ROOT = { has_country_flag = reclaimation_underway }
+            }
+        }
+    }
+    on_map_area = {
+        name = reclaim_metro_category
+        zoom = 150
+    }
+}
