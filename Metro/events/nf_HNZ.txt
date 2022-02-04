@@ -5,7 +5,7 @@ country_event = {		##	What he did before the Hanza - Red Line War
 	id = nf_HNZ.1
 	title = nf_HNZ.1.t
 	desc = nf_HNZ1.d
-	picture = GFX_event_station_defense_2
+	picture = GFX_event_station_2
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -58,7 +58,7 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 	id = nf_HNZ.2
 	title = nf_HNZ.2.t
 	desc = nf_HNZ.2.d
-	picture = GFX_event_station_defense_2
+	picture = GFX_event_HNZ_5
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -118,7 +118,7 @@ country_event = {		## Loginov's Demons
 	id = nf_HNZ.3
 	title = nf_HNZ.3.t
 	desc = nf_HNZ.3.d
-	picture = GFX_event_reclaimation
+	picture = GFX_event_tunnel
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -136,7 +136,7 @@ country_event = {		## New Quater
 	id = nf_HNZ.4
 	title = nf_HNZ.4.t
 	desc = nf_HNZ.4.d
-	picture = GFX_event_picture
+	picture = GFX_event_HNZ_5
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -151,7 +151,7 @@ country_event = {		## Pressure the Reich to open their sphere of trade
 	id = nf_HNZ.5
 	title = nf_HNZ.5.t
 	desc = nf_HNZ.5.d
-	picture = GFX_event_picture
+	picture = GFX_event_HNZ_1
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -255,7 +255,7 @@ country_event = {		## Pressure the Reich Failed ##
 	id = nf_HNZ.6
 	title = nf_HNZ.6.t
 	desc = nf_HNZ.6.d
-	picture = GFX_event_picture
+	picture = GFX_event_RCH.2
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -273,12 +273,12 @@ country_event = {		## Pressure the Reich Succeeded ##
 	id = nf_HNZ.7
 	title = nf_HNZ.7.t
 	desc = nf_HNZ.7.d
-	picture = GFX_event_picture
+	picture = GFX_event_HNZ_4
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = {	## screw 'em ##
+	option = {	## awesome ##
 		name = nf_HNZ.7.a
 		capital_scope = {
 			add_resource = {
@@ -287,5 +287,244 @@ country_event = {		## Pressure the Reich Succeeded ##
 			}
 		}
 		add_political_power = 50
+	}
+}
+
+country_event = {		## Hanza Sends Trade to Reich
+	id = nf_HNZ.8
+	title = nf_HNZ.8.t
+	desc = nf_HNZ.8.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.8.a
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 2
+			}
+			add_resource = {
+			    type = components
+			    amount = 1
+			}
+			add_resource = {
+			    type = alloys
+			    amount = 1
+			}
+		}
+		add_opinion_modifier = {
+				target = HNZ
+				modifier = trade_resources
+			}
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.9		## Trade with Reich Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+
+	option = {	## Fuck off ##
+		name = nf_HNZ.9.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.14  ## Trade with Reich Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## Trade with Reich Succeeded !
+	id = nf_HNZ.9
+	title = nf_HNZ.9.t
+	desc = nf_HNZ.9.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.8.a
+		capital_scope = {
+			add_resource = {
+			    type = components
+			    amount = 2
+			}
+			add_resource = {
+			    type = alloys
+			    amount = 2
+			}
+			add_opinion_modifier = {
+				target = RCH
+				modifier = trade_resources
+			}
+		}
+	}
+}
+
+country_event = {		## Trade Guns with Reich
+	id = nf_HNZ.10
+	title = nf_HNZ.10.t
+	desc = nf_HNZ.10.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.10.a
+		add_equipment_to_stockpile = {
+		    type = infantry_equipment 
+		    amount = 50
+		}
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.11		## Trade Guns with Reich Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = trade_weapons 
+		}
+	}
+
+	option = {	## Fuck off ##
+		name = nf_HNZ.10.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.14  ## Trade with Reich Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## Trade with Reich Succeeded !
+	id = nf_HNZ.11
+	title = nf_HNZ.11.t
+	desc = nf_HNZ.11.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Nice ##
+		name = nf_HNZ.11.a
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_opinion_modifier = {
+			target = RCH
+			modifier = trade_weapons
+		}
+	}
+}
+
+
+country_event = {		## Non Aggro with Polis in return for Savel !
+	id = nf_HNZ.12
+	title = nf_HNZ.12.t
+	desc = nf_HNZ.12.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## We Accept ##
+		name = nf_HNZ.12.a
+		diplomatic_relation = {
+    		country = PLS
+    		relation = non_aggression_pact
+    		active = yes
+		}
+		diplomatic_relation = {
+    		country = HNZ
+    		relation = non_aggression_pact
+    		active = yes
+		}
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.13		## Trade Guns with Reich Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+		unlock_national_focus = RCH_expansion_pls_annex
+		### Give them a decision to move into Savelovskaya once we take out Cvetnoi Bul'var ###
+	}
+
+	option = {	## Polis is Ours! ##
+		name = nf_HNZ.12.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.14  ## Trade with Reich Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## They Accept
+	id = nf_HNZ.13
+	title = nf_HNZ.13.t
+	desc = nf_HNZ.13.d
+	picture = GFX_event_PLS.1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Niiice ##
+		name = nf_HNZ.13.a
+		diplomatic_relation = {
+    		country = RCH
+    		relation = non_aggression_pact
+    		active = yes
+		}
+		DIM = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = fed_to_the_dogs 
+			}
+		}
+		RED = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = deals_with_fascists
+			}
+		}
+		HUL = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = deals_with_fascists
+			}
+		}
+		AVT = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = deals_with_fascists
+			}
+		}
+	}
+}
+
+country_event = {		## Reich Denies
+	id = nf_HNZ.14
+	title = nf_HNZ.14.t
+	desc = nf_HNZ.14.d
+	picture = GFX_event_station_defense_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.14.a
 	}
 }
