@@ -10,14 +10,16 @@ reclaim_metro = {
     priority = 1
     highlight_states = {
         highlight_states_trigger = {
-            AND = {
-                is_owned_by = RUI
-            }
-            NOT = {
-                ROOT = { has_country_flag = reclaimation_underway }
-                state = 1
-				state = 237
-            }
+			AND = {
+				is_owned_by = RUI
+				NOT = {
+					OR = {
+						ROOT = { has_country_flag = reclaimation_underway }
+						state = 1
+						state = 237
+					}
+				}
+			}
         }
     }
     on_map_area = {
