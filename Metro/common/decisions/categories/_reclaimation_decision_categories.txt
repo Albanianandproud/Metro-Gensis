@@ -8,6 +8,10 @@ reclaim_metro = {
         always = yes
     }
     priority = 1
+	
+	visibility_type = map_and_decisions_view
+	visible_when_empty = yes
+	
     highlight_states = {
         highlight_states_trigger = {
 			AND = {
@@ -23,6 +27,28 @@ reclaim_metro = {
         }
     }
     on_map_area = {
+		target_array = global.reclamation_array
+		target_trigger = {
+			FROM = {
+				AND = {
+					is_owned_by = RUI
+					NOT = {
+						OR = {
+							ROOT = { has_country_flag = reclaimation_underway }
+							state = 1
+							state = 237
+						}
+					}
+					any_neighbor_state = {
+						is_controlled_by = ROOT
+						NOT = {
+							state = 1
+							state = 237
+						}
+					}
+				}
+			}
+		}
         name = reclaim_metro_category
         zoom = 150
     }
