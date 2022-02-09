@@ -326,9 +326,9 @@ focus_tree = {
 		id = HNZ_establish_reclaimation_bureau
 		icon = GFX_cog_idea
 
-		# available = {
-		#	
-		# }
+		available = {
+			has_completed_focus = HNZ_new_quater
+		}
 
 		x = -11
 		y = 1
@@ -1054,7 +1054,7 @@ focus_tree = {
 		}
 	}
 
-	## Industry / Ring Line Focus Tree
+	## Ring of Steel Branch
 
 	focus = {
 		id = HNZ_ring_of_steel
@@ -1519,7 +1519,8 @@ focus_tree = {
 		}
 	
 		completion_reward = {
-			##TODO Decisions with MOB
+			# Decision list to trade with the Mobsters
+			custom_effect_tooltip = HNZ_trade_with_mobsters_tt
 		}
 	}
 
@@ -2020,8 +2021,6 @@ focus_tree = {
 	
 		prerequisite = {
 			focus = HNZ_trade_with_reich
-		}
-		prerequisite = {
 			focus = HNZ_pressure_reich
 		}
 		x = 0
@@ -2430,8 +2429,6 @@ focus_tree = {
 	
 		prerequisite = {
 			focus = HNZ_west_gattling_boost
-		}
-		prerequisite = {
 			focus = HNZ_west_explosive_boost
 		}
 		x = 0
@@ -3487,5 +3484,314 @@ focus_tree = {
 		}
 	}
 
+	## Hanza Satellite Tree
 
+	focus = {
+		id = HNZ_the_satellite_states
+		icon = GFX_RED_andreys_conviction
+
+		available = {
+			OR = {
+				has_completed_focus = HNZ_new_quater
+			}
+		}
+		x = 9
+		y = 8
+		relative_position_id = HNZ_new_quater
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_arb_arms_trade
+		icon = GFX_HNZ_arbat_arms_trade
+
+		prerequisite = {
+			focus = HNZ_the_satellite_states
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = HNZ_the_satellite_states
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_arb_trade_deals
+		icon = GFX_HNZ_arbat_deal_peace
+
+		prerequisite = {
+			focus = HNZ_arb_arms_trade
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_arb_arms_trade
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_arb_puppet
+		icon = GFX_HNZ_arbat_puppet
+
+		prerequisite = {
+			focus = HNZ_arb_trade_deals
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_arb_trade_deals
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_sev_arms_trade
+		icon = GFX_HNZ_sevastopol_arms_trade
+
+		prerequisite = {
+			focus =  HNZ_the_satellite_states
+		}
+
+		x = 0
+		y = 1
+		relative_position_id =  HNZ_the_satellite_states
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_sev_fix_power
+		icon = GFX_HNZ_sevastopol_power
+
+		prerequisite = {
+			focus = HNZ_sev_arms_trade
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_sev_arms_trade
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_sev_puppet
+		icon = GFX_HNZ_sevastopol_puppet
+
+		prerequisite = {
+			focus = HNZ_sev_fix_power
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_sev_fix_power
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_bau_trade
+		icon = GFX_HNZ_technician_trade
+
+		prerequisite = {
+			focus =  HNZ_the_satellite_states
+		}
+
+		x = 2
+		y = 1
+		relative_position_id =  HNZ_the_satellite_states
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_bau_refining_secrets
+		icon = GFX_HNZ_baumansky_refining_secrets
+
+		prerequisite = {
+			focus = HNZ_bau_trade
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_bau_trade
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_bau_puppet
+		icon = GFX_HNZ_baumansky_subjugate
+
+		prerequisite = {
+			focus = HNZ_bau_refining_secrets
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_bau_refining_secrets
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_pec_printer
+		icon = GFX_HNZ_pec_printer
+
+		prerequisite = {
+			focus = HNZ_the_satellite_states
+		}
+
+		x = -4
+		y = 1
+		relative_position_id = HNZ_the_satellite_states
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_pec_puppet
+		icon = GFX_HNZ_pec_printer
+
+		prerequisite = {
+			focus = HNZ_pec_printer
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_pec_printer
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_pvl_puppet
+		icon = GFX_HNZ_pvl_puppet
+
+		prerequisite = {
+			focus = HNZ_the_satellite_states
+		}
+
+		x = 4
+		y = 1
+		relative_position_id = HNZ_the_satellite_states
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = HNZ_ulitsa_puppet
+		icon = GFX_HNZ_ulitsa_puppet
+
+		prerequisite = {
+			focus = HNZ_pvl_puppet
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_pvl_puppet
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
 }

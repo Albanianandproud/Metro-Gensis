@@ -1,0 +1,185 @@
+### RED Line ###
+RED_prioritise_flamethrowers = {
+	## Flamethrowers, yo
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		always = yes
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = flamethrower_support 
+		value = 25
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = support
+		value = 2
+	}
+}
+RED_great_leap_forward = {
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		date < 2030.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 50
+	}
+}
+RED_capitalists_all_around = {
+	allowed = {
+		original_tag = RED
+	}
+
+	enable = {
+		always = yes
+	}
+
+	ai_strategy = {
+		type = garrison
+		value = 15
+	}
+}
+RED_its_now_or_never_pump_it_brother = {
+	allowed = { original_tag = RED }
+	enable = {
+		date > 2033.1.1
+	}
+	ai_strategy = {
+		type = force_build_armies
+		value = 2000
+	}
+}
+RED_guns_protect_our_nation = {
+	allowed = { original_tag = RED }
+	enable = {
+		always = yes
+	}
+	
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 55
+	}
+	
+}
+RED_drown_all_in_our_manpower = {
+	allowed = { original_tag = RED }
+	enable = {
+		date > 2030.1.1
+	}
+	
+	ai_strategy = {
+        type = force_build_armies
+        value = 100
+    }
+}
+RED_lets_be_friends_with_hanza_for_now = {
+	allowed = { original_tag = RED }
+	enable = {	
+		NOT = { has_war_with = RED }
+	}
+	
+	abort = {
+		date > 2031.1.1
+	}
+
+	ai_strategy = {
+		type = contain
+		id = "HNZ"			
+		value = -150
+	}	
+}
+RED_screw_hanza_yolo = {
+	allowed = { original_tag = RED }
+	enable = {	
+		date > 2034.1.1
+	}
+	
+	abort = {
+		num_of_military_factories < 29
+	}
+
+	ai_strategy = {
+		type = antagonize
+		id = "HNZ"			
+		value = 250
+	}	
+}
+RED_fuck_nazis = {
+	allowed = { original_tag = RED }
+	enable = {
+		country_exists = RCH
+	} 
+	abort = {
+		NOT = { country_exists = RCH }
+	}
+
+	ai_strategy = {
+		type = antagonize
+		id = "RCH"			
+		value = 75
+	}
+	ai_strategy = {
+		type = contain
+		id = "RCH"
+		value = 200
+	}	
+}
+red_line_is_very_very_important = {
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		has_war = yes
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = red_line
+		value = 200
+	}
+}
+RED_blood_for_the_motherland = {
+	allowed = {
+		original_tag = RED
+	}
+
+	enable = {
+		date < 2030.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = 0.5 ## Get it all out onto the field!
+	}
+}
+RED_lets_ignore_PLS = {
+	enable = {
+		country_exists = PLS
+	}
+	abort = {
+		NOT = {
+			country_exists = PLS
+		}
+	}
+	ai_strategy = {
+		type = ignore
+		id = "PLS"
+		value = 50
+	}
+}

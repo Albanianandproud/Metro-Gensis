@@ -360,10 +360,10 @@ country_event = {		## Trade with Reich Succeeded !
 			    type = alloys
 			    amount = 2
 			}
-			add_opinion_modifier = {
-				target = RCH
-				modifier = trade_resources
-			}
+		}
+		add_opinion_modifier = {
+			target = RCH
+			modifier = trade_resources
 		}
 	}
 }
@@ -528,3 +528,242 @@ country_event = {		## Reich Denies
 		name = nf_HNZ.14.a
 	}
 }
+
+
+country_event = {		## HNZ trades with MOB
+	id = nf_HNZ.15
+	title = nf_HNZ.15.t
+	desc = nf_HNZ.15.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.15.a
+		add_timed_idea = {
+			idea = HNZ_trade_with_neighbours
+			days = 365
+		}
+
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = trade_resources
+		}
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.16		## Trade with MOB Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+
+	option = {	## Fuck off ##
+		name = nf_HNZ.15.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.21  ## Trade with MOB Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## Trade CG with MOB Succeeds
+	id = nf_HNZ.16
+	title = nf_HNZ.16.t
+	desc = nf_HNZ.16.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Awesome ##
+		name = nf_HNZ.16.a
+		add_opinion_modifier = {
+			target = MOB
+			modifier = trade_partner
+		}
+	}
+}
+
+country_event = {		## HNZ trades tooling tech with MOB
+	id = nf_HNZ.17
+	title = nf_HNZ.17.t
+	desc = nf_HNZ.17.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.17.a
+
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.33
+			uses = 2
+			category = industry
+		}
+
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = trade_tool_tech
+		}
+
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.18		## Trade with MOB Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+
+	option = {	## Fuck off ##
+		name = nf_HNZ.17.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.21 ## Trade with MOB Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## Trade Tech with MOB Succeeds
+	id = nf_HNZ.18
+	title = nf_HNZ.18.t
+	desc = nf_HNZ.18.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Awesome ##
+		name = nf_HNZ.18.a
+		custom_effect_tooltip = HNZ_MOB_merc_tt
+		hidden_effect = {
+			load_oob = HNZ_MOB_merc
+		}
+		add_opinion_modifier = {
+			target = MOB
+			modifier = trade_soldiers
+		}
+	}
+}
+
+country_event = {		## HNZ trades Resources with MOB
+	id = nf_HNZ.19
+	title = nf_HNZ.19.t
+	desc = nf_HNZ.19.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Sure...? ##
+		name = nf_HNZ.19.a
+
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 2
+			}
+			add_resource = {
+			    type = components
+			    amount = 1
+			}
+			add_resource = {
+			    type = alloys
+			    amount = 1
+			}
+		}
+
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = trade_resources
+		}
+
+		diplomatic_relation = {
+    		country = HNZ
+    		relation = non_aggression_pact
+    		active = yes
+		}
+
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.20		## Trade with MOB Succeeded ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+
+	option = {	## Fuck off ##
+		name = nf_HNZ.19.b
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.21  ## Trade with MOB Failed ##
+				days = 3
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = {		## Trade Tech with MOB Succeeds
+	id = nf_HNZ.20
+	title = nf_HNZ.20.t
+	desc = nf_HNZ.20.d
+	picture = GFX_event_HNZ_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	## Awesome ##
+		name = nf_HNZ.20.a
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 2
+			}
+			add_resource = {
+			    type = electronics
+			    amount = 2
+			}
+			add_resource = {
+			    type = chemicals
+			    amount = 1
+			}
+		}
+		add_opinion_modifier = {
+			target = MOB
+			modifier = trade_resources
+		}
+		diplomatic_relation = {
+    		country = MOB
+    		relation = non_aggression_pact
+    		active = yes
+		}
+	}
+}
+
+country_event = {		## Mobsters Denied
+	id = nf_HNZ.21
+	title = nf_HNZ.21.t
+	desc = nf_HNZ.21.d
+	picture = GFX_event_station_defense_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.21.a
+	}
+}
+
+
