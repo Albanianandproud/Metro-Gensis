@@ -1,0 +1,49 @@
+HNZ_satellite = {
+	
+	satellite_request_factories = {
+
+		allowed = {
+			under_hanza_influence = yes
+		}
+		visible = {
+			under_hanza_influence = yes
+			NOT = {
+				ROOT = { has_country_flag = satellite_requesting_factories }
+			}
+		}
+
+		cost = 15
+		days_remove = 30
+		days_re_enable = 150
+
+		complete_effect = {
+			custom_effect_tooltip = satellite_begin_requesting_factories_tt
+			hidden_effect = {
+				ROOT = { set_country_flag = satellite_requesting_factories }
+				HNZ = {
+					country_event = nf_HNZ.22
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	satellite_cancel_factory_request = {
+		cost = 0
+		fire_only_once = no
+
+		cancel_if_not_visible = yes
+
+		remove_effect = {
+			set_country_flag = satellite_cancel_factories
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+}

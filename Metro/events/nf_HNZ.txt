@@ -766,4 +766,76 @@ country_event = {		## Mobsters Denied
 	}
 }
 
+country_event = {		##	Satellite is Requesting Factory Aid
+	id = nf_HNZ.22
+	title = nf_HNZ.22.t
+	desc = nf_HNZ.22.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {		## Accept AID request
+		name = nf_HNZ.22.a
+		random_core_state = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		every_country = {
+			if = {
+  				limit = {
+    				has_country_flag = satellite_requesting_factories
+    			}
+    			remove_country_flag = satellite_requesting_factories
+    			satellite_factories_increase = yes
+    		}
+    	}
+		add_political_power = 20
+		ai_chance = {
+			factor = 5
+		}
+	}
+
+	option = {		## Deny AID request
+		name = nf_HNZ.22.b
+
+		every_country = {
+			if = {
+  				limit = {
+    				has_country_flag = satellite_requesting_factories
+    			}
+    			clr_country_flag = satellite_requesting_factories
+    			country_event = { 
+					id = nf_HNZ.23
+					days = 4
+					random_days = 4
+				}
+    		}
+    	}
+
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {		##	Satellite request FAILED
+	id = nf_HNZ.23
+	title = nf_HNZ.23.t
+	desc = nf_HNZ.23.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {		## Bother!
+		name = nf_HNZ.23.a
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
 
