@@ -1,11 +1,27 @@
 satellite_factories_increase = {
 	if = {
 		limit = {
+			NOT = {
+				has_idea = satellite_factories_from_hanza_1
+			}
+		}
+		add_ideas = satellite_factories_from_hanza_1
+		add_to_variable = {
+			var = satellite_workshops_leased
+			value = 1
+		}
+	}
+	else_if = {
+		limit = {
 			has_idea = satellite_factories_from_hanza_1
 		}
 		swap_ideas = {
 			remove_idea = satellite_factories_from_hanza_1
 			add_idea = satellite_factories_from_hanza_2
+		}
+		add_to_variable = {
+			var = satellite_workshops_leased
+			value = 1
 		}
 	}
 	else_if = {
@@ -15,6 +31,10 @@ satellite_factories_increase = {
 		swap_ideas = {
 			remove_idea = satellite_factories_from_hanza_2
 			add_idea = satellite_factories_from_hanza_3
+		}
+		add_to_variable = {
+			var = satellite_workshops_leased
+			value = 1
 		}
 	}
 }
@@ -27,6 +47,10 @@ satellite_factories_decrease = {
 			remove_idea = satellite_factories_from_hanza_3
 			add_idea = satellite_factories_from_hanza_2
 		}
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 1
+		}
 	}
 	else_if = {
 		limit = {
@@ -36,11 +60,51 @@ satellite_factories_decrease = {
 			remove_idea = satellite_factories_from_hanza_2
 			add_idea = satellite_factories_from_hanza_1
 		}
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 1
+		}
 	}
 	else_if = {
 		limit = {
 			has_idea = satellite_factories_from_hanza_1
 		}
 		remove_ideas = satellite_factories_from_hanza_1
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 1
+		}
+	}
+}
+satellite_factories_flush = {
+	if = {
+		limit = {
+			has_idea = satellite_factories_from_hanza_3
+		}
+		remove_ideas = satellite_factories_from_hanza_3
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = satellite_factories_from_hanza_2
+		}
+		remove_ideas = satellite_factories_from_hanza_2
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = satellite_factories_from_hanza_1
+		}
+		remove_ideas = satellite_factories_from_hanza_1
+		subtract_from_variable = {
+			var = satellite_workshops_leased
+			value = 1
+		}
 	}
 }

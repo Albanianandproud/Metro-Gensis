@@ -26,7 +26,7 @@ NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
 
 ---Nation Stuff---
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 3
-NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0.005
+NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0.002
 NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
 NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.05
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.25
@@ -48,7 +48,10 @@ NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.3
 NDefines.NMilitary.INFRA_ORG_IMPACT = 0.4
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
 NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.1
-NDefines.NMilitary.BASE_FORT_PENALTY = -0.05			--- Base is 0.15
+NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
+NDefines.NMilitary.TRAINING_ORG = 0.35								--- Base is 0.2
+NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.25						--- if strength is less than this, the unit will pause training until it's been reinforced
+NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP gained per day from training
 
 ---Commanders
 NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 20	--- Base is 24
@@ -59,7 +62,7 @@ NDefines.NMilitary.FIELD_MARSHAL_DIVISIONS_CAP = 20		--- Base is 24
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_WIDTH = 5			
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_HEIGHT = 1
 NDefines.NMilitary.MAX_DIVISION_SUPPORT_WIDTH = 1
-NDefines.NMilitary.MAX_DIVISION_SUPPORT_HEIGHT = 3
+NDefines.NMilitary.MAX_DIVISION_SUPPORT_HEIGHT = 4
 
 NDefines.NMilitary.ENCIRCLED_PENALTY = -0.2		--- Base is 0.3
 
@@ -79,7 +82,7 @@ NDefines.NAI.STR_UNIT_WEAK = 0.35
 NDefines.NAI.ORG_UNIT_NORMAL = 0.45
 NDefines.NAI.STR_UNIT_NORMAL = 0.55
 
-NDefines.NAI.WANTED_UNITS_MANPOWER_DIVISOR = 5000
+NDefines.NAI.WANTED_UNITS_MANPOWER_DIVISOR = 50
 
 NDefines.NAI.DIPLOMACY_FACTION_WRONG_IDEOLOGY_PENALTY = 5
 

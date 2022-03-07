@@ -37,7 +37,7 @@ country_event = {		##	What he did before the Hanza - Red Line War
 	}
 
 	option = {		## Former resident of the Arbat 
-		name = nf_HNZ.2.a
+		name = nf_HNZ.1.b
 
 		add_country_leader_trait = loginov_arbat_resident
 
@@ -788,9 +788,13 @@ country_event = {		##	Satellite is Requesting Factory Aid
   				limit = {
     				has_country_flag = satellite_requesting_factories
     			}
-    			remove_country_flag = satellite_requesting_factories
     			satellite_factories_increase = yes
     		}
+    		country_event = { 
+				id = nf_HNZ.24
+				days = 2
+				random_days = 2
+			}
     	}
 		add_political_power = 20
 		ai_chance = {
@@ -806,7 +810,6 @@ country_event = {		##	Satellite is Requesting Factory Aid
   				limit = {
     				has_country_flag = satellite_requesting_factories
     			}
-    			clr_country_flag = satellite_requesting_factories
     			country_event = { 
 					id = nf_HNZ.23
 					days = 4
@@ -832,8 +835,90 @@ country_event = {		##	Satellite request FAILED
 
 	option = {		## Bother!
 		name = nf_HNZ.23.a
+		clr_country_flag = satellite_requesting_factories
 		ai_chance = {
 			factor = 5
+		}
+	}
+}
+
+country_event = {		##	Satellite Request succeeded
+	id = nf_HNZ.24
+	title = nf_HNZ.24.t
+	desc = nf_HNZ.24.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {		## Awesome
+		name = nf_HNZ.24.a
+		add_offsite_building = { type = arms_factory level = satellite_workshops_leased }
+		clr_country_flag = satellite_requesting_factories
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {		##	We get our factories back
+	id = nf_HNZ.25
+	title = nf_HNZ.25.t
+	desc = nf_HNZ.25.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {		## Awesome
+		name = nf_HNZ.25.a
+		random_core_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+			}
+		}
+	}
+}
+
+country_event = {		##	Hanza wants to have special operations
+	id = nf_HNZ.26
+	title = nf_HNZ.26.t
+	desc = nf_HNZ.26.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {		## Yea sure
+		name = nf_HNZ.26.a
+		add_command_power = 20
+		army_experience = 10
+		add_ideas = HNZ_joint_special_operations
+
+		HNZ = {
+			add_command_power = 10
+			army_experience = 10
+		}
+		diplomatic_relation = {
+    		country = HNZ
+    		relation = joint_special_ops
+    		active = yes
+		}
+
+		army_experience = 5
+
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {		## Yea no thanks
+		name = nf_HNZ.26.b
+		add_political_power = 10
+
+		ai_chance = {
+			factor = 2
 		}
 	}
 }
