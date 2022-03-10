@@ -1,4 +1,4 @@
-version="1.11.*"
+version="1.11.9"
 tags={
 	"Alternative History"
 	"Gameplay"
@@ -60,5 +60,5 @@ replace_path="map/strategicregions"
 replace_path="map/supplyareas"
 name="Metro"
 picture="thumbnail.jpg"
-supported_version="1.11.6"
+supported_version="1.11.9"
 remote_file_id="2620272492"

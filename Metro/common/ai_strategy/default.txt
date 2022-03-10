@@ -1,7 +1,4 @@
 default_unit_production = {
-	enable = {
-		always = yes
-	}
 
 	enable = {
 		always = yes
@@ -39,6 +36,68 @@ default_unit_production = {
 	}
 }
 
+stop_building_useless_stuff = {
+	enable = {
+		always = yes
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = fuel_silo 
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = synthetic_refinery
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = radar_station 
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = air_base
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = rocket_site
+		value = -10000
+	}
+}
+
+HNZ_build_up_late_game = {
+	enable = {
+		date > 2030.1.1
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = -50
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 150
+	}
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 20
+	}
+}
+
 ai_army_building_puppet = {
 	enable = {
 		has_army_size = {
@@ -50,7 +109,7 @@ ai_army_building_puppet = {
 	abort = {
 		OR = {
 			has_army_size = {
-    			size > 9
+    			size > 19
     			type = infantry
 			}
 			has_war = yes
@@ -128,16 +187,16 @@ default_stockpile_management = {
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 3 # double base stockpile #from 25 to 35
+		value = 1 # double base stockpile #from 25 to 35
 	}
 }
 
 DEFAULT_template_design = {
 	enable = {	
-		date < 33.1.1				
+		date < 2033.1.1				
 	}
 	abort = { 
-		date > 33.1.1
+		date > 2033.1.1
 	}
 
 	ai_strategy = {
@@ -161,7 +220,7 @@ stockpile_more_late_game = {
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 5 ## Stuffs 'bout to go down
+		value = 2 ## Stuffs 'bout to go down
 	}
 }
 
@@ -340,6 +399,6 @@ put_garrisons_on_high_prio = {
 	
 	ai_strategy = {
 		type = garrison_reinforcement_priority
-		value = 100 # positive is high prio, negative is low prio
+		value = -100 # positive is high prio, negative is low prio
 	}
 }

@@ -58,6 +58,10 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = HNZ_neutral
 			add_political_power = 150
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy 
+				days = -150
+			}
 		}
 	}
 
@@ -78,7 +82,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## RECRUIT ADVISOR
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy 
+				days = -100
+			}
 			add_popularity = {
 				ideology = oligarch
 				popularity = 0.05
@@ -197,6 +204,10 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = HNZ_property_rights
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy 
+				days = -50
+			}
 		}
 	}
 
@@ -1669,9 +1680,21 @@ focus_tree = {
 		ai_will_do = {
 			factor = 2
 		}
+
+		available = {
+			controls_state = 405
+			controls_state = 75
+		}
 	
 		completion_reward = {
-			# TODO Decision to setup protection authority to cleanse the southern tunnels. Puppet nation
+			custom_effect_tooltip = HNZ_southern_reclaimation_authority_tt
+			hidden_effect = {
+				405 = { add_core_of = SRA }
+				75 = { add_core_of = SRA }
+				SRA = {
+					set_capital = {state = 405 }
+				}
+			}
 		}
 	}
 
@@ -2863,7 +2886,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			# Implement Focuses #
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy 
+				days = -135
+			}
 		}
 	}
 
@@ -2958,7 +2984,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			# Implement Focuses # 
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy 
+				days = 150
+			}
 		}
 	}
 
@@ -3746,6 +3775,9 @@ focus_tree = {
 		icon = GFX_RED_andreys_conviction
 
 		available = {
+			NOT = {
+				has_idea = HNZ_exhausted_economy
+			}
 			OR = {
 				has_completed_focus = HNZ_new_quater
 			}
@@ -3760,7 +3792,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			add_threat = 5
+			every_country = {
+				limit = {
+					under_hanza_influence = yes
+					AND = {
+						has_idea = hanza_under_sphere_of_influence
+					}
+				}
+				country_event = nf_HNZ.27		## Hanza Subverse operations
+			}
 		}
 	}
 
@@ -3826,7 +3867,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			puppet = ARB
+			add_threat = 4
 		}
 	}
 
@@ -3892,7 +3934,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			puppet = SEV
+			add_threat = 4
 		}
 	}
 
@@ -3958,7 +4001,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			puppet = BAU
+			add_threat = 4
 		}
 	}
 
@@ -4002,7 +4046,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			puppet = PEC
+			add_threat = 4
 		}
 	}
 
@@ -4012,6 +4057,21 @@ focus_tree = {
 
 		prerequisite = {
 			focus = HNZ_the_satellite_states
+		}
+
+		available = {
+			strength_ratio = {
+    			tag = PVL
+    			ratio > 3
+			}
+			ic_ratio = {
+    			tag = PVL
+    			ratio > 1.5
+			}
+			has_opinion = {
+    			target = HNZ
+    			value > 14
+			}
 		}
 
 		x = 4
@@ -4024,7 +4084,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			puppet = PVL
 		}
 	}
 
@@ -4045,8 +4105,24 @@ focus_tree = {
 			factor = 2
 		}
 
+		available = {
+			strength_ratio = {
+    			tag = ULI
+    			ratio > 3
+			}
+			ic_ratio = {
+    			tag = ULI
+    			ratio > 1.5
+			}
+			has_opinion = {
+    			target = ULI
+    			value > 14
+			}
+		}
+
 		completion_reward = {
-			add_political_power = 50
+			puppet = ULI
+			add_threat = 4
 		}
 	}
 }

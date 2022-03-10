@@ -6,7 +6,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = generic_trade_resources
 
 		visible = {
 			has_completed_focus = HNZ_trade_with_reich
@@ -41,7 +41,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = generic_trade_guns
 
 		visible = {
 			has_completed_focus = HNZ_trade_with_reich
@@ -79,7 +79,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = generic_treaty
 
 		visible = {
 			has_completed_focus = HNZ_trade_with_reich
@@ -114,7 +114,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = decision_satellite_request_factories
 
 		visible = {
 			has_completed_focus = HNZ_HNZ_trade_with_MOB
@@ -149,7 +149,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = generic_trade_tools
 
 		visible = {
 			has_completed_focus = HNZ_HNZ_trade_with_MOB
@@ -184,7 +184,7 @@ HNZ_external_relations  = {
 			original_tag = HNZ
 		}
 
-		icon = generic_form_nation		##	TODO change GFX	##
+		icon = generic_trade_resources
 
 		visible = {
 			has_completed_focus = HNZ_HNZ_trade_with_MOB
@@ -209,6 +209,55 @@ HNZ_external_relations  = {
 			MOB = {
 				country_event = nf_HNZ.19
 				## Mobsters will boost relation with Hanza in return for resources
+			}
+		}
+	}
+}
+
+HNZ_southern_reclaimation_authority = {
+	HNZ_establish_southern_reclaimation_authority = {
+
+		icon = ger_reichskommissariats
+
+		available = {
+			has_completed_focus = HNZ_HNZ_clearing_southern_tunnels
+			controls_state = 405
+			controls_state = 75
+		}
+
+		cost = 0
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 10
+				date > 2030.1.1
+			}
+		}
+
+		visible = {
+			has_completed_focus = HNZ_HNZ_clearing_southern_tunnels
+		}
+
+		complete_effect = {
+			release_puppet = SRA
+			SRA = {
+				add_ideas = hanza_puppet
+				load_oob = HNZ_SRA
+				add_offsite_building = {
+					type = arms_factory
+					level = 2
+				}
+				set_variable = { satellite_economic_subversion = 90 }
+				set_variable = { satellite_politics_subversion = 85 }
+			}
+			405 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				    instant_build = yes
+				}
+
 			}
 		}
 	}
