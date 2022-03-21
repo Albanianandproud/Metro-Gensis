@@ -4,7 +4,7 @@ add_namespace = nf_HNZ
 country_event = {		##	What he did before the Hanza - Red Line War
 	id = nf_HNZ.1
 	title = nf_HNZ.1.t
-	desc = nf_HNZ1.d
+	desc = nf_HNZ.1.d
 	picture = GFX_event_station_2
 
 	is_triggered_only = yes
@@ -27,8 +27,8 @@ country_event = {		##	What he did before the Hanza - Red Line War
 		hidden_effect = {
 			country_event = { 
 				id = nf_HNZ.2
-				days = 3
-				random_days = 4
+				days = 6
+				random_days = 8
 			}
 		}
 		ai_chance = {
@@ -44,8 +44,8 @@ country_event = {		##	What he did before the Hanza - Red Line War
 		hidden_effect = {
 			country_event = { 
 				id = nf_HNZ.2
-				days = 3
-				random_days = 4
+				days = 6
+				random_days = 8
 			}
 		}
 		ai_chance = {
@@ -88,8 +88,8 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 		hidden_effect = {
 			country_event = { 
 				id = nf_HNZ.3
-				days = 3
-				random_days = 4
+				days = 6
+				random_days = 8
 			}
 		}
 		ai_chance = {
@@ -105,8 +105,8 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 		hidden_effect = {
 			country_event = { 
 				id = nf_HNZ.3
-				days = 3
-				random_days = 4
+				days = 6
+				random_days = 8
 			}
 		}
 		ai_chance = {
@@ -143,7 +143,7 @@ country_event = {		## New Quater
 
 	option = {
 		name = nf_HNZ.4.a
-		add_political_power = 60
+		add_political_power = 50
 	}
 }
 
@@ -329,7 +329,7 @@ country_event = {		## Hanza Sends Trade to Reich
 	}
 
 	option = {	## Fuck off ##
-		name = nf_HNZ.9.b
+		name = nf_HNZ.8.b
 		HNZ = {
 			country_event = { 
 				id = nf_HNZ.14  ## Trade with Reich Failed ##
@@ -456,8 +456,9 @@ country_event = {		## Non Aggro with Polis in return for Savel !
 				random_days = 6
 			}
 		}
+		set_country_flag = RCH_accepted_deal
 		unlock_national_focus = RCH_expansion_pls_annex
-		### Give them a decision to move into Savelovskaya once we take out Cvetnoi Bul'var ###
+		custom_effect_tooltip = HNZ_nf_HNZ.12_tt
 	}
 
 	option = {	## Polis is Ours! ##
@@ -947,6 +948,339 @@ country_event = {	## Hanza Musters
 
 		ai_chance = {
 			factor = 10
+		}
+	}
+}
+
+country_event = {	## Hanza wants to buy BRK
+	id = nf_HNZ.28
+	title = nf_HNZ.28.t
+	desc = nf_HNZ.28.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.28.a
+		BRK = {
+			add_offsite_building = {
+				type = arms_factory
+				level = 3
+			}
+			add_offsite_building = {
+				type = industrial_complex
+				level = 3
+			}
+		}
+		400 = { add_core_of = HNZ }
+		126 = { add_core_of = HNZ }
+
+		HNZ = {
+			set_state_controller = 400
+			set_state_controller = 126
+		}
+
+		ai_chance = {
+			factor = 5
+			modifier = {
+        		factor = 5
+        		has_opinion = {
+    				target = HNZ
+    				value > 9
+				}
+			}
+			modifier = {
+				factor = 5
+        		has_opinion = {
+    				target = HNZ
+    				value > 14
+				}
+    		}
+    		modifier = {
+    			factor = 10
+    			HNZ = {
+    				num_of_military_factories > 24
+    			}
+    		}
+		}
+	}
+
+	option = {
+		name = nf_HNZ.28.b
+		add_political_power = 50
+		add_stability = 0.05
+
+		ai_chance = {
+			factor = 10
+			modifier = {
+        		factor = 10
+        		has_opinion = {
+    				target = HNZ
+    				value > 9
+				}
+			}
+			modifier = {
+				factor = 10
+        		has_opinion = {
+    				target = HNZ
+    				value > 14
+				}
+    		}
+    		modifier = {
+    			factor = 10
+    			HNZ = {
+    				num_of_military_factories > 24
+    			}
+    		}
+		}
+	}
+}
+
+country_event = {	## Satanist Hanza Deal
+	id = nf_HNZ.29
+	title = nf_HNZ.29.t
+	desc = nf_HNZ.29.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.29.a
+
+		HNZ = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_manpower = -50
+			}
+			country_event = { 
+				id = nf_HNZ.30		## Success ##
+				days = 3
+				random_days = 4
+			}
+		}
+
+		capital_scope = {
+			add_manpower = 50
+			add_extra_state_shared_building_slots = 1
+		}
+
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.29.b
+
+		HNZ = {
+			country_event = { 
+				id = nf_HNZ.31		## Failure ##
+				days = 3
+				random_days = 4
+			}
+		}
+
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Satanist Deal Completed
+	id = nf_HNZ.30
+	title = nf_HNZ.30.t
+	desc = nf_HNZ.30.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.30.a
+
+		add_ideas = HNZ_satanist_fuel
+
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Satanist Deal Failed
+	id = nf_HNZ.31
+	title = nf_HNZ.31.t
+	desc = nf_HNZ.31.d
+	picture = GFX_event_station_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.31.a
+		
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {
+	id = nf_HNZ.32
+	title = nf_HNZ.32.t
+	desc = nf_HNZ.32.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.32.a
+		random_owned_state = { limit = { NOT = { has_state_category = pastoral } } add_extra_state_shared_building_slots = 1 }
+	}
+}
+
+country_event = {
+	id = nf_HNZ.33
+	title = nf_HNZ.33.t
+	desc = nf_HNZ.33.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.33.a
+		add_tech_bonus = { name = industrial_bonus bonus = 0.2 uses = 1 category = industry }
+	}
+}
+
+country_event = {
+	id = nf_HNZ.34
+	title = nf_HNZ.34.t
+	desc = nf_HNZ.34.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.34.a
+		if = {
+			limit = {
+				NOT = {
+					has_idea = HNZ_scavenge_tooling
+					add_timed_idea = { idea = HNZ_scavenged_tooling days = 120 }
+				}
+				modify_timed_idea = { idea = HNZ_scavenged_tooling days = 90 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = nf_HNZ.35
+	title = nf_HNZ.35.t
+	desc = nf_HNZ.35.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.35.a
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+	}
+}
+
+
+country_event = {
+	id = nf_HNZ.36
+	title = nf_HNZ.36.t
+	desc = nf_HNZ.36.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.36.a
+		add_timed_idea = { idea = HNZ_better_resource_effort = 240 }
+	}
+	option = {
+		name = nf_HNZ.36.b
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = scrap amount = 6 }
+		}
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = alloys amount = 6 }
+		}
+	}
+}
+
+country_event = {
+	id = nf_HNZ.37
+	title = nf_HNZ.37.t
+	desc = nf_HNZ.37.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.37.a
+		add_ideas = HNZ_gun_improvement
+	}
+	option = {
+		name = nf_HNZ.37.b
+		add_ideas = HNZ_gun_improvement_2
+	}
+}
+
+country_event = {
+	id = nf_HNZ.38
+	title = nf_HNZ.38.t
+	desc = nf_HNZ.38.d
+	picture = GFX_event_HNZ_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.38.a
+		add_ideas = HNZ_tank_production
+		hidden_effect = {
+			load_oob = HNZ_panzer
+		}
+		custom_effect_tooltip = HNZ_nf_HNZ.38_tt
+	}
+	option = {
+		name = nf_HNZ.38.b
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = scrap amount = 12 }
+		}
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = alloys amount = 8 }
+		}
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = chemicals amount = 6 }
+		}
+		random_owned_controlled_state = {
+		    limit = { NOT = { has_state_category = pastoral } }
+			add_resource = { type = components amount = 6 }
 		}
 	}
 }

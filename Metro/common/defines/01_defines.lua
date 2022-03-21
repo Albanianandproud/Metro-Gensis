@@ -34,7 +34,12 @@ NDefines.NCountry.BASE_MAX_COMMAND_POWER = 100
 NDefines.NCountry.ATTACHE_XP_SHARE = 0.335
 NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.05		
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
-NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5, 
+NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
+
+	NDefines.NCountry.STARTING_FUEL_RATIO = 0.33						-- starting fuel ratio compared to max fuel for countries
+	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 1						-- base amount of fuel gained hourly per excess oil
+	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
+	NDefines.NCountry.BASE_FUEL_CAPACITY = 500							-- base amount of fuel capacity
 
 ---Production Stuff---
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
@@ -65,6 +70,11 @@ NDefines.NMilitary.MAX_DIVISION_SUPPORT_WIDTH = 1
 NDefines.NMilitary.MAX_DIVISION_SUPPORT_HEIGHT = 4
 
 NDefines.NMilitary.ENCIRCLED_PENALTY = -0.2		--- Base is 0.3
+
+	NDefines.NMilitary.OUT_OF_FUEL_EQUIPMENT_MULT = 0.1				-- ratio of the stats that you get from equipments that uses fuel and you lack it
+	NDefines.NMilitary.OUT_OF_FUEL_SPEED_MULT = 0.1					-- speed mult that armies get when out of fuel
+	NDefines.NMilitary.OUT_OF_FUEL_TRAINING_XP_GAIN_MULT = 0.0		-- xp gain mult from training when a unit is out of fuel
+	NDefines.NMilitary.FUEL_CAPACITY_DEFAULT_HOURS = 96				-- default capacity if not specified
 
 ---Railway Guns---
 
