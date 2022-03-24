@@ -15,7 +15,7 @@ HNZ_production_shift = {
 		    }
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
@@ -27,8 +27,7 @@ HNZ_production_shift = {
 
 		modifier = {
            war_support_weekly = -0.005
-           production_factory_efficiency_gain_factor = 0.075
-           production_factory_start_efficiency_factor = 0.075
+           production_factory_efficiency_gain_factor = 0.1
         }
 
         remove_effect = {
@@ -46,7 +45,7 @@ HNZ_production_shift = {
 			always = yes
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
@@ -58,8 +57,8 @@ HNZ_production_shift = {
 
 		modifier = {
            war_support_weekly = 0.005
-           line_change_production_efficiency_factor = -0.075
-           production_factory_efficiency_gain_factor = -0.075
+           line_change_production_efficiency_factor = -0.1
+           production_factory_efficiency_gain_factor = -0.1
         }
 
         remove_effect = {
@@ -77,12 +76,12 @@ HNZ_production_shift = {
 			always = yes
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
 		modifier = {
-           production_factory_efficiency_gain_factor = -0.075
+           production_factory_efficiency_gain_factor = -0.05
 		   production_speed_buildings_factor = 0.05
         }
 	}
@@ -95,7 +94,7 @@ HNZ_production_shift = {
 			always = yes
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
@@ -117,13 +116,14 @@ HNZ_production_shift = {
 			always = yes
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 75
 		days_re_enable = 200
 
 		modifier = {
 			production_speed_bunker_factor = 0.1
 			production_speed_bunker2_factor = 0.1
+			production_speed_infrastructure_factor = 0.1
 		}
 	}
 
@@ -135,7 +135,7 @@ HNZ_production_shift = {
 			always = yes
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
@@ -170,13 +170,13 @@ HNZ_production_shift = {
 		    has_stability > 0.14
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
 		modifier = {
            war_support_weekly = -0.005
-           research_speed_factor = 0.1
+           research_speed_factor = 0.06
         }
 	}
 
@@ -193,12 +193,12 @@ HNZ_production_shift = {
 		    has_stability > 0.14
 		}
 
-		cost = 35
+		cost = 50
 		days_remove = 70
 		days_re_enable = 200
 
 		modifier = {
-			political_power_factor = -0.15
+			political_power_factor = -0.1
 		}
 
 		remove_effect = {
@@ -217,17 +217,17 @@ HNZ_scavenging_decisions = {
 		icon = GFX_generic_trade_tools
 
 		days_remove = 45
-		days_re_enable = 0
+		days_re_enable = 15
 
 		available = {
 		    has_manpower > 4
 			NOT = { has_country_flag = HNZ_scavenging_underway }
 		}
 
+		custom_cost_text = command_power_20
 		custom_cost_trigger = {
-    		command_power > 15
+			command_power > 19.9
 		}
-		custom_cost_text = command_power_more_than_15
 
 		visible = {
 			always = yes
@@ -238,6 +238,9 @@ HNZ_scavenging_decisions = {
 		complete_effect = {
 		    add_manpower = -5
 			set_country_flag = HNZ_scavenging_underway
+			hidden_effect = {
+				add_command_power = -20
+			}
 		}
 
 		remove_effect = {
@@ -256,17 +259,17 @@ HNZ_scavenging_decisions = {
 		icon = GFX_generic_trade_resources
 
 		days_remove = 45
-		days_re_enable = 0
+		days_re_enable = 15
 
 		available = {
 		    has_manpower > 4
 			NOT = { has_country_flag = HNZ_scavenging_underway }
 		}
 
+		custom_cost_text = command_power_20
 		custom_cost_trigger = {
-    		command_power > 15
+			command_power > 19.9
 		}
-		custom_cost_text = command_power_more_than_15
 
 		visible = {
 			always = yes
@@ -277,6 +280,9 @@ HNZ_scavenging_decisions = {
 		complete_effect = {
 		    add_manpower = -5
 			set_country_flag = HNZ_scavenging_underway
+			hidden_effect = {
+				add_command_power = -20
+			}
 		}
 
 		remove_effect = {
@@ -325,6 +331,519 @@ HNZ_scavenging_decisions = {
 		    	}
 			}
 			ROOT = { clr_country_flag = HNZ_scavenging_underway }
+		}
+	}
+}
+
+HNZ_subversion_statellite = {
+
+	HNZ_subvert_ARB_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			ARB = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			ARB = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			ARB = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_ARB_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			ARB = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			ARB = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			ARB = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_ARB_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			ARB = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = ARB
+		}
+	}
+
+	HNZ_mobilise_ARB = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			ARB = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			ARB = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
+		}
+	}
+
+	HNZ_subvert_SEV_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			SEV = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			SEV = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			SEV = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_SEV_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			SEV = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			SEV = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			SEV = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_SEV_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			SEV = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = SEV
+		}
+	}
+
+	HNZ_mobilise_SEV = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			SEV = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			SEV = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
+		}
+	}
+
+	HNZ_subvert_KAL_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			KAL = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			KAL = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			KAL = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_KAL_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			KAL = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			KAL = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			KAL = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_KAL_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			KAL = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = KAL
+		}
+	}
+
+	HNZ_mobilise_KAL = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			KAL = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			KAL = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
+		}
+	}
+
+	HNZ_subvert_ULI_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			ULI = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			ULI = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			ULI = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_ULI_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			ULI = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			ULI = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			ULI = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_ULI_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			ULI = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = ULI
+		}
+	}
+
+	HNZ_mobilise_ULI = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			ULI = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			ULI = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
+		}
+	}
+
+	HNZ_subvert_PEC_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			PEC = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			PEC = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			PEC = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_PEC_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			PEC = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			PEC = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			PEC = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_PEC_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			PEC = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = PEC
+		}
+	}
+
+	HNZ_mobilise_PEC = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			PEC = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			PEC = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
+		}
+	}
+
+	HNZ_subvert_BAU_eco = {
+		icon = GFX_satellite_request_factories
+		available = {
+			BAU = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			BAU = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			BAU = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_BAU_pol = {
+		icon = GFX_satellite_request_factories
+		available = {
+			BAU = {
+				NOT = {
+					has_idea = hanza_puppet
+				}
+				under_hanza_influence = yes	
+			}
+		}
+		visible = {
+			BAU = { under_hanza_influence = yes }
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 50
+
+		remove_effect = {
+			BAU = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_BAU_puppet = {	
+		icon = GFX_satellite_request_factories
+
+		available = { has_idea = hanza_puppet }
+		visible = {
+			BAU = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 50
+		days_re_enable = 360
+
+		remove_effect = {
+			puppet = BAU
+		}
+	}
+
+	HNZ_mobilise_BAU = {
+		icon = GFX_satellite_request_factories
+		available = { has_idea = hanza_puppet OR = { has_idea = hanza_satellite } }
+		visible = {
+			BAU = { under_hanza_influence = yes }
+		}
+
+		cost = 200
+		days_remove = 60
+		days_re_enable = 360
+
+		remove_effect = {
+			BAU = {
+				country_event = nf_HNZ.39		### Mobilise NOW!
+			}
 		}
 	}
 }

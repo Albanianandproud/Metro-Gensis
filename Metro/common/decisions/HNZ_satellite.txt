@@ -1,7 +1,7 @@
 HNZ_satellite = {
 	
 	satellite_request_factories = {
-		icon = satellite_request_factories
+		icon = GFX_satellite_request_factories
 		allowed = {
 			under_hanza_influence = yes	
 		}
@@ -22,9 +22,9 @@ HNZ_satellite = {
 			}
 		}
 
-		cost = 25
+		cost = 0
 		days_remove = 45
-		days_re_enable = 135
+		days_re_enable = 90
 
 		complete_effect = {
 			hidden_effect = {
@@ -33,6 +33,7 @@ HNZ_satellite = {
 		}
 		remove_effect = {
 			custom_effect_tooltip = satellite_begin_requesting_factories_tt
+			custom_effect_tooltip = satellite_small_eco_subversion_tt
 			HNZ = {
 				country_event = nf_HNZ.22	## mom, can we have factories event
 			}
@@ -44,8 +45,8 @@ HNZ_satellite = {
 	}
 
 	satellite_cancel_factory_request = {
-		icon = satellite_cancel_factories
-		cost = 5
+		icon = GFX_satellite_cancel_factories
+		cost = 0
 		days_remove = 14
 		fire_only_once = no
 
@@ -81,17 +82,10 @@ HNZ_satellite = {
 	}
 
 	satellite_request_guns = {
-		icon = satellite_request_guns
+		icon = GFX_satellite_request_guns
 		## Ask Hanza for Guns
 		cost = 10
-		days_remove = 21
-		visible = {
-			HNZ = { 
-				has_equipment = {
-    				infantry_equipment > 29
-				}
-			}
-		}
+		days_remove = 14
 		available = {
 			HNZ = { 
 				has_equipment = {
@@ -117,30 +111,19 @@ HNZ_satellite = {
 					var = satellite_guns_given
 					value = 30
 				}
-				HNZ = {
-					add_equipment_to_stockpile = {
-		       		 	type = infantry_equipment
-		        		amount = -30
-		    		}
-				}
 			}
 		}
 	}
 
 	satellite_request_flamethrowers = {
-		icon = satellite_request_flamethrower
+		icon = GFX_satellite_request_flamethrower
 		## Ask Hanza for Flamethrowers
 		cost = 10
-		days_remove = 21
-		visible = {
-			HNZ = { 
-				has_equipment = {
-    				flamethrower_equipment_0 > 14
-				}
-			}
-		}
+		days_remove = 14
 		available = {
-			has_tech = tech_flamethrower_equipment
+			ROOT = {
+				has_tech = tech_flamethrower_equipment
+			}
 			HNZ = { 
 				has_equipment = {
     				flamethrower_equipment_0 > 14
@@ -165,12 +148,6 @@ HNZ_satellite = {
 					var = satellite_flamethrower_given
 					value = 15
 				}
-				HNZ = {
-					add_equipment_to_stockpile = {
-		       		 	type = flamethrower_equipment_0
-		        		amount = -15
-		    		}
-				}
 			}
 		}
 		ai_will_do = {
@@ -186,19 +163,14 @@ HNZ_satellite = {
 	}
 
 	satellite_request_gatling = {
-		icon = satellite_request_gatling
+		icon = GFX_satellite_request_gatling
 		## Ask Hanza for Gatling
 		cost = 10
-		days_remove = 21
-		visible = {
-			HNZ = { 
-				has_equipment = {
-    				gatling_equipment_0 > 14
-				}
-			}
-		}
+		days_remove = 14
 		available = {
-			has_tech = tech_gatling_equipment
+			ROOT = {
+				has_tech = tech_gatling_equipment
+			}
 			HNZ = { 
 				has_equipment = {
     				gatling_equipment_0 > 14
@@ -223,12 +195,6 @@ HNZ_satellite = {
 					var = satellite_gattling_given
 					value = 15
 				}
-				HNZ = {
-					add_equipment_to_stockpile = {
-		       		 	type = gatling_equipment_0
-		        		amount = -15
-		    		}
-				}
 			}
 		}
 		ai_will_do = {
@@ -244,19 +210,14 @@ HNZ_satellite = {
 	}
 
 	satellite_request_explosive = {
-		icon = satellite_request_explosive
+		icon = GFX_satellite_request_explosive
 		## Ask Hanza for Explosive
 		cost = 10
-		days_remove = 21
-		visible = {
-			HNZ = { 
-				has_equipment = {
-    				explosive_equipment_0 > 14
-				}
-			}
-		}
+		days_remove = 14
 		available = {
-			has_tech = tech_explosive_equipment
+			ROOT = {
+				has_tech = tech_explosive_equipment
+			}
 			HNZ = { 
 				has_equipment = {
     				explosive_equipment_0 > 14
@@ -281,12 +242,6 @@ HNZ_satellite = {
 					var = satellite_explosive_given
 					value = 15
 				}
-				HNZ = {
-					add_equipment_to_stockpile = {
-		       		 	type = explosive_equipment_0
-		        		amount = -15
-		    		}
-				}
 			}
 		}
 		ai_will_do = {
@@ -303,9 +258,9 @@ HNZ_satellite = {
 
 	satellite_request_technican_knowledge = {
 		## Gain research buff for economic influence !
-		icon = satellite_request_technican
-		cost = 30
-		days_remove = 30
+		icon = GFX_satellite_request_technican
+		cost = 15
+		days_remove = 21
 		days_re_enable = 270
 
 		available = {
@@ -343,10 +298,10 @@ HNZ_satellite = {
 	}
 
 	satellite_hire_economic_advisor = {
-		icon = satellite_hire_economic_advisor
+		icon = GFX_satellite_hire_economic_advisor
 		## Recieve an economist, however increases pull to Hanza
-		cost = 30
-		days_remove = 60
+		cost = 15
+		days_remove = 21
 		fire_only_once = yes
 
 		remove_effect = {
@@ -406,7 +361,37 @@ HNZ_satellite = {
 				}
  			}
  			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = HNZ_economic_liason
+ 			custom_effect_tooltip = satellite_economic_liason_tt
+		}
+	}
+
+	satellite_remove_subversion = {
+		icon = GFX_generic_treaty_ruin
+		allowed = {
+			under_hanza_influence = yes	
+		}
+		visible = {
+			under_hanza_influence = yes
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 150
+
+		remove_effect = {
+			custom_effect_tooltip = satellite_remove_subversion
+			subtract_from_variable = {
+				var = satellite_economic_subversion
+				value = 5
+			}
+			subtract_from_variable = {
+				var = satellite_politics_subversion
+				value = 5
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 }
