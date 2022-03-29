@@ -7,10 +7,11 @@ reclaim_metro = {
  	reclaim_this_state = {
         icon = decision_generic_military
 		cost = 20 ### Change Cost depending on type of abandoned state? 
-		days_remove = 30
+		days_remove = 50
 		days_re_enable = 5
 		on_map_mode = map_only
 		state_target = yes
+		fixed_random_seed = no
 
         ai_will_do = {
 			factor = 5
@@ -78,7 +79,7 @@ reclaim_metro = {
 
 		remove_effect = {
 		    random_list = {
-		        60 = {
+		        50 = {
 					ROOT = {
 						set_variable = {
 							var = state_colonised_id
@@ -89,14 +90,23 @@ reclaim_metro = {
 		            FROM = {
 						clr_state_flag = state_being_colonised
 					}
+					modifier = {
+						factor = 0.25
+						FROM = {
+							OR = {
+								has_state_flag = flooded_tunnel_flag
+								has_state_flag = anomaly_tunnel_flag
+							}
+						}
+					}
 		        }
-		        20 = { #Overwhelmed Mutants
+		        25 = { #Overwhelmed Mutants
 		            country_event = reclaimation_event.mutants
 		            FROM = {
 						clr_state_flag = state_being_colonised
 					}
 		        }
-		        20 = { #Expedition lost
+		        25 = { #Expedition lost
 		            country_event = reclaimation_event.lost
 		            FROM = {
 						clr_state_flag = state_being_colonised
