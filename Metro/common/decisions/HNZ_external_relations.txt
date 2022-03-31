@@ -1,0 +1,264 @@
+HNZ_external_relations  = {
+
+	HNZ_reich_peaceful_trade_resources = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = generic_trade_resources
+
+		visible = {
+			has_completed_focus = HNZ_trade_with_reich
+		}
+
+		available = {
+			NOT = { has_war_with = RCH }
+			AND = {
+				country_exists = RCH
+			}
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			RCH = {
+				country_event = nf_HNZ.8
+				## Trade Resource with the Reich
+			}
+		}
+	}
+
+	HNZ_reich_peaceful_trade_guns = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = generic_trade_guns
+
+		visible = {
+			has_completed_focus = HNZ_trade_with_reich
+		}
+
+		available = {
+			NOT = { has_war_with = RCH }
+			AND = {
+				country_exists = RCH
+			}
+			has_equipment = {
+                infantry_equipment > 49
+            }
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			RCH = {
+				country_event = nf_HNZ.10
+				## Trade Guns with the Reich
+			}
+		}
+	}
+
+	HNZ_reich_treaty = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = generic_treaty
+
+		visible = {
+			has_completed_focus = HNZ_trade_with_reich
+		}
+
+		available = {
+			NOT = { has_war_with = RCH }
+			AND = {
+				country_exists = RCH
+			}
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			RCH = {
+				country_event = nf_HNZ.12
+				## Reich will give a non-aggression to Polis or Hanza in return for Reich movement into Saveloskaya
+			}
+		}
+	}
+
+	HNZ_MOB_trade_cg = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = decision_satellite_request_factories
+
+		visible = {
+			has_completed_focus = HNZ_HNZ_trade_with_MOB
+		}
+
+		available = {
+			NOT = { has_war_with = MOB }
+			AND = {
+				country_exists = MOB
+			}
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+		complete_effect = {
+			MOB = {
+				country_event = nf_HNZ.15
+				## Mobsters will non-aggression pact Hanza in return for CG debuff timed idea
+			}
+		}
+	}
+
+	HNZ_MOB_trade_tech = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = generic_trade_tools
+
+		visible = {
+			has_completed_focus = HNZ_HNZ_trade_with_MOB
+		}
+
+		available = {
+			NOT = { has_war_with = MOB }
+			AND = {
+				country_exists = MOB
+			}
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			MOB = {
+				country_event = nf_HNZ.17
+				## Mobsters will boost relation with Hanza in return for Tool Tech
+			}
+		}
+	}
+
+	HNZ_MOB_trade_resources = {
+
+		allowed = {
+			original_tag = HNZ
+		}
+
+		icon = generic_trade_resources
+
+		visible = {
+			has_completed_focus = HNZ_HNZ_trade_with_MOB
+		}
+
+		available = {
+			NOT = { has_war_with = MOB }
+			AND = {
+				country_exists = MOB
+			}
+		}
+
+		cost = 30
+		days_remove = 30
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			MOB = {
+				country_event = nf_HNZ.19
+				## Mobsters will boost relation with Hanza in return for resources
+			}
+		}
+	}
+}
+
+HNZ_southern_reclaimation_authority = {
+	HNZ_establish_southern_reclaimation_authority = {
+
+		icon = ger_reichskommissariats
+
+		available = {
+			has_completed_focus = HNZ_HNZ_clearing_southern_tunnels
+			controls_state = 405
+			controls_state = 75
+		}
+
+		cost = 0
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 10
+				date > 2030.1.1
+			}
+		}
+
+		visible = {
+			has_completed_focus = HNZ_HNZ_clearing_southern_tunnels
+		}
+
+		complete_effect = {
+			release_puppet = SRA
+			SRA = {
+				add_ideas = hanza_puppet
+				load_oob = HNZ_SRA
+				add_offsite_building = {
+					type = arms_factory
+					level = 2
+				}
+				set_variable = { satellite_economic_subversion = 90 }
+				set_variable = { satellite_politics_subversion = 85 }
+			}
+			405 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				    instant_build = yes
+				}
+
+			}
+		}
+	}
+}

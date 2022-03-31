@@ -9,6 +9,15 @@ on_actions = {
                 country_event = nf_metro.1
             }
         }
+		
+		effect = {
+			every_state = {
+				add_to_array = {
+					array = global.reclamation_array
+					value = THIS.id
+				}
+			}
+		}
 
         effect = {	
             ### Spartans ###
@@ -16,6 +25,7 @@ on_actions = {
 				if = {
 					limit = {
 						TAG = SPT
+						TAG = MUT
 					}
 					add_manpower = 100
 				}   
@@ -119,6 +129,24 @@ on_actions = {
 		    add_opinion_modifier = {
 		        target = PREV
 		        modifier = capitalist_swine 
+		   }
+	    }
+    }
+### The Order ###
+	SPT = {
+		PLS = {
+		    add_opinion_modifier = {
+		        target = PREV
+		        modifier = joint_operations_mutual_defense
+		   }
+	    }
+    }
+### Polis ###
+	PLS = {
+		SPT = {
+		    add_opinion_modifier = {
+		        target = PREV
+		        modifier = joint_operations_mutual_defense
 		   }
 	    }
     }

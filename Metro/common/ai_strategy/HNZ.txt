@@ -1,0 +1,205 @@
+## Hanza ##
+HNZ_default_unit_production = {
+	## Prioritise ELITE Divisions backed up by competent Mobile troops ##
+	allowed = {
+		original_tag = HNZ
+	}
+	enable = {
+		always = yes
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 25
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 15
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = explosive_support
+		value = 15
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = rail_car
+		value = 15
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = explosive_support
+		value = 15
+	}
+}
+HNZ_motorised_army = {
+	allowed = {
+		original_tag = HNZ
+	}
+	enable = {
+		date > 2031.1.1
+		ai_wants_divisions > 34 #Decreasing the amount of tanks the AI wants
+	}
+	abort = {
+		ai_wants_divisions < 35 #Decreasing the amount of tanks the AI wants
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 35
+	}
+}
+
+HNZ_stockpile_more_early_game = {
+	allowed = {
+		original_tag = HNZ
+	}
+
+	enable = {
+		date < 2030.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = 8 ## Brace for the oncoming storm...
+	}
+}
+
+HNZ_be_wary_of_commies = {
+	enable = {
+		country_exists = RED
+	}
+	abort = {
+		NOT = {
+			country_exists = RED
+		}
+	}
+	ai_strategy = {
+		type = contain
+		id = "RED"
+		value = 100
+	}
+}
+HNZ_be_wary_of_fascists = {
+	enable = {
+		country_exists = RCH
+	}
+	abort = {
+		NOT = {
+			country_exists = RCH
+		}
+	}
+	ai_strategy = {
+		type = contain
+		id = "RCH"
+		value = 50
+	}
+}
+HNZ_protect_potential_trade_interests_only = {
+	allowed = { original_tag = HNZ }
+
+	enable = {
+		country_exists = ARB
+		country_exists = DIM
+		country_exists = SEV
+		country_exists = BAU
+		country_exists = ULI
+		country_exists = VDN
+	}
+	abort = {
+		NOT = { 
+			country_exists = ARB
+			country_exists = DIM
+			country_exists = SEV
+			country_exists = BAU
+			country_exists = ULI
+			country_exists = VDN
+		}
+	}
+
+	ai_strategy = {
+		type = befriend
+		id = "ARB"
+		value = 20
+	}
+	ai_strategy = {
+		type = befriend
+		id = "DIM"
+		value = 20
+	}
+	ai_strategy = {
+		type = befriend
+		id = "SEV"
+		value = 20
+	}
+	ai_strategy = {
+		type = befriend
+		id = "BAU"
+		value = 20
+	}
+	ai_strategy = {
+		type = befriend
+		id = "ULI"
+		value = 20
+	}
+	ai_strategy = {
+		type = befriend
+		id = "VDN"
+		value = 20
+	}
+}
+HNZ_ring_line_is_very_very_important = {
+	allowed = {
+		original_tag = HNZ
+	}
+	enable = {
+		has_war = yes
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = ring_line
+		value = 200
+	}
+}
+HNZ_build_up_late_game = {
+	allowed = {
+		original_tag = HNZ
+	}
+	enable = {
+		date > 2032.1.1
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = -50
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 150
+	}
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 35
+	}
+}

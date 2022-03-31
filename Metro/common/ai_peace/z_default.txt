@@ -28,11 +28,12 @@ default_peace = {
 	enable = {
 		always = yes
 	}
-	annex_randomness = 0 #350
-	liberate_randomness = 0 #100
-	puppet_randomness = 0 #200
-	take_states_randomness = 0 #150
-	force_government_randomness = 0 #50
+
+	annex_randomness = 0
+	liberate_randomness = 0
+	puppet_randomness = 0
+	take_states_randomness = 0
+	force_government_randomness = 0
 	
 	build_temp_vars = {
 		
@@ -100,7 +101,7 @@ default_peace = {
 
 	# ROOT = Taker, FROM = Giver
 	puppet = {
-		factor = 0 #200
+		factor = -200 #200
 		modifier = {
 			factor = 0
 			OR = {
@@ -139,21 +140,12 @@ default_peace = {
 	
 	# ROOT = Taker, FROM = Giver
 	puppet_all = {
-		base = 0 
+		base = -200
 	}
 	
 	# ROOT = STATE, FROM = Taker, FROM.FROM = Giver
 	puppet_state = {
-		base = 0 
-		modifier = { #puppet state only if already puppeted
-			add = 200
-			#only if already puppetted the country
-			is_in_array = { subject_countries@FROM = FROM.FROM }
-			#only if already puppetted a neighbor state
-			any_neighbor_state = {
-				is_in_array = { subject_states@FROM = this }
-			}
-		}
+		base = 0
 	}
 
 	# ROOT = Taker, FROM = State
@@ -347,14 +339,6 @@ default_peace = {
 						is_core_of = ROOT
 					}
 				} 
-			}
-			OR = {
-				NOT = { FROM = { is_on_continent = africa } }
-				NOT = { capital_scope = { is_on_continent = europe } }
-				AND = {
-					#Is NOT a major
-					NOT = { num_of_factories > 100 }
-				}
 			}
 		}
 		modifier = { #Only take claimed/core land if a puppet.
