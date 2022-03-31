@@ -1,6 +1,9 @@
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+
 focus_tree = {
 	id = generic_focus
-	continuous_focus_position = { x = 1950 y = 550 }
+	continuous_focus_position = { x = 1950 y = 750 }
 	country = {
 		factor = 1
 	}
@@ -1362,17 +1365,55 @@ focus_tree = {
 	}
 
 	focus = {
-		id = community_2
+		id = community_ideology_change
 		icon = GFX_goal_generic_national_unity
 		cost = 6.5
 
 		prerequisite = {
 			focus = community_1
 		}
-		
+
+		available = {
+			community > 0.3
+		}
+
 		x = 0
 		y = 1
 		relative_position_id = community_1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = community }
+			}
+		}
+
+		completion_reward = {
+			set_politics = { 
+				ruling_party = community
+			 	elections_allowed = no 
+			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.2
+			}
+		    add_political_power = 45
+		}
+	}
+
+	focus = {
+		id = community_2
+		icon = GFX_goal_generic_national_unity
+		cost = 6.5
+
+		prerequisite = {
+			focus = community_ideology_change
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = community_ideology_change
 
 		ai_will_do = {
 			factor = 3
@@ -1409,7 +1450,7 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 	}
@@ -1454,17 +1495,55 @@ focus_tree = {
 	}
 
 	focus = {
-		id = council_2
+		id = council_ideology_change
 		icon = GFX_goal_anschluss
 		cost = 6.5
 
 		prerequisite = {
 			focus = council_1
 		}
-		
+
+		available = {
+			council > 0.3
+		}
+
 		x = 0
 		y = 1
 		relative_position_id = council_1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = council }
+			}
+		}
+
+		completion_reward = {
+			set_politics = { 
+				ruling_party = council
+			 	elections_allowed = no 
+			}
+		    add_popularity = {
+				ideology = council
+				popularity = 0.2
+			}
+		    add_political_power = 45
+		}
+	}
+
+	focus = {
+		id = council_2
+		icon = GFX_goal_anschluss
+		cost = 6.5
+
+		prerequisite = {
+			focus = council_ideology_change
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = council_ideology_change
 
 		ai_will_do = {
 			factor = 3
@@ -1537,17 +1616,55 @@ focus_tree = {
 	}
 
 	focus = {
-		id = oligarch_2
+		id = oligarch_ideology_change
 		icon = GFX_goal_generic_major_alliance
 		cost = 6.5
 
 		prerequisite = {
 			focus = oligarch_1
 		}
-		
+
+		available = {
+			oligarch > 0.3
+		}
+
 		x = 0
 		y = 1
 		relative_position_id = oligarch_1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = oligarch }
+			}
+		}
+
+		completion_reward = {
+			set_politics = { 
+				ruling_party = oligarch
+			 	elections_allowed = no 
+			}
+		    add_popularity = {
+				ideology = oligarch
+				popularity = 0.2
+			}
+		    add_political_power = 45
+		}
+	}
+
+	focus = {
+		id = oligarch_2
+		icon = GFX_goal_generic_major_alliance
+		cost = 6.5
+
+		prerequisite = {
+			focus = oligarch_ideology_change
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = oligarch_ideology_change
 
 		ai_will_do = {
 			factor = 3
@@ -1627,17 +1744,55 @@ focus_tree = {
 	}
 
 	focus = {
-		id = dictatorial_2
+		id = dictatorial_ideology_change
 		icon = GFX_goal_demand_sudetenland
 		cost = 6.5
 
 		prerequisite = {
 			focus = dictatorial_1
 		}
-		
+
+		available = {
+			dictatorial > 0.3
+		}
+
 		x = 0
 		y = 1
 		relative_position_id = dictatorial_1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_government = dictatorial }
+			}
+		}
+
+		completion_reward = {
+			set_politics = { 
+				ruling_party = dictatorial
+			 	elections_allowed = no 
+			}
+		    add_popularity = {
+				ideology = dictatorial
+				popularity = 0.2
+			}
+		    add_political_power = 45
+		}
+	}
+
+	focus = {
+		id = dictatorial_2
+		icon = GFX_goal_demand_sudetenland
+		cost = 6.5
+
+		prerequisite = {
+			focus = dictatorial_ideology_change
+		}
+		
+		x = 0
+		y = 1
+		relative_position_id = dictatorial_ideology_change
 
 		ai_will_do = {
 			factor = 3

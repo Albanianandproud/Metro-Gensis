@@ -1,11 +1,41 @@
 sancity_of_life = {
 
+	allow_creation_faction = {
+
+		icon = form_nation
+
+		visible = {
+			is_ai = no
+		}
+		available = {
+			is_ai = no
+		}
+		available = {
+			is_in_faction = no
+			AND = {
+    			num_of_military_factories > 19
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 0
+		}
+		complete_effect = {
+
+		set_rule = { can_create_factions = yes }
+		
+		}
+	}
+
 	ration_food = {
 
-		icon = decision_hol_war_on_pacifism
+		icon = hol_war_on_pacifism
 
 		available = {
-			has_stability < 0.79
+			has_stability < 0.44
 		}
 
 		visible = {
@@ -15,15 +45,15 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-			stability_weekly = 0.015
+			stability_weekly = 0.005
 			consumer_goods_factor = 0.05
 			political_power_gain = -0.15
 		}
 
 		days_remove = 64
-		days_re_enable = 14
+		days_re_enable = 128
 
-		cost = 50
+		cost = 40
 
 		complete_effect = {
 
@@ -32,18 +62,18 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 15
-				has_stability < 0.8
+				add = 10
+				has_stability < 0.44
 			}
 		}
 	}
 
 	hygiene_education = {
 
-		icon = decision_generic_research
+		icon = generic_research
 
 		available = {
-			has_stability < 0.8
+			has_stability < 0.49
 		}
 
 		visible = {
@@ -53,15 +83,15 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-		    political_power_gain = -0.2
+		    political_power_gain = -0.15
 			research_speed_factor = -0.1
-			stability_weekly = 0.02
+			stability_weekly = 0.005
 		}
 
 		days_remove = 84
-		days_re_enable = 21
+		days_re_enable = 168
 
-		cost = 60
+		cost = 40
 
 		complete_effect = {
 
@@ -70,18 +100,18 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 25
-				has_stability < 0.3
+				add = 10
+				has_stability < 0.49
 			}
 		}
 	}
 
 	rouse_the_people = {
 
-		icon = decision_category_spr_the_seeds_of_revolution
+		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_war_support < 0.8
+			has_war_support < 0.59
 		}
 
 		visible = {
@@ -91,14 +121,14 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-		    war_support_weekly = 0.015
-			stability_weekly = -0.005
+		    war_support_weekly = 0.005
+			stability_weekly = -0.0025
 		}
 
 		days_remove = 84
-		days_re_enable = 7
+		days_re_enable = 168
 
-		cost = 50
+		cost = 40
 
 		complete_effect = {
 
@@ -107,15 +137,15 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 35
-				has_war_support < 0.78
+				add = 5
+				has_war_support < 0.59
 			}
 		}
 	}
 
 	rouse_the_people_2 = {
 
-		icon = decision_category_spr_the_seeds_of_revolution
+		icon = generic_speech
 
 		available = {
 			has_war_support < 0.59
@@ -128,13 +158,13 @@ sancity_of_life = {
 		fire_only_once = no
 
 		modifier = {
-		    war_support_weekly = 0.01
+		    war_support_weekly = 0.005
 		}
 
 		days_remove = 70
-		days_re_enable = 35
+		days_re_enable = 140
 
-		cost = 50
+		cost = 40
 
 		complete_effect = {
 		}
@@ -142,246 +172,163 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 35
+				add = 10
 				has_war_support < 0.49
+			}
+			modifier = {
+				add = 15
+				has_war = yes
 			}
 		}
 	}
 }
 
-scavenging_expeditions = {
+	warfare_drastic_measures = {
+        draw_short_straws = {
+        	icon = ger_military_buildup
 
-	scavenge_scrap = {
+        	available = {
+		    	any_state = { 
+		    		state_population > 49
+		    	}
+		    	has_war_support < 0.19
+		    	has_stability < 0.19
+			}
 
-		icon = scrap
+			days_remove = 21
+			days_re_enable = 42
+			
+			custom_cost_text = command_power_20
+			custom_cost_trigger = {
+				command_power > 19.9
+			}
 
-		available = {
-		    has_manpower > 9
-			NOT = { has_country_flag = scavenging_scrap }
-		}
+			modifier = {
+               stability_weekly = -0.05
+               war_support_weekly = -0.025
+          	}
 
-		visible = {
-			always = yes
-		}
+			complete_effect = {
+				random_owned_state = {
+					limit = {
+						NOT = {
+					    	has_state_category = pastoral
+						}
+					}
+		    		add_manpower = -25
+				}
+				add_manpower = 25
+			}
+			ai_will_do = {
+				base = 5
+				modifier = {
+					add = 10
+					surrender_progress > 0.15
+				}
+			}
+        }
 
-		fire_only_once = no
+        siphon_equipment = {
+        	icon = generic_prepare_civil_war
 
-		complete_effect = {
-		    add_manpower = -10
-			set_country_flag = scavenging_scrap
-		}
+        	available = {
+				all_state = {
+		    		has_resources_amount = {
+    					resource = scrap 
+    					amount > 2
+					}
+				}	
+				all_state = {
+		    		has_resources_amount = {
+    					resource = alloys 
+    					amount > 1
+					}
+				}
+			}
 
-		days_remove = 50
-		days_re_enable = 0
+			days_remove = 21
+			days_re_enable = 42
+			
+			custom_cost_text = command_power_20
+			custom_cost_trigger = {
+				command_power > 19.9
+			}
 
-		cost = 50
+			modifier = {
+               stability_weekly = -0.05
+               war_support_weekly = -0.05
+          	}
 
-		remove_effect = {
-		    add_manpower = 5
-			random_owned_controlled_state = {
-		        limit = {
-			        NOT = {
-			            has_state_category = pastoral
-				    }
+          	complete_effect = {
+				random_owned_state = {
+					limit = {
+		    			has_resources_amount = {
+    						resource = scrap
+    						amount > 1
+						}
+					}
+		    		add_resource = {
+    					type = scrap 
+    					amount = -2
+    				}
+				}
+				random_owned_state = {
+					limit = {
+		    			has_resources_amount = {
+    						resource = alloys 
+    						amount > 1
+						}
+					}
+					add_resource = {
+    					type = alloys
+    					amount = -1
+    				}
+    			}
+    			add_equipment_to_stockpile = {
+		        type = infantry_equipment 
+		        amount = 25
 		        }
-			    add_resource = {
-			        type = scrap
-			        amount = 3
-			    }
-		    }
-
-			clr_country_flag = scavenging_scrap
-		}
-		ai_will_do = {
-			factor = 15
-			modifier = {
-				factor = 15
-				scrap < 5
 			}
-			modifier = {
-				factor = 10
-				scrap < 10
+			ai_will_do = {
+				base = 5
+				modifier = {
+					add = 10
+					surrender_progress > 0.15
+				}
 			}
-			modifier = {
-				factor = 0.1
-				has_manpower < 30
+        }
+
+        extended_shifts = {
+        	icon = ger_military_buildup
+
+        	available = {
+		    	has_war_support < 0.19
+		    	has_stability < 0.19
 			}
-		}
-    }
 
-	scavenge_alloys = {
-
-		icon = alloys
-
-		available = {
-		    has_manpower > 9
-			NOT = { has_country_flag = scavenging_alloys }
-		}
-
-		visible = {
-			always = yes
-		}
-
-		fire_only_once = no
-
-		complete_effect = {
-		    add_manpower = -10
-			set_country_flag = scavenging_alloys
-		}
-
-		days_remove = 50
-		days_re_enable = 0
-
-		cost = 50
-
-
-		remove_effect = {
-		    add_manpower = 5
-			random_owned_controlled_state = {
-		        limit = {
-			        NOT = {
-			            has_state_category = pastoral
-				    }
-		        }
-			    add_resource = {
-			        type = alloys
-			        amount = 3
-			    }
-		    }
-
-			clr_country_flag = scavenging_alloys
-		}
-		ai_will_do = {
-			factor = 11
-			modifier = {
-				factor = 11
-				alloys < 5
+        	days_remove = 70
+			days_re_enable = 135
+			
+			custom_cost_text = command_power_20
+			custom_cost_trigger = {
+				command_power > 19.9
 			}
+
 			modifier = {
-				factor = 8
-				alloys < 10
+               stability_weekly = -0.05
+               war_support_weekly = -0.05
+               consumer_goods_factor = 0.1
+               production_factory_efficiency_gain_factor = 0.15
+               production_factory_start_efficiency_factor = 0.15
+          	}
+
+          	ai_will_do = {
+				base = 5
+				modifier = {
+					add = 10
+					surrender_progress > 0.15
+				}
 			}
-			modifier = {
-				factor = 0.1
-				has_manpower < 30
-			}
-		}
-    }
+        }
+	}
 
-	scavenge_components = {
-
-		icon = components
-
-		available = {
-		    has_manpower > 9
-			NOT = { has_country_flag = scavenging_components }
-		}
-
-		visible = {
-			always = yes
-		}
-
-		fire_only_once = no
-
-		complete_effect = {
-		    add_manpower = -10
-			set_country_flag = scavenging_components
-		}
-
-		days_remove = 50
-		days_re_enable = 0
-
-		cost = 50
-
-
-		remove_effect = {
-		    add_manpower = 5
-			random_owned_controlled_state = {
-		        limit = {
-			        NOT = {
-			            has_state_category = pastoral
-				    }
-		        }
-			    add_resource = {
-			        type = components
-			        amount = 3
-			    }
-		    }
-
-			clr_country_flag = scavenging_components
-		}
-		ai_will_do = {
-			factor = 11
-			modifier = {
-				factor = 11
-				components < 4
-			}
-			modifier = {
-				factor = 8
-				components < 8
-			}
-			modifier = {
-				factor = 0.1
-				has_manpower < 30
-			}
-		}
-    }
-
-	scavenge_electronics = {
-
-		icon = electronics
-
-		available = {
-		    has_manpower > 9
-			NOT = { has_country_flag = scavenging_electronics }
-		}
-
-		visible = {
-			always = yes
-		}
-
-		fire_only_once = no
-
-		complete_effect = {
-		    add_manpower = -10
-			set_country_flag = scavenging_electronics
-		}
-
-		days_remove = 50
-		days_re_enable = 0
-
-		cost = 50
-
-
-		remove_effect = {
-		    add_manpower = 5
-			random_owned_controlled_state = {
-		        limit = {
-			        NOT = {
-			            has_state_category = pastoral
-				    }
-		        }
-			    add_resource = {
-			        type = electronics
-			        amount = 2
-			    }
-		    }
-
-			clr_country_flag = scavenging_electronics
-		}
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 6
-				electronics < 4
-			}
-			modifier = {
-				factor = 8
-				electronics < 8
-			}
-			modifier = {
-				factor = 0
-				has_manpower < 30
-			}
-		}
-    }

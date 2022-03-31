@@ -9,7 +9,6 @@ every_possible_country = {
 			original_tag = DIM
 			original_tag = DMD
 			original_tag = EUR
-			original_tag = HNZ
 			original_tag = HUL
 			original_tag = KAL
 			original_tag = KRY
@@ -28,6 +27,8 @@ every_possible_country = {
 			original_tag = ALK
 			original_tag = STG
 			original_tag = RIZ
+			original_tag = PVL
+			original_tag = SRA
 		}
 	}
 	generate_character = {
@@ -37,7 +38,7 @@ every_possible_country = {
 			traits = { _metro_civil_industry }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 16
 			}
 		}
 		portraits = { 
@@ -51,7 +52,7 @@ every_possible_country = {
 			traits = { _metro_military_industry }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 16
 			}
 		}
 		portraits = { 
@@ -65,7 +66,7 @@ every_possible_country = {
 			traits = { _metro_physician }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 12
 			}
 		}
 		portraits = { 
@@ -79,7 +80,7 @@ every_possible_country = {
 			traits = { _metro_scientist }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 12
 			}
 		}
 		portraits = { 
@@ -93,7 +94,7 @@ every_possible_country = {
 			traits = { _metro_trader }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 12
 			}
 		}
 		portraits = { 
@@ -107,7 +108,7 @@ every_possible_country = {
 			traits = { _metro_strings_puller }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 16
 			}
 		}
 		portraits = { 
@@ -121,7 +122,7 @@ every_possible_country = {
 			traits = { _metro_accountant }
 			cost = 100
 			ai_will_do = {
-				factor = 8
+				factor = 16
 			}
 		}
 		portraits = { 
@@ -217,7 +218,59 @@ every_possible_country = {
 		portraits = { 
 			army = { small = GFX_idea_generic_minister_19 }
 		}
-	} #
+	} 
+}
+every_possible_country = {
+	limit = {
+		OR = {
+			original_tag = ARB
+			original_tag = ATQ
+			original_tag = AVT
+			original_tag = BAU
+			original_tag = BRK
+			original_tag = DIM
+			original_tag = DMD
+			original_tag = EUR
+			original_tag = HNZ
+			original_tag = HUL
+			original_tag = KAL
+			original_tag = KRY
+			original_tag = KUZ
+			original_tag = MDR
+			original_tag = MIT
+			original_tag = PEC
+			original_tag = RYZ
+			original_tag = SEV
+			original_tag = SHD
+			original_tag = TRB
+			original_tag = TSH
+			original_tag = ULI
+			original_tag = VDN
+			original_tag = YAS
+			original_tag = ALK
+			original_tag = STG
+			original_tag = RIZ
+			original_tag = PVL
+			##	allow non generics for now	##
+			original_tag = SPT
+			original_tag = MUT
+			original_tag = SAT
+			original_tag = SCA
+			original_tag = PAG
+			original_tag = GWC
+			original_tag = HMS
+			original_tag = ISL
+		}
+	}
+}
+every_possible_country = {
+	limit = {
+		NOT = {
+			original_tag = HNZ
+			original_tag = RED
+		}
+	}
+
 	generate_character = {
 		token_base = metro_defense
 		advisor = {
@@ -267,6 +320,12 @@ every_possible_country = {
 	}
 }
 every_possible_country = {
+	limit = {
+		NOT = {
+			original_tag = GWC
+			original_tag = HNZ
+		}
+	}
 	generate_character = {
 		token_base = metro_small_arms_manufacturer
 		advisor = {
@@ -284,6 +343,12 @@ every_possible_country = {
 	}
 }
 every_possible_country = {
+	limit = {
+		NOT = {
+			original_tag = GWC
+			original_tag = HNZ
+		}
+	}
 	generate_character = {
 		token_base = metro_support_equipment_manufacturer
 		advisor = {
@@ -301,23 +366,12 @@ every_possible_country = {
 	}
 }
 every_possible_country = {
-	generate_character = {
-		token_base = metro_electronics_manufacturer
-		advisor = {
-			slot = industrial_concern
-			traits = { _metro_electronics_manufacturer }
-			research_bonus = { electronics = 0.15 }
-			cost = 100
-			ai_will_do = {
-				factor = 8
-			}
-		}
-		portraits = { 
-			army = { small = GFX_idea_generic_minister_17 }
+	limit = {
+		NOT = {
+			original_tag = GWC
+			original_tag = HNZ
 		}
 	}
-}
-every_possible_country = {
 	generate_character = {
 		token_base = metro_industrial_manufacturer
 		advisor = {
@@ -331,6 +385,31 @@ every_possible_country = {
 		}
 		portraits = { 
 			army = { small = GFX_idea_generic_minister_22 }
+		}
+	}
+}
+every_possible_country = {
+	limit = {
+		NOT = {
+			original_tag = GWC
+			original_tag = HNZ
+			original_tag = MUT
+			original_tag = SAT
+		}
+	}
+	generate_character = {
+		token_base = metro_special_forces_training
+		advisor = {
+			slot = high_command
+			ledger = army
+			traits = { _metro_special_forces_training }
+			cost = 100
+			ai_will_do = {
+				factor = 8
+			}
+		}
+		portraits = { 
+			army = { small = GFX_idea_HNZ_minister_military_1 }
 		}
 	}
 }

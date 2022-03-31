@@ -13,8 +13,8 @@ focus_tree = {
 		id = RCH_terror_campaigns
 		icon = GFX_RCH_commander
 
-		available = {
-		    has_completed_focus = RCH_proclaim_slavic_unity
+		mutually_exclusive = {
+			focus = RCH_inner_reforms
 		}
 
 		cost = 6.5
@@ -22,6 +22,8 @@ focus_tree = {
 		y = 0
 		completion_reward = {
 			add_ideas = terror_campaigns 
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_chief_of_police
 		}
 	}
 
@@ -49,7 +51,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_eradication
-		icon = GFX_RCH_army_2
+		icon = GFX_RCH_purge_foul
 		cost = 6.5
 
 		prerequisite = {
@@ -169,17 +171,28 @@ focus_tree = {
 		icon = GFX_RCH_russian_unity
 		cost = 6.5
 		x = 7
-		y = 0
+		y = 1
 
-		mutually_exclusive = {
-			focus = RCH_inner_reforms
+		prerequisite = {
+			focus = RCH_terror_campaigns
+			focus =	RCH_inner_reforms
 		}
 
 		completion_reward = {
-		    add_political_power = 90
+		    add_political_power = 100
 		    add_war_support = 0.1
 
-			#country_event = nf_RCH.1 
+			337 = {		## Tverskaya
+				set_state_name = "Darvinovskaya"
+			}
+			306 = {		## Pushkinskaya
+				set_state_name = "Wagnerovskaya"
+			}
+			275 = {		## Chekhovskaya
+				set_state_name = "Schillerovskaya"
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_karl_krainer
 		}
 	}
 
@@ -199,6 +212,8 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_political_power = 90
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_chairman_of_ministry
 		}
 	}
 
@@ -242,7 +257,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_cult_of_personality
-		icon = GFX_RCH_fuhrer
+		icon = GFX_RCH_cult_of_personality
 		cost = 6.5
 
 		x = 0
@@ -302,7 +317,7 @@ focus_tree = {
 		y = 0
 
 		mutually_exclusive = {
-			focus = RCH_proclaim_slavic_unity
+			focus = RCH_terror_campaigns
 		}
 		
 		completion_reward = {
@@ -434,7 +449,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_lebensraum
-		icon = GFX_RCH_lebensraum
+		icon = GFX_RCH_lebensraum_2
 		cost = 6.5
 		x = 39
 		y = 0
@@ -450,7 +465,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion
-		icon = GFX_RCH_propaganda
+		icon = GFX_RCH_march_into_trubnaya
 		cost = 6.5
 
 		x = 1
@@ -485,7 +500,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion_barrikadnaya_core
-		icon = GFX_mutant_death
+		icon = GFX_RCH_barrikadnaya_core
 		cost = 6.5
 
 		x = 0
@@ -500,11 +515,19 @@ focus_tree = {
 			418 = {
                 is_owned_by = ROOT
 			}
+			149 = {
+                is_owned_by = ROOT
+			}
+			148 = {
+                is_owned_by = ROOT
+			}
 			has_war = no
 		}
 
 		completion_reward = {
 			418 = { add_core_of = ROOT }
+			148 = { add_core_of = ROOT }
+			419 = { add_core_of = ROOT }
 		    418 = { 
 		    	add_manpower = -50 
 		    	add_extra_state_shared_building_slots = 2
@@ -519,7 +542,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion2
-		icon = GFX_RCH_propaganda
+		icon = GFX_RCH_expansion_into_barrikadnaya
 		cost = 6.5
 
 		x = -1
@@ -554,7 +577,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion_trubnaya_core
-		icon = GFX_mutant_death
+		icon = GFX_RCH_trubnaya_core
 		cost = 6.5
 
 		x = 0
@@ -569,11 +592,19 @@ focus_tree = {
 			312 = {
                 is_owned_by = ROOT
 			}
+			181 = {
+                is_owned_by = ROOT
+			}
+			120 = {
+                is_owned_by = ROOT
+			}
 			has_war = no
 		}
 
 		completion_reward = {
 			312 = { add_core_of = ROOT }
+			181 = { add_core_of = ROOT }
+			120 = { add_core_of = ROOT }
 		    312 = { 
 		    	add_manpower = -50 
 		    	add_extra_state_shared_building_slots = 2
@@ -588,7 +619,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion_mayakovskaya
-		icon = GFX_station_entrance
+		icon = GFX_RCH_expand_into_mayakovskaya_station
 		cost = 6.5
 
 		x = -3
@@ -628,7 +659,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion_mayakovskaya_2
-		icon = GFX_station_entrance
+		icon = GFX_RCH_colonize_mayakovskaya
 		cost = 6.5
 
 		x = 0
@@ -666,7 +697,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion3
-		icon = GFX_HNZ_destroy_communism
+		icon = GFX_RCH_expand_our_domain
 		cost = 6.5
 
 		x = 1
@@ -702,7 +733,7 @@ focus_tree = {
 
     focus = {
 		id = RCH_expansion_pls_tunnel
-		icon = GFX_RCH_tunnel_excavation
+		icon = GFX_RCH_expand_into_polis
 		cost = 6.5
 
 		x = 3
@@ -742,7 +773,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_expansion_pls_annex
-		icon = GFX_station_entrance
+		icon = GFX_RCH_polis_annex
 		cost = 6.5
 
 		x = 0
@@ -1408,7 +1439,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		    army_experience = 35
+		    army_experience = 20
+		    add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.2
+				uses = 1
+				category = land_doctrine
+			}
 		}
 	}
 
@@ -1426,7 +1463,13 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		    army_experience = 35
+		    army_experience = 10
+		    add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.4
+				uses = 1
+				category = land_doctrine
+			}
 		}
 	}
 

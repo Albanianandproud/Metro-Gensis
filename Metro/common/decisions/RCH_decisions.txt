@@ -1,0 +1,31 @@
+RCH_invade_savel = {
+	invade_savelovskaya = {
+		icon = decision_generic_military
+		days_remove = 14
+
+		available = {
+			has_manpower > 44
+			has_equipment = {
+                infantry_equipment > 44
+                supplies_equipment > 2
+            }
+			has_war_with = DIM
+			AND = {
+				country_exists = DIM
+				DIM = {
+					controls_state = 326
+					controls_state = 111
+				}
+			}
+		}
+		complete_effect = {
+			RCH = {
+				set_state_controller = 111
+			}
+			custom_effect_tooltip = RCH_hitsquad_oob_tt
+			hidden_effect = {
+				load_oob = RCH_hitsquad
+			}
+		}
+	}
+}
