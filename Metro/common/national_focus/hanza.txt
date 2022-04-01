@@ -536,10 +536,6 @@ focus_tree = {
 			focus = HNZ_reclaimation_organise_workforce
 			focus = HNZ_reclaimation_clearing_tunnels
 		}
-
-		available = {
-			has_idea = HNZ_alexey_terentyev
-		}
 		x = -3
 		y = 2
 		relative_position_id = HNZ_establish_reclaimation_bureau
@@ -909,7 +905,7 @@ focus_tree = {
 			NOT = {
 				has_idea = HNZ_exhausted_economy
 			}
-			num_of_civilian_factories > 40
+			num_of_civilian_factories > 54
 		}
 
 		x = 0
@@ -2907,16 +2903,10 @@ focus_tree = {
 						has_idea = hanza_under_sphere_of_influence
 					}
 				}
-				add_to_variable = {
-					var = satellite_economic_subversion
-					value = 5
+				add_timed_idea = {
+					idea = HNZ_subversive_activities
+					days = 480
 				}
-				add_to_variable = {
-					var = satellite_politics_subversion
-					value = 5
-				}
-				custom_effect_tooltip = HNZ_satellite_small_eco_subversion_tt
-				custom_effect_tooltip = HNZ_satellite_small_pol_subversion_tt
 			}
 		}
 	}
@@ -2930,12 +2920,6 @@ focus_tree = {
 		}
 
 		available = {
-			has_army_manpower = {
-    			size > 500
-			}
-		}
-
-		available = {
 			strength_ratio = {
     			tag = PVL
     			ratio > 3
@@ -2944,9 +2928,14 @@ focus_tree = {
     			tag = PVL
     			ratio > 1.5
 			}
-			has_opinion = {
-    			target = HNZ
-    			value > 9
+			OR = {
+				has_opinion = {
+    				target = HNZ
+    				value > 4
+				}
+				has_army_manpower = {
+    				size > 749
+				}
 			}
 		}
 		x = 0
@@ -3205,7 +3194,7 @@ focus_tree = {
 			army_experience = 10
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.66
+				cost_reduction = 0.5
 				uses = 2
 				category = land_doctrine
 			}
@@ -3517,10 +3506,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience = 10
+			army_experience = 20
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.66
+				cost_reduction = 0.5
 				uses = 2
 				category = land_doctrine
 			}

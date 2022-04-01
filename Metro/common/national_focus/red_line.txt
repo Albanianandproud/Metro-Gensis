@@ -1,9 +1,9 @@
 focus_tree = {
-	id = red_line
+	id = red_line_1
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 00
 			tag = RED
 		}
 	}
@@ -14,8 +14,11 @@ focus_tree = {
 		x = 10
 		y = 0
 		cost = 2.2
-		completion_reward = {
+
+		select_effect = {
+			country_event = nf_RED.1
 		}
+
 		ai_will_do = {
 			factor = 2
 		}
@@ -31,6 +34,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
+			country_event = nf_RED.4
 		}
 		ai_will_do = {
 			factor = 2
@@ -47,6 +51,7 @@ focus_tree = {
 		cost = 2.9
 		relative_position_id = RED_state_of_the_line
 		completion_reward = {
+			country_event = nf_RED.5
 		}
 		ai_will_do = {
 			factor = 2
@@ -79,6 +84,7 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_question_of_economy
 		completion_reward = {
+			country_event = nf_RED.9
 		}
 		ai_will_do = {
 			factor = 2
@@ -90,14 +96,28 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_formalise_ministry_of_economics
 		}
-		prerequisite = {
-			focus = RED_economic_demobilisation
-		}
 		x = 0
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_formalise_ministry_of_economics
 		completion_reward = {
+			add_timed_idea = {
+				idea = RED_de_kulakization
+				days = 140
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -114,6 +134,19 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_assume_kulak_property
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -123,16 +156,15 @@ focus_tree = {
 		id = RED_question_of_prodrazvyorstka
 		icon = GFX
 		prerequisite = {
-			focus = RED_formalise_ministry_of_economics
-		}
-		prerequisite = {
 			focus = RED_economic_demobilisation
+			focus = RED_formalise_ministry_of_economics
 		}
 		x = 0
 		y = 1
 		cost = 2.9
 		relative_position_id = RED_economic_demobilisation
 		completion_reward = {
+			country_event = nf_RED.7
 		}
 		ai_will_do = {
 			factor = 2
@@ -149,6 +181,7 @@ focus_tree = {
 		cost = 2.9
 		relative_position_id = RED_state_of_the_line
 		completion_reward = {
+			country_event = nf_RED.6
 		}
 		ai_will_do = {
 			factor = 2
@@ -165,6 +198,7 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_question_of_military
 		completion_reward = {
+			RED_military_reforms = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -181,19 +215,17 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_question_of_military
 		completion_reward = {
+			army_experience = 15
 		}
 		ai_will_do = {
 			factor = 2
 		}
 	}
 	focus = {
-		id = RED_establish_officer_academy
+		id = RED_young_officer_academy
 		icon = GFX
 		prerequisite = {
 			focus = RED_military_renovations
-		}
-		prerequisite = {
-			focus = RED_command_reforms
 		}
 		x = 0
 		y = 1
@@ -209,12 +241,12 @@ focus_tree = {
 		id = RED_new_officer_corps
 		icon = GFX
 		prerequisite = {
-			focus = RED_establish_officer_academy
+			focus = RED_young_officer_academy
 		}
 		x = 0
 		y = 1
 		cost = 3.6
-		relative_position_id = RED_establish_officer_academy
+		relative_position_id = RED_young_officer_academy
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -225,16 +257,15 @@ focus_tree = {
 		id = RED_question_of_brotherhood
 		icon = GFX
 		prerequisite = {
-			focus = RED_military_renovations
-		}
-		prerequisite = {
 			focus = RED_command_reforms
+			focus = RED_military_renovations
 		}
 		x = 0
 		y = 1
 		cost = 2.9
 		relative_position_id = RED_command_reforms
 		completion_reward = {
+			country_event = nf_RED.8
 		}
 		ai_will_do = {
 			factor = 2
@@ -251,8 +282,54 @@ focus_tree = {
 		}
 		x = 0
 		y = 4
-		cost = 8.6
+		cost = 3 #8.6
 		relative_position_id = RED_state_of_the_line
+
+		completion_reward = {
+			country_event = nf_RED.10
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+}
+
+focus_tree = {
+	id = red_line_2
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 25
+			tag = RED
+		}
+	}
+	default = no
+
+	continuous_focus_position = { x = 50 y = 1000 }
+
+	focus = {
+		id = RED_crisis
+		icon = GFX
+		x = 10
+		y = 0
+		cost = 2.2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_inaugerate_korbut
+		icon = GFX
+		prerequisite = {
+			focus = RED_crisis
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_crisis
 		completion_reward = {
 		}
 		ai_will_do = {

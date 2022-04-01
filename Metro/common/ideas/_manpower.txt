@@ -9,20 +9,27 @@ ideas = {
 			removal_cost = -1
 			level = 6
 			modifier = {
+				minimum_training_level = -0.05
+				training_time_factor = -0.05
 				conscription = 0.06
+				experience_gain_army = 0.01
 			}
 			default = yes
 			cancel_if_invalid = no
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}
@@ -36,6 +43,7 @@ ideas = {
 			}
 			modifier = {
 				conscription = 0.12
+				experience_gain_army = 0.02
 			}
 			ai_will_do = {
    				factor = 1
@@ -46,15 +54,19 @@ ideas = {
 			}
 			cancel_if_invalid = no
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}
@@ -63,13 +75,14 @@ ideas = {
 			removal_cost = -1
 			level = 4
 			available = {
-				has_war_support > 0.5
+				has_war_support > 0.39
 				NOT = { has_idea = undisturbed_isolation }
 				NOT = { has_idea = isolation }
 			}
 			modifier = {
 				conscription = 0.18
-				stability_factor = -0.05
+				experience_gain_army = 0.03
+				minimum_training_level = 0.05
 			}
 			ai_will_do = {
    				factor = 1
@@ -80,15 +93,19 @@ ideas = {
 			}
 			cancel_if_invalid = no
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}		
@@ -97,13 +114,14 @@ ideas = {
 			removal_cost = -1
 			level = 3
 			available = {
-				has_war_support > 0.6
+				has_war_support > 0.49
 			    AND = {
 				    has_war = yes
 				}
 				OR = {
 					has_government = oligarch
 					has_government = dictatorial
+					surrender_progress > 0.1
 					AND = {
 						has_war = yes
 						enemies_strength_ratio > 0.5
@@ -112,8 +130,9 @@ ideas = {
 			}
 			modifier = {
 				conscription = 0.24
-				industrial_capacity_factory = -0.05
-				stability_factor = -0.1
+				experience_gain_army = 0.04
+				minimum_training_level = 0.1
+				war_support_factor = -0.1
 			}
 			ai_will_do = {
    				factor = 1
@@ -125,15 +144,19 @@ ideas = {
 		    }
 			cancel_if_invalid = no
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}		
@@ -142,11 +165,12 @@ ideas = {
 			removal_cost = -1
 			level = 2
 			available = {
-				has_war_support > 0.7
+				has_war_support > 0.49
 				has_war = yes
 				OR = {
 					has_government = oligarch
 					has_government = dictatorial
+					surrender_progress > 0.15
 					AND = {
 						has_war = yes
 						enemies_strength_ratio > 0.5
@@ -155,8 +179,9 @@ ideas = {
 			}
 			modifier = {
 				conscription = 0.32
-				industrial_capacity_factory = -0.05
-				stability_factor = -0.15
+				experience_gain_army = 0.05
+				minimum_training_level = 0.15
+				war_support_factor = -0.2
 			}
 			ai_will_do = {
    				factor = 1
@@ -168,15 +193,19 @@ ideas = {
 		    }
 			cancel_if_invalid = no
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}
@@ -185,13 +214,14 @@ ideas = {
 			removal_cost = -1
 			level = 1
 			available = {
-				has_war_support > 0.8
+				has_war_support > 0.49
 				AND = {
 				    has_war = yes
 				}
 				OR = {
 					has_government = oligarch
 					has_government = dictatorial
+					surrender_progress > 0.3
 					AND = {
 						has_war = yes
 						enemies_strength_ratio > 0.5
@@ -200,8 +230,9 @@ ideas = {
 			}
 			modifier = {
 				conscription = 0.4
-				industrial_capacity_factory = -0.1
-				stability_factor = -0.2
+				experience_gain_army = 0.06
+				minimum_training_level = 0.2
+				war_support_factor = -0.3
 			}
 			cancel_if_invalid = no
 			ai_will_do = {
@@ -213,15 +244,19 @@ ideas = {
 				}	
 		    }
 			available = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law.
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 			visible = {
-				NOT = {
-					tag = RED 		## Red Line uses their own unique conscription law. 
-					tag = HNZ 		## Hanza uses their own unique conscription law. 
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+					}
 				}
 			}
 		}

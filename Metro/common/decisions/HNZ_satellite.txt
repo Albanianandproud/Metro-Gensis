@@ -20,6 +20,10 @@ HNZ_satellite = {
     			target = HNZ
     			value > 9
 			}
+			AND = {
+				check_variable = { satellite_economic_subversion > 9 }
+				check_variable = { satellite_politics_subversion > 9 }
+			}
 		}
 
 		cost = 0
@@ -264,6 +268,11 @@ HNZ_satellite = {
 		days_re_enable = 270
 
 		available = {
+			check_variable = { satellite_economic_subversion > 4 }
+			check_variable = { satellite_politics_subversion > 4 }
+		}
+
+		available = {
 			HNZ = { 
 				exists = yes
 			}
@@ -303,6 +312,11 @@ HNZ_satellite = {
 		cost = 15
 		days_remove = 21
 		fire_only_once = yes
+
+		available = {
+			check_variable = { satellite_economic_subversion > 9 }
+			check_variable = { satellite_politics_subversion > 9 }
+		}
 
 		remove_effect = {
 			hidden_effect = {
@@ -373,10 +387,14 @@ HNZ_satellite = {
 		visible = {
 			under_hanza_influence = yes
 		}
+		available = {
+			check_variable = { satellite_economic_subversion > 4 }
+			check_variable = { satellite_politics_subversion > 4 }
+		}
 
 		cost = 50
 		days_remove = 50
-		days_re_enable = 150
+		days_re_enable = 50
 
 		remove_effect = {
 			custom_effect_tooltip = satellite_remove_subversion
@@ -390,6 +408,50 @@ HNZ_satellite = {
 			}
 		}
 
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	satellite_kick_out_hansa_merchants = {
+		icon = GFX_generic_treaty_ruin
+		allowed = {
+			under_hanza_influence = yes	
+		}
+		available = {
+			NOT = {
+		 		has_idea = hanza_satellite
+		 		has_idea = hanza_puppet
+		 	}
+		 	AND = {
+		 		check_variable = { satellite_economic_subversion > 14 }
+				check_variable = { satellite_politics_subversion > 14 }
+		 	}
+		}
+		visible = {
+			under_hanza_influence = yes
+		}
+
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		days_remove = 15
+		days_re_enable = 150
+
+		remove_effect = {
+			custom_effect_tooltip = satellite_remove_subversion
+			custom_effect_tooltip = hanza_wont_like_this
+			subtract_from_variable = {
+				var = satellite_economic_subversion
+				value = 10
+			}
+			subtract_from_variable = {
+				var = satellite_politics_subversion
+				value = 10
+			}
+		}
 		ai_will_do = {
 			factor = 5
 		}
