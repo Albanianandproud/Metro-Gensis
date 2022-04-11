@@ -1,4 +1,52 @@
 on_actions = {
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = {
+					AND = {
+						has_idea = hanza_under_sphere_of_influence
+						check_variable = {
+							var = satellite_economic_subversion
+							value = 50
+							compare = greater_than_or_equals
+						}
+						check_variable = {
+							var = satellite_politics_subversion
+							value = 50
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = hanza_under_sphere_of_influence
+					add_idea = hanza_satellite
+				}
+			}
+		effect = {
+			every_country = {
+				limit = {
+					AND = {
+						has_idea = hanza_satellite
+						check_variable = {
+							var = satellite_economic_subversion
+							value = 100
+							compare = greater_than_or_equals
+						}
+						check_variable = {
+							var = satellite_politics_subversion
+							value = 100
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = hanza_satellite
+					add_idea = hanza_puppet
+				}
+			}
+			
+	    }
+	}
     on_startup = {
         effect = {
             ### Welcome ### 
@@ -14,6 +62,18 @@ on_actions = {
 			every_state = {
 				add_to_array = {
 					array = global.reclamation_array
+					value = THIS.id
+				}
+			}
+		}
+		
+		effect = {
+			every_country = {
+				limit = {
+					under_hanza_influence = yes
+				}
+				add_to_array = {
+					array = global.HNZ_sphere_array
 					value = THIS.id
 				}
 			}
