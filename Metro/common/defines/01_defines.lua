@@ -26,7 +26,7 @@ NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
 
 ---Nation Stuff---
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 3
-NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0
+NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0.0001
 NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
 NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.05
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.25
@@ -51,13 +51,13 @@ NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 5
 NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
 
 ---Military Stuff---
-NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.3
-NDefines.NMilitary.INFRA_ORG_IMPACT = 0.4
+NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.2
+NDefines.NMilitary.INFRA_ORG_IMPACT = 0.5
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.1
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.05
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
 NDefines.NMilitary.TRAINING_ORG = 0.35								--- Base is 0.2
-NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.25						--- if strength is less than this, the unit will pause training until it's been reinforced
+NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.35						--- if strength is less than this, the unit will pause training until it's been reinforced
 NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP gained per day from training
 
 ---Commanders
