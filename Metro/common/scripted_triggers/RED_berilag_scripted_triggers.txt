@@ -1,0 +1,48 @@
+@POW_CAP_MULTI = 5
+@GM_CAP_MULTI = 3
+@228_INFRA_MULTI = 1
+
+RED_berilag_calc_max_POW = {
+	set_temp_variable = { var = temp_POW_CAP        value = 1  }
+	set_temp_variable = { var = temp_POW_CAP 		value = @POW_CAP_MULTI  }
+	set_temp_variable = { var = temp_BERILAG_INFRA  value = @228_INFRA_MULTI }
+	set_temp_variable = { var = temp_INFRA_NUM		value = 228.infrastructure_level  }
+
+	228 = {
+		multiply_temp_variable = { var = temp_BERILAG_INFRA value = temp_INFRA_NUM  }
+	}
+
+	multiply_temp_variable = { var = temp_POW_CAP value = temp_BERILAG_INFRA  }
+
+	add_to_variable = { var = berilag_POW_CAP value = temp_POW_CAP }
+}
+
+RED_berilag_calc_max_GM = {
+	set_temp_variable = { var = temp_GM_CAP         value = 1  }
+	set_temp_variable = { var = temp_GM_CAP 		value = @GM_CAP_MULTI  }
+	set_temp_variable = { var = temp_BERILAG_INFRA  value = @228_INFRA_MULTI }
+	set_temp_variable = { var = temp_INFRA_NUM		value = 228.infrastructure_level  }
+
+	228 = {
+		multiply_temp_variable = { var = temp_BERILAG_INFRA value = temp_INFRA_NUM  }
+	}
+
+	multiply_temp_variable = { var = temp_GM_CAP value = temp_BERILAG_INFRA  }
+
+	add_to_variable = { var = berilag_GM_CAP value = temp_GM_CAP }
+}
+
+RED_berilag_activate = {
+	custom_trigger_tooltip = {
+		tooltip = RED_berilag_enabled_tooltip
+		has_country_flag = RED_berilag_enabled_flag
+	}
+}
+
+
+RED_berilag_check_max_pow_amount = {	
+}
+
+RED_berilag_check_max_gm_amount = {
+}
+

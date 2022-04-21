@@ -1,43 +1,30 @@
-#!gfx:interface\metro_goals.gfx
+﻿#!gfx:interface\metro_goals.gfx
 
 focus_tree = {
 	id = red_line_1
 	country = {
 		factor = 0
 		modifier = {
-			add = 00
+			add = 20
 			tag = RED
 		}
 	}
 	continuous_focus_position = { x = 50 y = 1000 }
 	focus = {
 		id = RED_bulwark_of_socialism
-		icon = GFX
+		icon = GFX_RED_generic_cccp
 		x = 10
 		y = 0
-		cost = 2.2
+		cost = 6.5
 
 		select_effect = {
 			country_event = nf_RED.1
 		}
 
-		ai_will_do = {
-			factor = 2
-		}
-	}
-	focus = {
-		id = RED_state_of_the_line
-		icon = GFX
-		prerequisite = {
-			focus = RED_bulwark_of_socialism
-		}
-		x = 0
-		y = 1
-		cost = 2.2
-		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
 			country_event = nf_RED.4
 		}
+
 		ai_will_do = {
 			factor = 2
 		}
@@ -46,12 +33,12 @@ focus_tree = {
 		id = RED_question_of_economy
 		icon = GFX_RED_question_of_economy
 		prerequisite = {
-			focus = RED_state_of_the_line
+			focus = RED_bulwark_of_socialism
 		}
 		x = -1
 		y = 1
 		cost = 2.9
-		relative_position_id = RED_state_of_the_line
+		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
 			country_event = nf_RED.5
 		}
@@ -70,6 +57,7 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_question_of_economy
 		completion_reward = {
+			RED_demobilise_economy = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -176,12 +164,12 @@ focus_tree = {
 		id = RED_question_of_military
 		icon = GFX_RED_question_of_military
 		prerequisite = {
-			focus = RED_state_of_the_line
+			focus = RED_bulwark_of_socialism
 		}
 		x = 1
 		y = 1
 		cost = 2.9
-		relative_position_id = RED_state_of_the_line
+		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
 			country_event = nf_RED.6
 		}
@@ -217,7 +205,7 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_question_of_military
 		completion_reward = {
-			army_experience = 1
+			army_experience = 10
 		}
 		ai_will_do = {
 			factor = 2
@@ -241,7 +229,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RED_new_officer_corps
-		icon = GFX_RED_young_officer_academy
+		icon = GFX_RED_new_commanders
 		prerequisite = {
 			focus = RED_young_officer_academy
 		}
@@ -284,10 +272,11 @@ focus_tree = {
 		}
 		x = 0
 		y = 4
-		cost = 3 #8.6
-		relative_position_id = RED_state_of_the_line
+		cost = 5
+		relative_position_id = RED_bulwark_of_socialism
 
 		completion_reward = {
+			custom_effect_tooltip = RED_new_economic_draft_tt
 			country_event = nf_RED.10
 		}
 		ai_will_do = {
@@ -1329,11 +1318,12 @@ focus_tree = {
 		available = {
 			has_completed_focus = RED_development_of_the_red_line
 		}
-		x = -6
+		x = -7
 		y = 0
 		cost = 2.2
 		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
+			add_ideas = RED_special_research
 		}
 		ai_will_do = {
 			factor = 2
@@ -1402,6 +1392,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_fund_special_research
 		completion_reward = {
+			country_event = nf_RED.40
 		}
 		ai_will_do = {
 			factor = 2
@@ -1419,23 +1410,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_development_the_berilag
 		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_further_volunteers
-		icon = GFX
-		prerequisite = {
-			focus = RED_allow_volunteers
-		}
-		x = 0
-		y = 1
-		cost = 2.2
-		relative_position_id = RED_allow_volunteers
-		completion_reward = {
+			RED_berilag_volunteers = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -1453,6 +1428,94 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_development_the_berilag
 		completion_reward = {
+			RED_berilag_funding = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_under_jurisdiction
+		icon = GFX
+		prerequisite = {
+			focus = RED_additional_funding
+		}
+		mutually_exclusive = {
+			focus = RED_self_autonomy
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_additional_funding
+		completion_reward = {
+			#
+			# Decision Stuff
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_self_autonomy
+		icon = GFX
+		prerequisite = {
+			focus = RED_allow_volunteers
+		}
+		mutually_exclusive = {
+			focus = RED_under_jurisdiction
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_volunteers
+		completion_reward = {
+			#
+			# Decision Stuff
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_further_volunteers
+		icon = GFX
+		prerequisite = {
+			focus = RED_self_autonomy
+			focus = RED_under_jurisdiction
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_self_autonomy
+		completion_reward = {
+			#
+			# Ability to use state pop and manpower in decisions
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_scientific_amenities
+		icon = GFX
+		prerequisite = {
+			focus = RED_further_volunteers
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_further_volunteers
+		completion_reward = {
+			#
+			# Put chemicals on the Berilag
+			#
 		}
 		ai_will_do = {
 			factor = 2
@@ -1463,13 +1526,17 @@ focus_tree = {
 		id = RED_station_renovations
 		icon = GFX
 		prerequisite = {
-			focus = RED_additional_funding
+			focus = RED_self_autonomy
+			focus = RED_under_jurisdiction
 		}
 		x = 0
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_additional_funding
+		relative_position_id = RED_under_jurisdiction
 		completion_reward = {
+			#
+			# Permanent increase to chances and cost
+			#
 		}
 		ai_will_do = {
 			factor = 2
@@ -1477,19 +1544,41 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_scientific_reporting
+		id = RED_retained_guards
 		icon = GFX
 		prerequisite = {
 			focus = RED_station_renovations
 		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_station_renovations
+		completion_reward = {
+			#
+			# Add bunkers to Berilag
+			# Decision Changes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_scientific_reportings
+		icon = GFX
 		prerequisite = {
-			focus = RED_further_volunteers
+			focus = RED_scientific_amenities
+			focus = RED_retained_guards
 		}
 		x = 0
-		y = 3
+		y = 5
 		cost = 2.2
 		relative_position_id = RED_development_the_berilag
 		completion_reward = {
+			#
+			# Upgrade Mikhails Trait through event
+			# Gain 1 research slot through said event
+			RED_berilag_breakthrough = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -1500,15 +1589,15 @@ focus_tree = {
 		id = RED_secret_projects
 		icon = GFX
 		prerequisite = {
-			focus = RED_scientific_reporting
+			focus = RED_scientific_reportings
 		}
 		mutually_exclusive = {
-			focus = RED_interrogation_station
+			focus = RED_long_arm_of_the_state
 		}
 		x = -2
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_scientific_reporting
+		relative_position_id = RED_scientific_reportings
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1517,50 +1606,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_begin_the_superhuman_project
+		id = RED_long_arm_of_the_state
 		icon = GFX
 		prerequisite = {
-			focus = RED_secret_projects
-		}
-		x = -1
-		y = 1
-		available = {
-			date > 2033.10.1
-		}
-		cost = 2.2
-		relative_position_id = RED_secret_projects
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_bioweapon
-		icon = GFX
-		prerequisite = {
-			focus = RED_secret_projects
-		}
-		x = 1
-		y = 1
-		available = {
-			date > 2033.10.1
-		}
-		cost = 2.2
-		relative_position_id = RED_secret_projects
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_interrogation_station
-		icon = GFX
-		prerequisite = {
-			focus = RED_scientific_reporting
+			focus = RED_scientific_reportings
 		}
 		mutually_exclusive = {
 			focus = RED_secret_projects
@@ -1568,24 +1617,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_scientific_reporting
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_truth_serum
-		icon = GFX
-		prerequisite = {
-			focus = RED_interrogation_station
-		}
-		x = 0
-		y = 1
-		cost = 2.2
-		relative_position_id = RED_interrogation_station
+		relative_position_id = RED_scientific_reportings
 		completion_reward = {
 		}
 		ai_will_do = {

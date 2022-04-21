@@ -148,26 +148,43 @@ ideas = {
 		law = yes
 		use_list_view = yes
 		
-		RED_exhausted_economy = {
+		RED_war_socialism_stale = {
 			cost = 100
 			removal_cost = -1
-			available = {
-				tag = RED
-			}
-			visible = {
-				tag = RED
-			}
-			picture = broken_lightbulb
+			available = { tag = RED }
+			visible = { tag = RED }
 
-			#allowed_to_remove = {
-			#	num_of_factories > 54
-			#}
+			allowed_to_remove = {
+				hidden_trigger = {
+					always = no
+				}
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.45
+				industrial_capacity_factory = -0.1
+				local_resources_factor = -0.1
+				production_factory_start_efficiency_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.1 
+			}
+
+			ai_will_do = {
+				factor = 0
+			}
+			cancel_if_invalid = no
+		}
+
+		RED_demobilising_economy = {
+			cost = 100
+			removal_cost = -1
+			available = { tag = RED }
+			visible = { tag = RED }
+
 			modifier = {
 				consumer_goods_factor = 0.4
-				conversion_cost_civ_to_mil_factor = 0.5
-				conversion_cost_mil_to_civ_factor = 0.5
-				production_speed_industrial_complex_factor = -0.2
-				production_speed_arms_factory_factor = -0.2
+				industrial_capacity_factory = -0.1
+				production_factory_start_efficiency_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.1 
 			}
 			ai_will_do = {
 				factor = 0
@@ -175,104 +192,260 @@ ideas = {
 			cancel_if_invalid = no
 		}
 
-		RED_recovering_economy = {
+		RED_new_economic_plan = {
 			cost = 100
 			removal_cost = -1
-			available = {
-				tag = RED
-				num_of_factories > 54
-			}
+			available = { tag = RED }
+
 			visible = {
-				tag = RED
+				has_completed_focus = RED_new_economic_draft
 			}
-			picture = broken_lightbulb
 
 			modifier = {
 				consumer_goods_factor = 0.3
-				conversion_cost_civ_to_mil_factor = 0.2
-				conversion_cost_mil_to_civ_factor = 0.2
+				production_speed_buildings_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_start_efficiency_factor = 0.05
 			}
-
-			available = {
-			#	NOT = { has_idea = RED_disintergrating_military }
-			#	NOT = { has_idea = RED_mutinies }
-			}
-
-			#available = {
-			#	has_completed_focus = RED_crisis_averted
-			#}
-
 			ai_will_do = {
 				factor = 0
 			}
 			cancel_if_invalid = no
 		}
 
-		RED_four_year_plan = {
-        	cost = 100
-			removal_cost = -1
-			available = {
-				tag = RED
-			}
-			visible = {
-				tag = RED
-			}
-			picture = broken_lightbulb
-
-			modifier = {
-				consumer_goods_factor = 0.25
-				production_speed_buildings_factor = 0.1
-			}
-
-			available = {
-				## has_completed_focus = RED_begin_the_4_year_plan
-				has_idea = RED_gosplan
-			}
-
-			ai_will_do = {
-				factor = 200    ## Red Line should ALWAYS try getting this ASAP!
-				modifier = {
-					factor = 2000
-					has_war = yes
-				}
-			}
-		}
-
-		RED_total_mobilisation = {
+		RED_planned_economy = {
 			cost = 100
 			removal_cost = -1
-			available = {
-				tag = RED
-			}
-			visible = {
-				tag = RED
-			}
-			picture = broken_lightbulb
+			available = { tag = RED }
+			visible = { tag = RED }
 
 			modifier = {
-				consumer_goods_factor = 0.15
-				production_speed_arms_factory_factor = 0.25
-				conversion_cost_civ_to_mil_factor= -0.25
+				consumer_goods_factor = 0.3
+				production_speed_buildings_factor = 0.1
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_start_efficiency_factor = -0.05
+				production_factory_max_efficiency_factor = 0.15
+				supply_node_range = 0.1
 			}
-
-			available = {
-				has_war_support > 0.74
-				OR = {
-					AND = {
-						has_war_with = HNZ
-					}
-				}
-				NOT = { has_idea = RED_disintergrating_military }
-				NOT = { has_idea = RED_mutinies }
-			}
-
 			ai_will_do = {
-				factor = 200    ## Red Line should get this ASAP if at war with HNZ
-				modifier = {
-					factor = 2000
-					has_war = yes
-				}
+				factor = 0
 			}
 			cancel_if_invalid = no
 		}
+
+		RED_mobilising_economy = {
+			cost = 100
+			removal_cost = -1
+			available = { tag = RED }
+			visible = { tag = RED }
+
+			modifier = {
+				consumer_goods_factor = 0.25
+				production_speed_arms_factory_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+				supply_node_range = 0.1
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			cancel_if_invalid = no
+		}
+
+		RED_war_socialism = {
+			cost = 100
+			removal_cost = -1
+			available = { tag = RED }
+			visible = { tag = RED }
+
+			modifier = {
+				consumer_goods_factor = 0.15
+				production_speed_arms_factory_factor = 0.15
+				production_factory_max_efficiency_factor = 0.15
+				supply_node_range = 0.15
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			cancel_if_invalid = no
+		}
+	}
+
+	trade_laws = { 
+		law = yes
+		use_list_view = yes
+
+		RED_army_ransacking = {
+
+			available = { tag = RED }
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0
+				stability_weekly_factor = -0.004
+				war_support_weekly_factor = -0.004
+				conscription_factor = -0.1
+				out_of_supply_factor = -0.15
+				supply_consumption_factor = -0.15
+				local_resources_factor = 0.1
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+		
+		RED_heavy_produce_requesition = {
+
+			available = { tag = RED }
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.15
+				stability_weekly_factor = -0.002
+				war_support_weekly_factor = -0.002
+				conscription_factor = -0.05
+				out_of_supply_factor = -0.1
+				supply_consumption_factor = -0.1
+				local_resources_factor = 0.05
+			}
+
+			allowed_to_remove = {
+				has_war = no
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+
+		RED_produce_requesition = {
+
+			available = { tag = RED }
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.25
+				stability_weekly_factor = -0.001
+				war_support_weekly_factor = -0.001
+				out_of_supply_factor = -0.05
+				supply_consumption_factor = -0.05
+				local_resources_factor = 0.025
+			}
+
+			allowed_to_remove = {
+				has_war = no
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+
+		RED_station_requesition = {
+
+			available = { tag = RED }
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.3
+				out_of_supply_factor = -0.025
+				supply_consumption_factor = -0.025
+				industrial_capacity_factory = 0.015
+				production_speed_buildings_factor = 0.015
+			}
+
+			allowed_to_remove = {
+				has_war = no
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+		RED_export_requesition = {
+
+			available = { 
+				tag = RED 
+				NOT = {
+					has_government = oligarch
+					has_government = dictatorial
+				}
+			}
+
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.35
+				industrial_capacity_factory = 0.025
+				production_speed_buildings_factor = 0.025
+				research_speed_factor = 0.025
+			}
+
+			allowed_to_remove = {
+				has_war = yes
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+
+		RED_outsider_dependency = {
+
+			available = { 
+				tag = RED 
+				NOT = {
+					has_government = oligarch
+					has_government = dictatorial
+				}
+			}
+			visible = { tag = RED }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.55
+				civilian_intel_to_others = 20
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.05
+			}
+
+			allowed_to_remove = {
+				has_war = yes
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+	}	
 }

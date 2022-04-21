@@ -10,13 +10,13 @@ country_event = { # Revolution
 
 	option = {
 		name = nf_RED.1.a
-
+        add_country_leader_trait = RED_andrey_war_support
         hidden_effect = { country_event = { id = nf_RED.2 days = 7 random_days = 7 } }
 	}
 
     option = {
         name = nf_RED.1.b
-
+        add_country_leader_trait = RED_andrey_stability
         hidden_effect = { country_event = { id = nf_RED.2 days = 7 random_days = 7 } }
     }
 }
@@ -31,13 +31,31 @@ country_event = { # Fallout
 
     option = {
         name = nf_RED.2.a
-
+        reverse_add_opinion_modifier = {
+            target = AVT
+            modifier = RED_betrayed_revolution
+        }
+        reverse_add_opinion_modifier = {
+            target = HUL
+            modifier = RED_betrayed_revolution
+        }
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
     }
 
     option = {
         name = nf_RED.2.b
-
+        reverse_add_opinion_modifier = {
+            target = AVT
+            modifier = RED_betrayed_revolution_for_now
+        }
+        reverse_add_opinion_modifier = {
+            target = HUL
+            modifier = RED_betrayed_revolution_for_now
+        }
+        add_popularity = {
+            ideology = council
+            popularity = -0.05
+        }
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
     }
 }
@@ -52,10 +70,12 @@ country_event = { # Peace
 
     option = {
         name = nf_RED.3.a
+        add_country_leader_trait = RED_champion_of_the_proletariat
     }
 
     option = {
         name = nf_RED.3.b
+        add_country_leader_trait = RED_champion_of_the_party
     }
 }
 
@@ -69,6 +89,7 @@ country_event = { # State of the Line
 
     option = {
         name = nf_RED.4.a
+        add_political_power = 20
     }
 }
 
@@ -82,10 +103,12 @@ country_event = { # Q of Economy
 
     option = {
         name = nf_RED.5.a
+        add_ideas = RED_economy_improve_line
     }
 
     option = {
         name = nf_RED.5.b
+        add_ideas = RED_economy_improve_living
     }
 }
 
@@ -99,10 +122,58 @@ country_event = { # Q of Military
 
     option = {
         name = nf_RED.6.a
+        add_trait = {
+            character = RED_viktor_kovshov
+            slot = army_chief 
+            trait = RED_removing_influence
+        }
+        add_trait = {
+            character = RED_yury_terekhov
+            slot = high_command
+            trait = RED_removing_influence
+        }
+        add_trait = {
+            character = RED_georgy_rozhestvensky
+            slot = high_command
+            trait = RED_removing_influence
+        }
     }
 
     option = {
         name = nf_RED.6.b
+        hidden_effect = {
+            remove_trait = {
+                character = RED_viktor_kovshov
+                slot = army_chief 
+                trait = RED_viktor_kovshov
+            }
+            remove_trait = {
+                character = RED_yury_terekhov
+                slot = high_command 
+                trait = RED_yury_terekhov
+            }
+            remove_trait = {
+                character = RED_georgy_rozhestvensky
+                slot = high_command
+                trait = RED_georgy_rozhestvensky
+            }
+        }
+
+        add_trait = {
+            character = RED_viktor_kovshov
+                slot = army_chief 
+                trait = RED_viktor_kovshov_2
+        }
+        add_trait = {
+            ccharacter = RED_yury_terekhov
+                slot = high_command 
+                trait = RED_yury_terekhov_2
+        }
+        add_trait = {
+            character = RED_georgy_rozhestvensky
+                slot = high_command
+                trait = RED_georgy_rozhestvensky_2
+        }
     }
 
     option = {
@@ -120,6 +191,13 @@ country_event = { # Q of grain requesition
 
     option = {
         name = nf_RED.7.a
+        RED_decrease_requesition_intensity = yes
+    }
+
+    option = {
+        name = nf_RED.7.a
+        remove_ideas = RED_heavy_produce_requesition
+        add_ideas = RED_station_requesition
     }
 }
 
@@ -152,16 +230,9 @@ country_event = { # Establish Ministry of Economy
 
     is_triggered_only = yes
 
-    option = {
+    option = { # 
         name = nf_RED.9.a
-    }
-
-    option = {
-        name = nf_RED.9.b
-    }
-
-    option = {
-        name = nf_RED.9.c
+        add_ideas = 
     }
 }
 
@@ -330,5 +401,33 @@ country_event = { # New Economic Policy
 
     option = {
         name = nf_RED.21.a
+    }
+}
+
+
+### Berilag Events
+
+country_event = { # Berilag
+    id = nf_RED.40
+    title = nf_RED.40.t
+    desc = nf_RED.40.d
+    picture = GFX_
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.40.a
+        hidden_effect = {
+            set_country_flag = RED_berilag_enabled_flag
+            set_variable = { var = berilag_SA value = 0 }
+            set_variable = { var = berilag_RP value = 0 }
+            ## Manpower ##
+            set_variable = { var = berilag_POW value = 0 }
+            set_variable = { var = berilag_GM value = 5 }
+
+            
+            RED_berilag_check_POW_capacity = yes
+            RED_berilag_check_GM_capacity = yes
+        }
     }
 }
