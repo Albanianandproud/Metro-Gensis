@@ -1,0 +1,201 @@
+@communist_fascist_skirmishes_cooldown = 30
+@communist_fascist_skirmishes_countdown = 90
+@communist_fascist_skirmishes_duration = 14
+
+communist_fascist_skirmishes_decision = {
+
+	## Warning countdown to brawl is imminent
+	communist_fascist_skirmish_countdown = {
+
+		priority = 25
+		days_mission_timeout = @communist_fascist_skirmishes_countdown
+		fire_only_once = yes
+		is_good = no
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { GLOBAL.cfs_attacker_tag = THIS.id }
+			}
+			if = {
+				limit = { check_variable = { GLOBAL.cfs_attacker_tag = THIS.id } }
+				var:GLOBAL.cfs_attacker_state = { is_owned_and_controlled_by = PREV }
+				divisions_in_state = {
+					size > 0
+					state = var:GLOBAL.cfs_attacker_state
+				}
+				NOT = { has_border_war_with = var:GLOBAL.cfs_defender_tag }
+				NOT = { is_in_faction_with = var:GLOBAL.cfs_defender_tag }
+				NOT = { var:GLOBAL.cfs_defender_tag = { is_subject_of = PREV } }
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				OR = {
+					if = {
+						limit = { original_tag = RCH }
+						OR = {
+							has_war_with = RCH
+							is_in_faction_with = RED
+						}
+					}
+					else_if = {
+						limit = { original_tag = RED }
+						OR = {
+							has_war_with = RCH
+							is_in_faction_with = RCH
+						}
+					}
+				}
+			}
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = var:GLOBAL.cfs_defender_state
+			}
+		}
+
+		war_with_on_remove = RED
+		war_with_on_remove = RCH
+
+		remove_effect = {
+			communist_fascist_skirmish = yes
+			activate_mission = communist_fascist_skirmishes_cooldown
+		}
+
+		days_remove = @communist_fascist_skirmishes_duration
+
+		complete_effect = {
+			if = {
+				limit = { check_variable = { GLOBAL.cfs_attacker_tag = THIS.id } }
+				var:GLOBAL.cfs_defender_tag = {
+					country_event = cfs.1
+				}
+				set_global_flag = cfs_conflict_imminent
+				effect_tooltip = {
+					communist_fascist_skirmish = yes
+				}
+			}
+		}
+
+		timeout_effect = { 
+			if = {
+				limit = {
+					RCH = { has_border_war_with = RED }
+				}
+			}
+			else_if = {
+				limit = {
+					has_global_flag = cfs_clash_imminent
+					check_variable = { GLOBAL.cfs_attacker_tag = THIS.id }
+				}
+				communist_fascist_skirmish = yes
+				clr_global_flag = cfs_clash_imminent
+			}
+			else_if = {
+				limit = {
+					has_global_flag = cfs_clash_imminent
+					NOT = { check_variable = { GLOBAL.cfs_attacker_tag = THIS.id } }
+				}
+				effect_tooltip = {
+					communist_fascist_skirmish = yes
+				}
+			}
+			else_if = {
+				limit = {
+					tag = var:GLOBAL.cfs_attacker_tag
+				}
+				country_event = cfs.2
+				var:GLOBAL.cfs_defender_tag = {
+					country_event = cfs.3
+				}
+			}
+			else = {
+				effect_tooltip = {
+					var:GLOBAL.cfs_attacker_tag = {
+						country_event = cfs.2
+					}
+					country_event = cfs.3
+				}
+			}
+			activate_mission = communist_fascist_skirmishes_cooldown
+		}
+	}
+
+	communist_fascist_skirmishes_conflict = {
+		allowed = {
+			always = no 
+		}
+
+		priority = 25
+		days_mission_timeout = @communist_fascist_skirmishes_duration
+		fire_only_once = yes
+		is_good = no
+
+		timeout_effect = {
+			activate_mission = communist_fascist_skirmishes_cooldown
+		}
+
+		ai_will_do = {
+			base = 150
+			modifier = {
+				factor = 0.1
+				has_war = yes
+				surrender_progress < 0.2
+			}
+		}
+	}
+
+	communist_fascist_skirmishes_cooldown = {
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				OR = {
+					if = {
+						limit = { original_tag = RCH }
+						OR = {
+							has_war_with = RCH
+							is_in_faction_with = RED
+						}
+					}
+					else_if = {
+						limit = { original_tag = RED }
+						OR = {
+							has_war_with = RCH
+							is_in_faction_with = RCH
+						}
+					}
+				}
+			}
+		}
+
+		priority = 25
+		days_mission_timeout = @communist_fascist_skirmishes_cooldown
+		fire_only_once = yes
+		is_good = no
+
+		timeout_effect = {
+			activate_mission = communist_fascist_skirmish_countdown 
+		}
+	}
+}

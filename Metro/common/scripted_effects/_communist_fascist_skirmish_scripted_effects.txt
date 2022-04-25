@@ -1,0 +1,125 @@
+# Stations #
+# 432	218				## Tverskaya to Okhotny Ryad 	
+# 430	431		214		## Tverskaya to Lubyanka
+
+flip_cfs_initiative = {
+	if = {
+		limit = {
+			check_variable = { GLOBAL.cfs_attacker_tag = RCH.id }
+			RCH = { NOT = { controls_no_conflict_state = yes } }
+		}
+		set_variable = { GLOBAL.cfs_attacker_tag = RED.id }
+		set_variable = { GLOBAL.cfs_defender_tag = RCH.id }
+	}
+	else_if = {
+		limit = {
+			check_variable = { GLOBAL.cfs_attacker_tag = RED.id }
+			RED = { NOT = { controls_no_conflict_state = yes } }
+		}
+		set_variable = { GLOBAL.cfs_attacker_tag = RCH.id }
+		set_variable = { GLOBAL.cfs_defender_tag = RED.id }
+	}
+	else_if = {
+		limit = {
+			var:GLOBAL.cfs_defender_tag = { controls_no_conflict_state = yes }
+		}
+	}
+}
+
+communist_fascist_skirmish = {
+	var:GLOBAL.cfs_attacker_tag = {
+		if = {
+			limit = {
+				tag = RED
+			}
+			start_border_war = {
+				change_state_after_war = no 
+				attacker = {
+					state = var:GLOBAL.cfs_attacker_state
+					num_provinces = 3
+					on_win = cfc.7
+					on_lose = cfc.8
+					on_cancel = cfc.9
+				}
+
+				defender = {
+					state = var:GLOBAL.cfs_defender_state
+					num_provinces = 3
+					on_win = cfc.4
+					on_lose = cfc.5
+					on_cancel = cfc.6
+				}
+			}
+			hidden_effect = {
+				set_border_war_data = {
+					attacker = var:GLOBAL.cfs_attacker_state
+					defender = var:GLOBAL.cfs_defender_state
+					attacker_modifier = 1
+					defender_modifier = 1
+					combat_width = 60
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = RCH
+			}
+			start_border_war = {
+				change_state_after_war = no 
+				attacker = {
+					state = var:GLOBAL.cfs_attacker_state
+					num_provinces = 3
+					on_win = cfc.4
+					on_lose = cfc.5
+					on_cancel = cfc.6
+				}
+
+				defender = {
+					state = var:GLOBAL.cfs_defender_state
+					num_provinces = 3
+					on_win = cfc.7
+					on_lose = cfc.8
+					on_cancel = cfc.9
+				}
+			}
+			hidden_effect = {
+				set_border_war_data = {
+					attacker = var:GLOBAL.cfs_attacker_state
+					defender = var:GLOBAL.cfs_defender_state
+					attacker_modifier = 1
+					defender_modifier = 1
+					combat_width = 60
+				}
+			}
+		}
+	}
+}
+intensify_border_conflict = {
+	if = {
+		limit = {
+			has_idea = communist_fascist_aggression
+		}
+		swap_ideas = {
+			remove_idea = communist_fascist_aggression
+			add_idea = communist_fascist_skirmishes
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = communist_fascist_skirmishes
+		}
+		swap_ideas = {
+			remove_idea = communist_fascist_skirmishes
+			add_idea = communist_fascist_clashes
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = communist_fascist_clashes
+		}
+		swap_ideas = {
+			remove_idea = communist_fascist_clashes
+			add_idea = communist_fascist_conflict
+		}
+	}
+}
