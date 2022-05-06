@@ -4,7 +4,7 @@ country_event = { # Revolution
     id = nf_RED.1
     title = nf_RED.1.t
     desc = nf_RED.1.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
 	is_triggered_only = yes
 
@@ -25,7 +25,7 @@ country_event = { # Fallout
     id = nf_RED.2
     title = nf_RED.2.t
     desc = nf_RED.2.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
     is_triggered_only = yes
 
@@ -64,7 +64,7 @@ country_event = { # Peace
     id = nf_RED.3
     title = nf_RED.3.t
     desc = nf_RED.3.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
     is_triggered_only = yes
 
@@ -83,7 +83,7 @@ country_event = { # State of the Line
     id = nf_RED.4
     title = nf_RED.4.t
     desc = nf_RED.4.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
     is_triggered_only = yes
 
@@ -97,7 +97,7 @@ country_event = { # Q of Economy
     id = nf_RED.5
     title = nf_RED.5.t
     desc = nf_RED.5.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
     is_triggered_only = yes
 
@@ -116,7 +116,7 @@ country_event = { # Q of Military
     id = nf_RED.6
     title = nf_RED.6.t
     desc = nf_RED.6.d
-    picture = GFX_event_RED_2event_RED_2
+    picture = GFX_event_RED_2
 
     is_triggered_only = yes
 
@@ -160,9 +160,8 @@ country_event = { # Q of Military
                 trait = RED_georgy_rozhestvensky
             }
         }
-
         add_trait = {
-            character = RED_viktor_kovshov
+            character = RED_kovshov
             slot = army_chief 
             trait = RED_viktor_kovshov_2
         }
@@ -176,8 +175,10 @@ country_event = { # Q of Military
             slot = high_command
             trait = RED_georgy_rozhestvensky_2
         }
+        hidden_effect = {
+            set_country_flag = RED_high_command_pissed_off
+        }
     }
-
     option = {
         name = nf_RED.6.c
     }
@@ -198,7 +199,9 @@ country_event = { # Q of grain requesition
 
     option = {
         name = nf_RED.7.a
-        remove_ideas = RED_heavy_produce_requesition
+        hidden_effect = {
+            remove_ideas = RED_heavy_produce_requesition
+        }
         add_ideas = RED_station_requesition
     }
 }
@@ -211,16 +214,58 @@ country_event = { # Q of Brotherhood
 
     is_triggered_only = yes
 
-    option = {
+    option = { ## Make him a theorist
         name = nf_RED.8.a
+        custom_effect_tooltip = RED_moskvin_q_theorist_role
+        custom_effect_tooltip = RED_moskvin_future_career
+        add_advisor_role = {
+            Character = RED_moskvin
+            advisor = {
+                slot = theorist
+                idea_token = RED_moskvin
+                cost = 100
+                allowed = {
+                    original_tag = RED
+                }
+                traits = { RED_maxim_1a }
+                removal_cost = -1
+                ai_will_do = {
+                    factor = 16
+                }
+            }
+            activate = yes
+        }
     }
 
-    option = {
+    option = { ## Make him a general / high command will grumble
         name = nf_RED.8.b
+        custom_effect_tooltip = RED_moskvin_q_general_role
+        custom_effect_tooltip = RED_moskvin_future_career
+        add_advisor_role = {
+            Character = RED_moskvin
+            advisor = {
+                slot = high_command
+                idea_token = RED_moskvin
+                cost = 100
+                allowed = {
+                    original_tag = RED
+                }
+                traits = { RED_maxim_1b }
+                removal_cost = -1
+                ai_will_do = {
+                    factor = 16
+                }
+            }
+            activate = yes
+        }
+        custom_effect_tooltip = RED_generals_will_be_unhappy
     }
 
     option = {
         name = nf_RED.8.c
+        ## No
+        custom_effect_tooltip = RED_moskvin_q_no_role
+        custom_effect_tooltip = RED_moskvin_future_career
     }
 }
 
@@ -232,9 +277,10 @@ country_event = { # Establish Ministry of Economy
 
     is_triggered_only = yes
 
-    option = { # 
+    option = { 
         name = nf_RED.9.a
-        add_ideas = 
+        add_ideas = RED_minister_of_economics
+        custom_effect_tooltip = RED_ministry_departments_tt
     }
 }
 
@@ -248,11 +294,6 @@ country_event = { # N E P Draft
 
     option = {
         name = nf_RED.10.a
-        hidden_effect = { country_event = { id = nf_RED.21 days = 1 random_days = 2 } }
-    }
-
-    option = {
-        name = nf_RED.10.b
         hidden_effect = { country_event = { id = nf_RED.21 days = 1 random_days = 2 } }
     }
 }
@@ -269,6 +310,7 @@ country_event = { # Crisis
 
     immediate = {
         load_focus_tree = { tree = red_line_2 keep_completed = yes }
+        hidden_effect = { country_event = { id = nf_RED.12 days = 3 random_days = 7 } }
     }
 
     option = {
@@ -286,6 +328,10 @@ country_event = { # Mushroom Revolts
 
     option = {
         name = nf_RED.12.a
+        hidden_effect = {
+            set_country_flag = RED_mushroom_revolts
+        }
+        custom_effect_tooltip = RED_unlock_mushroom_revolt_tt
     }
 }
 
@@ -297,8 +343,32 @@ country_event = { # Korbut
 
     is_triggered_only = yes
 
+    immediate = {
+        add_advisor_role = {
+            Character = RED_korbut
+            advisor = {
+                slot = political_advisor
+                idea_token = RED_korbut
+                removal_cost = -1
+                allowed = {
+                    original_tag = RED
+                }
+                traits = { RED_korbut }
+                removal_cost = -1
+                ai_will_do = {
+                    factor = 16
+                }
+            }
+            activate = yes
+        }
+    }
+
     option = {
         name = nf_RED.13.a
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.02
+        }
     }
 }
 

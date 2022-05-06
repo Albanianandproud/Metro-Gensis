@@ -102,11 +102,14 @@ focus_tree = {
 					}
 				}
 				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 		ai_will_do = {
@@ -262,6 +265,7 @@ focus_tree = {
 		relative_position_id = RED_young_officer_academy
 		completion_reward = {
 			custom_effect_tooltip = RED_future_officers_tt
+			custom_effect_tooltip = RED_generals_will_be_unhappy
 			## Add a hidden timed idea, when timer is up, give event, which would unlock path in focus tree proper
 			army_experience = 5
 		}
@@ -313,9 +317,8 @@ focus_tree = {
 
 focus_tree = {
 	id = red_line_2
-
 	country = {
-		factor = 00
+		factor = 30
 	}
 	default = no
 
@@ -323,7 +326,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_crisis
-		icon = GFX
+		icon = GFX_RED_generic_food
 		x = 7
 		y = 0
 		cost = 0.8
@@ -344,6 +347,7 @@ focus_tree = {
 		cost = 0.8
 		relative_position_id = RED_crisis
 		completion_reward = {
+			country_event = nf_RED.13
 		}
 		ai_will_do = {
 			factor = 2
@@ -352,7 +356,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_military_mutinies
-		icon = GFX
+		icon = RED_commanders
 		prerequisite = {
 			focus = RED_crisis
 		}
@@ -369,7 +373,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_rid_mutinies
-		icon = GFX
+		icon = GFX_RED_nkvd_support
 		prerequisite = {
 			focus = RED_military_mutinies
 		}
@@ -381,6 +385,7 @@ focus_tree = {
 			focus = RED_approach_dissenters
 		}
 		completion_reward = {
+			## Get rid of commanders
 		}
 		ai_will_do = {
 			factor = 2
@@ -399,6 +404,23 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_military_mutinies
 		completion_reward = {
+			set_division_template_lock = {
+				division_template = "NKVD Diviziya"
+				is_locked = no
+			}
+			custom_effect_tooltip = RED_NKVD_oob_tt
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -419,6 +441,7 @@ focus_tree = {
 			focus = RED_rid_mutinies
 		}
 		completion_reward = {
+			## Keep Commanders, but with debuff
 		}
 		ai_will_do = {
 			factor = 2
@@ -570,6 +593,9 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_the_great_show_trial
 		completion_reward = {
+			## Gets rid of commanders once and for all
+			## Debuff to cp, future leaders and experience gain
+			## Removed in 2030 focus tree
 		}
 		ai_will_do = {
 			factor = 2
@@ -578,13 +604,18 @@ focus_tree = {
 
 	focus = {
 		id = RED_dismantle_mushroom_revolts
-		icon = GFX
+		icon = GFX_fist
 		prerequisite = {
 			focus = RED_crisis
 		}
 		x = -5
 		y = 1
 		cost = 2.2
+		available = {
+			hidden_trigger = {
+				has_country_flag = RED_mushroom_revolts
+			}
+		}
 		relative_position_id = RED_crisis
 		completion_reward = {
 		}
@@ -595,7 +626,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_approach_hansa
-		icon = GFX
+		icon = GFX_HNZ_democracy_1
 		prerequisite = {
 			focus = RED_dismantle_mushroom_revolts
 		}
@@ -604,6 +635,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_dismantle_mushroom_revolts
 		completion_reward = {
+			## Event to approach hansa
 		}
 		ai_will_do = {
 			factor = 2
@@ -612,7 +644,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_new_polis_treaty
-		icon = GFX
+		icon = GFX_HNZ_independent_jurisdiction
 		prerequisite = {
 			focus = RED_approach_hansa
 		}
@@ -621,6 +653,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_approach_hansa
 		completion_reward = {
+			## Fuck up Red Line, but eco peace
+			## make them get outsider dependency, and eco debuff
 		}
 		ai_will_do = {
 			factor = 2
@@ -638,6 +672,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_new_polis_treaty
 		completion_reward = {
+			## Both factions gain relation boost
+			## Reduce affect of mushroom revolt
 		}
 		ai_will_do = {
 			factor = 2
@@ -655,6 +691,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_new_polis_treaty
 		completion_reward = {
+			## reduce effect of mushroom revolt
+			## non-aggro with hanza
 		}
 		ai_will_do = {
 			factor = 2
@@ -663,7 +701,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_reforms
-		icon = GFX
+		icon = GFX_RED_propaganda_1
 		prerequisite = {
 			focus = RED_dismantle_mushroom_revolts
 		}
@@ -672,6 +710,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_dismantle_mushroom_revolts
 		completion_reward = {
+			## lose party pop
+			## gain stability
 		}
 		ai_will_do = {
 			factor = 2
@@ -689,6 +729,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_dismantle_mushroom_revolts
 		completion_reward = {
+			## NEEDS Korbut
+			## Give decisions
 		}
 		ai_will_do = {
 			factor = 2
@@ -706,6 +748,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_sabotage_the_revolution
 		completion_reward = {
+			add_stability = -0.05
+			## Add more decisions
 		}
 		ai_will_do = {
 			factor = 2
@@ -757,6 +801,9 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_reforms
 		completion_reward = {
+			## reduce factory output
+			## replace mils with civs
+			## military factory malus debuff
 		}
 		ai_will_do = {
 			factor = 2
@@ -774,6 +821,8 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_reforms
 		completion_reward = {
+			## Worker council idea
+			## community pop gain, reduce factory output
 		}
 		ai_will_do = {
 			factor = 2
@@ -782,7 +831,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_meet_with_the_revolters
-		icon = GFX
+		icon = GFX_volunteer_expedition
 		prerequisite = {
 			focus = RED_reintroduce_workers_councils
 		}
@@ -794,6 +843,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_reforms
 		completion_reward = {
+			## Event to meet with revolters
 		}
 		ai_will_do = {
 			factor = 2
@@ -871,7 +921,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
-		x = -2
+		x = -3
 		y = 1
 		cost = 2.2
 		relative_position_id = RED_development_of_the_red_line
@@ -978,7 +1028,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
-		x = 2
+		x = 3
 		y = 1
 		cost = 2.2
 		relative_position_id = RED_development_of_the_red_line
@@ -1093,13 +1143,13 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_improve_infrastructure
+		id = RED_department_of_reclaimation
 		icon = GFX
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
 		x = 0
-		y = 4
+		y = 3
 		cost = 2.2
 		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
@@ -1110,15 +1160,15 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_improve_infrastructure_infrastructure_1
+		id = RED_public_works
 		icon = GFX
 		prerequisite = {
-			focus = RED_improve_infrastructure
+			focus = RED_department_of_reclaimation
 		}
 		x = -1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_improve_infrastructure
+		relative_position_id = RED_department_of_reclaimation
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1127,15 +1177,50 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_improve_infrastructure_infrastructure_2
+		id = RED_expand_administrative_bureaucracy
 		icon = GFX
 		prerequisite = {
-			focus = RED_improve_infrastructure
+			focus = RED_promote_station_urbanization
+			focus = RED_public_works
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_department_of_reclaimation
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_map_out_the_gosplan
+		icon = GFX
+		prerequisite = {
+			focus = RED_expand_administrative_bureaucracy
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_expand_administrative_bureaucracy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_promote_station_urbanization
+		icon = GFX
+		prerequisite = {
+			focus = RED_department_of_reclaimation
 		}
 		x = 1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_improve_infrastructure
+		relative_position_id = RED_department_of_reclaimation
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1149,7 +1234,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_2030
 		}
-		x = 2
+		x = 5
 		y = 1
 		cost = 2.2
 		relative_position_id = RED_2030
@@ -1161,15 +1246,32 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_socialist_radio_propaganda
+		id = RED_public_health_1
 		icon = GFX
 		prerequisite = {
 			focus = RED_workers_culture
 		}
-		x = 0
-		y = 3
+		x = -3
+		y = 1
 		cost = 2.2
 		relative_position_id = RED_workers_culture
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_public_health_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_public_health_1
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_public_health_1
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1181,29 +1283,13 @@ focus_tree = {
 		id = RED_bolshoi_theatre
 		icon = GFX
 		prerequisite = {
-			focus = RED_workers_culture
-		}
-		x = -2
-		y = 1
-		cost = 2.2
-		relative_position_id = RED_workers_culture
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_circuses
-		icon = GFX
-		prerequisite = {
-			focus = RED_bolshoi_theatre
+			focus = RED_public_health_3
+			focus = RED_public_health_2
 		}
 		x = -1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_bolshoi_theatre
+		relative_position_id = RED_public_health_3
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1212,32 +1298,15 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_socialist_propaganda
+		id = RED_public_health_3
 		icon = GFX
 		prerequisite = {
-			focus = RED_bolshoi_theatre
+			focus = RED_public_health_1
 		}
 		x = 0
-		y = 2
-		cost = 2.2
-		relative_position_id = RED_bolshoi_theatre
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_bread
-		icon = GFX
-		prerequisite = {
-			focus = RED_bolshoi_theatre
-		}
-		x = 1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_bolshoi_theatre
+		relative_position_id = RED_public_health_1
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1246,14 +1315,71 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_education_efforts
+		id = RED_public_health_4
 		icon = GFX
 		prerequisite = {
-			focus = RED_workers_culture
+			focus = RED_public_health_1
 		}
 		x = 2
 		y = 1
 		cost = 2.2
+		relative_position_id = RED_public_health_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_public_health_6
+		icon = GFX
+		prerequisite = {
+			focus = RED_public_health_4
+		}
+		mutually_exclusive = {
+			focus = RED_public_health_7
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_public_health_4
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_public_health_7
+		icon = GFX
+		prerequisite = {
+			focus = RED_public_health_4
+		}
+		mutually_exclusive = {
+			focus = RED_public_health_6
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_public_health_4
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_socialist_radio
+		icon = GFX
+		prerequisite = {
+			focus = RED_workers_culture
+		}
+		x = 5
+		y = 1
+		cost = 2.2
 		relative_position_id = RED_workers_culture
 		completion_reward = {
 		}
@@ -1263,15 +1389,15 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_socialist_studies
+		id = RED_education_department
 		icon = GFX
 		prerequisite = {
-			focus = RED_education_efforts
+			focus = RED_socialist_radio
 		}
 		x = -1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_education_efforts
+		relative_position_id = RED_socialist_radio
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1280,18 +1406,32 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_red_polis
+		id = RED_education_department_1
 		icon = GFX
 		prerequisite = {
-			focus = RED_engineering_studies
+			focus = RED_education_department
 		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_education_department
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_education_department_2
+		icon = GFX
 		prerequisite = {
-			focus = RED_socialist_studies
+			focus = RED_education_department
 		}
 		x = 0
-		y = 2
+		y = 1
 		cost = 2.2
-		relative_position_id = RED_education_efforts
+		relative_position_id = RED_education_department
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1300,15 +1440,15 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_scientific_studies
+		id = RED_education_department_3
 		icon = GFX
 		prerequisite = {
-			focus = RED_education_efforts
+			focus = RED_education_department
 		}
-		x = 1
+		x = 2
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_education_efforts
+		relative_position_id = RED_education_department
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1317,18 +1457,108 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_engineering_studies
+		id = RED_education_department_4
 		icon = GFX
 		prerequisite = {
-			focus = RED_engineering_studies
+			focus = RED_education_department_1
+			focus = RED_education_department_3
 		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_education_department_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_loyalty_to_the_party
+		icon = GFX
 		prerequisite = {
-			focus = RED_socialist_studies
+			focus = RED_socialist_radio
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_radio
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_loyalty_to_the_party_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_loyalty_to_the_party
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_loyalty_to_the_party
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_project_socialist_nostalgia
+		icon = GFX
+		prerequisite = {
+			focus = RED_loyalty_to_the_party
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_loyalty_to_the_party
+		completion_reward = {
+			## needs to not have intra-stational socialism
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_loyalty_to_the_party_war_support
+		icon = GFX
+		prerequisite = {
+			focus = RED_loyalty_to_the_party_2
+		}
+		mutually_exclusive = {
+			focus = RED_loyalty_to_the_party_stability
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_loyalty_to_the_party_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_loyalty_to_the_party_stability
+		icon = GFX
+		prerequisite = {
+			focus = RED_loyalty_to_the_party_2
+		}
+		mutually_exclusive = {
+			focus = RED_loyalty_to_the_party_war_support
 		}
 		x = 1
 		y = 1
 		cost = 2.2
-		relative_position_id = RED_education_efforts
+		relative_position_id = RED_loyalty_to_the_party_2
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1650,6 +1880,540 @@ focus_tree = {
 			factor = 2
 		}
 	}
+
+	## Military Branch
+
+	focus = {
+		id = RED_red_army
+		icon = GFX
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 20
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	## NKVD Branch
+
+	focus = {
+		id = RED_nkvd_primacy
+		icon = GFX_RED_nkvd_officers
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 27
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_permit_special_jurisdiction
+		icon = GFX_RED_nkvd_exceptions
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_secret_police_roles
+		icon = GFX_RED_secret_police_roles
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_allow_special_jurisdiction
+		icon = GFX_RED_NKVD_2
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_kortbut_general
+		icon = GFX_RED_head_of_kgb
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_permit_military_roles
+		icon = GFX_RED_permit_military_roles
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_no_227
+		icon = GFX_RED_no_227
+		prerequisite = {
+			focus = RED_permit_military_roles
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_permit_military_roles
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_court_martial_roles
+		icon = GFX_RED_court_marshal_roles
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = -4
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_allow_administration_roles
+		icon = GFX_RED_allow_administration_roles
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_spy_network
+		icon = GFX_RED_spy_on_citizens
+		prerequisite = {
+			focus = RED_allow_administration_roles
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_administration_roles
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_anti_corruption_force
+		icon = GFX_RED_anti_corruption_force
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = 4
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	## Diplomacy / Politics / war
+
+	focus = {
+		id = RED_cemented_authority
+		icon = GFX
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 40
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_breakaways
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = -6
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	
+	focus = {
+		id = RED_dry_station_bandits
+		icon = GFX
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_anarchists
+		icon = GFX
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_anarchists_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_anarchists
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_anarchists
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists
+		icon = GFX
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_trotskyists
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_puppet
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians
+		}
+		mutually_exclusive = {
+			focus = RED_technicians_annex
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_annex
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians
+		}
+		mutually_exclusive = {
+			focus = RED_technicians_puppet
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_technicians_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians_puppet
+			focus = RED_technicians_annex
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_pact_of_friendship
+		icon = GFX
+		prerequisite = {
+			focus = RED_anarchists_2
+			focus = RED_trotskyists_2
+			focus = RED_technicians_2
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_dry_station_bandits
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_MSU_bridge
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			## decision to reclaim and rebuild moscow bridge
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_emerald_city
+		icon = GFX
+		prerequisite = {
+			focus = RED_MSU_bridge
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_MSU_bridge
+		completion_reward = {
+			## needs to own moscow bridge
+			## enable decision mechanic to attack MSU
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_to_the_victors
+		icon = GFX
+		prerequisite = {
+			focus = RED_emerald_city
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_emerald_city
+		completion_reward = {
+			## needs MSU to not exist
+			## get event
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_line_secured
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 6
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			## requires to own ALL of the Red Line
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_bastion_of_socialism
+		icon = GFX
+		prerequisite = {
+			focus = RED_red_line_secured
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_red_line_secured
+		completion_reward = {
+			## requires to own ALL of the Red Line
+			## stability
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rebuild_line_proper
+		icon = GFX
+		prerequisite = {
+			focus = RED_red_line_secured
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_red_line_secured
+		completion_reward = {
+			## requires to own ALL of the Red Line
+			## Gain 2 infrastructure on all red line
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 }
 
 focus_tree = {
@@ -1668,6 +2432,8 @@ focus_tree = {
 		y = 0
 		cost = 0.8
 		completion_reward = {
+			add_manpower = 50
+			army_experience = 10
 		}
 		ai_will_do = {
 			factor = 2
@@ -1685,6 +2451,25 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_military_coup
 		completion_reward = {
+			## makes the 'dissenters' commanders
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_an_old_friend
+		icon = GFX_RED_infiltration
+		prerequisite = {
+			focus = RED_assume_leadership
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_assume_leadership
+		completion_reward = {
+			## event, dry bandits autoannexed and joins the revolution
 		}
 		ai_will_do = {
 			factor = 2
@@ -1702,6 +2487,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_military_coup
 		completion_reward = {
+			## upgrade conscription laws
 		}
 		ai_will_do = {
 			factor = 2
@@ -1719,6 +2505,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_mandatory_conscriptions
 		completion_reward = {
+			## tech boost to military and doctrine
 		}
 		ai_will_do = {
 			factor = 2
@@ -1736,6 +2523,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_mandatory_conscriptions
 		completion_reward = {
+			## eco debuff for factory prod buff
 		}
 		ai_will_do = {
 			factor = 2
@@ -1753,6 +2541,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_military_coup
 		completion_reward = {
+			## add equipment to stockpile
 		}
 		ai_will_do = {
 			factor = 2
@@ -1770,6 +2559,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_armaments_of_victory
 		completion_reward = {
+			## add military factories, reduce stab
 		}
 		ai_will_do = {
 			factor = 2
@@ -1787,6 +2577,7 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_armaments_of_victory
 		completion_reward = {
+			## reduce resistance and also reduce compliance
 		}
 		ai_will_do = {
 			factor = 2
