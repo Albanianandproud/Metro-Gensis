@@ -5,7 +5,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 20
+			add = 00
 			tag = RED
 		}
 	}
@@ -318,7 +318,7 @@ focus_tree = {
 focus_tree = {
 	id = red_line_2
 	country = {
-		factor = 30
+		factor = 00
 	}
 	default = no
 
@@ -398,6 +398,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_rid_mutinies
 			focus = RED_approach_dissenters
+		}
+		available = {
+			has_idea_with_trait = RED_korbut
 		}
 		x = 0
 		y = 2
@@ -502,7 +505,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_name_and_shame
-		icon = GFX
+		icon = GFX_RED_megaphone_politburo
 		prerequisite = {
 			focus = RED_approach_dissenters
 		}
@@ -519,7 +522,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_squash_dissidents
-		icon = GFX_RED_squash_dissidents
+		icon = GFX_RED_soldier_bust
 		prerequisite = {
 			focus = RED_name_and_shame
 		}
@@ -576,7 +579,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_staff_purge
-		icon = GFX
+		icon = GFX_RED_rifles
 		prerequisite = {
 			focus = RED_the_great_show_trial
 			focus = RED_martyrs_disappear
@@ -710,8 +713,11 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_dismantle_mushroom_revolts
 		completion_reward = {
-			## lose party pop
-			## gain stability
+			add_stability = 0.1
+			add_popularity = {
+				ideology = council
+				popularity = -0.05
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -723,6 +729,9 @@ focus_tree = {
 		icon = GFX_RED_smash_the_revolution
 		prerequisite = {
 			focus = RED_dismantle_mushroom_revolts
+		}
+		available = {
+			has_idea_with_trait = RED_korbut
 		}
 		x = 3
 		y = 1
@@ -801,9 +810,10 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_reforms
 		completion_reward = {
-			## reduce factory output
-			## replace mils with civs
-			## military factory malus debuff
+			add_timed_idea = {
+				idea = RED_militarization_scale_back
+				days = 480
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -821,8 +831,15 @@ focus_tree = {
 		cost = 2.2
 		relative_position_id = RED_reforms
 		completion_reward = {
-			## Worker council idea
-			## community pop gain, reduce factory output
+			add_popularity = {
+				ideology = community
+				popularity = 0.05
+			}
+			add_timed_idea = {
+				idea = RED_workers_councils
+				days = 480
+			}
+			custom_effect_tooltip = RED_worker_councils_law_lock_tt
 		}
 		ai_will_do = {
 			factor = 2
@@ -2127,18 +2144,34 @@ focus_tree = {
 	
 	focus = {
 		id = RED_dry_station_bandits
-		icon = GFX
+		icon = GFX_RED_dry_station_annex
 		prerequisite = {
 			focus = RED_breakaways
 		}
 		x = 3
 		y = 1
-		cost = 2.2
+		cost = 4.4
 		relative_position_id = RED_breakaways
+		bypass = {
+			OR = {
+				NOT = { country_exists = DRY }
+				has_war_with = DRY
+			}
+		}
+		available = {
+			has_war = no
+		}
+        will_lead_to_war_with = DRY
 		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = DRY
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 201
 		}
 	}
 
@@ -2305,15 +2338,16 @@ focus_tree = {
 
 	focus = {
 		id = RED_MSU_bridge
-		icon = GFX
+		icon = GFX_RED_sparrow_hills_bridge
 		prerequisite = {
 			focus = RED_cemented_authority
 		}
 		x = 3
 		y = 1
-		cost = 2.2
+		cost = 6.5
 		relative_position_id = RED_cemented_authority
 		completion_reward = {
+			custom_effect_tooltip = RED_vorobyovy_gory
 			## decision to reclaim and rebuild moscow bridge
 		}
 		ai_will_do = {
@@ -2323,17 +2357,21 @@ focus_tree = {
 
 	focus = {
 		id = RED_emerald_city
-		icon = GFX
+		icon = GFX_RED_crush_the_msu
 		prerequisite = {
 			focus = RED_MSU_bridge
 		}
 		x = 0
 		y = 1
-		cost = 2.2
+		cost = 6.5
+		available = {
+			288 = { is_owned_by = RED }
+		}
 		relative_position_id = RED_MSU_bridge
 		completion_reward = {
 			## needs to own moscow bridge
 			## enable decision mechanic to attack MSU
+			custom_effect_tooltip = RED_crack_the_facade_tt
 		}
 		ai_will_do = {
 			factor = 2
@@ -2342,17 +2380,28 @@ focus_tree = {
 
 	focus = {
 		id = RED_to_the_victors
-		icon = GFX
+		icon = GFX_RED_to_the_victors
 		prerequisite = {
 			focus = RED_emerald_city
 		}
+		available = {
+			NOT = { country_exists = MSU }
+		}
 		x = 0
 		y = 1
-		cost = 2.2
+		cost = 6.5
 		relative_position_id = RED_emerald_city
 		completion_reward = {
-			## needs MSU to not exist
 			## get event
+			every_owned_state = {
+				limit = {
+					is_core_of = MSU
+					OWNER = {
+						tag = RED
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2389,7 +2438,7 @@ focus_tree = {
 		relative_position_id = RED_red_line_secured
 		completion_reward = {
 			## requires to own ALL of the Red Line
-			## stability
+			add_stability = 0.1
 		}
 		ai_will_do = {
 			factor = 2
@@ -2409,6 +2458,7 @@ focus_tree = {
 		completion_reward = {
 			## requires to own ALL of the Red Line
 			## Gain 2 infrastructure on all red line
+			add_stability = 0.01
 		}
 		ai_will_do = {
 			factor = 2
