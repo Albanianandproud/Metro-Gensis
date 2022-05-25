@@ -1,0 +1,619 @@
+focus_tree = {
+	id = nf_GWC
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = GWC
+		}
+	}
+	default = no
+
+	focus = {
+		id = GWC_the_great_worm_cult
+		icon = GFX_GWC_the_great_worm_cult
+		
+		cost = 6.5
+		x = 15
+		y = 0
+		completion_reward = {
+			add_political_power = 90
+			country_event = nf_GWC.1 ## Intro event
+		}
+	}
+	
+	##################################
+	#         ECONOMIC TREE          #
+	##################################	
+	
+	#Shinies and Jewels
+	focus = {
+		id = GWC_shinies_and_jewels
+		icon = GFX_GWC_shinies_and_jewels
+		x = 10
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = GWC_the_great_worm_cult }
+		
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = GWC_shiny_and_jewel
+		}
+		
+	}
+
+	#Prosperity in the Tunnels
+	focus = {
+		id = GWC_prosperity_in_the_tunnels
+		icon = GFX_GWC_prosperity_in_the_tunnels
+		x = 11
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = GWC_shinies_and_jewels  }
+	
+		completion_reward = {
+			280 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			334 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Everyone Plays a Part
+	focus = {
+		id = GWC_everyone_plays_a_part
+		icon = GFX_GWC_finishing_off_the_scraps
+		x = 11
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_prosperity_in_the_tunnels  }
+		
+		completion_reward = {
+			add_ideas = GWC_for_the_cult
+		}
+	}
+
+	#Production Quotas
+	focus = {
+		id = GWC_production_quotas
+		icon = GFX_GWC_production_quotas
+		x = 9
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = GWC_shinies_and_jewels  }
+		
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = GWC_work_supervisor
+		}
+	}
+
+	#Slaviansky Industry
+	focus = {
+		id = GWC_slaviansky_industry
+		icon = GFX_GWC_industry
+		x = 9
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = GWC_production_quotas  }
+		
+		completion_reward = {
+			385 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			385 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Reproduction Factories
+	focus = {
+		id = GWC_reproduction_factories
+		icon = GFX_GWC_expand
+		x = 8
+		y = 4
+		cost = 4
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = GWC_slaviansky_industry  }
+		
+		completion_reward = {
+			custom_effect_tooltip = GWC_reproduction_decision_tt
+		}
+	}
+
+	#Steal Technology from the North
+	focus = {
+		id = GWC_steal_technology_from_the_north
+		icon = GFX_GWC_steal_technology_from_north
+		x = 10
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_everyone_plays_a_part  } prerequisite = { focus = GWC_slaviansky_industry  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	#Reverse-Engineering Specialists
+	focus = {
+		id = GWC_reverseengineering_specialists
+		icon = GFX_GWC_engineer_specialists
+		x = 10
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_steal_technology_from_the_north  }
+		
+		completion_reward = {
+			add_ideas = GWC_reverse_engineering
+		}
+	}
+	
+	##################################
+	#         MILITARY TREE          #
+	##################################
+	
+	#Tribal Doctrine
+	focus = {
+		id = GWC_tribal_doctrine
+		icon = GFX_GWC_skull_2
+		x = 18
+		y = 1
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_the_great_worm_cult  }
+		completion_reward = {
+			army_experience = 35
+		}
+	}
+
+	#Prioritize Guerilla Tactics
+	focus = {
+		id = GWC_prioritize_guerilla_tactics
+		icon = GFX_GWC_cannibal_2
+		x = 17
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = GWC_tribal_doctrine  }
+		mutually_exclusive = { focus = GWC_the_meat_grinder  }
+		
+		completion_reward = {
+			add_ideas = GWC_guerilla_tactics
+		}
+	}
+
+	#The Meat Grinder
+	focus = {
+		id = GWC_the_meat_grinder
+		icon = GFX_GWC_skull
+		x = 19
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = GWC_tribal_doctrine  }
+		mutually_exclusive = { focus = GWC_prioritize_guerilla_tactics  }
+		
+		completion_reward = {
+			add_ideas = GWC_meat_grinder
+		}
+	}
+
+	#Sticks and Stones
+	focus = {
+		id = GWC_sticks_and_stones
+		icon = GFX_GWC_axes
+		x = 18
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_prioritize_guerilla_tactics  focus = GWC_the_meat_grinder  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	#Adapt New Weapons
+	focus = {
+		id = GWC_adapt_new_weapons
+		icon = GFX_GWC_skull_axe
+		x = 17
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_sticks_and_stones  }
+		mutually_exclusive = { focus = GWC_spears_do_the_job  }
+		completion_reward = {
+		    add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	#Spears do the Job
+	focus = {
+		id = GWC_spears_do_the_job
+		icon = GFX_GWC_arrows
+		x = 19
+		y = 4
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		prerequisite = { focus = GWC_sticks_and_stones  }
+		mutually_exclusive = { focus = GWC_adapt_new_weapons  }
+		completion_reward = {
+		    add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	#Spider Hole Implementation
+	focus = {
+		id = GWC_spider_hole_implementation
+		icon = GFX_GWC_group_efforts
+		x = 15
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = GWC_prioritize_guerilla_tactics  }
+		
+		completion_reward = {
+			custom_effect_tooltip = GWC_tunnel_tt
+			hidden_effect = {
+				build_railway = {
+				  level = 1
+				  controller_priority = {
+					base = 1
+				   
+					modifier = {
+					  tag = GWC
+					  add = 2
+					}
+				  }
+				  fallback = yes
+				  path = { 3885 3886 3553 3561 3897 3895 3793 }
+				  start_province = 3885
+				  target_province = 3793
+				}
+			}
+		}
+	}
+
+	#Every Man a Warrior
+	focus = {
+		id = GWC_every_man_a_warrior
+		icon = GFX_GWC_warriors_of_the_worm
+		x = 15
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = GWC_spider_hole_implementation  }
+		
+		completion_reward = {
+			add_ideas = GWC_warrior_code
+		}
+	}
+
+	#Lightning Quick Movement
+	focus = {
+		id = GWC_lightning_quick_movement
+		icon = GFX_GWC_lightning_quick_movements
+		x = 21
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = GWC_the_meat_grinder  }
+		completion_reward = {
+			add_ideas = GWC_lightning_quick
+		}
+	}
+
+	#Fight for the Worm
+	focus = {
+		id = GWC_fight_for_the_worm
+		icon = GFX_GWC_fight_for_the_worm
+		x = 21
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = GWC_lightning_quick_movement  }
+		completion_reward = {
+			add_war_support = 0.1
+		}
+	}
+
+	#Seize the Initiative
+	focus = {
+		id = GWC_seize_the_initiative
+		icon = GFX_GWC_seize_the_initiative
+		x = 15
+		y = 7
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = GWC_every_man_a_warrior  }
+		mutually_exclusive = { focus = GWC_the_home_advantage  }
+		completion_reward = {
+			custom_effect_tooltip = GWC_focusunfinished_tt
+		}
+	}
+
+	#The Home Advantage
+	focus = {
+		id = GWC_the_home_advantage
+		icon = GFX_GWC_home_advantage
+		x = 17
+		y = 7
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_WAR_SUPPORT
+		}
+		prerequisite = { focus = GWC_every_man_a_warrior  }
+		mutually_exclusive = { focus = GWC_seize_the_initiative  }
+		completion_reward = {
+			custom_effect_tooltip = GWC_focusunfinished_tt
+		}
+	}
+
+	#Religious Army Leaders
+	focus = {
+		id = GWC_religious_army_leaders
+		icon = GFX_GWC_religious_leaders
+		x = 21
+		y = 7
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+		}
+		prerequisite = { focus = GWC_fight_for_the_worm }
+		completion_reward = {
+		 	create_corps_commander = {
+				name = "Efim Popo"
+				picture = "popo.dds"
+				traits = { brilliant_strategist }
+				skill = 5
+				attack_skill = 2
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 4
+			}
+		}
+	}
+	
+	##################################
+	#         CONQUEST TREE          #
+	##################################
+	
+	#Battle for Kuntsevskaya
+	focus = {
+		id = GWC_battle_for_kuntsevskaya
+		icon = GFX_GWC_battle_for_kuntsevskaya
+		x = 25
+		y = 1
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = GWC_the_great_worm_cult  }
+	}
+
+	#Push Northward
+	focus = {
+		id = GWC_push_northward
+		icon = GFX_GWC_expand_north
+		x = 23
+		y = 4
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_kuntsevskaya_core  }
+	}
+
+	#Establish Colonies
+	focus = {
+		id = GWC_establish_colonies
+		icon = GFX_GWC_securing_the_station
+		x = 24
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_battle_for_kuntsevskaya  }
+	}
+
+	#Redecorate the Station
+	focus = {
+		id = GWC_redecorate_the_station
+		icon = GFX_GWC_re_decorate_station
+		x = 26
+		y = 2
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_battle_for_kuntsevskaya  }
+	}
+
+	#Kuntsevskaya Core
+	focus = {
+		id = GWC_kuntsevskaya_core
+		icon = GFX_GWC_cannibal
+		x = 25
+		y = 3
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_establish_colonies  } prerequisite = { focus = GWC_redecorate_the_station  }
+	}
+
+	#Push Eastward
+	focus = {
+		id = GWC_push_eastward
+		icon = GFX_GWC_hanza_generic
+		x = 27
+		y = 4
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = GWC_kuntsevskaya_core  }
+	}
+
+	#Mutants no More
+	focus = {
+		id = GWC_mutants_no_more
+		icon = GFX_GWC_mutants_no_more
+		x = 24
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = GWC_push_northward  }
+	}
+
+	#Occupy Krylatskoe
+	focus = {
+		id = GWC_occupy_krylatskoe
+		icon = GFX_GWC_occupy_krylatskoe
+		x = 24
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = GWC_mutants_no_more  }
+	}
+
+	#Expand into Vystavochnaya
+	focus = {
+		id = GWC_expand_into_vystavochnaya
+		icon = GFX_GWC_expand_north
+		x = 26
+		y = 6
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = GWC_deploying_the_reserves  }
+	}
+
+	#Deploying the Reserves
+	focus = {
+		id = GWC_deploying_the_reserves
+		icon = GFX_GWC_deploy_the_reserves
+		x = 26
+		y = 5
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = GWC_push_eastward  }
+	}
+
+	#Finishing up the Scraps
+	focus = {
+		id = GWC_finishing_up_the_scraps
+		icon = GFX_GWC_finishing_off_the_scraps
+		x = 25
+		y = 7
+		cost = 7
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = GWC_occupy_krylatskoe  } prerequisite = { focus = GWC_expand_into_vystavochnaya  }
+	}
+
+
+}
+

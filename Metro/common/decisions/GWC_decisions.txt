@@ -1,0 +1,240 @@
+GWC_four_pillars = {
+	GWC_food_cannibalize_refugees = {
+
+		cost = 30
+
+		days_re_enable = 20
+
+		complete_effect = {
+			add_to_variable = { var = GWC_food value = 2 }
+			custom_effect_tooltip = GWC_food_plus
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.05
+			}
+			add_stability = 0.05
+		}
+
+	}
+
+	GWC_food_grow_food = {
+
+		cost = 50
+
+		days_re_enable = 25
+
+		available = {
+			check_variable = { var = GWC_food value = 0 compare = greater_than }
+		}
+
+		days_remove = 7
+
+		complete_effect = {
+			add_to_variable = { var = GWC_food value = 3 }
+			custom_effect_tooltip = GWC_food_plus
+			add_stability = -0.10
+		}
+
+	}
+
+	GWC_food_the_unthinkable = {
+		cost = 75
+		fire_only_once = yes
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = GWC_food_nofood
+				check_variable = { var = GWC_food value = -3 compare = greater_than }
+			}
+			custom_trigger_tooltip = {
+				tooltip = GWC_member_less_2
+				check_variable = { var = GWC_member value = 5 compare = less_than }
+			}
+		}
+
+		complete_effect = {
+			subtract_from_variable = { var = GWC_member value = 5 }
+			add_to_variable = { var = GWC_food value = 8 }
+			custom_effect_tooltip = GWC_food_plus
+			custom_effect_tooltip = GWC_member_minus
+		}
+	}
+
+	GWC_member_kidnap_dwellers = {
+		cost = 50
+		days_remove = 60
+		
+		modifier = {
+			consumer_goods_factor = 0.05
+			industrial_capacity_factory = 0.05
+		}
+		complete_effect = {
+			add_to_variable = { var = GWC_member value = 2 }
+			custom_effect_tooltip = GWC_member_plus
+		}
+	}
+
+	GWC_member_reorganize_the_reserves = {
+		cost = 50
+
+		complete_effect = {
+			add_to_variable = { var = GWC_member value = 1 }
+			custom_effect_tooltip = GWC_member_plus
+			add_war_support = -0.01
+			add_command_power = -20
+			add_manpower = -10
+			
+		}
+	}
+
+	GWC_member_guns_for_slaves = {
+		cost = 100
+		fire_only_once = yes
+		available = {
+			has_equipment = {
+			    infantry_equipment > 99
+			}
+		}
+
+		complete_effect = {
+			add_to_variable = { var = GWC_member value = 5 }
+			custom_effect_tooltip = GWC_member_plus
+			add_equipment_to_stockpile = {
+			    type = infantry_equipment
+			    amount = -100
+			}
+		}
+	}
+	
+	GWC_faith_sacrifice_for_the_worm = {
+		cost = 50
+		days_remove = 60
+		
+		modifier = {
+			consumer_goods_factor = 0.05
+			industrial_capacity_factory = 0.05
+		}
+		complete_effect = {
+			add_to_variable = { var = GWC_faith value = 3 }
+			subtract_from_variable = { var = GWC_member value = 2 }
+			custom_effect_tooltip = GWC_faith_plus
+			custom_effect_tooltip = GWC_member_minus
+		}
+	}
+
+	GWC_faith_food_for_the_worm = {
+		cost = 50
+
+		complete_effect = {
+			add_to_variable = { var = GWC_faith value = 3 }
+			subtract_from_variable = { var = GWC_food value = 2 }
+			custom_effect_tooltip = GWC_faith_plus
+			custom_effect_tooltip = GWC_food_minus
+		}
+	}
+	
+	GWC_infamy_raid_the_locals = {
+		cost = 25
+		available = {
+			has_equipment = {
+			    infantry_equipment > 50
+			}
+		}
+		
+		complete_effect = {
+			add_to_variable = { var = GWC_infamy value = 2 }
+			custom_effect_tooltip = GWC_infamy_plus
+			add_war_support = 0.05
+			add_command_power = -15
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+			    type = infantry_equipment
+			    amount = -50
+			}
+			
+		}
+	}
+
+	GWC_infamy_make_up_legends = {
+		cost = 50
+		fire_only_once = yes
+
+
+		complete_effect = {
+			add_to_variable = { var = GWC_infamy value = 7 }
+			subtract_from_variable = { var = GWC_faith value = 2 }
+			custom_effect_tooltip = GWC_infamy_plus
+			custom_effect_tooltip = GWC_faith_minus
+		}
+	}
+
+}
+
+GWC_reproduction_factories_decision = {
+	GWC_experimental_age_tests = {
+
+		available = {
+			has_manpower > 9
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		days_remove = 50
+
+		complete_effect = {
+			add_manpower = -10
+			set_country_flag = experimental_age_tests_done
+		}
+
+	}
+	
+	GWC_extracting_natural_medecine = {
+
+		cost = 50
+		fire_only_once = yes
+		
+		days_remove = 75
+		
+		visible = {
+			has_country_flag = experimental_age_tests_done
+		}
+		
+		modifier = {
+		    research_speed_factor = -0.10
+		}
+		
+		complete_effect = {
+			set_country_flag = extracting_natural_medecine_done
+		}
+	}
+	
+	GWC_expeditions_to_the_surface = {
+
+		cost = 75
+		fire_only_once = yes
+		
+		days_remove = 200
+		
+		visible = {
+			has_country_flag = extracting_natural_medecine_done
+		}
+		
+		complete_effect = {
+			add_equipment_to_stockpile = {
+			    type = infantry_equipment
+			    amount = -150
+			}
+			add_manpower = -50
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = expeditions_to_the_surface_done
+				GWC = {
+					country_event = 	### Chemicals have been found!
+				}
+				add_ideas = GWC_reproduction_factories_idea
+			}
+		}
+	}
+}
