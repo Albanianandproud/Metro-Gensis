@@ -1,0 +1,181 @@
+add_namespace = nf_GWC
+country_event = {
+    id = nf_GWC.1
+    title = nf_GWC.1.t
+    desc = nf_GWC.1.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_stability = -0.05
+    }
+
+	option = {
+		name = nf_GWC.1.a
+	}
+}
+country_event = {
+    id = nf_GWC.2
+    title = nf_GWC.2.t
+    desc = nf_GWC.2.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC.2.a
+	}
+}
+
+country_event = {
+    id = nf_GWC.3
+    title = nf_GWC.3.t
+    desc = nf_GWC.3.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC.3.a
+		add_manpower = 30
+		hidden_effect = { country_event = { id = nf_GWC.4 days = 7 random_days = 7 } }
+	}
+
+	option = {
+		name = nf_GWC.3.b
+		capital_scope = {
+			add_extra_state_shared_building_slots = 2
+		}
+		hidden_effect = { country_event = { id = nf_GWC.4 days = 7 random_days = 7 } }
+	}
+}
+
+country_event = {
+    id = nf_GWC.4
+    title = nf_GWC.4.t
+    desc = nf_GWC.4.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC.4.a
+		add_country_leader_trait = GWC_priest_justify_time
+		hidden_effect = { country_event = { id = nf_GWC.5 days = 7 random_days = 7 } }
+	}
+
+	option = {
+		name = nf_GWC.4.b
+		add_country_leader_trait = GWC_priest_organization
+		hidden_effect = { country_event = { id = nf_GWC.5 days = 7 random_days = 7 } }
+	}
+}
+
+country_event = {
+    id = nf_GWC.5
+    title = nf_GWC.5.t
+    desc = nf_GWC.5.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC.5.a
+		random_owned_state = {
+			limit = {
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	option = {
+		name = nf_GWC.5.b
+		army_experience = 20
+	}
+}
+
+country_event = {
+    id = nf_GWC.6
+    title = nf_GWC.6.t
+    desc = nf_GWC.6.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC.6.a
+		add_advisor_role = {
+            Character = GWC_warrior
+            advisor = {
+                slot = high_command
+                idea_token = GWC_warrior
+                cost = 100
+                allowed = {
+                    original_tag = GWC
+                }
+                traits = { GWC_warrior_1 }
+                removal_cost = -1
+                ai_will_do = {
+                    factor = 16
+                }
+            }
+            activate = yes
+        }
+		create_corps_commander = {
+			name = ""
+			picture = "GWC_warrior.dds"
+			traits = { trickster commando }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+	}
+
+	option = {
+		name = nf_GWC.6.b
+		add_advisor_role = {
+            Character = GWC_warrior
+            advisor = {
+                slot = high_command
+                idea_token = GWC_warrior
+                cost = 100
+                allowed = {
+                    original_tag = GWC
+                }
+                traits = { GWC_warrior_2 }
+                removal_cost = -1
+                ai_will_do = {
+                    factor = 16
+                }
+            }
+            activate = yes
+        }
+		create_corps_commander = {
+			name = ""
+			picture = "GWC_warrior.dds"
+			traits = { trickster adaptable }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+	}
+}

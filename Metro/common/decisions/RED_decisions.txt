@@ -1,3 +1,5 @@
+@department_increase_cost = 100
+
 RED_ministry_departments = {
 	
 	RED_ministry_economics_upgrade = {
@@ -7,30 +9,81 @@ RED_ministry_departments = {
 		available = {
 			has_idea = RED_minister_of_economics
 			AND = {
-				NOT = { has_idea_with_trait = RED_stepan_markelov_4 }
+				hidden_trigger = {
+					NOT = { has_idea_with_trait = RED_stepan_markelov_4 }
+				}
 			}
 		}
 		visible = { NOT = { has_idea_with_trait = RED_stepan_markelov_4 } }
 
-		cost = 1
-		days_remove = 2
+		cost = 100
+		days_remove = 90
 		days_re_enable = 0
 
-		complete_effect = {
-			## Call trigger to update minister trait through events
-		}
-
 		modifier = {
-           ## Increase CG? Reduce PP gain?
+           political_power_gain = -0.15
         }
 
         remove_effect = {
-        	## Check event trigger and set trait to idea
         	RED_ministry_economics_upgrade_trait = yes
 		}
 	}
 }
 
+RED_crisis_category = {
+
+	RED_mushroom_revolt_mission_countdown = {
+
+		activation = {
+			always = no
+		}
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		allowed = { tag = RED }
+		is_good = no
+		days_mission_timeout = 360
+		available = {                           
+            not = {
+            	has_country_flag = RED_mushroom_revolts
+            }
+        }
+		timeout_effect = {                      
+            ## remove idea, but make civil war happen
+            country_event = nf_RED.50 ### Mushroom Revolts Occur       
+        }
+        complete_effect = {                    
+            remove_ideas = RED_mushroom_revolt      
+        }
+	}
+
+	RED_military_mutiny_mission_countdown = {
+
+		activation = {
+			always = no
+		}
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		allowed = { tag = RED }
+		is_good = no
+		days_mission_timeout = 360
+		available = {                           
+            not = {
+            	has_country_flag = RED_military_mutinies
+            }
+        }
+		timeout_effect = {                      
+            ## remove idea, but make civil war happen
+            country_event = nf_RED.51 ### Dissenters Revolt        
+        }
+        complete_effect = {                    
+            remove_ideas = RED_military_mutinies            
+        }
+	}
+}
 
 RED_emerald_city_category = {
 
@@ -93,5 +146,26 @@ RED_emerald_city_category = {
 		cost = 75
 		days_remove = 35
 		days_re_enable = 225
+	}
+}
+
+RED_generic_decision_category = {
+	
+	RED_lobby_the_politburo = {
+		cost = 75
+		days_remove = 35
+		days_re_enable = 0
+	}
+
+	RED_economic_concessions = {
+		cost = 75
+		days_remove = 35
+		days_re_enable = 0
+	}
+
+	RED_idolize_cult_of_communism = {
+		cost = 75
+		days_remove = 35
+		days_re_enable = 0
 	}
 }

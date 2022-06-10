@@ -4,7 +4,7 @@ country_event = { # Revolution
     id = nf_RED.1
     title = nf_RED.1.t
     desc = nf_RED.1.d
-    picture = GFX_event_RED_2
+    picture = GFX_event_RED_9
 
 	is_triggered_only = yes
 
@@ -25,7 +25,7 @@ country_event = { # Fallout
     id = nf_RED.2
     title = nf_RED.2.t
     desc = nf_RED.2.d
-    picture = GFX_event_RED_2
+    picture = GFX_event_soldier.combat.1
 
     is_triggered_only = yes
 
@@ -54,7 +54,7 @@ country_event = { # Fallout
         }
         add_popularity = {
             ideology = council
-            popularity = -0.05
+            popularity = -0.035
         }
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
     }
@@ -64,7 +64,7 @@ country_event = { # Peace
     id = nf_RED.3
     title = nf_RED.3.t
     desc = nf_RED.3.d
-    picture = GFX_event_RED_2
+    picture = GFX_event_RED_7
 
     is_triggered_only = yes
 
@@ -83,13 +83,18 @@ country_event = { # State of the Line
     id = nf_RED.4
     title = nf_RED.4.t
     desc = nf_RED.4.d
-    picture = GFX_event_RED_2
+    picture = GFX_event_RED_1
 
     is_triggered_only = yes
 
     option = {
         name = nf_RED.4.a
-        add_political_power = 20
+        add_political_power = 10
+        add_popularity = {
+            ideology = council
+            popularity = 0.02
+        }
+        hidden_effect = { country_event = { id = nf_RED.22 days = 14 random_days = 14 } } ### Consul event
     }
 }
 
@@ -97,7 +102,7 @@ country_event = { # Q of Economy
     id = nf_RED.5
     title = nf_RED.5.t
     desc = nf_RED.5.d
-    picture = GFX_event_RED_2
+    picture = GFX_report_event_stalin_propaganda
 
     is_triggered_only = yes
 
@@ -116,7 +121,7 @@ country_event = { # Q of Military
     id = nf_RED.6
     title = nf_RED.6.t
     desc = nf_RED.6.d
-    picture = GFX_event_RED_2
+    picture = GFX_report_event_soviet_purge_officers_01
 
     is_triggered_only = yes
 
@@ -179,16 +184,13 @@ country_event = { # Q of Military
             set_country_flag = RED_high_command_pissed_off
         }
     }
-    option = {
-        name = nf_RED.6.c
-    }
 }
 
 country_event = { # Q of grain requesition
     id = nf_RED.7
     title = nf_RED.7.t
     desc = nf_RED.7.d
-    picture = GFX_event_RED_2
+    picture = GFX_report_event_soviet_finnish_pact
 
     is_triggered_only = yes
 
@@ -210,7 +212,7 @@ country_event = { # Q of Brotherhood
     id = nf_RED.8
     title = nf_RED.8.t
     desc = nf_RED.8.d
-    picture = GFX_event_RED_2
+    picture = GFX_event_RED_7
 
     is_triggered_only = yes
 
@@ -279,8 +281,11 @@ country_event = { # Establish Ministry of Economy
 
     option = { 
         name = nf_RED.9.a
-        add_ideas = RED_minister_of_economics
         custom_effect_tooltip = RED_ministry_departments_tt
+        custom_effect_tooltip = RED_minister_of_economics_departments_tt
+        hidden_effect = {
+            add_ideas = RED_minister_of_economics
+        }
     }
 }
 
@@ -311,10 +316,16 @@ country_event = { # Crisis
     immediate = {
         load_focus_tree = { tree = red_line_2 keep_completed = yes }
         hidden_effect = { country_event = { id = nf_RED.12 days = 3 random_days = 7 } }
+        hidden_effect = { country_event = { id = nf_RED.14 days = 3 random_days = 7 } }
+        hidden_effect = { country_event = { id = nf_RED.20 days = 1 random_days = 2 } }
+        hidden_effect = {
+            set_country_flag = RED_crisis_country_flag
+        }
     }
 
     option = {
         name = nf_RED.11.a
+        add_stability = -0.05
     }
 }
 
@@ -331,7 +342,16 @@ country_event = { # Mushroom Revolts
         hidden_effect = {
             set_country_flag = RED_mushroom_revolts
         }
-        custom_effect_tooltip = RED_unlock_mushroom_revolt_tt
+        custom_effect_tooltip = RED_unlock_mushroom_revolt_tt#
+        custom_effect_tooltip = RED_mushroom_revolt_countdown
+        activate_mission = RED_mushroom_revolt_mission_countdown
+    }
+
+    immediate = {
+        add_timed_idea = {
+            idea = RED_mushroom_revolt
+            days = 361
+        }
     }
 }
 
@@ -361,6 +381,7 @@ country_event = { # Korbut
             }
             activate = yes
         }
+        custom_effect_tooltip = RED_korbut_control_mechanic_tt
     }
 
     option = {
@@ -382,6 +403,19 @@ country_event = { # Military Mutinies
 
     option = {
         name = nf_RED.14.a
+        hidden_effect = {
+            set_country_flag = RED_military_mutinies
+        }
+        custom_effect_tooltip = RED_unlock_mutiny_path_tt
+        custom_effect_tooltip = RED_mutiny_countdown
+        activate_mission = RED_military_mutiny_mission_countdown
+    }
+
+    immediate = {
+        add_timed_idea = {
+            idea = RED_military_mutinies
+            days = 361
+        }
     }
 }
 
@@ -395,6 +429,24 @@ country_event = { # Approach the Commanders
 
     option = {
         name = nf_RED.15.a
+    }
+
+    option = {
+        name = nf_RED.15.b
+    }
+
+    option = { ## Maxim Moskvin needs to be a general
+        custom_effect_tooltip = RED_maxim_moskvin_is_a_general
+        trigger = { 
+            has_idea_with_trait = RED_maxim_1b 
+        }
+        name = nf_RED.15.c
+        custom_effect_tooltip = RED_maxim_becomes_resolute
+        add_trait = {
+            character = RED_moskvin
+            slot = high_command
+            trait = maxim_resolute
+        }
     }
 }
 
@@ -450,7 +502,7 @@ country_event = { # repress evidence
     }
 }
 
-country_event = { # conspiracy plot
+country_event = { # Aslan Fugitive
     id = nf_RED.20
     title = nf_RED.20.t
     desc = nf_RED.20.d
@@ -460,6 +512,13 @@ country_event = { # conspiracy plot
 
     option = {
         name = nf_RED.20.a
+        retire_character = RED_minister_council_advisor
+        add_popularity = {
+            ideology = council
+            popularity = -0.025
+        }
+        add_political_power = -15
+        ## Begin revolutionist plot decision
     }
 }
 
@@ -473,9 +532,63 @@ country_event = { # New Economic Policy
 
     option = {
         name = nf_RED.21.a
+        ## gp straight to 2030 tree <-- BORING
     }
 }
 
+country_event = { # Consul Advisor Event
+    id = nf_RED.22
+    title = nf_RED.22.t
+    desc = nf_RED.22.d
+    picture = GFX_event_RED_2
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.22.a
+        ## Tell about mushroom revolts and military
+        ## Enables Unique Generic Decisions
+    }
+}
+
+country_event = { # Consul Advisor Flees
+    id = nf_RED.23
+    title = nf_RED.23.t
+    desc = nf_RED.23.d
+    picture = GFX_event_RED_2
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.23.a
+        add_popularity = {
+            ideology = council
+            popularity = -0.025
+        }
+        ## Revolutionist Plot start     
+    }
+}
+
+country_event = { # Great Show Trial
+    id = nf_RED.24
+    title = nf_RED.24.t
+    desc = nf_RED.24.d
+    picture = GFX_event_RED_2
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.24.a
+        add_popularity = {
+            ideology = council
+            popularity = 0.025
+        }
+        remove_ideas = RED_military_mutinies
+        hidden_effect = {
+            clr_country_flag = RED_military_mutinies
+        }  
+    }
+}
 
 ### Berilag Events
 
@@ -501,5 +614,76 @@ country_event = { # Berilag
             RED_berilag_check_POW_capacity = yes
             RED_berilag_check_GM_capacity = yes
         }
+    }
+}
+
+### CIVIL WAR EVENT ###
+
+country_event = { # Mushroom Revolt
+    id = nf_RED.50
+    title = nf_RED.50.t
+    desc = nf_RED.50.d
+    picture = GFX_event_station_defense_1
+
+    is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            344 =  { teleport_armies = { to_state = 386 } }
+            135 =  { teleport_armies = { to_state = 250 } }
+            release = PPL
+            PPL = {
+                if = {
+                    limit = {
+                        is_ai = yes
+                    }
+                    add_offsite_building = { type = arms_factory level = 4 }
+                    add_equipment_to_stockpile = { type = infantry_equipment amount = 150 }
+                    add_equipment_to_stockpile = { type = support_equipment  amount = 35 }
+                    else = {
+                        add_offsite_building = { type = arms_factory level = 2 }
+                        add_equipment_to_stockpile = { type = infantry_equipment amount = 50 }
+                        add_equipment_to_stockpile = { type = support_equipment  amount = 10 }
+                    }
+                }
+                set_capital = { state = 344 }
+                load_oob = "PPL_revolt"
+                declare_war_on = {
+                    target = RED
+                    type = annex_everything
+                }
+            }
+        }
+    }
+
+    option = {
+        name = nf_RED.50.a
+    }
+
+    option = { ### Play as Revolters
+        name = nf_RED.50.b
+    }
+}
+
+
+country_event = { # Dissenters Revolt
+    id = nf_RED.51
+    title = nf_RED.51.t
+    desc = nf_RED.51.d
+    picture = GFX_event_station_defense_1
+
+    is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+        }
+    }
+    
+    option = {
+        name = nf_RED.51.a
+    }
+
+    option = { ### Play as Dissenters
+        name = nf_RED.51.b
     }
 }
