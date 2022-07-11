@@ -1,0 +1,1527 @@
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+
+focus_tree = {
+    id = communist_shared
+	continuous_focus_position = { x = 2900 y = 150 }
+	country = {
+		base = 0
+		modifier = {
+			OR = {
+				original_tag = HUL
+				original_tag = AVT
+			}
+			add = 50
+		}
+	}
+	default = no
+	reset_on_civilwar = no
+
+	focus = {
+		id = communist_introduction
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 3
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 2
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_collectivization
+		icon = GFX_workstation
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_introduction
+		}
+		x = -6
+		y = 1
+		relative_position_id = communist_introduction
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_2
+		icon = GFX_workshop_2
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_collectivization
+		}
+		x = -2
+		y = 1
+		relative_position_id =  communist_collectivization
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_station_planning
+		}
+	}
+
+	focus = {
+		id = communist_industry_3
+		icon = GFX_workstation_2
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_industry_2
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_industry_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_4
+		icon = GFX_computer_terminal
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_industry_3
+		}
+		x = 1
+		y = 1
+		relative_position_id =  communist_industry_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_5
+		icon = GFX_workshop_3
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_industry_4
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_industry_4
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_gas_lighting
+		icon = GFX_oil_lamp
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_collectivization
+		}
+		x = 0
+		y = 1
+		relative_position_id =  communist_collectivization
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_tunnel_clearing
+		icon = GFX_railroad_construction
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_gas_lighting
+		}
+		available = {
+		    num_of_controlled_states > 3
+		}
+		x = 1
+		y = 1
+		relative_position_id =  communist_gas_lighting
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_preliminary_defences
+		icon = GFX_sandbags
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_gas_lighting
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_gas_lighting
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_infrastructure_3
+		icon = GFX_welder
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_tunnel_clearing
+			focus =  communist_preliminary_defences
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_tunnel_clearing
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_improve_infrastructure
+		}
+	}
+
+	focus = {
+		id = communist_community_resource_share
+		icon = GFX_scrap_metal_4
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_collectivization
+		}
+		x = 2
+		y = 1
+		relative_position_id =  communist_collectivization
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_resource = {
+			        type = scrap
+			        amount = 6
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = communist_equal_duty
+		icon = GFX_scrap_metal_2
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_community_resource_share
+		}
+		x = 1
+		y = 1
+		relative_position_id =  communist_community_resource_share
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_resource = {
+			        type = scrap
+			        amount = 4
+			    }
+			    add_resource = {
+			        type = alloys
+			        amount = 4
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = communist_getting_the_good_stuff
+		icon = GFX_booze
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_equal_duty
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_equal_duty
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			## give me CG debuff for a time :))
+		}
+	}
+
+	focus = {
+		id = communist_socialist_science
+		icon = GFX_equipment_medical
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_getting_the_good_stuff
+		}
+		x = 1
+		y = 1
+		relative_position_id =  communist_getting_the_good_stuff
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = chemicals
+			        amount = 3
+			    }
+			}
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = communist_population_build_slots
+		icon = GFX_mushroom
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_getting_the_good_stuff
+		}
+		prerequisite = {
+			focus =  communist_industry_4
+		}
+		prerequisite = {
+			focus =  communist_infrastructure_3
+		}
+		available = {
+		    num_of_controlled_states > 5
+		}
+		x = 0
+		y = 1
+		relative_position_id =  communist_infrastructure_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_manpower = 20
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_manpower = 20
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_manpower = 20
+			}
+		}
+	}
+
+	focus = {
+		id = communist_1
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_population_build_slots
+		}
+		mutually_exclusive = {
+			focus = communist_2
+		}
+		x = -1
+		y = 1
+		relative_position_id =  communist_population_build_slots
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = communist_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_1
+		}
+		x = 0
+		y = 1
+		relative_position_id =  communist_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_population_build_slots
+		}
+		mutually_exclusive = {
+			focus = communist_1
+		}
+		x = 1
+		y = 1
+		relative_position_id =  communist_population_build_slots
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_4
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_2
+		}
+		x = 0
+		y = 1
+		relative_position_id =  communist_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_eco_buff
+		icon = GFX_armory
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_introduction
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_introduction
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea
+		icon = GFX_toolbox
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_buff
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_eco_buff
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_economy
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_1
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea
+		}
+		mutually_exclusive = {
+			focus = communist_eco_idea_1
+		}
+		x = -1
+		y = 1
+		relative_position_id = communist_eco_idea
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_economy_path_1
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea
+		}
+		mutually_exclusive = {
+			focus = communist_eco_idea_2
+		}
+		x = 1
+		y = 1
+		relative_position_id = communist_eco_idea
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_economy_path_2
+		}
+	}
+
+	focus = {
+		id = communist_industry_tech_buff_1
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea_1
+			focus = communist_eco_idea_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_eco_idea_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = construction
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_tech_buff_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_industry_tech_buff_1
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_industry_tech_buff_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = tooling
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_tech_buff_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea_1
+			focus = communist_eco_idea_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_eco_idea_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = casting
+			}
+		}
+	}
+
+	focus = {
+		id = communist_industry_tech_buff_4
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_industry_tech_buff_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_industry_tech_buff_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = smithing
+			}
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_buff_1
+		icon = GFX_wrench
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_buff
+		}
+		x = 3
+		y = 1
+		relative_position_id = communist_eco_buff
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_eco_idea_buff_1
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_buff_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea_buff_1
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_eco_idea_buff_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			red_eco_buff_idea = yes
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_buff_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea_buff_2
+		}
+		prerequisite = {
+			focus = communist_mobilise_army
+		}
+		x = 0
+		y = 2
+		relative_position_id = communist_eco_idea_buff_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			red_eco_buff_idea = yes
+		}
+	}
+
+	focus = {
+		id = communist_eco_idea_buff_4
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_eco_idea_buff_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_eco_idea_buff_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			red_eco_buff_idea = yes
+		}
+	}
+
+	focus = {
+		id = communist_world_tension_unlock
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_introduction
+		}
+		available = {
+			threat > 0.2
+		}
+		x = 8
+		y = 1
+		relative_position_id = communist_introduction
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			army_experience = 15
+		}
+	}
+
+	focus = {
+		id = communist_recruitment_1
+		icon = GFX_soldier_1
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_world_tension_unlock
+		}
+		x = 1
+		y = 1
+		relative_position_id = communist_world_tension_unlock
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_manpower = 35
+		}
+	}
+
+	focus = {
+		id = communist_recruitment_2
+		icon = GFX_RED_promote_loyality
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_recruitment_1
+		}
+		mutually_exclusive = {
+			focus = communist_recruitment_3
+		}
+		x = -1
+		y = 1
+		relative_position_id = communist_recruitment_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_world_tomorrow
+		}
+	}
+
+	focus = {
+		id = communist_recruitment_3
+		icon = GFX_RED_promote_loyality
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_recruitment_1
+		}
+		mutually_exclusive = {
+			focus = communist_recruitment_2
+		}
+		x = 1
+		y = 1
+		relative_position_id = communist_recruitment_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_world_today
+		}
+	}
+
+	focus = {
+		id = communist_doctrine_1
+		icon = GFX_binoculars
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_world_tension_unlock
+		}
+		x = -2
+		y = 1
+		relative_position_id = communist_world_tension_unlock
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = communist_mobilise_army
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_doctrine_1
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_doctrine_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_train_red_line
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_mobilise_army
+		}
+		mutually_exclusive = {
+			focus = communist_our_own_advisors
+		}
+		x = -1
+		y = 1
+		relative_position_id = communist_mobilise_army
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_train_red_line_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_train_red_line
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_train_red_line
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_train_red_line_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_train_red_line_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_train_red_line_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_our_own_advisors
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_mobilise_army
+		}
+		mutually_exclusive = {
+			focus = communist_train_red_line
+		}
+		x = 1
+		y = 1
+		relative_position_id = communist_mobilise_army
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_our_own_advisors_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_our_own_advisors
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_our_own_advisors
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_our_own_advisors_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_our_own_advisors_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_our_own_advisors_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_military_1
+		icon = GFX_HNZ_generic_bullet_focus
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_world_tension_unlock
+		}
+		prerequisite = {
+			focus = communist_military_0
+		}
+		x = 4
+		y = 1
+		relative_position_id = communist_world_tension_unlock
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_military_2
+		icon = GFX_HNZ_veteran_armaments_upgrade
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_military_1
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_military_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_military_0
+		icon = GFX_bullets_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_introduction
+		}
+		x = 17
+		y = 1
+		relative_position_id = communist_introduction
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_contact_BAU
+		icon = GFX_HNZ_technician_trade
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_military_0
+		}
+		mutually_exclusive = {
+			focus = communist_our_own_technicians
+			focus = communist_contact_KUZ
+		}
+		x = -2
+		y = 1
+		relative_position_id = communist_military_0
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_our_own_technicians
+		icon = GFX_workshop_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_military_0
+		}
+		mutually_exclusive = {
+			focus = communist_contact_KUZ
+			focus = communist_contact_BAU
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_military_0
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_our_own_technicians
+		}
+	}
+
+	focus = {
+		id = communist_contact_KUZ
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_military_0
+		}
+		mutually_exclusive = {
+			focus = communist_our_own_technicians
+			focus = communist_contact_BAU
+		}
+		x = 2
+		y = 1
+		relative_position_id = communist_military_0
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_gun_buff
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_our_own_technicians
+			focus = communist_contact_BAU
+		}
+		mutually_exclusive = {
+			focus = communist_weapon_research_speed
+		}
+		x = -1
+		y = 1
+		relative_position_id = communist_our_own_technicians
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = communist_gun_improvement
+		}
+	}
+
+	focus = {
+		id = communist_weapon_research_speed
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_our_own_technicians
+			focus = communist_contact_KUZ
+		}
+		mutually_exclusive = {
+			focus = communist_gun_buff
+		}
+		x = 1
+		y = 1
+		relative_position_id = communist_our_own_technicians
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = communist_tech_bonus
+				bonus = 2
+				ahead_reduction = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_1
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_gun_buff
+			focus = communist_weapon_research_speed
+		}
+		x = -2
+		y = 2
+		relative_position_id = communist_our_own_technicians
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_2
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_tech_buff_1
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_tech_buff_1
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_3
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_gun_buff
+			focus = communist_weapon_research_speed
+		}
+		x = 0
+		y = 2
+		relative_position_id = communist_our_own_technicians
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_4
+		icon = GFX_goal_generic_army_doctrines
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_tech_buff_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_tech_buff_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_5
+		icon = GFX_cog_blueprints
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_gun_buff
+			focus = communist_weapon_research_speed
+		}
+		x = 2
+		y = 2
+		relative_position_id = communist_our_own_technicians
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = rail_cart
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = rail_car
+			}
+		}
+	}
+
+	focus = {
+		id = communist_tech_buff_6
+		icon = GFX_HNZ_generic_railbike
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_tech_buff_5
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_tech_buff_5
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+}

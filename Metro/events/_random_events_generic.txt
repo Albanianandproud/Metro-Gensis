@@ -5,10 +5,10 @@ country_event = {
 	id = random_event.1
 	title = random_event.1.t
 	desc = random_event.1.d
-	picture = event_tunnel
+	picture = event_living.4
 
 	mean_time_to_happen = {
-		days = 1800
+		days = 2400
 	}
 
 	trigger = {
@@ -44,10 +44,10 @@ country_event = {
 	id = random_event.2
 	title = random_event.2.t
 	desc = random_event.2.d
-	picture = event_tunnel
+	picture = event_tunnel.4
 
 	mean_time_to_happen = {
-		days = 1800
+		days = 2400
 	}
 
 	trigger = {
@@ -64,10 +64,10 @@ country_event = {
 		    20 = { ## Mutant Attack
 		        ROOT = { country_event = random_event.3 }
 		    }
-		    50 = { ## Nothing of Value
+		    40 = { ## Nothing of Value
 		        ROOT = { country_event = random_event.4 }
 		    }
-		    30 = { ## Found Something
+		    40 = { ## Found Something
 		        ROOT = { country_event = random_event.5 }
 		    }
 		}
@@ -83,7 +83,7 @@ country_event = {
 	id = random_event.3
 	title = random_event.3.t
 	desc = random_event.3.d
-	picture = event_mutants.1
+	picture = event_mutant.2
 	is_triggered_only = yes
 
 	option = {	## Owch ##
@@ -99,7 +99,7 @@ country_event = {
 	id = random_event.4
 	title = random_event.4.t
 	desc = random_event.4.d
-	picture = event_tunnel
+	picture = event_tunnel.8
 	is_triggered_only = yes
 
 	option = {	## Owch ##
@@ -112,7 +112,7 @@ country_event = {
 	id = random_event.5
 	title = random_event.5.t
 	desc = random_event.5.d
-	picture = event_station_defense_2
+	picture = event_workshop.1
 	is_triggered_only = yes
 
 	option = {	## Sweet ##
@@ -138,7 +138,7 @@ country_event = {
 		    	}      
 		    }
 		    33 = { ## Found Valuable Trinkets
-		        add_political_power = 50
+		        add_political_power = 35
 		    }
 		}
 	}
@@ -149,10 +149,10 @@ country_event = {
 	id = random_event.6
 	title = random_event.6.t
 	desc = random_event.6.d
-	picture = event_station_4
+	picture = event_station.1
 
 	mean_time_to_happen = {
-		days = 1800
+		days = 2400
 	}
 
 	trigger = {
@@ -176,5 +176,166 @@ country_event = {
     		ideology = dictatorial
     		popularity = 0.02
 		}
+	}
+}
+
+## Station Slot ##
+country_event = {
+	id = random_event.7
+	title = random_event.7.t
+	desc = random_event.7.d
+	picture = event_station.4
+
+	mean_time_to_happen = {
+		days = 2850
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+		}
+	}
+
+	option = {
+		name = random_event.7.a
+		random_owned_state = {
+			limit = {
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+## Rats! ##
+country_event = {
+	id = random_event.8
+	title = random_event.8.t
+	desc = random_event.8.d
+	picture = event_station.2
+
+	mean_time_to_happen = {
+		days = 3350
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+		}
+	}
+
+	option = {
+		name = random_event.8.a
+		add_timed_idea = {
+			idea = metro_rat_infestation
+			days = 90
+		}
+	}
+}
+
+## Caravan Ambush! ##
+country_event = {
+	id = random_event.9
+	title = random_event.9.t
+	desc = random_event.9.d
+	picture = event_trade.1
+
+	mean_time_to_happen = {
+		days = 3350
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+		}
+	}
+
+	option = {
+		name = random_event.9.a
+		add_timed_idea = {
+			idea = metro_caravan_ambush
+			days = 90
+		}
+	}
+}
+
+## Fallow Crops ##
+country_event = {
+	id = random_event.10
+	title = random_event.10.t
+	desc = random_event.10.d
+	picture = event_underground.2
+
+	mean_time_to_happen = {
+		days = 3500
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			AND = {
+				has_tech = tech_farming_4 
+			}
+		}
+	}
+
+	option = {
+		name = random_event.10.a
+		add_timed_idea = {
+			idea = metro_fallow_crops
+			days = 150
+		}
+	}
+}
+
+## The Good Stuff! ##
+country_event = {
+	id = random_event.11
+	title = random_event.11.t
+	desc = random_event.11.d
+	picture = event_booze.1
+
+	mean_time_to_happen = {
+		days = 3500
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+		}
+	}
+
+	option = {
+		name = random_event.11.a
+		add_timed_idea = {
+			idea = metro_the_good_stuff
+			days = 100
+		}
+	}
+}
+
+## Soldiers of Fortune ##
+country_event = {
+	id = random_event.12
+	title = random_event.12.t
+	desc = random_event.12.d
+	picture = event_netural_territory.4
+
+	mean_time_to_happen = {
+		days = 3500
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = SPT
+		}
+	}
+
+	option = {
+		name = random_event.12.a
+		add_manpower = 10
 	}
 }

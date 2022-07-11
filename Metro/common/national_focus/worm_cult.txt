@@ -27,6 +27,10 @@ focus_tree = {
 		select_effect = {
 			country_event = nf_GWC.3
 		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
 	}
 
 	focus = {
@@ -34,7 +38,7 @@ focus_tree = {
 		icon = GFX_GWC_deploy_the_reserves
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 3.1
 
 		prerequisite = {
 			focus = GWC_followers_of_the_worm
@@ -47,7 +51,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
+			add_war_support = 0.05
+			add_stability = 0.05
 		}
 	}
 
@@ -79,7 +84,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_all_to_muster
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_heed_the_muster
 		x = -2
 		y = 1
 		cost = 5.8
@@ -290,7 +295,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 1
+				bonus = 0.75
 				uses = 2
 				category = industry
 			}
@@ -299,7 +304,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_spikier_clubs
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_spikier_clubs
 		x = -1
 		y = 1
 		cost = 5.8
@@ -317,7 +322,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 1
+				bonus = 0.5
 				uses = 1
 				category = infantry_weapons
 			}
@@ -360,12 +365,12 @@ focus_tree = {
 
 		prerequisite = {
 			focus = GWC_spikier_clubs
-			focus = GWC_ravage_and_spoil
+			focus = GWC_mark_our_territory
 		}
 
 		prerequisite = {
 			focus = GWC_mark_our_territory
-			focus = GWC_preserved_meat
+			focus = GWC_ravage_and_spoil
 		}
 
 		relative_position_id = GWC_2
@@ -375,13 +380,26 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.1
+			add_ideas = war_economy
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = GWC_KRY
-		icon = GFX_GWC_skull
+		icon = GFX_fist
 		x = 1
 		y = 1
 		cost = 5.8
@@ -409,7 +427,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_adrenaline_rush
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_lightning_quick_movements
 		x = 1
 		y = 1
 		cost = 5.8
@@ -455,6 +473,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = KRY
 		}
 
         will_lead_to_war_with = KRY
@@ -470,7 +489,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_head_trophy
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_head_trophy
 		x = 2
 		y = 1
 		cost = 5.8
@@ -532,7 +551,7 @@ focus_tree = {
 
 		completion_reward = {
 			257 = {
-                add_manpower = -75
+                add_manpower = -50
 				add_building_construction = {
 					type = arms_factory
 					level = 1
@@ -571,7 +590,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = clothing
 				bonus = 1
-				uses = 1
+				uses = 3
 				category = clothing_kits
 			}
 		}
@@ -579,7 +598,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_secret_tunnels
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_underground_military_tunnels
 		x = 1
 		y = 1
 		cost = 5.8
@@ -630,7 +649,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_HMS
-		icon = GFX_GWC_skull
+		icon = GFX_fist
 		x = -1
 		y = 1
 		cost = 5.8
@@ -658,7 +677,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_rend_for_the_worm
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_rend_for_worm
 		x = -1
 		y = 1
 		cost = 5.8
@@ -674,7 +693,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_idea = GWC_rend_for_worm
+			add_ideas = GWC_rend_for_worm
 		}
 	}
 
@@ -704,6 +723,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = HMS
 		}
 
         will_lead_to_war_with = HMS
@@ -747,7 +767,7 @@ focus_tree = {
 
 		completion_reward = {
 			377 = {
-                add_manpower = -75
+                add_manpower = -50
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -759,7 +779,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_spoils
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_finishing_off_the_scraps
 		x = 0
 		y = 1
 		cost = 5.8
@@ -788,7 +808,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 2.5
+				bonus = 2
 				uses = 3
 				category = recycling
 			}
@@ -821,18 +841,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			completion_reward = {
-				add_equipment_to_stockpile = {
-					type = infantry_equipment
-					amount = 35
-				}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 50
 			}
 		}
 	}
 
 	focus = {
 		id = GWC_flesh_granaries
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_brain
 		x = -1
 		y = 1
 		cost = 5.8
@@ -914,6 +932,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = STG
 		}
 
         will_lead_to_war_with = STG
@@ -964,6 +983,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_research_slot = 1
 			318 = { add_core_of = ROOT }
 			377 = { add_core_of = ROOT }
 			257 = { add_core_of = ROOT }
@@ -972,7 +992,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_EUR
-		icon = GFX_GWC_skull
+		icon = GFX_fist
 		x = 3
 		y = 1
 		cost = 5.8
@@ -996,6 +1016,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = EUR
 		}
 
         will_lead_to_war_with = EUR
@@ -1011,7 +1032,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_ARB
-		icon = GFX_GWC_skull
+		icon = GFX_fist
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1035,6 +1056,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = ARB
 		}
 
         will_lead_to_war_with = ARB
@@ -1050,7 +1072,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_MIT
-		icon = GFX_GWC_skull
+		icon = GFX_fist
 		x = -3
 		y = 1
 		cost = 5.8
@@ -1074,6 +1096,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			is_neighbor_of = MIT
 		}
 
         will_lead_to_war_with = MIT
@@ -1089,7 +1112,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_war_devolved
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_warfare_devolved
 		x = -5
 		y = 1
 		cost = 5.8
@@ -1108,7 +1131,7 @@ focus_tree = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 0.25
-				uses = 1
+				uses = 2
 				category = land_doctrine
 			}
 		}
@@ -1116,7 +1139,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_primal_fury
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_worm_warriors
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1132,13 +1155,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_idea = GWC_primal_fury
+			add_ideas = GWC_primal_fury
 		}
 	}
 
 	focus = {
 		id = GWC_antediluvian_armaments
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_ancient_armaments
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1165,7 +1188,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_doped_shrooms
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_mushrooms
 		x = 2
 		y = 1
 		cost = 5.8
@@ -1182,13 +1205,13 @@ focus_tree = {
 
 		completion_reward = {
 			army_experience = -35
-			## army reinforcement buff
+			add_ideas = GWC_doped_shrooms
 		}
 	}
 
 	focus = {
 		id = GWC_bone_armor
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_bone_armor
 		x = -2
 		y = 1
 		cost = 5.8
@@ -1215,7 +1238,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_a_hundred_bodies
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_heed_the_muster
 		x = -1
 		y = 2
 		cost = 5.8
@@ -1241,7 +1264,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_worm_warriors
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_a_hundred_warriors
 		x = 1
 		y = 2
 		cost = 5.8
@@ -1267,7 +1290,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_irradiated_tunnels
-		icon = GFX_GWC_skull
+		icon = GFX_RCH_tunnel_excavation
 		x = 5
 		y = 1
 		cost = 5.8
@@ -1278,6 +1301,9 @@ focus_tree = {
 
 		available = {
 			153 = {
+                is_owned_by = RUI
+			}
+			392 = {
                 is_owned_by = RUI
 			}
 			423 = {
@@ -1303,6 +1329,7 @@ focus_tree = {
 			transfer_state = 423
 			transfer_state = 164
 			transfer_state = 256
+			transfer_state = 392
 		}
 	}
 
@@ -1372,6 +1399,9 @@ focus_tree = {
 			256 = {
                 is_owned_by = ROOT
 			}
+			392 = {
+                is_owned_by = ROOT
+			}
 			has_war = no
 		}
 
@@ -1438,12 +1468,27 @@ focus_tree = {
 					}
 				}
 			}
+			392 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = GWC_brawling_grounds
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_a_hundred_warriors
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1520,6 +1565,9 @@ focus_tree = {
 			256 = {
                 is_owned_by = ROOT
 			}
+			392 = {
+                is_owned_by = ROOT
+			}
 		}
 
 		relative_position_id = GWC_stake_a_claim
@@ -1533,6 +1581,7 @@ focus_tree = {
 			add_state_core = 423
 			add_state_core = 164
 			add_state_core = 256
+			add_state_core = 392
 		}
 	}
 
@@ -1549,12 +1598,18 @@ focus_tree = {
 
 		relative_position_id = gwc_core_irradiated_tunnels
 
+		available = {
+			455 = {
+                is_owned_by = RUI
+			}
+		}
+
 		ai_will_do = {
 			factor = 2
 		}
 
 		completion_reward = {
-			country_event = nf_GWC.2
+			country_event = nf_GWC.7
 		}
 	}
 
@@ -1581,7 +1636,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_war_crafts_1
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_spikier_clubs
 		x = -2
 		y = 1
 		cost = 5.8
@@ -1607,7 +1662,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_war_crafts_2
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_group_efforts
 		x = 0
 		y = 3
 		cost = 5.8
@@ -1657,7 +1712,7 @@ focus_tree = {
 		icon = GFX_GWC_skull
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 3.2
 
 		prerequisite = {
 			focus = GWC_a_culture_of_conflict
@@ -1669,25 +1724,26 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
+			add_research_slot = 1
 			random_owned_state = {
 				limit = {
 					NOT = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
 			}
 		}
 	}
 
 	focus = {
 		id = GWC_war_crafts_3
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_core
 		x = 0
 		y = 3
 		cost = 5.8
@@ -1719,7 +1775,7 @@ focus_tree = {
 		icon = GFX_GWC_skull
 		x = 0
 		y = 2
-		cost = 5.8
+		cost = 3.1
 
 		prerequisite = {
 			focus = GWC_military_branch
@@ -1742,7 +1798,7 @@ focus_tree = {
 		icon = GFX_GWC_skull
 		x = 1
 		y = 1
-		cost = 5.8
+		cost = 3.1
 
 		prerequisite = {
 			focus = GWC_military_branch_2
@@ -1769,7 +1825,7 @@ focus_tree = {
 		icon = GFX_GWC_skull
 		x = -1
 		y = 1
-		cost = 5.8
+		cost = 3.1
 
 		prerequisite = {
 			focus = GWC_military_branch_2
@@ -1828,7 +1884,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_rid_the_machines
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_warfare_2
 		x = -2
 		y = 1
 		cost = 5.8
@@ -1844,22 +1900,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			capital_scope = {
-			    add_resource = {
-			        type = scrap
-			        amount = 8
-			    }
-				add_resource = {
-			        type = alloys
-			        amount = 4
-			    }
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
 			}
 		}
 	}
 
 	focus = {
 		id = GWC_sharper_sticks
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_group_efforts
 		x = -1
 		y = 1
 		cost = 5.8
@@ -2060,12 +2112,18 @@ focus_tree = {
 
 		completion_reward = {	
 			add_ideas = GWC_toolmaking_smiths
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.75
+				uses = 1
+				category = industry
+			}
 		}
 	}
 
 	focus = {
 		id = GWC_cave_fungus
-		icon = GFX_GWC_skull
+		icon = GFX_mushroom
 		x = -1
 		y = 1
 		cost = 5.8
@@ -2087,7 +2145,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_medicinal_wonders
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_ceremony_necklace
 		x = 1
 		y = 1
 		cost = 5.8
@@ -2296,6 +2354,12 @@ focus_tree = {
 			        type = alloys
 			        amount = 4
 			    }
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.75
+				uses = 2
+				category = industry
 			}
 		}
 	}

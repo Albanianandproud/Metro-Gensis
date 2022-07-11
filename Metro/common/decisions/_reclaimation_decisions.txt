@@ -6,22 +6,25 @@ reclaim_metro = {
 
  	reclaim_this_state = {
         icon = decision_generic_military
-		cost = 20 ### Change Cost depending on type of abandoned state? 
-		days_remove = 50
-		days_re_enable = 5
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+		days_remove = 28
+		days_re_enable = 0
 		on_map_mode = map_only
 		state_target = yes
 		fixed_random_seed = no
 
-        ai_will_do = {
-			factor = 5
+        	ai_will_do = {
+			factor = 10
 			modifier = {
 				factor = -200
 				has_war = yes
 			}
 			modifier = {
 				is_major = yes
-				factor = -200
+				factor = -75
 			}
 		}
 		
@@ -33,8 +36,7 @@ reclaim_metro = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
 					NOT = {
-						state = 1
-						state = 237
+						region = 2
 					}
                 }
             }
@@ -47,7 +49,7 @@ reclaim_metro = {
 			has_manpower > 10
 			has_equipment = {
                 infantry_equipment > 9
-                supplies_equipment > 1
+                ### supplies_equipment > 1
             }
 			NOT = {
 				ROOT = { has_country_flag = reclaimation_underway }
@@ -67,14 +69,15 @@ reclaim_metro = {
 		        type = infantry_equipment
 		        amount = -10
 		    }
-		    add_equipment_to_stockpile = {
-		        type = supplies_equipment
-		        amount = -2
-		    }
+		    ### add_equipment_to_stockpile = {
+		    ###    type = supplies_equipment
+		    ###    amount = -2
+		    ### }
 			set_country_flag = reclaimation_underway
 			FROM = {
 				set_state_flag = state_being_colonised
 			}
+			add_command_power = -25
 		}
 
 		remove_effect = {

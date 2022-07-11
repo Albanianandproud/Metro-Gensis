@@ -26,7 +26,7 @@ NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
 
 ---Nation Stuff---
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 2
-NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0.0001
+NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0
 NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
 NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.05
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.25
@@ -54,7 +54,7 @@ NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
 NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.2
 NDefines.NMilitary.INFRA_ORG_IMPACT = 0.5
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.05
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.02
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
 NDefines.NMilitary.TRAINING_ORG = 0.35								--- Base is 0.2
 NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.35						--- if strength is less than this, the unit will pause training until it's been reinforced
@@ -62,7 +62,7 @@ NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP g
 
 ---Commanders
 NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 20	--- Base is 24
-NDefines.NMilitary.DIVISION_SIZE_FOR_XP = 5				--- Base is 8
+NDefines.NMilitary.DIVISION_SIZE_FOR_XP = 2				--- Base is 8
 NDefines.NMilitary.FIELD_MARSHAL_DIVISIONS_CAP = 20		--- Base is 24
 
 ---Division Designer
@@ -103,21 +103,21 @@ NDefines.NAI.NUM_SILOS_PER_MILITARY_FACTORIES = 0.0001
 NDefines.NAI.NUM_SILOS_PER_DOCKYARDS = 0.001
 ---Supply Stuff---
 NDefines.NSupply.MAX_RAILWAY_LEVEL = 3		--- Base is 5. Pending Change.
-NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.6
-NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.6
+NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.75
+NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.75
 
-NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.4 		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
+NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.5		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
 
 NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.25		--- Base is 0.3
 
 NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 0.5
 
-NDefines.NSupply.INFRA_TO_SUPPLY = 0.8
+NDefines.NSupply.INFRA_TO_SUPPLY = 0.75
 NDefines.NSupply.VP_TO_SUPPLY_BASE = 0.75
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.2
-NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.5
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.25
+NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.75
 
-NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.25		--- Base is 0.35. Attrition is bad in the Metro yo,
+NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.2		--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
 NDefines.NOperatives.AGENCY_CREATION_DAYS = 99				--- No more Espionage!
