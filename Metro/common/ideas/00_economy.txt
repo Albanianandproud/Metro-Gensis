@@ -1,0 +1,506 @@
+ideas = {
+	economy = { 
+		law = yes
+		use_list_view = yes
+		
+		civilian_economy = {
+			
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				### Economy 
+				consumer_goods_factor = 0.35
+				production_speed_arms_factory_factor = -0.35
+				conversion_cost_civ_to_mil_factor = 0.35
+				production_factory_efficiency_gain_factor = -0.1
+				production_speed_buildings_factor = 0.1
+				offensive_war_stability_factor = -2
+			}
+
+			available = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			default = yes
+			cancel_if_invalid = no
+		}
+		
+		low_economic_mobilisation = {
+			
+			available = {
+				has_war_support > 0.34
+			}
+
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.25
+				production_speed_arms_factory_factor = -0.2
+				conversion_cost_civ_to_mil_factor = 0.2
+				production_factory_max_efficiency_factor = -0.025
+				production_factory_efficiency_gain_factor = -0.025 
+				production_factory_start_efficiency_factor = 0.05
+			}
+
+			available = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 2
+
+   				modifier = {
+					factor = 20
+					
+					is_major = yes
+				}
+				modifier = {
+					has_war_support > 0.49
+					factor = 0 #don't even look at it if you could be taking partial mob
+				}
+   			}
+		}
+		
+		partial_economic_mobilisation = {
+			
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				production_speed_arms_factory_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				offensive_war_stability_factor = -0.75
+				political_power_gain = -0.1
+			}
+
+
+			available = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+
+				has_war_support > 0.44
+				OR = {
+					threat > 0.09
+					date > 2030.1.1
+				}
+			}
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			
+			cancel_if_invalid = no
+			ai_will_do = {
+   				factor = 2
+
+   				modifier = {
+					factor = 20
+					
+					is_major = yes
+				}
+   			}
+		}
+		
+		war_economy = {
+			
+			available = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+
+				has_war_support > 0.49
+				OR = {
+					date > 2032.1.1
+					AND = {
+						has_war = yes
+						enemies_strength_ratio > 0.24
+					}
+				}
+			}
+
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+		
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				### Economy 
+				consumer_goods_factor = 0.15
+				production_speed_arms_factory_factor = 0.2
+				production_factory_max_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_start_efficiency_factor = -0.05
+				offensive_war_stability_factor = -0.25
+				defensive_war_stability_factor = 0.25
+				political_power_gain = -0.2
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 5
+
+				modifier = {
+					#High prio on production
+					factor = 20
+					manpower_per_military_factory >  5
+				}
+				
+				modifier = {
+					add = 1800
+					has_idea = closed_economy
+				}
+   			}
+		}
+		
+		tot_economic_mobilisation = {
+
+			available = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+				
+				has_war_support > 0.49
+				date > 2033.1.1
+				OR = {
+					has_war = yes
+					AND = {
+						enemies_strength_ratio > 0.39
+						surrender_progress > 0.24
+					}
+				}
+			}
+
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = HNZ 		## Hanza uses their own unique conscription law. 
+						tag = SPT		## Hanza uses their own unique conscription law. 
+					}
+				}
+			}
+			
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				### Economy 
+				consumer_goods_factor = 0.1
+				production_speed_arms_factory_factor = 0.3
+				production_factory_max_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_start_efficiency_factor = -0.1
+				defensive_war_stability_factor = 0.5
+				political_power_gain = -0.35
+			}
+	
+			ai_will_do = {
+   				factor = 1
+
+				modifier = {
+					factor = 25
+					#Prio this if nation has a lot of manpower compared to MIC
+					manpower_per_military_factory > 15
+				}
+
+				modifier = {
+					#Block  unless nation has a lot of manpower
+					factor = 0
+					manpower_per_military_factory <  25
+				}
+   			}
+			cancel_if_invalid = no
+		}
+	}
+	
+	trade_laws = { 
+		law = yes
+		use_list_view = yes
+		
+		free_trade = {
+
+			available = {
+				NOT = {
+					has_government = dictatorial
+				}
+			}
+
+			available = {
+				NOT = {
+					tag = RED 		## Red Line uses their own unique trade law. 
+				}
+			}
+
+			visible = { NOT = { tag = RED } }
+						
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.6
+				industrial_capacity_factory = 0.15
+				industrial_capacity_dockyard = 0.15
+				production_speed_buildings_factor = 0.15
+				research_speed_factor = 0.10
+				civilian_intel_to_others = 40.0
+				navy_intel_to_others = 20.0
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+   			}
+		}
+		
+		export_focus = {
+			
+			available = {
+				NOT = {
+					has_government = dictatorial
+				}
+			}
+
+			available = {
+				NOT = {
+					tag = RED 		## Red Line uses their own unique trade law. 
+				}
+			}
+
+			visible = { NOT = { tag = RED } }
+			
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.4
+				industrial_capacity_factory = 0.1
+				industrial_capacity_dockyard = 0.1
+				production_speed_buildings_factor = 0.1
+				research_speed_factor = 0.05
+				civilian_intel_to_others = 20.0
+				navy_intel_to_others = 10.0
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+
+				modifier = {
+					factor = 0
+					is_major = no
+					has_war = no
+					is_in_faction = no
+				}
+   			}
+		}
+		
+		limited_exports = {
+			available = {
+				OR = {
+					AND = {
+						has_government = dictatorial
+						has_government = oligarch
+						has_war = yes
+						any_enemy_country = {
+							ic_ratio = { 
+								tag = ROOT 
+								ratio > 0.3
+							}
+						}
+					}
+					AND = {
+						NOT = { has_government = council }
+						OR = {
+							has_idea = partial_economic_mobilisation
+							has_idea = war_economy
+							has_idea = tot_economic_mobilisation
+						}
+					}
+				}
+			}
+
+			available = {
+				NOT = {
+					tag = RED 		## Red Line uses their own unique trade law. 
+				}
+			}
+
+			visible = { NOT = { tag = RED } }
+		
+			cost = 100
+			removal_cost = -1
+			
+			modifier = {
+				min_export = 0.2
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.01
+				civilian_intel_to_others = 10.0
+				navy_intel_to_others = 5
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+
+   				modifier = {
+					add = -1
+					
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					add = -1
+					
+					is_major = no
+					has_war = no
+				}
+				
+				modifier = {
+					add = 1500
+					
+					# revert from closed_economy if we have large allies
+					has_idea = closed_economy
+				}
+   			}
+		}
+		
+		closed_economy = {
+			
+			
+			available = {
+				has_war = yes
+				OR = { 
+					has_government = oligarch
+					has_government = dictatorial
+				}
+				OR = {
+					has_idea = war_economy
+					has_idea = tot_economic_mobilisation
+				}
+				OR = {
+					NOT = {	tag = HNZ }
+				}
+			}
+
+			available = {
+				NOT = {
+					tag = RED 		## Red Line uses their own unique trade law. 
+				}
+			}
+
+			visible = { NOT = { tag = RED } }
+			
+			cost = 100
+			removal_cost = -1
+			
+			
+			modifier = {
+				min_export = 0
+				#civilian_intel_to_others = 0.0
+				ai_get_ally_desire_factor = -1.5
+			}
+			
+			on_add = {
+				custom_effect_tooltip = closed_economy_TT
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+
+   				modifier = {
+					factor = 0
+					
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					factor = 0
+					
+					is_major = no
+					has_war = no
+				}
+				
+				modifier = {
+					factor = 3
+					
+				}
+   			}
+		}
+	}
+}

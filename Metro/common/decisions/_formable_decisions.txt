@@ -45,4 +45,271 @@ formable_nations_category = {
 			base = 200
 		}
 	}
+
+	northern_emirate = {
+		allowed = {
+			original_tag = ISL
+		}
+
+		available = {
+			AND = {
+				controls_state = 303
+			}
+			OR = {
+				SAT = {
+					exists = no
+				}
+			}
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = ISL_northern_emirate
+			303 = { add_core_of = ROOT }
+			add_stability = 0.1
+			add_war_support = 0.1
+
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							region = 17
+						}
+					}
+					add_claim_by = ROOT
+					add_core_of = ROOT
+				}
+			}
+			custom_effect_tooltip = northern_emirate_formable_tooltip
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+	vdnkh_commonwealth = {
+		allowed = {
+			original_tag = VDN
+		}
+
+		available = {
+			count_triggers = {
+    			amount = 3
+				ROOT = {
+					is_in_faction_with = ALK
+					is_in_faction_with = RIZ
+				}
+				ALK = {
+					exists = no
+				}
+				RIZ = {
+					exists = no
+				}
+				controls_state = 424
+				controls_state = 317
+				date > 2033.01.01
+			}
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = VDN_commonwealth
+			add_stability = 0.15
+
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = ALK
+					}
+				}
+				annex_country = {
+    				target = ALK
+    				transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = RIZ
+					}
+				}
+				annex_country = {
+    				target = RIZ
+    				transfer_troops = yes
+				}
+			}
+
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = ALK
+						is_core_of = RIZ
+					}
+				}
+				add_core_of = ROOT
+			}
+			add_ideas = vdnk
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+	hyperborea = {
+		allowed = {
+			original_tag = PAG
+		}
+
+		available = {
+			has_country_leader = {
+				character = PAG_yuriy
+				ruling_only = yes
+			}
+			AND = {
+				controls_state = 294
+				controls_state = 318
+				controls_state = 372
+				controls_state = 246
+			}
+			OR = {
+				TSH = {
+					exists = no
+				}
+				SHD = {
+					exists = no
+				}
+			}
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = PAG_hyperborea
+			add_war_support = 0.15
+
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							region = 14
+						}
+					}
+					add_claim_by = ROOT
+					add_core_of = ROOT
+				}
+			}
+			custom_effect_tooltip = pagan_hyperborea_tooltip
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+	skavendom = {
+		allowed = {
+			original_tag = SCA
+		}
+
+		available = {
+			has_government = dictatorial
+			AND = {
+				controls_state = 367
+				controls_state = 263
+				ALT = {
+					exists = no
+				}
+				ISL = {
+					exists = no
+				}
+				SAT = {
+					exists = no
+				}
+			}
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = SCA_scavendom
+			367 = { add_core_of = ROOT }
+			263 = { add_core_of = ROOT }
+
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							region = 17
+						}
+					}
+					add_claim_by = ROOT
+					add_core_of = ROOT
+				}
+			}
+			custom_effect_tooltip = scavendom_formable_tooltip
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+	venice_china_town = {
+		allowed = {
+			original_tag = TRT
+			original_tag = KTG
+		}
+
+		available = {
+			count_triggers = {
+    			amount = 3
+				ROOT = {
+					is_in_faction_with = TRT
+					is_in_faction_with = KTG
+				}
+				TRT = {
+					exists = no
+				}
+				KTG = {
+					exists = no
+				}
+				controls_state = 311
+				controls_state = 315
+				date > 2033.01.01
+			}
+		}
+		complete_effect = {
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = TRT
+					}
+				}
+				annex_country = {
+    				target = TRT
+    				transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = KTG
+					}
+				}
+				annex_country = {
+    				target = KTG
+    				transfer_troops = yes
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = KTG
+						is_core_of = TRT
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
 }

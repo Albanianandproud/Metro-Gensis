@@ -1159,7 +1159,7 @@ country_event = {
 			}
 			modify_timed_idea = { idea = HNZ_scavenged_tooling days = 90 }
 		}
-		add_timed_idea = { idea = HNZ_scavenged_tooling days = 120 }
+		add_timed_idea = { idea = HNZ_scavenged_tooling days = 150 }
 	}
 }
 
@@ -1193,17 +1193,15 @@ country_event = {
 
 	option = {
 		name = nf_HNZ.36.a
-		add_timed_idea = { idea = HNZ_better_resource_effort days = 240 }
+		add_timed_idea = { idea = HNZ_better_resource_effort days = 360 }
 	}
 	option = {
 		name = nf_HNZ.36.b
-		random_owned_controlled_state = {
-		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = scrap amount = 6 }
-		}
-		random_owned_controlled_state = {
-		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = alloys amount = 6 }
+
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_3
+			amount = 25
+			producer = RUS
 		}
 	}
 }
@@ -1244,27 +1242,60 @@ country_event = {
 		}
 		add_equipment_to_stockpile = {
 		    type = rail_panzer_equipment
-		    amount = 30
+		    amount = 5
 		}
 		custom_effect_tooltip = HNZ_nf_HNZ.38_tt
+		if = {
+    		limit = {
+        		NOT = {
+        			has_tech = rail_panzer_tech_2030
+        			AND = {
+						is_researching_technology = rail_panzer_tech_2030
+        			}
+        		}
+    		}
+    		set_technology = {
+    			rail_panzer_tech_2030 = 1
+    		}
+    	}
 	}
 	option = {
 		name = nf_HNZ.38.b
 		random_owned_controlled_state = {
 		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = scrap amount = 12 }
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
 		}
 		random_owned_controlled_state = {
 		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = alloys amount = 8 }
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
 		}
 		random_owned_controlled_state = {
 		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = chemicals amount = 6 }
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
 		}
 		random_owned_controlled_state = {
 		    limit = { NOT = { has_state_category = pastoral } }
-			add_resource = { type = components amount = 6 }
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
 		}
 	}
 }
@@ -1315,6 +1346,25 @@ country_event = { ## Mobilise NOW
 	option = {
 		name = nf_HNZ.39.b
 		add_political_power = 50
+	}
+}
+
+country_event = {
+	id = nf_HNZ.40
+	title = nf_HNZ.40.t
+	desc = nf_HNZ.40.d
+	picture = GFX_event_clearsky
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		select_scavenging_reward_equipment = yes
+	}
+
+	option = {
+		name = nf_HNZ.40.a
+		give_scavenge_reward_equipment = yes
 	}
 }
 

@@ -10,13 +10,13 @@ reclaim_metro = {
 		custom_cost_trigger = {
 			command_power > 24.9
 		}
-		days_remove = 28
+		days_remove = 45
 		days_re_enable = 0
 		on_map_mode = map_only
 		state_target = yes
 		fixed_random_seed = no
 
-        	ai_will_do = {
+        ai_will_do = {
 			factor = 10
 			modifier = {
 				factor = -200
@@ -40,9 +40,15 @@ reclaim_metro = {
 					}
                 }
             }
+            NOT = {
+            	original_tag = GWC
+            }
         }
 
 		available = {
+			NOT = {
+            	original_tag = GWC
+            }
 			FROM = {
                 is_owned_by = RUI
 			}
@@ -57,7 +63,6 @@ reclaim_metro = {
 					OR = {
 						has_state_flag = state_being_colonised
 						state = 1
-						state = 237
 					}
 				}
 			}
@@ -111,19 +116,113 @@ reclaim_metro = {
 		        }
 		        20 = { #Expedition lost
 		            country_event = reclaimation_event.lost
-		            FROM = {
+		        	FROM = {
 						clr_state_flag = state_being_colonised
 					}
-		        }
-			}
+				}	
+		    }
 			ROOT = { clr_country_flag = reclaimation_underway }
 		}
-		ai_will_do = {
-			factor = 0.5
+    }
+
+    GWC_reclaim_this_state = { ### Will always succeed. But takes far longer ## 
+        icon = decision_generic_military
+
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		days_remove = 90
+		days_re_enable = 0
+
+		on_map_mode = map_only
+		state_target = yes
+		fixed_random_seed = no
+
+        ai_will_do = {
+			factor = 10
 			modifier = {
-				factor = 1.5
-				is_major = no
+				factor = -200
+				has_war = yes
 			}
+			modifier = {
+				is_major = yes
+				factor = -75
+			}
+		}
+		
+        visible = {
+            RUI = {
+                owns_state = FROM
+            }
+            FROM = {
+                any_neighbor_state = {
+                    is_fully_controlled_by = ROOT
+					NOT = {
+						region = 2
+					}
+                }
+            }
+            AND = {
+            	original_tag = GWC
+            }
+        }
+
+		available = {
+			AND = {
+            	original_tag = GWC
+            }
+			FROM = {
+                is_owned_by = RUI
+			}
+			has_manpower > 9
+			has_equipment = {
+                infantry_equipment > 9
+                ### supplies_equipment > 1
+            }
+			NOT = {
+				ROOT = { has_country_flag = reclaimation_underway }
+				FROM = {
+					OR = {
+						has_state_flag = state_being_colonised
+						state = 1
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			add_manpower = -10
+		    add_equipment_to_stockpile = {
+		        type = infantry_equipment
+		        amount = -10
+		    }
+		    ### add_equipment_to_stockpile = {
+		    ###    type = supplies_equipment
+		    ###    amount = -2
+		    ### }
+			set_country_flag = reclaimation_underway
+			FROM = {
+				set_state_flag = state_being_colonised
+			}
+			add_command_power = -25
+		}
+
+		remove_effect = {
+			ROOT = {
+				set_variable = {
+					var = state_colonised_id
+					value = FROM
+				}
+			}
+			hidden_effect = {
+				ROOT = { country_event = reclaimation_event.2 }
+			}
+		    FROM = {
+				clr_state_flag = state_being_colonised
+			}
+		   ROOT = { clr_country_flag = reclaimation_underway }
 		}
     }
 }

@@ -4,7 +4,7 @@ country_event = { # Revolution
     id = nf_RED.1
     title = nf_RED.1.t
     desc = nf_RED.1.d
-    picture = event_attack.2
+    picture = GFX_event_red.9
 
 	is_triggered_only = yes
 
@@ -12,12 +12,20 @@ country_event = { # Revolution
 		name = nf_RED.1.a
         add_country_leader_trait = RED_andrey_war_support
         hidden_effect = { country_event = { id = nf_RED.2 days = 7 random_days = 7 } }
+
+        ai_chance = {
+            base = 1
+        }
 	}
 
     option = {
         name = nf_RED.1.b
         add_country_leader_trait = RED_andrey_stability
         hidden_effect = { country_event = { id = nf_RED.2 days = 7 random_days = 7 } }
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -25,7 +33,7 @@ country_event = { # Fallout
     id = nf_RED.2
     title = nf_RED.2.t
     desc = nf_RED.2.d
-    picture = event_red.9
+    picture = GFX_event_red.11
 
     is_triggered_only = yes
 
@@ -40,6 +48,10 @@ country_event = { # Fallout
             modifier = RED_betrayed_revolution
         }
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     option = {
@@ -53,10 +65,15 @@ country_event = { # Fallout
             modifier = RED_betrayed_revolution_for_now
         }
         add_popularity = {
-            ideology = council
-            popularity = -0.035
+            ideology = community
+            popularity = 0.025
         }
+        add_political_power = -25
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
+
+        ai_chance = {
+            base = 0.5
+        }
     }
 }
 
@@ -64,18 +81,26 @@ country_event = { # Peace
     id = nf_RED.3
     title = nf_RED.3.t
     desc = nf_RED.3.d
-    picture = event_polis.3
+    picture = GFX_event_polis.3
 
     is_triggered_only = yes
 
     option = {
         name = nf_RED.3.a
         add_country_leader_trait = RED_champion_of_the_proletariat
+
+        ai_chance = {
+            base = 5
+        }
     }
 
     option = {
         name = nf_RED.3.b
         add_country_leader_trait = RED_champion_of_the_party
+
+        ai_chance = {
+            base = 1
+        }
     }
 }
 
@@ -83,18 +108,18 @@ country_event = { # State of the Line
     id = nf_RED.4
     title = nf_RED.4.t
     desc = nf_RED.4.d
-    picture = event_red.5
+    picture = GFX_event_red.5
 
     is_triggered_only = yes
 
     option = {
         name = nf_RED.4.a
-        add_political_power = 10
-        add_popularity = {
-            ideology = council
-            popularity = 0.02
-        }
+        add_political_power = 5
         hidden_effect = { country_event = { id = nf_RED.22 days = 14 random_days = 14 } } ### Consul event
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -102,18 +127,32 @@ country_event = { # Q of Economy
     id = nf_RED.5
     title = nf_RED.5.t
     desc = nf_RED.5.d
-    picture = event_red.11
+    picture = GFX_event_red.11
 
     is_triggered_only = yes
 
     option = {
         name = nf_RED.5.a
-        add_ideas = RED_economy_improve_line
+        add_timed_idea = {
+            idea = RED_economy_improve_line
+            days = 240
+        }
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     option = {
         name = nf_RED.5.b
-        add_ideas = RED_economy_improve_living
+        add_timed_idea = {
+            idea = RED_economy_improve_living
+            days = 240
+        }
+
+        ai_chance = {
+            base = 1.5
+        }
     }
 }
 
@@ -121,7 +160,7 @@ country_event = { # Q of Military
     id = nf_RED.6
     title = nf_RED.6.t
     desc = nf_RED.6.d
-    picture = event_red.6
+    picture = GFX_event_red.6
 
     is_triggered_only = yes
 
@@ -143,47 +182,53 @@ country_event = { # Q of Military
             slot = high_command
             trait = RED_removing_influence
         }
+        hidden_effect = { country_event = { id = nf_RED.24 days = 7 random_days = 14 } }
+
+        ai_chance = {
+            base = 5
+        }
     }
 
-    option = {
-        name = nf_RED.6.b
-        custom_effect_tooltip = RED_appease_the_dissenters
-        hidden_effect = {
-            remove_trait = {
-                character = RED_kovshov
-                slot = army_chief 
-                trait = RED_viktor_kovshov
-            }
-            remove_trait = {
-                character = RED_yury_terekhov
-                slot = high_command 
-                trait = RED_yury_terekhov
-            }
-            remove_trait = {
-                character = RED_georgy_rozhestvensky
-                slot = high_command
-                trait = RED_georgy_rozhestvensky
-            }
-        }
-        add_trait = {
-            character = RED_kovshov
-            slot = army_chief 
-            trait = RED_viktor_kovshov_2
-        }
-        add_trait = {
-            character = RED_yury_terekhov
-            slot = high_command 
-            trait = RED_yury_terekhov_2
-        }
-        add_trait = {
-            character = RED_georgy_rozhestvensky
-            slot = high_command
-            trait = RED_georgy_rozhestvensky_2
-        }
-        hidden_effect = {
-            set_country_flag = RED_high_command_pissed_off
-        }
-    }
+    #option = {
+    #    name = nf_RED.6.b
+    #    custom_effect_tooltip = RED_appease_the_dissenters
+    #    hidden_effect = {
+    #        remove_trait = {
+    #            character = RED_kovshov
+    #            slot = army_chief 
+    #            trait = RED_viktor_kovshov
+    #        }
+    #        remove_trait = {
+    #            character = RED_yury_terekhov
+    #            slot = high_command 
+    #            trait = RED_yury_terekhov
+    #        }
+    #        remove_trait = {
+    #            character = RED_georgy_rozhestvensky
+    #            slot = high_command
+    #            trait = RED_georgy_rozhestvensky
+    #        }
+    #    }
+    #    add_trait = {
+    #        character = RED_kovshov
+    #        slot = army_chief 
+    #        trait = RED_viktor_kovshov_2
+    #    }
+    #    add_trait = {
+    #        character = RED_yury_terekhov
+    #        slot = high_command 
+    #        trait = RED_yury_terekhov_2
+    #    }
+    #    add_trait = {
+    #        character = RED_georgy_rozhestvensky
+    #        slot = high_command
+    #        trait = RED_georgy_rozhestvensky_2
+    #    }
+    #    hidden_effect = {
+    #        set_country_flag = RED_high_command_pissed_off
+    #    }
+    #    hidden_effect = { country_event = { id = nf_RED.24 days = 7 random_days = 14 } }
+    #}
 }
 
 country_event = { # Q of grain requesition
@@ -197,6 +242,11 @@ country_event = { # Q of grain requesition
     option = {
         name = nf_RED.7.a
         RED_decrease_requesition_intensity = yes
+        add_stability = 0.025
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     option = {
@@ -205,7 +255,12 @@ country_event = { # Q of grain requesition
             remove_ideas = RED_heavy_produce_requesition
         }
         add_ideas = RED_station_requesition
-    }
+        add_stability = 0.025
+
+        ai_chance = {
+            base = 1
+        }
+    }   
 }
 
 country_event = { # Q of Brotherhood
@@ -237,37 +292,45 @@ country_event = { # Q of Brotherhood
             }
             activate = yes
         }
+
+        ai_chance = {
+            base = 10
+        }
     }
 
-    option = { ## Make him a general / high command will grumble
-        name = nf_RED.8.b
-        custom_effect_tooltip = RED_moskvin_q_general_role
-        custom_effect_tooltip = RED_moskvin_future_career
-        add_advisor_role = {
-            Character = RED_moskvin
-            advisor = {
-                slot = high_command
-                idea_token = RED_moskvin
-                cost = 100
-                allowed = {
-                    original_tag = RED
-                }
-                traits = { RED_maxim_1b }
-                removal_cost = -1
-                ai_will_do = {
-                    factor = 16
-                }
-            }
-            activate = yes
-        }
-        custom_effect_tooltip = RED_generals_will_be_unhappy
-    }
+    #option = { ## Make him a general / high command will grumble
+    #    name = nf_RED.8.b
+    #    custom_effect_tooltip = RED_moskvin_q_general_role
+    #    custom_effect_tooltip = RED_moskvin_future_career
+    #    add_advisor_role = {
+    #        Character = RED_moskvin
+    #        advisor = {
+    #            slot = high_command
+    #            idea_token = RED_moskvin
+    #            cost = 100
+    #            allowed = {
+    #                original_tag = RED
+    #            }
+    #            traits = { RED_maxim_1b }
+    #            removal_cost = -1
+    #            ai_will_do = {
+    #                factor = 16
+    #            }
+    #        }
+    #        activate = yes
+    #    }
+    #    custom_effect_tooltip = RED_generals_will_be_unhappy
+    #}
 
     option = {
         name = nf_RED.8.c
         ## No
         custom_effect_tooltip = RED_moskvin_q_no_role
         custom_effect_tooltip = RED_moskvin_future_career
+
+        ai_chance = {
+            base = 0.5
+        }
     }
 }
 
@@ -285,6 +348,10 @@ country_event = { # Establish Ministry of Economy
         custom_effect_tooltip = RED_minister_of_economics_departments_tt
         hidden_effect = {
             add_ideas = RED_minister_of_economics
+        }
+
+        ai_chance = {
+            base = 25
         }
     }
 }
@@ -325,7 +392,10 @@ country_event = { # Crisis
 
     option = {
         name = nf_RED.11.a
-        add_stability = -0.05
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -345,6 +415,10 @@ country_event = { # Mushroom Revolts
         custom_effect_tooltip = RED_unlock_mushroom_revolt_tt#
         custom_effect_tooltip = RED_mushroom_revolt_countdown
         activate_mission = RED_mushroom_revolt_mission_countdown
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     immediate = {
@@ -388,7 +462,11 @@ country_event = { # Korbut
         name = nf_RED.13.a
         add_popularity = {
             ideology = dictatorial
-            popularity = 0.02
+            popularity = 0.01
+        }
+
+        ai_chance = {
+            base = 25
         }
     }
 }
@@ -409,6 +487,13 @@ country_event = { # Military Mutinies
         custom_effect_tooltip = RED_unlock_mutiny_path_tt
         custom_effect_tooltip = RED_mutiny_countdown
         activate_mission = RED_military_mutiny_mission_countdown
+        add_ideas = RED_army_ransacking
+        country_lock_all_division_template = yes
+        hidden_effect = { country_event = { id = nf_RED.26 days = 21 random_days = 21 } }
+
+        ai_chance = {
+            base = 25
+        }
     }
 
     immediate = {
@@ -416,6 +501,7 @@ country_event = { # Military Mutinies
             idea = RED_military_mutinies
             days = 361
         }
+        add_ideas = RED_army_ransacking
     }
 }
 
@@ -429,23 +515,76 @@ country_event = { # Approach the Commanders
 
     option = {
         name = nf_RED.15.a
-    }
+        trigger = { 
+            NOT = {
+                has_idea_with_trait = RED_maxim_1b 
+            }
+        }
+        add_political_power = -30
+        hidden_effect = {
+            add_corps_commander_role = {
+				character = RED_Yurik_velikov
+				skill = 4
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				legacy_id=-1
+			}
+            add_corps_commander_role = {
+				character = RED_Valerian_Grabovoi
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+				legacy_id=-1
+			}
+        }
+        hidden_effect = { country_event = { id = nf_RED.25 days = 21 random_days = 21 } }
 
-    option = {
-        name = nf_RED.15.b
+        ai_chance = {
+            base = 2
+        }
     }
 
     option = { ## Maxim Moskvin needs to be a general
+        name = nf_RED.15.c
         custom_effect_tooltip = RED_maxim_moskvin_is_a_general
         trigger = { 
-            has_idea_with_trait = RED_maxim_1b 
+            has_idea_with_trait = RED_maxim_1a 
         }
-        name = nf_RED.15.c
+        army_experience = 5
         custom_effect_tooltip = RED_maxim_becomes_resolute
         add_trait = {
             character = RED_moskvin
             slot = high_command
             trait = maxim_resolute
+        }
+        hidden_effect = {
+            add_corps_commander_role = {
+				character = RED_Yurik_velikov
+				skill = 4
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				legacy_id=-1
+			}
+            add_corps_commander_role = {
+				character = RED_Valerian_Grabovoi
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+				legacy_id=-1
+			}
+        }
+        hidden_effect = { country_event = { id = nf_RED.25 days = 21 random_days = 21 } }
+
+        ai_chance = {
+            base = 50
         }
     }
 }
@@ -460,6 +599,16 @@ country_event = { # Martyrs Disappear
 
     option = {
         name = nf_RED.16.a
+        army_experience = 10
+
+        add_days_remove  = {
+            decision = RED_military_mutiny_mission_countdown
+            days = 40
+        }
+
+        ai_chance = {
+            base = 30
+        }
     }
 }
 
@@ -473,6 +622,10 @@ country_event = { # Approach Hansa
 
     option = {
         name = nf_RED.17.a
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -486,6 +639,20 @@ country_event = { # rid ring leaders
 
     option = {
         name = nf_RED.18.a
+
+        add_popularity = {
+            ideology = council
+            popularity = 0.05
+        }
+
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.01
+        }
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -499,6 +666,10 @@ country_event = { # repress evidence
 
     option = {
         name = nf_RED.19.a
+        add_political_power = 30
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -519,6 +690,11 @@ country_event = { # Aslan Fugitive
         }
         add_political_power = -15
         ## Begin revolutionist plot decision
+        complete_national_focus = RED_crisis
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -548,10 +724,14 @@ country_event = { # Consul Advisor Event
         name = nf_RED.22.a
         ## Tell about mushroom revolts and military
         ## Enables Unique Generic Decisions
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
-country_event = { # Consul Advisor Flees
+country_event = { # Great Show Trial
     id = nf_RED.23
     title = nf_RED.23.t
     desc = nf_RED.23.d
@@ -563,13 +743,20 @@ country_event = { # Consul Advisor Flees
         name = nf_RED.23.a
         add_popularity = {
             ideology = council
-            popularity = -0.025
+            popularity = 0.05
         }
-        ## Revolutionist Plot start     
+        RED_mutiny_removal = yes
+
+        hidden_effect = {
+            clr_country_flag = RED_military_mutinies
+        } 
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
-country_event = { # Great Show Trial
+country_event = { # Old Generals refusing new Commanders
     id = nf_RED.24
     title = nf_RED.24.t
     desc = nf_RED.24.d
@@ -579,14 +766,195 @@ country_event = { # Great Show Trial
 
     option = {
         name = nf_RED.24.a
+        add_ideas = RED_commanders_short_supply
+
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+country_event = { # Generals Siphoning manpower
+    id = nf_RED.25
+    title = nf_RED.25.t
+    desc = nf_RED.25.d
+    picture = event_living.3
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.25.a
+        trigger = {
+            NOT = {
+                has_idea_with_trait = maxim_resolute
+            }
+        }
+        add_timed_idea = {
+            idea = RED_generals_siphoning_manpower
+            days = 75
+        }
+
+        ai_chance = {
+            base = 2.5
+        }
+    }
+
+    option = {
+        name = nf_RED.25.b
+        trigger = { 
+            has_idea_with_trait = maxim_resolute
+        }
+        add_timed_idea = {
+            idea = RED_generals_siphoning_manpower
+            days = 30
+        }
+
+        ai_chance = {
+            base = 35
+        }
+    }
+
+    option = {
+        name = nf_RED.25.c
+        trigger = { 
+            has_idea_with_trait = RED_andrey_war_support
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+}
+
+country_event = { # Plans of outward mutiny
+    id = nf_RED.26
+    title = nf_RED.26.t
+    desc = nf_RED.26.d
+    picture = event_living.3
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.26.a
+        add_timed_idea = {
+            idea = RED_soldiers_siphoning_equipment
+            days = 60
+        }
+
+        ai_chance = {
+            base = 2.5
+        }
+    }
+
+    option = {
+        name = nf_RED.25.b
+        trigger = { 
+            has_idea_with_trait = RED_korbut
+        }
         add_popularity = {
             ideology = council
-            popularity = 0.025
+            popularity = -0.01
         }
-        remove_ideas = RED_military_mutinies
-        hidden_effect = {
-            clr_country_flag = RED_military_mutinies
-        }  
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.01
+        }
+
+        ai_chance = {
+            base = 10
+        }
+    }
+
+    option = {
+        name = nf_RED.26.c
+        add_manpower = -35
+
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+
+country_event = { # How to deal with People revolt
+    id = nf_RED.27
+    title = nf_RED.27.t
+    desc = nf_RED.27.d
+    picture = event_living.3
+
+    is_triggered_only = yes
+
+    option = { #Completes Reforms
+        name = nf_RED.27.a
+        set_country_flag = RED_inner_reforms
+
+        ai_chance = {
+            base = 5
+        }
+    }
+
+    option = { #Completes Hansa
+        name = nf_RED.27.b
+        set_country_flag = RED_approaching_hansa
+
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+
+country_event = { # wholesome meet with revolters
+    id = nf_RED.28
+    title = nf_RED.28.t
+    desc = nf_RED.28.d
+    picture = event_living.3
+
+    is_triggered_only = yes
+
+    option = { #Korbut shoots them lol
+        name = nf_RED.28.a
+
+        ai_chance = {
+            base = 500
+        }
+    }
+
+    option = { #they shoot u lol
+        name = nf_RED.28.b
+
+        ai_chance = {
+            base = 0.5
+        }
+    }
+
+    option = { #they quell down
+        name = nf_RED.28.c
+
+        ai_chance = {
+            base = 20
+        }
+    }
+}
+
+country_event = { ## loads 2030 tree
+    id = nf_RED.30
+    title = nf_RED.30.t
+    desc = nf_RED.30.d
+    picture = event_mutant.3
+
+    trigger = { RED_crisis_remove = yes }
+
+    fire_only_once = yes
+
+    immediate = {
+        load_focus_tree = { tree = red_line_3 }
+    }
+
+    option = {
+        name = nf_RED.30.a
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }
 
@@ -613,6 +981,10 @@ country_event = { # Berilag
             
             RED_berilag_check_POW_capacity = yes
             RED_berilag_check_GM_capacity = yes
+        }
+
+        ai_chance = {
+            base = 2.5
         }
     }
 }
@@ -652,12 +1024,18 @@ country_event = { # Mushroom Revolt
                     target = RED
                     type = annex_everything
                 }
+                transfer_state = 344
+                transfer_state = 135
             }
         }
     }
 
     option = {
         name = nf_RED.50.a
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     option = { ### Play as Revolters
@@ -676,14 +1054,107 @@ country_event = { # Dissenters Revolt
 
     immediate = {
         hidden_effect = {
+            retire_character = RED_kovshov
+            retire_character = RED_yury_terekhov
+            retire_character = RED_georgy_rozhestvensky
+            release = RMJ
+            RMJ = {
+                if = {
+                    limit = {
+                        is_ai = yes
+                    }
+                    add_offsite_building = { type = arms_factory level = 6 }
+                    add_equipment_to_stockpile = { type = infantry_equipment amount = 180 }
+                    add_equipment_to_stockpile = { type = support_equipment  amount = 35 }
+                    else = {
+                        add_equipment_to_stockpile = { type = infantry_equipment amount = 60 }
+                        add_equipment_to_stockpile = { type = support_equipment  amount = 10 }
+                    }
+                }
+                set_capital = { state = 245 }
+                load_oob = "RMJ_revolt"
+                transfer_state = 245
+                transfer_state = 187
+                transfer_state = 205
+                transfer_state = 185
+                transfer_state = 282
+                transfer_state = 188
+                declare_war_on = {
+                    target = RED
+                    type = annex_everything
+                }
+            }
+            every_owned_state = {
+                limit = {
+                    is_core_of = RED
+                }
+                add_core_of = RMJ
+            }
         }
     }
     
     option = {
         name = nf_RED.51.a
+        declare_war_on = {
+            target = RMJ
+            type = annex_everything
+        }
+        ai_chance = {
+            base = 2.5
+        }
     }
 
     option = { ### Play as Dissenters
         name = nf_RED.51.b
+        RMJ = {
+            change_tag_from = ROOT
+            declare_war_on = {
+                target = RED
+                type = annex_everything
+            }
+            every_owned_state = {
+                limit = {
+                    is_core_of = RED
+                }
+                add_core_of = PREV
+            }
+        }
+    }
+}
+
+country_event = { # DRY station Flavor 1
+    id = nf_RED.52
+    title = nf_RED.52.t
+    desc = nf_RED.52.d
+    picture = event_attack.1
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.52.a
+        ## Taunts over Radio
+
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+country_event = { # DRY station Flavor 2
+    id = nf_RED.53
+    title = nf_RED.53.t
+    desc = nf_RED.53.d
+    picture = event_attack.1
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.53.a
+        ## Master is shot
+        add_political_power = 15
+
+        ai_chance = {
+            base = 2.5
+        }
     }
 }

@@ -1,6 +1,6 @@
 on_actions = {
 	on_startup = {
-		effect = { ### giving every tunnel a modifier
+		effect = { ### giving every tunnel a shared modifier
 			every_state = {
 				limit = {
 					has_state_category = pastoral
@@ -9,44 +9,83 @@ on_actions = {
                     modifier = tunnel
                 }
 			}
-		}
-	    effect = {
-	    	every_country = {
-				limit = {
-					NOT = {
-						tag = MUT
-					}
-				}
-				set_variable = { delete_manpower_from_tunnel = -1 }
+        }
+        effect = {
+            every_country = {
+                every_state = {
+                    limit = {
+                        OR = {
+                            has_state_category = pastoral
+                        }
+                    }
+                    if = {
+                        limit = {
+                            PREV = {
+                                controls_state = PREV
+                            }
+                        }
+                        if = { limit = { PREV = { NOT = { has_variable = delete_manpower_from_tunnel } } }
+                            PREV = {
+                                set_variable = { delete_manpower_from_tunnel = -1 }
+                            }
+                        }
+                        else = {
+                            PREV = {
+                                add_to_variable = { delete_manpower_from_tunnel = -1 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    on_monthly = {
+        effect = {
+            every_state = {
+                limit = {
+                    OR = {
+                        has_state_category = pastoral
+                    }
+                }
+                if = {
+                    limit = {
+                        ROOT = {
+                            controls_state = PREV
+                        }
+                    }
+                    THIS = { add_manpower = -1 }
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = delete_manpower_from_tunnel
+                }
+                add_manpower = var:delete_manpower_from_tunnel
+                log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower removed"
             }
         }
     }
     on_state_control_changed = {
-        effect = {
-            if = {
-                limit = {
-                    FROM.FROM = {
-                        has_country_flag = dont_delete_manpower
-                    }
-                }
-                ROOT = {
-                    add_to_variable = { delete_manpower_from_tunnel = -1 }
-                }
-                FROM = {
-                    add_to_variable = { delete_manpower_from_tunnel = 1 }
-                }
-            }
-        }
-    }
-    on_weekly = {
-        effect = {
-            every_country = {
-                add_manpower = var:delete_manpower_from_tunnel
-            }
-            ROOT = {
-           		log = "we own [?num_of_controlled_states] states"
-            	log = "[?delete_manpower_from_tunnel] removed"
-            }
-        }
-    }
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							has_state_category = pastoral
+						}
+					}
+				}
+				ROOT = {
+					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove before changed"
+					add_to_variable = { delete_manpower_from_tunnel = -1 }
+					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove after change"
+				}
+				FROM = {
+					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove before change"
+					add_to_variable = { delete_manpower_from_tunnel = 1 }
+					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove after change"
+				}
+			}
+		}
+	}
 }

@@ -43,7 +43,7 @@ RED_crisis_category = {
 
 		allowed = { tag = RED }
 		is_good = no
-		days_mission_timeout = 360
+		days_mission_timeout = 361
 		available = {                           
             not = {
             	has_country_flag = RED_mushroom_revolts
@@ -69,7 +69,7 @@ RED_crisis_category = {
 
 		allowed = { tag = RED }
 		is_good = no
-		days_mission_timeout = 360
+		days_mission_timeout = 361
 		available = {                           
             not = {
             	has_country_flag = RED_military_mutinies
@@ -82,6 +82,216 @@ RED_crisis_category = {
         complete_effect = {                    
             remove_ideas = RED_military_mutinies            
         }
+	}
+
+	RED_military_mutiny_rid_mutinies = {
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_rid_mutinies
+		}
+
+		visible = {
+			has_completed_focus = RED_rid_mutinies
+		}
+		cost = 35
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+
+		modifier = {
+			command_power_gain_mult = -0.75
+		}
+
+		remove_effect = {
+			RED_mutiny_removal = yes
+		}
+	}
+
+	RED_military_mutiny_rid_mutinies_2 = { # Needed. So players can only use decision Twice
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_martyrs_disappear
+		}
+
+		visible = {
+			has_completed_focus = RED_martyrs_disappear
+		}
+		cost = 35
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+
+		modifier = {
+			command_power_gain_mult = -0.75
+		}
+
+		remove_effect = {
+			RED_mutiny_removal = yes
+		}
+	}
+
+	RED_military_mutiny_remove_power = {
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_military_mutinies
+		}
+
+		visible = {
+			has_completed_focus = RED_military_mutinies
+		}
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+		cost = 20
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+		complete_effect = {
+			add_command_power = -20
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = 25
+			}
+		}
+	}
+	RED_military_mutiny_court_marshal_traitors = {
+		icon = GFX_HNZ_increase_industrial_shift
+		available = {
+			has_completed_focus = RED_military_mutinies
+			AND = {
+				has_manpower > 19
+			}
+		}
+		visible = {
+			has_completed_focus = RED_military_mutinies
+		}
+		cost = 20
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+		complete_effect = {
+			add_manpower = -20
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = 25
+			}
+		}
+	}
+	RED_military_mutiny_promote_new_recruits = {
+		icon = GFX_HNZ_increase_industrial_shift
+		available = {
+			has_completed_focus = RED_military_mutinies
+			AND = {
+				has_completed_focus = RED_promote_loyalty
+			}
+		}
+		visible = {
+			has_completed_focus = RED_military_mutinies
+			AND = {
+				has_completed_focus = RED_promote_loyalty
+			}
+		}
+		cost = 5
+		days_remove = 15
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+		complete_effect = {
+			add_command_power = 15
+			add_political_power = 20
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = 20
+			}
+		}
+	}
+	RED_mushroom_revolt_rid_mutinies = {
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_dismantle_mushroom_revolts
+		}
+
+		visible = {
+			has_completed_focus = RED_dismantle_mushroom_revolts
+		}
+
+		cost = 50
+		days_remove = 7
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+
+		modifier = {	
+			stability_weekly = -0.1
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = mushroom_revolt_never_fire_event_tt	
+			}
+			custom_effect_tooltip = mushroom_revolts_never_fire_tt
+		}
+	}
+
+	RED_mushroom_revolt_sabotage_revolution = {
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_sabotage_the_revolution
+		}
+
+		visible = {
+			has_completed_focus = RED_sabotage_the_revolution
+		}
+
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		days_remove = 15
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+
+		remove_effect = {
+			add_popularity = {
+				ideology = council
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.01
+			}
+			hidden_effect = {
+				set_country_flag = triggered_sabotage_revolution	
+			}
+		}
 	}
 }
 
@@ -149,23 +359,275 @@ RED_emerald_city_category = {
 	}
 }
 
+RED_frontline_decision_category =  {
+	RED_frontline_sabotage = {
+		cost = 20 ## MAKE IT COST command
+		days_remove = 2
+		days_re_enable = 35
+
+		available = {
+			has_completed_focus = RED_RCH_frontline_sabotage
+			AND = { 
+				country_exists = RCH 
+				has_war_with = RCH
+			}
+			430  = { is_owned_by = RCH }
+			431  = { is_owned_by = RCH }
+			214  = { is_owned_by = RCH }
+		}
+
+		visible = {
+			has_completed_focus = RED_RCH_frontline_sabotage
+			AND = { 
+				country_exists = RCH 
+				has_war_with = RCH
+			}
+		}
+
+		complete_effect = {
+			add_manpower = -5
+			if = {
+				limit = {
+		    		214 = { is_owned_by = RCH }
+				}
+				214 = {
+			    	damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+				}
+		    }
+			if = {
+				limit = {
+		    		431 = { is_owned_by = RCH }
+				}
+				431 = {
+			    	damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+				}
+		    }
+			if = {
+				limit = {
+		    		430 = { is_owned_by = RCH }
+				}
+				430 = {
+			    	damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+				}
+		    }
+		}
+	}
+}
+
 RED_generic_decision_category = {
 	
 	RED_lobby_the_politburo = {
-		cost = 75
-		days_remove = 35
-		days_re_enable = 0
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+		cost = 80
+		days_remove = 15
+		days_re_enable = 480
+
+		modifier = {
+			mobilization_laws_cost_factor = -0.25
+			trade_laws_cost_factor = -0.25
+			economy_cost_factor = -0.25
+        }
 	}
 
-	RED_economic_concessions = {
-		cost = 75
+	RED_lobby_the_politburo_andrey = {
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+		cost = 60
+		days_remove = 30
+		days_re_enable = 360
+
+		visible = {
+			has_completed_focus = RED_lenins_descendant
+		}
+
+		available = {
+			has_completed_focus = RED_lenins_descendant
+		}
+
+		modifier = {
+			mobilization_laws_cost_factor = -0.4
+			trade_laws_cost_factor = -0.4
+			economy_cost_factor = -0.4
+        }
+	}
+
+	RED_economic_rejuvination = {
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+
+		cost = 80
 		days_remove = 35
-		days_re_enable = 0
+		days_re_enable = 360
+
+		available = {
+			NOT = {
+				has_war = yes
+			}
+		}
+
+		modifier = {
+			industrial_capacity_factory = -0.15
+			war_support_weekly = -0.01
+			consumer_goods_factor = -0.05
+        }
 	}
 
 	RED_idolize_cult_of_communism = {
-		cost = 75
-		days_remove = 35
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+		cost = 50
+		days_remove = 75
+		days_re_enable = 30
+
+		visible = {
+			NOT = {
+				has_completed_focus = RED_preach_the_word_of_lenin
+			}
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = RED_preach_the_word_of_lenin
+			}
+		}
+
+		modifier = {
+			stability_weekly = 0.005
+			war_support_weekly = 0.005
+        }
+	}
+
+	RED_idolize_cult_of_communism_2 = {
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+		cost = 50
+		days_remove = 60
 		days_re_enable = 0
+
+		visible = {
+			has_completed_focus = RED_preach_the_word_of_lenin
+		}
+
+		available = {
+			has_completed_focus = RED_preach_the_word_of_lenin
+		}
+
+		modifier = {
+			political_power_factor = 0.1
+			stability_weekly = 0.005
+			war_support_weekly = 0.005
+        }
+	}
+
+	RED_grain_rebates = {
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+
+		cost = 50
+		days_remove = 45
+		days_re_enable = 480
+
+		modifier = {
+			stability_weekly = 0.0035
+			production_speed_industrial_complex_factor = 0.1 
+        }
+	}
+
+	RED_administrational_adjustments  = {
+
+		available = {
+			NOT = {
+				hidden_trigger = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+				}
+			}
+			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
+		}
+		
+		cost = 0
+		days_remove = 45
+		days_re_enable = 480
+
+		modifier = {
+			political_power_gain = 0.2
+        }
 	}
 }

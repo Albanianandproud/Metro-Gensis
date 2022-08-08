@@ -57,8 +57,8 @@ HNZ_production_shift = {
 
 		modifier = {
            war_support_weekly = 0.005
-           line_change_production_efficiency_factor = -0.1
-           production_factory_efficiency_gain_factor = -0.1
+           line_change_production_efficiency_factor = -0.125
+           production_factory_efficiency_gain_factor = -0.125
         }
 
         remove_effect = {
@@ -81,8 +81,8 @@ HNZ_production_shift = {
 		days_re_enable = 200
 
 		modifier = {
-           production_factory_efficiency_gain_factor = -0.05
-		   production_speed_buildings_factor = 0.05
+           production_factory_efficiency_gain_factor = -0.075
+		   production_speed_buildings_factor = 0.075
         }
 	}
 
@@ -176,7 +176,7 @@ HNZ_production_shift = {
 
 		modifier = {
            war_support_weekly = -0.005
-           research_speed_factor = 0.06
+           research_speed_factor = 0.05
         }
 	}
 
@@ -216,8 +216,7 @@ HNZ_scavenging_decisions = {
 
 		icon = GFX_generic_trade_tools
 
-		days_remove = 45
-		days_re_enable = 15
+		days_remove = 60
 
 		available = {
 		    has_manpower > 4
@@ -245,10 +244,11 @@ HNZ_scavenging_decisions = {
 
 		remove_effect = {
 			random_list = {
-				40 = { ROOT = { country_event = nf_HNZ.32 } }			## ~ Scavenge 1 building slot
-				35 = { ROOT = { country_event = nf_HNZ.33 } }			## ~ Scavenge 1 Tech Bonus
-				20 = { ROOT = { country_event = nf_HNZ.34 } }			## ~ Scavenge Timed Idea
+				10 = { ROOT = { country_event = nf_HNZ.32 } }			## ~ Scavenge 1 building slot
+				20 = { ROOT = { country_event = nf_HNZ.33 } }			## ~ Scavenge 1 Tech Bonus
+				15 = { ROOT = { country_event = nf_HNZ.34 } }			## ~ Scavenge Timed Idea
 				5 = { ROOT = { country_event = nf_HNZ.35 } }			## ~ Scavenge Factory
+				50 = { ROOT = { country_event = nf_HNZ.40 } }			## ~ Scavenge Guns
 			}
 			ROOT = { clr_country_flag = HNZ_scavenging_underway }
 		}
@@ -258,8 +258,7 @@ HNZ_scavenging_decisions = {
 
 		icon = GFX_generic_trade_resources
 
-		days_remove = 45
-		days_re_enable = 15
+		days_remove = 60
 
 		available = {
 		    has_manpower > 4
@@ -287,7 +286,7 @@ HNZ_scavenging_decisions = {
 
 		remove_effect = {
 			random_list = {
-		        25 = {
+		        30 = {
 		        	add_manpower = 5
 					random_owned_controlled_state = {
 		        		limit = { NOT = { has_state_category = pastoral } }
@@ -320,13 +319,6 @@ HNZ_scavenging_decisions = {
 					random_owned_controlled_state = {
 		        		limit = { NOT = { has_state_category = pastoral } }
 			    		add_resource = { type = chemicals amount = 1 }
-		    		}
-		    	}
-		        5 = {
-		        	add_manpower = 5
-					random_owned_controlled_state = {
-		        		limit = { NOT = { has_state_category = pastoral } }
-			    		add_resource = { type = oil amount = 1 }
 		    		}
 		    	}
 			}
