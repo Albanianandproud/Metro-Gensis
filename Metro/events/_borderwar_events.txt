@@ -1,0 +1,185 @@
+add_namespace = borderwar
+
+country_event = {
+	id = borderwar.1
+	title = borderwar.1.t
+	desc = borderwar.1.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar.1.a
+	}
+}
+
+country_event = { 
+	id = borderwar.2
+	title = borderwar.2.t
+	desc = borderwar.2.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar.2.a
+	}
+}
+
+country_event = { 
+	id = borderwar.3
+	title = borderwar.3.t
+	desc = borderwar.3.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar.3.a
+	}
+}
+
+country_event = { 
+	id = borderwar.4
+	title = borderwar.4.t
+	desc = borderwar.4.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar.4.a
+	}
+}
+
+add_namespace = borderwar_clash
+
+country_event = { # RED / victory
+	id = borderwar_clash.1
+	title = borderwar_clash.1.t
+	desc = borderwar_clash.1.d
+	#picture =
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				if = {
+					limit = { has_global_flag = debug_logs }
+					log = "RED victory if borderwar attacker tag: [?GLOBAL.borderwar_attacker_tag], borderwar defender state: [?GLOBAL.borderwar_defender_state]"
+				}
+				transfer_state = var:GLOBAL.borderwar_defender_state
+			}
+		}
+	}
+
+	option = {
+		name = borderwar_clash.1.a
+		army_experience = 10
+		effect_tooltip = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				transfer_state = var:GLOBAL.borderwar_defender_state
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = borderwar_clash.2
+	title = borderwar_clash.2.t
+	desc = borderwar_clash.2.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar_clash.2.a
+		army_experience = 5
+		effect_tooltip = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id } }
+				RCH = { transfer_state = var:GLOBAL.borderwar_defender_state }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = borderwar_clash.3
+	title = borderwar_clash.3.t
+	desc = borderwar_clash.3.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar_clash.3.a
+		army_experience = 5
+	}
+}
+
+country_event = { # RCH / victory
+	id = borderwar_clash.4
+	title = borderwar_clash.4.t
+	desc = borderwar_clash.4.d
+	#picture =
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				transfer_state = var:GLOBAL.borderwar_defender_state
+			}
+		}
+	}
+
+	option = {
+		name = borderwar_clash.4.a
+		army_experience = 10
+		effect_tooltip = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				transfer_state = var:GLOBAL.borderwar_defender_state
+			}
+		}
+	}
+}
+
+country_event = { # RCH / loss
+	id = borderwar_clash.5
+	title = borderwar_clash.5.t
+	desc = borderwar_clash.5.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar_clash.5.a
+		army_experience = 5
+		effect_tooltip = {
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id } }
+				RED = { transfer_state = var:GLOBAL.borderwar_defender_state }
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = borderwar_clash.6
+	title = borderwar_clash.6.t
+	desc = borderwar_clash.6.d
+	#picture =
+
+	is_triggered_only = yes
+
+	option = {
+		name = borderwar_clash.6.a
+		army_experience = 5
+	}
+}

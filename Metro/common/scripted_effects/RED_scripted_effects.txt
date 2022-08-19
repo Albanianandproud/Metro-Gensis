@@ -1,181 +1,280 @@
-exploit_workers_councils = {
+RED_start_crisis = {
 	if = {
 		limit = {
-			has_idea = RED_workers_councils
+			meets_RED_crisis_criteria = yes
+		}
+		country_event = { days = 1 id = nf_RED.11 }
+	}
+}
+RED_military_reforms = {
+	if = {
+		limit = {
+			has_idea = RED_fragmented_military
 		}
 		swap_ideas = {
-			remove_idea = RED_workers_councils
-			add_idea = RED_workers_councils_exploited 
+			remove_idea = RED_fragmented_military
+			add_idea = RED_reforming_military
 		}
 	}
 	else_if = {
 		limit = {
-			has_idea = RED_workers_councils_exploited 
+			has_idea = RED_reforming_military
+		}
+		remove_ideas = RED_reforming_military
+	}
+}
+RED_demobilise_economy = {
+	if = {
+		limit = {
+			has_idea = RED_war_socialism_stale
 		}
 		swap_ideas = {
-			remove_idea = RED_workers_councils_exploited 
-			add_idea = RED_workers_councils_exploited_2
+			remove_idea = RED_war_socialism_stale
+			add_idea = RED_demobilising_economy 
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_demobilising_economy 
+		}
+		remove_ideas = RED_demobilising_economy 
+		add_ideas = RED_new_economic_plan
+	}
+}
+RED_decrease_requesition_intensity = {
+	if = {
+		limit = {
+			has_idea = RED_army_ransacking
+		}
+		swap_ideas = {
+			remove_idea = RED_army_ransacking
+			add_idea = RED_heavy_produce_requesition
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_heavy_produce_requesition
+		}
+		remove_ideas = RED_heavy_produce_requesition
+		add_ideas = RED_produce_requesition
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_produce_requesition
+		}
+		remove_ideas = RED_station_requesition
+		add_ideas = RED_station_requesition
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_station_requesition
+		}
+		remove_ideas = RED_station_requesition
+		add_ideas = RED_export_requesition
+	}
+}
+RED_increase_requesition_intensity = {
+	if = {
+		limit = {
+			has_idea = RED_export_requesition
+		}
+		swap_ideas = {
+			remove_idea = RED_export_requesition
+			add_idea = RED_station_requesition
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_station_requesition
+		}
+		remove_ideas = RRED_station_requesition
+		add_ideas = RED_produce_requesition
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_produce_requesition
+		}
+		remove_ideas = RED_produce_requesition
+		add_ideas = RED_heavy_produce_requesition
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_heavy_produce_requesition
+		}
+		remove_ideas = RED_heavy_produce_requesition
+		add_ideas = RED_army_ransacking
+	}
+}
+##
+##	- 	Crisis
+##
+
+RED_mutiny_removal = {
+	if = {
+		limit = {
+			has_idea = RED_military_mutinies
+		}
+		swap_ideas = {
+			remove_idea = RED_military_mutinies
+			add_idea = RED_military_mutinies_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RED_military_mutinies_2
+		}
+		swap_ideas = {
+			remove_idea = RED_military_mutinies_2
+			add_idea = RED_military_mutinies_3
+		}
+	}
+	else = {
+		limit = {
+			has_idea = RED_military_mutinies_3
+		}
+		remove_ideas = RED_military_mutinies_3
+	}
+}
+
+##
+## - Berilag
+##
+
+RED_berilag_volunteers = {
+	if = {
+		limit = {
+			has_idea = RED_special_research
+		}
+		swap_ideas = {
+			remove_idea = RED_special_research
+			add_idea = RED_special_research_volunteers
 		}
 	}
 }
-###### Revolutionist Plot #######
-red_revolutionist_plot = {
+RED_berilag_funding = {
 	if = {
 		limit = {
-			has_idea = revolutionist_plot_1
+			has_idea = RED_special_research
 		}
 		swap_ideas = {
-			remove_idea = revolutionist_plot_1
-			add_idea = revolutionist_plot_2
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_2
-		}
-		swap_ideas = {
-			remove_idea = revolutionist_plot_2
-			add_idea = revolutionist_plot_3
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_3
-		}
-		swap_ideas = {
-			remove_idea = revolutionist_plot_3
-			add_idea = revolutionist_plot_4
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_4
-		}
-		swap_ideas = {
-			remove_idea = revolutionist_plot_4
-			add_idea = revolutionist_plot_5
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_5
-		}
-		swap_ideas = {
-			remove_idea = revolutionist_plot_5
-			add_idea = revolutionist_plot_6
+			remove_idea = RED_special_research
+			add_idea = RED_special_research_funding
 		}
 	}
 }
-red_revolutionist_plot_foiled = {
+RED_berilag_breakthrough = {
 	if = {
 		limit = {
-			has_idea = revolutionist_plot_1
+			has_idea = RED_special_research_funding
 		}
-		remove_ideas = {
-			remove_idea = revolutionist_plot_1
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_2
-		}
-		remove_ideas = {
-			remove_idea = revolutionist_plot_2
+		swap_ideas = {
+			remove_idea = RED_special_research_funding
+			add_idea = RED_special_research_funding_breakthrough
 		}
 	}
 	else_if = {
 		limit = {
-			has_idea = revolutionist_plot_3
+			has_idea = RED_special_research_volunteers
 		}
-		remove_ideas = {
-			remove_idea = revolutionist_plot_3
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_4
-		}
-		remove_ideas = {
-			remove_idea = revolutionist_plot_4
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = revolutionist_plot_5
-		}
-		remove_ideas = {
-			remove_idea = revolutionist_plot_5
+		swap_ideas = {
+			remove_idea = RED_special_research_volunteers
+			add_idea = RED_special_research_volunteers_breakthrough
 		}
 	}
 }
-####### POLITBURO ######
-politburo_anger = {
+
+##
+## - Radio Nostalgia
+##
+
+RED_radio_idea_upgrade = {
 	if = {
 		limit = {
-			has_idea = RED_politburo_onboard 
+			has_idea = RED_socialist_radio
 		}
 		swap_ideas = {
-			remove_idea = RED_politburo_onboard 
-			add_idea = RED_politburo_dissatisfied
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = RED_politburo_dissatisfied 
-		}
-		swap_ideas = {
-			remove_idea = RED_politburo_dissatisfied 
-			add_idea = RED_politburo_angry
+			remove_idea = RED_socialist_radio
+			add_idea = RED_socialist_radio_2
 		}
 	}
 }
-politburo_content = {
+
+RED_radio_idea_radio_relations = {
 	if = {
 		limit = {
-			has_idea = RED_politburo_angry
+			has_idea = RED_propaganda_tune_radio
 		}
 		swap_ideas = {
-			remove_idea = RED_politburo_angry
-			add_idea = RED_politburo_dissatisfied
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = RED_politburo_dissatisfied 
-		}
-		swap_ideas = {
-			remove_idea = RED_politburo_dissatisfied 
-			add_idea = RED_politburo_onboard 
+			remove_idea = RED_propaganda_tune_radio
+			add_idea = RED_propaganda_tune_radio_relations
 		}
 	}
 }
-###### Korbut Mechanic ######
-korbut_influence = {
+
+RED_radio_idea_radio_subversion = {
 	if = {
 		limit = {
-			has_idea = RED_korbut_influence_1
+			has_idea = RED_propaganda_tune_radio
 		}
 		swap_ideas = {
-			remove_idea = RED_korbut_influence_1
-			add_idea = RED_korbut_influence_2
+			remove_idea = RED_propaganda_tune_radio
+			add_idea = RED_propaganda_tune_radio_subversion
 		}
+	}
+}
+
+### Ministry Department Related Effects ###
+
+RED_ministry_economics_upgrade_trait = {
+	if = {
+		limit = {
+			has_idea_with_trait = RED_stepan_markelov_1
+		}
+		hidden_effect = {
+			remove_trait = {
+            	character = RED_minister_of_economics 
+            	slot = industrial_concern
+            	trait = RED_stepan_markelov_1
+        	}
+        }
+        add_trait = {
+            character = RED_minister_of_economics 
+            slot = industrial_concern
+            trait = RED_stepan_markelov_2
+        }
 	}
 	else_if = {
 		limit = {
-			has_idea = RED_korbut_influence_2
+			has_idea_with_trait = RED_stepan_markelov_2
 		}
-		swap_ideas = {
-			remove_idea = RED_korbut_influence_2
-			add_idea = RED_korbut_influence_3
-		}
+		hidden_effect = {
+			remove_trait = {
+            	character = RED_minister_of_economics 
+            	slot = industrial_concern
+            	trait = RED_stepan_markelov_2
+        	}
+        }
+        add_trait = {
+            character = RED_minister_of_economics 
+            slot = industrial_concern
+            trait = RED_stepan_markelov_3
+        }
 	}
 	else_if = {
 		limit = {
-			has_idea = RED_korbut_influence_3
+			has_idea_with_trait = RED_stepan_markelov_3
 		}
-		swap_ideas = {
-			remove_idea = RED_korbut_influence_3
-			add_idea = RED_korbut_influence_4
-		}
+		hidden_effect = {
+			remove_trait = {
+            	character = RED_minister_of_economics 
+            	slot = industrial_concern
+            	trait = RED_stepan_markelov_3
+        	}
+        }
+        add_trait = {
+            character = RED_minister_of_economics 
+            slot = industrial_concern
+            trait = RED_stepan_markelov_4
+        }
 	}
 }

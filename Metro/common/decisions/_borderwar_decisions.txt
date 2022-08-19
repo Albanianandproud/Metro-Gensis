@@ -1,0 +1,173 @@
+border_war = {
+	border_war_countdown_timer = {
+		activation = { always = no }
+
+		available = {
+			hidden_trigger = {
+				always = no 
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = borderwar_stalemate
+				OR = {
+					has_global_flag = borderwar_stalemate
+					if = {
+						limit = { original_tag = RED }
+						OR = { has_war_with = RCH }
+					}
+					else_if = {
+						limit = { original_tag = RCH }
+						OR = { has_war_with = RED }
+					}
+				}
+			}
+		}
+		priority = 200
+		days_mission_timeout = 90
+		is_good = no
+
+		timeout_effect = {
+			if = {
+				limit = {
+					RED = { NOT = { has_border_war_with = RCH } }
+				}
+				hidden_effect = { hidden_borderwar_flip = yes }
+				activate_mission = borderwar_imminent_clash
+			}
+			else = {
+				activate_mission = border_war_countdown_timer 
+			}
+		}
+	}
+
+	borderwar_imminent_clash = {
+		allowed = {
+			always = no
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_borderwar_initiative
+				check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id }
+			}
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				var:GLOBAL.borderwar_attacker_state = { is_owned_and_controlled_by = PREV }
+				divisions_in_state = {
+					size > 0
+					state = var:GLOBAL.borderwar_attacker_state
+				}
+				NOT = { has_border_war_with = var:GLOBAL.borderwar_defender_tag }
+			}
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = var:GLOBAL.borderwar_defender_state
+			}
+		}
+
+		priority = 10
+		days_mission_timeout = 21
+		selectable_mission = yes
+		is_good = no
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 0.01
+				has_war = yes
+				surrender_progress < 0.5
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = borderwar_stalemate
+				OR = {
+					has_global_flag = borderwar_stalemate
+					if = {
+						limit = { original_tag = RED }
+						OR = {
+							has_war_with = RCH
+							is_in_faction_with = RCH
+						}
+					}
+					else_if = {
+						limit = { original_tag = RCH }
+						OR = {
+							has_war_with = RED
+							is_in_faction_with = RED
+						}
+					}
+				}
+			}
+		}
+
+		war_with_on_remove = RED
+		war_with_on_remove = RCH
+
+		remove_effect = {
+			fire_clash = yes
+			activate_mission = border_war_countdown_timer
+		}
+
+		days_remove = borderwar_remove_days?0 # set via complete_effect
+
+		complete_effect = {
+			hidden_effect = {
+				set_variable = { borderwar_remove_days = days_mission_timeout@border_war_countdown_timer}
+			}
+			if = {
+				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				var:GLOBAL.borderwar_defender_tag = {
+					country_event = borderwar.1
+				}
+				set_global_flag = borderwar_clash_imminent
+				effect_tooltip = {
+					fire_clash = yes
+				}
+			}
+		}
+
+		timeout_effect = {
+			if = {
+				limit = {
+					has_global_flag = borderwar_clash_imminent
+					check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id }
+				}
+				fire_clash = yes
+				clr_global_flag = borderwar_clash_imminent
+			}
+			else_if = {
+				limit = {
+					has_global_flag = borderwar_clash_imminent
+					NOT = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
+				}
+				effect_tooltip = {
+					fire_clash = yes
+				}
+			}
+			else_if = {
+				limit = {
+					tag = var:GLOBAL.borderwar_attacker_tag
+				}
+				country_event = borderwar.2
+				var:GLOBAL.borderwar_defender_tag = {
+					country_event = borderwar.3
+				}
+			}
+			else = {
+				effect_tooltip = {
+					var:GLOBAL.borderwar_attacker_tag = {
+						country_event = borderwar.2
+					}
+					country_event = borderwar.3
+				}
+			}
+			activate_mission = border_war_countdown_timer
+		}
+	}
+}

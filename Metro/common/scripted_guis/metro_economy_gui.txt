@@ -1,5 +1,4 @@
 scripted_gui = {
-
 	bullets = {
 		context_type = player_context
 		parent_window_token = top_bar
@@ -26,29 +25,24 @@ scripted_gui = {
 	}  
 }
 
-
-## New Station Economy Mechanics ##
-
-scripted_gui = {
-	context_type = selected_state_context
-
-	window_name = "station_economy_window"
-	parent_window_token = selected_state_view
-	visible = {
-		ROOT = {
-			is_ai = no
-			NOT = {
-				has_global_flag = bullets_disabled_global_flag
-			}
-		}
-		OR = {
-			is_in_array = { global.stations = THIS.id }
-			any_of_scopes = {
-				array = global.stations
-				is_in_array = { controlled_stations = PREV.id }
-			}
-		}
-	}
-}
+#scripted_gui = {
+#	context_type = selected_state_context
+#
+#	window_name = "station_economy_window"
+#	parent_window_token = selected_state_view
+#	
+#	visible = {
+#		ROOT = {
+#			is_ai = no
+#		}
+#		#OR = {
+#		#	has_state_flag = stationEconomy.enabled
+#		#}
+#	}
+#
+#    ai_enabled = {
+#		always = no
+#    }
+#}
 
 

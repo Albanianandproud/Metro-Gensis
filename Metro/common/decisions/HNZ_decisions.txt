@@ -1,0 +1,457 @@
+HNZ_production_shift = {
+	
+	HNZ_increase_industrial_shift = {
+
+		icon = GFX_HNZ_increase_industrial_shift
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+		    has_war_support > 0.14
+		    NOT = {
+		    	has_country_flag = HNZ_industrial_shift_change
+		    }
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HNZ_industrial_shift_change
+			}
+		}
+
+		modifier = {
+           war_support_weekly = -0.005
+           production_factory_efficiency_gain_factor = 0.1
+        }
+
+        remove_effect = {
+        	hidden_effect = {
+				clr_country_flag = HNZ_industrial_shift_change
+			}
+		}
+	}
+
+	HNZ_decrease_industrial_shift = {
+
+		icon = GFX_HNZ_decrease_industrial_shift
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HNZ_industrial_shift_change
+			}
+		}
+
+		modifier = {
+           war_support_weekly = 0.005
+           line_change_production_efficiency_factor = -0.125
+           production_factory_efficiency_gain_factor = -0.125
+        }
+
+        remove_effect = {
+        	hidden_effect = {
+				clr_country_flag = HNZ_industrial_shift_change
+			}
+		}
+	}
+
+	HNZ_industrial_renovation = {
+
+		icon = GFX_HNZ_industrial_renovation
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		modifier = {
+           production_factory_efficiency_gain_factor = -0.075
+		   production_speed_buildings_factor = 0.075
+        }
+	}
+
+	HNZ_nationalise_infrastructure = {
+
+		icon = GFX_HNZ_nationalise_infrastructure
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	HNZ_reinforce_ring_line = {
+
+		icon = GFX_HNZ_reinforce_ring_line
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		days_remove = 75
+		days_re_enable = 200
+
+		modifier = {
+			production_speed_bunker_factor = 0.1
+			production_speed_bunker2_factor = 0.1
+			production_speed_infrastructure_factor = 0.1
+		}
+	}
+
+	HNZ_privatise_land_share = {
+
+		icon = GFX_HNZ_privatise_land_share
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+		    		free_building_slots = {
+    					building = arms_factory
+    					size > 1
+    					include_locked = yes
+					}
+				}
+		    	add_extra_state_shared_building_slots = -1
+			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.05
+			}
+		}
+	}
+
+	HNZ_extend_research_administration = {
+
+		icon = GFX_HNZ_extend_research_administration
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+		    has_war_support > 0.14
+		    has_stability > 0.14
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		modifier = {
+           war_support_weekly = -0.005
+           research_speed_factor = 0.05
+        }
+	}
+
+	HNZ_extend_station_administration = {
+
+		icon = GFX_HNZ_extend_station_administration
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+		    has_war_support > 0.14
+		    has_stability > 0.14
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 200
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		remove_effect = {
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.05
+			}
+		}
+	}
+}
+
+HNZ_scavenging_decisions = {
+	
+	scavenge_for_tooling = {
+
+		icon = GFX_generic_trade_tools
+
+		days_remove = 60
+
+		available = {
+		    has_manpower > 4
+			NOT = { has_country_flag = HNZ_scavenging_underway }
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -5
+			set_country_flag = HNZ_scavenging_underway
+			hidden_effect = {
+				add_command_power = -20
+			}
+		}
+
+		remove_effect = {
+			random_list = {
+				10 = { ROOT = { country_event = nf_HNZ.32 } }			## ~ Scavenge 1 building slot
+				20 = { ROOT = { country_event = nf_HNZ.33 } }			## ~ Scavenge 1 Tech Bonus
+				15 = { ROOT = { country_event = nf_HNZ.34 } }			## ~ Scavenge Timed Idea
+				5 = { ROOT = { country_event = nf_HNZ.35 } }			## ~ Scavenge Factory
+				50 = { ROOT = { country_event = nf_HNZ.40 } }			## ~ Scavenge Guns
+			}
+			ROOT = { clr_country_flag = HNZ_scavenging_underway }
+		}
+	}
+
+	scavenge_resources = {
+
+		icon = GFX_generic_trade_resources
+
+		days_remove = 60
+
+		available = {
+		    has_manpower > 4
+			NOT = { has_country_flag = HNZ_scavenging_underway }
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+		    add_manpower = -5
+			set_country_flag = HNZ_scavenging_underway
+			hidden_effect = {
+				add_command_power = -20
+			}
+		}
+
+		remove_effect = {
+			random_list = {
+		        30 = {
+		        	add_manpower = 5
+					random_owned_controlled_state = {
+		        		limit = { NOT = { has_state_category = pastoral } }
+			    		add_resource = { type = scrap amount = 2 }
+		    		}
+		    	}
+		        20 = {
+		        	add_manpower = 5
+					random_owned_controlled_state = {
+		        		limit = { NOT = { has_state_category = pastoral } }
+			    		add_resource = { type = alloys amount = 2 }
+		    		}
+		    	}
+		        20 = {
+		        	add_manpower = 5
+					random_owned_controlled_state = {
+		        		limit = { NOT = { has_state_category = pastoral } }
+			    		add_resource = { type = electronics amount = 2 }
+		    		}
+		    	}
+		        20 = {
+		        	add_manpower = 5
+					random_owned_controlled_state = {
+		        		limit = { NOT = { has_state_category = pastoral } }
+			    		add_resource = { type = components amount = 2 }
+		    		}
+		    	}
+		        10 = {
+		        	add_manpower = 5
+					random_owned_controlled_state = {
+		        		limit = { NOT = { has_state_category = pastoral } }
+			    		add_resource = { type = chemicals amount = 1 }
+		    		}
+		    	}
+			}
+			ROOT = { clr_country_flag = HNZ_scavenging_underway }
+		}
+	}
+}
+
+HNZ_subversion_statellite = {
+
+	HNZ_subvert_eco = {
+		icon = GFX_satellite_request_factories
+		on_map_mode = map_and_decisions_view
+		state_target = no
+		
+		available = {
+			FROM = {
+				has_idea = hanza_under_sphere_of_influence
+				NOT = {
+					check_variable = {
+						var = satellite_economic_subversion
+						value = 120
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+		
+		visible = {
+			FROM = { has_idea = hanza_under_sphere_of_influence NOT = {tag = PVL}}
+		}
+		
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				num_of_military_factories > 25
+			}
+		}
+
+		cost = 50
+		days_remove = 40
+		days_re_enable = 5
+
+		remove_effect = {
+			FROM = {
+				add_to_variable = { var = satellite_economic_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_subvert_pol = {
+		icon = GFX_satellite_request_factories
+		on_map_mode = map_and_decisions_view
+		state_target = no
+		available = {
+			FROM = {
+				has_idea = hanza_under_sphere_of_influence
+				NOT = {
+					check_variable = {
+						var = satellite_politics_subversion
+						value = 120
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+		visible = {
+			FROM = { has_idea = hanza_under_sphere_of_influence	NOT = {tag = PVL}}
+		}
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				num_of_military_factories > 25
+			}
+		}
+
+		cost = 50
+		days_remove = 40
+		days_re_enable = 5
+
+		remove_effect = {
+			FROM = {
+				add_to_variable = { var = satellite_politics_subversion value = 10 }
+			}
+		}
+	}
+
+	HNZ_pull_puppet = {
+		icon = GFX_satellite_request_factories
+		on_map_mode = map_and_decisions_view
+		state_target = no
+		fire_only_once = yes
+		available = { FROM = { has_idea = hanza_puppet NOT = { is_subject = yes } } }
+		visible = {
+			FROM = { under_hanza_influence = yes NOT = {tag = PVL}}
+		}
+
+		cost = 200
+		days_remove = 50
+
+		remove_effect = {
+			puppet = FROM
+		}
+	}
+
+	# HNZ_mobilise = {
+		# icon = GFX_satellite_request_factories
+		# on_map_mode = map_and_decisions_view
+		# state_target = no
+		# fire_only_once = yes
+		# available = {
+			# FROM = {
+				# OR = {
+					# has_idea = hanza_puppet
+					# has_idea = hanza_satellite
+				# }
+			# }
+		# }
+		# visible = {
+			# FROM = { under_hanza_influence = yes }
+		# }
+
+		# cost = 200
+		# days_remove = 60
+		# days_re_enable = 360
+
+		# remove_effect = {
+			# FROM = {
+				# country_event = nf_HNZ.39		### Mobilise NOW!
+			# }
+		# }
+	# }
+
+}

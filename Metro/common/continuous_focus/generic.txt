@@ -9,112 +9,300 @@ continuous_focus_palette = {
 	reset_on_civilwar = no
 			
 	position = { x = 50 y = 1000 }
-	
-		
-	
+
 	focus = {
-		id = continuous_non_factory_construct
+		id = continuous_prioritise_hearth
 		
-		icon = GFX_goal_continuous_non_factory_construct
+		icon = GFX_
 		
 		available = {
 		}
-		
-		
-		modifier = {
-			production_speed_infrastructure_factor = 0.3
 				
+		modifier = {
+			production_speed_industrial_complex_factor = 0.1
+			local_resources_factor = 0.1
+			production_speed_infrastructure_factor = 0.1
+            		production_speed_supply_node_factor = 0.1
+            		production_speed_rail_way_factor = 0.1
 		}
 		
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-		
-		supports_ai_strategy = ai_focus_defense
-		
+				
 		daily_cost = 1
 		
 		available_if_capitulated = yes
 	}
 
 	focus = {
-		id = continuous_reduce_training_time
+		id = continuous_prioritise_our_way
 		
-		icon = GFX_goal_continuous_reduce_training_time
+		icon = GFX_
 		
 		available = {
 		}
-		
+				
 		modifier = {
-			training_time_army_factor = -0.25
+			production_speed_arms_factory_factor = 0.1
+			production_factory_start_efficiency_factor = 0.1
+			production_factory_efficiency_gain_factor = 0.1
 		}
 		
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-		
-		supports_ai_strategy = ai_focus_defense
-		
+				
 		daily_cost = 1
 		
 		available_if_capitulated = yes
 	}
 
 	focus = {
-		id = continuous_suppression
+		id = continuous_military_advancements
 		
-		icon = GFX_goal_continuous_suppression
+		icon = GFX_
 		
 		available = {
 		}
-		
+				
 		modifier = {
-			resistance_target = -0.05
+			experience_gain_army = 0.05
+			land_doctrine_cost_factor = -0.025
 		}
 		
 		ai_will_do = {
-			factor = 1
+			base = 1
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	focus = {
+		id = continuous_research_advancements
+		
+		icon = GFX_
+		
+		available = {
+		}
+				
+		modifier = {	
+			research_speed_factor = 0.1
+		}
+		
+		ai_will_do = {
+			base = 1
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	###########
+	### RCH ###
+	###########
+
+	focus = {
+		id = continuous_RCH_foster_pride
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RCH
+		}
+				
+		modifier = {
+			experience_gain_army = 0.05
+			land_doctrine_cost_factor = -0.05
+			political_power_factor = 0.1
+			stability_weekly = 0.001
+		}
+		
+		ai_will_do = {
+			base = 0.25
 			modifier = {
-				factor = 0
-				
-				num_occupied_states < 1
+				add = 10
+				has_manpower < 60
 			}
 		}
-		
-		supports_ai_strategy = ai_focus_military_advancements
-		
+				
 		daily_cost = 1
 		
 		available_if_capitulated = yes
 	}
 
 	focus = {
-		id = continuous_repair
+		id = continuous_RCH_gearing_for_the_final_war
 		
-		icon = GFX_goal_continuous_repairments
+		icon = GFX_
 		
 		available = {
+	    	original_tag = RCH
 		}
 				
 		modifier = {
-			industry_repair_factor = 0.5
-			industry_free_repair_factor = 1.0
+			war_support_weekly = 0.001
+			industrial_capacity_factory = 0.1
+			consumer_goods_factor = -0.05
 		}
 		
 		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				
-				has_damaged_buildings = no
-			}
+			base = 1
 		}
-		
-		supports_ai_strategy = ai_focus_military_advancements
-		
+				
 		daily_cost = 1
 		
 		available_if_capitulated = yes
 	}
 
+	focus = {
+		id = continuous_RCH_people_to_arms
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RCH
+		}
+				
+		modifier = {
+			weekly_manpower = 1
+			army_core_attack_factor = 0.05
+			army_core_defence_factor = 0.05
+			dig_in_speed = 1
+			max_dig_in = 2
+		}
+		
+		ai_will_do = {
+			base = 1
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	focus = {
+		id = continuous_RCH_purge_the_mutant
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RCH
+		}
+				
+		modifier = {
+			resistance_growth = -0.66
+			compliance_growth = 0.2
+			starting_compliance = 0.2
+		}
+		
+		ai_will_do = {
+			base = 1
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	###########
+	### RED ###
+	###########
+
+	focus = {
+		id = continuous_RED_cult_of_lenin_and_stalin
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RED
+		}
+				
+		modifier = {
+			stability_weekly = 0.001
+			war_support_weekly = 0.001
+		}
+		
+		ai_will_do = {
+			base = 0.25
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	focus = {
+		id = continuous_RED_lobby_the_politburo
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RED
+		}
+			
+		modifier = {
+			political_power_factor = 0.1
+			political_power_gain = 0.1
+			political_advisor_cost_factor = -0.05
+		}
+		
+		ai_will_do = {
+			base = 0.25
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	focus = {
+		id = continuous_RED_great_leap_forward
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RED
+		}
+				
+		modifier = {
+			monthly_population = 0.2
+			production_speed_buildings_factor = 0.1
+		}
+		
+		ai_will_do = {
+			base = 0.25
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
+
+	focus = {
+		id = continuous_RED_radio_jammers
+		
+		icon = GFX_
+		
+		available = {
+	    	original_tag = RED
+		}
+				
+		modifier = {
+			encryption = 0.5
+			civilian_intel_to_others = -25
+			foreign_subversive_activites = -0.25
+		}
+		
+		ai_will_do = {
+			base = 0.25
+		}
+				
+		daily_cost = 1
+		
+		available_if_capitulated = yes
+	}
 }

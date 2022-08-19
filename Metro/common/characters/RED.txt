@@ -7,7 +7,7 @@ characters={
 			}
 		}
 		country_leader={
-			ideology = vanguard_party
+			ideology = military_junta
 			traits = {  }
 			expire = "2050.1.1.1"
 			id = -1
@@ -21,26 +21,14 @@ characters={
 				small = "GFX_idea_RED_minister_maxim"
 			}
 		}
-		country_leader={
-			ideology = totalitarianism
-			traits = {  }
-			expire="2050.1.1.1"
-			id = -1
-		}
-		advisor = {
-			slot = army_chief 
-			idea_token = RED_moskvin
-			name = RED_moskvin
-			ledger = army
-			removal_cost = -1
-			allowed = {
-				original_tag = RED
-			}
-			traits = {
-				RED_maxim
-			}
-			research_bonus = { doctrine = 0.08 }
-		}
+		#country_leader={ ### Will become a leader later...
+		#	ideology = vanguard_party
+		#	traits = {  }
+		#	expire="2050.1.1.1"
+		#
+		#	id = -1
+		#}
+		### He is added as an advisor through the focus tree!
 	}
 	RED_korbut = {
 		name = RED_korbut
@@ -51,23 +39,12 @@ characters={
 			}
 		}
 		country_leader={
-			ideology = military_junta 
+			ideology = totalitarianism
 			traits = {  }
 			expire = "2050.1.1.1"
 			id = -1
 		}
-		advisor = {
-			slot = political_advisor
-			idea_token = RED_korbut
-			name = RED_korbut
-			removal_cost = -1
-			allowed = {
-				original_tag = RED
-			}
-			traits = {
-				RED_korbut
-			}
-		}
+		### He is added as an advisor through the focus tree!
 	}
 	RED_former_komsomol = {
 		name = RED_former_komsomol
@@ -86,7 +63,7 @@ characters={
 			traits = { RED_former_komsomol }
 			cost = 100
 			ai_will_do = {
-				factor = 10
+				factor = 16
 			}
 		}		
 	}
@@ -104,11 +81,10 @@ characters={
 			allowed = {
 				original_tag = RED
 			}
-
 			traits = { RED_industrialist }
 			cost = 100
 			ai_will_do = {
-				factor = 10
+				factor = 20
 			}
 		}		
 	}
@@ -136,7 +112,7 @@ characters={
 			traits = { RED_gosplan }
 			cost = 100
 			ai_will_do = {
-				factor = 10
+				factor = 20
 			}
 		}		
 	}
@@ -246,8 +222,364 @@ characters={
 			traits = { RED_propaganda_minister }
 			cost = 100
 			ai_will_do = {
-				factor = 10
+				factor = 18
 			}
 		}	
 	}
-}
+
+	#
+	# New Advisors
+	#
+
+	RED_minister_council_advisor = {
+		name = RED_aslan_kostoyev
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = RED_minister_council_advisor
+			removal_cost = -1
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_council_advisor }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_foreign_affairs = {
+		name = RED_milan_melikhov
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = RED_minister_of_foreign_affairs
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_of_foreign_affairs }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_defense = {
+		name = RED_vasily_petrov 
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = RED_minister_of_defense
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_of_defense }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_reclaimation = {
+		name = RED_fyodor_akimov
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = industrial_concern
+			idea_token = RED_minister_of_reclaimation
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_of_reclaimation }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_economics = {
+		name = RED_stepan_markelov
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = industrial_concern
+			idea_token = RED_minister_of_economics
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			available = {
+				has_completed_focus = RED_formalise_ministry_of_economics
+			}
+			traits = { RED_stepan_markelov_1 }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_domestics = {
+		name = RED_arkady_antonov
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = materiel_manufacturer
+			idea_token = RED_minister_of_domestics
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_of_labour }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	RED_minister_of_labour = {
+		name = RED_yevgeny_nikiforov
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_4"
+			}
+		}
+		advisor = {
+			slot = materiel_manufacturer
+			idea_token = RED_minister_of_labour
+			cost = 100
+			allowed = {
+				original_tag = RED
+			}
+			traits = { RED_minister_of_labour }
+			cost = 100
+			ai_will_do = {
+				factor = 18
+			}
+		}	
+	}
+
+	##
+	## Armed Forces
+	##
+
+	RED_kovshov = {		## Viktor Kovshov
+		name = RED_viktor_kovshov
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/kovshov.dds"
+				small = "GFX_idea_RED_minister_kovshov"
+			}
+		}
+		field_marshal={
+			traits = { war_hero trait_reckless trickster }
+			skill = 5
+			legacy_id=-1
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 3
+		}
+		advisor = {
+			slot = army_chief 
+			idea_token = RED_viktor_kovshov
+			name = RED_viktor_kovshov
+			ledger = army
+			removal_cost = -1
+			allowed = {
+				original_tag = RED
+			}
+			traits = {
+				RED_viktor_kovshov
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 50
+			}
+		}
+		country_leader={
+			ideology = vanguard_party
+			traits = {  }
+			expire="2050.1.1.1"
+		
+			id = -1
+		}
+	}
+	RED_yury_terekhov = {
+		name = RED_yury_terekhov
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/terekhov.dds"
+				small = "GFX_idea_RED_minister_terekhov"
+			}
+		}
+		corps_commander = {
+			traits = { infantry_officer inflexible_strategist trait_reckless }
+			skill = 2
+			legacy_id=-1
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 1
+		}
+		advisor = {
+			idea_token = RED_yury_terekhov
+			slot = high_command
+			ledger = army
+			traits = { RED_yury_terekhov }
+			allowed = {
+				original_tag = RED
+			}
+			removal_cost = -1
+			ai_will_do = {
+				factor = 15
+			}
+		}
+	}
+	RED_georgy_rozhestvensky = {
+		name = RED_georgy_rozhestvensky
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/rozhestvensky.dds"
+				small = "GFX_idea_RED_minister_rozhestvensky"
+			}
+		}
+		corps_commander = {
+			traits = { infantry_officer }
+			skill = 2
+			legacy_id=-1
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+		}
+		advisor = {
+			idea_token = RED_georgy_rozhestvensky
+			slot = high_command
+			ledger = army
+			traits = { RED_georgy_rozhestvensky }
+			allowed = {
+				original_tag = RED
+			}
+			removal_cost = -1
+			ai_will_do = {
+				factor = 15
+			}
+		}
+	}
+
+	RED_Yurik_velikov  = {
+		name = RED_Yurik_velikov
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/yurik_velikov.dds"
+			}
+		}
+	}
+
+	RED_Valerian_Grabovoi  = {
+		name = RED_Valerian_Grabovoi
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/valerian_grabovoi.dds"
+			}
+		}
+	}
+
+	RED_Keskil_Nagibin = {
+		name = RED_Keskil_Nagibin
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/keskil_nagibin.dds"
+			}
+		}
+	}
+
+	RED_vinogradov = {
+		name = RED_vinogradov
+		portraits = {
+			army = {
+				large = "gfx/leaders/RED/vinogradov.dds"
+			}
+		}
+	}
+
+	##
+	## Korbuts 
+	##
+
+	RED_mikhail_korbut = {
+		name = RED_mikhail_korbut
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_mikhail_korbut"
+			}
+		}
+		advisor = {
+			idea_token = RED_mikhail_korbut
+			slot = theorist
+			traits = { RED_mikhail_korbut }
+			allowed = {
+				original_tag = RED
+			}
+			available = {
+				has_completed_focus = RED_development_the_berilag
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 15
+			}
+		}
+	}
+
+	RED_cheslav_mihaylovich = {
+		name = RED_cheslav_mihaylovich
+		portraits = {
+			army = {
+				small = "GFX_idea_RED_minister_cheslav_mihaylovich"
+			}
+		}
+		advisor = {
+			idea_token = RED_cheslav_mihaylovich
+			slot = political_advisor
+			ledger = army
+			traits = { RED_cheslav_mihaylovich }
+			allowed = {
+				original_tag = RED
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 15
+			}
+		}
+	}
+}	

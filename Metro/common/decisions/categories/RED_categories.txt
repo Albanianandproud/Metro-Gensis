@@ -47,17 +47,97 @@
 #}
 #
 
-RED_disintergrated_military_category = {
+RED_berilag_category = {
 	icon = generic_industry
-	priority = { 
-	    base = 100
-	}
+	scripted_gui = RED_berilag_gui
 
+	priority = { 
+	    base = 55
+	}
+	visible = {
+        original_tag = RED
+        AND = {
+       		has_country_flag = RED_berilag_enabled_flag
+        }
+    }
 	available = { 
-      has_idea = RED_disintergrating_military 
+        has_country_flag = RED_berilag_enabled_flag
 	}
 
 	allowed = {
 		original_tag = RED
 	}
+}
+RED_ministry_departments = {
+	icon = RED_ministry_departments
+	priority = { 
+	    base = 201
+	}
+	visible = {
+        original_tag = RED
+        AND = {
+       		has_completed_focus = RED_formalise_ministry_of_economics
+        }
+    }
+    visible_when_empty = yes
+	allowed = {
+		original_tag = RED
+	}
+}
+
+RED_emerald_city_category = {
+	icon = RED_ministry_economics
+
+	priority = { base = 101 }
+
+	available = {
+		#has_completed_focus = RED_MSU_bridge
+	}
+	visible_when_empty = no
+
+	# visible = { country_exists = MSU }
+	visible = {
+		always = no
+	}
+}
+
+RED_frontline_decision_category = {
+	icon = RED_ministry_economics
+
+	priority = { base = 51 }
+
+	available = {
+		has_completed_focus = RED_RCH_frontline_sabotage
+	}
+
+	visible_when_empty = no
+
+	visible = {
+		always = no
+	}
+}
+
+RED_crisis_category = {
+	icon = RED_redline_in_crisis
+
+	priority = { base = 1001 }
+
+	available = {
+		has_country_flag = RED_crisis_country_flag
+	}
+
+	visible = {
+		has_country_flag = RED_crisis_country_flag
+	}
+
+	visible_when_empty = yes
+}
+RED_generic_decision_category = {
+	icon = RED_ministry_economics
+
+	priority = { base = 501 }
+
+	allowed = {
+        original_tag = RED
+    }
 }

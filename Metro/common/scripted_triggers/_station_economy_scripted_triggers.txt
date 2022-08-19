@@ -1,30 +1,21 @@
-
-### Variables
-
-### Multipliers ###
-@CIV = 5			###
-@INFRA = 1			###			    
-@POP = 0.1	 		### 10 pop = 1
-
-
 ### Calculate Station Income ###
+
+@CIV = 1
+@POP = 0.01
+@INFRA = 0.2
 
 calculate_station_income = {
 	set_temp_variable = { industrial_complex_level = 0 }
 	set_temp_variable = { state_population = 0 }
 	set_temp_variable = { temp_infrastructure = 0 }
 
-	all_of_scopes = {
-		if = {
-			limit = {
-				is_in_array = {
-					array = global.stations
-				}
-				multiply_temp_variable = { temp_state_civ_factories = @CIV }
-				multiply_temp_variable = { temp_infrastructure_level = @INFRA }
-				multiply_temp_variable = { temp_population = @POP }
-			}
-		}
+		
+	all_owned_state = {
+		has_state_flag = enable_station_economy
+		
+		multiply_temp_variable = { temp_state_civ_factories = @CIV }
+		multiply_temp_variable = { temp_infrastructure_level = @INFRA }
+		multiply_temp_variable = { temp_population = @POP }
 	}
 
 	# State Parameters
