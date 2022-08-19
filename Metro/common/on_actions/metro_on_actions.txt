@@ -1,4 +1,52 @@
 on_actions = {
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = {
+					AND = {
+						has_idea = hanza_under_sphere_of_influence
+						check_variable = {
+							var = satellite_economic_subversion
+							value = 50
+							compare = greater_than_or_equals
+						}
+						check_variable = {
+							var = satellite_politics_subversion
+							value = 50
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = hanza_under_sphere_of_influence
+					add_idea = hanza_satellite
+				}
+			}
+		}
+		effect = {
+			every_country = {
+				limit = {
+					AND = {
+						has_idea = hanza_satellite
+						check_variable = {
+							var = satellite_economic_subversion
+							value = 100
+							compare = greater_than_or_equals
+						}
+						check_variable = {
+							var = satellite_politics_subversion
+							value = 100
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = hanza_satellite
+					add_idea = hanza_puppet
+				}
+			}
+	    }
+	}
     on_startup = {
         effect = {
             ### Welcome ### 
@@ -9,135 +57,150 @@ on_actions = {
                 country_event = nf_metro.1
             }
         }
-
-        effect = {	
-            ### Spartans ###
+		
+		effect = {
+			every_state = {
+				add_to_array = {
+					array = global.reclamation_array
+					value = THIS.id
+				}
+			}
+		}	
+		effect = {
 			every_country = {
-				if = {
+				limit = {
+					under_hanza_influence = yes
+				}
+				add_to_array = {
+					array = global.HNZ_sphere_array
+					value = THIS.id
+				}
+			}
+		}
+        effect = {
+			### Nazi ###
+			every_country = {
+				limit = {
+					tag = RCH
+				}
+				add_ideas = communist_fascist_aggression
+				every_country = {
 					limit = {
-						TAG = SPT
+						NOT = { tag = RCH }
 					}
-					add_manpower = 100
-				}   
-			}  
-### Nazi ###
-	    every_country = {
-		    limit = {
-			    tag = RCH
-		    }
+					reverse_add_opinion_modifier = {
+						target = PREV
+						modifier = mutant
+					}
 
-		    every_country = {
-		        limit = {
-			        NOT = { tag = RCH }
-		        }
-		        reverse_add_opinion_modifier = {
-			        target = PREV
-			        modifier = mutant
-		        }
+					add_opinion_modifier = {
+						target = PREV
+						modifier = fascist
+					}
+				}
+			}
+			### Fanatics ###
+			every_country = {
+				limit = {
+					tag = GWC
+				}
+				every_country = {
+					limit = {
+						NOT = { tag = GWC }
+					}
+					reverse_add_opinion_modifier = {
+						target = PREV
+						modifier = nonbelivers
+					}
 
-		        add_opinion_modifier = {
-		            target = PREV
-		            modifier = fascist
-		        }
-	        }
-        }
-### Fanatics ###
-	    every_country = {
-		limit = {
-			tag = GWC
-		}
-		    every_country = {
-		        limit = {
-			        NOT = { tag = GWC }
-		        }
-		        reverse_add_opinion_modifier = {
-			        target = PREV
-			        modifier = nonbelivers
-		        }
+					add_opinion_modifier = {
+						target = PREV
+						modifier = fanatics
+					}
+				}
+			}
+			### Mutants ###
+			every_country = {
+				limit = {
+					tag = MUT
+				}
+				every_country = {
+					limit = {
+						NOT = { tag = MUT }
+					}
+					reverse_add_opinion_modifier = {
+						target = PREV
+						modifier = incapable_of_reason 
+					}
 
-		        add_opinion_modifier = {
-		            target = PREV
-		            modifier = fanatics
-		        }
-	        }
-        }
-### Mutants ###
-	    every_country = {
-		limit = {
-			tag = MUT
+					add_opinion_modifier = {
+						target = PREV
+						modifier = mutant
+					}
+				}
+			}
+			MUT = { ##crutch to make beginning war a little challenging for Spartans
+				add_manpower = 50
+			}
+			### HMS ###
+			every_country = {
+				limit = {
+					tag = HMS
+				}
+				every_country = {
+					limit = {
+						NOT = { tag = HMS }
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = disfigured
+					}
+				}
+			}
+			### Communist ###
+			every_country = {
+				limit = {
+					tag = RED
+				}
+				add_ideas = communist_fascist_aggression
+				every_country = {
+					limit = {
+						NOT = { tag = RED }
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = communist
+					}
+				}
+			}
+			### HANZA ###
+			HNZ = {
+				RED = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = capitalist_swine 
+				   }
+				}
+			}
+			### The Order ###
+			SPT = {
+				add_manpower = 30
+				PLS = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = joint_operations_mutual_defense
+				   }
+				}
+			}
+			### Polis ###
+			PLS = {
+				SPT = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = joint_operations_mutual_defense
+				   }
+				}
+			}
 		}
-		    every_country = {
-		        limit = {
-			        NOT = { tag = MUT }
-		        }
-		        reverse_add_opinion_modifier = {
-			        target = PREV
-			        modifier = incapable_of_reason 
-		        }
-
-		        add_opinion_modifier = {
-		            target = PREV
-		            modifier = mutant
-		        }
-	        }
-        }
-### HMS ###
-	    every_country = {
-		limit = {
-			tag = HMS
-		}
-		    every_country = {
-		        limit = {
-			        NOT = { tag = HMS }
-		        }
-		        add_opinion_modifier = {
-		            target = PREV
-		            modifier = disfigured
-		        }
-	        }
-        }
-### Communist ###
-	    every_country = {
-		limit = {
-			tag = RED
-		}
-		add_ideas = RED_korbut
-		add_ideas = RED_moskvin
-		    every_country = {
-		        limit = {
-			        NOT = { tag = RED }
-		        }
-		        add_opinion_modifier = {
-		            target = PREV
-		            modifier = communist
-		        }
-	        }
-        }
-### HANZA ###
-	HNZ = {
-		RED = {
-		    add_opinion_modifier = {
-		        target = PREV
-		        modifier = capitalist_swine 
-		   }
-	    }
-    }
-### The Order ###
-	SPT = {
-		PLS = {
-		    add_opinion_modifier = {
-		        target = PREV
-		        modifier = joint_operations_mutual_defense
-		   }
-	    }
-    }
-### Polis ###
-	PLS = {
-		SPT = {
-		    add_opinion_modifier = {
-		        target = PREV
-		        modifier = joint_operations_mutual_defense
-		   }
-	    }
-    }
+	}
 }

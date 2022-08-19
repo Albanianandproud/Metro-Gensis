@@ -3,64 +3,25 @@
 # These names can NOT be removed or changes, as the code uses them....
 
 weather_rain_light = { # on Region 
-	air_detection = -0.1
-	naval_detection = -0.1
-	naval_hit_chance = -0.05
-	naval_speed_factor = -0.05
-	naval_strike = -0.2
-	air_accidents = 0.1
-	air_mission_efficiency = -0.1
-	naval_retreat_speed = 0.05
-
 	local_org_regain = -0.05
+	army_speed_factor = 0.1
 }
 weather_rain_heavy = { # on Region 
-	air_detection = -0.2
-	naval_detection = -0.2
-	naval_hit_chance = -0.2
-	naval_speed_factor = -0.1
-	carrier_traffic = -0.8
-	naval_strike = -0.4
-	air_accidents = 0.3
-	air_bombing_targetting = -0.5
-	local_org_regain = -0.2
-	air_mission_efficiency = -0.3
-	naval_retreat_speed = 0.1
-	positioning = -0.1
+	local_org_regain = -0.075
+	army_speed_factor = -0.15
 }
 weather_snow = { # on Region 
-	air_detection = -0.15
-	naval_detection = -0.15
-	naval_hit_chance = -0.05
-	naval_speed_factor = -0.05
-	naval_strike = -0.3
-	air_accidents = 0.1
-	local_org_regain = -0.05
-	air_mission_efficiency = -0.1
-	naval_retreat_speed = 0.05
-	positioning = -0.1
+	local_org_regain = -0.1
+	army_speed_factor = -0.2
+	winter_attrition = 0.25
 }
 weather_blizzard = { # on Region 
-	air_detection = -0.3
-	naval_detection = -0.3
-	naval_hit_chance = -0.1
-	naval_speed_factor = -0.1
-	carrier_traffic = -1.0
-	naval_strike = -0.4
-	air_accidents = 0.3
-	air_bombing_targetting = -0.7
-	local_org_regain = -0.3
-	air_mission_efficiency = -0.3
-	naval_retreat_speed = 0.15
-	positioning = -0.2
+	local_org_regain = -0.2
+	army_speed_factor = -0.4
+	winter_attrition = 0.5
 }
 weather_sandstorm = { # on Region 
-	air_detection = -0.9
-	air_accidents = 0.6
-	naval_strike = -0.9
-	air_bombing_targetting = -1
-	local_org_regain = -0.5
-	air_mission_efficiency = -0.5
+	local_org_regain = -0.1
 }
 
 weather_arctic_water = { # on Region 
@@ -71,20 +32,17 @@ weather_arctic_water = { # on Region
 }
 
 weather_mud = { # on Province
-	attrition = 0.7
-	army_speed_factor = -0.5
-	army_attack_factor = -0.4
+	attrition = 0.2
+	army_speed_factor = -0.2
 }
 weather_extreme_cold = { # on Province
-	winter_attrition = 0.2
-	dig_in_speed_factor = -0.6
+	winter_attrition = 1.5
+	dig_in_speed_factor = -0.35
 	local_org_regain = -0.05
-	army_attack_factor = -0.2
 }
 weather_very_cold = { # on Province
-	winter_attrition = 0.1
-	dig_in_speed_factor = -0.3
-	army_attack_factor = -0.1
+	winter_attrition = 0.8
+	dig_in_speed_factor = -0.15
 }
 weather_very_hot = { # on Province
 	heat_attrition = 0.1
@@ -97,28 +55,25 @@ weather_extreme_hot = { # on Province
 	army_attack_factor = -0.1
 }
 weather_ground_snow_medium = { # on Province
-	army_speed_factor = -0.1
-	army_attack_factor = -0.1
+	army_speed_factor = -0.05
+	army_attack_factor = -0.05
 }
 weather_ground_snow_high = { # on Province
-	army_speed_factor = -0.25
+	army_speed_factor = -0.1
 	local_org_regain = -0.05
-	army_attack_factor = -0.3
-	naval_retreat_speed = 0.1
+	army_attack_factor = -0.05
 }
 
 flooded = { # on Province
-	army_speed_factor = -0.5
-	army_defence_factor = 0.5
-	dig_in_speed_factor = 0.2
+	army_speed_factor = -0.2
+	army_defence_factor = -0.2
+	dig_in_speed_factor = -0.3
 }
 
 unplanned_offensive = { # on Province
-	army_speed_factor = -0.7
-	army_attack_factor = -0.7
-	local_org_regain = -0.3
-	air_cas_present_factor = -0.75
-	ground_attack_factor = -0.75
+	army_speed_factor = -0.5
+	army_attack_factor = -0.5
+	local_org_regain = -0.5
 }
 
 night = { # On province. Multiplied by amount of darkness.
@@ -148,9 +103,9 @@ compliance_effect_base = {
 }
 
 compliance_effect = {
-	local_factories = 0.65
-	local_non_core_manpower = 0.5
-	local_resources = 0.60
+	local_factories = 0.25
+	local_non_core_manpower = 0.25
+	local_resources = 0.25
 }
 
 # On States that are owned by a non-core country
@@ -159,10 +114,9 @@ non_core = {
 
 # On States that are controlled by a non-core country
 non_core_controller = {
-	local_building_slots_factor = -0.25
-	
-	local_factories = -0.5
-	#local_manpower = -0.5
+	local_building_slots_factor = -0.5	
+	local_factories = -0.25
+	local_manpower = -0.25
 }
 
 lacking_consumer_goods = {
@@ -183,33 +137,34 @@ free_license = {
 
 # applies when stability > 50%
 stability_good_modifier = {
-        local_resources_factor = 0.2
-        production_speed_buildings_factor = 0.2
-	industrial_capacity_factory = 0.2
+    local_resources_factor = 0.2
+    production_speed_buildings_factor = 0.2
 	consumer_goods_factor = -0.05
 	political_power_factor = 0.1
+	industrial_capacity_factory = 0.1
 }
 
 # applies when stability < 50%
-stability_bad_modifier = {
-        local_resources_factor = -0.2
-        production_speed_buildings_factor = -0.2
-	industrial_capacity_factory = -0.5
+	stability_bad_modifier = {
+    local_resources_factor = -0.2
+    production_speed_buildings_factor = -0.2
 	political_power_factor = -0.5
+	industrial_capacity_factory = -0.2
 }
 
 war_support_good_modifier = {
-	mobilization_speed = 0.5 #in 1/1000 of 1 %
-	army_attack_factor = 0.05
-	army_defence_factor = 0.05
+	mobilization_speed = 0.5
 	command_power_gain_mult = 0.1
+	industrial_capacity_factory = 0.1
 }
 
 war_support_bad_modifier = {
 	mobilization_speed = -0.500 # Reduce mobilization speed by half.
-	army_attack_factor = -0.1
-	army_defence_factor = -0.1
+	army_attack_factor = -0.15
+	army_defence_factor = -0.15
 	command_power_gain_mult = -0.5
+	training_time_factor = 0.25
+	industrial_capacity_factory = -0.2
 }
 
 
@@ -220,61 +175,56 @@ attache_sent = {
 # Difficulty modifiers
 
 diff_very_easy_player = {
-	production_factory_max_efficiency_factor = 0.3
-	research_speed_factor = 0.15
-	political_power_factor = 0.5
-	production_lack_of_resource_penalty_factor = -0.8
-	army_fuel_consumption_factor = -0.5
-	air_fuel_consumption_factor = -0.5
- 	navy_fuel_consumption_factor = -0.5
 }
 
 diff_easy_player = {
-	production_factory_max_efficiency_factor = 0.2
-	research_speed_factor = 0.07
-	political_power_factor = 0.25
-	production_lack_of_resource_penalty_factor = -0.3
-	army_fuel_consumption_factor = -0.25
-	air_fuel_consumption_factor = -0.25
- 	navy_fuel_consumption_factor = -0.25
 }
 
 diff_normal_player = {
 }
 
 diff_hard_player = {
-	production_factory_max_efficiency_factor = -0.2
-	research_speed_factor = -0.15
-	political_power_factor = -0.1
+	stability_weekly_factor = -0.001
+	war_support_weekly_factor = -0.001
 }
 
 diff_very_hard_player = {
-	production_factory_max_efficiency_factor = -0.3
-	research_speed_factor = -0.30
-	political_power_factor = -0.15
+	stability_weekly_factor = -0.002
+	war_support_weekly_factor = -0.002
 }
 
-
 diff_very_easy_ai = {
+	production_lack_of_resource_penalty_factor = -0.2
 }
 
 diff_easy_ai = {
-	
+	production_lack_of_resource_penalty_factor = -0.2
 }
 
 diff_normal_ai = {
+	production_lack_of_resource_penalty_factor = -0.2
+	ai_desired_divisions_factor = 0.5
+	industrial_capacity_dockyard = 2
 }
 
 diff_hard_ai = {
-	army_fuel_consumption_factor = -0.25
-	air_fuel_consumption_factor = -0.25
- 	navy_fuel_consumption_factor = -0.25
+	production_lack_of_resource_penalty_factor = -0.2
+	production_factory_max_efficiency_factor = 0.15
+	ai_desired_divisions_factor = 1
+	dig_in_speed_factor = 0.25
+	army_morale_factor = 0.05
+	army_core_attack_factor = 0.05
+	army_core_defence_factor = 0.05
 }
 
 diff_very_hard_ai = {
-	army_fuel_consumption_factor = -0.5
-	air_fuel_consumption_factor = -0.5
- 	navy_fuel_consumption_factor = -0.5
+	production_lack_of_resource_penalty_factor = -0.2
+	production_factory_max_efficiency_factor = 0.25
+	ai_desired_divisions_factor = 1
+	dig_in_speed_factor = 0.25
+	army_morale_factor = 0.1
+	army_core_attack_factor = 0.1
+	army_core_defence_factor = 0.1
 }
 
 

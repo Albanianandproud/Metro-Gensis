@@ -1,0 +1,71 @@
+scavenging_expeditions = {
+
+	execute_scavenge_mission = {
+
+		icon = electronics
+
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		available = {
+			NOT = { has_country_flag = scavenging_underway }
+			NOT = { has_country_flag = scavenging_disabled }
+
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 5
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+
+		complete_effect = {
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			set_country_flag = scavenging_underway
+		}
+
+		days_remove = 1
+		days_re_enable = 0
+
+		remove_effect = {
+			clr_country_flag = scavenging_underway
+			random_list = {
+				50 = { #Found something
+					country_event = scavenge_mission.1
+				}
+				30 = { #Loss
+					country_event = scavenge_mission.2
+				}
+				20 = { #Disappear
+					country_event = scavenge_mission.3
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0.05
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.05
+				has_manpower < 19
+			}
+			modifier = {
+				factor = 5
+				has_manpower > 79
+			}
+		}
+    }

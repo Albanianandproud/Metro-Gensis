@@ -1,0 +1,329 @@
+add_namespace = HNZ_random_event
+
+country_event = { ## Underhanded Trader ## 
+	id = HNZ_random_event.1
+	title = HNZ_random_event.1.t
+	desc = HNZ_random_event.1.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		has_war = no
+	}
+
+	option = {	## Reprimand his wares ##
+		name = HNZ_random_event.1.a
+		custom_effect_tooltip = HNZ_random_event.1.a_tt
+		random_owned_state = {
+			limit = {
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+			    type = alloys
+			    amount = 1
+			}
+			add_resource = {
+			    type = scrap
+			    amount = 1
+			}
+		}
+		add_popularity = {
+			ideology = oligarch
+			popularity = -0.02
+		}
+	}
+
+	option = {	## Kick him out of the station ##
+		name = HNZ_random_event.1.b
+
+		add_stability = 0.03
+		add_political_power = 15
+	}
+}
+
+country_event = { ## Tradesmen don't carry Passports ## 
+	id = HNZ_random_event.2
+	title = HNZ_random_event.2.t
+	desc = HNZ_random_event.2.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		has_war = no
+		AND = {
+			has_completed_focus = HNZ_passport_requirements
+		}
+	}
+
+	option = { ## Turn them Away. No Passport no entry ##
+		name = HNZ_random_event.2.a
+
+		add_stability = 0.02
+		add_political_power = 5
+		add_popularity = {
+			ideology = oligarch
+			popularity = 0.02
+		}
+	}
+
+	option = {	## Promising Wares, let them come ##
+		name = HNZ_random_event.2.b
+
+		random_owned_state = {
+			limit = {
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+			    type = electronics
+			    amount = 1
+			}
+			add_resource = {
+			    type = components
+			    amount = 1
+			}
+			add_resource = {
+			    type = chemicals
+			    amount = 1
+			}
+		}
+		add_popularity = {
+			ideology = oligarch
+			popularity = -0.025
+		}
+	}
+}
+
+country_event = { ## Bandit Raid on Caravan ## 
+	id = HNZ_random_event.3
+	title = HNZ_random_event.3.t
+	desc = HNZ_random_event.3.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		has_war = no
+	}
+
+	option = {	## Take them Out ##
+		name = HNZ_random_event.3.a
+		add_manpower = -10
+		add_stability = 0.02
+		add_popularity = {
+			ideology = oligarch
+			popularity = 0.02
+		}
+	}
+
+	option = {	## Approach them to hire ##
+		name = HNZ_random_event.3.b
+		random_list = {
+			50 = { ## Hire Successful
+		    	ROOT = { country_event = HNZ_random_event.4 }
+			}
+			50 = { ## Hire Failed
+		   		ROOT = { country_event = HNZ_random_event.8 }
+			}
+		}
+	}
+
+	option = {	## Pay them to fuck off ##
+		name = HNZ_random_event.3.c
+		add_popularity = {
+			ideology = oligarch
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = { ## Hire Successful ## 
+	id = HNZ_random_event.4
+	title = HNZ_random_event.4.t
+	desc = HNZ_random_event.4.d
+	picture = event_mutants.1
+	is_triggered_only = yes
+
+	option = {	## Nice ##
+		name = HNZ_random_event.4.a
+		random_owned_state = {
+			limit = {
+		    	has_resources_amount = {
+    				resource = scrap
+    				amount > 1
+				}
+			}
+		    add_resource = {
+    			type = scrap 
+    			amount = -2
+    		}
+    	}
+		random_owned_state = {
+			limit = {
+		    	has_resources_amount = {
+    				resource = alloys
+    				amount > 1
+				}
+    		}
+    		add_resource = {
+    			type = alloys
+    			amount = -1
+    		}
+    	}
+		custom_effect_tooltip = HNZ_random_event.4.a_tt
+		hidden_effect = {
+			load_oob = HNZ_bandit_hired
+		}
+	}
+}
+
+country_event = { ## Hire Failed ## 
+	id = HNZ_random_event.8
+	title = HNZ_random_event.8.t
+	desc = HNZ_random_event.8.d
+	picture = event_mutants.1
+	is_triggered_only = yes
+
+	option = {	## Nice ##
+		name = HNZ_random_event.8.a
+		add_manpower = -10
+		add_stability = -0.02
+	}
+}
+
+country_event = { ## Pipes ate my caravan ##
+	id = HNZ_random_event.5
+	title = HNZ_random_event.5.t
+	desc = HNZ_random_event.5.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		has_war = no
+	}
+
+	option = { 
+		name = HNZ_random_event.5.a
+		add_equipment_to_stockpile = {
+		    type = infantry_equipment
+		    amount = 20
+		} 
+	}
+}
+
+country_event = { ## Red Line Trade Crash ##
+	id = HNZ_random_event.6
+	title = HNZ_random_event.6.t
+	desc = HNZ_random_event.6.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		has_war = no
+		AND = {
+			RED = {
+				is_ai = yes
+			}
+		}
+	}
+
+	option = { 
+		name = HNZ_random_event.6.a
+		custom_effect_tooltip = HNZ_random_event.6.a_tt
+		add_equipment_to_stockpile = {
+		    type = infantry_equipment
+		    amount = 10
+		}
+		random_owned_state = {
+			limit = {
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+			    type = alloys
+			    amount = 1
+			}
+			add_resource = {
+			    type = components
+			    amount = 1
+			}
+			add_resource = {
+			    type = scrap
+			    amount = 1
+			}
+		} 
+	}
+	option = { 
+		name = HNZ_random_event.6.b
+		add_political_power = 10
+		custom_effect_tooltip = HNZ_random_event.6.b_tt
+		RED = {
+			add_opinion_modifier = {
+				target = RED
+				modifier = returned_goods
+			}
+		}
+	}
+}
+
+country_event = { ## Staion Chief calls against Hansa ## 
+	id = HNZ_random_event.7
+	title = HNZ_random_event.7.t
+	desc = HNZ_random_event.7.d
+	picture = event_tunnel
+
+	mean_time_to_happen = {
+		days = 1800
+	}
+
+	trigger = {
+		original_tag = HNZ
+		currently_is_decentralised = yes
+		NOT = {
+    		has_stability > 0.54
+    		OR = {
+    			has_idea = HNZ_chief_doubt
+			}
+		}
+	}
+
+	option = {
+		name = HNZ_random_event.7.a
+		add_timed_idea = {
+			idea = HNZ_chief_doubt
+			days = 180
+		}
+	}
+
+	option = {
+		name = HNZ_random_event.7.b
+		trigger = {
+			has_government = dictatorial
+		}
+		custom_effect_tooltip = HNZ_random_event.7.b_tt
+		add_political_power = -20
+	}
+}

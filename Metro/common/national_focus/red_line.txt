@@ -1,1881 +1,5022 @@
-###	###	###	###	###	###	###	###	###
-###		Red Line Focus Tree 	###
-###		Designed by : Albanian	###
-###	###	###	###	###	###	###	###	###
+﻿#!gfx:interface\metro_goals.gfx
+
 focus_tree = {
-	id = red_line
+	id = red_line_1
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 100
 			tag = RED
 		}
 	}
 	continuous_focus_position = { x = 50 y = 1000 }
 	focus = {
-		id = RED_introduction
-		icon = GFX_focus_generic_join_comintern
-		x = 20
+		id = RED_bulwark_of_socialism
+		icon = GFX_RED_generic_cccp
+		x = 5
 		y = 0
-		cost = 1
+		cost = 5.8
+
+		select_effect = {
+			country_event = nf_RED.1
+		}
+
+		completion_reward = {
+			country_event = nf_RED.4
+		}
+
 		ai_will_do = {
 			factor = 2
 		}
+	}
+	focus = {
+		id = RED_question_of_economy
+		icon = GFX_RED_question_of_economy
+		prerequisite = {
+			focus = RED_bulwark_of_socialism
+		}
+		x = -1
+		y = 1
+		cost = 1 #2.2
+		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
-		    country_event = nf_RED.1
+			country_event = nf_RED.5
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
-
 	focus = {
-		id = RED_adress_the_situation
-		icon = GFX_focus_generic_join_comintern
-		cost = 1
-		relative_position_id = RED_introduction
+		id = RED_economic_demobilisation
+		icon = GFX_RED_economic_demobilization
+		prerequisite = {
+			focus = RED_question_of_economy
+		}
 		x = 0
 		y = 1
-		prerequisite = {
-			focus = RED_introduction
+		cost = 1 #2.9
+		relative_position_id = RED_question_of_economy
+		completion_reward = {
+			RED_demobilise_economy = yes
+			add_stability = 0.025
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
+	}
+	focus = {
+		id = RED_formalise_ministry_of_economics
+		icon = GFX_RED_formalise_ministry_of_economics
+		prerequisite = {
+			focus = RED_question_of_economy
+		}
+		x = -2
+		y = 1
+		cost = 1 #2.9
+		relative_position_id = RED_question_of_economy
 		completion_reward = {
-		    country_event = nf_RED.4
+			country_event = nf_RED.9
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
-
 	focus = {
-		id = RED_shut_down_mutinies
-		icon = GFX_lenin
-		cost = 3.6
+		id = RED_assume_kulak_property
+		icon = GFX_RED_assume_kulak_property
 		prerequisite = {
-			focus = RED_adress_the_situation
+			focus = RED_formalise_ministry_of_economics
 		}
-		mutually_exclusive = {
-			focus = RED_use_korbut
-		}
-		relative_position_id = RED_adress_the_situation
-		x = -4
+		x = 0
 		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
+		cost = 1 #3.6
+		relative_position_id = RED_formalise_ministry_of_economics
 		completion_reward = {
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -60
+			add_timed_idea = {
+				idea = RED_de_kulakization
+				days = 150
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
 			}
 		}
+		ai_will_do = {
+			factor = 250
+		}
+	}
+	focus = {
+		id = RED_unionise_inefficient_sectors
+		icon = GFX_RED_unionize_inefficient_industries
+		prerequisite = {
+			focus = RED_assume_kulak_property
+		}
+		x = 0
+		y = 1
+		cost = 1 #3.6
+		relative_position_id = RED_assume_kulak_property
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_question_of_prodrazvyorstka
+		icon = GFX_RED_question_of_prodrazvyorstka
+		prerequisite = {
+			focus = RED_economic_demobilisation
+			focus = RED_formalise_ministry_of_economics
+		}
+		x = 0
+		y = 1
+		cost = 1 #2.9
+		relative_position_id = RED_economic_demobilisation
+		completion_reward = {
+			country_event = nf_RED.7
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_question_of_military
+		icon = GFX_RED_question_of_military
+		prerequisite = {
+			focus = RED_bulwark_of_socialism
+		}
+		x = 1
+		y = 1
+		cost = 1 #2.2
+		relative_position_id = RED_bulwark_of_socialism
+		completion_reward = {
+			country_event = nf_RED.6
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_command_reforms
+		icon = GFX_RED_command_reforms
+		prerequisite = {
+			focus = RED_question_of_military
+		}
+		x = 0
+		y = 1
+		cost = 1 #2.9
+		relative_position_id = RED_question_of_military
+		completion_reward = {
+			RED_military_reforms = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_military_renovations
+		icon = GFX_RED_military_reforms
+		prerequisite = {
+			focus = RED_question_of_military
+		}
+		x = 2
+		y = 1
+		cost = 1 #2.9
+		relative_position_id = RED_question_of_military
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = infantry_equipment 
+		        amount = 15
+		    }
+		    add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 5
+		    }
+		    add_equipment_to_stockpile = {
+		        type = flamethrower_equipment
+		        amount = 5
+		    }
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_young_officer_academy
+		icon = GFX_RED_new_commanders
+		prerequisite = {
+			focus = RED_military_renovations
+		}
+		x = 0
+		y = 1
+		cost = 1 #3.6
+		relative_position_id = RED_military_renovations
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.15
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.15
+				uses = 1
+				category = entrench_kits
+			}
+		}
+		ai_will_do = {
+			factor = 250
+		}
+	}
+	focus = {
+		id = RED_new_officer_corps
+		icon = GFX_RED_generic_troop_1
+		prerequisite = {
+			focus = RED_young_officer_academy
+		}
+		x = 0
+		y = 1
+		cost = 1 #3.6
+		relative_position_id = RED_young_officer_academy
+		completion_reward = {
+			custom_effect_tooltip = RED_future_officers_tt
+			custom_effect_tooltip = RED_generals_will_be_unhappy
+			army_experience = 5
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_question_of_brotherhood
+		icon = GFX_RED_question_of_brotherhood
+		prerequisite = {
+			focus = RED_command_reforms
+			focus = RED_military_renovations
+		}
+		x = 0
+		y = 1
+		cost = 1 #2.9
+		relative_position_id = RED_command_reforms
+		completion_reward = {
+			country_event = nf_RED.8
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	focus = {
+		id = RED_new_economic_draft
+		icon = GFX_RED_new_economic_draft
+		prerequisite = {
+			focus = RED_question_of_brotherhood
+		}
+		prerequisite = {
+			focus = RED_question_of_prodrazvyorstka
+		}
+		prerequisite = {
+			focus = RED_unionise_inefficient_sectors
+		}
+		prerequisite = {
+			focus = RED_new_officer_corps
+		}
+		cancel = {
+			hidden_trigger = {
+				has_country_flag = RED_crisis_country_flag
+			}
+		}
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = RED_bulwark_of_socialism
+
+		completion_reward = {
+			custom_effect_tooltip = RED_new_economic_draft_tt
+			country_event = nf_RED.10
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+}
+
+focus_tree = {
+	id = red_line_2
+	country = {
+		factor = 0
+		modifier = {
+			add = 100
+			tag = RED
+		}
+	}
+	focus = {
+		id = RED_crisis
+		icon = GFX_RED_generic_food
+		x = 0
+		y = 0
+		cost = 0.8
+		available = {
+			always = no
+		}
+		completion_reward = {
+			### tooltip or something
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_inaugerate_korbut
+		icon = GFX_RED_head_of_kgb
+		prerequisite = {
+			focus = RED_crisis
+		}
+		x = 0
+		y = 1
+		cost = 0.8
+		relative_position_id = RED_crisis
+		completion_reward = {
+			country_event = nf_RED.13
+			### BEGIN KORBUT MECHANIC
+		}
+		ai_will_do = {
+			factor = 2
+		}
 	}
 
 	focus = {
-		id = RED_scale_back_militarization
-		icon = GFX_focus_BUL_condemn_macedonian_organizations
-		cost = 3.6
+		id = RED_military_mutinies
+		icon = GFX_RED_military_mutinies
 		prerequisite = {
-			focus = RED_shut_down_mutinies
-			focus = RED_use_korbut
+			focus = RED_inaugerate_korbut
 		}
-		relative_position_id = RED_shut_down_mutinies
+		x = 5
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_inaugerate_korbut
+		completion_reward = {
+			custom_effect_tooltip = RED_military_mutinies_decisions_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rid_mutinies
+		icon = GFX_RED_nkvd_support
+		prerequisite = {
+			focus = RED_military_mutinies
+		}
+		x = -1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_military_mutinies
+		completion_reward = {
+			## unlock decisions
+			custom_effect_tooltip = RED_military_rid_mutinies_tt
+		}
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+	focus = {
+		id = RED_nkvd_divisions
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_rid_mutinies
+			focus = RED_approach_dissenters
+		}
+		available = {
+			has_idea_with_trait = RED_korbut
+		}
+		x = 0
+		y = 2
+		cost = 2.9
+		relative_position_id = RED_military_mutinies
+		completion_reward = {
+			set_division_template_lock = {
+				division_template = "NKVD Diviziya"
+				is_locked = no
+			}
+			custom_effect_tooltip = RED_NKVD_oob_tt
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+			### TO DO -- KORBUT MECHANIC ###
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_approach_dissenters
+		icon = GFX_RED_troopers
+		prerequisite = {
+			focus = RED_military_mutinies
+		}
 		x = 1
 		y = 1
-
-		ai_will_do = {
-			factor = 3
+		cost = 2.9
+		relative_position_id = RED_military_mutinies
+		completion_reward = {
+			custom_effect_tooltip = RED_approach_commanders_tt
+			country_event = nf_RED.15
 		}
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+	focus = {
+		id = RED_out_of_sight
+		icon = GFX_RED_out_of_sight
+		prerequisite = {
+			focus = RED_rid_mutinies
+		}
+		available = {
+			has_idea = RED_military_mutinies_2
+		}
+		x = -3
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_rid_mutinies
+		completion_reward = {
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = -10
+			}
+			add_war_support = 0.02
+			350 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_martyrs_disappear
+		icon = GFX_RED_army_march
+		prerequisite = {
+			focus = RED_out_of_sight
+		}
+		available = {
+			has_idea = RED_military_mutinies_3
+		}
+		x = 1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_out_of_sight
+		completion_reward = {
+			add_war_support = 0.02
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = -20
+			}
+			country_lock_all_division_template = no
+			country_event = nf_RED.16
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rallying_cry
+		icon = GFX_RED_loyalty
+		prerequisite = {
+			focus = RED_rid_mutinies
+		}
+		available = {
+			has_idea = RED_military_mutinies_2
+		}
+		x = -1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_rid_mutinies
+		completion_reward = {
+			add_war_support = 0.02
+			custom_effect_tooltip = RED_rallying_cry_tt
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+
+	focus = {
+		id = RED_name_and_shame
+		icon = GFX_RED_radiation_troopers
+		prerequisite = {
+			focus = RED_approach_dissenters
+		}
+		available = {
+			has_idea = RED_military_mutinies_2
+		}
+		x = 3
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_approach_dissenters
+		completion_reward = {
+			add_war_support = 0.02
+			add_political_power = 30
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = -10
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_squash_dissidents
+		icon = GFX_RED_honorguard
+		prerequisite = {
+			focus = RED_name_and_shame
+		}
+		available = {
+			has_idea = RED_military_mutinies_3
+		}
+		x = -1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_name_and_shame
+		completion_reward = {
+			add_war_support = 0.02
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = -20
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_promote_loyalty
+		icon = GFX_RED_promote_loyality
+		prerequisite = {
+			focus = RED_approach_dissenters
+		}
+		available = {
+			has_idea = RED_military_mutinies_2
+		}
+		x = 1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_approach_dissenters
+		completion_reward = {
+			army_experience = 5
+			add_war_support = 0.02
+			add_days_remove  = {
+				decision = RED_military_mutiny_mission_countdown
+				days = -10
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_the_great_show_trial
+		icon = GFX_RED_show_trial
+		prerequisite = {
+			focus = RED_rallying_cry
+			focus = RED_promote_loyalty
+		}
+		prerequisite = {
+			focus = RED_out_of_sight
+			focus = RED_name_and_shame
+		}
+		prerequisite = {
+			focus = RED_nkvd_divisions
+		}
+		available = {
+			has_idea = RED_military_mutinies_3
+		}
+		x = 0
+		y = 3
+		cost = 2.9
+		relative_position_id = RED_military_mutinies
+		completion_reward = {
+			country_event = nf_RED.23 
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_staff_purge
+		icon = GFX_RED_begin_the_purge
+		prerequisite = {
+			focus = RED_the_great_show_trial
+			focus = RED_martyrs_disappear
+		}
+		prerequisite = {
+			focus = RED_the_great_show_trial
+		}
+		prerequisite = {
+			focus = RED_the_great_show_trial
+			focus = RED_squash_dissidents
+		}
+		x = 0
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_the_great_show_trial
+		completion_reward = {
+			retire_character = RED_kovshov
+			retire_character = RED_yury_terekhov
+			retire_character = RED_georgy_rozhestvensky
+			add_timed_idea = {
+				idea = RED_staff_purge
+				days = 900
+			}
+			custom_effect_tooltip = RED_staff_purge_removal_prerequesites_tt
+			clr_country_flag = RED_military_mutinies
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_dismantle_mushroom_revolts
+		icon = GFX_fist
+		prerequisite = {
+			focus = RED_inaugerate_korbut
+		}
+		x = -5
+		y = 1
+		cost = 2.9
+		available = {
+			hidden_trigger = {
+				has_country_flag = RED_mushroom_revolts
+			}
+		}
+		relative_position_id = RED_inaugerate_korbut
+		completion_reward = {
+			country_event = nf_RED.27
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_approach_hansa
+		icon = GFX_HNZ_democracy_1
+		prerequisite = {
+			focus = RED_dismantle_mushroom_revolts
+		}
+		available = {
+			has_country_flag = RED_approaching_hansa
+		}
+		x = -3
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_dismantle_mushroom_revolts
+		completion_reward = {
+			## Event to approach hansa
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_new_polis_treaty
+		icon = GFX_HNZ_independent_jurisdiction
+		prerequisite = {
+			focus = RED_approach_hansa
+		}
+		x = 0
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_approach_hansa
+		completion_reward = {
+			## Fuck up Red Line, but eco peace
+			## make them get outsider dependency, and eco debuff
+			diplomatic_relation = {
+				country = HNZ
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_mushroom_trades
+		icon = GFX_mushroom
+		prerequisite = {
+			focus = RED_new_polis_treaty
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_new_polis_treaty
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			HNZ = {
+				random_owned_state = {
+					limit = {
+						NOT = {
+							has_state_category = pastoral
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_deal_well_made
+		icon = GFX_communist_book
+		prerequisite = {
+			focus = RED_new_polis_treaty
+		}
+		x = 1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_new_polis_treaty
+		completion_reward = {
+			add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_reforms
+		icon = GFX_RED_propaganda_1
+		prerequisite = {
+			focus = RED_dismantle_mushroom_revolts
+		}
+		available = {
+			has_country_flag = RED_inner_reforms
+		}
+		x = 0
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_dismantle_mushroom_revolts
+		completion_reward = {
+			add_stability = 0.025
+			add_popularity = {
+				ideology = council
+				popularity = -0.05
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_sabotage_the_revolution
+		icon = GFX_RED_smash_the_revolution
+		prerequisite = {
+			focus = RED_dismantle_mushroom_revolts
+		}
+		available = {
+			has_idea_with_trait = RED_korbut
+		}
+		x = 3
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_dismantle_mushroom_revolts
+		completion_reward = {
+			custom_effect_tooltip = RED_sabotage_the_revolution_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_crackdowns
+		icon = GFX_RED_surpress_rioters
+		prerequisite = {
+			focus = RED_sabotage_the_revolution
+		}
+		x = 0
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_sabotage_the_revolution
+		completion_reward = {
+			add_stability = -0.05
+			custom_effect_tooltip = RED_crackdowns_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_repress_the_evidence
+		icon = GFX_RED_repress_evidence
+		prerequisite = {
+			focus = RED_crackdowns
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = RED_has_infiltrated_revolution
+			}
+			hidden_trigger = {
+				has_country_flag = triggered_sabotage_revolution
+			}
+		}
+		x = 1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_crackdowns
+		completion_reward = {
+			country_event = nf_RED.19
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rid_the_ring_leaders
+		icon = GFX_RED_remove_ring_leaders
+		prerequisite = {
+			focus = RED_crackdowns
+		}
+		mutually_exclusive = {
+			focus = RED_meet_with_the_revolters
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = RED_has_infiltrated_revolution
+			}
+			hidden_trigger = {
+				has_country_flag = triggered_sabotage_revolution
+			}
+		}
+		x = -1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_crackdowns
+		completion_reward = {
+			country_event = nf_RED.18
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_military_industry_scaleback
+		icon = GFX_RED_council_of_workers
+		prerequisite = {
+			focus = RED_reforms
+		}
+		x = -1
+		y = 1
+		cost = 2.9
+		relative_position_id = RED_reforms
 		completion_reward = {
 			add_timed_idea = {
 				idea = RED_militarization_scale_back
-				days = 365
+				days = 480
 			}
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -60
-			}
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_workers_councils
-		icon = GFX_RED_will_of_proletariat
-		cost = 3.6
+		id = RED_reintroduce_workers_councils
+		icon = GFX_RED_introduce_workers_councils
 		prerequisite = {
-			focus = RED_shut_down_mutinies
-			focus = RED_use_korbut
+			focus = RED_reforms
 		}
-		relative_position_id = RED_shut_down_mutinies
-		x = -1
+		x = 1
 		y = 1
-		ai_will_do = {
-			factor = 3
-		}
+		cost = 2.9
+		relative_position_id = RED_reforms
 		completion_reward = {
 			add_popularity = {
 				ideology = community
 				popularity = 0.05
 			}
-			add_ideas = RED_workers_councils
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -60
+			add_timed_idea = {
+				idea = RED_workers_councils
+				days = 480
 			}
+			custom_effect_tooltip = RED_worker_councils_law_lock_tt
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_concessions_to_the_masses
-		icon = GFX_RED_bread
-		cost = 3.6
+		id = RED_meet_with_the_revolters
+		icon = GFX_volunteer_expedition
 		prerequisite = {
-			focus = RED_workers_councils
+			focus = RED_reintroduce_workers_councils
 		}
 		prerequisite = {
-			focus = RED_scale_back_militarization
+			focus = RED_military_industry_scaleback
 		}
-
-		relative_position_id = RED_shut_down_mutinies
+		mutually_exclusive = {
+			focus = RED_rid_the_ring_leaders
+		}
 		x = 0
 		y = 2
-		ai_will_do = {
-			factor = 3
-		}
+		cost = 2.9
+		relative_position_id = RED_reforms
 		completion_reward = {
-			add_political_power = 60
-			add_popularity = {
-				ideology = community
-				popularity = 0.05
-			}
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -120
-			}
+			country_event = nf_RED.28
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_use_korbut
-		icon = GFX_RED_NKVD_2
-		cost = 6.5
+		id = RED_the_crowd_stills
+		icon = GFX_RED_crowd_stills
 		prerequisite = {
-			focus = RED_adress_the_situation
+			focus = RED_rid_the_ring_leaders
+			focus = RED_deal_well_made
 		}
-		mutually_exclusive = {
-			focus = RED_placate_ministers
+		prerequisite = {
+			focus = RED_repress_the_evidence
+			focus = RED_mushroom_trades
 		}
-		mutually_exclusive = {
-			focus = RED_shut_down_mutinies
+		prerequisite = {
+			focus = RED_meet_with_the_revolters
+			focus = RED_rid_the_ring_leaders
 		}
-		relative_position_id = RED_adress_the_situation
 		x = 0
 		y = 1
-
-		ai_will_do = {
-			factor = 3
+		cost = 2.9
+		relative_position_id = RED_meet_with_the_revolters
+		completion_reward = {
+			clr_country_flag = RED_mushroom_revolts
+			remove_ideas = RED_mushroom_revolt      
 		}
-		completion_reward = { #Korbut 'control' Mechanic
-		    country_event = nf_RED.2
-		    custom_effect_tooltip = RED_korbut_influence
+		ai_will_do = {
+			factor = 2
+		}
+	}
+}
+
+focus_tree = {
+	id = red_line_3
+	country = {
+		factor = 444444
+		modifier = {
+			add = 100
+			tag = RED
+		}
+	}
+
+	continuous_focus_position = { x = 50 y = 1400 }
+	focus = {
+		id = RED_2030
+		icon = GFX
+		x = 12
+		y = 0
+		cost = 0.8
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_reintroduce_chekists
-		icon = GFX_RED_NKVD
-		cost = 6.5
+		id = RED_development_of_the_red_line
+		icon = GFX_RED_victory_soviet_2
 		prerequisite = {
-			focus = RED_use_korbut
+			focus = RED_2030
 		}
-		relative_position_id = RED_use_korbut
-		x = 0
+		x = -6
 		y = 1
-
-		ai_will_do = {
-			factor = 3
+		cost = 2.2
+		relative_position_id = RED_2030
+		completion_reward = {
+			add_ideas = RED_minister_of_reclaimation
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_reclaimation_departments_tt
 		}
-		completion_reward = { 
-			### Add the 'Chekist' Support Company
-			add_ideas = RED_chekists
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -80
-			}
-			custom_effect_tooltip = RED_reintroduce_chekists
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_infiltrate_workers_culture
-		icon = GFX_RED_infiltration
-		cost = 6.5
+		id = RED_collectivization
+		icon = GFX_RED_collectivization
 		prerequisite = {
-			focus = RED_reintroduce_chekists
+			focus = RED_development_of_the_red_line
 		}
-		relative_position_id = RED_reintroduce_chekists
+		x = 3
+		y = 1
+		cost = 5.8
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_central_planning
+		icon = GFX_RED_infrastructure
+		prerequisite = {
+			focus = RED_collectivization
+		}
 		x = -1
 		y = 1
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = { 
-			modify_timed_idea = {
-				idea = RED_mutinies
-				days = -240
-			}
-			add_timed_idea = {
-			    idea = RED_kgb_patrols
-			    days = 480
-			}
-		}
-	}
-
-	focus = {
-		id = RED_watch_the_politburo
-		icon = GFX_RED_politburo
-		cost = 6.5
-		prerequisite = {
-			focus = RED_reintroduce_chekists
-		}
-		relative_position_id = RED_reintroduce_chekists
-		x = 1
-		y = 1
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = { 
-		    add_political_power = 90
-		}
-	}
-
-	focus = {
-		id = RED_placate_ministers
-		icon = GFX_goal_molotov_ribbentrop_pact
-		cost = 3.6
-		prerequisite = {
-			focus = RED_adress_the_situation
-		}
-		mutually_exclusive = {
-			focus = RED_use_korbut
-		}
-		relative_position_id = RED_adress_the_situation
-		x = 4
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
+		cost = 5.8
+		relative_position_id = RED_collectivization
 		completion_reward = {
-			add_timed_idea = {
-			    idea = RED_placate_ministers
-			    days = 90
-			}
-			custom_effect_tooltip = RED_placate_ministry
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_gather_politburo_support
-		icon = GFX_goal_generic_forceful_treaty
-		cost = 3.6
+		id = RED_central_planning_2
+		icon = GFX_RED_infrastructure
 		prerequisite = {
-			focus = RED_placate_ministers
-			focus = RED_use_korbut
+			focus = RED_central_planning
 		}
-		relative_position_id = RED_placate_ministers
 		x = -1
 		y = 1
-		ai_will_do = {
-			factor = 3
-		}
-		available = {
-			ROOT = {
-			    has_political_power > 49
-			}
-		}
+		cost = 5.8
+		relative_position_id = RED_central_planning
 		completion_reward = {
-			add_political_power = -50
-			add_stability = 0.05
-			modify_timed_idea = {
-                idea = RED_placate_ministers
-			    days = -30
-			}
-		}
-	}
-
-	focus = {
-		id = RED_banner_of_the_revolution
-		icon = GFX_focus_generic_join_comintern
-		cost = 3.6
-		prerequisite = {
-			focus = RED_placate_ministers
-			focus = RED_use_korbut
-		}
-		relative_position_id = RED_placate_ministers
-		x = 1
-		y = 1
-
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = {
-		    241 = {
-		        add_extra_state_shared_building_slots = 3
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 2
 					instant_build = yes
 				}
 			}
-			modify_timed_idea = {
-                idea = RED_placate_ministers
-			    days = -30
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_central_planning_3
+		icon = GFX_RED_infrastructure
+		prerequisite = {
+			focus = RED_central_planning
+		}
+		x = 1
+		y = 1
+		cost = 5.8
+		relative_position_id = RED_central_planning
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
 			}
 		}
-	}
-
-	focus = {
-		id = RED_politburo_onboard
-		icon = GFX_focus_chi_mission_to_the_soviet_union
-		cost = 3.6
-		prerequisite = {
-			focus = RED_banner_of_the_revolution
-		}
-		prerequisite = {
-			focus = RED_gather_politburo_support
-		}
-		relative_position_id = RED_placate_ministers
-		x = 0
-		y = 2
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = {
-			politburo_content = yes
-			add_to_variable = { var = politburo_happiness value = 5 }
-			custom_effect_tooltip = RED_politburo_happiness_increase
-		}
-	}
-
-	focus = {
-		id = RED_crisis_averted
-		icon = GFX_RED_rodina
-		cost = 3.6
-		prerequisite = {
-			focus = RED_infiltrate_workers_culture
-			focus = RED_concessions_to_the_masses
-		}
-		prerequisite = {
-			focus= RED_watch_the_politburo
-			focus = RED_politburo_onboard
-		}
-		available = {
-		    NOT = {
-		        has_idea = RED_mutinies
-		        has_idea = RED_placate_ministers
-		    }
-		}
-		mutually_exclusive = {
-		    focus = RED_civil_war
-		}
-		relative_position_id = RED_reintroduce_chekists
-		x = -1
-		y = 2
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 35
-			add_ideas = RED_recovering_economy 	
-		}
-	}
-
-	focus = {
-		id = RED_civil_war
-		icon = GFX_fist
-		cost = 3.6
-		prerequisite = {
-			focus = RED_infiltrate_workers_culture
-			focus = RED_concessions_to_the_masses
-		}
-		prerequisite = {
-			focus= RED_watch_the_politburo
-			focus = RED_politburo_onboard
-		}
-		mutually_exclusive = {
-		    focus = RED_crisis_averted
-		}
-		available = {
-		    has_country_flag = RED_civilwar_mutiny
-		}
-		relative_position_id = RED_reintroduce_chekists
-		x = 1
-		y = 2
-		ai_will_do = {
-			factor = 3
-		}
-		completion_reward = {
-		}
-	}
-
-	### Political Branch ###
-
-	focus = {
-		id = RED_restructuring
-		icon = GFX_RED_handshake
-		cost = 1
-		relative_position_id = RED_introduction
-		x = 0
-		y = 7
-		#available = {
-		#	has_completed_focus = RED_crises_averted
-		#}
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = RED_central_planning_4
+		icon = GFX_RED_infrastructure
+		prerequisite = {
+			focus = RED_central_planning_3
+		}
+		mutually_exclusive = {
+			focus = RED_central_planning_5
+		}
+		x = 0
+		y = 1
+		cost = 5.8
+		relative_position_id = RED_central_planning_3
 		completion_reward = {
-			add_political_power = 10
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
-	###	Gosplan / Industry Branch ###
+
 	focus = {
-		id = RED_establish_gosplan
+		id = RED_central_planning_5
+		icon = GFX_RED_infrastructure
+		prerequisite = {
+			focus = RED_central_planning_2
+		}
+		mutually_exclusive = {
+			focus = RED_central_planning_4
+		}
+		x = 0
+		y = 1
+		cost = 5.8
+		relative_position_id = RED_central_planning_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_map_out_the_gosplan
 		icon = GFX_RED_gosplan
-		cost = 3
-		relative_position_id = RED_restructuring
-		x = -4
-		y = 1
 		prerequisite = {
-			focus = RED_restructuring
+			focus = RED_central_planning_5
+		}
+		prerequisite = {
+			focus = RED_central_planning_4
+		}
+		x = 0
+		y = 3
+		cost = 5.8
+		relative_position_id = RED_central_planning
+		completion_reward = {
 		}
 		ai_will_do = {
 			factor = 2
-		}
-		completion_reward = {
-			add_political_power = 45
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RED_gosplan
 		}
 	}
+
 	focus = {
-		id = RED_unionize_trades
-		icon = GFX_mobilise_workforce
-		cost = 6.5
-		relative_position_id = RED_establish_gosplan
-		x = -1
-		y = 1
+		id = RED_infrastructure_networks
+		icon = GFX_RED_gosplan
 		prerequisite = {
-			focus = RED_establish_gosplan
+			focus = RED_map_out_the_gosplan
 		}
-		ai_will_do = {
-			factor = 2
-		}
+		x = 0
+		y = 1
+		cost = 5.8
+		relative_position_id = RED_map_out_the_gosplan
 		completion_reward = {
-			random_owned_state = {
+			every_owned_state = {
 				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-					OR = {
-					    NOT = {
-					    	has_state_category = pastoral
-						}
-					}
+					has_state_category = pastoral
 				}
 				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
+					type = infrastructure
+					level = 2
+					instant_build = yes
 				}
 			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-					OR = {
-					    NOT = {
-					    	has_state_category = pastoral
-						}
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-					OR = {
-					    NOT = {
-					    	has_state_category = pastoral
-						}
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
-				}
-			}
-		}
-	}
-	focus = {
-		id = RED_centralised_planning
-		icon = GFX_RED_gosplan
-		cost = 6.5
-		relative_position_id = RED_establish_gosplan
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = RED_establish_gosplan
 		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
 	}
+
 	focus = {
-		id = RED_allow_for_private_market
-		icon = GFX_RED_gosplan
-		cost = 6.5
-		relative_position_id = RED_centralised_planning
-		x = 1
-		y = 1
+		id = RED_unionize_artisans
+		icon = GFX_RED_collectivization
 		prerequisite = {
-			focus = RED_centralised_planning
+			focus = RED_collectivization
 		}
-		mutually_exclusive = {
-			focus = RED_fixed_rates
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_stability= 0.05
-			add_ideas = RED_private_market
-		}
-	}
-	focus = {
-		id = RED_fixed_rates
-		icon = GFX_mushroom
-		cost = 6.5
-		relative_position_id = RED_centralised_planning
-		x = 3
-		y = 1
-		prerequisite = {
-			focus = RED_centralised_planning
-		}
-		mutually_exclusive = {
-			focus = RED_allow_for_private_market
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_ideas = RED_fixed_rates
-		}
-	}
-	focus = {
-		id = RED_prodrazvyorstka
-		icon = GFX_pig
-		cost = 6.5
-		relative_position_id = RED_allow_for_private_market
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = RED_allow_for_private_market
-			focus = RED_fixed_rates
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_ideas = RED_prodrazvyorstka
-		}
-	}
-	focus = {
-		id = RED_collectivization_efforts
-		icon = GFX_RED_gosplan
-		cost = 6.5
-		relative_position_id = RED_prodrazvyorstka
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_prodrazvyorstka
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_stability = -0.05
-			add_ideas = RED_collectivization_efforts
-		}
-	}
-	focus = {
-		id = RED_infrastructure_developement
-		icon = GFX_RED_planned_infrastructure
-		cost = 6.5
-		relative_position_id = RED_centralised_planning
-		x = 6
-		y = 1
-		prerequisite = {
-			focus = RED_centralised_planning
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			#add_timed_idea = {
-			#	idea = RED_infrastructure_developement
-			#	days = 120
-			#}
-			custom_effect_tooltip = RED_rebuilding_the_line
-		}
-	}
-	focus = {
-		id = RED_infrastructure_developement_inner_line
-		icon = GFX_RED_planned_infrastructure
-		cost = 3
-		relative_position_id = RED_infrastructure_developement
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_infrastructure_developement
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Decision to build infra on inner line 
-			### Extra decisions to construct
-			### Defense against fascists
-			modify_timed_idea = {
-				idea = RED_rebuilding_the_line
-				days = 60
-			}
-		}
-	}
-	focus = {
-		id = RED_infrastructure_developement_northern_line
-		icon = GFX_RED_planned_infrastructure
-		cost = 3
-		relative_position_id = RED_infrastructure_developement
 		x = 2
 		y = 1
-		prerequisite = {
-			focus = RED_infrastructure_developement
-		}
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 4.3
+		relative_position_id = RED_collectivization
 		completion_reward = {
-			### Decision to build infra on northern 
-			### Extra decisions to construct
-			### Develope prison station
-			modify_timed_idea = {
-				idea = RED_rebuilding_the_line
-				days = 60
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
-	}
-	focus = {
-		id = RED_infrastructure_developement_southern_line
-		icon = GFX_RED_planned_infrastructure
-		cost = 3
-		relative_position_id = RED_infrastructure_developement
-		x = -2
-		y = 1
-		prerequisite = {
-			focus = RED_infrastructure_developement
-		}
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = RED_military_plant
+		icon = GFX_workshop_3
+		prerequisite = {
+			focus = RED_unionize_artisans
+		}
+		prerequisite = {
+			focus = RED_military_engineering
+		}
+		x = 0
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_unionize_artisans
 		completion_reward = {
-			### Decision to build infra on southern
-			### Extra decisions to construct
-			### Listening post against Emerald City
-			modify_timed_idea = {
-				idea = RED_rebuilding_the_line
-				days = 60
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
-	}
-	focus = {
-		id = RED_infrastructure_developement_electricity
-		icon = GFX_battery
-		cost = 4
-		relative_position_id = RED_infrastructure_developement
-		x = -1
-		y = 2
-		prerequisite = {
-			focus = RED_infrastructure_developement_southern_line
-			focus = RED_infrastructure_developement_inner_line
-			focus = RED_infrastructure_developement_northern_line
-		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			### Every station with +4 infrastructure / give buff
-			### Every station with +3 infrastructure / give 1 infra
-			### Every station with +5 infrastructure / give 1 slot
-		}
 	}
+
 	focus = {
-		id = RED_economic_plan
-		icon = GFX_RED_propaganda_1
-		cost = 5
-		relative_position_id = RED_establish_gosplan
-		x = 0
-		y = 2
+		id = RED_retooling_artisans_for_war
+		icon = GFX_RED_gosplan_2
 		prerequisite = {
-			focus = RED_centralised_planning
+			focus = RED_military_plant
 		}
-		prerequisite = {
-			focus = RED_unionize_trades
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Unlock Advisor / Event
-		}
-	}
-	focus = {
-		id = RED_great_leap
-		icon = GFX_RED_rodina
-		cost = 5
-		relative_position_id = RED_economic_plan
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = RED_economic_plan
-		}
-		mutually_exclusive = {
-			focus = RED_methodical_leap
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_ideas = RED_great_leap
-			### Unlock Advisor
-			### Idea buff
-		}
-	}
-	focus = {
-		id = RED_great_leap_2
-		icon = GFX_RED_station
-		cost = 5
-		relative_position_id = RED_great_leap
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_great_leap
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Idea
-			add_ideas = RED_industrial_output
-		}
-	}
-	focus = {
-		id = RED_methodical_leap
-		icon = GFX_RED_factories
-		cost = 5
-		relative_position_id = RED_economic_plan
 		x = 1
 		y = 1
-		prerequisite = {
-			focus = RED_economic_plan
-		}
-		mutually_exclusive = {
-			focus = RED_great_leap
+		cost = 5.8
+		relative_position_id = RED_military_plant
+		completion_reward = {
 		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			### Unlock Advisor
-			### Idea buff
-		}
 	}
+
 	focus = {
-		id = RED_methodical_leap_2
-		icon = GFX_cog_idea
-		cost = 5
-		relative_position_id = RED_methodical_leap
+		id = RED_military_plant_2
+		icon = GFX_workstation_4
+		prerequisite = {
+			focus = RED_unionize_artisans
+		}
 		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_methodical_leap
+		y = 2
+		cost = 5.8
+		relative_position_id = RED_military_plant
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			### Idea Buff
-		}
 	}
+
 	focus = {
-		id = RED_begin_the_4_year_plan
+		id = RED_agricultural_demand
 		icon = GFX_RED_generic_food
-		cost = 4
-		relative_position_id = RED_economic_plan
-		x = 2
-		y = 3
 		prerequisite = {
-			focus = RED_methodical_leap_2
-			focus = RED_great_leap_2
+			focus = RED_development_of_the_red_line
 		}
-		prerequisite = {
-			focus = RED_infrastructure_developement_electricity
-		}
-		prerequisite = {
-			focus = RED_collectivization_efforts
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			add_ideas = RED_four_year_plan
-		}
-	}
-	focus = {
-		id = RED_arts_culture
-		icon = GFX_RED_megaphone_politburo
-		cost = 3
-		relative_position_id = RED_restructuring
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_restructuring
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = RED_liquidate_private_sector
-		icon = GFX_smash_capitalist
-		cost = 6.5
-		relative_position_id = RED_restructuring
-		x = 2
-		y = 1
-		prerequisite = {
-			focus = RED_restructuring
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-		}
-	}
-
-		### Neighbours Branch ###
-
-	focus = {
-		id = RED_outsiders
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_restructuring
-		x = 11
-		y = 1
-		available = {
-			has_completed_focus = RED_restructuring
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Give PP ###
-		}
-	}
-
-	## Armory Station ## 
-
-	focus = {
-		id = RED_armory_1
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_outsiders
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = RED_outsiders
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Some buff / improve relation decision ###
-		}
-	}
-
-	focus = {
-		id = RED_armory_2
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_outsiders
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = RED_outsiders
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Some buff / improve relation decision ###
-		}
-	}
-
-	focus = {
-		id = RED_armory_puppet
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_outsiders
-		x = 0
-		y = 3
-		prerequisite = {
-			focus = RED_armory_2
-		}
-		prerequisite = {
-			focus = RED_armory_1
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Bind Armory to your will ###
-		}
-	}
-
-	focus = {
-		id = RED_trotskyists
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_outsiders
 		x = -3
 		y = 1
-		prerequisite = {
-			focus = RED_outsiders
+		cost = 5.8
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			### Event / Decision to deal with the Che Guvera brigade ###
-		}
 	}
 
 	focus = {
-		id = RED_crush_agitators
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_trotskyists
-		x = -1
-		y = 1
+		id = RED_kolkhozes
+		icon = GFX_RED_agricultural_demand
 		prerequisite = {
-			focus = RED_trotskyists
+			focus = RED_agricultural_demand
 		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Give u claims and cores on their stations Korbut / Moskvin path only. Remove any buffs gained from them ###
-		}
-	}
-
-	focus = {
-		id = RED_fuel_for_servitude
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_trotskyists
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = RED_trotskyists
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Event to give them guns in return for relationship / possibility of joining the Red Line ? ###
-		}
-	}
-
-	focus = {
-		id = RED_trotskyists_2
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_trotskyists
-		x = 0
-		y = 2
-		prerequisite = {
-			focus = RED_trotskyists
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Event to invite to faction ###
-		}
-	}
-
-	focus = {
-		id = RED_anarchists
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_outsiders
-		x = 3
-		y = 1
-		prerequisite = {
-			focus = RED_outsiders
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Decision to make peace / come to a resolution with them. Most often than not should fail ###
-		}
-	}
-
-	focus = {
-		id = RED_crush_anarchists
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_anarchists
-		x = 1
-		y = 1
-		prerequisite = {
-			focus = RED_anarchists
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Give u claims and cores on their stations Korbut / Moskvin path only. Remove any buffs gained from them ###
-		}
-	}
-
-	focus = {
-		id = RED_studied_railcart_designs
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_anarchists
-		x = -1
-		y = 1
-		prerequisite = {
-			focus = RED_anarchists
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Both nations recieve research buff to railcarts / production cost reduction? ###
-		}
-	}
-
-	focus = {
-		id = RED_anarchists_2
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_anarchists
-		x = 0
-		y = 2
-		prerequisite = {
-			focus = RED_anarchists
-		}
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Event to invite to faction ###
-		}
-	}
-
-	focus = {
-		id = RED_unbreakable_bond
-		icon = GFX_RED_megaphone_politburo
-		cost = 4
-		relative_position_id = RED_armory_puppet
-		x = 0
-		y = 1
-		prerequisite = {
-			focus = RED_anarchists_2
-		}
-		prerequisite = {
-			focus = RED_trotskyists_2
-		}
-		prerequisite = {
-			focus = RED_armory_puppet
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-		completion_reward = {
-			### Every member / puppet gets buff idea / PP ###
-		}
-	}
-
-	### Pre 2033 Military Branch ###
-
-	focus = {
-		id = RED_might_of_the_red_line
-		icon = GFX_RED_the_might_of_the_red_line
-		cost = 1
-
-		relative_position_id = RED_introduction
-		x = 14
-		y = 1
-
-		#available = {
-		#	has_completed_focus = RED_crises_averted
-		#}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Army XP, Doctrine research
-		}
-	}
-
-	focus = {
-		id = RED_conscription_reforms
-		icon = GFX_RED_standardisation
-		cost = 1
-
-		relative_position_id = RED_might_of_the_red_line
-		x = -4
-		y = 1
-
 		mutually_exclusive = {
-			focus = RED_soviet_soldier_myth
+			focus = RED_sovkhozes
 		}
-
-		prerequisite = {
-			focus = RED_might_of_the_red_line
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Smaller, reformed army
-		}
-	}
-
-	focus = {
-		id = RED_standards
-		icon = GFX_RED_rifles
-		cost = 1
-
-		relative_position_id = RED_conscription_reforms
-		x = 0
-		y = 2
-
-		prerequisite = {
-			focus = RED_conscription_reforms
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Smaller, reformed army
-		}
-	}
-
-	focus = {
-		id = RED_cohesive_tactics
-		icon = GFX_RED_soldier_bust
-		cost = 1
-
-		relative_position_id = RED_conscription_reforms
 		x = -2
 		y = 1
-
-		prerequisite = {
-			focus = RED_conscription_reforms
+		cost = 5.8
+		relative_position_id = RED_agricultural_demand
+		completion_reward = {
+			add_ideas = RED_kolkhozes_farm
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Smaller, reformed army
 		}
 	}
 
 	focus = {
-		id = RED_adaptability
-		icon = GFX_RED_generic_revolution_2
-		cost = 1
+		id = RED_allow_station_autonomy
+		icon = GFX_RED_bread
+		prerequisite = {
+			focus = RED_kolkhozes
+		}
+		x = 0
+		y = 2
+		cost = 4.3
+		relative_position_id = RED_kolkhozes
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 
-		relative_position_id = RED_cohesive_tactics
+	focus = {
+		id = RED_sovkhozes
+		icon = GFX_RED_propaganda_1
+		prerequisite = {
+			focus = RED_agricultural_demand
+		}
+		mutually_exclusive = {
+			focus = RED_kolkhozes
+		}
 		x = 0
 		y = 1
-
-		prerequisite = {
-			focus = RED_cohesive_tactics
+		cost = 5.8
+		relative_position_id = RED_agricultural_demand
+		completion_reward = {
+			add_ideas = RED_sovkhozes_farms
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Smaller, reformed army
 		}
 	}
 
 	focus = {
-		id = RED_elite_military
-		icon = GFX_soldier_3
-		cost = 1
-
-		relative_position_id = RED_standards
-		x = -1
+		id = RED_intergrate_agriculture
+		icon = GFX_mushroom
+		prerequisite = {
+			focus = RED_sovkhozes
+		}
+		x = 0
 		y = 1
-
-		prerequisite = {
-			focus = RED_standards
-			focus = RED_adaptability
+		cost = 4.3
+		relative_position_id = RED_sovkhozes
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Smaller, reformed army
 		}
 	}
 
 	focus = {
-		id = RED_soviet_soldier_myth
-		icon = GFX_RED_the_might_of_the_red_line
-		cost = 1
-
-		relative_position_id = RED_might_of_the_red_line
-		x = 4
-		y = 1
-
-		mutually_exclusive = {
-			focus = RED_conscription_reforms
-		}
-
+		id = RED_increased_pig_output
+		icon = GFX_pig
 		prerequisite = {
-			focus = RED_might_of_the_red_line
+			focus = RED_agricultural_demand
 		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Bigger Army, more disorganised and crude
-		}
-	}
-
-	focus = {
-		id = RED_mass_recruitment
-		icon = GFX_RED_troops2
-		cost = 1
-
-		relative_position_id = RED_soviet_soldier_myth
 		x = 2
 		y = 1
-
-		prerequisite = {
-			focus = RED_soviet_soldier_myth
+		cost = 2.2
+		relative_position_id = RED_agricultural_demand
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Bigger Army, more disorganised and crude
 		}
 	}
 
 	focus = {
-		id = RED_cartridge
-		icon = GFX_bullets_2
-		cost = 1
-
-		relative_position_id =  RED_mass_recruitment
+		id = RED_increased_pig_output_2
+		icon = GFX_pig
+		prerequisite = {
+			focus = RED_increased_pig_output
+		}
 		x = 0
 		y = 1
-
-		prerequisite = {
-			focus =  RED_mass_recruitment
+		cost = 4.3
+		relative_position_id = RED_increased_pig_output
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Bigger Army, more disorganised and crude
 		}
 	}
 
 	focus = {
-		id = RED_no_victory_without_sacrifice
-		icon = GFX_helmet
-		cost = 1
-
-		relative_position_id =  RED_soviet_soldier_myth
-		x = 0
-		y = 2
-
+		id = RED_pig_feed
+		icon = GFX_pig
 		prerequisite = {
-			focus =  RED_soviet_soldier_myth
+			focus = RED_increased_pig_output_2
 		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Bigger Army, more disorganised and crude
-		}
-	}
-
-	focus = {
-		id = RED_uraaaa
-		icon = GFX_RED_uraaaaa
-		cost = 1
-
-		relative_position_id =  RED_no_victory_without_sacrifice
-		x = 1
-		y = 1
-
-		prerequisite = {
-			focus =  RED_no_victory_without_sacrifice
-			focus =  RED_cartridge
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Bigger Army, more disorganised and crude
-		}
-	}
-
-	focus = {
-		id = RED_sniper_teams
-		icon = GFX_RED_sniper_teams
-		cost = 1
-
-		relative_position_id = RED_conscription_reforms
-		x = 1
-		y = 1
-
-		prerequisite = {
-			focus = RED_conscription_reforms
-			focus = RED_soviet_soldier_myth
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### New unique support tech Snipers. Good soft attack and breakthrough at the cost of less org. Doesn't affect supply too badly 
-		}
-	}
-
-	focus = {
-		id = RED_study_tank_designs
-		icon = GFX_train
-		cost = 1
-
-		relative_position_id = RED_soviet_soldier_myth
-		x = -1
-		y = 1
-
-		prerequisite = {
-			focus = RED_conscription_reforms
-			focus = RED_soviet_soldier_myth
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			## new advisor / research buff to tanks and increase something WIP
-		}
-	}
-
-	### NKVD primacy ### 
-
-	focus = {
-		id = RED_NKVD_exceptions
-		icon = GFX_RED_nkvd_exceptions
-		cost = 1
-
-		relative_position_id = RED_might_of_the_red_line
 		x = 0
 		y = 2
-
-		prerequisite = {
-			focus = RED_conscription_reforms
-			focus = RED_soviet_soldier_myth
+		cost = 5.8
+		relative_position_id = RED_increased_pig_output_2
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
 		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Reduce PP gain for bonus to supression, resistance and compliance
 		}
 	}
 
 	focus = {
-		id = RED_permit_special_recruitment
-		icon = GFX_RED_permit_special_recruitment
-		cost = 1
+		id = RED_state_controlled_plots
+		icon = GFX_RED_agricultural_demand
+		prerequisite = {
+			focus = RED_intergrate_agriculture
+		}
+		prerequisite = {
+			focus = RED_increased_pig_output_2
+		}
+		x = 1
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_intergrate_agriculture
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 
-		relative_position_id = RED_NKVD_exceptions
+	focus = {
+		id = RED_food_issue
+		icon = GFX_RED_food_issue
+		prerequisite = {
+			focus = RED_state_controlled_plots
+			focus = RED_allow_station_autonomy
+		}
+		x = 0
+		y = 4
+		cost = 5.8
+		relative_position_id = RED_agricultural_demand
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_workers_culture
+		icon = GFX_RED_workers_culture
+		prerequisite = {
+			focus = RED_2030
+		}
+		x = 7
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_2030
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = RED_minister_of_domestics
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_domestics_departments_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_department_of_production
+		icon = GFX_cog_bulletfactories
+		prerequisite = {
+			focus = RED_workers_culture
+			focus = RED_development_of_the_red_line
+		}
+		x = -5
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_workers_culture
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = tooling
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = casting
+			}
+			add_ideas = RED_minister_of_labour
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_labour_departments_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_bolshoi_theatre
+		icon = GFX
+		prerequisite = {
+			focus = RED_workers_culture
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_workers_culture
+		completion_reward = {
+			add_stability = 0.05
+			## modify generic RED decisions
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_getting_the_band_back_together
+		icon = GFX
+		prerequisite = {
+			focus = RED_bolshoi_theatre
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_bolshoi_theatre
+		completion_reward = {
+			## red army choir
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_question_of_arts_and_culture
+		icon = GFX
+		prerequisite = {
+			focus = RED_bolshoi_theatre
+		}
 		x = -2
 		y = 1
-
-		prerequisite = {
-			focus = RED_NKVD_exceptions
+		cost = 2.2
+		relative_position_id = RED_bolshoi_theatre
+		completion_reward = {
+			## reduce cost of generic RED decisions
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
+	}
 
+	focus = {
+		id = RED_propaganda_in_art
+		icon = GFX
+		prerequisite = {
+			focus = RED_question_of_arts_and_culture
+		}
+		x = -1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_question_of_arts_and_culture
 		completion_reward = {
-			### reduce recruitable factor for command gain and extra buffs as above focus
+			## unlock new generic RED decisions
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_repair_socialist_facades
+		icon = GFX
+		prerequisite = {
+			focus = RED_question_of_arts_and_culture
+		}
+		x = 1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_question_of_arts_and_culture
+		completion_reward = {
+			## unlock new generic RED decisions
+			# every state of the Sokol controlled get +1 slot
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_military_engineering
+		icon = GFX_cog_factories
+		prerequisite = {
+			focus = RED_department_of_production
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_department_of_production
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_cutting_edge_developments
+		icon = GFX_cog_idea
+		prerequisite = {
+			focus = RED_military_engineering
+		}
+		mutually_exclusive = {
+			focus = RED_quotas_of_production
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_military_engineering
+		completion_reward = {
+			add_ideas = RED_cutting_edge
+			add_tech_bonus = {
+				name = communist_tech_bonus
+				bonus = 1
+				ahead_reduction = 2
+				category = infantry_weapons
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_quotas_of_production
+		icon = GFX_cog_blueprints
+		prerequisite = {
+			focus = RED_military_engineering
+		}
+		mutually_exclusive = {
+			focus = RED_cutting_edge_developments
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_military_engineering
+		completion_reward = {
+			add_ideas = RED_quotas_production
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_foster_positive_heroism
+		icon = GFX
+		prerequisite = {
+			focus = RED_quotas_of_production
+			focus = RED_cutting_edge_developments
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_military_engineering
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_a_world_for_tomorrow
+		icon = GFX
+		prerequisite = {
+			focus = RED_foster_positive_heroism
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_foster_positive_heroism
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_socialist_radio
+		icon = GFX
+		prerequisite = {
+			focus = RED_workers_culture
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_workers_culture
+		completion_reward = {
+			add_political_power = 45
+			add_ideas = RED_socialist_radio
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_tap_into_radio_transmissions
+		icon = GFX_spy_radio
+		prerequisite = {
+			focus = RED_socialist_radio
+		}
+		available = {
+			always = no
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_radio
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_fund_an_education_department
+		icon = GFX
+		prerequisite = {
+			focus = RED_socialist_radio
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_radio
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_children_schools
+		icon = GFX
+		prerequisite = {
+			focus = RED_fund_an_education_department
+		}
+		x = -2
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_fund_an_education_department
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_fitness_schools
+		icon = GFX
+		prerequisite = {
+			focus = RED_fund_an_education_department
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_fund_an_education_department
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_engineering_academy
+		icon = GFX
+		prerequisite = {
+			focus = RED_fund_an_education_department
+		}
+		x = 2
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_fund_an_education_department
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_fund_an_education_department_4
+		icon = GFX
+		prerequisite = {
+			focus = RED_children_schools
+			focus = RED_engineering_academy
+			focus = RED_fitness_schools
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_fitness_schools
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_preach_the_word_of_lenin
+		icon = GFX_RED_generic_leninism
+		prerequisite = {
+			focus = RED_socialist_radio
+		}
+		available = {
+			NOT = {
+				has_idea = RED_intra_stational_socialism
+			}
+		}
+		x = 7
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_radio
+		completion_reward = {
+			RED_radio_idea_upgrade = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_propaganda_tune
+		icon = GFX_radio
+		prerequisite = {
+			focus = RED_preach_the_word_of_lenin
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_preach_the_word_of_lenin
+		completion_reward = {
+			add_ideas = RED_propaganda_tune_radio
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_project_socialist_nostalgia
+		icon = GFX_RED_megaphone_politburo
+		prerequisite = {
+			focus = RED_socialist_radio
+		}
+		x = 5
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_radio
+		completion_reward = {
+			add_political_power = 150
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_radio_relations
+		icon = GFX_RED_generic_science
+		prerequisite = {
+			focus = RED_propaganda_tune
+		}
+		mutually_exclusive = {
+			focus = RED_radio_subvert_populace
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_propaganda_tune
+		completion_reward = {
+			RED_radio_idea_radio_relations = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_radio_subvert_populace
+		icon = GFX_RED_rodina
+		prerequisite = {
+			focus = RED_propaganda_tune
+		}
+		mutually_exclusive = {
+			focus = RED_radio_relations
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_propaganda_tune
+		completion_reward = {
+			RED_radio_idea_radio_subversion = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	## Fund Research
+
+	focus = {
+		id = RED_fund_special_research
+		icon = GFX_RED_mikhail_korbut
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = -8
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+			add_ideas = RED_special_research
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_socialist_recovery
+		icon = GFX
+		prerequisite = {
+			focus = RED_fund_special_research
+		}
+		x = -4
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_fund_special_research
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_surface_waypoints
+		icon = GFX
+		prerequisite = {
+			focus = RED_socialist_recovery
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_socialist_recovery
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_scouring_lenins_tomb
+		icon = GFX_RED_lenin_will
+		prerequisite = {
+			focus = RED_surface_waypoints
+		}
+		x = 0
+		y = 3
+		cost = 2.2
+		relative_position_id = RED_surface_waypoints
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_development_the_berilag
+		icon = GFX
+		prerequisite = {
+			focus = RED_fund_special_research
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_fund_special_research
+		completion_reward = {
+			country_event = nf_RED.40
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_allow_volunteers
+		icon = GFX
+		prerequisite = {
+			focus = RED_development_the_berilag
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_development_the_berilag
+		completion_reward = {
+			RED_berilag_volunteers = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_additional_funding
+		icon = GFX
+		prerequisite = {
+			focus = RED_development_the_berilag
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_development_the_berilag
+		completion_reward = {
+			RED_berilag_funding = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_under_jurisdiction
+		icon = GFX
+		prerequisite = {
+			focus = RED_additional_funding
+		}
+		mutually_exclusive = {
+			focus = RED_self_autonomy
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_additional_funding
+		completion_reward = {
+			#
+			# Decision Stuff
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_self_autonomy
+		icon = GFX
+		prerequisite = {
+			focus = RED_allow_volunteers
+		}
+		mutually_exclusive = {
+			focus = RED_under_jurisdiction
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_volunteers
+		completion_reward = {
+			#
+			# Decision Stuff
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_further_volunteers
+		icon = GFX
+		prerequisite = {
+			focus = RED_self_autonomy
+			focus = RED_under_jurisdiction
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_self_autonomy
+		completion_reward = {
+			#
+			# Ability to use state pop and manpower in decisions
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_scientific_amenities
+		icon = GFX
+		prerequisite = {
+			focus = RED_further_volunteers
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_further_volunteers
+		completion_reward = {
+			#
+			# Put chemicals on the Berilag
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_station_renovations
+		icon = GFX
+		prerequisite = {
+			focus = RED_self_autonomy
+			focus = RED_under_jurisdiction
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_under_jurisdiction
+		completion_reward = {
+			#
+			# Permanent increase to chances and cost
+			#
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_retained_guards
+		icon = GFX
+		prerequisite = {
+			focus = RED_station_renovations
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_station_renovations
+		completion_reward = {
+			#
+			# Add bunkers to Berilag
+			# Decision Changes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_scientific_reportings
+		icon = GFX
+		prerequisite = {
+			focus = RED_scientific_amenities
+			focus = RED_retained_guards
+		}
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = RED_development_the_berilag
+		completion_reward = {
+			#
+			# Upgrade Mikhails Trait through event
+			# Gain 1 research slot through said event
+			RED_berilag_breakthrough = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_secret_projects
+		icon = GFX
+		prerequisite = {
+			focus = RED_scientific_reportings
+		}
+		mutually_exclusive = {
+			focus = RED_long_arm_of_the_state
+		}
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = RED_scientific_reportings
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_long_arm_of_the_state
+		icon = GFX
+		prerequisite = {
+			focus = RED_scientific_reportings
+		}
+		mutually_exclusive = {
+			focus = RED_secret_projects
+		}
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = RED_scientific_reportings
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	## Military Branch
+
+	focus = {
+		id = RED_red_army
+		icon = GFX_RED_the_might_of_the_red_line
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 22
+		y = 7
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+			army_experience = 15
+			
+			remove_ideas = {
+				ideas = RED_commanders_short_supply
+			}
+			add_ideas = RED_minister_of_defense
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_defense_departments_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_army_conscription_reforms
+		icon = GFX_RED_conscription_reforms
+		prerequisite = {
+			focus =  RED_red_army
+		}
+		mutually_exclusive = {
+			focus = RED_red_army_soviet_myth
+		}
+		x = -5
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army
+		completion_reward = {
+			add_ideas = RED_conscription_reforms
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rudimentary_drills
+		icon = GFX_RED_soviet_guy
+		prerequisite = {
+			focus =  RED_red_army_conscription_reforms
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_conscription_reforms
+		completion_reward = {
+			add_ideas = RED_rudimentary_drills
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_equipment_standardisation
+		icon = GFX_RED_equipment_standardisation
+		prerequisite = {
+			focus =  RED_red_army_conscription_reforms
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_conscription_reforms
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_ideas = RED_gun_production_boost 
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_adaptable_force
+		icon = GFX_RED_logistics
+		prerequisite = {
+			focus =  RED_rudimentary_drills
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_rudimentary_drills
+		completion_reward = {
+			add_ideas = RED_adaptable_force 
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_cohesive_force
+		icon = GFX_RED_recruits
+		prerequisite = {
+			focus =  RED_red_army_conscription_reforms
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_conscription_reforms
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_coordination_efforts
+		icon = GFX_RED_coordinate_efforts
+		prerequisite = {
+			focus =  RED_cohesive_force
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_cohesive_force
+		completion_reward = {
+			add_ideas = RED_coordination_efforts
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_army_soviet_myth
+		icon = GFX_RED_promote_loyality
+		prerequisite = {
+			focus =  RED_red_army
+		}
+		mutually_exclusive = {
+			focus = RED_red_army_conscription_reforms
+		}
+		x = 5
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army
+		completion_reward = {
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_mass_recruitment_campaigns
+		icon = GFX_RED_recruitment_campaigns
+		prerequisite = {
+			focus =  RED_red_army_soviet_myth
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_soviet_myth
+		completion_reward = {
+			add_ideas = RED_recruitment_compaigns
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_heroic_deeds_of_mother_russia
+		icon = GFX_RED_heroic_deeds_of_mother_russia
+		prerequisite = {
+			focus =  RED_mass_recruitment_campaigns
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_mass_recruitment_campaigns
+		completion_reward = {
+			add_ideas = RED_heroic_deeds
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_human_wave_offensive
+		icon = GFX_RED_soviet_charge
+		prerequisite = {
+			focus =  RED_red_army_soviet_myth
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_soviet_myth
+		completion_reward = {
+			add_ideas = RED_human_waves
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_cartridge_for_every_comrade
+		icon = GFX_RED_equipment_effort
+		prerequisite = {
+			focus =  RED_red_army_soviet_myth
+		}
+		x = -3
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_soviet_myth
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_uraaa
+		icon = GFX_RED_soviet_propaganda
+		prerequisite = {
+			focus =  RED_human_wave_offensive
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_human_wave_offensive
+		completion_reward = {
+			add_ideas = RED_ura_uraa
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_spetnaz_spec_ops
+		icon = GFX_RED_spetnaz_deployment
+		prerequisite = {
+			focus =  RED_adaptable_force
+			focus =  RED_heroic_deeds_of_mother_russia
+		}
+		prerequisite = {
+			focus =  RED_coordination_efforts
+			focus =  RED_uraaa
+		}
+		mutually_exclusive = {
+			focus = RED_heavy_spec_ops
+		}
+		x = 4
+		y = 3
+		cost = 2.2
+		relative_position_id =  RED_red_army_conscription_reforms
+		completion_reward = {
+			set_technology = {
+				special_forces_spetnaz_equipment_tech = 1
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_heavy_spec_ops
+		icon = GFX_RED_heavy_squad_2
+		prerequisite = {
+			focus =  RED_adaptable_force
+			focus =  RED_heroic_deeds_of_mother_russia
+		}
+		prerequisite = {
+			focus =  RED_coordination_efforts
+			focus =  RED_uraaa
+		}
+		mutually_exclusive = {
+			focus = RED_spetnaz_spec_ops
+		}
+		x = -4
+		y = 3
+		cost = 2.2
+		relative_position_id =  RED_red_army_soviet_myth
+		completion_reward = {
+			set_technology = {
+				special_forces_equipment_heavy = 1
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_army_leader_1
+		icon = GFX_RED_army_helmet
+		prerequisite = {
+			focus =  RED_red_army
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id =  RED_red_army
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_army_flamethrower
+		icon = GFX_special_arms_1
+		prerequisite = {
+			focus =  RED_red_army_leader_1
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_leader_1
+		completion_reward = {
+			add_ideas = RED_flamethrowers
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_army_maxim
+		icon = GFX_RED_frontlines
+		prerequisite = {
+			focus =  RED_red_army_leader_1
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id =  RED_red_army_leader_1
+		completion_reward = {
+			add_ideas = RED_army_maxims
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_riot-shields
+		icon = GFX_RED_heavy_deployment
+		prerequisite = {
+			focus =  RED_heavy_spec_ops
+			focus =  RED_spetnaz_spec_ops
+		}
+		x = 0
+		y = 3
+		cost = 2.2
+		relative_position_id =  RED_red_army_leader_1
+		completion_reward = {
+			add_ideas = RED_spec_ops_hardness
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+
+	## NKVD Branch
+
+	focus = {
+		id = RED_nkvd_primacy
+		icon = GFX_RED_nkvd_officers
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 38
+		y = 7
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
+		completion_reward = {
+			add_stability = -0.025
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_nkvd_military_units
+		icon = GFX_RED_NKVD_soldier_1
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_nkvd_equipment
+		icon = GFX_NKVD_eqipment
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_nkvd_exceptions
+		icon = GFX_RED_chekists2
+		prerequisite = {
+			focus = RED_nkvd_primacy
+		}
+		x = -2
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+			add_stability = -0.025
+			## resistence buff #1
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
 		id = RED_secret_police_roles
-		icon = GFX_RED_secret_police_roles
-		cost = 1
-
-		relative_position_id = RED_NKVD_exceptions
-		x = 2
-		y = 1
-
+		icon = GFX_RED_chekist
 		prerequisite = {
-			focus = RED_NKVD_exceptions
+			focus = RED_nkvd_primacy
 		}
-
+		x = 2
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+			add_stability = -0.025
+			## resistence buff #2
+		}
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Give unique resistance law. Less manpower needed to garrison, more comp for more resistance and less state gain i.e. noncore, factories and resources
 		}
 	}
 
 	focus = {
 		id = RED_allow_special_jurisdiction
-		icon = GFX_RED_allow_special_jurisdiction
-		cost = 1
-
-		relative_position_id = RED_NKVD_exceptions
-		x = 0
-		y = 1
-
+		icon = GFX_RED_NKVD_2
 		prerequisite = {
-			focus = RED_NKVD_exceptions
+			focus = RED_nkvd_primacy
 		}
-
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_nkvd_primacy
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
+		}
 		ai_will_do = {
 			factor = 2
 		}
+	}
 
+	focus = {
+		id = RED_kortbut_general
+		icon = GFX_RED_head_of_kgb
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
 		completion_reward = {
-			### allow for the recruitment of NKVD advisors and certain decisions /WIP/
+			country_event = nf_RED.38
+			## korbut general
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
 		id = RED_permit_military_roles
 		icon = GFX_RED_permit_military_roles
-		cost = 1
-
-		relative_position_id = RED_allow_special_jurisdiction
-		x = -1
-		y = 1
-
 		prerequisite = {
 			focus = RED_allow_special_jurisdiction
 		}
-
 		mutually_exclusive = {
 			focus = RED_court_martial_roles
 		}
-
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+			add_political_power = -25
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
+		}
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Give Unique Support Equipment / NKVD which serve to boost reorg and morale at the cost of org and other debuffs /WIP/
 		}
 	}
 
 	focus = {
 		id = RED_no_227
 		icon = GFX_RED_no_227
-		cost = 1
-
-		relative_position_id = RED_permit_military_roles
-		x = -1
-		y = 1
-
 		prerequisite = {
 			focus = RED_permit_military_roles
 		}
-
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_permit_military_roles
+		completion_reward = {
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
+			### unlock army ability tactic
+		}
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### New Commander Ability when at war /WIP/
 		}
 	}
 
 	focus = {
 		id = RED_court_martial_roles
-		icon = GFX_RED_standardisation
-		cost = 1
-
-		relative_position_id = RED_allow_special_jurisdiction
-		x = -3
-		y = 1
-
+		icon = GFX_RED_court_marshal_roles
 		prerequisite = {
 			focus = RED_allow_special_jurisdiction
 		}
-
 		mutually_exclusive = {
 			focus = RED_permit_military_roles
 		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			### Generals are more expensive, cost more to train troops but better overall reorg and stats
-		}
-	}
-
-		focus = {
-		id = RED_allow_administration_roles
-		icon = GFX_RED_permit_military_roles
-		cost = 1
-
-		relative_position_id = RED_allow_special_jurisdiction
-		x = 1
+		x = -3
 		y = 1
-
-		prerequisite = {
-			focus = RED_allow_special_jurisdiction
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
 		}
-
-		mutually_exclusive = {
-			focus = RED_anti_corruption_force
-		}
-
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			### Advisors more expensive / Politburo default happiness increases / Threshold of them being upset reduced by 1
 		}
 	}
 
 	focus = {
-		id = RED_spy_networks
-		icon = GFX_RED_infiltration
-		cost = 1
-
-		relative_position_id = RED_allow_administration_roles
+		id = RED_allow_administration_roles
+		icon = GFX_RED_allow_administration_roles
+		prerequisite = {
+			focus = RED_allow_special_jurisdiction
+		}
+		mutually_exclusive = {
+			focus = RED_anti_corruption_force
+		}
 		x = 1
 		y = 1
-
-		prerequisite = {
-			focus = RED_allow_administration_roles
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+			add_ideas = NKVD_administration_roles
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
+	}
 
+	focus = {
+		id = RED_spy_network
+		icon = GFX_RED_spy_on_citizens
+		prerequisite = {
+			focus = RED_allow_administration_roles
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_administration_roles
 		completion_reward = {
-			### Buffs to spy networks
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
+			add_ideas = RED_nkvd_spy_networks
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
 		id = RED_anti_corruption_force
-		icon = GFX_RED_permit_military_roles
-		cost = 1
-
-		relative_position_id = RED_allow_special_jurisdiction
-		x = 3
-		y = 1
-
+		icon = GFX_RED_anti_corruption_force
 		prerequisite = {
 			focus = RED_allow_special_jurisdiction
 		}
-
 		mutually_exclusive = {
 			focus = RED_allow_administration_roles
 		}
-
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_allow_special_jurisdiction
+		completion_reward = {
+			add_ideas = RED_nkvd_anti_corruption_force
+		}
 		ai_will_do = {
 			factor = 2
 		}
+	}
 
+	## Diplomacy / Politics / war
+
+	focus = {
+		id = RED_cemented_authority
+		icon = GFX_RED_young_officer_academy
+		available = {
+			has_completed_focus = RED_development_of_the_red_line
+		}
+		x = 35
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
-			### Politburo support increased through subversion / Reduces spy infiltration / gain party POP and PP gain
+			add_stability = 0.05
+			add_ideas = RED_minister_of_foreign_affairs
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_foreign_affairs_departments_tt
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = RED_give_korbut_general
-		icon = GFX_RED_give_korbut_general
-		cost = 1
+		id = RED_breakaways
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = -6
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			add_political_power = 35
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 
-		relative_position_id = RED_allow_special_jurisdiction
+	focus = {
+		id = RED_anarchists
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+			country_event = nf_RED.35
+			### Subvert Technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_anarchists_2
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_anarchists
+		}
 		x = 0
 		y = 2
-
-		prerequisite = {
-			focus = RED_allow_special_jurisdiction
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
+		cost = 2.2
+		relative_position_id = RED_anarchists
 		completion_reward = {
-			### Event to decide whether Korbut becomes a general. If so, he is a fairly good general, but control increases
-		}
-	}
-
-	### Stalker Branch ###
-
-	focus = {
-		id = RED_surface_studies
-		icon = GFX_clearsky
-		cost = 4
-		relative_position_id = RED_restructuring
-		x = -10
-		y = 1
-
-		available = {
-			has_completed_focus = RED_restructuring
 		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			add_tech_bonus = {
-				name = stalkergear
-				bonus = 0.5
-				uses = 1
-				category = clothing_kits
-			}
-			add_tech_bonus = {
-				name = stalkergasmasks
-				bonus = 0.5
-				uses = 1
-				category = gas_mask
-			}
-		}
 	}
 
 	focus = {
-		id = RED_stalker_tactics
-		icon = GFX_stalker1
-		cost = 4
+		id = RED_anarchists_3
+		icon = GFX_RED_1905
 		prerequisite = {
-			focus= RED_surface_studies
+			focus = RED_anarchists_2
 		}
-		relative_position_id = RED_surface_studies
 		x = 0
 		y = 1
+		cost = 2.2
+		relative_position_id = RED_anarchists_2
+		completion_reward = {
+		}
 		ai_will_do = {
 			factor = 2
-		}
-		completion_reward = {
-			add_ideas = RED_stalker_tactics
 		}
 	}
+	
 	focus = {
-		id = RED_soviet_memrobillia
-		icon = GFX_RED_victory_soviet
-		cost = 4
+		id = RED_dry_station_bandits
+		icon = GFX_RED_dry_station_annex
 		prerequisite = {
-			focus= RED_surface_studies
+			focus = RED_breakaways
 		}
-		relative_position_id = RED_surface_studies
-		x = 2
+		x = 6
 		y = 1
-		ai_will_do = {
-			factor = 2
+		cost = 4.4
+		relative_position_id = RED_breakaways
+		bypass = {
+			OR = {
+				NOT = { country_exists = DRY }
+				has_war_with = DRY
+			}
 		}
+		available = {
+			has_war = no
+		}
+        will_lead_to_war_with = DRY
 		completion_reward = {
-			add_political_power = 60
-			custom_effect_tooltip = Soviet_Memrobilia
-			### Unlocks Memrobilia decisions ###
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = DRY
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 201
 		}
 	}
 
 	focus = {
-		id = RED_lenin_tomb
-		icon = GFX_RED_generic_leninism
-		cost = 4
+		id = RED_taking_back_our_stuff
+		icon = GFX_crate
 		prerequisite = {
-			focus= RED_soviet_memrobillia
+			focus = RED_dry_station_bandits
 		}
-		relative_position_id = RED_soviet_memrobillia
+		x = 0
+		y = 1
+		cost = 4.4
+		relative_position_id = RED_dry_station_bandits
+		available = {
+			NOT = { country_exists = DRY }
+			262 = {
+				is_owned_by = ROOT
+			}
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_0
+		        amount = 35
+			}
+		}
+		ai_will_do = {
+			factor = 201
+		}
+	}
+
+	focus = {
+		id = RED_1905
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = -3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+			country_event = nf_RED.33
+			### Subvert Technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_1905_civ_1
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_1905
+		}
 		x = -1
 		y = 1
+		cost = 2.2
+		relative_position_id = RED_1905
+		completion_reward = {
+		}
 		ai_will_do = {
 			factor = 2
-		}
-		completion_reward = {
-			country_event = nf_RED.5
 		}
 	}
 
 	focus = {
-		id = RED_point_in_the_storm
-		icon = GFX_cityruins3
-		cost = 4
+		id = RED_1905_civ_2
+		icon = GFX_RED_1905
 		prerequisite = {
-			focus= RED_surface_studies
+			focus = RED_1905_civ_1
 		}
-		available = {
-			always = no
-		}
-		relative_position_id = RED_surface_studies
-		x = -2
+		x = 0
 		y = 1
+		cost = 2.2
+		relative_position_id = RED_1905_civ_1
+		completion_reward = {
+		}
 		ai_will_do = {
 			factor = 2
 		}
-		completion_reward = {
-			## When Surface is Added ##
-			custom_effect_tooltip = Future_Update
-		}
 	}
-
+	
 	focus = {
-		id = RED_listening_posts
-		icon = GFX_HNZ_radio
-		cost = 4
+		id = RED_1905_flavor_1
+		icon = GFX_RED_1905
 		prerequisite = {
-			focus = RED_point_in_the_storm
+			focus = RED_1905
 		}
-		available = {
-			always = no
-		}
-		relative_position_id = RED_point_in_the_storm
 		x = 1
 		y = 1
+		cost = 2.2
+		relative_position_id = RED_1905
+		completion_reward = {
+		}
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = RED_1905_flavor_2
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_1905_flavor_1
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_1905_flavor_1
 		completion_reward = {
-			## When Surface is Added ##
-			custom_effect_tooltip = Future_Update
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_1905_2
+		icon = GFX_RED_1905
+		prerequisite = {
+			focus = RED_1905
+		}
+		prerequisite = {
+			focus = RED_1905_civ_2
+		}
+		x = 0
+		y = 3
+		cost = 2.2
+		relative_position_id = RED_1905
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists
+		icon = GFX
+		prerequisite = {
+			focus = RED_breakaways
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_breakaways
+		completion_reward = {
+			country_event = nf_RED.34
+			### Subvert Technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_civ_1
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_trotskyists
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_civ_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists_civ_1
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_trotskyists_civ_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_flavour_1
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_trotskyists
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_flavour_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists_flavour_1
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_trotskyists_flavour_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_trotskyists_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_trotskyists
+		}
+		prerequisite = {
+			focus = RED_trotskyists_civ_2
+		}
+		x = 0
+		y = 3
+		cost = 2.2
+		relative_position_id = RED_trotskyists
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 4
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			add_ideas = RED_technicians_1
+			### add relations with technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_subvert
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_puppet
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians
+		}
+		mutually_exclusive = {
+			focus = RED_technicians_faction_member
+		}
+		x = -1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+			country_event = nf_RED.30
+			### Subvert Technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_factories
+		icon = GFX_workstation
+		prerequisite = {
+			focus = RED_technicians_puppet
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_technicians_puppet
+		completion_reward = {
+			## 1 factory on kuznetsky
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_supply_our_arms
+		icon = GFX_scrap_computers
+		prerequisite = {
+			focus = RED_technicians_puppet
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_technicians_puppet
+		completion_reward = {
+			# give both us and kuznet improve gun / eqp
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_technicians_faction_member
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians
+		}
+		mutually_exclusive = {
+			focus = RED_technicians_puppet
+		}
+		x = 1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+			country_event = nf_RED.31
+			### Subvert Technicians
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_technicians_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_technicians_puppet
+			focus = RED_technicians_faction_member
+		}
+		x = 0
+		y = 4
+		cost = 2.2
+		relative_position_id = RED_technicians
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_pact_of_friendship
+		icon = GFX
+		prerequisite = {
+			focus = RED_1905_2
+			focus = RED_trotskyists_2
+			focus = RED_technicians_2
+			focus = RED_anarchists_3
+		}
+		x = -3
+		y = 4
+		cost = 2.2
+		relative_position_id = RED_dry_station_bandits
+		completion_reward = {
+			## Either owns their capital, is puppet or faction memebr
+			## Every faction member gets 1 mil, 1 civ 
+			## Red Line gets 1 mil, 1 civ for every member (3 max each)
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	focus = {
+		id = RED_pact_of_friendship_choice_1
+		icon = GFX
+		prerequisite = {
+			focus = RED_pact_of_friendship
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_2
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_3
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_pact_of_friendship
+		completion_reward = {
+			### every member gets 300 PP
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_pact_of_friendship_choice_2
+		icon = GFX
+		prerequisite = {
+			focus = RED_pact_of_friendship
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_1
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_3
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_pact_of_friendship
+		completion_reward = {
+			### every member gets 10% Research
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_pact_of_friendship_choice_3
+		icon = GFX
+		prerequisite = {
+			focus = RED_pact_of_friendship
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_1
+		}
+		mutually_exclusive = {
+			focus = RED_pact_of_friendship_choice_2
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_pact_of_friendship
+		completion_reward = {
+			### Every member gets 10% war support
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_MSU_bridge
+		icon = GFX_RED_sparrow_hills_bridge
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 16
+		y = 1
+		cost = 3
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			custom_effect_tooltip = RED_vorobyovy_gory
+			army_experience = 5
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_bridge_over_troubled_waters
+		icon = GFX_RED_crush_the_msu
+		prerequisite = {
+			focus = RED_MSU_bridge
+		}
+		x = -1
+		y = 1
+		cost = 4.3
+		available = {
+			288 = { is_owned_by = RED }
+		}
+		relative_position_id = RED_MSU_bridge
+		completion_reward = {
+			custom_effect_tooltip = RED_bridge_over_trouble_waters_oob_TT
+			hidden_effect = {
+				288 = {
+					create_unit = {
+						division = "name = \"Spec Ops\" division_template = \"Tyazhelaya Diviziya\" start_experience_factor = 0.75 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_battering_rams
+		icon = GFX_RED_heavy_squad_2
+		prerequisite = {
+			focus = RED_MSU_bridge
+		}
+		x = 1
+		y = 1
+		cost = 4.3
+		available = {
+			288 = { is_owned_by = RED }
+		}
+		relative_position_id = RED_MSU_bridge
+		completion_reward = {
+			add_ideas = RED_MSU_battering_rams
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_emerald_city
+		icon = GFX_RED_crush_the_msu
+		prerequisite = {
+			focus = RED_MSU_bridge
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		available = {
+			288 = { is_owned_by = RED }
+		}
+		relative_position_id = RED_MSU_bridge
+		completion_reward = {
+			## needs to own moscow bridge
+			## enable decision mechanic to attack MSU
+			custom_effect_tooltip = RED_crack_the_facade_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_to_the_victors
+		icon = GFX_RED_to_the_victors
+		prerequisite = {
+			focus = RED_emerald_city
+		}
+		available = {
+			NOT = { country_exists = MSU }
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RED_emerald_city
+		completion_reward = {
+			## get event
+			every_owned_state = {
+				limit = {
+					is_core_of = MSU
+					OWNER = {
+						tag = RED
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_core_of = PREV
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		x = 12
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			214 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+			army_experience = 20
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_agressive
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		mutually_exclusive = {
+			focus = RED_RCH_frontline_defensive
+		}
+		x = -1
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline
+		completion_reward = {
+			add_ideas = RED_frontline_agressive
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_defensive
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		mutually_exclusive = {
+			focus = RED_RCH_frontline_agressive
+		}
+		x = 1
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline
+		completion_reward = {
+			add_ideas = RED_frontline_defensive
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_sabotage
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline_agressive
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		prerequisite = {
+			focus = RED_RCH_frontline_defensive
+		}
+		x = 0
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline_agressive
+		completion_reward = {
+			## when we go to war, we can destroy their infrastructure
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_barricades
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline_agressive
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		prerequisite = {
+			focus = RED_RCH_frontline_defensive
+		}
+		x = 0
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline_defensive
+		completion_reward = {
+		   if = {
+			    limit = {
+				   337 = { is_owned_by = ROOT }
+			    }
+			    337 = {
+				    add_building_construction = {
+					    type = bunker
+						level = 1
+					    instant_build = yes
+					    province = { all_provinces = yes }
+				    }
+				    add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				    }
+			    }
+		    }
+		    if = {
+			    limit = {
+				   430 = { is_owned_by = ROOT }
+			    }
+			    430 = {
+				   add_building_construction = {
+					    type = bunker
+						level = 1
+					    instant_build = yes
+					    province = { all_provinces = yes }
+				    }
+				    add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				    }
+			    }
+		    }
+		    if = {
+			    limit = { 
+					431 = { is_owned_by = ROOT }
+				}
+			    431  = {
+				   add_building_construction = {
+					   type = bunker
+					   level = 1
+					   instant_build = yes
+					   province = { all_provinces = yes }
+				    }
+				   add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				   }
+			    }
+		    }
+		    if = {
+			    limit = {
+				   214 = { is_owned_by = ROOT }
+			    }
+			    214 = {
+				   add_building_construction = {
+						type = bunker
+						level = 1
+					   	instant_build = yes
+					    province = { all_provinces = yes }
+				    }
+				   add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				    }
+			    }
+		    }
+	    }
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_AT
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline_barricades
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		x = 0
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline_barricades
+		completion_reward = {
+			add_ideas = RED_frontline_AT
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_reinforce
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline_sabotage
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		x = 0
+		y = 1
+		cost = 4.3
+		relative_position_id = RED_RCH_frontline_sabotage
+		completion_reward = {
+			add_ideas = RED_frontline_reinforce
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_war
+		icon = GFX
+		prerequisite = {
+			focus = RED_RCH_frontline_reinforce
+		}
+		prerequisite = {
+			focus = RED_RCH_frontline_AT
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = RCH
+		}
+		x = 0
+		y = 5
+		cost = 6.5
+		relative_position_id = RED_RCH_frontline
+		will_lead_to_war_with = RCH
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = RCH
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_flag_above_tverskaya
+		icon = GFX_RED_banner_over_tverskaya
+		prerequisite = {
+			focus = RED_RCH_frontline_war
+		}
+		available = {
+			NOT = { country_exists = RCH }
+			AND = {
+				275= {
+					is_owned_by = ROOT
+				}
+			}
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_RCH_frontline_war
+		completion_reward = {
+			## something cool IDK
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_protect_reich_border
+		icon = GFX_RED_anti_fascism_2
+		prerequisite = {
+			focus = RED_RCH_frontline_reinforce
+		}
+		prerequisite = {
+			focus = RED_RCH_frontline_AT
+		}
+		available = {
+			AND = {
+				country_exists = DIM
+				country_exists = ULI
+			}
+			ULI = {
+				is_neighbor_of = RCH
+			}
+			DIM = {
+				is_neighbor_of = RCH
+			}
+		}
+		mutually_exclusive = {
+			focus = RED_RCH_frontline_support_containment
+		}
+		x = -2
+		y = 4
+		cost = 6.5
+		relative_position_id = RED_RCH_frontline
+		completion_reward = {
+			every_possible_country = {
+				limit = { 
+					is_neighbor_of = RCH
+					AND = { NOT = { original_tag = RUI original_tag = HNZ } }
+					add_timed_idea = { idea = RED_fight_against_fascism days = 360 }
+				}		
+				add_threat = 2.5
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_RCH_frontline_support_containment
+		icon = GFX_RED_containment
+		prerequisite = {
+			focus = RED_RCH_frontline_reinforce
+		}
+		prerequisite = {
+			focus = RED_RCH_frontline_AT
+		}
+		mutually_exclusive = {
+			focus = RED_RCH_frontline_protect_reich_border
+		}
+		x = 2
+		y = 4
+		cost = 6.5
+		relative_position_id = RED_RCH_frontline
+		completion_reward = {
+			every_possible_country = {
+				limit = { 
+					is_neighbor_of = RCH
+					AND = { NOT = { original_tag = RUI original_tag = HNZ } }
+					add_timed_idea = { idea = RED_aggressive_containment days = 480 }
+				}		
+				add_threat = 7.5
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_HNZ_enemy
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 8
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			## req smth
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_red_line_secured
+		icon = GFX
+		prerequisite = {
+			focus = RED_cemented_authority
+		}
+		x = 20
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_cemented_authority
+		completion_reward = {
+			## requires to own ALL of the Red Line
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_bastion_of_socialism
+		icon = GFX
+		prerequisite = {
+			focus = RED_red_line_secured
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_red_line_secured
+		completion_reward = {
+			## requires to own ALL of the Red Line
+			add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rebuild_line_proper
+		icon = GFX
+		prerequisite = {
+			focus = RED_red_line_secured
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_red_line_secured
+		completion_reward = {
+			## requires to own ALL of the Red Line
+			## Gain 2 infrastructure on all red line
+			add_stability = 0.01
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	#focus = {
+	#	id = RED_politburo_path
+	#	icon = GFX_RED_politburo
+	#	x = -5
+	#	y = 0
+	#	cost = 2.2
+	#	relative_position_id = RED_moskvin_path
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 2
+	#	}
+	#}
+
+	focus = {
+		id = RED_korbut_path
+		icon = GFX_RED_head_of_kgb
+		x = -1
+		y = 8
+		cost = 2.2
+		available = {
+			always = no
+		}
+		relative_position_id = RED_2030
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_government_roles_for_nkvd
+		icon = GFX_RED_interrogation
+		prerequisite = {
+			focus = RED_korbut_path
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_korbut_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_cheslav_mihaylovich
+		icon = GFX_RED_cheslav_mihaylovich
+		prerequisite = {
+			focus = RED_government_roles_for_nkvd
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_government_roles_for_nkvd
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_gearing_up_for_war
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_korbut_path
+		}
+		x = -1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_korbut_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_great_terror
+		icon = GFX_RED_citizen_spy
+		prerequisite = {
+			focus = RED_gearing_up_for_war
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_gearing_up_for_war
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_mind_control_serum
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_great_terror
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_great_terror
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_recruit_spartan_spy
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_korbut_path
+			focus = RED_moskvin_path
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_korbut_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_spy_networks_increase
+		icon = GFX_RED_spy_networks
+		prerequisite = {
+			focus = RED_korbut_path
+		}
+		x = 1
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_korbut_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_sabotage
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_spy_networks_increase
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_spy_networks_increase
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_weaponize_the_dark_ones
+		icon = GFX_RED_nkvd_officers
+		prerequisite = {
+			focus = RED_sabotage
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_sabotage
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_moskvin_path
+		icon = GFX_RED_moskvin
+		x = -7
+		y = 0
+		cost = 2.2
+		relative_position_id = RED_korbut_path
+		available = {
+			always = no
+		}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_inheritor_of_secretary
+		icon = GFX_RED_secretary_of_the_line
+		prerequisite = {
+			focus = RED_moskvin_path
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_moskvin_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_chief_of_the_force
+		icon = GFX_RED_chief_of_the_force
+		prerequisite = {
+			focus = RED_moskvin_path
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_moskvin_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_head_the_politburo
+		icon = GFX_RED_head_the_politburo
+		prerequisite = {
+			focus = RED_moskvin_path
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_moskvin_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_cult_of_personality
+		icon = GFX_RED_cult_of_personality
+		prerequisite = {
+			focus = RED_head_the_politburo
+		}
+		prerequisite = {
+			focus = RED_chief_of_the_force
+		}
+		prerequisite = {
+			focus = RED_inheritor_of_secretary
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_head_the_politburo
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_rapid_industrialisation
+		icon = GFX_RED_gosplan_2
+		prerequisite = {
+			focus = RED_moskvin_path
+			focus = RED_korbut_path
+		}
+		x = 3
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_moskvin_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_andrei_path
+		icon = GFX_RED_andrey
+		x = 6
+		y = 0
+		cost = 2.2
+		available = {
+			always = no
+		}
+		relative_position_id = RED_korbut_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_take_back_the_politburo
+		icon = GFX_RED_politics_nkvd_3
+		prerequisite = {
+			focus = RED_andrei_path
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_andrei_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_drain_the_swamp
+		icon = GFX_RED_politics
+		prerequisite = {
+			focus = RED_take_back_the_politburo
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_take_back_the_politburo
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_eye_of_the_snake
+		icon = GFX_RED_smash_the_revolution
+		prerequisite = {
+			focus = RED_andrei_path
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_andrei_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_reform_the_nkvd
+		icon = GFX_RED_politics_nkvd_2
+		prerequisite = {
+			focus = RED_eye_of_the_snake
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_eye_of_the_snake
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_a_brothers_fate
+		icon = GFX_RED_question_of_brotherhood
+		prerequisite = {
+			focus = RED_andrei_path
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_andrei_path
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_lenins_descendant
+		icon = GFX_RED_lenin_will
+		prerequisite = {
+			focus = RED_drain_the_swamp
+		}
+		prerequisite = {
+			focus = RED_reform_the_nkvd
+		}
+		x = 0
+		y = 3
+		cost = 2.2
+		relative_position_id = RED_andrei_path
+		completion_reward = {
+			add_political_power = 200
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_one_unified_socialist_state
+		icon = GFX_RED_generic_cccp
+		prerequisite = {
+			focus = RED_lenins_descendant
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_lenins_descendant
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_fist_of_lenin
+		icon = GFX_RED_soviet_tankists
+		prerequisite = {
+			focus = RED_lenins_descendant
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_lenins_descendant
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_lenins_fury2
+		icon = GFX_RED_reznov
+		prerequisite = {
+			focus = RED_lenins_descendant
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_lenins_descendant
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	#focus = {
+	#	id = RED_pavel_path
+	#	icon = GFX_RED_generic_food
+	#	x = 5
+	#	y = 0
+	#	cost = 2.2
+	#	available = {
+	#		always = no
+	#	}
+	#	relative_position_id = RED_andrei_path
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 2
+	#	}
+	#}
+}
+
+focus_tree = {
+	id = red_line_military_coup
+	
+	country = {
+		factor = 00
+	}
+	default = no
+	continuous_focus_position = { x = 50 y = 1000 }
+	
+	focus = {
+		id = RED_military_coup
+		icon = GFX_RED_military_coup
+		x = 4
+		y = 0
+		cost = 0.8
+		completion_reward = {
+			add_manpower = 50
+			army_experience = 10
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_assume_leadership
+		icon = GFX_RED_viktor_kovshov
+		prerequisite = {
+			focus = RED_military_coup
+		}
+		x = 0
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_military_coup
+		completion_reward = {
+			## makes the 'dissenters' commanders
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_an_old_friend
+		icon = GFX_RED_infiltration
+		prerequisite = {
+			focus = RED_assume_leadership
+		}
+		x = 0
+		y = 2
+		cost = 2.2
+		relative_position_id = RED_assume_leadership
+		completion_reward = {
+			## event, dry bandits autoannexed and joins the revolution
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_mandatory_conscriptions
+		icon = GFX_RED_generic_troop_1
+		prerequisite = {
+			focus = RED_military_coup
+		}
+		x = -2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_military_coup
+		completion_reward = {
+			## upgrade conscription laws
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_form_military_committee
+		icon = GFX_RED_nkvd_divisions
+		prerequisite = {
+			focus = RED_mandatory_conscriptions
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_mandatory_conscriptions
+		completion_reward = {
+			## tech boost to military and doctrine
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_army_tax
+		icon = GFX_RED_question_of_economy
+		prerequisite = {
+			focus = RED_mandatory_conscriptions
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_mandatory_conscriptions
+		completion_reward = {
+			## eco debuff for factory prod buff
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_armaments_of_victory
+		icon = GFX_RED_frontlines
+		prerequisite = {
+			focus = RED_military_coup
+		}
+		x = 2
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_military_coup
+		completion_reward = {
+			## add equipment to stockpile
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_dawn_til_dusk_quotas
+		icon = GFX_RED_nkvd_support
+		prerequisite = {
+			focus = RED_armaments_of_victory
+		}
+		x = -1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_armaments_of_victory
+		completion_reward = {
+			## add military factories, reduce stab
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_brutal_occupation
+		icon = GFX_RED_squash_dissidents
+		prerequisite = {
+			focus = RED_armaments_of_victory
+		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_armaments_of_victory
+		completion_reward = {
+			## reduce resistance and also reduce compliance
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 }

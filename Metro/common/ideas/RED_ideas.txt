@@ -14,22 +14,6 @@ ideas = {
 				army_org_regain = 0.05
 	        }	
 	    }
-		RED_mutinies = {
-			picture = idea_RED_mutinies
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				weekly_manpower = -3
-				conscription_factor = -0.25
-				army_org_regain = -0.33
-				land_reinforce_rate = -0.33
-	        }
-	    }
-	    #### Conspiracy Ideas ####
 	    revolutionist_plot_1 = {
 			picture = RED_revolutionist_plot
 
@@ -153,7 +137,7 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-			    stability_weekly_factor = 0.0025
+			    stability_weekly_factor = 0.001
 				production_speed_arms_factory_factor = -0.2
 	        }	
 	    }
@@ -372,19 +356,6 @@ ideas = {
                 production_speed_infrastructure_factor = 0.15
 	        }	
 	    }
-		RED_supply_increase = {
-			picture = home_of_the_revolution
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-                supply_consumption_factor = -0.06
-                winter_attrition_factor = -0.04
-	        }	
-	    }
 		RED_core_RD = {
 			picture = home_of_the_revolution
 
@@ -545,62 +516,6 @@ ideas = {
 	        }	
 	    }
 
-	    #### Army ####
-
-		RED_flamethrowers = {
-			picture = great_depression
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			equipment_bonus = {
-				flamethrower_support = {
-					build_cost_ic = -0.15
-					soft_attack = 0.1
-					hard_attack = 0.1
-					breakthrough = 0.1
-					defense = 0.1
-					instant = yes
-				}
-			}	
-	    }
-		RED_chekist_instructors = {
-			picture = great_depression
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				training_time_factor = -0.15
-				army_org_regain = 0.1
-	        }		
-	    }
-		RED_gun_production_boost = {
-
-			picture = generic_production_bonus
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-
-			removal_cost = 1
-
-			equipment_bonus = {
-				infantry_equipment = {
-					build_cost_ic = -0.1
-					instant = yes
-				}
-			}
-		}
-
 		RED_gearing_for_war = {
 			picture = great_depression
 
@@ -627,6 +542,1008 @@ ideas = {
 				recon_factor = 0.04
 				terrain_penalty_reduction = 0.04
 	        }		
+	    }
+
+		##
+		##	- Starting Ideas
+		##
+
+	    RED_intra_stational_socialism = {
+			picture = GFX
+
+			allowed = {
+			}
+
+            on_add = {
+            	set_rule = {
+    				can_send_volunteers = no
+				}
+            }
+
+            on_remove = {
+            	set_rule = {
+    				can_send_volunteers = yes
+				}
+            }
+
+			removal_cost = -1
+
+			modifier = {
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				political_power_gain = -0.05
+				opinion_gain_monthly_factor = -0.2
+				resistance_target = 1
+				resistance_growth = 1.5
+				custom_modifier_tooltip = RED_intra_stational_socialism_tt
+	        }	
+	    }
+
+	    RED_fragmented_military = {
+			picture = GFX
+
+			allowed = {
+			}
+
+			cancel = {
+                RCH = {
+                    exists = no
+                }
+            }
+
+			removal_cost = -1
+
+			modifier = {
+				max_command_power = -15
+				planning_speed = -0.05
+				army_org_factor = -0.05
+	        }	
+	    }
+
+	    RED_reforming_military = {
+			picture = GFX
+
+			allowed = {
+			}
+
+			cancel = {
+                RCH = {
+                    exists = no
+                }
+            }
+
+			removal_cost = -1
+
+			modifier = {
+				max_command_power = -10
+				planning_speed = -0.025
+				army_org_factor = -0.025
+	        }	
+	    }
+
+		RED_commanders_short_supply = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				military_leader_cost_factor = 1.5
+				command_power_gain = -0.1
+				minimum_training_level = 0.1 
+	        }	
+	    }
+
+		RED_generals_siphoning_manpower = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = -0.035
+				mobilization_speed = -0.5
+	        }	
+	    }
+		RED_soldiers_siphoning_equipment = {
+			picture = home_of_the_revolution
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+                industrial_capacity_factory = -0.15
+	        }	
+	    }
+
+	    RED_bastion_of_socialism = {
+			picture = GFX
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				drift_defence_factor = 0.5
+				army_org_regain = 0.05
+	        }	
+	    }
+
+	    RED_de_kulakization = {
+			picture = GFX
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				oligarch_drift = -0.01
+				stability_weekly = -0.0025
+				consumer_goods_factor = -0.1
+	        }	
+	    }
+
+	    RED_economy_improve_line = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+			cancel = {
+                has_country_flag = RED_crisis_country_flag
+            }
+
+		    removal_cost = -1
+
+		    modifier = {
+                production_speed_buildings_factor = 0.05
+	        }	
+	    }
+
+	    RED_economy_improve_living = {
+			picture = GFX
+
+			allowed = {
+			}
+
+			cancel = {
+                has_country_flag = RED_crisis_country_flag
+            }
+
+			removal_cost = -1
+
+	        research_bonus = { construction = 0.15 farming = 0.15 }	
+	    }
+
+		###
+		###	-	Crisis Ideas
+		###
+
+	    RED_mushroom_revolt = {
+			picture = idea_RED_mushroom_revolt
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.15
+				stability_factor = -0.15
+				war_support_factor = -0.15
+				community_drift = 0.05
+	        }
+	    }
+
+	    RED_military_mutinies = {
+			picture = idea_RED_mutinies
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_org_regain = -0.15
+				army_morale_factor = -0.15
+				training_time_factor = 0.25
+				minimum_training_level = 0.25
+				stability_factor = -0.15
+				war_support_factor = -0.15
+	        }
+	    }
+
+		RED_military_mutinies_2 = {
+			picture = idea_RED_mutinies
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_org_regain = -0.1
+				army_morale_factor = -0.1
+				training_time_factor = 0.15
+				minimum_training_level = 0.15
+				stability_factor = -0.15
+				war_support_factor = -0.15
+	        }
+	    }
+
+		RED_military_mutinies_3 = {
+			picture = idea_RED_mutinies
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_org_regain = -0.05
+				army_morale_factor = -0.05
+				training_time_factor = 0.1
+				minimum_training_level = 0.1
+				stability_factor = -0.15
+				war_support_factor = -0.15
+	        }
+	    }
+
+	    RED_staff_purge = {
+			picture = GFX
+
+			allowed = {
+			}
+			
+			removal_cost = -1
+
+			modifier = {
+				land_doctrine_cost_factor = 0.1
+                command_power_gain = -0.1
+                army_leader_cost_factor = 1
+				max_command_power = -1
+				planning_speed = -0.1
+				army_org_factor = -0.1
+				experience_gain_army = -0.1
+	        }	
+	    }
+
+		RED_sovkhozes_farms = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				political_power_gain = 0.1
+				global_building_slots_factor = 0.1	
+	        }	
+	    }
+
+		RED_kolkhozes_farm = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				political_power_gain = -0.15
+				production_speed_buildings_factor = 0.1
+	        }	
+	    }
+
+		RED_quotas_production = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				industrial_capacity_factory = 0.1
+				production_factory_start_efficiency_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.1  
+	        }	
+	    }
+
+		RED_cutting_edge = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+			research_bonus = { infantry_tech = 0.1 }	
+	    }
+
+		##
+		##	-	Socialist Radio
+		##
+
+		RED_socialist_radio = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				political_power_gain = 0.1
+	        }	
+	    }
+
+		RED_socialist_radio_2 = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				political_power_gain = 0.15
+				offensive_war_stability_factor = 0.05
+	        }	
+	    }
+		
+		RED_propaganda_tune_radio = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				compliance_gain = 0.05
+				enemy_justify_war_goal_time = 0.05
+	        }	
+	    }
+
+		RED_propaganda_tune_radio_relations = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				compliance_gain = 0.05
+				enemy_justify_war_goal_time = 0.05
+				justify_war_goal_time = -0.05
+	        }	
+	    }
+
+		RED_propaganda_tune_radio_subversion = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				compliance_gain = 0.05
+				enemy_justify_war_goal_time = 0.05
+				resistance_target = -0.1
+	        }	
+	    }
+
+		##
+		##	-	Red Army Military
+		##
+
+		## -	Conscription Reforms 
+
+		RED_conscription_reforms = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				recruitable_population_factor = -0.1
+				minimum_training_level = 0.1
+				experience_gain_army = 0.05 
+	        }	
+	    }
+
+		RED_adaptable_force = {
+			picture = home_of_the_revolution
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+                supply_consumption_factor = -0.075
+                winter_attrition_factor = -0.05
+	        }	
+	    }
+
+		RED_rudimentary_drills = {
+			picture = great_depression
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				training_time_factor = -0.1
+				army_org_regain = 0.1
+	        }		
+	    }
+
+		RED_gun_production_boost = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = 1
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		RED_coordination_efforts = {
+			picture = great_depression
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_org_regain = 0.1
+	        }		
+	    }
+
+		## -	Soviet Soldier
+
+		RED_recruitment_compaigns = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				recruitable_population_factor = 0.15
+				minimum_training_level = -0.1
+				mobilization_speed = 0.5
+	        }	
+	    }
+
+		RED_human_waves = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				army_attack_factor = 0.05
+				army_attack_speed_factor = 0.05
+				army_org_regain = -0.1
+				army_org_factor = -0.1
+	        }	
+	    }
+
+		RED_heroic_deeds = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				breakthrough_factor = 0.05
+				army_morale_factor = 0.1
+				army_org_regain = -0.1
+				army_org_factor = -0.1
+	        }	
+	    }
+
+		RED_ura_uraa = {
+		    picture = GFX
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+				org_loss_at_low_org_factor = -0.2
+				org_loss_when_moving = -0.2
+	        }	
+	    }
+
+		##	-	Middle Army Leader Branch
+
+		RED_flamethrowers = {
+			picture = great_depression
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				flamethrower_support = {
+					soft_attack = 0.1
+					hard_attack = 0.1
+					breakthrough = 0.1
+					defense = 0.1
+					instant = yes
+				}
+			}	
+	    }
+
+		RED_army_maxims = {
+			picture = great_depression
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				gatling_support = {
+					soft_attack = 0.1
+					hard_attack = 0.1
+					breakthrough = 0.1
+					defense = 0.1
+					instant = yes
+				}
+			}	
+	    }
+
+		RED_spec_ops_hardness = {
+			picture = great_depression
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				special_forces_equipment = {
+					defense = 0.1
+					hardness = 0.35
+					instant = yes
+				}
+			}	
+	    }
+
+		##
+		##	-	Relations Branch
+		##
+
+		RED_technicians_1 = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = 1
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.025
+					instant = yes
+				}
+			}
+		}
+
+		RED_technicians_2 = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = 1
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.05
+					instant = yes
+				}
+			}
+		}
+
+		RED_technicians_3a = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = 1
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.125
+					instant = yes
+				}
+			}
+		}
+
+		RED_technicians_3b = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = 1
+
+			modifier = {
+				industrial_capacity_factory = 0.02
+			}
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.075
+					breakthrough = 0.05
+					ap_attack = 0.05
+					instant = yes
+				}
+			}
+		}
+
+		##
+		##	-	Frontline Conflict
+		##
+
+		RED_frontline_agressive = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			cancel = {
+				RCH = {
+					exists = no
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = RCH
+				breakthrough_bonus_against = 0.05
+			}	
+	    }
+
+		RED_frontline_defensive = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			cancel = {
+				RCH = {
+					exists = no
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = RCH
+				defense_bonus_against = 0.05
+			}	
+	    }
+
+		RED_frontline_reinforce = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				land_reinforce_rate = 0.02
+				army_morale_factor = 0.05
+	        }	
+	    }
+
+		RED_frontline_AT = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				explosive_equipment_0 = {
+					breakthrough = 0.05
+					ap_attack = 0.15
+					instant = yes
+				}
+				gattling_equipment_0 = {
+					breakthrough = 0.05
+					ap_attack = 0.15
+					instant = yes
+				}
+			}
+	    }
+
+		RED_fight_against_fascism = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			cancel = {
+				RCH = {
+					exists = no
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				experience_gain_army = 0.05
+				land_doctrine_cost_factor = -0.05
+				training_time_factor = -0.1
+	        }
+			
+			targeted_modifier = {
+				tag = RCH
+				defense_bonus_against = 0.05
+			}
+	    }
+
+		RED_aggressive_containment = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			cancel = {
+				RCH = {
+					exists = no
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				experience_gain_army = 0.05
+				training_time_factor = -0.1
+	        }
+			
+			targeted_modifier = {
+				tag = RCH
+				defense_bonus_against = 0.05
+				breakthrough_bonus_against = 0.05
+			}
+	    }
+
+		RED_MSU_battering_rams = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			cancel = {
+				RCH = {
+					exists = no
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = MSU 
+				attack_bonus_against_cores = 0.1
+			}	
+	    }
+
+		### BERILAG ###
+
+		RED_special_research = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				research_speed_factor = 0.05
+	        }	
+	    }
+
+		RED_special_research_volunteers = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				non_core_manpower = -0.2
+				conscription_factor = -0.06
+				research_speed_factor = 0.075
+	        }	
+	    }
+
+		RED_special_research_volunteers_breakthrough = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				non_core_manpower = -0.25
+				conscription_factor = -0.075
+				research_speed_factor = 0.125
+	        }	
+	    }
+
+		RED_special_research_funding = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				consumer_goods_factor = 0.02
+				political_power_gain = -0.08
+				research_speed_factor = 0.075
+	        }	
+	    }
+
+		RED_special_research_funding_breakthrough = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				consumer_goods_factor = 0.035
+				political_power_gain = -0.01
+				research_speed_factor = 0.125
+	        }	
+	    }
+
+		### NKVD IDEAS ### 
+
+		NKVD_secret_police_1 = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				resistance_activity = -0.15
+	        }	
+	    }
+
+		NKVD_secret_police_2 = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				resistance_activity = -0.25
+				resistance_growth_on_our_occupied_states = -0.25
+	        }	
+	    }
+
+		NKVD_administration_roles = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				political_power_factor = -0.05
+				### something with decisions perhaps
+	        }	
+	    }
+
+		RED_nkvd_anti_corruption_force = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				political_power_factor = 0.05
+				### something with decisions perhaps
+	        }	
+	    }
+
+		RED_nkvd_spy_networks = {
+			picture = RED_revolutionist_plot
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				decryption_factor = 0.025
+				intel_network_gain_factor = 0.25
+				subversive_activites_upkeep = -0.25
+	        }	
 	    }
 	}
 }

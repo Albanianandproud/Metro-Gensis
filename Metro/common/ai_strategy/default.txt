@@ -1,18 +1,80 @@
 default_unit_production = {
+
+	allowed = {
+		NOT = {
+			original_tag = HNZ 
+			original_tag = RED
+			original_tag = RCH  
+		}
+	}
+
+	enable = { always = yes }
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 50
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = special_forces
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 50
+	}
+}
+
+default_AI_self_preservation = {
+	enable = { surrender_progress > 0.40 }
+	abort = { surrender_progress < 0.55 }
+	ai_strategy = { 
+		type = build_army 
+		id = infantry 
+		value = 150 
+	}
+}
+
+stop_building_useless_stuff = {
 	enable = {
 		always = yes
 	}
 
 	ai_strategy = {
-		type = role_ratio
-		id = armor
-		value = 25
+		type = building_target
+		id = fuel_silo 
+		value = -10000
 	}
 
 	ai_strategy = {
-		type = role_ratio
-		id = infantry
-		value = 75
+		type = building_target
+		id = synthetic_refinery
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = radar_station 
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = air_base
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = rocket_site
+		value = -10000
 	}
 }
 
@@ -27,7 +89,7 @@ ai_army_building_puppet = {
 	abort = {
 		OR = {
 			has_army_size = {
-    			size > 9
+    			size > 19
     			type = infantry
 			}
 			has_war = yes
@@ -54,7 +116,7 @@ default_pp_spend_amount = {
 	ai_strategy = {
 		type = pp_spend_amount
 		id = decision
-		value = 100
+		value = 50
 	}
 }
 
@@ -69,13 +131,13 @@ default_armored_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 50
+		value = 25
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 50
+		value = 75
 	}
 }
 
@@ -90,44 +152,74 @@ highered_armored_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 75
+		value = 45
 	}
 }
 
 default_stockpile_management = {
 	enable = {
-		num_divisions > 34
+		num_divisions > 19
 	}
 
 	abort = {
-		num_divisions < 15
+		num_divisions < 14
 	}
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 5 # double base stockpile #from 25 to 35
+		value = 0.25 # double base stockpile #from 25 to 35
 	}
 }
 
+force_build_late_game = {
+	allowed = {
+		NOT = {
+			original_tag = HNZ 
+			original_tag = RED
+			original_tag = RCH  
+		}
+	}
+	enable = {
+		date < 2032.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = force_build_armies
+		value = 2000
+	}
+}
 
 DEFAULT_template_design = {
 	enable = {	
-		date < 30.1.1				
+		date < 2033.1.1				
 	}
 	abort = { 
-		date > 30.1.1
+		date > 2033.1.1
 	}
 
 	ai_strategy = {
 		type = template_prio
 		id = armor
-		value = 20
+		value = 25
 	}
 	
 	ai_strategy = {
 		type = template_prio
 		id = infantry
 		value = 80
+	}
+}
+
+stockpile_more_late_game = {
+	enable = {
+		date > 2032.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = 0.5 ## Stuffs 'bout to go down
 	}
 }
 
@@ -190,7 +282,6 @@ build_intelligence_agency = {
 		type = intelligence_agency_usable_factories
 		value = 5
 	}
-
 }
 
 upgrade_intelligence_agency = {
@@ -307,6 +398,6 @@ put_garrisons_on_high_prio = {
 	
 	ai_strategy = {
 		type = garrison_reinforcement_priority
-		value = 100 # positive is high prio, negative is low prio
+		value = -100 # positive is high prio, negative is low prio
 	}
 }
