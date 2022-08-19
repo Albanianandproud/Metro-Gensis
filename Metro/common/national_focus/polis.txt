@@ -1,0 +1,149 @@
+#!gfx:interface\metro_goals.gfx
+
+focus_tree = {
+    id = nf_PLS
+    country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PLS
+		}
+	}
+	default = no
+
+	#############
+	###HISTORY###
+	#############
+
+	focus = {
+		id = PLS_SUPPORTING_PEACE
+		icon = GFX_HNZ_external_affairs
+		mutually_exclusive = { focus = PLS_CIVIL_WAR }
+
+		x = 7
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		allow_branch = {
+			if = {
+				limit {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT {
+					has_completed_focus = PLS_CIVIL_WAR
+				}
+			}
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				load_focus_tree = {
+					tree = nf_PLS
+					keep_completed = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+	}
+
+	focus = {
+		id = PLS_POLITICS_1
+		
+		x = 7
+		y = 1
+
+		prerequisite = {
+			focus = PLS_SUPPORTING_PEACE
+		}
+
+		ai_will_do = {
+			2
+		}
+
+	}
+
+	focus = {
+		id = PLS_POLITICS_2
+		
+		x = 7
+		y = 2
+
+		prerequisite = {
+			focus = PLS_POLITICS_1
+		}
+
+		ai_will_do = {
+			2
+		}
+
+	}
+
+	#################
+	###ALTERNATIVE###
+	#################
+
+	focus = {
+		id = PLS_CIVIL_WAR
+		icon = GFX_soldier_3
+		mutually_exclusive = { focus = PLS_SUPPORTING_PEACE }
+
+		allow_branch = { 
+			if {
+				limit {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				AND {
+					has_country_flag = council_will_fall
+					NOT {
+						has_completed_focus = PLS_SUPPORTING_PEACE
+					}
+				}
+			}
+		}
+
+		x = 14
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+		
+		offset = {
+			x = -7
+			y = 0
+			trigger = {
+				has_completed_focus = PLS_CIVIL_WAR
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+			}
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				load_focus_tree = {
+					tree = nf_PLS
+					keep_completed = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+
+	}
+}
