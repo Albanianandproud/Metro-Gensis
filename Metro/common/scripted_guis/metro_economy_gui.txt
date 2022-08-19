@@ -1,54 +1,77 @@
-scripted_gui = {
-
-	bullets = {
-		context_type = player_context
-		parent_window_token = top_bar
-		window_name = "bullets_container"
-
-		visible = {
-		}
-
-        ai_enabled = {
-		    always = no
-        }
-	}
-	rations = {
-		context_type = player_context
-		parent_window_token = top_bar
-		window_name = "food_rations_container"
-
-		visible = {
-		}
-
-        ai_enabled = {
-		    always = no
-        }
-	}  
-}
+#scripted_gui = {
+#
+#	bullets = {
+#		context_type = player_context
+#		parent_window_token = top_bar
+#		window_name = "bullets_container"
+#
+#		visible = {
+#		}
+#
+#        ai_enabled = {
+#		    always = no
+#        }
+#	}
+#	rations = {
+#		context_type = player_context
+#		parent_window_token = top_bar
+#		window_name = "food_rations_container"
+#
+#		visible = {
+#		}
+#
+#        ai_enabled = {
+#		    always = no
+#        }
+#	}  
+#}
 
 
 ## New Station Economy Mechanics ##
 
-scripted_gui = {
-	context_type = selected_state_context
+#scripted_gui = {
+#	context_type = selected_state_context
+#
+#	window_name = "station_economy_window"
+#	parent_window_token = selected_state_view
+#	visible = {
+#		ROOT = {
+#			is_ai = no
+#			NOT = {
+#				has_global_flag = bullets_disabled_global_flag
+#			}
+#		}
+#		OR = {
+#			is_in_array = { global.stations = THIS.id }
+#			any_of_scopes = {
+#				array = global.stations
+#				is_in_array = { controlled_stations = PREV.id }
+#			}
+#		}
+#	}
+#}
 
-	window_name = "station_economy_window"
-	parent_window_token = selected_state_view
-	visible = {
-		ROOT = {
-			is_ai = no
-			NOT = {
-				has_global_flag = bullets_disabled_global_flag
-			}
+scripted_gui = {
+
+	ammunition = {
+		context_type = player_context
+
+		window_name = "ammunition_topbar"
+
+
+		triggers = {
+			
 		}
-		OR = {
-			is_in_array = { global.stations = THIS.id }
-			any_of_scopes = {
-				array = global.stations
-				is_in_array = { controlled_stations = PREV.id }
+
+		properties = {
+			ammo_ratio_bar = {
+				frame = ammo_ratio_var
 			}
-		}
+
+			ammo_icon = {
+				frame = ammo_frame_var
+			}
+        }
+
 	}
 }
-
-
