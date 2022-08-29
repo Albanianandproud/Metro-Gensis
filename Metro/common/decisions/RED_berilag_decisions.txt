@@ -1,51 +1,60 @@
 RED_berilag_category = {
-	RED_berilag_check_pow_capacity = {
-
-		icon = form_nation
-
-		cost = 0
-		fire_only_once = no
-		
-		ai_will_do = {
-			factor = 0
-		}
-		days_remove = 1
-		remove_effect = {
-			## RED_berilag_check_POW_capacity = yes
-			add_to_variable = { var = berilag_GM_CAP value = temp_POW_CAP }
-		}
-	}
-	RED_berilag_check_gm_capacity = {
-
-		icon = form_nation
-
-		cost = 0
-		fire_only_once = no
-		
-		ai_will_do = {
-			factor = 0
-		}
-		days_remove = 1
-		remove_effect = {
-			## RED_berilag_check_GM_capacity = yes
-			add_to_variable = { var = berilag_GM_CAP value = temp_GM_CAP }
-		}
-	}
 	RED_berilag_add_RP = {
 
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_POW_5_tt
+				check_variable = { berilag_POW > 4 }
+			} 
+			custom_trigger_tooltip = {
+				tooltip = berilag_SA_30_tt
+				check_variable = { berilag_SA > 29 }
+			} 
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_self_autonomy
+					has_completed_focus = RED_under_jurisdiction
+				}
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_self_autonomy
+					has_completed_focus = RED_under_jurisdiction
+				}
+			}
+		}
+
 		icon = form_nation
 
-		cost = 50
+		cost = 20
+		days_remove = 14
+		days_re_enable = 7
+
 		fire_only_once = no
 		
 		ai_will_do = {
 			factor = 0
 		}
-		days_remove = 10 
+
+		days_remove = 1 
 		remove_effect = {
-			add_to_variable = {
-				var = berilag_RP
-				value = 100
+			custom_effect_tooltip = RED_berilag_add_RP_10_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_RP
+					value = 10
+				}
+				subtract_from_variable = { 
+					var = berilag_SA
+					value = 30
+				}
+				subtract_from_variable = { 
+					var = berilag_POW
+					value = 5
+				}
 			}
 		}
 	}
@@ -54,17 +63,383 @@ RED_berilag_category = {
 
 		icon = form_nation
 
-		cost = 50
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_self_autonomy
+					has_completed_focus = RED_under_jurisdiction
+				}
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_self_autonomy
+					has_completed_focus = RED_under_jurisdiction
+				}
+			}
+		}
+
+		cost = 15
+		days_remove = 14
+		days_re_enable = 0
+
 		fire_only_once = no
 		
 		ai_will_do = {
 			factor = 0
 		}
-		days_remove = 10 
+
 		remove_effect = {
-			add_to_variable = {
-				var = berilag_SA
-				value = 100
+			custom_effect_tooltip = RED_berilag_add_SA_10_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_SA
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_add_RP_self_autonomy = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_POW_5_tt
+				check_variable = { berilag_POW > 4 }
+			} 
+			custom_trigger_tooltip = {
+				tooltip = berilag_SA_44_tt
+				check_variable = { berilag_SA > 44 }
+			} 
+			hidden_trigger = {
+				has_completed_focus = RED_self_autonomy
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_completed_focus = RED_self_autonomy
+			}
+		}
+
+		icon = form_nation
+
+		cost = 20
+		days_remove = 14
+		days_re_enable = 7
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		days_remove = 1 
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_add_RP_10_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_RP
+					value = 20
+				}
+				subtract_from_variable = { 
+					var = berilag_SA
+					value = 45
+				}
+				subtract_from_variable = { 
+					var = berilag_POW
+					value = 5
+				}
+			}
+		}
+	}
+
+	RED_berilag_add_SA_self_autonomy = {
+
+		icon = form_nation
+
+		available = {
+			hidden_trigger = {
+				has_completed_focus = RED_self_autonomy
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_completed_focus = RED_self_autonomy
+			}
+		}
+
+		cost = 15
+		days_remove = 14
+		days_re_enable = 0
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_add_SA_20_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_SA
+					value = 20
+				}
+			}
+		}
+	}
+
+		RED_berilag_add_RP_under_jurisdiction = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_POW_5_tt
+				check_variable = { berilag_POW > 4 }
+			} 
+			custom_trigger_tooltip = {
+				tooltip = berilag_SA_30_tt
+				check_variable = { berilag_SA > 29 }
+			} 
+			hidden_trigger = {
+				has_completed_focus = RED_under_jurisdiction
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_completed_focus = RED_under_jurisdiction
+			}
+		}
+
+		icon = form_nation
+
+		cost = 10
+		days_remove = 7
+		days_re_enable = 0
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		days_remove = 1 
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_add_RP_10_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_RP
+					value = 10
+				}
+				subtract_from_variable = { 
+					var = berilag_SA
+					value = 30
+				}
+				subtract_from_variable = { 
+					var = berilag_POW
+					value = 5
+				}
+			}
+		}
+	}
+
+	RED_berilag_add_SA_under_jurisdiction = {
+
+		icon = form_nation
+
+		available = {
+			hidden_trigger = {
+				has_completed_focus = RED_under_jurisdiction
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_completed_focus = RED_under_jurisdiction
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		days_re_enable = 0
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_add_SA_10_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_SA
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_increase_capacity = {
+		icon = form_nation
+
+		available = {
+			228 = {
+				infrastructure > 1
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_increase_occupant_capacity_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW_CAP
+					value = 20
+				}
+				add_to_variable = {
+					var = berilag_GM_CAP
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_increase_capacity_2 = {
+		icon = form_nation
+
+		available = {
+			228 = {
+				infrastructure > 3
+			}
+		}
+
+		visible = {
+			228 = {
+				infrastructure > 3
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_increase_occupant_capacity_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW_CAP
+					value = 20
+				}
+				add_to_variable = {
+					var = berilag_GM_CAP
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_increase_capacity_3 = {
+		icon = form_nation
+
+		available = {
+			228 = {
+				infrastructure > 5
+			}
+		}
+
+		visible = {
+			228 = {
+				infrastructure > 5
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_increase_occupant_capacity_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW_CAP
+					value = 20
+				}
+				add_to_variable = {
+					var = berilag_GM_CAP
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_increase_capacity_4 = {
+		icon = form_nation
+
+		available = {
+			228 = {
+				infrastructure > 7
+			}
+		}
+
+		visible = {
+			228 = {
+				infrastructure > 7
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_increase_occupant_capacity_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW_CAP
+					value = 20
+				}
+				add_to_variable = {
+					var = berilag_GM_CAP
+					value = 10
+				}
+			}
+		}
+	}
+
+	RED_berilag_increase_capacity_5 = {
+		icon = form_nation
+
+		available = {
+			228 = {
+				infrastructure > 9
+			}
+		}
+
+		visible = {
+			228 = {
+				infrastructure > 9
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_increase_occupant_capacity_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW_CAP
+					value = 20
+				}
+				add_to_variable = {
+					var = berilag_GM_CAP
+					value = 10
+				}
 			}
 		}
 	}
@@ -73,17 +448,118 @@ RED_berilag_category = {
 
 		icon = form_nation
 
-		cost = 50
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_POW_less_than_cap_tt
+				check_variable = {
+					var = berilag_POW
+					value = berilag_POW_CAP
+					compare = less_than
+				}
+			}
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_further_volunteers
+				}
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				NOT = {
+					has_completed_focus = RED_further_volunteers
+				}
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		days_re_enable = 0
+
 		fire_only_once = no
 		
 		ai_will_do = {
 			factor = 0
 		}
-		days_remove = 10 
+
 		remove_effect = {
-			add_to_variable = {
-				var = berilag_POW
-				value = 100
+			custom_effect_tooltip = RED_berilag_add_POW_5_tt
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_manpower = -5
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW
+					value = 5
+				}
+				clamp_variable = {
+					var = berilag_POW
+					min = 0
+					max = berilag_POW_CAP
+				}
+			}
+		}
+	}
+
+	RED_berilag_add_POW_2 = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_POW_less_than_cap_tt
+				check_variable = {
+					var = berilag_POW
+					value = berilag_POW_CAP
+					compare = less_than
+				}
+			}
+			hidden_trigger = {
+				has_completed_focus = RED_further_volunteers
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_completed_focus = RED_further_volunteers
+			}
+		}
+
+		cost = 10
+		days_remove = 7
+		days_re_enable = 0
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RED_berilag_add_POW_10_tt
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_manpower = -10
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_POW
+					value = 10
+				}
+				clamp_variable = {
+					var = berilag_POW
+					min = 0
+					max = berilag_POW_CAP
+				}
 			}
 		}
 	}
@@ -92,17 +568,229 @@ RED_berilag_category = {
 
 		icon = form_nation
 
-		cost = 50
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_GM_less_than_cap_tt
+				check_variable = {
+					var = berilag_GM
+					value = berilag_GM_CAP
+					compare = less_than
+				}
+			} 
+		}
+
+		cost = 10
+		days_remove = 7
+		days_re_enable = 0
+
 		fire_only_once = no
 		
 		ai_will_do = {
 			factor = 0
 		}
-		days_remove = 10 
 		remove_effect = {
-			add_to_variable = {
-				var = berilag_GM
-				value = 123
+			custom_effect_tooltip = RED_berilag_add_GM_5_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = berilag_GM
+					value = 5
+				}
+				clamp_variable = {
+					var = berilag_GM
+					min = 0
+					max = berilag_GM_CAP
+				}
+			}
+		}
+	}
+
+	### Decisions to spend RP on
+
+	RED_berilag_spend_on_research = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_RP_100_tt
+				check_variable = { berilag_RP > 99 }
+			} 
+		}
+
+		custom_cost_text = berilag_RP_100
+		days_remove = 60
+		days_re_enable = 0
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		modifier = {
+			research_speed_factor = 0.2
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RED_berilag_subtract_RP_100_tt
+			hidden_effect = {
+				subtract_from_variable = { 
+					var = berilag_RP
+					value = 100
+				}
+			}
+		}
+	}
+
+	RED_berilag_spend_on_tech_bonus_stalker = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_RP_60_tt
+				check_variable = { berilag_RP > 59 }
+			} 
+		}
+
+		custom_cost_text = berilag_RP_60
+		days_re_enable = 100
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RED_berilag_subtract_RP_60_tt
+			hidden_effect = {
+				subtract_from_variable = { 
+					var = berilag_RP
+					value = 60
+				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.75
+				uses = 1
+				category = stalker
+			}
+		}
+	}
+
+	RED_berilag_spend_on_tech_bonus_infantry_weapons = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_RP_60_tt
+				check_variable = { berilag_RP > 59 }
+			} 
+		}
+
+		custom_cost_text = berilag_RP_60
+		days_re_enable = 100
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RED_berilag_subtract_RP_60_tt
+			hidden_effect = {
+				subtract_from_variable = { 
+					var = berilag_RP
+					value = 60
+				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	RED_berilag_spend_on_tech_bonus_support_tech = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_RP_60_tt
+				check_variable = { berilag_RP > 59 }
+			} 
+		}
+
+		custom_cost_text = berilag_RP_60
+		days_re_enable = 100
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RED_berilag_subtract_RP_60_tt
+			hidden_effect = {
+				subtract_from_variable = { 
+					var = berilag_RP
+					value = 60
+				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+
+	RED_berilag_spend_on_chemicals = {
+
+		icon = form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = berilag_RP_80_tt
+				check_variable = { berilag_RP > 79 }
+			} 
+		}
+
+		custom_cost_text = berilag_RP_80
+		days_remove = 14
+		days_re_enable = 140
+
+		fire_only_once = no
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		modifier = {
+			research_speed_factor = 0.2
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RED_berilag_subtract_RP_80_tt
+			hidden_effect = {
+				subtract_from_variable = { 
+					var = berilag_RP
+					value = 80
+				}
+			}
+			228 = {
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
 			}
 		}
 	}

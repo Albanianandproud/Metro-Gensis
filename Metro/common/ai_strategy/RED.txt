@@ -1,6 +1,5 @@
 ### RED Line ###
 RED_prioritise_flamethrowers = {
-	## Flamethrowers, yo
 	allowed = {
 		original_tag = RED
 	}
@@ -14,25 +13,60 @@ RED_prioritise_flamethrowers = {
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 50
+		value = 35
 	}
 
+	#ai_strategy = {
+	#	type = role_ratio
+	#	id = special_forces
+	#	value = 20
+	#}
+
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 20
+	}
 	ai_strategy = {
 		type = template_prio
 		id = flamethrower_support 
-		value = 35
+		value = 50
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = armor
-		value = 15
+		value = 5
 	}
 
 	ai_strategy = {
 		type = equipment_production_min_factories
 		id = support
-		value = 3
+		value = 30
+	}
+}
+RED_hate_emerald_city = {
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		OR = {
+			country_exists = MSU
+		}
+	}
+	abort = {
+		NOT = {
+			country_exists = MUS
+			OR = {
+				is_in_faction_with = MSU
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = antagonize
+		id = "MSU"
+		value = 200
 	}
 }
 RED_great_leap_forward = {
@@ -49,10 +83,16 @@ RED_great_leap_forward = {
 		id = industrial_complex
 		value = 50
 	}
+
+	ai_strategy = {
+		type = building_target
+		id = infrastructure
+		value = 25
+	}
 	
 	ai_strategy = {
 		type = force_build_armies
-		value = 150
+		value = 50
 	}
 }
 RED_mass_industrialisation = {
@@ -77,29 +117,25 @@ RED_mass_industrialisation = {
 		id = arms_factory
 		value = 200
 	}
-}
-RED_capitalists_all_around = {
-	allowed = {
-		original_tag = RED
-	}
-
-	enable = {
-		always = yes
-	}
 
 	ai_strategy = {
-		type = garrison
-		value = 15
+		type = force_build_armies
+		value = 300
 	}
 }
-RED_its_now_or_never_pump_it_brother = {
+RED_its_now_or_never = {
 	allowed = { original_tag = RED }
 	enable = {
-		date > 2031.1.1
+		date > 2031.1.2
 	}
 	ai_strategy = {
 		type = force_build_armies
 		value = 2000
+	}
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = -0.5
 	}
 }
 RED_guns_protect_our_nation = {
@@ -121,7 +157,7 @@ RED_drown_all_in_our_manpower = {
 	
 	ai_strategy = {
         type = force_build_armies
-        value = 100
+        value = 1000
     }
 }
 RED_lets_be_friends_with_hanza_for_now = {
@@ -189,7 +225,38 @@ red_line_is_very_very_important = {
 	ai_strategy = {
 		type = area_priority
 		id = red_line
-		value = 200
+		value = 100
+	}
+}
+RED_kill_DRY_bandits = {
+	enable = {
+		focus_progress = {
+			focus = RED_dry_station_bandits
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = RED_dry_station_bandits
+			owns_state = 262
+		}
+		country_exists = DRY
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = DRY }
+
+			AND = {
+				has_completed_focus = RED_dry_station_bandits
+				RED = { has_war_with = DRY }
+			}
+			owns_state = 262
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "DRY"
+		value = 100
 	}
 }
 RED_lets_ignore_PLS = {
@@ -199,6 +266,7 @@ RED_lets_ignore_PLS = {
 	abort = {
 		NOT = {
 			country_exists = PLS
+			PLS = { has_war_with = RED }
 		}
 	}
 	ai_strategy = {

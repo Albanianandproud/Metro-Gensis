@@ -10,17 +10,103 @@ scavenging_expeditions = {
 		}
 
 		available = {
-			NOT = { has_country_flag = scavenging_underway }
-			NOT = { has_country_flag = scavenging_disabled }
+			hidden_trigger = {
+				NOT = { original_tag = MSU }
+				NOT = { has_country_flag = scavenging_underway }
+				NOT = { has_country_flag = scavenging_disabled }
+			}
 
 			has_manpower > 4
 			has_equipment = {
-				infantry_equipment > 5
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
 			}
 		}
 
 		visible = {
-			always = yes
+			hidden_trigger = {
+				NOT = { original_tag = MSU }
+				NOT = { original_tag = GWC }
+				NOT = { original_tag = MUT }
+				NOT = { original_tag = PAG }
+			}
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+			set_country_flag = scavenging_underway
+		}
+
+		days_remove = 45
+		days_re_enable = 0
+
+		remove_effect = {
+			clr_country_flag = scavenging_underway
+			random_list = {
+				50 = { #Found something
+					country_event = scavenge_mission.1
+				}
+				50 = { #Loss
+					country_event = scavenge_mission.2
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0.05
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.05
+				has_manpower < 19
+			}
+			modifier = {
+				factor = 5
+				has_manpower > 79
+			}
+		}
+
+	}
+
+	execute_scavenge_mission_free = {
+
+		icon = electronics
+
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = scavenging_underway }
+				NOT = { has_country_flag = scavenging_disabled }
+			}
+
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+		}
+
+		visible = {
+			original_tag = MSU
 		}
 
 		fixed_random_seed = no
@@ -35,20 +121,17 @@ scavenging_expeditions = {
 			set_country_flag = scavenging_underway
 		}
 
-		days_remove = 1
+		days_remove = 50
 		days_re_enable = 0
 
 		remove_effect = {
 			clr_country_flag = scavenging_underway
 			random_list = {
-				50 = { #Found something
+				65 = { #Found something
 					country_event = scavenge_mission.1
 				}
-				30 = { #Loss
+				35 = { #Loss
 					country_event = scavenge_mission.2
-				}
-				20 = { #Disappear
-					country_event = scavenge_mission.3
 				}
 			}
 		}
