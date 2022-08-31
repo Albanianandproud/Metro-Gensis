@@ -18,7 +18,7 @@ default_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 25
+		value = 45
 	}
 	ai_strategy = {
 		type = role_ratio
@@ -28,7 +28,7 @@ default_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 25
+		value = 10
 	}
 }
 
@@ -101,6 +101,29 @@ ai_army_building_puppet = {
 		value = 200
 	}
 }
+
+reserve_manpower_25 = {
+	enable = {
+		AND = {
+			has_manpower < 25
+			num_divisions > 5
+			ai_wants_divisions > 5
+		}
+	}
+	abort = {
+		OR = {
+			has_manpower > 24
+			num_divisions < 5
+			ai_wants_divisions > 5
+		}
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -200
+	}
+}
+
 
 default_pp_spend_amount = {
 	enable = {
@@ -180,7 +203,7 @@ force_build_late_game = {
 		}
 	}
 	enable = {
-		date < 2031.1.1
+		date < 2030.1.1
 	}
 	abort_when_not_enabled = yes
 

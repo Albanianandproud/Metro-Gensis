@@ -359,9 +359,12 @@ country_event = { # N E P Draft
 
     is_triggered_only = yes
 
+    immediate = {
+        load_focus_tree = { tree = red_line_3 }
+    }
+
     option = {
         name = nf_RED.10.a
-        hidden_effect = { country_event = { id = nf_RED.21 days = 1 random_days = 2 } }
     }
 }
 
@@ -709,7 +712,7 @@ country_event = { # New Economic Policy
 
     option = {
         name = nf_RED.21.a
-        ## gp straight to 2030 tree <-- BORING
+        
     }
 }
 
@@ -1002,10 +1005,7 @@ country_event = { ## loads 2030 tree
     picture = "GFX_event (65)"
 
     trigger = { 
-        OR = {
-            RED_crisis_remove = yes
-            date > 2030.1.1
-        } 
+        RED_crisis_remove = yes
     }
 
     fire_only_once = yes
@@ -1019,7 +1019,7 @@ country_event = { ## loads 2030 tree
     option = {
         name = nf_RED.30.a
         ai_chance = {
-            base = 2.5
+            base = 2500
         }
     }
 }
@@ -1639,10 +1639,11 @@ country_event = { # Change ideology chance before 2033 #
     picture = "GFX_event (123)"
 
     trigger = { 
-        date < 2033.1.1 
         AND = {
             count_triggers = {
-                amount = 2
+                amount = 4
+                original_tag = RED
+                date < 2033.1.1 
                 oligarch > party_popularity@council
                 dictatorial > party_popularity@council
                 has_completed_focus = RED_2030
