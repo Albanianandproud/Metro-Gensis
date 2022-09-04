@@ -1,0 +1,104 @@
+RED_fuck_bolsheviks = {
+	allowed = { original_tag = RCH }
+	enable = {
+		country_exists = RED
+	} 
+	abort = {
+		NOT = { country_exists = RED }
+	}
+
+	ai_strategy = {
+		type = antagonize
+		id = "RED"			
+		value = 75
+	}
+	ai_strategy = {
+		type = contain
+		id = "RED"
+		value = 200
+	}	
+}
+RCH_kill_DIM = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = RCH_expansion
+		}
+		country_exists = DIM
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = DIM }
+
+			AND = {
+				RCH = { has_war_with = DIM}
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "DIM"
+		value = 100
+	}
+}
+RCH_kill_ULI = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion2
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = RCH_expansion2
+		}
+		country_exists = ULI
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = ULI }
+
+			AND = {
+				RCH = { has_war_with = ULI }
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "ULI"
+		value = 100
+	}
+}
+RCH_kill_PLS = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion_pls_annex
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = RCH_expansion_pls_annex
+		}
+		country_exists = PLS
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = PLS }
+
+			AND = {
+				RCH = { has_war_with = PLS }
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "PLS"
+		value = 100
+	}
+}

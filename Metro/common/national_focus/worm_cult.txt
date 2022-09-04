@@ -10,7 +10,7 @@ focus_tree = {
 			tag = GWC
 		}
 	}
-	continuous_focus_position = { x = 1820 y = 1100}
+	continuous_focus_position = { x = 2020 y = 1100}
 	default = no
 
 	focus = {
@@ -59,7 +59,7 @@ focus_tree = {
 	focus = {
 		id = GWC_left_path_1
 		icon = GFX_GWC_warfare_2
-		x = -3
+		x = -5
 		y = 1
 		cost = 5.8
 
@@ -156,7 +156,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_mark_our_territory
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_marking_our_territory
 		x = -1
 		y = 1
 		cost = 5.8
@@ -204,7 +204,7 @@ focus_tree = {
 	focus = {
 		id = GWC_right_path_1
 		icon = GFX_GWC_steal_technology_from_north
-		x = 3
+		x = 5
 		y = 1
 		cost = 5.8
 
@@ -282,7 +282,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_a_culture_of_blood
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_a_culture_of_blood
 		x = 2
 		y = 1
 		cost = 5.8
@@ -362,6 +362,154 @@ focus_tree = {
 	}
 
 	focus = {
+		id = GWC_call_on_me
+		icon = GFX_GWC_battle_for_kuntsevskaya
+		x = 0
+		y = 2
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_2
+		}
+
+		available = {
+			AND = {
+				has_completed_focus = GWC_worm_skulks
+				has_war_support > 0.49
+			}
+		}
+
+		relative_position_id = GWC_2
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = GWC_flesh_granaries
+		icon = GFX_GWC_brain
+		x = -2
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_call_on_me
+		}
+
+		relative_position_id = GWC_call_on_me
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_padded_armor
+		icon = GFX_GWC_skull
+		x = 2
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_call_on_me
+		}
+
+		relative_position_id = GWC_call_on_me
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing
+				bonus = 1
+				uses = 3
+				category = clothing_kits
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_secret_tunnels
+		icon = GFX_GWC_underground_military_tunnels
+		x = 0
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_call_on_me
+		}
+
+		relative_position_id = GWC_call_on_me
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
 		id = GWC_worm_skulks
 		icon = GFX_GWC_skull_2
 		x = 0
@@ -407,727 +555,9 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GWC_KRY
-		icon = GFX_fist
-		x = 1
-		y = 1
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_worm_skulks
-		}
-
-		relative_position_id = GWC_worm_skulks
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			KRY = {
-				add_timed_idea = {
-					idea = GWC_bump_in_the_night
-					days = 150
-				}
-				country_event = nf_GWC.1
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_adrenaline_rush
-		icon = GFX_GWC_lightning_quick_movements
-		x = 1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_KRY
-		}
-
-		relative_position_id = GWC_KRY
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_war_support = 0.1
-		}
-	}
-
-	focus = {
-		id = GWC_head_on_stake
-		icon = GFX_GWC_occupy_krylatskoe
-		x = -1
-		y = 2
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_adrenaline_rush
-		}
-
-		relative_position_id = GWC_adrenaline_rush
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = KRY }
-				has_war_with = KRY
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = KRY
-		}
-
-        will_lead_to_war_with = KRY
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = KRY
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = GWC_head_trophy
-		icon = GFX_GWC_head_trophy
-		x = 2
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_head_on_stake
-		}
-
-		mutually_exclusive = {
-			focus = GWC_a_great_feast
-		}
-
-		relative_position_id = GWC_head_on_stake
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = KRY }
-			257 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			add_political_power = 100
-			add_war_support = 0.05
-		}
-	}
-
-	focus = {
-		id = GWC_a_great_feast
-		icon = GFX_GWC_feast
-		x = 0
-		y = 1
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_head_on_stake
-		}
-
-		mutually_exclusive = {
-			focus = GWC_head_trophy
-		}
-
-		relative_position_id = GWC_head_on_stake
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = KRY }
-			257 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			257 = {
-                add_manpower = -75
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_padded_armor
-		icon = GFX_GWC_skull
-		x = -1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_head_trophy
-			focus = GWC_a_great_feast
-		}
-
-		relative_position_id = GWC_head_trophy
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = KRY }
-			257 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = clothing
-				bonus = 1
-				uses = 3
-				category = clothing_kits
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_secret_tunnels
-		icon = GFX_GWC_underground_military_tunnels
-		x = 1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_padded_armor
-		}
-
-		relative_position_id = GWC_padded_armor
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_HMS
-		icon = GFX_fist
-		x = -1
-		y = 1
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_worm_skulks
-		}
-
-		relative_position_id = GWC_worm_skulks
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			HMS = {
-				add_timed_idea = {
-					idea = GWC_bump_in_the_night
-					days = 150
-				}
-				country_event = nf_GWC.1
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_rend_for_the_worm
-		icon = GFX_GWC_rend_for_worm
-		x = -1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_HMS
-		}
-
-		relative_position_id = GWC_HMS
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = GWC_rend_for_worm
-		}
-	}
-
-	focus = {
-		id = GWC_mutant_menace
-		icon = GFX_GWC_re_decorate_station
-		x = 1
-		y = 2
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_rend_for_the_worm
-		}
-
-		relative_position_id = GWC_rend_for_the_worm
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = HMS }
-				has_war_with = HMS
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = HMS
-		}
-
-        will_lead_to_war_with = HMS
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = HMS
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = GWC_HMS_4
-		icon = GFX_GWC_mutants_no_more
-		x = -2
-		y = 1
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_mutant_menace
-		}
-
-		mutually_exclusive = {
-			focus = GWC_spoils
-		}
-
-		relative_position_id = GWC_mutant_menace
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = HMS }
-			377 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			377 = {
-                add_manpower = -75
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_spoils
-		icon = GFX_GWC_finishing_off_the_scraps
-		x = 0
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_mutant_menace
-		}
-
-		mutually_exclusive = {
-			focus = GWC_HMS_4
-		}
-
-		relative_position_id = GWC_mutant_menace
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = HMS }
-			377 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 2
-				uses = 3
-				category = recycling
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_dismantle_arms
-		icon = GFX_GWC_skull
-		x = 1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_HMS_4
-			focus = GWC_spoils
-		}
-
-		relative_position_id = GWC_HMS_4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			NOT = { country_exists = HMS }
-			377 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = 20
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_flesh_granaries
-		icon = GFX_GWC_brain
-		x = -1
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_dismantle_arms
-		}
-
-		relative_position_id = GWC_dismantle_arms
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = GWC_call_on_me
-		icon = GFX_GWC_battle_for_kuntsevskaya
-		x = 0
-		y = 2
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_worm_skulks
-		}
-
-		relative_position_id = GWC_worm_skulks
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = all_adults
-			add_war_support = 0.1
-		}
-	}
-
-	focus = {
-		id = GWC_STG
-		icon = GFX_GWC_expand
-		x = 0
-		y = 3
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_rend_for_the_worm
-			focus = GWC_adrenaline_rush
-		}
-
-		relative_position_id = GWC_worm_skulks
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = STG }
-				has_war_with = STG
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = STG
-		}
-
-        will_lead_to_war_with = STG
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = STG
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = GWC_all_bow_to_worm
-		icon = GFX_GWC_skull
-		x = 0
-		y = 7
-		cost = 6.4
-
-		prerequisite = {
-			focus = GWC_dismantle_arms
-		}
-		prerequisite = {
-			focus = GWC_padded_armor
-		}
-		prerequisite = {
-			focus = GWC_STG
-		}
-
-		relative_position_id = GWC_worm_skulks
-
-		available = {
-			305 = {
-                is_owned_by = ROOT
-			}
-			377 = {
-                is_owned_by = ROOT
-			}
-			257 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			305 = { add_core_of = ROOT }
-			377 = { add_core_of = ROOT }
-			257 = { add_core_of = ROOT }
-		}
-	}
-
-	focus = {
-		id = GWC_EUR
-		icon = GFX_fist
-		x = 3
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_all_bow_to_worm
-		}
-
-		relative_position_id = GWC_all_bow_to_worm
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = EUR }
-				has_war_with = EUR
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = EUR
-		}
-
-        will_lead_to_war_with = EUR
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = EUR
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = GWC_ARB
-		icon = GFX_fist
-		x = 0
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_all_bow_to_worm
-		}
-
-		relative_position_id = GWC_all_bow_to_worm
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = ARB }
-				has_war_with = ARB
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = ARB
-		}
-
-        will_lead_to_war_with = ARB
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = ARB
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = GWC_MIT
-		icon = GFX_fist
-		x = -3
-		y = 1
-		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_all_bow_to_worm
-		}
-
-		relative_position_id = GWC_all_bow_to_worm
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = MIT }
-				has_war_with = MIT
-			}
-		}
-
-		available = {
-			has_war = no
-			is_neighbor_of = MIT
-		}
-
-        will_lead_to_war_with = MIT
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = MIT
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
 		id = GWC_war_devolved
 		icon = GFX_GWC_warfare_devolved
-		x = -5
+		x = -7
 		y = 1
 		cost = 5.8
 
@@ -1169,7 +599,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience = 20
+			army_experience = 25
 		}
 	}
 
@@ -1184,10 +614,6 @@ focus_tree = {
 			focus = GWC_primal_fury
 		}
 
-		available = {
-			has_army_experience > 19
-		}
-
 		relative_position_id = GWC_primal_fury
 
 		ai_will_do = {
@@ -1195,7 +621,6 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience = -20
 			add_ideas = GWC_antediluvian_armaments
 		}
 	}
@@ -1233,10 +658,6 @@ focus_tree = {
 			focus = GWC_primal_fury
 		}
 
-		available = {
-			has_army_experience > 19
-		}
-
 		relative_position_id = GWC_primal_fury
 
 		ai_will_do = {
@@ -1244,7 +665,6 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience = -20
 			add_ideas = GWC_bone_armor
 		}
 	}
@@ -1304,7 +724,7 @@ focus_tree = {
 	focus = {
 		id = GWC_irradiated_tunnels
 		icon = GFX_RCH_tunnel_excavation
-		x = 5
+		x = 6
 		y = 1
 		cost = 5.8
 
@@ -1333,6 +753,24 @@ focus_tree = {
 			}
 		}
 
+		bypass = {
+			153 = {
+				is_owned_by = ROOT
+			}
+			392 = {
+				is_owned_by = ROOT
+			}
+			423 = {
+				is_owned_by = ROOT
+			}
+			164 = {
+				is_owned_by = ROOT
+			}
+			256 = {
+				is_owned_by = ROOT
+			}	
+		}
+
 		relative_position_id = GWC_worm_skulks
 
 		ai_will_do = {
@@ -1350,7 +788,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_salvage_it_all
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_defense_of_domain_3
 		x = 1
 		y = 1
 		cost = 5.8
@@ -1378,7 +816,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_stake_a_claim
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_stake_a_claim
 		x = -1
 		y = 1
 		cost = 5.8
@@ -1530,7 +968,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_wanderlust
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_wanderlust
 		x = 2
 		y = 1
 		cost = 5.8
@@ -1630,8 +1068,8 @@ focus_tree = {
 
 	focus = {
 		id = GWC_military_branch
-		icon = GFX_GWC_skull
-		x = -7
+		icon = GFX_GWC_military_path
+		x = -9
 		y = 1
 		cost = 3.1
 
@@ -1660,17 +1098,12 @@ focus_tree = {
 			focus = GWC_military_branch
 		}
 
-		available = {
-			has_army_experience > 4
-		}
-
 		relative_position_id = GWC_military_branch
 
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			army_experience = -5
 			add_ideas = GWC_weapon_smithing_1
 		}
 	}
@@ -1686,9 +1119,6 @@ focus_tree = {
 			focus = GWC_war_crafts_1
 		}
 
-		available = {
-			has_army_experience > 9
-		}
 
 		relative_position_id = GWC_war_crafts_1
 
@@ -1696,7 +1126,6 @@ focus_tree = {
 			factor = 100
 		}
 		completion_reward = {
-			army_experience = -10
 			GWC_war_craft_upgrade = yes
 		}
 	}
@@ -1724,7 +1153,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_a_culture_of_conflict_2
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_culture_of_conflict
 		x = 0
 		y = 1
 		cost = 3.2
@@ -1770,17 +1199,12 @@ focus_tree = {
 			focus = GWC_primal_fury
 		}
 
-		available = {
-			has_army_experience > 24
-		}
-
 		relative_position_id = GWC_war_crafts_2
 
 		ai_will_do = {
 			factor = 100
 		}
 		completion_reward = {
-			army_experience = -25
 			GWC_war_craft_upgrade = yes
 		}
 	}
@@ -1865,7 +1289,7 @@ focus_tree = {
 	focus = {
 		id = GWC_heart_of_darkness
 		icon = GFX_GWC_skull
-		x = 11
+		x = 12
 		y = 1
 		cost = 4
 
@@ -2048,7 +1472,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_ind_5
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_defense_of_domain_4
 		x = 1
 		y = 1
 		cost = 5.8
@@ -2261,7 +1685,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_ind_9
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_defense_of_domain_2
 		x = 1
 		y = 1
 		cost = 5.8
@@ -2348,7 +1772,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_into_the_earth
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_into_the_earth
 		x = -3
 		y = 1
 		cost = 5.8
@@ -2411,7 +1835,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_worm_punishes
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_worm_punishes
 		x = 1
 		y = 1
 		cost = 5.8
@@ -2513,7 +1937,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_heart_of_darkness2
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_defense_of_domain
 		x = -1
 		y = 1
 		cost = 5.8
@@ -2544,6 +1968,650 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+		}
+	}
+
+	### HMS ### 
+	focus = {
+		id = GWC_HMS
+		icon = GFX_fist
+		x = -1
+		y = 1
+		cost = 6.4
+
+		available = {
+			has_completed_focus = GWC_worm_skulks
+			has_war = no
+			is_neighbor_of = HMS
+			OR = {
+				threat > 0.19
+				date > 2030.1.1
+			}
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			HMS = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_rend_for_the_worm
+		icon = GFX_GWC_rend_for_worm
+		x = -1
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_HMS
+		}
+
+		relative_position_id = GWC_HMS
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = GWC_rend_for_worm
+		}
+	}
+
+	focus = {
+		id = GWC_mutant_menace
+		icon = GFX_GWC_re_decorate_station
+		x = 1
+		y = 1
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_rend_for_the_worm
+		}
+
+		relative_position_id = GWC_rend_for_the_worm
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = HMS }
+				has_war_with = HMS
+			}
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = HMS
+		}
+
+        will_lead_to_war_with = HMS
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = HMS
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	focus = {
+		id = GWC_HMS_4
+		icon = GFX_GWC_mutants_no_more
+		x = -3
+		y = 1
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_mutant_menace
+		}
+
+		mutually_exclusive = {
+			focus = GWC_spoils
+		}
+
+		relative_position_id = GWC_mutant_menace
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			NOT = { country_exists = HMS }
+			377 = {
+                is_owned_by = ROOT
+			}
+		}
+
+		completion_reward = {
+			377 = {
+                add_manpower = -50
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_spoils
+		icon = GFX_GWC_finishing_off_the_scraps
+		x = -1
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_mutant_menace
+		}
+
+		mutually_exclusive = {
+			focus = GWC_HMS_4
+		}
+
+		relative_position_id = GWC_mutant_menace
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_completed_focus = GWC_worm_skulks
+			NOT = { country_exists = HMS }
+			377 = {
+                is_owned_by = ROOT
+			}
+		}
+
+		completion_reward = {
+			army_experience = 25
+		}
+	}
+
+	### HMS ### 
+	focus = {
+		id = GWC_STG
+		icon = GFX_fist
+		x = 1
+		y = 1
+		cost = 6.4
+
+		available = {
+			has_war = no
+			is_neighbor_of = STG
+			OR = {
+				threat > 0.19
+				date > 2030.1.1
+			}
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			KRY = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_adrenaline_rush
+		icon = GFX_GWC_lightning_quick_movements
+		x = 1
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_STG
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = STG
+		}
+
+		relative_position_id = GWC_STG
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_war_support = 0.10
+			add_command_power = 20
+		}
+	}
+
+	focus = {
+		id = GWC_cull_the_mass
+		icon = GFX_plague
+		x = -1
+		y = 1
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_adrenaline_rush
+		}
+
+		relative_position_id = GWC_adrenaline_rush
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = STG }
+				has_war_with = STG
+			}
+		}
+
+        will_lead_to_war_with = STG
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = STG
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	focus = {
+		id = GWC_head_trophy
+		icon = GFX_GWC_head_trophy
+		x = 3
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_cull_the_mass
+		}
+
+		mutually_exclusive = {
+			focus = GWC_a_great_feast
+		}
+
+		relative_position_id = GWC_cull_the_mass
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			NOT = { country_exists = STG }
+			305 = {
+                is_owned_by = ROOT
+			}
+		}
+
+		completion_reward = {
+			army_experience = 20
+		}
+	}
+
+	focus = {
+		id = GWC_a_great_feast
+		icon = GFX_GWC_feast
+		x = 1
+		y = 1
+		cost = 6.4
+
+		prerequisite = {
+			focus =GWC_cull_the_mass
+		}
+
+		mutually_exclusive = {
+			focus = GWC_head_trophy
+		}
+
+		relative_position_id = GWC_cull_the_mass
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			NOT = { country_exists = STG }
+			305 = {
+                is_owned_by = ROOT
+			}
+		}
+
+		completion_reward = {
+			305 = {
+                add_manpower = -50
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_KRY
+		icon = GFX_GWC_expand
+		x = 0
+		y = 2
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_HMS
+			focus = GWC_STG
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = KRY
+			OR = {
+				threat > 0.19
+				date > 2030.1.1
+			}
+		}
+
+		completion_reward = {
+			KRY = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_head_on_stake
+		icon = GFX_GWC_occupy_krylatskoe
+		x = 0
+		y = 2
+		cost = 6.4
+
+		prerequisite = {
+			focus = GWC_KRY
+		}
+
+		relative_position_id = GWC_KRY
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = KRY }
+				has_war_with = KRY
+			}
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = KRY
+		}
+
+        will_lead_to_war_with = KRY
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = KRY
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	### ARB ### 
+	focus = {
+		id = GWC_ARB
+		icon = GFX_fist
+		x = -3
+		y = 5
+		cost = 6.4
+
+		available = {
+			has_completed_focus = GWC_worm_skulks
+			has_war = no
+			is_neighbor_of = ARB
+			OR = {
+				threat > 0.19
+				date > 2031.1.1
+			}
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			ARB = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_ARB_2
+		icon = GFX_fist
+		x = 1
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_ARB
+		}
+
+		relative_position_id = GWC_ARB
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = ARB }
+				has_war_with = ARB
+			}
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = ARB
+		}
+
+        will_lead_to_war_with = ARB
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = ARB
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	### EUR ### 
+	focus = {
+		id = GWC_EUR
+		icon = GFX_fist
+		x = 0
+		y = 5
+		cost = 6.4
+
+		available = {
+			has_completed_focus = GWC_worm_skulks
+			has_war = no
+			is_neighbor_of = EUR
+			OR = {
+				threat > 0.19
+				date > 2031.1.1
+			}
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			EUR = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_EUR_2
+		icon = GFX_fist
+		x = 0
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_EUR
+		}
+
+		relative_position_id = GWC_EUR
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = EUR }
+				has_war_with = EUR
+			}
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = EUR
+		}
+
+        will_lead_to_war_with = EUR
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = EUR
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	### MIT ### 
+	focus = {
+		id = GWC_MIT
+		icon = GFX_fist
+		x = 3
+		y = 5
+		cost = 6.4
+
+		available = {
+			has_completed_focus = GWC_worm_skulks
+			has_war = no
+			is_neighbor_of = MIT
+			OR = {
+				threat > 0.19
+				date > 2031.1.1
+			}
+		}
+
+		relative_position_id = GWC_worm_skulks
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			MIT = {
+				add_timed_idea = {
+					idea = GWC_bump_in_the_night
+					days = 150
+				}
+				country_event = nf_GWC.1
+			}
+		}
+	}
+
+	focus = {
+		id = GWC_MIT_2
+		icon = GFX_fist
+		x = -1
+		y = 1
+		cost = 5.8
+
+		prerequisite = {
+			focus = GWC_MIT
+		}
+
+		relative_position_id = GWC_MIT
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = MIT }
+				has_war_with = MIT
+			}
+		}
+
+		available = {
+			has_war = no
+			is_neighbor_of = MIT
+		}
+
+        will_lead_to_war_with = MIT
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = MIT
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
 	}
 }

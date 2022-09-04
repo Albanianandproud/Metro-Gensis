@@ -6,17 +6,17 @@ reclaim_metro = {
 
  	reclaim_this_state = {
         icon = decision_generic_military
-		custom_cost_text = command_power_25
+		custom_cost_text = command_power_20
 		custom_cost_trigger = {
-			command_power > 24.9
+			command_power > 19.9
 		}
-		days_remove = 45
+		days_remove = 60
 		days_re_enable = 0
 		on_map_mode = map_only
 		state_target = yes
 		fixed_random_seed = no
 
-        ai_will_do = {
+        	ai_will_do = {
 			factor = 10
 			modifier = {
 				factor = -200
@@ -36,7 +36,7 @@ reclaim_metro = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
 					NOT = {
-						region = 2
+						region = 1
 					}
                 }
             }
@@ -78,16 +78,17 @@ reclaim_metro = {
 		    ###    type = supplies_equipment
 		    ###    amount = -2
 		    ### }
+
 			set_country_flag = reclaimation_underway
 			FROM = {
 				set_state_flag = state_being_colonised
 			}
-			add_command_power = -25
+			add_command_power = -20
 		}
 
 		remove_effect = {
 		    random_list = {
-		        60 = {
+		        80 = {
 					ROOT = {
 						set_variable = {
 							var = state_colonised_id
@@ -108,13 +109,13 @@ reclaim_metro = {
 						}
 					}
 		        }
-		        20 = { #Overwhelmed Mutants
+		        15 = { #Overwhelmed Mutants
 		            country_event = reclaimation_event.mutants
 		            FROM = {
 						clr_state_flag = state_being_colonised
 					}
 		        }
-		        20 = { #Expedition lost
+		        5 = { #Expedition lost
 		            country_event = reclaimation_event.lost
 		        	FROM = {
 						clr_state_flag = state_being_colonised
@@ -125,7 +126,8 @@ reclaim_metro = {
 		}
     }
 
-    GWC_reclaim_this_state = { ### Will always succeed. But takes far longer ## 
+    GWC_reclaim_this_state = { 
+    	### Will always succeed. But takes far longer ## 
         icon = decision_generic_military
 
 		custom_cost_text = command_power_25
@@ -160,7 +162,7 @@ reclaim_metro = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
 					NOT = {
-						region = 2
+						region = 1
 					}
                 }
             }

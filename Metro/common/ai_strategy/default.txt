@@ -13,32 +13,32 @@ default_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 15
+		value = 0
 	}
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 50
+		value = 45
 	}
 	ai_strategy = {
 		type = role_ratio
-		id = special_forces
-		value = 15
+		id = marines
+		value = 5
 	}
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 50
+		value = 10
 	}
 }
 
 default_AI_self_preservation = {
-	enable = { surrender_progress > 0.40 }
-	abort = { surrender_progress < 0.55 }
+	enable = { surrender_progress > 0.01 }
+	abort = { surrender_progress < 0.09 }
 	ai_strategy = { 
 		type = build_army 
 		id = infantry 
-		value = 150 
+		value = 300
 	}
 }
 
@@ -98,9 +98,32 @@ ai_army_building_puppet = {
 	ai_strategy = {
 		type = build_army
 		id = infantry
-		value = 50
+		value = 200
 	}
 }
+
+reserve_manpower_25 = {
+	enable = {
+		AND = {
+			has_manpower < 25
+			num_divisions > 5
+			ai_wants_divisions > 5
+		}
+	}
+	abort = {
+		OR = {
+			has_manpower > 24
+			num_divisions < 5
+			ai_wants_divisions > 5
+		}
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -200
+	}
+}
+
 
 default_pp_spend_amount = {
 	enable = {
@@ -116,7 +139,7 @@ default_pp_spend_amount = {
 	ai_strategy = {
 		type = pp_spend_amount
 		id = decision
-		value = 50
+		value = 100
 	}
 }
 
@@ -131,13 +154,13 @@ default_armored_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 25
+		value = 50
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 75
+		value = 25
 	}
 }
 
@@ -152,22 +175,22 @@ highered_armored_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 45
+		value = 80
 	}
 }
 
 default_stockpile_management = {
 	enable = {
-		num_divisions > 19
+		num_divisions > 11
 	}
 
 	abort = {
-		num_divisions < 14
+		num_divisions < 9
 	}
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 0.25 # double base stockpile #from 25 to 35
+		value = 0.15 # double base stockpile #from 25 to 35
 	}
 }
 
@@ -180,7 +203,7 @@ force_build_late_game = {
 		}
 	}
 	enable = {
-		date < 2032.1.1
+		date < 2030.1.1
 	}
 	abort_when_not_enabled = yes
 
@@ -219,7 +242,7 @@ stockpile_more_late_game = {
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 0.5 ## Stuffs 'bout to go down
+		value = 0.25 ## Stuffs 'bout to go down
 	}
 }
 
