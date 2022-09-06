@@ -1,7 +1,9 @@
 ### RED Line ###
-RED_prioritise_flamethrowers = {
+
+
+RED_default_unit_production = {
 	allowed = {
-		original_tag = RED
+		original_tag = SOV
 	}
 	enable = {
 		always = yes
@@ -12,39 +14,67 @@ RED_prioritise_flamethrowers = {
 
 	ai_strategy = {
 		type = role_ratio
-		id = infantry
-		value = 35
+		id = marines
+		value = 15
 	}
-
-	#ai_strategy = {
-	#	type = role_ratio
-	#	id = special_forces
-	#	value = 20
-	#}
 
 	ai_strategy = {
 		type = role_ratio
-		id = marines
-		value = 20
-	}
-	ai_strategy = {
-		type = template_prio
-		id = flamethrower_support 
+		id = infantry
 		value = 50
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
-		id = armor
-		value = 5
+		id = infantry
+		value = 15
+	}
+}
+
+RED_late_game_production = {
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		date > 2032.1.1
 	}
 
 	ai_strategy = {
-		type = equipment_production_min_factories
-		id = support
-		value = 30
+		type = role_ratio
+		id = marines
+		value = 40
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 25
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = rail_panzer
+		value = 20
 	}
 }
+
+RED_prioritise_flamethrower_equipment = {
+	allowed = {
+		original_tag = RED
+	}
+	enable = {
+		always = yes
+	}
+	abort = {
+		always = no
+	}
+	ai_strategy = {
+		type = template_prio
+		id = flamethrower_support 
+		value = 250
+	}
+}
+
 RED_hate_emerald_city = {
 	allowed = {
 		original_tag = RED
@@ -62,13 +92,13 @@ RED_hate_emerald_city = {
 			}
 		}
 	}
-
 	ai_strategy = {
 		type = antagonize
 		id = "MSU"
 		value = 200
 	}
 }
+
 RED_great_leap_forward = {
 	allowed = {
 		original_tag = RED
@@ -81,7 +111,7 @@ RED_great_leap_forward = {
 	ai_strategy = {
 		type = building_target
 		id = industrial_complex
-		value = 50
+		value = 200
 	}
 
 	ai_strategy = {
@@ -92,15 +122,16 @@ RED_great_leap_forward = {
 	
 	ai_strategy = {
 		type = force_build_armies
-		value = 50
+		value = 150
 	}
 }
+
 RED_mass_industrialisation = {
 	allowed = {
 		original_tag = RED
 	}
 	enable = {
-		date > 2031.1.2
+		date > 2031.2.1
 	}
 	abort = {
 		always = no
@@ -123,10 +154,11 @@ RED_mass_industrialisation = {
 		value = 300
 	}
 }
+
 RED_its_now_or_never = {
 	allowed = { original_tag = RED }
 	enable = {
-		date > 2031.1.2
+		date > 2032.1.2
 	}
 	ai_strategy = {
 		type = force_build_armies
@@ -138,6 +170,7 @@ RED_its_now_or_never = {
 		value = -0.5
 	}
 }
+
 RED_guns_protect_our_nation = {
 	allowed = { original_tag = RED }
 	enable = {
@@ -149,6 +182,7 @@ RED_guns_protect_our_nation = {
 		value = 60
 	}
 }
+
 RED_drown_all_in_our_manpower = {
 	allowed = { original_tag = RED }
 	enable = {
@@ -157,17 +191,18 @@ RED_drown_all_in_our_manpower = {
 	
 	ai_strategy = {
         type = force_build_armies
-        value = 1000
+        value = 250
     }
 }
+
 RED_lets_be_friends_with_hanza_for_now = {
 	allowed = { original_tag = RED }
 	enable = {	
-		NOT = { has_war_with = RED }
+		NOT = { has_war_with = HNZ }
 	}
 	
 	abort = {
-		date > 2031.1.1
+		date > 2032.1.1
 	}
 
 	ai_strategy = {
@@ -176,6 +211,7 @@ RED_lets_be_friends_with_hanza_for_now = {
 		value = -150
 	}	
 }
+
 RED_screw_hanza_yolo = {
 	allowed = { original_tag = RED }
 	enable = {	
@@ -204,7 +240,7 @@ RED_fuck_nazis = {
 	ai_strategy = {
 		type = antagonize
 		id = "RCH"			
-		value = 75
+		value = 200
 	}
 	ai_strategy = {
 		type = contain
@@ -212,7 +248,8 @@ RED_fuck_nazis = {
 		value = 200
 	}	
 }
-red_line_is_very_very_important = {
+
+sokolnicheskaya_is_very_very_important = {
 	allowed = {
 		original_tag = RED
 	}
@@ -228,6 +265,7 @@ red_line_is_very_very_important = {
 		value = 100
 	}
 }
+
 RED_kill_DRY_bandits = {
 	enable = {
 		focus_progress = {
@@ -259,6 +297,7 @@ RED_kill_DRY_bandits = {
 		value = 100
 	}
 }
+
 RED_lets_ignore_PLS = {
 	enable = {
 		country_exists = PLS

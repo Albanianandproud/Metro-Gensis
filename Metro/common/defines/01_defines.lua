@@ -51,6 +51,10 @@ NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
 NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 5
 NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
 
+
+NDefines.NProduction.RAILWAY_GUN_MAX_MIL_FACTORIES_PER_LINE = 10
+NDefines.NProduction.RAILWAY_GUN_REPAIR_SPEED = 8.0
+
 ---Military Stuff---
 NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.2
 NDefines.NMilitary.INFRA_ORG_IMPACT = 0.6
@@ -83,14 +87,15 @@ NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance t
 
 NDefines.NResistance.RESISTANCE_POP_LOW_CUTOFF = 5
 NDefines.NResistance.RESISTANCE_POP_VERY_LOW_CUTOFF = 1
-
+	
 ---Division Designer
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_WIDTH = 5			
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_HEIGHT = 1
 NDefines.NMilitary.MAX_DIVISION_SUPPORT_WIDTH = 1
 NDefines.NMilitary.MAX_DIVISION_SUPPORT_HEIGHT = 4
 
-NDefines.NMilitary.ENCIRCLED_PENALTY = -0.2		--- Base is 0.3
+
+	NDefines.NMilitary.ENCIRCLED_PENALTY = -0.3
 
 	NDefines.NMilitary.OUT_OF_FUEL_EQUIPMENT_MULT = 0.1				-- ratio of the stats that you get from equipments that uses fuel and you lack it
 	NDefines.NMilitary.OUT_OF_FUEL_SPEED_MULT = 0.1					-- speed mult that armies get when out of fuel
@@ -99,7 +104,9 @@ NDefines.NMilitary.ENCIRCLED_PENALTY = -0.2		--- Base is 0.3
 
 ---Railway Guns---
 
-NDefines.NRailwayGun.RAILWAY_GUN_RANGE = 10		--- Range in Pixels. Default is 30. Pending Change.
+NDefines.NRailwayGunRAILWAY_GUN_RANGE = 20
+NDefines.NRailwayGunOUT_OF_SUPPLY_SPEED = -0.99	
+NDefines.NRailwayGunBASE_CAPTURE_CHANCE = 0.5			
 
 ---NAI Stuff---
 NDefines.NAI.ESTIMATED_CONVOYS_PER_DIVISION = 1		---Base is 6. Pending Change.
@@ -107,11 +114,11 @@ NDefines.NAI.ESTIMATED_CONVOYS_PER_DIVISION = 1		---Base is 6. Pending Change.
 NDefines.NAI.ORG_UNIT_STRONG = 0.65
 NDefines.NAI.STR_UNIT_STRONG = 0.75
 
-NDefines.NAI.ORG_UNIT_WEAK = 0.25
-NDefines.NAI.STR_UNIT_WEAK = 0.35
+NDefines.NAI.ORG_UNIT_WEAK = 0.3
+NDefines.NAI.STR_UNIT_WEAK = 0.3
 
-NDefines.NAI.ORG_UNIT_NORMAL = 0.45
-NDefines.NAI.STR_UNIT_NORMAL = 0.55
+NDefines.NAI.ORG_UNIT_NORMAL = 0.5
+NDefines.NAI.STR_UNIT_NORMAL = 0.5
 
 NDefines.NAI.WANTED_UNITS_INDUSTRY_FACTORY = 2
 NDefines.NAI.WANTED_UNITS_MILFACTORY_MIN = 1
@@ -128,20 +135,20 @@ NDefines.NSupply.MAX_RAILWAY_LEVEL = 1		--- Base is 5. Pending Change.
 NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.5
 NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.5
 
-NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.1		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
+NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.08		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
 
-NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.65	--- Base is 0.3
+NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.8--- Base is 0.3
 
 NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 1
 
 NDefines.NSupply.INFRA_TO_SUPPLY = 1.15
-NDefines.NSupply.VP_TO_SUPPLY_BASE = 1
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.25
-NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.6
+NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.05
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.2
+NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.75
 
 NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 10.0
 
-NDefines.NSupply.SUPPLY_HUB_FULL_MOTORIZATION_TRUCK_COST = 40.0
+NDefines.NSupply.SUPPLY_HUB_FULL_MOTORIZATION_TRUCK_COST = 35.0
 
 NDefines.NSupply.MIN_TRAIN_SUPPLY_FACTOR = 0.34
 

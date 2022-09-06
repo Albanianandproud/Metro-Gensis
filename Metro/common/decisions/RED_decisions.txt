@@ -380,6 +380,47 @@ RED_crisis_category = {
 		}
 	}
 
+	RED_sieze_arms = {
+		icon = GFX_HNZ_increase_industrial_shift
+
+		available = {
+			has_completed_focus = RED_rid_mutinies
+		}
+
+		visible = {
+			has_completed_focus = RED_rid_mutinies
+		}
+
+		cost = 25
+		days_remove = 14
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 2500
+		}
+
+		modifier = {
+			weekly_manpower = -10
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
 	RED_military_mutiny_rid_mutinies_2 = { # Needed. So players can only use decision Twice
 		icon = GFX_HNZ_increase_industrial_shift
 
@@ -419,7 +460,7 @@ RED_crisis_category = {
 			has_completed_focus = RED_deal_with_military_mutinies
 		}
 
-		custom_cost_text = command_power_20
+		custom_cost_text = command_power_15
 		custom_cost_trigger = {
 			command_power > 14.9
 		}
@@ -448,7 +489,7 @@ RED_crisis_category = {
 			}
 		}
 
-		custom_cost_text = command_power_20
+		custom_cost_text = command_power_15
 		custom_cost_trigger = {
 			command_power > 14.9
 		}
@@ -712,7 +753,7 @@ RED_frontline_decision_category =  {
 	RED_frontline_sabotage = {
 		cost = 20 ## MAKE IT COST command
 		days_remove = 2
-		days_re_enable = 35
+		days_re_enable = 75
 
 		available = {
 			has_completed_focus = RED_RCH_frontline_sabotage
@@ -777,22 +818,36 @@ RED_generic_decision_category = {
 	RED_lobby_the_politburo = {
 
 		available = {
-			NOT = {
-				hidden_trigger = {
-					has_idea = RED_mushroom_revolt
-					has_idea = RED_military_mutinies 
-					has_idea = RED_military_mutinies_2
-					has_idea = RED_military_mutinies_3
-					has_country_flag = RED_military_mutinies
-					has_country_flag = RED_mushroom_revolts
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
+						has_idea = RED_mushroom_revolt
+						has_idea = RED_military_mutinies 
+						has_idea = RED_military_mutinies_2
+						has_idea = RED_military_mutinies_3
+						has_country_flag = RED_military_mutinies
+						has_country_flag = RED_mushroom_revolts
+					}
 				}
 			}
-			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
 		}
 
-		cost = 40
+		cost = 10
 		days_remove = 7
-		days_re_enable = 0
+		days_re_enable = 180
+
+		visible = {
+			NOT = {
+				has_completed_focus = RED_lenins_descendant
+			}
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = RED_lenins_descendant
+			}
+		}
 
 		modifier = {
 			mobilization_laws_cost_factor = -0.35
@@ -808,17 +863,19 @@ RED_generic_decision_category = {
 	RED_lobby_the_politburo_andrey = {
 
 		available = {
-			NOT = {
-				hidden_trigger = {
-					has_idea = RED_mushroom_revolt
-					has_idea = RED_military_mutinies 
-					has_idea = RED_military_mutinies_2
-					has_idea = RED_military_mutinies_3
-					has_country_flag = RED_military_mutinies
-					has_country_flag = RED_mushroom_revolts
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
+						has_idea = RED_mushroom_revolt
+						has_idea = RED_military_mutinies 
+						has_idea = RED_military_mutinies_2
+						has_idea = RED_military_mutinies_3
+						has_country_flag = RED_military_mutinies
+						has_country_flag = RED_mushroom_revolts
+					}
 				}
 			}
-			custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
 		}
 
 		cost = 60
@@ -847,10 +904,10 @@ RED_generic_decision_category = {
 	RED_economic_rejuvination = {
 
 		available = {
-			NOT = {
-				custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
-				hidden_trigger = {
-					OR = {
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
 						has_idea = RED_mushroom_revolt
 						has_idea = RED_military_mutinies 
 						has_idea = RED_military_mutinies_2
@@ -861,7 +918,6 @@ RED_generic_decision_category = {
 				}
 			}
 		}
-
 
 		cost = 60
 		days_remove = 49
@@ -875,8 +931,7 @@ RED_generic_decision_category = {
 
 		modifier = {
 			industrial_capacity_factory = -0.15
-			war_support_weekly = -0.01
-			production_speed_buildings_factor = 0.1
+			consumer_goods_factor = -0.08
         }
 
 		ai_will_do = {
@@ -892,10 +947,10 @@ RED_generic_decision_category = {
 	RED_idolize_cult_of_communism = {
 
 		available = {
-			NOT = {
-				custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
-				hidden_trigger = {
-					OR = {
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
 						has_idea = RED_mushroom_revolt
 						has_idea = RED_military_mutinies 
 						has_idea = RED_military_mutinies_2
@@ -941,10 +996,10 @@ RED_generic_decision_category = {
 	RED_idolize_cult_of_communism_2 = {
 
 		available = {
-			NOT = {
-				custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
-				hidden_trigger = {
-					OR = {
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
 						has_idea = RED_mushroom_revolt
 						has_idea = RED_military_mutinies 
 						has_idea = RED_military_mutinies_2
@@ -987,10 +1042,10 @@ RED_generic_decision_category = {
 	RED_grain_rebates = {
 
 		available = {
-			NOT = {
-				custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
-				hidden_trigger = {
-					OR = {
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
 						has_idea = RED_mushroom_revolt
 						has_idea = RED_military_mutinies 
 						has_idea = RED_military_mutinies_2
@@ -1003,7 +1058,7 @@ RED_generic_decision_category = {
 		}
 
 		cost = 60
-		days_remove = 49
+		days_remove = 45
 		days_re_enable = 360
 
 		modifier = {
@@ -1024,11 +1079,10 @@ RED_generic_decision_category = {
 	RED_administrational_adjustments  = {
 
 		available = {
-			date > 2030.1.1
-			NOT = {
-				custom_trigger_tooltip = { tooltip = RED_not_in_crisis_tt }
-				hidden_trigger = {
-					OR = {
+			custom_trigger_tooltip = { 
+				tooltip = RED_not_in_crisis_tt 
+				NOT = {
+					hidden_trigger = {
 						has_idea = RED_mushroom_revolt
 						has_idea = RED_military_mutinies 
 						has_idea = RED_military_mutinies_2
@@ -1040,12 +1094,12 @@ RED_generic_decision_category = {
 			}
 		}
 		
-		cost = 5
-		days_remove = 45
+		cost = 0
+		days_remove = 30
 		days_re_enable = 360
 
 		modifier = {
-			political_power_gain = 0.2
+			political_power_gain = 0.25
         }
 	}
 
@@ -1062,7 +1116,7 @@ RED_generic_decision_category = {
 		}
 		
 		cost = 10
-		days_remove = 50
+		days_remove = 45
 		fire_only_once = yes
 
 		remove_effect = {
@@ -1122,7 +1176,6 @@ RED_generic_decision_category = {
 		days_re_enable = 180
 
 		remove_effect = {
-			add_stability = -0.04
 			custom_effect_tooltip = RED_rallying_cry_tt
 			hidden_effect = {
 				capital_scope = {
@@ -1157,12 +1210,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			264 = {	
 				set_state_name = "RED_264"
@@ -1190,12 +1238,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			329 = {	
 				set_state_name = "RED_329"
@@ -1223,12 +1266,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			245 = {	
 				set_state_name = "RED_245"
@@ -1256,12 +1294,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			330 = {	
 				set_state_name = "RED_330"
@@ -1289,12 +1322,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			362 = {	
 				set_state_name = "RED_362"
@@ -1322,12 +1350,7 @@ RED_rebuilding_the_line_category = {
 		days_remove = 14
 		fire_only_once = yes
 
-		modifier = {
-			political_power_factor = -0.1
-        }
-
 		remove_effect = {
-			add_political_power = 20
 			add_stability = 0.02
 			250 = {	
 				set_state_name = "RED_250"

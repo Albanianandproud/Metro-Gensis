@@ -624,7 +624,7 @@ country_event = { # Approach Hansa
         add_political_power = -15
         add_stability = 0.05
         ai_chance = {
-            base = 2.5
+            base = 50
         }
     }
 }
@@ -796,9 +796,9 @@ country_event = { # Generals Siphoning manpower
         }
         add_timed_idea = {
             idea = RED_generals_siphoning_manpower
-            days = 140
+            days = 160
         }
-        add_manpower = -80
+        add_manpower = -100
         ai_chance = {
             base = 2.5
         }
@@ -811,7 +811,7 @@ country_event = { # Generals Siphoning manpower
         }
         add_popularity = {
             ideology = oligarch
-            popularity = 0.02
+            popularity = 0.025
         }
         custom_effect_tooltip = RED_has_maxim_resolute_trait
         ai_chance = {
@@ -835,13 +835,13 @@ country_event = { # Generals Siphoning manpower
     }
 
     option = {
-        name = nf_RED.25.a
+        name = nf_RED.25.e
         add_timed_idea = {
             idea = RED_generals_siphoning_manpower
-            days = 45
+            days = 50
         }
-        add_manpower = -75
-        add_political_power = 20
+        add_manpower = -80
+        add_political_power = -20
         ai_chance = {
             base = 2.5
         }
@@ -924,7 +924,7 @@ country_event = { # How to deal with People revolt
         set_country_flag = RED_approaching_hansa
 
         ai_chance = {
-            base = 5
+            base = 20
         }
         hidden_effect = {
             country_event = { id = nf_RED.32 days = 7 random_days = 10 } 
@@ -1274,7 +1274,7 @@ country_event = { # Trade between RED and KUZ
             modifier = trade_partner
         }
         KUZ = {
-            reverse_add_opinion_modifier = {
+            add_opinion_modifier = {
                 target = RED
                 modifier = trade_partner
             }
@@ -1387,6 +1387,7 @@ country_event = { # Mushroom Revolt
             every_owned_state = {
                 add_core_of = PPL
             }
+            complete_national_focus = RED_the_crowd_stills
         }
         ai_chance = {
             base = 2.5
@@ -1442,6 +1443,7 @@ country_event = { # Dissenters Revolt
             every_owned_state = {
                 add_core_of = RMJ
             }
+            complete_national_focus = RED_staff_purge
         }
         ai_chance = {
             base = 2.5
@@ -1617,7 +1619,7 @@ country_event = { # Election Warning Tooltip
     desc = nf_RED.73.d
     picture = "GFX_event (65)"
 
-    trigger = { date > 2030.1.1 }
+    is_triggered_only = yes
 
     fire_only_once = yes
 
@@ -1629,6 +1631,7 @@ country_event = { # Election Warning Tooltip
         name = nf_RED.73.a
         custom_effect_tooltip = RED_2033_election_tt
         activate_mission = RED_2033_election_countdown_mission
+        add_political_power = 15
     }
 }
 
@@ -1641,8 +1644,9 @@ country_event = { # Change ideology chance before 2033 #
     trigger = { 
         AND = {
             count_triggers = {
-                amount = 4
+                amount = 5
                 original_tag = RED
+                date > 2030.1.1
                 date < 2033.1.1 
                 oligarch > party_popularity@council
                 dictatorial > party_popularity@council

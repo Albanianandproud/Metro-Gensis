@@ -1,3 +1,14 @@
+stop_death_spiral_production = {
+	
+	enable = { always = yes }
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = train
+		value = 2
+	}
+}
+
 default_unit_production = {
 
 	allowed = {
@@ -24,11 +35,6 @@ default_unit_production = {
 		type = role_ratio
 		id = marines
 		value = 5
-	}
-	ai_strategy = {
-		type = equipment_production_factor
-		id = infantry
-		value = 10
 	}
 }
 
@@ -81,7 +87,7 @@ stop_building_useless_stuff = {
 ai_army_building_puppet = {
 	enable = {
 		has_army_size = {
-    		size > 4
+    		size < 5
     		type = infantry
 		}
 		is_subject = yes
@@ -89,10 +95,9 @@ ai_army_building_puppet = {
 	abort = {
 		OR = {
 			has_army_size = {
-    			size > 19
+    			size > 18
     			type = infantry
 			}
-			has_war = yes
 		}
 	}
 	ai_strategy = {
@@ -102,7 +107,7 @@ ai_army_building_puppet = {
 	}
 }
 
-reserve_manpower_25 = {
+reserve_manpower = {
 	enable = {
 		AND = {
 			has_manpower < 25
@@ -124,7 +129,6 @@ reserve_manpower_25 = {
 	}
 }
 
-
 default_pp_spend_amount = {
 	enable = {
 		always = yes
@@ -143,12 +147,49 @@ default_pp_spend_amount = {
 	}
 }
 
-default_armored_production = {
+#default_armored_production = {
+#	enable = {
+#		ai_wants_divisions > 19
+#	}
+#	abort = {
+#		ai_wants_divisions < 20
+#	}
+#
+#	ai_strategy = {
+#		type = role_ratio
+#		id = armor
+#		value = 50
+#	}
+#
+#	ai_strategy = {
+#		type = role_ratio
+#		id = infantry
+#		value = 25
+#	}
+#}
+
+
+dont_build_armor_if_low_ic = {
 	enable = {
-		ai_wants_divisions > 19
+		num_of_military_factories > 16
 	}
 	abort = {
-		ai_wants_divisions < 20
+		num_of_military_factories < 17
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -150
+	}
+}
+
+highered_armored_production = {
+	enable = {
+		num_of_military_factories > 24
+	}
+	abort = {
+		num_of_military_factories < 25
 	}
 
 	ai_strategy = {
@@ -156,32 +197,11 @@ default_armored_production = {
 		id = armor
 		value = 50
 	}
-
-	ai_strategy = {
-		type = role_ratio
-		id = infantry
-		value = 25
-	}
-}
-
-highered_armored_production = {
-	enable = {
-		num_of_military_factories > 39
-	}
-	abort = {
-		num_of_military_factories < 40
-	}
-
-	ai_strategy = {
-		type = role_ratio
-		id = armor
-		value = 80
-	}
 }
 
 default_stockpile_management = {
 	enable = {
-		num_divisions > 11
+		num_divisions > 10
 	}
 
 	abort = {
@@ -190,7 +210,25 @@ default_stockpile_management = {
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 0.15 # double base stockpile #from 25 to 35
+		value = 0.1 # double base stockpile #from 25 to 35
+	}
+}
+
+build_some_support_weaponry = {
+	enable = {
+		num_of_military_factories > 4
+	}
+
+	ai_strategy = {
+    	type = equipment_production_factor
+    	id = support
+    	value = 30
+	}
+
+	ai_strategy = {
+    	type = equipment_production_min_factories
+    	id = support
+    	value = 2
 	}
 }
 
@@ -202,47 +240,16 @@ force_build_late_game = {
 			original_tag = RCH  
 		}
 	}
+
 	enable = {
 		date < 2030.1.1
 	}
+
 	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = force_build_armies
-		value = 2000
-	}
-}
-
-DEFAULT_template_design = {
-	enable = {	
-		date < 2033.1.1				
-	}
-	abort = { 
-		date > 2033.1.1
-	}
-
-	ai_strategy = {
-		type = template_prio
-		id = armor
-		value = 25
-	}
-	
-	ai_strategy = {
-		type = template_prio
-		id = infantry
-		value = 80
-	}
-}
-
-stockpile_more_late_game = {
-	enable = {
-		date > 2032.1.1
-	}
-	abort_when_not_enabled = yes
-
-	ai_strategy = {
-		type = equipment_stockpile_surplus_ratio
-		value = 0.25 ## Stuffs 'bout to go down
+		value = 200
 	}
 }
 
