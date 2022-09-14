@@ -189,15 +189,15 @@ focus_tree = {
 		completion_reward = {
 		    add_political_power = 100
 		    add_war_support = 0.1
-
+			add_stability = 0.1
 			337 = {		## Tverskaya
-				set_state_name = "Darvinovskaya"
+				set_state_name = "RCH_337"
 			}
 			306 = {		## Pushkinskaya
-				set_state_name = "Wagnerovskaya"
+				set_state_name = "RCH_306"
 			}
 			275 = {		## Chekhovskaya
-				set_state_name = "Schillerovskaya"
+				set_state_name = "RCH_275"
 			}
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = RCH_karl_krainer
@@ -305,6 +305,7 @@ focus_tree = {
 		
 		completion_reward = {
 			add_ideas = family_promotion
+			add_stability = 0.1
 		}
 	}
 
@@ -490,10 +491,10 @@ focus_tree = {
 			focus = RCH_lebensraum
 		}
 
-		bypass = {
-			OR = {
-				NOT = { country_exists = DIM }
-				has_war_with = DIM
+		available = {
+			has_war = no
+			426 = {
+				is_owned_by = RCH
 			}
 		}
 
@@ -503,6 +504,13 @@ focus_tree = {
 
         will_lead_to_war_with = DIM
 		completion_reward = {
+			426 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
 			create_wargoal = {
  				type = take_state_focus
  				target = DIM
@@ -518,7 +526,7 @@ focus_tree = {
 		cost = 6.5
 
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = RCH_expansion
 
 		prerequisite = {
@@ -576,10 +584,20 @@ focus_tree = {
 
 		available = {
 			has_war = no
+			426 = {
+				is_owned_by = RCH
+			}
 		}
 		
-        will_lead_to_war_with = ULI
+        will_lead_to_war_with = DIM
 		completion_reward = {
+			426 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
 			create_wargoal = {
  				type = take_state_focus
  				target = ULI
@@ -595,7 +613,7 @@ focus_tree = {
 		cost = 6.5
 
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = RCH_expansion2
 
 		prerequisite = {
@@ -715,12 +733,12 @@ focus_tree = {
 		cost = 6.5
 
 		x = 1
-		y = 1
+		y = 2
 		relative_position_id = RCH_expansion2
 
 		prerequisite = {
-			focus = RCH_expansion
-			focus = RCH_expansion2
+			focus = RCH_expansion_trubnaya_core
+			focus = RCH_expansion_barrikadnaya_core
 		}
 
 		bypass = {
@@ -811,6 +829,39 @@ focus_tree = {
 
 		completion_reward = {
 		    244 = { add_core_of = ROOT }
+		}
+	}
+
+	focus = {
+		id = RCH_hole_alliance
+		icon = GFX_RCH_new_order
+		cost = 6.5
+
+		x = 5
+		y = 1
+		relative_position_id = RCH_lebensraum
+
+		prerequisite = {
+			focus = RCH_lebensraum
+		}
+
+		available = {
+			PVL = {
+				exists = yes
+				AND = {
+					is_in_faction = no
+				}
+			}
+			375 = {
+				is_owned_by = PVL
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCH_hole_aggression_tt
+			PVL = {
+				country_event = nf_RCH.6
+			}
 		}
 	}
 
@@ -1022,28 +1073,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
-			}
-			random_owned_controlled_state = {
 				add_building_construction = {
 					type = infrastructure
 					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
+					instant_build = yes
 				}
 			}
 		}
@@ -1095,28 +1134,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
 				}
-			}
-			random_owned_controlled_state = {
 				add_building_construction = {
 					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				}
-			}
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
+					level = 2
+					instant_build = yes
 				}
 			}
 		}
@@ -1633,11 +1658,19 @@ focus_tree = {
 		}
 		
 		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+					}
+				}
+				set_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+				custom_effect_tooltip = RCH_unlock_sturmgewehr_tt
+			}
 		    add_offsite_building = {
 				type = arms_factory
-				level = 2
+				level = 1
 			}
-			custom_effect_tooltip = future_update_tt
 		}
 	}
 
@@ -1656,11 +1689,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = RCH_spec_ops_increase
 		    add_offsite_building = {
 				type = arms_factory
-				level = 2
+				level = 1
 			}
-			custom_effect_tooltip = future_update_tt
 		}
 	}
 
@@ -1692,12 +1725,12 @@ focus_tree = {
 		cost = 6.5
 
 		x = 1
-		y = 1
+		y = 2
 		relative_position_id = RCH_military12
 
 		prerequisite = {
-			focus = RCH_military12
-			focus = RCH_military11
+			focus = RCH_military13
+			focus = RCH_military15
 		}
 				
 		completion_reward = {
@@ -1790,7 +1823,7 @@ focus_tree = {
 
 	focus = {
 		id = RCH_topside6
-		icon = GFX_electronics
+		icon = GFX_scrap_metal
 		cost = 6.5
 
 		x = 1
@@ -1802,11 +1835,11 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.35
-				uses = 2
-				category = industry
+			capital_scope = {
+			    add_resource = {
+			        type = alloys
+			        amount = 8
+			    }
 			}
 		}
 	}

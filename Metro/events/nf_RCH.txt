@@ -74,7 +74,7 @@ country_event = { # Dimitrovskaya refuses
 		name = nf_RCH.5.a
 	}
 }
-country_event = { # test
+country_event = { 
     id = nf_RCH.6
     title = nf_RCH.6.t
     desc = nf_RCH.6.d
@@ -83,6 +83,115 @@ country_event = { # test
 	is_triggered_only = yes
 
 	option = {
+		trigger = {
+			tag = PVL
+			is_ai = yes
+		}
 		name = nf_RCH.6.a
+		hidden_effect = {
+			PVL = {
+				remove_opinion_modifier = {
+					target = RCH
+					modifier = fascist
+				}
+				remove_ideas = hanza_under_sphere_of_influence
+			}
+			RCH = {
+				remove_opinion_modifier = {
+					target = PVL
+					modifier = mutant
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_government = dictatorial
+				}
+			}
+			set_political_party = {
+				ideology = dictatorial
+				popularity = 50
+			}
+			set_politics = {
+				ruling_party = dictatorial
+				elections_allowed = no
+				election_frequency = 0
+				long_name = PVL_RCH_long_name
+				name = PVL_RCH_name
+			}
+			RCH = {
+				puppet = PVL
+			}
+		}
+		ai_chance = {
+			factor = 20
+			modifier = {
+    			factor = 20
+    			PVL = {
+    				num_of_military_factories < 6
+    			}
+    		}
+		}
+	}
+
+	option = {
+		trigger = {
+			tag = PVL
+			is_ai = no
+		}
+		name = nf_RCH.6.b
+		hidden_effect = {
+			PVL = {
+				remove_opinion_modifier = {
+					target = RCH
+					modifier = fascist
+				}
+				remove_ideas = hanza_under_sphere_of_influence
+			}
+			RCH = {
+				remove_opinion_modifier = {
+					target = PVL
+					modifier = mutant
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_government = dictatorial
+				}
+			}
+			set_political_party = {
+				ideology = dictatorial
+				popularity = 50
+			}
+			set_politics = {
+				ruling_party = dictatorial
+				elections_allowed = no
+				election_frequency = 0
+				long_name = PVL_RCH_long_name
+				name = PVL_RCH_name
+			}
+			RCH = { add_to_faction = PVL }
+		}
+		ai_chance = {
+			factor = 0.5
+		}
+	}
+
+	option = {
+		name = nf_RCH.6.c
+		army_experience = 10
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1.5
+			modifier = {
+    			factor = 10
+    			PVL = {
+    				num_of_military_factories > 6
+    			}
+    		}
+		}
 	}
 }
