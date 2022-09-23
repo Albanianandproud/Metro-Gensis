@@ -259,7 +259,7 @@ sancity_of_life = {
 	}
 }
 
-	warfare_drastic_measures = {
+warfare_drastic_measures = {
         draw_short_straws = {
         	icon = ger_military_buildup
 
@@ -418,5 +418,318 @@ sancity_of_life = {
 				}
 			}
         }
+}
+
+military_theory_committee = {
+	establish_military_committee = {
+
+		icon = hol_war_on_pacifism
+
+		available = {
+			command_power > 9.9
+		}
+
+		days_remove = 39
+
+		fire_only_once = yes
+			
+		custom_cost_text = command_power_10
+		custom_cost_trigger = {
+			command_power > 9.9
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -10
+			}
+			custom_effect_tooltip = allow_to_conduct_war_operations
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = held_military_committee
+			}
+		}
 	}
+
+	hold_exercise_routines = {
+
+		icon = hol_war_on_pacifism
+
+		days_remove = 45
+			
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		available = {
+			command_power > 19.9
+			has_war = no
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		cancel_trigger = {
+            has_war = yes
+        }
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		modifier = {
+			command_power_gain_mult = -0.2
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -20
+			}
+		}
+
+		remove_effect = {
+			army_experience = 15
+		}
+	}
+
+	centralise_military_command = {
+		
+		icon = hol_war_on_pacifism
+
+		days_remove = 50
+
+		available = {
+			command_power > 20
+			has_war = no
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		cancel_trigger = {
+            has_war = yes
+        }
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		modifier = {
+			high_command_cost_factor = -0.15
+			army_chief_cost_factor = -0.15
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -20
+			}
+		}
+
+		remove_effect = {
+			army_experience = 5
+		}
+	}
+
+	conduct_war_games = {
+
+		icon = hol_war_on_pacifism
+
+		days_remove = 50
+
+		available = {
+			has_war = no
+			command_power > 50
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		cancel_trigger = {
+            has_war = yes
+        }
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		custom_cost_text = command_power_50
+		custom_cost_trigger = {
+			command_power > 49.9
+		}
+
+		modifier = {
+			army_org_regain = -0.1
+			command_power_gain_mult = -0.5
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -50
+			}
+		}
+
+		remove_effect = {
+			army_experience = 20
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	military_theory_analysis = {
+
+		icon = hol_war_on_pacifism
+
+		days_remove = 35
+
+		days_re_enable = 95
+
+		available = {
+			has_army_experience > 5
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		custom_cost_text = army_experience_5
+		custom_cost_trigger = {
+			has_army_experience > 4.9
+		}
+
+		modifier = {
+			command_power_gain_mult = -0.2
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -5
+			}
+		}
+
+		remove_effect = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.3
+				uses = 1
+				category = entrench_kits
+			}
+		}
+	}
+
+	conduct_r_and_d = {
+
+		icon = hol_war_on_pacifism
+
+		days_remove = 30
+
+		days_re_enable = 90
+
+		available = {
+			has_army_experience > 10
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		custom_cost_text = army_experience_10
+		custom_cost_trigger = {
+			has_army_experience > 9.9
+		}
+
+		modifier = {
+			research_speed_factor = -0.15
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -5
+			}
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				name = clothing
+				bonus = 0.3
+				uses = 1
+				category = clothing_kits
+			}
+			add_tech_bonus = {
+				name = clothing
+				bonus = 0.3
+				uses = 1
+				category = gas_mask
+			}
+		}
+	}
+
+	train_the_troops = {
+
+		icon = hol_war_on_pacifism
+
+		days_remove = 90
+
+		days_re_enable = 270
+
+		available = {
+			has_army_experience > 20
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+
+		custom_cost_text = army_experience_20
+		custom_cost_trigger = {
+			has_army_experience > 19.9
+		}
+
+		modifier = {
+			training_time_army_factor = -0.2
+			minimum_training_level = -0.1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -20
+			}
+		}
+
+		remove_effect = {
+			army_experience = 5
+		}
+	}
+}
 
