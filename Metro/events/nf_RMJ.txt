@@ -1,0 +1,132 @@
+add_namespace = nf_RMJ
+
+country_event = {
+    id = nf_RMJ.1
+    title = nf_RMJ.1.t
+    desc = nf_RMJ.1.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_RMJ.1.a
+	}
+
+	option = {
+		name = nf_RMJ.1.b
+	}
+}
+
+country_event = { ## An Old Friend
+    id = nf_RMJ.2
+    title = nf_RMJ.2.t
+    desc = nf_RMJ.2.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_RMJ.2.a
+		create_faction = RMJ_junta
+		DRY = {
+			country_event = nf_RMJ.3
+		}
+	}
+}
+
+country_event = {
+    id = nf_RMJ.3
+    title = nf_RMJ.3.t
+    desc = nf_RMJ.3.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ## Lets join 
+	name = nf_RMJ.3.a
+		RMJ = { add_to_faction = DRY }
+	}
+
+	option = { ## Rather Not !
+		name = nf_RMJ.3.b
+		RMJ = {
+			country_event = nf_RMJ.4
+		}
+	}
+}
+
+country_event = { ### DRY told us nah!
+    id = nf_RMJ.4
+    title = nf_RMJ.4.t
+    desc = nf_RMJ.4.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ## Lets join 
+	name = nf_RMJ.4.a
+		RMJ = { add_to_faction = DRY }
+	}
+}
+
+country_event = { ### Reich non-aggro
+    id = nf_RMJ.5
+    title = nf_RMJ.5.t
+    desc = nf_RMJ.5.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ## Sure 
+	name = nf_RMJ.5.a
+		RMJ = {
+			country_event = nf_RMJ.6
+		}
+		diplomatic_relation = {
+			country = RMJ
+			relation = non_aggression_pact
+			active = yes
+		}
+	}
+
+	option = { ## Still a mutie
+	name = nf_RMJ.5.b
+		RMJ = {
+			country_event = nf_RMJ.7
+		}
+	}
+}
+
+country_event = { ### Accepted
+    id = nf_RMJ.6
+    title = nf_RMJ.6.t
+    desc = nf_RMJ.6.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+	name = nf_RMJ.6.a
+	}
+}
+
+country_event = { ### Refused
+    id = nf_RMJ.7
+    title = nf_RMJ.7.t
+    desc = nf_RMJ.7.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+	name = nf_RMJ.7.a
+	}
+}
+

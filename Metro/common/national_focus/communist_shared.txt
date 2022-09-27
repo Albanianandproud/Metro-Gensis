@@ -3,14 +3,14 @@
 
 focus_tree = {
     id = communist_shared
-	continuous_focus_position = { x = 2900 y = 150 }
+	continuous_focus_position = { x = 3550 y = 150 }
 	country = {
 		base = 0
 		modifier = {
 			OR = {
 				original_tag = AVT
 			}
-			add = 00 
+			add = 0
 		}
 	}
 	default = no
@@ -19,7 +19,7 @@ focus_tree = {
 	focus = {
 		id = communist_introduction
 		icon = GFX_goal_generic_allies_build_infantry
-		x = 3
+		x = 2
 		y = 0
 		cost = 6.5
 
@@ -38,7 +38,7 @@ focus_tree = {
 		prerequisite = {
 			focus = communist_introduction
 		}
-		x = -6
+		x = -7
 		y = 1
 		relative_position_id = communist_introduction
 
@@ -101,30 +101,23 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
+			### Recieve Advisor ### 
 		}
 	}
 
 	focus = {
-		id = communist_industry_4
-		icon = GFX_computer_terminal
+		id = communist_scrapping_for_parts
+		icon = GFX_scrap_computers
 		cost = 6.5
 
 		prerequisite = {
 			focus =  communist_industry_3
 		}
+
+		mutually_exclusive = {
+			focus = communist_using_the_terminal
+		}
+
 		x = 1
 		y = 1
 		relative_position_id =  communist_industry_3
@@ -134,19 +127,59 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = electronics
+			        amount = 1
+			    }
+				add_resource = {
+			        type = components
+			        amount = 1
+			    }
+				add_resource = {
+			        type = alloys
+			        amount = 1
+			    }
+			}
 			random_owned_state = {
 				limit = {
 					NOT = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
+		}
+	}
+
+	focus = {
+		id = communist_using_the_terminal
+		icon = GFX_computer_terminal
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_industry_3
+		}
+
+		mutually_exclusive = {
+			focus = communist_scrapping_for_parts
+		}
+
+		x = -1
+		y = 1
+		relative_position_id =  communist_industry_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			### Salvage Terminal Event ###
 		}
 	}
 
@@ -156,11 +189,33 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_industry_4
+			focus =  communist_using_the_terminal
 		}
-		x = -1
+		x = -2
 		y = 1
-		relative_position_id =  communist_industry_4
+		relative_position_id =  communist_scrapping_for_parts
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = communist_industry_6
+		icon = GFX_workshop_3
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_scrapping_for_parts
+		}
+
+		x = 0
+		y = 1
+		relative_position_id =  communist_scrapping_for_parts
 
 		ai_will_do = {
 			factor = 3
@@ -173,10 +228,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 3
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -238,7 +293,7 @@ focus_tree = {
 				}
 				add_building_construction = {
 					type = infrastructure
-					level = 1
+					level = 2
 				}
 			}
 			random_owned_controlled_state = {
@@ -410,6 +465,32 @@ focus_tree = {
 	}
 
 	focus = {
+		id = communist_equal_duty_2
+		icon = GFX_scrap_metal_2
+		cost = 6.5
+
+		prerequisite = {
+			focus =  communist_equal_duty
+		}
+
+		mutually_exclusive = {
+			focus = communist_getting_the_good_stuff
+		}
+
+		x = 1
+		y = 1
+		relative_position_id =  communist_equal_duty
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			### Add Advisor - Distiller or smth
+		}
+	}
+
+	focus = {
 		id = communist_getting_the_good_stuff
 		icon = GFX_booze
 		cost = 6.5
@@ -417,6 +498,11 @@ focus_tree = {
 		prerequisite = {
 			focus =  communist_equal_duty
 		}
+
+		mutually_exclusive = {
+			focus = communist_equal_duty_2
+		}
+
 		x = -1
 		y = 1
 		relative_position_id =  communist_equal_duty
@@ -426,7 +512,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## give me CG debuff for a time :))
+			add_timed_idea = { 
+				idea = communist_kvass_for_the_people
+				days = 250
+			}
 		}
 	}
 
@@ -436,9 +525,30 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
+			focus =  communist_equal_duty_2
+		}
+		x = 2
+		y = 1
+		relative_position_id =  communist_getting_the_good_stuff
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = communist_socialist_science_2
+		icon = GFX_equipment_medical
+		cost = 6.5
+
+		prerequisite = {
 			focus =  communist_getting_the_good_stuff
 		}
-		x = 1
+		x = 0
 		y = 1
 		relative_position_id =  communist_getting_the_good_stuff
 
@@ -450,10 +560,9 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = chemicals
-			        amount = 3
+			        amount = 8
 			    }
 			}
-			add_research_slot = 1
 		}
 	}
 
@@ -464,9 +573,11 @@ focus_tree = {
 
 		prerequisite = {
 			focus =  communist_getting_the_good_stuff
+			focus =  communist_equal_duty_2
 		}
 		prerequisite = {
-			focus =  communist_industry_4
+			focus =  communist_scrapping_for_parts
+			focus =  communist_using_the_terminal
 		}
 		prerequisite = {
 			focus =  communist_infrastructure_3
@@ -490,7 +601,7 @@ focus_tree = {
 					}
 				}
 				add_extra_state_shared_building_slots = 2
-				add_manpower = 20
+				add_manpower = 25
 			}
 			random_owned_state = {
 				limit = {
@@ -499,7 +610,7 @@ focus_tree = {
 					}
 				}
 				add_extra_state_shared_building_slots = 2
-				add_manpower = 20
+				add_manpower = 25
 			}
 			random_owned_state = {
 				limit = {
@@ -508,7 +619,7 @@ focus_tree = {
 					}
 				}
 				add_extra_state_shared_building_slots = 2
-				add_manpower = 20
+				add_manpower = 25
 			}
 		}
 	}
@@ -533,7 +644,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_research_slot = 1
+			##erfe3
 		}
 	}
 
@@ -897,7 +1008,7 @@ focus_tree = {
 			focus = communist_introduction
 		}
 		available = {
-			threat > 0.2
+			threat > 0.14
 		}
 		x = 8
 		y = 1
@@ -1515,6 +1626,26 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = communist_tech_buff_5
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = politics_1
+		icon = GFX_bullets_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_introduction
+		}
+		x = 23
+		y = 1
+		relative_position_id = communist_introduction
 
 		ai_will_do = {
 			factor = 3

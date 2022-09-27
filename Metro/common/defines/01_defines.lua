@@ -135,15 +135,15 @@ NDefines.NSupply.MAX_RAILWAY_LEVEL = 1		--- Base is 5. Pending Change.
 NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.5
 NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.5
 
-NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.08		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
+NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.05		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
 
 NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.8--- Base is 0.3
 
 NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 1
 
 NDefines.NSupply.INFRA_TO_SUPPLY = 1.15
-NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.05
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.2
+NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.1
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.25
 NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.75
 
 NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 10.0
@@ -154,9 +154,9 @@ NDefines.NSupply.MIN_TRAIN_SUPPLY_FACTOR = 0.34
 
 NDefines.NSupply.RAILWAY_BASE_FLOW = 15.0 
 
-NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 3.00
+NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 3.5
 
-NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.35		--- Base is 0.35. Attrition is bad in the Metro yo,
+NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.3	--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
 NDefines.NOperatives.AGENCY_CREATION_DAYS = 99				--- No more Espionage!
