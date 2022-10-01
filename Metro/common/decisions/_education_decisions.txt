@@ -1,0 +1,571 @@
+education_practise = {
+
+	### Change Civics to reflect the increase of level of education in the metro
+	### Political Power decrease at the expense of research speed
+	### However as people become more intellectual, they'll become less likely to follow government
+	### I.E. More maluses from war, less political power gain
+
+	improve_education_normal = {
+
+		allowed = {
+
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+   				tooltip = is_not_bandit_nation
+   				NOT = {
+   					has_country_flag = is_bandit_nation
+   				}
+   			}
+   			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+					has_idea = civics_education_level_6 
+				}
+   			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = is_bandit_nation
+			}
+		}
+
+		cost = 20
+
+		days_re_enable = 200
+
+		complete_effect = {
+			hidden_effect = {
+				#set_variable = { education_reform_undertaking = 120 }
+				if = {
+					limit = {
+						num_of_controlled_states < 6
+					}
+					set_variable = {
+						var = education_reform_undertaking
+						value = 15
+					}
+				}
+				else = {
+					set_variable = {
+						var = education_reform_undertaking
+						value = num_controlled_states
+					}
+				}
+				multiply_variable = {
+					var = education_reform_undertaking
+					value = 15
+				}
+				#// Make cost increase for every education tier we have
+				clamp_variable = {
+					var = education_reform_undertaking
+					min = 180
+					max = 960
+				}
+				set_country_flag = improving_education
+			}
+			activate_mission = improve_education_efforts_mission
+			custom_effect_tooltip = education_efforts_mission_tooltip
+		}
+	}
+
+	improve_education_efforts_mission = {
+		
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		priority = 1001
+
+		is_good = yes
+		days_mission_timeout = education_reform_undertaking
+
+		timeout_effect = {                 
+            country_event = nf_metro_education.1
+            custom_effect_tooltip = education_efforts_mission_completed
+            hidden_effect = {
+            	clr_country_flag = improving_education
+            }
+        }
+	}
+
+	improve_education_efforts_administrate_station_chiefs  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		cost = 0
+
+		days_re_enable = 20
+
+		days_remove = 20
+
+		modifier = {
+			political_power_gain = -0.15
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -20
+			}
+		}
+	}
+
+	improve_education_efforts_collect_books  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		cost = 30
+
+		days_re_enable = 30
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -30
+			}
+		}
+	}
+
+	improve_education_efforts_soapbox  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		cost = 40
+
+		days_re_enable = 15
+
+		days_remove = 30
+
+		modifier = {
+			war_support_factor = -0.1
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -40
+			}
+		}
+	}
+
+	improve_education_efforts_purchase_amenities  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		cost = 50
+
+		days_re_enable = 15
+
+		days_remove = 30
+
+		modifier = {
+			consumer_goods_factor = 0.05
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -50
+			}
+		}
+	}
+
+	improve_education_efforts_establish_schoolhouses = {
+
+		allowed = {
+			has_dlc = "Waking the Tiger"
+		}
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 3
+		}
+
+		cost = 0
+
+		days_re_enable = 50
+
+		days_remove = 50
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = -1
+			}
+		}
+		
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -75
+			}
+		}
+	}
+
+	improve_education_bandit = {
+
+		allowed = {
+
+		}
+
+		visible = {
+			custom_trigger_tooltip = {
+   				tooltip = is_bandit_nation
+   				has_country_flag = is_bandit_nation
+   			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+   				tooltip = is_bandit_nation
+   				has_country_flag = is_bandit_nation
+   			}
+   			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+					has_idea = civics_education_level_5
+				}
+   			}
+		}
+
+		cost = 20
+
+		days_re_enable = 200
+
+		complete_effect = {
+			hidden_effect = {
+				#set_variable = { education_reform_undertaking = 150 }
+				if = {
+					limit = {
+						num_of_controlled_states < 5
+					}
+					set_variable = {
+						var = education_reform_undertaking
+						value = 20
+					}
+				}
+				else = {
+					set_variable = {
+						var = education_reform_undertaking
+						value = num_controlled_states
+					}
+				}
+				multiply_variable = {
+					var = education_reform_undertaking
+					value = 15
+				}
+				#// Make cost increase for every education tier we have
+				clamp_variable = {
+					var = education_reform_undertaking
+					min = 200
+					max = 1080
+				}
+				set_country_flag = improving_education_bandit
+				activate_mission = improve_education_efforts_bandit_mission
+			}
+		}
+	}
+
+	improve_education_efforts_bandit_mission = {
+	
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		priority = 1001
+
+		is_good = yes
+		days_mission_timeout = education_reform_undertaking
+
+        timeout_effect = {                       
+            country_event = nf_metro_education.2
+            custom_effect_tooltip = education_efforts_mission_completed
+            hidden_effect = {
+            	clr_country_flag = improving_education_bandit
+            }
+        }
+	}
+
+	improve_education_efforts_bandit_disceting_equipment  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education_bandit
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+				}
+   			}
+		}
+
+		available = {
+			num_of_military_factories > 2
+		}
+
+		cost = 0
+
+		days_remove = 30
+
+		days_re_enable = 15
+
+		modifier = {
+			equipment_capture_factor = -0.5
+			industrial_capacity_factory = -0.1
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -45
+			}
+		}
+	}
+
+	improve_education_efforts_bandit_sleezy_books  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education_bandit
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+				}
+   			}
+		}
+
+		cost = 5
+
+		days_re_enable = 30
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -25
+			}
+		}
+	}
+
+	improve_education_efforts_bandit_forced = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education_bandit
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+				}
+   			}
+		}
+
+		cost = 10
+
+		days_remove = 30
+
+		days_re_enable = 30
+
+		complete_effect = {
+			add_war_support = -0.05
+		}
+
+		modifier = {
+			war_support_weekly = -0.005
+		}
+		
+		remove_effect = {
+			add_war_support = 0.05
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -30
+			}
+		}
+	}
+
+	improve_education_efforts_bandit_pp_spend = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education_bandit
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+				}
+   			}
+		}
+
+		cost = 50
+
+		days_remove = 21
+
+		days_re_enable = 50
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -50
+			}
+		}
+	}
+
+	improve_education_efforts_bandit_pinch_it_someplace_else = {
+
+		visible = {
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education_bandit
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education_bandit
+				}
+   			}
+		}
+
+		custom_cost_text = army_experience_5
+		custom_cost_trigger = {
+			has_army_experience > 4.99
+		}
+
+		days_re_enable = 0
+
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -5
+			}
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -45
+			}
+		}
+	}
+}

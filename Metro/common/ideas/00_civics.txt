@@ -553,139 +553,311 @@ ideas = {
    			}
    		}
 	}
+
 	civics_education = { 
 		law = yes
 		use_list_view = yes
 
-		civics_education_0 = { ## indoctrination
-			
-			visible = {
-				tag = GWC
+   		civics_education_level_0 = { ## Societal Indoctrination / GWC / PAG ##
+   			available = {
+   				OR = {
+   					custom_trigger_tooltip = {
+   						tooltip = is_a_savage_nation
+   						OR = {
+   							has_country_flag = is_savage_nation
+   							original_tag = GWC
+   							original_tag = PAG
+   						}
+   					}
+   				}
+   				custom_trigger_tooltip = {
+   					tooltip = has_relevant_ideology
+   					OR = {
+                    	has_government = dictatorial
+                    	has_government = oligarch
+   					}
+                }
+            }
+
+            visible = {
+            	custom_trigger_tooltip = {
+   					tooltip = is_a_savage_nation
+   					OR = {
+   						has_country_flag = is_savage_nation
+   						original_tag = GWC
+   						original_tag = PAG
+   					}
+   				}
+            }
+
+            allowed_civil_war = {
+				always = yes
 			}
 
-			cost = 50
-			removal_cost = -1
-		
-			modifier = {
-				research_speed_factor = -0.05
-		 		political_power_gain = 0.15
-			}
+            removal_cost = -1
 
+   			modifier = {
+   				political_power_gain = 0.05
+		 		research_speed_factor = -0.45
+				land_doctrine_cost_factor = -0.2
+			}
 			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 2
-   			}
 		}
 
-		civics_education_1 = { ## basic education
-			
-			available = {
-				NOT = {
-					tag = MUT
-					tag = GWC
-					OR = {
-						has_country_flag = is_bandit_nation
-						has_country_flag = is_savage_nation
-					} 
-				}
+		civics_education_level_1 = { ## State-Mandated Propaganda 
+            available = {
+   				custom_trigger_tooltip = {
+   					tooltip = has_propaganda_apparatus
+   					OR = {
+                    	has_country_flag = has_propaganda_apparatus
+   					}
+                }
+                custom_trigger_tooltip = {
+                	tooltip = has_relevant_ideology
+   					OR = {
+                    	has_government = dictatorial
+                    	has_government = oligarch
+   					}
+                }
+            }
+            
+            visible = {
+            	NOT = {
+            		OR = {
+            			has_country_flag = is_savage_nation
+            			has_government = community
+            		}
+            	}
+            }
+
+            allowed_civil_war = {
+				always = yes
 			}
 
-			cost = 50
-			removal_cost = -1
-		
+            removal_cost = -1
+
 			modifier = {
-				political_advisor_cost_factor = -0.1
-		 		political_power_gain = -0.2
-		 		research_speed_factor = 0.12
-		 		theorist_cost_factor = -0.1
+				political_power_gain = 0.15
+				offensive_war_stability_factor = 0.1
+				## Make it a double-edged sword. I.E. if nation drops below 50% stability or war support BAD! shit happens!
+				custom_modifier_tooltip = propaganda_apparatus_modifier_tooltip
 			}
-
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 2
-   			}
+			cancel_if_invalid = yes
 		}
 
-		civics_education_2 = { ## basic literacy
-			
-			available = {
-				NOT = {
-					has_country_flag = is_savage_nation
-				}
-			}
-
-			cost = 50
-			removal_cost = -1
-		
-			modifier = {
-				political_advisor_cost_factor = -0.05
-		 		political_power_gain = -0.15
-		 		research_speed_factor = 0.06
-		 		theorist_cost_factor = -0.05
-			}
-
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 2
-   			}
-   		}
-
-		civics_education_3 = { ## children education
-			
-			available = {
-				NOT = {
-					has_country_flag = is_bandit_nation
-					has_country_flag = is_savage_nation
-				}
-			}
-
-			cost = 50
-			removal_cost = -1
-		
-			modifier = {
-		 		political_power_gain = -0.1
-		 		research_speed_factor = 0.03
-			}
+		civics_education_level_2 = { ## No Education
+			level = 1
 
 			default = yes
 
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 2
-   			}
-   		}
-
-		civics_education_4 = { ## no education
-			
 			available = {
-				NOT = {
-					tag = PLS
-					tag = MSU
-					tag = SCA
-					tag = VDN
-					OR = {
-						has_government = council
-					} 
+				hidden_trigger = {
+					has_idea = civics_education_level_2
 				}
 			}
 
-			cost = 50
+			visible = {
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
 			removal_cost = -1
-		
+
 			modifier = {
 		 		political_power_gain = 0.15
-		 		research_speed_factor = -0.09
+		 		research_speed_factor = -0.25
+				land_doctrine_cost_factor = 0.25
 			}
 
 			cancel_if_invalid = no
+		}
 
-			ai_will_do = {
-   				factor = 2
-   			}
-   		}
+		civics_education_level_3 = { ## Basic
+			level = 2
+
+			available = {
+				hidden_trigger = {
+					has_idea = civics_education_level_3
+				}
+			}
+
+			visible = {
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+		 		political_power_gain = 0.05
+		 		research_speed_factor = -0.15
+				land_doctrine_cost_factor = 0.15
+			}
+
+			cancel_if_invalid = no
+		}
+
+		civics_education_level_4 = { ## Decent
+			level = 3
+
+			available = {
+				hidden_trigger = {
+					has_idea = civics_education_level_4
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			visible = {
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			removal_cost = -1
+
+			modifier = {
+		 		political_power_gain = -0.1
+		 		research_speed_factor = 0.05
+				land_doctrine_cost_factor = -0.025
+				offensive_war_stability_factor = -0.025
+			}
+			cancel_if_invalid = no
+		}
+
+		civics_education_level_5 = { ## Comprehensive
+			level = 4
+
+			available = {
+				custom_trigger_tooltip = {
+   					tooltip = is_not_bandit_nation
+   					NOT = {
+   						has_country_flag = is_bandit_nation
+   					}
+   				}
+				hidden_trigger = {
+					has_idea = civics_education_level_5
+				}
+			}
+
+			visible = {
+            	custom_trigger_tooltip = {
+   					tooltip = is_not_bandit_nation
+   					NOT = {
+   						has_country_flag = is_bandit_nation
+   					}
+   				}
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+		 		political_power_gain = -0.15
+		 		research_speed_factor = 0.15
+				land_doctrine_cost_factor = 0.05
+				political_advisor_cost_factor = -0.05
+		 		theorist_cost_factor = -0.05
+		 		offensive_war_stability_factor = -0.05
+			}
+			cancel_if_invalid = no
+		}
+
+		civics_education_level_6 = { ## Advanced
+			level = 5
+
+			available = {
+				hidden_trigger = {
+					has_idea = civics_education_level_6
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			visible = {
+            	custom_trigger_tooltip = {
+   					tooltip = can_advance_education
+   					has_country_flag = can_do_advanced_education
+   				}
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			removal_cost = -1
+
+			modifier = {
+		 		political_power_gain = -0.25
+		 		research_speed_factor = 0.25
+				land_doctrine_cost_factor = 0.1
+				political_advisor_cost_factor = -0.1
+		 		theorist_cost_factor = -0.1
+		 		offensive_war_stability_factor = -0.1
+			}
+
+			cancel_if_invalid = no
+		}
+
+		civics_education_level_7 = { ## Cutting-Edge
+			level = 6
+
+			visible = {
+            	custom_trigger_tooltip = {
+   					tooltip = can_advance_education
+   					has_country_flag = can_do_advanced_education
+   				}
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			available = {
+				custom_trigger_tooltip = {
+   					tooltip = can_advance_education
+   					has_country_flag = can_do_advanced_education
+   				}
+				hidden_trigger = {
+					has_idea = civics_education_level_7
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			visible = {
+            	NOT = {
+            		has_country_flag = is_savage_nation
+            	}
+            }
+
+			removal_cost = -1
+
+			modifier = {
+		 		research_speed_factor = 0.35
+			}
+
+			cancel_if_invalid = no
+		}
    	}
 }

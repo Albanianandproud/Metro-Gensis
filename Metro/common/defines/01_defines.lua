@@ -68,9 +68,9 @@ NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7
 
 ---Commanders
-NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 20	--- Base is 24
+NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 10	--- Base is 24
 NDefines.NMilitary.DIVISION_SIZE_FOR_XP = 2				--- Base is 8
-NDefines.NMilitary.FIELD_MARSHAL_DIVISIONS_CAP = 20		--- Base is 24
+NDefines.NMilitary.FIELD_MARSHAL_DIVISIONS_CAP = 10		--- Base is 24
 
 --- Resistance
 
