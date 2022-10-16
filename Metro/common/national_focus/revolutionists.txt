@@ -645,7 +645,7 @@ focus_tree = {
 
 	focus = {
 		id = communist_1
-		icon = GFX_goal_generic_army_doctrines
+		icon = GFX_workstation_2
 		cost = 6.5
 
 		prerequisite = {
@@ -681,7 +681,7 @@ focus_tree = {
 
 	focus = {
 		id = communist_3
-		icon = GFX_goal_generic_army_doctrines
+		icon = GFX_workshop_1
 		cost = 6.5
 
 		prerequisite = {
@@ -696,12 +696,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = communist_industrial_complex_building
 		}
 	}
 
 	focus = {
 		id = communist_2
-		icon = GFX_goal_generic_army_doctrines
+		icon = GFX_generic_small_arms_2
 		cost = 6.5
 
 		prerequisite = {
@@ -737,7 +738,7 @@ focus_tree = {
 
 	focus = {
 		id = communist_4
-		icon = GFX_goal_generic_army_doctrines
+		icon = GFX_RCH_reinburse_the_stockpile
 		cost = 6.5
 
 		prerequisite = {
@@ -752,6 +753,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = communist_arms_factory_building
 		}
 	}
 
@@ -1052,7 +1054,9 @@ focus_tree = {
 			focus = communist_introduction
 		}
 		available = {
-			threat > 0.09
+			has_army_manpower = {
+				size > 30
+			}
 		}
 		x = 8
 		y = 1
@@ -1465,7 +1469,7 @@ focus_tree = {
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3 
-				amount = 45
+				amount = 20
 				producer = RUS
 			}
 			random_owned_state = {
@@ -1496,6 +1500,9 @@ focus_tree = {
 			focus = communist_our_own_technicians
 			focus = communist_contact_KUZ
 		}
+		available = {
+			num_of_available_military_factories > 4
+		}
 		x = -2
 		y = 1
 		relative_position_id = communist_military_0
@@ -1524,6 +1531,9 @@ focus_tree = {
 			focus = communist_contact_KUZ
 			focus = communist_contact_BAU
 		}
+		available = {
+			num_of_available_military_factories > 4
+		}
 		x = 0
 		y = 1
 		relative_position_id = communist_military_0
@@ -1548,6 +1558,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = communist_our_own_technicians
 			focus = communist_contact_BAU
+		}
+		available = {
+			num_of_available_military_factories > 4
 		}
 		x = 2
 		y = 1
@@ -1822,7 +1835,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = politics_1
+		id = AVT_reforming_inner_sphere
 		icon = GFX_bullets_2
 		cost = 6.5
 
@@ -1838,44 +1851,71 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			add_political_power = 150
 		}
 	}
 
 	focus = {
-		id = politics_communism_1
+		id = AVT_move_south
 		icon = GFX_bullets_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_1
+			focus = AVT_reforming_inner_sphere
 		}
+
+		available = {
+			374 = {
+                is_owned_by = RUI
+			}
+			59 = {
+                is_owned_by = RUI
+			}
+			407 = {
+                is_owned_by = RUI
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		bypass = {
+			374 = {
+                is_owned_by = ROOT
+			}
+			59 = {
+                is_owned_by = ROOT
+			}
+			407 = {
+                is_owned_by = ROOT
+			}
+		}
+
 		x = -2
 		y = 1
-		relative_position_id = politics_1
+		relative_position_id = AVT_reforming_inner_sphere
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			transfer_state = 374
+			transfer_state = 59
+			transfer_state = 407
 		}
 	}
 
 	focus = {
-		id = politics_communism_2
+		id = AVT_guerilla_tactics
 		icon = GFX_bullets_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_1
+			focus = AVT_reforming_inner_sphere
 		}
 		x = 2
 		y = 1
-		relative_position_id = politics_1
+		relative_position_id = AVT_reforming_inner_sphere
 
 		ai_will_do = {
 			factor = 3
@@ -1888,41 +1928,42 @@ focus_tree = {
 	}
 
 	focus = {
-		id = politics_communism_3
+		id = AVT_Anatoly_takes_helm
 		icon = GFX_bullets_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_1
+			focus = AVT_reforming_inner_sphere
 		}
 		x = 0
 		y = 1
-		relative_position_id = politics_1
+		relative_position_id = AVT_reforming_inner_sphere
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			## Make Anatoly Field Marshal
+			## Improve stats
+			## Becamed leaderr 
 		}
 	}
 
 	focus = {
-		id = politics_communism_choice_1
+		id = AVT_reconciliation
 		icon = GFX_bullets_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_1
+			focus = AVT_move_south
 		}
 		mutually_exclusive = {
-			focus = politics_communism_choice_2
+			focus = AVT_death_to_tankies
 		}
 		x = 1
 		y = 1
-		relative_position_id = politics_communism_1
+		relative_position_id = AVT_move_south
 
 		ai_will_do = {
 			factor = 3
@@ -1940,19 +1981,18 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_choice_1
+			focus = AVT_reconciliation
 		}
 		x = -1
 		y = 1
-		relative_position_id = politics_communism_choice_1
+		relative_position_id = AVT_reconciliation
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			## Decisions to bring the fight against the Reich
 		}
 	}
 
@@ -2045,19 +2085,19 @@ focus_tree = {
 	}
 
 	focus = {
-		id = politics_communism_choice_2
+		id = AVT_death_to_tankies
 		icon = GFX_bullets_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_2
+			focus = AVT_guerilla_tactics
 		}
 		mutually_exclusive = {
-			focus = politics_communism_choice_1
+			focus = AVT_reconciliation
 		}
 		x = -1
 		y = 1
-		relative_position_id = politics_communism_2
+		relative_position_id = AVT_guerilla_tactics
 
 		ai_will_do = {
 			factor = 3
@@ -2071,23 +2111,22 @@ focus_tree = {
 
 	focus = {
 		id = politics_communism_fight_against_stalinism
-		icon = GFX_bullets_2
+		icon = GFX_lenin
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_choice_2
+			focus = AVT_death_to_tankies
 		}
 		x = 1
 		y = 1
-		relative_position_id = politics_communism_choice_2
+		relative_position_id = AVT_death_to_tankies
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			## Decisions to bring the fight against the Red Line
 		}
 	}
 
@@ -2097,11 +2136,11 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_choice_2
+			focus = AVT_death_to_tankies
 		}
 		x = 3
 		y = 1
-		relative_position_id = politics_communism_choice_2
+		relative_position_id = AVT_death_to_tankies
 
 		ai_will_do = {
 			factor = 3
@@ -2185,12 +2224,12 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = politics_communism_choice_2
-			focus = politics_communism_choice_1
+			focus = AVT_death_to_tankies
+			focus = AVT_reconciliation
 		}
 		x = 0
 		y = 3
-		relative_position_id = politics_communism_3
+		relative_position_id = AVT_Anatoly_takes_helm
 
 		ai_will_do = {
 			factor = 3
@@ -2211,6 +2250,29 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = politics_communism_establish_bases
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = politics_fight_against_capitalism
+		icon = GFX_smash_capitalist
+		cost = 6.5
+
+		prerequisite = {
+			focus = politics_death_to_fascists
+		}
+		prerequisite = {
+			focus = politics_communism_march_on_berilag
+		}
+		x = 0
+		y = 1
+		relative_position_id = politics_improve_relations
 
 		ai_will_do = {
 			factor = 3

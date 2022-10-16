@@ -1,0 +1,516 @@
+add_namespace = nf_EUR
+
+
+## How to organise Immigrants
+country_event = { 
+    id = nf_EUR.1
+    title = nf_EUR.1.t
+    desc = nf_EUR.1.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+	option = { ## Put them in armed forces
+		name = nf_EUR.1.a
+		hidden_effect = { 
+			add_ideas = immigranst_military 
+			set_country_flag = EUR_military_flag
+		}
+
+        ai_chance = {
+            base = 1
+        }
+	}
+
+    option = { ## Put them in industry
+        name = nf_EUR.1.b
+		hidden_effect = { 
+			add_ideas = immigranst_industrial
+			set_country_flag = EUR_industrial_flag
+		}
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Pre-political form the council
+country_event = { 
+    id = nf_EUR.2
+    title = nf_EUR.2.t
+    desc = nf_EUR.2.d
+    picture = "GFX_event (121)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.2.b
+		hidden_effect = {
+			set_country_flag = europe_has_council
+			remove_country_leader_role = {
+				character = EUR_immigrant_collective
+				ideology = labour_council
+			}
+			add_country_leader_role = {
+				character = EUR_elective_council
+				country_leader={
+					ideology = labour_council
+					traits = { _elected_representatives }
+					expire="2050.1.1.1"
+				}
+				promote_leader = yes
+			}
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Scavenging Run -- Successful
+country_event = { 
+    id = nf_EUR.3
+    title = nf_EUR.3.t
+    desc = nf_EUR.3.d
+    picture = "GFX_event (121)"
+
+	is_triggered_only = yes
+
+	option = { ## Yippe!!!
+		name = nf_EUR.3.a
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 2
+			}
+		}
+		capital_scope = {
+			add_resource = {
+			    type = alloys
+			    amount = 1
+			}
+		}
+		capital_scope = {
+			add_resource = {
+			    type = components
+			    amount = 1
+			}
+		}
+		add_manpower = 20
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+
+## Scavenging Run -- UnSuccessful
+country_event = { 
+    id = nf_EUR.4
+    title = nf_EUR.4.t
+    desc = nf_EUR.4.d
+    picture = "GFX_event (121)"
+
+	is_triggered_only = yes
+
+	option = { ## :(
+		name = nf_EUR.4.a
+		add_war_support = -0.05
+		add_stability = -0.02
+		capital_scope = {
+			add_resource = {
+			    type = scrap
+			    amount = 1
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+
+## Industrial Drive -- Increase Military Drive
+country_event = { 
+    id = nf_EUR.5
+    title = nf_EUR.5.t
+    desc = nf_EUR.5.d
+    picture = "GFX_event (125)"
+
+	is_triggered_only = yes
+
+	option = { ## :(
+		name = nf_EUR.5.a
+		add_ideas = EUR_military_drive_1
+        ai_chance = {
+            base = 1
+        }
+	}
+	option = { ## :(
+		name = nf_EUR.5.b
+		add_ideas = EUR_military_drive_2
+        ai_chance = {
+            base = 1
+        }
+	}
+	option = { ## :(
+		name = nf_EUR.5.c
+		add_ideas = EUR_military_drive_3
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+
+## Westernisation 1
+country_event = { 
+    id = nf_EUR.6
+    title = nf_EUR.6.t
+    desc = nf_EUR.6.d
+    picture = "GFX_event (121)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.6.a
+		hidden_effect = {
+			add_ideas = westernisation_1
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Westernisation 2
+country_event = { 
+    id = nf_EUR.7
+    title = nf_EUR.7.t
+    desc = nf_EUR.7.d
+    picture = "GFX_event (121)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.7.a
+		hidden_effect = {
+			swap_ideas = { 
+			  remove_idea = westernisation_1 
+			  add_idea = westernisation_2
+			}
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## The Threat Realised
+country_event = { 
+    id = nf_EUR.8
+    title = nf_EUR.8.t
+    desc = nf_EUR.8.d
+    picture = "GFX_event (121)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.8.a
+		add_war_support = 0.5
+		add_stability = -0.1
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+
+## Scavenging Runs -- Saiga 12
+country_event = { 
+    id = nf_EUR.9
+    title = nf_EUR.9.t
+    desc = nf_EUR.9.d
+    picture = "GFX_event (111)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.9.a
+		set_technology = {
+			shotgun_infantry_equipment_4_tech = 1 #Saiga 12
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Scavenging Runs -- Revolvers
+country_event = { 
+    id = nf_EUR.10
+    title = nf_EUR.10.t
+    desc = nf_EUR.10.d
+    picture = "GFX_event (111)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.10.a
+		add_equipment_to_stockpile = {
+			type = basic_infantry_equipment
+			amount = 35
+			producer = RUS
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Scavenging Runs -- Scrap Guns
+country_event = { 
+    id = nf_EUR.11
+    title = nf_EUR.11.t
+    desc = nf_EUR.11.d
+    picture = "GFX_event (111)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.11.a
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_1
+			amount = 15
+			producer = RUS
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Beginniong of political stuuf
+country_event = { 
+    id = nf_EUR.12
+    title = nf_EUR.12.t
+    desc = nf_EUR.12.d
+    picture = "GFX_event (100)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.12.a
+		add_political_power = 25
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Head chancellor shulz
+country_event = { 
+    id = nf_EUR.13
+    title = nf_EUR.13.t
+    desc = nf_EUR.13.d
+    picture = "GFX_event (121)"
+	
+	is_triggered_only = yes
+
+    option = { ## Council
+        name = nf_EUR.13.a
+		hidden_effect = {
+			remove_country_leader_role = {
+				character = EUR_elective_council
+				ideology = labour_council
+			}
+			add_country_leader_role = {
+				character = EUR_head_chancellor_schulz
+				country_leader={
+					ideology = labour_council
+					traits = { _head_chancellor }
+					expire="2050.1.1.1"
+				}
+				promote_leader = yes
+			}
+		}
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## problem_general
+country_event = { 
+    id = nf_EUR.14
+    title = nf_EUR.14.t
+    desc = nf_EUR.14.d
+    picture = "GFX_event (92)"
+	
+	is_triggered_only = yes
+
+    option = { ## Allow his ideas
+        name = nf_EUR.14.a
+		add_stability = -0.05
+		set_country_flag = europe_worm_is_threat
+        ai_chance = {
+            base = 2.5
+        }
+		
+    }
+	
+	option = { ## ban him
+        name = nf_EUR.14.b
+		add_stability = 0.1
+		add_war_support = -0.05
+        ai_chance = {
+            base = 2.5
+        }
+		
+    }
+}
+
+## European Union
+country_event = { 
+    id = nf_EUR.15
+    title = nf_EUR.15.t
+    desc = nf_EUR.15.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { ## Less gooo
+	
+        name = nf_EUR.15.a
+		
+		add_ideas = european_unity
+		remove_ideas = lessons_from_reds
+		
+        ai_chance = {
+            base = 2.5
+        }
+		
+    }
+}
+
+## Artbatksya joins faction against GWC
+country_event = { 
+    id = nf_EUR.16
+    title = nf_EUR.16.t
+    desc = nf_EUR.16.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { 
+	
+        name = nf_EUR.16.a
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Artbatksya denys
+country_event = { 
+    id = nf_EUR.17
+    title = nf_EUR.17.t
+    desc = nf_EUR.17.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { 
+	
+        name = nf_EUR.17.a
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Artbatksya denys
+country_event = { 
+    id = nf_EUR.18
+    title = nf_EUR.18.t
+    desc = nf_EUR.18.d
+    picture = "GFX_event (1)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.18.a
+		
+		add_ideas = europe_industrial_powerhouse_more_build_speed
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+	
+	option = { 
+        name = nf_EUR.18.b
+		
+		add_ideas = europe_industrial_powerhouse_more_output
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+## Schulz speech
+country_event = { 
+    id = nf_EUR.19
+    title = nf_EUR.19.t
+    desc = nf_EUR.19.d
+    picture = "GFX_event (15)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.19.a
+		
+		add_timed_idea = { idea = schulz_speech days = 730 }
+		
+        ai_chance = {
+            base = 2.5
+        }
+    }
+
+}
+
+
+## hanza business deal
+country_event = { 
+    id = nf_EUR.20
+    title = nf_EUR.20.t
+    desc = nf_EUR.20.d
+    picture = "GFX_event (15)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.20.a
+		
+		add_offsite_building = { type = arms_factory level = 2 }
+		add_timed_idea = { idea = europe_hanza_payment days = 180 }
+		
+        ai_chance = {
+            base = 2
+        }
+    }
+	
+	option = { 
+        name = nf_EUR.20.b
+		
+		add_offsite_building = { type = industrial_complex level = 2 }
+		add_timed_idea = { idea = europe_hanza_payment days = 180 }
+		
+        ai_chance = {
+            base = 1
+        }
+    }
+	
+
+}
