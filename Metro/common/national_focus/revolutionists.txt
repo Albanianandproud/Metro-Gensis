@@ -3,14 +3,14 @@
 
 focus_tree = {
     id = communist_shared
-	continuous_focus_position = { x = 3900 y = 100 }
+	continuous_focus_position = { x = 4000 y = 100 }
 	country = {
 		base = 0
 		modifier = {
 			OR = {
 				original_tag = AVT
 			}
-			add = 30
+			add = 0
 		}
 	}
 	default = no
@@ -1229,6 +1229,11 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = communist_our_own_advisors
 		}
+		available = {
+			NOT = {
+				has_completed_focus = AVT_death_to_tankies
+			}
+		}
 		x = -1
 		y = 1
 		relative_position_id = communist_mobilise_army
@@ -1311,7 +1316,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = AVT_vladimir_koltsov
+			show_ideas_tooltip = AVT_koltsov
+			add_ideas = AVT_vengeance
 		}
 	}
 
@@ -1333,7 +1339,7 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = AVT_nikolai_nosov
+			show_ideas_tooltip = AVT_nosov
 		}
 	}
 
@@ -1355,7 +1361,7 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = AVT_perebezhchik 
+			show_ideas_tooltip = AVT_perebezhchik
 		}
 	}
 
@@ -1489,6 +1495,95 @@ focus_tree = {
 	}
 
 	focus = {
+		id = communist_oil_stockpiling
+		icon = GFX_Fuel
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_military_0
+		}
+		x = 4
+		y = 1
+		relative_position_id = communist_military_0
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.5
+				uses = 1
+				category = refinery
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = communist_refineries
+		icon = GFX_Fuel
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_oil_stockpiling
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_oil_stockpiling
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = revolutionary_oil_stockpiling
+		}
+	}
+
+	focus = {
+		id = communist_refineries_tech
+		icon = GFX_Fuel
+		cost = 6.5
+
+		prerequisite = {
+			focus = communist_refineries
+		}
+		x = 0
+		y = 1
+		relative_position_id = communist_refineries
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 2
+				category = refinery
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
 		id = communist_contact_BAU
 		icon = GFX_HNZ_technician_trade
 		cost = 6.5
@@ -1501,7 +1596,7 @@ focus_tree = {
 			focus = communist_contact_KUZ
 		}
 		available = {
-			num_of_available_military_factories > 4
+			num_of_available_military_factories > 3
 		}
 		x = -2
 		y = 1
@@ -1532,7 +1627,7 @@ focus_tree = {
 			focus = communist_contact_BAU
 		}
 		available = {
-			num_of_available_military_factories > 4
+			num_of_available_military_factories > 3
 		}
 		x = 0
 		y = 1
@@ -1560,7 +1655,7 @@ focus_tree = {
 			focus = communist_contact_BAU
 		}
 		available = {
-			num_of_available_military_factories > 4
+			num_of_available_military_factories > 3
 		}
 		x = 2
 		y = 1
@@ -1775,13 +1870,13 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 0.75
 				uses = 1
 				category = rail_cart
 			}
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 0.75
 				uses = 1
 				category = rail_car
 			}
@@ -1857,7 +1952,7 @@ focus_tree = {
 
 	focus = {
 		id = AVT_move_south
-		icon = GFX_bullets_2
+		icon = GFX_campfire_2
 		cost = 6.5
 
 		prerequisite = {
@@ -1907,7 +2002,7 @@ focus_tree = {
 
 	focus = {
 		id = AVT_guerilla_tactics
-		icon = GFX_bullets_2
+		icon = GFX_AVT_snipoer
 		cost = 6.5
 
 		prerequisite = {
@@ -1922,14 +2017,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			add_ideas = AVT_guerilla_schemes
 		}
 	}
 
 	focus = {
 		id = AVT_Anatoly_takes_helm
-		icon = GFX_bullets_2
+		icon = GFX_AVT_anatoly
 		cost = 6.5
 
 		prerequisite = {
@@ -1944,15 +2038,25 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## Make Anatoly Field Marshal
-			## Improve stats
-			## Becamed leaderr 
+			hidden_effect = {
+				remove_country_leader_role = {
+					character = AVT_rusakov
+					ideology = peoples_council
+				}
+			}
+
+			AVT_tomsky = {
+				gain_xp = 1500
+			}
+			add_field_marshal_role = {
+				Character = AVT_tomsky
+			}
 		}
 	}
 
 	focus = {
 		id = AVT_reconciliation
-		icon = GFX_bullets_2
+		icon = GFX_AVT_reconcile
 		cost = 6.5
 
 		prerequisite = {
@@ -1960,6 +2064,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = AVT_death_to_tankies
+		}
+		available = {
+			date > 2032.1.1
 		}
 		x = 1
 		y = 1
@@ -1970,14 +2077,22 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			add_opinion_modifier = {
+				target = RED
+				modifier = support 
+			}
+			RED = {
+				add_opinion_modifier = {
+					target = AVT
+					modifier = support 
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = politics_fight_against_fascism
-		icon = GFX_bullets_2
+		icon = GFX_AVT_espionage
 		cost = 6.5
 
 		prerequisite = {
@@ -1998,7 +2113,7 @@ focus_tree = {
 
 	focus = {
 		id = politics_curtail_supplies
-		icon = GFX_bullets_2
+		icon = GFX_AVT_partisan
 		cost = 6.5
 
 		prerequisite = {
@@ -2019,7 +2134,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = politics_anti_fascism_action
+		id = politics_join_the_red_line
 		icon = GFX_bullets_2
 		cost = 6.5
 
@@ -2035,14 +2150,24 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			diplomatic_relation = {
+				country = RED
+				relation = non_aggression_pact
+				active = no
+			}
+			RED = {
+				diplomatic_relation = {
+					country = AVT
+					relation = non_aggression_pact
+					active = no
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = politics_thorn_in_their_side
-		icon = GFX_bullets_2
+		icon = GFX_AVT_espionage
 		cost = 6.5
 
 		prerequisite = {
@@ -2074,19 +2199,29 @@ focus_tree = {
 		y = 1
 		relative_position_id = politics_curtail_supplies
 
-		ai_will_do = {
-			factor = 3
+		available = {
+			ROOT = {
+				is_neighbor_of = RCH
+			}
 		}
 
+		will_lead_to_war_with = RCH
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = RCH
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 20
 		}
 	}
 
 	focus = {
 		id = AVT_death_to_tankies
-		icon = GFX_bullets_2
+		icon = GFX_AVT_death_to_tankies
 		cost = 6.5
 
 		prerequisite = {
@@ -2094,6 +2229,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = AVT_reconciliation
+		}
+		available = {
+			date > 2032.1.1
 		}
 		x = -1
 		y = 1
@@ -2104,8 +2242,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			add_war_support = 0.1
+			army_experience = 10
+			add_opinion_modifier = {
+				target = RED
+				modifier = ideological_enemy
+			}
 		}
 	}
 
@@ -2126,13 +2268,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## Decisions to bring the fight against the Red Line
+			create_faction = AVT_revolutionists
 		}
 	}
 
 	focus = {
 		id = politics_freedom_from_tyranny
-		icon = GFX_bullets_2
+		icon = GFX_AVT_revolutionists
 		cost = 6.5
 
 		prerequisite = {
@@ -2147,8 +2289,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			add_ideas = AVT_freedom_from_tyranny
 		}
 	}
 
@@ -2169,8 +2310,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			army_experience = 10
+			add_ideas = AVT_die_standing
 		}
 	}
 
@@ -2191,8 +2332,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			army_experience = 10
+			add_ideas = AVT_against_tyranny
 		}
 	}
 
@@ -2212,9 +2353,28 @@ focus_tree = {
 			factor = 3
 		}
 
+		available = {
+			ROOT = {
+				is_neighbor_of = RED
+				AND = {
+					228 = {
+						is_owned_and_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		will_lead_to_war_with = RED
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
+			228 = {
+				add_core_of = ROOT
+			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = RED
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
 	}
 
@@ -2278,7 +2438,17 @@ focus_tree = {
 			factor = 3
 		}
 
+		will_lead_to_war_with = HNZ
 		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = HNZ 
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 20
 		}
 	}
 }
