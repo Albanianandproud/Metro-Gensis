@@ -4,7 +4,7 @@ RED_ministry_departments = {
 	
 	RED_ministry_economics_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_economics
@@ -36,7 +36,7 @@ RED_ministry_departments = {
 
 	RED_ministry_reclaimation_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_reclaimation
@@ -76,7 +76,7 @@ RED_ministry_departments = {
 
 	RED_ministry_reclaimation_construction = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_reclaimation
@@ -117,7 +117,7 @@ RED_ministry_departments = {
 
 	RED_ministry_reclaimation_resource = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_reclaimation
@@ -158,7 +158,7 @@ RED_ministry_departments = {
 
 	RED_ministry_domestics_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_domestics
@@ -190,7 +190,7 @@ RED_ministry_departments = {
 
 	RED_ministry_labour_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_labour
@@ -222,7 +222,7 @@ RED_ministry_departments = {
 
 	RED_ministry_foreign_affairs_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_foreign_affairs
@@ -254,7 +254,7 @@ RED_ministry_departments = {
 
 	RED_ministry_defense_upgrade = {
 
-		icon = decision_ministries
+		icon = ministries
 
 		available = {
 			has_idea = RED_minister_of_defense
@@ -351,7 +351,7 @@ RED_crisis_category = {
 	}
 
 	RED_military_mutiny_rid_mutinies = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = decision_remove_military_mutiny_2
 
 		available = {
 			has_completed_focus = RED_rid_mutinies
@@ -359,6 +359,9 @@ RED_crisis_category = {
 
 		visible = {
 			has_completed_focus = RED_rid_mutinies
+			AND = {
+				has_country_flag = RED_military_mutinies
+			}
 		}
 
 		cost = 0
@@ -381,7 +384,7 @@ RED_crisis_category = {
 	}
 
 	RED_sieze_arms = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_mutiny_3
 
 		available = {
 			has_completed_focus = RED_rid_mutinies
@@ -422,7 +425,7 @@ RED_crisis_category = {
 	}
 
 	RED_military_mutiny_rid_mutinies_2 = { # Needed. So players can only use decision Twice
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_mutiny_2
 
 		available = {
 			has_completed_focus = RED_the_great_show_trial
@@ -450,7 +453,7 @@ RED_crisis_category = {
 	}
 
 	RED_military_mutiny_remove_power = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_mutiny
 
 		available = {
 			has_completed_focus = RED_deal_with_military_mutinies
@@ -458,6 +461,9 @@ RED_crisis_category = {
 
 		visible = {
 			has_completed_focus = RED_deal_with_military_mutinies
+			AND = {
+				has_country_flag = RED_military_mutinies
+			}
 		}
 
 		custom_cost_text = command_power_15
@@ -481,11 +487,14 @@ RED_crisis_category = {
 		}
 	}
 	RED_military_mutiny_court_marshal_traitors = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_traitors
 		available = {
 			has_completed_focus = RED_deal_with_military_mutinies
 			AND = {
 				has_manpower > 34
+			}
+			AND = {
+				has_country_flag = RED_military_mutinies
 			}
 		}
 
@@ -516,7 +525,7 @@ RED_crisis_category = {
 		}
 	}
 	RED_military_mutiny_promote_new_recruits = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_recruits
 		available = {
 			has_completed_focus = RED_deal_with_military_mutinies
 			AND = {
@@ -544,7 +553,7 @@ RED_crisis_category = {
 	## Mushroom Revolts ##
 
 	RED_mushroom_revolt_rid_mutinies = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_military_mutiny_2
 
 		available = {
 			has_completed_focus = RED_dismantle_mushroom_revolts
@@ -573,7 +582,7 @@ RED_crisis_category = {
 	}
 
 	RED_mushroom_revolt_sabotage_revolution = {
-		icon = GFX_HNZ_increase_industrial_shift
+		icon = remove_people_sabotage
 
 		available = {
 			has_completed_focus = RED_sabotage_the_revolution
@@ -817,22 +826,20 @@ RED_generic_decision_category = {
 	
 	RED_lobby_the_politburo = {
 
-		icon = decision_politburo
+		icon = politburo
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 10
@@ -864,22 +871,20 @@ RED_generic_decision_category = {
 
 	RED_lobby_the_politburo_andrey = {
 
-		icon = decision_politburo
+		icon = politburo
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 60
@@ -907,22 +912,20 @@ RED_generic_decision_category = {
 
 	RED_economic_rejuvination = {
 
-		icon = decision_rejuvination
+		icon = rejuvination
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 60
@@ -952,22 +955,20 @@ RED_generic_decision_category = {
 
 	RED_idolize_cult_of_communism = {
 
-		icon = decision_idolize
+		icon = idolize
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 60
@@ -1003,22 +1004,20 @@ RED_generic_decision_category = {
 
 	RED_idolize_cult_of_communism_2 = {
 
-		icon = decision_idolize
+		icon = idolize
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 60
@@ -1051,22 +1050,20 @@ RED_generic_decision_category = {
 
 	RED_grain_rebates = {
 
-		icon = decision_rebates
+		icon = rebates
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 
 		cost = 60
@@ -1090,22 +1087,20 @@ RED_generic_decision_category = {
 
 	RED_administrational_adjustments  = {
 
-		icon = decision_adjustments
+		icon = adjustments
 
 		available = {
-			custom_trigger_tooltip = { 
+			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
-				NOT = {
-					hidden_trigger = {
-						has_idea = RED_mushroom_revolt
-						has_idea = RED_military_mutinies 
-						has_idea = RED_military_mutinies_2
-						has_idea = RED_military_mutinies_3
-						has_country_flag = RED_military_mutinies
-						has_country_flag = RED_mushroom_revolts
-					}
-				}
-			}
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
 		}
 		
 		cost = 0
