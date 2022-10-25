@@ -183,7 +183,7 @@ peace_ai_desires = {
     }
 
 
-    council_dont_liberate_the_wrong_ideology = {
+    communist_dont_liberate_the_wrong_ideology = {
         peace_action_type = liberate
         enable = {
             ROOT = { has_government = council }
@@ -193,7 +193,7 @@ peace_ai_desires = {
     }
 
 
-    dictatorial_dont_liberate_the_wrong_ideology = {
+    fascist_dont_liberate_the_wrong_ideology = {
         peace_action_type = liberate
         enable = {
             ROOT = { has_government = dictatorial }
@@ -251,22 +251,6 @@ peace_ai_desires = {
 	
         ai_desire = 50
     }
-	
-	dont_take_land_if_sov_government_is_forced = { 
-        peace_action_type = { take_states puppet }
-        enable = {
-			ROOT.FROM.FROM = { 
-				original_tag = SOV 
-				pc_is_forced_government = yes
-			}
-            ROOT.FROM.FROM.FROM = {
-                NOT = { is_claimed_by = ROOT.FROM }
-            }
-        }
-	
-        ai_desire = -50
-    }
-
 
     liberate_if_already_exists = {
         peace_action_type = liberate
@@ -307,20 +291,6 @@ peace_ai_desires = {
         }
         ai_desire = -90
     }
-
-
-    non_aligned_should_stick_to_claims = {
-        peace_action_type = take_states
-        enable = {
-            ROOT = { has_government = oligarch }
-            ROOT.FROM.FROM.FROM = {
-                NOT = { is_claimed_by = ROOT.FROM }
-                NOT = { is_core_of = ROOT.FROM }
-            }
-        }
-        ai_desire = -50
-    }
-
 
     wrong_ideology_faction_members_dont_force_gov = {
         peace_action_type = force_government
@@ -364,11 +334,11 @@ peace_ai_desires = {
     }
 
 
-    dont_resurrect_hitler = {
+    dont_resurrect_hitler_2 = {
         peace_action_type = liberate
         enable = {
             ROOT.FROM = {
-                original_tag = GER
+                original_tag = RCH
                 has_government = dictatorial
             }
         }
@@ -453,39 +423,5 @@ peace_ai_desires = {
 		}
 		ai_desire = 70 #Acceptable values
 	}
-	
-	allies_dont_liberate_on_sov = {
-        peace_action_type = { liberate puppet }
-        enable = {
-            ROOT = {
-                OR = {
-					has_government = community
-					has_government = oligarch
-				}
-            }
-            ROOT.FROM.FROM = {
-                tag = RED
-				is_major = yes
-            }
-        }
-        ai_desire = -50
-    }
-	
-	allies_force_gov_on_sov = {
-        peace_action_type = force_government
-        enable = {
-            ROOT = {
-                OR = {
-					has_government = community
-					has_government = oligarch
-				}
-            }
-            ROOT.FROM.FROM = {
-                tag = RED
-				is_major = yes
-            }
-        }
-        ai_desire = 30
-    }
 
 }
