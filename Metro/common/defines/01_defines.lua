@@ -159,5 +159,5 @@ NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 3.5
 NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.3	--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
-NDefines.NOperatives.AGENCY_CREATION_DAYS = 99				--- No more Espionage!
-NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 999		--- No more Espionage!
+NDefines.NOperatives.AGENCY_CREATION_DAYS = 35				--- No more Espionage!
+NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 2		--- No more Espionage!
