@@ -1417,9 +1417,12 @@ focus_tree = {
 
 	focus = {
 		id = RED_retooling_artisans_for_war
-		icon = GFX_RED_gosplan_2
+		icon = GFX_generic_stalker_2
 		prerequisite = {
 			focus = RED_military_plant
+		}
+		available = {
+			has_character = RED_vasily_petrov 
 		}
 		x = 1
 		y = 1
@@ -1431,6 +1434,19 @@ focus_tree = {
 				character = RED_vasily_petrov 
 				slot = political_advisor
 				trait = RED_retooling_arms
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = {
@@ -2708,10 +2724,8 @@ focus_tree = {
 		cost = 4.3
 		relative_position_id = RED_development_the_berilag
 		completion_reward = {
-			#
-			# Upgrade Mikhails Trait through event
-			# Gain 1 research slot through said event
 			RED_berilag_breakthrough = yes
+			add_research_slot = 1
 		}
 		ai_will_do = {
 			factor = 2
