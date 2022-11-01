@@ -1,0 +1,59 @@
+# Scripted AI desire for peace actions.
+# See documentation.info file for more detailed scripting information.
+
+peace_ai_desires = {
+
+    RED_wants_sokolnicheskaya = {
+        peace_action_type = take_states
+        enable = {
+            tag = RED # Negotiatior is soviet union
+            FROM = { tag = ROOT }  # And the negotiator is also taking for themselves
+            FROM.FROM.FROM = { state = 274 }
+            FROM.FROM.FROM = { state = 341 }
+            FROM.FROM.FROM = { state = 361 }
+            FROM.FROM.FROM = { state = 270 }
+        }
+
+        ai_desire = 50  # 50 percent higher desire
+    }
+
+
+    RED_puppet_KUZ = {
+        peace_action_type = puppet
+        enable = {
+            is_historical_focus_on = yes
+            ROOT.FROM = { tag = KUZ }
+            ROOT.FROM.FROM.FROM = { is_core_of = KUZ }
+            tag = RED
+        }
+        ai_desire = 150
+    }
+
+
+    RED_claims_histo = {
+        peace_action_type = take_state
+        enable = {
+            is_historical_focus_on = yes
+            ROOT.FROM.FROM.FROM = {
+                OR = {
+                    state = 274
+                    state = 341
+                    state = 361
+                    state = 270
+                }
+            }
+            ROOT.FROM = { tag = RED }
+        }
+        ai_desire = 400
+    }
+
+    RED_leave_TRB_alone = {
+        peace_action_type = { take_states puppet liberate force_government }
+        enable = {
+            is_historical_focus_on = yes
+            ROOT = { tag = RED }
+            ROOT.FROM.FROM.FROM = { is_core_of = TRB }
+        }
+        ai_desire = -50
+    }
+}
