@@ -159,5 +159,10 @@ NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 3.5
 NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.3	--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
-NDefines.NOperatives.AGENCY_CREATION_DAYS = 35				--- No more Espionage!
-NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 2		--- No more Espionage!
+NDefines.NOperatives.AGENCY_CREATION_DAYS = 30			
+NDefines.NOperatives.AGENCY_UPGRADE_DAYS = 150			--- Original 30
+NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 1
+NDefines.NOperatives.MAX_OPERATIVE_SLOT_FROM_AGENCY_UPGRADES = 0	--- Slots gain from unlocking Skill
+NDefines.AGENCY_UPGRADE_PER_OPERATIVE_SLOT = 0
+
+
