@@ -365,3 +365,93 @@ country_event = {
 		add_manpower = 15
 	}
 }
+
+## Disappearance Event ##
+
+country_event = {
+	id =  random_event.13
+	title =  random_event.13.t
+	desc =  random_event.13.d
+	picture = "GFX_event (82)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	immediate = {
+		hidden_effect = {
+			add_manpower = -10
+			add_equipment_to_stockpile = {
+		        type = infantry_equipment
+		        amount = -10
+		    }
+		}
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = SPT
+			original_tag = PAG
+			original_tag = MUT
+			original_tag = RUI
+		}
+	}
+
+	option = {
+		name = random_event.13.a
+		add_manpower = -5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -5
+		}
+		random_list = {
+		    50 = {  ## Found only Equipment ##
+		        ROOT = { country_event = { id = random_event.14 days = 2 random_days = 2} }
+		    }
+		    50 = {  ## Found patrol ##
+			ROOT = { country_event = { id = random_event.15 days = 2 random_days = 2} }
+		    }
+		}
+	}
+
+	option = {
+		name = random_event.13.b
+		add_stability = -0.02
+	}
+}
+
+country_event = {
+	id = random_event.14
+	title = random_event.14.t
+	desc = random_event.14.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {	
+		name = random_event.14.a
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 15
+		}
+	}
+}
+
+country_event = {
+	id = random_event.15
+	title = random_event.15.t
+	desc = random_event.15.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {	
+		name = random_event.15.a
+		add_manpower = 15
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 15
+		}
+		add_stability = 0.025
+	}
+}
