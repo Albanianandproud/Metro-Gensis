@@ -142,22 +142,27 @@ NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.8--- Base is 0.3
 NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 1
 
 NDefines.NSupply.INFRA_TO_SUPPLY = 1.15
-NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.1
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.25
+NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.5
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.3
 NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 0.75
 
-NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 10.0
+NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 11.5
 
 NDefines.NSupply.SUPPLY_HUB_FULL_MOTORIZATION_TRUCK_COST = 35.0
 
 NDefines.NSupply.MIN_TRAIN_SUPPLY_FACTOR = 0.34
 
-NDefines.NSupply.RAILWAY_BASE_FLOW = 15.0 
+NDefines.NSupply.RAILWAY_BASE_FLOW = 20.0 
 
-NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 3.5
+NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 1
 
 NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.3	--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
-NDefines.NOperatives.AGENCY_CREATION_DAYS = 35				--- No more Espionage!
-NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 2		--- No more Espionage!
+NDefines.NOperatives.AGENCY_CREATION_DAYS = 30			
+NDefines.NOperatives.AGENCY_UPGRADE_DAYS = 150			--- Original 30
+NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 1
+NDefines.NOperatives.MAX_OPERATIVE_SLOT_FROM_AGENCY_UPGRADES = 0	--- Slots gain from unlocking Skill
+NDefines.AGENCY_UPGRADE_PER_OPERATIVE_SLOT = 0
+
+

@@ -491,9 +491,6 @@ RED_crisis_category = {
 		available = {
 			has_completed_focus = RED_deal_with_military_mutinies
 			AND = {
-				has_manpower > 34
-			}
-			AND = {
 				has_country_flag = RED_military_mutinies
 			}
 		}
@@ -538,8 +535,8 @@ RED_crisis_category = {
 				has_completed_focus = RED_promote_loyalty
 			}
 		}
-		cost = 5
-		days_remove = 14
+		cost = 0
+		days_remove = 21
 		fire_only_once = yes
 
 		ai_will_do = {
@@ -547,7 +544,7 @@ RED_crisis_category = {
 		}
 		complete_effect = {
 			add_command_power = 15
-			add_political_power = 30
+			add_political_power = 10
 		}
 	}
 	## Mushroom Revolts ##
@@ -1364,6 +1361,40 @@ RED_rebuilding_the_line_category = {
 
 		ai_will_do = {
 			base = 5
+		}
+	}
+
+	RED_hunt_for_lenin_tomb = {
+
+		icon = politburo
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = RED_not_in_crisis_tt 
+   				NOT = {
+					has_idea = RED_mushroom_revolt
+					has_idea = RED_military_mutinies 
+					has_idea = RED_military_mutinies_2
+					has_idea = RED_military_mutinies_3
+					has_country_flag = RED_military_mutinies
+					has_country_flag = RED_mushroom_revolts
+   				}
+   			}
+		}
+
+		cost = 0
+		days_remove = 45
+
+		visible = {
+			has_completed_focus = RED_scouring_lenins_tomb
+		}
+
+		remove_effect = {
+			 country_event = nf_RED.86
+		}
+
+		ai_will_do = {
+			factor = 0
 		}
 	}
 }

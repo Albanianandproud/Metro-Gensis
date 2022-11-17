@@ -17,7 +17,7 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation
 		icon = GFX
-		x = 21
+		x = 22
 		y = 1
 		cost = 6.5
 
@@ -26,6 +26,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_timed_idea = {
+				idea = ARB_economic_revitalisation
+				days = 180
+			}
 		}
 	}
 
@@ -34,7 +38,7 @@ focus_tree = {
 		icon = GFX
 		x = -2
 		y = 1
-		cost = 6.5
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -46,6 +50,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_stability = 0.05
 		}
 	}
 
@@ -54,7 +59,7 @@ focus_tree = {
 		icon = GFX
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 4.3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -66,6 +71,19 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -74,32 +92,12 @@ focus_tree = {
 		icon = GFX
 		x = 2
 		y = 1
-		cost = 6.5
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
 		}
 		relative_position_id =ARB_economic_revitalisation
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = ARB_economic_revitalisation_5
-		icon = GFX
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = ARB_economic_revitalisation_3
-		}
-		relative_position_id = ARB_economic_revitalisation_3
 
 		ai_will_do = {
 			factor = 3
@@ -114,11 +112,23 @@ focus_tree = {
 		icon = GFX
 		x = 1
 		y = 1
-		cost = 6.5
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation_3
 		}
+
+		mutually_exclusive = {
+			focus = ARB_economic_revitalisation_5
+		}
+
+		available = {
+			399 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
 		relative_position_id = ARB_economic_revitalisation_3
 
 		ai_will_do = {
@@ -126,6 +136,68 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			399 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_economic_revitalisation_5
+		icon = GFX
+		x = 3
+		y = 1
+		cost = 3
+
+		prerequisite = {
+			focus = ARB_economic_revitalisation_3
+		}
+
+		mutually_exclusive = {
+			focus = ARB_economic_revitalisation_6
+		}
+
+		available = {
+			399 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		relative_position_id = ARB_economic_revitalisation_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			399 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
 		}
 	}
 
@@ -147,7 +219,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hansa_alignment
 		icon = GFX
-		x = -4
+		x = -7
 		y = 1
 		cost = 6.5
 
@@ -161,6 +233,50 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = ARB_revive_caucasian_movement
 		}
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_hiring_technical_expertise
+		icon = GFX
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_hansa_alignment
+		}
+		relative_position_id = ARB_hansa_alignment
+		mutually_exclusive = {
+			focus = ARB_hiring_economic_expertise
+		}
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_hiring_economic_expertise
+		icon = GFX
+		x = -4
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_hansa_alignment
+		}
+		mutually_exclusive = {
+			focus = ARB_hiring_technical_expertise
+		}
+		relative_position_id = ARB_hansa_alignment
 		ai_will_do = {
 			factor = 3
 		}
@@ -290,9 +406,9 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ARB_join_rangers
-		icon = GFX
-		x = -1
+		id = ARB_assist_the_rangers
+		icon = GFX_SPT_generic
+		x = -3
 		y = 1
 		cost = 6.5
 
@@ -303,6 +419,28 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = ARB_revaunchism
 		}
+		mutually_exclusive = {
+			focus = ARB_our_slice_of_home
+		}
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_assistance_against_GWC
+		icon = GFX
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_assist_the_rangers
+		}
+		relative_position_id = ARB_assist_the_rangers
 		ai_will_do = {
 			factor = 3
 		}
@@ -313,15 +451,15 @@ focus_tree = {
 
 	focus = {
 		id = ARB_ranger_initialisation
-		icon = GFX
+		icon = GFX_SPT_generic_soldier_3
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_join_rangers
+			focus = ARB_assist_the_rangers
 		}
-		relative_position_id = ARB_join_rangers
+		relative_position_id = ARB_assist_the_rangers
 		ai_will_do = {
 			factor = 3
 		}
@@ -332,7 +470,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_ranger_spec_ops
-		icon = GFX
+		icon = GFX_SPT_generic_soldier_4
 		x = -1
 		y = 1
 		cost = 6.5
@@ -350,8 +488,28 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_equal_amongst_peers
+		icon = GFX_SPT_generic_ranger
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_bastion_of_humanity
+			focus = ARB_ranger_spec_ops
+		}
+		relative_position_id = ARB_ranger_initialisation
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
 		id = ARB_bastion_of_humanity
-		icon = GFX
+		icon = GFX_SPT_generic_artyom
 		x = 1
 		y = 1
 		cost = 6.5
@@ -371,7 +529,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revaunchism
 		icon = GFX
-		x = 1
+		x = 3
 		y = 1
 		cost = 6.5
 
@@ -380,7 +538,10 @@ focus_tree = {
 		}
 		relative_position_id = ARB_neutrality
 		mutually_exclusive = {
-			focus = ARB_join_rangers 
+			focus = ARB_assist_the_rangers 
+		}
+		mutually_exclusive = {
+			focus = ARB_our_slice_of_home
 		}
 		ai_will_do = {
 			factor = 3
@@ -401,6 +562,25 @@ focus_tree = {
 			focus = ARB_revaunchism
 		}
 		relative_position_id = ARB_revaunchism
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_what_of_them
+		icon = GFX
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_claim_GWC
+		}
+		relative_position_id = ARB_claim_GWC
 		ai_will_do = {
 			factor = 3
 		}
@@ -449,6 +629,70 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_revival_of_an_empire
+		icon = GFX
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_war_against_polis
+			focus = ARB_war_against_hansa
+		}
+		relative_position_id = ARB_pressure_for_smolenskaya
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_our_slice_of_home
+		icon = GFX
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_neutrality
+		}
+		relative_position_id = ARB_neutrality
+		mutually_exclusive = {
+			focus = ARB_assist_the_rangers
+		}
+		mutually_exclusive = {
+			focus = ARB_revaunchism
+		}
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_our_slice_of_home_2
+		icon = GFX
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_our_slice_of_home
+		}
+		relative_position_id = ARB_our_slice_of_home
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
 		id = ARB_war_against_polis
 		icon = GFX
 		x = 1
@@ -470,7 +714,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revive_caucasian_movement
 		icon = GFX
-		x = 3
+		x = 7
 		y = 1
 		cost = 6.5
 
@@ -514,7 +758,7 @@ focus_tree = {
 	focus = {
 		id = ARB_house_refugees
 		icon = GFX
-		x = 1
+		x = 0
 		y = 1
 		cost = 6.5
 
@@ -531,10 +775,92 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_a_new_age_people
+		icon = GFX
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_house_refugees
+		}
+		mutually_exclusive = {
+			focus = ARB_ethnonationalism
+		}
+		relative_position_id = ARB_house_refugees
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_a_construction
+		icon = GFX
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_a_new_age_people
+		}
+		relative_position_id = ARB_a_new_age_people
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_ethnonationalism
+		icon = GFX
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_house_refugees
+		}
+		mutually_exclusive = {
+			focus = ARB_a_new_age_people
+		}
+		relative_position_id = ARB_house_refugees
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = ARB_promote_an_identity
+		icon = GFX
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_ethnonationalism
+		}
+		relative_position_id = ARB_ethnonationalism
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
 		id = ARB_faction_with_europa
 		icon = GFX
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 
 		prerequisite = {
@@ -552,7 +878,7 @@ focus_tree = {
 	focus = {
 		id = ARB_stalker_civilian_prioritisation
 		icon = GFX
-		x = 12
+		x = 16
 		y = 1
 		cost = 6.5
 
@@ -668,10 +994,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			#add_timed_idea = { 
-			#	idea = ARB_scrapping_the_refuse
-			#	days = 360
-			#}
+			add_timed_idea = { 
+				idea = ARB_scrapping_the_refuse
+				days = 360
+			}
 		}
 	}
 
@@ -692,6 +1018,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			## Make Military Advisors cost more PP
+			## Make Economic / Industrial advisors cost less PP
 		}
 	}
 
@@ -715,6 +1043,32 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -799,10 +1153,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			#add_timed_idea = { 
-			#	idea = ARB_construction_efforts
-			#	days = 360
-			#}
+			add_timed_idea = { 
+				idea = ARB_construction_efforts
+				days = 360
+			}
 			add_tech_bonus = {
 				name = industrial_bonus
 				bonus = 1.5
@@ -829,6 +1183,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 6
+				}
+				add_resource = {
+					type = alloys
+					amount = 4
+				}
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
+			}
 		}
 	}
 
@@ -883,6 +1251,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_stability = 0.075
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -966,10 +1348,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			#add_timed_idea = { 
-			#	idea = ARB_selling_surface_goods
-			#	days = 360
-			#}
+			add_timed_idea = { 
+				idea = ARB_selling_surface_goods
+				days = 360
+			}
 		}
 	}
 

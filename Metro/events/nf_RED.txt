@@ -528,6 +528,21 @@ country_event = { # Approach the Commanders
 				logistics_skill = 3
 				legacy_id=-1
 			}
+            add_advisor_role = {
+                character = RED_Yurik_velikov
+                activate = yes
+                advisor = {
+                    slot = high_command
+                    cost = 100
+                    idea_token = RED_Yurik_velikov
+                    traits = {
+                        RED_Yurik_velikov_trait
+                    }
+                    allowed = {
+                        always = yes
+                    }
+                }
+            }
             add_corps_commander_role = {
 				character = RED_Valerian_Grabovoi
 				skill = 3
@@ -537,6 +552,21 @@ country_event = { # Approach the Commanders
 				logistics_skill = 2
 				legacy_id=-1
 			}
+            add_advisor_role = {
+                character = RED_Valerian_Grabovoi
+                activate = yes
+                advisor = {
+                    slot = high_command
+                    cost = 100
+                    idea_token = RED_Valerian_Grabovoi
+                    traits = {
+                        RED_Valerian_Grabovoi_trait
+                    }
+                    allowed = {
+                        always = yes
+                    }
+                }
+            }
         }
         custom_effect_tooltip = RED_recruit_generals_tt
         hidden_effect = { country_event = { id = nf_RED.25 days = 21 random_days = 21 } }
@@ -574,6 +604,21 @@ country_event = { # Approach the Commanders
 				logistics_skill = 3
 				legacy_id=-1
 			}
+            add_advisor_role = {
+                character = RED_Yurik_velikov
+                activate = yes
+                advisor = {
+                    slot = high_command
+                    cost = 100
+                    idea_token = RED_Yurik_velikov
+                    traits = {
+                        RED_Yurik_velikov_trait
+                    }
+                    allowed = {
+                        always = yes
+                    }
+                }
+            }
             add_corps_commander_role = {
 				character = RED_Valerian_Grabovoi
 				skill = 3
@@ -583,6 +628,21 @@ country_event = { # Approach the Commanders
 				logistics_skill = 2
 				legacy_id=-1
 			}
+            add_advisor_role = {
+                character = RED_Valerian_Grabovoi
+                activate = yes
+                advisor = {
+                    slot = high_command
+                    cost = 100
+                    idea_token = RED_Valerian_Grabovoi
+                    traits = {
+                        RED_Valerian_Grabovoi_trait
+                    }
+                    allowed = {
+                        always = yes
+                    }
+                }
+            }
         }
         custom_effect_tooltip = RED_recruit_generals_tt
         hidden_effect = { country_event = { id = nf_RED.25 days = 21 random_days = 21 } }
@@ -1916,6 +1976,69 @@ country_event = { ### ELECTION EVENT
         hidden_effect = { clr_country_flag = RED_maxim_election_goes_underway }
         ai_chance = {
             base = 500
+        }
+    }
+}
+
+### Lenin's tomb ###
+
+country_event = { # Lenin's tomb
+    id = nf_RED.86
+    title = nf_RED.86.t
+    desc = nf_RED.86.d
+    picture = "GFX_event (12)"
+
+    is_triggered_only = yes
+
+    option = { ### He's there, wholesome reddit
+        name = nf_RED.86.a
+        add_ideas = RED_lenin_reclaimed
+        ai_chance = {
+            base = 1
+        }
+    }
+
+    option = { ## zombie event
+        name = nf_RED.86.b
+        hidden_effect = { country_event = { id = nf_RED.87 days = 30 random_days = 30 } }
+        ai_chance = {
+            base = 2.5
+        }
+    }
+}
+
+country_event = { # Lenin becomes wholesome leader
+    id = nf_RED.87
+    title = nf_RED.87.t
+    desc = nf_RED.87.d
+    picture = "GFX_event (12)"
+
+    is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            remove_country_leader_role = {
+                character = RED_korbut
+                ideology = totalitarianism
+            } 
+        }
+    }
+
+    option = { 
+        name = nf_RED.87.a
+        promote_character = RED_zombie_lenin
+        add_country_leader_role = {
+            character = RED_zombie_lenin
+            country_leader={
+                ideology = totalitarianism
+                traits = {  }
+                expire="2050.1.1.1"
+                id = -1
+            }
+        }
+        set_politics = {
+            ruling_party = dictatorial
+            elections_allowed = no
         }
     }
 }
