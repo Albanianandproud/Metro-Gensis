@@ -10,7 +10,7 @@ focus_tree = {
 			OR = {
 				original_tag = ARB
 			}
-			add = 0
+			add = 25
 		}
 	}
 
@@ -38,7 +38,7 @@ focus_tree = {
 		icon = GFX
 		x = -2
 		y = 1
-		cost = 3
+		cost = 2.9
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -50,7 +50,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
+			add_stability = 0.1
+			add_political_power = 100
 		}
 	}
 
@@ -108,7 +109,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ARB_economic_revitalisation_6
+		id = ARB_cover_up
 		icon = GFX
 		x = 1
 		y = 1
@@ -119,7 +120,7 @@ focus_tree = {
 		}
 
 		mutually_exclusive = {
-			focus = ARB_economic_revitalisation_5
+			focus = ARB_military_curfew
 		}
 
 		available = {
@@ -155,7 +156,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ARB_economic_revitalisation_5
+		id = ARB_military_curfew
 		icon = GFX
 		x = 3
 		y = 1
@@ -166,7 +167,7 @@ focus_tree = {
 		}
 
 		mutually_exclusive = {
-			focus = ARB_economic_revitalisation_6
+			focus = ARB_cover_up
 		}
 
 		available = {
@@ -415,6 +416,11 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_neutrality
 		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+		}
 		relative_position_id = ARB_neutrality
 		mutually_exclusive = {
 			focus = ARB_revaunchism
@@ -459,6 +465,11 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_assist_the_rangers
 		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+		}
 		relative_position_id = ARB_assist_the_rangers
 		ai_will_do = {
 			factor = 3
@@ -477,6 +488,14 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ARB_ranger_initialisation
+		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+			AND = {
+				is_in_faction_with = SPT
+			}
 		}
 		relative_position_id = ARB_ranger_initialisation
 		ai_will_do = {
@@ -516,6 +535,14 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ARB_ranger_initialisation
+		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+			AND = {
+				is_in_faction_with = SPT
+			}
 		}
 		relative_position_id = ARB_ranger_initialisation
 		ai_will_do = {
@@ -880,7 +907,7 @@ focus_tree = {
 		icon = GFX
 		x = 16
 		y = 1
-		cost = 6.5
+		cost = 5
 
 		ai_will_do = {
 			factor = 50
@@ -906,9 +933,9 @@ focus_tree = {
 	focus = {
 		id = ARB_resurfacing_old_rooms
 		icon = GFX
-		x = -4
+		x = -3
 		y = 1
-		cost = 6.5
+		cost = 2.9
 
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
@@ -927,28 +954,16 @@ focus_tree = {
 					}
 				}
 				add_extra_state_shared_building_slots = 2
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-				add_resource = {
-			        type = alloys
-			        amount = 2
-			    }
-				add_resource = {
-			        type = components
-			        amount = 2
-			    }
 			}
 		}
 	}
 
 	focus = {
 		id = ARB_kicking_in_the_generator
-		icon = GFX
-		x = 0
+		icon = GFX_Fuel
+		x = -1
 		y = 1
-		cost = 6.5
+		cost = 3.6
 
 		prerequisite = {
 			focus = ARB_resurfacing_old_rooms
@@ -978,11 +993,35 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_kicking_in_the_generator_2
+		icon = GFX
+		x = 0
+		y = 1
+		cost = 5.8
+		available = {
+			has_tech = tech_refinery_2
+		}
+		prerequisite = {
+			focus = ARB_kicking_in_the_generator
+		}
+		relative_position_id = ARB_kicking_in_the_generator
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			set_technology = {
+				tech_refinery_5 = 1
+			}
+		}
+	}
+
+	focus = {
 		id = ARB_scrapping_it_all
 		icon = GFX
-		x = 2
+		x = 1
 		y = 1
-		cost = 6.5
+		cost = 5
 
 		prerequisite = {
 			focus = ARB_resurfacing_old_rooms
@@ -1007,7 +1046,9 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6.5
-
+		available = {
+			has_completed_focus = ARB_economic_revitalisation
+		}
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
 		}
@@ -1315,7 +1356,9 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 6.5
-
+		available = {
+			has_completed_focus = ARB_economic_revitalisation
+		}
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
 		}
