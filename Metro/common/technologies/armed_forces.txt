@@ -1,7 +1,11 @@
+#!gfx:interface\countrytechreview.gui
+#!gfx:interface\metro_technologies.gfx
+
 technologies = {
-    @TECH_YEAR_TRAINING_Y = 0
+    @TECH_YEAR_TYPE_Y = 0
+    @TECH_YEAR_TRAINING_Y = 5
     @TECH_YEAR_PURPOSE_Y = 15
-    @TECH_YEAR_END_Y = 30
+    @TECH_YEAR_END_Y = 25
     
 
     @TECH_COLUMN_ARMEDFORCES_MILITIA = 5
@@ -12,23 +16,26 @@ technologies = {
         }
 
         path = {
-            leads_to_tech = Training_Police_Academy
+            leads_to_tech = basic_militia_Training_Police_Academy
+            research_cost_coeff =1 
         }
 
         path = {
-            leads_to_tech = Training_Basic_Training
+            leads_to_tech = basic_militia_Training_Basic_Training
+            research_cost_coeff =1
         }
 
         path = {
-            leads_to_tech = Training_Combat_Excercises
+            leads_to_tech = basic_militia_Training_Combat_Excercises
+            research_cost_coeff =1
         }
 
         start_year = 2020
         folder = {
             name = armedforces_folder
             position = {
-                x = 0
-                y = @TECH_YEAR_TRAINING_Y
+                x = 10
+                y = 0
             }
         }
         categories = {
@@ -36,39 +43,161 @@ technologies = {
         }
     }
 
-    Training_Police_Academy = {
+    basic_militia_Training_Police_Academy = {
 
         path = {
-            leads_to_tech = 
+            leads_to_tech = basic_militia_Purpose_Peacekeepers
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Deterrence
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Backbone
         }
 
         XOR = {
-            Training_Basic_Training
-            Training_Combat_Excercises
+            basic_militia_Training_Basic_Training
+            basic_militia_Training_Combat_Excercises
+        }
+
+        start_year = 2028
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 0
+                y = 6
+            }
         }
     }
 
-    Training_Basic_Training = {
+    basic_militia_Training_Basic_Training = {
 
         path = {
-            leads_to_tech = 
+            leads_to_tech = basic_militia_Purpose_Peacekeepers
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Deterrence
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Backbone
         }
 
         XOR = {
-            Training_Police_Academy
-            Training_Combat_Excercises
+            basic_militia_Training_Police_Academy
+            basic_militia_Training_Combat_Excercises
+            
+        }
+
+        start_year = 2028
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 5
+                y = 6
+            }
         }
     }
 
-    Training_Combat_Excercises = {
+    basic_militia_Training_Combat_Excercises = {
 
         path = {
-            leads_to_tech
+            leads_to_tech = basic_militia_Purpose_Peacekeepers
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Deterrence
+        }
+        path = {
+            leads_to_tech = basic_militia_Purpose_Backbone
         }
 
         XOR = {
-            Training_Police_Academy
-            Training_Basic_Training
+            basic_militia_Training_Police_Academy
+            basic_militia_Training_Basic_Training
+        }
+
+        start_year = 2028
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 10
+                y = 6
+            }
+        }
+    }
+
+    basic_militia_Purpose_Backbone = {
+        path = {
+            leads_to_tech = basic_militia_End_Stationary
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Iron
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Every_Man
+        }
+
+        XOR = {
+            basic_militia_Purpose_Deterrence
+            basic_militia_Purpose_Peacekeepers
+        }
+
+        start_year = 2030
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 0
+                y = @TECH_YEAR_PURPOSE_Y
+            }
+        }
+    }
+
+    basic_militia_Purpose_Deterrence = {
+        path = {
+            leads_to_tech = basic_militia_End_Stationary
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Iron
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Every_Man
+        }
+
+        XOR = {
+            basic_militia_Purpose_Backbone
+            basic_militia_Purpose_Peacekeepers
+        }
+        start_year = 2030
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 5
+                y = @TECH_YEAR_PURPOSE_Y
+            }
+        }
+    }
+
+    basic_militia_Purpose_Peacekeepers = {
+        path = {
+            leads_to_tech = basic_militia_End_Stationary
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Iron
+        }
+        path = {
+            leads_to_tech = basic_militia_End_Every_Man
+        }
+
+        XOR = {
+            basic_militia_Purpose_Backbone
+            basic_militia_Purpose_Deterrence
+        }
+        start_year = 2030
+        folder = {
+            name = armedforces_folder
+            position = {
+                x = 10
+                y = @TECH_YEAR_PURPOSE_Y
+            }
         }
     }
 }
