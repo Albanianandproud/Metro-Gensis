@@ -7,8 +7,11 @@ NDefines.NGame.END_DATE = "2055.1.1.1"
 NDefines.NDiplomacy.TRUCE_BREAK_COST_PP = 100
 NDefines.NDiplomacy.NAP_EXPIRY_MONTHS = 24
 NDefines.NDiplomacy.NAP_UNBREAKABLE_MONTHS = 6
-NDefines.NDiplomacy.VOLUNTEERS_TRANSFER_SPEED = 2
-NDefines.NDiplomacy.VOLUNTEERS_DIVISIONS_REQUIRED = 5
+NDefines.NDiplomacy.VOLUNTEERS_TRANSFER_SPEED = 3
+NDefines.NDiplomacy.VOLUNTEERS_DIVISIONS_REQUIRED = 10
+NDefines.NDiplomacy.VOLUNTEERS_PER_TARGET_PROVINCE = 0.05
+NDefines.NDiplomacy.VOLUNTEERS_PER_COUNTRY_ARMY = 0.001
+NDefines.NDiplomacy.VOLUNTEERS_RETURN_EQUIPMENT = 0.001
 NDefines.NDiplomacy.TENSION_TIME_SCALE_START_DATE = "2028.1.1.12"
 NDefines.NDiplomacy.GUARANTEE_COST = 100			
 NDefines.NDiplomacy.REVOKE_GUARANTEE_COST = 100
@@ -56,16 +59,25 @@ NDefines.NProduction.RAILWAY_GUN_MAX_MIL_FACTORIES_PER_LINE = 10
 NDefines.NProduction.RAILWAY_GUN_REPAIR_SPEED = 8.0
 
 ---Military Stuff---
-NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.2
-NDefines.NMilitary.INFRA_ORG_IMPACT = 0.6
+NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.15
+NDefines.NMilitary.INFRA_ORG_IMPACT = 0.35
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.05
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.02
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
-NDefines.NMilitary.TRAINING_ORG = 0.45								--- Base is 0.2
-NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.4						--- if strength is less than this, the unit will pause training until it's been reinforced
+NDefines.NMilitary.TRAINING_ORG = 0.5								--- Base is 0.2
+NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.5						--- if strength is less than this, the unit will pause training until it's been reinforced
 NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP gained per day from training
 NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7
+
+---Characters
+NDefines.NCharacter.OFFICER_CORP_HIGH_COMMAND_SLOTS_IN_MENU = 5
+NDefines.NCharacter.POLITICAL_ADVISOR_SLOTS_IN_MENU = 5
+NDefines.NCharacter.DEFAULT_PP_COST_FOR_MILITARY_ADVISOR = 100
+NDefines.NCharacter.DEFAULT_PP_COST_FOR_POLITICAL_ADVISOR = 100
+NDefines.NCharacter.DEFAULT_CP_COST_FOR_ADVISOR = 5
+NDefines.NCharacter.DEFAULT_CP_COST_FOR_DYNAMIC_ADVISORS = 0
+NDefines.NCharacter.ADVISOR_PROMOTION_COST = 100
 
 ---Commanders
 NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 10	--- Base is 24
