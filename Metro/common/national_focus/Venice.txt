@@ -15,6 +15,21 @@ focus_tree = {
 	default = no
 
 	focus = {
+		id = TRT_yakub
+		icon = GFX_RCH_hitler
+		x = 1000
+		y = 1000
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
 		id = TRT_construct_foundations
 		icon = GFX_oil_lamp
 		x = 1
@@ -147,8 +162,8 @@ focus_tree = {
 		id = TRT_shrimping
 		icon = GFX_stalker1
 		relative_position_id = TRT_exploration_rafts
-		x = -1
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.45
 
 		prerequisite = { focus = TRT_exploration_rafts }
@@ -1250,13 +1265,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			every_owned_state  = {
-                limit = {
-                    is_core_of = GWC
-					is_owned_by = EUR
-                }
-                add_core_of = PREV
-            }
+			every_state = {
+				limit = {
+					is_core_of = KTG
+				}
+				add_core_of = ROOT
+			}
 		}
 	}
 
@@ -1401,6 +1415,7 @@ focus_tree = {
 		cost = 6.45
 		
 		available = {
+			date > 2031.1.1
 		}
 
 		prerequisite = { focus = TRT_greater_sights focus = TRT_protectors_of_freedom }
@@ -1611,11 +1626,11 @@ focus_tree = {
 	#########
 
 	focus = {
-		id = TRT_our_place
-		icon = GFX_HNZ_external_affairs
-		x = 8
+		id = TRT_army_reforms
+		icon = GFX_HNZ_mercenary_army
+		x = 7
 		y = 1
-		cost = 2
+		cost = 6.45
 		relative_position_id = TRT_start_political_talks
 		prerequisite = { focus = TRT_start_political_talks }
 
@@ -1624,32 +1639,162 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 25
+			army_experience = 25
 		}
 	}
 
-	#########
-	#
-	# Faction Path Incomplete
-	#
-	#########
-
 	focus = {
-		id = TRT_gang_leader
-		icon = GFX_TRT_bandit_2
-		x = 16
-		y = 0
-		cost = 2
-		relative_position_id = TRT_start_political_talks
+		id = TRT_pest_control
+		icon = GFX_mutant_death
+		x = 3
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
 
 		ai_will_do = {
 			factor = 0
 		}
 
 		completion_reward = {
-			add_political_power = 25
-			TRT_bop_low_decrease_effect = yes
+			reduce_shrimp = yes
 		}
 	}
 
+	focus = {
+		id = TRT_armament_effort
+		icon = GFX_generic_small_arms_3
+		x = -1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 55
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_weapon_production
+		icon = GFX_generic_small_arms_2
+		x = 0
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_armament_effort
+		prerequisite = { focus = TRT_armament_effort }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_milita_army
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = militia_funding
+		}
+	}
+
+	focus = {
+		id = TRT_standing_force
+		icon = GFX_focus_secret_rearmament
+		x = 0
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_milita_army
+		prerequisite = { focus = TRT_milita_army }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			remove_ideas = militia_funding
+            add_ideas = home_guard
+		}
+	}
+
+	focus = {
+		id = TRT_guerrila_tactics
+		icon = GFX_equipment_gasmask
+		x = 1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_standing_force
+		prerequisite = { focus = TRT_standing_force }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = guerilla_militias
+		}
+	}
+
+	focus = {
+		id =  TRT_military_tactics
+		icon = GFX_soldier_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = TRT_standing_force
+		}
+		prerequisite = {
+			focus = TRT_weapon_production
+		}
+		x = -1
+		y = 1
+		relative_position_id = TRT_standing_force
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = new_world_army
+		}
+	}
+	
 }
