@@ -27,6 +27,8 @@ focus_tree = {
 
 		completion_reward = {
 			country_event = nf_ARB.3
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = hjalmar_schacht
 		}
 	}
 
@@ -158,7 +160,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## timed idea which provides SPEC OPS boost
+			add_timed_idea = { 
+				idea = ARB_spec_ops_boost
+				days = 165
+			}
 		}
 	}
 
@@ -174,8 +179,12 @@ focus_tree = {
 		}
 
 		available = {
-			has_war_with = GWC
-			## make sure we're on the losing side of it
+			OR = {
+				has_war_with = GWC
+				AND = {
+					surrender_progress > 0.1
+				}
+			}
 		}
 
 		relative_position_id = ARB_help_from_stalkers
@@ -185,7 +194,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## do something idk
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 45
+				producer = RUS
+			}
 		}
 	}
 
@@ -243,7 +256,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ARB_enforce_compliance
+		id = ARB_mandatory_draft
 		icon = GFX
 		x = 0
 		y = 1
@@ -260,69 +273,102 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_manpower = 20
+			add_stability = -0.05
+			add_ideas = ARB_the_draft
 		}
 	}
 
 	focus = {
-		id = ARB_compliance_1
-		icon = GFX
+		id = ARB_forfeit_arms
+		icon = GFX_generic_medium_arms_3
 		x = -1
 		y = 1
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_enforce_compliance
+			focus = ARB_mandatory_draft
 		}
 
-		relative_position_id = ARB_enforce_compliance
+		relative_position_id = ARB_mandatory_draft
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = ARB_align_key_traders
 		}
 	}
 
 	focus = {
-		id = ARB_compliance_2
+		id = ARB_mitigate_travel
 		icon = GFX
 		x = 0
 		y = 2
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_enforce_compliance
+			focus = ARB_mandatory_draft
 		}
 
-		relative_position_id = ARB_enforce_compliance
+		relative_position_id = ARB_mandatory_draft
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			add_ideas = civics_border_3
+			add_ideas = closed_economy 
 		}
 	}
 
 	focus = {
-		id = ARB_compliance_3
+		id = ARB_crackdowns
 		icon = GFX_EUR_the_coup
 		x = 1
 		y = 1
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_enforce_compliance
+			focus = ARB_mandatory_draft
 		}
 
-		relative_position_id = ARB_enforce_compliance
+		relative_position_id = ARB_mandatory_draft
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = ARB_crackdown_operations
 		}
 	}
 
@@ -1524,7 +1570,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_resurfacing_old_rooms
-		icon = GFX
+		icon = GFX_barscene
 		x = -3
 		y = 1
 		cost = 1.5
@@ -1586,7 +1632,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_kicking_in_the_generator_2
-		icon = GFX
+		icon = GFX_HNZ_military_surplus
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1610,7 +1656,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_scrapping_it_all
-		icon = GFX
+		icon = GFX_scrap
 		x = 1
 		y = 1
 		cost = 5
@@ -2020,6 +2066,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_dedicated_stalker_units
 		}
 	}
 
@@ -2144,6 +2191,19 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3
 				amount = 35
@@ -2177,6 +2237,19 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3
 				amount = 25
