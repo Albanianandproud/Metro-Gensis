@@ -1,0 +1,285 @@
+add_namespace = random_event_vagrants
+
+country_event = {
+	id = random_event_vagrants.01
+	title = random_event_vagrants.01.t
+	desc = random_event_vagrants.01.d
+	picture = "GFX_event (23)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = RED
+			original_tag = MSU
+		}
+		has_war = no
+		num_of_controlled_states > 2
+	}
+
+	option = {	## Let the Join ##
+		name = random_event_vagrants.01.a
+		custom_effect_tooltip = random_event_vagrants.a_tt
+		random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+			add_manpower = 20
+		}
+		add_stability = -0.025
+		add_war_support = -0.025
+	}
+
+	option = {	## Turn them Away ##
+		custom_effect_tooltip = random_event_vagrants.b_tt
+		name = random_event_vagrants.01.b
+	}
+}
+
+###############################################################################################################
+
+add_namespace = random_event_glitters
+
+country_event = {
+	id = random_event_glitters.01
+	title = random_event_glitters.01.t
+	desc = random_event_glitters.01.d
+	picture = "GFX_event (3)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = RED
+		}
+		has_war = no
+		num_of_controlled_states > 1
+	}
+
+	option = {	## Remove the Barricade ##
+		name = random_event_glitters.a
+		random_list = {
+		    20 = { ## Mutant Attack
+		        ROOT = { country_event = random_event_glitters.02 }
+		    }
+		    40 = { ## Nothing of Value
+		        ROOT = { country_event = random_event_glitters.03}
+		    }
+		    40 = { ## Found Something
+		        ROOT = { country_event = random_event_glitters.04 }
+		    }
+		}
+	}
+
+	option = {	## Do not remove the Barricade ##
+		name = random_event_glitters.b
+	}
+}
+
+country_event = {
+	id = random_event_glitters.02
+	title = random_event_glitters.02.t
+	desc = random_event_glitters.02.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {	## Owch ##
+		name = random_event_glitters.02.a
+		add_stability = -0.05
+		add_manpower = -10
+	}
+}
+
+## Found Nothing of Value ##
+country_event = {
+	id = random_event_glitters.03
+	title = random_event_glitters.03.t
+	desc = random_event_glitters.03.d
+	picture = event_tunnel.8
+	is_triggered_only = yes
+
+	option = {	## Owch ##
+		name = random_event_glitters.03.a
+	}
+}
+
+## Found Valuables ##
+country_event = {
+	id = random_event_glitters.04
+	title = random_event_glitters.04.t
+	desc = random_event_glitters.04.d
+	picture = "GFX_event (20)"
+	is_triggered_only = yes
+
+	option = {	## Sweet ##
+		name = random_event_glitters.04.a
+
+		random_list = {
+		    33 = { ## Found Resources 
+		        capital_scope = {
+			    	add_resource = {
+			        	type = alloys
+			        	amount = 2
+			    	}
+			    	add_resource = {
+			        	type = scrap
+			        	amount = 2
+			    	}
+				}
+		    }
+		    24 = { ## Found Arms
+		    	add_equipment_to_stockpile = {
+		        	type = infantry_equipment
+		        	amount = 20
+		    	}      
+		    }
+		    33 = { ## Found Valuable Trinkets
+		        add_political_power = 35
+		    }
+		}
+	}
+}
+
+###############################################################################################################
+
+add_namespace = random_event_station_babbler
+
+country_event = {
+	id = random_event_station_babbler.01
+	title = random_event_station_babbler.01.t
+	desc = random_event_station_babbler.01.d
+	picture = "GFX_event (17)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = RED
+			original_tag = MSU
+		}
+		has_war = no
+	}
+
+	option = {	## Kick him Out ##
+		custom_effect_tooltip = random_event_station_babbler.a_tt
+		name = random_event_station_babbler.01.a
+		add_political_power = 20
+	}
+
+	option = {	## Let him Stay ##
+		name = random_event_station_babbler.01.b
+		custom_effect_tooltip = random_event_station_babbler.b_tt
+		add_stability = 0.02
+		add_popularity = {
+    		ideology = dictatorial
+    		popularity = 0.02
+		}
+	}
+}
+
+###############################################################################################################
+
+add_namespace = random_event_disappearance
+
+country_event = {
+	id =  random_event_disappearance.01
+	title =  random_event_disappearance.01.t
+	desc =  random_event_disappearance.01.d
+	picture = "GFX_event (82)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	immediate = {
+		hidden_effect = {
+			add_manpower = -10
+			add_equipment_to_stockpile = {
+		        type = infantry_equipment
+		        amount = -10
+		    }
+		}
+	}
+
+	trigger = {
+		NOT = {
+			original_tag = GWC
+			original_tag = SPT
+			original_tag = PAG
+			original_tag = MUT
+			original_tag = RUI
+		}
+	}
+
+	option = {
+		name = random_event_disappearance.01.a
+		add_manpower = -5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -5
+		}
+		random_list = {
+		    50 = {  ## Found only Equipment ##
+		        ROOT = { country_event = { id = random_event_disappearance.02 days = 2 random_days = 2} }
+		    }
+		    50 = {  ## Found patrol ##
+				ROOT = { country_event = { id = random_event_disappearance.03 days = 2 random_days = 2} }
+		    }
+		}
+	}
+
+	option = {
+		name = random_event_disappearance.01.b
+		add_stability = -0.02
+	}
+}
+
+country_event = {
+	id = random_event_disappearance.02
+	title = random_event_disappearance.02.t
+	desc = random_event_disappearance.02.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {	
+		name = random_event_disappearance.02.a
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 15
+		}
+	}
+}
+
+country_event = {
+	id = random_event_disappearance.03
+	title = random_event_disappearance.03.t
+	desc = random_event_disappearance.03.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {	
+		name = random_event_disappearance.03.a
+		add_manpower = 15
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 15
+		}
+		add_stability = 0.025
+	}
+}
+
+###############################################################################################################
+
+
