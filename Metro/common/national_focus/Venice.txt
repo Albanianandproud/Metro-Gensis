@@ -3,11 +3,11 @@
 #!gfx:interface/TRT_focus_icons.gfx
 
 focus_tree = {
-	id = venicefocus
+	id = venice
 	country = {
 		factor = 0
 		modifier = {
-			add = 35
+			add = 00
 			tag = TRT
 		}
 	}
@@ -15,17 +15,71 @@ focus_tree = {
 	default = no
 
 	focus = {
-		id = TRT_yakub
-		icon = GFX_RCH_hitler
-		x = 1000
-		y = 1000
-		cost = 6.45
+		id = TRT_start_political_talks
+		icon = GFX_TRT_generic_1
+		x = 15
+		y = 0
+		cost = 2
 
 		ai_will_do = {
 			factor = 0
 		}
 
 		completion_reward = {
+			add_political_power = 10
+		}
+	}
+
+	focus = {
+		id = TRT_flood_gates
+		icon = GFX_tunnel_bunker
+		x = -8
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_start_political_talks
+		prerequisite = { focus = TRT_start_political_talks }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -82,59 +136,6 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = TRT_city_on_stilts
 				add_idea = TRT_city_on_stilts2
-			}
-		}
-	}
-
-	focus = {
-		id = TRT_flood_gates
-		icon = GFX_tunnel_bunker
-		x = -8
-		y = 1
-		cost = 6.45
-		relative_position_id = TRT_start_political_talks
-		prerequisite = { focus = TRT_start_political_talks }
-
-		ai_will_do = {
-			factor = 0
-		}
-
-		completion_reward = {
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
 			}
 		}
 	}
@@ -199,23 +200,6 @@ focus_tree = {
 			}
 			add_manpower = 25
 			add_command_power = 20
-		}
-	}
-
-
-	focus = {
-		id = TRT_start_political_talks
-		icon = GFX_TRT_generic_1
-		x = 15
-		y = 0
-		cost = 2
-
-		ai_will_do = {
-			factor = 0
-		}
-
-		completion_reward = {
-			add_political_power = 10
 		}
 	}
 

@@ -9,7 +9,7 @@ country_event = {
 	
 	is_triggered_only = yes
 
-    option = { ## Less gooo
+    option = {
         name = nf_ARB.1.a
 		EUR = {
 			set_rule = {
@@ -24,7 +24,7 @@ country_event = {
         }
     }
 	
-	option = { ## Less gooo
+	option = { 
         name = nf_ARB.1.b
 		EUR = {
 			country_event = nf_EUR.17
@@ -35,7 +35,6 @@ country_event = {
     }
 }
 
-## Guarantee Europe
 country_event = { 
     id = nf_ARB.2
     title = nf_ARB.2.t
@@ -68,14 +67,19 @@ country_event = {
 	
 	is_triggered_only = yes
 
+    immediate = {
+        hidden_effect = { country_event = { id = nf_ARB.10 days = 360 random_days = 480 } }
+    }
+
     option = { 
         name = nf_ARB.3.a
         add_timed_idea = {
 			idea = ARB_economic_revitalisation
-			days = 180
+			days = 210
 	    }
+
         ai_chance = {
-            base = 3.5
+            base = 5
         }
     }
 }
@@ -90,6 +94,14 @@ country_event = {
 
     option = { 
         name = nf_ARB.4.a
+        add_field_marshal_role = {
+            character = ARB_khandukht
+            skill = 4
+            attack_skill = 4
+            defense_skill = 3
+            planning_skill = 2
+            logistics_skill = 2
+        }
         ai_chance = {
             base = 3.5
         }
@@ -151,7 +163,7 @@ country_event = {
     }
 
     option = { 
-        name = nf_ARB.6.b
+        name = nf_ARB.6.b ##TODO change
 		random_owned_state = {
 			limit = {
 				NOT = {
@@ -166,6 +178,145 @@ country_event = {
 			}
 		}
         ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.7
+    title = nf_ARB.7.t
+    desc = nf_ARB.7.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.7.a
+        ARB = {
+            transfer_state = 398
+            transfer_state = 176
+            transfer_state = 175
+            hidden_effect = { country_event = { id = nf_ARB.8 days = 2 random_days = 2 } }
+        }
+        ai_chance = {
+            base = 0.5
+            modifier = {
+                factor = 25
+                ARB = { is_ai = no } ## Player ARB should get the station
+            }
+        }
+    }
+
+    option = { ## No Fuck off
+        name = nf_ARB.7.b
+        hidden_effect = { country_event = { id = nf_ARB.9 days = 2 random_days = 2 } }
+        ai_chance = {
+            base = 1
+        }
+    }
+
+    option = { ## Make it so if ARB AI = become Hansa Puppet
+        name = nf_ARB.7.c
+        trigger = {
+            ARB = {
+                is_ai = yes
+            }
+        }
+        ARB = {
+            transfer_state = 398
+            transfer_state = 176
+            transfer_state = 175
+            175 = { add_core_of = PREV }
+            176 = { add_core_of = PREV }
+            398 = { add_core_of = PREV }
+        }
+        puppet = ARB
+        ai_chance = {
+            base = 0
+            modifier = {
+                factor = 10
+                ARB = { is_ai = yes }
+            }
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.8
+    title = nf_ARB.8.t
+    desc = nf_ARB.8.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.8.a
+        175 = { add_core_of = ROOT }
+        176 = { add_core_of = ROOT }
+        398 = { add_core_of = ROOT }
+        ai_chance = {
+            base = 2
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.9
+    title = nf_ARB.9.t
+    desc = nf_ARB.9.d
+    picture = "GFX_event (12)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.9.a
+        ai_chance = {
+            base = 2
+        }
+    }
+
+    option = { ## Bye
+        name = nf_ARB.9.b
+        398 = { add_claim_by = ROOT }
+        176 = { add_claim_by = ROOT }
+        175 = { add_claim_by = ROOT }
+        create_wargoal = {
+            type = puppet_wargoal_focus
+            target = HNZ
+        }
+        ai_chance = {
+            base = 0
+            modifier = {
+                factor = 15
+                ARB = { is_ai = yes }
+                AND = {
+                    ic_ratio = {
+                        tag = HNZ
+                        ratio > 0.34
+                    }
+                }
+            }
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.10
+    title = nf_ARB.10.t
+    desc = nf_ARB.10.d
+    picture = "GFX_event (12)"
+        
+    is_triggered_only = yes
+
+    immediate = {
+        add_ideas = ARB_devastation
+    }
+    
+    option = { 
+        name = nf_ARB.10.a
+        show_ideas_tooltip = ARB_devastation
+            ai_chance = {
             base = 3.5
         }
     }

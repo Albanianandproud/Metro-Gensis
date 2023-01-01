@@ -32,10 +32,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-                stability_factor = -0.25
-				conscription_factor = -0.25
-                weekly_manpower = -1 
-				mobilization_laws_cost_factor = -0.25              
+				stability_weekly = -0.005
+                stability_factor = -0.2
+				conscription_factor = -0.35
+				mobilization_laws_cost_factor = -0.2           
 	        }	
 	    }
 
@@ -59,7 +59,8 @@ ideas = {
 				#materiel_manufacturer_cost_factor = 1.5
 				#industrial_concern_cost_factor = 1.5
 				theorist_cost_factor = 1
-				economy_cost_factor = 1      
+				economy_cost_factor = 1
+				line_change_production_efficiency_factor = -0.1  
 	        }	
 	    }
 
@@ -81,7 +82,7 @@ ideas = {
                 political_advisor_cost_factor = 0.25
 				high_command_cost_factor = 2
 				theorist_cost_factor = 0.25
-				economy_cost_factor = 0.25     
+				economy_cost_factor = 0.25  
 	        }	
 	    }
 
@@ -103,7 +104,8 @@ ideas = {
                 political_advisor_cost_factor = -0.1
 				high_command_cost_factor = -0.1
 				theorist_cost_factor = -0.5
-				economy_cost_factor = -0.5    
+				economy_cost_factor = -0.5
+				line_change_production_efficiency_factor = 0.2  
 	        }	
 	    }
 
@@ -122,10 +124,7 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				local_resources_factor = 0.1    
-				country_resource_scrap = 2
-				country_resource_components = 2
-				country_resource_alloys = 2       
+				local_resources_factor = 0.1           
 	        }	
 	    }
 
@@ -212,7 +211,9 @@ ideas = {
 
 			removal_cost = -1
 
-			research_bonus = { industry = 0.15 }		
+			research_bonus = { 
+				industry = 0.15 
+			}		
 	    }
 
 		ARB_economic_revitalisation = {
@@ -241,10 +242,6 @@ ideas = {
 
 			allowed = {
 				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
 			}
 
 			removal_cost = 1
@@ -312,7 +309,7 @@ ideas = {
 			equipment_bonus = {
 				infantry_equipment = {
 					build_cost_ic = -0.05
-					reliability = 0.03
+					reliability = 0.02
 					instant = yes
 				}
 			}
@@ -352,7 +349,7 @@ ideas = {
 
 			targeted_modifier = {
 				tag = GWC
-				breakthrough_bonus_against = 0.1
+				breakthrough_bonus_against = 0.05
 			}
 	    }
 
@@ -372,7 +369,7 @@ ideas = {
 
 			equipment_bonus = {
 				special_forces_equipment = {
-					build_cost_ic = -0.225
+					build_cost_ic = -0.15
 					instant = yes
 				}
 			}
@@ -387,9 +384,169 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				land_reinforce_rate = 0.025
+				land_reinforce_rate = 0.02
 				max_command_power = 10
 				supply_factor = 0.1
+	        }	
+	    }
+
+		### GWC Interactions ###
+
+		ARB_devastation = {
+			picture = idea_devastation
+			
+			allowed = {
+			}
+                        
+            cancel = {
+                GWC = {
+                    exists = no
+                }
+            }
+
+			removal_cost = -1
+
+			modifier = {
+                stability_factor = -0.25              
+	        }	
+	    }
+
+		### Spartan Interaction ###
+
+		ARB_spartan_intergration   = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+	        }	
+	    }
+
+		ARB_SPT_spec_ops_cap   = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				special_forces_min = 10
+				special_forces_training_time_factor = -0.05
+	        }	
+	    }
+
+		ARB_SPT_stalker_integration   = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				special_forces_no_supply_grace = 8
+				planning_speed = 0.05
+				max_planning_factor = 0.05
+	        }	
+	    }
+
+		ARB_SPT_bastion_of_humanity   = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				command_power_gain_mult = 0.2
+				experience_gain_army = 0.05
+				land_doctrine_cost_factor = -0.1
+	        }	
+	    }
+
+		## HNZ ##
+
+		ARB_HNZ_spec_op_training = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				special_forces_training_time_factor = -0.05
+	        }
+			
+			equipment_bonus = {
+				special_forces_equipment = {
+					build_cost_ic = -0.075
+					instant = yes
+				}
+			}
+	    }
+
+		ARB_HNZ_joint_committee   = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				max_command_power = 15
+				command_power_gain_mult = 0.15
+				experience_gain_army = 0.05
+	        }	
+	    }
+
+		ARB_HNZ_spec_op_corps = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				special_forces_min = 15
+	        }	
+	    }
+
+		## Neutral Path ##
+
+		ARB_our_slice_of_home = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				enemy_justify_war_goal_time = 0.2
+				army_core_defence_factor = 0.05
+	        }	
+	    }
+
+		ARB_free_stalker_authority = {
+			picture = idea_bump_in_the_night
+			
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				party_popularity_stability_factor = 0.1
+				local_resources_factor = 0.1
 	        }	
 	    }
 	}
