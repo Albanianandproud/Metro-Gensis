@@ -3,14 +3,14 @@
 
 focus_tree = {
     id = arbat_confederation
-	continuous_focus_position = { x = 4600 y = 150 }
+	continuous_focus_position = { x = 5000 y = 150 }
 	country = {
 		base = 0
 		modifier = {
 			OR = {
 				original_tag = ARB
 			}
-			add = 25
+			add = 00
 		}
 	}
 
@@ -18,7 +18,7 @@ focus_tree = {
 		id = ARB_economic_revitalisation
 		icon = GFX_generic_consumer_goods
 		x = 29
-		y = 1
+		y = 0
 		cost = 6.5
 
 		ai_will_do = {
@@ -34,10 +34,10 @@ focus_tree = {
 
 	focus = {
 		id = ARB_economic_revitalisation_2
-		icon = GFX
+		icon = GFX_barscene
 		x = -2
 		y = 1
-		cost = 2.9
+		cost = 4.3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -49,14 +49,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.1
-			add_political_power = 100
+			add_stability = 0.05
+			add_political_power = 50
 		}
 	}
 
 	focus = {
 		id = ARB_economic_revitalisation_3
-		icon = GFX
+		icon = GFX_generic_planks
 		x = 0
 		y = 1
 		cost = 3.6
@@ -82,7 +82,7 @@ focus_tree = {
 				}
 				add_building_construction = {
 					type = infrastructure
-					level = 3
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -91,10 +91,10 @@ focus_tree = {
 
 	focus = {
 		id = ARB_economic_revitalisation_4
-		icon = GFX
+		icon = GFX_campfire
 		x = 2
 		y = 1
-		cost = 2.9
+		cost = 4.3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -106,17 +106,110 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.1
-			add_political_power = 100
+			add_war_support = 0.05
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = ARB_economic_revitalisation_contact_hansa
+		icon = GFX_HNZ_generic_treaty
+		x = 0
+		y = 1
+		cost = 2.9
+
+		prerequisite = {
+			focus = ARB_economic_revitalisation_2
+			focus = ARB_economic_revitalisation_4
+		}
+
+		relative_position_id = ARB_economic_revitalisation_3
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			diplomatic_relation = {
+				country = HNZ
+				relation = non_aggression_pact
+				active = yes
+			}
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = support
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_economic_revitalisation_choice_1
+		icon = GFX_goal_generic_neutrality_focus
+		x = -1
+		y = 1
+		cost = 2.9
+
+		prerequisite = {
+			focus = ARB_economic_revitalisation_contact_hansa
+		}
+		available = {
+			has_idea_with_trait = ARB_arman_trait
+		}
+		mutually_exclusive = {
+			focus = ARB_economic_revitalisation_choice_2
+		}
+		relative_position_id = ARB_economic_revitalisation_contact_hansa
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_trait = {
+				character = ARB_arman_trait
+				slot = political_advisor
+				trait = ARB_arman_shrewd
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_economic_revitalisation_choice_2
+		icon = GFX_goal_generic_national_unity
+		x = 1
+		y = 1
+		cost = 2.9
+
+		prerequisite = {
+			focus = ARB_economic_revitalisation_contact_hansa
+		}
+		available = {
+			has_idea_with_trait = ARB_arman_trait
+		}
+		mutually_exclusive = {
+			focus = ARB_economic_revitalisation_choice_1
+		}
+		relative_position_id = ARB_economic_revitalisation_contact_hansa
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_trait = {
+				character = ARB_arman_trait
+				slot = political_advisor
+				trait = ARB_arman_sincere
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_oh_its_on
-		icon = GFX
+		icon = GFX_anti_gwc
 		x = 0
-		y = 5
-		cost = 2.9
+		y = 7
+		cost = 1
 
 		prerequisite = {
 			focus = ARB_mitigate_travel
@@ -127,8 +220,7 @@ focus_tree = {
 		available = {
 			has_war_with = GWC
 			NOT = {
-				has_completed_focus = ARB_the_cover_up
-				has_completed_focus = ARB_military_curfew
+				has_idea = ARB_devastation
 			}
 		}
 
@@ -139,13 +231,15 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			custom_effect_tooltip = ARB_war_with_GWC_decisions
+			remove_ideas = ARB_devastation
 			country_event = nf_ARB.4
 		}
 	}
 
 	focus = {
-		id = ARB_help_from_stalkers
-		icon = GFX
+		id = ARB_do_or_die
+		icon = GFX_anti_gwc_2
 		x = 0
 		y = 1
 		cost = 3
@@ -165,40 +259,6 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_timed_idea = { 
-				idea = ARB_spec_ops_boost
-				days = 165
-			}
-		}
-	}
-
-	focus = {
-		id = ARB_do_or_die
-		icon = GFX
-		x = 0
-		y = 1
-		cost = 3
-
-		prerequisite = {
-			focus = ARB_help_from_stalkers
-		}
-
-		available = {
-			OR = {
-				has_war_with = GWC
-				AND = {
-					surrender_progress > 0.1
-				}
-			}
-		}
-
-		relative_position_id = ARB_help_from_stalkers
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetnaz
 				amount = 45
@@ -211,8 +271,8 @@ focus_tree = {
 		id = ARB_the_cover_up
 		icon = GFX_HNZ_generic_tunnel_focus
 		x = -2
-		y = 1
-		cost = 3
+		y = 3
+		cost = 5
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation_3
@@ -229,6 +289,7 @@ focus_tree = {
 			has_war = no
 			AND = {
 				has_political_power > 49
+				has_idea = ARB_devastation
 			}
 		}
 
@@ -262,7 +323,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_mandatory_draft
-		icon = GFX
+		icon = GFX_HNZ_conscription_reforms
 		x = 0
 		y = 1
 		cost = 6.5
@@ -321,7 +382,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_mitigate_travel
-		icon = GFX
+		icon = GFX_tunnel_bunker
 		x = 0
 		y = 2
 		cost = 6.5
@@ -381,8 +442,8 @@ focus_tree = {
 		id = ARB_military_curfew
 		icon = GFX_TRT_law_1
 		x = 2
-		y = 1
-		cost = 3
+		y = 3
+		cost = 5
 
 		cancel_if_invalid = yes
 
@@ -402,6 +463,7 @@ focus_tree = {
 			AND = {
 				has_stability > 0.29
 				has_war_support > 0.29
+				has_idea = ARB_devastation
 			}
 		}
 
@@ -443,7 +505,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_twenty_four_seven_lighting
-		icon = GFX
+		icon = GFX_camp
 		x = -1
 		y = 1
 		cost = 6.5
@@ -465,7 +527,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_manned_posts
-		icon = GFX
+		icon = GFX_generic_defences_2
 		x = 1
 		y = 1
 		cost = 6.5
@@ -487,7 +549,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_curtail_activities
-		icon = GFX
+		icon = GFX_HNZ_generic_tunnel_focus
 		x = 0
 		y = 1
 		cost = 6.5
@@ -513,7 +575,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_keep_watch_keep_guard
-		icon = GFX
+		icon = GFX_generic_defences
 		x = 0
 		y = 1
 		cost = 6.5
@@ -555,7 +617,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hansa_alignment
 		icon = GFX_HNZ_league_of_steel
-		x = -9
+		x = -10
 		y = 1
 		cost = 6.5
 
@@ -574,13 +636,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = trade_relations_3
+			}
+			HNZ = { add_to_faction = ARB }
 		}
 	}
 
 	focus = {
 		id = ARB_hiring_technical_expertise
-		icon = GFX
-		x = -2
+		icon = GFX_railroad_construction
+		x = -3
 		y = 1
 		cost = 6.5
 
@@ -596,13 +663,21 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_golodny
 		}
 	}
 
 	focus = {
 		id = ARB_hiring_economic_expertise
-		icon = GFX
-		x = -4
+		icon = GFX_HNZ_generic_bullet_focus
+		x = -5
 		y = 1
 		cost = 6.5
 
@@ -618,6 +693,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 2
+				uses = 1
+				category = industry
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_srjdan
 		}
 	}
 
@@ -625,11 +708,15 @@ focus_tree = {
 		id = ARB_worthwhile_allies
 		icon = GFX_HNZ_mercenary_army
 		x = -1
-		y = 2
+		y = 1
 		cost = 6.5
 
 		prerequisite = {
 			focus = ARB_hansa_alignment
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
 		}
 		relative_position_id = ARB_hansa_alignment
 		ai_will_do = {
@@ -637,12 +724,40 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			HNZ = {
+				random_owned_state = {
+					limit = {
+						NOT = {
+							has_state_category = pastoral
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = arms_factory
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_worthwhile_allies_2
-		icon = GFX
+		icon = GFX_HNZ_joint_operations
 		x = -1
 		y = 1
 		cost = 6.5
@@ -650,18 +765,75 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_worthwhile_allies
 		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
 		relative_position_id = ARB_worthwhile_allies
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_kazakh
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_jori
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_tamerian
+		}
+	}
+
+	focus = {
+		id = ARB_worthwhile_allies_4
+		icon = GFX_HNZ_soldier
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_worthwhile_allies_2
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
+		relative_position_id = ARB_worthwhile_allies_2
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_corps_commander_role = {
+				character = ARB_kazakh
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_jori
+				skill = 3
+				attack_skill = 3
+				defense_skill = 4
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_tamerian
+				skill = 4 
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 4
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_worthwhile_allies_3
-		icon = GFX
+		icon = GFX_HNZ_committee_centralisation
 		x = 1
 		y = 1
 		cost = 6.5
@@ -669,24 +841,137 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_worthwhile_allies
 		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
 		relative_position_id = ARB_worthwhile_allies
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			add_ideas = ARB_HNZ_joint_committee
+			HNZ = {
+				army_experience = 5
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_worthwhile_allies_5
+		icon = GFX_generic_spec_ops_3
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_worthwhile_allies_3
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
+		relative_position_id = ARB_worthwhile_allies_3
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_HNZ_spec_op_training
+		}
+	}
+
+	focus = {
+		id = ARB_worthwhile_allies_final
+		icon = GFX_generic_stalker_2
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_worthwhile_allies_5
+			focus = ARB_heavy_soldiers_2
+		}
+		relative_position_id = ARB_worthwhile_allies_4
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_HNZ_spec_op_corps
+		}
+	}
+
+	focus = {
+		id = ARB_heavy_soldiers
+		icon = GFX_generic_spec_ops_2
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_worthwhile_allies
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
+		relative_position_id = ARB_worthwhile_allies
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_heavy
+				amount = 20
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_heavy_soldiers_2
+		icon = GFX_generic_spec_ops_1
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_heavy_soldiers
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+		}
+		relative_position_id = ARB_heavy_soldiers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			set_technology = {
+				special_forces_heavy_equipment_tech = 1
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_bargain_state_1
-		icon = GFX
-		x = 1
+		icon = GFX_HNZ_generic_agreement
+		x = 2
 		y = 1
 		cost = 6.5
 
 		prerequisite = {
 			focus = ARB_hansa_alignment
+		}
+		available = {
+			398 = {
+				is_owned_by = HNZ
+			}
+			AND = { HNZ = { exists = yes } }
 		}
 		relative_position_id = ARB_hansa_alignment
 		ai_will_do = {
@@ -694,12 +979,15 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			HNZ = {
+				country_event = nf_ARB.8
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_bargain_state_2
-		icon = GFX
+		icon = GFX_mobilise_workforce
 		x = 0
 		y = 1
 		cost = 6.5
@@ -707,12 +995,41 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_bargain_state_1
 		}
+		available = {
+			398 = {
+				is_owned_by = ARB
+			}
+		}
 		relative_position_id = ARB_bargain_state_1
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			398 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			175 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
+			176 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+				}
+			}
 		}
 	}
 
@@ -768,12 +1085,37 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = SPT
+				modifier = joint_operations_mutual_defense
+			}
+			army_experience = 30
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_arsen
+			add_corps_commander_role = {
+				character = ARB_arsen
+				skill = 2 
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 3
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_valentin
+			add_corps_commander_role = {
+				character = ARB_valentin
+				skill = 2 
+				attack_skill = 2
+				defense_skill = 4
+				planning_skill = 2
+				logistics_skill = 2
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_assistance_against_GWC
-		icon = GFX
+		icon = GFX_SPT_generic_soldier_3
 		x = -1
 		y = 1
 		cost = 6.5
@@ -787,12 +1129,22 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 20
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 20
+				producer = RUS
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_technical_application
-		icon = GFX
+		icon = GFX_SPT_generic_aks
 		x = 1
 		y = 1
 		cost = 6.5
@@ -806,12 +1158,29 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_SPT_hermann
+			add_equipment_to_stockpile = {
+		        type = flamethrower_equipment
+		        amount = 5
+				producer = RUS
+		    }
+			add_equipment_to_stockpile = {
+		        type = gatling_equipment
+		        amount = 5
+				producer = RUS
+		    }
+			add_equipment_to_stockpile = {
+		        type = explosive_equipment
+		        amount = 5
+				producer = RUS
+		    }
 		}
 	}
 
 	focus = {
 		id = ARB_ranger_initialisation
-		icon = GFX_SPT_generic_soldier_3
+		icon = GFX_SPT_generic_gear
 		x = 0
 		y = 2
 		cost = 6.5
@@ -823,6 +1192,7 @@ focus_tree = {
 			SPT = {
 				exists = yes
 			}
+			has_guaranteed = SPT
 		}
 		relative_position_id = ARB_assist_the_rangers
 		ai_will_do = {
@@ -830,6 +1200,21 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			SPT = { add_to_faction = ARB }
+			army_experience = 35
+			set_country_flag = allow_spartan_recruitment_laws
+			custom_effect_tooltip = ARB_path_of_ranger
+			add_ideas = SPT_ranger_recruitment
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ARB_SPT_maksimenko
+			add_field_marshal_role = {
+				character = ARB_SPT_maksimenko
+				skill = 3 
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 2
+			}
 		}
 	}
 
@@ -857,12 +1242,56 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			set_technology = {
+				special_forces_spartan_equipment_tech = 1
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_intergrate_industries
+		icon = GFX_SPT_generic_gear_repair
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_ranger_spec_ops
+		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+			AND = {
+				is_in_faction_with = SPT
+			}
+		}
+		relative_position_id = ARB_ranger_spec_ops
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_spartan_intergration
+			every_country = {
+				limit = {
+					is_in_faction_with = SPT
+				}
+				capital_scope = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = ARB_equal_amongst_peers
-		icon = GFX_SPT_generic_ranger
+		icon = GFX_SPT_generic_logo
 		x = 0
 		y = 2
 		cost = 6.5
@@ -871,17 +1300,43 @@ focus_tree = {
 			focus = ARB_bastion_of_humanity
 			focus = ARB_ranger_spec_ops
 		}
+
+		available = {
+			GWC = {
+				exists = no
+			}
+		}
 		relative_position_id = ARB_ranger_initialisation
+
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			add_ideas = ARB_SPT_spec_ops_cap
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			ARB_SPT_maksimenko = {
+				gain_xp = 2000
+				add_skill_level = 1
+			}
+			ARB_valentin = {
+				gain_xp = 2000
+				add_skill_level = 1
+			}
+			ARB_valentin = {
+				gain_xp = 2000
+				add_skill_level = 1
+			}
 		}
 	}
 
 	focus = {
-		id = ARB_equal_amongst_peers2
+		id = ARB_allow_orderly_recruitment
 		icon = GFX_SPT_generic_ranger
 		x = -1
 		y = 1
@@ -896,12 +1351,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = SPT_ranger_recruitment_station_auxillary
+			add_manpower = 20
 		}
 	}
 
 	focus = {
-		id = ARB_equal_amongst_peers3
-		icon = GFX_SPT_generic_ranger
+		id = ARB_stalker_intergration
+		icon = GFX_SPT_generic_soldier_5
 		x = 1
 		y = 1
 		cost = 6.5
@@ -915,6 +1372,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			army_experience = 15
+			add_ideas = ARB_SPT_stalker_integration
 		}
 	}
 
@@ -942,6 +1401,35 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_SPT_bastion_of_humanity
+		}
+	}
+
+	focus = {
+		id = ARB_draw_from_the_commoners
+		icon = GFX_SPT_generic_soldier_2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_bastion_of_humanity
+		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+			AND = {
+				is_in_faction_with = SPT
+			}
+		}
+		relative_position_id = ARB_bastion_of_humanity
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_manpower = 50
 		}
 	}
 
@@ -1127,6 +1615,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_our_slice_of_home
 		}
 	}
 
@@ -1146,11 +1635,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_free_stalker_authority
 		}
 	}
 	
 	focus = {
-		id = ARB_neutral_grounds_1
+		id = ARB_stalker_council
 		icon = GFX
 		x = -1
 		y = 1
@@ -1165,6 +1655,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			## Spawn unit of Spec ops OOB
+			## Give decision to spawn 4 OOBs at the cost of army XP and CP and relation
 		}
 	}
 
@@ -1176,14 +1668,16 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_neutral_grounds_1
+			focus = ARB_stalker_council
 		}
-		relative_position_id = ARB_neutral_grounds_1
+		relative_position_id = ARB_stalker_council
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			## Add relations with 'NEUTRAL' faction
+			add_political_power = 50
 		}
 	}
 
@@ -1195,14 +1689,15 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_neutral_grounds_1
+			focus = ARB_stalker_council
 		}
-		relative_position_id = ARB_neutral_grounds_1
+		relative_position_id = ARB_stalker_council
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
+			### Create Formable
 		}
 	}
 
@@ -1234,7 +1729,7 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ARB_neutral_grounds_2
-			focus = ARB_neutral_grounds_1
+			focus = ARB_stalker_council
 		}
 		relative_position_id = ARB_free_stalker_authority
 		ai_will_do = {
@@ -1553,22 +2048,13 @@ focus_tree = {
 		}
 
 		available = {
-			has_completed_focus = ARB_economic_revitalisation
+			has_completed_focus = ARB_economic_revitalisation_contact_hansa
 		}
 
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+			add_political_power = 90
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
 			}
 		}
 	}
@@ -1603,7 +2089,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_kicking_in_the_generator
-		icon = GFX_Fuel
+		icon = GFX_generic_electricity
 		x = -1
 		y = 1
 		cost = 3.6
@@ -1637,7 +2123,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_kicking_in_the_generator_2
-		icon = GFX_HNZ_military_surplus
+		icon = GFX_generic_electricity_2
 		x = 0
 		y = 1
 		cost = 5.8
@@ -1685,12 +2171,12 @@ focus_tree = {
 
 	focus = {
 		id = ARB_weapons_to_ploughs
-		icon = GFX
+		icon = GFX_generic_construction_2
 		x = 0
 		y = 1
 		cost = 6.5
 		available = {
-			has_completed_focus = ARB_economic_revitalisation
+			has_completed_focus = ARB_economic_revitalisation_2
 		}
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
@@ -1882,7 +2368,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_construction_refurbishments
-		icon = GFX
+		icon = GFX_generic_construction
 		x = -2
 		y = 1
 		cost = 6.5
@@ -2060,7 +2546,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		available = {
-			has_completed_focus = ARB_economic_revitalisation
+			has_completed_focus = ARB_economic_revitalisation_4
 		}
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
@@ -2293,7 +2779,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_scrounging_option_4
-		icon = GFX_TRT_law_1
+		icon = GFX_equipment_backpack
 		x = 0
 		y = 1
 		cost = 6.5
