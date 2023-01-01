@@ -317,4 +317,71 @@ formable_nations_category = {
 			}
 		}
 	}
+
+	arbat_stalker_authority = {
+		allowed = {
+			OR = {
+				AND = {
+					original_tag = ARB
+				}
+			}
+		}
+
+        visible = {
+            has_completed_focus = ARB_stalker_free_zone
+        }
+
+		available = {
+			count_triggers = {
+    			amount = 3
+				ROOT = {
+					has_completed_focus = ARB_stalker_free_zone
+				}
+				GWC = {
+					exists = no
+				}
+				EUR = {
+					exists = no
+				}
+                ROOT = {
+					is_in_faction_with = EUR
+					is_in_faction_with = GWC
+				}
+			}
+		}
+		complete_effect = {
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = GWC
+					}
+				}
+				annex_country = {
+    				target = GWC
+    				transfer_troops = no
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						is_in_faction_with = EUR
+					}
+				}
+				annex_country = {
+    				target = EUR
+    				transfer_troops = no
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EUR
+						is_core_of = GWC
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+    }
+}
 }

@@ -10,7 +10,7 @@ focus_tree = {
 			OR = {
 				original_tag = ARB
 			}
-			add = 00
+			add = 30
 		}
 	}
 
@@ -647,7 +647,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hiring_technical_expertise
 		icon = GFX_railroad_construction
-		x = -3
+		x = -4
 		y = 1
 		cost = 6.5
 
@@ -677,7 +677,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hiring_economic_expertise
 		icon = GFX_HNZ_generic_bullet_focus
-		x = -5
+		x = -6
 		y = 1
 		cost = 6.5
 
@@ -705,9 +705,35 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_liason_surveyor
+		icon = GFX_generic_medium_arms_5
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_hansa_alignment
+		}
+		relative_position_id = ARB_hansa_alignment
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
 		id = ARB_worthwhile_allies
 		icon = GFX_HNZ_mercenary_army
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 
@@ -1055,6 +1081,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_neutral_station
 		}
 	}
 
@@ -1085,11 +1112,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			remove_idea = ARB_neutral_station
 			add_opinion_modifier = {
 				target = SPT
 				modifier = joint_operations_mutual_defense
 			}
-			army_experience = 30
+			army_experience = 20
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = ARB_arsen
 			add_corps_commander_role = {
@@ -1455,6 +1483,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			remove_idea = ARB_neutral_station
 		}
 	}
 
@@ -1552,6 +1581,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			ARB_revaunchist_change = yes
 		}
 	}
 
@@ -1615,7 +1645,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = ARB_our_slice_of_home
+			ARB_neutrality_change = yes
+			captial_scope = {
+				add_extra_state_shared_building_slots = 2
+			}
 		}
 	}
 
@@ -1655,8 +1688,25 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			## Spawn unit of Spec ops OOB
-			## Give decision to spawn 4 OOBs at the cost of army XP and CP and relation
+			custom_effect_tooltip = ARB_recruit_mercenaries_tt
+			division_template = {
+				name = "Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
 		}
 	}
 
@@ -1697,7 +1747,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			### Create Formable
+			custom_effect_tooltip = ARB_free_stalker_authority_formable_tt
 		}
 	}
 
@@ -1717,6 +1767,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			custom_effect_tooltip = expert_scavengers_tt
+			set_country_flag = free_scavenging_cost
 		}
 	}
 
@@ -1750,12 +1802,35 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_neutral_grounds_2
 		}
+		not = {
+			has_idea = ARB_devastation
+			has_idea = bump_in_the_night
+		}
 		relative_position_id = ARB_neutral_grounds_2
 		ai_will_do = {
 			factor = 3
 		}
-
+		available = {
+			297 = {
+				is_owned_by = ROOT
+			}
+			421 = {
+				is_owned_by = ROOT
+			}
+			399 = {
+				is_owned_by = ROOT
+			}
+		}
 		completion_reward = {
+			capital_scope = {
+				add_manpower = 50
+			}
+			421 = {
+				add_manpower = 50
+			}
+			399 = {
+				add_manpower = 50
+			}
 		}
 	}
 
@@ -1775,6 +1850,20 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 12
+				}
+				add_resource = {
+					type = alloys
+					amount = 8
+				}
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
 		}
 	}
 
