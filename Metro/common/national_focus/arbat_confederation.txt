@@ -3,7 +3,7 @@
 
 focus_tree = {
     id = arbat_confederation
-	continuous_focus_position = { x = 5000 y = 150 }
+	continuous_focus_position = { x = 5500 y = 150 }
 	country = {
 		base = 0
 		modifier = {
@@ -465,7 +465,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = civics_border_3
-			add_ideas = closed_economy 
+			add_stability = 0.05
 		}
 	}
 
@@ -667,11 +667,17 @@ focus_tree = {
 
 	focus = {
 		id = ARB_political
-		icon = GFX
-		x = 0
+		icon = GFX_HNZ_generic_treaty
+		x = -2
 		y = 1
-		cost = 6.5
-
+		cost = 3
+		available = {
+			NOT = {
+				has_idea = ARB_devastation
+				has_stability < 0.44
+			}
+			date > 2029.9.1
+		}
 		ai_will_do = {
 			factor = 50
 		}
@@ -683,7 +689,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hansa_alignment
 		icon = GFX_HNZ_league_of_steel
-		x = -10
+		x = -12
 		y = 1
 		cost = 6.5
 
@@ -786,7 +792,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience = 10
+			army_experience = 15
 			add_tech_bonus = {
 				name = infantry_bonus
 				bonus = 0.5
@@ -801,7 +807,7 @@ focus_tree = {
 		icon = GFX_HNZ_mercenary_army
 		x = -2
 		y = 1
-		cost = 6.5
+		cost = 8.6
 
 		prerequisite = {
 			focus = ARB_hansa_alignment
@@ -920,6 +926,12 @@ focus_tree = {
 				planning_skill = 2
 				logistics_skill = 4
 			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
 		}
 	}
 
@@ -996,6 +1008,36 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_worthwhile_allies_6
+		icon = GFX_HNZ_form_special_forces_divisions
+		x = 2
+		y = 3
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_worthwhile_allies
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_in_faction_with = HNZ
+			AND = {
+				has_war_with = RED
+			}
+		}
+		relative_position_id = ARB_worthwhile_allies
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_revive_coalition_war
+			HNZ = {
+				add_ideas = ARB_revive_coalition_war
+			}
+		}
+	}
+
+	focus = {
 		id = ARB_heavy_soldiers
 		icon = GFX_generic_spec_ops_2
 		x = -3
@@ -1019,6 +1061,12 @@ focus_tree = {
 				type = special_forces_equipment_heavy
 				amount = 20
 				producer = RUS
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = stalker
 			}
 		}
 	}
@@ -1127,7 +1175,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_neutrality
-		icon = GFX
+		icon = GFX_focus_generic_improve_the_administration
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1148,13 +1196,14 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = ARB_neutral_station
+			add_political_power = 90
 		}
 	}
 
 	focus = {
 		id = ARB_assist_the_rangers
 		icon = GFX_SPT_generic
-		x = -5
+		x = -6
 		y = 1
 		cost = 6.5
 
@@ -1214,6 +1263,9 @@ focus_tree = {
 		prerequisite = {
 			focus = ARB_assist_the_rangers
 		}
+		available = {
+			has_war = yes
+		}
 		relative_position_id = ARB_assist_the_rangers
 		ai_will_do = {
 			factor = 3
@@ -1251,21 +1303,22 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = ARB_SPT_hermann
-			add_equipment_to_stockpile = {
-		        type = flamethrower_equipment
-		        amount = 5
-				producer = RUS
-		    }
-			add_equipment_to_stockpile = {
-		        type = gatling_equipment
-		        amount = 5
-				producer = RUS
-		    }
-			add_equipment_to_stockpile = {
-		        type = explosive_equipment
-		        amount = 5
-				producer = RUS
-		    }
+
+			#add_equipment_to_stockpile = {
+		    #    type = flamethrower_equipment
+		    #    amount = 5
+			#	producer = RUS
+		    #}
+			#add_equipment_to_stockpile = {
+		    #    type = gatling_equipment
+		    #    amount = 5
+			#	producer = RUS
+		    #}
+			#add_equipment_to_stockpile = {
+		    #    type = explosive_equipment
+		    #    amount = 5
+			#	producer = RUS
+		    #}
 		}
 	}
 
@@ -1527,7 +1580,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revaunchism
 		icon = GFX_goal_generic_major_war
-		x = 5
+		x = 6
 		y = 2
 		cost = 6.5
 
@@ -1542,7 +1595,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			remove_ideas = ARB_neutral_station#
+			ARB_revaunchist_change = yes
 			add_war_support = 0.1
 		}
 	}
@@ -1622,7 +1675,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_state_claim = 261
+		    add_state_claim = 171
+			add_state_claim = 390
 		}
 	}
 
@@ -1667,6 +1721,9 @@ focus_tree = {
 
 		completion_reward = {
 			ARB_revaunchist_change = yes
+			add_war_support = 0.1
+			add_manpower = 100
+			army_experience = 50
 		}
 	}
 
@@ -1721,7 +1778,7 @@ focus_tree = {
 		icon = GFX_ARB_our_slice_of_home
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 8.6
 
 		prerequisite = {
 			focus = ARB_neutrality
@@ -1737,7 +1794,12 @@ focus_tree = {
 		completion_reward = {
 			ARB_neutrality_change = yes
 			capital_scope = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -1832,8 +1894,11 @@ focus_tree = {
     			ideology = community
     			popularity = 0.1
 			}
-			## Add relations with 'NEUTRAL' faction
-			add_political_power = 50
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 40
+				producer = RUS
+			}
 		}
 	}
 
@@ -1854,6 +1919,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARB_free_stalker_authority_formable_tt
+			add_war_support = 0.05
+			add_stability = 0.05
 		}
 	}
 
@@ -1873,10 +1940,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_popularity = {
-    			ideology = community
-    			popularity = 0.1
-			}
+			add_equipment_to_stockpile = {
+		        type = flamethrower_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
+			add_equipment_to_stockpile = {
+		        type = explosive_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
 			custom_effect_tooltip = expert_scavengers_tt
 			set_country_flag = free_scavenging_cost
 		}
@@ -1954,6 +2027,7 @@ focus_tree = {
 				}
 			}
 			421 = {
+				add_manpower = 50
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -1961,6 +2035,7 @@ focus_tree = {
 				}
 			}
 			399 = {
+				add_manpower = 50
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -2029,7 +2104,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revive_caucasian_movement
 		icon = GFX_focus_TUR_turanist_ambition
-		x = 11
+		x = 12
 		y = 1
 		cost = 6.5
 
