@@ -17,7 +17,7 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation
 		icon = GFX_generic_consumer_goods
-		x = 29
+		x = 30
 		y = 1
 		cost = 6.5
 
@@ -35,7 +35,7 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation_2
 		icon = GFX_barscene
-		x = -2
+		x = -3
 		y = 1
 		cost = 4.3
 
@@ -49,8 +49,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 50
+			add_tech_bonus = {
+				name = teamsters
+				uses = 1
+				bonus = 0.5
+				category = construction
+			}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
 		}
 	}
 
@@ -65,7 +75,12 @@ focus_tree = {
 			focus = ARB_economic_revitalisation
 		}
 		available = {
-			has_character = ARB_arman
+			custom_trigger_tooltip = {
+				tooltip = ARB_recruited_arman
+				AND = {
+					has_idea_with_trait = ARB_arman_trait
+				}
+			}
 		}
 		relative_position_id =ARB_economic_revitalisation
 
@@ -92,7 +107,7 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation_4
 		icon = GFX_campfire
-		x = 2
+		x = 3
 		y = 1
 		cost = 4.3
 
@@ -106,8 +121,17 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.05
-			add_political_power = 50
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
 		}
 	}
 
@@ -166,7 +190,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_trait = {
-				character = ARB_arman_trait
+				character = ARB_arman 
 				slot = political_advisor
 				trait = ARB_arman_shrewd
 			}
@@ -197,7 +221,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_trait = {
-				character = ARB_arman_trait
+				character = ARB_arman 
 				slot = political_advisor
 				trait = ARB_arman_sincere
 			}
@@ -208,7 +232,7 @@ focus_tree = {
 		id = ARB_oh_its_on
 		icon = GFX_anti_gwc
 		x = 0
-		y = 7
+		y = 6
 		cost = 1
 
 		prerequisite = {
@@ -240,7 +264,7 @@ focus_tree = {
 	focus = {
 		id = ARB_do_or_die
 		icon = GFX_anti_gwc_2
-		x = 0
+		x = -1
 		y = 1
 		cost = 3
 
@@ -261,7 +285,49 @@ focus_tree = {
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetnaz
-				amount = 45
+				amount = 20
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_cleanse_park_pobedy
+		icon = GFX_RCH_hans_get_ze_flammenwerfer
+		x = 1
+		y = 1
+		cost = 3
+
+		prerequisite = {
+			focus = ARB_oh_its_on
+		}
+
+		available = {
+			owns_state = 334
+			GWC = {
+				exists = no
+			}
+		}
+
+		relative_position_id = ARB_oh_its_on
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			#country_event = nf_ARB.12
+			army_experience = 15
+			334 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment
+				amount = 20
 				producer = RUS
 			}
 		}
@@ -270,7 +336,7 @@ focus_tree = {
 	focus = {
 		id = ARB_the_cover_up
 		icon = GFX_HNZ_generic_tunnel_focus
-		x = -2
+		x = -3
 		y = 3
 		cost = 5
 
@@ -324,7 +390,7 @@ focus_tree = {
 	focus = {
 		id = ARB_mandatory_draft
 		icon = GFX_HNZ_conscription_reforms
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 
@@ -348,7 +414,7 @@ focus_tree = {
 	focus = {
 		id = ARB_forfeit_arms
 		icon = GFX_generic_medium_arms_3
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 
@@ -384,7 +450,7 @@ focus_tree = {
 		id = ARB_mitigate_travel
 		icon = GFX_tunnel_bunker
 		x = 0
-		y = 2
+		y = 1
 		cost = 6.5
 
 		prerequisite = {
@@ -406,7 +472,7 @@ focus_tree = {
 	focus = {
 		id = ARB_crackdowns
 		icon = GFX_EUR_the_coup
-		x = 1
+		x = 2
 		y = 1
 		cost = 6.5
 
@@ -441,7 +507,7 @@ focus_tree = {
 	focus = {
 		id = ARB_military_curfew
 		icon = GFX_TRT_law_1
-		x = 2
+		x = 3
 		y = 3
 		cost = 5
 
@@ -1460,7 +1526,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_revaunchism
-		icon = GFX
+		icon = GFX_goal_generic_major_war
 		x = 5
 		y = 2
 		cost = 6.5
@@ -1483,7 +1549,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_claim_GWC
-		icon = GFX
+		icon = GFX_mutant_death
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1511,13 +1577,24 @@ focus_tree = {
 
 	focus = {
 		id = ARB_what_of_them
-		icon = GFX
+		icon = GFX_RCH_trubnaya_core
 		x = -1
 		y = 1
 		cost = 6.5
 
 		prerequisite = {
 			focus = ARB_claim_GWC
+		}
+		available = {
+			334 = {
+				is_owned_by = ROOT
+			}
+			280 = {
+				is_owned_by = ROOT
+			}
+			385 = {
+				is_owned_by = ROOT
+			}
 		}
 		relative_position_id = ARB_claim_GWC
 		ai_will_do = {
@@ -1531,7 +1608,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_pressure_for_smolenskaya
-		icon = GFX
+		icon = GFX_goal_generic_demand_territory
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1545,13 +1622,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			country_event = nf_ARB.12
+			add_state_claim = 261
 		}
 	}
 
 	focus = {
 		id = ARB_war_against_hansa
-		icon = GFX
+		icon = GFX_goal_generic_demand_territory
 		x = -1
 		y = 1
 		cost = 6.5
@@ -1574,7 +1651,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_revival_of_an_empire
-		icon = GFX
+		icon = GFX_goal_demand_sudetenland
 		x = 0
 		y = 2
 		cost = 6.5
@@ -1595,7 +1672,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_expand_east
-		icon = GFX
+		icon = GFX_goal_generic_major_war
 		x = -1
 		y = 1
 		cost = 6.5
@@ -1618,7 +1695,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_expand_west
-		icon = GFX
+		icon = GFX_goal_generic_major_war
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1682,6 +1759,14 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = ARB_free_stalker_authority
+			add_popularity = {
+    			ideology = community
+    			popularity = 0.2
+			}
+			set_politics = {
+				ruling_party = community
+    			elections_allowed = no
+			}
 		}
 	}
 	
@@ -1701,6 +1786,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_popularity = {
+    			ideology = community
+    			popularity = 0.1
+			}
 			custom_effect_tooltip = ARB_recruit_mercenaries_tt
 			division_template = {
 				name = "Stalkers"
@@ -1739,6 +1828,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_popularity = {
+    			ideology = community
+    			popularity = 0.1
+			}
 			## Add relations with 'NEUTRAL' faction
 			add_political_power = 50
 		}
@@ -1780,6 +1873,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_popularity = {
+    			ideology = community
+    			popularity = 0.1
+			}
 			custom_effect_tooltip = expert_scavengers_tt
 			set_country_flag = free_scavenging_cost
 		}
@@ -1844,6 +1941,10 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
+			add_popularity = {
+    			ideology = community
+    			popularity = 0.1
+			}
 			capital_scope = {
 				add_manpower = 50
 				add_building_construction = {
@@ -1904,7 +2005,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_war_against_polis
-		icon = GFX
+		icon = GFX_goal_generic_demand_territory
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1927,8 +2028,8 @@ focus_tree = {
 
 	focus = {
 		id = ARB_revive_caucasian_movement
-		icon = GFX
-		x = 10
+		icon = GFX_focus_TUR_turanist_ambition
+		x = 11
 		y = 1
 		cost = 6.5
 
@@ -1952,7 +2053,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_foster_caucasian_nationalism
-		icon = GFX
+		icon = GFX_HNZ_independent_jurisdiction
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1972,7 +2073,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_reverence_to_old_world
-		icon = GFX
+		icon = GFX_focus_TUR_loosen_the_laws_on_secularism
 		x = 2
 		y = 1
 		cost = 6.5
@@ -1991,7 +2092,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_house_refugees
-		icon = GFX
+		icon = GFX_settle_minorities
 		x = 0
 		y = 1
 		cost = 6.5
@@ -2030,7 +2131,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_a_new_age_people
-		icon = GFX
+		icon = GFX_focus_generic_treaty
 		x = -2
 		y = 1
 		cost = 6.5
@@ -2053,7 +2154,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_a_construction
-		icon = GFX
+		icon = GFX_generic_1
 		x = 0
 		y = 1
 		cost = 6.5
@@ -2073,7 +2174,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_ethnonationalism
-		icon = GFX
+		icon = GFX_focus_generic_fascist_troops
 		x = 2
 		y = 1
 		cost = 6.5
@@ -2090,12 +2191,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = ARB_ethnonationalism
 		}
 	}
 
 	focus = {
 		id = ARB_promote_an_identity
-		icon = GFX
+		icon = GFX_focus_generic_population_growth
 		x = 0
 		y = 1
 		cost = 6.5
@@ -2115,7 +2217,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_faction_with_europa
-		icon = GFX
+		icon = GFX_EUR_focus_2
 		x = 0
 		y = 2
 		cost = 6.5
@@ -2134,7 +2236,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_question_of_HMS
-		icon = GFX
+		icon = GFX_bullets
 		x = 1
 		y = 1
 		cost = 6.5
@@ -2152,7 +2254,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_up_and_coming
-		icon = GFX
+		icon = GFX_bullets_2
 		x = -1
 		y = 1
 		cost = 6.5
@@ -2170,7 +2272,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_into_polis
-		icon = GFX
+		icon = GFX_focus_ITA_moschettieri_del_duce
 		x = 0
 		y = 2
 		cost = 6.5
@@ -2191,7 +2293,7 @@ focus_tree = {
 	focus = {
 		id = ARB_stalker_civilian_prioritisation
 		icon = GFX_RED_allow_station_autonomy
-		x = 18
+		x = 19
 		y = 1
 		cost = 5
 
@@ -2216,7 +2318,7 @@ focus_tree = {
 		icon = GFX_barscene
 		x = -3
 		y = 1
-		cost = 2.2
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
@@ -2244,7 +2346,7 @@ focus_tree = {
 		icon = GFX_generic_electricity
 		x = -1
 		y = 1
-		cost = 3.6
+		cost = 4
 
 		prerequisite = {
 			focus = ARB_resurfacing_old_rooms
@@ -2278,7 +2380,7 @@ focus_tree = {
 		icon = GFX_generic_electricity_2
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 6.5
 		available = {
 			has_tech = tech_refinery_2
 		}
@@ -2302,7 +2404,7 @@ focus_tree = {
 		icon = GFX_scrap
 		x = 1
 		y = 1
-		cost = 5
+		cost = 6.5
 
 		prerequisite = {
 			focus = ARB_resurfacing_old_rooms
@@ -2329,6 +2431,14 @@ focus_tree = {
 		cost = 6.5
 		available = {
 			has_completed_focus = ARB_economic_revitalisation_2
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = has_civic_education_higher_2_tooltip
+					AND = {
+						has_civic_education_higher_2 = yes
+					}
+				}
+			}
 		}
 		prerequisite = {
 			focus = ARB_stalker_civilian_prioritisation
@@ -2473,7 +2583,16 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 6.5
-
+		available = {
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = has_civic_education_higher_3_tooltip
+					AND = {
+						has_civic_education_higher_3 = yes
+					}
+				}
+			}
+		}
 		prerequisite = {
 			focus = ARB_use
 		}
@@ -2762,7 +2881,11 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 6.5
-
+		available = {
+			NOT = {
+				has_idea = ARB_selling_surface_goods
+			}
+		}
 		prerequisite = {
 			focus = ARB_sell_surface_wares
 		}
