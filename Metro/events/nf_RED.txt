@@ -167,20 +167,10 @@ country_event = { # Q of Military
     option = {
         name = nf_RED.6.a
         custom_effect_tooltip = RED_removing_army_bloat_tt
-        add_trait = {
-            character = RED_kovshov
-            slot = army_chief 
-            trait = RED_removing_influence
-        }
-        add_trait = {
-            character = RED_yury_terekhov
-            slot = high_command
-            trait = RED_removing_influence
-        }
-        add_trait = {
-            character = RED_georgy_rozhestvensky
-            slot = high_command
-            trait = RED_removing_influence
+        add_command_power = -5
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.03
         }
         hidden_effect = { country_event = { id = nf_RED.24 days = 7 random_days = 14 } }
 
@@ -281,9 +271,6 @@ country_event = { # Q of Brotherhood
                 slot = theorist
                 idea_token = RED_moskvin
                 cost = 100
-                allowed = {
-                    original_tag = RED
-                }
                 traits = { RED_maxim_1a }
                 removal_cost = -1
                 ai_will_do = {
@@ -292,7 +279,10 @@ country_event = { # Q of Brotherhood
             }
             activate = yes
         }
-
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
         ai_chance = {
             base = 10
         }
@@ -308,9 +298,6 @@ country_event = { # Q of Brotherhood
                 slot = high_command
                 idea_token = RED_moskvin
                 cost = 100
-                allowed = {
-                    original_tag = RED
-                }
                 traits = { RED_maxim_1b }
                 removal_cost = -1
                 ai_will_do = {
@@ -319,12 +306,15 @@ country_event = { # Q of Brotherhood
             }
             activate = yes
         }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.02
+        }
         custom_effect_tooltip = RED_generals_will_be_unhappy
     }
 
     option = {
         name = nf_RED.8.c
-        ## No
         custom_effect_tooltip = RED_moskvin_q_no_role
         custom_effect_tooltip = RED_moskvin_future_career
 
@@ -440,9 +430,6 @@ country_event = { # Korbut
                     slot = political_advisor
                     idea_token = RED_korbut
                     removal_cost = -1
-                    allowed = {
-                        original_tag = RED
-                    }
                     traits = { RED_korbut }
                     ai_will_do = {
                         factor = 16
@@ -530,16 +517,13 @@ country_event = { # Approach the Commanders
 			}
             add_advisor_role = {
                 character = RED_Yurik_velikov
-                activate = yes
+                activate = no
                 advisor = {
                     slot = high_command
                     cost = 100
                     idea_token = RED_Yurik_velikov
                     traits = {
                         RED_Yurik_velikov_trait
-                    }
-                    allowed = {
-                        always = yes
                     }
                 }
             }
@@ -554,16 +538,13 @@ country_event = { # Approach the Commanders
 			}
             add_advisor_role = {
                 character = RED_Valerian_Grabovoi
-                activate = yes
+                activate = no
                 advisor = {
                     slot = high_command
                     cost = 100
                     idea_token = RED_Valerian_Grabovoi
                     traits = {
                         RED_Valerian_Grabovoi_trait
-                    }
-                    allowed = {
-                        always = yes
                     }
                 }
             }
@@ -592,7 +573,7 @@ country_event = { # Approach the Commanders
         }
         add_popularity = {
             ideology = oligarch
-            popularity = 0.03
+            popularity = 0.035
         }
         hidden_effect = {
             add_corps_commander_role = {
@@ -614,9 +595,6 @@ country_event = { # Approach the Commanders
                     traits = {
                         RED_Yurik_velikov_trait
                     }
-                    allowed = {
-                        always = yes
-                    }
                 }
             }
             add_corps_commander_role = {
@@ -637,9 +615,6 @@ country_event = { # Approach the Commanders
                     idea_token = RED_Valerian_Grabovoi
                     traits = {
                         RED_Valerian_Grabovoi_trait
-                    }
-                    allowed = {
-                        always = yes
                     }
                 }
             }
@@ -802,6 +777,10 @@ country_event = { # Great Show Trial
 
     is_triggered_only = yes
 
+    immediate = {
+        RED_mutiny_removal = yes
+    }
+
     option = {
         name = nf_RED.23.a
         add_popularity = {
@@ -895,11 +874,17 @@ country_event = { # Generals Siphoning manpower
 
     option = {
         name = nf_RED.25.e
+        trigger = {
+            NOT = {
+                has_idea_with_trait = maxim_resolute
+                has_idea_with_trait = RED_andrey_war_support
+            }
+        }
         add_timed_idea = {
             idea = RED_generals_siphoning_manpower
             days = 75
         }
-        add_manpower = -100
+        add_manpower = -50
         add_political_power = -25
         ai_chance = {
             base = 2.5
@@ -919,7 +904,11 @@ country_event = { # Plans of outward mutiny
         name = nf_RED.26.a
         add_timed_idea = {
             idea = RED_soldiers_siphoning_equipment
-            days = 150
+            days = 45
+        }
+        add_days_remove  = {
+            decision = RED_military_mutiny_mission_countdown
+            days = 10
         }
         ai_chance = {
             base = 2.5
@@ -935,9 +924,9 @@ country_event = { # Plans of outward mutiny
             ideology = dictatorial
             popularity = 0.025
         }
-        add_timed_idea = {
-            idea = RED_soldiers_siphoning_equipment
-            days = 45
+        add_days_mission_timeout = {
+            mission = RED_military_mutiny_mission_countdown
+            days = 25
         }
         ai_chance = {
             base = 10
@@ -946,10 +935,8 @@ country_event = { # Plans of outward mutiny
 
     option = {
         name = nf_RED.26.c
-        add_manpower = -50
-        add_command_power = -5
-        add_timed_idea = {
-            idea = RED_soldiers_siphoning_equipment
+        add_days_remove  = {
+            decision = RED_military_mutiny_mission_countdown
             days = 30
         }
         ai_chance = {
@@ -1192,6 +1179,9 @@ country_event = { # Question of Maxim becoming General
 
     option = { 
         name = nf_RED.33.a
+        hidden_effect = {
+            retire_ideology_leader = oligarch 
+        }
         add_country_leader_role = {
             character = RED_moskvin
             country_leader={
@@ -1211,6 +1201,10 @@ country_event = { # Question of Maxim becoming General
             logistics_skill = 4
             legacy_id=-1
         }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.015
+        }
         ai_chance = {
             base = 500
         }
@@ -1218,6 +1212,9 @@ country_event = { # Question of Maxim becoming General
 
     option = { 
         name = nf_RED.33.b
+        hidden_effect = {
+            retire_ideology_leader = oligarch 
+        }
         add_country_leader_role = {
             character = RED_moskvin
             country_leader={
@@ -1226,6 +1223,10 @@ country_event = { # Question of Maxim becoming General
                 expire="2050.1.1.1"
                 id = -1
             }
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.015
         }
         ai_chance = {
             base = 500
@@ -1697,7 +1698,47 @@ country_event = { # Election Warning Tooltip
         name = nf_RED.73.a
         custom_effect_tooltip = RED_2033_election_tt
         activate_mission = RED_2033_election_countdown_mission
-        add_political_power = 15
+        hidden_effect = { country_event = { id = nf_RED.74 days = 65 random_days = 65 } }
+    }
+}
+
+country_event = { # Maxim plans on running
+    id = nf_RED.74
+    title = nf_RED.74.t
+    desc = nf_RED.74.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = { ### We want to win as Maxim
+        name = nf_RED.74.a
+        custom_effect_tooltip = RED_plan_taking_maxim_route
+        add_political_power = -5
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+        add_timed_idea = { 
+            idea = RED_maxim_moskvin_runs 
+            days = 720
+        }
+        hidden_effect = {
+            set_country_flag = RED_allow_maxim_meddling_election
+        } 
+    }
+
+    option = { ### Lets keep Andrey
+        name = nf_RED.74.b
+        add_political_power = -5
+        add_timed_idea = { 
+            idea = RED_maxim_moskvin_runs_andrey_path 
+            days = 720
+        }
+        add_popularity = {
+            ideology = council
+            popularity = -0.02
+        }
+        hidden_effect = { country_event = { id = nf_RED.86 days = 80 random_days = 75 } }
     }
 }
 
@@ -1711,11 +1752,11 @@ country_event = { # Change ideology chance before 2033 #
         AND = {
             count_triggers = {
                 amount = 5
-                original_tag = RED
                 date > 2030.1.1
                 date < 2033.1.1 
-                oligarch > party_popularity@council
-                dictatorial > party_popularity@council
+                has_stability < 0.44
+                has_war_support < 0.44
+                council < 0.30
                 has_completed_focus = RED_2030
             }
         }
@@ -1734,6 +1775,7 @@ country_event = { # Change ideology chance before 2033 #
         name = nf_RED.75.b
         trigger = { 
             oligarch > party_popularity@council
+            council < 0.29
         }
         hidden_effect = { country_event = { id = nf_RED.76 days = 21 random_days = 21 } }
         custom_effect_tooltip = RED_election_maxim_path_tt
@@ -1746,6 +1788,7 @@ country_event = { # Change ideology chance before 2033 #
         name = nf_RED.75.c
         trigger = { 
             dictatorial > party_popularity@council
+            council < 0.29
         }
         hidden_effect = { country_event = { id = nf_RED.80 days = 60 random_days = 61 } }
         custom_effect_tooltip = RED_election_korbut_path_tt
@@ -1943,10 +1986,6 @@ country_event = { ### ELECTION EVENT
 
     option = { ## Andrey Wins ## 
         name = nf_RED.85.a
-        set_politics = {
-            ruling_party = council
-            elections_allowed = no
-        }
         add_popularity = {
             ideology = council
             popularity = 0.05
@@ -1980,65 +2019,69 @@ country_event = { ### ELECTION EVENT
     }
 }
 
-### Lenin's tomb ###
-
-country_event = { # Lenin's tomb
+country_event = { # Maxim and Andrey fallout
     id = nf_RED.86
     title = nf_RED.86.t
     desc = nf_RED.86.d
-    picture = "GFX_event (12)"
+    picture = "GFX_event (65)"
 
     is_triggered_only = yes
 
-    option = { ### He's there, wholesome reddit
+    option = {
         name = nf_RED.86.a
-        add_ideas = RED_lenin_reclaimed
-        ai_chance = {
-            base = 1
+        add_political_power = -10
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
         }
+        add_ideas = RED_brother_fallout
     }
+}
 
-    option = { ## zombie event
-        name = nf_RED.86.b
-        hidden_effect = { country_event = { id = nf_RED.87 days = 30 random_days = 30 } }
-        ai_chance = {
-            base = 2.5
+country_event = { # Maxim meddling
+    id = nf_RED.87
+    title = nf_RED.87.t
+    desc = nf_RED.87.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED.87.a
+        add_popularity = {
+            ideology = council
+            popularity = -0.05
         }
     }
 }
 
-country_event = { # Lenin becomes wholesome leader
-    id = nf_RED.87
-    title = nf_RED.87.t
-    desc = nf_RED.87.d
-    picture = "GFX_event (12)"
+
+## Korbut Interaction ## 
+
+country_event = { # Korbut Manipulations, stage 1
+    id = nf_RED.100
+    title = nf_RED.100.t
+    desc = nf_RED.100.d
+    picture = "GFX_event (65)"
 
     is_triggered_only = yes
 
-    immediate = {
-        hidden_effect = {
-            remove_country_leader_role = {
-                character = RED_korbut
-                ideology = totalitarianism
-            } 
+    trigger = { 
+        AND = {
+            count_triggers = {
+                amount = 2
+                date > 2029.1.1
+                dictatorial > 0.1
+                has_completed_focus = RED_inaugerate_korbut
+            }
         }
     }
 
-    option = { 
-        name = nf_RED.87.a
-        promote_character = RED_zombie_lenin
-        add_country_leader_role = {
-            character = RED_zombie_lenin
-            country_leader={
-                ideology = totalitarianism
-                traits = {  }
-                expire="2050.1.1.1"
-                id = -1
-            }
-        }
-        set_politics = {
-            ruling_party = dictatorial
-            elections_allowed = no
+    option = {
+        name = nf_RED.100.a
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.01
         }
     }
 }

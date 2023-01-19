@@ -1,0 +1,65 @@
+ideas = {
+	country = {
+		RYZ_unorganized = {
+			picture = idea_RYZ_unorganized
+				
+			cancel = {
+				OR = {
+					oligarch > 0.5
+					dictatorial > 0.5
+					community > 0.5
+					council > 0.5
+				}
+			}
+
+			on_remove = {
+				add_timed_idea = { 
+					idea = RYZ_organized_community
+					days = 720
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				industrial_capacity_factory = -0.1
+				production_speed_buildings_factor = -0.1
+				stability_factor = -0.1      
+			}
+		}
+
+		RYZ_organized_community = {
+			picture = idea_RYZ_organized_community
+
+			on_remove = {
+				add_ideas = RYZ_ryazan_community
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.1
+				stability_factor = 0.1
+				consumer_goods_factor = -0.1 
+			}
+		}
+
+		RYZ_ryazan_community = {
+			picture = idea_RYZ_community
+
+			on_remove = {
+				add_ideas = RYZ_ryazan_community
+			}
+
+			removal_cost = -1
+
+			modifier = {	
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+				stability_factor = 0.15
+				consumer_goods_factor = -0.05
+			}
+		}
+	}	
+}

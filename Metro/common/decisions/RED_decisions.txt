@@ -351,7 +351,7 @@ RED_crisis_category = {
 	}
 
 	RED_military_mutiny_rid_mutinies = {
-		icon = decision_remove_military_mutiny_2
+		icon = remove_military_mutiny_2
 
 		available = {
 			has_completed_focus = RED_rid_mutinies
@@ -421,34 +421,10 @@ RED_crisis_category = {
 					instant_build = yes
 				}
 			}
-		}
-	}
-
-	RED_military_mutiny_rid_mutinies_2 = { # Needed. So players can only use decision Twice
-		icon = remove_military_mutiny_2
-
-		available = {
-			has_completed_focus = RED_the_great_show_trial
-		}
-
-		visible = {
-			has_completed_focus = RED_the_great_show_trial
-		}
-		cost = 0
-		days_remove = 14
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 2500
-		}
-
-		modifier = {
-			command_power_gain_mult = -0.5
-		}
-
-		remove_effect = {
-			RED_mutiny_removal = yes
+			add_days_mission_timeout = {
+				mission = RED_military_mutiny_mission_countdown
+				days = 25
+			}
 		}
 	}
 
@@ -461,8 +437,11 @@ RED_crisis_category = {
 
 		visible = {
 			has_completed_focus = RED_deal_with_military_mutinies
-			AND = {
-				has_country_flag = RED_military_mutinies
+			custom_trigger_tooltip = {
+				tooltip = RED_currently_suffering_military_mutinies
+				AND = {
+					has_country_flag = RED_military_mutinies
+				}
 			}
 		}
 
@@ -495,32 +474,31 @@ RED_crisis_category = {
 			}
 		}
 
-		custom_cost_text = command_power_15
+		custom_cost_text = command_power_10
 		custom_cost_trigger = {
-			command_power > 14.9
+			command_power > 9.9
 		}
-		days_re_enable = 35
+		days_re_enable = 20
 
 		visible = {
 			has_completed_focus = RED_deal_with_military_mutinies
 		}
+
 		fire_only_once = yes
 
 		ai_will_do = {
 			factor = 2500
 		}
 		complete_effect = {
-			add_manpower = -35
-			add_command_power = -15
-			hidden_effect = {
-				add_days_mission_timeout = {
-					mission = RED_military_mutiny_mission_countdown
-					days = 25
-				}
+			add_manpower = -20
+			add_command_power = -10
+			add_days_mission_timeout = {
+				mission = RED_military_mutiny_mission_countdown
+				days = 25
 			}
-			custom_effect_tooltip = RED_military_mutinies_extention_tt
 		}
 	}
+
 	RED_military_mutiny_promote_new_recruits = {
 		icon = remove_military_recruits
 		available = {
@@ -554,6 +532,9 @@ RED_crisis_category = {
 
 		available = {
 			has_completed_focus = RED_dismantle_mushroom_revolts
+			NOT = {
+				has_completed_focus = RED_the_crowd_stills
+			}
 		}
 
 		visible = {
@@ -575,6 +556,10 @@ RED_crisis_category = {
 
 		remove_effect = {
 			add_stability = 0.05
+			add_popularity = {
+				ideology = community
+				popularity = -0.05
+			}
 		}
 	}
 
@@ -603,13 +588,14 @@ RED_crisis_category = {
 		}
 
 		complete_effect = {
-			add_command_power = -25
+			add_command_power = -5
+			custom_effect_tooltip = RED_necessary_to_progress_tt
 		}
 
 		remove_effect = {
 			add_popularity = {
 				ideology = dictatorial
-				popularity = 0.01
+				popularity = 0.015
 			}
 			hidden_effect = {
 				set_country_flag = triggered_sabotage_revolution	
@@ -1216,6 +1202,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			264 = {	
 				set_state_name = "RED_264"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1244,6 +1235,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			329 = {	
 				set_state_name = "RED_329"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1272,6 +1268,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			245 = {	
 				set_state_name = "RED_245"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1300,6 +1301,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			330 = {	
 				set_state_name = "RED_330"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1328,6 +1334,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			362 = {	
 				set_state_name = "RED_362"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1356,6 +1367,11 @@ RED_rebuilding_the_line_category = {
 			add_stability = 0.02
 			250 = {	
 				set_state_name = "RED_250"
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 
@@ -1396,36 +1412,5 @@ RED_rebuilding_the_line_category = {
 		ai_will_do = {
 			factor = 0
 		}
-	}
-}
-
-RED_2033_election_category = {
-	RED_2033_election_countdown_mission = {
-
-		activation = {
-			always = no
-		}
-		available = {
-			hidden_trigger = { has_country_flag = RED_election_happening }
-		}
-		priority = 2501
-
-		allowed = { tag = RED }
-		is_good = no
-		days_mission_timeout = 720
-
-		available = {                           
-            NOT = {
-            	has_country_flag = RED_election_happening 
-            }
-        }
-		cancel_trigger = {
-			NOT = {
-            	has_country_flag = RED_election_happening 
-            }
-		}
-		timeout_effect = {                      
-            country_event = nf_RED.85 ### Election_lmao   
-        }
 	}
 }

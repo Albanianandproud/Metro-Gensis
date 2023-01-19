@@ -1,0 +1,1784 @@
+#!gfx:interface/metro_goals.gfx
+#!gfx:interface/EUR_focus_icons.gfx
+#!gfx:interface/TRT_focus_icons.gfx
+
+focus_tree = {
+	id = venice
+	country = {
+		factor = 0
+		modifier = {
+			add = 00
+			tag = TRT
+		}
+	}
+	continuous_focus_position = { x = 100 y = 1000}
+	default = no
+
+	focus = {
+		id = TRT_start_political_talks
+		icon = GFX_TRT_generic_1
+		x = 15
+		y = 0
+		cost = 2
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 10
+		}
+	}
+
+	focus = {
+		id = TRT_flood_gates
+		icon = GFX_tunnel_bunker
+		x = -8
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_start_political_talks
+		prerequisite = { focus = TRT_start_political_talks }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_construct_foundations
+		icon = GFX_oil_lamp
+		x = 1
+		y = 1
+		cost = 6.45
+
+		prerequisite = { focus = TRT_flood_gates }
+
+		relative_position_id = TRT_flood_gates
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_support_beams
+		icon = GFX_metro_infrastructure
+		relative_position_id = TRT_construct_foundations
+		x = 1
+		y = 1
+		cost = 6.45
+
+		prerequisite = { focus = TRT_construct_foundations }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = TRT_city_on_stilts
+				add_idea = TRT_city_on_stilts2
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_exploration_rafts
+		icon = GFX_tunnel_patrol
+		relative_position_id = TRT_flood_gates
+		x = -1
+		y = 1
+		cost = 6.45
+
+		prerequisite = { focus = TRT_flood_gates }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_command_power = 20
+			add_ideas = TRT_exploration_raft_idea
+		}
+	}
+	focus = {
+		id = TRT_shrimping
+		icon = GFX_stalker1
+		relative_position_id = TRT_exploration_rafts
+		x = 0
+		y = 2
+		cost = 6.45
+
+		prerequisite = { focus = TRT_exploration_rafts }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			reduce_shrimp = yes
+		}
+	}
+
+	focus = {
+		id = TRT_colonisation
+		icon = GFX_HNZ_generic_tunnel_focus
+		relative_position_id = TRT_flood_gates
+		x = 0
+		y = 2
+		cost = 6.45
+
+		prerequisite = { focus = TRT_flood_gates }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 25
+				producer = RUS
+			}
+			add_manpower = 25
+			add_command_power = 20
+		}
+	}
+
+	focus = {
+		id = TRT_mobsters_path
+		icon = GFX_TRT_bandit_2
+		relative_position_id = TRT_start_political_talks
+		x = -3
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_law_enforcment_path }
+
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value < -0.05
+            }
+		}
+
+		prerequisite = { focus = TRT_start_political_talks }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			TRT_bop_low_decrease_effect = yes
+			#swap_ideas = {
+			#	remove_idea = TRT_bandit_enterprise
+			#	add_idea = TRT_bandit_enterprise_2
+			#}
+		}
+	}
+
+	focus = {
+		id = TRT_law_enforcment_path
+		icon = GFX_TRT_law_1
+		relative_position_id = TRT_start_political_talks
+		x = 3
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_mobsters_path }
+
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value > 0.05
+            }
+		}
+
+		prerequisite = { focus = TRT_start_political_talks }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			TRT_bop_low_increase_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_reform_the_economy
+		icon = GFX_generic_ammunition_1
+		relative_position_id = TRT_start_political_talks
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_mobsters_path focus = TRT_law_enforcment_path }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = TRT_bandit_enterprise
+				add_idea = TRT_bandit_enterprise_2
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_invest_in_entertainment
+		icon = GFX_TRT_degeneracy_3
+		relative_position_id = TRT_reform_the_economy
+		x = -2
+		y = 1
+		cost = 6.45
+		mutually_exclusive = { focus = TRT_invest_in_fishermen focus = TRT_military_buildup }
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_reform_the_economy }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_very_low_decrease_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_invest_in_fishermen
+		icon = GFX_oil_lamp
+		relative_position_id = TRT_reform_the_economy
+		x = 0
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_invest_in_entertainment focus = TRT_military_buildup }
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_reform_the_economy }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = fishermen_idea
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_military_buildup
+		icon = GFX_gunsupply
+		relative_position_id = TRT_reform_the_economy
+		x = 2
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_invest_in_entertainment focus = TRT_invest_in_fishermen }
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_reform_the_economy }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_very_low_increase_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_the_northern_guard
+		icon = GFX_sandbag_reinforcement
+		relative_position_id = TRT_mobsters_path
+		x = 1
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_mobsters_path focus = TRT_law_enforcment_path }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_low_decrease_effect = yes
+			reduce_shrimp = yes
+		}
+	}
+
+	focus = {
+		id = TRT_foreign_involvement
+		icon = GFX_generic_equipment_gasmask_5
+		relative_position_id = TRT_law_enforcment_path
+		x = -1
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_mobsters_path focus = TRT_law_enforcment_path }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_low_increase_effect = yes
+			add_ideas = TRT_foreign_involvement
+		}
+	}
+
+	focus = {
+		id = TRT_local_protection_gangs
+		icon = GFX_TRT_bandit_1
+		relative_position_id = TRT_mobsters_path
+		x = -1
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_mobsters_path }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				load_oob = "TRT_lmp"
+			}
+			custom_effect_tooltip = LMP_TT
+			TRT_bop_very_low_decrease_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_ban_extortion
+		icon = GFX_HNZ_control_trade
+		relative_position_id = TRT_local_protection_gangs
+		x = 0
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_local_protection_gangs }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_very_low_decrease_effect = yes
+			add_stability = 0.1
+		}
+	}
+
+	focus = {
+		id = TRT_remove_mobsters
+		icon = GFX_HNZ_secret_operations
+		relative_position_id = TRT_law_enforcment_path
+		x = 1
+		y = 2
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_law_enforcment_path }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_timed_idea = { idea = TRT_removing_mobsters days = 365 }
+			TRT_bop_low_increase_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_tactical_takeover
+		icon = GFX_HNZ_generic_agreement
+		relative_position_id = TRT_remove_mobsters
+		x = -1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_trial_by_fire }
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value > 0.3
+            }
+		}
+
+		prerequisite = { focus = TRT_remove_mobsters }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			set_politics = {
+                ruling_party = council
+            }
+		}
+	}
+
+	focus = {
+		id = TRT_trial_by_fire
+		icon = GFX_TRT_civil_war
+		relative_position_id = TRT_remove_mobsters
+		x = 1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_tactical_takeover }
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value > 0
+            }
+		}
+
+		prerequisite = { focus = TRT_remove_mobsters }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			set_politics = {
+                ruling_party = council
+            }
+			start_civil_war = {
+				ideology = dictatorial
+				size = 0.3
+				capital = 422
+				states = {
+					422
+				}
+			}
+			TRT_bop_medium_increase_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_the_new_plan
+		icon = GFX_cog_blueprints
+		relative_position_id = TRT_invest_in_fishermen
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_invest_in_entertainment focus = TRT_invest_in_fishermen focus = TRT_military_buildup }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = TRT_bandit_enterprise_2
+				add_idea = TRT_bandit_enterprise_3
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_invest_in_community_businesses
+		icon = GFX_HNZ_factories
+		relative_position_id = TRT_the_new_plan
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_new_plan }
+		prerequisite = { focus = TRT_trial_by_fire focus = TRT_tactical_takeover }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_low_increase_effect = yes
+			remove_ideas = TRT_bandit_enterprise_3
+		}
+	}
+
+	focus = {
+		id = TRT_cannon_fodder
+		icon = GFX_HNZ_not_another_bloodbath
+		relative_position_id = TRT_trial_by_fire
+		x = 2
+		y = 1
+		cost = 3
+		
+		available = {
+			has_civil_war = yes
+		}
+
+		prerequisite = { focus = TRT_trial_by_fire }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_command_power = 10
+			add_manpower = 20
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 20
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_the_final_push_home
+		icon = GFX_HNZ_skull_spike
+		relative_position_id = TRT_cannon_fodder
+		x = 0
+		y = 1
+		cost = 3
+		
+		available = {
+			has_civil_war = yes
+		}
+
+		prerequisite = { focus = TRT_cannon_fodder }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_manpower = 50
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 70
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_deport_mob_supporters
+		icon = GFX_HNZ_the_managers_last_shift
+		relative_position_id = TRT_tactical_takeover
+		x = 2
+		y = 1
+		cost = 3
+		
+		available = {
+			has_civil_war = no
+		}
+
+		prerequisite = { focus = TRT_tactical_takeover focus = TRT_trial_by_fire }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			add_manpower = -50
+			TRT_bop_very_low_increase_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_peoples_army
+		icon = GFX_HNZ_planning_1
+		relative_position_id = TRT_tactical_takeover
+		x = 0
+		y = 1
+		cost = 3
+		
+		available = {
+			has_civil_war = no
+		}
+
+		prerequisite = { focus = TRT_tactical_takeover focus = TRT_trial_by_fire }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				load_oob = "TRT_law_oob"
+			}
+			custom_effect_tooltip = PA_TT
+		}
+	}
+
+	focus = {
+		id = TRT_infrastructure
+		icon = GFX_cog_cement
+		relative_position_id = TRT_invest_in_community_businesses
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_new_plan }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_focus_on_the_military
+		icon = GFX_HNZ_planning_advisor
+		relative_position_id = TRT_invest_in_community_businesses
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_invest_in_community_businesses }
+		prerequisite = { focus = TRT_peoples_army }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_purge_the_filth
+		icon = GFX_RED_begin_the_purge
+		relative_position_id = TRT_deport_mob_supporters
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_deport_mob_supporters }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = removed_prostitution_1
+			country_event = { id = nf_TRT.1 days = 45 }
+		}
+	}
+
+	focus = {
+		id = TRT_industrial_overhaul
+		icon = GFX_workstation_4
+		relative_position_id = TRT_focus_on_the_military
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_focus_on_the_military }
+		prerequisite = { focus = TRT_infrastructure }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_exterior_focus
+		icon = GFX_HNZ_mercenary_army
+		relative_position_id = TRT_purge_the_filth
+		x = -1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_among_us }
+
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value > 0.5
+			}
+		}
+
+		prerequisite = { focus = TRT_purge_the_filth }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 30
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = TRT_among_us
+		icon = GFX_HNZ_internal_affairs
+		relative_position_id = TRT_purge_the_filth
+		x = 1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_exterior_focus }
+
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value > 0.4
+            }
+		}
+
+		prerequisite = { focus = TRT_purge_the_filth }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 30
+			add_ideas = among_us
+		}
+	}
+
+	focus = {
+		id = TRT_royal_flush
+		icon = GFX_TRT_degeneracy_1
+		relative_position_id = TRT_ban_extortion
+		x = 1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_mob_civil_war }
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value < -0.3
+            }
+		}
+
+		prerequisite = { focus = TRT_ban_extortion }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			set_politics = {
+                ruling_party = council
+            }
+		}
+	}
+
+	focus = {
+		id = TRT_mob_civil_war
+		icon = GFX_TRT_civil_war
+		relative_position_id = TRT_ban_extortion
+		x = -1
+		y = 1
+		cost = 6.45
+
+		mutually_exclusive = { focus = TRT_royal_flush }
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value < 0
+            }
+		}
+
+		prerequisite = { focus = TRT_ban_extortion }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			start_civil_war = {
+				ideology = council
+				size = 0.3
+				capital = 422
+				states = {
+					422
+				}
+			}
+			TRT_bop_medium_decrease_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_use_the_stockpiles
+		icon = GFX_RCH_stockpile
+		relative_position_id = TRT_mob_civil_war
+		x = -2
+		y = 1
+		cost = 6.45
+		
+		available = {
+			has_civil_war = yes
+		}
+
+		prerequisite = { focus = TRT_mob_civil_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_command_power = 10
+			add_manpower = 20
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 20
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_use_the_reserves
+		icon = GFX_RCH_conscription1
+		relative_position_id = TRT_mob_civil_war
+		x = -2
+		y = 2
+		cost = 6.45
+		
+		available = {
+			has_civil_war = yes
+		}
+
+		prerequisite = { focus = TRT_use_the_stockpiles }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_manpower = 50
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 70
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_execute_law_enforcers
+		icon = GFX_HNZ_night_of_knifes
+		relative_position_id = TRT_mob_civil_war
+		x = 0
+		y = 1
+		cost = 6.45
+		
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_mob_civil_war focus = TRT_royal_flush }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			add_manpower = -50
+			TRT_bop_very_low_decrease_effect = yes
+		}
+	}
+
+	focus = {
+		id = TRT_form_proper_military
+		icon = GFX_TRT_bandit_3
+		relative_position_id = TRT_mob_civil_war
+		x = 2
+		y = 1
+		cost = 6.45
+		
+		available = {
+			has_civil_war = no
+		}
+
+		prerequisite = { focus = TRT_mob_civil_war focus = TRT_royal_flush }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = mob_army_formed
+		}
+	}
+
+	focus = {
+		id = TRT_integrate_degeneracy
+		icon = GFX_TRT_degeneracy_2
+		relative_position_id = TRT_mob_civil_war
+		x = 4
+		y = 1
+		cost = 6.45
+		
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_the_new_plan }
+		prerequisite = { focus = TRT_mob_civil_war focus = TRT_royal_flush }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			TRT_bop_low_decrease_effect = yes
+			swap_ideas = {
+				remove_idea = TRT_bandit_enterprise_3
+				add_idea = TRT_bandit_enterprise_4
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_entertain_the_people
+		icon = GFX_TRT_degeneracy_4
+		relative_position_id = TRT_form_proper_military
+		x = 1
+		y = 1
+		cost = 6.45
+		
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_integrate_degeneracy }
+		prerequisite = { focus = TRT_form_proper_military }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = TRT_bandit_enterprise_4
+				add_idea = TRT_bandit_enterprise_5
+			}
+		}
+	}
+	
+
+	focus = {
+		id = TRT_gathering_of_scum
+		icon = GFX_unknown
+		relative_position_id = TRT_entertain_the_people
+		x = -2
+		y = 1
+		cost = 6.45
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value < -0.4
+            }
+		}
+
+		prerequisite = { focus = TRT_entertain_the_people focus = TRT_execute_law_enforcers }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = the_scum_of_the_metro
+		}
+	}
+
+	focus = {
+		id = TRT_cleansing
+		icon = GFX_unknown
+		relative_position_id = TRT_exterior_focus
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_exterior_focus }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = KTG
+			}
+			#every_owned_state  = {
+            #    limit = {
+            #        is_core_of = GWC
+			#		is_owned_by = EUR
+            #    }
+            #    add_core_of = PREV
+            #}
+		}
+	}
+
+	focus = {
+		id = TRT_integration
+		icon = GFX_mob_reconciliation
+		relative_position_id = TRT_cleansing
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+			has_war = no
+		}
+
+		prerequisite = { focus = TRT_cleansing }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = KTG
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+
+
+
+	focus = {
+		id = TRT_greater_sights
+		icon = GFX_unknown
+		relative_position_id = TRT_cleansing
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		prerequisite = { focus = TRT_cleansing focus = TRT_among_us }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 20
+			add_war_support = 0.05
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = TRT_proper_industry
+		icon = GFX_workstation_3
+		relative_position_id = TRT_infrastructure
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+
+		}
+
+		prerequisite = { focus = TRT_entertain_the_people }
+		prerequisite = { focus = TRT_infrastructure }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			remove_ideas = TRT_bandit_enterprise_5
+		}
+	}
+
+	focus = {
+		id = TRT_protectors_of_freedom
+		icon = GFX_unknown
+		relative_position_id = TRT_gathering_of_scum
+		x = 1
+		y = 1
+		cost = 6.45
+		
+		available = {
+			power_balance_value = {
+                id = TRT_power_balance
+                value < -0.5
+            }
+		}
+
+		prerequisite = { focus = TRT_gathering_of_scum }
+		prerequisite = { focus = TRT_proper_industry }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 35
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_the_time_for_war
+		icon = GFX_EUR_clock
+		relative_position_id = TRT_greater_sights
+		x = -5
+		y = 1
+		cost = 6.45
+		
+		available = {
+			date > 2031.1.1
+		}
+
+		prerequisite = { focus = TRT_greater_sights focus = TRT_protectors_of_freedom }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_war_support = 0.3
+			add_command_power = 20
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 65
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_polis_war
+		icon = GFX_HNZ_invade_polis
+		relative_position_id = TRT_the_time_for_war
+		x = -1
+		y = 2
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_time_for_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PLS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_hanza_war
+		icon = GFX_HNZ_league_of_steel
+		relative_position_id = TRT_the_time_for_war
+		x = 1
+		y = 2
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_time_for_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = HNZ
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_reich_war
+		icon = GFX_RCH_army_2
+		relative_position_id = TRT_the_time_for_war
+		x = 2
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_time_for_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = RCH
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_RED_war
+		icon = GFX_RED_will_of_proletariat
+		relative_position_id = TRT_the_time_for_war
+		x = -2
+		y = 1
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_time_for_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = RED
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_arm_the_men
+		icon = GFX_HNZ_soldier
+		relative_position_id = TRT_the_time_for_war
+		x = 0
+		y = 3
+		cost = 6.45
+		
+		available = {
+		}
+
+		prerequisite = { focus = TRT_the_time_for_war }
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 150
+				producer = RUS
+			}
+			add_manpower = 125
+		}
+	}
+
+	focus = {
+		id = TRT_business_on_the_water
+		icon = GFX_metro_industry
+		relative_position_id = TRT_construct_foundations
+		x = 0
+		y = 2
+		cost = 6.45
+
+		prerequisite = { focus = TRT_construct_foundations }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots =1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_shrimping_further
+		icon = GFX_workstation
+		relative_position_id = TRT_shrimping
+		x = 0
+		y = 1
+		cost = 6.45
+
+		prerequisite = { focus = TRT_shrimping }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			reduce_shrimp = yes
+		}
+	}
+
+	#########
+	#
+	# Faction Path Incomplete
+	#
+	#########
+
+	focus = {
+		id = TRT_army_reforms
+		icon = GFX_HNZ_mercenary_army
+		x = 7
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_start_political_talks
+		prerequisite = { focus = TRT_start_political_talks }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			army_experience = 25
+		}
+	}
+
+	focus = {
+		id = TRT_pest_control
+		icon = GFX_mutant_death
+		x = 3
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			reduce_shrimp = yes
+		}
+	}
+
+	focus = {
+		id = TRT_armament_effort
+		icon = GFX_generic_small_arms_3
+		x = -1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 55
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_weapon_production
+		icon = GFX_generic_small_arms_2
+		x = 0
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_armament_effort
+		prerequisite = { focus = TRT_armament_effort }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_milita_army
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_army_reforms
+		prerequisite = { focus = TRT_army_reforms }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = militia_funding
+		}
+	}
+
+	focus = {
+		id = TRT_standing_force
+		icon = GFX_focus_secret_rearmament
+		x = 0
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_milita_army
+		prerequisite = { focus = TRT_milita_army }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			remove_ideas = militia_funding
+            add_ideas = home_guard
+		}
+	}
+
+	focus = {
+		id = TRT_guerrila_tactics
+		icon = GFX_equipment_gasmask
+		x = 1
+		y = 1
+		cost = 6.45
+		relative_position_id = TRT_standing_force
+		prerequisite = { focus = TRT_standing_force }
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_ideas = guerilla_militias
+		}
+	}
+
+	focus = {
+		id =  TRT_military_tactics
+		icon = GFX_soldier_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = TRT_standing_force
+		}
+		prerequisite = {
+			focus = TRT_weapon_production
+		}
+		x = -1
+		y = 1
+		relative_position_id = TRT_standing_force
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+		    add_ideas = new_world_army
+		}
+	}
+	
+}

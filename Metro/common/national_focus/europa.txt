@@ -1,0 +1,5123 @@
+#!gfx:interface/metro_goals.gfx
+#!gfx:interface/EUR_focus_icons.gfx
+
+focus_tree = {
+	id = europa
+	country = {
+		factor = 0
+		modifier = {
+			add = 30
+			tag = EUR
+		}
+	}
+	continuous_focus_position = { x = 100 y = 1000}
+	default = no
+
+	focus = {
+		id = EUR_bingle
+		icon = GFX_RED_get_owned
+		x = 1000
+		y = 1000
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = EUR_organise_the_immigrants
+		icon = GFX_HNZ_internal_affairs
+		x = 6
+		y = 0
+		cost = 4
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			country_event = nf_EUR.1
+			## How to organise Immigrants
+		}
+	}
+
+	### INDUSTRIAL BRANCH
+
+	focus = {
+		id = EUR_industrial_drive
+		icon = GFX_cog_factories
+
+		prerequisite = { focus = EUR_organise_the_immigrants }
+
+		relative_position_id = EUR_organise_the_immigrants
+		mutually_exclusive = { focus = EUR_the_new_prussia }
+		x = -2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_country_flag = EUR_industrial_flag
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_establish_a_full_government
+		icon = GFX_HNZ_independent_jurisdiction
+
+		prerequisite = { focus = EUR_industrial_drive }
+
+		relative_position_id = EUR_industrial_drive
+		x = 0
+		y = 1
+		cost = 5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			country_event = nf_EUR.2
+		}
+	}
+
+
+	focus = {
+		id = EUR_scavenging_runs
+		icon = GFX_generic_equipment_gasmask_1
+
+		prerequisite = { focus = EUR_industrial_drive focus = EUR_the_new_prussia }
+
+		relative_position_id = EUR_industrial_drive
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_manpower > 20
+		}
+
+		select_effect = {
+			add_manpower = -20
+
+		}
+
+		completion_reward = {
+			random_list = {
+				 80 = { country_event = { id = nf_EUR.3 } }
+				 20 = { country_event = { id = nf_EUR.4 } }
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_increase_military_drive
+		icon = GFX_volunteer_expedition
+
+		prerequisite = { focus = EUR_industrial_drive }
+
+		relative_position_id = EUR_industrial_drive
+		x = -2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			country_event = { id = nf_EUR.5 }
+		}
+	}
+
+	focus = {
+		id = EUR_further_industrial_drive
+		icon = GFX_cog_blueprints
+
+		prerequisite = { focus = EUR_industrial_drive }
+
+		relative_position_id = EUR_industrial_drive
+		x = -4
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_powerhouse_of_the_west
+		icon = GFX_workstation_4
+
+		prerequisite = { focus = EUR_further_industrial_drive }
+
+		relative_position_id = EUR_further_industrial_drive
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_establish_a_trading_hub
+		icon = GFX_spy_radio
+
+		prerequisite = { focus = EUR_scavenging_runs }
+		prerequisite = { focus = EUR_establish_a_full_government}
+
+		relative_position_id = EUR_scavenging_runs
+		x = -1
+		y = 1
+		cost = 7.3
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			247 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			393 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			395 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {  ### SHARED FOCUS
+		id = EUR_an_economy
+		icon = GFX_generic_ammunition_1
+
+		prerequisite = { focus = EUR_establish_a_trading_hub focus = EUR_further_westernisation }
+
+		relative_position_id = EUR_establish_a_trading_hub
+		x = 1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			add_ideas = EUR_economy_2
+		}
+	}
+
+	focus = {
+		id = EUR_invest_in_military
+		icon = GFX_bullets_2
+
+		prerequisite = { focus = EUR_increase_military_drive }
+
+		relative_position_id = EUR_increase_military_drive
+		x = 0
+		y = 1
+		cost = 5
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.2
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_increase_military_spending
+		icon = GFX_equipment_gasmask	
+
+		prerequisite = { focus = EUR_invest_in_military }
+
+		relative_position_id = EUR_invest_in_military
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_interventionism
+		icon = GFX_HNZ_knight_to_remember
+
+		prerequisite = { focus = EUR_invest_in_military }
+
+		mutually_exclusive = { focus = EUR_neutrality }
+		relative_position_id = EUR_invest_in_military
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			add_ideas = EUR_interventionism_idea
+			army_experience = 10
+		}
+	}
+
+	focus = {
+		id = EUR_neutrality
+		icon = GFX_sandbags
+
+		prerequisite = { focus = EUR_powerhouse_of_the_west }
+
+		mutually_exclusive = { focus = EUR_interventionism }
+		relative_position_id = EUR_invest_in_military
+		x = -2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		select_effect = {
+
+		}
+
+		completion_reward = {
+			add_ideas = EUR_neutrality_idea
+			army_experience = 10
+		}
+	}
+
+
+
+	### MILITARY BRANCH
+
+	focus = {
+		id = EUR_the_new_prussia
+		icon = GFX_EUR_armed_forces
+
+		prerequisite = { focus = EUR_organise_the_immigrants }
+
+		relative_position_id = EUR_organise_the_immigrants
+		mutually_exclusive = { focus = EUR_industrial_drive }
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_country_flag = EUR_military_flag
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+				    type = arms_factory
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_q_democracy
+		icon = GFX_courtroom
+
+		prerequisite = { focus = EUR_the_new_prussia}
+
+		relative_position_id = EUR_the_new_prussia
+		x = 4
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			country_event = nf_EUR.2
+		}
+	}
+
+	focus = {
+		id = EUR_westernisation
+		icon = GFX_EUR_westernization
+
+		prerequisite = { focus = EUR_the_new_prussia}
+
+		relative_position_id = EUR_the_new_prussia
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			country_event = nf_EUR.6
+		}
+	}
+
+	focus = {
+		id = EUR_further_westernisation
+		icon = GFX_EUR_westernization
+
+		prerequisite = { focus = EUR_westernisation}
+
+		relative_position_id = EUR_westernisation
+		x = -1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.7
+		}
+	}
+
+	focus = {
+		id = EUR_ideas_of_the_wehrmacht
+		icon = GFX_RCH_helmet2
+
+		prerequisite = { focus = EUR_the_new_prussia }
+
+		relative_position_id = EUR_the_new_prussia
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_doctrine_cost_reduction = {
+				name = wehrmacht_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = doctrine_balanced
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_expanionism
+		icon = GFX_HNZ_knight_to_remember
+
+		prerequisite = { focus = EUR_ideas_of_the_wehrmacht }
+
+		relative_position_id = EUR_ideas_of_the_wehrmacht
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+
+		completion_reward = {
+			add_command_power = 20
+			add_manpower = 20
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_increase_colonisation_drive
+		icon = GFX_HNZ_generic_tunnel_focus
+
+		prerequisite = { focus = EUR_expanionism }
+
+		relative_position_id = EUR_expanionism
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			has_country_flag = EUR_military_flag
+		}
+
+		#select_effect = {
+		#
+		#
+		#}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+			}
+			army_experience = 15
+		}
+	}
+
+	focus = {
+		id = EUR_formalise_the_militias
+		icon = GFX_HNZ_stalker_training
+
+		prerequisite = { focus = EUR_ideas_of_the_wehrmacht }
+
+		relative_position_id = EUR_ideas_of_the_wehrmacht
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = militia_formalisation_eu
+		}
+	}
+
+	focus = {
+		id = EUR_finalisation_of_peoples_militia
+		icon = GFX_HNZ_mercenary_army
+		
+		prerequisite = { focus = EUR_formalise_the_militias }
+		prerequisite = { focus = EUR_further_westernisation }
+
+		relative_position_id = EUR_formalise_the_militias
+		x = -2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EUR_tt_1
+			hidden_effect = {
+				load_oob = "EUR_militia"
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_army_recruitment
+		icon = GFX_RCH_propaganda
+
+		prerequisite = { focus = EUR_formalise_the_militias }
+
+		relative_position_id = EUR_formalise_the_militias
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = { id = nf_EUR.5 }
+		}
+	}
+
+	#################################
+	#								#
+	#	Defense against worm people #
+	#								#
+	#################################
+
+	focus = {
+		id = EUR_realise_the_threat
+		icon = GFX_GWC_skull
+
+		#relative_position_id =
+		available = {
+			GWC = { exists = yes }
+			OR = {
+				has_country_flag = europe_worm_is_threat
+				date > 2030.6.1
+			}
+		}
+		bypass = {
+			has_war_with = GWC
+		}
+		x = 18
+		y = 0
+		cost = 3
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			country_event = { id = nf_EUR.8 }
+		}
+	}
+
+	focus = {
+		id = EUR_defensive_line
+		icon = GFX_sandbag_reinforcement
+		prerequisite = { focus = EUR_realise_the_threat }
+
+		relative_position_id = EUR_realise_the_threat
+		x = 1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			152 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3818
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 2074
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 2080
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_start_bunker_construction
+		icon = GFX_tunnel_bunker
+		prerequisite = { focus = EUR_defensive_line }
+
+		relative_position_id = EUR_defensive_line
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			393 = {
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					province = 2347
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					province = 2346
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					province = 2371
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_fortify_the_capital
+		icon = GFX_goal_generic_attack_allies
+		prerequisite = { focus = EUR_start_bunker_construction }
+		prerequisite = { focus = EUR_constructing_a_good_defense }
+
+		relative_position_id = EUR_start_bunker_construction
+		x = -1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			247 = {
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					province = 2372
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 2348
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 2349
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 2381
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 2357
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_holding_the_line
+		icon = GFX_RED_develop_the_berilag
+		prerequisite = { focus = EUR_realise_the_threat }
+		mutually_exclusive = { focus = EUR_the_best_defence_is_a_good_offence }
+
+		relative_position_id = EUR_realise_the_threat
+		x = -1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = EUR_worm_cult_hold_line
+		}
+	}
+
+	focus = {
+		id = EUR_the_best_defence_is_a_good_offence
+		icon = GFX_HNZ_joint_operations
+		prerequisite = { focus = EUR_realise_the_threat }
+		mutually_exclusive = { focus = EUR_holding_the_line }
+
+		relative_position_id = EUR_realise_the_threat
+		x = -3
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = EUR_worm_cult_offensive
+		}
+	}
+
+	focus = {
+		id = EUR_constructing_a_good_defense
+		icon = GFX_sandbags
+		prerequisite = { focus = EUR_holding_the_line }
+
+		relative_position_id = EUR_holding_the_line
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = EUR_worm_cult_hold_line2
+		}
+	}
+
+	focus = {
+		id = EUR_rallying_the_men
+		icon = GFX_HNZ_merc_force
+		prerequisite = { focus = EUR_the_best_defence_is_a_good_offence }
+
+		relative_position_id = EUR_the_best_defence_is_a_good_offence
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = EUR_worm_cult_offensive
+			  add_idea = EUR_worm_cult_offensive2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_improved_doctrine
+		icon = GFX_RED_nkvd_officers
+		prerequisite = { focus = EUR_rallying_the_men }
+
+		relative_position_id = EUR_rallying_the_men
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = rallied_men_bonus
+				cost_reduction = 0.25
+				uses = 2
+				category = doctrine_balanced
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_create_our_own_weapons
+		icon = GFX_EUR_armed_forces_2
+		prerequisite = { focus = EUR_realise_the_threat }
+
+		relative_position_id = EUR_realise_the_threat
+		x = 3
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_manufacture_our_own_weapons
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = EUR_create_our_own_weapons }
+
+		relative_position_id = EUR_create_our_own_weapons
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			395 = { ## adds arms factory
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_scavenge_old_armouries
+		icon = GFX_armory
+		prerequisite = { focus = EUR_manufacture_our_own_weapons }
+
+		relative_position_id = EUR_manufacture_our_own_weapons
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			num_of_military_factories > 9
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			hidden_effect = {
+				scavenge_armouries = yes
+			}
+			custom_effect_tooltip = EUR_tt_2
+		}
+	}
+
+	#########################
+	#						#
+	#	Political stuff		#
+	#						#
+	#########################
+
+	focus = {
+		id = EUR_start_of_political_reform
+		icon = GFX_EUR_focus_1
+		x = 32
+		y = 0
+		cost = 4
+
+		available = {
+			has_country_flag = europe_has_council
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.12
+		}
+	}
+
+	#focus = {
+	#	id = EUR_british_influence
+	#	icon = GFX_HNZ_guiding_hand
+	#	prerequisite = { focus = EUR_start_of_political_reform }
+	#	mutually_exclusive = { focus = EUR_italian_influence focus = EUR_remain_centralised }
+#
+#		relative_position_id = EUR_start_of_political_reform
+#		x = 6
+#		y = 2
+#		cost = 6.45
+#
+#		available = {
+#			has_country_flag = EUR_flag_coming_soon
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+#
+#		completion_reward = {
+#			swap_ideas = {
+#				remove_idea = british_majority
+#				add_idea = british_majority_3
+#			}
+#			add_ideas = brit_economy_3
+#		}
+#	}
+
+	focus = {
+		id = EUR_remain_centralised
+		icon = GFX_EUR_patriotism_3
+		prerequisite = { focus = EUR_start_of_political_reform }
+		mutually_exclusive = { 
+			#focus = EUR_british_influence 
+			focus = EUR_italian_influence 
+		}
+
+		relative_position_id = EUR_start_of_political_reform
+		x = 4
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 10
+			add_stability = 0.06
+			add_ideas = remain_centralised
+		}
+	}
+
+	focus = {
+		id = EUR_remove_undesirables_from_council
+		icon = GFX_RED_squash_dissidents
+		prerequisite = { focus = EUR_start_of_political_reform }
+
+		mutually_exclusive = { focus = EUR_democratic_reforms }
+
+		relative_position_id = EUR_start_of_political_reform
+		x = 2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = council popularity = -0.05 }
+			add_popularity = { ideology = community popularity = -0.05 }
+		}
+	}
+
+	focus = {
+		id = EUR_increase_budget
+		icon = GFX_bullets_3
+		prerequisite = { focus = EUR_start_of_political_reform }
+
+		relative_position_id = EUR_start_of_political_reform
+		x = 6
+		y = 1
+		cost = 6.45
+
+		available = {
+
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = i_b_tt
+		}
+	}
+
+	focus = {
+		id = EUR_democratic_reforms
+		icon = GFX_HNZ_democracy_1
+		prerequisite = { focus = EUR_start_of_political_reform }
+
+		mutually_exclusive = { focus = EUR_remove_undesirables_from_council }
+
+		relative_position_id = EUR_start_of_political_reform
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = dictatorial popularity = -0.05 }
+			add_popularity = { ideology = oligarch popularity = -0.05 }
+		}
+	}
+
+	focus = {
+		id = EUR_foreign_arms_purchase
+		icon = GFX_gatling_arms_1
+		prerequisite = { focus = EUR_start_of_political_reform }
+
+		relative_position_id = EUR_start_of_political_reform
+		x = -6
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = f_a_p_tt
+		}
+	}
+
+	#############################
+	#							#
+	#	Remain Centralised		#
+	#							#
+	#############################
+
+	focus = {
+		id = EUR_settle_the_majorities
+		icon = GFX_settle_minorities
+		prerequisite = { focus = EUR_remain_centralised }
+
+		mutually_exclusive = { focus = EUR_ostalgie }
+
+		relative_position_id = EUR_remain_centralised
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = council popularity = 0.05 }
+			swap_ideas = {
+			  remove_idea = british_majority
+			  add_idea = british_majority_1
+			}
+			swap_ideas = {
+			  remove_idea = italian_majority
+			  add_idea = italian_majority_1
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_equal_party_representation
+		icon = GFX_focus_POL_complete_april_constitution
+		prerequisite = { focus = EUR_settle_the_majorities }
+
+		mutually_exclusive = { focus = EUR_bolster_national_ideals }
+
+		relative_position_id = EUR_settle_the_majorities
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = remove_majorities_tt
+			hidden_effect = {
+				remove_ideas = {
+					british_majority_1
+					italian_majority_1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_head_of_council
+		icon = GFX_conference
+		prerequisite = { focus = EUR_remain_centralised }
+
+		relative_position_id = EUR_remain_centralised
+		x = 2
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.13
+		}
+	}
+
+	focus = {
+		id = EUR_promote_immigration
+		icon = GFX_RED_allow_volunteers
+		prerequisite = { focus = EUR_head_of_council }
+
+		relative_position_id = EUR_head_of_council
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = europe_pro_immigration
+		}
+	}
+
+	focus = {
+		id = EUR_gwc_rehabilitation
+		icon = GFX_mob_reconciliation
+		prerequisite = { focus = EUR_promote_immigration }
+
+		relative_position_id = EUR_promote_immigration
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = worm_rehabilitation
+			add_popularity = { ideology = community popularity = 0.05 }
+		}
+	}
+
+	focus = {
+		id = EUR_industrial_reforms
+		icon = GFX_workstation_2
+		prerequisite = { focus = EUR_head_of_council }
+
+		relative_position_id = EUR_head_of_council
+		x = 1
+		y = 1
+		cost = 8.572
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = industrial_reform_europe
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 3
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_the_schulz_project
+		icon = GFX_EUR_schulz_plan
+		prerequisite = { focus = EUR_industrial_reforms }
+
+		relative_position_id = EUR_industrial_reforms
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_timed_idea = { idea = schulz_project  days = 120 }
+		}
+	}
+
+	focus = {
+		id = EUR_bolster_national_ideals
+		icon = GFX_western_patriotism
+		prerequisite = { focus = EUR_settle_the_majorities }
+
+		mutually_exclusive = { focus = EUR_equal_party_representation }
+
+		relative_position_id = EUR_settle_the_majorities
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = british_majority_1
+			  add_idea = british_majority_2
+			}
+			swap_ideas = {
+			  remove_idea = italian_majority_1
+			  add_idea = italian_majority_2
+			}
+		}
+	}
+
+
+	focus = {
+		id = EUR_tackle_the_problem_general
+		icon = GFX_EUR_dipose_roman
+		prerequisite = { focus = EUR_equal_party_representation focus = EUR_bolster_national_ideals }
+
+		relative_position_id = EUR_bolster_national_ideals
+		x = 1
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.14
+		}
+	}
+
+	focus = {
+		id = EUR_a_european_union
+		icon = GFX_EUR_focus_2
+		prerequisite = { focus = EUR_gwc_rehabilitation }
+		prerequisite = { focus = EUR_the_schulz_project }
+		prerequisite = { focus = EUR_tackle_the_problem_general }
+		
+		mutually_exclusive = { focus = EUR_lessons_from_the_reds }
+
+		relative_position_id = EUR_gwc_rehabilitation
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+			council > .6
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.15
+		}
+	}
+
+	focus = {
+		id = EUR_by_blood_and_bullets
+		icon = GFX_EUR_patriotism_2
+		prerequisite = { focus = EUR_a_european_union }
+
+		mutually_exclusive = { focus = EUR_by_words_and_wisdom }
+
+		relative_position_id = EUR_a_european_union
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = blood_and_bullets
+		}
+	}
+
+	focus = {
+		id = EUR_by_words_and_wisdom
+		icon = GFX_EUR_patriotism
+		prerequisite = { focus = EUR_a_european_union }
+
+		mutually_exclusive = { focus = EUR_by_blood_and_bullets }
+
+		relative_position_id = EUR_a_european_union
+		x = 2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = words_and_wisdom
+		}
+	}
+
+	focus = {
+		id = EUR_preempt_the_threat
+		icon = GFX_GWC_expand
+		prerequisite = { focus = EUR_by_blood_and_bullets focus = EUR_the_great_worm_cult_realised }
+
+		mutually_exclusive = { focus = EUR_wait_it_out }
+
+		relative_position_id = EUR_by_blood_and_bullets
+		x = -4
+		y = 2
+		cost = 6.45
+
+		available = {
+			has_country_flag = europe_worm_is_threat
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = blood_and_bullets
+				add_idea = blood_and_bullets1
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_wait_it_out
+		icon = GFX_EUR_clock
+		prerequisite = { focus = EUR_by_blood_and_bullets }
+
+		mutually_exclusive = { focus = EUR_preempt_the_threat }
+
+		relative_position_id = EUR_by_blood_and_bullets
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = blood_and_bullets
+				add_idea = blood_and_bullets1
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_industrial_powerhouse
+		icon = GFX_workshop_1
+		prerequisite = { focus = EUR_a_european_union }
+
+		relative_position_id = EUR_a_european_union
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_combined_efforts
+		icon = GFX_HNZ_arbat_arms_trade
+		prerequisite = { focus = EUR_by_blood_and_bullets focus = EUR_the_great_worm_cult_realised }
+
+		relative_position_id = EUR_by_blood_and_bullets
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+			ARB = { exists = yes }
+			NOT = { has_war_with = ARB }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			ARB = { country_event = nf_ARB.2 }
+		}
+	}
+
+	focus = {
+		id = EUR_industrial_powerhouse2
+		icon = GFX_workstation
+		prerequisite = { focus = EUR_industrial_powerhouse }
+
+		relative_position_id = EUR_industrial_powerhouse
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.18
+		}
+	}
+
+	focus = {
+		id = EUR_hitting_a_brick_wall
+		icon = GFX_sandbag_reinforcement
+		prerequisite = { focus = EUR_wait_it_out focus = EUR_preempt_the_threat }
+
+		relative_position_id = EUR_wait_it_out
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EUR_hitting_a_brick_wall_tt
+			hidden_effect = {
+				247 = {
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2348
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2349
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2381
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2357
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2390
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2391
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2382
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 2362
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_ready_ourselves
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = EUR_wait_it_out }
+		prerequisite = { focus = EUR_industrial_powerhouse2 }
+
+		relative_position_id = EUR_wait_it_out
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_untouchable
+		icon = GFX_RED_develop_the_berilag
+		prerequisite = { focus = EUR_hitting_a_brick_wall }
+
+		relative_position_id = EUR_hitting_a_brick_wall
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EUR_hitting_a_brick_wall_tt_2
+			hidden_effect = {
+				247 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2348
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2349
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2381
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2357
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2390
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2391
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2382
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 2362
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_death_by_attrition
+		icon = GFX_crate
+		prerequisite = { focus = EUR_wait_it_out }
+
+		relative_position_id = EUR_wait_it_out
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 60
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_waited_too_long
+		icon = GFX_GWC_skull
+		prerequisite = { focus = EUR_death_by_attrition }
+		prerequisite = { focus = EUR_untouchable }
+
+		relative_position_id = EUR_untouchable
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+			date > 2033.1.1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = GWC
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_ready_to_take
+		icon = GFX_GWC_skull
+		prerequisite = { focus = EUR_preempt_the_threat }
+
+		relative_position_id = EUR_preempt_the_threat
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GWC
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_militia_fighters
+		icon = GFX_stalker1
+		prerequisite = { focus = EUR_preempt_the_threat }
+
+		relative_position_id = EUR_preempt_the_threat
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EUR_tt_1_2
+			hidden_effect = {
+				load_oob = "EUR_militia_2"
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_stake_our_claim
+		icon = GFX_HNZ_knight_to_remember
+		prerequisite = { focus = EUR_militia_fighters }
+
+		relative_position_id = EUR_militia_fighters
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		bypass = {
+			owns_state = 153
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			ARB = { 
+				add_stability = -0.1 
+				add_war_support = 0.2
+			}
+			add_state_core = 421
+			transfer_state = 421
+			
+			IF = { 
+				limit = {
+					ARB = {
+						owns_state = 170
+					}
+				}
+				add_state_core = 170
+				transfer_state = 170
+			}
+			
+			IF = { 
+				limit = {
+					ARB = {
+						owns_state = 397
+					}
+				}
+				add_state_core = 397
+				transfer_state = 397
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_kill_every_last_one
+		icon = GFX_GWC_stake_a_claim
+		prerequisite = { focus = EUR_stake_our_claim }
+		prerequisite = { focus = EUR_untouchable }
+
+		relative_position_id = EUR_stake_our_claim
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_timed_idea = {  idea = EUR_kill_GWC days = 120 }
+		}
+	}
+
+	focus = {
+		id = EUR_core_GWC
+		icon = GFX_GWC_core
+		prerequisite = { focus = EUR_ready_to_take }
+
+		relative_position_id = EUR_ready_to_take
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			GWC = {
+				exists = no
+			}
+			ROOT = {
+				all_owned_state = {
+					is_core_of = GWC
+					AND = {
+						compliance > 80
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			every_owned_state  = {
+                limit = {
+                    is_core_of = GWC
+					is_owned_by = EUR
+                }
+                add_core_of = PREV
+            }
+		}
+	}
+
+	focus = {
+		id = EUR_war_HNZ
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = EUR_core_GWC }
+		prerequisite = { focus = EUR_stake_our_claim }
+
+		relative_position_id = EUR_core_GWC
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HNZ
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_schulz_speech
+		icon = GFX_conference
+		prerequisite = { focus = EUR_by_words_and_wisdom }
+
+		relative_position_id = EUR_by_words_and_wisdom
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.19
+		}
+	}
+
+	focus = {
+		id = EUR_defend_our_people
+		icon = GFX_sandbag_reinforcement
+		prerequisite = { focus = EUR_schulz_speech }
+
+		relative_position_id = EUR_schulz_speech
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_hanza_business_deal
+		icon = GFX_HNZ_generic_treaty
+		prerequisite = { focus = EUR_defend_our_people }
+		prerequisite = { focus = EUR_industrial_powerhouse2 }
+
+		relative_position_id = EUR_defend_our_people
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.20
+		}
+	}
+
+	focus = {
+		id = EUR_commonwealth_army_preparations
+		icon = GFX_goal_rhineland
+		prerequisite = { focus = EUR_schulz_speech }
+
+		relative_position_id = EUR_schulz_speech
+		x = 2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.2
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_commonwealth_army_preparations_2
+		icon = GFX_goal_generic_wolf_pack
+		prerequisite = { focus = EUR_defend_our_people }
+		prerequisite = { focus = EUR_commonwealth_army_preparations }
+
+		relative_position_id = EUR_defend_our_people
+
+		x = 1
+		y = 1
+		cost = 6.45
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = commonwealth_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = doctrine_balanced
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_commonwealth_army_preparations_3
+		icon = GFX_goal_generic_secret_weapon
+		prerequisite = { focus = EUR_commonwealth_army_preparations_2 }
+
+		relative_position_id = EUR_commonwealth_army_preparations_2
+
+		x = 0
+		y = 1
+		cost = 6.45
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = commonwealth_army
+		}
+	}
+
+	focus = {
+		id = EUR_negotiations_with_ARB
+		icon = GFX_HNZ_arbat_deal_peace
+		prerequisite = { focus = EUR_schulz_speech }
+
+		relative_position_id = EUR_schulz_speech
+		x = 4
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			ARB = { country_event = nf_ARB.2 }
+		}
+	}
+
+	focus = {
+		id = EUR_a_purpose
+		icon = GFX_HNZ_external_affairs
+
+		#relative_position_id =
+		available = {
+			OR = {
+				has_completed_focus = EUR_an_economy
+				date > 2032.1.1
+			}
+		}
+		bypass = {
+		}
+		x = 14
+		y = 5
+		cost = 3
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 25
+		}
+	}
+
+
+	focus = {
+		id = EUR_a_hub_of_science
+		icon = GFX_RCH_science
+		prerequisite = { focus = EUR_a_purpose }
+		mutually_exclusive = { focus = EUR_a_hub_of_trade }
+
+		relative_position_id = EUR_a_purpose
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_ideas = hub_of_science
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_trade
+		icon = GFX_generic_ammunition_box
+		prerequisite = { focus = EUR_a_purpose }
+		mutually_exclusive = { focus = EUR_a_hub_of_science }
+
+		relative_position_id = EUR_a_purpose
+		available = {
+
+		}
+		bypass = {
+		}
+		x = -1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_ideas = hub_of_trade
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_science_2
+		icon = GFX_goal_generic_scientific_exchange
+		prerequisite = { focus = EUR_a_hub_of_science }
+
+		relative_position_id = EUR_a_hub_of_science
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_science
+			  add_idea = hub_of_science2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_trade_2
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = EUR_a_hub_of_trade }
+
+		relative_position_id = EUR_a_hub_of_trade
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_trade
+			  add_idea = hub_of_trade2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_science_3
+		icon = GFX_goal_generic_scientific_exchange
+		prerequisite = { focus = EUR_a_hub_of_science_2 }
+
+		relative_position_id = EUR_a_hub_of_science_2
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_science2
+			  add_idea = hub_of_science3
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_trade_3
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = EUR_a_hub_of_trade_2 }
+
+		relative_position_id = EUR_a_hub_of_trade_2
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_trade2
+			  add_idea = hub_of_trade3
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_science_4
+		icon = GFX_goal_tfv_generic_tech_sharing
+		prerequisite = { focus = EUR_a_hub_of_science_3 }
+
+		relative_position_id = EUR_a_hub_of_science_3
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 2
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_science3
+			  add_idea = hub_of_science4
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_hub_of_trade_4
+		icon = GFX_goal_generic_positive_trade_relations
+		prerequisite = { focus = EUR_a_hub_of_trade_3 }
+
+		relative_position_id = EUR_a_hub_of_trade_3
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 2
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = hub_of_trade3
+			  add_idea = hub_of_trade4
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_cementing_our_place
+		icon = GFX_fist
+		prerequisite = { focus = EUR_a_hub_of_trade_4 focus = EUR_a_hub_of_science_4 }
+
+		relative_position_id = EUR_a_hub_of_trade_4
+		available = {
+			is_in_faction = no
+		}
+		bypass = {
+			is_in_faction = yes
+		}
+		x = 1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			create_faction = EUR_MIL_PACT_NAME
+		}
+	}
+
+	focus = {
+		id = EUR_weapons_research
+		icon = GFX_generic_medium_arms_1
+		prerequisite = { focus = EUR_a_hub_of_science}
+
+		relative_position_id = EUR_a_hub_of_science
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.6
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_industry_research
+		icon = GFX_cog_cement
+		prerequisite = { focus = EUR_weapons_research }
+
+		relative_position_id = EUR_weapons_research
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.75
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_armor_research
+		icon = GFX_cog_idea
+		prerequisite = { focus = EUR_industry_research }
+		prerequisite = { focus = EUR_a_hub_of_science_3 }
+
+		relative_position_id = EUR_industry_research
+		available = {
+
+		}
+		bypass = {
+		}
+		x = -1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			army_experience = 10
+		}
+	}
+
+	focus = {
+		id = EUR_more_rescources
+		icon = GFX_equipment_backpack
+		prerequisite = { focus = EUR_a_hub_of_trade }
+
+		relative_position_id = EUR_a_hub_of_trade
+		available = {
+
+		}
+		bypass = {
+		}
+		x = -2
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_more_rescources_2
+		icon = GFX_HNZ_logistics_1
+		prerequisite = { focus = EUR_more_rescources }
+
+		relative_position_id = EUR_more_rescources
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 0
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
+				add_resource = {
+					type = electronics
+					amount = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_more_rescources_3
+		icon = GFX_toolbox
+		prerequisite = { focus = EUR_more_rescources_2 }
+		prerequisite = { focus = EUR_a_hub_of_trade_3 }
+
+		relative_position_id = EUR_more_rescources_2
+		available = {
+
+		}
+		bypass = {
+		}
+		x = 1
+		y = 1
+		cost = 6.45
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
+				add_resource = {
+					type = electronics
+					amount = 2
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+		}
+	}
+
+	### ROME COOl
+
+	focus = {
+		id = EUR_italian_influence
+		icon = GFX_EUR_the_coup
+		prerequisite = { focus = EUR_start_of_political_reform }
+		mutually_exclusive = { 
+			# focus = EUR_british_influence 
+			focus = EUR_remain_centralised 
+		}
+
+		relative_position_id = EUR_start_of_political_reform
+		x = -4
+		y = 2
+		cost = 6.45
+
+		available = {
+
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = dictatorial popularity = 0.05}
+			add_ideas = europe_rising_rome_sentiment
+		}
+	}
+
+	focus = {
+		id = EUR_expose_council_members
+		icon = GFX_conference
+		prerequisite = { focus = EUR_italian_influence }
+
+		relative_position_id = EUR_italian_influence
+		x = 1
+		y = 1
+		cost = 2.587
+
+		available = {
+			dictatorial > .15
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.21
+		}
+	}
+
+	focus = {
+		id = EUR_military_display
+		icon = GFX_HNZ_skull_spike
+		prerequisite = { focus = EUR_italian_influence }
+
+		relative_position_id = EUR_italian_influence
+		x = -3
+		y = 1
+		cost = 6.45
+
+		available = {
+			has_manpower > 35
+			dictatorial > .15
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.22
+			add_manpower = -35
+		}
+	}
+
+	focus = {
+		id = EUR_riots_against_the_council
+		icon = GFX_courtroom
+		prerequisite = { focus = EUR_italian_influence }
+
+		relative_position_id = EUR_italian_influence
+		x = -1
+		y = 1
+		cost = 2.587
+
+		available = {
+			has_manpower > 25
+			dictatorial > .15
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.23
+			add_manpower = -25
+		}
+	}
+
+	focus = {
+		id = EUR_sabotage_industry
+		icon = GFX_focus_SOV_organize_wreckers
+		prerequisite = { focus = EUR_italian_influence }
+
+		relative_position_id = EUR_italian_influence
+		x = 3
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .25
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = sabotaged_industry_despot
+		}
+	}
+
+	focus = {
+		id = EUR_rise_of_the_workers
+		icon = GFX_soldier_1
+		prerequisite = { focus = EUR_sabotage_industry }
+
+		relative_position_id = EUR_sabotage_industry
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .30
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = sabotaged_industry_despot
+			  add_idea = sabotaged_industry_despot2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_inspire_nationalism
+		icon = GFX_focus_generic_italy_first
+		prerequisite = { focus = EUR_expose_council_members }
+		prerequisite = { focus = EUR_riots_against_the_council }
+
+		relative_position_id = EUR_expose_council_members
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .2
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = british_majority
+			  add_idea = british_majority_1
+			}
+			swap_ideas = {
+			  remove_idea = italian_majority
+			  add_idea = italian_majority_1
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_united_independance
+		icon = GFX_HNZ_logistics_2
+		prerequisite = { focus = EUR_inspire_nationalism }
+
+		relative_position_id = EUR_inspire_nationalism
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .3
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+			  remove_idea = british_majority_1
+			  add_idea = british_majority_2
+			}
+			swap_ideas = {
+			  remove_idea = italian_majority_1
+			  add_idea = italian_majority_3
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_hostile_displays
+		icon = GFX_HNZ_knight_to_remember
+		prerequisite = { focus = EUR_military_display }
+
+		relative_position_id = EUR_military_display
+		x = 1
+		y = 1
+		cost = 2.587
+
+		available = {
+			dictatorial > .35
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = hostile_displays_tt
+		}
+	}
+
+	focus = {
+		id = EUR_the_centurions_might
+		icon = GFX_EUR_for_europa
+		prerequisite = { focus = EUR_hostile_displays }
+
+		relative_position_id = EUR_hostile_displays
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .2
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			hidden_effect = { load_oob = "EUR_roman_militia" }
+			custom_effect_tooltip = roman_militia_tt
+		}
+	}
+
+	focus = {
+		id = EUR_lessons_from_history
+		icon = GFX_HNZ_generic_treaty
+		prerequisite = { focus = EUR_military_display }
+
+		relative_position_id = EUR_military_display
+		x = -1
+		y = 1
+		cost = 2.587
+
+		available = {
+			dictatorial > .35
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = rallied_men_bonus
+				cost_reduction = 0.25
+				uses = 2
+				category = doctrine_balanced
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_mimic_roman_institutions
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = EUR_lessons_from_history }
+
+		relative_position_id = EUR_lessons_from_history
+		x = 0
+		y = 1
+		cost = 2.587
+
+		available = {
+			dictatorial > .35
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = council popularity = 0.025 }
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_glorify_rome
+		icon = GFX_EUR_rome_glorify
+		prerequisite = { focus = EUR_mimic_roman_institutions }
+
+		relative_position_id = EUR_mimic_roman_institutions
+		x = 0
+		y = 1
+		cost = 2
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_popularity = { ideology = dictatorial popularity = 0.05 }
+		}
+	}
+
+	focus = {
+		id = EUR_bianachis_coup
+		icon = GFX_EUR_roman_general
+		prerequisite = { focus = EUR_the_centurions_might }
+		prerequisite = { focus = EUR_united_independance }
+
+		mutually_exclusive = { focus = EUR_a_military_state }
+
+		relative_position_id = EUR_the_centurions_might
+		x = 0
+		y = 1
+		cost = 2.587
+
+		available = {
+			dictatorial > .55
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.25
+			set_country_flag = europe_worm_is_threat
+		}
+	}
+
+	focus = {
+		id = EUR_a_military_state
+		icon = GFX_EUR_a_military_state
+		prerequisite = { focus = EUR_united_independance }
+		prerequisite = { focus = EUR_rise_of_the_workers }
+
+		mutually_exclusive = { focus = EUR_bianachis_coup }
+
+		relative_position_id = EUR_united_independance
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+			dictatorial > .5
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.24
+		}
+	}
+
+	focus = {
+		id = EUR_ad_glorium
+		icon = GFX_focus_ITA_mare_nostrum
+		prerequisite = { focus = EUR_bianachis_coup }
+		prerequisite = { focus = EUR_glorify_rome }
+
+		mutually_exclusive = { focus = EUR_for_europa }
+
+		relative_position_id = EUR_bianachis_coup
+		x = -1
+		y = 1
+		cost = 2.587
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = ad_glorium_idea
+			add_ideas = nova_roma
+		}
+	}
+
+	focus = {
+		id = EUR_for_europa
+		icon = GFX_EUR_for_europa
+		prerequisite = { focus = EUR_a_military_state focus = EUR_bianachis_coup }
+
+		mutually_exclusive = { focus = EUR_ad_glorium }
+
+		relative_position_id = EUR_a_military_state
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = for_europa_idea
+			add_ideas = blood_and_bullets
+			add_ideas = nova_roma
+		}
+	}
+
+	focus = {
+		id = EUR_the_great_worm_cult_realised
+		icon = GFX_GWC_skull
+		prerequisite = { focus = EUR_for_europa}
+
+		relative_position_id = EUR_for_europa
+		x = 0.5
+		y = 1
+		cost = 6.45
+
+		available = {
+			has_army_manpower = {
+				size > 50
+			}
+			has_war_support > 0.3
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_war_support = 0.1
+			add_stability = -0.05
+			set_country_flag = europe_worm_is_threat
+		}
+	}
+
+	focus = {
+		id = EUR_dispose_ideas_of_rome
+		icon = GFX_EUR_dipose_roman
+		prerequisite = { focus = EUR_for_europa}
+
+		relative_position_id = EUR_for_europa
+		x = 2.5
+		y = 1
+		cost = 6.45
+
+		available = {
+			has_army_manpower = {
+				size > 50
+			}
+			has_war_support > 0.3
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			country_event = nf_EUR.26
+		}
+	}
+
+	focus = {
+		id = EUR_united_army
+		icon = GFX_EUR_armed_forces
+		prerequisite = { focus = EUR_for_europa}
+
+		relative_position_id = EUR_for_europa
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = united_army_europe
+		}
+	}
+
+	focus = {
+		id = EUR_nationalist_militias
+		icon = GFX_focus_ITA_albanian_fascist_militia
+		prerequisite = { focus = EUR_united_army focus = EUR_a_pax_romana }
+
+		mutually_exclusive = { focus = EUR_united_militias focus = EUR_legions }
+
+		relative_position_id = EUR_united_army
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = united_army_europe
+				add_idea = united_army_europe_fascist
+			}
+			army_experience = 10
+		}
+	}
+
+	focus = {
+		id = EUR_united_militias
+		icon = GFX_EUR_armed_forces_2
+		prerequisite = { focus = EUR_united_army }
+
+		mutually_exclusive = { focus = EUR_nationalist_militias }
+
+		relative_position_id = EUR_united_army
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = united_army_europe
+				add_idea = united_army_europe_democrat
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			army_experience = 10
+		}
+	}
+
+	focus = {
+		id = EUR_equip_our_forces
+		icon = GFX_medium_arms_2
+		prerequisite = { focus = EUR_nationalist_militias focus = EUR_united_militias }
+
+		relative_position_id = EUR_united_army
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 75
+				producer = RUS
+			}
+			add_manpower = 50
+		}
+	}
+
+	focus = {
+		id = EUR_jumpstart_the_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = EUR_for_europa focus = EUR_ad_glorium }
+
+		relative_position_id = EUR_for_europa
+		x = -4
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_a_pax_romana
+		icon = GFX_focus_ITA_corpo_volontari_della_liberta
+		prerequisite = { focus = EUR_ad_glorium }
+
+		relative_position_id = EUR_ad_glorium
+		x = -2
+		y = 1
+		cost = 3
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = pax_romana
+		}
+	}
+
+	focus = {
+		id = EUR_rome_slaves_in_workforce
+		icon = GFX_RED_allow_volunteers 
+		prerequisite = { focus = EUR_a_pax_romana }
+
+		relative_position_id = EUR_a_pax_romana
+		x = -3
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = rome_slavery_1
+			custom_effect_tooltip = rome_slaves_in_workforce_tt
+		}
+	}
+
+	focus = {
+		id = EUR_legions
+		icon = GFX_EUR_roman_army
+		prerequisite = { focus = EUR_a_pax_romana }
+
+		mutually_exclusive = { focus = EUR_nationalist_militias }
+
+		relative_position_id = EUR_a_pax_romana
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = united_army_europe_rome
+			army_experience = 10
+		}
+	}
+
+	focus = {
+		id = EUR_i_came
+		icon = GFX_EUR_veni
+		prerequisite = { focus = EUR_a_pax_romana }
+
+		relative_position_id = EUR_legions
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_i_saw
+		icon = GFX_EUR_vidi
+		prerequisite = { focus = EUR_legions focus = EUR_nationalist_militias }
+
+		relative_position_id = EUR_legions
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 100
+				producer = RUS
+			}
+			add_manpower = 25
+		}
+	}
+
+	focus = {
+		id = EUR_i_conquered
+		icon = GFX_EUR_vici
+		prerequisite = { focus = EUR_i_came }
+		prerequisite = { focus = EUR_i_saw }
+
+		relative_position_id = EUR_i_saw
+		x = 0
+		y = 1
+		cost = 3
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GWC
+			}
+			add_timed_idea = {  idea = EUR_kill_GWC  days = 120 }
+		}
+	}
+
+	focus = {
+		id = EUR_take_what_is_ours
+		icon = GFX_HNZ_logistics_2
+		prerequisite = { focus = EUR_i_conquered }
+
+		relative_position_id = EUR_i_conquered
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+			NOT = { has_war_with = GWC }
+			ROOT = {
+				all_owned_state = {
+					is_core_of = GWC
+					AND = {
+						compliance > 80
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			every_owned_state = {
+                limit = {
+                    is_core_of = GWC
+                    is_owned_by = EUR
+                }
+                add_core_of = PREV
+            }
+		}
+	}
+
+	focus = {
+		id = EUR_crossing_the_rubicon
+		icon = GFX_HNZ_arbat_puppet
+		prerequisite = { focus = EUR_i_conquered }
+
+		relative_position_id = EUR_i_conquered
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			date > 2031.1.1
+		}
+
+		bypass = {
+			OR = {
+				has_war_with = ARB
+				ARB = { country_exists = no }
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ARB
+			}
+			421 = {
+				add_core_of = ROOT
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_dagger_to_the_heart
+		icon = GFX_EUR_rome_dagger_to_the_heart
+		prerequisite = { focus = EUR_crossing_the_rubicon }
+
+		relative_position_id = EUR_crossing_the_rubicon
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			OR = {
+				date > 2032.1.1
+				ARB = { country_exists = no }
+			}
+		}
+
+		bypass = {
+			has_war_with = HNZ
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HNZ
+			}
+			add_timed_idea = { idea = buff_against_hanza  days = 120 }
+		}
+	}
+
+	focus = {
+		id = EUR_militarise_the_society
+		icon = GFX_HNZ_knight_to_remember
+		prerequisite = { focus = EUR_a_pax_romana }
+
+		relative_position_id = EUR_a_pax_romana
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = pax_romana
+				add_idea = pax_romana_1
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_improve_living_conditions
+		icon = GFX_campfire
+		prerequisite = { focus = EUR_militarise_the_society }
+
+		relative_position_id = EUR_militarise_the_society
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			swap_ideas = {
+				remove_idea = pax_romana_1
+				add_idea = pax_romana_2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_industrialise_rome
+		icon = GFX_workstation_3
+		prerequisite = { focus = EUR_improve_living_conditions }
+
+		relative_position_id = EUR_improve_living_conditions
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 3
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = pax_romana_2
+				add_idea = pax_romana_3
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_militarise_roman_industry
+		icon = GFX_generic_small_arms_2
+		prerequisite = { focus = EUR_improve_living_conditions }
+
+		relative_position_id = EUR_improve_living_conditions
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+				    type = arms_factory
+				    level = 3
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_the_might_of_rome
+		icon = GFX_generic_stalker_4
+		prerequisite = { focus = EUR_industrialise_rome }
+		prerequisite = { focus = EUR_militarise_roman_industry }
+
+		relative_position_id = EUR_industrialise_rome
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_all_roads_lead_to_rome
+		icon = GFX_RCH_infrastructure
+		prerequisite = { focus = EUR_the_might_of_rome }
+
+		relative_position_id = EUR_the_might_of_rome
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			every_owned_state  = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_rome_ready_RED
+		icon = GFX_EUR_rome_core_RED
+		prerequisite = { focus = EUR_crossing_the_rubicon }
+
+		relative_position_id = EUR_crossing_the_rubicon
+		x = 2
+		y = 1
+		cost = 6.45
+
+		available = {
+			date > 2031.1.1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 125
+				producer = RUS
+			}
+			add_manpower = 125
+		}
+	}
+
+	focus = {
+		id = EUR_rome_war_RED
+		icon = GFX_EUR_rome_war_RED
+		prerequisite = { focus = EUR_rome_ready_RED }
+
+		relative_position_id = EUR_crossing_the_rubicon
+		x = 2
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		bypass = {
+			has_war_with = RED
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RED
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_rome_ready_RCH
+		icon = GFX_EUR_rome_core_RCH
+		prerequisite = { focus = EUR_crossing_the_rubicon }
+
+		relative_position_id = EUR_crossing_the_rubicon
+		x = -2
+		y = 1
+		cost = 6.45
+
+		available = {
+			date > 2031.1.1
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 125
+				producer = RUS
+			}
+			add_manpower = 125
+		}
+	}
+
+	focus = {
+		id = EUR_rome_war_RCH
+		icon = GFX_EUR_rome_war_RCH
+		prerequisite = { focus = EUR_rome_ready_RCH }
+
+		relative_position_id = EUR_crossing_the_rubicon
+		x = -2
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		bypass = {
+			has_war_with = RCH
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RCH
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_rome_in_sight
+		icon = GFX_HNZ_invade_polis
+		prerequisite = { focus = EUR_rome_war_RCH focus = EUR_rome_war_RED focus = EUR_dagger_to_the_heart }
+
+		relative_position_id = EUR_dagger_to_the_heart
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PLS
+			}
+			set_cosmetic_tag = EUR_roman_empire
+		}
+	}
+
+	focus = {
+		id = EUR_my_rome
+		icon = GFX_EUR_my_rome
+		prerequisite = { focus = EUR_rome_in_sight }
+
+		relative_position_id = EUR_rome_in_sight
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			NOT = { has_war_with = PLS }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			every_owned_state  = {
+                limit = {
+                    is_core_of = PLS
+                    is_owned_by = EUR
+                }
+                add_core_of = PREV
+            }
+		}
+	}
+
+	####################
+	#				   #
+	#  COMMUNISM AHHH  #
+	#				   #
+	####################
+
+	
+	
+
+	focus = {
+		id = EUR_ostalgie
+		icon = GFX_EUR_ostalgie
+		prerequisite = { focus = EUR_remain_centralised }
+
+		mutually_exclusive = { focus = EUR_settle_the_majorities }
+
+		relative_position_id = EUR_remain_centralised
+		x = 7
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = british_majority
+				add_idea = british_majority_1
+			}
+			swap_ideas = {
+				remove_idea = italian_majority
+				add_idea = italian_majority_1
+			}
+			add_political_power = 25
+			add_popularity = { ideology = community popularity = 0.05 }
+		}
+	}
+
+	focus = {
+		id = EUR_rising_dissent
+		icon = GFX_fist
+		prerequisite = { focus = EUR_ostalgie }
+
+		relative_position_id = EUR_ostalgie
+		x = 0
+		y = 1
+		cost = 3
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = council popularity = -0.075 }
+		}
+	}
+
+	focus = {
+		id = EUR_mutinies_in_the_army
+		icon = GFX_RED_crowd_stills
+		prerequisite = { focus = EUR_rising_dissent }
+
+		relative_position_id = EUR_rising_dissent
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = commie_mutiny
+		}
+	}
+
+	focus = {
+		id = EUR_workers_uprising
+		icon = GFX_RED_remove_ring_leaders
+		prerequisite = { focus = EUR_mutinies_in_the_army }
+
+		relative_position_id = EUR_mutinies_in_the_army
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = sabotaged_industry_community
+		}
+	}
+
+	focus = {
+		id = EUR_lessons_from_the_reds
+		icon = GFX_RED_collectivization_of_tunnels
+		prerequisite = { focus = EUR_gwc_rehabilitation }
+		prerequisite = { focus = EUR_the_schulz_project }
+		prerequisite = { focus = EUR_workers_uprising }
+		
+		mutually_exclusive = { focus = EUR_a_european_union }
+
+		relative_position_id = EUR_the_schulz_project
+		x = 4
+		y = 1
+		cost = 6.45
+
+		available = {
+			community > .55
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			country_event = nf_EUR.27
+			remove_ideas = sabotaged_industry_community
+		}
+	}
+
+	focus = {
+		id = EUR_sieze_the_means_of_production
+		icon = GFX_RED_generic_food
+		prerequisite = { focus = EUR_lessons_from_the_reds }
+
+		relative_position_id = EUR_lessons_from_the_reds
+		x = -3
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_sieze_the_means_of_armament
+		icon = GFX_RED_ak
+		prerequisite = { focus = EUR_sieze_the_means_of_production }
+
+		relative_position_id = EUR_sieze_the_means_of_production
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				    type = arms_factory
+				    level = 2
+				    instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_peoples_liberation_army
+		icon = GFX_RED_generic_revolution_2
+		prerequisite = { focus = EUR_lessons_from_the_reds }
+
+		relative_position_id = EUR_lessons_from_the_reds
+		x = 5
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = commie_mutiny
+				add_idea = europe_red_army
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_improve_red_army
+		icon = GFX_RED_generic_revolution_3
+		prerequisite = { focus = EUR_peoples_liberation_army }
+
+		relative_position_id = EUR_peoples_liberation_army
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = europe_red_army
+				add_idea = europe_red_army_2
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_follow_in_their_footsteps
+		icon = GFX_RED_long_arm_of_the_state
+		prerequisite = { focus = EUR_lessons_from_the_reds }
+
+		mutually_exclusive = { focus = EUR_a_new_era }
+
+		relative_position_id = EUR_lessons_from_the_reds
+		x = 3
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_opinion_modifier = { target = RED modifier = small_increase }
+			RED = { add_opinion_modifier = { target = EUR modifier = small_increase } }
+
+			hidden_effect = {
+				remove_country_leader_role = {
+					character = EUR_immigrant_collective
+					ideology = communal_party
+				}
+				add_country_leader_role = {
+					character = EUR_marshal
+					country_leader={
+						ideology = communal_party
+						traits = { }
+						expire="2050.1.1.1"
+					}
+					promote_leader = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_threats_to_the_cause
+		icon = GFX_GWC_skull
+		prerequisite = { focus = EUR_lessons_from_the_reds }
+
+		relative_position_id = EUR_lessons_from_the_reds
+		x = -1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		bypass = {
+			GWC = { exists = no }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GWC
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_people_of_europa
+		icon = GFX_GWC_core
+		prerequisite = { focus = EUR_threats_to_the_cause }
+
+		relative_position_id = EUR_threats_to_the_cause
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			NOT = { has_war_with = GWC }
+			ROOT = {
+				all_owned_state = {
+					is_core_of = GWC
+					AND = {
+						compliance > 80
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			every_owned_state  = {
+                limit = {
+                    is_core_of = GWC
+					is_owned_by = EUR
+                }
+                add_core_of = PREV
+            }
+		}
+	}
+
+	focus = {
+		id = EUR_clear_the_infestations
+		icon = GFX_nosalis
+		prerequisite = { focus = EUR_increase_budget }
+
+		relative_position_id = EUR_increase_budget
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			has_manpower > 10
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_manpower = -10
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_make_our_own_weapons
+		icon = GFX_generic_medium_arms_2
+		prerequisite = { focus = EUR_foreign_arms_purchase }
+
+		relative_position_id = EUR_foreign_arms_purchase
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_invite_RED_advisors
+		icon = GFX_RED_politburo_concessions
+		prerequisite = { focus = EUR_follow_in_their_footsteps }
+
+		relative_position_id = EUR_follow_in_their_footsteps
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			custom_effect_tooltip = redline_advisors_europa
+		}
+	}
+
+	focus = {
+		id = EUR_invite_RED_volunteers
+		icon = GFX_RED_specops
+		prerequisite = { focus = EUR_invite_RED_advisors }
+		prerequisite = { focus = EUR_improve_red_army }
+
+		relative_position_id = EUR_invite_RED_advisors
+		x = 2
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			load_oob = "EUR_RED_VOL"
+		}
+	}
+
+	focus = {
+		id = EUR_adopt_soviet_ideals
+		icon = GFX_RED_honorguard
+		prerequisite = { focus = EUR_invite_RED_advisors }
+
+		relative_position_id = EUR_invite_RED_advisors
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = community popularity = 0.05 }
+			add_opinion_modifier = { target = RED modifier = small_increase }
+			RED = { add_opinion_modifier = { target = EUR modifier = small_increase } }
+		}
+	}
+
+	focus = {
+		id = EUR_purge_western_ideals
+		icon = GFX_RED_permit_special_recruitment
+		prerequisite = { focus = EUR_adopt_soviet_ideals }
+
+		relative_position_id = EUR_invite_RED_advisors
+		x = 0
+		y = 2
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = remove_majorities_tt
+			#hidden_effect = {
+			#	remove_ideas = {
+			#		british_majority_1
+			#		italian_majority_1
+			#	}
+			#}
+		}
+	}
+
+	focus = {
+		id = EUR_a_part_of_something_larger
+		icon = GFX_RED_generic_food
+		prerequisite = { focus = EUR_purge_western_ideals }
+
+		relative_position_id = EUR_purge_western_ideals
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			NOT = { has_war_with = RED }
+		}
+		bypass = {
+			is_in_faction = yes
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = political_support_system_not_integrated_yet
+		}
+	}
+
+	focus = {
+		id = EUR_a_new_era
+		icon = GFX_RED_rodina
+		prerequisite = { focus = EUR_lessons_from_the_reds }
+
+		mutually_exclusive = { focus = EUR_follow_in_their_footsteps }
+
+		relative_position_id = EUR_lessons_from_the_reds
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_political_power = 50
+
+			hidden_effect = {
+				remove_country_leader_role = {
+					character = EUR_immigrant_collective
+					ideology = communal_party
+				}
+				add_country_leader_role = {
+					character = EUR_central_committee
+					country_leader={
+						ideology = communal_party
+						traits = { }
+						expire="2050.1.1.1"
+					}
+					promote_leader = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EUR_reforms_in_the_military
+		icon = GFX_RED_soldier_1
+		prerequisite = { focus = EUR_a_new_era }
+
+		relative_position_id = EUR_a_new_era
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_command_power = 35
+			army_experience = 25
+		}
+	}
+
+	focus = {
+		id = EUR_forge_a_new_path
+		icon = GFX_RED_infrastructure
+		prerequisite = { focus = EUR_reforms_in_the_military }
+
+		relative_position_id = EUR_reforms_in_the_military
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_popularity = { ideology = community popularity = 0.05 }
+			add_opinion_modifier = { target = RED modifier = small_decrease }
+			RED = { add_opinion_modifier = { target = EUR modifier = small_decrease } }
+		}
+	}
+
+	focus = {
+		id = EUR_true_eqaulity
+		icon = GFX_RED_children_education
+		prerequisite = { focus = EUR_forge_a_new_path }
+
+		relative_position_id = EUR_forge_a_new_path
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			add_ideas = eur_com_equality
+		}
+	}
+
+	focus = {
+		id = EUR_the_rail_unity
+		icon = GFX_RED_secret_police_roles
+		prerequisite = { focus = EUR_true_eqaulity }
+
+		relative_position_id = EUR_true_eqaulity
+		x = 0
+		y = 1
+		cost = 6.45
+
+		available = {
+			is_in_faction = no
+		}
+		bypass = {
+			is_in_faction = yes
+		}
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			create_faction = EUR_MIL_PACT_NAME
+		}
+	}
+
+	focus = {
+		id = EUR_the_true_threat
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = EUR_the_rail_unity focus = EUR_a_part_of_something_larger }
+
+		relative_position_id = EUR_the_rail_unity
+		x = 1
+		y = 1
+		cost = 6.45
+
+		available = {
+		}
+
+
+		ai_will_do = {
+			factor = 2
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HNZ
+			}
+		}
+	}
+	
+
+
+	####
+	####
+	####
+	####
+	####		DO NOT ADD TO THE GITHUB THIS IS THE BRIT ECONOMY STUFF!!!
+	####
+	####
+	####
+	####
+
+#	focus = {
+#		id = EUR_steam_engines
+#		icon = GFX_HNZ_generic_treaty
+#		prerequisite = { focus = EUR_british_influence }
+#
+#		relative_position_id = EUR_british_influence
+#		x = 0
+#		y = 1
+#		cost = 6.45
+#
+#		available = {
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+#
+#		completion_reward = {
+#			add_ideas = steam_engines
+#			EUR_increase_brit_economy = yes
+#		}
+#	}
+#
+#	focus = {
+#		id = EUR_basic_machinery
+#		icon = GFX_HNZ_generic_treaty
+#		prerequisite = { focus = EUR_steam_engines }
+#
+#		relative_position_id = EUR_steam_engines
+#		x = -1
+#		y = 1
+#		cost = 6.45
+#
+#		available = {
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+#
+#		completion_reward = {
+#			add_tech_bonus = {
+#				name = industry_bonus
+#				bonus = 0.75
+#				uses = 3
+#				category = industry
+#			}
+#		}
+#	}
+#
+#	focus = {
+#		id = EUR_the_mill
+#		icon = GFX_HNZ_generic_treaty
+#		prerequisite = { focus = EUR_steam_engines }
+#
+#		relative_position_id = EUR_steam_engines
+#		x = 1
+#		y = 1
+#		cost = 6.45
+#
+#		available = {
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+
+#		completion_reward = {
+#			random_owned_controlled_state = {
+#				limit = {
+#					NOT = {
+#						has_state_category = pastoral
+#					}
+#				}
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#				    type = industrial_complex
+#				    level = 1
+#				    instant_build = yes
+#				}
+#				add_building_construction = {
+#					type = infrastructure
+#					level = 1
+#					instant_build = yes
+#				}
+#			}
+#		}
+#	}
+#
+#	focus = {
+#		id = EUR_widespread_implementation
+#		icon = GFX_HNZ_generic_treaty
+#		prerequisite = { focus = EUR_basic_machinery }
+#		prerequisite = { focus = EUR_the_mill }
+#
+#		relative_position_id = EUR_basic_machinery
+#		x = 1
+#		y = 1
+#		cost = 6.45
+#
+#		available = {
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+#
+#		completion_reward = {
+#			EUR_decrease_brit_economy = yes
+#			random_owned_controlled_state = {
+#				limit = {
+#					NOT = {
+#						has_state_category = pastoral
+#					}
+#				}
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#				    type = industrial_complex
+#				    level = 1
+#				    instant_build = yes
+#				}
+#			}
+#			random_owned_controlled_state = {
+#				limit = {
+#					NOT = {
+#						has_state_category = pastoral
+#					}
+#				}
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#				    type = industrial_complex
+#				    level = 1
+#				    instant_build = yes
+#				}
+#			}
+#			random_owned_controlled_state = {
+#				limit = {
+#					NOT = {
+#						has_state_category = pastoral
+#					}
+#				}
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#				    type = industrial_complex
+#				    level = 1
+#				    instant_build = yes
+#				}
+#			}
+#		}
+#	}
+#
+#	focus = {
+#		id = EUR_invest_in_other_factions
+#		icon = GFX_HNZ_generic_treaty
+#		prerequisite = { focus = EUR_widespread_implementation }
+#
+#		relative_position_id = EUR_widespread_implementation
+#		x = 1
+#		y = 1
+#		cost = 6.45
+#
+#		available = {
+#		}
+#
+#		ai_will_do = {
+#			factor = 2
+#		}
+#
+#		completion_reward = {
+#			EUR_increase_brit_economy = yes
+#			ARB = {
+#				add_opinion_modifier = { target = EUR modifier = medium_increase }
+#				random_owned_controlled_state = {
+#					limit = {
+#						NOT = {
+#							has_state_category = pastoral
+#						}
+#					}
+#					add_extra_state_shared_building_slots = 1
+#					add_building_construction = {
+#						type = industrial_complex
+#						level = 1
+#						instant_build = yes
+#					}
+#				}
+#			}
+#		}
+#	}
+
+}

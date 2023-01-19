@@ -1,0 +1,75 @@
+RED_2033_election_category = {
+	RED_2033_election_countdown_mission = {
+
+		activation = {
+			always = no
+		}
+		available = {                    
+			custom_trigger_tooltip = {
+    			tooltip = RED_election_called_off
+				hidden_trigger = { has_country_flag = RED_election_happening }
+			}
+        }
+		
+		priority = 2501
+
+		allowed = { tag = RED }
+
+		is_good = no
+
+		days_mission_timeout = 720
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+    			tooltip = RED_cancelled_election
+				NOT = {
+					has_country_flag = RED_election_happening 
+				}
+			}
+		}
+
+		timeout_effect = {                      
+            country_event = nf_RED.85 
+        }
+	}
+
+	RED_maxim_meddling = {
+		icon = remove_military_mutiny
+
+		available = {                           
+			custom_trigger_tooltip = {
+    			tooltip = RED_election_called_off
+				NOT = {
+					has_country_flag = RED_election_happening 
+				}
+				AND = {
+					has_country_flag = RED_allow_maxim_meddling_election
+				}
+			}
+        }
+
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = RED_maxim_can_meddle
+				has_country_flag = RED_allow_maxim_meddling_election
+			}
+		}
+
+		custom_cost_text = command_power_5
+		custom_cost_trigger = {
+			command_power > 4.9
+		}
+
+		days_remove = 14
+
+		fire_only_once = yes
+		
+		ai_will_do = {
+			factor = 2500
+		}
+
+		complete_effect = {
+			country_event = nf_RED.87
+		}
+	}
+}

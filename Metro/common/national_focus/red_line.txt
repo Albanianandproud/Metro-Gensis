@@ -481,7 +481,12 @@ focus_tree = {
 			focus = RED_rid_mutinies
 		}
 		available = {
-			has_idea = RED_military_mutinies_2
+			custom_trigger_tooltip = {
+				tooltip = RED_has_completed_decision_removed_mutinies
+				AND = {
+					has_idea = RED_military_mutinies_2
+				}
+			}
 		}
 		x = -3
 		y = 1
@@ -546,7 +551,12 @@ focus_tree = {
 			focus = RED_rid_mutinies
 		}
 		available = {
-			has_idea = RED_military_mutinies_2
+			custom_trigger_tooltip = {
+				tooltip = RED_has_completed_decision_removed_mutinies
+				AND = {
+					has_idea = RED_military_mutinies_2
+				}
+			}
 		}
 		x = -1
 		y = 1
@@ -581,7 +591,12 @@ focus_tree = {
 			focus = RED_approach_dissenters
 		}
 		available = {
-			has_idea = RED_military_mutinies_2
+			custom_trigger_tooltip = {
+				tooltip = RED_has_completed_decision_removed_mutinies
+				AND = {
+					has_idea = RED_military_mutinies_2
+				}
+			}
 		}
 		x = 3
 		y = 1
@@ -642,7 +657,12 @@ focus_tree = {
 			focus = RED_approach_dissenters
 		}
 		available = {
-			has_idea = RED_military_mutinies_2
+			custom_trigger_tooltip = {
+				tooltip = RED_has_completed_decision_removed_mutinies
+				AND = {
+					has_idea = RED_military_mutinies_2
+				}
+			}
 		}
 		x = 1
 		y = 1
@@ -674,7 +694,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 3
-		cost = 2.9
+		cost = 1
 		relative_position_id = RED_deal_with_military_mutinies
 		completion_reward = {
 			country_event = nf_RED.23 
@@ -692,7 +712,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 2.9
+		cost = 1
 		relative_position_id = RED_the_great_show_trial
 		completion_reward = {
 			add_timed_idea = {
@@ -905,6 +925,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_sabotage_the_revolution
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = RED_has_completed_sabotaged_revolution
+				AND = {
+					has_country_flag = triggered_sabotage_revolution	
+				}
+			}
+		}
 		x = 0
 		y = 1
 		cost = 2.9
@@ -1058,7 +1086,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 2.9
+		cost = 1
 		relative_position_id = RED_meet_with_the_revolters
 		completion_reward = {
 			clr_country_flag = RED_mushroom_revolts
@@ -2237,10 +2265,16 @@ focus_tree = {
 		relative_position_id = RED_fund_an_education_department
 		completion_reward = {
 			add_doctrine_cost_reduction = {
-				name = entrench_kits
+				name = health
 				cost_reduction = 0.5
-				uses = 2
-				category = entrench_kits
+				uses = 1
+				category = health
+			}
+			add_doctrine_cost_reduction = {
+				name = health
+				cost_reduction = 0.5
+				uses = 1
+				category = farming
 			}
 			random_owned_state = {
 				limit = {
@@ -2273,10 +2307,16 @@ focus_tree = {
 		relative_position_id = RED_fund_an_education_department
 		completion_reward = {
 			add_doctrine_cost_reduction = {
-				name = stalker
+				name = clothing_kits
 				cost_reduction = 0.5
-				uses = 2
-				category = stalker
+				uses = 1
+				category = clothing_kits
+			}
+			add_doctrine_cost_reduction = {
+				name = entrench_kits
+				cost_reduction = 0.5
+				uses = 1
+				category = entrench_kits
 			}
 			random_owned_state = {
 				limit = {
@@ -2311,8 +2351,14 @@ focus_tree = {
 			add_doctrine_cost_reduction = {
 				name = smithing
 				cost_reduction = 0.5
-				uses = 2
+				uses = 1
 				category = smithing
+			}
+			add_doctrine_cost_reduction = {
+				name = casting
+				cost_reduction = 0.5
+				uses = 1
+				category = casting
 			}
 			random_owned_state = {
 				limit = {
@@ -3224,6 +3270,8 @@ focus_tree = {
 				ideology = oligarch
 				popularity = 0.025
 			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RED_vinogradov
 			add_advisor_role = {
                 character = RED_vinogradov
                 activate = yes
@@ -3233,9 +3281,6 @@ focus_tree = {
                     idea_token = RED_vinogradov
                     traits = {
                         RED_vinogradov_trait
-                    }
-                    allowed = {
-                        always = yes
                     }
                 }
             }
