@@ -2,7 +2,6 @@
 NDefines.NGame.START_DATE = "2028.1.1.12"
 NDefines.NGame.END_DATE = "2055.1.1.1"
 
-
 ---Diplomacy Stuff---
 NDefines.NDiplomacy.TRUCE_BREAK_COST_PP = 100
 NDefines.NDiplomacy.NAP_EXPIRY_MONTHS = 24
@@ -59,13 +58,13 @@ NDefines.NProduction.RAILWAY_GUN_MAX_MIL_FACTORIES_PER_LINE = 10
 NDefines.NProduction.RAILWAY_GUN_REPAIR_SPEED = 8.0
 
 ---Military Stuff---
-NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.15
-NDefines.NMilitary.INFRA_ORG_IMPACT = 0.35
+NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.1
+NDefines.NMilitary.INFRA_ORG_IMPACT = 0.25
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.02
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.1
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
-NDefines.NMilitary.TRAINING_ORG = 0.5								--- Base is 0.2
-NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.5						--- if strength is less than this, the unit will pause training until it's been reinforced
+NDefines.NMilitary.TRAINING_ORG = 0.65								--- Base is 0.2
+NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.45						--- if strength is less than this, the unit will pause training until it's been reinforced
 NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP gained per day from training
 NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7

@@ -37,7 +37,7 @@ focus_tree = {
 		icon = GFX_barscene
 		x = -3
 		y = 1
-		cost = 4.3
+		cost = 2.9
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -52,7 +52,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = teamsters
 				uses = 1
-				bonus = 0.5
+				bonus = 0.25
 				category = construction
 			}
 			capital_scope = {
@@ -69,7 +69,7 @@ focus_tree = {
 		icon = GFX_generic_planks
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 2.9
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -109,7 +109,7 @@ focus_tree = {
 		icon = GFX_campfire
 		x = 3
 		y = 1
-		cost = 4.3
+		cost = 2.9
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -124,7 +124,7 @@ focus_tree = {
 			capital_scope = {
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 				add_resource = {
@@ -388,6 +388,33 @@ focus_tree = {
 	}
 
 	focus = {
+		id = ARB_sedate_the_public
+		icon = GFX_booze
+		x = 3
+		y = 1
+		cost = 4.4
+
+		prerequisite = {
+			focus = ARB_the_cover_up
+			focus = ARB_military_curfew
+		}
+
+		relative_position_id = ARB_the_cover_up
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_stability = 0.075
+			add_timed_idea = { 
+				idea = ARB_soothe_population
+				days = 270
+			}
+		}
+	}
+
+	focus = {
 		id = ARB_mandatory_draft
 		icon = GFX_HNZ_conscription_reforms
 		x = 1
@@ -527,7 +554,6 @@ focus_tree = {
 			}
 			has_war = no
 			AND = {
-				has_stability > 0.29
 				has_war_support > 0.29
 				has_idea = ARB_devastation
 			}
@@ -540,8 +566,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = -0.05
-			add_stability = -0.05
+			add_war_support = -0.07
 			custom_effect_tooltip = ARB_spawn_curfew_div
 			hidden_effect = {
 				capital_scope = {
@@ -850,6 +875,30 @@ focus_tree = {
 					}
 				}
 			}
+			add_corps_commander_role = {
+				character = ARB_kazakh
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_jori
+				skill = 3
+				attack_skill = 3
+				defense_skill = 4
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_tamerian
+				skill = 4 
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 4
+			}
 		}
 	}
 
@@ -902,36 +951,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_corps_commander_role = {
-				character = ARB_kazakh
-				skill = 3
-				attack_skill = 3
-				defense_skill = 3
-				planning_skill = 3
-				logistics_skill = 2
-			}
-			add_corps_commander_role = {
-				character = ARB_jori
-				skill = 3
-				attack_skill = 3
-				defense_skill = 4
-				planning_skill = 2
-				logistics_skill = 2
-			}
-			add_corps_commander_role = {
-				character = ARB_tamerian
-				skill = 4 
-				attack_skill = 2
-				defense_skill = 2
-				planning_skill = 2
-				logistics_skill = 4
-			}
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 0.5
 				uses = 2
 				category = land_doctrine
 			}
+			army_experience = 25
 		}
 	}
 
@@ -1441,7 +1467,7 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = ARB_ranger_spec_ops
+			focus = ARB_ranger_polis_collaboration
 		}
 		available = {
 			SPT = {
@@ -1463,10 +1489,10 @@ focus_tree = {
 					is_in_faction_with = SPT
 				}
 				capital_scope = {
-					add_extra_state_shared_building_slots = 1
+					add_extra_state_shared_building_slots = 2
 					add_building_construction = {
 						type = arms_factory
-						level = 1
+						level = 2
 						instant_build = yes
 					}
 				}
@@ -1941,6 +1967,30 @@ focus_tree = {
 				ruling_party = community
     			elections_allowed = no
 			}
+			add_corps_commander_role = {
+				character = ARB_kiril
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_pilgrim
+				skill = 3
+				attack_skill = 3
+				defense_skill = 4
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = ARB_gregorovitch
+				skill = 4 
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 4
+			}
 		}
 	}
 	
@@ -2287,6 +2337,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 100
+			add_war_support = 0.1
 		}
 	}
 
@@ -2295,7 +2346,7 @@ focus_tree = {
 		icon = GFX_settle_minorities
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 8.6
 
 		prerequisite = {
 			focus = ARB_foster_caucasian_nationalism
@@ -2319,12 +2370,30 @@ focus_tree = {
 		completion_reward = {
 			capital_scope = {
 				add_manpower = 50
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 			421 = {
 				add_manpower = 50
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 			399 = {
 				add_manpower = 50
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -2593,6 +2662,7 @@ focus_tree = {
 			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 			}
+			add_stability = 0.1
 		}
 	}
 
@@ -2734,6 +2804,7 @@ focus_tree = {
 
 		completion_reward = {
 			ARB_get_more_expertise = yes
+			add_stability = 0.075
 		}
 	}
 
@@ -2836,6 +2907,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			add_stability = 0.075
 		}
 	}
 
@@ -2903,6 +2975,12 @@ focus_tree = {
 					level = 3
 					instant_build = yes
 				}
+			}
+			if = {
+				limit = {
+					has_idea = ARB_devastation
+				}
+				remove_ideas = ARB_devastation
 			}
 		}
 	}
@@ -3034,6 +3112,7 @@ focus_tree = {
 				uses = 3
 				category = farming
 			}
+			add_stability = 0.05
 		}
 	}
 
@@ -3054,7 +3133,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.05
+			add_stability = 0.075
 			random_owned_state = {
 				limit = {
 					NOT = {
@@ -3206,6 +3285,7 @@ focus_tree = {
 				amount = 10
 				producer = RUS
 			}
+			add_stability = 0.075
 		}
 	}
 

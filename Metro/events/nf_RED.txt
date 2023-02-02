@@ -551,7 +551,8 @@ country_event = { # Approach the Commanders
         }
         custom_effect_tooltip = RED_recruit_generals_tt
         hidden_effect = { country_event = { id = nf_RED.25 days = 21 random_days = 21 } }
-        hidden_effect = { country_event = { id = nf_RED.34 days = 40 random_days = 40 } }
+        hidden_effect = { country_event = { id = nf_RED.34 days = 45 random_days = 45 } }
+        hidden_effect = { country_event = { id = nf_RED.33 days = 85 random_days = 85 } }
 
         ai_chance = {
             base = 2
@@ -1174,23 +1175,26 @@ country_event = { # Question of Maxim becoming General
     ## Make Maxim leader of Oligarch party
     ## Immediate
 
-    ## Make sure this event can fire / be loaded for future
-    ## IDK / Maxim mechanic
-
-    option = { 
-        name = nf_RED.33.a
+    immediate = {
         hidden_effect = {
             retire_ideology_leader = oligarch 
         }
         add_country_leader_role = {
             character = RED_moskvin
-            country_leader={
+            promote_leader = yes
+            country_leader = {
                 ideology = vanguard_party
-                traits = {  }
-                expire="2050.1.1.1"
-                id = -1
+                expire = "2999.9.9"
+                traits = { }
             }
-        }
+        }   
+    } 
+
+    ## Make sure this event can fire / be loaded for future
+    ## IDK / Maxim mechanic
+
+    option = { 
+        name = nf_RED.33.a
         add_field_marshal_role = {
 			traits = { aggressive_assaulter trait_reckless harsh_leader }
             character = RED_moskvin
@@ -1201,10 +1205,6 @@ country_event = { # Question of Maxim becoming General
             logistics_skill = 4
             legacy_id=-1
         }
-        add_popularity = {
-            ideology = oligarch
-            popularity = 0.015
-        }
         ai_chance = {
             base = 500
         }
@@ -1212,21 +1212,9 @@ country_event = { # Question of Maxim becoming General
 
     option = { 
         name = nf_RED.33.b
-        hidden_effect = {
-            retire_ideology_leader = oligarch 
-        }
-        add_country_leader_role = {
-            character = RED_moskvin
-            country_leader={
-                ideology = vanguard_party
-                traits = {  }
-                expire="2050.1.1.1"
-                id = -1
-            }
-        }
         add_popularity = {
             ideology = oligarch
-            popularity = 0.015
+            popularity = 0.035
         }
         ai_chance = {
             base = 500
@@ -1362,7 +1350,7 @@ country_event = { # Question of Korbut
     is_triggered_only = yes
 
     option = { 
-        name = nf_RED.33.a
+        name = nf_RED.38.a
         add_field_marshal_role = {
 			traits = { aggressive_assaulter trait_reckless harsh_leader }
             character = RED_korbut

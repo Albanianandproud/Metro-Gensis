@@ -1,0 +1,315 @@
+	## Flooding occours around same time every year
+	## To stop Flooding requires a specific amount of flooding_preparedness
+	## That variable must be higher than the flooding_threshold
+	## flooding_threshold will increase every mission
+	## If flooding_threshold is met >> no flooding event
+	## If flooding_threshold is not met >> flooding event
+
+TRT_flooding_issue = {
+	TRT_countdown_to_flood_timer = {
+		icon = GFX_TRT_decision_category_flooding
+		is_good = no
+		priority = 1001
+
+		activation  = {
+			has_country_flag = TRT_flooding_country_flag
+		}
+
+		custom_cost_text = TRT_preparedness_text
+		custom_cost_trigger = {
+			check_variable = { 
+				var = TRT_preparedness
+				value = TRT_preparedness_requirement
+				compare = greater_than_or_equals  
+			}
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = TRT_venitian_determination
+			}
+		}
+		selectable_mission = YES
+		fire_only_once = no
+		cancel_trigger = {
+			### TODO check and cancel if [BANDIT TRIANGLE] is not owned by ROOT
+			OR = {
+				has_completed_focus  = TRT_venitian_determination
+				311 = {
+					NOT = {
+						is_owned_by = ROOT
+					}
+				}
+			}
+		}
+		days_mission_timeout = TRT_timer_until_flooding
+
+		remove_effect = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				activate_mission = TRT_countdown_to_flood_timer_event
+				clr_country_flag = TRT_flooding_country_flag
+				clear_variable = TRT_preparedness
+				clear_variable = TRT_preparation_explosives_duration
+				clear_variable = TRT_preparation_explosives_duration
+			}
+		}
+		timeout_effect = {
+			if = {
+				limit = {
+					## If the variable is not equals, fire flooding event
+					check_variable = { 
+						var = TRT_preparedness
+						value = TRT_preparedness_requirement
+						compare = less_than_or_equals  
+					}
+				}
+				country_event = { id = nf_TRT.7 }
+			}
+			else = {
+				country_event = { id = nf_TRT.6 }
+			}
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+	TRT_countdown_to_flood_timer_event  = {
+		icon = GFX_decision_TRT_countdown_timer
+		is_good = no
+		priority = 1001
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			has_completed_focus = TRT_venitian_determination
+		}
+
+		cancel_trigger = {
+            has_completed_focus = TRT_venitian_determination
+		}
+
+		days_mission_timeout = 30
+
+		allowed = { tag = TRT }
+
+		timeout_effect = { 
+			country_event = nf_TRT.6 
+		}
+	}
+	TRT_prepare_for_flooding_use_factories = {
+		icon = GFX_decision_TRT_use_factory
+		priority = 10
+
+		days_remove = 10
+
+		custom_cost_text = TRT_num_of_free_civlian_factories
+		custom_cost_trigger = {
+			num_of_civilian_factories  > TRT_preparation_cost_factories
+		}
+
+		available = {
+			num_of_civilian_factories > TRT_preparation_cost_factories
+			custom_trigger_tooltip = {
+				tooltip = TRT_not_already_met_requirements
+				check_variable = { TRT_preparedness < TRT_preparedness_requirement }
+			}
+		}
+
+		visible = {
+			has_active_mission = TRT_countdown_to_flood_timer
+			custom_trigger_tooltip = {
+    			tooltip = TRT_flooding_still_an_issue
+				NOT = {
+					has_completed_focus = TRT_venitian_determination
+				}
+			}
+		}
+
+		cancel_effect = {
+		}
+
+		modifier = {
+			production_speed_buildings_factor = -0.25
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = TRT_increase_flooding_protection_cost
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_preparation_cost_factories
+					value = 1
+				}
+				add_to_variable = {
+					var = TRT_preparedness
+					value = 10
+				}
+			}
+			custom_effect_tooltip = TRT_increase_preparation_level
+		}
+	}
+	TRT_prepare_for_flooding_use_political_power = {
+		icon = GFX_decision_TRT_use_pp
+		priority = 10
+
+		days_remove = 10
+		cost = TRT_preparation_cost_pp
+		days_re_enable = 0
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TRT_not_already_met_requirements
+				check_variable = { TRT_preparedness < TRT_preparedness_requirement }
+			}
+		}
+
+		visible = {
+			has_active_mission = TRT_countdown_to_flood_timer
+			custom_trigger_tooltip = {
+    			tooltip = TRT_flooding_still_an_issue
+				NOT = {
+					has_completed_focus = TRT_venitian_determination
+				}
+			}
+		}
+
+		cancel_effect = {
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = TRT_increase_flooding_protection_cost
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_preparation_cost_pp
+					value = 10
+				}
+				add_to_variable = {
+					var = TRT_preparedness
+					value = 10
+				}
+			}
+			custom_effect_tooltip = TRT_increase_preparation_level
+		}
+	}
+
+	TRT_prepare_for_flooding_use_explosives = {
+		icon = GFX_decision_TRT_use_explosives
+		priority = 10
+
+		days_remove = TRT_preparation_explosives_duration
+		days_re_enable = 0
+
+		custom_cost_text = TRT_num_explsive_equipment
+		custom_cost_trigger = {
+			has_equipment = {
+				explosive_equipment_0 > 4
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TRT_not_already_met_requirements
+				check_variable = { TRT_preparedness < TRT_preparedness_requirement }
+			}
+			has_completed_focus = TRT_depth_charges
+			has_equipment = {
+				explosive_equipment_0 > 5
+			}
+		}
+
+		visible = {
+			has_active_mission = TRT_countdown_to_flood_timer
+			custom_trigger_tooltip = {
+    			tooltip = TRT_flooding_still_an_issue
+				NOT = {
+					has_completed_focus = TRT_venitian_determination
+				}
+			}
+		}
+
+		cancel_effect = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_0
+				amount = 5
+			}
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = TRT_increase_flooding_protection_duration
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_preparation_explosives_duration
+					value = 5
+				}
+				add_to_variable = {
+					var = TRT_preparedness
+					value = 10
+				}
+			}
+			custom_effect_tooltip = TRT_increase_preparation_level
+		}
+	}
+
+	TRT_prepare_for_flooding_use_manpower = {
+		icon = GFX_decision_TRT_use_manpower
+		priority = 10
+
+		days_remove = TRT_preparation_manpower_duration
+		days_re_enable = 0
+
+		custom_cost_text = TRT_num_free_manpower
+		custom_cost_trigger = {
+			has_manpower > 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TRT_not_already_met_requirements
+				check_variable = { TRT_preparedness < TRT_preparedness_requirement }
+			}
+			has_completed_focus = TRT_draining_depths
+			has_manpower > 5
+		}
+
+		visible = {
+			has_active_mission = TRT_countdown_to_flood_timer
+			custom_trigger_tooltip = {
+    			tooltip = TRT_flooding_still_an_issue
+				NOT = {
+					has_completed_focus = TRT_venitian_determination
+				}
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 5
+		}
+
+		complete_effect = {
+			add_manpower = -5
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = TRT_increase_flooding_protection_duration
+			add_manpower = 5
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_preparation_manpower_duration
+					value = 5
+				}
+				add_to_variable = {
+					var = TRT_preparedness
+					value = 10
+				}
+			}
+			custom_effect_tooltip = TRT_increase_preparation_level
+		}
+	}
+}

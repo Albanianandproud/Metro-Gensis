@@ -19,3 +19,241 @@ country_event = {
 	}
 }
 
+### Flooding ###
+country_event = {
+    id = nf_TRT.2
+    title = nf_TRT.2.t
+    desc = nf_TRT.2.d
+    picture = "GFX_event (139)"
+
+    is_triggered_only = yes
+
+    immediate = {
+        311 = {
+            add_dynamic_modifier = {
+                modifier = flooding_station_modifier
+                scope = TRT
+                days = 60
+            }
+        }
+    }
+
+    option = {
+		name = nf_TRT.2.a
+	}
+}
+
+country_event = {
+    id = nf_TRT.3
+    title = nf_TRT.3.t
+    desc = nf_TRT.3.d
+    picture = "GFX_event (133)"
+
+    is_triggered_only = yes
+
+    option = {
+		name = nf_TRT.3.a
+        ### Prelude to flooding mechanic
+        hidden_effect = { country_event = { id = nf_TRT.4 days = 40 random_days = 40 } }
+	}
+}
+
+country_event = {   ## First Time introduction to flooding mechanic 
+    id = nf_TRT.4
+    title = nf_TRT.4.t
+    desc = nf_TRT.4.d
+    picture = "GFX_event (135)"
+
+    is_triggered_only = yes
+
+    immediate = {
+        set_country_flag = TRT_flooding_country_flag
+        add_to_variable = { ## initial variable
+            var = TRT_preparedness_requirement
+            value = 20
+        }
+        ### We set the timer until flooding variable through event
+        set_variable = {
+            var = TRT_timer_until_flooding
+            value = 120
+        }
+    }
+    option = {
+		name = nf_TRT.4.a
+        custom_effect_tooltip = TRT_begin_flooding_mission
+        ### Setting initial decision costs
+        set_variable = {
+            var = TRT_preparation_cost_factories
+            value = 1
+        }
+        set_variable = {
+            var = TRT_preparation_cost_pp  
+            value = 10
+        }
+        set_variable = {
+            var = TRT_preparation_explosives_duration
+            value = 5
+        }
+	}
+}
+
+country_event = {   ## Repeated Mechanic
+    id = nf_TRT.5
+    title = nf_TRT.5.t
+    desc = nf_TRT.5.d
+    picture = "GFX_event (120)"
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    #trigger = {
+    #    OR = {
+    #        date > 2029.05.01
+    #        date > 2030.05.01
+    #        date > 2031.05.01
+    #        date > 2032.05.01
+    #        date > 2033.05.01
+    #        date > 2034.05.01
+    #        date > 2035.05.01
+    #        date > 2036.05.01
+    #        AND = {
+    #            NOT = {
+    #                has_completed_focus = TRT_venitian_determination
+    #            }
+    #        }
+    #    }
+    #}
+
+    immediate = {
+        set_country_flag = TRT_flooding_country_flag
+        random_list = {
+            50 = {
+                add_to_variable = {
+                    var = TRT_preparedness_requirement
+                    value = 30
+                }
+            }
+            30 = {
+                add_to_variable = {
+                    var = TRT_preparedness_requirement
+                    value = 40
+                }
+            }
+            20 = {
+                add_to_variable = {
+                    var = TRT_preparedness_requirement
+                    value = 50
+                }
+            }
+        }
+        add_to_variable = {
+            var = TRT_preparedness
+            value = TRT_minimum_prepardness
+        }
+    }
+    
+    option = {
+		name = nf_TRT.5.a
+        custom_effect_tooltip = TRT_begin_flooding_mission
+    }
+}
+
+country_event = {   ## Flooding defended 
+    id = nf_TRT.6
+    title = nf_TRT.6.t
+    desc = nf_TRT.6.d
+    picture = "GFX_event (119)"
+
+    is_triggered_only = yes
+    
+    option = {
+		name = nf_TRT.6.a
+        trigger = { 
+            NOT = {
+                has_completed_focus = TRT_draining_depths
+            }
+        }
+    }
+    option = {
+		name = nf_TRT.6.b
+        trigger = { 
+            has_completed_focus = TRT_draining_depths
+        }
+        random_list = {
+            20 = {
+                ## Nothing
+            }
+            20  = {
+                add_resource = {
+                    type = alloys
+                    amount = 2
+                }
+            }
+            20 = {
+                add_resource = {
+                    type = components
+                    amount = 2
+                }
+            }
+            20 = {
+                add_resource = {
+                    type = scrap
+                    amount = 2
+                }
+            }
+            20 = {
+                add_resource = {
+                    type = scrap
+                    amount = 1
+                }
+                add_resource = {
+                    type = components
+                    amount = 1
+                }
+                add_resource = {
+                    type = alloys
+                    amount = 1
+                }
+            }
+        }
+	}
+}
+
+country_event = {   ## Draining Depths
+    id = nf_TRT.8
+    title = nf_TRT.8.t
+    desc = nf_TRT.8.d
+    picture = "GFX_event (119)"
+
+    is_triggered_only = yes
+
+    immediate = {
+    }
+
+    option = {
+		name = nf_TRT.8.a
+        custom_effect_tooltip = TRT_flooding_decision_resources
+        capital_scope = {
+            add_resource = {
+                type = alloys
+				amount = 2
+			}
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+			add_resource = {
+				type = components
+				amount = 2
+			}
+        }
+        hidden_effect = {
+            subtract_from_variable = {
+                var = TRT_preparedness_requirement
+                value = -20
+            }
+        }
+        custom_effect_tooltip = TRT_preparedness_requirement_permanent_reduction
+	}
+}
+

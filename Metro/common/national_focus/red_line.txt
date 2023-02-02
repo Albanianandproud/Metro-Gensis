@@ -1150,7 +1150,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
-		x = 3
+		x = 2
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_development_of_the_red_line
@@ -1200,15 +1200,15 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = chemicals
-			        amount = 2
+			        amount = 3
 			    }
 			    add_resource = {
 			        type = components
-			        amount = 4
+			        amount = 6
 			    }
 			    add_resource = {
 			        type = alloys
-			        amount = 6
+			        amount = 9
 			    }
 			}
 			add_ideas = RED_planned_economy
@@ -1386,7 +1386,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_collectivization
 		}
-		x = 2
+		x = 3
 		y = 1
 		cost = 4.3
 		relative_position_id = RED_collectivization
@@ -1483,16 +1483,82 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RED_military_plant_2
-		icon = GFX_workstation_4
+		id = RED_transformation_of_industry
+		icon = GFX_components
 		prerequisite = {
 			focus = RED_military_plant
 		}
-		x = 0
-		y = 2
+		x = -1
+		y = 1
 		cost = 5.8
 		relative_position_id = RED_military_plant
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+			    add_resource = {
+			        type = scrap
+			        amount = 10
+			    }
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+			    add_resource = {
+			        type = alloys
+			        amount = 10
+			    }
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_resource = {
+			        type = components
+			        amount = 10
+			    }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = RED_military_plant_2
+		icon = GFX_workstation_4
+		prerequisite = {
+			focus = RED_transformation_of_industry
+		}
+		prerequisite = {
+			focus = RED_retooling_artisans_for_war
+		}
+		x = 0
+		y = 2
+		cost = 8.6
+		relative_position_id = RED_military_plant
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 			random_owned_state = {
 				limit = {
 					NOT = {
@@ -1518,7 +1584,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
-		x = -3
+		x = -4
 		y = 1
 		cost = 2.8
 		relative_position_id = RED_development_of_the_red_line
@@ -2073,7 +2139,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		relative_position_id = RED_department_of_production
 		completion_reward = {
 			add_equipment_to_stockpile = {
@@ -2510,7 +2576,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_2030
 		}
-		x = -8
+		x = -11
 		y = 0
 		cost = 4.3
 		relative_position_id = RED_development_of_the_red_line

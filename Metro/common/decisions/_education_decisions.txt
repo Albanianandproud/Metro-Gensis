@@ -21,7 +21,7 @@ education_practise = {
    				tooltip = not_currently_under_education_reforms
    				NOT = {
 					has_country_flag = improving_education
-					has_idea = civics_education_level_6 
+					has_idea = civics_education_level_5
 				}
    			}
 		}
@@ -61,9 +61,10 @@ education_practise = {
 				#// Make cost increase for every education tier we have
 				clamp_variable = {
 					var = education_reform_undertaking
-					min = 270
-					max = 1080
+					min = 300
+					max = 1440
 				}
+				calculate_education_reform_timer_multiplier = yes
 				set_country_flag = improving_education
 			}
 			activate_mission = improve_education_efforts_mission
@@ -121,9 +122,9 @@ education_practise = {
    			}
 		}
 
-		cost = 0
+		cost = education_administrate_cost
 
-		days_re_enable = 20
+		days_re_enable = education_administrate_duration
 
 		days_remove = 20
 
@@ -135,6 +136,19 @@ education_practise = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
 				days = -20
+			}
+			custom_effect_tooltip = education_reform_increase_cost_and_duration_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = education_administrate_cost
+					value = 5
+				}
+				add_to_variable = {
+					var = education_administrate_duration
+					value = 5
+				}
+				#education_reforms_administer_increase_cost = yes
+				#education_reforms_administer_increase_duration = yes
 			}
 		}
 
@@ -169,14 +183,27 @@ education_practise = {
    			}
 		}
 
-		cost = 30
+		cost = education_books_cost
 
-		days_re_enable = 30
+		days_re_enable = education_books_duration
 		
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
 				days = -30
+			}
+			custom_effect_tooltip = education_reform_increase_cost_and_duration_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = education_books_cost
+					value = 5
+				}
+				add_to_variable = {
+					var = education_books_duration
+					value = 5
+				}
+				#education_reforms_books_increase_cost = yes
+				#education_reforms_books_increase_duration = yes
 			}
 		}
 
@@ -418,6 +445,7 @@ education_practise = {
 					value = 15
 				}
 				#// Make cost increase for every education tier we have
+				calculate_education_reform_timer_multiplier = yes
 				clamp_variable = {
 					var = education_reform_undertaking
 					min = 270
@@ -681,6 +709,141 @@ education_practise = {
 				add = 0.1
 				has_army_experience < 11
 			}
+		}
+	}
+
+	education_civic_2_reward_civilian_sphere  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = {
+					has_civic_education_higher_2 = yes
+					NOT = {
+						has_country_flag = education_civic_already_picked_boon
+					}
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cost = 100
+		days_remove = 270
+
+		fire_only_once = yes
+		
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = education_civic_already_picked_boon
+			}
+			add_timed_idea = { idea = metro_civics_civilian_boon days = 270 }
+		}
+
+		modifier = {
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = education_civic_already_picked_boon 	
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	education_civic_2_reward_infantry_techs  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = {
+					has_civic_education_higher_3 = yes
+					NOT = {
+						has_country_flag = education_civic_already_picked_boon
+					}
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cost = 100
+		days_remove = 270
+
+		fire_only_once = yes
+		
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = education_civic_already_picked_boon
+			}
+			add_timed_idea = { idea = metro_civics_infantry_boon days = 270 }
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = education_civic_already_picked_boon 	
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	education_civic_2_reward_rail_vehicles  = {
+
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_4_tooltip
+				AND = {
+					has_civic_education_higher_4 = yes
+					NOT = {
+						has_country_flag = education_civic_already_picked_boon
+					}
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cost = 100
+		days_remove = 270
+
+		fire_only_once = yes
+
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = education_civic_already_picked_boon
+			}
+			add_timed_idea = { idea = metro_civics_rail_boon days = 270 }
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = education_civic_already_picked_boon 	
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
 		}
 	}
 }

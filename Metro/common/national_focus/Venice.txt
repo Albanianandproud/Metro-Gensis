@@ -1,6 +1,6 @@
 #!gfx:interface/metro_goals.gfx
-#!gfx:interface/EUR_focus_icons.gfx
-#!gfx:interface/TRT_focus_icons.gfx
+## Originally made by Nelgw
+## Edited by Heavy
 
 focus_tree = {
 	id = venice
@@ -11,22 +11,893 @@ focus_tree = {
 			tag = TRT
 		}
 	}
-	continuous_focus_position = { x = 100 y = 1000}
+	continuous_focus_position = { x = 100 y = 125 }
 	default = no
 
 	focus = {
-		id = TRT_start_political_talks
-		icon = GFX_TRT_generic_1
-		x = 15
+		id = TRT_big_happenings_in_little_venice
+		icon = GFX_pig
+		x = 18
 		y = 0
-		cost = 2
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 0
 		}
 
 		completion_reward = {
-			add_political_power = 10
+			country_event = nf_TRT.3
+		}
+	}
+
+	focus = {
+		id = TRT_haven_of_crime#
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_big_happenings_in_little_venice
+		prerequisite = { 
+			focus = TRT_big_happenings_in_little_venice
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_focus_3
+		icon = GFX_pig
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_big_happenings_in_little_venice
+		prerequisite = { 
+			focus = TRT_big_happenings_in_little_venice
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_focus_4
+		icon = GFX_pig
+		x = -3
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_big_happenings_in_little_venice
+		prerequisite = { 
+			focus = TRT_big_happenings_in_little_venice
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	## Dealing with the Shrimp Infestation
+
+	focus = {
+		id = TRT_what_lurks_beneath
+		icon = GFX_pig
+		x = -5
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_4
+		prerequisite = { 
+			focus = TRT_focus_4
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_depth_charges
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_what_lurks_beneath
+		prerequisite = { 
+			focus = TRT_what_lurks_beneath
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			add_ideas = TRT_exploives_equipment_improve_1
+			add_tech_bonus = {
+				name = explosive_bonus
+				bonus = 0.4
+				uses = 3
+				category = explosive_support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_draining_depths
+		icon = GFX_pig
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_what_lurks_beneath
+		prerequisite = { 
+			focus = TRT_what_lurks_beneath
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			custom_effect_tooltip = TRT_able_to_use_decision_manpower
+			hidden_effect = {
+				country_event = { id = nf_TRT.8 hours = 36 }
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_fish_industry
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_draining_depths
+		prerequisite = { 
+			focus = TRT_draining_depths
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = TRT_fish_industry_1
+		}
+	}
+
+	focus = {
+		id = TRT_sustinance
+		icon = GFX_pig
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_draining_depths
+		prerequisite = { 
+			focus = TRT_fish_industry
+		}
+		mutually_exclusive = {
+			focus = TRT_a_sport
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			TRT_fishindustry_sustinance_upgrade = yes
+		}
+	}
+
+	focus = {
+		id = TRT_cleansing_nests
+		icon = GFX_pig
+		x = -3
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_depth_charges
+		prerequisite = { 
+			focus = TRT_depth_charges
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_0
+		        amount = 15
+			}
+			capital_scope = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_hardcore_fishing
+		icon = GFX_pig
+		x = 2
+		y = 0
+		cost = 6.5
+		relative_position_id = TRT_cleansing_nests
+		prerequisite = { 
+			focus = TRT_depth_charges
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			TRT_explosives_equipment_improve = yes
+			capital_scope = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_kabloooeyyy
+		icon = GFX_pig
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_cleansing_nests
+		prerequisite = { 
+			focus = TRT_cleansing_nests
+			focus = TRT_hardcore_fishing
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			TRT_explosives_equipment_improve = yes
+		}
+	}
+
+	focus = {
+		id = TRT_a_sport
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_fish_industry
+		mutually_exclusive = {
+			focus = TRT_sustinance
+		}
+		prerequisite = { 
+			focus = TRT_fish_industry
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			TRT_fishindustry_sport_upgrade = yes
+		}
+	}
+
+	focus = {
+		id = TRT_shrimp_anyone
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_sustinance
+		prerequisite = { 
+			focus = TRT_a_sport
+			focus = TRT_sustinance
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	### Fixin' Up the Triangle Branch
+
+	focus = {
+		id = TRT_city_on_stilts
+		icon = GFX_pig
+		x = 5
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_3
+		prerequisite = { 
+			focus = TRT_focus_3
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					is_core_of = TRT
+					is_owned_by = TRT
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			TRT_upgrade_city_on_stilts_idea = yes
+		}
+	}
+
+	focus = {
+		id = TRT_floodgate_bulwarks
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_city_on_stilts
+		prerequisite = { 
+			focus = TRT_city_on_stilts
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_house_that_dirt_built
+		icon = GFX_pig
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_city_on_stilts
+		prerequisite = { 
+			focus = TRT_city_on_stilts
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_logistic_canals
+		icon = GFX_pig
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_city_on_stilts
+		prerequisite = { 
+			focus = TRT_city_on_stilts
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			custom_effect_tooltip = TRT_increase_minimum_prepardness_10
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_minimum_prepardness
+					value = 10
+				}	
+			}
+			TRT_upgrade_city_on_stilts_idea = yes
+		}
+	}
+
+	focus = {
+		id = TRT_flooding_protection
+		icon = GFX_pig
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_house_that_dirt_built
+		prerequisite = { 
+			focus = TRT_house_that_dirt_built
+			focus = TRT_floodgate_bulwarks
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_public_works
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_flooding_protection
+		prerequisite = { 
+			focus = TRT_flooding_protection
+		}
+		mutually_exclusive = {
+			focus = TRT_toil_the_toll
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_shipping_routes
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_logistic_canals
+		prerequisite = { 
+			focus = TRT_logistic_canals
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			custom_effect_tooltip = TRT_increase_minimum_prepardness_10
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_minimum_prepardness
+					value = 10
+				}	
+			}
+			TRT_upgrade_city_on_stilts_idea = yes
+		}
+	}
+
+	focus = {
+		id = TRT_modular_districts
+		icon = GFX_pig
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_shipping_routes
+		prerequisite = { 
+			focus = TRT_shipping_routes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+			custom_effect_tooltip = TRT_increase_minimum_prepardness_10
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_minimum_prepardness
+					value = 10
+				}	
+			}
+			TRT_upgrade_city_on_stilts_idea = yes
+		}
+	}
+
+	focus = {
+		id = TRT_toil_the_toll
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_shipping_routes
+		prerequisite = { 
+			focus = TRT_logistic_canals
+		}
+		mutually_exclusive = {
+			focus = TRT_public_works
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_venitian_determination
+		icon = GFX_pig
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = TRT_floodgate_bulwarks
+		prerequisite = { 
+			focus = TRT_public_works
+			focus = TRT_toil_the_toll
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_checking_stock
+		icon = GFX_pig
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_4
+		mutually_exclusive = {
+			focus = TRT_extortion
+		}
+		prerequisite = { 
+			focus = TRT_haven_of_crime
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_extortion
+		icon = GFX_pig
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_3
+		mutually_exclusive = {
+			focus = TRT_checking_stock
+		}
+		prerequisite = { 
+			focus = TRT_haven_of_crime
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	## Internal Sphere ##
+
+	focus = {
+		id = TRT_arms_in_the_arms_industry
+		icon = GFX_pig
+		x = -3
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_haven_of_crime
+		prerequisite = { 
+			focus = TRT_focus_4
+		}
+		mutually_exclusive = {
+			focus = TRT_entertainment
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_shooting_range
+		icon = GFX_pig
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_arms_in_the_arms_industry
+		prerequisite = { 
+			focus = TRT_arms_in_the_arms_industry
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_live_game
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_shooting_range
+		prerequisite = { 
+			focus = TRT_shooting_range
+		}
+		mutually_exclusive = {
+			focus = TRT_hideout_for_kuznetsky_most
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_technicians_trades
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_arms_in_the_arms_industry
+		prerequisite = { 
+			focus = TRT_arms_in_the_arms_industry
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_hideout_for_kuznetsky_most
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_technicians_trades
+		prerequisite = { 
+			focus = TRT_technicians_trades
+		}
+		mutually_exclusive = {
+			focus = TRT_live_game
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_armed_to_the_teeth
+		icon = GFX_pig
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_live_game
+		prerequisite = { 
+			focus = TRT_live_game
+			focus = TRT_hideout_for_kuznetsky_most
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	## Domestic / Entertainment Branch
+
+	focus = {
+		id = TRT_entertainment
+		icon = GFX_pig
+		x = 3
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_haven_of_crime#
+		prerequisite = { 
+			focus = TRT_focus_3
+		}
+		mutually_exclusive = {
+			focus = TRT_arms_in_the_arms_industry
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = TRT_booze
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_entertainment
+		prerequisite = { 
+			focus = TRT_entertainment
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_distilleries
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_booze
+		prerequisite = { 
+			focus = TRT_booze
+		}
+		mutually_exclusive = {
+			focus = TRT_promiscuous 
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = TRT_adult_industry
+		icon = GFX_pig
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_entertainment
+		prerequisite = { 
+			focus = TRT_entertainment
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_promiscuous 
+		icon = GFX_pig
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_adult_industry
+		prerequisite = { 
+			focus = TRT_adult_industry
+		}
+		mutually_exclusive = {
+			focus = TRT_distilleries
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_domestics
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_promiscuous 
+		prerequisite = { 
+			focus = TRT_promiscuous 
+			focus = TRT_distilleries
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_reorganize_the_bar
+		icon = GFX_pig
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = TRT_haven_of_crime#
+		prerequisite = { 
+			focus = TRT_checking_stock
+			focus = TRT_extortion
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_check_in_with_the_inlaws
+		icon = GFX_pig
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_reorganize_the_bar
+		prerequisite = { 
+			focus = TRT_reorganize_the_bar
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_big_problems_in_little_china
+		icon = GFX_pig
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_reorganize_the_bar
+		prerequisite = { 
+			focus = TRT_reorganize_the_bar
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_checking_the_gossip
+		icon = GFX_pig
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_reorganize_the_bar
+		prerequisite = { 
+			focus = TRT_big_problems_in_little_china
+			focus = TRT_check_in_with_the_inlaws
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_hunt_for_the_silo
+		icon = GFX_pig
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = { 
+			focus = TRT_checking_the_gossip
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = TRT_start_political_talks
+		icon = GFX_TRT_generic_1
+		x = 45
+		y = 0
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_political_power = 35
 		}
 	}
 
@@ -642,7 +1513,7 @@ focus_tree = {
 		relative_position_id = TRT_trial_by_fire
 		x = 2
 		y = 1
-		cost = 3
+		cost = 6.5
 		
 		available = {
 			has_civil_war = yes
@@ -670,7 +1541,7 @@ focus_tree = {
 		relative_position_id = TRT_cannon_fodder
 		x = 0
 		y = 1
-		cost = 3
+		cost = 6.5
 		
 		available = {
 			has_civil_war = yes
@@ -697,7 +1568,7 @@ focus_tree = {
 		relative_position_id = TRT_tactical_takeover
 		x = 2
 		y = 1
-		cost = 3
+		cost = 6.5
 		
 		available = {
 			has_civil_war = no
@@ -721,7 +1592,7 @@ focus_tree = {
 		relative_position_id = TRT_tactical_takeover
 		x = 0
 		y = 1
-		cost = 3
+		cost = 6.5
 		
 		available = {
 			has_civil_war = no
