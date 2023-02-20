@@ -40,6 +40,11 @@ TRT_flooding_issue = {
 						is_owned_by = ROOT
 					}
 				}
+				422 = {
+					NOT = {
+						is_owned_by = ROOT
+					}
+				}
 			}
 		}
 		days_mission_timeout = TRT_timer_until_flooding
@@ -105,7 +110,7 @@ TRT_flooding_issue = {
 		icon = GFX_decision_TRT_use_factory
 		priority = 10
 
-		days_remove = 10
+		days_remove = TRT_flooding_shrimp_problems
 
 		custom_cost_text = TRT_num_of_free_civlian_factories
 		custom_cost_trigger = {
@@ -156,7 +161,7 @@ TRT_flooding_issue = {
 		icon = GFX_decision_TRT_use_pp
 		priority = 10
 
-		days_remove = 10
+		days_remove = TRT_flooding_shrimp_problems
 		cost = TRT_preparation_cost_pp
 		days_re_enable = 0
 
@@ -310,6 +315,57 @@ TRT_flooding_issue = {
 				}
 			}
 			custom_effect_tooltip = TRT_increase_preparation_level
+		}
+	}
+
+	TRT_clearing_shrimp_nests = {
+		icon = GFX_decision_TRT_clearing_shrimp_nests
+		priority = 101
+
+		days_remove = 14
+		days_re_enable = 0
+
+		custom_cost_text = command_power_10
+		custom_cost_trigger = {
+			command_power > 10
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TRT_not_already_met_requirements
+				check_variable = { TRT_flooding_shrimp_problems > 5 }
+			}
+			has_completed_focus = TRT_what_lurks_beneath
+			command_power > 15
+		}
+
+		visible = {
+			has_active_mission = TRT_countdown_to_flood_timer
+			custom_trigger_tooltip = {
+    			tooltip = TRT_flooding_still_an_issue
+				NOT = {
+					has_completed_focus = TRT_venitian_determination
+				}
+			}
+		}
+
+		cancel_effect = {
+			add_command_power = 10
+		}
+
+		complete_effect = {
+			add_command_power = -10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = TRT_reduce_shrimp_nests_severity
+			army_experience = 2.5
+			hidden_effect = {
+				subtract_from_variable = {
+					var = TRT_flooding_shrimp_problems
+					value = -5
+				}
+			}
 		}
 	}
 }

@@ -1,0 +1,90 @@
+add_namespace = nf_SPT
+
+country_event = {
+    id = nf_SPT.1
+    title = nf_SPT.1.t
+    desc = nf_SPT.1.d
+    picture = "GFX_event (87)"
+
+	trigger = {
+		date > 2028.2.1
+		tag = SPT
+	}
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT.1.a
+		hidden_effect = {
+			set_country_flag = SPT_enable_scavenging
+		}
+		custom_effect_tooltip = SPT_salvaging_duties
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT.2
+    title = nf_SPT.2.t
+    desc = nf_SPT.2.d
+    picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = nf_SPT.2.a
+		trigger = { 
+            NOT = {
+            	has_idea = SPT_salvage_resources_1
+            	has_idea = SPT_salvage_resources_2
+                has_idea = SPT_salvage_resources_3
+            }
+        }
+		add_ideas = SPT_salvage_resources_1
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { 
+		name = nf_SPT.2.b
+		trigger = { 
+            has_idea = SPT_salvage_resources_1
+        }
+		SPT_upgrade_salvage_idea = yes
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment
+			amount = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { 
+		name = nf_SPT.2.c
+		trigger = { 
+            has_idea = SPT_salvage_resources_2
+        }
+		SPT_upgrade_salvage_idea = yes
+		clr_country_flag = SPT_enable_scavenging
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment
+			amount = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}

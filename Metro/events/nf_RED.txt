@@ -273,6 +273,7 @@ country_event = { # Q of Brotherhood
                 cost = 100
                 traits = { RED_maxim_1a }
                 removal_cost = -1
+                can_be_fired = no
                 ai_will_do = {
                     factor = 16
                 }
@@ -299,6 +300,7 @@ country_event = { # Q of Brotherhood
                 idea_token = RED_moskvin
                 cost = 100
                 traits = { RED_maxim_1b }
+                can_be_fired = no
                 removal_cost = -1
                 ai_will_do = {
                     factor = 16
@@ -430,6 +432,7 @@ country_event = { # Korbut
                     slot = political_advisor
                     idea_token = RED_korbut
                     removal_cost = -1
+                    can_be_fired = no
                     traits = { RED_korbut }
                     ai_will_do = {
                         factor = 16
@@ -1413,7 +1416,6 @@ country_event = { # Mushroom Revolt
                 add_offsite_building = { type = arms_factory level = 6 }
                 add_equipment_to_stockpile = { type = infantry_equipment amount = 100 }
                 add_equipment_to_stockpile = { type = support_equipment_1  amount = 20 }
-                add_equipment_to_stockpile = { type = supplies_equipment_1 amount = 35 }
                 add_equipment_to_stockpile = { type = rail_cart_equipment_1 amount = 15 }
                 set_capital = { state = 344 }
                 load_oob = "PPL_revolt"
@@ -1482,7 +1484,6 @@ country_event = { # Dissenters Revolt
                 add_offsite_building = { type = arms_factory level = 5 }
                 add_equipment_to_stockpile = { type = infantry_equipment amount = 125 }
                 add_equipment_to_stockpile = { type = support_equipment_1  amount = 20 }
-                add_equipment_to_stockpile = { type = supplies_equipment_1 amount = 35 }
                 add_equipment_to_stockpile = { type = rail_cart_equipment_1 amount = 15 }
                 declare_war_on = {
                     target = RED
@@ -1545,7 +1546,12 @@ country_event = { # DRY station Flavor 2
     desc = nf_RED.53.d
     picture = "GFX_event (92)"
 
-    is_triggered_only = yes
+    trigger = {
+		owns_state = 262
+		tag = SPT
+	}
+	fire_only_once = yes
+
 
     option = {
         name = nf_RED.53.a
