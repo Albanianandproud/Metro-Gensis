@@ -1,97 +1,116 @@
 TRT_power_balance_category = {
 
-	TRT_increase_mob_low = {
+	## Bandits ##
 
+	TRT_establish_bordello = {
 		icon = generic_speech
-		priority = 89
+		priority = 80
 		allowed = {
 			original_tag = TRT
 		}
+		visible = {
+			has_completed_focus = TRT_promiscuous
+		}
 
-		#custom_cost_text = command_power_20
-		#custom_cost_trigger = {
-		#	command_power > 19.9
-		#}
-		cost = 20
-
-		days_re_enable = 90
+		cost = 50
+		fire_only_once = yes
 
 		complete_effect = {
-			TRT_bop_very_low_decrease_effect = yes
-			add_stability = -0.03
-		}
-		
-	}
-
-	TRT_increase_mob_high = {
-
-		icon = GFX_decision_SWI_consolidate_council_power
-		priority = 88
-		allowed = {
-			original_tag = TRT
-		}
-
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
-		}
-
-		days_re_enable = 180
-
-		complete_effect = {
-			TRT_bop_low_decrease_effect = yes
-			add_stability = -0.05
-			add_manpower = -10
-			hidden_effect = {
-				add_command_power = -20
+			capital_scope = { 
+				add_extra_state_shared_building_slots = -1
 			}
 		}
-		
+
+		remove_effect = {
+			TRT_bop_decrease_10 = yes
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
 	}
 
-	TRT_increase_cit_low = {
-
+	TRT_pay_a_toll = {
 		icon = generic_speech
-		priority = 86
+		priority = 80
 		allowed = {
 			original_tag = TRT
 		}
-
-		cost = 20
-
-		days_re_enable = 90
-
-		complete_effect = {
-			TRT_bop_very_low_increase_effect = yes
-			add_war_support = -0.03
+		visible = {
+			has_completed_focus = TRT_toil_the_toll
 		}
-		
+
+		cost = 40
+		days_remove = 40
+		fire_only_once = yes
+
+		modifier = {
+			production_speed_arms_factory_factor = -0.06	
+			industrial_capacity_factory = -0.09
+		}
+
+		remove_effect = {
+			TRT_bop_decrease_10 = yes
+			add_ideas = TRT_trade_toll
+		}
 	}
 
-	TRT_increase_cit_high = {
 
-		icon = GFX_decision_SWI_consolidate_council_power
-		priority = 85
+	## Vigilantes
+
+	TRT_construct_distillery = {
+		icon = generic_speech
+		priority = 80
 		allowed = {
 			original_tag = TRT
 		}
-
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
+		visible = {
+			has_completed_focus = TRT_distilleries
 		}
 
-		days_re_enable = 180
+		cost = 40
+		fire_only_once = yes
 
 		complete_effect = {
-			TRT_bop_low_increase_effect = yes
-			add_stability = -0.05
-			add_manpower = -10
-			hidden_effect = {
-				add_command_power = -20
+			capital_scope = { 
+				add_extra_state_shared_building_slots = -1
 			}
 		}
-		
+
+		remove_effect = {
+			TRT_bop_increase_10 = yes
+			add_stability = 0.1
+			upgrade_booze_national_spirit = yes
+		}
 	}
 
+	TRT_public_work_sites = {
+		icon = generic_speech
+		priority = 80
+		allowed = {
+			original_tag = TRT
+		}
+		visible = {
+			has_completed_focus = TRT_public_works
+		}
+
+		cost = 40
+		days_remove = 40
+		fire_only_once = yes
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+			production_speed_infrastructure_factor = -0.1
+		}
+
+		remove_effect = {
+			TRT_bop_increase_10 = yes
+			add_stability = 0.05
+
+			custom_effect_tooltip = TRT_increase_minimum_prepardness_10
+			hidden_effect = {
+				add_to_variable = {
+					var = TRT_minimum_prepardness
+					value = 10
+				}	
+			}
+		}
+	}
 }
