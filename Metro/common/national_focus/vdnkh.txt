@@ -31,8 +31,8 @@ focus_tree = {
 	
 	focus = {
 		id = VDN_political_manuvering
-		icon = GFX_focus_hol_the_foundations_of_defense
-		x = -10
+		icon = GFX_generic_political
+		x = -9
 		y = 1
 		cost = 3
 
@@ -53,7 +53,7 @@ focus_tree = {
 	focus = {
 		id = VDN_decentralization
 		icon = GFX_VDN_decentralization
-		x = -6
+		x = -2
 		y = 1
 		cost = 7
 
@@ -76,7 +76,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { var = vdn_foreign value = +3 }
+			add_to_variable = { 
+				var = vdn_foreign 
+				value = 3
+			}
 			custom_effect_tooltip = vdn_foreign_plus
 			add_timed_idea = {
 				idea = VDN_idea_decentralization
@@ -118,7 +121,7 @@ focus_tree = {
 
 	focus = {
 		id = VDN_military_contributions
-		icon = GFX_VDN_soldier
+		icon = GFX_vdn_soldier
 		x = 4
 		y = 1
 		cost = 7
@@ -132,9 +135,9 @@ focus_tree = {
 		}
 		relative_position_id = VDN_the_commonwealth
 		completion_reward = {
-			add_to_variable = { var = vdn_foreign value = +2 }
+			add_to_variable = { var = vdn_foreign value = 2 }
 			custom_effect_tooltip = vdn_foreign_plus
-			add_to_variable = { var = vdn_army value = +1 }
+			add_to_variable = { var = vdn_army value = 1 }
 			custom_effect_tooltip = vdn_army_plus
 			
 			
@@ -166,7 +169,7 @@ focus_tree = {
 	
 	focus = {
 		id = VDN_good_relations
-		icon = GFX_VDN_stations
+		icon = GFX_vdn_stations
 		x = -1
 		y = 1
 		cost = 7
@@ -181,9 +184,9 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { var = vdn_foreign value = +2 }
+			add_to_variable = { var = vdn_foreign value = 2 }
 			custom_effect_tooltip = vdn_foreign_plus
-			add_to_variable = { var = vdn_politician value = +1 }
+			add_to_variable = { var = vdn_politician value = 1 }
 			custom_effect_tooltip = vdn_politician_plus
 			
 			add_opinion_modifier = { target = ALK modifier = medium_increase }
@@ -210,9 +213,9 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { var = vdn_foreign value = +1 }
+			add_to_variable = { var = vdn_foreign value = 1 }
 			custom_effect_tooltip = vdn_foreign_plus
-			add_to_variable = { var = vdn_capitalist value = +2 }
+			add_to_variable = { var = vdn_capitalist value = 2 }
 			custom_effect_tooltip = vdn_capitalist_plus
 		
 			336 = {
@@ -282,8 +285,266 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = VDN_government_reform
+		icon = GFX_VDN_deal
+		x = 2
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_no_place_for_fascists
+			focus = VDN_grant_concessions
+		}
+		
+		relative_position_id = VDN_no_place_for_fascists
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+	
+	focus = {
+		id = VDN_alexander_stays
+		icon = GFX_VDN_sukhoi
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_government_reform
+		}
+		
+		relative_position_id = VDN_government_reform
+		ai_will_do = {
+			factor = 50
+		}
+
+		mutually_exclusive = {
+			focus = VDN_a_heavenly_leader
+		}
+
+		completion_reward = {
+			add_country_leader_trait = _respected_politician
+		}
+	}
+	
+	focus = {
+		id = VDN_a_heavenly_leader
+		icon = GFX_courtroom
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_government_reform
+		}
+		
+		mutually_exclusive = {
+			focus = VDN_alexander_stays
+		}
+		
+		relative_position_id = VDN_government_reform
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = oligarch
+			}
+			retire_ideology_leader = community
+			create_country_leader = {
+				name = "Council of Trade"
+				desc = ""
+				picture = Trade_Council.dds
+				ideology = trade_alliance
+				traits = {
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_work_to_be_done
+		icon = GFX_VDN_suitcase
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_a_heavenly_leader
+			focus = VDN_alexander_stays
+		}
+	
+		
+		relative_position_id = VDN_a_heavenly_leader
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { var = vdn_trade value = 2 }
+			custom_effect_tooltip = vdn_trade_plus
+			add_to_variable = { var = vdn_capitalist value = 2 }
+			custom_effect_tooltip = vdn_capitalist_plus
+		}
+	}
+	
+	focus = {
+		id = VDN_invite_commonwealth_merchants
+		icon = GFX_VDN_suitcase
+		x = -3
+		y = 0
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_a_heavenly_leader
+			focus = VDN_alexander_stays
+		}
+		
+		relative_position_id = VDN_work_to_be_done
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 50
+				producer = RIZ
+			}
+			336 = {
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+			}
+			add_to_variable = { var = vdn_trade value = -1 }
+			custom_effect_tooltip = vdn_trade_minus
+			add_to_variable = { var = vdn_foreign value = 1 }
+			custom_effect_tooltip = vdn_foreign_plus
+		}
+	}
+	
+	focus = {
+		id = VDN_intertwining_our_governments
+		icon = GFX_VDN_concessions
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_a_heavenly_leader
+			focus = VDN_alexander_stays
+		}
+		
+		relative_position_id = VDN_alexander_stays
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = VDN_puppetunlock_tt
+		}
+	}
+	
+	focus = {
+		id = VDN_rizhskaya
+		icon = GFX_VDN_riz
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_intertwining_our_governments
+		}
+		
+		available = {
+			has_country_flag = VDN_riz_integrate_3
+		}
+		
+		relative_position_id = VDN_intertwining_our_governments
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			puppet = RIZ
+		}
+	}
+	
+	focus = {
+		id = VDN_alekseevskaya
+		icon = GFX_VDN_alk
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_intertwining_our_governments
+		}
+		
+		available = {
+			has_country_flag = VDN_alk_integrate_3
+		}
+		
+		relative_position_id = VDN_intertwining_our_governments
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			puppet = ALK
+		}
+	}
+	
+	focus = {
+		id = VDN_privately_owned_ventures
+		icon = GFX_VDN_capitalist
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_invite_commonwealth_merchants
+		}
+		
+		relative_position_id = VDN_invite_commonwealth_merchants
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			check_variable = {
+				vdn_capitalist > 14
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = VDN_capitalistinfluencehigh_tt
+			add_ideas = VDN_private_industry
+			336 = {
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+			add_to_variable = { var = vdn_capitalist value = 2 }
+			custom_effect_tooltip = vdn_capitalist_plus
+		}
+	}
+
+	focus = {
 		id = VDN_economic_reforms
-		icon = GFX_VDN_economy
+		icon = GFX_vdn_economy
 		x = -3
 		y = 1
 		cost = 7
@@ -291,7 +552,6 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_privately_owned_ventures
 		}
-		
 		
 		relative_position_id = VDN_privately_owned_ventures
 		ai_will_do = {
@@ -325,14 +585,11 @@ focus_tree = {
 
 		completion_reward = {
 			336 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 1
 					add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-					}
+					type = industrial_complex
+					level = 1
+					instant_build = yes
 				}
 				add_building_construction = {
 					type = infrastructure
@@ -342,7 +599,7 @@ focus_tree = {
 			}
 			317 = {
 				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
+					add_building_construction = {
 					type = industrial_complex
 					level = 1
 					instant_build = yes
@@ -355,7 +612,7 @@ focus_tree = {
 			}
 			424 = {
 				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
+					add_building_construction = {
 					type = industrial_complex
 					level = 1
 					instant_build = yes
@@ -388,14 +645,11 @@ focus_tree = {
 
 		completion_reward = {
 			336 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = industrial_complex
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
 				}
 			}
 		}
@@ -515,474 +769,16 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = VDN_tradesafe_tt
-			add_building_construction = {
-				type = bunker
-				level = 1
-				instant_build = yes
-				province = 3020
-			}
-			add_building_construction = {
-				type = bunker
-				level = 1
-				instant_build = yes
-				province = 3736
-			}
-			add_building_construction = {
-				type = bunker
-				level = 1
-				instant_build = yes
-				province = 3021
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_establish_colonization
-		icon = GFX_VDN_scout
-		x = 0
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_the_silk_road
-			focus = VDN_fortis_fortune
-			focus = VDN_unraidable_caravans
-		}
-		
-		
-		relative_position_id = VDN_fortis_fortune
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			add_manpower = 30
-			add_equipment_to_stockpile = {
-				type = scrap_infantry_equipment_1
-				amount = 10
-				producer = RUS
-			}
-			add_equipment_to_stockpile = {
-				type = basic_infantry_equipment
-				amount = 40
-				producer = RUS
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_repel_dark_one
-		icon = GFX_VDN_darkone
-		x = 0
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_establish_colonization
-		}
-		
-		available = {
-			date > 2030.01.01
-			has_army_manpower = {
-				size > 199
-			}
-		}
-		
-		relative_position_id = VDN_establish_colonization
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			set_country_flag = VDN_darkonerepelled_tt
-			country_event = nf_VDN.3
-			if = {
-				limit = {
-					has_country_flag = VDN_concessions_given
-				}
-				hidden_effect = {
-					VDN = {
-						puppet = ELI
-					}
-					ELI = {
-						set_cosmetic_tag = ELI_PUP
-						transfer_state = 307
-						transfer_state = 463
-						transfer_state = 5
-						transfer_state = 439
-						add_state_core = 307
-						add_state_core = 463
-						add_state_core = 5
-						add_state_core = 439
-						set_capital = {
-						state = 307
-							remember_old_capital = no
-						}
-						set_politics = {
-							ruling_party = dictatorial
-						}
-						add_popularity = {
-							ideology = dictatorial
-							popularity = 1
-						}
-					}
-					307 = {
-						add_manpower = 220
-						set_state_category = city
-						add_extra_state_shared_building_slots = 3
-						add_building_construction = {
-							type = industrial_complex
-							level = 1
-							instant_build = yes
-						}
-						add_building_construction = {
-							type = arms_factory
-							level = 2
-							instant_build = yes
-						}
+			6 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
 					}
 				}
 			}
-			else = {
-				hidden_effect = {
-					VDN = {
-						transfer_state = 307
-						transfer_state = 463
-						transfer_state = 5
-						transfer_state = 439
-						add_state_core = 307
-						add_state_core = 463
-						add_state_core = 5
-						add_state_core = 439
-					}
-					307 = {
-						add_manpower = 220
-						set_state_category = city
-					}
-				}
-			}	
-		}
-	}
-	
-	focus = {
-		id = VDN_expand_christ_domain
-		icon = GFX_RCH_tunnel_excavation
-		x = 0
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = VDN_repel_dark_one
-		}
-		
-		available = {
-			has_country_flag = VDN_darkonerepelled_tt
-			has_army_manpower = {
-				size > 299
-			}
-		}
-		
-		relative_position_id = VDN_repel_dark_one
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			VDN = {
-				transfer_state = 4
-				transfer_state = 272
-				transfer_state = 3
-				transfer_state = 460
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_completing_the_line
-		icon = GFX_RCH_tunnel_excavation
-		x = 0
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = VDN_expand_christ_domain
-		}
-		
-		available = {
-			has_army_manpower = {
-				size > 449
-			}
-		}
-		
-		relative_position_id = VDN_expand_christ_domain
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			VDN = {
-				transfer_state = 242
-				transfer_state = 2
-				transfer_state = 366
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_government_reform
-		icon = GFX_VDN_deal
-		x = 2
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_no_place_for_fascists
-			focus = VDN_grant_concessions
-		}
-		
-		relative_position_id = VDN_no_place_for_fascists
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-	}
-	
-	focus = {
-		id = VDN_alexander_stays
-		icon = GFX_VDN_sukhoi
-		x = 1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_government_reform
-		}
-		
-		relative_position_id = VDN_government_reform
-		ai_will_do = {
-			factor = 50
-		}
-
-		mutually_exclusive = {
-			focus = VDN_a_heavenly_leader
-		}
-
-		completion_reward = {
-			add_country_leader_trait = _respected_politician
-		}
-	}
-	
-	focus = {
-		id = VDN_a_heavenly_leader
-		icon = GFX_courtroom
-		x = -1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_government_reform
-		}
-		
-		mutually_exclusive = {
-			focus = VDN_alexander_stays
-		}
-		
-		relative_position_id = VDN_government_reform
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			set_politics = {
-				ruling_party = oligarch
-			}
-			retire_ideology_leader = community
-			create_country_leader = {
-				name = Council of Trade
-				desc = ""
-				picture = Trade_Council.dds
-				ideology = trade_alliance
-				traits = {
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_work_to_be_done
-		icon = GFX_VDN_suitcase
-		x = 1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_a_heavenly_leader
-			focus = VDN_alexander_stays
-		}
-	
-		
-		relative_position_id = VDN_a_heavenly_leader
-		
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			add_to_variable = { var = vdn_trade value = +2 }
-			custom_effect_tooltip = vdn_trade_plus
-			add_to_variable = { var = vdn_capitalist value = +2 }
-			custom_effect_tooltip = vdn_capitalist_plus
-		}
-	}
-	
-	focus = {
-		id = VDN_invite_commonwealth_merchants
-		icon = GFX_VDN_suitcase
-		x = -3
-		y = 0
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_a_heavenly_leader
-			focus = VDN_alexander_stays
-		}
-		
-		relative_position_id = VDN_work_to_be_done
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = 50
-				producer = RIZ
-			}
-			336 = {
-				add_resource = {
-					type = alloys
-					amount = 3
-				}
-				add_resource = {
-					type = scrap
-					amount = 3
-				}
-			}
-			add_to_variable = { var = vdn_trade value = -1 }
-			custom_effect_tooltip = vdn_trade_minus
-			add_to_variable = { var = vdn_foreign value = +1 }
-			custom_effect_tooltip = vdn_foreign_plus
-		}
-	}
-	
-	focus = {
-		id = VDN_intertwining_our_governments
-		icon = GFX_VDN_concessions
-		x = -1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_a_heavenly_leader
-			focus = VDN_alexander_stays
-		}
-		
-		relative_position_id = VDN_alexander_stays
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = VDN_puppetunlock_tt
-		}
-	}
-	
-	focus = {
-		id = VDN_rizhskaya
-		icon = GFX_VDN_riz
-		x = -1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_intertwining_our_governments
-		}
-		
-		available = {
-			has_country_flag = VDN_riz_integrate_3
-		}
-		
-		relative_position_id = VDN_intertwining_our_governments
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			puppet = RIZ
-		}
-	}
-	
-	focus = {
-		id = VDN_alekseevskaya
-		icon = GFX_VDN_alk
-		x = 1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_intertwining_our_governments
-		}
-		
-		available = {
-			has_country_flag = VDN_alk_integrate_3
-		}
-		
-		relative_position_id = VDN_intertwining_our_governments
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			puppet = ALK
-		}
-	}
-	
-	focus = {
-		id = VDN_privately_owned_ventures
-		icon = GFX_VDN_capitalist
-		x = 0
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = VDN_invite_commonwealth_merchants
-		}
-		
-		relative_position_id = VDN_invite_commonwealth_merchants
-		ai_will_do = {
-			factor = 50
-		}
-
-		available = {
-			check_variable = {
-				vdn_capitalist > 14
-			}
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = VDN_capitalistinfluencehigh_tt
-			add_ideas = VDN_private_industry
-			336 = {
-				remove_building = {
-					type = industrial_complex
-					level = 2
-				}
-			}
-			add_to_variable = { var = vdn_capitalist value = +2 }
-			custom_effect_tooltip = vdn_capitalist_plus
 		}
 	}
 	
@@ -1005,11 +801,11 @@ focus_tree = {
 
 		completion_reward = {
 			set_country_flag = VDN_scalecompleted
-			add_to_variable = { var = vdn_trade value = +3 }
+			add_to_variable = { var = vdn_trade value = 3 }
 			custom_effect_tooltip = vdn_trade_plus
-			add_to_variable = { var = vdn_capitalist value = +3 }
+			add_to_variable = { var = vdn_capitalist value = 3 }
 			custom_effect_tooltip = vdn_capitalist_plus
-			add_to_variable = { var = vdn_foreign value = +3 }
+			add_to_variable = { var = vdn_foreign value = 3 }
 			custom_effect_tooltip = vdn_foreign_plus
 			
 			add_to_variable = { var = vdn_commonfolk value = -3 }
@@ -1789,7 +1585,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { var = vdn_army value = +3 }
+			add_to_variable = { var = vdn_army value = 3 }
 			custom_effect_tooltip = vdn_army_plus
 			add_to_variable = { var = vdn_politician value = -2 }
 			custom_effect_tooltip = vdn_politician_minus
@@ -1802,7 +1598,7 @@ focus_tree = {
 	
 	focus = {
 		id = VDN_upgrade_military
-		icon = GFX_VDN_military
+		icon = GFX_vdn_military
 		x = 0
 		y = 1
 		cost = 7
@@ -1851,8 +1647,200 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 50
-			add_to_variable = { var = vdn_army value = +2 }
+			add_to_variable = { var = vdn_army value = 2 }
 			custom_effect_tooltip = vdn_army_plus
+		}
+	}
+
+	focus = {
+		id = VDN_establish_colonization
+		icon = GFX_vdn_scout
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_the_silk_road
+			focus = VDN_fortis_fortune
+			focus = VDN_unraidable_caravans
+		}
+		
+		
+		relative_position_id = VDN_fortis_fortune
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = 30
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 10
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = basic_infantry_equipment
+				amount = 40
+				producer = RUS
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_repel_dark_one
+		icon = GFX_VDN_darkone
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = VDN_establish_colonization
+		}
+		
+		available = {
+			date > 2030.01.01
+			has_army_manpower = {
+				size > 199
+			}
+		}
+		
+		relative_position_id = VDN_establish_colonization
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_country_flag = VDN_darkonerepelled_tt
+			country_event = nf_VDN.3
+			if = {
+				limit = {
+					has_country_flag = VDN_concessions_given
+				}
+				hidden_effect = {
+					VDN = {
+						puppet = ELI
+					}
+					ELI = {
+						set_cosmetic_tag = ELI_PUP
+						transfer_state = 307
+						transfer_state = 463
+						transfer_state = 5
+						transfer_state = 439
+						add_state_core = 307
+						add_state_core = 463
+						add_state_core = 5
+						add_state_core = 439
+						set_capital = {
+						state = 307
+							remember_old_capital = no
+						}
+						set_politics = {
+							ruling_party = dictatorial
+						}
+						add_popularity = {
+							ideology = dictatorial
+							popularity = 1
+						}
+					}
+					307 = {
+						add_manpower = 220
+						set_state_category = city
+						add_extra_state_shared_building_slots = 3
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					VDN = {
+						transfer_state = 307
+						transfer_state = 463
+						transfer_state = 5
+						transfer_state = 439
+						add_state_core = 307
+						add_state_core = 463
+						add_state_core = 5
+						add_state_core = 439
+					}
+					307 = {
+						add_manpower = 220
+						set_state_category = city
+					}
+				}
+			}	
+		}
+	}
+	
+	focus = {
+		id = VDN_expand_christ_domain
+		icon = GFX_RCH_tunnel_excavation
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = VDN_repel_dark_one
+		}
+		
+		available = {
+			has_country_flag = VDN_darkonerepelled_tt
+			has_army_manpower = {
+				size > 299
+			}
+		}
+		
+		relative_position_id = VDN_repel_dark_one
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			VDN = {
+				transfer_state = 4
+				transfer_state = 272
+				transfer_state = 3
+				transfer_state = 460
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_completing_the_line
+		icon = GFX_RCH_tunnel_excavation
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = VDN_expand_christ_domain
+		}
+		
+		available = {
+			has_army_manpower = {
+				size > 449
+			}
+		}
+		
+		relative_position_id = VDN_expand_christ_domain
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			VDN = {
+				transfer_state = 242
+				transfer_state = 2
+				transfer_state = 366
+			}
 		}
 	}
 	
@@ -2056,7 +2044,7 @@ focus_tree = {
 
 	focus = {
 		id = VDN_industrial_research_effort
-		icon = GFX_goal_generic_production
+		icon = GFX_wrench
 		cost = 6.5
 
 		prerequisite = {
@@ -2265,11 +2253,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
+			336 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
 			}
 			317 = {
 				add_extra_state_shared_building_slots = 1
@@ -2300,9 +2290,6 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = VDN_gunsmith_2
-		}
-		prerequisite = {
-			focus = VDN_infrastructure_effort_2
 		}
 		x = 0
 		y = 3
@@ -2406,7 +2393,7 @@ focus_tree = {
 
 	focus = {
 		id = VDN_workshops_3
-		icon = GFX_goal_generic_construct_civ_factory
+		icon = GFX_workstation_3
 		cost = 6.5
 
 		prerequisite = {
@@ -2492,7 +2479,7 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_clearing_clutter
 		}
-		x = 5
+		x = 4
 		y = 1
 		relative_position_id = VDN_clearing_clutter
 
@@ -2638,7 +2625,7 @@ focus_tree = {
 
 	focus = {
 		id = VDN_laboratory
-		icon = GFX_focus_research
+		icon = GFX_RCH_science
 		cost = 6.5
 
 		prerequisite = {
