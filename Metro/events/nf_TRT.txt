@@ -49,6 +49,7 @@ country_event = {
 
     option = {
 		name = nf_TRT.3.a
+        add_political_power = 50
         ### Prelude to flooding mechanic
         hidden_effect = { country_event = { id = nf_TRT.4 days = 40 random_days = 40 } }
 	}
@@ -113,19 +114,19 @@ country_event = {   ## Repeated Mechanic
 
     trigger = {
         OR = {
-            date > 2029.05.01
-            date > 2030.05.01
-            date > 2031.05.01
-            date > 2032.05.01
-            date > 2033.05.01
-            date > 2034.05.01
-            date > 2035.05.01
-            date > 2036.05.01
-            AND = {
-                NOT = {
-                    has_completed_focus = TRT_venitian_determination
-                }
-            }
+            date > 2029.04.01
+            date > 2030.04.01
+            date > 2031.04.01
+            date > 2032.04.01
+            date > 2033.04.01
+            date > 2034.04.01
+            date > 2035.04.01
+            date > 2036.04.01
+            #AND = {
+            #    NOT = {
+            #        has_completed_focus = TRT_venitian_determination
+            #    }
+            #}
         }
     }
 
@@ -309,33 +310,8 @@ country_event = {   ## Draining Depths
 
     is_triggered_only = yes
 
-    immediate = {
-    }
-
     option = {
 		name = nf_TRT.8.a
-        custom_effect_tooltip = TRT_flooding_decision_resources
-        capital_scope = {
-            add_resource = {
-                type = alloys
-				amount = 2
-			}
-			add_resource = {
-				type = scrap
-				amount = 2
-			}
-			add_resource = {
-				type = components
-				amount = 2
-			}
-        }
-        hidden_effect = {
-            subtract_from_variable = {
-                var = TRT_preparedness_requirement
-                value = -20
-            }
-        }
-        custom_effect_tooltip = TRT_preparedness_requirement_permanent_reduction
 	}
 }
 
@@ -380,6 +356,14 @@ country_event = {   ## Sunken Crevasse
     option = {
 		name = nf_TRT.10.a
         add_manpower = -3
+        army_experience = 5
+        custom_effect_tooltip = TRT_increase_minimum_prepardness_10
+		hidden_effect = {
+			add_to_variable = {
+				var = TRT_minimum_prepardness
+				value = 10
+			}	
+		}
 	}
 
     option = {
@@ -401,6 +385,8 @@ country_event = {   ## Exploration Part 1
 
     option = {
 		name = nf_TRT.11.a
+        army_experience = 10
+        add_command_power = 10
         add_manpower = 2
 	}
 
@@ -423,6 +409,19 @@ country_event = {   ## Exploration Part 2
     option = {
 		name = nf_TRT.12.a
         add_manpower = 1
+        custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = TRT_demonslayer
+        add_corps_commander_role = {
+            character = TRT_gennardy
+            skill = 3
+            attack_skill = 3
+            defense_skill = 3
+            planning_skill = 3
+            logistics_skill = 3
+        }
+        hidden_effect = {
+            set_country_flag = TRT_recieve_demonslayer
+        }
 	}
 }
 

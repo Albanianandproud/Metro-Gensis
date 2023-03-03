@@ -129,6 +129,56 @@ focus_tree = {
 				bonus = 0.5
 				uses = 2
 				category = explosive_support_tech
+			}			
+		}
+	}
+
+	focus = {
+		id = TRT_improved_depth_charges
+		icon = GFX_explosive_arms_1
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_depth_charges
+		prerequisite = { 
+			focus = TRT_depth_charges
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_0
+				producer = RUS
+		        amount = 25
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_deadly_depth_charges
+		icon = GFX_crate
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_improved_depth_charges
+		prerequisite = { 
+			focus = TRT_improved_depth_charges
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_2
+				producer = RUS
+		        amount = 10
+			}
+			add_tech_bonus = {
+				name = explosive_bonus
+				bonus = 1.5
+				uses = 1
+				category = explosive_support_tech
 			}
 		}
 	}
@@ -152,7 +202,28 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = TRT_able_to_use_decision_manpower
-			country_event = nf_TRT.8
+			custom_effect_tooltip = TRT_flooding_decision_resources
+        	capital_scope = {
+            	add_resource = {
+                	type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+        	}
+        	hidden_effect = {
+            	subtract_from_variable = {
+                	var = TRT_preparedness_requirement
+                	value = -20
+            	}
+        	}
+        	custom_effect_tooltip = TRT_preparedness_requirement_permanent_reduction
 		}
 	}
 
@@ -205,7 +276,7 @@ focus_tree = {
 
 	focus = {
 		id = TRT_cleansing_nests
-		icon = GFX_explosive_arms_1
+		icon = GFX_RCH_purge_foul
 		x = -3
 		y = 1
 		cost = 6.5
@@ -217,11 +288,6 @@ focus_tree = {
 			factor = 5
 		}
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = explosive_equipment_0
-				producer = RUS
-		        amount = 15
-			}
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -236,7 +302,7 @@ focus_tree = {
 	focus = {
 		id = TRT_hardcore_fishing
 		icon = GFX_HNZ_explosion
-		x = 2
+		x = -2
 		y = 0
 		cost = 6.5
 		relative_position_id = TRT_cleansing_nests
@@ -262,7 +328,7 @@ focus_tree = {
 	focus = {
 		id = TRT_kabloooeyyy
 		icon = GFX_TRT_explosions
-		x = 1
+		x = -1
 		y = 1
 		cost = 8.6
 		relative_position_id = TRT_cleansing_nests
@@ -766,9 +832,88 @@ focus_tree = {
 			add_ideas = TRT_armed_to_da_teeth
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
+				amount = 40
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_armed_to_the_teeth_option_1
+		icon = GFX_generic_ammunition_1
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_armed_to_the_teeth
+		prerequisite = { 
+			focus = TRT_armed_to_the_teeth
+		}
+		mutually_exclusive = {
+			focus = TRT_armed_to_the_teeth_option_2
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			TRT_bop_decrease_5 = yes
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
 				amount = 50
 				producer = RUS
 			}
+		}
+	}
+
+	focus = {
+		id = TRT_armed_to_the_teeth_option_2
+		icon = GFX_EUR_schulz_plan
+		x = 1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_armed_to_the_teeth
+		prerequisite = { 
+			focus = TRT_armed_to_the_teeth
+		}
+		mutually_exclusive = {
+			focus = TRT_armed_to_the_teeth_option_1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			TRT_bop_increase_5 = yes
+			add_tech_bonus = {
+				name = communist_tech_bonus
+				bonus = 1
+				ahead_reduction = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_armed_to_the_teeth_option_3
+		icon = GFX_railroad_construction
+		x = 0
+		y = 2
+		cost = 8.6
+		relative_position_id = TRT_armed_to_the_teeth
+		available = {
+			KUZ = { exists = no }
+			OR = {
+				RED = { exists = no }
+			}
+		}
+		prerequisite = { 
+			focus = TRT_armed_to_the_teeth_option_1
+			focus = TRT_armed_to_the_teeth_option_2
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = TRT_andrew
 		}
 	}
 
@@ -780,7 +925,7 @@ focus_tree = {
 		x = 8
 		y = 1
 		cost = 6.5
-		relative_position_id = TRT_haven_of_crime#
+		relative_position_id = TRT_haven_of_crime
 		prerequisite = { 
 			focus = TRT_focus_3
 		}
@@ -907,6 +1052,7 @@ focus_tree = {
 					modifier = pilfering_raids
 				}
 			}
+			add_threat = 2.5 
 		}
 	}
 
@@ -1001,6 +1147,10 @@ focus_tree = {
 			}
 		}
 	}
+	#| TODO - add another focus to annex depot near venice
+	#| with event to deal with Tsoi worshippers
+	#| gain resources or instead an advisor + manpower 
+	#| if chosen community path
 
 	## Domestic / Entertainment Branch
 
@@ -1024,11 +1174,62 @@ focus_tree = {
 			}
 		}
 	}
+
+	focus = {
+		id = TRT_gambling_dens
+		icon = GFX_TRT_degeneracy_3
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_entertainment
+		prerequisite = { 
+			focus = TRT_entertainment
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = TRT_gambling_dens_2
+		icon = GFX_TRT_generic_2
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_gambling_dens
+		prerequisite = { 
+			focus = TRT_gambling_dens
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			TRT_bop_decrease_10 = yes
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
 	
 	focus = {
 		id = TRT_booze
 		icon = GFX_booze
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_entertainment
@@ -1069,7 +1270,7 @@ focus_tree = {
 	focus = {
 		id = TRT_adult_industry
 		icon = GFX_TRT_degeneracy_2
-		x = 2
+		x = 3
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_entertainment
@@ -1130,6 +1331,50 @@ focus_tree = {
 	}
 
 	focus = {
+		id = TRT_domestics_1
+		icon = GFX_generic_political
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_domestics
+		prerequisite = { 
+			focus = TRT_domestics
+		}
+		mutually_exclusive = {
+			focus = TRT_domestics_2
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			TRT_bop_increase_10 = yes
+			add_ideas = TRT_trade_consortium
+		}
+	}
+
+	focus = {
+		id = TRT_domestics_2
+		icon = GFX_brother
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_domestics
+		prerequisite = { 
+			focus = TRT_domestics
+		}
+		mutually_exclusive = {
+			focus = TRT_domestics_1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			TRT_bop_decrease_10 = yes
+			add_ideas = TRT_bandit_radio
+		}
+	}
+
+	focus = {
 		id = TRT_reorganize_the_bar
 		icon = GFX_barscene
 		x = 0
@@ -1157,7 +1402,7 @@ focus_tree = {
 
 	focus = {
 		id = TRT_check_in_with_the_inlaws
-		icon = GFX_pig
+		icon = GFX_volunteer_expedition
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1178,7 +1423,7 @@ focus_tree = {
 
 	focus = {
 		id = TRT_big_problems_in_little_china
-		icon = GFX_pig
+		icon = GFX_generic_equipment_gasmask_4
 		x = -1
 		y = 1
 		cost = 6.5
@@ -1199,7 +1444,7 @@ focus_tree = {
 
 	focus = {
 		id = TRT_checking_the_gossip
-		icon = GFX_pig
+		icon = GFX_courtroom
 		x = 0
 		y = 2
 		cost = 6.5
@@ -1212,6 +1457,8 @@ focus_tree = {
 			factor = 5
 		}
 		completion_reward = {
+			add_political_power = 60
+			add_command_power = 20
 		}
 	}
 
@@ -1238,283 +1485,278 @@ focus_tree = {
 
 	## vigilante path
 
-	focus = {
-		id = TRT_vigilante_path
-		icon = GFX_western_patriotism
-		x = -1
-		y = 2
-		cost = 6.5
-		relative_position_id = TRT_armed_to_the_teeth
-		available = {
-			power_balance_value = {
-    			id = TRT_power_balance
-    			value > 0.5
-			}
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			TRT_bop_increase_20 = yes
-			add_timed_idea = { idea = TRT_cleaning_place days = 360 }
-			remove_ideas = TRT_mere_thugs
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_path
+	#	icon = GFX_western_patriotism
+	#	x = -1
+	#	y = 3
+	#	cost = 6.5
+	#	relative_position_id = TRT_armed_to_the_teeth
+	#	available = {
+	#		power_balance_value = {
+    #			id = TRT_power_balance
+    #			value > 0.5
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#		TRT_bop_increase_20 = yes
+	#		add_timed_idea = { idea = TRT_cleaning_place days = 360 }
+	#		remove_ideas = TRT_mere_thugs
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_1
-		icon = GFX_generic_silo
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_path
-		prerequisite = { 
-			focus = TRT_vigilante_path
-		}
-		mutually_exclusive = {
-			focus = TRT_vigilante_2
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			country_event = nf_TRT.15
-		}
-	}
+ 	#focus = {
+	#	id = TRT_vigilante_1
+	#	icon = GFX_generic_silo
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_path
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_path
+	#	}
+	#	mutually_exclusive = {
+	#		focus = TRT_vigilante_2
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_2
-		icon = GFX_generic_silo
-		x = -2
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_path
-		prerequisite = { 
-			focus = TRT_vigilante_path
-		}
-		mutually_exclusive = {
-			focus = TRT_vigilante_1
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			country_event = nf_TRT.15
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_2
+	#	icon = GFX_generic_silo
+	#	x = -2
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_path
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_path
+	#	}
+	#	mutually_exclusive = {
+	#		focus = TRT_vigilante_1
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_3
-		icon = GFX_camp
-		x = 2
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_path
-		prerequisite = { 
-			focus = TRT_vigilante_path
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-			}
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_3
+	#	icon = GFX_camp
+	#	x = 2
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_path
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_path
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 2
+	#		}
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 2
+	#		}
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 2
+	#		}
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_4
-		icon = GFX_workstation
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_3
-		prerequisite = { 
-			focus = TRT_vigilante_3
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_4
+	#	icon = GFX_workstation
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_3
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_3
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 1
+	#			add_building_construction = {
+	#				type = industrial_complex
+	#				level = 1
+	#				instant_build = yes
+	#			}
+	#		}
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 1
+	#			add_building_construction = {
+	#				type = industrial_complex
+	#				level = 1
+	#				instant_build = yes
+	#			}
+	#		}
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_5
-		icon = GFX_generic_medium_arms_5
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_4
-		prerequisite = { 
-			focus = TRT_vigilante_4
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_3
-				amount = 20
-				producer = RUS
-			}
-			add_equipment_to_stockpile = {
-		        type = support_equipment 
-		        amount = 10
-				producer = RUS
-		    }
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_5
+	#	icon = GFX_generic_medium_arms_5
+	#	x = 1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_4
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_4
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#		add_equipment_to_stockpile = {
+	#			type = conventional_infantry_equipment_3
+	#			amount = 20
+	#			producer = RUS
+	#		}
+	#		add_equipment_to_stockpile = {
+	#	        type = support_equipment 
+	#	        amount = 10
+	#			producer = RUS
+	#	    }
+	#		add_tech_bonus = {
+	#			name = infantry_bonus
+	#			bonus = 1
+	#			uses = 1
+	#			category = infantry_weapons
+	#		}
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_6
-		icon = GFX_workshop_2
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_4
-		prerequisite = { 
-			focus = TRT_vigilante_4
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_6
+	#	icon = GFX_workshop_2
+	#	x = -1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_4
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_4
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 1
+	#			add_building_construction = {
+	#				type = arms_factory
+	#				level = 1
+	#				instant_build = yes
+	#			}
+	#		}
+	#		random_owned_state = {
+	#			limit = {
+	#				NOT = {
+	#				    has_state_category = pastoral
+	#				}
+	#			}
+	#			add_extra_state_shared_building_slots = 1
+	#			add_building_construction = {
+	#				type = arms_factory
+	#				level = 1
+	#				instant_build = yes
+	#			}
+	#		}
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_7
-		icon = GFX_generic_silo
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_2
-		prerequisite = { 
-			focus = TRT_vigilante_2
-			focus = TRT_vigilante_1
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			country_event = nf_TRT.15
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_7
+	#	icon = GFX_generic_silo
+	#	x = 1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_2
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_2
+	#		focus = TRT_vigilante_1
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_8
-		icon = GFX_generic_silo
-		x = 0
-		y = 2
-		cost = 6.5
-		relative_position_id = TRT_vigilante_7
-		prerequisite = { 
-			focus = TRT_vigilante_7
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			country_event = nf_TRT.15
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_8
+	#	icon = GFX_generic_silo
+	#	x = 0
+	#	y = 2
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_7
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_7
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#	}
+	#}
 
-	focus = {
-		id = TRT_vigilante_9
-		icon = GFX_generic_silo
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = TRT_vigilante_7
-		prerequisite = { 
-			focus = TRT_vigilante_7
-		}
-		ai_will_do = {
-			factor = 5
-		}
-		completion_reward = {
-			country_event = nf_TRT.15
-		}
-	}
+	#focus = {
+	#	id = TRT_vigilante_9
+	#	icon = GFX_generic_silo
+	#	x = -1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = TRT_vigilante_7
+	#	prerequisite = { 
+	#		focus = TRT_vigilante_7
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#	completion_reward = {
+	#	}
+	#}
 }
