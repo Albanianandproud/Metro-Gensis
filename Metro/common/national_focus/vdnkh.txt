@@ -143,9 +143,10 @@ focus_tree = {
 			
 			hidden_effect = { load_oob = VDNKH_shared_troops_OOB }
 			custom_effect_tooltip = VDN_sharedtroops_tt
-
-			add_corps_commander_role = {
-				character = VDN_shirokov_makarovich
+			
+			create_corps_commander = {
+				name = "Shirokov Makarovich"
+				picture = "portrait_generic_11.dds"
 				traits = { brilliant_strategist }
 				skill = 3
 				attack_skill = 3
@@ -153,9 +154,9 @@ focus_tree = {
 				planning_skill = 1
 				logistics_skill = 2
 			}
-
-			add_corps_commander_role = {
-				character = VDN_berezin_vadimvich
+			create_corps_commander = {
+				name = "Berezin Vadimvich"
+				picture = "portrait_generic_10.dds"
 				traits = { infantry_officer }
 				skill = 4
 				attack_skill = 4
@@ -889,16 +890,28 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			5 = {
+				add_core_of = VDN
+			}
+			439 = {
+				add_core_of = VDN
+			}
+			307 = {
+				add_core_of = VDN
+			}
 			4 = {
 				add_core_of = VDN
 			}
 			272 = {
 				add_core_of = VDN
 			}
-			1 = {
+			3 = {
 				add_core_of = VDN
 			}
-			444 = {
+			248 = {
+				add_core_of = VDN
+			}
+			366 = {
 				add_core_of = VDN
 			}
 		}
@@ -983,6 +996,10 @@ focus_tree = {
 		available = {
 			check_variable = {
 				vdn_army < 1
+			}
+			
+			NOT = {
+				has_country_flag = VDN_military_has_taken_over
 			}
 		}
 		
@@ -1723,11 +1740,9 @@ focus_tree = {
 					ELI = {
 						set_cosmetic_tag = ELI_PUP
 						transfer_state = 307
-						transfer_state = 463
 						transfer_state = 5
 						transfer_state = 439
 						add_state_core = 307
-						add_state_core = 463
 						add_state_core = 5
 						add_state_core = 439
 						set_capital = {
@@ -1763,11 +1778,9 @@ focus_tree = {
 				hidden_effect = {
 					VDN = {
 						transfer_state = 307
-						transfer_state = 463
 						transfer_state = 5
 						transfer_state = 439
 						add_state_core = 307
-						add_state_core = 463
 						add_state_core = 5
 						add_state_core = 439
 					}
@@ -1808,7 +1821,7 @@ focus_tree = {
 				transfer_state = 4
 				transfer_state = 272
 				transfer_state = 3
-				transfer_state = 460
+				transfer_state = 444
 			}
 		}
 	}
@@ -1837,9 +1850,10 @@ focus_tree = {
 
 		completion_reward = {
 			VDN = {
-				transfer_state = 242
+				transfer_state = 248
 				transfer_state = 2
 				transfer_state = 366
+				transfer_state = 444
 			}
 		}
 	}
@@ -2010,6 +2024,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			set_country_flag = VDN_military_has_taken_over
 			create_wargoal = {
 				type = annex_everything
 				target = HNZ
