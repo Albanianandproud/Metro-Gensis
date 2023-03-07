@@ -397,7 +397,7 @@ focus_tree = {
 	focus = {
 		id = TRT_city_on_stilts
 		icon = GFX_TRT_stilts_house
-		x = 10
+		x = 11
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_focus_3
@@ -922,7 +922,7 @@ focus_tree = {
 	focus = {
 		id = TRT_commander_option_1
 		icon = GFX_TRT_bandit_2
-		x = 8
+		x = 9
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_haven_of_crime
@@ -944,7 +944,7 @@ focus_tree = {
 	focus = {
 		id = TRT_commander_option_2
 		icon = GFX_generic_spec_ops_3
-		x = 10
+		x = 11
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_haven_of_crime#
@@ -1081,7 +1081,7 @@ focus_tree = {
 	focus = {
 		id = TRT_defences
 		icon = GFX_generic_defences_2
-		x = 3
+		x = 4
 		y = 1
 		cost = 4.3
 		relative_position_id = TRT_focus_3
@@ -1147,12 +1147,32 @@ focus_tree = {
 			}
 		}
 	}
-	#| TODO - add another focus to annex depot near venice
-	#| with event to deal with Tsoi worshippers
-	#| gain resources or instead an advisor + manpower 
-	#| if chosen community path
 
-	## Domestic / Entertainment Branch
+	focus = {
+		id = TRT_depot_tsoi
+		icon = GFX_generic_door
+		x = 1
+		y = 1
+		cost = 4.3
+		relative_position_id = TRT_defences
+		prerequisite = { 
+			focus = TRT_defences
+		}
+		available = {
+			237 = {
+				is_owned_by = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		completion_reward = {
+			237 = {
+				add_core_of = ROOT
+			}
+			country_event = nf_TRT.16
+		}
+	}
 
 	focus = {
 		id = TRT_entertainment
@@ -1209,6 +1229,9 @@ focus_tree = {
 		relative_position_id = TRT_gambling_dens
 		prerequisite = { 
 			focus = TRT_gambling_dens
+		}
+		available = {
+			NOT = { has_idea = TRT_fine_entertainment }
 		}
 		ai_will_do = {
 			factor = 5
