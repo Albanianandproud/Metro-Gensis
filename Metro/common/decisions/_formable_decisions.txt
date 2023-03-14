@@ -330,22 +330,26 @@ formable_nations_category = {
         visible = {
             has_completed_focus = ARB_stalker_free_zone
         }
-
 		available = {
-			count_triggers = {
-    			amount = 3
+			if = {
 				ROOT = {
 					has_completed_focus = ARB_stalker_free_zone
 				}
-				GWC = {
-					exists = no
+				OR = {
+					GWC = {
+						exists = no
+					}
+					ROOT = {
+						is_in_faction_with = GWC
+					}
 				}
-				EUR = {
-					exists = no
-				}
-                ROOT = {
-					is_in_faction_with = EUR
-					is_in_faction_with = GWC
+				OR = {
+					EUR = {
+						exists = no
+					}
+					ROOT = {
+						is_in_faction_with = EUR
+					}
 				}
 			}
 		}
