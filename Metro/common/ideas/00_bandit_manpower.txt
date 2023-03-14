@@ -1,0 +1,215 @@
+ideas = {
+	mobilization_laws = { 
+		law = yes
+		use_list_view = yes
+
+		bandit_law_1 = {	
+			visible = {
+				has_country_flag = allow_bandit_recruitment_laws
+			}
+			cost = 150
+			removal_cost = -1
+			level = 4
+
+			modifier = {
+				weekly_manpower = 2
+				conscription = 0.05
+				experience_gain_army = 0.03
+				army_org_factor = -0.04
+				army_org_regain = -0.06
+				experience_gain_army_unit_factor = -0.15
+				resistance_damage_to_garrison_on_our_occupied_states = 0.75
+				land_reinforce_rate = -0.01
+				defensive_war_stability_factor = -0.15
+				#offensive_war_stability_factor = 0.3
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = { ## We want to get off this
+   				factor = 0.5
+			}
+		}
+
+		bandit_law_2 = {
+			visible = {
+				has_country_flag = allow_bandit_recruitment_laws
+			}
+			cost = 150
+			removal_cost = -1
+			level = 3
+
+			available = {
+				threat > 0.1
+				date > 2030.1.1
+				OR = {
+					threat > 0.15
+					AND = {
+						has_war_support > 0.34
+					}
+				}
+				OR = {
+					has_war_support > 0.5
+				}
+			}
+
+			modifier = {
+				weekly_manpower = 1
+				conscription = 0.09
+				experience_gain_army = 0.05
+				army_org_factor = -0.02
+				army_org_regain = -0.03
+				experience_gain_army_unit_factor = -0.05
+				resistance_damage_to_garrison_on_our_occupied_states = 0.5
+				land_reinforce_rate = 0.01
+				defensive_war_stability_factor = -0.05
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 2.5
+   				modifier = {
+					factor = 100
+					ai_wants_divisions > 9
+				}
+				modifier = {
+					factor = 100
+					date > 2029.1.1
+				}
+			}
+		}
+
+		bandit_law_3 = {
+			visible = {
+				has_country_flag = allow_bandit_recruitment_laws
+			}	
+			cost = 150
+			removal_cost = -1
+			level = 2
+
+			available = {
+				threat > 0.15
+				date > 2030.1.1
+				OR = {
+					threat > 0.10
+					AND = {
+						has_war_support > 0.34
+					}
+				}
+			}
+
+			modifier = {
+				conscription = 0.14
+				experience_gain_army = 0.07
+				resistance_damage_to_garrison_on_our_occupied_states = 0.2
+				land_reinforce_rate = 0.02
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 5
+   				modifier = {
+					factor = 100
+					ai_wants_divisions > 14
+				}
+				modifier = {
+					factor = 150
+					threat > 0.1
+				}
+			}
+		}
+
+		bandit_law_4 = {
+			visible = {
+				has_country_flag = allow_bandit_recruitment_laws
+			}	
+			cost = 150
+			removal_cost = -1
+			level = 1
+
+			available = {
+				threat > 0.25
+				date > 2031.1.1
+				OR = {
+					threat > 0.15
+					AND = {
+						has_war_support > 0.44
+						has_added_tension_amount > 5
+					}
+				}
+			}
+
+			modifier = {
+				conscription = 0.2
+				experience_gain_army = 0.09
+				resistance_damage_to_garrison_on_our_occupied_states = 0.1
+				land_reinforce_rate = 0.03
+				army_org_factor = 0.02
+				army_org_regain = 0.03
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 5
+   				modifier = {
+					factor = 100
+					ai_wants_divisions > 19
+				}
+				modifier = {
+					factor = 150
+					threat > 0.15
+				}
+			}
+		}
+
+		bandit_law_5 = {
+			visible = {
+				has_country_flag = allow_bandit_recruitment_laws
+			}	
+			cost = 150
+			removal_cost = -1
+			level = 0
+
+			available = {
+				threat > 0.35
+				date > 2033.1.1
+				OR = {
+					threat > 0.25
+					AND = {
+						has_war_support > 0.54
+						has_added_tension_amount > 10
+					}
+				}
+			}
+
+			modifier = {
+				conscription = 0.3
+				experience_gain_army = 0.11
+				resistance_damage_to_garrison_on_our_occupied_states = -0.15
+				resistance_target = -0.2
+				land_reinforce_rate = 0.04
+				army_org_factor = 0.04
+				army_org_regain = 0.06
+				army_leader_start_planning_level = 1
+				enemy_justify_war_goal_time = -0.2
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 5
+   				modifier = {
+					factor = 100
+					ai_wants_divisions > 24
+				}
+				modifier = {
+					factor = 150
+					threat > 0.25
+				}
+			}
+		}
+	}
+}

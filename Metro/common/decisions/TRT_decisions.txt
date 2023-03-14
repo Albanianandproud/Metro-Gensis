@@ -368,3 +368,66 @@ TRT_flooding_issue = {
 		}
 	}
 }
+
+TRT_testing_the_red_line = {
+	TRT_testing_the_soviets = {
+		available = {
+			NOT = {
+				has_war_with = RED
+				is_in_faction_with = RED
+				has_non_aggression_pact_with = RED
+				RED = { is_puppet_of = TRT }
+			}
+			207 = {
+				any_neighbor_state = {
+					is_controlled_by = RED
+				}
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 206
+				state = 207
+			} 
+		}
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 1
+			modifier = { # We won't do this if RED are our friends c;
+				OR = {
+					TRT = {
+						has_opinion = {
+							target = RED
+							value > 20
+						}
+					}
+				}
+				factor = 0
+			}
+		}
+		cost = 0
+		days_remove = 14
+		war_with_on_remove = RED
+		complete_effect = {
+			RED = { country_event = nf_TRT.18 }
+		}
+		remove_effect = {
+			add_threat = 0.01
+			start_border_war = {
+				attacker = {
+					state = 206
+					num_provinces = 3
+					on_win = nf_TRT.19
+					on_lose = nf_TRT.20
+					modifier = 0.1
+				}	
+				defender = {
+					state = 207
+					num_provinces = 3
+					on_win = nf_TRT.19
+					on_lose = nf_TRT.20
+				}	
+			}
+		}
+	}
+}

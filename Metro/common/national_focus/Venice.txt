@@ -1,4 +1,7 @@
-#!gfx:interface/metro_goals.gfx
+
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+
 ## Originally made by Nelgw
 ## Edited by Heavy
 
@@ -94,7 +97,7 @@ focus_tree = {
 	focus = {
 		id = TRT_what_lurks_beneath
 		icon = GFX_gates_of_hell
-		x = -5
+		x = -6
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_focus_4
@@ -397,7 +400,7 @@ focus_tree = {
 	focus = {
 		id = TRT_city_on_stilts
 		icon = GFX_TRT_stilts_house
-		x = 11
+		x = 12
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_focus_3
@@ -636,10 +639,10 @@ focus_tree = {
 	focus = {
 		id = TRT_checking_stock
 		icon = GFX_TRT_smuggled_arms
-		x = 2
+		x = 1
 		y = 1
 		cost = 6.5
-		relative_position_id = TRT_focus_4
+		relative_position_id = TRT_haven_of_crime
 		mutually_exclusive = {
 			focus = TRT_extortion
 		}
@@ -662,10 +665,10 @@ focus_tree = {
 	focus = {
 		id = TRT_extortion
 		icon = GFX_TRT_extortion
-		x = -2
+		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = TRT_focus_3
+		relative_position_id = TRT_haven_of_crime
 		mutually_exclusive = {
 			focus = TRT_checking_stock
 		}
@@ -690,10 +693,10 @@ focus_tree = {
 	focus = {
 		id = TRT_arms_in_the_arms_industry
 		icon = GFX_HNZ_veteran_armaments_upgrade
-		x = -3
+		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = TRT_haven_of_crime
+		relative_position_id = TRT_focus_4
 		prerequisite = { 
 			focus = TRT_focus_4
 		}
@@ -922,7 +925,7 @@ focus_tree = {
 	focus = {
 		id = TRT_commander_option_1
 		icon = GFX_TRT_bandit_2
-		x = 9
+		x = 10
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_haven_of_crime
@@ -944,7 +947,7 @@ focus_tree = {
 	focus = {
 		id = TRT_commander_option_2
 		icon = GFX_generic_spec_ops_3
-		x = 11
+		x = 12
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_haven_of_crime#
@@ -1081,7 +1084,7 @@ focus_tree = {
 	focus = {
 		id = TRT_defences
 		icon = GFX_generic_defences_2
-		x = 4
+		x = 5
 		y = 1
 		cost = 4.3
 		relative_position_id = TRT_focus_3
@@ -1177,10 +1180,10 @@ focus_tree = {
 	focus = {
 		id = TRT_entertainment
 		icon = GFX_TRT_degeneracy_4
-		x = 3
+		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = TRT_haven_of_crime#
+		relative_position_id = TRT_focus_3
 		prerequisite = { 
 			focus = TRT_focus_3
 		}
@@ -1198,7 +1201,7 @@ focus_tree = {
 	focus = {
 		id = TRT_gambling_dens
 		icon = GFX_TRT_degeneracy_3
-		x = -1
+		x = 0
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_entertainment
@@ -1252,7 +1255,7 @@ focus_tree = {
 	focus = {
 		id = TRT_booze
 		icon = GFX_booze
-		x = 1
+		x = 2
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_entertainment
@@ -1293,7 +1296,7 @@ focus_tree = {
 	focus = {
 		id = TRT_adult_industry
 		icon = GFX_TRT_degeneracy_2
-		x = 3
+		x = 4
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_entertainment
@@ -1401,7 +1404,7 @@ focus_tree = {
 		id = TRT_reorganize_the_bar
 		icon = GFX_barscene
 		x = 0
-		y = 3
+		y = 2
 		cost = 6.5
 		relative_position_id = TRT_haven_of_crime#
 		prerequisite = { 
@@ -1469,15 +1472,23 @@ focus_tree = {
 		id = TRT_checking_the_gossip
 		icon = GFX_courtroom
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
+		available = {
+			date > 2033.1.1
+			AND = {
+				capital_scope = {
+					infrastructure > 9
+				}
+			}
+		}
 		prerequisite = { 
 			focus = TRT_big_problems_in_little_china
 			focus = TRT_check_in_with_the_inlaws
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 100
 		}
 		completion_reward = {
 			add_political_power = 60
@@ -1485,21 +1496,408 @@ focus_tree = {
 		}
 	}
 
+	focus = { 
+		id = TRT_into_china_town
+		icon = GFX_TRT_bandit_sitdown
+		x = -3
+		y = 1
+		cost = 8.6
+		available = {
+			is_neighbor_of = KTG
+			date > 2033.1.1
+			KTG = {
+				has_government = ROOT
+				AND = {
+					strength_ratio = {
+						tag = TRT
+						ratio < 0.5
+					}
+				}
+			}
+		}
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		mutually_exclusive = {
+			focus = TRT_chinatown_wargoal
+		}
+		ai_will_do = {
+			factor = 100
+			## We REALLY wanna do this
+		}
+		completion_reward = {
+			custom_effect_tooltip = TRT_coming_together
+			add_threat = 10
+			annex_country = {
+				target = KTG
+				transfer_troops = yes
+			}
+		}
+	}
+
+	focus = { 
+		id = TRT_chinatown_wargoal
+		icon = GFX_TRT_bandit_4
+		x = -1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		mutually_exclusive = {
+			focus = TRT_into_china_town
+		}
+		available = {
+			has_war = no
+			is_neighbor_of = KTG
+		}
+		ai_will_do = {
+			factor = 5
+		}
+        will_lead_to_war_with = KTG
+		completion_reward = {
+			add_threat = 5
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = KTG
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+	}
+
+	focus = { 
+		id = TRT_chinatown_core
+		icon = GFX_TRT_might_makes_right
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_chinatown_wargoal
+		prerequisite = {
+			focus = TRT_into_china_town
+			focus = TRT_chinatown_wargoal
+		}
+		available = {
+			KTG = { exists = no }
+			353 = { is_owned_by = ROOT }
+			200 = { is_owned_by = ROOT }
+			315 = { is_owned_by = ROOT }
+		}
+		completion_reward = {
+			353 = { add_core_of = ROOT }
+			200 = { add_core_of = ROOT }
+			315 = { add_core_of = ROOT }
+		}
+		ai_will_do = {
+			factor = 100
+			## We REALLY wanna do this
+		}
+	}
+
+	focus = { 
+		id = TRT_dealings_with_the_reich
+		icon = GFX_RCH_metromacht
+		x = 2
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		available = {
+			RCH = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+				add_resource = {
+					type = chemicals
+					amount = 1
+				}
+			}
+			RED = {
+				add_opinion_modifier = {
+					target = TRT
+					modifier = TRT_trade_with_fascists
+				}
+			}
+			HUL = {
+				add_opinion_modifier = {
+					target = TRT
+					modifier = TRT_trade_with_fascists
+				}
+			}
+			AVT = {
+				add_opinion_modifier = {
+					target = TRT
+					modifier = TRT_trade_with_fascists
+				}
+			}
+			ULI = {
+				add_opinion_modifier = {
+					target = TRT
+					modifier = TRT_trade_with_fascists
+				}
+			}
+			RCH = {
+				country_event = nf_RCH.7
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = { 
+		id = TRT_operation_barbarossa
+		icon = GFX_RCH_new_age_fascism
+		x = -1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_dealings_with_the_reich
+		prerequisite = {
+			focus = TRT_dealings_with_the_reich
+		}
+		available = {
+			NOT = {
+				has_completed_focus = TRT_soviet_connection
+			}
+		}
+		mutually_exclusive = {
+			focus = TRT_RCH_trade
+		}
+		available = {
+			RCH = { exists = yes }
+			is_neighbor_of = RED
+		}
+		completion_reward = {
+			## If we do this focus we will HAVE to join a war against RED
+			## IF RCH goes to war with them
+			custom_effect_tooltip = TRT_operation_barbarossa_preparation
+			custom_effect_tooltip = TRT_reich_assistance
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.25
+				uses = 1
+				category = entrench_kits
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.25
+				uses = 1
+				category = infantry_weapons
+			}
+			army_experience = 20
+		}
+		ai_will_do = {
+			factor = 0.8 ## Do we REALLY wanna do this?
+		}
+	}
+	focus = { 
+		id = TRT_RCH_trade
+		icon = GFX_generic_medium_arms_5
+		x = 1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_dealings_with_the_reich
+		prerequisite = {
+			focus = TRT_dealings_with_the_reich
+		}
+		mutually_exclusive = {
+			focus = TRT_operation_barbarossa
+		}
+		available = {
+			RCH = { exists = yes }
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.25
+				uses = 1
+				category = infantry_weapons
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 2.5 
+		}
+	}
+
+	focus = { 
+		id = TRT_soviet_connection
+		icon = GFX_TRT_soviet_connection
+		x = 4
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		mutually_exclusive = {
+			focus = TRT_testing_the_sokol
+		}
+		available = {
+			NOT = {
+				has_completed_focus = TRT_operation_barbarossa
+			}
+		}
+		available = {
+			RED = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			add_opinion_modifier = {
+				target = TRT
+				modifier = TRT_the_connection
+			}
+			reverse_add_opinion_modifier = {
+				target = RED
+				modifier = TRT_bandit_connection
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = { 
+		id = TRT_operation_red_alert
+		icon = GFX_RED_to_victory
+		x = 0
+		y = 2
+		cost = 8.6
+		relative_position_id = TRT_soviet_connection
+		prerequisite = {
+			focus = TRT_soviet_connection
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_neighbor_of = HNZ
+		}
+		completion_reward = {
+			## If we do this focus we will HAVE to join a war against RED
+			## IF RED goes to war with them
+			custom_effect_tooltip = TRT_operation_red_alert_preparation
+			custom_effect_tooltip = TRT_redline_assistance
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.25
+				uses = 1
+				category = clothing_kits
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = support_weapons_tech
+			}
+			army_experience = 20
+		}
+		ai_will_do = {
+			factor = 0.8 ## Do we REALLY wanna do this?
+		}
+	}
+
+	focus = { 
+		id = TRT_testing_the_sokol
+		icon = GFX_TRT_testing_the_reds
+		x = 6
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		mutually_exclusive = {
+			focus = TRT_soviet_connection
+		}
+		available = {
+			RED = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			activate_decision = TRT_testing_the_soviets
+			custom_effect_tooltip = TRT_borderwar_soviet
+		}
+		ai_will_do = {
+			factor = 2.5
+		}
+	}
+	
+	focus = { 
+		id = TRT_testing_the_sokol_2
+		icon = GFX_TRT_testing_the_reds_2
+		x = -1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_testing_the_sokol
+		prerequisite = {
+			focus = TRT_testing_the_sokol
+		}
+		available = {
+			RED = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			add_threat = 5
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = RED
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+
 	focus = {
 		id = TRT_hunt_for_the_silo
 		icon = GFX_generic_silo
 		x = 0
-		y = 2
+		y = 3
 		cost = 12.85
 		available = {
-			date > 2033.1.1
+			date > 2034.1.1
 		}
 		relative_position_id = TRT_checking_the_gossip
 		prerequisite = { 
 			focus = TRT_checking_the_gossip
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 75
 		}
 		completion_reward = {
 			country_event = nf_TRT.15
