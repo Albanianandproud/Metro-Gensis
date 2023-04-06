@@ -1,0 +1,83 @@
+scripted_gui = {
+	bullets = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "bullets_container"
+
+		visible = {
+		}
+        ai_enabled = {
+		    always = no
+        }
+	}
+	food = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "food_container"
+
+		visible = {
+		}
+        ai_enabled = {
+		    always = no
+        }
+	} 
+	unit_specops_cap = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "unit_specops_cap_container"
+
+		visible = {
+		}
+
+        ai_enabled = {
+		    always = no
+        }
+	}
+	#unit_regulars_cap = {
+	#	context_type = player_context
+	#	parent_window_token = top_bar
+	#	window_name = "unit_regulars_cap_container"
+	#
+	#	visible = {
+	#	}
+	#
+        #ai_enabled = {
+	#	    always = no
+        #}
+	#}
+
+	topbar_resource_toogle_window = {
+		context_type = player_context
+
+		window_name = "topbar_resource_toogle_window"
+		parent_window_token = trade_tab
+
+		effects = {
+			toogle_button_click={
+				if={
+					limit={
+						check_variable={
+							resources_disabled=0
+						}
+					}
+					set_variable={
+						resources_disabled=1
+					}
+				}
+				else={
+					clear_variable=resources_disabled
+				}
+			}
+		}
+	}
+
+	topbar_resources = {
+		context_type = player_context
+		window_name = "topbar_resource_container"
+		visible = {
+			check_variable={resources_disabled=0}
+		}
+		triggers = {
+		}
+	}
+}

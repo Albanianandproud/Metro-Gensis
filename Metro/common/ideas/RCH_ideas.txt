@@ -1,25 +1,37 @@
 ideas = {
 	country = {
-		RCH_racial_supremacy = {
-			picture = GFX_idea_RCH_racial_supremacy
-
+		RCH_reclusive_nazis = {
+			picture = GFX_idea_
 			allowed = {
 				always = no
 			}
-
 			allowed_civil_war = {
 				always = yes
 			}
-
 			removal_cost = -1
-
 			modifier = {
-				weekly_manpower = -1
-			    non_core_manpower = -1
-			    opinion_gain_monthly_factor = -1
+				generate_wargoal_tension = 0.75
+				justify_war_goal_time = 0.75
+				opinion_gain_monthly_factor = -0.75
+				drift_defence_factor = 0.75
+	        }	
+	    }
+		RCH_genetic_supremacy = {
+			picture = GFX_idea_
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				weekly_manpower = -1 
+				war_support_factor = 0.05
 				resistance_target = 0.25
 				resistance_growth = 0.25
 				resistance_damage_to_garrison = -0.5
+				non_core_manpower = -1
 				hidden_modifier = {
 					ai_get_ally_desire_factor = -5
 					ai_focus_aggressive_factor = 0.5 
@@ -27,47 +39,247 @@ ideas = {
 				}
 	        }	
 	    }
-	    RCH_a_final_war = {
-			picture = GFX_idea_RCH_a_final_war
-
+		RCH_the_metromacht = {
+			picture = GFX_idea_
 			allowed = {
 				always = no
 			}
-
 			allowed_civil_war = {
 				always = yes
 			}
-
 			removal_cost = -1
-
 			modifier = {
-				offensive_war_stability_factor = 0.15
-				defensive_war_stability_factor = 0.15
-				industrial_capacity_factory = 0.1
+				training_time_factor = 0.1
+				conscription_factor = -0.1
+				experience_gain_army = 0.04
+				command_power_gain = 0.04
 	        }	
 	    }
-	    RCH_metromacht = {
-			picture = GFX_idea_RCH_metromacht
-
+		RCH_internalized_industry = {
+			picture = GFX_idea_
 			allowed = {
 				always = no
 			}
-
 			allowed_civil_war = {
 				always = yes
 			}
-
 			removal_cost = -1
-
 			modifier = {
-				conscription_factor = -0.15
-				land_reinforce_rate = 0.03
-				army_org_regain = 0.05
-				army_morale_factor = 0.05
-				attrition = -0.05
-				supply_consumption_factor = -0.05
+				line_change_production_efficiency_factor = 0.05
+				production_factory_start_efficiency_factor = -0.1
+	        }
+			equipment_bonus = {
+				infantry_equipment = {
+					reliability = 0.025
+					build_cost_ic = 0.05
+					instant = yes
+				}
+			}
+			research_bonus = { infantry_tech = 0.05 }
+			research_bonus = { clothing_kits = 0.05 }
+			research_bonus = { entrench_kits = 0.05 }
+	    }
+		###
+		###
+		RCH_cemented_authority = {
+			picture = GFX_idea_
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				experience_gain_army = 0.025
+				stability_weekly = 0.002
+	        }
+	    }
+		RCH_campaigns_of_terror = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			modifier = {
+				political_power_gain = 0.1
+				dictatorial_drift = 0.01
 	        }	
 	    }
+		###
+		### Military RD path
+		###
+		RCH_firearm_production  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { infantry_tech = 0.1 }
+			equipment_bonus = {
+				infantry_equipment = {
+					reliability = 0.05
+					instant = yes
+				}
+			}
+	    }
+		## Economies of Scale
+		RCH_cheaper_arms  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { infantry_tech = 0.1 }
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.05
+					reliability = -0.05
+					instant = yes
+				}
+			}
+	    }
+		RCH_streamlined_labour = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+	    }
+		RCH_volkssturm_armaments  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.15
+					reliability = -0.05
+					ap_attack = -0.1
+					instant = yes
+				}
+			}
+	    }
+		## German Authenticity
+		RCH_german_imitation_arms  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { infantry_tech = 0.1 }
+			equipment_bonus = {
+				infantry_equipment = {
+					reliability = 0.05
+					breakthrough = 0.05
+					build_cost_ic = 0.05
+					instant = yes
+				}
+			}
+	    }
+		RCH_precision_arms  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { infantry_tech = 0.15 }
+			equipment_bonus = {
+				infantry_equipment = {
+					reliability = 0.05
+					breakthrough = 0.05
+					instant = yes
+				}
+			}
+	    }
+		RCH_gattling_proficiency  = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { gatling_support_tech = 0.1 }
+			equipment_bonus = {
+				gatling_support = {
+					breakthrough = 0.06
+					defense = 0.08
+					instant = yes
+				}
+			}
+	    }
+		### 
+		### Draisine Production
+		##
+		RCH_draisine_tech_bonus = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { motorized_tech = 0.08 }
+	    }
+		RCH_draisine_tech_bonus_2 = {
+			picture = great_depression
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { 
+				rail_panzer = 0.15
+				rail_car = 0.10
+				rail_part = 0.10
+			}
+	    }
+		###
+		### Panzers
+		###
+		RCH_panzer_1 = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				rail_panzer_equipment = {
+					build_cost_ic = -0.05
+					instant = yes
+				}
+			}
+		}
+		RCH_panzer_2 = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+			}
+			removal_cost = -1
+
+			equipment_bonus = {
+				rail_panzer_equipment = {
+					build_cost_ic = -0.1
+					soft_attack = 0.1
+					hard_attack = 0.1
+					instant = yes
+				}
+			}
+		}
+		RCH_panzer_3 = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+			}
+			removal_cost = -1
+
+			equipment_bonus = {
+				rail_panzer_equipment = {
+					build_cost_ic = -0.2
+					soft_attack = 0.1
+					hard_attack = 0.1
+					breakthrough = 0.1
+					hardness = 0.1
+					instant = yes
+				}
+			}
+		}
 		fourth_reich_2 = {
 			picture = GFX_idea_fourth_reich_2
 
@@ -85,7 +297,7 @@ ideas = {
 				army_core_attack_factor = 0.05
 				army_core_defence_factor = 0.05
 				foreign_subversive_activites = -0.5
-			    	non_core_manpower = -0.5
+			    non_core_manpower = -0.5
 	        }	
 	    }
 		fourth_reich_3 = {
@@ -417,50 +629,6 @@ ideas = {
 				conscription = 0.02
 	        }	
 	    }
-		RCH_rail_panzer_production = {
-
-			picture = generic_production_bonus
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-
-			removal_cost = 1
-
-			equipment_bonus = {
-				rail_panzer_equipment = {
-					build_cost_ic = -0.15
-					instant = yes
-				}
-			}
-		}
-		RCH_rail_panzer_boost = {
-
-			picture = generic_production_bonus
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-
-			removal_cost = 1
-
-			equipment_bonus = {
-				rail_panzer_equipment = {
-					soft_attack = 0.1
-					hard_attack = 0.1
-					instant = yes
-				}
-			}
-		}
-
 		RCH_spec_ops_increase = {
 			picture = generic_production_bonus
 
@@ -473,6 +641,15 @@ ideas = {
 			}
 
 			removal_cost = 1
+
+			on_add = {
+				add_to_variable = { spec_ops_cap_from_national_spirits = 10 }
+				calc_battalion_limit = yes
+			}
+			on_remove = {
+				subtract_from_variable = { spec_ops_cap_from_national_spirits = 10 }
+				calc_battalion_limit = yes
+			}
 
 			modifier = {
 				special_forces_training_time_factor = -0.1

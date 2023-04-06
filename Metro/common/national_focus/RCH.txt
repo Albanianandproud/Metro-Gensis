@@ -1,0 +1,2630 @@
+#!gfx:interface\metro_goals.gfx
+
+focus_tree = {
+	id = nf_RCH
+	country = {
+		factor = 0
+		modifier = {
+			add = 25
+			tag = RCH
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 7500 y = 50 }
+	focus = {
+		id = RCH_movements_against_the_fuhrer
+		icon = GFX_RCH_reich_2
+		mutually_exclusive = {
+			focus = RCH_uncontested_authority
+		}
+		available= {
+			always = no
+		}
+		cost = 6.5
+		x = -6
+		y = 0
+		completion_reward = {
+			## Add Idea :
+			## Uncontested Authority which grants PP gain. 
+			## Stability & No Malus to BoP mechanic
+		}
+	}
+	focus = {
+		id = RCH_uncontested_authority
+		icon = GFX_RCH_reich_2
+		mutually_exclusive = {
+			focus = RCH_movements_against_the_fuhrer
+		}
+		cost = 3.6
+		x = 10
+		y = 0
+		completion_reward = {
+			## Stability & No Malus to BoP mechanic
+			add_country_leader_trait = RCH_unquestioned_fuhrer
+			add_timed_idea = { idea = RCH_cemented_authority days = 270 } 
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = RCH_campaigns_of_terror
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_uncontested_authority
+		}
+		mutually_exclusive = {
+			focus = RCH_reformation
+		}
+		x = 0
+		y = 1
+		cost = 3.6
+		relative_position_id = RCH_uncontested_authority
+		completion_reward = {
+			add_stability = -0.1
+			add_ideas = RCH_campaigns_of_terror
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_the_mutant_threat
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+		}
+		x = 2
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_campaigns_of_terror
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_the_mutant_threat_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_the_mutant_threat
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_the_mutant_threat
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_definition_of_human
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_campaigns_of_terror
+		completion_reward = {
+			add_ideas = RCH_campaigns_of_terror
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_earth_for_the_russians
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_definition_of_human
+		}
+		mutually_exclusive = {
+			focus = RCH_concession_to_non_slavs
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_definition_of_human
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_burn_the_dissident
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_earth_for_the_russians
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_earth_for_the_russians
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_sweep_the_filth
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_burn_the_dissident
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_burn_the_dissident
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_eradicate_the_impure
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_sweep_the_filth
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_sweep_the_filth
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_concession_to_non_slavs
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_definition_of_human
+		}
+		mutually_exclusive = {
+			focus = RCH_earth_for_the_russians
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_definition_of_human
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_permit_outside_recruitment
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_concession_to_non_slavs
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_concession_to_non_slavs
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_foreign_support
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_permit_outside_recruitment
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_permit_outside_recruitment
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_outside_generals
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_permit_outside_recruitment
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_permit_outside_recruitment
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_yield_power_to_gestapo
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+		}
+		x = -10
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_campaigns_of_terror
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_RNU_leanings
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_yield_power_to_gestapo
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_yield_power_to_gestapo
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_RNU_character_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_RNU_leanings
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_RNU_leanings
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_RNU_option_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_RNU_character_1
+		}
+		mutually_exclusive = {
+			focus = RCH_RNU_option_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_RNU_character_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_RNU_character_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_RNU_leanings
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_RNU_leanings
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_RNU_option_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_RNU_character_2
+		}
+		mutually_exclusive = {
+			focus = RCH_RNU_option_1
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_RNU_character_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_slavic_aryanism
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_yield_power_to_gestapo
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_yield_power_to_gestapo
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_slavic_aryanism_character_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_slavic_aryanism
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_slavic_aryanism
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_slavic_aryanism_option_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_slavic_aryanism_character_1
+		}
+		mutually_exclusive = {
+			focus = RCH_slavic_aryanism_option_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_slavic_aryanism_character_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_slavic_aryanism_character_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_slavic_aryanism
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_slavic_aryanism
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_slavic_aryanism_option_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_slavic_aryanism_character_2
+		}
+		mutually_exclusive = {
+			focus = RCH_slavic_aryanism_option_1
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_slavic_aryanism_character_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_gestapo_jurisdiction
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_yield_power_to_gestapo
+		}
+		x = 0
+		y = 4
+		cost = 6.5
+		relative_position_id = RCH_yield_power_to_gestapo
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_domestic_roles
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_gestapo_jurisdiction
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_gestapo_jurisdiction
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_domestic_role_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_domestic_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_domestic_role_2
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_domestic_roles
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_domestic_role_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_domestic_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_domestic_role_1
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_domestic_roles
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_military_roles
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_gestapo_jurisdiction
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_gestapo_jurisdiction
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_military_role_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_military_role_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_roles
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_military_role_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_military_role_1
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_roles
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_dabble_into_occult
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_gestapo_jurisdiction
+		}
+		available= {
+			## Either Kreipp or Yevgeny
+			## Yevgeny requires leaning Gestapo Power
+			## Kreipp no BOP needed
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RCH_gestapo_jurisdiction
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = RCH_establish_stalags
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+		}
+		available= {
+			has_completed_focus = RCH_yield_power_to_gestapo
+		}
+		x = -5
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_campaigns_of_terror
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_establish_stalags_work_the_mines
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_establish_stalags
+		}
+		available= {
+			has_completed_focus = RCH_domestic_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_establish_stalags_work_the_forges
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_establish_stalags
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_establish_stalags_work_the_forges
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_establish_stalags
+		}
+		available= {
+			has_completed_focus = RCH_military_roles
+		}
+		mutually_exclusive = {
+			focus = RCH_establish_stalags_work_the_mines
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_establish_stalags
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_reformation
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_uncontested_authority
+		}
+		mutually_exclusive = {
+			focus = RCH_campaigns_of_terror
+		}
+		available= {
+			## Must not have Petrovich as leader
+			##
+			##
+			always = no
+		}
+		x = 5
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_uncontested_authority
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_establish_the_ministry_of_culture
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		x = 24
+		y = 0
+		completion_reward = {
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_moc_path_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_establish_the_ministry_of_culture
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_establish_the_ministry_of_culture
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_establish_the_ministry_of_culture
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_establish_the_ministry_of_culture
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_2
+			focus = RCH_moc_path_1
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_establish_the_ministry_of_culture
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_4
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_3
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_5
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_3
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_6
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_4
+		}
+		mutually_exclusive = {
+			focus = RCH_moc_path_7
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_4
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_7
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_5
+		}
+		mutually_exclusive = {
+			focus = RCH_moc_path_6
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_5
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_8
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_7
+			focus = RCH_moc_path_6
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RCH_moc_path_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_infrastructure_path_1
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		x = 21
+		y = 0
+		completion_reward = {
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_infrastructure_path_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_infrastructure_path_1
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_infrastructure_path_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_infrastructure_path_2
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		x = 27
+		y = 0
+		completion_reward = {
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_infrastructure_path_4
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_infrastructure_path_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_infrastructure_path_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_infrastructure_path_3
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_infrastructure_path_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_1
+		}
+		mutually_exclusive = {
+			focus = RCH_military_industry_3
+		}
+		x = -3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_1
+		}
+		mutually_exclusive = {
+			focus = RCH_military_industry_2
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_4
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_3
+		}
+		x = 1
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_military_industry_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_8
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_3
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_5
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_6
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_5
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_5
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_military_industry_7
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_industry_6
+			focus = RCH_military_industry_4
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_industry_6
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_infrastructure_path_4
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_infrastructure_path_4
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_1
+		}
+		mutually_exclusive = {
+			focus = RCH_civilian_industry_3
+		}
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_1
+		}
+		mutually_exclusive = {
+			focus = RCH_civilian_industry_2
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_4
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_3
+		}
+		x = -1
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_8
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_3
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_5
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_2
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_6
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_5
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_5
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_civilian_industry_7
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_civilian_industry_6
+			focus = RCH_civilian_industry_4
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_civilian_industry_6
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_9
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_8
+		}
+		mutually_exclusive = {
+			focus = RCH_moc_path_10
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_8
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_10
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_8
+		}
+		mutually_exclusive = {
+			focus = RCH_moc_path_9
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_8
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_11
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_9
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_9
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_moc_path_12
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_10
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_moc_path_10
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_wunderwaffen_project
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_moc_path_10
+			focus = RCH_moc_path_9
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RCH_moc_path_8
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_bulwark_against_the_red
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_infrastructure_path_4
+		}
+		prerequisite = {
+			focus = RCH_the_metromacht
+		}
+		x = 5
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_infrastructure_path_4
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_the_metromacht
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		x = 39
+		y = 0
+		completion_reward = {
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_military_research_and_development
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_the_metromacht
+		}
+		x = 9
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_the_metromacht
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_draisine_salvaging
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		available = { 
+			has_technology = { 
+				rail_automobile_salvaging = 1
+			}
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			RCH_draisine_upgrade_idea = yes
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_draisine_production
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		available = { 
+			has_equipment = {
+				rail_cart_equipment > 9
+			}
+		}
+		cancel_if_invalid = yes
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			RCH_draisine_upgrade_idea = yes
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_rail_armor
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_draisine_production
+		}
+		prerequisite = {
+			focus = RCH_draisine_salvaging
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_draisine_production
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				uses = 2
+				ahead_reduction = 2
+				category = rail_panzer
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_firearms_development
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		x = 4
+		y = 1
+		cost = 4.4
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_ideas = RCH_firearm_production
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = RCH_gattling_production
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		x = -3
+		y = 1
+		cost = 4.4
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = gatling_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_gattling_production_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_gattling_production
+		}
+		available = {
+			RCH_tested_gatling_arms = yes
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_gattling_production
+		completion_reward = {
+			add_ideas = RCH_gattling_proficiency
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_german_authenticity
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		mutually_exclusive = {
+			focus = RCH_economies_of_scale
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			RCH_ga_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	focus = {
+		id = RCH_economies_of_scale
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		mutually_exclusive = {
+			focus = RCH_german_authenticity
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			RCH_eos_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	focus = {
+		id = RCH_test_out_rail_tanks
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_rail_armor
+		}
+		available = { 
+			has_equipment = {
+				rail_panzer_equipment > 9
+			}
+		}
+		cancel_if_invalid = yes
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_rail_armor
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_panzer_equipment
+				amount = -10
+			}
+			add_ideas = RCH_panzer_1
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_blitzkrieg_tactics
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_test_out_rail_tanks
+		}
+		available = {
+			has_technology = { 
+				rail_panzer_tech_2035 = 1
+			}
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_test_out_rail_tanks
+		completion_reward = {
+			RCH_panzer_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_fist_of_the_reich
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_test_out_rail_tanks
+		}
+		available = {
+			has_technology = { 
+				rail_panzer_tech_2035 = 1
+			}
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_test_out_rail_tanks
+		completion_reward = {
+			RCH_panzer_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_superior_armaments
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_german_authenticity
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_german_authenticity
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 1
+				ahead_reduction = 2
+				category = infantry_weapons
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_sturmgewehr_2033
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_superior_armaments
+		}
+		x = 0
+		y = 1
+		cost = 8.6
+		relative_position_id = RCH_superior_armaments
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+					}
+				}
+				set_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+				custom_effect_tooltip = RCH_unlock_sturmgewehr_tt
+			}
+			else_if = {
+				limit = {
+					has_technology = { 
+						conventional_infantry_equipment_6_tech = 1
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_4
+					amount = 40
+					producer = RCH
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+				}
+				add_tech_bonus = {
+					name = infantry_bonus
+					bonus = 0.5
+					uses = 1
+					category = conventional_infantry_equipment_6_tech_category
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_precision_arms
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_german_authenticity
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_german_authenticity
+		completion_reward = {
+			RCH_ga_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_streamlined_production
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_economies_of_scale
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_economies_of_scale
+		completion_reward = {
+			RCH_eos_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_volkssturm_arms
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_streamlined_production
+		}
+		available = {
+			has_war = yes
+			AND = {
+				has_completed_focus = RCH_volkssturm
+			}
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_streamlined_production
+		completion_reward = {
+			RCH_eos_upgrade_idea = yes
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_simple_arms_for_simple_people
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_streamlined_production
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_streamlined_production
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 65
+				producer = RCH
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_inaugerate_the_new_blood
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_the_metromacht
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_the_metromacht
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_inaugerate_the_new_blood
+		}
+		mutually_exclusive = {
+			focus = RCH_tnb_3
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_inaugerate_the_new_blood
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_1_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_1
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_1_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_1_1
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_1_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_1_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_1_2
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_1_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_inaugerate_the_new_blood
+		}
+		x = -4
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_inaugerate_the_new_blood
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_inaugerate_the_new_blood
+		}
+		mutually_exclusive = {
+			focus = RCH_tnb_1
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_inaugerate_the_new_blood
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_3_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_3
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_3
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_3_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_3_1
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_3_1
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_3_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_3_2
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_3_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_4
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_inaugerate_the_new_blood
+		}
+		x = 4
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_inaugerate_the_new_blood
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_5
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_4
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_tnb_4
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_6
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_4
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_4
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_7
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_2
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_tnb_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_tnb_8
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_tnb_2
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_2
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_would_you_like_total_war
+		icon = GFX_RCH_do_you_want_total_war
+		prerequisite = {
+			focus = RCH_tnb_3_1
+			focus = RCH_tnb_1_1
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_tnb_3_1
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_volkssturm
+		icon = GFX_RCH_volkssturm_1
+		prerequisite = {
+			focus = RCH_would_you_like_total_war
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_would_you_like_total_war
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_old_and_decrepit
+		icon = GFX_RCH_volkssturm_2
+		prerequisite = {
+			focus = RCH_volkssturm
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_volkssturm
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_SS_overview
+		icon = GFX_RCH_volkssturm_3
+		prerequisite = {
+			focus = RCH_volkssturm
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_volkssturm
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_volkssturm_permit_children_recruitment
+		icon = GFX_RCH_volkssturm_4
+		prerequisite = {
+			focus = RCH_old_and_decrepit
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_old_and_decrepit
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_the_last_redoubt
+		icon = GFX_RCH_volkssturm_5
+		prerequisite = {
+			focus = RCH_SS_overview
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_SS_overview
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_outwards
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		x = 61
+		y = 0
+		completion_reward = {
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_outwards_into_mayakovskaya
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_outwards_into_mayakovskaya_cleanse
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards_into_mayakovskaya
+		}
+		mutually_exclusive = {
+			focus = RCH_outwards_into_mayakovskaya_2
+		}
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards_into_mayakovskaya
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_outwards_into_mayakovskaya_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards_into_mayakovskaya
+		}
+		mutually_exclusive = {
+			focus = RCH_outwards_into_mayakovskaya_cleanse
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards_into_mayakovskaya
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_outwards_hole_station
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards_into_mayakovskaya
+		}
+		mutually_exclusive = {
+			focus = RCH_outwards_something_else
+		}
+		x = -3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards_into_mayakovskaya
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_outwards_something_else
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards_into_mayakovskaya
+		}
+		mutually_exclusive = {
+			focus = RCH_outwards_hole_station
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards_into_mayakovskaya
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_anti_capitalist_dogma
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards
+		}
+		available = {
+			NOT = {
+				has_completed_focus = RCH_proclaimation_of_slavic_unity
+			}
+		}
+		mutually_exclusive = {
+			focus = RCH_anti_communist_dogma
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_acd_1
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_anti_capitalist_dogma
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_anti_capitalist_dogma
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_acd_2
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_anti_capitalist_dogma
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_anti_capitalist_dogma
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_acd_3
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_acd_2
+			focus = RCH_acd_1
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_anti_capitalist_dogma
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_anti_communist_dogma
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_outwards
+		}
+		available= {
+			NOT = {
+				has_completed_focus = RCH_proclaimation_of_slavic_unity
+			}
+		}
+		mutually_exclusive = {
+			focus = RCH_anti_capitalist_dogma
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_assist_tretyakov_bandits
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_anti_communist_dogma
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_anti_communist_dogma
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_sow_dissent_amongst_allies
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_anti_communist_dogma
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_anti_communist_dogma
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_dissent_amongst_the_party
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_sow_dissent_amongst_allies
+		}
+		mutually_exclusive = {
+			focus = RCH_dissent_amongst_the_ranks
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_sow_dissent_amongst_allies
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_dissent_amongst_the_ranks
+		icon = GFX_RCH_reich_2
+		prerequisite = {
+			focus = RCH_sow_dissent_amongst_allies
+		}
+		mutually_exclusive = {
+			focus = RCH_dissent_amongst_the_party
+		}
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_sow_dissent_amongst_allies
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_proclaimation_of_slavic_unity
+		icon = GFX_RCH_reich_2
+		available= {
+			has_war_support > 0.94
+			has_stability > 0.94
+			OR = {
+				date > 2033.6.1
+			}
+		}
+		cost = 6.5
+		x = 0
+		y = 6
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			##
+			##
+			##
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}

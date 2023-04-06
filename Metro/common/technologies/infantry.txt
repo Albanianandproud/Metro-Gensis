@@ -46,10 +46,6 @@ technologies = {
 			research_cost_coeff = 1
 		}		
 		
-		enable_subunits = {
-			infantry
-		}
-		
 		research_cost = 3
 	    xp_research_type = army
 		xp_boost_cost = 50
@@ -334,7 +330,7 @@ technologies = {
 
 	conventional_infantry_equipment_tech_2 = {
 
-		infantry = {
+		category_light_infantry = {
 			defense = 0.025
 			ap_attack = 0.025
 		}
@@ -572,7 +568,7 @@ technologies = {
 
 	pheumatic_infantry_equipment_tech_2 = {
 
-		infantry = {
+		category_light_infantry = {
 			breakthrough = 0.08
 		}
 
@@ -642,7 +638,7 @@ technologies = {
 
 	pheumatic_infantry_equipment_tech_4 = {
 
-		infantry = {
+		category_light_infantry = {
 			breakthrough = 0.05
 			ap_attack = 0.25
 		}
@@ -1602,9 +1598,14 @@ technologies = {
 
 		on_research_complete = {
 			hidden_effect = {
-				load_oob = "spec_ops_template"
+				load_oob = "_spec_ops_template"
 			}
 			custom_effect_tooltip = UNLOCK_DIVISION_TEMPLATE
+			add_to_variable = {
+				var = spec_ops_cap_from_tech
+				value = 5
+			}
+			calc_battalion_limit = yes
 		}
 
 		path = {
@@ -1706,6 +1707,14 @@ technologies = {
 			research_cost_coeff = 1
 		}	
 
+		on_research_complete = {
+			add_to_variable = {
+				var = spec_ops_cap_from_tech
+				value = 5
+			}
+			calc_battalion_limit = yes
+		}
+
 		research_cost = 3
 
 		start_year = 2031
@@ -1798,6 +1807,14 @@ technologies = {
 		path = {
 			leads_to_tech = spec_ops_equipment_8_tech 
 			research_cost_coeff = 1
+		}
+
+		on_research_complete = {
+			add_to_variable = {
+				var = spec_ops_cap_from_tech
+				value = 5
+			}
+			calc_battalion_limit = yes
 		}
 
 		research_cost = 3
@@ -1907,6 +1924,7 @@ technologies = {
 		
 		categories = {
 			infantry_weapons
+			shotgun_infantry_equipment_4_tech_category
 		}
 		
 		ai_will_do = {
@@ -1945,6 +1963,7 @@ technologies = {
 		
 		categories = {
 			infantry_weapons
+			shotgun_infantry_equipment_5_tech_category
 		}
 		
 		ai_will_do = {
@@ -1967,11 +1986,11 @@ technologies = {
 		}
 
 		allow = {
-            has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
-        }
+            		has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+        	}
 					
 		research_cost = 3
-	    xp_research_type = army
+	    	xp_research_type = army
 		xp_boost_cost = 50
 		xp_research_bonus = 0.5
 
@@ -1983,6 +2002,7 @@ technologies = {
 		
 		categories = {
 			infantry_weapons
+			conventional_infantry_equipment_6_tech_category
 		}
 		
 		ai_will_do = {
@@ -2005,8 +2025,8 @@ technologies = {
 		}
 
 		allow = {
-            has_country_flag = scav_reward_eq_gun_laser_infantry_equipment_1_tech_unlock
-        }
+            		has_country_flag = scav_reward_eq_gun_laser_infantry_equipment_1_tech_unlock
+        	}
 					
 		research_cost = 3
 	    	xp_research_type = army
@@ -2021,6 +2041,7 @@ technologies = {
 		
 		categories = {
 			infantry_weapons
+			laser_infantry_equipment_1_tech_category
 		}
 		
 		ai_will_do = {

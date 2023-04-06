@@ -37,7 +37,7 @@ NDefines.NCountry.BASE_MAX_COMMAND_POWER = 100
 NDefines.NCountry.LOCAL_MANPOWER_ACCESSIBLE_NON_CORE_FACTOR = 0.1
 NDefines.NCountry.MAX_NON_CORE_MANPOWER_FACTOR = 0.75
 NDefines.NCountry.ATTACHE_XP_SHARE = 0.4
-NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.025		
+NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.0001		--- Adding is done manually through script		
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
 NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 
