@@ -93,20 +93,25 @@ formable_nations_category = {
 		}
 
 		available = {
-			count_triggers = {
-    			amount = 3
-				ROOT = {
-					is_in_faction_with = ALK
-					is_in_faction_with = RIZ
+			IF = {
+				OR = {
+					ROOT = {
+						is_in_faction_with = RIZ
+					}
+					RIZ = {
+						exists = no
+					}
+					controls_state = 424
 				}
-				ALK = {
-					exists = no
+				OR = {
+					ROOT = {
+						is_in_faction_with = ALK
+					}
+					ALK = {
+						exists = no
+					}
+					controls_state = 317
 				}
-				RIZ = {
-					exists = no
-				}
-				controls_state = 424
-				controls_state = 317
 				date > 2033.01.01
 			}
 		}
