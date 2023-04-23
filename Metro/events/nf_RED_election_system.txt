@@ -1,0 +1,74 @@
+add_namespace = nf_RED_election_system
+
+country_event = { # Election called Event
+    id = nf_RED_election_system.1
+    title = nf_RED_election_system.1.t
+    desc = nf_RED_election_system.1.d
+    picture = "GFX_event (71)"
+
+	trigger = { RED_election_starting = yes }
+
+	immediate = {
+        set_country_flag = RED_election_happening
+    }
+
+    option = {
+        name = nf_RED_election_system.1.a
+        custom_effect_tooltip = RED_2033_election_tt
+        activate_mission = RED_2033_election_countdown_mission
+        hidden_effect = { country_event = { id = nf_RED_election_system.2 days = 60 random_days = 60 } }
+    }
+}
+
+country_event = { # Maxim plans on running
+    id = nf_RED_election_system.2
+    title = nf_RED_election_system.2.t
+    desc = nf_RED_election_system.2.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = { ### Maxim Moskvin Path
+        name = nf_RED_election_system.2.a
+        custom_effect_tooltip = RED_plan_taking_maxim_route
+        add_political_power = -5
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+        hidden_effect = {
+            set_country_flag = RED_player_pursues_maxim_route
+        }
+        custom_effect_tooltip = RED_allow_maxim_moskvin_decisions
+    }
+
+    option = { ### Andrey Moskvin path
+        name = nf_RED_election_system.2.b
+        custom_effect_tooltip = RED_plan_taking_andrey_route
+        hidden_effect = {
+            set_country_flag = RED_player_pursues_andrey_route
+        }
+    }
+}
+
+country_event = { # Maxim and Andrey fallout
+    id = nf_RED_election_system.3
+    title = nf_RED_election_system.3.t
+    desc = nf_RED_election_system.3.d
+    picture = "GFX_event (69)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election_system.3.a
+        add_political_power = -10
+        add_stability = -0.015
+        set_country_flag = RED_tarnished_brother_relationship
+        if = {
+            limit = {
+                has_country_flag = RED_player_pursues_maxim_route
+            }
+            custom_effect_tooltip = RED_ability_tarnish_andrey_rule
+        }
+    }
+}

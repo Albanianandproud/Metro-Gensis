@@ -1,6 +1,6 @@
 RED_2033_election_category = {
-	RED_2033_election_countdown_mission = {
 
+	RED_2033_election_countdown_mission = {
 		activation = {
 			always = no
 		}
@@ -10,15 +10,10 @@ RED_2033_election_category = {
 				hidden_trigger = { has_country_flag = RED_election_happening }
 			}
         }
-		
 		priority = 2501
-
 		allowed = { tag = RED }
-
 		is_good = no
-
-		days_mission_timeout = 720
-
+		days_mission_timeout = 630
 		cancel_trigger = {
 			custom_trigger_tooltip = {
     			tooltip = RED_cancelled_election
@@ -27,49 +22,106 @@ RED_2033_election_category = {
 				}
 			}
 		}
-
 		timeout_effect = {                      
             country_event = nf_RED.85 
         }
 	}
 
-	RED_maxim_meddling = {
+	RED_call_snap_election = {
 		icon = remove_military_mutiny
-
 		available = {                           
-			custom_trigger_tooltip = {
-    			tooltip = RED_election_called_off
-				NOT = {
-					has_country_flag = RED_election_happening 
-				}
-				AND = {
-					has_country_flag = RED_allow_maxim_meddling_election
-				}
+			OR = {  
+				oligarch > 0.75
+				council > 0.75
 			}
         }
-
+		priority = 105
+		days_remove = 2
+		cost = 100
+		fire_only_once = yes
+		complete_effect = {
+			## Jump straight to election results
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	### Andrey Route
+	RED_andrey_council_boost_1 = {
+		icon = remove_military_mutiny
+		available = {                           
+			has_country_flag = RED_plan_taking_andrey_route	
+        }
 		visible = {
-			custom_trigger_tooltip = {
-				tooltip = RED_maxim_can_meddle
-				has_country_flag = RED_allow_maxim_meddling_election
+			NOT = {
+				has_country_flag = RED_player_pursues_maxim_route
 			}
 		}
-
-		custom_cost_text = command_power_5
-		custom_cost_trigger = {
-			command_power > 4.9
+		days_remove = 15
+		cost = 75
+		days_re_enable = 30
+		remove_effect = {
+			add_popularity = {
+				ideology = council
+				popularity = 0.05
+			}
 		}
-
-		days_remove = 14
-
-		fire_only_once = yes
-		
 		ai_will_do = {
-			factor = 2500
+			factor = 10
 		}
-
-		complete_effect = {
-			country_event = nf_RED.87
+	}
+	### Maxim Route
+	RED_maxim_oligarch_boost_1 = {
+		icon = remove_military_mutiny
+		available = {                           
+			has_country_flag = RED_player_pursues_maxim_route
+        }
+		visible = {
+			NOT = {
+				has_country_flag = RED_plan_taking_andrey_route	
+			}
+		}
+		days_remove = 15
+		cost = 75
+		days_re_enable = 30
+		remove_effect = {
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.05
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	RED_maxim_tarnish_brothers_rule = {
+		icon = remove_military_mutiny
+		available = {                           
+			has_country_flag = RED_player_pursues_maxim_route
+			AND = {
+				has_country_flag = RED_tarnished_brother_relationship
+			}
+        }
+		visible = {
+			NOT = {
+				has_country_flag = RED_plan_taking_andrey_route	
+			}
+		}
+		days_remove = 7
+		cost = 50
+		days_re_enable = 60
+		remove_effect = {
+			add_popularity = {
+				ideology = council
+				popularity = -0.05
+			}
+			hidden_effect = {
+				## Make some variable which calculates how many times this decision has been done
+				## if over a certain threshold, give Andrey debuffs
+			}
+		}
+		ai_will_do = {
+			factor = 10
 		}
 	}
 }

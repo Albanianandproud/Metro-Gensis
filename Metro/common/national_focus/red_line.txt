@@ -1102,7 +1102,7 @@ focus_tree = {
 focus_tree = {
 	id = red_line_3
 	country = {
-		factor = 0
+		factor = 40
 		modifier = {
 			add = 100
 			tag = RED
@@ -1584,7 +1584,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_development_of_the_red_line
 		}
-		x = -4
+		x = -5
 		y = 1
 		cost = 2.8
 		relative_position_id = RED_development_of_the_red_line
@@ -2480,7 +2480,7 @@ focus_tree = {
 				has_idea = RED_intra_stational_socialism
 			}
 		}
-		x = 7
+		x = 6
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_socialist_radio
@@ -2516,7 +2516,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_socialist_radio
 		}
-		x = 5
+		x = 4
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_socialist_radio
@@ -2576,7 +2576,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_2030
 		}
-		x = -11
+		x = -10
 		y = 0
 		cost = 4.3
 		relative_position_id = RED_development_of_the_red_line
@@ -2937,23 +2937,556 @@ focus_tree = {
 		}
 	}
 
-	## Military Branch
-
 	focus = {
-		id = RED_red_army
+		id = RED_the_might_of_the_soviet_union
 		icon = GFX_RED_the_might_of_the_red_line
 		available = {
 			has_completed_focus = RED_2030
 		}
 		x = 30
 		y = 0
-		cost = 5
+		cost = 6.5
 		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
 			army_experience = 10
-			add_ideas = RED_minister_of_defense
-			custom_effect_tooltip = RED_ministry_departments_tt
-        	custom_effect_tooltip = RED_minister_of_defense_departments_tt
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_conscription_standardisation
+		icon = GFX_RED_soviet_soldier_myth
+		prerequisite = {
+			focus =  RED_the_might_of_the_soviet_union
+		}
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id =  RED_the_might_of_the_soviet_union
+		completion_reward = {
+			add_ideas = RED_conscription_reforms
+			add_manpower = 100
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_coordinated_force
+		icon = GFX_RED_commissar
+		prerequisite = {
+			focus =  RED_conscription_standardisation
+		}
+		available = {	
+			land_doctrine_level > 5
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id =  RED_conscription_standardisation
+		completion_reward = {
+			add_ideas = RED_adaptable_force
+			army_experience = 15
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_conscription_standardisation_the_loyal_conscript
+		icon = GFX_RED_specialists_1
+		prerequisite = {
+			focus =  RED_conscription_standardisation
+		}
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id =  RED_conscription_standardisation
+		completion_reward = {
+			add_ideas = RED_the_loyal_conscript
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_conscript_1
+		icon = GFX_RED_troops2
+		prerequisite = {
+			focus =  RED_conscription_standardisation_the_loyal_conscript
+		}
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_conscription_standardisation_the_loyal_conscript
+		completion_reward = {
+			RED_conscription_irregulars_scripted_effect = yes
+			add_command_power = 20
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_conscript_2
+		icon = GFX_RED_army_conscript
+		prerequisite = {
+			focus =  RED_conscription_standardisation_the_loyal_conscript
+		}
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_conscription_standardisation_the_loyal_conscript
+		completion_reward = {
+			RED_conscription_irregulars_scripted_effect = yes
+			add_command_power = 20
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_to_the_bitter_end
+		icon = GFX_RED_bugle
+		prerequisite = {
+			focus =  RED_conscript_1
+		}
+		mutually_exclusive = {
+			focus = RED_to_the_bitter_means
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id =  RED_conscript_1
+		completion_reward = {
+			add_ideas = RED_to_the_end
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_to_the_bitter_means
+		icon = GFX_RED_soviet_propaganda
+		prerequisite = {
+			focus =  RED_conscript_2
+		}
+		mutually_exclusive = {
+			focus = RED_to_the_bitter_end
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id =  RED_conscript_2
+		completion_reward = {
+			add_ideas = RED_to_the_means
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_ura_ura_ura
+		icon = GFX_RED_specialists_2
+		prerequisite = {
+			focus = RED_to_the_bitter_means
+			focus = RED_to_the_bitter_end
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RED_conscription_standardisation_the_loyal_conscript
+		completion_reward = {
+			add_ideas = RED_ura_uraa
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_conscription_reforms_1
+		icon = GFX_RED_to_victory_2
+		prerequisite = {
+			focus =  RED_conscription_standardisation
+			focus =  RED_accentuate_heroic_deeds_of_soviets
+		}
+		available = {
+			has_army_manpower = {
+				size > 1999
+			}
+		}
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_conscription_standardisation
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RED_conscription_reforms
+					add_idea = RED_conscription_reforms_1
+				}
+			}
+			hidden_effect = {
+				RED_conscription_reforms_scripted_effect = yes
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = RED_conscription_reforms_2
+		icon = GFX_RED_female_soldiers
+		prerequisite = {
+			focus = RED_conscription_reforms_1
+		}
+		available = {
+			has_army_manpower = {
+				size > 3499
+			}
+		}
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RED_conscription_reforms_1
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RED_conscription_reforms_1
+					add_idea = RED_conscription_reforms_2
+				}
+			}
+			hidden_effect = {
+				RED_conscription_reforms_scripted_effect = yes
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_accentuate_heroic_deeds_of_soviets
+		icon = GFX_RED_to_victory
+		prerequisite = {
+			focus =  RED_the_might_of_the_soviet_union
+		}
+		available  = {
+			OR = {
+				has_defensive_war = yes
+				surrender_progress > 0.05
+			}
+			OR = {
+				has_offensive_war = yes
+				threat > 0.89
+			}
+			OR = {
+				has_war_with_major = yes
+				has_country_leader = {
+					character = RED_moskvin
+					ruling_only = yes
+				}	
+			}
+		}
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id =  RED_the_might_of_the_soviet_union
+		completion_reward = {
+			add_ideas = RED_heroic_deeds
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation
+		icon = GFX_RED_equipment_standardisation
+		prerequisite = {
+			focus =  RED_the_might_of_the_soviet_union
+		}
+		x = 6
+		y = 1
+		cost = 5
+		relative_position_id =  RED_the_might_of_the_soviet_union
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_ideas = RED_gun_production_boost
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_option_1
+		icon = GFX_generic_medium_arms_5
+		prerequisite = {
+			focus =  RED_equipment_standardisation
+		}
+		mutually_exclusive = {
+			focus =  RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		available = {
+			has_completed_focus = RED_military_engineering
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id =  RED_equipment_standardisation
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 100
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_exploit_kuznetsky_most
+		icon = GFX_RCH_industry6
+		prerequisite = {
+			focus =  RED_equipment_standardisation
+		}
+		mutually_exclusive = {
+			focus =  RED_equipment_standardisation_option_1
+		}
+		available = {
+			OR = { 
+				KUZ = { is_puppet_of = RED }
+				AND = { 349 = { is_owned_by = KUZ } }
+			}
+			OR = { 
+				KUZ = { exists = no }
+				AND = { 349 = { is_owned_by = ROOT } }
+			}
+		}
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation
+		completion_reward = {
+			349 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_surface_recovery_exploitation
+		icon = GFX_RED_sight_seeing
+		prerequisite = {
+			focus =  RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		available = {
+			OR = { 
+				KUZ = { is_puppet_of = RED }
+				AND = { 349 = { is_owned_by = KUZ } }
+			}
+			OR = { 
+				KUZ = { exists = no }
+				AND = { 349 = { is_owned_by = ROOT } }
+			}
+		}
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_exploit_kuznetsky_most
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_scorched_earth
+		icon = GFX_HNZ_vengeance
+		prerequisite = {
+			focus =  RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		available = {
+			OR = { 
+				KUZ = { is_puppet_of = RED }
+				AND = { 349 = { is_owned_by = KUZ } }
+			}
+			OR = { 
+				KUZ = { exists = no }
+				AND = { 349 = { is_owned_by = ROOT } }
+			}
+		}
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_exploit_kuznetsky_most
+		completion_reward = {
+			## Scorch Kuznetsky most if it falls under enemy hands 
+			## Or smth idk :/
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_weapon_arms
+		icon = GFX_RED_retool_industry
+		prerequisite = {
+			focus =  RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		available = {
+			OR = { 
+				KUZ = { is_puppet_of = RED }
+				AND = { 349 = { is_owned_by = KUZ } }
+			}
+		}
+		bypass = { KUZ = { exists = no } }
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_exploit_kuznetsky_most
+		completion_reward = {
+			add_ideas = RED_gun_production_boost_kuznetsky_most
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_option_1_1
+		icon = GFX_generic_ammunition_1
+		prerequisite = {
+			focus =  RED_equipment_standardisation_option_1
+			focus = RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		mutually_exclusive = {
+			focus =  RED_equipment_standardisation_option_1_2
+		}
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_option_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_option_1_2
+		icon = GFX_RED_breakthrough
+		prerequisite = {
+			focus =  RED_equipment_standardisation_option_1
+			focus = RED_equipment_standardisation_exploit_kuznetsky_most
+		}
+		mutually_exclusive = {
+			focus =  RED_equipment_standardisation_option_1_1
+		}
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_option_1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 3
+				category = support_weapons_tech
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_equipment_standardisation_option_3
+		icon = GFX_RED_flamethrower
+		prerequisite = {
+			focus = RED_conscription_reforms_2
+			focus = RED_equipment_standardisation_option_1_2
+		}
+		prerequisite = {
+			focus = RED_conscription_reforms_2
+			focus = RED_equipment_standardisation_option_1_1
+		}
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id =  RED_equipment_standardisation_option_1
+		completion_reward = {
+			add_ideas = RED_flamethrowers
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment_2 
+				amount = 25
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = flamethrower_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_general_standardisation
+		icon = GFX_RED_general
+		prerequisite = {
+			focus =  RED_the_might_of_the_soviet_union
+		}
+		x = -5
+		y = 1
+		cost = 5
+		relative_position_id =  RED_the_might_of_the_soviet_union
+		completion_reward = {
 			add_corps_commander_role = {
 				character = RED_luzhkov
 				skill = 3
@@ -2964,7 +3497,7 @@ focus_tree = {
 			}
 			add_corps_commander_role = {
 				character = RED_ukolov
-				skill = 2
+				skill = 3
 				attack_skill = 2
 				defense_skill = 2
 				planning_skill = 3
@@ -2975,377 +3508,24 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
 	focus = {
-		id = RED_red_army_conscription_reforms
-		icon = GFX_RED_conscription_reforms
+		id = RED_vinogradov
+		icon = GFX_RED_the_thing_1
 		prerequisite = {
-			focus =  RED_red_army
-		}
-		mutually_exclusive = {
-			focus = RED_red_army_soviet_myth
-		}
-		x = -5
-		y = 1
-		cost = 5
-		relative_position_id =  RED_red_army
-		completion_reward = {
-			add_ideas = RED_conscription_reforms
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_rudimentary_drills
-		icon = GFX_RED_soviet_guy
-		prerequisite = {
-			focus =  RED_red_army_conscription_reforms
+			focus =  RED_general_standardisation
 		}
 		x = -1
 		y = 1
 		cost = 5
-		relative_position_id =  RED_red_army_conscription_reforms
-		completion_reward = {
-			add_ideas = RED_rudimentary_drills
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_equipment_standardisation
-		icon = GFX_RED_ak
-		prerequisite = {
-			focus =  RED_red_army_conscription_reforms
-		}
-		x = 3
-		y = 1
-		cost = 4.7
-		relative_position_id =  RED_red_army_conscription_reforms
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 85
-				producer = RUS
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_adaptable_force
-		icon = GFX_RED_logistics
-		prerequisite = {
-			focus =  RED_rudimentary_drills
-		}
-		x = 0
-		y = 1
-		cost = 5
-		relative_position_id =  RED_rudimentary_drills
-		completion_reward = {
-			add_ideas = RED_adaptable_force 
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_cohesive_force
-		icon = GFX_RED_recruits
-		prerequisite = {
-			focus =  RED_red_army_conscription_reforms
-		}
-		x = 1
-		y = 1
-		cost = 5
-		relative_position_id =  RED_red_army_conscription_reforms
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_coordination_efforts
-		icon = GFX_RED_coordinate_efforts
-		prerequisite = {
-			focus =  RED_cohesive_force
-		}
-		x = 0
-		y = 1
-		cost = 5
-		relative_position_id =  RED_cohesive_force
-		completion_reward = {
-			add_ideas = RED_coordination_efforts
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_outside_recruitment
-		icon = GFX_RED_soviet_guy_2
-		prerequisite = {
-			focus =  RED_coordination_efforts
-		}
-		prerequisite = {
-			focus =  RED_adaptable_force
-		}
-		x = -1
-		y = 1
-		cost = 4.7
-		relative_position_id =  RED_coordination_efforts
-		completion_reward = {
-			add_ideas = RED_outside_volunteers
-			custom_effect_tooltip = RED_outside_volunteer_decision_tt
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_red_army_soviet_myth
-		icon = GFX_RED_promote_loyality
-		prerequisite = {
-			focus =  RED_red_army
-		}
-		mutually_exclusive = {
-			focus = RED_red_army_conscription_reforms
-		}
-		x = 5
-		y = 1
-		cost = 5
-		relative_position_id =  RED_red_army
-		completion_reward = {
-			army_experience = 10
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.75
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_mass_recruitment_campaigns
-		icon = GFX_RED_recruitment_campaigns
-		prerequisite = {
-			focus =  RED_red_army_soviet_myth
-		}
-		x = -1
-		y = 1
-		cost = 5
-		relative_position_id =  RED_red_army_soviet_myth
-		completion_reward = {
-			add_ideas = RED_recruitment_compaigns
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_heroic_deeds_of_mother_russia
-		icon = GFX_RED_heroic_deeds_of_mother_russia
-		prerequisite = {
-			focus =  RED_mass_recruitment_campaigns
-		}
-		x = 0
-		y = 1
-		cost = 5
-		relative_position_id =  RED_mass_recruitment_campaigns
-		completion_reward = {
-			add_ideas = RED_heroic_deeds
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_human_wave_offensive
-		icon = GFX_RED_soviet_charge
-		prerequisite = {
-			focus =  RED_red_army_soviet_myth
-		}
-		x = 1
-		y = 1
-		cost = 5
-		relative_position_id =  RED_red_army_soviet_myth
-		completion_reward = {
-			add_ideas = RED_human_waves
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_cartridge_for_every_comrade
-		icon = GFX_RED_equipment_effort
-		prerequisite = {
-			focus =  RED_red_army_soviet_myth
-		}
-		x = -3
-		y = 1
-		cost = 4.7
-		relative_position_id =  RED_red_army_soviet_myth
-		completion_reward = {
-			add_ideas = RED_gun_production_boost 
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_peoples_army
-		icon = GFX_RED_female_soldiers
-		prerequisite = {
-			focus =  RED_human_wave_offensive
-		}
-		x = 0
-		y = 1
-		cost = 5
-		relative_position_id =  RED_human_wave_offensive
-		completion_reward = {
-			custom_effect_tooltip = RED_peoples_army_decision_tt
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_uraaa
-		icon = GFX_RED_soviet_propaganda
-		prerequisite = {
-			focus =  RED_peoples_army
-		}
-		prerequisite = {
-			focus =  RED_heroic_deeds_of_mother_russia
-		}
-		x = 1
-		y = 1
-		cost = 4.7
-		relative_position_id =  RED_heroic_deeds_of_mother_russia
-		completion_reward = {
-			add_ideas = RED_ura_uraa
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_spetnaz_spec_ops
-		icon = GFX_RED_spetnaz_deployment
-		prerequisite = {
-			focus =  RED_adaptable_force
-			focus =  RED_heroic_deeds_of_mother_russia
-		}
-		prerequisite = {
-			focus =  RED_coordination_efforts
-			focus =  RED_peoples_army
-		}
-		mutually_exclusive = {
-			focus = RED_heavy_spec_ops
-		}
-		x = 4
-		y = 3
-		cost = 5
-		relative_position_id =  RED_red_army_conscription_reforms
-		completion_reward = {
-			set_technology = {
-				special_forces_spetnaz_equipment_tech = 1
-			}
-			add_equipment_to_stockpile = {
-				type = special_forces_equipment_spetnaz
-				amount = 30
-				producer = RUS
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_heavy_spec_ops
-		icon = GFX_RED_heavy_squad_2
-		prerequisite = {
-			focus =  RED_adaptable_force
-			focus =  RED_heroic_deeds_of_mother_russia
-		}
-		prerequisite = {
-			focus =  RED_coordination_efforts
-			focus =  RED_peoples_army
-		}
-		mutually_exclusive = {
-			focus = RED_spetnaz_spec_ops
-		}
-		x = -4
-		y = 3
-		cost = 5
-		relative_position_id =  RED_red_army_soviet_myth
-		completion_reward = {
-			set_technology = {
-				special_forces_heavy_equipment_tech = 1
-			}
-			add_equipment_to_stockpile = {
-				type = special_forces_equipment_heavy
-				amount = 30
-				producer = RUS
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_red_army_leader_1
-		icon = GFX_RED_army_helmet
-		prerequisite = {
-			focus =  RED_red_army
-		}
-		x = 0
-		y = 2
-		cost = 5
-		relative_position_id =  RED_red_army
+		relative_position_id =  RED_general_standardisation
 		completion_reward = {
 			add_corps_commander_role = {
 				character = RED_vinogradov
-				skill = 6
-				attack_skill = 4
-				defense_skill = 2
-				planning_skill = 4
-				logistics_skill = 2
+				skill = 5
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 3
 				legacy_id=-1
 			}
 			add_popularity = {
@@ -3371,40 +3551,62 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
 	focus = {
-		id = RED_red_army_flamethrower
-		icon = GFX_special_arms_1
+		id = RED_in_defense_of_the_mother_line
+		icon = GFX_RED_defend_the_headquaters_of_the_revolution
 		prerequisite = {
-			focus =  RED_red_army_leader_1
+			focus =  RED_the_might_of_the_soviet_union
 		}
-		x = -1
+		x = -2
 		y = 1
-		cost = 4.7
-		relative_position_id =  RED_red_army_leader_1
+		cost = 5
+		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
-			add_ideas = RED_flamethrowers
-			add_equipment_to_stockpile = {
-				type = flamethrower_equipment_2 
-				amount = 30
-				producer = RUS
+			add_ideas = RED_minister_of_defense
+			custom_effect_tooltip = RED_ministry_departments_tt
+        	custom_effect_tooltip = RED_minister_of_defense_departments_tt
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_the_supreme_soviet
+		icon = GFX_RED_supreme_soviet
+		prerequisite = {
+			focus = RED_coordinated_force
+			focus = RED_equipment_standardisation_option_3
+		}
+		prerequisite = {
+			focus = RED_coordinated_force
+			focus = RED_equipment_standardisation_weapon_arms
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id =  RED_equipment_standardisation_option_1
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1
+				uses = 1
+				category = land_doctrine
 			}
 		}
 		ai_will_do = {
 			factor = 2
 		}
 	}
-
 	focus = {
 		id = RED_red_army_maxim
 		icon = GFX_RED_frontlines
 		prerequisite = {
-			focus =  RED_red_army_leader_1
+			focus =  RED_the_supreme_soviet
 		}
-		x = 1
+		x = 2
 		y = 1
 		cost = 4.7
-		relative_position_id =  RED_red_army_leader_1
+		relative_position_id =  RED_the_supreme_soviet
 		completion_reward = {
 			add_ideas = RED_army_maxims
 			add_equipment_to_stockpile = {
@@ -3417,18 +3619,40 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
+	focus = {
+		id = RED_spetnaz_spec_ops
+		icon = GFX_RED_spetnaz_deployment
+		prerequisite = {
+			focus =  RED_the_supreme_soviet
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RED_the_supreme_soviet
+		completion_reward = {
+			set_technology = {
+				special_forces_spetnaz_equipment_tech = 1
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 30
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 	focus = {
 		id = RED_riot-shields
 		icon = GFX_RED_heavy_deployment
 		prerequisite = {
-			focus =  RED_heavy_spec_ops
 			focus =  RED_spetnaz_spec_ops
 		}
-		x = 0
-		y = 3
-		cost = 5.7
-		relative_position_id =  RED_red_army_leader_1
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id =  RED_spetnaz_spec_ops
 		completion_reward = {
 			add_ideas = RED_spec_ops_hardness
 			set_technology = {
@@ -3439,8 +3663,79 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
-
+	focus = {
+		id = RED_shchors_brigade
+		icon = GFX_RED_shchors
+		prerequisite = {
+			focus = RED_the_supreme_soviet
+		}
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = RED_the_supreme_soviet
+		completion_reward = {
+		    add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 3
+				category = rail_cart
+			}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_3 
+				amount = 25
+				producer = RUS
+			}
+			division_template = {
+				name = "Shchors Brigade"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					rail_cart = { x = 0 y = 0 }
+					rail_cart = { x = 0 y = 1 }
+					rail_cart = { x = 0 y = 2 }
+					rail_cart = { x = 0 y = 3 }
+					rail_cart = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Shchors Brigade\" division_template = \"Shchors Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RED_soviet_tankists
+		icon = GFX_RED_soviet_tankists
+		prerequisite = {
+			focus = RED_the_supreme_soviet
+		}
+		x = 1
+		y = 2
+		cost = 6.5
+		relative_position_id = RED_the_supreme_soviet
+		completion_reward = {
+		    add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 3
+				category = rail_panzer
+			}
+			add_equipment_to_stockpile = {
+				type = rail_panzer_equipment_2
+				amount = 20
+				producer = RUS
+			}
+			add_ideas = RED_reverse_engineer_panzer
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
 	## NKVD Branch
 
 	focus = {
@@ -3452,7 +3747,7 @@ focus_tree = {
 				has_completed_focus = RED_andrei_path
 			}
 		}
-		x = 32
+		x = 28
 		y = 7
 		cost = 3.5
 		relative_position_id = RED_development_of_the_red_line
@@ -3775,7 +4070,7 @@ focus_tree = {
 				has_idea = RED_polis_treaty_2
 			}
 		}
-		x = 48
+		x = 51
 		y = 0
 		cost = 2.2
 		relative_position_id = RED_development_of_the_red_line
@@ -5339,7 +5634,7 @@ focus_tree = {
 	focus = { ## Its Korbin' time!
 		id = RED_korbut_path
 		icon = GFX_RED_head_of_kgb
-		x = 11
+		x = 5
 		y = 8
 		cost = 2.2
 		available = {
@@ -5550,7 +5845,6 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
 	focus = {
 		id = RED_moskvin_path
 		icon = GFX_RED_moskvin
