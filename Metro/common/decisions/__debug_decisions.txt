@@ -1,5 +1,5 @@
 debug_decisions_category = {
-	test_state_modifiers = {
+	_test_state_modifiers = {
 		
 		ai_will_do = {
 			factor = 0
@@ -11,17 +11,94 @@ debug_decisions_category = {
 			country_event = nf_TRT.2
 		}
 	}
-	test_regulars = {
-		
+	_debug_execute_scavenge_mission = {
+
+		icon = electronics
+
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = free_scavenging_cost }
+				NOT = { has_country_flag = scavenging_underway }
+				NOT = { has_country_flag = scavenging_disabled }
+			}
+			#has_equipment = {
+			#	special_forces_equipment > 4
+			#}
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+			country_event = scavenge_mission.1
+		}
+
 		ai_will_do = {
 			factor = 0
 		}
-		complete_effect = {
-			add_to_variable = {
-				var = regulars_cap_from_tech
-				value = 2
-			}
-			calc_battalion_regulars_limit = yes
-		}
 	}
+
+	_debug_reclaim_this_state = {
+        icon = decision_generic_military
+		days_remove = 1
+		days_re_enable = 0
+		on_map_mode = map_only
+		state_target = yes
+		fixed_random_seed = no
+
+        	ai_will_do = {
+			factor = 0
+		}
+		
+        visible = {
+            RUI = {
+                owns_state = FROM
+            }
+            FROM = {
+                any_neighbor_state = {
+                    is_fully_controlled_by = ROOT
+					NOT = {
+						region = 1
+					}
+                }
+            }
+        }
+
+		available = {
+			NOT = {
+				ROOT = { has_country_flag = reclaimation_underway }
+				FROM = {
+					OR = {
+						has_state_flag = state_being_colonised
+						state = 1
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				set_state_flag = state_being_colonised
+			}
+		}
+
+		remove_effect = {
+		    100 = {
+				ROOT = {
+					set_variable = {
+						var = state_colonised_id
+						value = FROM
+					}
+				}
+		        ROOT = { country_event = reclaimation_event.2 }
+		        FROM = {
+					clr_state_flag = state_being_colonised
+				}
+		    }
+			ROOT = { clr_country_flag = reclaimation_underway }
+		}
+    }
 }

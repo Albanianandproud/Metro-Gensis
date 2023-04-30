@@ -1,11 +1,12 @@
 #!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
 
 focus_tree = {
 	id = nf_RCH
 	country = {
 		factor = 0
 		modifier = {
-			add = 25
+			add = 40
 			tag = RCH
 		}
 	}
@@ -39,7 +40,6 @@ focus_tree = {
 		x = 10
 		y = 0
 		completion_reward = {
-			## Stability & No Malus to BoP mechanic
 			add_country_leader_trait = RCH_unquestioned_fuhrer
 			add_timed_idea = { idea = RCH_cemented_authority days = 270 } 
 			add_war_support = 0.05
@@ -133,7 +133,7 @@ focus_tree = {
 		cost = 4.3
 		relative_position_id = RCH_definition_of_human
 		completion_reward = {
-			add_political_power = 50
+			add_ideas = RCH_metro_for_the_russians
 		}
 		ai_will_do = {
 			factor = 5
@@ -790,10 +790,11 @@ focus_tree = {
 		x = 22
 		y = 0
 		completion_reward = {
-			##
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_chairman_of_ministry
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 25
 		}
 	}
 	focus = {
@@ -807,12 +808,10 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
-			##
-			##
-			##
+			RCH_chairman_of_ministry_upgrade_trait = yes
 		}
 		ai_will_do = {
-			factor = 0.5
+			factor = 30
 		}
 	}
 	focus = {
@@ -826,32 +825,31 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
-			##
-			##
-			##
+			RCH_chairman_of_ministry_upgrade_trait = yes
 		}
 		ai_will_do = {
-			factor = 0.5
+			factor = 30
 		}
 	}
 	focus = {
 		id = RCH_moc_path_3
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_industry8
 		prerequisite = {
 			focus = RCH_moc_path_2
 			focus = RCH_moc_path_1
+		}
+		available = {
+			num_of_civilian_factories > 9
 		}
 		x = 0
 		y = 2
 		cost = 6.5
 		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
-			##
-			##
-			##
+			custom_effect_tooltip = RCH_unlock_economy_laws
 		}
 		ai_will_do = {
-			factor = 0.5
+			factor = 25.5
 		}
 	}
 	focus = {
@@ -958,15 +956,26 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_infrastructure_path_1
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_infrastructure
 		cost = 6.5
 		x = 19
 		y = 0
 		completion_reward = {
-			##
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 25
 		}
 	}
 	focus = {
@@ -980,9 +989,16 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_1
 		completion_reward = {
-			##
-			##
-			##
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -990,15 +1006,26 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_infrastructure_path_2
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_infrastructure
 		cost = 6.5
 		x = 25
 		y = 0
 		completion_reward = {
-			##
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 25
 		}
 	}
 	focus = {
@@ -1012,17 +1039,24 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_2
 		completion_reward = {
-			##
-			##
-			##
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_military_industry_1
-		icon = GFX_RCH_reich_2
+		id = RCH_rearmament
+		icon = GFX_RCH_stockpile
 		prerequisite = {
 			focus = RCH_infrastructure_path_3
 		}
@@ -1059,69 +1093,63 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_military_industry_2
+		id = RCH_rearmament_construction_choice
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_military_industry_1
+			focus = RCH_rearmament
 		}
 		mutually_exclusive = {
-			focus = RCH_military_industry_3
-			focus = RCH_military_industry_44
+			focus = RCH_rearmament_tech_choice
+			focus = RCH_rearmament_factory_choice
 		}
 		x = -5
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_military_industry_1
+		relative_position_id = RCH_rearmament
 		completion_reward = {
-			##
-			##
-			##
+			add_ideas = RCH_construction_priority
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_military_industry_3
+		id = RCH_rearmament_tech_choice
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_military_industry_1
+			focus = RCH_rearmament
 		}
 		mutually_exclusive = {
-			focus = RCH_military_industry_44
-			focus = RCH_military_industry_2
+			focus = RCH_rearmament_factory_choice
+			focus = RCH_rearmament_construction_choice
 		}
 		x = -3
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_military_industry_1
+		relative_position_id = RCH_rearmament
 		completion_reward = {
-			##
-			##
-			##
+			add_ideas = RCH_research_priority
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_military_industry_44
+		id = RCH_rearmament_factory_choice
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_military_industry_1
+			focus = RCH_rearmament
 		}
 		mutually_exclusive = {
-			focus = RCH_military_industry_3
-			focus = RCH_military_industry_2
+			focus = RCH_rearmament_tech_choice
+			focus = RCH_rearmament_construction_choice
 		}
 		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_military_industry_1
+		relative_position_id = RCH_rearmament
 		completion_reward = {
-			##
-			##
-			##
+			add_ideas = RCH_rearmament_priority
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -1131,18 +1159,44 @@ focus_tree = {
 		id = RCH_military_industry_be
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_military_industry_3
-			focus = RCH_military_industry_2
-			focus = RCH_military_industry_44
+			focus = RCH_rearmament_tech_choice
+			focus = RCH_rearmament_construction_choice
+			focus = RCH_rearmament_factory_choice
+		}
+		available = {
+			306 = { is_owned_by = ROOT }
+			275 = { is_owned_by = ROOT }
+			337 = { is_owned_by = ROOT }
 		}
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_military_industry_3
+		relative_position_id = RCH_rearmament_tech_choice
 		completion_reward = {
-			##
-			##
-			##
+			306 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
+			275 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
+			337 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -1193,25 +1247,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_military_industry_fe
-		icon = GFX_RCH_reich_2
-		prerequisite = {
-			focus = RCH_military_industry_be
-		}
-		x = -2
-		y = 2
-		cost = 6.5
-		relative_position_id = RCH_military_industry_be
-		completion_reward = {
-			##
-			##
-			##
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
 		id = RCH_military_industry_ge
 		icon = GFX_RCH_reich_2
 		prerequisite = {
@@ -1232,7 +1267,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_1
+		id = RCH_internal_civilian_1
 		icon = GFX_RCH_reich_2
 		prerequisite = {
 			focus = RCH_infrastructure_path_4
@@ -1270,18 +1305,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_2
+		id = RCH_internal_civilian_2
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_1
+			focus = RCH_internal_civilian_1
 		}
 		mutually_exclusive = {
-			focus = RCH_civilian_industry_3
+			focus = RCH_internal_civilian_3
 		}
 		x = 4
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_1
+		relative_position_id = RCH_internal_civilian_1
 		completion_reward = {
 			##
 			##
@@ -1292,18 +1327,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_3
+		id = RCH_internal_civilian_3
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_1
+			focus = RCH_internal_civilian_1
 		}
 		mutually_exclusive = {
-			focus = RCH_civilian_industry_2
+			focus = RCH_internal_civilian_2
 		}
 		x = 2
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_1
+		relative_position_id = RCH_internal_civilian_1
 		completion_reward = {
 			##
 			##
@@ -1314,15 +1349,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_4
+		id = RCH_internal_civilian_4
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_3
+			focus = RCH_internal_civilian_3
 		}
 		x = -1
 		y = 2
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_3
+		relative_position_id = RCH_internal_civilian_3
 		completion_reward = {
 			##
 			##
@@ -1333,15 +1368,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_8
+		id = RCH_internal_civilian_8
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_3
+			focus = RCH_internal_civilian_3
 		}
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_3
+		relative_position_id = RCH_internal_civilian_3
 		completion_reward = {
 			##
 			##
@@ -1352,15 +1387,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_5
+		id = RCH_internal_civilian_5
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_2
+			focus = RCH_internal_civilian_2
 		}
 		x = 1
 		y = 2
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_2
+		relative_position_id = RCH_internal_civilian_2
 		completion_reward = {
 			##
 			##
@@ -1371,15 +1406,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_6
+		id = RCH_internal_civilian_6
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_2
+			focus = RCH_internal_civilian_2
 		}
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_2
+		relative_position_id = RCH_internal_civilian_2
 		completion_reward = {
 			##
 			##
@@ -1390,16 +1425,16 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_civilian_industry_7
+		id = RCH_internal_civilian_7
 		icon = GFX_RCH_reich_2
 		prerequisite = {
-			focus = RCH_civilian_industry_6
-			focus = RCH_civilian_industry_8
+			focus = RCH_internal_civilian_6
+			focus = RCH_internal_civilian_8
 		}
 		x = -1
 		y = 2
 		cost = 6.5
-		relative_position_id = RCH_civilian_industry_2
+		relative_position_id = RCH_internal_civilian_2
 		completion_reward = {
 			##
 			##
@@ -1515,15 +1550,12 @@ focus_tree = {
 		id = RCH_bulwark_against_the_red
 		icon = GFX_RCH_bulwark_against_bolshevism
 		prerequisite = {
-			focus = RCH_infrastructure_path_4
-		}
-		prerequisite = {
 			focus = RCH_the_metromacht
 		}
-		x = 5
+		x = -9
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_infrastructure_path_4
+		relative_position_id = RCH_the_metromacht
 		completion_reward = {
 			##
 			##
@@ -1537,7 +1569,7 @@ focus_tree = {
 		id = RCH_the_metromacht
 		icon = GFX_RCH_reich_2
 		cost = 6.5
-		x = 45
+		x = 40
 		y = 0
 		completion_reward = {
 			add_doctrine_cost_reduction = {
@@ -1820,7 +1852,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_economies_of_scale
-		icon = GFX_RCH_military_industry_3
+		icon = GFX_RCH_rearmament_tech_choice
 		prerequisite = {
 			focus = RCH_firearms_development
 		}
