@@ -2815,7 +2815,7 @@ focus_tree = {
 			RCH_bop_increase_2 = yes
 			add_offsite_building = {
 				type = arms_factory
-				level = 1
+				level = 2
 			}
 		}
 		ai_will_do = {
@@ -3259,7 +3259,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_waffen_ss
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_4 = yes
+			add_ideas = RCH_academy
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3280,6 +3281,13 @@ focus_tree = {
 		relative_position_id = RCH_waffen_ss
 		completion_reward = {
 			RCH_bop_decrease_2 = yes
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.5
+				uses = 1
+				category = entrench_kits
+			}
+			army_experience = 5
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3325,7 +3333,21 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_military_ss_2
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_4 = yes
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st SS Battalion\" division_template = \"SS\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd SS Battalion\" division_template = \"SS\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"3rd SS Battalion\" division_template = \"Metromacht\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3431,9 +3453,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_volkssturm
 		completion_reward = {
-			##
-			##
-			##
+			add_command_power = 20
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3477,9 +3497,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_SS_overview
 		completion_reward = {
-			##
-			##
-			##
+			add_command_power = 20
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3507,7 +3525,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_outwards
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_looking_outwards
 		cost = 6.5
 		x = 68
 		y = 0
@@ -3515,10 +3533,43 @@ focus_tree = {
 			has_completed_focus = RCH_uncontested_authority
 		}
 		completion_reward = {
-			##
+			custom_effect_tooltip = RCH_incompleted_subtree_tt
+			add_corps_commander_role = {
+				character = RCH_stortbeker
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 4
+				logistics_skill = 4
+			}
 		}
 		ai_will_do = {
 			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_infiltrate_paveletskaya
+		icon = GFX_RCH_gestapo
+		prerequisite = {
+			focus = RCH_outwards
+		}
+		available= {
+			PVL = {
+				is_puppet = no
+				is_subject = no
+			}
+		}
+		x = 5
+		y = 1
+		cost = 5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			PVL = {
+				country_event = nf_RCH.6
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
 		}
 	}
 	focus = {
@@ -3714,6 +3765,7 @@ focus_tree = {
 			NOT = {
 				has_completed_focus = RCH_proclaimation_of_slavic_unity
 			}
+			always = no
 		}
 		mutually_exclusive = {
 			focus = RCH_anti_communist_dogma
@@ -3723,9 +3775,8 @@ focus_tree = {
 		cost = 3
 		relative_position_id = RCH_outwards
 		completion_reward = {
-			##
-			##
-			##
+			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3742,9 +3793,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_anti_capitalist_dogma
 		completion_reward = {
-			##
-			##
-			##
+			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3761,9 +3811,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_anti_capitalist_dogma
 		completion_reward = {
-			##
-			##
-			##
+			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3779,6 +3828,7 @@ focus_tree = {
 			NOT = {
 				has_completed_focus = RCH_proclaimation_of_slavic_unity
 			}
+			always = no
 		}
 		mutually_exclusive = {
 			focus = RCH_anti_capitalist_dogma
@@ -3788,9 +3838,8 @@ focus_tree = {
 		cost = 3
 		relative_position_id = RCH_outwards
 		completion_reward = {
-			##
-			##
-			##
+			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3807,9 +3856,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_anti_communist_dogma
 		completion_reward = {
-			##
-			##
-			##
+			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3846,12 +3894,10 @@ focus_tree = {
 		}
 		cost = 3
 		x = 0
-		y = 5
+		y = 4
 		relative_position_id = RCH_outwards
 		completion_reward = {
-			##
-			##
-			##
+			custom_effect_tooltip = RCH_unlock_max_tier_mobilisation
 		}
 		ai_will_do = {
 			factor = 10
@@ -3928,49 +3974,6 @@ focus_tree = {
  			}
 		}
 	}
-
-	focus = {
-		id = RCH_expansion_barrikadnaya_core
-		icon = GFX_RCH_barrikadnaya_core
-		cost = 6.5
-
-		x = 0
-		y = 1
-		relative_position_id = RCH_expansion2
-
-		prerequisite = {
-			focus = RCH_expansion2
-		}
-
-		available = {
-			418 = {
-                is_owned_by = ROOT
-			}
-			149 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
-		}
-
-		completion_reward = {
-			418 = { add_core_of = ROOT }
-			149 = { add_core_of = ROOT }
-		    418 = { 
-		    	add_manpower = -50 
-		    	add_extra_state_shared_building_slots = 2
-		    	add_building_construction = {
-    				type = infrastructure
-    				level = 2
-    				instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
 	focus = {
 		id = RCH_expansion2
 		icon = GFX_RCH_expansion_into_barrikadnaya
@@ -4028,7 +4031,47 @@ focus_tree = {
  			}
 		}
 	}
+	focus = {
+		id = RCH_expansion_barrikadnaya_core
+		icon = GFX_RCH_barrikadnaya_core
+		cost = 6.5
 
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion2
+
+		prerequisite = {
+			focus = RCH_expansion2
+		}
+
+		available = {
+			418 = {
+                is_owned_by = ROOT
+			}
+			149 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			418 = { add_core_of = ROOT }
+			149 = { add_core_of = ROOT }
+		    418 = { 
+		    	add_manpower = -50 
+		    	add_extra_state_shared_building_slots = 2
+		    	add_building_construction = {
+    				type = infrastructure
+    				level = 2
+    				instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
 	focus = {
 		id = RCH_expansion_trubnaya_core
 		icon = GFX_RCH_trubnaya_core
@@ -4154,7 +4197,8 @@ focus_tree = {
 				}
 			}
 			375 = { is_owned_by = PVL }
-		}
+			has_completed_focus = RCH_infiltrate_paveletskaya
+		} 
 
 		completion_reward = {
 			375 = {
