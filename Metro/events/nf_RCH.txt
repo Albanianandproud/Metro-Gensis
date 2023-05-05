@@ -248,7 +248,7 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
-		name = nf_RCH.7.a
+		name = nf_RCH.9.a
 		RCH_bop_decrease_10 = yes
 		add_stability = -0.08
 		add_timed_idea = { idea = RCH_SS_outside_recruitment days = 280 }
@@ -282,10 +282,14 @@ country_event = {
 				owner = ROOT
 			}
 		}
+		add_popularity = {
+			ideology = council
+			popularity = 0.025
+		}
 	}
 
 	option = {
-		name = nf_RCH.7.b
+		name = nf_RCH.9.b
 		RCH_bop_decrease_6 = yes
 		add_timed_idea = { idea = RCH_SS_outside_recruitment days = 84 }
 		add_stability = -0.05
@@ -311,14 +315,72 @@ country_event = {
 				owner = ROOT
 			}
 		}
+		add_popularity = {
+			ideology = council
+			popularity = 0.015
+		}
 	}
 
 	option = {
-		name = nf_RCH.7.c
+		name = nf_RCH.9.c
 		add_political_power = 40
 		add_popularity = {
 			ideology = dictatorial
-			popularity = 0.05
+			popularity = 0.035
 		}
 	}
 }
+
+country_event = { ## Mayakovskaya ##
+    id = nf_RCH.10
+    title = nf_RCH.10.t
+    desc = nf_RCH.10.d
+    picture = event_tunnel
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			180 = { add_core_of = MYK }
+        	316 = { add_core_of = MYK }
+			179 = { add_core_of = MYK }
+			MYK = { set_capital = { state = 316 } }	
+		}
+    }
+
+	option = {
+		name = nf_RCH.10.a
+		trigger = { date > 2029.6.1 }
+		hidden_effect = {
+			RUI = { release = MYK }
+			MYK = {
+				add_manpower = 40
+                add_offsite_building = { type = arms_factory level = 3 }
+                add_equipment_to_stockpile = { type = infantry_equipment amount = 35 }
+                declare_war_on = {
+                    target = RCH
+                    type = annex_everything
+                }
+				load_oob = MYK
+            }
+			316 = {
+			 	add_manpower = 145
+			}
+			set_country_flag = RCH_mayakov_a	
+		}
+	}
+
+	option = {
+		name = nf_RCH.10.b
+		trigger = { date < 2029.6.1 }
+		transfer_state = 180
+		transfer_state = 316
+		transfer_state = 179
+		hidden_effect = {
+			set_country_flag = RCH_mayakov_b
+		}
+	}
+}
+
+
+

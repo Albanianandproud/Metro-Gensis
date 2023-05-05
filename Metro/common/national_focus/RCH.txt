@@ -29,6 +29,7 @@ focus_tree = {
 			## Add Idea :
 			## Uncontested Authority which grants PP gain. 
 			## Stability & No Malus to BoP mechanic
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 	}
 	focus = {
@@ -43,7 +44,7 @@ focus_tree = {
 		completion_reward = {
 			add_country_leader_trait = RCH_unquestioned_fuhrer
 			add_timed_idea = { idea = RCH_cemented_authority days = 270 } 
-			add_war_support = 0.05
+			add_war_support = 0.025
 		}
 	}
 	focus = {
@@ -52,8 +53,13 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_uncontested_authority
 		}
-		mutually_exclusive = {
-			focus = RCH_reformation
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
 		}
 		x = 0
 		y = 1
@@ -100,7 +106,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.04
 			effect_tooltip = {
-				add_idea = RCH_no_more_mutant_2
+				add_ideas = RCH_no_more_mutant_2
 			}
 			hidden_effect = {
 				swap_ideas = {
@@ -233,6 +239,14 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_earth_for_the_russians
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
+		}
 		x = -1
 		y = 1
 		cost = 4.3
@@ -249,6 +263,14 @@ focus_tree = {
 		icon = GFX_RCH_military_purges
 		prerequisite = {
 			focus = RCH_concession_to_non_slavs
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
 		}
 		x = 0
 		y = 2
@@ -267,6 +289,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_permit_outside_recruitment
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
+		}
 		x = -1
 		y = 1
 		cost = 6.5
@@ -283,6 +313,14 @@ focus_tree = {
 		icon = GFX_RCH_commander
 		prerequisite = {
 			focus = RCH_permit_outside_recruitment
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
 		}
 		x = 1
 		y = 1
@@ -301,6 +339,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_campaigns_of_terror
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = -6
 		y = 1
 		cost = 3.6
@@ -308,6 +354,10 @@ focus_tree = {
 		completion_reward = {
 			RCH_bop_decrease_4 = yes
 			add_political_power = 50
+			add_popularity = {
+				ideology = council
+				popularity = 0.025
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -558,6 +608,10 @@ focus_tree = {
 		completion_reward = {
 			add_command_power = 5
 			custom_effect_tooltip = allow_ss_integration_tree
+			add_popularity = {
+				ideology = council
+				popularity = 0.02
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -633,7 +687,6 @@ focus_tree = {
 			focus = RCH_campaigns_of_terror
 		}
 		available= {
-			has_completed_focus = RCH_yield_power_to_gestapo
 			has_completed_focus = RCH_air_vent_discovery
 		}
 		x = -4
@@ -732,9 +785,6 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_uncontested_authority
 		}
-		mutually_exclusive = {
-			focus = RCH_campaigns_of_terror
-		}
 		available= {
 			## Must not have Petrovich as leader
 			always = no
@@ -745,6 +795,7 @@ focus_tree = {
 		relative_position_id = RCH_uncontested_authority
 		completion_reward = {
 			## ||TODO
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -1116,6 +1167,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infrastructure_path_3
 		}
+		available = {
+			has_completed_focus = RCH_establish_the_ministry_of_culture
+		}
 		x = 1
 		y = 1
 		cost = 4.3
@@ -1391,6 +1445,9 @@ focus_tree = {
 		icon = GFX_RCH_reich_2
 		prerequisite = {
 			focus = RCH_infrastructure_path_4
+		}
+		available = {
+			has_completed_focus = RCH_establish_the_ministry_of_culture
 		}
 		x = -1
 		y = 1
@@ -2313,6 +2370,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_inaugerate_the_new_blood
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
+		}
 		x = 2
 		y = 1
 		cost = 6.5
@@ -2335,6 +2400,14 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_ss_integration_1
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
+		}
 		x = -1
 		y = 1
 		cost = 6.5
@@ -2352,6 +2425,14 @@ focus_tree = {
 		icon = GFX_RCH_uber_soldaten_2
 		prerequisite = {
 			focus = RCH_the_iron_legion
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
 		}
 		x = 2
 		y = 1
@@ -2469,6 +2550,12 @@ focus_tree = {
 		}
 		available = {
 			has_completed_focus = RCH_proclaimation_of_slavic_unity
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
 		}
 		x = 0
 		y = 2
@@ -2487,6 +2574,14 @@ focus_tree = {
 		icon = GFX_RCH_metromacht_2
 		prerequisite = {
 			focus = RCH_the_iron_legion
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value < -0.335
+				}
+			}
 		}
 		x = 6
 		y = 1
@@ -2787,6 +2882,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_inaugerate_the_new_blood
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = -2
 		y = 1
 		cost = 6.5
@@ -2809,6 +2912,14 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_the_iron_legion_1
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -2828,7 +2939,12 @@ focus_tree = {
 			focus = RCH_ss_integration
 		}
 		available = {
-			has_completed_focus = RCH_gestapo_jurisdiction
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
 		}
 		x = -4
 		y = 1
@@ -2875,6 +2991,14 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_ss_integration_flavour_5
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = -1
 		y = 1
 		cost = 6.5
@@ -2892,6 +3016,14 @@ focus_tree = {
 		icon = GFX_RCH_ss_commander
 		prerequisite = {
 			focus = RCH_ss_integration
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
 		}
 		x = -2
 		y = 1
@@ -2951,6 +3083,14 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_ss_integration_flavour_2
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -2970,13 +3110,21 @@ focus_tree = {
 			focus = RCH_ss_integration_flavour_2
 			focus = RCH_ss_integration_flavour_5
 		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
 		x = 1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_flavour_2
 		completion_reward = {
 			RCH_bop_decrease_4 = yes
-			create_field_marshal = {
+			add_corps_commander_role = {
 				character = RCH_roman_orlov
 				skill = 5
 				attack_skill = 3
@@ -2984,21 +3132,13 @@ focus_tree = {
 				planning_skill = 4
 				logistics_skill = 3
 			}
-			add_advisor_role = {
-				character = RCH_roman_orlov
-				activate = yes
-				advisor = {
-					slot = army_chief
-					cost = 50
-					idea_token = RCH_roman_orlov
-					traits = {
-						RCH_roman_orlov_chief
-					}
-				}
-			}
 			swap_ideas = {
 				remove_idea = RCH_SS_idea_2
 				add_idea = RCH_SS_idea_3
+			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.025
 			}
 		}
 		ai_will_do = {
@@ -3351,14 +3491,15 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_the_metromacht
 		}
+		available = {
+			always = no
+		}
 		x = -9
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_the_metromacht
 		completion_reward = {
-			##
-			##
-			##
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3382,106 +3523,182 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_outwards_into_mayakovskaya
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_spec
 		prerequisite = {
 			focus = RCH_outwards
 		}
+		available = {
+			180 = { is_owned_by = RUI }
+			316 = { is_owned_by = RUI }
+			179 = { is_owned_by = RUI }
+			has_manpower > 600
+		}
+		bypass = {
+			180 = { is_owned_by = RCH }
+			316 = { is_owned_by = RCH }
+			179 = { is_owned_by = RCH }
+		}
 		x = 0
-		y = 3
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
-			##
-			##
-			##
+			country_event = nf_RCH.10
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_outwards_into_mayakovskaya_cleanse
-		icon = GFX_RCH_reich_2
+		id = RCH_mayakovskaya_2b
+		icon = GFX_RCH_expand_into_polis
 		prerequisite = {
 			focus = RCH_outwards_into_mayakovskaya
 		}
 		mutually_exclusive = {
-			focus = RCH_outwards_into_mayakovskaya_2
+			focus = RCH_mayakovskaya_2a
+		}
+		available = {
+			has_country_flag = RCH_mayakov_b
+			owns_state = 306
+			MYK = { exists = no }		
 		}
 		x = 3
 		y = 1
-		cost = 6.5
+		cost = 3.6
 		relative_position_id = RCH_outwards_into_mayakovskaya
 		completion_reward = {
-			##
-			##
-			##
+			180 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			316 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			179 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_outwards_into_mayakovskaya_2
-		icon = GFX_RCH_reich_2
+		id = RCH_mayakovskaya_2a
+		icon = GFX_RCH_expand_into_mayakovskaya_station
 		prerequisite = {
 			focus = RCH_outwards_into_mayakovskaya
 		}
 		mutually_exclusive = {
-			focus = RCH_outwards_into_mayakovskaya_cleanse
+			focus = RCH_mayakovskaya_2b
+		}
+		available = {
+			has_country_flag = RCH_mayakov_b
+			owns_state = 306
+			MYK = { exists = no }		
 		}
 		x = 1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards_into_mayakovskaya
 		completion_reward = {
-			##
-			##
-			##
+			316 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_outwards_hole_station
-		icon = GFX_RCH_reich_2
+		id = RCH_mayakovskaya_1a
+		icon = GFX_RCH_trubnaya_core
 		prerequisite = {
 			focus = RCH_outwards_into_mayakovskaya
 		}
 		mutually_exclusive = {
-			focus = RCH_outwards_something_else
+			focus = RCH_mayakovskaya_1b
+		}
+		available = {
+			has_country_flag = RCH_mayakov_a
+			owns_state = 306
+			MYK = { exists = no }	
 		}
 		x = -3
 		y = 1
-		cost = 6.5
+		cost = 3.6
 		relative_position_id = RCH_outwards_into_mayakovskaya
 		completion_reward = {
-			##
-			##
-			##
+			316 = {
+				add_manpower = -100
+			}
+			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
 			factor = 0.5
 		}
 	}
 	focus = {
-		id = RCH_outwards_something_else
-		icon = GFX_RCH_reich_2
+		id = RCH_mayakovskaya_1b
+		icon = GFX_RCH_imprison
 		prerequisite = {
 			focus = RCH_outwards_into_mayakovskaya
 		}
 		mutually_exclusive = {
-			focus = RCH_outwards_hole_station
+			focus = RCH_mayakovskaya_1a
+		}
+		available = {
+			has_country_flag = RCH_mayakov_a	
+			owns_state = 306
+			MYK = { exists = no }	
 		}
 		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards_into_mayakovskaya
 		completion_reward = {
-			##
-			##
-			##
+			add_stability = -0.05
+			add_political_power = -45
+			306 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+			}
+			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -3501,9 +3718,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_anti_communist_dogma
 		}
-		x = -2
+		x = -3
 		y = 1
-		cost = 6.5
+		cost = 3
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			##
@@ -3553,26 +3770,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_acd_3
-		icon = GFX_RCH_reich_2
-		prerequisite = {
-			focus = RCH_acd_2
-			focus = RCH_acd_1
-		}
-		x = 0
-		y = 2
-		cost = 6.5
-		relative_position_id = RCH_anti_capitalist_dogma
-		completion_reward = {
-			##
-			##
-			##
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
 		id = RCH_anti_communist_dogma
 		icon = GFX_RCH_reich_2
 		prerequisite = {
@@ -3586,9 +3783,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_anti_capitalist_dogma
 		}
-		x = 2
+		x = 3
 		y = 1
-		cost = 6.5
+		cost = 3
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			##
@@ -3638,52 +3835,8 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_dissent_amongst_the_party
-		icon = GFX_RCH_reich_2
-		prerequisite = {
-			focus = RCH_sow_dissent_amongst_allies
-		}
-		mutually_exclusive = {
-			focus = RCH_dissent_amongst_the_ranks
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_sow_dissent_amongst_allies
-		completion_reward = {
-			##
-			##
-			##
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_dissent_amongst_the_ranks
-		icon = GFX_RCH_reich_2
-		prerequisite = {
-			focus = RCH_sow_dissent_amongst_allies
-		}
-		mutually_exclusive = {
-			focus = RCH_dissent_amongst_the_party
-		}
-		x = 3
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_sow_dissent_amongst_allies
-		completion_reward = {
-			##
-			##
-			##
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
 		id = RCH_proclaimation_of_slavic_unity
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_hitler
 		available= {
 			has_war_support > 0.95
 			has_stability > 0.5
@@ -3691,9 +3844,9 @@ focus_tree = {
 				date > 2033.6.1
 			}
 		}
-		cost = 6.5
+		cost = 3
 		x = 0
-		y = 6
+		y = 5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			##
@@ -3702,6 +3855,522 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 10
+		}
+	}
+
+	focus = {
+		id = RCH_lebensraum
+		icon = GFX_RCH_lebensraum_2
+		cost = 6.5
+		prerequisite = {
+			focus = RCH_proclaimation_of_slavic_unity
+		}
+		x = 0
+		y = 1
+		relative_position_id = RCH_proclaimation_of_slavic_unity
+		completion_reward = {
+			add_ideas = war_economy
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = RCH_expansion
+		icon = GFX_RCH_march_into_trubnaya
+		cost = 6.5
+
+		x = 1
+		y = 1
+		relative_position_id = RCH_lebensraum
+
+		prerequisite = {
+			focus = RCH_lebensraum
+		}
+
+		available = {
+			has_war = no
+			426 = {
+				is_owned_by = RCH
+			}
+		}
+
+		available = {
+			has_war = no
+		}
+
+        will_lead_to_war_with = DIM
+		completion_reward = {
+			426 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = DIM
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+ 			if = {
+ 				limit = {
+ 					is_ai = yes
+ 				}
+ 				426 = {
+ 					add_building_construction = {
+    					type = supply_node 
+    					level = 1
+    					instant_build = yes
+    					province = 3687
+    				}
+				}
+ 			}
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_barrikadnaya_core
+		icon = GFX_RCH_barrikadnaya_core
+		cost = 6.5
+
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion2
+
+		prerequisite = {
+			focus = RCH_expansion2
+		}
+
+		available = {
+			418 = {
+                is_owned_by = ROOT
+			}
+			149 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			418 = { add_core_of = ROOT }
+			149 = { add_core_of = ROOT }
+		    418 = { 
+		    	add_manpower = -50 
+		    	add_extra_state_shared_building_slots = 2
+		    	add_building_construction = {
+    				type = infrastructure
+    				level = 2
+    				instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = RCH_expansion2
+		icon = GFX_RCH_expansion_into_barrikadnaya
+		cost = 6.5
+
+		x = -1
+		y = 1
+		relative_position_id = RCH_lebensraum
+
+		prerequisite = {
+			focus = RCH_lebensraum
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = ULI }
+				has_war_with = ULI
+			}
+		}
+
+		available = {
+			has_war = no
+			428 = {
+				is_owned_by = RCH
+			}
+		}
+		
+        will_lead_to_war_with = DIM
+		completion_reward = {
+			428 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = ULI
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+ 			if = {
+ 				limit = {
+ 					is_ai = yes
+ 				}
+ 				428 = {
+ 					add_building_construction = {
+    					type = supply_node 
+    					level = 1
+    					instant_build = yes
+    					province = 3677
+    				}
+				}
+ 			}
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_trubnaya_core
+		icon = GFX_RCH_trubnaya_core
+		cost = 6.5
+
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion
+
+		prerequisite = {
+			focus = RCH_expansion
+		}
+
+		available = {
+			312 = {
+                is_owned_by = ROOT
+			}
+			181 = {
+                is_owned_by = ROOT
+			}
+			120 = {
+                is_owned_by = ROOT
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			312 = { add_core_of = ROOT }
+			181 = { add_core_of = ROOT }
+			120 = { add_core_of = ROOT }
+		    312 = { 
+		    	add_manpower = -50 
+		    	add_extra_state_shared_building_slots = 2
+		    	add_building_construction = {
+    				type = infrastructure
+    				level = 2
+    				instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_pls_tunnel
+		icon = GFX_RCH_expand_into_polis
+		cost = 6.5
+		prerequisite = {
+			focus = RCH_expansion_trubnaya_core
+			focus = RCH_expansion_barrikadnaya_core
+		}
+		x = 1
+		y = 2
+		relative_position_id = RCH_expansion2
+
+        available = {
+			429 = { is_owned_by = RUI }
+			220 = { is_owned_by = RUI }
+		}
+		bypass = {
+		    NOT = {
+			    429 = { is_owned_by = RUI }
+			    220 = { is_owned_by = RUI }
+			}
+	    }
+		completion_reward = {
+		    transfer_state = 429
+		    429 = { add_core_of = ROOT }
+
+		    transfer_state = 220
+		    220 = { add_core_of = ROOT }
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_pls_annex
+		icon = GFX_RCH_polis_annex
+		cost = 6.5
+
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion_pls_tunnel
+
+		prerequisite = {
+			focus = RCH_expansion_pls_tunnel
+		}
+
+		available = {
+			has_war = no
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PLS }
+				has_war_with = PLS
+			}
+		}
+
+		completion_reward = {
+		    244 = { add_core_of = ROOT }
+		}
+	}
+
+	focus = {
+		id = RCH_hole_alliance
+		icon = GFX_RCH_new_order
+		cost = 4.3
+		prerequisite = {
+			focus = RCH_lebensraum
+		}
+		x = 4
+		y = 1
+		relative_position_id = RCH_lebensraum
+
+		available = {
+			PVL = {
+				exists = yes
+				AND = {
+					has_government = dictatorial
+				}
+			}
+			375 = { is_owned_by = PVL }
+		}
+
+		completion_reward = {
+			375 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RCH_hole_alliance1
+		icon = GFX_RCH_new_order
+		prerequisite = {
+			focus = RCH_hole_alliance
+		}
+		mutually_exclusive = {
+			focus = RCH_hole_alliance2
+		}
+		available = {
+			PVL = {
+				exists = yes
+				AND = {
+					has_government = dictatorial
+				}
+			}
+			375 = { is_owned_by = PVL }
+		}
+		x = 1
+		y = 1
+		cost = 3.5
+		relative_position_id = RCH_hole_alliance
+		completion_reward = {
+			PVL = { 
+				army_experience = 25 
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 20
+					producer = RUS
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_hole_alliance2
+		icon = GFX_RCH_new_order
+		prerequisite = {
+			focus = RCH_hole_alliance
+		}
+		mutually_exclusive = {
+			focus = RCH_hole_alliance1
+		}
+		available = {
+			PVL = {
+				exists = yes
+				AND = {
+					has_government = dictatorial
+				}
+			}
+			375 = { is_owned_by = PVL }
+		}
+		x = -1
+		y = 1
+		cost = 3.5
+		relative_position_id = RCH_hole_alliance
+		completion_reward = {
+			PVL = {
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 0.5
+					uses = 1
+					category = land_doctrine
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_hole_alliance3
+		icon = GFX_RCH_new_order
+		prerequisite = {
+			focus = RCH_hole_alliance1
+			focus = RCH_hole_alliance2
+		}
+		available = {
+			PVL = {
+				exists = yes
+				AND = {
+					has_government = dictatorial
+				}
+			}
+			AVT = { exists = no }
+		}
+		x = -1
+		y = 1
+		cost = 3.5
+		relative_position_id = RCH_hole_alliance1
+		completion_reward = {
+			375 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_defense_against_bolsheviks
+		icon = GFX_RCH_military_army
+		cost = 4.3
+		x = 16
+		y = 0
+		
+		completion_reward = {
+		 	custom_effect_tooltip = RED_reich_border
+		    if = {
+		    	limit = {
+		    		337 = {
+                		is_owned_by = RCH
+					}
+				}
+				337 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		    		430 = {
+                		is_owned_by = RCH
+					}
+				}
+				430 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		    		431 = {
+                		is_owned_by = RCH
+					}
+				}
+				431  = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+
+		    if = {
+				limit = {
+		    		214 = {
+                		is_owned_by = RCH
+					}
+				}
+				214 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
 		}
 	}
 }
