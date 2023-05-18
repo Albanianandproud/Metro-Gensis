@@ -41,6 +41,10 @@ focus_tree = {
 		cost = 3.6
 		x = 10
 		y = 0
+		select_effect = {
+			hidden_effect = { add_stability = 0.001 }
+			custom_effect_tooltip = RCH_cannot_be_cancelled
+		}
 		completion_reward = {
 			add_country_leader_trait = RCH_unquestioned_fuhrer
 			add_timed_idea = { idea = RCH_cemented_authority days = 270 } 
@@ -248,13 +252,14 @@ focus_tree = {
 					value < -0.335
 				}
 			}
+			always = no
 		}
 		x = -1
 		y = 1
 		cost = 4.3
 		relative_position_id = RCH_definition_of_human
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			custom_effect_tooltip = RCH_future_update_tt
 		}
 		ai_will_do = {
 			factor = 5
@@ -669,6 +674,7 @@ focus_tree = {
 			## Either Kreipp or Yevgeny
 			## Yevgeny requires leaning Gestapo Power
 			## Kreipp no BOP needed
+			always = no
 		}
 		x = -3
 		y = 1
@@ -806,7 +812,7 @@ focus_tree = {
 	focus = {
 		id = RCH_establish_the_ministry_of_culture
 		icon = GFX_RCH_cultural_institutions
-		cost = 4.3
+		cost = 3
 		x = 22
 		y = 0
 		available = {
@@ -875,7 +881,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
-		cost = 6.5
+		cost = 3
 		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
 			custom_effect_tooltip = RCH_unlock_economy_laws
@@ -1080,7 +1086,7 @@ focus_tree = {
 	focus = {
 		id = RCH_infrastructure_path_1
 		icon = GFX_RCH_infrastructure
-		cost = 3.6
+		cost = 3
 		x = 19
 		y = 0
 		completion_reward = {
@@ -1109,7 +1115,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 3
 		relative_position_id = RCH_infrastructure_path_1
 		completion_reward = {
 			every_owned_state = {
@@ -1130,7 +1136,7 @@ focus_tree = {
 	focus = {
 		id = RCH_infrastructure_path_2
 		icon = GFX_RCH_infrastructure
-		cost = 3.6
+		cost = 3
 		x = 25
 		y = 0
 		completion_reward = {
@@ -1159,7 +1165,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 3
 		relative_position_id = RCH_infrastructure_path_2
 		completion_reward = {
 			every_owned_state = {
@@ -1509,7 +1515,7 @@ focus_tree = {
 			80 = { is_owned_by = RUI }
 		}
 		bypass = {
-			80 = { is_owned_by = RUI }
+			80 = { NOT = { is_owned_by = RUI } }
 		}
 		x = 3
 		y = 1
@@ -1745,615 +1751,14 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_the_metromacht
-		icon = GFX_RCH_reich_2
-		cost = 4.3
+		id = RCH_inaugerate_the_new_blood
+		icon = GFX_RCH_a_new_fuhrer
 		x = 40
 		y = 0
 		available = {
 			has_completed_focus = RCH_uncontested_authority
 		}
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.8
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = RCH_military_research_and_development
-		icon = GFX_RCH_science
-		prerequisite = {
-			focus = RCH_the_metromacht
-		}
-		x = 12
-		y = 1
 		cost = 6.5
-		relative_position_id = RCH_the_metromacht
-		completion_reward = {
-			add_research_slot = 1
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_draisine_salvaging
-		icon = GFX_RCH_draisines
-		prerequisite = {
-			focus = RCH_military_research_and_development
-		}
-		available = { 
-			has_tech = rail_automobile_salvaging
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_military_research_and_development
-		completion_reward = {
-			RCH_draisine_upgrade_idea = yes
-			capital_scope = {
-				add_resource = {
-					type = scrap
-					amount = 2
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_draisine_production
-		icon = GFX_RCH_draisines2
-		prerequisite = {
-			focus = RCH_military_research_and_development
-		}
-		available = { 
-			has_equipment = {
-				rail_cart_equipment > 9
-			}
-		}
-		cancel_if_invalid = yes
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_military_research_and_development
-		completion_reward = {
-			RCH_draisine_upgrade_idea = yes
-			capital_scope = {
-				add_resource = {
-					type = alloys
-					amount = 2
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_rail_armor
-		icon = GFX_RCH_panzer
-		prerequisite = {
-			focus = RCH_draisine_production
-		}
-		prerequisite = {
-			focus = RCH_draisine_salvaging
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_draisine_production
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				uses = 2
-				ahead_reduction = 2
-				category = rail_panzer
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_firearms_development
-		icon = GFX_RCH_stockpile
-		prerequisite = {
-			focus = RCH_military_research_and_development
-		}
-		x = 7
-		y = 1
-		cost = 4.4
-		relative_position_id = RCH_military_research_and_development
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				category = infantry_weapons
-			}
-			add_ideas = RCH_firearm_production
-		}
-		ai_will_do = {
-			factor = 3
-		}
-	}
-	focus = {
-		id = RCH_flammenwerfer_teams
-		icon = GFX_RCH_stormtrooper_2
-		prerequisite = {
-			focus = RCH_firearms_development
-		}
-		mutually_exclusive = {
-			focus = RCH_gasoline_siphoning
-		}
-		available = {
-			has_tech = tech_flamethrower_equipment
-		}
-		x = -4
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_firearms_development
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 2
-				category = flamethrower_support_tech
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_hanz_get_ze_flamethrower
-		icon = GFX_RCH_hans_get_ze_flammenwerfer
-		prerequisite = {
-			focus = RCH_flammenwerfer_teams
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_flammenwerfer_teams
-		completion_reward = {
-			add_equipment_to_stockpile = {
-		        type = flamethrower_equipment
-		        amount = 25
-				producer = RUS
-		    }
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 1
-				category = flamethrower_support_tech
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_gasoline_siphoning
-		icon = GFX_Fuel
-		prerequisite = {
-			focus = RCH_firearms_development
-			focus = RCH_draisine_salvaging
-		}
-		mutually_exclusive = {
-			focus = RCH_flammenwerfer_teams
-		}
-		x = -6
-		y = 1
-		cost = 4.4
-		relative_position_id = RCH_firearms_development
-		completion_reward = {
-			add_ideas = RCH_gasoline_for_vehicles
-			add_ideas = RCH_improved_vehicles
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_gattling_production
-		icon = GFX_RCH_Gatling
-		prerequisite = {
-			focus = RCH_firearms_development
-		}
-		x = -2
-		y = 1
-		cost = 4.4
-		relative_position_id = RCH_firearms_development
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 2
-				category = gatling_support_tech
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_gattling_production_2
-		icon = GFX_RCH_MG42
-		prerequisite = {
-			focus = RCH_gattling_production
-		}
-		available = {
-			RCH_tested_gatling_arms = yes
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_gattling_production
-		completion_reward = {
-			add_ideas = RCH_gattling_proficiency
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_german_authenticity
-		icon = GFX_RCH_germanarms
-		prerequisite = {
-			focus = RCH_firearms_development
-		}
-		mutually_exclusive = {
-			focus = RCH_economies_of_scale
-		}
-		x = 2
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_firearms_development
-		completion_reward = {
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_firearm_production
-					add_idea = RCH_german_imitation_arms
-				}
-			}
-			hidden_effect = {
-				RCH_ga_upgrade_idea = yes
-			}
-		}
-		ai_will_do = {
-			factor = 1.5
-		}
-	}
-	focus = {
-		id = RCH_economies_of_scale
-		icon = GFX_RCH_military_industry
-		prerequisite = {
-			focus = RCH_firearms_development
-		}
-		mutually_exclusive = {
-			focus = RCH_german_authenticity
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_firearms_development
-		completion_reward = {
-			RCH_eos_upgrade_idea = yes
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_firearm_production
-					add_idea = RCH_cheaper_arms
-				}
-			}
-			hidden_effect = {
-				RCH_eos_upgrade_idea = yes
-			}
-		}
-		ai_will_do = {
-			factor = 1.5
-		}
-	}
-	focus = {
-		id = RCH_test_out_rail_tanks
-		icon = GFX_RCH_panzers
-		prerequisite = {
-			focus = RCH_rail_armor
-		}
-		available = { 
-			has_equipment = {
-				rail_panzer_equipment > 9
-			}
-		}
-		cancel_if_invalid = yes
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_rail_armor
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = rail_panzer_equipment
-				amount = -10
-			}
-			add_ideas = RCH_panzer_1
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_blitzkrieg_tactics
-		icon = GFX_RCH_blitzkrieg
-		prerequisite = {
-			focus = RCH_test_out_rail_tanks
-		}
-		available = {
-			has_tech = rail_panzer_tech_2035
-		}
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_test_out_rail_tanks
-		completion_reward = {
-			effect_tooltip = {
-				if = {
-					limit = {
-						has_idea = RCH_panzer_1
-					}
-					swap_ideas = {
-						remove_idea = RCH_panzer_1
-						add_idea = RCH_panzer_2
-					}
-				}
-				else = {
-					swap_ideas = {
-						remove_idea = RCH_panzer_2
-						add_idea = RCH_panzer_3
-					}
-				}
-			}
-			hidden_effect = {
-				RCH_panzer_upgrade_idea = yes	
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_fist_of_the_reich
-		icon = GFX_RCH_furhers_fist
-		prerequisite = {
-			focus = RCH_test_out_rail_tanks
-		}
-		available = {
-			has_tech = rail_panzer_tech_2035
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_test_out_rail_tanks
-		completion_reward = {
-			effect_tooltip = {
-				if = {
-					limit = {
-						has_idea = RCH_panzer_1
-					}
-					swap_ideas = {
-						remove_idea = RCH_panzer_1
-						add_idea = RCH_panzer_2
-					}
-				}
-				else = {
-					swap_ideas = {
-						remove_idea = RCH_panzer_2
-						add_idea = RCH_panzer_3
-					}
-				}
-			}
-			hidden_effect = {
-				RCH_panzer_upgrade_idea = yes	
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_superior_armaments
-		icon = GFX_RCH_precisionarms
-		prerequisite = {
-			focus = RCH_german_authenticity
-		}
-		available = {
-			has_tech = tech_smithing_power_hammer 
-		}
-		x = 2
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_german_authenticity
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 1
-				ahead_reduction = 2
-				category = infantry_weapons
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_sturmgewehr_2033
-		icon = GFX_RCH_sturmgewehr_2033
-		prerequisite = {
-			focus = RCH_superior_armaments
-		}
-		available = {
-			has_tech = tech_smithing_machine_pressing
-		}
-		x = 0
-		y = 1
-		cost = 8.6
-		relative_position_id = RCH_superior_armaments
-		completion_reward = {
-			if = {
-				limit = {
-					NOT = {
-						has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
-				custom_effect_tooltip = RCH_unlock_sturmgewehr_tt
-			}
-			else_if = {
-				limit = {
-					has_tech = conventional_infantry_equipment_6_tech
-				}
-				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_4
-					amount = 40
-					producer = RCH
-				}
-			}
-			else_if = {
-				limit = {
-					has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
-				}
-				add_tech_bonus = {
-					name = infantry_bonus
-					bonus = 0.5
-					uses = 1
-					category = conventional_infantry_equipment_6_tech_category
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_precision_arms
-		icon = GFX_RCH_arms1
-		prerequisite = {
-			focus = RCH_german_authenticity
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_german_authenticity
-		completion_reward = {
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_german_imitation_arms
-					add_idea = RCH_precision_arms
-				}
-			}
-			hidden_effect = {
-				RCH_ga_upgrade_idea = yes	
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_streamlined_production
-		icon = GFX_RCH_reinburse_the_stockpile
-		prerequisite = {
-			focus = RCH_economies_of_scale
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_economies_of_scale
-		completion_reward = {
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_cheaper_arms
-					add_idea = RCH_streamlined_labour 
-				}
-			}
-			hidden_effect = {
-				RCH_eos_upgrade_idea = yes	
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_volkssturm_arms
-		icon = GFX_RCH_volkssturmsimplearms
-		prerequisite = {
-			focus = RCH_streamlined_production
-		}
-		available = {
-			has_war = yes
-			AND = {
-				has_completed_focus = RCH_volkssturm
-			}
-		}
-		x = 2
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_streamlined_production
-		completion_reward = {
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_streamlined_labour 
-					add_idea = RCH_volkssturm_armaments
-				}
-			}
-			hidden_effect = {
-				RCH_eos_upgrade_idea = yes	
-			}
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_simple_arms_for_simple_people
-		icon = GFX_RCH_volkssturmarms
-		prerequisite = {
-			focus = RCH_streamlined_production
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_streamlined_production
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = scrap_infantry_equipment_1
-				amount = 65
-				producer = RUS
-			}
-			## TODO Do something Else, too
-		}
-		ai_will_do = {
-			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_inaugerate_the_new_blood
-		icon = GFX_RCH_a_new_fuhrer
-		prerequisite = {
-			focus = RCH_the_metromacht
-		}
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_the_metromacht
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = RCH_karl_krainer
@@ -2374,6 +1779,12 @@ focus_tree = {
 				defense_skill = 3
 				planning_skill = 2
 				logistics_skill = 2
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
 			}
 		}
 		ai_will_do = {
@@ -3533,7 +2944,7 @@ focus_tree = {
 		id = RCH_bulwark_against_the_red
 		icon = GFX_RCH_bulwark_against_bolshevism
 		prerequisite = {
-			focus = RCH_the_metromacht
+			focus = RCH_inaugerate_the_new_blood
 		}
 		available = {
 			always = no
@@ -3541,7 +2952,7 @@ focus_tree = {
 		x = -9
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_the_metromacht
+		relative_position_id = RCH_inaugerate_the_new_blood
 		completion_reward = {
 			custom_effect_tooltip = RCH_future_update_tt
 		}
@@ -3550,9 +2961,691 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_defense_against_bolsheviks
+		icon = GFX_RCH_military_army
+		cost = 4.3
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = RCH_bulwark_against_the_red
+		}
+		relative_position_id = RCH_bulwark_against_the_red
+		completion_reward = {
+		 	custom_effect_tooltip = RED_reich_border
+		    if = {
+		    	limit = {
+		    		337 = {
+                		is_owned_by = RCH
+					}
+				}
+				337 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		    		430 = {
+                		is_owned_by = RCH
+					}
+				}
+				430 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		    if = {
+				limit = {
+		    		431 = {
+                		is_owned_by = RCH
+					}
+				}
+				431  = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+
+		    if = {
+				limit = {
+		    		214 = {
+                		is_owned_by = RCH
+					}
+				}
+				214 = {
+			    	add_building_construction = {
+    					type = bunker
+   						level = 1
+    					instant_build = yes
+    					province = {
+       						all_provinces = yes
+   						}
+					}
+					add_building_construction = {
+    					type = infrastructure
+    					level = 1
+    					instant_build = yes
+					}
+				}
+		    }
+		}
+	}
+	focus = {
+		id = RCH_military_research_and_development
+		icon = GFX_RCH_science
+		prerequisite = {
+			focus = RCH_inaugerate_the_new_blood
+		}
+		x = 12
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_inaugerate_the_new_blood
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_draisine_salvaging
+		icon = GFX_RCH_draisines
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		available = { 
+			has_tech = rail_automobile_salvaging
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			RCH_draisine_upgrade_idea = yes
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_draisine_production
+		icon = GFX_RCH_draisines2
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		available = { 
+			has_equipment = {
+				rail_cart_equipment > 9
+			}
+		}
+		cancel_if_invalid = yes
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			RCH_draisine_upgrade_idea = yes
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_rail_armor
+		icon = GFX_RCH_panzer
+		prerequisite = {
+			focus = RCH_draisine_production
+		}
+		prerequisite = {
+			focus = RCH_draisine_salvaging
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_draisine_production
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				uses = 2
+				ahead_reduction = 2
+				category = rail_panzer
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_firearms_development
+		icon = GFX_RCH_stockpile
+		prerequisite = {
+			focus = RCH_military_research_and_development
+		}
+		x = 7
+		y = 1
+		cost = 4.4
+		relative_position_id = RCH_military_research_and_development
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_ideas = RCH_firearm_production
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = RCH_flammenwerfer_teams
+		icon = GFX_RCH_stormtrooper_2
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		mutually_exclusive = {
+			focus = RCH_gasoline_siphoning
+		}
+		available = {
+			has_tech = tech_flamethrower_equipment
+		}
+		x = -4
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = flamethrower_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_hanz_get_ze_flamethrower
+		icon = GFX_RCH_hans_get_ze_flammenwerfer
+		prerequisite = {
+			focus = RCH_flammenwerfer_teams
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_flammenwerfer_teams
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = flamethrower_equipment
+		        amount = 25
+				producer = RUS
+		    }
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 1
+				category = flamethrower_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_gasoline_siphoning
+		icon = GFX_Fuel
+		prerequisite = {
+			focus = RCH_firearms_development
+			focus = RCH_draisine_salvaging
+		}
+		mutually_exclusive = {
+			focus = RCH_flammenwerfer_teams
+		}
+		x = -6
+		y = 1
+		cost = 4.4
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			add_ideas = RCH_gasoline_for_vehicles
+			add_ideas = RCH_improved_vehicles
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_gattling_production
+		icon = GFX_RCH_Gatling
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		x = -2
+		y = 1
+		cost = 4.4
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = gatling_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_gattling_production_2
+		icon = GFX_RCH_MG42
+		prerequisite = {
+			focus = RCH_gattling_production
+		}
+		available = {
+			RCH_tested_gatling_arms = yes
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_gattling_production
+		completion_reward = {
+			add_ideas = RCH_gattling_proficiency
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_german_authenticity
+		icon = GFX_RCH_germanarms
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		mutually_exclusive = {
+			focus = RCH_economies_of_scale
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_firearm_production
+					add_idea = RCH_german_imitation_arms
+				}
+			}
+			hidden_effect = {
+				RCH_ga_upgrade_idea = yes
+			}
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	focus = {
+		id = RCH_economies_of_scale
+		icon = GFX_RCH_military_industry
+		prerequisite = {
+			focus = RCH_firearms_development
+		}
+		mutually_exclusive = {
+			focus = RCH_german_authenticity
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_firearms_development
+		completion_reward = {
+			RCH_eos_upgrade_idea = yes
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_firearm_production
+					add_idea = RCH_cheaper_arms
+				}
+			}
+			hidden_effect = {
+				RCH_eos_upgrade_idea = yes
+			}
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	focus = {
+		id = RCH_test_out_rail_tanks
+		icon = GFX_RCH_panzers
+		prerequisite = {
+			focus = RCH_rail_armor
+		}
+		available = { 
+			has_equipment = {
+				rail_panzer_equipment > 9
+			}
+		}
+		cancel_if_invalid = yes
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_rail_armor
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_panzer_equipment
+				amount = -10
+			}
+			add_ideas = RCH_panzer_1
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_blitzkrieg_tactics
+		icon = GFX_RCH_blitzkrieg
+		prerequisite = {
+			focus = RCH_test_out_rail_tanks
+		}
+		available = {
+			has_tech = rail_panzer_tech_2035
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_test_out_rail_tanks
+		completion_reward = {
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_idea = RCH_panzer_1
+					}
+					swap_ideas = {
+						remove_idea = RCH_panzer_1
+						add_idea = RCH_panzer_2
+					}
+				}
+				else = {
+					swap_ideas = {
+						remove_idea = RCH_panzer_2
+						add_idea = RCH_panzer_3
+					}
+				}
+			}
+			hidden_effect = {
+				RCH_panzer_upgrade_idea = yes	
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_fist_of_the_reich
+		icon = GFX_RCH_furhers_fist
+		prerequisite = {
+			focus = RCH_test_out_rail_tanks
+		}
+		available = {
+			has_tech = rail_panzer_tech_2035
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_test_out_rail_tanks
+		completion_reward = {
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_idea = RCH_panzer_1
+					}
+					swap_ideas = {
+						remove_idea = RCH_panzer_1
+						add_idea = RCH_panzer_2
+					}
+				}
+				else = {
+					swap_ideas = {
+						remove_idea = RCH_panzer_2
+						add_idea = RCH_panzer_3
+					}
+				}
+			}
+			hidden_effect = {
+				RCH_panzer_upgrade_idea = yes	
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_superior_armaments
+		icon = GFX_RCH_precisionarms
+		prerequisite = {
+			focus = RCH_german_authenticity
+		}
+		available = {
+			has_tech = tech_smithing_power_hammer 
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_german_authenticity
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 1
+				ahead_reduction = 2
+				category = infantry_weapons
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_sturmgewehr_2033
+		icon = GFX_RCH_sturmgewehr_2033
+		prerequisite = {
+			focus = RCH_superior_armaments
+		}
+		available = {
+			has_tech = tech_smithing_machine_pressing
+		}
+		x = 0
+		y = 1
+		cost = 8.6
+		relative_position_id = RCH_superior_armaments
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+					}
+				}
+				set_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+				custom_effect_tooltip = RCH_unlock_sturmgewehr_tt
+			}
+			else_if = {
+				limit = {
+					has_tech = conventional_infantry_equipment_6_tech
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_4
+					amount = 40
+					producer = RCH
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
+				}
+				add_tech_bonus = {
+					name = infantry_bonus
+					bonus = 0.5
+					uses = 1
+					category = conventional_infantry_equipment_6_tech_category
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_precision_arms
+		icon = GFX_RCH_arms1
+		prerequisite = {
+			focus = RCH_german_authenticity
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_german_authenticity
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_german_imitation_arms
+					add_idea = RCH_precision_arms
+				}
+			}
+			hidden_effect = {
+				RCH_ga_upgrade_idea = yes	
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_streamlined_production
+		icon = GFX_RCH_reinburse_the_stockpile
+		prerequisite = {
+			focus = RCH_economies_of_scale
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_economies_of_scale
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_cheaper_arms
+					add_idea = RCH_streamlined_labour 
+				}
+			}
+			hidden_effect = {
+				RCH_eos_upgrade_idea = yes	
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_volkssturm_arms
+		icon = GFX_RCH_volkssturmsimplearms
+		prerequisite = {
+			focus = RCH_streamlined_production
+		}
+		available = {
+			has_war = yes
+			AND = {
+				has_completed_focus = RCH_volkssturm
+			}
+		}
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_streamlined_production
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_streamlined_labour 
+					add_idea = RCH_volkssturm_armaments
+				}
+			}
+			hidden_effect = {
+				RCH_eos_upgrade_idea = yes	
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = RCH_simple_arms_for_simple_people
+		icon = GFX_RCH_volkssturmarms
+		prerequisite = {
+			focus = RCH_streamlined_production
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_streamlined_production
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 65
+				producer = RUS
+			}
+			## TODO Do something Else, too
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
 		id = RCH_outwards
 		icon = GFX_RCH_looking_outwards
-		cost = 6.5
+		cost = 2
 		x = 68
 		y = 0
 		available = {
@@ -3560,14 +3653,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = RCH_incompleted_subtree_tt
-			add_corps_commander_role = {
-				character = RCH_stortbeker
-				skill = 3
-				attack_skill = 3
-				defense_skill = 2
-				planning_skill = 4
-				logistics_skill = 4
-			}
+			RCH_reclusive_upgrade_idea = yes
+			country_event = nf_RCH.11
 		}
 		ai_will_do = {
 			factor = 10
@@ -4377,106 +4464,6 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 0.5
-		}
-	}
-	focus = {
-		id = RCH_defense_against_bolsheviks
-		icon = GFX_RCH_military_army
-		cost = 4.3
-		x = 16
-		y = 0
-		
-		completion_reward = {
-		 	custom_effect_tooltip = RED_reich_border
-		    if = {
-		    	limit = {
-		    		337 = {
-                		is_owned_by = RCH
-					}
-				}
-				337 = {
-			    	add_building_construction = {
-    					type = bunker
-   						level = 1
-    					instant_build = yes
-    					province = {
-       						all_provinces = yes
-   						}
-					}
-					add_building_construction = {
-    					type = infrastructure
-    					level = 1
-    					instant_build = yes
-					}
-				}
-		    }
-		    if = {
-				limit = {
-		    		430 = {
-                		is_owned_by = RCH
-					}
-				}
-				430 = {
-			    	add_building_construction = {
-    					type = bunker
-   						level = 1
-    					instant_build = yes
-    					province = {
-       						all_provinces = yes
-   						}
-					}
-					add_building_construction = {
-    					type = infrastructure
-    					level = 1
-    					instant_build = yes
-					}
-				}
-		    }
-		    if = {
-				limit = {
-		    		431 = {
-                		is_owned_by = RCH
-					}
-				}
-				431  = {
-			    	add_building_construction = {
-    					type = bunker
-   						level = 1
-    					instant_build = yes
-    					province = {
-       						all_provinces = yes
-   						}
-					}
-					add_building_construction = {
-    					type = infrastructure
-    					level = 1
-    					instant_build = yes
-					}
-				}
-		    }
-
-		    if = {
-				limit = {
-		    		214 = {
-                		is_owned_by = RCH
-					}
-				}
-				214 = {
-			    	add_building_construction = {
-    					type = bunker
-   						level = 1
-    					instant_build = yes
-    					province = {
-       						all_provinces = yes
-   						}
-					}
-					add_building_construction = {
-    					type = infrastructure
-    					level = 1
-    					instant_build = yes
-					}
-				}
-		    }
 		}
 	}
 }

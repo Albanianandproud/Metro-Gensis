@@ -3,7 +3,7 @@ country_event = {
     id = nf_RCH.1
     title = nf_RCH.1.t
     desc = nf_RCH.1.d
-    picture = event_tunnel
+    picture = "GFX_event (142)"
 
 	is_triggered_only = yes
 
@@ -30,7 +30,7 @@ country_event = { # Ulitsa surrenders
     id = nf_RCH.2
     title = nf_RCH.2.t
     desc = nf_RCH.2.d
-    picture = event_tunnel
+    picture = "GFX_event (142)"
 
 	is_triggered_only = yes
 
@@ -42,7 +42,7 @@ country_event = { # Ulitsa refuses
     id = nf_RCH.3
     title = nf_RCH.3.t
     desc = nf_RCH.3.d
-    picture = event_tunnel
+    picture = "GFX_event (105)"
 
 	is_triggered_only = yes
 
@@ -54,7 +54,7 @@ country_event = { # Dimitrovskaya surrenders
     id = nf_RCH.4
     title = nf_RCH.4.t
     desc = nf_RCH.4.d
-    picture = event_tunnel
+    picture = "GFX_event (142)"
 
 	is_triggered_only = yes
 
@@ -66,7 +66,7 @@ country_event = { # Dimitrovskaya refuses
     id = nf_RCH.5
     title = nf_RCH.5.t
     desc = nf_RCH.5.d
-    picture = event_tunnel
+    picture = "GFX_event (141)"
 
 	is_triggered_only = yes
 
@@ -78,7 +78,7 @@ country_event = {
     id = nf_RCH.6
     title = nf_RCH.6.t
     desc = nf_RCH.6.d
-    picture = event_tunnel
+    picture = "GFX_event (81)"
 
 	is_triggered_only = yes
 
@@ -199,7 +199,7 @@ country_event = {
     id = nf_RCH.7
     title = nf_RCH.7.t
     desc = nf_RCH.7.d
-    picture = event_tunnel
+    picture = "GFX_event (56)"
 
 	is_triggered_only = yes
 
@@ -226,7 +226,7 @@ country_event = {
     id = nf_RCH.8
     title = nf_RCH.8.t
     desc = nf_RCH.8.d
-    picture = event_tunnel
+    picture = "GFX_event (143)"
 
 	is_triggered_only = yes
 
@@ -243,7 +243,7 @@ country_event = {
     id = nf_RCH.9
     title = nf_RCH.9.t
     desc = nf_RCH.9.d
-    picture = event_tunnel
+    picture = "GFX_event (142)"
 
 	is_triggered_only = yes
 
@@ -335,7 +335,7 @@ country_event = { ## Mayakovskaya ##
     id = nf_RCH.10
     title = nf_RCH.10.t
     desc = nf_RCH.10.d
-    picture = event_tunnel
+    picture = "GFX_event (46)"
 
 	is_triggered_only = yes
 
@@ -348,7 +348,7 @@ country_event = { ## Mayakovskaya ##
 		}
     }
 
-	option = {
+	option = {	### Mayakovskaya is infested with bandits
 		name = nf_RCH.10.a
 		trigger = { date > 2029.6.1 }
 		hidden_effect = {
@@ -370,7 +370,7 @@ country_event = { ## Mayakovskaya ##
 		}
 	}
 
-	option = {
+	option = {	### Mayakovskaya is practically empty
 		name = nf_RCH.10.b
 		trigger = { date < 2029.6.1 }
 		transfer_state = 180
@@ -379,6 +379,45 @@ country_event = { ## Mayakovskaya ##
 		hidden_effect = {
 			set_country_flag = RCH_mayakov_b
 		}
+	}
+}
+
+country_event = {	## Stortbeker event
+    id = nf_RCH.11
+    title = nf_RCH.11.t
+    desc = nf_RCH.11.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {	## Let him back in. Allows PVL to become RCH aligned through RCHs focuses.
+		name = nf_RCH.11.a
+		add_corps_commander_role = {
+			character = RCH_stortbeker
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 4
+		}
+		add_popularity = {
+			ideology = dictatorial
+			popularity = -0.025
+		}
+		hidden_effect = {
+			set_country_flag = RCH_recruit_stortbeker
+		}
+	}
+
+	option = { ## Outcast him. Eventually allow SEV or another southern nation to pursue fascist path / allow AVT some gameplay lol
+		name = nf_RCH.11.b
+		add_popularity = {
+			ideology = dictatorial
+			popularity = 0.015
+		}
+		add_political_power = 10
+		## actually, fuck it. lets do that now
+		hidden_effect = { RUI = { country_event = { id = nf_RUI.1 days = 480 random_days = 480 } } }
 	}
 }
 

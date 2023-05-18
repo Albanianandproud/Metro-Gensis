@@ -1,0 +1,65 @@
+add_namespace = nf_RUI
+
+## Ruins AI will handle alot of events. incredibly fucky if Ruins is a player. You know some minmaxer will play Ruins...
+country_event = {	## Stortbeker spawns somewhere in the south
+    id = nf_RUI.1
+    title = nf_RUI.1.t
+    desc = nf_RUI.1.d
+    picture = ccc_mutant
+	immediate = {
+		hidden_effect = {
+			random_owned_controlled_state = {
+				prioritize = { 407 240 380 388 } ## Basically we prefer if Stortbeker spawns in these states.
+				limit = {
+					region = 2
+					NOT = { has_state_category = pastoral }
+				}
+				set_state_flag = STB_starting_point
+			}
+			every_state = {
+				limit = { has_state_flag = STB_starting_point }
+				add_core_of = STB
+			}
+		}	
+	}
+	fire_only_once = yes
+
+	option = { 
+		name = nf_RUI.1.a
+		RUI = { release = STB }
+		STB = {
+			add_manpower = 35
+            add_offsite_building = { type = arms_factory level = 3 }
+            add_equipment_to_stockpile = { type = infantry_equipment amount = 35 }
+			add_field_marshal_role = {
+				character = STB_stortbeker
+				skill = 5
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 4
+				logistics_skill = 4
+			}
+			## until I can be asked to make a mini tree. STB wont change ideology and do fucky stuff
+			complete_national_focus = dictatorial_1
+			complete_national_focus = dictatorial_ideology_change
+		}
+		## send out 2 events
+		## 1 to RCH 
+		## and 1 to neighbouring countries
+		every_possible_country = {
+			limit = {
+				OR = {
+					original_tag = DMD
+					original_tag = AVT
+					original_tag = SEV
+					original_tag = ATQ
+				}
+			}		
+			country_event = nf_metro.4
+		}
+		RCH = { country_event = nf_metro.5 }
+		ai_chance = {
+			base = 1.5
+		}
+	}
+}
