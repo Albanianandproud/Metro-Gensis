@@ -1,7 +1,7 @@
 ideas = {
 	country = {	
-		huliaipole = {
-			picture = GFX_idea_huliaipole
+	    HUL_anarchist_republic = {
+			picture = GFX_idea_HUL_anarchist_republic
 
 			allowed = {
 			}
@@ -9,15 +9,47 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				conscription = 0.03
-				drift_defence_factor = 0.3
-				oligarch_acceptance = -25
-				dictatorial_acceptance = -25   
+				drift_defence_factor = 0.334
+				stability_factor = 0.08
+				war_support_factor = 0.08
 	        }
+	    }
+	    HUL_beat_the_reds = {
+			picture = GFX_idea_HUL_beat_the_reds
+
+			allowed = {
+				RED = { exists = yes }
+			}
+			on_add = {
+				add_opinion_modifier = { target = RED modifier = HUL_death_to_reds }
+			}
+			on_remove = {
+				remove_opinion_modifier = { target = RED modifier = HUL_death_to_reds }
+			}
+
+			removal_cost = -1
+
 			targeted_modifier = {
 				tag = RED
 				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
 			}
-	    }	
+	    }
+	    HUL_narcotics = {
+			picture = GFX_idea_HUL_narcotics
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				industrial_capacity_factory = -0.1
+				production_factory_max_efficiency_factor = -0.1
+				army_org_factor = -0.1
+				army_morale_factor = -0.1
+	        }
+	    }
 	}
 }

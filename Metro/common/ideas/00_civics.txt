@@ -621,7 +621,6 @@ ideas = {
    					}
                 }
             }
-
             visible = {
             	custom_trigger_tooltip = {
    					tooltip = is_a_savage_nation
@@ -633,16 +632,15 @@ ideas = {
    				}
             }
 
-            allowed_civil_war = {
-				always = yes
-			}
+            allowed_civil_war = { always = yes }
 
             removal_cost = -1
 
    			modifier = {
-   				political_power_gain = 0.1
+				political_power_factor = 0.1
 		 		research_speed_factor = -0.25
-				land_doctrine_cost_factor = -0.2
+				offensive_war_stability_factor = 0.1
+				defensive_war_stability_factor = 0.1
 			}
 			cancel_if_invalid = no
 		}
@@ -680,7 +678,7 @@ ideas = {
             removal_cost = -1
 
 			modifier = {
-				political_power_gain = 0.15
+				political_power_factor = 0.05
 				offensive_war_stability_factor = 0.1
 				## Make it a double-edged sword. I.E. if nation drops below 50% stability or war support BAD! shit happens!
 				custom_modifier_tooltip = propaganda_apparatus_modifier_tooltip
@@ -712,7 +710,6 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-		 		political_power_gain = 0.15
 		 		research_speed_factor = -0.15
 				land_doctrine_cost_factor = 0.075
 			}
@@ -742,7 +739,6 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				political_power_gain = 0.05
 				research_speed_factor = -0.05
 		    }
 
@@ -758,10 +754,6 @@ ideas = {
 				}
 			}
 
-			allowed_civil_war = {
-				always = yes
-			}
-
 			visible = {
             	NOT = {
             		has_country_flag = is_savage_nation
@@ -771,10 +763,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-		 		political_power_gain = -0.05
-		 		research_speed_factor = 0.05
+				political_power_factor = -0.03
+				research_speed_factor = 0.05
 				land_doctrine_cost_factor = -0.025
-				offensive_war_stability_factor = -0.025
 			}
 			cancel_if_invalid = no
 		}
@@ -783,12 +774,6 @@ ideas = {
 			level = 4
 
 			available = {
-				custom_trigger_tooltip = {
-   					tooltip = is_not_bandit_nation
-   					NOT = {
-   						has_country_flag = is_bandit_nation
-   					}
-   				}
 				hidden_trigger = {
 					has_idea = civics_education_level_5
 				}
@@ -813,12 +798,12 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-		 		political_power_gain = -0.1
-		 		research_speed_factor = 0.1
+				political_power_factor = -0.09
+				research_speed_factor = 0.1
 				land_doctrine_cost_factor = -0.05
-				political_advisor_cost_factor = -0.05
-		 		theorist_cost_factor = -0.05
-		 		offensive_war_stability_factor = -0.05
+				political_advisor_cost_factor = -0.04
+				theorist_cost_factor = -0.04
+				offensive_war_stability_factor = -0.04
 			}
 			cancel_if_invalid = no
 		}
@@ -830,14 +815,6 @@ ideas = {
 				hidden_trigger = {
 					has_idea = civics_education_level_6
 				}
-				OR = {
-					tag = PLS
-					tag = MSU
-				}
-			}
-
-			allowed_civil_war = {
-				always = yes
 			}
 
 			visible = {
@@ -853,12 +830,12 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-		 		political_power_gain = -0.2
-		 		research_speed_factor = 0.2
-				land_doctrine_cost_factor = 0.1
-				political_advisor_cost_factor = -0.1
-		 		theorist_cost_factor = -0.1
-		 		offensive_war_stability_factor = -0.1
+				political_power_factor = -0.12
+				research_speed_factor = 0.2
+				land_doctrine_cost_factor = -0.08
+				political_advisor_cost_factor = -0.06
+				theorist_cost_factor = -0.06
+				offensive_war_stability_factor = -0.06
 			}
 
 			cancel_if_invalid = no
@@ -867,6 +844,12 @@ ideas = {
 		civics_education_level_7 = { ## Cutting-Edge
 			level = 6
 
+			available = {
+				hidden_trigger = {
+					has_idea = civics_education_level_7
+				}
+			}
+
 			visible = {
             	custom_trigger_tooltip = {
    					tooltip = can_advance_education
@@ -881,30 +864,14 @@ ideas = {
 				}
             }
 
-			available = {
-				custom_trigger_tooltip = {
-   					tooltip = can_advance_education
-   					has_country_flag = can_do_advanced_education
-   				}
-				hidden_trigger = {
-					has_idea = civics_education_level_7
-				}
-			}
-
 			allowed_civil_war = {
 				always = yes
 			}
 
-			visible = {
-            	NOT = {
-            		has_country_flag = is_savage_nation
-            	}
-            }
-
 			removal_cost = -1
 
 			modifier = {
-		 		research_speed_factor = 0.3
+				research_speed_factor = 0.35
 			}
 
 			cancel_if_invalid = no
