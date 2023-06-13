@@ -251,18 +251,33 @@ select_scavenging_reward_equipment = {
 			3 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_flamethrower_equipment
-					}
+					NOT = { has_tech = tech_basic_flamethrower_equipment }
 				}
-				set_country_flag = scav_reward_eq_flamethrower
+				modifier = {
+					add = 1
+					has_tech  = tech_basic_flamethrower_equipment
+				}
+				set_country_flag = scav_reward_eq_basic_flamethrower
 			}
 			2 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_flamethrower_equipment_2
-					}
+					NOT = { has_tech = tech_basic_flamethrower_equipment }
+				}
+				modifier = {
+					add = 1
+					has_tech  = tech_flamethrower_equipment_1
+				}
+				set_country_flag = scav_reward_eq_flamethrower_1
+			}
+			2 = {
+				modifier = {
+					factor = 0
+					NOT = { has_tech = tech_basic_flamethrower_equipment }
+				}
+				modifier = {
+					add = 1
+					has_tech  = tech_flamethrower_equipment_2
 				}
 				set_country_flag = scav_reward_eq_flamethrower_2
 			}
@@ -270,16 +285,16 @@ select_scavenging_reward_equipment = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_flamethrower_equipment
+						has_tech = tech_basic_flamethrower_equipment
 					}
 				}
-				set_country_flag = scav_reward_eq_flamethrower_buff
+				set_country_flag = scav_reward_eq_flamethrower_production_buff
 			}
 			2 = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_flamethrower_equipment
+						has_tech = tech_basic_flamethrower_equipment
 					}
 				}
 				set_country_flag = scav_reward_eq_flamethrower_stat_buff
@@ -288,26 +303,33 @@ select_scavenging_reward_equipment = {
 			3 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_gatling_equipment
-					}
+					NOT = { has_tech = tech_basic_gatling_equipment }
 				}
 				modifier = {
 					add = 1
-					has_tech  = tech_gatling_equipment
+					has_tech  = tech_basic_gatling_equipment
 				}
-				set_country_flag = scav_reward_eq_gatling
+				set_country_flag = scav_reward_eq_basic_gatling
 			}
 			2 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_gatling_equipment
-					}
+					NOT = { has_tech = tech_basic_gatling_equipment }
 				}
 				modifier = {
 					add = 1
-					has_tech  = tech_gatling_equipment
+					has_tech  = tech_gatling_equipment_1
+				}
+				set_country_flag = scav_reward_eq_gatling_1
+			}
+			2 = {
+				modifier = {
+					factor = 0
+					NOT = { has_tech = tech_basic_gatling_equipment }
+				}
+				modifier = {
+					add = 1
+					has_tech  = tech_gatling_equipment_2
 				}
 				set_country_flag = scav_reward_eq_gatling_2
 			}
@@ -315,7 +337,7 @@ select_scavenging_reward_equipment = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_gatling_equipment
+						has_tech = tech_basic_gatling_equipment
 					}
 				}
 				set_country_flag = scav_reward_eq_gatling_production_buff
@@ -324,31 +346,42 @@ select_scavenging_reward_equipment = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_gatling_equipment
+						has_tech = tech_basic_gatling_equipment
 					}
 				}
 				set_country_flag = scav_reward_eq_gatling_stat_buff
 			}
-			## Explosive Eq
+			## Flamethrower Eq
 			3 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_explosive_equipment
-					}
+					NOT = { has_tech = tech_basic_explosive_equipment }
 				}
-				set_country_flag = scav_reward_eq_explosive
+				modifier = {
+					add = 1
+					has_tech  = tech_basic_explosive_equipment
+				}
+				set_country_flag = scav_reward_eq_basic_explosive
 			}
 			2 = {
 				modifier = {
 					factor = 0
-					NOT = {
-						has_tech = tech_explosive_equipment
-					}
+					NOT = { has_tech = tech_basic_explosive_equipment }
 				}
 				modifier = {
 					add = 1
-					has_tech = tech_explosive_equipment
+					has_tech  = tech_explosive_equipment_1
+				}
+				set_country_flag = scav_reward_eq_explosive_1
+			}
+			2 = {
+				modifier = {
+					factor = 0
+					NOT = { has_tech = tech_basic_explosive_equipment }
+				}
+				modifier = {
+					add = 1
+					has_tech  = tech_explosive_equipment_2
 				}
 				set_country_flag = scav_reward_eq_explosive_2
 			}
@@ -356,7 +389,7 @@ select_scavenging_reward_equipment = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_gatling_equipment
+						has_tech = tech_basic_explosive_equipment
 					}
 				}
 				set_country_flag = scav_reward_eq_explosive_production_buff
@@ -365,7 +398,7 @@ select_scavenging_reward_equipment = {
 				modifier = {
 					factor = 0
 					NOT = {
-						has_tech = tech_gatling_equipment
+						has_tech = tech_basic_explosive_equipment
 					}
 				}
 				set_country_flag = scav_reward_eq_explosive_stat_buff
@@ -699,18 +732,32 @@ give_scavenge_reward_equipment = {
 		log = "scav_reward_eq_tech_support granted"
 	}
 	if = {
-		limit = { has_country_flag = scav_reward_eq_flamethrower }
+		limit = { has_country_flag = scav_reward_eq_basic_flamethrower }
 
 		ROOT = {
 			add_equipment_to_stockpile = {
-				type = flamethrower_equipment
+				type = basic_flamethrower_equipment
 				amount = 15
 				producer = RUS
 			}
 		}
 
-		clr_country_flag = scav_reward_eq_flamethrower
-		log = "scav_reward_eq_flamethrower granted"
+		clr_country_flag = scav_reward_eq_basic_flamethrower
+		log = "scav_reward_eq_basic_flamethrower granted"
+	}
+	if = {
+		limit = { has_country_flag = scav_reward_eq_flamethrower_1 }
+
+		ROOT = {
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+
+		clr_country_flag = scav_reward_eq_flamethrower_1
+		log = "scav_reward_eq_flamethrower_1 granted"
 	}
 	if = {
 		limit = { has_country_flag = scav_reward_eq_flamethrower_2 }
@@ -749,18 +796,32 @@ give_scavenge_reward_equipment = {
 		log = "scav_reward_eq_flamethrower_production_buff  granted"
 	}
 	if = {
-		limit = { has_country_flag = scav_reward_eq_gatling }
+		limit = { has_country_flag = scav_reward_eq_basic_gatling }
 
 		ROOT = {
 			add_equipment_to_stockpile = {
-				type = gatling_equipment
+				type = basic_gatling_equipment
 				amount = 15
 				producer = RUS
 			}
 		}
 
-		clr_country_flag = scav_reward_eq_gatling
-		log = "scav_reward_eq_gatling granted"
+		clr_country_flag = scav_reward_eq_basic_gatling
+		log = "scav_reward_eq_basic_gatling granted"
+	}
+	if = {
+		limit = { has_country_flag = scav_reward_eq_gatling_1 }
+
+		ROOT = {
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+
+		clr_country_flag = scav_reward_eq_gatling_1
+		log = "scav_reward_eq_gatling_1 granted"
 	}
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gatling_2 }
@@ -799,18 +860,32 @@ give_scavenge_reward_equipment = {
 		log = "scav_reward_eq_gatling_production_buff  granted"
 	}
 	if = {
-		limit = { has_country_flag = scav_reward_eq_explosive }
+		limit = { has_country_flag = scav_reward_eq_basic_explosive }
 
 		ROOT = {
 			add_equipment_to_stockpile = {
-				type = explosive_equipment
+				type = basic_explosive_equipment
 				amount = 15
 				producer = RUS
 			}
 		}
 
-		clr_country_flag = scav_reward_eq_explosive
-		log = "scav_reward_eq_explosive granted"
+		clr_country_flag = scav_reward_eq_basic_explosive
+		log = "scav_reward_eq_basic_explosive granted"
+	}
+	if = {
+		limit = { has_country_flag = scav_reward_eq_explosive_1 }
+
+		ROOT = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+
+		clr_country_flag = scav_reward_eq_explosive_1
+		log = "scav_reward_eq_explosive_1 granted"
 	}
 	if = {
 		limit = { has_country_flag = scav_reward_eq_explosive_2 }
@@ -1986,31 +2061,31 @@ flush_scavenge_reward_technology = {
 	clr_country_flag = scav_reward_tech_punch_pressing_40
 	clr_country_flag = scav_reward_tech_stalker_20
 	clr_country_flag = scav_reward_tech_stalker_40
-clr_country_flag = scav_reward_tech_gas_mask_20
-clr_country_flag = scav_reward_tech_gas_mask_40
-clr_country_flag = scav_reward_tech_entrench_kits_20
-clr_country_flag = scav_reward_tech_entrench_kits_40
-clr_country_flag = scav_reward_tech_clothing_kits_20
-clr_country_flag = scav_reward_tech_clothing_kits_40
-clr_country_flag = scav_reward_tech_support_tech_20
-clr_country_flag = scav_reward_tech_support_tech_40
-clr_country_flag = scav_reward_tech_infantry_weapons_20
-clr_country_flag = scav_reward_tech_infantry_weapons_40
-clr_country_flag = scav_reward_tech_armor_20
-clr_country_flag = scav_reward_tech_armor_40
-clr_country_flag = scav_reward_land_doctrine_25
-clr_country_flag = scav_reward_land_doctrine_40
-clr_country_flag = scav_reward_tech_gas_mask_futuristic 
-clr_country_flag = scav_reward_tech_gas_mask_scientific
-clr_country_flag = scav_reward_tech_gas_mask_military 
-clr_country_flag = scav_reward_tech_future_toolkits
-clr_country_flag = scav_reward_tech_technician_toolkit
-clr_country_flag = scav_reward_tech_precision_tools
-clr_country_flag = scav_reward_tech_technician_pressing
-clr_country_flag = scav_reward_tech_technician_machining 
-clr_country_flag = scav_reward_tech_refinery_3
-clr_country_flag = scav_reward_tech_refinery_4
-clr_country_flag = scav_reward_tech_refinery_5
+	clr_country_flag = scav_reward_tech_gas_mask_20
+	clr_country_flag = scav_reward_tech_gas_mask_40
+	clr_country_flag = scav_reward_tech_entrench_kits_20
+	clr_country_flag = scav_reward_tech_entrench_kits_40
+	clr_country_flag = scav_reward_tech_clothing_kits_20
+	clr_country_flag = scav_reward_tech_clothing_kits_40
+	clr_country_flag = scav_reward_tech_support_tech_20
+	clr_country_flag = scav_reward_tech_support_tech_40
+	clr_country_flag = scav_reward_tech_infantry_weapons_20
+	clr_country_flag = scav_reward_tech_infantry_weapons_40
+	clr_country_flag = scav_reward_tech_armor_20
+	clr_country_flag = scav_reward_tech_armor_40
+	clr_country_flag = scav_reward_land_doctrine_25
+	clr_country_flag = scav_reward_land_doctrine_40
+	clr_country_flag = scav_reward_tech_gas_mask_futuristic 
+	clr_country_flag = scav_reward_tech_gas_mask_scientific
+	clr_country_flag = scav_reward_tech_gas_mask_military 
+	clr_country_flag = scav_reward_tech_future_toolkits
+	clr_country_flag = scav_reward_tech_technician_toolkit
+	clr_country_flag = scav_reward_tech_precision_tools
+	clr_country_flag = scav_reward_tech_technician_pressing
+	clr_country_flag = scav_reward_tech_technician_machining 
+	clr_country_flag = scav_reward_tech_refinery_3
+	clr_country_flag = scav_reward_tech_refinery_4
+	clr_country_flag = scav_reward_tech_refinery_5
 log = "flushed tech reward chances"
 }
 
@@ -2040,18 +2115,25 @@ clr_country_flag = scav_reward_eq_spec_ops_heavy
 clr_country_flag = scav_reward_eq_spec_ops_production_buff
 clr_country_flag = scav_reward_eq_spec_ops_stat_buff
 clr_country_flag = scav_reward_eq_tech_support
-clr_country_flag = scav_reward_eq_flamethrower
+
+clr_country_flag = scav_reward_eq_basic_flamethrower
 clr_country_flag = scav_reward_eq_flamethrower_2
+clr_country_flag = scav_reward_eq_flamethrower_1
 clr_country_flag = scav_reward_eq_flamethrower_buff
 clr_country_flag = scav_reward_eq_flamethrower_stat_buff
-clr_country_flag = scav_reward_eq_gatling
+
+clr_country_flag = scav_reward_eq_basic_gatling
+clr_country_flag = scav_reward_eq_gatling_1
 clr_country_flag = scav_reward_eq_gatling_2
 clr_country_flag = scav_reward_eq_gatling_production_buff
 clr_country_flag = scav_reward_eq_gatling_stat_buff
-clr_country_flag = scav_reward_eq_explosive
+
+clr_country_flag = scav_reward_eq_basic_explosive
+clr_country_flag = scav_reward_eq_explosive_1
 clr_country_flag = scav_reward_eq_explosive_2
 clr_country_flag = scav_reward_eq_explosive_production_buff
 clr_country_flag = scav_reward_eq_explosive_stat_buff
+
 clr_country_flag = shotgun_infantry_equipment_3_tech_unlock
 clr_country_flag = scav_reward_eq_gun_shotgun_4_tech_unlock
 clr_country_flag = scav_reward_eq_gun_conventional_6_tech_unlock

@@ -106,3 +106,112 @@ laser_casting_research = {
 		} 
 	}
 }
+
+## Support ## 
+
+flamethrower_restrictions_lift = {
+	if = {
+		limit = { has_idea = flamethrower_restriction_ban }
+		add_threat_over_time = yes
+		news_event = { id = global_event.60 }
+		every_country = {
+			limit = {
+				NOT = { original_tag = ROOT }
+				OR = {
+					has_idea = flamethrower_restriction_ban
+				}
+			}
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = abandoned_flamethrower_restrictions
+			}
+		}
+	}
+}
+
+flamethrower_restrictions_abandoned = {	## Harsher
+	if = {
+		limit = { has_idea = flamethrower_restriction_ban }
+		news_event = { id = global_event.60 }
+		add_threat_over_time_harsher = yes
+		every_country = {
+			limit = {
+				NOT = { original_tag = ROOT }
+				OR = {
+					has_country_flag = is_generic_nation
+					has_idea = flamethrower_restriction_ban
+				}
+			}
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = abandoned_flamethrower_restrictions_harsher
+			}
+		}
+	}
+}
+
+add_threat_over_time = {
+	if = {
+		limit = {
+			threat < 0.06
+		}
+		add_threat = 3
+	}
+	else_if = {
+		limit = {
+			threat > 0.06
+		}
+		add_threat = 2.5
+	}
+	else_if = {
+		limit = {
+			threat > 0.11
+		}
+		add_threat = 2
+	}
+	else_if = {
+		limit = {
+			threat > 0.16
+		}
+		add_threat = 1
+	}
+}
+
+add_threat_over_time_harsher = {
+	if = {
+		limit = {
+			threat < 0.06
+		}
+		add_threat = 4
+	}
+	else_if = {
+		limit = {
+			threat > 0.06
+		}
+		add_threat = 4
+	}
+	else_if = {
+		limit = {
+			threat > 0.12
+		}
+		add_threat = 3
+	}
+	else_if = {
+		limit = {
+			threat > 0.18
+		}
+		add_threat = 2
+	}
+}
+
+reduce_abandon_flamethrower_treaty_cost = {
+	every_country = {
+		limit = {
+			has_idea = flamethrower_restriction_ban
+		}
+		subtract_from_variable = {
+			var = abandon_flamethrower_treaty_cost
+			value = 5
+		}
+	}
+}

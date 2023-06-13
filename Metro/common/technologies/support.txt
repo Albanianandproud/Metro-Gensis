@@ -1,3 +1,19 @@
+@TECH_YEAR_2020_Y = 0
+@TECH_YEAR_2028_Y = 4
+@TECH_YEAR_2029_Y = 7
+@TECH_YEAR_2030_Y = 10
+@TECH_YEAR_2031_Y = 13
+@TECH_YEAR_2032_Y = 16
+@TECH_YEAR_2033_Y = 19
+@TECH_YEAR_2034_Y = 22
+@TECH_YEAR_2035_Y = 25
+@TECH_YEAR_2035.5_Y = 28
+@TECH_YEAR_2036_Y = 33
+@TECH_YEAR_2037_Y = 37
+@TECH_YEAR_2038_Y = 39
+
+@TECH_COLUMN_INFANTRY_TACTICS = 1 
+
 technologies = {
 	
 	tech_support = {
@@ -6,7 +22,7 @@ technologies = {
 			support_equipment_1
 		}
 
-		research_cost = 3.25
+		research_cost = 1.8
 		start_year = 2020
 		folder = {
 			name = support_folder
@@ -48,7 +64,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 3.25
+		research_cost = 1.8
 		start_year = 2028
 		folder = {
 			name = support_folder
@@ -295,7 +311,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 3.25
+		research_cost = 1.8
 		start_year = 2028
 		folder = {
 			name = support_folder
@@ -799,11 +815,10 @@ technologies = {
 			}
 		}
 	}
-
-	tech_flamethrower_equipment = {
+	tech_basic_flamethrower_equipment = {	## Molotov Cocktails ## 
 
 		enable_equipments = {
-		    flamethrower_equipment
+		    basic_flamethrower_equipment
 		}
 
 		enable_subunits = {
@@ -811,20 +826,20 @@ technologies = {
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_pneumatic_airtight
+			leads_to_tech = tech_flamethrower_ballast
 			research_cost_coeff = 1
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_pneumatic_automatic
+			leads_to_tech = tech_flamethrower_infantry_gear
 			research_cost_coeff = 1
 		}
 
-		research_cost = 3.25
-		start_year = 2020
+		research_cost = 1.05
+		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 0 }
+			position = { x = 1 y = @TECH_YEAR_2020_Y }
 		}
 	
 		categories = {
@@ -833,36 +848,114 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.05 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 25
-				original_tag = RED
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
+	tech_flamethrower_infantry_gear = {
 
-	tech_flamethrower_pneumatic_airtight = {
+		dependencies = { entrench_kits_2030 = 1 }
 
-	    category_flamethrower = {
-			soft_attack = 0.05
-			hard_attack = 0.05
+		irregulars = {
+			need = { basic_flamethrower_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_irregulars_flamethrower_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = -1 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			flamethrower_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+		}
+	}
+	tech_flamethrower_ballast = {
+
+		category_flamethrower = {
+			defense = 0.15
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_extended_tank
+			leads_to_tech = tech_flamethrower_equipment_1
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_flamethrower_pneumatic_automatic
+		research_cost = 1.8
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2028_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			flamethrower_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
+			}
+		}
+	}
+	tech_flamethrower_equipment_1 = {
+
+		allow = { NOT = { has_country_flag = flamethrower_restriction_ban } } 
+
+		on_research_complete = {
+			custom_effect_tooltip = flamethrower_restriction_treaty_negative_impact
+			flamethrower_restrictions_abandoned = yes
+        }
+
+		enable_equipments = {
+		    flamethrower_equipment_1
 		}
 
-		research_cost = 2.5
+		path = {
+			leads_to_tech = tech_flamethrower_airtight_pneumatic_system
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_flamethrower_automatic_pneumatic_system
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2.35
 		start_year = 2029
 		folder = {
 			name = support_folder
-			position = { x = -1 y = 3 }
+			position = { x = 1 y = @TECH_YEAR_2029_Y }
 		}
 	
 		categories = {
@@ -871,74 +964,38 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 2.35 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
 
-	tech_flamethrower_pneumatic_automatic = {
+	tech_flamethrower_airtight_pneumatic_system = {
 
-	    category_flamethrower = {
-			soft_attack = 0.1
+		category_flamethrower = {
+			defense = 0.15
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_extended_tank
+			leads_to_tech = tech_flamethrower_larger_tank
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_flamethrower_pneumatic_airtight
-		}
+		XOR = { tech_flamethrower_automatic_pneumatic_system }
 
-		research_cost = 2.5
-		start_year = 2029
-		folder = {
-			name = support_folder
-			position = { x = 1 y = 3 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			flamethrower_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-			modifier = {
-				add = 10
-				original_tag = RED
-			}
-		}
-	}
-
-	tech_flamethrower_extended_tank = {
-
-	    category_flamethrower = {
-			defense = 0.05
-			soft_attack = 0.05
-		}
-
-		path = {
-			leads_to_tech = tech_flamethrower_petrochemical
-			research_cost_coeff = 1
-		}
-
-		path = {
-			leads_to_tech = tech_flamethrower_gas
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
+		research_cost = 1.8
 		start_year = 2030
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 6 }
+			position = { x = 0 y = @TECH_YEAR_2030_Y }
 		}
 	
 		categories = {
@@ -947,36 +1004,37 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
+	tech_flamethrower_automatic_pneumatic_system = {
 
-	tech_flamethrower_gas = {
-
-	    category_flamethrower = {
-			soft_attack = 0.06
-			hard_attack = 0.06
+		category_flamethrower = {
+			soft_attack = 0.15
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_high_capacity_pneumatic
+			leads_to_tech = tech_flamethrower_larger_tank
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_flamethrower_petrochemical
-		}
+		XOR = { tech_flamethrower_airtight_pneumatic_system }
 
-		research_cost = 2.5
-		start_year = 2031
+		research_cost = 1.8
+		start_year = 2030
 		folder = {
 			name = support_folder
-			position = { x = 1 y = 9 }
+			position = { x = 2 y = @TECH_YEAR_2030_Y }
 		}
 	
 		categories = {
@@ -985,36 +1043,40 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
+	tech_flamethrower_larger_tank = {
 
-	tech_flamethrower_petrochemical = {
-
-	    category_flamethrower = {
-			soft_attack = 0.1
-			breakthrough = 0.1
+		category_flamethrower = {
+			breakthrough = 0.25
 		}
 
 		path = {
-			leads_to_tech = tech_flamethrower_high_capacity_pneumatic
+			leads_to_tech = tech_flamethrower_fuel_petrochemical
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_flamethrower_gas
+		path = {
+			leads_to_tech = tech_flamethrower_fuel_gasoline
+			research_cost_coeff = 1
 		}
 
-		research_cost = 2.5
+		research_cost = 1.8
 		start_year = 2031
 		folder = {
 			name = support_folder
-			position = { x = -1 y = 9 }
+			position = { x = 1 y = @TECH_YEAR_2031_Y }
 		}
 	
 		categories = {
@@ -1023,20 +1085,23 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
+	tech_flamethrower_fuel_petrochemical = {
 
-	tech_flamethrower_high_capacity_pneumatic = {
-
-	    category_flamethrower = {
-			soft_attack = 0.1
-			hard_attack = 0.1
+		category_flamethrower = {
+			ap_attack = 1
 		}
 
 		path = {
@@ -1044,11 +1109,13 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 2.5
+		XOR = { tech_flamethrower_fuel_gasoline }
+
+		research_cost = 1.8
 		start_year = 2032
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 12 }
+			position = { x = 0 y = @TECH_YEAR_2032_Y }
 		}
 	
 		categories = {
@@ -1057,26 +1124,37 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
+	tech_flamethrower_fuel_gasoline = {
 
-	tech_flamethrower_equipment_2 = {
-
-		enable_equipments = {
-			flamethrower_equipment_2
+		category_flamethrower = {
+			hard_attack = 0.35
 		}
 
-		research_cost = 3.25
-		start_year = 2033
+		path = {
+			leads_to_tech = tech_flamethrower_equipment_2
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_flamethrower_fuel_petrochemical }
+
+		research_cost = 1.8
+		start_year = 2032
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 15 }
+			position = { x = 2 y = @TECH_YEAR_2032_Y }
 		}
 	
 		categories = {
@@ -1085,283 +1163,130 @@ technologies = {
 			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
 			modifier = {
-				add = 10
-				original_tag = RED
+				factor = 2.5
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
 			}
 		}
 	}
-
-	tech_gatling_equipment = {
+	tech_flamethrower_equipment_2 = {	## Basic Flamer ## 
 
 		enable_equipments = {
-			gatling_equipment
-		}
-
-		enable_subunits = {
-			gatling_support
+		    flamethrower_equipment_2
 		}
 
 		path = {
-			leads_to_tech = tech_gatling_barrel
+			leads_to_tech = tech_flamethrower_pneumatic_high_capacity
 			research_cost_coeff = 1
 		}
 
-		research_cost = 3.25
-		start_year = 2020
+		path = {
+			leads_to_tech = tech_flamethrower_ergonomic_handgrip
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2.35
+		start_year = 2023
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 0 }
+			position = { x = 1 y = @TECH_YEAR_2033_Y }
 		}
 	
 		categories = {
 			support_tech
 			support_weapons_tech
-			gatling_support_tech
+			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 2.35 }
 		ai_will_do = {
-			factor = 6
+			base = 3
+			modifier = {
+				factor = 2.5
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
+			}
 		}
 	}
+	tech_flamethrower_ergonomic_handgrip = {
 
-	tech_gatling_barrel = {
-
-	    category_gatling = {
-			defense = 0.1
-			soft_attack = 0.1
+		category_flamethrower = {
+			reliability = 0.1
 		}
 
-		path = {
-			leads_to_tech = tech_gatling_engine
-			research_cost_coeff = 1
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_stabiliser
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2029
+		research_cost = 1.8
+		start_year = 2034
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 3 }
+			position = { x = 0 y = @TECH_YEAR_2034_Y }
 		}
 	
 		categories = {
 			support_tech
 			support_weapons_tech
-			gatling_support_tech
+			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
+			}
 		}
 	}
+	tech_flamethrower_pneumatic_high_capacity = {
 
-	tech_gatling_stabiliser = {
-
-	    category_gatling = {
-			soft_attack = 0.1
-			defense = 0.1
-		}
-
-		XOR = {
-		    tech_gatling_engine
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_support
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2030
-		folder = {
-			name = support_folder
-			position = { x = -1 y = 6 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			gatling_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_gatling_engine = {
-
-	    category_gatling = {
-			soft_attack = 0.1
-			ap_attack = 0.25
-		}
-
-		XOR = {
-		    tech_gatling_stabiliser
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_support
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2030
-		folder = {
-			name = support_folder
-			position = { x = 1 y = 6 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			gatling_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_gatling_support = {
-
-	    category_gatling = {
+		category_flamethrower = {
 			soft_attack = 0.1
 			hard_attack = 0.1
 		}
 
-		path = {
-			leads_to_tech = tech_gatling_spring_mechanism 
-			research_cost_coeff = 1
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_magazine
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2031
+		research_cost = 1.8
+		start_year = 2034
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 9 }
+			position = { x = 2 y = @TECH_YEAR_2034_Y }
 		}
 	
 		categories = {
 			support_tech
 			support_weapons_tech
-			gatling_support_tech
+			flamethrower_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = flamethrower_support
+			}
 		}
 	}
-
-	tech_gatling_spring_mechanism = {
-
-	    category_gatling = {
-			soft_attack = 0.1
-			ap_attack = 0.1
-			hard_attack = 0.1
-		}
-
-		XOR = {
-		    tech_gatling_magazine
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_equipment_2
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2032
-		folder = {
-			name = support_folder
-			position = { x = -1 y = 12 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			gatling_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_gatling_magazine = {
-
-	    category_gatling = {
-			soft_attack = 0.125
-			breakthrough = 0.25
-		}
-
-		XOR = {
-		    tech_gatling_spring_mechanism
-		}
-
-		path = {
-			leads_to_tech = tech_gatling_equipment_2
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-		start_year = 2032
-		folder = {
-			name = support_folder
-			position = { x = 1 y = 12 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			gatling_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_gatling_equipment_2 = {
+	tech_basic_explosive_equipment = {	## Dirty Grenades ## 
 
 		enable_equipments = {
-			gatling_equipment_2
-		}
-
-		research_cost = 3.25
-		start_year = 2033
-		folder = {
-			name = support_folder
-			position = { x = 0 y = 15 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			gatling_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_explosive_equipment = {
-
-		enable_equipments = {
-		    explosive_equipment
+		    basic_explosive_equipment
 		}
 
 		enable_subunits = {
@@ -1369,20 +1294,20 @@ technologies = {
 		}
 
 		path = {
-			leads_to_tech = tech_explosive_fragmentation_grenade
+			leads_to_tech = tech_explosive_nail_bomb
 			research_cost_coeff = 1
 		}
 
 		path = {
-			leads_to_tech = tech_explosive_fragmentation_nail_grenade
+			leads_to_tech = tech_explosive_infantry_gear
 			research_cost_coeff = 1
 		}
 
-		research_cost = 3.25
-		start_year = 2020
+		research_cost = 1.05
+		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 0 }
+			position = { x = 1 y = @TECH_YEAR_2020_Y }
 		}
 	
 		categories = {
@@ -1391,32 +1316,74 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.05 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_infantry_gear = {
 
-	tech_explosive_fragmentation_grenade = {
+		dependencies = { entrench_kits_2030 = 1 }
 
-	    category_explosive = {
+		irregulars = {
+			need = { basic_explosive_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_irregulars_explosive_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 3 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_explosive_nail_bomb = {
+
+		category_explosive = {
 			soft_attack = 0.1
 			hard_attack = 0.1
 		}
 
 		path = {
-			leads_to_tech = tech_explosive_stock
+			leads_to_tech = tech_explosive_equipment_1
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_explosive_fragmentation_nail_grenade
-		}
-
-		research_cost = 2.5
-		start_year = 2029
+		research_cost = 1.8
+		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = -1 y = 3 }
+			position = { x = 1 y = @TECH_YEAR_2028_Y }
 		}
 	
 		categories = {
@@ -1425,50 +1392,23 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_equipment_1 = { ## Medved
 
-	tech_explosive_fragmentation_nail_grenade = {
-
-	    category_explosive = {
-			soft_attack = 0.125
-			breakthrough = 0.125
-		}
-
-		path = {
-			leads_to_tech = tech_explosive_stock
-			research_cost_coeff = 1
-		}
-
-		XOR = {
-            tech_explosive_fragmentation_grenade
-		}
-
-		research_cost = 2.5
-		start_year = 2029
-		folder = {
-			name = support_folder
-			position = { x = 1 y = 3 }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			explosive_support_tech
-		}
-		
-		ai_will_do = {
-			factor = 6
-		}
-	}
-
-	tech_explosive_stock = {
-
-	    category_explosive = {
-			soft_attack = 0.1
-			hard_attack = 0.1
+		enable_equipments = {
+		    explosive_equipment_1
 		}
 
 		path = {
@@ -1477,15 +1417,15 @@ technologies = {
 		}
 
 		path = {
-			leads_to_tech = tech_explosive_high_explosive_pill
+			leads_to_tech = tech_explosive_high_explosive
 			research_cost_coeff = 1
 		}
 
-		research_cost = 2.5
-		start_year = 2030
+		research_cost = 2.35
+		start_year = 2029
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 6 }
+			position = { x = 1 y = @TECH_YEAR_2029_Y }
 		}
 	
 		categories = {
@@ -1494,16 +1434,62 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 2.35 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
 
-	tech_explosive_high_explosive_pill = {
+	tech_explosive_flechette = {
 
-	    category_explosive = {
-			soft_attack = 0.1
-			hard_attack = 0.1
+		category_explosive = {
+			ap_attack = 0.2
+		}
+
+		path = {
+			leads_to_tech = tech_explosive_revolving_chamber
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_explosive_high_explosive }
+
+		research_cost = 1.8
+		start_year = 2030
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2030_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_explosive_high_explosive = {
+
+		category_explosive = {
 			breakthrough = 0.2
 		}
 
@@ -1512,15 +1498,13 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_explosive_flechette
-		}
+		XOR = { tech_explosive_flechette }
 
-		research_cost = 2.5
-		start_year = 2031
+		research_cost = 1.8
+		start_year = 2030
 		folder = {
 			name = support_folder
-			position = { x = 1 y = 9 }
+			position = { x = 2 y = @TECH_YEAR_2030_Y }
 		}
 	
 		categories = {
@@ -1529,34 +1513,40 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_revolving_chamber = {
 
-	tech_explosive_flechette = {
-
-	    category_explosive = {
-			soft_attack = 0.1
-			hard_attack = 0.1
-			breakthrough = 0.1
-			ap_attack = 0.1
+		category_flamethrower = {
+			defense = 0.15
 		}
 
 		path = {
-			leads_to_tech = tech_explosive_revolving_chamber
+			leads_to_tech = tech_explosive_spring_mechanism
 			research_cost_coeff = 1
 		}
 
-		XOR = {
-            tech_explosive_high_explosive_pill
+		path = {
+			leads_to_tech = tech_explosive_breakable_container
+			research_cost_coeff = 1
 		}
 
-		research_cost = 2.5
+		research_cost = 1.8
 		start_year = 2031
 		folder = {
 			name = support_folder
-			position = { x = -1 y = 9 }
+			position = { x = 1 y = @TECH_YEAR_2031_Y }
 		}
 	
 		categories = {
@@ -1565,17 +1555,24 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_spring_mechanism = {
 
-	tech_explosive_revolving_chamber = {
-
-	    category_explosive = {
-			soft_attack = 0.1
-		    breakthrough = 0.1
-			ap_attack = 0.15
+		category_flamethrower = {
+			soft_attack = 0.2
+			hard_attack = 0.1
 		}
 
 		path = {
@@ -1583,11 +1580,13 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		research_cost = 2.5
+		XOR = { tech_explosive_breakable_container }
+
+		research_cost = 1.8
 		start_year = 2032
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 12 }
+			position = { x = 0 y = @TECH_YEAR_2032_Y }
 		}
 	
 		categories = {
@@ -1596,22 +1595,80 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 1.8 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_breakable_container = {
 
-	tech_explosive_equipment_2 = {
+		category_flamethrower = {
+			soft_attack = 0.1
+			hard_attack = 0.2
+		}
+
+		path = {
+			leads_to_tech = tech_explosive_equipment_2
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_explosive_spring_mechanism }
+
+		research_cost = 1.8
+		start_year = 2032
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2032_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_explosive_equipment_2 = {	## Grenade Launcher ## 
 
 		enable_equipments = {
 		    explosive_equipment_2
 		}
 
-		research_cost = 3.25
-		start_year = 2033
+		path = {
+			leads_to_tech = tech_explosive_clockwork_spring
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_explosive_electric_fuse
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2.35
+		start_year = 2023
 		folder = {
 			name = support_folder
-			position = { x = 0 y = 15 }
+			position = { x = 1 y = @TECH_YEAR_2033_Y }
 		}
 	
 		categories = {
@@ -1620,18 +1677,568 @@ technologies = {
 			explosive_support_tech
 		}
 		
+		ai_research_weights = { support_weapons_tech = 2.35 }
 		ai_will_do = {
-			factor = 6
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
 		}
 	}
+	tech_explosive_electric_fuse = {
 
-	### Unique Technologies ###
+		category_explosive = {
+			reliability = 0.1
+		}
+
+		research_cost = 1.8
+		start_year = 2034
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2034_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_explosive_clockwork_spring = {
+
+		category_explosive = {
+			defense = 0.05
+			breakthrough = 0.1
+		}
+
+		research_cost = 1.8
+		start_year = 2034
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2034_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_basic_gatling_equipment = {	## Scrap Gatling Gun ## 
+
+		enable_equipments = {
+		    basic_gatling_equipment
+		}
+
+		enable_subunits = {
+			gatling_support
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_belt_fed
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_cartridge
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.35
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.35 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_belt_fed = {
+
+		category_gatling = {
+			defense = 0.05
+			breakthrough = 0.025
+			ap_attack  = 0.025
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_five_barrel_assembly
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_gatling_cartridge }
+
+		research_cost = 1.8
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2028_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_cartridge = {
+
+		category_gatling = {
+			breakthrough = 0.1
+			ap_attack  = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_five_barrel_assembly
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_gatling_belt_fed }
+
+		research_cost = 1.8
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2028_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_five_barrel_assembly = {
+
+		category_gatling = {
+			defense = 0.1
+			soft_attack = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_shortened_barrel
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_quadrant_magazine
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2029
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2029_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_shortened_barrel = {
+
+		category_gatling = {
+			soft_attack = 0.1
+			defense = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_spring_mechanism
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_gatling_quadrant_magazine }
+
+		research_cost = 1.8
+		start_year = 2030
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2030_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_quadrant_magazine = {
+
+		category_gatling = {
+			soft_attack = 0.1
+			ap_attack = 0.25
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_stabilizer 
+			research_cost_coeff = 1
+		}
+
+		XOR = { tech_gatling_shortened_barrel }
+
+		research_cost = 1.8
+		start_year = 2030
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2030_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_spring_mechanism = {
+
+		category_gatling = {
+			ap_attack = 0.1
+			breakthrough = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_equipment_1
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2031
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2031_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_stabilizer = {
+
+		category_gatling = {
+			breakthrough = 0.2
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_equipment_1
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2031
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2031_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_equipment_1 = {	## Improved Gatling gun ## 
+
+		enable_equipments = {
+		    gatling_equipment_1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_handcrank_engine
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_gatling_rotary_machine
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2.35
+		start_year = 2032
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2032_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 2.35 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_handcrank_engine = {
+
+		category_gatling = {
+			defense = 0.1
+			hard_attack = 0.1
+		}
+
+		XOR = { tech_gatling_rotary_machine }
+
+		path = {
+			leads_to_tech = tech_gatling_equipment_2
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2033
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2033_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_rotary_machine = {
+
+		category_gatling = {
+			soft_attack = 0.1
+			defense = 0.1
+		}
+
+		XOR = { tech_gatling_handcrank_engine }
+
+		path = {
+			leads_to_tech = tech_gatling_equipment_2
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2033
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2033_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	tech_gatling_equipment_2 = {	## DshK ## 
+
+		enable_equipments = {
+		    gatling_equipment_2
+		}
+
+		research_cost = 2.35
+		start_year = 2034
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2034_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			gatling_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 2.35 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = gatling_support
+			}
+		}
+	}
+	### UNIQUE ###
 
 	nkvd_equipment_tech = {
 
-		allow = {
-            	always = no
-        	}
+		allow = { always = no }
 
 		enable_equipments = {
 			nkvd_equipment_1
@@ -1641,7 +2248,7 @@ technologies = {
 			nkvd_support
 		}
 
-		research_cost = 3.25
+		research_cost = 1.8
 		start_year = 2020
 
 		folder = {

@@ -1,3 +1,187 @@
+flamethrower_restriction_treaty = {
+	flamethrower_restriction_treaty_abandon_enforce = {
+		icon = eng_propaganda_campaigns
+
+		available = {
+			FROM = {
+				has_country_flag = flamethrower_restriction_ban_abandoning
+			}
+		}
+
+		visible = {
+			original_tag = HNZ
+			AND = {
+				OR = {
+					has_government = oligarch
+					has_government = dictatorial
+				}
+			}
+			FROM = {
+				has_country_flag = flamethrower_restriction_ban_abandoning
+			}
+		}
+
+		target_array = global.countries
+
+		target_trigger = {
+			FROM = {
+				has_country_flag = flamethrower_restriction_ban_abandoning
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				country_event = global_event.63
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				date < 2029.1.1
+				AND = { threat < 0.1 }
+			}
+			modifier = {
+				factor = 3
+				date < 2030.1.1
+				AND = { threat < 0.1 }
+			}
+			modifier = {
+				factor = 0
+				date < 2030.1.1
+				AND = { threat > 0.1 }
+			}
+		}
+	}
+
+	flamethrower_restriction_treaty_abandon = {
+		icon = form_nation
+
+		available = {
+			has_idea = flamethrower_restriction_ban
+			AND = {
+				threat < 0.20
+				NOT = { is_puppet = yes is_subject = yes }
+			}
+			NOT = {
+				has_active_mission = flamethrower_restrictions_timer_until_reapply
+			}
+		}
+
+		visible  = {
+			has_idea = flamethrower_restriction_ban
+			NOT = { 
+				original_tag = HNZ 
+				original_tag = PLS
+
+				has_active_mission = flamethrower_restrictions_timer_until_reapply
+			}
+		}
+
+		cancel_trigger = {
+            has_country_flag = flamethrower_restriction_ban_backdown
+        }
+
+		complete_effect  = {
+			HNZ = { country_event = global_event.62 } 
+			hidden_effect = {
+				set_country_flag = flamethrower_restriction_ban_abandoning
+			}
+		}
+
+		cost = abandon_flamethrower_treaty_cost
+		fire_only_once = yes
+
+		days_remove = 14
+
+		remove_effect = {
+			flamethrower_restrictions_lift = yes
+			remove_ideas = flamethrower_restriction_ban
+			reduce_abandon_flamethrower_treaty_cost = yes
+		}
+		
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				NOT = {
+					OR = {
+						TAG = HNZ
+						TAG = PLS
+					}
+				}
+				factor = 0
+			}
+		}
+	}
+
+	flamethrower_restriction_treaty_abandon_silently = {
+		icon = form_nation
+
+		available = {
+			has_idea = flamethrower_restriction_ban
+			AND = {
+				threat > 0.25
+			}
+			NOT = {
+				has_active_mission = flamethrower_restrictions_timer_until_reapply
+			}
+		}
+
+		visible  = {
+			has_idea = flamethrower_restriction_ban
+		}
+
+		cost = 0
+		fire_only_once = yes
+		
+		complete_effect = {
+			remove_ideas = flamethrower_restriction_ban
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				OR = {
+					has_government = council
+					has_government = oligarch
+					has_government = dictatorial
+				}
+				factor = 5
+			}
+		}
+	}
+
+	flamethrower_restrictions_timer_until_reapply  = {
+		icon = GFX_TRT_decision_category_flooding
+		is_good = no
+		priority = 1000
+
+		activation  = { has_country_flag = flamethrower_restriction_ban_backdown }
+
+		available = {
+			NOT  = {
+				has_idea = flamethrower_restriction_ban
+				AND = { has_country_flag = flamethrower_restriction_ban_backdown }
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = no
+		cancel_trigger = {
+			HNZ = { exists = NO }
+		}
+		days_mission_timeout = 180
+		remove_effect = {}
+
+		timeout_effect = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
 sancity_of_life = {
 
 	allow_creation_faction = {
