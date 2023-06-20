@@ -1,10 +1,19 @@
 flamethrower_restriction_treaty = {
 	flamethrower_restriction_treaty_abandon_enforce = {
+		## Hansa only
+		## They can 'enforce' compliance from signatory nations
+ 
 		icon = eng_propaganda_campaigns
 
 		available = {
 			FROM = {
 				has_country_flag = flamethrower_restriction_ban_abandoning
+				AND = { 
+					strength_ratio = {
+						tag = ROOT
+						ratio < 0.3
+					}
+				}
 			}
 		}
 
@@ -55,6 +64,71 @@ flamethrower_restriction_treaty = {
 		}
 	}
 
+	flamethrower_restriction_treaty_abandon_brute_force = {
+		## Nations like RCH and RED should be able to leave without getting cucked
+		## if they have a large army
+
+		icon = form_nation
+
+		available = {
+			has_idea = flamethrower_restriction_ban
+			AND = {
+				OR = {
+					strength_ratio = {
+						tag = HNZ
+						ratio > 0.40
+					}
+					ic_ratio = {
+						tag = HNZ
+						ratio > 0.30
+					}
+				}
+			}
+			NOT = {
+				has_active_mission = flamethrower_restrictions_timer_until_reapply
+			}
+		}
+
+		visible  = {
+			has_idea = flamethrower_restriction_ban
+			AND = {
+				OR = {
+					strength_ratio = {
+						tag = HNZ
+						ratio > 0.40
+					}
+					ic_ratio = {
+						tag = HNZ
+						ratio > 0.30
+					}
+					original_tag = RED
+					original_tag = RCH
+					has_government = dictatorial
+				}
+			}
+		}
+
+		cost = 0
+		fire_only_once = yes
+		
+		complete_effect = {
+			flamethrower_restrictions_lift = yes
+			remove_ideas = flamethrower_restriction_ban
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				OR = {
+					has_government = council
+					has_government = oligarch
+					has_government = dictatorial
+				}
+				factor = 5
+			}
+		}
+	}
+
 	flamethrower_restriction_treaty_abandon = {
 		icon = form_nation
 
@@ -99,6 +173,8 @@ flamethrower_restriction_treaty = {
 			flamethrower_restrictions_lift = yes
 			remove_ideas = flamethrower_restriction_ban
 			reduce_abandon_flamethrower_treaty_cost = yes
+			add_stability = -0.05
+			add_war_support = -0.05
 		}
 		
 		ai_will_do = {
@@ -128,15 +204,15 @@ flamethrower_restriction_treaty = {
 			}
 		}
 
-		visible  = {
-			has_idea = flamethrower_restriction_ban
-		}
+		visible  = { has_idea = flamethrower_restriction_ban }
 
 		cost = 0
 		fire_only_once = yes
 		
 		complete_effect = {
 			remove_ideas = flamethrower_restriction_ban
+			add_stability = -0.025
+			add_war_support = -0.025
 		}
 
 		ai_will_do = {

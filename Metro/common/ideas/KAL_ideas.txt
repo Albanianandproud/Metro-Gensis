@@ -1,7 +1,7 @@
 ideas = {
 	country = {
-		kalininskaya = {
-			picture = GFX_idea_kalininskaya
+		KAL_young_confederation = {
+			picture = GFX_idea_KAL_young_confederation
 
 			allowed = {
 			}
@@ -9,12 +9,53 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-                production_factory_efficiency_gain_factor = 0.08
-                production_speed_industrial_complex_factor = 0.08
-                min_export = -0.05
-	        }	
-	    }
-	    KAL_the_mad_king = {
+				production_speed_industrial_complex_factor = 0.05
+				party_popularity_stability_factor = 0.1
+				war_support_factor = -0.05
+	        }
+		}
+
+		KAL_peaceful_economy = {
+			picture = GFX_idea_KAL_peaceful_economy
+
+			allowed = {
+				NOT = {
+					has_government = council
+					has_government = community
+				}
+				OR = {
+					has_idea = partial_economic_mobilisation 
+					has_idea = war_economy 
+					has_idea = tot_economic_mobilisation 
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = -0.02
+				industrial_capacity_factory = -0.15
+				monthly_population = 0.15
+				trade_opinion_factor = 0.15
+				war_support_factor = -0.05
+	        }
+		}
+
+		KAL_anomalies = {
+			picture = GFX_idea_KAL_anomalies
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.05
+				supply_combat_penalties_on_core_factor = 0.25
+	        }
+		}
+
+		KAL_the_mad_king = {
 			picture = GFX_idea_KAL_the_mad_king
 
 			allowed = {
@@ -28,7 +69,8 @@ ideas = {
 
 			modifier = {
                 political_power_gain = -0.1
-                political_advisor_cost_factor = 0.1
+                political_advisor_cost_factor = 0.05
+				drift_defence_factor = -0.05
 	        }	
 	    }
 	}

@@ -3,7 +3,6 @@ ideas = {
 		law = yes
 		use_list_view = yes
 		
-		
 		conscripted_militia = {	
 			cost = 150
 			removal_cost = -1
@@ -35,13 +34,11 @@ ideas = {
 					}
 				}
 			}
-
 			modifier = {
 				minimum_training_level = -0.05
 				training_time_factor = -0.05
 				conscription = 0.06
 			}
-
 			cancel_if_invalid = no
 		}
 
@@ -64,7 +61,7 @@ ideas = {
 				has_war_support > 0.34
 				OR = {
 					threat > 0.09
-					date > 2029.1.1
+					date > 2030.1.1
 				}
 			}
 
@@ -84,19 +81,32 @@ ideas = {
 
 			modifier = {
 				conscription = 0.12
-				minimum_training_level = -0.025
-				training_time_factor = -0.025
+				minimum_training_level = -0.03
+				training_time_factor = -0.02
 			}
 
 			cancel_if_invalid = no
 
 			ai_will_do = {
-   				factor = 1
-   				modifier = {
-					factor = 2000 # We want to get off this ASAP
-					has_idea = conscripted_militia
+				factor = 2
+				modifier = {
+					factor = 2.5
+					has_war = yes
+				}
+				modifier = {
+					factor = 2.5
+					manpower_per_military_factory < 10
+				}
+				modifier = {
+					factor = 0.1
+					num_of_controlled_states < 3
+				}
+				modifier = {
+					factor = 0
+					NOT = { has_idea = conscripted_militia }
 				}
 			}
+			cancel_if_invalid = no
 		}
 		mandatory_service = {	
 			cost = 150
@@ -116,8 +126,8 @@ ideas = {
 
 				has_war_support > 0.49
 				OR = {
-					threat > 0.14
-					date > 2030.1.1
+					threat > 0.19
+					date > 2031.1.1
 				}
 			}
 
@@ -146,6 +156,21 @@ ideas = {
    				modifier = {
 					factor = 1500 # We want to get off this ASAP
 					has_idea = standing_force
+				}
+			}
+			ai_will_do = {
+				factor = 2
+				modifier = {
+					factor = 2.5
+					has_war = yes
+				}
+				modifier = {
+					factor = 2.5
+					manpower_per_military_factory < 10
+				}
+				modifier = {
+					factor = 0
+					NOT = { has_idea = standing_force }
 				}
 			}
 			cancel_if_invalid = no
@@ -197,13 +222,20 @@ ideas = {
 			}
 
 			ai_will_do = {
-   				factor = 1
+				factor = 2
 				modifier = {
-					#Prio if low on manpower
-					factor = 200
-					manpower_per_military_factory <  20
-				}	
-		    }
+					factor = 2.5
+					surrender_progress > 0.1
+				}
+				modifier = {
+					factor = 5
+					manpower_per_military_factory < 10
+				}
+				modifier = {
+					factor = 0
+					NOT = { has_idea = mandatory_service }
+				}
+			}
 			cancel_if_invalid = no
 		}		
 		young_and_old = {	
@@ -255,13 +287,20 @@ ideas = {
 			}
 
 			ai_will_do = {
-   				factor = 1
+				factor = 2
 				modifier = {
-					#Prio if low on manpower
-					factor = 200
-					manpower_per_military_factory <  15
-				}	
-		    }
+					factor = 2.5
+					surrender_progress > 0.2
+				}
+				modifier = {
+					factor = 5
+					manpower_per_military_factory < 10
+				}
+				modifier = {
+					factor = 0
+					NOT = { has_idea = all_adults }
+				}
+			}
 			cancel_if_invalid = no
 		}
 		all_serve = {	
@@ -312,15 +351,22 @@ ideas = {
 				war_support_factor = -0.25
 			}
 
-			cancel_if_invalid = no
 			ai_will_do = {
-   				factor = 1
+				factor = 2
 				modifier = {
-					#Prio if low on manpower
-					factor = 200
-					manpower_per_military_factory <  10
-				}	
-		    }
+					factor = 5
+					surrender_progress > 0.3
+				}
+				modifier = {
+					factor = 5
+					manpower_per_military_factory < 10
+				}
+				modifier = {
+					factor = 0
+					NOT = { has_idea = young_and_old }
+				}
+			}
+			cancel_if_invalid = no
 		}
 	}
 }

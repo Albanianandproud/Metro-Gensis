@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 	default = no
-	continuous_focus_position = { x = 8100 y = 50 }
+	continuous_focus_position = { x = 8350 y = 50 }
 
 	focus = {
 		id = RCH_movements_against_the_fuhrer
@@ -39,7 +39,7 @@ focus_tree = {
 			focus = RCH_movements_against_the_fuhrer
 		}
 		cost = 2.9
-		x = 10
+		x = 8
 		y = 0
 		select_effect = {
 			hidden_effect = { add_stability = 0.001 }
@@ -126,6 +126,27 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_cult_of_personality
+		icon = GFX_RCH_ja
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+		}
+		available = {
+			has_war_support > 0.79
+			dictatorial > 0.49
+		}
+		x = 1
+		y = 1
+		cost = 2.9
+		relative_position_id = RCH_campaigns_of_terror
+		completion_reward = {
+			add_ideas = RCH_cult_personality 
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = RCH_definition_of_human
 		icon = GFX_RCH_a_new_race
 		prerequisite = {
@@ -158,6 +179,7 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = RCH_metro_for_the_russians
 			RCH_bop_decrease_2 = yes
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 5
@@ -174,9 +196,10 @@ focus_tree = {
 		cost = 4.3
 		relative_position_id = RCH_earth_for_the_russians
 		completion_reward = {
-			add_stability = -0.05
+			add_stability = -0.025
 			add_ideas = RCH_purity_1
 			RCH_bop_decrease_2 = yes
+			add_stability = 0.05
 		}
 		ai_will_do = {
 			factor = 5
@@ -193,7 +216,7 @@ focus_tree = {
 		cost = 4.3
 		relative_position_id = RCH_burn_the_dissident
 		completion_reward = {
-			add_stability = -0.05
+			add_stability = -0.025
 			effect_tooltip = {
 				swap_ideas = {
 					remove_idea = RCH_purity_1
@@ -204,6 +227,7 @@ focus_tree = {
 				RCH_purity_upgrade_idea = yes
 			}
 			RCH_bop_decrease_2 = yes
+			add_war_support = 0.1
 		}
 		ai_will_do = {
 			factor = 5
@@ -215,8 +239,8 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_sweep_the_filth
 		}
-		x = 0
-		y = 2
+		x = 1
+		y = 1
 		cost = 4.3
 		relative_position_id = RCH_sweep_the_filth
 		completion_reward = {
@@ -231,6 +255,28 @@ focus_tree = {
 				RCH_purity_upgrade_idea = yes
 			}
 			RCH_bop_decrease_2 = yes
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_33
+		icon = GFX_RCH_generic
+		prerequisite = {
+			focus = RCH_eradicate_the_impure
+		}
+		prerequisite = {
+			focus = RCH_the_mutant_threat_2
+		}
+		x = 1
+		y = 1
+		cost = 4.3
+		relative_position_id = RCH_eradicate_the_impure
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
 		}
 		ai_will_do = {
 			factor = 5
@@ -813,13 +859,14 @@ focus_tree = {
 		id = RCH_establish_the_ministry_of_culture
 		icon = GFX_RCH_cultural_institutions
 		cost = 3
-		x = 22
+		x = 21
 		y = 0
 		available = {
 			has_completed_focus = RCH_uncontested_authority
 		}
 		completion_reward = {
 			add_ideas = RCH_chairman_of_ministry
+			add_stability = 0.05
 		}
 		ai_will_do = {
 			factor = 25
@@ -863,7 +910,18 @@ focus_tree = {
 		cost = 2.9
 		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
-			RCH_chairman_of_ministry_upgrade_trait = yes
+			hidden_effect = {
+				remove_trait = {
+					character = RCH_chairman_of_ministry
+					slot = industrial_concern
+					trait = RCH_chairman_of_ministry_1
+				}
+			}
+			add_trait = {
+				character = RCH_chairman_of_ministry
+				slot = industrial_concern
+				trait = RCH_chairman_of_ministry_2
+			}
 		}
 		ai_will_do = {
 			factor = 30
@@ -874,6 +932,8 @@ focus_tree = {
 		icon = GFX_RCH_industry8
 		prerequisite = {
 			focus = RCH_moc_path_2
+		}
+		prerequisite = {
 			focus = RCH_moc_path_1
 		}
 		available = {
@@ -1014,24 +1074,26 @@ focus_tree = {
 			focus = RCH_moc_path_6
 		}
 		available = {
-			num_of_civilian_factories > 19
+			RCH_chairman_of_ministry = {
+				is_character_slot = industrial_concern
+			}
 		}
 		x = 0
 		y = 3
 		cost = 6.5
 		relative_position_id = RCH_moc_path_3
 		completion_reward = {
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-				    instant_build = yes
+			hidden_effect = {
+				remove_trait = {
+					character = RCH_chairman_of_ministry
+					slot = industrial_concern
+					trait = RCH_chairman_of_ministry_2
 				}
-				add_resource = {
-					type = scrap
-					amount = 8
-				}
+			}
+			add_trait = {
+				character = RCH_chairman_of_ministry
+				slot = industrial_concern
+				trait = RCH_chairman_of_ministry_3
 			}
 		}
 		ai_will_do = {
@@ -1049,12 +1111,23 @@ focus_tree = {
 				is_character_slot = industrial_concern
 			}
 		}
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_moc_path_8
 		completion_reward = {
-			RCH_chairman_of_ministry_upgrade_trait = yes
+			hidden_effect = {
+				remove_trait = {
+					character = RCH_chairman_of_ministry
+					slot = industrial_concern
+					trait = RCH_chairman_of_ministry_3
+				}
+			}
+			add_trait = {
+				character = RCH_chairman_of_ministry
+				slot = industrial_concern
+				trait = RCH_chairman_of_ministry_4
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -1066,7 +1139,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_moc_path_8
 		}
-		x = 1
+		x = 2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_moc_path_8
@@ -1087,8 +1160,9 @@ focus_tree = {
 		id = RCH_infrastructure_path_1
 		icon = GFX_RCH_infrastructure
 		cost = 3
-		x = 19
+		x = -3
 		y = 0
+		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
 			every_owned_state = {
 				limit = {
@@ -1137,8 +1211,9 @@ focus_tree = {
 		id = RCH_infrastructure_path_2
 		icon = GFX_RCH_infrastructure
 		cost = 3
-		x = 25
+		x = 3
 		y = 0
+		relative_position_id = RCH_establish_the_ministry_of_culture
 		completion_reward = {
 			every_owned_state = {
 				limit = {
@@ -2094,7 +2169,7 @@ focus_tree = {
 			337 = { is_owned_by = ROOT }
 		}
 		x = 1
-		y = 2
+		y = 3
 		cost = 3
 		relative_position_id = RCH_the_iron_legion_1
 		completion_reward = {
@@ -2621,7 +2696,7 @@ focus_tree = {
 			focus = RCH_would_you_like_total_war
 		}
 		x = -1
-		y = 2
+		y = 3
 		cost = 3
 		relative_position_id = RCH_ss_integration_1
 		completion_reward = {
@@ -2804,7 +2879,7 @@ focus_tree = {
 			}
 		}
 		x = 1
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_1
 		completion_reward = {
@@ -2828,7 +2903,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_volkssturm
-		icon = GFX_RCH_volkssturm_1
+		icon = GFX_RCH_volkssturm_2
 		prerequisite = {
 			focus = RCH_would_you_like_total_war
 		}
@@ -2856,7 +2931,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_old_and_decrepit
-		icon = GFX_RCH_volkssturm_2
+		icon = GFX_RCH_volkssturm_1
 		prerequisite = {
 			focus = RCH_volkssturm
 		}
@@ -2943,14 +3018,14 @@ focus_tree = {
 	focus = {
 		id = RCH_bulwark_against_the_red
 		icon = GFX_RCH_bulwark_against_bolshevism
-		prerequisite = {
-			focus = RCH_inaugerate_the_new_blood
+		available = {
+			has_completed_focus = RCH_inaugerate_the_new_blood
 		}
 		available = {
 			always = no
 		}
-		x = -9
-		y = 1
+		x = -10
+		y = 0
 		cost = 6.5
 		relative_position_id = RCH_inaugerate_the_new_blood
 		completion_reward = {
@@ -3672,10 +3747,16 @@ focus_tree = {
 				is_subject = no
 			}
 			AND = {
-				has_country_flag = RCH_recruit_stortbeker
+				custom_trigger_tooltip = {
+					tooltip = RCH_has_recruited_stortbeker
+					has_country_flag = RCH_recruit_stortbeker
+				}
+				has_army_manpower = {
+					size > 450
+				}
 			}
 		}
-		x = 5
+		x = 6
 		y = 1
 		cost = 5
 		relative_position_id = RCH_outwards
@@ -3698,7 +3779,9 @@ focus_tree = {
 			180 = { is_owned_by = RUI }
 			316 = { is_owned_by = RUI }
 			179 = { is_owned_by = RUI }
-			has_manpower > 600
+			has_army_manpower = {
+				size > 600
+			}
 		}
 		bypass = {
 			180 = { is_owned_by = RCH }
@@ -3706,14 +3789,14 @@ focus_tree = {
 			179 = { is_owned_by = RCH }
 		}
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			country_event = nf_RCH.10
 		}
 		ai_will_do = {
-			factor = 0.5
+			factor = 15
 		}
 	}
 	focus = {
@@ -4002,7 +4085,7 @@ focus_tree = {
 		id = RCH_proclaimation_of_slavic_unity
 		icon = GFX_RCH_hitler
 		available= {
-			has_war_support > 0.95
+			has_war_support > 0.9
 			has_stability > 0.5
 			OR = {
 				date > 2033.1.1
@@ -4010,14 +4093,14 @@ focus_tree = {
 		}
 		cost = 2
 		x = 0
-		y = 4
+		y = 5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			custom_effect_tooltip = RCH_unlock_max_tier_mobilisation
 			add_political_power = 100
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 100
 		}
 	}
 
