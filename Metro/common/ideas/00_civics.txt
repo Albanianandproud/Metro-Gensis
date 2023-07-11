@@ -227,6 +227,14 @@ ideas = {
 				always = no
 			}
 
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+					}
+				}
+			}
+
 			cost = 50
 			removal_cost = -1
 		
@@ -252,6 +260,14 @@ ideas = {
 				always = no
 			}
 
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+					}
+				}
+			}
+
 			cost = 50
 			removal_cost = -1
 		
@@ -273,6 +289,14 @@ ideas = {
 			
 			available = {
 				always = no
+			}
+
+			visible = {
+				hidden_trigger = {
+					NOT = {
+						tag = RED 		## Red Line uses their own unique conscription law.
+					}
+				}
 			}
 
 			cost = 50
@@ -429,9 +453,8 @@ ideas = {
 
 		civics_property_5 = { ## Bandit Economy
 			
-		    available = {
-			   has_country_flag = is_bandit_nation
-		    }
+		    available = { has_country_flag = is_bandit_nation }
+			visible = { has_country_flag = is_bandit_nation }
 
 			cancel = {
 				NOT = {
@@ -448,6 +471,33 @@ ideas = {
 			   industrial_capacity_factory = -0.05
 			   production_factory_start_efficiency_factor = 0.05
 			   line_change_production_efficiency_factor = 0.15
+		    }
+
+		    cancel_if_invalid = no
+
+		    ai_will_do = {
+				factor = 2
+			}
+		}
+
+		civics_property_6 = { ## State-Economy
+			
+		    available = { has_country_flag = is_communist_nation }
+			visible = { has_country_flag = is_communist_nation }
+
+			cancel = {
+				NOT = {
+					has_country_flag = is_communist_nation
+				}
+			}
+
+		   cost = 50
+		   removal_cost = -1		
+
+		    modifier = {
+			   global_building_slots_factor = 0.15
+			   production_speed_buildings_factor = -0.05
+			   production_factory_start_efficiency_factor = 0.05
 		    }
 
 		    cancel_if_invalid = no

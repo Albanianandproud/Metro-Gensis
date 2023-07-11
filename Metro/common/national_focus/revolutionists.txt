@@ -48,24 +48,19 @@ focus_tree = {
 		y = 1
 		relative_position_id = AVT_introduction
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -93,7 +88,7 @@ focus_tree = {
 	focus = {
 		id = AVT_industry_3
 		icon = GFX_engine
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_industry_2
@@ -102,20 +97,20 @@ focus_tree = {
 		y = 1
 		relative_position_id =  AVT_industry_2
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			custom_effect_tooltip = AVT_advisor
 			show_ideas_tooltip = AVT_lumumba
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
 	focus = {
 		id = AVT_scrapping_for_parts
 		icon = GFX_scrap_computers
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_industry_3
@@ -137,29 +132,16 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = electronics
-			        amount = 1
+			        amount = 2
 			    }
 				add_resource = {
 			        type = components
-			        amount = 1
+			        amount = 2
 			    }
 				add_resource = {
 			        type = alloys
-			        amount = 1
+			        amount = 2
 			    }
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
 			}
 		}
 	}
@@ -167,7 +149,7 @@ focus_tree = {
 	focus = {
 		id = AVT_using_the_terminal
 		icon = GFX_computer_terminal
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_industry_3
@@ -195,19 +177,25 @@ focus_tree = {
 		icon = GFX_RED_breakthrough
 		cost = 6.5
 
-		prerequisite = {
-			focus =  AVT_using_the_terminal
+		prerequisite = { focus =  AVT_using_the_terminal }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
+
 		x = -2
 		y = 1
 		relative_position_id =  AVT_scrapping_for_parts
 
-		ai_will_do = {
-			factor = 3
+		completion_reward = {
+			AVT_socialist_science_upgrade_idea = yes
 		}
 
-		completion_reward = {
-			add_research_slot = 1
+		ai_will_do = {
+			factor = 8
 		}
 	}
 
@@ -274,7 +262,7 @@ focus_tree = {
 	focus = {
 		id = AVT_tunnel_clearing
 		icon = GFX_railroad_construction
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_gas_lighting
@@ -333,7 +321,7 @@ focus_tree = {
 	focus = {
 		id = AVT_preliminary_defences
 		icon = GFX_sandbags
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_gas_lighting
@@ -384,7 +372,7 @@ focus_tree = {
 	focus = {
 		id = AVT_infrastructure_3
 		icon = GFX_welder
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_tunnel_clearing
@@ -429,7 +417,7 @@ focus_tree = {
 				}
 				add_resource = {
 			        type = scrap
-			        amount = 4
+			        amount = 6
 			    }
 			}
 		}
@@ -438,7 +426,7 @@ focus_tree = {
 	focus = {
 		id = AVT_equal_duty
 		icon = GFX_scrap_metal_2
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_community_resource_share
@@ -474,7 +462,7 @@ focus_tree = {
 	focus = {
 		id = AVT_equal_duty_2
 		icon = GFX_radio_reciever
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_equal_duty
@@ -494,15 +482,11 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -512,7 +496,7 @@ focus_tree = {
 	focus = {
 		id = AVT_getting_the_good_stuff
 		icon = GFX_booze
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_equal_duty
@@ -543,19 +527,24 @@ focus_tree = {
 		icon = GFX_RED_breakthrough
 		cost = 6.5
 
-		prerequisite = {
-			focus =  AVT_equal_duty_2
+		prerequisite = { focus =  AVT_equal_duty_2 }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = 2
 		y = 1
 		relative_position_id =  AVT_getting_the_good_stuff
 
-		ai_will_do = {
-			factor = 3
+		completion_reward = {
+			AVT_socialist_science_upgrade_idea = yes
 		}
 
-		completion_reward = {
-			add_research_slot = 1
+		ai_will_do = {
+			factor = 8
 		}
 	}
 
@@ -608,10 +597,6 @@ focus_tree = {
 		y = 1
 		relative_position_id =  AVT_infrastructure_3
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			random_owned_state = {
 				limit = {
@@ -641,41 +626,9 @@ focus_tree = {
 				add_manpower = 25
 			}
 		}
-	}
-
-	focus = {
-		id = AVT_1
-		icon = GFX_workstation_2
-		cost = 6.5
-
-		prerequisite = {
-			focus =  AVT_population_build_slots
-		}
-		mutually_exclusive = {
-			focus = AVT_2
-		}
-		x = -1
-		y = 1
-		relative_position_id =  AVT_population_build_slots
 
 		ai_will_do = {
 			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
 		}
 	}
 
@@ -685,11 +638,11 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus =  AVT_1
+			focus = AVT_population_build_slots
 		}
-		x = 0
+		x = -1
 		y = 1
-		relative_position_id =  AVT_1
+		relative_position_id = AVT_population_build_slots
 
 		ai_will_do = {
 			factor = 3
@@ -701,52 +654,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = AVT_2
-		icon = GFX_generic_small_arms_2
-		cost = 6.5
-
-		prerequisite = {
-			focus =  AVT_population_build_slots
-		}
-		mutually_exclusive = {
-			focus = AVT_1
-		}
-		x = 1
-		y = 1
-		relative_position_id =  AVT_population_build_slots
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
 		id = AVT_4
 		icon = GFX_RCH_reinburse_the_stockpile
 		cost = 6.5
 
 		prerequisite = {
-			focus =  AVT_2
+			focus =  AVT_population_build_slots
 		}
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id =  AVT_2
+		relative_position_id =  AVT_population_build_slots
 
 		ai_will_do = {
 			factor = 3
@@ -769,10 +686,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = AVT_introduction
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
@@ -780,6 +693,10 @@ focus_tree = {
 				uses = 1
 				category = industry
 			}
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
@@ -815,6 +732,12 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = AVT_eco_idea_1
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
+		}
 		x = -1
 		y = 1
 		relative_position_id = AVT_eco_idea
@@ -839,6 +762,12 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = AVT_eco_idea_2
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
+		}
 		x = 1
 		y = 1
 		relative_position_id = AVT_eco_idea
@@ -860,6 +789,12 @@ focus_tree = {
 		prerequisite = {
 			focus = AVT_eco_idea_1
 			focus = AVT_eco_idea_2
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 1
@@ -913,6 +848,12 @@ focus_tree = {
 		prerequisite = {
 			focus = AVT_eco_idea_1
 			focus = AVT_eco_idea_2
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 1
@@ -984,8 +925,12 @@ focus_tree = {
 		icon = GFX_workers
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_eco_idea_buff_1
+		prerequisite = { focus = AVT_eco_idea_buff_1 }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = 0
 		y = 1
@@ -1005,11 +950,14 @@ focus_tree = {
 		icon = GFX_workstation_4
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_eco_idea_buff_2
-		}
-		prerequisite = {
-			focus = AVT_mobilise_army
+		prerequisite = { focus = AVT_eco_idea_buff_2 }
+		prerequisite = { focus = AVT_mobilise_army }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 2
@@ -1029,8 +977,13 @@ focus_tree = {
 		icon = GFX_volunteer_expedition
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_eco_idea_buff_3
+		prerequisite = { focus = AVT_eco_idea_buff_3 }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_4_tooltip
+				AND = { has_civic_education_higher_4 = yes }
+			}
 		}
 		x = 0
 		y = 1
@@ -1054,20 +1007,18 @@ focus_tree = {
 			focus = AVT_introduction
 		}
 		available = {
-			has_army_manpower = {
-				size > 30
-			}
+			has_army_manpower = { size > 40 }
 		}
 		x = 8
 		y = 1
 		relative_position_id = AVT_introduction
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			army_experience = 15
+		}
+
+		ai_will_do = {
+			factor = 20
 		}
 	}
 
@@ -1200,10 +1151,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = AVT_doctrine_1
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3
@@ -1216,24 +1163,37 @@ focus_tree = {
 				producer = RUS
 			}
 		}
+
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
 		id = AVT_train_red_line
 		icon = GFX_generic_equipment_gasmask_7
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_mobilise_army
-		}
-		mutually_exclusive = {
-			focus = AVT_our_own_advisors
-		}
+		prerequisite = { focus = AVT_mobilise_army }
 		available = {
-			NOT = {
-				has_completed_focus = AVT_death_to_tankies
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
 			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = -1
 		y = 1
 		relative_position_id = AVT_mobilise_army
@@ -1251,39 +1211,70 @@ focus_tree = {
 	focus = {
 		id = AVT_train_red_line_2
 		icon = GFX_RED_chekist
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_train_red_line
+		prerequisite = { focus = AVT_train_red_line }
+		available = {
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
+			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = 0
 		y = 1
 		relative_position_id = AVT_train_red_line
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			add_ideas = AVT_redline_liason
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
 	focus = {
 		id = AVT_train_red_line_3
 		icon = GFX_RED_chekists2
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_train_red_line_2
+		prerequisite = { focus = AVT_train_red_line_2 }
+
+		available = {
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
+			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = 0
 		y = 1
 		relative_position_id = AVT_train_red_line_2
-
-		ai_will_do = {
-			factor = 3
-		}
 
 		completion_reward = {
 			add_doctrine_cost_reduction = {
@@ -1293,18 +1284,19 @@ focus_tree = {
 				category = land_doctrine
 			}
 		}
+
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
 		id = AVT_our_own_advisors
 		icon = GFX_generic_equipment_gasmask_6
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus = AVT_mobilise_army
-		}
-		mutually_exclusive = {
-			focus = AVT_train_red_line
 		}
 		x = 1
 		y = 1
@@ -1324,7 +1316,7 @@ focus_tree = {
 	focus = {
 		id = AVT_our_own_advisors_2
 		icon = GFX_generic_equipment_gasmask_3
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus = AVT_our_own_advisors
@@ -1346,7 +1338,7 @@ focus_tree = {
 	focus = {
 		id = AVT_our_own_advisors_3
 		icon = GFX_RCH_expedition
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
 			focus = AVT_our_own_advisors_2
@@ -1389,15 +1381,13 @@ focus_tree = {
 
 	focus = {
 		id = AVT_military_1
-		icon = GFX_HNZ_generic_bullet_focus
-		cost = 6.5
+		icon = GFX_generic_small_arms_2
+		cost = 3.6
 
-		prerequisite = {
-			focus = AVT_world_tension_unlock
-		}
-		prerequisite = {
-			focus = AVT_military_0
-		}
+		prerequisite = { focus = AVT_world_tension_unlock }
+
+		prerequisite = { focus = AVT_military_0 }
+
 		x = 4
 		y = 1
 		relative_position_id = AVT_world_tension_unlock
@@ -1413,10 +1403,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1425,12 +1415,12 @@ focus_tree = {
 
 	focus = {
 		id = AVT_military_2
-		icon = GFX_HNZ_veteran_armaments_upgrade
-		cost = 6.5
+		icon = GFX_generic_medium_arms_2
+		cost = 5
 
-		prerequisite = {
-			focus = AVT_military_1
-		}
+		prerequisite = { focus = AVT_military_1 }
+
+		available = { has_tech = tech_tooling_modern_tools }
 		x = 0
 		y = 1
 		relative_position_id = AVT_military_1
@@ -1441,11 +1431,7 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
+				limit = { NOT = { has_state_category = pastoral } }
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
@@ -1458,14 +1444,14 @@ focus_tree = {
 
 	focus = {
 		id = AVT_military_3
-		icon = GFX_HNZ_veteran_armaments_upgrade
+		icon = GFX_generic_medium_arms_3
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_military_2
-		}
+		prerequisite = { focus = AVT_military_2 }
+
+		available = { has_tech = tech_tooling_power_tools }
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = AVT_military_2
 
 		completion_reward = {
@@ -1475,10 +1461,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -1885,7 +1871,7 @@ focus_tree = {
 
 	focus = {
 		id = AVT_expanding_the_depot
-		icon = GFX_cog_blueprints
+		icon = GFX_generic_door
 		cost = 6.5
 
 		prerequisite = {
@@ -2145,7 +2131,7 @@ focus_tree = {
 
 		available = { HNZ = { exists = yes } }
 
-		x = -2
+		x = -1
 		y = 1
 		relative_position_id = AVT_political_anti_capitalist
 
@@ -2317,7 +2303,7 @@ focus_tree = {
 
 		available = { HNZ = { exists = yes } }
 
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = AVT_political_PVL
 
@@ -2361,11 +2347,12 @@ focus_tree = {
 		mutually_exclusive = { focus = AVT_political_death_to_bolsheviks }
 
 		available = {
-			RED = { exists = yes }
 			date > 2033.10.10
-			has_country_leader = {
-				character = RED_andrey_moskvin
-				ruling_only = yes
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
 			}
 		}
 
