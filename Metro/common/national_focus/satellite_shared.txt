@@ -1,33 +1,452 @@
 #!gfx:interface\metro_goals.gfx
 
 shared_focus = {
+	id = satellite_military
+	icon = GFX_generic_equipment_gasmask_4
+	x = -4
+	y = 0
+	cost = 6.5
+
+	completion_reward = {
+		army_experience = 15
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_standardisation
+	icon = GFX_generic_spec_ops_3
+	x = 0
+	y = 3
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 25
+			producer = RUS
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 10
+			producer = RUS
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_organized_containment
+	icon = GFX_EUR_the_coup
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	mutually_exclusive = { focus = satellite_defensive_force }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_training_drills
+	icon = GFX_EUR_the_coup
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_organized_containment }
+
+	relative_position_id = satellite_organized_containment
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_standing_military
+	icon = GFX_EUR_the_coup
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_training_drills 
+		focus = satellite_station_watch 
+	}
+
+	relative_position_id = satellite_training_drills
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_defensive_force
+	icon = GFX_TRT_law_1
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	mutually_exclusive = { focus = satellite_organized_containment }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_ideas = satellite_defensive_army
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_station_watch
+	icon = GFX_TRT_law_1
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_defensive_force }
+
+	relative_position_id = satellite_defensive_force
+
+	completion_reward = {
+		add_ideas = satellite_station_garrison
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_mandatory_service
+	icon = GFX_TRT_law_1
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_station_watch 
+		focus = satellite_training_drills 
+	}
+
+	relative_position_id = satellite_station_watch
+
+	completion_reward = {
+		add_ideas = satellite_mandatory_service
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_adopt_doctrine
+	icon = GFX_generic_telephone
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	mutually_exclusive = { focus = satellite_cp_1 }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_doctrine_1
+	icon = GFX_generic_telephone
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_adopt_doctrine }
+
+	relative_position_id = satellite_adopt_doctrine
+
+	completion_reward = {
+		add_ideas = satellite_doctrine_cost_reduction
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_doctrine_2
+	icon = GFX_generic_telephone
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_doctrine_1
+		focus = satellite_localize_command
+	}
+
+	relative_position_id = satellite_doctrine_1
+
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.5
+			uses = 2
+			category = land_doctrine
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_cp_1
+	icon = GFX_generic_political_2
+	x = -3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	mutually_exclusive = { focus = satellite_adopt_doctrine }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_ideas = satellite_cp_gain
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_localize_command
+	icon = GFX_generic_political_2
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_cp_1 }
+
+	relative_position_id = satellite_cp_1
+
+	completion_reward = {
+		add_ideas = satellite_localized_command
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_improve_military_staff
+	icon = GFX_generic_political_2
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_localize_command 
+		focus = satellite_doctrine_1
+	}
+
+	relative_position_id = satellite_localize_command
+
+	completion_reward = {
+		add_ideas = satellite_improve_staff
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_specops
+	icon = GFX_generic_spec_ops_3
+	x = -3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_standardisation }
+
+	relative_position_id = satellite_standardisation
+
+	completion_reward = {
+		add_ideas = satellite_specops_bonus
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_draisines
+	icon = GFX_generic_spec_ops_3
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_standardisation }
+
+	relative_position_id = satellite_standardisation
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_military_4
+	icon = GFX_generic_spec_ops_3
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_standardisation }
+
+	mutually_exclusive = { focus = satellite_military_4 }
+
+	relative_position_id = satellite_standardisation
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_military_7
+	icon = GFX_generic_spec_ops_3
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_4 }
+
+	relative_position_id = satellite_military_4
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_military_5
+	icon = GFX_generic_spec_ops_3
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_standardisation }
+
+	mutually_exclusive = { focus = satellite_military_4 }
+
+	relative_position_id = satellite_standardisation
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_military_6
+	icon = GFX_generic_spec_ops_3
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_5 }
+
+	relative_position_id = satellite_military_5
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
 	id = satellite_defend_the_bulwark
 	icon = GFX_generic_construction_2
 	x = 3
 	y = 0
 	cost = 6.5
 
-	available = {
-		any_owned_state = {
-			limit = { 
-				NOT = {
-					has_state_category = pastoral 
-				}
-			}
-		}
-	}
-
-	bypass = {
-		any_owned_state = {
-			limit = { 
-				NOT = {
-					has_state_category = pastoral 
-				}
-			}
-		}
-	}
-
 	completion_reward = {
+		capital_scope = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				instant_build = yes
+				province = { all_provinces = yes }
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -47,6 +466,7 @@ shared_focus = {
 	relative_position_id = satellite_defend_the_bulwark
 
 	completion_reward = {
+		add_ideas = satellite_defensive_barricades
 	}
 
 	ai_will_do = {
@@ -55,7 +475,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_defensive_2
+	id = satellite_military_emplacements
 	icon = GFX_oil_lamp
 	x = -1
 	y = 1
@@ -66,6 +486,10 @@ shared_focus = {
 	relative_position_id = satellite_defensive_1
 
 	completion_reward = {
+		swap_ideas = {
+			remove_idea = satellite_defensive_barricades
+			add_idea = satellite_defensive_barricades2
+		}
 	}
 
 	ai_will_do = {
@@ -74,17 +498,84 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_defensive_3
+	id = satellite_communication_lines
 	icon = GFX_generic_telephone
 	x = 0
 	y = 1
 	cost = 6.5
 
-	prerequisite = { focus = satellite_defensive_2 }
+	prerequisite = { focus = satellite_military_emplacements }
 
-	relative_position_id = satellite_defensive_2
+	relative_position_id = satellite_military_emplacements
 
 	completion_reward = {
+		random_owned_state = {
+			limit = { has_state_category = pastoral }
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = { has_state_category = pastoral }
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = { has_state_category = pastoral }
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_ied_mines
+	icon = GFX_generic_telephone
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_communication_lines }
+
+	relative_position_id = satellite_communication_lines
+
+	completion_reward = {
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -99,12 +590,19 @@ shared_focus = {
 	y = 2
 	cost = 6.5
 
-	prerequisite = { focus = satellite_defensive_3 }
-	prerequisite = { focus = satellite_construction_7 }
+	prerequisite = { focus = satellite_communication_lines }
+	prerequisite = { focus = satellite_ordinance_depot }
 
-	relative_position_id = satellite_defensive_3
+	relative_position_id = satellite_communication_lines
 
 	completion_reward = {
+		add_ideas = satellite_technical_application
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = industry
+		}
 	}
 
 	ai_will_do = {
@@ -120,6 +618,18 @@ shared_focus = {
 	cost = 6.5
 
 	completion_reward = {
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = tooling
+		}
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = construction
+		}
 	}
 
 	ai_will_do = {
@@ -139,6 +649,14 @@ shared_focus = {
 	relative_position_id = satellite_economy
 
 	completion_reward = {
+		capital_scope = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -147,7 +665,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_construction_2
+	id = satellite_military_investment
 	icon = GFX_generic_small_arms_1
 	x = -1
 	y = 1
@@ -159,6 +677,12 @@ shared_focus = {
 	relative_position_id = satellite_construction_1
 
 	completion_reward = {
+		add_ideas = satellite_construction_civilian_1
+		add_equipment_to_stockpile = {
+			type = basic_infantry_equipment
+			amount = 10
+			producer = RUS
+		}
 	}
 
 	ai_will_do = {
@@ -179,6 +703,18 @@ shared_focus = {
 	relative_position_id = satellite_construction_1
 
 	completion_reward = {
+		add_ideas = satellite_construction_civilian_1
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+			add_resource = {
+				type = alloys
+				amount = 1
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -187,19 +723,25 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_construction_4
-	icon = GFX_generic_medium_arms_1
+	id = satellite_arsenal_stockpiling
+	icon = GFX_generic_medium_arms_2
 	x = 0
 	y = 1
 	cost = 6.5
 
 	prerequisite = { 
-		focus = satellite_construction_2
+		focus = satellite_military_investment
 	}
 
-	relative_position_id = satellite_construction_2
+	relative_position_id = satellite_military_investment
 
 	completion_reward = {
+		_satellite_upgrade_mil_idea = yes
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 15
+			producer = RUS
+		}
 	}
 
 	ai_will_do = {
@@ -216,12 +758,24 @@ shared_focus = {
 
 	prerequisite = { 
 		focus = satellite_construction_3
-		focus = satellite_construction_2
+		focus = satellite_military_investment
 	}
 
 	relative_position_id = satellite_construction_3
 
 	completion_reward = {
+		_satellite_upgrade_civ_idea = yes
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_resource = {
+				type = components
+				amount = 2
+			}
+			add_resource = {
+				type = electronics
+				amount = 1
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -230,19 +784,29 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_construction_7
+	id = satellite_ordinance_depot
 	icon = GFX_generic_medium_arms_5
 	x = 0
 	y = 1
 	cost = 6.5
 
-	prerequisite = { focus = satellite_construction_4 }
+	prerequisite = { focus = satellite_arsenal_stockpiling }
 
-	relative_position_id = satellite_construction_4
+	relative_position_id = satellite_arsenal_stockpiling
 
 	mutually_exclusive = { focus = satellite_construction_9 }
 
 	completion_reward = {
+		_satellite_upgrade_mil_idea = yes
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -263,9 +827,19 @@ shared_focus = {
 
 	relative_position_id = satellite_construction_6
 
-	mutually_exclusive = { focus = satellite_construction_7 }
+	mutually_exclusive = { focus = satellite_ordinance_depot }
 
 	completion_reward = {
+		_satellite_upgrade_civ_idea = yes
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -281,13 +855,14 @@ shared_focus = {
 	cost = 6.5
 
 	prerequisite = { 
-		focus = satellite_construction_7 
+		focus = satellite_ordinance_depot 
 		focus = satellite_construction_9 
 	}
 
 	relative_position_id = satellite_construction_1
 
 	completion_reward = {
+		add_ideas = satellite_establish_library
 	}
 
 	ai_will_do = {
@@ -317,7 +892,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_economy_3
 	icon = GFX_generic_cement
-	x =1
+	x = 2
 	y = 1
 	cost = 6.5
 
@@ -336,13 +911,13 @@ shared_focus = {
 shared_focus = {
 	id = satellite_economy_4
 	icon = GFX_generic_electricity_2
-	x = 0
-	y = 1
+	x = 1
+	y = 2
 	cost = 6.5
 
-	prerequisite = { focus = satellite_economy_3 }
+	prerequisite = { focus = satellite_economy_2 }
 
-	relative_position_id = satellite_economy_3
+	relative_position_id = satellite_economy_2
 
 	completion_reward = {
 	}
@@ -365,6 +940,7 @@ shared_focus = {
 	relative_position_id = satellite_economy_4
 
 	completion_reward = {
+		add_ideas = satellite_stout_labour
 	}
 
 	ai_will_do = {
@@ -375,7 +951,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_domestics_1
 	icon = GFX_generic_consumer_goods
-	x = 0
+	x = 1
 	y = 1
 	cost = 6.5
 
@@ -391,6 +967,16 @@ shared_focus = {
 	}
 
 	completion_reward = {
+		add_ideas = satellite_domestics_focus_1
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -401,7 +987,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_trade
 	icon = GFX_generic_market
-	x = 2
+	x = 3
 	y = 1
 	cost = 6.5
 
@@ -417,6 +1003,34 @@ shared_focus = {
 	}
 
 	completion_reward = {
+		capital_scope = {
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+			add_resource = {
+				type = components
+				amount = 2
+			}
+			add_resource = {
+				type = alloys
+				amount = 2
+			}
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -427,7 +1041,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_arsenal
 	icon = GFX_generic_ammunition_1
-	x = 4
+	x = 5
 	y = 1
 	cost = 6.5
 
@@ -443,6 +1057,16 @@ shared_focus = {
 	}
 
 	completion_reward = {
+		add_ideas = satellite_arsenal_focus_1
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -462,7 +1086,15 @@ shared_focus = {
 		focus = satellite_trade
 	}
 
-	available = { RED = { exists = yes } }
+	available = { 
+		RED = { exists = yes } 
+		NOT  = { 
+			has_war_with = RED
+			is_puppet_of = HNZ
+			is_in_faction_with = HNZ
+		} 
+	}
+	
 
 	relative_position_id = satellite_domestics_1
 
@@ -488,7 +1120,14 @@ shared_focus = {
 		focus = satellite_trade
 	}
 
-	available = { HNZ = { exists = yes } }
+	available = { 
+		HNZ = { exists = yes }
+		NOT  = { 
+			has_war_with = HNZ 
+			is_puppet_of = RED
+			is_in_faction_with = RED
+		} 
+	}
 
 	relative_position_id = satellite_arsenal
 
@@ -516,6 +1155,19 @@ shared_focus = {
 	relative_position_id = satellite_trade
 
 	completion_reward = {
+		swap_ideas = {
+			remove_idea = satellite_domestics_focus_1
+			add_idea = satellite_domestics_focus_2
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -540,6 +1192,21 @@ shared_focus = {
 	relative_position_id = satellite_trade
 
 	completion_reward = {
+		add_ideas = satellite_trade_focus
+		capital_scope = {
+			add_resource = {
+				type = components
+				amount = 4
+			}
+			add_resource = {
+				type = alloys
+				amount = 3
+			}
+			add_resource = {
+				type = electronics
+				amount = 2
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -561,6 +1228,24 @@ shared_focus = {
 	relative_position_id = satellite_trade
 
 	completion_reward = {
+		swap_ideas = {
+			remove_idea = satellite_arsenal_focus_1
+			add_idea = satellite_arsenal_focus_2
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 5
+			producer = RUS
+		}
 	}
 
 	ai_will_do = {
@@ -582,6 +1267,11 @@ shared_focus = {
 	relative_position_id = satellite_investment_redline
 
 	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = flamethrower_equipment_1
+			amount = 10
+			producer = RUS
+		}
 	}
 
 	ai_will_do = {
@@ -605,6 +1295,11 @@ shared_focus = {
 	relative_position_id = satellite_investment_hansa
 
 	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = basic_gatling_equipment
+			amount = 10
+			producer = RUS
+		}
 	}
 
 	ai_will_do = {
@@ -637,7 +1332,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_investment_alone
 	icon = GFX_equipment_backpack
-	x = 2
+	x = 1
 	y = 1
 	cost = 6.5
 
@@ -655,6 +1350,574 @@ shared_focus = {
 	}
 
 	relative_position_id = satellite_arsenal
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_investment_alone_3
+	icon = GFX_generic_political
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_investment_alone
+	}
+
+	relative_position_id = satellite_investment_alone
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_our_own_technicians
+	icon = GFX_generic_political
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_investment_alone
+	}
+
+	relative_position_id = satellite_investment_alone
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_specialised_production
+	icon = GFX_generic_political
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_our_own_technicians
+	}
+
+	relative_position_id = satellite_our_own_technicians
+
+	completion_reward = {
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_chemicals
+	icon = GFX_generic_political
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_our_own_technicians
+	}
+
+	relative_position_id = satellite_our_own_technicians
+
+	completion_reward = {
+		capital_scope = {
+			add_resource = {
+				type = chemicals
+				amount = 4
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_autarky
+	icon = GFX_generic_political
+	x = 0
+	y = 2
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_investment_alone_3
+	}
+
+	relative_position_id = satellite_investment_alone_3
+
+	completion_reward = {
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_our_path
+	icon = GFX_pig
+	x = 27
+	y = 0
+	cost = 6.5
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_winds_of_change
+	icon = GFX_generic_political
+	x = -3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_our_path
+	}
+
+	relative_position_id = satellite_our_path
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_kick_out_foreign_merchants
+	icon = GFX_generic_political
+	x = 2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_winds_of_change
+	}
+
+	relative_position_id = satellite_winds_of_change
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_consolidate_our_own_economy
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_kick_out_foreign_merchants
+	}
+
+	relative_position_id = satellite_kick_out_foreign_merchants
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_against_the_proverbial_powers
+	icon = GFX_generic_political
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_winds_of_change
+	}
+
+	relative_position_id = satellite_winds_of_change
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_align_the_sokol
+	icon = GFX_generic_political
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_against_the_proverbial_powers
+	}
+
+	relative_position_id = satellite_against_the_proverbial_powers
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_soviet_nostalgism
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_align_the_sokol
+	}
+
+	relative_position_id = satellite_align_the_sokol
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_strike_the_hanseatic_league
+	icon = GFX_generic_political
+	x = -1
+	y = 2
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_align_the_sokol
+	}
+
+	mutually_exclusive = { focus = satellite_deal_with_the_devil }
+
+	relative_position_id = satellite_align_the_sokol
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_deal_with_the_devil
+	icon = GFX_generic_political
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_soviet_nostalgism
+	}
+
+	mutually_exclusive = { focus = satellite_strike_the_hanseatic_league }
+
+	relative_position_id = satellite_soviet_nostalgism
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_our_own_path
+	icon = GFX_generic_political
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_against_the_proverbial_powers
+	}
+
+	relative_position_id = satellite_against_the_proverbial_powers
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_de_sovietisation
+	icon = GFX_generic_political
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_our_own_path
+	}
+
+	relative_position_id = satellite_our_own_path
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_strike_the_redline
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_de_sovietisation
+	}
+
+	relative_position_id = satellite_de_sovietisation
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_in_the_interests_of_the_anti_revolution
+	icon = GFX_generic_political
+	x = 2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_de_sovietisation
+	}
+
+	relative_position_id = satellite_de_sovietisation
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_status_quo
+	icon = GFX_generic_political
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_our_path
+	}
+
+	relative_position_id = satellite_our_path
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_status_quo_2
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_status_quo
+	}
+
+	relative_position_id = satellite_status_quo
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_guarentee_polis
+	icon = GFX_generic_political
+	x = 2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_status_quo
+	}
+
+	relative_position_id = satellite_status_quo
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_assist_the_rangers
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_guarentee_polis
+	}
+
+	relative_position_id = satellite_guarentee_polis
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_support_the_hanseatic_league
+	icon = GFX_generic_political
+	x = -2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_status_quo
+	}
+
+	relative_position_id = satellite_status_quo
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_equal_opportunity_member
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_support_the_hanseatic_league
+	}
+
+	relative_position_id = satellite_support_the_hanseatic_league
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_anti_communist_coalition
+	icon = GFX_generic_political
+	x = 2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_support_the_hanseatic_league
+	}
+
+	relative_position_id = satellite_support_the_hanseatic_league
+
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_red_alert
+	icon = GFX_generic_political
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_anti_communist_coalition
+	}
+
+	relative_position_id = satellite_anti_communist_coalition
 
 	completion_reward = {
 	}
