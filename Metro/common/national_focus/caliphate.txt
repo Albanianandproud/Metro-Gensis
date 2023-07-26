@@ -1,0 +1,1898 @@
+focus_tree = {
+	id = caliphate_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = ISL
+		}
+	}
+	continuous_focus_position = { x = 3000 y = 2000}
+	default = no
+
+	focus = {
+		id = ISL_the_caliphate
+		icon = GFX_ISL_islamic_flag
+		x = 10
+		y = 0
+		cost = 4
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+	
+	focus = {
+		id = ISL_terrorist_approach
+		icon = GFX_ISL_terrorism
+		x = -5
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_the_caliphate
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_peace_approach
+		}
+
+		relative_position_id = ISL_the_caliphate
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			
+			add_opinion_modifier = { target = ALT modifier = large_decrease }
+			ALT = { add_opinion_modifier = { target = ISL modifier = large_decrease } }
+			
+			add_opinion_modifier = { target = SCA modifier = large_decrease }
+			SCA = { add_opinion_modifier = { target = ISL modifier = large_decrease } }
+		}
+	}
+	
+	focus = {
+		id = ISL_war_against_satan
+		icon = GFX_ISL_anti_satan
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_terrorist_approach
+		}
+
+		relative_position_id = ISL_terrorist_approach
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_bonus_against_satan
+		}
+	}
+	
+	focus = {
+		id = ISL_sword_of_islam
+		icon = GFX_ISL_sword
+		x = 2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_terrorist_approach
+		}
+
+		relative_position_id = ISL_terrorist_approach
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ISL_motivated_soldier
+		}
+	}
+	
+	focus = {
+		id = ISL_trust_in_emir
+		icon = GFX_ISL_emir
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_sword_of_islam
+		}
+
+		relative_position_id = ISL_sword_of_islam
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			ISL_emir = {
+				add_country_leader_trait = _paragon_of_islam
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_faith_in_the_people
+		icon = GFX_ISL_threepeople
+		x = 0
+		y = 2
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_sword_of_islam
+		}
+
+		relative_position_id = ISL_sword_of_islam
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_war_support = 0.1
+		}
+	}
+	
+	focus = {
+		id = ISL_put_them_to_use
+		icon = GFX_RCH_industry3
+		x = -2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_war_against_satan
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_execution
+		}
+		
+		available = {
+			owns_state = 303
+		}
+
+		relative_position_id = ISL_war_against_satan
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			303 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+			add_stability = -0.3
+		}
+	}
+	
+	focus = {
+		id = ISL_execution
+		icon = GFX_ISL_gun_pointed
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_war_against_satan
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_put_them_to_use
+		}
+		
+		available = {
+			owns_state = 303
+		}
+
+		relative_position_id = ISL_war_against_satan
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			303 = {
+				add_manpower = -250
+			}
+			add_stability = 0.2
+		}
+	}
+	
+	focus = {
+		id = ISL_peace_approach
+		icon = GFX_ISL_peace
+		x = 5
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_the_caliphate
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_terrorist_approach
+		}
+
+		relative_position_id = ISL_the_caliphate
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_faction = "Skaven Pact"
+
+			add_opinion_modifier = { target = ALT modifier = large_increase }
+			ALT = { add_opinion_modifier = { target = ISL modifier = large_increase } }
+			
+			add_opinion_modifier = { target = SCA modifier = large_increase }
+			SCA = { add_opinion_modifier = { target = ISL modifier = large_increase } }
+		}
+	}
+	
+	focus = {
+		id = ISL_cabinet_of_caliphate
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_peace_approach
+		}
+		
+		relative_position_id = ISL_peace_approach
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_emirs_cabinet
+		}
+	}
+	
+	focus = {
+		id = ISL_farabi_principles
+		icon = GFX_ISL_farabi
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_cabinet_of_caliphate
+		}
+		
+		relative_position_id = ISL_cabinet_of_caliphate
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_popularity = {
+				ideology = community
+				popularity = 0.5
+			}
+			set_politics = {
+				ruling_party = community
+				elections_allowed = no
+			}
+			add_political_power = 100
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+	
+	focus = {
+		id = ISL_unified_through_hardship
+		icon = GFX_ISL_scaven_ally
+		x = 2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_peace_approach
+		}
+		
+		relative_position_id = ISL_peace_approach
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_country_flag = ISL_i_love_rats
+			custom_effect_tooltip = ISL_i_love_rats_tt
+			SCA = {
+				country_event = nf_ISL.1
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_boy_who_cried_wolf
+		icon = GFX_ISL_anti_libertines
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_unified_through_hardship
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_united_against_satanism
+		}
+		
+		relative_position_id = ISL_unified_through_hardship
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_bonus_against_wolves
+		}
+	}
+	
+	focus = {
+		id = ISL_united_against_satanism
+		icon = GFX_ISL_anti_satan_symbol
+		x = 2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_unified_through_hardship
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_boy_who_cried_wolf
+		}
+		
+		relative_position_id = ISL_unified_through_hardship
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_country_flag = ISL_i_love_furries
+			custom_effect_tooltip = ISL_i_love_furries_tt
+			ALT = {
+				country_event = nf_ISL.4
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_scaven_supremacy
+		icon = GFX_ISL_scaven_supremacy
+		x = 1
+		y = 3
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_terrorist_approach
+			focus = ISL_peace_approach
+		}
+		
+		relative_position_id = ISL_the_caliphate
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_skaven_supremacy
+		}
+	}
+	
+	focus = {
+		id = ISL_government_policies
+		icon = GFX_ISL_government
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_scaven_supremacy
+		}
+		
+		relative_position_id = ISL_scaven_supremacy
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+	
+	focus = {
+		id = ISL_encourage_islamic_immigration
+		icon = GFX_ISL_immigration
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_government_policies
+		}
+		
+		relative_position_id = ISL_government_policies
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = 25
+			263 = {
+				add_manpower = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_islamic_culture
+		icon = GFX_ISL_islam
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_scaven_supremacy
+		}
+		
+		relative_position_id = ISL_scaven_supremacy
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_islamic_culture
+		}
+	}
+	
+	focus = {
+		id = ISL_skaven_hierarchy
+		icon = GFX_ISL_hierarchy
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_islamic_culture
+		}
+		
+		relative_position_id = ISL_islamic_culture
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ISL_feudal_slaves
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ISL_islamic_noble
+		}
+	}
+	
+	focus = {
+		id = ISL_cult_of_personality
+		icon = GFX_ISL_emir_prayers
+		x = 0
+		y = 2
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_scaven_supremacy
+		}
+		
+		relative_position_id = ISL_scaven_supremacy
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			remove_ideas = ISL_skaven_supremacy	
+			add_ideas = ISL_skaven_supremacy2
+		}
+	}
+	
+	focus = {
+		id = ISL_we_march_on
+		icon = GFX_ISL_tank
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_cult_of_personality
+		}
+		prerequisite = {
+			focus = ISL_skaven_hierarchy
+		}
+		prerequisite = {
+			focus = ISL_encourage_islamic_immigration
+		}
+
+		available = {
+			has_completed_focus = ISL_war_plan_wolf
+		}
+		
+		relative_position_id = ISL_cult_of_personality
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			remove_ideas = ISL_the_great_deadlock
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_pig
+		icon = GFX_ISL_plan_pig
+		x = 2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_we_march_on
+		}
+		
+		relative_position_id = ISL_we_march_on
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HNZ
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_eagle
+		icon = GFX_ISL_plan_eagle
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_we_march_on
+		}
+		
+		relative_position_id = ISL_we_march_on
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RCH
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_bear
+		icon = GFX_ISL_plan_bear
+		x = -2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_we_march_on
+		}
+		
+		relative_position_id = ISL_we_march_on
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RED
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_department
+		icon = GFX_ISL_war_plans
+		x = 23
+		y = 0
+		cost = 6
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			army_experience = 50
+		}
+	}
+	
+	focus = {
+		id = ISL_defense_focus
+		icon = GFX_generic_defences
+		x = -2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_war_plan_department
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_offense_focus
+		}
+		
+		relative_position_id = ISL_war_plan_department
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_defense_focus
+		}
+	}
+	
+	focus = {
+		id = ISL_offense_focus
+		icon = GFX_generic_stalker_1
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_war_plan_department
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_defense_focus
+		}
+		
+		relative_position_id = ISL_war_plan_department
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_offense_focus
+		}
+	}
+	
+	focus = {
+		id = ISL_rally_the_men
+		icon = GFX_generic_equipment_gasmask_5
+		x = 2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_war_plan_department
+		}
+		
+		relative_position_id = ISL_war_plan_department
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = 30
+		}
+	}
+	
+	focus = {
+		id = ISL_send_them_back
+		icon = GFX_domain_of_hell
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ISL_rally_the_men
+		}
+
+		available = {
+			has_manpower > 1
+		}
+		
+		relative_position_id = ISL_rally_the_men
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = -1
+			303 = {
+				add_manpower = -10
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_qita
+		icon = GFX_ISL_plan_cat
+		x = 0
+		y = 2
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_defense_focus
+			focus = ISL_offense_focus
+		}
+		
+		prerequisite = {
+			focus = ISL_send_them_back
+		}
+		
+		relative_position_id = ISL_offense_focus
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SAT
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_contact_kohzin
+		icon = GFX_generic_political
+		x = -2
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_war_plan_qita
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_war_plan_qita
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = ISL_planning_with_lib
+			ALT = {
+				add_ideas = ISL_planning_with_lib	
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_brothers_in_arms
+		icon = GFX_AVT_reconcile
+		x = -1
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_contact_kohzin
+		}
+		bypass_if_unavailable = yes
+		mutually_exclusive = {
+			focus = ISL_nothing_more_than_mutual_interest
+		}
+		
+		relative_position_id = ISL_contact_kohzin
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_war_support = 0.10
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = ISL_nothing_more_than_mutual_interest
+		icon = GFX_peace
+		x = 1
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_contact_kohzin
+		}
+		bypass_if_unavailable = yes
+		mutually_exclusive = {
+			focus = ISL_brothers_in_arms
+		}
+		
+		relative_position_id = ISL_contact_kohzin
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = 15
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 25
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 10
+				producer = ALT
+		    }
+		}
+	}
+	
+	focus = {
+		id = ISL_abdullahs_calling
+		icon = GFX_generic_equipment_gasmask_2
+		x = 2
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_war_plan_qita
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_war_plan_qita
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = ISL_abdullah
+		}
+	}
+	
+	focus = {
+		id = ISL_gates_of_jannah
+		icon = GFX_ISL_jannah
+		x = 0
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_abdullahs_calling
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_abdullahs_calling
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_technology = {
+				isl_suicide_bombs = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_far
+		icon = GFX_ISL_plan_rat
+		x = -2
+		y = 1
+		cost = 7
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_rats
+			}
+		}
+		prerequisite = {
+			focus = ISL_gates_of_jannah
+		}
+		prerequisite = {
+			focus = ISL_brothers_in_arms
+			focus = ISL_nothing_more_than_mutual_interest
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_gates_of_jannah
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SCA
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_spoils_of_war
+		icon = GFX_scrap_computers
+		x = -1
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_furries
+			}
+		}
+		prerequisite = {
+			focus = ISL_war_plan_far
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_war_plan_far
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			263 = {
+				add_resource = {
+					type = components
+					amount = 6
+				}
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_what_we_learned
+		icon = GFX_generic_medium_arms_2
+		x = 1
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_furries
+			}
+		}
+		prerequisite = {
+			focus = ISL_war_plan_far
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_war_plan_far
+		ai_will_do = {
+			factor = 50
+		}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = ISL_stab_in_the_back
+		icon = GFX_ISL_anti_libertines
+		x = -1
+		y = 1
+		cost = 6
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_furries
+			}
+		}
+		prerequisite = {
+			focus = ISL_what_we_learned
+		}
+		prerequisite = {
+			focus = ISL_spoils_of_war
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_what_we_learned
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			remove_ideas = ISL_planning_with_lib
+			ALT = {
+				add_stability = -0.05
+				add_stability = -0.05
+				add_manpower = -5
+				remove_ideas = ISL_planning_with_lib
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_war_plan_wolf
+		icon = GFX_ISL_plan_wolf
+		x = 0
+		y = 1
+		cost = 7
+		available = {
+			NOT = {
+				has_country_flag = ISL_i_love_furries
+			}
+		}
+		prerequisite = {
+			focus = ISL_stab_in_the_back
+		}
+		bypass_if_unavailable = yes
+		relative_position_id = ISL_stab_in_the_back
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ALT
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_skaven_army_culture
+		icon = GFX_skaven_generic_army
+		x = 31
+		y = 0
+		cost = 6
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			army_experience = 100
+		}
+	}
+	
+	focus = {
+		id = ISL_darcy_school
+		icon = GFX_ISL_darcy
+		x = -3
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_skaven_army_culture
+		}
+
+		mutually_exclusive = {
+			focus = ISL_mohammad_school
+		}
+
+		relative_position_id = ISL_skaven_army_culture
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_darcys_school_of_thought
+		}
+	}
+	
+	focus = {
+		id = ISL_what_are_ethics
+		icon = GFX_RCH_trubnaya_core
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_darcy_school
+		}
+
+		relative_position_id = ISL_darcy_school
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_stability = -0.1
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 50
+				producer = RUS
+			}
+			286 = {
+				add_manpower = -10
+			}
+			368 = {
+				add_manpower = -10
+			}
+			263 = {
+				add_manpower = 20
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_finders_keepers
+		icon = GFX_scrap_metal_2
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_darcy_school
+		}
+
+		relative_position_id = ISL_darcy_school
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_fight_like_the_savage_animals_we_are
+		icon = GFX_ISL_bear
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_what_are_ethics
+		}
+		prerequisite = {
+			focus = ISL_finders_keepers
+		}
+
+		relative_position_id = ISL_what_are_ethics
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_animal_spirit
+		}
+	}
+	
+	focus = {
+		id = ISL_mohammad_school
+		icon = GFX_ISL_mohammad
+		x = 3
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_skaven_army_culture
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_darcy_school
+		}
+
+		relative_position_id = ISL_skaven_army_culture
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_mohammads_school_of_thought
+		}
+	}
+	
+	focus = {
+		id = ISL_quality_equipment
+		icon = GFX_generic_spec_ops_2
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_mohammad_school
+		}
+
+		relative_position_id = ISL_mohammad_school
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = support_weapons_tech_research
+				bonus = 0.5
+				uses = 1
+				category = support_weapons_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_turn_their_weapons_against_them
+		icon = GFX_flamethrower
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_mohammad_school
+		}
+
+		relative_position_id = ISL_mohammad_school
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_flamethrower_production
+		}
+	}
+	
+	focus = {
+		id = ISL_humans_at_heart
+		icon = GFX_campfire_2
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_quality_equipment
+		}
+		prerequisite = {
+			focus = ISL_turn_their_weapons_against_them
+		}
+
+		relative_position_id = ISL_turn_their_weapons_against_them
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			country_event = nf_ISL.7
+		}
+	}
+	
+	focus = {
+		id = ISL_recruitment_campaigns
+		icon = GFX_settle_minorities
+		x = 0
+		y = 2
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_skaven_army_culture
+		}
+
+		relative_position_id = ISL_skaven_army_culture
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_manpower = 25
+		}
+	}
+	
+	focus = {
+		id = ISL_establish_scavenger_teams
+		icon = GFX_generic_stalker_4
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_recruitment_campaigns
+		}
+
+		relative_position_id = ISL_recruitment_campaigns
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			set_country_flag = free_scavenging_cost
+			custom_effect_tooltip = ISL_free_scavenge_tt
+		}
+	}
+	
+	focus = {
+		id = ISL_scavenging_for_scrap
+		icon = GFX_scrap
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_establish_scavenger_teams
+		}
+		prerequisite = {
+			focus = ISL_fight_like_the_savage_animals_we_are
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_scavenging_for_weapons
+		}
+
+		relative_position_id = ISL_establish_scavenger_teams
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = components
+					amount = 3
+				}
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+				add_resource = {
+					type = chemicals
+					amount = 3
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_scavenging_for_weapons
+		icon = GFX_generic_defences_2
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_establish_scavenger_teams
+		}
+		prerequisite = {
+			focus = ISL_humans_at_heart
+		}
+
+		mutually_exclusive = {
+			focus = ISL_scavenging_for_scrap
+		}
+
+		relative_position_id = ISL_establish_scavenger_teams
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 70
+				producer = RUS
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_military_superiority
+		icon = GFX_generic_skaven
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_scavenging_for_scrap
+			focus = ISL_scavenging_for_weapons
+		}
+
+		relative_position_id = ISL_scavenging_for_scrap
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+
+		}
+	}
+	
+	focus = {
+		id = ISL_update_the_infrastructure
+		icon = GFX_metro_infrastructure
+		x = 40
+		y = 0
+		cost = 7
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_charge_the_mosques
+		icon = GFX_bullets_3
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_update_the_infrastructure
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_the_mosques_are_exempt
+		}
+
+		relative_position_id = ISL_update_the_infrastructure
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_not_exempt
+		}
+	}
+	
+	focus = {
+		id = ISL_the_mosques_are_exempt
+		icon = GFX_mob_reconciliation
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_update_the_infrastructure
+		}
+		
+		mutually_exclusive = {
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_update_the_infrastructure
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_exempt
+		}
+	}
+	
+	focus = {
+		id = ISL_skaven_work_ethic
+		icon = GFX_generic_skaven
+		x = -1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_the_mosques_are_exempt
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_the_mosques_are_exempt
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			263 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_civilian_sector_expansion
+		icon = GFX_workstation
+		x = 1
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_the_mosques_are_exempt
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_the_mosques_are_exempt
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			303 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_improve_station_communications
+		icon = GFX_radio
+		x = 3
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_the_mosques_are_exempt
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_the_mosques_are_exempt
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_catching_up
+		icon = GFX_generic_electricity_2
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_skaven_work_ethic
+		}
+		prerequisite = {
+			focus = ISL_civilian_sector_expansion
+		}
+		prerequisite = {
+			focus = ISL_improve_station_communications
+		}
+
+		relative_position_id = ISL_civilian_sector_expansion
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_catching_up
+		}
+	}
+	
+	focus = {
+		id = ISL_increase_war_production
+		icon = GFX_generic_ammunition_1
+		x = -2
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_catching_up
+		}
+
+		relative_position_id = ISL_catching_up
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ISL_catching_up
+				add_idea = ISL_catching_up2
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_minister_for_war
+		icon = GFX_RED_formalise_ministry_of_economics
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_increase_war_production
+		}
+
+		relative_position_id = ISL_increase_war_production
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_ministry_of_war
+		}
+	}
+	
+	focus = {
+		id = ISL_tunnel_rats
+		icon = GFX_crate
+		x = 2
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_catching_up
+		}
+
+		relative_position_id = ISL_catching_up
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 5
+				}
+				add_resource = {
+					type = components
+					amount = 5
+				}
+				add_resource = {
+					type = alloys
+					amount = 5
+				}
+				add_resource = {
+					type = chemicals
+					amount = 5
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_supply_scavenging
+		icon = GFX_equipment_backpack
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_tunnel_rats
+		}
+
+		relative_position_id = ISL_tunnel_rats
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = ISL_scavenging_program
+		}
+	}
+	
+	focus = {
+		id = ISL_the_ratway_vaults
+		icon = GFX_scrap_metal_2
+		x = 2
+		y = 1
+		cost = 8
+
+		prerequisite = {
+			focus = ISL_supply_scavenging
+		}
+
+		relative_position_id = ISL_supply_scavenging
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+
+		}
+	}
+	
+	focus = {
+		id = ISL_revitalized_economy
+		icon = GFX_cog_idea
+		x = -2
+		y = 1
+		cost = 8
+
+		prerequisite = {
+			focus = ISL_minister_for_war
+		}
+		prerequisite = {
+			focus = ISL_supply_scavenging
+		}
+
+		relative_position_id = ISL_supply_scavenging
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			263 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			263 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_southern_line_development
+		icon = GFX_cog_factories
+		x = -4
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_catching_up
+		}
+		
+		available = {
+			owns_state = 303
+			owns_state = 114
+			owns_state = 263
+			owns_state = 115
+		}
+
+		relative_position_id = ISL_catching_up
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			303 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			263 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ISL_northern_line_development
+		icon = GFX_cog_factories
+		x = 4
+		y = 1
+		cost = 7
+
+		prerequisite = {
+			focus = ISL_catching_up
+		}
+		
+		available = {
+			owns_state = 286
+			owns_state = 116
+			owns_state = 298
+			owns_state = 117
+			owns_state = 313
+			owns_state = 118
+			owns_state = 367
+		}
+
+		relative_position_id = ISL_catching_up
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			286 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			298 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			313 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			367 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
