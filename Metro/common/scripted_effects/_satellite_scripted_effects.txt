@@ -18,7 +18,6 @@ _satellite_upgrade_civ_idea = {
 		}
 	}
 }
-
 _satellite_upgrade_mil_idea = {
 	if = {
 		limit = {
@@ -36,6 +35,82 @@ _satellite_upgrade_mil_idea = {
 		swap_ideas = {
 			remove_idea = satellite_construction_military_2
 			add_idea = satellite_construction_military_3
+		}
+	}
+}
+satellite_build_fortifications_next_reich = {
+	if = {
+		limit = { original_tag = DIM }
+		181 = {
+			add_building_construction = {
+				type = bunker
+				level = 1
+				instant_build = yes
+				province = { all_provinces = yes }
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	else_if = {
+		limit = { original_tag = ULI }
+		149 = {
+			add_building_construction = {
+				type = bunker
+				level = 1
+				instant_build = yes
+				province = { all_provinces = yes }
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+start_border_conflict_with_reich = {
+	if = {
+		limit = { original_tag = DIM }
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 181
+				num_provinces = 3
+				on_win = nf_satellite.2
+				on_lose = nf_satellite.3
+				on_cancel = nf_satellite.4
+			}
+			defender = {
+				state = 426
+				num_provinces = 3
+				on_win = nf_satellite.2
+				on_lose = nf_satellite.3
+				on_cancel = nf_satellite.4
+			}
+		}
+	}
+	else_if = {
+		limit = { original_tag = ULI }
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 149
+				num_provinces = 3
+				on_win = nf_satellite.2
+				on_lose = nf_satellite.3
+				on_cancel = nf_satellite.4
+			}
+			defender = {
+				state = 428
+				num_provinces = 3
+				on_win = nf_satellite.2
+				on_lose = nf_satellite.3
+				on_cancel = nf_satellite.4
+			}
 		}
 	}
 }

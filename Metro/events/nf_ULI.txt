@@ -40,3 +40,36 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+    id = nf_ULI.2
+    title = nf_ULI.2.t
+    desc = nf_ULI.2.d
+    picture = ccc_mutant
+	trigger = {
+		ULI_meets_darkones_introduction_criteria = yes
+	}
+
+	fire_only_once = yes
+
+	option = { # Evacuate stations
+		name = nf_ULI.2.a
+		RUI = {
+			transfer_state = 302
+			transfer_state = 143
+			transfer_state = 267
+		}
+
+		302 = { add_manpower = -120 set_demilitarized_zone = yes }
+		143 = { set_demilitarized_zone = yes }
+		267 = { add_manpower = -145 set_demilitarized_zone = yes }
+		capital_scope = { add_manpower = 150 }
+
+		add_timed_idea = { idea = ULI_polezhaevsky_incident days = 1080 }
+
+		news_event = global_event.66
+		ai_chance = {
+			base = 50
+		}
+	}
+}

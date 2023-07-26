@@ -1,0 +1,83 @@
+_satellite_against_fascism_decisions = {
+
+	_satellite_against_fascism_perimeter_defences = {
+		icon = form_nation
+		available =  {
+			RCH = { exists = yes }
+			NOT = { has_war = yes }
+		}
+
+		cost = 45
+
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+			production_speed_buildings_factor = -0.1
+		}
+
+		remove_effect = {
+			satellite_build_fortifications_next_reich = yes
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+
+	_satellite_against_fascism_extended_shifts = {
+		icon = form_nation
+		available =  {
+			RCH = { exists = yes }
+			NOT = { has_war = yes }
+			has_war_support > 0.3
+		}
+		cost = 55
+		days_remove = 45
+		days_re_enable = 80
+
+		modifier = {
+			production_factory_efficiency_gain_factor = 0.15
+			war_support_weekly = -0.005
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+
+	_satellite_against_fascism_preliminary_strike = {
+		icon = form_nation
+		available =  {
+			RCH = { exists = yes }
+			NOT = {
+				has_war_with = RCH
+				is_in_faction_with = RCH
+				has_non_aggression_pact_with = RCH
+				RCH = { is_puppet_of = ROOT }
+			}
+			has_army_manpower = { size > 175 }
+			has_war_support > 0.4
+			has_completed_focus = satellite_antifascist_decisions
+		}
+
+		days_remove = 15
+		war_with_on_remove = RCH
+		days_re_enable = 95
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = { command_power > 19.9 }
+
+		remove_effect = { }
+
+		complete_effect = { 
+			start_border_conflict_with_reich = yes
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				date < 2030.1.1
+				factor = 0
+			}
+		}
+	}
+}
