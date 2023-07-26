@@ -11,21 +11,6 @@ focus_tree = {
 	continuous_focus_position = { x = 100 y = 800 }
 	default = no
 
-	#focus = { || STOP ADDING THIS IDIOT
-	#	id = EUR_bingle
-	#	icon = GFX_RED_get_owned
-	#	x = 1000
-	#	y = 1000
-	#	cost = 6.5
-	#	
-	#	ai_will_do = {
-	#		factor = 0
-	#	}
-	#	
-	#	completion_reward = {
-	#	}
-	#}
-
 	focus = {
 		id = EUR_organise_the_immigrants
 		icon = GFX_HNZ_internal_affairs
@@ -36,11 +21,6 @@ focus_tree = {
 		ai_will_do = {
 			factor = 2
 		}
-
-		#select_effect = {
-		#
-		#
-		#}
 
 		completion_reward = {
 			country_event = nf_EUR.1
@@ -70,11 +50,6 @@ focus_tree = {
 			has_country_flag = EUR_industrial_flag
 		}
 
-		#select_effect = {
-		#
-		#
-		#}
-
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
@@ -82,10 +57,10 @@ focus_tree = {
 						has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 				    type = industrial_complex
-				    level = 2
+				    level = 1
 				    instant_build = yes
 				}
 				add_building_construction = {
@@ -504,11 +479,6 @@ focus_tree = {
 			has_country_flag = EUR_military_flag
 		}
 
-		#select_effect = {
-		#
-		#
-		#}
-
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
@@ -516,21 +486,11 @@ focus_tree = {
 						has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 				    type = arms_factory
 				    level = 1
 				    instant_build = yes
-				}
-				add_building_construction = {
-				    type = industrial_complex
-				    level = 1
-				    instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
 				}
 			}
 		}
@@ -1138,7 +1098,7 @@ focus_tree = {
 	focus = {
 		id = EUR_start_of_political_reform
 		icon = GFX_EUR_focus_1
-		x = 32
+		x = 40
 		y = 0
 		cost = 4
 
@@ -1219,7 +1179,7 @@ focus_tree = {
 		mutually_exclusive = { focus = EUR_democratic_reforms }
 
 		relative_position_id = EUR_start_of_political_reform
-		x = 2
+		x = 1
 		y = 1
 		cost = 6.5
 
@@ -1231,8 +1191,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_popularity = { ideology = council popularity = -0.05 }
-			add_popularity = { ideology = community popularity = -0.05 }
+			add_popularity = { ideology = council popularity = -0.1 }
+			add_popularity = { ideology = community popularity = -0.1 }
 		}
 	}
 
@@ -1267,7 +1227,7 @@ focus_tree = {
 		mutually_exclusive = { focus = EUR_remove_undesirables_from_council }
 
 		relative_position_id = EUR_start_of_political_reform
-		x = -2
+		x = -1
 		y = 1
 		cost = 6.5
 
@@ -1279,8 +1239,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_popularity = { ideology = dictatorial popularity = -0.05 }
-			add_popularity = { ideology = oligarch popularity = -0.05 }
+			add_popularity = { ideology = dictatorial popularity = -0.1 }
+			add_popularity = { ideology = oligarch popularity = -0.1 }
 		}
 	}
 
@@ -2147,32 +2107,37 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 
-		available = {
-			GWC = {
-				exists = no
-			}
-			ROOT = {
-				all_owned_state = {
-					is_core_of = GWC
-					AND = {
-						compliance > 80
+		completion_reward = {
+			effect_tooltip = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
 					}
+					add_core_of = PREV
+				}
+				GWC = {
+					every_owned_state = {
+						limit = {
+							is_core_of = GWC
+						}
+						add_core_of = EUR
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
+					}
+					add_core_of = PREV
 				}
 			}
 		}
 
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			every_owned_state  = {
-                limit = {
-                    is_core_of = GWC
-					is_owned_by = EUR
-                }
-                add_core_of = PREV
-            }
 		}
 	}
 
@@ -2396,8 +2361,8 @@ focus_tree = {
 				date > 2032.1.1
 			}
 		}
-		x = 14
-		y = 5
+		x = 27
+		y = 0
 		cost = 3
 
 		ai_will_do = {
@@ -3694,29 +3659,49 @@ focus_tree = {
 		cost = 6.5
 
 		available = {
-			NOT = { has_war_with = GWC }
-			ROOT = {
-				all_owned_state = {
-					is_core_of = GWC
-					AND = {
-						compliance > 80
+			GWC = { exists = no }
+			334 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+			280 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+			385 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+		}
+
+		completion_reward = {
+			effect_tooltip = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
 					}
+					add_core_of = PREV
+				}
+				GWC = {
+					every_owned_state = {
+						limit = {
+							is_core_of = GWC
+						}
+						add_core_of = EUR
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
+					}
+					add_core_of = PREV
 				}
 			}
 		}
 
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			every_owned_state = {
-                limit = {
-                    is_core_of = GWC
-                    is_owned_by = EUR
-                }
-                add_core_of = PREV
-            }
 		}
 	}
 
@@ -4528,30 +4513,48 @@ focus_tree = {
 		cost = 6.5
 
 		available = {
-			NOT = { has_war_with = GWC }
-			ROOT = {
-				all_owned_state = {
-					is_core_of = GWC
-					AND = {
-						compliance > 80
+			GWC = { exists = no }
+			334 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+			280 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+			385 = { is_owned_by = ROOT 
+				AND = { compliance > 80 }
+			}
+		}
+
+		completion_reward = {
+			effect_tooltip = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
 					}
+					add_core_of = PREV
+				}
+				GWC = {
+					every_owned_state = {
+						limit = {
+							is_core_of = GWC
+						}
+						add_core_of = EUR
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = GWC
+						is_owned_by = EUR
+					}
+					add_core_of = PREV
 				}
 			}
 		}
 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			every_owned_state  = {
-                limit = {
-                    is_core_of = GWC
-					is_owned_by = EUR
-                }
-                add_core_of = PREV
-            }
-		}
+		ai_will_do = { factor = 2 }
 	}
 
 	focus = {
@@ -4567,10 +4570,7 @@ focus_tree = {
 		available = {
 			has_manpower > 10
 		}
-
-		ai_will_do = {
-			factor = 2
-		}
+		cancel_if_invalid = yes
 
 		completion_reward = {
 			add_manpower = -10
@@ -4587,6 +4587,11 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 2
 		}
 	}
 

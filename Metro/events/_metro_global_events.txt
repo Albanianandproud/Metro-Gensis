@@ -742,6 +742,85 @@ news_event = {
 		}
 	}
 }
+news_event = {
+	id = global_event.18
+	title = global_event.18.t
+	picture = GFX_news_event_8
+	major = yes
+	hidden = no
+	is_triggered_only = yes
+	fire_only_once = no
+	desc = {
+		text = global_event.18_generic_capitulation
+		trigger = {
+			NOT = {
+				FROM.FROM = { has_country_flag = is_bandit_nation}
+			}
+		}
+	}
+	#desc = {
+	#	text = global_event.18_bandit_capitulation
+	#	trigger = {
+	#		FROM.FROM = { has_country_flag = is_bandit_nation}
+	#	}
+	#}
+	#desc = {
+	#	text = global_event.18_savage_capitulation
+	#	trigger = {
+	#		FROM.FROM = { has_country_flag = is_savage_nation}
+	#	}
+	#desc = {
+	#	text = global_event.18_RED_capitulation
+	#	trigger = {
+	#		FROM.FROM = { original_tag = RED}
+	#	}
+	#desc = {
+	#	text = global_event.18_HNZ_capitulation
+	#	trigger = {
+	#		FROM.FROM = { original_tag = HNZ}
+	#	}
+	#desc = {
+	#	text = global_event.18_PLS_capitulation
+	#	trigger = {
+	#		FROM.FROM = { original_tag = PLS}
+	#	}
+	#desc = {
+	#	text = global_event.18_RCH_capitulation
+	#	trigger = {
+	#		FROM.FROM = { original_tag = RCH}
+	#	}
+	option = {
+		name = global_event.18.a
+		trigger = {
+			OR = {
+				any_allied_country = {
+					has_war_with = ROOT
+				}
+				has_war_with = ROOT
+			}
+		}
+	}
+	option = {
+		name = global_event.18.b
+		trigger = {
+			OR = {
+				tag = ROOT
+				has_war_together_with = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+	option = {
+		name = global_event.18.c
+		trigger = {
+			NOT = { has_war_together_with = ROOT }
+			NOT = { is_in_faction_with = ROOT }
+			NOT = { any_allied_country = { has_war_with = ROOT } }
+			NOT = { has_war_with = ROOT }
+			NOT = { tag = ROOT }
+		}
+	}
+}
 
 ## Keep global_event.18 - global_event.30 IDs for other capital occupied events...
 

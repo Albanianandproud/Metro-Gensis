@@ -2,8 +2,8 @@
 ## Code above is for VSC HOI4 utility. pls leave ty
 
 focus_tree = {
-    id = communist_shared
-	continuous_focus_position = { x = 4000 y = 100 }
+    id = revolutionists
+	continuous_focus_position = { x = 5350 y = 100 }
 	country = {
 		base = 0
 		modifier = {
@@ -17,7 +17,7 @@ focus_tree = {
 	reset_on_civilwar = no
 
 	focus = {
-		id = communist_introduction
+		id = AVT_introduction
 		icon = GFX_RED_long_arm_of_the_state
 		x = 2
 		y = 0
@@ -37,97 +37,92 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_collectivization
+		id = AVT_collectivization
 		icon = GFX_workstation
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_introduction
+			focus = AVT_introduction
 		}
 		x = -7
 		y = 1
-		relative_position_id = communist_introduction
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_introduction
 
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+		}
 	}
 
 	focus = {
-		id = communist_industry_2
+		id = AVT_industry_2
 		icon = GFX_workshop_2
 		cost = 3.6
 
 		prerequisite = {
-			focus =  communist_collectivization
+			focus =  AVT_collectivization
 		}
 		x = -2
 		y = 1
-		relative_position_id =  communist_collectivization
+		relative_position_id =  AVT_collectivization
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_station_planning
+			add_ideas = AVT_station_planning
 		}
 	}
 
 	focus = {
-		id = communist_industry_3
+		id = AVT_industry_3
 		icon = GFX_engine
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_industry_2
+			focus =  AVT_industry_2
 		}
 		x = -1
 		y = 1
-		relative_position_id =  communist_industry_2
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id =  AVT_industry_2
 
 		completion_reward = {
 			custom_effect_tooltip = AVT_advisor
 			show_ideas_tooltip = AVT_lumumba
 		}
+
+		ai_will_do = {
+			factor = 5
+		}
 	}
 
 	focus = {
-		id = communist_scrapping_for_parts
+		id = AVT_scrapping_for_parts
 		icon = GFX_scrap_computers
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_industry_3
+			focus =  AVT_industry_3
 		}
 
 		mutually_exclusive = {
-			focus = communist_using_the_terminal
+			focus = AVT_using_the_terminal
 		}
 
 		x = 1
 		y = 1
-		relative_position_id =  communist_industry_3
+		relative_position_id =  AVT_industry_3
 
 		ai_will_do = {
 			factor = 3
@@ -137,49 +132,36 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = electronics
-			        amount = 1
+			        amount = 2
 			    }
 				add_resource = {
 			        type = components
-			        amount = 1
+			        amount = 2
 			    }
 				add_resource = {
 			        type = alloys
-			        amount = 1
+			        amount = 2
 			    }
-			}
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
 			}
 		}
 	}
 
 	focus = {
-		id = communist_using_the_terminal
+		id = AVT_using_the_terminal
 		icon = GFX_computer_terminal
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_industry_3
+			focus =  AVT_industry_3
 		}
 
 		mutually_exclusive = {
-			focus = communist_scrapping_for_parts
+			focus = AVT_scrapping_for_parts
 		}
 
 		x = -1
 		y = 1
-		relative_position_id =  communist_industry_3
+		relative_position_id =  AVT_industry_3
 
 		ai_will_do = {
 			factor = 3
@@ -191,38 +173,44 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_industry_5
+		id = AVT_industry_5
 		icon = GFX_RED_breakthrough
 		cost = 6.5
 
-		prerequisite = {
-			focus =  communist_using_the_terminal
+		prerequisite = { focus =  AVT_using_the_terminal }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
+
 		x = -2
 		y = 1
-		relative_position_id =  communist_scrapping_for_parts
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id =  AVT_scrapping_for_parts
 
 		completion_reward = {
-			add_research_slot = 1
+			AVT_socialist_science_upgrade_idea = yes
+		}
+
+		ai_will_do = {
+			factor = 8
 		}
 	}
 
 	focus = {
-		id = communist_industry_6
+		id = AVT_industry_6
 		icon = GFX_equipment_electrical
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_scrapping_for_parts
+			focus =  AVT_scrapping_for_parts
 		}
 
 		x = 0
 		y = 1
-		relative_position_id =  communist_scrapping_for_parts
+		relative_position_id =  AVT_scrapping_for_parts
 
 		ai_will_do = {
 			factor = 3
@@ -246,16 +234,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_gas_lighting
+		id = AVT_gas_lighting
 		icon = GFX_oil_lamp
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_collectivization
+			focus =  AVT_collectivization
 		}
 		x = 0
 		y = 1
-		relative_position_id =  communist_collectivization
+		relative_position_id =  AVT_collectivization
 
 		ai_will_do = {
 			factor = 3
@@ -272,19 +260,19 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_tunnel_clearing
+		id = AVT_tunnel_clearing
 		icon = GFX_railroad_construction
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_gas_lighting
+			focus =  AVT_gas_lighting
 		}
 		available = {
 		    num_of_controlled_states > 3
 		}
 		x = 1
 		y = 1
-		relative_position_id =  communist_gas_lighting
+		relative_position_id =  AVT_gas_lighting
 
 		ai_will_do = {
 			factor = 3
@@ -331,16 +319,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_preliminary_defences
+		id = AVT_preliminary_defences
 		icon = GFX_sandbags
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_gas_lighting
+			focus =  AVT_gas_lighting
 		}
 		x = -1
 		y = 1
-		relative_position_id =  communist_gas_lighting
+		relative_position_id =  AVT_gas_lighting
 
 		ai_will_do = {
 			factor = 3
@@ -382,38 +370,38 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_infrastructure_3
+		id = AVT_infrastructure_3
 		icon = GFX_welder
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_tunnel_clearing
-			focus =  communist_preliminary_defences
+			focus =  AVT_tunnel_clearing
+			focus =  AVT_preliminary_defences
 		}
 		x = -1
 		y = 1
-		relative_position_id =  communist_tunnel_clearing
+		relative_position_id =  AVT_tunnel_clearing
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_improve_infrastructure
+			add_ideas = AVT_improve_infrastructure
 		}
 	}
 
 	focus = {
-		id = communist_community_resource_share
+		id = AVT_community_resource_share
 		icon = GFX_scrap_metal_4
 		cost = 3.6
 
 		prerequisite = {
-			focus =  communist_collectivization
+			focus =  AVT_collectivization
 		}
 		x = 2
 		y = 1
-		relative_position_id =  communist_collectivization
+		relative_position_id =  AVT_collectivization
 
 		ai_will_do = {
 			factor = 3
@@ -429,23 +417,23 @@ focus_tree = {
 				}
 				add_resource = {
 			        type = scrap
-			        amount = 4
+			        amount = 6
 			    }
 			}
 		}
 	}
 
 	focus = {
-		id = communist_equal_duty
+		id = AVT_equal_duty
 		icon = GFX_scrap_metal_2
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_community_resource_share
+			focus =  AVT_community_resource_share
 		}
 		x = 1
 		y = 1
-		relative_position_id =  communist_community_resource_share
+		relative_position_id =  AVT_community_resource_share
 
 		ai_will_do = {
 			factor = 3
@@ -472,21 +460,21 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_equal_duty_2
+		id = AVT_equal_duty_2
 		icon = GFX_radio_reciever
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_equal_duty
+			focus =  AVT_equal_duty
 		}
 
 		mutually_exclusive = {
-			focus = communist_getting_the_good_stuff
+			focus = AVT_getting_the_good_stuff
 		}
 
 		x = 1
 		y = 1
-		relative_position_id =  communist_equal_duty
+		relative_position_id =  AVT_equal_duty
 
 		ai_will_do = {
 			factor = 3
@@ -494,15 +482,11 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -510,21 +494,21 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_getting_the_good_stuff
+		id = AVT_getting_the_good_stuff
 		icon = GFX_booze
-		cost = 5.7
+		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_equal_duty
+			focus =  AVT_equal_duty
 		}
 
 		mutually_exclusive = {
-			focus = communist_equal_duty_2
+			focus = AVT_equal_duty_2
 		}
 
 		x = -1
 		y = 1
-		relative_position_id =  communist_equal_duty
+		relative_position_id =  AVT_equal_duty
 
 		ai_will_do = {
 			factor = 3
@@ -532,44 +516,49 @@ focus_tree = {
 
 		completion_reward = {
 			add_timed_idea = { 
-				idea = communist_kvass_for_the_people
+				idea = AVT_kvass_for_the_people
 				days = 250
 			}
 		}
 	}
 
 	focus = {
-		id = communist_socialist_science
+		id = AVT_socialist_science
 		icon = GFX_RED_breakthrough
 		cost = 6.5
 
-		prerequisite = {
-			focus =  communist_equal_duty_2
+		prerequisite = { focus =  AVT_equal_duty_2 }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = 2
 		y = 1
-		relative_position_id =  communist_getting_the_good_stuff
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id =  AVT_getting_the_good_stuff
 
 		completion_reward = {
-			add_research_slot = 1
+			AVT_socialist_science_upgrade_idea = yes
+		}
+
+		ai_will_do = {
+			factor = 8
 		}
 	}
 
 	focus = {
-		id = communist_socialist_science_2
+		id = AVT_socialist_science_2
 		icon = GFX_generic_resource_chemicals_1
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_getting_the_good_stuff
+			focus =  AVT_getting_the_good_stuff
 		}
 		x = 0
 		y = 1
-		relative_position_id =  communist_getting_the_good_stuff
+		relative_position_id =  AVT_getting_the_good_stuff
 
 		ai_will_do = {
 			factor = 3
@@ -586,31 +575,27 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_population_build_slots
+		id = AVT_population_build_slots
 		icon = GFX_mushroom
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_getting_the_good_stuff
-			focus =  communist_equal_duty_2
+			focus =  AVT_getting_the_good_stuff
+			focus =  AVT_equal_duty_2
 		}
 		prerequisite = {
-			focus =  communist_scrapping_for_parts
-			focus =  communist_using_the_terminal
+			focus =  AVT_scrapping_for_parts
+			focus =  AVT_using_the_terminal
 		}
 		prerequisite = {
-			focus =  communist_infrastructure_3
+			focus =  AVT_infrastructure_3
 		}
 		available = {
 		    num_of_controlled_states > 5
 		}
 		x = 0
 		y = 1
-		relative_position_id =  communist_infrastructure_3
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id =  AVT_infrastructure_3
 
 		completion_reward = {
 			random_owned_state = {
@@ -641,137 +626,65 @@ focus_tree = {
 				add_manpower = 25
 			}
 		}
-	}
-
-	focus = {
-		id = communist_1
-		icon = GFX_workstation_2
-		cost = 6.5
-
-		prerequisite = {
-			focus =  communist_population_build_slots
-		}
-		mutually_exclusive = {
-			focus = communist_2
-		}
-		x = -1
-		y = 1
-		relative_position_id =  communist_population_build_slots
 
 		ai_will_do = {
 			factor = 3
 		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
 	}
 
 	focus = {
-		id = communist_3
+		id = AVT_3
 		icon = GFX_workshop_1
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_1
+			focus = AVT_population_build_slots
 		}
-		x = 0
+		x = -1
 		y = 1
-		relative_position_id =  communist_1
+		relative_position_id = AVT_population_build_slots
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_industrial_complex_building
+			add_ideas = AVT_industrial_complex_building
 		}
 	}
 
 	focus = {
-		id = communist_2
-		icon = GFX_generic_small_arms_2
-		cost = 6.5
-
-		prerequisite = {
-			focus =  communist_population_build_slots
-		}
-		mutually_exclusive = {
-			focus = communist_1
-		}
-		x = 1
-		y = 1
-		relative_position_id =  communist_population_build_slots
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = communist_4
+		id = AVT_4
 		icon = GFX_RCH_reinburse_the_stockpile
 		cost = 6.5
 
 		prerequisite = {
-			focus =  communist_2
+			focus =  AVT_population_build_slots
 		}
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id =  communist_2
+		relative_position_id =  AVT_population_build_slots
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_arms_factory_building
+			add_ideas = AVT_arms_factory_building
 		}
 	}
 
 	focus = {
-		id = communist_eco_buff
+		id = AVT_eco_buff
 		icon = GFX_armory
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_introduction
+			focus = AVT_introduction
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_introduction
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_introduction
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -781,89 +694,111 @@ focus_tree = {
 				category = industry
 			}
 		}
+
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
-		id = communist_eco_idea
+		id = AVT_eco_idea
 		icon = GFX_toolbox
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_buff
+			focus = AVT_eco_buff
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_eco_buff
+		relative_position_id = AVT_eco_buff
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_economy
+			add_ideas = AVT_economy
 		}
 	}
 
 	focus = {
-		id = communist_eco_idea_1
+		id = AVT_eco_idea_1
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_idea
+			focus = AVT_eco_idea
 		}
 		mutually_exclusive = {
-			focus = communist_eco_idea_1
+			focus = AVT_eco_idea_1
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = -1
 		y = 1
-		relative_position_id = communist_eco_idea
+		relative_position_id = AVT_eco_idea
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_economy_path_1
+			add_ideas = AVT_economy_path_1
 		}
 	}
 
 	focus = {
-		id = communist_eco_idea_2
+		id = AVT_eco_idea_2
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_idea
+			focus = AVT_eco_idea
 		}
 		mutually_exclusive = {
-			focus = communist_eco_idea_2
+			focus = AVT_eco_idea_2
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = 1
 		y = 1
-		relative_position_id = communist_eco_idea
+		relative_position_id = AVT_eco_idea
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_economy_path_2
+			add_ideas = AVT_economy_path_2
 		}
 	}
 
 	focus = {
-		id = communist_industry_tech_buff_1
+		id = AVT_industry_tech_buff_1
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_idea_1
-			focus = communist_eco_idea_2
+			focus = AVT_eco_idea_1
+			focus = AVT_eco_idea_2
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_eco_idea_1
+		relative_position_id = AVT_eco_idea_1
 
 		ai_will_do = {
 			factor = 3
@@ -880,16 +815,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_industry_tech_buff_2
+		id = AVT_industry_tech_buff_2
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_industry_tech_buff_1
+			focus = AVT_industry_tech_buff_1
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_industry_tech_buff_1
+		relative_position_id = AVT_industry_tech_buff_1
 
 		ai_will_do = {
 			factor = 3
@@ -906,17 +841,23 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_industry_tech_buff_3
+		id = AVT_industry_tech_buff_3
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_idea_1
-			focus = communist_eco_idea_2
+			focus = AVT_eco_idea_1
+			focus = AVT_eco_idea_2
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_eco_idea_2
+		relative_position_id = AVT_eco_idea_2
 
 		ai_will_do = {
 			factor = 3
@@ -933,16 +874,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_industry_tech_buff_4
+		id = AVT_industry_tech_buff_4
 		icon = GFX_communist_book
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_industry_tech_buff_3
+			focus = AVT_industry_tech_buff_3
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_industry_tech_buff_3
+		relative_position_id = AVT_industry_tech_buff_3
 
 		ai_will_do = {
 			factor = 3
@@ -959,16 +900,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_eco_idea_buff_1
+		id = AVT_eco_idea_buff_1
 		icon = GFX_wrench
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_eco_buff
+			focus = AVT_eco_buff
 		}
 		x = 3
 		y = 1
-		relative_position_id = communist_eco_buff
+		relative_position_id = AVT_eco_buff
 
 		ai_will_do = {
 			factor = 3
@@ -980,16 +921,20 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_eco_idea_buff_2
+		id = AVT_eco_idea_buff_2
 		icon = GFX_workers
 		cost = 6.5
 
-		prerequisite = {
-			focus = communist_eco_idea_buff_1
+		prerequisite = { focus = AVT_eco_idea_buff_1 }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_2_tooltip
+				AND = { has_civic_education_higher_2 = yes }
+			}
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_eco_idea_buff_1
+		relative_position_id = AVT_eco_idea_buff_1
 
 		ai_will_do = {
 			factor = 3
@@ -1001,19 +946,22 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_eco_idea_buff_3
+		id = AVT_eco_idea_buff_3
 		icon = GFX_workstation_4
 		cost = 6.5
 
-		prerequisite = {
-			focus = communist_eco_idea_buff_2
-		}
-		prerequisite = {
-			focus = communist_mobilise_army
+		prerequisite = { focus = AVT_eco_idea_buff_2 }
+		prerequisite = { focus = AVT_mobilise_army }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_3_tooltip
+				AND = { has_civic_education_higher_3 = yes }
+			}
 		}
 		x = 0
 		y = 2
-		relative_position_id = communist_eco_idea_buff_2
+		relative_position_id = AVT_eco_idea_buff_2
 
 		ai_will_do = {
 			factor = 3
@@ -1025,16 +973,21 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_eco_idea_buff_4
+		id = AVT_eco_idea_buff_4
 		icon = GFX_volunteer_expedition
 		cost = 6.5
 
-		prerequisite = {
-			focus = communist_eco_idea_buff_3
+		prerequisite = { focus = AVT_eco_idea_buff_3 }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_civic_education_higher_4_tooltip
+				AND = { has_civic_education_higher_4 = yes }
+			}
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_eco_idea_buff_3
+		relative_position_id = AVT_eco_idea_buff_3
 
 		ai_will_do = {
 			factor = 3
@@ -1046,42 +999,40 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_world_tension_unlock
+		id = AVT_world_tension_unlock
 		icon = GFX_generic_stalker_3
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_introduction
+			focus = AVT_introduction
 		}
 		available = {
-			has_army_manpower = {
-				size > 30
-			}
+			has_army_manpower = { size > 40 }
 		}
 		x = 8
 		y = 1
-		relative_position_id = communist_introduction
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_introduction
 
 		completion_reward = {
 			army_experience = 15
 		}
+
+		ai_will_do = {
+			factor = 20
+		}
 	}
 
 	focus = {
-		id = communist_recruitment_1
+		id = AVT_recruitment_1
 		icon = GFX_soldier_1
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_world_tension_unlock
+			focus = AVT_world_tension_unlock
 		}
 		x = 1
 		y = 1
-		relative_position_id = communist_world_tension_unlock
+		relative_position_id = AVT_world_tension_unlock
 
 		ai_will_do = {
 			factor = 3
@@ -1093,86 +1044,86 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_recruitment_2
+		id = AVT_recruitment_2
 		icon = GFX_RED_army_march
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_recruitment_1
+			focus = AVT_recruitment_1
 		}
 		mutually_exclusive = {
-			focus = communist_recruitment_3
+			focus = AVT_recruitment_3
 		}
 		x = -1
 		y = 1
-		relative_position_id = communist_recruitment_1
+		relative_position_id = AVT_recruitment_1
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_world_tomorrow
+			add_ideas = AVT_world_tomorrow
 		}
 	}
 
 	focus = {
-		id = communist_recruitment_4
+		id = AVT_recruitment_4
 		icon = GFX_RED_female_soldiers
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_recruitment_3
-			focus = communist_recruitment_2
+			focus = AVT_recruitment_3
+			focus = AVT_recruitment_2
 		}
 		x = 0
 		y = 2
-		relative_position_id = communist_recruitment_1
+		relative_position_id = AVT_recruitment_1
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_equality_in_armed_forces
+			add_ideas = AVT_equality_in_armed_forces
 		}
 	}
 
 	focus = {
-		id = communist_recruitment_3
+		id = AVT_recruitment_3
 		icon = GFX_RED_promote_loyality
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_recruitment_1
+			focus = AVT_recruitment_1
 		}
 		mutually_exclusive = {
-			focus = communist_recruitment_2
+			focus = AVT_recruitment_2
 		}
 		x = 1
 		y = 1
-		relative_position_id = communist_recruitment_1
+		relative_position_id = AVT_recruitment_1
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_world_today
+			add_ideas = AVT_world_today
 		}
 	}
 
 	focus = {
-		id = communist_doctrine_1
+		id = AVT_doctrine_1
 		icon = GFX_binoculars
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_world_tension_unlock
+			focus = AVT_world_tension_unlock
 		}
 		x = -2
 		y = 1
-		relative_position_id = communist_world_tension_unlock
+		relative_position_id = AVT_world_tension_unlock
 
 		ai_will_do = {
 			factor = 3
@@ -1189,20 +1140,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_mobilise_army
+		id = AVT_mobilise_army
 		icon = GFX_generic_medium_arms_5
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_doctrine_1
+			focus = AVT_doctrine_1
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_doctrine_1
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_doctrine_1
 
 		completion_reward = {
 			add_equipment_to_stockpile = {
@@ -1216,27 +1163,40 @@ focus_tree = {
 				producer = RUS
 			}
 		}
+
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
-		id = communist_train_red_line
+		id = AVT_train_red_line
 		icon = GFX_generic_equipment_gasmask_7
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = communist_mobilise_army
-		}
-		mutually_exclusive = {
-			focus = communist_our_own_advisors
-		}
+		prerequisite = { focus = AVT_mobilise_army }
 		available = {
-			NOT = {
-				has_completed_focus = AVT_death_to_tankies
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
 			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = -1
 		y = 1
-		relative_position_id = communist_mobilise_army
+		relative_position_id = AVT_mobilise_army
 
 		ai_will_do = {
 			factor = 3
@@ -1249,41 +1209,72 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_train_red_line_2
+		id = AVT_train_red_line_2
 		icon = GFX_RED_chekist
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = communist_train_red_line
+		prerequisite = { focus = AVT_train_red_line }
+		available = {
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
+			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = 0
 		y = 1
-		relative_position_id = communist_train_red_line
+		relative_position_id = AVT_train_red_line
+
+		completion_reward = {
+			add_ideas = AVT_redline_liason
+		}
 
 		ai_will_do = {
 			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = communist_redline_liason
 		}
 	}
 
 	focus = {
-		id = communist_train_red_line_3
+		id = AVT_train_red_line_3
 		icon = GFX_RED_chekists2
-		cost = 4.3
+		cost = 6.5
 
-		prerequisite = {
-			focus = communist_train_red_line_2
+		prerequisite = { focus = AVT_train_red_line_2 }
+
+		available = {
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
+			}
 		}
+		cancel = {
+			NOT = {
+				RED = {
+					has_country_leader = {
+						character = RED_andrey_moskvin
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
 		x = 0
 		y = 1
-		relative_position_id = communist_train_red_line_2
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_train_red_line_2
 
 		completion_reward = {
 			add_doctrine_cost_reduction = {
@@ -1293,22 +1284,23 @@ focus_tree = {
 				category = land_doctrine
 			}
 		}
+
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
-		id = communist_our_own_advisors
+		id = AVT_our_own_advisors
 		icon = GFX_generic_equipment_gasmask_6
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus = communist_mobilise_army
-		}
-		mutually_exclusive = {
-			focus = communist_train_red_line
+			focus = AVT_mobilise_army
 		}
 		x = 1
 		y = 1
-		relative_position_id = communist_mobilise_army
+		relative_position_id = AVT_mobilise_army
 
 		ai_will_do = {
 			factor = 3
@@ -1322,16 +1314,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_our_own_advisors_2
+		id = AVT_our_own_advisors_2
 		icon = GFX_generic_equipment_gasmask_3
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus = communist_our_own_advisors
+			focus = AVT_our_own_advisors
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_our_own_advisors
+		relative_position_id = AVT_our_own_advisors
 
 		ai_will_do = {
 			factor = 3
@@ -1344,16 +1336,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_our_own_advisors_3
+		id = AVT_our_own_advisors_3
 		icon = GFX_RCH_expedition
-		cost = 4.3
+		cost = 6.5
 
 		prerequisite = {
-			focus = communist_our_own_advisors_2
+			focus = AVT_our_own_advisors_2
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_our_own_advisors_2
+		relative_position_id = AVT_our_own_advisors_2
 
 		ai_will_do = {
 			factor = 3
@@ -1366,41 +1358,39 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_perfect_force
+		id = AVT_perfect_force
 		icon = GFX_generic_equipment_gasmask_5
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_train_red_line_3
-			focus = communist_our_own_advisors_3
+			focus = AVT_train_red_line_3
+			focus = AVT_our_own_advisors_3
 		}
 		x = 0
 		y = 4
-		relative_position_id = communist_mobilise_army
+		relative_position_id = AVT_mobilise_army
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_combined_force
+			add_ideas = AVT_combined_force
 		}
 	}
 
 	focus = {
-		id = communist_military_1
-		icon = GFX_HNZ_generic_bullet_focus
-		cost = 6.5
+		id = AVT_military_1
+		icon = GFX_generic_small_arms_2
+		cost = 3.6
 
-		prerequisite = {
-			focus = communist_world_tension_unlock
-		}
-		prerequisite = {
-			focus = communist_military_0
-		}
+		prerequisite = { focus = AVT_world_tension_unlock }
+
+		prerequisite = { focus = AVT_military_0 }
+
 		x = 4
 		y = 1
-		relative_position_id = communist_world_tension_unlock
+		relative_position_id = AVT_world_tension_unlock
 
 		ai_will_do = {
 			factor = 3
@@ -1413,10 +1403,10 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1424,16 +1414,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_military_2
-		icon = GFX_HNZ_veteran_armaments_upgrade
-		cost = 6.5
+		id = AVT_military_2
+		icon = GFX_generic_medium_arms_2
+		cost = 5
 
-		prerequisite = {
-			focus = communist_military_1
-		}
+		prerequisite = { focus = AVT_military_1 }
+
+		available = { has_tech = tech_tooling_modern_tools }
 		x = 0
 		y = 1
-		relative_position_id = communist_military_1
+		relative_position_id = AVT_military_1
 
 		ai_will_do = {
 			factor = 3
@@ -1441,11 +1431,7 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
+				limit = { NOT = { has_state_category = pastoral } }
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
@@ -1457,16 +1443,49 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_military_0
+		id = AVT_military_3
+		icon = GFX_generic_medium_arms_3
+		cost = 6.5
+
+		prerequisite = { focus = AVT_military_2 }
+
+		available = { has_tech = tech_tooling_power_tools }
+		x = 0
+		y = 1
+		relative_position_id = AVT_military_2
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = AVT_military_0
 		icon = GFX_generic_ammunition_box
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_introduction
+			focus = AVT_introduction
 		}
 		x = 16
 		y = 1
-		relative_position_id = communist_introduction
+		relative_position_id = AVT_introduction
 
 		ai_will_do = {
 			factor = 3
@@ -1495,16 +1514,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_oil_stockpiling
+		id = AVT_oil_stockpiling
 		icon = GFX_Fuel
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_military_0
+			focus = AVT_military_0
 		}
 		x = 4
 		y = 1
-		relative_position_id = communist_military_0
+		relative_position_id = AVT_military_0
 
 		ai_will_do = {
 			factor = 3
@@ -1529,16 +1548,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_refineries
+		id = AVT_refineries
 		icon = GFX_generic_electricity
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_oil_stockpiling
+			focus = AVT_oil_stockpiling
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_oil_stockpiling
+		relative_position_id = AVT_oil_stockpiling
 
 		ai_will_do = {
 			factor = 3
@@ -1550,16 +1569,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_refineries_tech
+		id = AVT_refineries_tech
 		icon = GFX_generic_electricity_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_refineries
+			focus = AVT_refineries
 		}
 		x = 0
-		y = 1
-		relative_position_id = communist_refineries
+		y = 2
+		relative_position_id = AVT_refineries
 
 		ai_will_do = {
 			factor = 3
@@ -1584,23 +1603,23 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_contact_BAU
+		id = AVT_contact_BAU
 		icon = GFX_HNZ_technician_trade
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_military_0
+			focus = AVT_military_0
 		}
 		mutually_exclusive = {
-			focus = communist_our_own_technicians
-			focus = communist_contact_KUZ
+			focus = AVT_our_own_technicians
+			focus = AVT_contact_KUZ
 		}
 		available = {
 			num_of_available_military_factories > 3
 		}
 		x = -2
 		y = 1
-		relative_position_id = communist_military_0
+		relative_position_id = AVT_military_0
 
 		ai_will_do = {
 			factor = 3
@@ -1615,51 +1634,51 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_our_own_technicians
+		id = AVT_our_own_technicians
 		icon = GFX_workstation_3
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_military_0
+			focus = AVT_military_0
 		}
 		mutually_exclusive = {
-			focus = communist_contact_KUZ
-			focus = communist_contact_BAU
+			focus = AVT_contact_KUZ
+			focus = AVT_contact_BAU
 		}
 		available = {
 			num_of_available_military_factories > 3
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_military_0
+		relative_position_id = AVT_military_0
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_our_own_technicians
+			add_ideas = AVT_our_own_technicians
 		}
 	}
 
 	focus = {
-		id = communist_contact_KUZ
+		id = AVT_contact_KUZ
 		icon = GFX_Technicians
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_military_0
+			focus = AVT_military_0
 		}
 		mutually_exclusive = {
-			focus = communist_our_own_technicians
-			focus = communist_contact_BAU
+			focus = AVT_our_own_technicians
+			focus = AVT_contact_BAU
 		}
 		available = {
 			num_of_available_military_factories > 3
 		}
 		x = 2
 		y = 1
-		relative_position_id = communist_military_0
+		relative_position_id = AVT_military_0
 
 		ai_will_do = {
 			factor = 3
@@ -1674,45 +1693,45 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_gun_buff
+		id = AVT_gun_buff
 		icon = GFX_bullets_3
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_our_own_technicians
-			focus = communist_contact_BAU
+			focus = AVT_our_own_technicians
+			focus = AVT_contact_BAU
 		}
 		mutually_exclusive = {
-			focus = communist_weapon_research_speed
+			focus = AVT_weapon_research_speed
 		}
 		x = -1
 		y = 1
-		relative_position_id = communist_our_own_technicians
+		relative_position_id = AVT_our_own_technicians
 
 		ai_will_do = {
 			factor = 3
 		}
 
 		completion_reward = {
-			add_ideas = communist_gun_improvement
+			add_ideas = AVT_gun_improvement
 		}
 	}
 
 	focus = {
-		id = communist_weapon_research_speed
+		id = AVT_weapon_research_speed
 		icon = GFX_cog_factories
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_our_own_technicians
-			focus = communist_contact_KUZ
+			focus = AVT_our_own_technicians
+			focus = AVT_contact_KUZ
 		}
 		mutually_exclusive = {
-			focus = communist_gun_buff
+			focus = AVT_gun_buff
 		}
 		x = 1
 		y = 1
-		relative_position_id = communist_our_own_technicians
+		relative_position_id = AVT_our_own_technicians
 
 		ai_will_do = {
 			factor = 3
@@ -1726,17 +1745,17 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_tech_buff_1
+		id = AVT_tech_buff_1
 		icon = GFX_generic_equipment_gasmask_4
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_gun_buff
-			focus = communist_weapon_research_speed
+			focus = AVT_gun_buff
+			focus = AVT_weapon_research_speed
 		}
 		x = -2
 		y = 2
-		relative_position_id = communist_our_own_technicians
+		relative_position_id = AVT_our_own_technicians
 
 		ai_will_do = {
 			factor = 3
@@ -1753,16 +1772,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_tech_buff_2
+		id = AVT_tech_buff_2
 		icon = GFX_generic_stalker_5
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_tech_buff_1
+			focus = AVT_tech_buff_1
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_tech_buff_1
+		relative_position_id = AVT_tech_buff_1
 
 		ai_will_do = {
 			factor = 3
@@ -1776,17 +1795,17 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_tech_buff_3
+		id = AVT_tech_buff_3
 		icon = GFX_generic_equipment_gasmask_1
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_gun_buff
-			focus = communist_weapon_research_speed
+			focus = AVT_gun_buff
+			focus = AVT_weapon_research_speed
 		}
 		x = 0
 		y = 2
-		relative_position_id = communist_our_own_technicians
+		relative_position_id = AVT_our_own_technicians
 
 		ai_will_do = {
 			factor = 3
@@ -1803,12 +1822,12 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_tech_buff_4
+		id = AVT_tech_buff_4
 		icon = GFX_generic_equipment_gasmask_2
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_tech_buff_3
+			focus = AVT_tech_buff_3
 		}
 
 		available = {
@@ -1818,7 +1837,7 @@ focus_tree = {
 
 		x = 0
 		y = 1
-		relative_position_id = communist_tech_buff_3
+		relative_position_id = AVT_tech_buff_3
 
 		ai_will_do = {
 			factor = 3
@@ -1851,17 +1870,17 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_expanding_the_depot
-		icon = GFX_cog_blueprints
+		id = AVT_expanding_the_depot
+		icon = GFX_generic_door
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_gun_buff
-			focus = communist_weapon_research_speed
+			focus = AVT_gun_buff
+			focus = AVT_weapon_research_speed
 		}
 		x = 2
 		y = 2
-		relative_position_id = communist_our_own_technicians
+		relative_position_id = AVT_our_own_technicians
 
 		ai_will_do = {
 			factor = 3
@@ -1884,16 +1903,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = communist_first_interstational_brigade
+		id = AVT_first_interstational_brigade
 		icon = GFX_HNZ_generic_railbike
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_expanding_the_depot
+			focus = AVT_expanding_the_depot
 		}
 		x = 0
 		y = 1
-		relative_position_id = communist_expanding_the_depot
+		relative_position_id = AVT_expanding_the_depot
 
 		available = {
 			has_tech = tech_recon
@@ -1930,506 +1949,146 @@ focus_tree = {
 	}
 
 	focus = {
-		id = AVT_reforming_inner_sphere
-		icon = GFX_RED_collectivization_of_tunnels
+		id = AVT_inner_sphere_1
+		icon = GFX
 		cost = 6.5
 
 		prerequisite = {
-			focus = communist_introduction
+			focus = AVT_introduction
 		}
-		x = 25
+		x = 23
 		y = 1
-		relative_position_id = communist_introduction
+		relative_position_id = AVT_introduction
+
+		completion_reward = {
+			AVT_tomsky = { 
+				gain_xp = 2000 
+			}
+			army_experience = 15
+		}
 
 		ai_will_do = {
 			factor = 3
 		}
-
-		completion_reward = {
-			add_political_power = 150
-		}
 	}
 
 	focus = {
-		id = AVT_move_south
-		icon = GFX_campfire_2
+		id = AVT_inner_sphere_brigades
+		icon = GFX
 		cost = 6.5
 
 		prerequisite = {
-			focus = AVT_reforming_inner_sphere
-		}
-
-		available = {
-			374 = {
-                is_owned_by = RUI
-			}
-			59 = {
-                is_owned_by = RUI
-			}
-			407 = {
-                is_owned_by = RUI
-			}
-		}
-
-		cancel_if_invalid = yes
-
-		bypass = {
-			374 = {
-                is_owned_by = ROOT
-			}
-			59 = {
-                is_owned_by = ROOT
-			}
-			407 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		x = -2
-		y = 1
-		relative_position_id = AVT_reforming_inner_sphere
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			transfer_state = 374
-			transfer_state = 59
-			transfer_state = 407
-		}
-	}
-
-	focus = {
-		id = AVT_core_technopark
-		icon = GFX_cityruins
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_move_south
-		}
-
-		available = {
-			374 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		cancel_if_invalid = yes
-
-		x = -1
-		y = 1
-		relative_position_id = AVT_move_south
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			374 = {
-				add_core_of = ROOT
-				add_resource = {
-					type = alloys
-					amount = 6
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AVT_guerilla_tactics
-		icon = GFX_AVT_snipoer
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_reforming_inner_sphere
+			focus = AVT_inner_sphere_1
 		}
 		x = 2
 		y = 1
-		relative_position_id = AVT_reforming_inner_sphere
+		relative_position_id = AVT_inner_sphere_1
+
+		completion_reward = {
+		}
 
 		ai_will_do = {
 			factor = 3
 		}
-
-		completion_reward = {
-			add_ideas = AVT_guerilla_schemes
-		}
 	}
 
 	focus = {
-		id = AVT_Anatoly_takes_helm
-		icon = GFX_AVT_anatoly
+		id = AVT_inner_sphere_anatoly
+		icon = GFX
 		cost = 6.5
 
 		prerequisite = {
-			focus = AVT_reforming_inner_sphere
+			focus = AVT_inner_sphere_1
 		}
 		x = 0
 		y = 1
-		relative_position_id = AVT_reforming_inner_sphere
+		relative_position_id = AVT_inner_sphere_1
+
+		completion_reward = {
+			AVT_tomsky = { 
+				promote_leader = yes
+			}
+			add_command_power = 15
+		}
 
 		ai_will_do = {
 			factor = 3
 		}
-
-		completion_reward = {
-			hidden_effect = {
-				remove_country_leader_role = {
-					character = AVT_rusakov
-					ideology = peoples_council
-				}
-			}
-			AVT_tomsky = {
-				gain_xp = 2000
-			}
-			add_field_marshal_role = {
-				Character = AVT_tomsky
-			}
-		}
 	}
 
 	focus = {
-		id = AVT_reconciliation
-		icon = GFX_AVT_reconcile
+		id = AVT_inner_sphere_2
+		icon = GFX
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_move_south
-		}
-		mutually_exclusive = {
-			focus = AVT_death_to_tankies
-		}
-		available = {
-			date > 2032.1.1
-		}
+		prerequisite = { focus = AVT_inner_sphere_1 }
+
+		mutually_exclusive = { focus = AVT_inner_sphere_3 }
 		x = 1
-		y = 1
-		relative_position_id = AVT_move_south
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = RED
-				modifier = support 
-			}
-			RED = {
-				add_opinion_modifier = {
-					target = AVT
-					modifier = support 
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = politics_fight_against_fascism
-		icon = GFX_AVT_espionage
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_reconciliation
-		}
-		x = -1
-		y = 1
-		relative_position_id = AVT_reconciliation
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = AVT_fight_against_RCH
-		}
-	}
-
-	focus = {
-		id = politics_curtail_supplies
-		icon = GFX_AVT_partisan
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_fight_against_fascism
-		}
-		x = -2
-		y = 1
-		relative_position_id = politics_fight_against_fascism
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
-		}
-	}
-
-	focus = {
-		id = politics_join_the_red_line
-		icon = GFX_RED_introduce_workers_councils
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_fight_against_fascism
-		}
-		x = 0
-		y = 1
-		relative_position_id = politics_fight_against_fascism
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			diplomatic_relation = {
-				country = RED
-				relation = non_aggression_pact
-				active = yes
-			}
-			RED = {
-				diplomatic_relation = {
-					country = AVT
-					relation = non_aggression_pact
-					active = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = politics_thorn_in_their_side
-		icon = GFX_AVT_espionage
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_curtail_supplies
-		}
-		x = 0
-		y = 1
-		relative_position_id = politics_curtail_supplies
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 20
-		}
-	}
-
-	focus = {
-		id = politics_death_to_fascists
-		icon = GFX_RCH_trubnaya_core
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_curtail_supplies
-		}
-		x = 2
-		y = 1
-		relative_position_id = politics_curtail_supplies
-
-		available = {
-			ROOT = {
-				is_neighbor_of = RCH
-			}
-		}
-
-		will_lead_to_war_with = RCH
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = RCH
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-		ai_will_do = {
-			factor = 20
-		}
-	}
-
-	focus = {
-		id = AVT_death_to_tankies
-		icon = GFX_AVT_death_to_tankies
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_guerilla_tactics
-		}
-		mutually_exclusive = {
-			focus = AVT_reconciliation
-		}
-		available = {
-			date > 2032.1.1
-		}
-		x = -1
-		y = 1
-		relative_position_id = AVT_guerilla_tactics
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_war_support = 0.1
-			army_experience = 10
-			add_opinion_modifier = {
-				target = RED
-				modifier = ideological_enemy
-			}
-		}
-	}
-
-	focus = {
-		id = politics_communism_fight_against_stalinism
-		icon = GFX_lenin
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_death_to_tankies
-		}
-		x = 1
-		y = 1
-		relative_position_id = AVT_death_to_tankies
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			create_faction = AVT_revolutionists
-		}
-	}
-
-	focus = {
-		id = politics_freedom_from_tyranny
-		icon = GFX_AVT_revolutionists
-		cost = 6.5
-
-		prerequisite = {
-			focus = AVT_death_to_tankies
-		}
-		x = 3
-		y = 1
-		relative_position_id = AVT_death_to_tankies
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = AVT_freedom_from_tyranny
-		}
-	}
-
-	focus = {
-		id = politics_better_to_die_standing
-		icon = GFX_RED_adaptable_force
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_freedom_from_tyranny
-		}
-		x = -1
-		y = 1
-		relative_position_id = politics_freedom_from_tyranny
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			army_experience = 10
-			add_ideas = AVT_die_standing
-		}
-	}
-
-	focus = {
-		id = politics_than_live_kneeling
-		icon = GFX_RED_citizen_spy
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_freedom_from_tyranny
-		}
-		x = 1
-		y = 1
-		relative_position_id = politics_freedom_from_tyranny
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			army_experience = 10
-			add_ideas = AVT_against_tyranny
-		}
-	}
-
-	focus = {
-		id = politics_communism_march_on_berilag
-		icon = GFX_RED_soviet_charge
-		cost = 6.5
-
-		prerequisite = {
-			focus = politics_communism_fight_against_stalinism
-		}
-		x = 0
 		y = 2
-		relative_position_id = politics_communism_fight_against_stalinism
+		relative_position_id = AVT_inner_sphere_1
+
+		completion_reward = {
+		}
 
 		ai_will_do = {
 			factor = 3
 		}
+	}
 
-		available = {
-			ROOT = {
-				is_neighbor_of = RED
-				AND = {
-					228 = {
-						is_owned_and_controlled_by = ROOT
-					}
-				}
-			}
+	focus = {
+		id = AVT_inner_sphere_3
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_inner_sphere_1 }
+
+		mutually_exclusive = { focus = AVT_inner_sphere_2 }
+		x = -1
+		y = 2
+		relative_position_id = AVT_inner_sphere_1
+
+		completion_reward = {
 		}
 
-		will_lead_to_war_with = RED
-		completion_reward = {
-			228 = {
-				add_core_of = ROOT
-			}
-			create_wargoal = {
- 				type = take_state_focus
- 				target = RED
- 				expire = 0
- 				generator = { 28 }
- 			}
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
 	focus = {
-		id = politics_communism_establish_bases
-		icon = GFX_bullets_2
+		id = AVT_inner_sphere_4
+		icon = GFX
 		cost = 6.5
 
-		prerequisite = {
-			focus = AVT_death_to_tankies
-			focus = AVT_reconciliation
-		}
-
-		available = {
-			always = no
+		prerequisite = { 
+			focus = AVT_inner_sphere_2
+			focus = AVT_inner_sphere_3 
 		}
 
 		x = 0
 		y = 3
-		relative_position_id = AVT_Anatoly_takes_helm
+		relative_position_id = AVT_inner_sphere_anatoly
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = AVT_political_focus_1
+		icon = GFX_RED_collectivization_of_tunnels
+		cost = 6.5
+
+		prerequisite = {
+			focus = AVT_introduction
+		}
+		x = 34
+		y = 1
+		relative_position_id = AVT_introduction
 
 		ai_will_do = {
 			factor = 3
@@ -2440,58 +2099,710 @@ focus_tree = {
 	}
 
 	focus = {
-		id = politics_improve_relations
-		icon = GFX_bullets_2
+		id = AVT_political_anti_capitalist
+		icon = GFX
 		cost = 6.5
 
-		prerequisite = {
-			focus = politics_communism_establish_bases
-		}
+		prerequisite = { focus = AVT_political_focus_1 }
 
 		available = {
-			always = no
+			HNZ = { exists = yes }
 		}
 
-		x = 0
+		x = -5
 		y = 1
-		relative_position_id = politics_communism_establish_bases
-
-		ai_will_do = {
-			factor = 3
-		}
+		relative_position_id = AVT_political_focus_1
 
 		completion_reward = {
+			custom_effect_tooltip = AVT_anti_capitalist_diplomacy_tt
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = politics_fight_against_capitalism
-		icon = GFX_smash_capitalist
+		id = AVT_political_anti_capitalist_1
+		icon = GFX
 		cost = 6.5
 
-		prerequisite = {
-			focus = politics_death_to_fascists
-			focus = politics_communism_march_on_berilag
+		prerequisite = { focus = AVT_political_anti_capitalist }
+
+		available = { HNZ = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist
+
+		completion_reward = {
 		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_3
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_1 }
+
+		mutually_exclusive = { focus = AVT_political_anti_capitalist_4 }
+
+		available = { HNZ = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_1
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_7
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_3 }
+
+		available = { HNZ = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_3
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_8
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_3 }
+
+		available = { HNZ = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_3
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_4
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_1 }
+
+		mutually_exclusive = { focus = AVT_political_anti_capitalist_3 }
+
+		available = { HNZ = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_1
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_5
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_4}
+
+		available = { HNZ = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_4
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_capitalist_6
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist_5}
+
+		available = { HNZ = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist_5
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_PVL
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_capitalist }
+
+		available = { HNZ = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_anti_capitalist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_assistance_against_the_mutants
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_PVL }
+
+		available = { HNZ = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_PVL
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_communist
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_focus_1 }
+
+		available = { RED = { exists = yes } }
+
+		x = 6
+		y = 1
+		relative_position_id = AVT_political_focus_1
+
+		completion_reward = {
+			custom_effect_tooltip = AVT_anti_communist_diplomacy_tt
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_communist }
+
+		mutually_exclusive = { focus = AVT_political_death_to_bolsheviks }
+
+		available = {
+			date > 2033.10.10
+			RED = { exists = yes 
+				has_country_leader = {
+					character = RED_andrey_moskvin
+					ruling_only = yes
+				}
+			}
+		}
+
+		x = 2
+		y = 1
+		relative_position_id = AVT_political_anti_communist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation_1
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_reconciliation }
+
+		available = {
+			RED = { exists = yes }
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_reconciliation
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation_3
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_reconciliation }
+
+		available = {
+			RED = { exists = yes }
+		}
+
+		x = 3
+		y = 1
+		relative_position_id = AVT_political_reconciliation
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation_4
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_reconciliation_3 }
+
+		available = {
+			RED = { exists = yes }
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_reconciliation_3
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation_5
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_reconciliation_3 }
+
+		available = {
+			RED = { exists = yes }
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_reconciliation_3
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_reconciliation_2
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_reconciliation }
+
+		available = {
+			RED = { exists = yes }
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = AVT_political_reconciliation
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_death_to_bolsheviks
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_communist }
+
+		mutually_exclusive = { focus = AVT_political_reconciliation }
+
+		available = { RED = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_communist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_death_to_bolsheviks_1
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_death_to_bolsheviks }
+
+		available = { RED = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_death_to_bolsheviks
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_death_to_bolsheviks_2
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_death_to_bolsheviks }
+
+		available = { RED = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_death_to_bolsheviks
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_death_to_bolsheviks_4
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_death_to_bolsheviks_1 }
+
+		available = { RED = { exists = yes } }
+
 		x = 0
 		y = 1
-		relative_position_id = politics_improve_relations
+		relative_position_id = AVT_political_death_to_bolsheviks_1
 
-		ai_will_do = {
-			factor = 3
-		}
-
-		will_lead_to_war_with = HNZ
 		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = HNZ 
- 				expire = 0
- 				generator = { 28 }
- 			}
 		}
+
 		ai_will_do = {
-			factor = 20
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_death_to_bolsheviks_3
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_death_to_bolsheviks_2}
+
+		available = { RED = { exists = yes } }
+
+		x = 0
+		y = 1
+		relative_position_id = AVT_political_death_to_bolsheviks_2
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_march_on_berilag
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { 
+			focus = AVT_political_death_to_bolsheviks_3
+			focus = AVT_political_death_to_bolsheviks_4
+		}
+
+		available = { RED = { exists = yes } }
+
+		x = 0
+		y = 3
+		relative_position_id = AVT_political_death_to_bolsheviks
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_focus_1 }
+
+		available = {
+			RCH = { exists = yes }
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = AVT_political_focus_1
+
+		completion_reward = {
+			custom_effect_tooltip = AVT_anti_fascist_diplomacy_tt
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_1
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist }
+
+		available = { RCH = { exists = yes } }
+
+		x = -1
+		y = 2
+		relative_position_id = AVT_political_anti_fascist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_2
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist }
+
+		available = { RCH = { exists = yes } }
+
+		x = 1
+		y = 2
+		relative_position_id = AVT_political_anti_fascist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_4
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist_1 }
+
+		available = { RCH = { exists = yes } }
+
+		x = 0
+		y = 1
+		relative_position_id = AVT_political_anti_fascist_1
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_3
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist_2 }
+
+		available = { RCH = { exists = yes } }
+
+		x = 0
+		y = 1
+		relative_position_id = AVT_political_anti_fascist_2
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_5
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist_4 }
+
+		available = { RCH = { exists = yes } }
+
+		x = -1
+		y = 1
+		relative_position_id = AVT_political_anti_fascist_4
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_anti_fascist_6
+		icon = GFX
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist_3 }
+
+		available = { RCH = { exists = yes } }
+
+		x = 1
+		y = 1
+		relative_position_id = AVT_political_anti_fascist_3
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_political_hunt_for_stortbeker
+		icon = GFX_RCH_purge_officers
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_anti_fascist }
+
+		available = { STB = { exists = yes } }
+
+		x = 0
+		y = 1
+		relative_position_id = AVT_political_anti_fascist
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = AVT_return_to_sender
+		icon = GFX_RCH_purge_officers
+		cost = 6.5
+
+		prerequisite = { focus = AVT_political_hunt_for_stortbeker }
+
+		available = { STB = { exists = no } }
+
+		x = 0
+		y = 3
+		relative_position_id = AVT_political_hunt_for_stortbeker
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 }
