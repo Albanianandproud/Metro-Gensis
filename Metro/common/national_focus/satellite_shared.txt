@@ -1637,7 +1637,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_defense_against_facism
 	icon = GFX_soldier_2
-	x = 20
+	x = 21
 	y = 0
 	cost = 6.5
 
@@ -1653,9 +1653,52 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = satellite_antifascist_army
+	icon = GFX_stalker1
+	x = 0
+	y = 1
+	cost = 6.5
+
+	available = { RCH = { exists = yes } }
+
+	prerequisite = { 
+		focus = satellite_defense_against_facism
+	}
+
+	relative_position_id = satellite_defense_against_facism
+
+	completion_reward = {
+		division_template = {
+			name = "Special Forces"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				special_forces = { x = 0 y = 0 }
+				special_forces = { x = 0 y = 1 }
+				special_forces = { x = 0 y = 2 }
+				special_forces = { x = 0 y = 3 }
+			}
+			support = {
+				field_hospital = { x = 0 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 5
+	}
+}
+
+shared_focus = {
 	id = satellite_antifascist_decisions
 	icon = GFX_RCH_generic_anti
-	x = 1
+	x = 2
 	y = 1
 	cost = 6.5
 
@@ -1679,7 +1722,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_struggle_alone
 	icon = GFX_soldier_3
-	x = -1
+	x = -2
 	y = 1
 	cost = 6.5
 
@@ -1706,11 +1749,11 @@ shared_focus = {
 shared_focus = {
 	id = satellite_seek_help_from_the_redline
 	icon = GFX_RED_collectivization_of_tunnels
-	x = -3
+	x = -4
 	y = 1
 	cost = 6.5
 
-	available = { RCH = { exists = yes } }
+	available = { RCH = { exists = yes } AND = { RED = { exists = yes }} }
 
 	prerequisite = { focus = satellite_defense_against_facism }
 
@@ -1728,23 +1771,123 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = satellite_struggle_alone_2
+	icon = GFX_tunnel_surplus
+	x = 0
+	y = 1
+	cost = 6.5
+
+	available = { RCH = { exists = yes } }
+
+	prerequisite = { 
+		focus = satellite_struggle_alone
+	}
+	relative_position_id = satellite_struggle_alone
+
+	completion_reward = {
+		add_timed_idea = { idea = satellite_tunnel_supply days = 240 }
+	}
+
+	ai_will_do = {
+		factor = 5
+	}
+}
+
+shared_focus = {
+	id = satellite_seek_help_from_the_redline_2
+	icon = GFX_RED_to_victory
+	x = 0
+	y = 1
+	cost = 6.5
+
+	available = { RCH = { exists = yes } AND = { RED = { exists = yes }} }
+
+	prerequisite = { focus = satellite_seek_help_from_the_redline }
+
+	relative_position_id = satellite_seek_help_from_the_redline
+
+	completion_reward = {
+		army_experience = 5
+		division_template = {
+			name = "Regular Forces"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				regulars = { x = 0 y = 0 }
+				regulars = { x = 0 y = 1 }
+				regulars = { x = 0 y = 2 }
+				regulars = { x = 0 y = 3 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"1st Standing Guard\" division_template = \"Regular Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"2nd Standing Guard\" division_template = \"Regular Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 4
+	}
+}
+
+shared_focus = {
+	id = satellite_commander_buff
+	icon = GFX_tunnel_bunker
+	x = -1
+	y = 1
+	cost = 6.5
+
+	available = {
+		has_war = no
+		RCH = { exists = yes }
+	}
+
+	prerequisite = { focus = satellite_antifascist_decisions }
+
+	relative_position_id = satellite_antifascist_decisions
+
+	completion_reward = {
+		every_unit_leader = {
+			gain_xp = 300
+			add_planning = 1
+			add_defense = 1
+		}
+	}
+
+	ai_will_do = {
+		factor = 2
+	}
+}
+
+shared_focus = {
 	id = satellite_counterattacks
 	icon = GFX_generic_stalker_1
 	x = 0
-	y = 2
+	y = 3
 	cost = 6.5
 
 	available = {
 		has_war = no
 		RCH = { exists = yes }
 		has_army_manpower = {
-			size > 300
+			size > 399
 		}
+		has_war_support > 0.39
 	}
 
 	prerequisite = { 
 		focus = satellite_antifascist_decisions
 		focus = satellite_struggle_alone
+	}
+
+	prerequisite = { 
+		focus = satellite_antifascist_decisions
 	}
 
 	relative_position_id = satellite_defense_against_facism
@@ -1797,7 +1940,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_our_path
 	icon = GFX_pig
-	x = 27
+	x = 29
 	y = 0
 	cost = 6.5
 
