@@ -1037,10 +1037,10 @@ shared_focus = {
 		add_ideas = satellite_domestics_focus_1
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots =1
 			add_building_construction = {
 				type = industrial_complex
-				level = 2
+				level = 1
 				instant_build = yes
 			}
 		}
@@ -1088,16 +1088,6 @@ shared_focus = {
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
 			add_extra_state_shared_building_slots = 2
-			add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
 		}
 	}
 
@@ -1128,10 +1118,10 @@ shared_focus = {
 		add_ideas = satellite_arsenal_focus_1
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
 				type = arms_factory
-				level = 2
+				level = 1
 				instant_build = yes
 			}
 		}
@@ -1160,6 +1150,7 @@ shared_focus = {
 			has_war_with = RED
 			is_puppet_of = HNZ
 			is_in_faction_with = HNZ
+			has_completed_focus = satellite_support_the_hanseatic_league
 		} 
 	}
 	
@@ -1204,6 +1195,7 @@ shared_focus = {
 			has_war_with = HNZ 
 			is_puppet_of = RED
 			is_in_faction_with = RED
+			has_completed_focus = satellite_align_the_sokol
 		} 
 	}
 
@@ -1231,7 +1223,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_investment_domestics
-	icon = GFX_generic_political
+	icon = GFX_generic_domestics
 	x = -2
 	y = 2
 	cost = 6.5
@@ -1915,6 +1907,7 @@ shared_focus = {
 			tag = RCH
 			ratio > 0.49
 		}
+		AND = { is_neighbor_of = RCH date > 2033.1.1 }
 	}
 
 	will_lead_to_war_with = RCH
@@ -1940,7 +1933,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_our_path
 	icon = GFX_pig
-	x = 29
+	x = 30
 	y = 0
 	cost = 6.5
 
@@ -2009,9 +2002,20 @@ shared_focus = {
 		focus = satellite_kick_out_foreign_merchants
 	}
 
+	available = { NOT = { has_idea = _satellite_expunged_merchants } }
+
 	relative_position_id = satellite_kick_out_foreign_merchants
 
 	completion_reward = {
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -2044,7 +2048,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_align_the_sokol
 	icon = GFX_generic_support_redline
-	x = -1
+	x = -2
 	y = 1
 	cost = 6.5
 
@@ -2057,6 +2061,28 @@ shared_focus = {
 	relative_position_id = satellite_against_the_proverbial_powers
 
 	completion_reward = {
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+shared_focus = {
+	id = satellite_soviet_help
+	icon = GFX_generic_political
+	x = 2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_align_the_sokol
+	}
+
+	relative_position_id = satellite_align_the_sokol
+
+	completion_reward = {
+		## get an advisor or general or smth from redline
 	}
 
 	ai_will_do = {
@@ -2188,7 +2214,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_a_new_power_dawns
 	icon = GFX_generic_political
-	x = 0
+	x = 1
 	y = 1
 	cost = 6.5
 
@@ -2216,7 +2242,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_de_sovietisation
 	icon = GFX_generic_political
-	x = 2
+	x = 3
 	y = 1
 	cost = 6.5
 
@@ -2367,6 +2393,9 @@ shared_focus = {
 	relative_position_id = satellite_status_quo
 
 	completion_reward = {
+		## in return for relations, 
+		## let us use wealth of knowledge decision for#
+		## education mechanic
 	}
 
 	ai_will_do = {
@@ -2388,6 +2417,8 @@ shared_focus = {
 	relative_position_id = satellite_guarentee_polis
 
 	completion_reward = {
+		## allow us to use unique spartan decisions
+		## and let us recruit a spartan military advisor
 	}
 
 	ai_will_do = {
