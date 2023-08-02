@@ -1968,7 +1968,7 @@ shared_focus = {
 	relative_position_id = satellite_our_path
 
 	completion_reward = {
-		# activate decisions to do other stuff
+		add_political_power = 50
 	}
 
 	ai_will_do = {
@@ -2357,7 +2357,7 @@ shared_focus = {
 	relative_position_id = satellite_our_path
 
 	completion_reward = {
-		# activate decisions to uphold status quo
+		add_political_power = 150
 	}
 
 	ai_will_do = {
@@ -2397,12 +2397,26 @@ shared_focus = {
 		focus = satellite_status_quo
 	}
 
+	available = { 
+		PLS = { exists = yes } 
+		NOT  = { has_war_with = PLS } 
+	}
+
 	relative_position_id = satellite_status_quo
 
 	completion_reward = {
-		## in return for relations, 
-		## let us use wealth of knowledge decision for#
-		## education mechanic
+		set_country_flag = allow_access_polis_education_decision
+		custom_effect_tooltip = access_polis_education_decision
+		add_opinion_modifier = {
+			target = PLS
+			modifier = support 
+		}
+		PLS = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = support 
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -2417,6 +2431,13 @@ shared_focus = {
 	y = 1
 	cost = 6.5
 
+	available = { 
+		SPT = { exists = yes } 
+		NOT  = { has_war_with = SPT } 
+	}
+
+	continue_if_invalid = no
+
 	prerequisite = { 
 		focus = satellite_guarentee_polis
 	}
@@ -2424,10 +2445,19 @@ shared_focus = {
 	relative_position_id = satellite_guarentee_polis
 
 	completion_reward = {
-		## allow us to use unique spartan decisions
-		## and let us recruit a spartan military advisor
+		add_opinion_modifier = {
+			target = SPT
+			modifier = support 
+		}
+		SPT = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = support 
+			}
+		}
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = _metro_ranger_personal_liason
 	}
-
 	ai_will_do = {
 		factor = 10
 	}
