@@ -28,3 +28,73 @@ RCH_invade_savel = {
 		}
 	}
 }
+RCH_depose_category = {
+	RCH_cause_divisional_chaos = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+		cost = 50
+		days_re_enable = 60
+		
+
+		available = {
+			command_power > 19
+		}
+		ai_will_do = {
+			factor = 2500
+		}
+
+		complete_effect = {
+			add_command_power = -20
+			add_stability = -0.05
+			custom_effect_tooltip = RCH_assasination_plus
+			add_to_variable = { var = rch_assasination value = 3 }
+		}
+	}
+	RCH_dispose_of_stockpiles = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+		cost = 20
+		days_re_enable = 80
+		
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 49
+			}
+		}
+		ai_will_do = {
+			factor = 2500
+		}
+
+		complete_effect = {
+			add_war_support = -0.025
+			add_stability = -0.025
+			custom_effect_tooltip = RCH_assasination_plus
+			add_to_variable = { var = rch_assasination value = 3 }
+		}
+	}
+	RCH_sabotage_civ_factory = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+		cost = 20
+		days_re_enable = 60
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		ai_will_do = {
+			factor = 2000
+		}
+
+		remove_effect = {
+			add_stability = -0.025
+			custom_effect_tooltip = RCH_assasination_plus
+			add_to_variable = { var = rch_assasination value = 4 }
+		}
+	}
+}
