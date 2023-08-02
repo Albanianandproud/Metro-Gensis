@@ -78,6 +78,37 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_yield_power_to_gestapo
+		icon = GFX_RCH_SS_powers
+		prerequisite = {
+			focus = RCH_campaigns_of_terror
+			focus = RCH_dabble_into_occult
+		}
+		available = {
+			NOT  = {
+				power_balance_value = {
+					id = RCH_power_balance
+					value > 0.335
+				}
+			}
+		}
+		x = -5
+		y = 3
+		cost = 3.6
+		relative_position_id = RCH_uncontested_authority
+		completion_reward = {
+			RCH_bop_decrease_4 = yes
+			add_political_power = 50
+			add_popularity = {
+				ideology = council
+				popularity = 0.025
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = RCH_the_mutant_threat
 		icon = GFX_GWC_wanderlust
 		prerequisite = {
@@ -331,37 +362,6 @@ focus_tree = {
 		relative_position_id = RCH_permit_outside_recruitment
 		completion_reward = {
 			RCH_bop_increase_2 = yes
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = RCH_yield_power_to_gestapo
-		icon = GFX_RCH_SS_powers
-		prerequisite = {
-			focus = RCH_campaigns_of_terror
-			focus = RCH_dabble_into_occult
-		}
-		available = {
-			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value > 0.335
-				}
-			}
-		}
-		x = 0
-		y = 3
-		cost = 3.6
-		relative_position_id = RCH_reformation
-		completion_reward = {
-			RCH_bop_decrease_4 = yes
-			add_political_power = 50
-			add_popularity = {
-				ideology = council
-				popularity = 0.025
-			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -672,7 +672,7 @@ focus_tree = {
 			## Yevgeny requires leaning Gestapo Power
 			## Kreipp no BOP needed
 		}
-		x = -6
+		x = 0
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_movements_against_the_fuhrer
@@ -698,7 +698,7 @@ focus_tree = {
 		available= {
 			
 		}
-		x = 3
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_dabble_into_occult
@@ -743,7 +743,6 @@ focus_tree = {
 			focus = RCH_depose_the_fuhrer
 		}
 		available= {
-			
 		}
 		x = 3
 		y = 1
@@ -752,11 +751,11 @@ focus_tree = {
 		completion_reward = {
 			275 = {
 				add_manpower = -50
-				add_political_power = -50
-				add_stability = -0.1
 				add_to_variable = { var = rch_assasination value = 6 }
 				custom_effect_tooltip = RCH_assasination_plus_large
 			}
+			add_political_power = -50
+			add_stability = -0.1
 		}
 		ai_will_do = {
 			factor = 5
@@ -770,7 +769,7 @@ focus_tree = {
 			focus = RCH_depose_the_fuhrer
 		}
 		
-		x = -2
+		x = -3
 		y = 2
 		cost = 6.5
 		relative_position_id = RCH_depose_the_fuhrer
@@ -803,7 +802,7 @@ focus_tree = {
 		available= {
 			has_country_flag = RCH_coup_succeed
 		}
-		x = -2
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_assasinate_the_fuhrer
@@ -3137,9 +3136,6 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_inaugerate_the_new_blood
 		completion_reward = {
-			RED = {
-				country_event = nf_RCH.12
-			}
 			330 = {
 				add_manpower = -50
 				damage_building = {
