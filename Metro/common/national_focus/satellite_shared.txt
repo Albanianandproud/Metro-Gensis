@@ -289,7 +289,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_improve_military_staff
-	icon = GFX_generic_equipment_gasmask_1
+	icon = GFX_generic_soldier
 	x = -1
 	y = 1
 	cost = 6.5
@@ -522,7 +522,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_ied_mines
-	icon = GFX_generic_telephone
+	icon = GFX_generic_mine
 	x = 0
 	y = 1
 	cost = 6.5
@@ -1604,7 +1604,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_autarky
-	icon = GFX_generic_political
+	icon = GFX_generic_microphone
 	x = 0
 	y = 2
 	cost = 6.5
@@ -1853,7 +1853,7 @@ shared_focus = {
 
 	completion_reward = {
 		every_unit_leader = {
-			gain_xp = 350
+			gain_xp = 500
 			add_planning = 1
 			add_defense = 1
 		}
@@ -1882,17 +1882,12 @@ shared_focus = {
 
 	prerequisite = { 
 		focus = satellite_antifascist_decisions
-		focus = satellite_struggle_alone
-	}
-
-	prerequisite = { 
-		focus = satellite_antifascist_decisions
 	}
 
 	relative_position_id = satellite_defense_against_facism
 
 	completion_reward = {
-		custom_effect_tooltip = satellite_enable_direct_antifascist_decisions
+		add_ideas = satellite_stand_firm_against_fascism
 	}
 
 	ai_will_do = {
@@ -1939,7 +1934,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_our_path
-	icon = GFX_pig
+	icon = GFX_HNZ_committee_centralisation
 	x = 30
 	y = 0
 	cost = 6.5
@@ -1978,7 +1973,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_kick_out_foreign_merchants
-	icon = GFX_generic_political
+	icon = GFX_gangster
 	x = 2
 	y = 1
 	cost = 6.5
@@ -1990,7 +1985,9 @@ shared_focus = {
 	relative_position_id = satellite_winds_of_change
 
 	completion_reward = {
+		satellite_remove_hansa_dependency = yes
 		add_timed_idea = { idea = _satellite_expunged_merchants days = 180 }
+		HNZ = { country_event = { id = nf_satellite.9 } }
 	}
 
 	ai_will_do = {
@@ -2000,7 +1997,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_consolidate_our_own_economy
-	icon = GFX_generic_political
+	icon = GFX_generic_market
 	x = 0
 	y = 1
 	cost = 6.5
@@ -2041,10 +2038,23 @@ shared_focus = {
 		focus = satellite_winds_of_change
 	}
 	
-
+	available = {
+		is_puppet = no
+		is_subject = no
+		custom_trigger_tooltip = {
+			tooltip = satellite_not_reliant_on_no_one	
+			NOT = {
+				has_idea = ULI_1905_station_hanseatic_troubles
+				has_idea = BRK_reliance_on_the_hansa
+				has_idea = SEV_hanseatic_reliance
+			}
+		} 
+	}
 	relative_position_id = satellite_winds_of_change
 
 	completion_reward = {
+		add_threat = 2
+		add_ideas = satellite_stake_our_claim_in_the_world
 	}
 
 	ai_will_do = {
@@ -2063,11 +2073,17 @@ shared_focus = {
 		focus = satellite_against_the_proverbial_powers
 	}
 
+	available = { RED = { exists = yes } NOT = { has_war_with = RED }}
+
 	mutually_exclusive = { focus = satellite_our_own_path }
 
 	relative_position_id = satellite_against_the_proverbial_powers
 
 	completion_reward = {
+		add_opinion_modifier = {
+			target = RED
+			modifier = jointoperations 
+		}
 	}
 
 	ai_will_do = {
@@ -2077,7 +2093,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_soviet_help
-	icon = GFX_generic_political
+	icon = GFX_RED_troops2
 	x = 2
 	y = 1
 	cost = 6.5
@@ -2086,10 +2102,21 @@ shared_focus = {
 		focus = satellite_align_the_sokol
 	}
 
+	available = { RED = { exists = yes } NOT = { has_war_with = RED }}
+
 	relative_position_id = satellite_align_the_sokol
 
 	completion_reward = {
 		## get an advisor or general or smth from redline
+		army_experience = 5
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 20
+			producer = RUS
+		}
+		RED = {
+			army_experience = 5
+		}
 	}
 
 	ai_will_do = {
@@ -2099,7 +2126,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_soviet_nostalgism
-	icon = GFX_generic_political
+	icon = GFX_generic_soviet
 	x = 0
 	y = 1
 	cost = 6.5
@@ -2108,9 +2135,12 @@ shared_focus = {
 		focus = satellite_align_the_sokol
 	}
 
+	available = { RED = { exists = yes } NOT = { has_war_with = RED }}
+
 	relative_position_id = satellite_align_the_sokol
 
 	completion_reward = {
+		add_ideas = satellite_soviet_nostalgism
 	}
 
 	ai_will_do = {
@@ -2120,7 +2150,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_strike_the_hanseatic_league
-	icon = GFX_generic_political
+	icon = GFX_RED_anti_fascism_2
 	x = -1
 	y = 2
 	cost = 6.5
@@ -2128,6 +2158,10 @@ shared_focus = {
 	prerequisite = { 
 		focus = satellite_align_the_sokol
 	}
+
+	available = { RED = { exists = yes } HNZ = { exists = yes }
+	NOT = { has_war_with = HNZ }}
+	
 
 	mutually_exclusive = { focus = satellite_deal_with_the_devil }
 
@@ -2162,6 +2196,8 @@ shared_focus = {
 		focus = satellite_soviet_nostalgism
 	}
 
+	available = { RED = { exists = yes } NOT = { has_war_with = RED }}
+
 	mutually_exclusive = { focus = satellite_strike_the_hanseatic_league }
 
 	relative_position_id = satellite_soviet_nostalgism
@@ -2175,6 +2211,7 @@ shared_focus = {
 	completion_reward = {
 		## we'll declare war on HNZ IF Redline does so
 		custom_effect_tooltip = _satellite_kill_hansa_assistance
+		custom_effect_tooltip = _satellite_redline_assistance
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
 			cost_reduction = 0.25
@@ -2197,7 +2234,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_our_own_path
-	icon = GFX_generic_political
+	icon = GFX_generic_radio
 	x = 1
 	y = 1
 	cost = 6.5
@@ -2211,6 +2248,7 @@ shared_focus = {
 	relative_position_id = satellite_against_the_proverbial_powers
 
 	completion_reward = {
+		add_ideas = satellite_our_own_way
 	}
 
 	ai_will_do = {
@@ -2220,7 +2258,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_a_new_power_dawns
-	icon = GFX_generic_political
+	icon = GFX_generic_a_new_power_dawns
 	x = 1
 	y = 1
 	cost = 6.5
@@ -2248,7 +2286,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_de_sovietisation
-	icon = GFX_generic_political
+	icon = GFX_generic_de_sovietization
 	x = 3
 	y = 1
 	cost = 6.5
@@ -2257,9 +2295,12 @@ shared_focus = {
 		focus = satellite_our_own_path
 	}
 
+	available = { RED = { exists = yes } }
+
 	relative_position_id = satellite_our_own_path
 
 	completion_reward = {
+		add_ideas = satellite_de_sovietisation
 	}
 
 	ai_will_do = {
@@ -2269,7 +2310,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_strike_the_redline
-	icon = GFX_generic_political
+	icon = GFX_generic_anti_communist_focus
 	x = -1
 	y = 1
 	cost = 6.5
@@ -2311,6 +2352,8 @@ shared_focus = {
 		focus = satellite_de_sovietisation
 	}
 
+	available = { HNZ = { exists = yes } RED = { exists = yes }  NOT = { has_war_with = HNZ }}
+
 	mutually_exclusive = { focus = satellite_strike_the_redline }
 
 	relative_position_id = satellite_de_sovietisation
@@ -2324,6 +2367,7 @@ shared_focus = {
 	completion_reward = {
 		## we'll declare war on RED IF Hanza does so
 		custom_effect_tooltip = _satellite_kill_redline_assistance
+		custom_effect_tooltip = _satellite_hansa_assistance
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
 			cost_reduction = 0.25
@@ -2345,7 +2389,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_status_quo
-	icon = GFX_generic_political
+	icon = GFX_HNZ_democracy_1
 	x = 3
 	y = 1
 	cost = 6.5
@@ -2366,30 +2410,9 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_status_quo_2
-	icon = GFX_generic_political
-	x = 0
-	y = 1
-	cost = 6.5
-
-	prerequisite = { 
-		focus = satellite_status_quo
-	}
-
-	relative_position_id = satellite_status_quo
-
-	completion_reward = {
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-
-shared_focus = {
 	id = satellite_guarentee_polis
 	icon = GFX_generic_support_polis
-	x = 2
+	x = 0
 	y = 1
 	cost = 6.5
 
@@ -2427,7 +2450,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_assist_the_rangers
 	icon = GFX_SPT_patch_guns
-	x = 0
+	x = 2
 	y = 1
 	cost = 6.5
 
@@ -2455,8 +2478,7 @@ shared_focus = {
 				modifier = support 
 			}
 		}
-		custom_effect_tooltip = available_political_advisor
-		show_ideas_tooltip = _metro_ranger_personal_liason
+		custom_effect_tooltip = _satellite_recieve_spartan_character
 	}
 	ai_will_do = {
 		factor = 10
@@ -2474,9 +2496,19 @@ shared_focus = {
 		focus = satellite_status_quo
 	}
 
+	available = { HNZ = { exists = yes }}
+
 	relative_position_id = satellite_status_quo
 
 	completion_reward = {
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = jointoperations 
+		}
+		army_experience = 10
+		HNZ = {
+			army_experience = 10
+		}
 	}
 
 	ai_will_do = {
@@ -2486,7 +2518,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_equal_opportunity_member
-	icon = GFX_generic_political
+	icon = GFX_HNZ_all_is_well
 	x = 0
 	y = 1
 	cost = 6.5
@@ -2498,6 +2530,7 @@ shared_focus = {
 	relative_position_id = satellite_support_the_hanseatic_league
 
 	completion_reward = {
+		satellite_remove_hansa_dependency = yes
 	}
 
 	ai_will_do = {
@@ -2519,6 +2552,20 @@ shared_focus = {
 	relative_position_id = satellite_support_the_hanseatic_league
 
 	completion_reward = {
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.25
+			uses = 1
+			category = land_doctrine
+		}
+		HNZ = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.1
+				uses = 1
+				category = land_doctrine
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -2528,7 +2575,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_red_alert
-	icon = GFX_generic_political
+	icon = GFX_generic_strike
 	x = 0
 	y = 1
 	cost = 6.5
@@ -2539,8 +2586,19 @@ shared_focus = {
 
 	relative_position_id = satellite_anti_communist_coalition
 
-	completion_reward = {
+	available = {
+		RED = { exists = yes }
+		is_neighbor_of = RED
 	}
+	will_lead_to_war_with = RED
+
+	completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = RED
+		}	
+	}
+
 
 	ai_will_do = {
 		factor = 10
