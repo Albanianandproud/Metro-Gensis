@@ -41,11 +41,11 @@ education_practise = {
 				#set_variable = { education_reform_undertaking = 120 }
 				if = {
 					limit = {
-						num_of_controlled_states < 6
+						num_of_controlled_states < 7
 					}
 					set_variable = {
 						var = education_reform_undertaking
-						value = 15
+						value = 16
 					}
 				}
 				else = {
@@ -61,7 +61,7 @@ education_practise = {
 				#// Make cost increase for every education tier we have
 				clamp_variable = {
 					var = education_reform_undertaking
-					min = 270
+					min = 300
 					max = 1800
 				}
 				calculate_education_reform_timer_multiplier = yes
@@ -425,10 +425,13 @@ education_practise = {
 				PLS = {
 					has_opinion = {
 						target = ROOT
-						value > 75
+						value > 74
 					}
 				}
-				has_country_flag = allow_access_polis_education_decision
+				custom_trigger_tooltip = {
+					tooltip = allow_access_polis_education_decision
+					has_country_flag = allow_access_polis_education_decision
+				}
 			}
 			hidden_trigger = {
 				NOT = { tag = PLS }
