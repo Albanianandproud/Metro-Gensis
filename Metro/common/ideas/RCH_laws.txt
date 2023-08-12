@@ -48,6 +48,8 @@ ideas = {
 					has_war_support > 0.79
 				}
 			}
+			cancel_if_invalid = no
+			
 			modifier = {
 				conscription = 0.17
 				consumer_goods_factor = 0.05
@@ -70,13 +72,19 @@ ideas = {
 				has_country_flag = is_reich_nation
 				NOT = { tag = STB }
 			}
+
 			available = {
-				has_completed_focus = RCH_proclaimation_of_slavic_unity
 				OR = {
-					has_war_support > 0.89
+					has_completed_focus = RCH_proclaimation_of_slavic_unity
 					has_war = yes
 				}
+				OR = {
+					threat > 0.09
+					has_war_support > 0.89
+				}
 			}
+			cancel_if_invalid = no
+
 			modifier = {
 				conscription = 0.25
 				consumer_goods_factor = 0.1
@@ -108,6 +116,8 @@ ideas = {
 					has_war = yes
 				}
 			}
+			cancel_if_invalid = no
+
 			modifier = {
 				conscription = 0.4
 				consumer_goods_factor = 0.15
@@ -162,6 +172,8 @@ ideas = {
 			available = {
 				has_completed_focus = RCH_moc_path_3
 			}
+			cancel_if_invalid = no
+
 			level = 4
 			cost = 150
 			modifier = {
@@ -184,6 +196,8 @@ ideas = {
 					has_war_support > 0.74
 				}
 			}
+			cancel_if_invalid = no
+
 			level = 3
 			cost = 150
 			modifier = {
@@ -205,13 +219,15 @@ ideas = {
 				has_country_flag = is_reich_nation
 				NOT = { tag = STB }
 			}
+
 			available = {
 				has_completed_focus = RCH_moc_path_3
-				AND = {
-					has_war_support > 0.74
-					has_war = yes
+				OR = {
+					has_war_support > 0.84
 				}
 			}
+			cancel_if_invalid = no
+
 			level = 2
 			cost = 150
 			modifier = {
@@ -237,12 +253,19 @@ ideas = {
 				NOT = { tag = STB }
 			}
 			available = {
-				AND = {
-					has_war_support > 0.89
-					has_completed_focus = RCH_would_you_like_total_war
-					has_war = yes
+				OR = {
+					AND = {
+						has_war_support > 0.89
+						has_completed_focus = RCH_would_you_like_total_war
+					}
+					AND = {
+						has_war = yes
+					}
 				}
 			}
+
+			cancel_if_invalid = no
+
 			level = 1
 			cost = 150
 			modifier = {
