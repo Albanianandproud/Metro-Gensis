@@ -9,7 +9,7 @@ focus_tree = {
 			tag = HNZ
 		}
 	}
-	continuous_focus_position = { x = 6000 y = 1}
+	continuous_focus_position = { x = 200 y = 800}
 	default = no
 
 	focus = {
@@ -24,328 +24,648 @@ focus_tree = {
 		}
 
 		select_effect = {
-			country_event = nf_HNZ.1
 			## Introduction to Hanza / Loginov's Demons
+			country_event = nf_HNZ.1
 		}
 
 		completion_reward = {
-			country_event = nf_HNZ.4
 			## New Quater / Decisions
+			country_event = nf_HNZ.4
 		}
 	}
 
-	## OTL ##
 	focus = {
-		id = HNZ_economic_neutrality
-		icon = GFX_HNZ_generic_treaty
+		id = HNZ_year_1_defensive_priority
+		icon = GFX_icon
 
-		mutually_exclusive = {
-			focus = HNZ_steer_in_new_direction
+		prerequisite = { focus = HNZ_new_quater }
+
+		mutually_exclusive = { 
+			focus = HNZ_year_1_economic_priority
+			focus = HNZ_year_1_neutrality_priority
 		}
-		
-		prerequisite = {
-			focus = HNZ_new_quater
-		}
-		x = -4
+		available = { always = no }
+
+		x = -2
 		y = 1
 		relative_position_id = HNZ_new_quater
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 25
-		}
+		cost = 2.2
 
 		completion_reward = {
-			add_ideas = HNZ_neutral
-			add_political_power = 75
-			modify_timed_idea = {
-				idea = HNZ_exhausted_economy 
-				days = -75
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_defensive_priority
+			activate_mission = HNZ_mission_defensive_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				add_country_leader_trait = loginov_defender
+				custom_effect_tooltip = HNZ_gain_political_control
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_guiding_hand
-		icon = GFX_HNZ_guiding_hand
-
-		prerequisite = {
-			focus = HNZ_economic_neutrality
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_economic_neutrality
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			modify_timed_idea = {
-				idea = HNZ_exhausted_economy 
-				days = -75
-			}
-			add_popularity = {
-				ideology = oligarch
-				popularity = 0.05
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_introduce_import_tarrifs
-		icon = GFX_HNZ_generic_treaty
-
-		available = {
-			oligarch > 0.74
-		}
-
-		prerequisite = {
-			focus =  HNZ_guiding_hand
-		}
-		x = 0
-		y = 1
-		relative_position_id =  HNZ_guiding_hand
-		cost = 5.8
 
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = HNZ_year_1_economic_priority
+		icon = GFX_icon
+
+		prerequisite = { focus = HNZ_new_quater }
+
+		mutually_exclusive = { 
+			focus = HNZ_year_1_defensive_priority
+			focus = HNZ_year_1_neutrality_priority
+		}
+		available = { always = no }
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			add_ideas = HNZ_import_tarrifs
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_economic_priority
+			activate_mission = HNZ_mission_economic_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				add_country_leader_trait = loginov_pursuit_of_profit
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = HNZ_protectionist_policies
-		icon = GFX_HNZ_generic_treaty
+		id = HNZ_year_1_neutrality_priority
+		icon = GFX_icon
 
-		prerequisite = {
-			focus = HNZ_economic_neutrality
+		prerequisite = { focus = HNZ_new_quater }
+
+		mutually_exclusive = { 
+			focus = HNZ_year_1_defensive_priority
+			focus = HNZ_year_1_economic_priority
 		}
+		available = { always = no }
+
+		x = 2
+		y = 1
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_neutrality_priority
+			activate_mission = HNZ_mission_neutrality_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				add_country_leader_trait = loginov_neutrality
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_2_military_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_1_defensive_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_2_armament_priority
+			focus = HNZ_year_2_reclaimation_priority
+			focus = HNZ_year_2_research_priority
+		}
+		available = { always = no }
+
+		x = -3
+		y = 2
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_military_priority
+			activate_mission = HNZ_mission_military_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_2_armament_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_1_defensive_priority
+			focus = HNZ_year_1_economic_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_2_military_priority
+			focus = HNZ_year_2_reclaimation_priority
+			focus = HNZ_year_2_research_priority
+		}
+		available = { always = no }
+
+		x = -1
+		y = 2
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_armament_priority
+			activate_mission = HNZ_mission_armament_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				add_timed_idea = {
+					idea = HNZ_military_armament_prestige
+					days = 400
+				}
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_2_reclaimation_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_1_economic_priority
+			focus = HNZ_year_1_neutrality_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_2_military_priority
+			focus = HNZ_year_2_armament_priority
+			focus = HNZ_year_2_research_priority
+		}
+		available = { always = no }
+
 		x = 1
 		y = 2
-		relative_position_id = HNZ_economic_neutrality
-		cost = 5.8
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_reclaimation_priority
+			activate_mission = HNZ_mission_reclaimation_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
 
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = HNZ_year_2_research_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_1_neutrality_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_2_military_priority
+			focus = HNZ_year_2_armament_priority
+			focus = HNZ_year_2_reclaimation_priority
+		}
+		available = { always = no }
+
+		x = 3
+		y = 2
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 50
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_research_priority
+			activate_mission = HNZ_mission_research_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = HNZ_passport_requirements
-		icon = GFX_HNZ_passport_requirement
+		id = HNZ_year_3_draisine_priority
+		icon = GFX_icon
 
-		prerequisite = {
-			focus =  HNZ_introduce_import_tarrifs
+		prerequisite = { 
+			focus = HNZ_year_2_military_priority
+			focus = HNZ_year_2_armament_priority
 		}
-		prerequisite = {
-			focus = HNZ_protectionist_policies
+
+		mutually_exclusive = { 
+			focus = HNZ_year_3_mutant_purge_priority
+			focus = HNZ_year_3_polis_priority
 		}
+		available = { always = no }
+
+		x = -2
+		y = 3
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_draisine_priority
+			activate_mission = HNZ_mission_draisine_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_3_mutant_purge_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_2_armament_priority
+			focus = HNZ_year_2_reclaimation_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_3_draisine_priority
+			focus = HNZ_year_3_polis_priority
+		}
+		available = { always = no }
+
 		x = 0
 		y = 3
-		relative_position_id = HNZ_economic_neutrality
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			add_ideas = HNZ_passport_requirements
-		}
-	}
-
-	## Adam Smith
-	focus = {
-		id = HNZ_adam_smith_legacy
-		icon = GFX_HNZ_generic_treaty
-
-		prerequisite = {
-			focus = HNZ_guiding_hand
-		}
-		x = -1
-		y = 2
-		relative_position_id = HNZ_guiding_hand
-		cost =5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_adam_smith
-		}
-	}
-
-	focus = {
-		id = HNZ_property_rights
-		icon = GFX_HNZ_democracy_1
-
-		prerequisite = {
-			focus = HNZ_economic_neutrality
-		}
-		x = -5
-		y = 1
-		relative_position_id = HNZ_economic_neutrality
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_property_rights
-			modify_timed_idea = {
-				idea = HNZ_exhausted_economy 
-				days = -50
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_mutant_purge_priority
+			activate_mission = HNZ_mission_mutant_purge_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_station_centralisation
-		icon = GFX_HNZ_generic_treaty
-
-		mutually_exclusive = {
-			focus = HNZ_independent_station_jurisdiction
-		}
-
-		prerequisite = {
-			focus = HNZ_property_rights
-		}
-		prerequisite = {
-			focus = HNZ_guiding_hand
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_property_rights
-		cost = 5.8
 
 		ai_will_do = {
 			factor = 2
 		}
-
-		completion_reward = {
-			add_timed_idea = {
-				idea = HNZ_station_centralisation
-				days = 720
-			}
-		}
 	}
 
 	focus = {
-		id = HNZ_station_centralisation_2
-		icon = GFX_HNZ_generic_treaty
+		id = HNZ_year_3_polis_priority
+		icon = GFX_icon
 
-		prerequisite = {
-			focus = HNZ_property_rights
+		prerequisite = { 
+			focus = HNZ_year_2_reclaimation_priority
+			focus = HNZ_year_2_research_priority
 		}
 
-		available = {
-			has_idea = HNZ_station_centralisation
+		mutually_exclusive = { 
+			focus = HNZ_year_3_draisine_priority
+			focus = HNZ_year_3_mutant_purge_priority
 		}
-		
-		x = -1
-		y = 2
-		relative_position_id = HNZ_property_rights
-		cost = 5.8
+		available = { always = no }
+
+		x = 2
+		y = 3
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_mutant_polis_priority
+			activate_mission = HNZ_mission_polis_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
 
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = HNZ_year_4_generals_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_3_draisine_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_4_containment_priority
+			focus = HNZ_year_4_puppet_priority
+			focus = HNZ_year_4_industry_priority
+		}
+		available = { always = no }
+
+		x = -3
+		y = 4
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			add_political_power = 65
-			add_stability = -0.05
-			modify_timed_idea = {
-				idea = HNZ_station_centralisation
-				days = 90
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_generals_priority
+			activate_mission = HNZ_mission_generals_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
 			}
+		}
+
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
 	focus = {
-		id = HNZ_independent_station_jurisdiction
-		icon = GFX_HNZ_independent_jurisdiction
+		id = HNZ_year_4_containment_priority
+		icon = GFX_icon
 
-		mutually_exclusive = {
-			focus = HNZ_station_centralisation
+		prerequisite = { 
+			focus = HNZ_year_3_draisine_priority
+			focus = HNZ_year_3_mutant_purge_priority
 		}
 
-		prerequisite = {
-			focus = HNZ_property_rights
+		mutually_exclusive = { 
+			focus = HNZ_year_4_generals_priority
+			focus = HNZ_year_4_puppet_priority
+			focus = HNZ_year_4_industry_priority
 		}
-		prerequisite = {
-			focus = HNZ_guiding_hand
+		available = { always = no }
+
+		x = -1
+		y = 4
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_containment_priority
+			activate_mission = HNZ_mission_containment_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
 		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_4_puppet_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_3_mutant_purge_priority
+			focus = HNZ_year_3_polis_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_4_generals_priority
+			focus = HNZ_year_4_containment_priority
+			focus = HNZ_year_4_industry_priority
+		}
+		available = { always = no }
+
 		x = 1
-		y = 1
-		relative_position_id = HNZ_property_rights
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		y = 4
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			add_war_support = 0.05
-			add_stability = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_independent_station_2
-		icon = GFX_HNZ_generic_treaty
-
-		prerequisite = {
-			focus = HNZ_independent_station_jurisdiction
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_independent_station_jurisdiction
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_timed_idea = {
-				idea = HNZ_station_jurisdiction
-				days = 720
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_puppet_priority
+			activate_mission = HNZ_mission_puppet_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_station_establish_political_committee
-		icon = GFX_HNZ_committee_centralisation
-		prerequisite = {
-			focus = HNZ_independent_station_jurisdiction
-			focus = HNZ_station_centralisation
-		}
-		x = 0
-		y = 3
-		relative_position_id = HNZ_property_rights
-		cost = 5.8
 
 		ai_will_do = {
 			factor = 2
 		}
+	}
+
+	focus = {
+		id = HNZ_year_4_industry_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_3_polis_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_4_generals_priority
+			focus = HNZ_year_4_containment_priority
+			focus = HNZ_year_4_puppet_priority
+		}
+		available = { always = no }
+
+		x = 3
+		y = 4
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
 
 		completion_reward = {
-			# Reduce impact of Decentralised Commonwealth Somewhat
-			add_political_power = 65
-			add_war_support = 0.05
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_industry_priority
+			activate_mission = HNZ_mission_industry_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_5_hegemony_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_4_generals_priority
+			focus = HNZ_year_4_containment_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_5_expansion_priority
+			focus = HNZ_year_5_coalition_priority
+		}
+		available = { always = no }
+
+		x = -2
+		y = 5
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_hegemony_priority
+			activate_mission = HNZ_mission_hegemony_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_5_expansion_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_4_containment_priority
+			focus = HNZ_year_4_puppet_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_5_hegemony_priority
+			focus = HNZ_year_5_coalition_priority
+		}
+		available = { always = no }
+
+		x = 0
+		y = 5
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_expansion_priority
+			activate_mission = HNZ_mission_expansion_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_5_coalition_priority
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_4_puppet_priority
+			focus = HNZ_year_4_industry_priority
+		}
+
+		mutually_exclusive = { 
+			focus = HNZ_year_5_hegemony_priority
+			focus = HNZ_year_5_expansion_priority
+		}
+		available = { always = no }
+
+		x = 2
+		y = 5
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_agenda_missions
+			custom_effect_tooltip = HNZ_agenda_coalition_priority
+			activate_mission = HNZ_mission_coalition_priority
+			effect_tooltip = {
+				custom_effect_tooltip = HNZ_agenda_once_completed
+				## Tooltip for doing something cool here
+				custom_effect_tooltip = HNZ_gain_political_control
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_year_6
+		icon = GFX_icon
+
+		prerequisite = { 
+			focus = HNZ_year_5_hegemony_priority
+			focus = HNZ_year_5_expansion_priority
+			focus = HNZ_year_5_coalition_priority
+		}
+		available = { always = no }
+
+		x = 0
+		y = 6
+		relative_position_id = HNZ_new_quater
+		cost = 2.2
+
+		completion_reward = {
+			## Event whether to lean into Observers, revive the CMC or keep being Hansa
+		}
+
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
@@ -354,13 +674,11 @@ focus_tree = {
 		id = HNZ_establish_reclaimation_bureau
 		icon = GFX_RED_council_of_workers
 
-		available = {
-			has_completed_focus = HNZ_new_quater
-		}
+		available = { has_completed_focus = HNZ_new_quater }
 
-		x = -11
-		y = 1
-		relative_position_id = HNZ_economic_neutrality
+		x = -26
+		y = 0
+		relative_position_id = HNZ_new_quater
 		cost = 5.8
 
 		ai_will_do = {
@@ -369,6 +687,18 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = HNZ_reclaimation_bureau
+			random_owned_controlled_state = {
+				add_resource = {
+			        type = scrap
+			        amount = 3
+			    }
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+			        type = alloys
+			        amount = 3
+			    }
+			}
 		}
 	}
 
@@ -503,7 +833,7 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = chemicals
-			        amount = 8
+			        amount = 10
 			    }
 			}
 		}
@@ -604,6 +934,18 @@ focus_tree = {
 					remove_idea = HNZ_tunnel_cleansers
 					add_idea = HNZ_tunnel_cleansers_2
 				}
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+			        type = components
+			        amount = 3
+			    }
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+			        type = electronics
+			        amount = 3
+			    }
 			}
 		}
 	}
@@ -1193,14 +1535,10 @@ focus_tree = {
 		icon = GFX_station_entrance
 
 		available = {
-			OR = {
-				has_completed_focus = HNZ_economic_neutrality
-				has_completed_focus = HNZ_steer_in_new_direction
-			}
+			has_completed_focus = HNZ_new_quater
 		}
-		x = 9
-		y = 3
-		relative_position_id = HNZ_reclaimation_bureau_2_military
+		x = -2
+		y = 0
 		cost = 5
 
 		ai_will_do = {
@@ -2658,479 +2996,6 @@ focus_tree = {
 		}
 	}
 
-	## Alt History ##
-	focus = {
-		id = HNZ_steer_in_new_direction
-		icon = GFX_HNZ_soldier 
-
-		mutually_exclusive = {
-			focus = HNZ_economic_neutrality
-		}
-
-		prerequisite = {
-			focus = HNZ_new_quater
-		}
-
-		available = {
-			has_war_support > 0.29
-			always = no
-		}
-
-		x = 6
-		y = 1
-		relative_position_id = HNZ_new_quater
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_stability = -0.1
-			add_timed_idea = {
-				idea = HNZ_political_reinvention
-				days = 540
-			}
-			custom_effect_tooltip = HNZ_political_reinvention_requirement
-			custom_effect_tooltip = future_update_tt
-		}
-	}
-
-	### Government 
-
-	focus = {
-		id = HNZ_board_of_directors
-		icon = GFX_HNZ_weapons_deal
-
-		mutually_exclusive = {
-			focus = HNZ_a_new_leader
-		}
-
-		prerequisite = {
-			focus = HNZ_economic_neutrality
-			focus = HNZ_steer_in_new_direction
-		}
-		x = 4
-		y = 1
-		relative_position_id = HNZ_economic_neutrality
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_popularity = {
-				ideology = oligarch
-				popularity = 0.1
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_satellite_states
-		icon = GFX_HNZ_generic_agreement
-
-		prerequisite = {
-			focus = HNZ_board_of_directors
-			focus = HNZ_a_new_leader
-		}
-		x = 2
-		y = 1
-		relative_position_id = HNZ_board_of_directors
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		bypass = {
-			NOT = { country_exists = ARB }
-			NOT = { country_exists = SEV }
-			NOT = { country_exists = ULI }
-			NOT = { country_exists = BRK }
-		}
-
-		available = {
-			NOT = { has_war_with = ULI }
-			NOT = { has_war_with = ARB }			
-			NOT = { has_war_with = SEV }
-			NOT = { has_war_with = BRK }
-		}
-
-		completion_reward = {
-			diplomatic_relation = {
-				country = ARB
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_opinion_modifier = {
-				target = ARB
-				modifier = peaceful_coexistance 
-			}
-			diplomatic_relation = {
-				country = SEV
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_opinion_modifier = {
-				target = SEV
-				modifier = peaceful_coexistance 
-			}
-			diplomatic_relation = {
-				country = ULI
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_opinion_modifier = {
-				target = ULI
-				modifier = peaceful_coexistance 
-			}
-			diplomatic_relation = {
-				country = BRK
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_opinion_modifier = {
-				target = BRK
-				modifier = peaceful_coexistance 
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_begin_satellite_states
-		icon = GFX_HNZ_control_trade
-
-		available = {
-			NOT = {
-				has_idea = HNZ_exhausted_economy
-			}
-			OR = {
-				has_completed_focus = HNZ_new_quater
-			}
-		}
-
-		prerequisite = {
-			focus = HNZ_satellite_states
-		}
-
-		x = -3
-		y = 1
-		relative_position_id = HNZ_satellite_states
-		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_threat = 3
-			add_stability = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_subversion
-		icon = GFX_RED_infiltration
-
-		available = {
-			NOT = {
-				has_idea = HNZ_exhausted_economy
-			}
-			OR = {
-				has_completed_focus = HNZ_new_quater
-			}
-		}
-
-		prerequisite = {
-			focus = HNZ_begin_satellite_states
-		}
-
-		x = 1
-		y = 1
-		relative_position_id = HNZ_begin_satellite_states
-		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_stability = 0.05
-		}
-	}
-
-	focus = {
-		id = HNZ_pvl_puppet
-		icon = GFX_HNZ_pvl_puppet
-
-		prerequisite = {
-			focus = HNZ_satellite_states
-		}
-
-		available = {
-			strength_ratio = {
-    			tag = PVL
-    			ratio > 3
-			}
-			ic_ratio = {
-    			tag = PVL
-    			ratio > 1.5
-			}
-			OR = {
-				has_opinion = {
-    				target = HNZ
-    				value > 4
-				}
-				has_army_manpower = {
-    				size > 749
-				}
-			}
-			PVL = {
-				is_puppet = no
-			}
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_satellite_states
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			puppet = PVL
-		}
-	}
-
-	focus = {
-		id = HNZ_pls_agreement
-		icon = GFX_goal_generic_improve_relations
-
-		bypass = {
-			NOT = { country_exists = PLS }
-		}
-
-		available = {
-			NOT = { has_war_with = PLS }
-		}
-
-		prerequisite = {
-			focus = HNZ_satellite_states
-		}
-
-		x = 3
-		y = 1
-		relative_position_id = HNZ_satellite_states
-		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			give_guarantee = PLS
-			add_opinion_modifier = {
-				target = PLS
-				modifier = guarentee
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_support_the_rangers
-		icon = GFX_SPT_generic_logo
-
-		bypass = {
-			NOT = { country_exists = SPT }
-		}
-
-		available = {
-			NOT = { has_war_with = SPT }
-		}
-
-		prerequisite = {
-			focus = HNZ_pls_agreement
-		}
-
-		x = -1
-		y = 1
-		relative_position_id = HNZ_pls_agreement
-		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			diplomatic_relation = {
-				country = SPT
-				relation = non_aggression_pact
-				active = yes
-			}
-			add_opinion_modifier = {
-				target = SPT
-				modifier = support
-			}
-			SPT = {
-				add_manpower = 50
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_our_authority
-		icon = GFX_HNZ_a_ring_of_steel
-
-		available = {
-			NOT = { has_idea = hanza_redline_war }
-		}
-
-		prerequisite = {
-			focus = HNZ_support_the_rangers
-			focus = HNZ_subversion
-		}
-
-		x = 0
-		y = 2
-		relative_position_id = HNZ_pvl_puppet
-		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			IF = {
-				LIMIT = {
-					HNZ_loginov = {
-						has_trait = loginov_haunted
-					}
-				}
-				remove_trait = {
-     				character = HNZ_loginov
-     				slot = country_leader
-     				trait = loginov_haunted
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_RED
-		icon = GFX_HNZ_destroy_communism
-
-		available = {
-			NOT = { has_idea = hanza_redline_war }
-			has_idea = HNZ_subversive_hegemony
-		}
-
-		prerequisite = {
-			focus = HNZ_our_authority
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = RED }
-				has_war_with = RED
-			}
-		}
-
-		x = -1
-		y = 1
-		relative_position_id = HNZ_our_authority
-		cost = 9.4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		will_lead_to_war_with = RED
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = RED
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = HNZ_RCH
-		icon = GFX_fist
-
-		available = {
-			NOT = { has_idea = hanza_redline_war }
-			has_idea = HNZ_subversive_hegemony
-		}
-
-		prerequisite = {
-			focus = HNZ_our_authority
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = RCH }
-				has_war_with = RCH
-			}
-		}
-
-		x = 1
-		y = 1
-		relative_position_id = HNZ_our_authority
-		cost = 9.4
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		will_lead_to_war_with = RCH
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = RCH
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-	}
-
-	focus = {
-		id = HNZ_a_new_leader
-		icon = GFX_HNZ_the_managers_last_shift
-
-		prerequisite = {
-			focus = HNZ_economic_neutrality
-			focus = HNZ_steer_in_new_direction
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_board_of_directors
-		}
-
-		available = {
-			always = no
-			## custom_effect_tooltip = HNZ_not_available_until_event
-			## Requires Events or Focus rewards to chose
-		}
-
-		x = -2
-		y = 1
-		relative_position_id = HNZ_steer_in_new_direction
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = future_update_tt
-		}
-	}
-
 	### Get rid of our Generals ### 
 
 	focus = {
@@ -3141,8 +3006,8 @@ focus_tree = {
 			has_completed_focus = HNZ_new_quater
 		}
 
-		x = -22
-		y = 8
+		x = 11
+		y = 0
 		relative_position_id = HNZ_new_quater
 		cost = 4.3
 
@@ -3486,8 +3351,8 @@ focus_tree = {
 			has_completed_focus = HNZ_lessons_from_conflict
 		}
 
-		x = -22
-		y = 13
+		x = 23
+		y = 0
 		relative_position_id = HNZ_new_quater
 		cost = 4.3
 

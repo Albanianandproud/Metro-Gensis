@@ -15,20 +15,17 @@ reclaim_metro = {
 		fixed_random_seed = no
 
         visible = {
-            RUI = {
-                owns_state = FROM
-            }
+            RUI = { owns_state = FROM }
             FROM = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
-					NOT = {
-						region = 1
-					}
+					NOT = { region = 1 }
                 }
             }
             NOT = {
             	original_tag = GWC
 				original_tag = VDN
+				original_tag = AVT
             }
 			NOT = {
             	has_idea = RCH_reclusive_nazis
@@ -37,15 +34,13 @@ reclaim_metro = {
         }
 		available = {
 			NOT = {
+				## These two tags use their own unique reclaimation system
             	original_tag = GWC
+				original_tag = AVT
             }
-			FROM = {
-                is_owned_by = RUI
-			}
+			FROM = { is_owned_by = RUI }
 			has_manpower > 10
-			has_equipment = {
-                infantry_equipment > 9
-            }
+			has_equipment = { infantry_equipment > 9 }
 			NOT = {
 				ROOT = { has_country_flag = reclaimation_underway }
 				FROM = {
@@ -63,9 +58,7 @@ reclaim_metro = {
 		        amount = -10
 		    }
 			set_country_flag = reclaimation_underway
-			FROM = {
-				set_state_flag = state_being_colonised
-			}
+			FROM = { set_state_flag = state_being_colonised }
 			add_command_power = -20
 		}
 
@@ -79,9 +72,7 @@ reclaim_metro = {
 						}
 					}
 		            ROOT = { country_event = reclaimation_event.2 }
-		            FROM = {
-						clr_state_flag = state_being_colonised
-					}
+		            FROM = { clr_state_flag = state_being_colonised }
 					modifier = {
 						factor = 0.25
 						FROM = {
@@ -94,15 +85,11 @@ reclaim_metro = {
 		        }
 		        15 = { #Overwhelmed Mutants
 		            country_event = reclaimation_event.mutants
-		            FROM = {
-						clr_state_flag = state_being_colonised
-					}
+		            FROM = { clr_state_flag = state_being_colonised }
 		        }
 		        5 = { #Expedition lost
 		            country_event = reclaimation_event.3
-		        	FROM = {
-						clr_state_flag = state_being_colonised
-					}
+		        	FROM = { clr_state_flag = state_being_colonised }
 				}	
 		    }
 			ROOT = { clr_country_flag = reclaimation_underway }
@@ -134,65 +121,31 @@ reclaim_metro = {
         icon = decision_generic_military
 
 		custom_cost_text = command_power_25
-		custom_cost_trigger = {
-			command_power > 24.9
-		}
+		custom_cost_trigger = { command_power > 24.9 }
 
-		days_remove = 90
+		days_remove = 80
 		days_re_enable = 0
 
 		on_map_mode = map_only
 		state_target = yes
 		fixed_random_seed = no
-
-        ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = -200
-				has_war = yes
-			}
-			modifier = {
-				is_major = yes
-				factor = -75
-			}
-			modifier = { ## STOP COLONIZING IDIOT
-				factor = -200
-				original_tag = KUZ
-			}
-			modifier = { ## STOP COLONIZING IDIOT
-				factor = -200
-				original_tag = KTG
-			}
-		}
 		
         visible = {
-            RUI = {
-                owns_state = FROM
-            }
+            RUI = { owns_state = FROM }
             FROM = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
-					NOT = {
-						region = 1
-					}
+					NOT = { region = 1 }
                 }
             }
-            AND = {
-            	original_tag = GWC
-            }
+            AND = { original_tag = GWC }
         }
 
 		available = {
-			AND = {
-            	original_tag = GWC
-            }
-			FROM = {
-                is_owned_by = RUI
-			}
+			AND = { original_tag = GWC }
+			FROM = { is_owned_by = RUI }
 			has_manpower > 9
-			has_equipment = {
-                infantry_equipment > 9
-            }
+			has_equipment = { infantry_equipment > 9 }
 			NOT = {
 				ROOT = { has_country_flag = reclaimation_underway }
 				FROM = {
@@ -210,9 +163,7 @@ reclaim_metro = {
 		        amount = -10
 		    }
 			set_country_flag = reclaimation_underway
-			FROM = {
-				set_state_flag = state_being_colonised
-			}
+			FROM = { set_state_flag = state_being_colonised }
 			add_command_power = -25
 		}
 		remove_effect = {
@@ -225,10 +176,88 @@ reclaim_metro = {
 			hidden_effect = {
 				ROOT = { country_event = reclaimation_event.2 }
 			}
-		    FROM = {
-				clr_state_flag = state_being_colonised
+		    FROM = { clr_state_flag = state_being_colonised }
+		    ROOT = { clr_country_flag = reclaimation_underway }
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = -200
+				has_war = yes
 			}
-		   ROOT = { clr_country_flag = reclaimation_underway }
+		}
+    }
+}
+
+AVT_reclaim_metro = {
+	AVT_reclaim_this_state = { 
+        icon = decision_generic_military
+
+		custom_cost_text = command_power_30
+		custom_cost_trigger = { command_power > 29.9 }
+
+		days_remove = 50
+		days_re_enable = 180
+
+		on_map_mode = map_only
+		state_target = yes
+		fixed_random_seed = no
+
+		visible = {
+			FROM = {
+				is_fully_controlled_by = RUI
+				NOT = { has_state_category = pastoral }
+			}
+			has_completed_focus = AVT_political_focus_1
+		}
+
+		available = {
+			AND = { original_tag = AVT }
+			FROM = { is_owned_by = RUI }
+			has_manpower > 4
+			has_equipment = { infantry_equipment > 4 }
+			NOT = {
+				ROOT = { has_country_flag = reclaimation_underway }
+				FROM = {
+					OR = {
+						has_state_flag = state_being_colonised
+						state = 1
+						has_state_category = pastoral
+					}
+				}
+			}
+		}
+		complete_effect = {
+			add_manpower = -5
+		    add_equipment_to_stockpile = {
+		        type = infantry_equipment
+		        amount = -5
+		    }
+			set_country_flag = reclaimation_underway
+			FROM = { set_state_flag = state_being_colonised }
+			add_command_power = -20
+		}
+		remove_effect = {
+			ROOT = {
+				set_variable = {
+					var = state_colonised_id
+					value = FROM
+				}
+			}
+			hidden_effect = {
+				ROOT = { country_event = reclaimation_event.2 }
+			}
+		    FROM = { clr_state_flag = state_being_colonised }
+		    ROOT = { clr_country_flag = reclaimation_underway }
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = -200
+				has_war = yes
+			}
 		}
     }
 }

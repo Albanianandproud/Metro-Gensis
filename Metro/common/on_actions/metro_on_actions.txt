@@ -52,7 +52,7 @@ on_actions = {
 					is_ai = yes
 				}
                 add_equipment_to_stockpile = { type = rail_cart_equipment_1 amount = 10 }
-                army_experience = 20
+                army_experience = 10
             }
         }
 		effect = {
@@ -204,6 +204,70 @@ on_actions = {
 						target = PREV
 						modifier = joint_operations_mutual_defense
 				   }
+				}
+			}
+			### Scaven ###
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = ISL
+						original_tag = ALT
+						original_tag = SCA
+					}
+				}
+				every_country = {
+					limit = {
+						NOT = { 
+							OR = {
+								original_tag = ISL
+								original_tag = ALT
+								original_tag = SCA 
+							}
+						}
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = ratmen
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = ISL
+						original_tag = ALT
+						original_tag = SCA
+					}
+				}
+				every_country = {
+					limit = {
+						OR = {
+							original_tag = ISL
+							original_tag = ALT
+							original_tag = SCA 
+						}
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = ratmen_kin
+					}
+				}
+			}
+			### Bandits ### 
+			every_country = {
+				limit = {
+					has_country_flag = is_bandit_nation
+				}
+				every_country = {
+					limit = {
+						NOT = { 
+							has_country_flag = is_bandit_nation
+						}
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = bandit
+					}
 				}
 			}
 		}

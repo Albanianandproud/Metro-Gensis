@@ -22,6 +22,10 @@ NDefines.NDiplomacy.BASE_PEACE_PUPPET_FACTOR = 1
 NDefines.NDiplomacy.BASE_PEACE_LIBERATE_FACTOR = 1
 NDefines.NDiplomacy.BASE_PEACE_TAKE_UNCONTROLLED_STATE_FACTOR = 20.0
 
+NDefines.NDiplomacy.MAX_OPINION_VALUE = 200
+NDefines.NDiplomacy.MIN_OPINION_VALUE = -200
+NDefines.NDiplomacy.BASE_TRUCE_PERIOD = 90
+
 
 --- Buildings Stuff ---
 NDefines.NBuildings.INFRASTRUCTURE_RESOURCE_BONUS = 0.0

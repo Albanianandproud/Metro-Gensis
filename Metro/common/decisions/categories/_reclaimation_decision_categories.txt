@@ -1,12 +1,8 @@
 ### Reclaimation Decisions ###
 reclaim_metro = {
     icon = generic_prospect_for_resources
-    visible = {
-        always = yes
-    }
+    visible = { NOT = { original_tag = AVT } }
     allowed = {
-        always = yes
-
 		NOT = {
 	    	original_tag = RED
 			original_tag = MSU
@@ -14,7 +10,7 @@ reclaim_metro = {
 	}
 	priority = 1001
 	visibility_type = map_and_decisions_view
-	visible_when_empty = yes
+	visible_when_empty = no
 	
     highlight_states = {
         highlight_states_trigger = {
@@ -46,6 +42,56 @@ reclaim_metro = {
 						NOT = {
 							state = 1
 						}
+					}
+				}
+			}
+		}
+        name = reclaim_metro_category
+        zoom = 150
+    }
+}
+AVT_reclaim_metro = {
+    icon = generic_prospect_for_resources
+	visible = { original_tag = AVT } 
+
+	priority = 1001
+	visibility_type = map_and_decisions_view
+	visible_when_empty = no
+
+	highlight_states = {
+        highlight_states_trigger = {
+			AND = {
+				is_owned_by = RUI
+				NOT = {
+					has_state_category = pastoral
+					OR = {
+						ROOT = { has_country_flag = reclaimation_underway }
+						state = 1
+					}
+				}
+			}
+        }
+    }
+    on_map_area = {
+		target_array = global.reclamation_array
+		target_trigger = {
+			FROM = {
+				AND = {
+					is_owned_by = RUI
+					NOT = {
+						has_state_category = pastoral
+						OR = {
+							ROOT = { has_country_flag = reclaimation_underway }
+							state = 1
+						}
+					}
+					any_state = {
+						is_fully_controlled_by = ROOT
+						NOT = {
+							state = 1
+							has_state_category = pastoral
+						}
+						NOT = {  has_state_category = pastoral }
 					}
 				}
 			}

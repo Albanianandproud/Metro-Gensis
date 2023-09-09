@@ -66,3 +66,31 @@ centralise_commonwealth = {
 		remove_ideas = HNZ_decentralised_commonwealth_1
 	}
 }
+HNZ_mutant_purge_scripted_effect = {
+	if = {
+		limit = {
+			any_neighbor_country = {
+				has_country_flag = is_mutant_nation
+				has_country_flag = is_savage_nation
+				has_country_flag = is_skaven_nation
+			}
+		}
+		custom_effect_tooltip = HNZ_agenda_failure
+		country_event = nf_HNZ.42 # Failure Event
+	}
+	else_if = {
+		limit = {
+			any_neighbor_country = {
+				NOT = {
+					has_country_flag = is_mutant_nation
+					has_country_flag = is_savage_nation
+					has_country_flag = is_skaven_nation
+				}
+			}
+		}
+		country_event = nf_HNZ.41 # Completion event
+		add_ideas = HNZ_purge_the_unclean
+		custom_effect_tooltip = HNZ_gain_political_control
+		hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+	}
+}

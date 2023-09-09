@@ -1,5 +1,4 @@
 HNZ_production_shift = {
-	
 	HNZ_increase_industrial_shift = {
 
 		icon = GFX_HNZ_increase_industrial_shift
@@ -10,9 +9,7 @@ HNZ_production_shift = {
 
 		available = {
 		    has_war_support > 0.14
-		    NOT = {
-		    	has_country_flag = HNZ_industrial_shift_change
-		    }
+		    NOT = { has_country_flag = HNZ_industrial_shift_change }
 		}
 
 		cost = 50
@@ -323,6 +320,596 @@ HNZ_scavenging_decisions = {
 		    	}
 			}
 			ROOT = { clr_country_flag = HNZ_scavenging_underway }
+		}
+	}
+}
+
+## The Hansa can chose 1 agenda each year. Agendas are activated missions
+## In order to complete the mission, Hansa must complete the required conditions under the timer limit
+## The Agenda requirements will be stuff they normally do through play
+## If the Agenda is fufilled, Hansa gets ???
+## Alongside a national spirit buff or completion reward
+
+## gotta do this 17 times for each focus. Lol
+HNZ_agendas = {
+	HNZ_mission_defensive_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_1_defensive_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_defense_condition
+				OR = {
+					bunker > 10
+					bunker2 > 10
+				}
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			add_country_leader_trait = loginov_defender
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_economic_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_1_economic_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				#tooltip = HNZ_mission_economic_condition
+				num_of_civilian_factories > 35
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			add_country_leader_trait = loginov_pursuit_of_profit
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_neutrality_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_1_neutrality_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				### Since we're required to spend 1 year meeting this criteria
+				## we'll need to move this to another bracket.
+				tooltip = HNZ_mission_neutrality_condition
+				has_offensive_war = yes
+				has_added_tension_amount < 1
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+		is_good = yes
+
+		cancel_trigger = { 
+			has_offensive_war = yes
+			has_added_tension_amount > 1
+		}
+
+		timeout_effect = { ## if we complete the agenda
+			country_event = nf_HNZ.41 # Completion event
+			add_country_leader_trait = loginov_neutrality
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+	}
+
+	## Year 2 
+
+	HNZ_mission_military_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_2_military_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			OR = {
+				num_divisions > 59
+				has_army_manpower = {
+					size > 1499
+				}
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_armament_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_2_armament_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			has_equipment = { infantry_equipment > 249 }
+			has_equipment = { support_equipment > 49 }
+			OR = {
+				has_equipment = { flamethrower_equipment > 49 }
+				has_equipment = { explosive_equipment > 49 }
+				has_equipment = { gatling_equipment > 49 }
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+			add_timed_idea = {
+				idea = HNZ_military_armament_prestige
+				days = 400
+			}
+		}
+	}
+
+	HNZ_mission_reclaimation_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_2_reclaimation_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			OR = {
+				has_completed_focus = HNZ_reclaimation_stalker_jackpot
+				has_completed_focus = HNZ_reclaimation_bureau_2_improve
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_research_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_2_research_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			OR = {
+				num_researched_technologies > 20
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_draisine_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_3_draisine_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			OR = {
+				has_equipment = { rail_cart_equipment  > 34 }
+				has_equipment = { rail_car_equipment  > 24 }
+				has_equipment = { rail_panzer_equipment  > 19 }
+			}
+			OR = {
+				has_tech = rail_cart_tech_2029
+				has_tech = rail_car_tech_2029
+				has_tech = rail_panzer_tech_2030
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_mutant_purge_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_3_mutant_purge_priority }
+		is_good = yes
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_mutant_purge_condition
+				any_neighbor_country = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_skaven_nation
+					}
+				}
+				AND = { has_political_power > 2001 }
+				## Because the decision would auto-complete if requirements are met. We'll need to add some sort of unobtainable requirement
+				## and instead use timeout_effect to decide whether to complete or fail the agenda
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+		is_good = yes
+
+		cancel_trigger = { 
+			has_offensive_war = yes
+		}
+
+		timeout_effect = { ## if we complete the agenda
+			HNZ_mutant_purge_scripted_effect = yes
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+	}
+
+	HNZ_mission_polis_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_3_polis_priority }
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				### Since we're required to spend 1 year meeting this criteria
+				## we'll need to move this to another bracket.
+				tooltip = HNZ_mission_polis_condition
+				NOT = {
+					has_war_with = PLS
+					PLS = { exists = no }
+				}
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+		is_good = yes
+
+		cancel_trigger = { 
+			has_war_with = PLS
+			PLS = { exists = no }
+		}
+
+		timeout_effect = { ## if we complete the agenda
+			country_event = nf_HNZ.41 # Completion event
+			add_opinion_modifier = {
+				target = PLS
+				modifier = PLS_support
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = PLS_support
+			}
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+	}
+
+	HNZ_mission_generals_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_4_generals_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_generals_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_containment_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_4_containment_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_containment_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_puppet_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_4_puppet_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_puppet_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_industry_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_4_industry_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_industry_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_hegemony_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_5_hegemony_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_hegemony_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_expansion_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_5_expansion_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_expansion_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_coalition_priority = {
+		days_mission_timeout = 360
+		activation = { has_completed_focus = HNZ_year_5_coalition_priority }
+		is_good = no
+
+		custom_cost_text = HNZ_agenda_requirement
+
+		available = {	## We will complete the agenda if said requirements are met
+			custom_trigger_tooltip = {
+				tooltip = HNZ_mission_coalition_condition
+				### Condition
+			}
+		}
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { has_war = yes }
+
+		timeout_effect = { ## if we fail completing agenda
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
+		}
+
+		complete_effect = { ## if we finish completing agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
 	}
 }

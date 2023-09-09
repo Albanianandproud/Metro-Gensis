@@ -21,6 +21,7 @@ ideas = {
 				max_planning_factor = -0.2
 				consumer_goods_factor = 0.1
 				production_speed_buildings_factor = -0.2
+				research_speed_factor = -0.1
 			}
 		}
 		AVT_army_with_a_state = {
@@ -31,7 +32,6 @@ ideas = {
 				attrition = -0.05
 				planning_speed = 0.2
 				max_planning_factor = 0.1
-				production_speed_buildings_factor = 0.2
 			}
 		}
 		AVT_ammo_reserves = {
@@ -44,22 +44,33 @@ ideas = {
 				production_lack_of_resource_penalty_factor = -0.1
 			}
 		}
-	}
+		AVT_recouperating_efforts = {
+			picture = idea_AVT_ammo_reserves
+			allowed = {}
+			removal_cost = -1
 	
-	country = {
+			on_add = { set_country_flag = disable_reclaimation_mechanic }
+			on_remove = { clr_country_flag = disable_reclaimation_mechanic }
+			
+			modifier = {
+				command_power_gain_mult = -0.1
+				custom_modifier_tooltip = AVT_recouperating
+			}
+		}
+		
 		AVT_gun_siphoned = {
 			picture = generic_production_bonus
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			equipment_bonus = {
 				infantry_equipment = {
 					build_cost_ic = -0.08
@@ -67,20 +78,20 @@ ideas = {
 				}
 			}
 		}
-
+	
 		AVT_gun_siphoned_research = {
 			picture = generic_production_bonus
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			equipment_bonus = {
 				infantry_equipment = {
 					build_cost_ic = -0.05
@@ -88,139 +99,140 @@ ideas = {
 				}
 			}
 		}
-
+	
 		AVT_station_planning = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_buildings_factor = 0.1
 			}
 		}
-
+	
 		AVT_improve_infrastructure = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_infrastructure_factor = 0.1
 				production_speed_bunker_factor = 0.1
 				production_speed_bunker2_factor = 0.1
 			}
 		}
-
+	
 		AVT_economy = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_factory_efficiency_gain_factor = 0.05
 				production_factory_max_efficiency_factor = 0.05
 			}
 		}
-
+	
 		AVT_computer_research = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				research_speed_factor = 0.06
 			}
 		}
-
+	
 		AVT_world_tomorrow = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
-				conscription = 0.05
+				conscription = 0.03
+				compliance_gain = 0.01
 			}
 		}
-
+	
 		AVT_world_today = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
-				weekly_manpower = 2
+				local_non_core_manpower = 0.25
 				mobilization_speed = 0.2
 			}
 		}
-
+	
 		AVT_economy_path_1 = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_factory_efficiency_gain_factor = 0.1
 				production_factory_max_efficiency_factor = 0.05
 			}
 		}
-
+	
 		AVT_economy_path_2 = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_factory_efficiency_gain_factor = 0.05
 				production_factory_max_efficiency_factor = 0.1
 			}
 		}
-
+	
 		AVT_gun_improvement = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			equipment_bonus = {
 				infantry_equipment = {
 					build_cost_ic = -0.1
@@ -228,16 +240,16 @@ ideas = {
 				}
 			}
 		}
-
+	
 		AVT_our_own_technicians = {
 			picture = GFX_idea_cartridges
-
+	
 			allowed = {
 			}
-
+	
 			removal_cost = -1
-
-	        equipment_bonus = {
+	
+			equipment_bonus = {
 				explosive_equipment = {
 					build_cost_ic = -0.05
 					instant = yes
@@ -255,22 +267,22 @@ ideas = {
 					instant = yes
 				}
 			}
-	    }
-
+		}
+	
 		AVT_eco_buff_1 = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_buildings_factor = 0.025
 				industrial_capacity_factory = 0.025
@@ -278,19 +290,19 @@ ideas = {
 			}
 		}
 		AVT_eco_buff_2 = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_buildings_factor = 0.05
 				industrial_capacity_factory = 0.05
@@ -298,19 +310,19 @@ ideas = {
 			}
 		}
 		AVT_eco_buff_3 = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_buildings_factor = 0.075
 				industrial_capacity_factory = 0.075
@@ -318,19 +330,19 @@ ideas = {
 			}
 		}
 		AVT_eco_buff_4 = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_buildings_factor = 0.1
 				industrial_capacity_factory = 0.1
@@ -338,118 +350,117 @@ ideas = {
 			}
 		}
 		AVT_kvass_for_the_people = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				consumer_goods_factor = -0.05
 				stability_factor = 0.1
 			}
 		}
-
+	
 		AVT_combined_force  = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				max_planning_factor = 0.1
 				planning_speed = 0.1
 			}
 		}
-
+	
 		AVT_redline_liason  = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				training_time_factor = -0.2
 				experience_gain_army = 0.05
 			}
 		}
-
-		AVT_equality_in_armed_forces   = {
-
+	
+		AVT_equality_in_armed_forces = {
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
-				conscription = 0.04
-				stability_factor = 0.05
+				conscription_factor = 0.15
 			}
 		}
-
+	
 		AVT_guerilla_schemes = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				attrition = -0.05	
 				out_of_supply_factor = 0.025
 			}
 		}
 		AVT_vengeance = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			targeted_modifier = {
 				tag = RED
 				attack_bonus_against = 0.05
@@ -457,160 +468,176 @@ ideas = {
 			}
 		}
 		revolutionary_oil_stockpiling = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				max_fuel_factor = 0.1
 				army_fuel_consumption_factor = -0.05
 			}
 		}
-
+	
 		AVT_freedom_from_tyranny = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				required_garrison_factor = -0.2
 				compliance_gain = 0.035
 			}
 		}
-
+	
 		AVT_against_tyranny = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				resistance_growth_on_our_occupied_states = 0.3
 				agency_upgrade_time = -0.25
 			}
 		}
-
+	
 		AVT_die_standing = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				max_surrender_limit_offset = 0.1
 				no_supply_grace = 8
 			}
 		}
-
+	
 		AVT_industrial_complex_building  = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_industrial_complex_factor = 0.1
 			}
 		}
-
+	
 		AVT_arms_factory_building  = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				production_speed_arms_factory_factor = 0.1
 			}
 		}
-
+	
 		AVT_fight_against_RCH = {
-
+	
 			picture = equipment
-
+	
 			allowed = {
 				always = no
 			}
-
+	
 			allowed_civil_war = {
 				always = yes
 			}
-
+	
 			removal_cost = 1
-
+	
 			targeted_modifier = {
 				tag = RCH
 				breakthrough_bonus_against = 0.1
 			}
-
+	
 			modifier = {
 				conscription = 0.02
 				land_reinforce_rate = 0.02
-	        }
+			}
 		}
-
+	
 		AVT_socialist_sciences = {
 			picture = generic_production_bonus
-
+	
 			allowed = { always = no }
-
+	
 			allowed_civil_war = { always = yes }
-
+	
 			removal_cost = 1
-
+	
 			modifier = {
 				research_speed_factor = 0.05
 			}
+		}
+
+		AVT_firearm_manufacturing = {
+			picture = generic_production_bonus
+	
+			allowed = {
+				always = no
+			}
+	
+			allowed_civil_war = {
+				always = yes
+			}
+	
+			removal_cost = 1
+	
+			research_bonus = { infantry_tech = 0.2 }
 		}
 	}
 }
