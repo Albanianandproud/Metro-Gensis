@@ -1,3 +1,5 @@
+	## TO DO for Polis update : Completely revamp this mechanic!!!!!
+
 education_practise = {
 
 	### Change Civics to reflect the increase of level of education in the metro
@@ -7,15 +9,12 @@ education_practise = {
 
 	improve_education_normal = {
 
-		allowed = {
-		}
+		allowed = {}
 
 		available = {
 			custom_trigger_tooltip = {
    				tooltip = is_not_bandit_nation
-   				NOT = {
-   					has_country_flag = is_bandit_nation
-   				}
+   				NOT = { has_country_flag = is_bandit_nation }
    			}
    			custom_trigger_tooltip = {
    				tooltip = not_currently_under_education_reforms
@@ -27,9 +26,8 @@ education_practise = {
 		}
 
 		visible = {
-			NOT = {
-				has_country_flag = is_bandit_nation
-			}
+			NOT = { has_country_flag = is_bandit_nation }
+			NOT = { has_idea = civics_education_level_5 }
 		}
 
 		cost = 0
@@ -61,7 +59,76 @@ education_practise = {
 				#// Make cost increase for every education tier we have
 				clamp_variable = {
 					var = education_reform_undertaking
-					min = 300
+					min = 360
+					max = 1800
+				}
+				calculate_education_reform_timer_multiplier = yes
+				set_country_flag = improving_education
+			}
+			activate_mission = improve_education_efforts_mission
+			custom_effect_tooltip = education_efforts_mission_tooltip
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				add = 0.1
+				has_war = yes
+			}
+		}
+	}
+
+	improve_education_normal_advanced = {
+
+		allowed = {}
+
+		available = {
+			custom_trigger_tooltip = {
+   				tooltip = is_not_bandit_nation
+   				NOT = { has_country_flag = is_bandit_nation }
+   			}
+   			custom_trigger_tooltip = {
+   				tooltip = has_civics_education_level_5
+				has_idea = civics_education_level_5
+				has_country_flag = civic_unlock_tier_6
+   			}
+		}
+
+		visible = {
+			NOT = { has_country_flag = is_bandit_nation }
+			has_idea = civics_education_level_5 
+		}
+
+		cost = 0
+
+		days_re_enable = 300
+
+		complete_effect = {
+			hidden_effect = {
+				#set_variable = { education_reform_undertaking = 120 }
+				if = {
+					limit = {
+						num_of_controlled_states < 7
+					}
+					set_variable = {
+						var = education_reform_undertaking
+						value = 20
+					}
+				}
+				else = {
+					set_variable = {
+						var = education_reform_undertaking
+						value = num_controlled_states
+					}
+				}
+				multiply_variable = {
+					var = education_reform_undertaking
+					value = 25
+				}
+				#// Make cost increase for every education tier we have
+				clamp_variable = {
+					var = education_reform_undertaking
+					min = 380
 					max = 1800
 				}
 				calculate_education_reform_timer_multiplier = yes
@@ -129,7 +196,7 @@ education_practise = {
 		days_remove = 20
 
 		modifier = {
-			political_power_gain = -0.1
+			political_power_gain = -0.15
 		}
 		
 		remove_effect = {
@@ -300,7 +367,7 @@ education_practise = {
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
-				days = -50
+				days = -40
 			}
 		}
 

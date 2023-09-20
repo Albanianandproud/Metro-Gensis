@@ -14,10 +14,12 @@ _satellite_against_fascism_decisions = {
 
 		modifier = {
 			production_speed_buildings_factor = -0.1
+			consumer_goods_factor = 0.1
 		}
 
 		remove_effect = {
 			satellite_build_fortifications_next_reich = yes
+			add_war_support = 0.03
 		}
 		ai_will_do = {
 			factor = 1.5
@@ -44,6 +46,40 @@ _satellite_against_fascism_decisions = {
 		}
 	}
 
+	_satellite_against_fascism_factory_overtime = {
+		icon = form_nation
+		available =  {
+			RCH = { exists = yes }
+			NOT = { has_war = yes }
+			has_war_support > 0.3
+		}
+		cost = 50
+		days_remove = 50
+		
+		fire_only_once = yes
+
+		modifier = {
+			stability_weekly = -0.005
+			war_support_weekly = -0.005
+		}
+
+		complete_effect = { 
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+
 	_satellite_against_fascism_preliminary_strike = {
 		icon = form_nation
 		available =  {
@@ -56,6 +92,9 @@ _satellite_against_fascism_decisions = {
 			}
 			has_army_manpower = { size > 175 }
 			has_war_support > 0.4
+		}
+
+		visible = {
 			has_completed_focus = satellite_antifascist_decisions
 		}
 

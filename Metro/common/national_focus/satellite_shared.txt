@@ -1894,6 +1894,37 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = satellite_militarization
+	icon = GFX_bullets_2
+	x = 1
+	y = 1
+	cost = 6.5
+
+	available = {
+		has_war = no
+		RCH = { exists = yes }
+		stability > 0.59
+	}
+
+	prerequisite = { focus = satellite_antifascist_decisions }
+
+	relative_position_id = satellite_antifascist_decisions
+
+	completion_reward = {
+		add_stability = -0.1
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 10
+			producer = RUS
+		}
+		add_timed_idea = { idea = satellite_rapid_production days = 180 }
+	}
+	ai_will_do = {
+		factor = 2
+	}
+}
+
+shared_focus = {
 	id = satellite_counterattacks
 	icon = GFX_generic_stalker_1
 	x = 0
@@ -1906,7 +1937,7 @@ shared_focus = {
 		has_army_manpower = {
 			size > 399
 		}
-		has_war_support > 0.39
+		has_war_support > 0.49
 	}
 
 	prerequisite = { 
@@ -1964,7 +1995,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_our_path
 	icon = GFX_HNZ_committee_centralisation
-	x = 30
+	x = 31
 	y = 0
 	cost = 6.5
 

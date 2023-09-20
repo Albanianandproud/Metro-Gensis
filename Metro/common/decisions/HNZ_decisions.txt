@@ -327,8 +327,8 @@ HNZ_scavenging_decisions = {
 ## The Hansa can chose 1 agenda each year. Agendas are activated missions
 ## In order to complete the mission, Hansa must complete the required conditions under the timer limit
 ## The Agenda requirements will be stuff they normally do through play
-## If the Agenda is fufilled, Hansa gets ???
-## Alongside a national spirit buff or completion reward
+## If the Agenda is fufilled, Hansa gets rewarded
+## Alongside a national spirit buff and strengthening unity
 
 ## gotta do this 17 times for each focus. Lol
 HNZ_agendas = {
@@ -340,12 +340,12 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_defense_condition
-				OR = {
-					bunker > 10
-					bunker2 > 10
-				}
+			OR = {
+				bunker > 10
+				bunker2 > 10
+			}
+			AND = {
+				304 = { infrastructure > 7 }
 			}
 		}
 
@@ -375,9 +375,23 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				#tooltip = HNZ_mission_economic_condition
-				num_of_civilian_factories > 35
+			num_of_civilian_factories > 35
+			AND = {
+				has_resources_in_country = {
+					resource = scrap
+					amount > 24
+					extracted = yes
+				}
+				has_resources_in_country = {
+					resource = alloys
+					amount > 15
+					extracted = yes
+				}
+				has_resources_in_country = {
+					resource = components
+					amount > 15
+					extracted = yes
+				}
 			}
 		}
 
@@ -468,6 +482,7 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			add_ideas = HNZ_military_priority_completion_reward
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -538,6 +553,7 @@ HNZ_agendas = {
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
 			custom_effect_tooltip = HNZ_gain_political_control
+			add_ideas = HNZ_reclaimation_reward
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
 	}
@@ -567,6 +583,7 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			add_ideas = HNZ_research_reward
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -604,6 +621,7 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			add_ideas = HNZ_draisine_reward
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -658,8 +676,6 @@ HNZ_agendas = {
 
 		available = {	## We will complete the agenda if said requirements are met
 			custom_trigger_tooltip = {
-				### Since we're required to spend 1 year meeting this criteria
-				## we'll need to move this to another bracket.
 				tooltip = HNZ_mission_polis_condition
 				NOT = {
 					has_war_with = PLS
@@ -687,7 +703,11 @@ HNZ_agendas = {
 				target = HNZ
 				modifier = PLS_support
 			}
-			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+			custom_effect_tooltip = civic_unlock_tier_6
+			hidden_effect = { 
+				add_to_variable = { var = HNZ_political_authority value = 1 } 
+				set_country_flag = civic_unlock_tier_6
+			}
 		}
 
 		complete_effect = { ## if we finish completing agenda
@@ -704,9 +724,17 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_generals_condition
-				### Condition
+			#amount_taken_ideas = {
+			#	amount > 0
+			#	character_slot = { army_chief }
+			#}
+			#
+			#amount_taken_ideas = {
+			#	amount > 2
+			#	character_slot = { high_command }
+			#}
+			NOT = {
+				has_idea = HNZ_poor_high_command
 			}
 		}
 
@@ -722,6 +750,7 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			add_ideas = HNZ_generals_reward_idea
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -735,26 +764,43 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_containment_condition
-				### Condition
+			OR = {
+				RED = {
+					NOT = {
+						any_controlled_state = {
+							region = 3
+						}
+					}
+				}
+				RCH = {
+					NOT = {
+						any_controlled_state = {
+							region = 3
+						}
+					}
+				}
 			}
 		}
 
 		selectable_mission = no
 		fire_only_once = yes
+		is_good = yes
 
-		cancel_trigger = { has_war = yes }
+		cancel_trigger = { 
+			has_offensive_war = yes
+			has_added_tension_amount > 1
+		}
 
-		timeout_effect = { ## if we fail completing agenda
-			custom_effect_tooltip = HNZ_agenda_failure
-			country_event = nf_HNZ.42 # Failure Event
+		timeout_effect = { ## if we complete the agenda
+			country_event = nf_HNZ.41 # Completion event
+			custom_effect_tooltip = HNZ_gain_political_control
+			add_ideas = HNZ_containment_protocols
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
 
 		complete_effect = { ## if we finish completing agenda
-			country_event = nf_HNZ.41 # Completion event
-			custom_effect_tooltip = HNZ_gain_political_control
-			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+			custom_effect_tooltip = HNZ_agenda_failure
+			country_event = nf_HNZ.42 # Failure Event
 		}
 	}
 
@@ -766,10 +812,7 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_puppet_condition
-				### Condition
-			}
+			num_subjects > 1
 		}
 
 		selectable_mission = no
@@ -784,6 +827,23 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			every_neighbor_country = { 
+				limit = {
+					NOT = {
+						has_idea = civics_border_4
+						OR = {
+							original_tag = RED
+							original_tag = HNZ
+							has_country_flag = is_savage_nation
+							has_country_flag = is_bandit_nation
+						}
+					}
+				}
+				add_timed_idea = {
+					idea = HNZ_subversion_efforts
+					days = 460
+				}
+			}
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -797,10 +857,7 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_industry_condition
-				### Condition
-			}
+			num_of_factories > 99
 		}
 
 		selectable_mission = no
@@ -815,6 +872,10 @@ HNZ_agendas = {
 
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
+			set_technology = {
+				tech_technician_machining = 1
+				tech_technician_toolkit = 1
+			}
 			custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
@@ -828,10 +889,7 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_hegemony_condition
-				### Condition
-			}
+			num_faction_members > 2
 		}
 
 		selectable_mission = no
@@ -859,9 +917,15 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			custom_trigger_tooltip = {
-				tooltip = HNZ_mission_expansion_condition
-				### Condition
+			OR = {
+				419 = { is_owned_by = ROOT }
+				297 = { is_owned_by = ROOT }
+				284 = { is_owned_by = ROOT }
+				340 = { is_owned_by = ROOT }
+				251 = { is_owned_by = ROOT }
+				410 = { is_owned_by = ROOT }
+				400 = { is_owned_by = ROOT }
+				242 = { is_owned_by = ROOT }
 			}
 		}
 

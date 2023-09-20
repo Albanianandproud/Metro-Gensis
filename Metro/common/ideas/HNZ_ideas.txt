@@ -1,21 +1,5 @@
 ideas = {
 	country = {	
-		hanseatic_league = {
-			picture = GFX_idea_hanseatic_league
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				min_export = 0.05
-                local_resources_factor = 0.05
-                production_speed_buildings_factor = 0.05
-			    lend_lease_tension = -0.05
-	        }	
-	    }
-
 	    ### Beginning Starting Laws ###
 
 	    HNZ_poor_high_command = {
@@ -26,10 +10,13 @@ ideas = {
 
 		    removal_cost = -1
 
-		    modifier = {
+			on_add = { set_country_flag = HNZ_enable_corruption_military }
+			on_remove = { clr_country_flag = HNZ_enable_corruption_military }
+
+		    modifier = { 
                 land_doctrine_cost_factor = 0.2	
-				planning_speed = -0.1
-                army_leader_cost_factor = 0.5
+				max_command_power_mult = -0.2
+				experience_gain_factor = -0.2
 	        }	
 	    }
 	    HNZ_exhausted_economy = {
@@ -42,7 +29,7 @@ ideas = {
 
 		    modifier = {		    		
 				industrial_capacity_factory = -0.05
-                line_change_production_efficiency_factor = -0.25
+                line_change_production_efficiency_factor = -0.1
 	        }
 	        research_bonus = { industry = -0.25 }	
 	    }
@@ -251,9 +238,13 @@ ideas = {
 
 		    equipment_bonus = {
 				rail_cart_equipment = {
-					build_cost_ic = -0.04
-					hardness = 0.1
-					reliability = 0.02
+					build_cost_ic = -0.035
+					hardness = 0.15
+					instant = yes
+				}
+				rail_car_equipment = {
+					build_cost_ic = -0.035
+					hardness = 0.15
 					instant = yes
 				}
 			}	
@@ -961,7 +952,7 @@ ideas = {
                 local_resources_factor = 0.1
 	        }	
 	    }
-	    HNZ_subversion = {
+		HNZ_subversion = {
 		    picture = GFX_idea_watchers
 
 		    allowed = {
@@ -970,9 +961,32 @@ ideas = {
 		    removal_cost = -1
 
 		    modifier = {
-                oligarch_drift = 0.01
-                oligarch_acceptance = 15
-	        }	
+                oligarch_drift = 0.03
+				political_power_factor = -0.1
+	        }
+			targeted_modifier = {
+				tag = HNZ
+				attack_bonus_against = -0.1
+				defense_bonus_against = -0.1
+			}	
+	    }
+	    HNZ_subversion_efforts = {
+		    picture = GFX_idea_watchers
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+                oligarch_drift = 0.02
+				political_power_factor = -0.1
+	        }
+			targeted_modifier = {
+				tag = HNZ
+				attack_bonus_against = -0.1
+				defense_bonus_against = -0.1
+			}	
 	    }
 	    HNZ_subversive_activities = {
 		    picture = GFX_idea_watchers
@@ -1037,5 +1051,139 @@ ideas = {
 				attack_bonus_against = 0.1
 			}
 		}
+
+		HNZ_equipment_reliability = {
+			picture = GFX_idea_armaments
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				special_forces_equipment = {
+					#build_cost_ic = -0.05
+					hardness = 0.1
+					reliability = 0.03
+					instant = yes
+				}
+			}
+	    }
+
+		HNZ_railcar_baumansky_deal = {
+		    picture = GFX_idea_trainline
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+			
+			research_bonus = { armor = 0.1 }	
+
+		    equipment_bonus = {
+				rail_car_equipment = {
+					max_strength = 0.1
+					reliability = 0.02
+					instant = yes
+				}
+				rail_cart_equipment = {
+					max_strength = 0.1
+					reliability = 0.02
+					instant = yes
+				}
+				rail_panzer_equipment = {
+					max_strength = 0.1
+					reliability = 0.02
+					instant = yes
+				}
+			}	
+	    }
+
+		HNZ_military_priority_completion_reward = {
+		    picture = GFX_idea_watchers
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+                command_power_gain = 0.02
+				mobilization_speed = 0.1
+	        }	
+	    }
+
+		HNZ_reclaimation_reward = {
+			picture = GFX_idea_gasmask3
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+                country_resource_chemicals = 16
+	        }	
+	    }
+
+		HNZ_research_reward = {
+		    picture = GFX_idea_fixers
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+                research_speed_factor = 0.06
+	        }
+	    }
+
+		HNZ_draisine_reward = {
+			picture = GFX_idea_armaments
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			research_bonus = { armor = 0.1 }
+	    }
+
+		HNZ_generals_reward_idea = {
+		    picture = GFX_idea_fixers
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    modifier = {
+                army_leader_start_level = 1 
+				army_leader_cost_factor = -0.2 
+	        }
+	    }
+
+		HNZ_containment_protocols = {
+		    picture = GFX_idea_fixers
+
+		    allowed = {
+		    }
+
+		    removal_cost = -1
+
+		    targeted_modifier = {
+				tag = RCH
+				generate_wargoal_tension_against = -0.3
+			}
+			targeted_modifier = {
+				tag = RED
+				generate_wargoal_tension_against = -0.3
+			}
+			targeted_modifier = {
+				tag = GWC
+				generate_wargoal_tension_against = -0.3
+			}
+	    }
 	}
 }
