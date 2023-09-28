@@ -272,13 +272,14 @@ ideas = {
 
 			available = {
 				NOT = {
-					has_government = dictatorial
-				}
-			}
-
-			available = {
-				NOT = {
-					original_tag = MSU
+					OR = {
+						has_idea = civics_border_4
+						has_government = dictatorial
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						original_tag = MSU
+						original_tag = GWC
+					}
 				}
 			}
 						
@@ -287,9 +288,10 @@ ideas = {
 			
 			modifier = {
 				min_export = 0.75
-				production_speed_buildings_factor = 0.125
-				consumer_goods_factor = -0.025
-				research_speed_factor = 0.125
+				trade_opinion_factor = 0.2
+				production_speed_buildings_factor = 0.1
+				consumer_goods_factor = -0.05
+				research_speed_factor = 0.1
 				civilian_intel_to_others = 40.0
 			}
 			
@@ -304,13 +306,14 @@ ideas = {
 			
 			available = {
 				NOT = {
-					has_government = dictatorial
-				}
-			}
-
-			available = {
-				NOT = {
-					original_tag = MSU
+					OR = {
+						has_idea = civics_border_4
+						has_government = dictatorial
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						original_tag = MSU
+						original_tag = GWC
+					}
 				}
 			}
 			
@@ -318,9 +321,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				min_export = 0.4
+				min_export = 0.5
+				trade_opinion_factor = 0.1
 				production_speed_buildings_factor = 0.05
-				consumer_goods_factor = -0.01
 				research_speed_factor = 0.05
 				civilian_intel_to_others = 20.0
 			}
@@ -371,7 +374,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				min_export = 0.2
+				monthly_population = -0.05
+				min_export = 0.25
 				production_speed_buildings_factor = 0.025
 				research_speed_factor = 0.025
 				civilian_intel_to_others = 5.0
@@ -427,7 +431,9 @@ ideas = {
 			
 			
 			modifier = {
+				monthly_population = -0.1
 				min_export = 0
+				research_speed_factor = -0.025
 			}
 			
 			on_add = {
@@ -441,22 +447,15 @@ ideas = {
 
    				modifier = {
 					factor = 0
-					
 					is_major = no
 					is_in_faction = yes
 					has_war = yes
 				}
 
-				# minors not at war should want to get the bonuses from free trade
 				modifier = {
 					factor = 0
-					
 					is_major = no
 					has_war = no
-				}
-				
-				modifier = {
-					factor = 3	
 				}
    			}
 		}

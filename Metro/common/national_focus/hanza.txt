@@ -706,6 +706,10 @@ focus_tree = {
 		available = { has_completed_focus = HNZ_new_quater }
 
 		completion_reward = {
+			## Event where set border status to passport only
+			## Event which makes all neighbours HAVE to set to passport
+			country_event = nf_HNZ.52
+			custom_effect_tooltip = HNZ_passport_projection
 		}
 
 		ai_will_do = {
@@ -714,17 +718,23 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_reich_redline_stance
+		id = HNZ_reich_stance
 		icon = GFX_RCH_generic
 		prerequisite = {
 			focus = HNZ_external_sphere
 		}
+		available = {
+			NOT = { has_war_with = RCH }
+			RCH = { exists = yes }
+		}
 		x = -3
 		y = 1
 		relative_position_id = HNZ_external_sphere
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			country_event = nf_HNZ.59
+			custom_effect_tooltip = HNZ_reich_relation_decisions
 		}
 
 		ai_will_do = {
@@ -738,12 +748,18 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_external_sphere
 		}
+		available = {
+			NOT = { has_war_with = RED }
+			RED = { exists = yes }
+		}
 		x = 4
 		y = 1
 		relative_position_id = HNZ_external_sphere
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			country_event = nf_HNZ.60
+			custom_effect_tooltip = HNZ_reich_relation_decisions
 		}
 
 		ai_will_do = {
@@ -757,12 +773,31 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_external_sphere
 		}
+		available = {
+			NOT = { has_war_with = ARB }
+		}
+		bypass = {
+			ARB = { exists = no }
+		}
 		x = -1
 		y = 1
 		relative_position_id = HNZ_external_sphere
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = ARB
+				modifier = ARB_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = ARB_assistance
+			}
+			diplomatic_relation = {
+				country = HNZ
+				relation = non_aggression_pact
+				active = yes
+			}
 		}
 
 		ai_will_do = {
@@ -776,12 +811,31 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_external_sphere
 		}
+		available = {
+			NOT = { has_war_with = PLS }
+		}
+		bypass = {
+			PLS = { exists = no }
+		}
 		x = 2
 		y = 1
 		relative_position_id = HNZ_external_sphere
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = PLS
+				modifier = PLS_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = PLS_assistance
+			}
+			diplomatic_relation = {
+				country = PLS
+				relation = guarantee
+				active = yes
+			}
 		}
 
 		ai_will_do = {
@@ -795,14 +849,27 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_reaffirm_polis_state
 		}
+		available = {
+			NOT = { has_war_with = VDN }
+		}
+		bypass = {
+			VDN = { exists = no }
+		}
 		x = 2
 		y = 1
 		relative_position_id = HNZ_reaffirm_polis_state
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = VDN
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = VDN
+				modifier = VDN_trade
+			}
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
@@ -817,9 +884,18 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reaffirm_polis_state
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			SPT = { add_manpower = 10 }
+			add_opinion_modifier = {
+				target = SPT
+				modifier = SPT_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = SPT_assistance
+			}
 		}
 
 		ai_will_do = {
@@ -829,7 +905,7 @@ focus_tree = {
 
 	focus = {
 		id = HNZ_external_sphere_5
-		icon = GFX_HNZ
+		icon = GFX_settle_minorities
 		prerequisite = {
 			focus = HNZ_old_comrades
 		}
@@ -848,6 +924,8 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+			ARB = { country_event = nf_HNZ.57 }
+			custom_effect_tooltip = ARB_intergrate_economies
 		}
 
 		ai_will_do = {
@@ -867,9 +945,18 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_old_comrades
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			add_political_power = 25
+			add_command_power = 20
+			ARB = {
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 20
+					producer = RUS
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -890,6 +977,8 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+			SPT = { country_event = nf_HNZ.58 }
+			custom_effect_tooltip = HNZ_spartan_military_tie
 		}
 
 		ai_will_do = {
@@ -899,9 +988,23 @@ focus_tree = {
 
 	focus = {
 		id = HNZ_external_sphere_8
-		icon = GFX_HNZ
+		icon = GFX_ARV_emplacement_3
 		prerequisite = {
 			focus = HNZ_external_sphere_5
+		}
+		available = {
+			ARB = { 
+				exists = yes
+				has_country_leader = {
+					character = ARB_tvaltvadze
+					ruling_only = yes
+				}
+				has_opinion = {
+					target = HNZ
+					value > 49
+				}
+			}
+			NOT = { has_war_with = ARB }
 		}
 		x = 0
 		y = 1
@@ -909,6 +1012,25 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+			add_to_faction = ARB
+			ARB = {
+				capital_scope = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -925,9 +1047,27 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_external_sphere_6
-		cost = 5
+		cost = 2.8
 
 		completion_reward = {
+			## Recruit advisor for Arbat or smth
+			ARB = {
+				generate_character = {
+					token_base = economic_chief_liason
+					name = liason_chief
+					advisor = {
+						slot = political_advisor
+						cost = 100
+						idea_token = ARB_liason_chief
+						traits = {
+							ARB_liason_chief
+						}
+						allowed = {
+							HNZ = { exists = yes }
+						}
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -937,16 +1077,32 @@ focus_tree = {
 
 	focus = {
 		id = HNZ_old_comrades0
-		icon = GFX_HNZ
+		icon = GFX_generic_support_sevastopol
 		prerequisite = {
 			focus = HNZ_support_the_vdnk_commonwealth
 		}
+		bypass = { SEV = { exists = no } }
 		x = 0
 		y = 1
 		relative_position_id = HNZ_support_the_vdnk_commonwealth
 		cost = 5
 
 		completion_reward = {
+			SEV = {
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 20
+					producer = RUS
+				}
+			}
+			add_opinion_modifier = {
+				target = SPT
+				modifier = SEV_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = SEV_assistance
+			}
 		}
 
 		ai_will_do = {
@@ -956,10 +1112,17 @@ focus_tree = {
 
 	focus = {
 		id = HNZ_old_comrades1
-		icon = GFX_HNZ
+		icon = GFX_HNZ_arbat_deal_peace
 		prerequisite = {
 			focus = HNZ_external_sphere_9
 			focus = HNZ_external_sphere_8
+		}
+		available = {
+			date > 2033.1.1
+			OR = {
+				ARB = { has_idea = bump_in_the_night }
+				GWC = { exists = yes }
+			}
 		}
 		x = 1
 		y = 1
@@ -967,6 +1130,39 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+			if = {
+				limit = {
+					ARB = { is_ai = yes}
+				}
+				puppet = ARB
+				add_named_threat = {
+					threat = 4
+					name = HNZ_puppet_ARB
+				}
+			}
+			else_if = {
+				limit = {
+					ARB = { is_ai = no }
+				}
+				ARB = {
+					capital_scope = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1019,6 +1215,7 @@ focus_tree = {
  				expire = 0
  				generator = { 28 }
  			}
+			TRT = { country_event = nf_HNZ.62 }
 		}
 
 		ai_will_do = {
@@ -1046,11 +1243,36 @@ focus_tree = {
 	}
 
 	focus = {
+		id = HNZ_old_comrades3
+		icon = GFX_HNZ
+		prerequisite = {
+			focus = HNZ_external_sphere
+		}
+		x = 1
+		y = 4
+		relative_position_id = HNZ_external_sphere
+		cost = 5
+
+		completion_reward = {
+			## every satellite nation with HNZ idea get shifted towards
+			### HNZ sphere of influence
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
 		id = HNZ_old_comrades2
 		icon = GFX_HNZ
 		prerequisite = {
 			focus = HNZ_external_sphere_7
 			focus = HNZ_old_comrades0
+		}
+		bypass = {
+			RIZ = { exists = no is_puppet_of = VDN }
+			ALK = { exists = no is_puppet_of = VDN }
 		}
 		x = -1
 		y = 1
@@ -1058,6 +1280,10 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+			## Give RIZ, and the other tag a hanseatic encroachment national spirit
+			RIZ = { add_timed_idea = { idea = HNZ_enroachment days = 400 } }
+			ALK = { add_timed_idea = { idea = HNZ_enroachment days = 400 } }
+			VDN = { country_event = nf_HNZ.61 }
 		}
 
 		ai_will_do = {
@@ -1071,6 +1297,7 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_old_comrades2
 		}
+		available = { SAT = { exists = yes } }
 		x = 1
 		y = 1
 		relative_position_id = HNZ_old_comrades2
@@ -1078,6 +1305,26 @@ focus_tree = {
 
 		completion_reward = {
 			SAT = { country_event = nf_HNZ.29 }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = HNZ_scaven_wth
+		icon = GFX_HNZ
+		prerequisite = {
+			focus = HNZ_satanists_trade
+		}
+		available = { SCA = { exists = yes } }
+		x = 0
+		y = 2
+		relative_position_id = HNZ_satanists_trade
+		cost = 5
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -1375,7 +1622,7 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_reclaimation_train_technicians
 		}
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = HNZ_reclaimation_train_technicians
 		cost = 2.2
@@ -1452,7 +1699,7 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_reclaimation_organise_workforce
 		}
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = HNZ_reclaimation_organise_workforce
 		cost = 2.2
@@ -4115,7 +4362,7 @@ focus_tree = {
 			has_completed_focus = HNZ_new_quater
 		}
 
-		x = 28
+		x = 27
 		y = 0
 		relative_position_id = HNZ_new_quater
 		cost = 4.3
@@ -4460,7 +4707,7 @@ focus_tree = {
 			has_completed_focus = HNZ_lessons_from_conflict
 		}
 
-		x = 40
+		x = 38
 		y = 0
 		relative_position_id = HNZ_new_quater
 		cost = 4.3

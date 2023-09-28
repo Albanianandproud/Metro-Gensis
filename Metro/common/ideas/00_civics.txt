@@ -17,7 +17,7 @@ ideas = {
 		
 			modifier = {
 				stability_weekly = 0.001
-				stability_factor = 0.06
+				stability_factor = 0.05
 				party_popularity_stability_factor = 0.1
 				production_factory_efficiency_gain_factor = -0.1 
 				industrial_capacity_factory = -0.1
@@ -43,10 +43,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				stability_factor = 0.04
-				party_popularity_stability_factor = 0.06
-				production_factory_efficiency_gain_factor = -0.06
-				industrial_capacity_factory = -0.04
+				stability_factor = 0.025
+				party_popularity_stability_factor = 0.05
+				production_factory_efficiency_gain_factor = -0.05
+				industrial_capacity_factory = -0.03
 			}
 
 			cancel_if_invalid = no
@@ -59,9 +59,7 @@ ideas = {
 		civics_work_ethics_3 = { #Everybody Works
 			
 			available = {
-				NOT = {
-					tag = PLS
-				}
+				NOT = { tag = PLS }
 			}
 
 			cost = 50
@@ -84,9 +82,7 @@ ideas = {
 		civics_work_ethics_4 = { #Sweatshop Labour
 			
 			available = {
-				NOT = {
-					has_government = community
-				}
+				NOT = { has_government = community }
 				OR = {
 					has_government = dictatorial
 					has_government = oligarch
@@ -99,12 +95,12 @@ ideas = {
 			removal_cost = -1
 		
 			modifier = {
-				conscription_factor = -0.06
-				party_popularity_stability_factor = -0.06
-				stability_factor = -0.02
-				production_factory_max_efficiency_factor = 0.04
-				production_factory_efficiency_gain_factor = 0.04
-				production_factory_start_efficiency_factor = 0.02
+				conscription_factor = -0.05
+				party_popularity_stability_factor = -0.05
+				stability_factor = -0.05
+				production_factory_max_efficiency_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_start_efficiency_factor = 0.05
 			}
 
 			cancel_if_invalid = no
@@ -117,9 +113,7 @@ ideas = {
 		civics_work_ethics_5 = { #Slavery
 			
 			available = {
-				NOT = {
-					has_government = community
-				}
+				NOT = { has_government = community }
 				OR = {
 					has_government = dictatorial
 					has_country_flag = is_bandit_nation
@@ -136,7 +130,7 @@ ideas = {
 				stability_factor = -0.08
 				production_factory_max_efficiency_factor = 0.08
 				production_factory_efficiency_gain_factor = 0.08
-				production_factory_start_efficiency_factor = 0.04
+				production_factory_start_efficiency_factor = 0.08
 			}
 
 			cancel_if_invalid = no
@@ -517,6 +511,7 @@ ideas = {
 					OR = {
 						has_government = dictatorial
 						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
 					} 
 				}
 			}
@@ -525,20 +520,24 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				civilian_intel_to_others = 20
+				monthly_population = 0.2
+				conscription_factor = 0.1
+				drift_defence_factor = -0.2
+				civilian_intel_to_others = 0.5
+				army_intel_to_others = 0.5
 				enemy_operative_detection_chance = -15
 				intelligence_agency_defense = -0.15
 				foreign_subversive_activites = 0.15
 				## Eco benefits ##
 				consumer_goods_factor = -0.05
-				trade_opinion_factor = 1.25
+				trade_opinion_factor = 0.3
 				local_resources_factor = 0.15
 			}
 
 			cancel_if_invalid = no
 
 			ai_will_do = {
-   				factor = 2
+   				factor = 0.1
    			}
    		}
 
@@ -559,14 +558,16 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				civilian_intel_to_others = 10
-				enemy_operative_detection_chance = -5
-				intelligence_agency_defense = -0.05
-				foreign_subversive_activites = 0.05
+				monthly_population = 0.05
+				conscription_factor = 0.05
+				drift_defence_factor = -0.05
+				civilian_intel_to_others = 0.15
+				army_intel_to_others = 0.15
+				foreign_subversive_activites = 0.15
 				## Eco benefits ##
 				consumer_goods_factor = -0.025
-				trade_opinion_factor = 0.5
-				local_resources_factor = 0.1
+				trade_opinion_factor = 0.1
+				local_resources_factor = 0.05
 			}
 
 			default = yes
@@ -585,7 +586,6 @@ ideas = {
 					tag = RCH
 					tag = GWC
 					OR = {
-						has_government = dictatorial
 						has_country_flag = is_savage_nation
 					} 
 				}
@@ -595,13 +595,14 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				civilian_intel_to_others = -5
-				enemy_operative_detection_chance = 5
+				enemy_operative_detection_chance = 0.1
 				intelligence_agency_defense = 0.05
-				foreign_subversive_activites = -0.05
-				encryption = 0.05
+				drift_defence_factor = 0.05
+				civilian_intel_to_others = -0.1
+				army_intel_to_others = -0.1
+				foreign_subversive_activites = -0.1
 				## Eco benefits ##
-				trade_opinion_factor = 0.25
+				trade_opinion_factor = 0.05
 				local_resources_factor = 0.05
 			}
 
@@ -619,14 +620,16 @@ ideas = {
 				tag = MSU
 				NOT = {
 					tag = HNZ
-					has_idea = closed_economy
+					has_idea = export_focus
+					has_idea = free_trade
+					has_idea = limited_exports
 				}
 			}
 
 			allowed_to_remove = {
 				NOT = {
 					has_country_flag = is_savage_nation
-					has_country_flag = is_scientist_nation
+					tag = MSU
 				}
 			}
 
@@ -635,7 +638,7 @@ ideas = {
 		
 			modifier = {
 				civilian_intel_to_others = -2
-				enemy_operative_detection_chance = 2
+				enemy_operative_detection_chance = 0.2
 				intelligence_agency_defense = 0.2
 				foreign_subversive_activites = -0.2
 				encryption = 0.2
@@ -750,20 +753,16 @@ ideas = {
 			}
 
 			visible = {
-            	NOT = {
-            		has_country_flag = is_savage_nation
-            	}
+            	NOT = { has_country_flag = is_savage_nation }
             }
 
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 
 			removal_cost = -1
 
 			modifier = {
-		 		research_speed_factor = -0.12
-				land_doctrine_cost_factor = 0.08
+		 		research_speed_factor = -0.125
+				land_doctrine_cost_factor = 0.1
 			}
 
 			cancel_if_invalid = no
@@ -778,21 +777,15 @@ ideas = {
 				}
 			}
 
-			visible = {
-            	NOT = {
-            		has_country_flag = is_savage_nation
-            	}
-            }
+			visible = { NOT = { has_country_flag = is_savage_nation } }
 
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 
 			removal_cost = -1
 
 			modifier = {
-				research_speed_factor = -0.06
-			    land_doctrine_cost_factor = 0.04
+				research_speed_factor = -0.065
+			    land_doctrine_cost_factor = 0.05
 		    }
 
 			cancel_if_invalid = no
@@ -807,11 +800,7 @@ ideas = {
 				}
 			}
 
-			visible = {
-            	NOT = {
-            		has_country_flag = is_savage_nation
-            	}
-            }
+			visible = { NOT = { has_country_flag = is_savage_nation } }
 
 			removal_cost = -1
 
@@ -819,6 +808,7 @@ ideas = {
 				political_power_factor = -0.02
 				research_speed_factor = 0.05
 		    }
+
 			cancel_if_invalid = no
 		}
 
@@ -850,10 +840,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				political_power_factor = -0.06
+				political_power_factor = -0.05
 				research_speed_factor = 0.1
 				land_doctrine_cost_factor = -0.025
-				theorist_cost_factor = -0.04
+				theorist_cost_factor = -0.05
 			}
 			cancel_if_invalid = no
 		}
@@ -880,10 +870,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				political_power_factor = -0.09
+				political_power_factor = -0.08
 				research_speed_factor = 0.15
 				land_doctrine_cost_factor = -0.05
-				theorist_cost_factor = -0.07
+				theorist_cost_factor = -0.08
 			}
 			cancel_if_invalid = no
 		}
@@ -902,12 +892,9 @@ ideas = {
    					tooltip = can_advance_education
    					has_country_flag = can_do_advanced_education
    				}
-            	NOT = {
-            		has_country_flag = is_savage_nation
-            	}
+            	NOT = { has_country_flag = is_savage_nation }
 				OR = {
-					tag = PLS
-					tag = MSU
+					has_country_flag = is_scientist_nation
 				}
             }
 

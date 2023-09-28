@@ -1,3 +1,36 @@
+HNZ_passport_enforcement = {
+	HNZ_enforce_passports = {
+		icon = eng_propaganda_campaigns
+
+		available = {
+			FROM = { NOT = { has_idea = civics_border_3 } }
+		}
+	
+		cost = 5
+	
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = { 
+				NOT = { has_idea = civics_border_3 
+					OR = { 
+						original_tag = RUI 
+					} 
+					has_country_flag = is_bandit_nation
+					has_country_flag = is_mutant_nation 
+				}
+				AND = { is_neighbor_of = HNZ } 
+			}
+		}
+	
+		complete_effect = {
+			FROM = {
+				country_event = nf_HNZ.54
+			}
+		}
+	}
+}
+
 HNZ_production_shift = {
 	HNZ_increase_industrial_shift = {
 
@@ -78,8 +111,8 @@ HNZ_production_shift = {
 		days_re_enable = 200
 
 		modifier = {
-           production_factory_efficiency_gain_factor = -0.075
-		   production_speed_buildings_factor = 0.075
+           production_factory_efficiency_gain_factor = -0.1
+		   production_speed_buildings_factor = 0.1
         }
 	}
 
