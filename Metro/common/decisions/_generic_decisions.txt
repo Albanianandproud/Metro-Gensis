@@ -266,36 +266,30 @@ flamethrower_restriction_treaty = {
 }
 
 sancity_of_life = {
-
 	allow_creation_faction = {
-
 		icon = form_nation
 
 		visible = {
 			is_ai = no
-			not = {
-			    tag = RCH
+			is_in_faction = no
+			not = { 
+				tag = RCH 
+				tag = HNZ
+				tag = GWC
 			}
 		}
 		available = {
 			is_ai = no
-			not = {
-			    tag = RCH
-			}
 		}
 		available = {
 			is_in_faction = no
-			AND = {
-    			num_of_military_factories > 19
-			}
+			AND = { num_of_military_factories > 19 }
 		}
 
 		cost = 100
 		fire_only_once = yes
 		
-		ai_will_do = {
-			factor = 0
-		}
+		ai_will_do = { factor = 0 }
 		complete_effect = {
 			set_rule = { can_create_factions = yes }
 		}
@@ -304,18 +298,16 @@ sancity_of_life = {
 	ration_food = {
 
 		icon = hol_war_on_pacifism
+		
+		visible = { has_tech = tech_farming_1 }
 
-		available = {
-			has_stability < 0.49
-			has_tech = tech_farming_1
-		}
+		available = { has_stability < 0.69 }
 
 		fire_only_once = no
 
 		modifier = {
 			stability_weekly = 0.005
-			consumer_goods_factor = 0.1
-			political_power_gain = -0.15
+			production_factory_max_efficiency_factor = -0.1 
 		}
 
 		days_remove = 64
@@ -326,8 +318,12 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 10
-				has_stability < 0.44
+				add = 2
+				has_stability < 0.59
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.49
 			}
 		}
 	}
@@ -337,31 +333,31 @@ sancity_of_life = {
 		icon = generic_research
 
 		available = {
-			has_stability < 0.49
-			has_tech = tech_hygiene_basic_hygiene 
+			has_stability < 0.69
 		}
+
+		visible = { has_tech = tech_hygiene_basic_hygiene }
 
 		fire_only_once = no
 
 		modifier = {
-		    political_power_gain = -0.15
-			research_speed_factor = -0.15
+			research_speed_factor = -0.1
 			stability_weekly = 0.005
 		}
 
-		days_remove = 84
-		days_re_enable = 168
+		days_remove = 64
+		days_re_enable = 128
 
 		cost = 50
-
-		complete_effect = {
-
-		}
 
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 10
+				add = 2
+				has_stability < 0.59
+			}
+			modifier = {
+				add = 5
 				has_stability < 0.49
 			}
 		}
@@ -381,14 +377,16 @@ sancity_of_life = {
 			has_tech = tech_construction_wood
 		}	
 
+		visible = { has_tech = tech_construction_wood }
+
 		fire_only_once = no
 
 		modifier = {
 		    production_speed_buildings_factor = -0.1
 		}
 
-		days_remove = 45
-		days_re_enable = 90
+		days_remove = 64
+		days_re_enable = 128
 
 		cost = 50
 
@@ -418,21 +416,17 @@ sancity_of_life = {
 		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_government = community
-			has_stability < 0.60
-			has_war_support < 0.60
+			has_stability < 0.79
+			has_war_support < 0.79
 		}
 
-		visible = {
-			always = yes
-		}
+		visible = { has_government = community }
 
 		fire_only_once = no
 
 		modifier = {
-			stability_weekly = 0.0075
-		    war_support_weekly = 0.0075
-		    consumer_goods_factor = 0.1
+			stability_weekly = 0.005
+		    war_support_weekly = 0.005
 		    industrial_capacity_factory = -0.1
 		}
 
@@ -441,14 +435,17 @@ sancity_of_life = {
 
 		cost = 50
 
-		complete_effect = {
-		}
-
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 5
+				add = 2
+				has_stability < 0.59
 				has_war_support < 0.59
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.49
+				has_war_support < 0.49
 			}
 		}
 	}
@@ -458,11 +455,11 @@ sancity_of_life = {
 		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_war_support > 0.59
+			has_war_support > 0.69
 		}
 
 		visible = {
-			has_war_support > 0.59
+			has_war_support > 0.69
 		}
 
 		fire_only_once = no
@@ -477,14 +474,10 @@ sancity_of_life = {
 
 		cost = 50
 
-		complete_effect = {
-
-		}
-
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 5
+				add = 2
 				has_war_support < 0.59
 			}
 		}
@@ -498,18 +491,14 @@ sancity_of_life = {
 			has_war_support < 0.59
 		}
 
-		visible = {
-			has_war_support < 0.59
-		}
-
 		fire_only_once = no
 
 		modifier = {
 		    war_support_weekly = 0.005
 		}
 
-		days_remove = 70
-		days_re_enable = 140
+		days_remove = 72
+		days_re_enable = 144
 
 		cost = 50
 
@@ -535,45 +524,41 @@ warfare_drastic_measures = {
         	icon = ger_military_buildup
 
         	available = {
-		    	any_state = { 
-		    		state_population > 49
-		    	}
-		    	has_war_support > 0.24
-				has_stability > 0.24
+		    	any_state = {  state_population > 34 }
+		    	has_war_support > 0.19
+				has_stability > 0.19
 			}
 
-			days_remove = 21
+			days_remove = 14
 			days_re_enable = 42
 			
-			custom_cost_text = command_power_20
-			custom_cost_trigger = {
-				command_power > 19.9
-			}
+			custom_cost_text = command_power_10
+			custom_cost_trigger = { command_power > 9.9 }
 
 			modifier = {
                stability_weekly = -0.05
-               war_support_weekly = -0.025
+               war_support_weekly = -0.05
           	}
 
 			complete_effect = {
 				random_owned_state = {
 					limit = {
-						NOT = {
-					    	has_state_category = pastoral
-						}
+						NOT = { has_state_category = pastoral }
 					}
-		    		add_manpower = -25
+		    		add_manpower = -35
 				}
-				add_manpower = 25
-				hidden_effect = {
-					add_command_power = -20
-				}
+				add_manpower = 35
+				hidden_effect = { add_command_power = -10 }
 			}
 			ai_will_do = {
 				base = 5
 				modifier = {
-					add = 10
+					add = 1
 					surrender_progress > 0.15
+				}
+				modifier = {
+					add = 10
+					has_manpower < 50
 				}
 			}
         }
@@ -594,16 +579,16 @@ warfare_drastic_measures = {
     					amount > 1
 					}
 				}
-				has_war_support > 0.24
-				has_stability > 0.24
+				has_war_support > 0.19
+				has_stability > 0.19
 			}
 
-			days_remove = 21
+			days_remove = 14
 			days_re_enable = 42
 			
-			custom_cost_text = command_power_20
+			custom_cost_text = command_power_10
 			custom_cost_trigger = {
-				command_power > 19.9
+				command_power > 9.9
 			}
 
 			modifier = {
@@ -637,11 +622,12 @@ warfare_drastic_measures = {
     				}
     			}
     			add_equipment_to_stockpile = {
-		        type = infantry_equipment
-		        amount = 25
+		        	type = scrap_infantry_equipment_1
+		        	amount = 25
+					producer = RUS
 		        }
 		        hidden_effect = {
-					add_command_power = -20
+					add_command_power = -10
 				}
 			}
 			ai_will_do = {
@@ -657,16 +643,16 @@ warfare_drastic_measures = {
         	icon = ger_military_buildup
 
         	available = {
-		    	has_war_support > 0.24
-		    	has_stability > 0.24
+		    	has_war_support > 0.2
+		    	has_stability > 0.2
 			}
 
         	days_remove = 70
 			days_re_enable = 135
 			
-			custom_cost_text = command_power_20
+			custom_cost_text = command_power_10
 			custom_cost_trigger = {
-				command_power > 19.9
+				command_power > 9.9
 			}
 
 			modifier = {
@@ -678,7 +664,7 @@ warfare_drastic_measures = {
 
           	complete_effect = {
 				hidden_effect = {
-					add_command_power = -20
+					add_command_power = -10
 				}
 			}
 
@@ -732,30 +718,24 @@ military_theory_committee = {
 
 		icon = hol_war_on_pacifism
 
-		available = {
-			command_power > 10
+		available = { command_power > 19.9 }
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 20
 		}
 
-		days_remove = 40
+		days_remove = 50
 
 		fire_only_once = yes
-			
-		custom_cost_text = command_power_10
-		custom_cost_trigger = {
-			command_power > 10
-		}
 
 		complete_effect = {
-			hidden_effect = {
-				add_command_power = -10
-			}
+			hidden_effect = { add_command_power = -20 }
 			custom_effect_tooltip = allow_to_conduct_war_operations
 		}
 
 		remove_effect = {
-			hidden_effect = {
-				set_country_flag = held_military_committee
-			}
+			hidden_effect = { set_country_flag = held_military_committee }
 		}
 	}
 
@@ -790,6 +770,7 @@ military_theory_committee = {
 
 		modifier = {
 			command_power_gain_mult = -0.2
+			training_time_factor = -0.2
 		}
 
 		complete_effect = {
@@ -799,7 +780,7 @@ military_theory_committee = {
 		}
 
 		remove_effect = {
-			army_experience = 15
+			army_experience = 20
 		}
 	}
 
@@ -808,6 +789,11 @@ military_theory_committee = {
 		icon = hol_war_on_pacifism
 
 		days_remove = 50
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
 
 		available = {
 			command_power > 20
@@ -827,20 +813,13 @@ military_theory_committee = {
 			}
 		}
 
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
-		}
-
 		modifier = {
 			high_command_cost_factor = -0.15
 			army_chief_cost_factor = -0.15
 		}
 
 		complete_effect = {
-			hidden_effect = {
-				add_command_power = -20
-			}
+			hidden_effect = { add_command_power = -20 }
 		}
 
 		remove_effect = {

@@ -199,6 +199,7 @@ technologies = {
 	tech_recycling_1 = {
 
 		production_lack_of_resource_penalty_factor = -0.1
+		production_speed_salvage_hub_factor = 0.1
 
 		path = {
 			leads_to_tech = tech_recycling_2
@@ -224,8 +225,26 @@ technologies = {
 
 	tech_recycling_2 = {
 
-		production_lack_of_resource_penalty_factor = -0.1
+		production_speed_salvage_hub_factor = 0.1
 
+		on_research_complete = {
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = scrap
+    			amount = 1
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = alloys
+    			amount = 1
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = components
+    			amount = 1
+			}
+		}
+		
 		path = {
 			leads_to_tech = tech_recycling_3 
 			research_cost_coeff = 1
@@ -250,7 +269,25 @@ technologies = {
 
 	tech_recycling_3 = {
 
-		production_lack_of_resource_penalty_factor = -0.1
+		production_speed_salvage_hub_factor = 0.1
+
+		on_research_complete = {
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = scrap
+    			amount = 2
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = alloys
+    			amount = 2
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = components
+    			amount = 2
+			}
+		}
 		
 		research_cost = 1.8
 		start_year = 2035
