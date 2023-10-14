@@ -1826,7 +1826,7 @@ country_event = {
 		HNZ = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.2
+				cost_reduction = 0.25
 				uses = 1
 				category = land_doctrine
 			}
@@ -1837,7 +1837,7 @@ country_event = {
 	}
 }
 
-country_event = { 
+country_event = { ## Reich
 	id = nf_HNZ.59
 	title = nf_HNZ.59.t
 	desc = nf_HNZ.59.d
@@ -1848,14 +1848,53 @@ country_event = {
 	
 	option = {
 		name = nf_HNZ.59.a
-		### Decision stuff IDK
+		army_experience = 10
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.33
+			uses = 1
+			category = industry
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.59.b
+		capital_scope = {
+			add_resource = {
+				type = chemicals
+				amount = 2
+			}
+		}
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = entrench_kits
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.59.c
+		add_tech_bonus = {
+			name = rail_car
+			bonus = 0.5
+			uses = 1
+			category = rail_panzer
+		}
+		trigger = { NOT = { has_completed_focus = HNZ_redline_stance } }
 		ai_chance = {
 			factor = 10
 		}
 	}
 }
 
-country_event = { 
+country_event = { ## Redline
 	id = nf_HNZ.60
 	title = nf_HNZ.60.t
 	desc = nf_HNZ.60.d
@@ -1866,7 +1905,44 @@ country_event = {
 	
 	option = {
 		name = nf_HNZ.60.a
-		### Decision stuff IDK
+		army_experience = 10
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.33
+			uses = 1
+			category = industry
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.60.b
+		capital_scope = {
+			add_resource = {
+				type = electronics
+				amount = 2
+			}
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.60.c
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = support_weapons_tech
+		}
+		trigger = { NOT = { has_completed_focus = HNZ_reich_stance } }
 		ai_chance = {
 			factor = 10
 		}
@@ -1881,13 +1957,6 @@ country_event = {
 
 	is_triggered_only = yes
 	fire_only_once = yes
-	
-	option = {
-		name = nf_HNZ.61.a
-		ai_chance = {
-			factor = 10
-		}
-	}
 }
 
 country_event = { ## KTG / HNZ War
@@ -1946,6 +2015,92 @@ country_event = {	## Invisible Observers Path
 			elections_allowed = no 
 		}
 
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Fuel For Slaves?
+	id = nf_HNZ.65
+	title = nf_HNZ.65.t
+	desc = nf_HNZ.65.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_HNZ.65.a
+		add_manpower = -50
+		HNZ = {
+			capital_scope = {
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+			}
+		}
+		add_ideas = HNZ_sat_fuel
+		SAT = { country_event = nf_HNZ.67 }
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Flamethrowers for troops?
+	id = nf_HNZ.66
+	title = nf_HNZ.66.t
+	desc = nf_HNZ.66.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_HNZ.66.a
+		add_ideas = HNZ_DIM_flamethrower_help
+		add_manpower = -50
+		DIM = { country_event = nf_HNZ.68 }
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## HNZ slaves
+	id = nf_HNZ.67
+	title = nf_HNZ.67.t
+	desc = nf_HNZ.67.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_HNZ.67.a
+		capital_scope = {
+			add_manpower = 50
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## HNZ slaves
+	id = nf_HNZ.68
+	title = nf_HNZ.68.t
+	desc = nf_HNZ.68.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_HNZ.68.a
+		add_manpower = 50
 		ai_chance = {
 			factor = 10
 		}

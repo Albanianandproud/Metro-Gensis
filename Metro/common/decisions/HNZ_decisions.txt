@@ -41,18 +41,19 @@ HNZ_production_shift = {
 		}
 
 		available = {
-		    has_war_support > 0.14
-		    NOT = { has_country_flag = HNZ_industrial_shift_change }
+		    has_war_support > 0.19
+			custom_trigger_tooltip = {
+				tooltip = HNZ_shift_in_effect
+				hidden_trigger = { NOT = { has_country_flag = HNZ_industrial_shift_change } }
+			}
 		}
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		complete_effect = {
-			hidden_effect = {
-				set_country_flag = HNZ_industrial_shift_change
-			}
+			hidden_effect = { set_country_flag = HNZ_industrial_shift_change }
 		}
 
 		modifier = {
@@ -61,9 +62,7 @@ HNZ_production_shift = {
         }
 
         remove_effect = {
-        	hidden_effect = {
-				clr_country_flag = HNZ_industrial_shift_change
-			}
+        	hidden_effect = { clr_country_flag = HNZ_industrial_shift_change }
 		}
 	}
 
@@ -77,23 +76,22 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
+
+
+		modifier = {
+           war_support_weekly = 0.005
+           line_change_production_efficiency_factor = -0.1
+           production_factory_efficiency_gain_factor = -0.1
+        }
+
+        remove_effect = {
+        	hidden_effect = { clr_country_flag = HNZ_industrial_shift_change }
+		}
 
 		complete_effect = {
 			hidden_effect = {
 				set_country_flag = HNZ_industrial_shift_change
-			}
-		}
-
-		modifier = {
-           war_support_weekly = 0.005
-           line_change_production_efficiency_factor = -0.125
-           production_factory_efficiency_gain_factor = -0.125
-        }
-
-        remove_effect = {
-        	hidden_effect = {
-				clr_country_flag = HNZ_industrial_shift_change
 			}
 		}
 	}
@@ -108,7 +106,7 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		modifier = {
            production_factory_efficiency_gain_factor = -0.1
@@ -126,10 +124,15 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		remove_effect = {
-			random_owned_controlled_state = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -147,13 +150,38 @@ HNZ_production_shift = {
 		}
 
 		cost = 50
-		days_remove = 75
-		days_re_enable = 200
+		days_remove = 70
+		days_re_enable = 100
 
 		modifier = {
 			production_speed_bunker_factor = 0.1
 			production_speed_bunker2_factor = 0.1
 			production_speed_infrastructure_factor = 0.1
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+				}
+			}
 		}
 	}
 
@@ -167,23 +195,16 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		remove_effect = {
 			random_owned_state = {
 				limit = {
-		    		free_building_slots = {
-    					building = arms_factory
-    					size > 1
-    					include_locked = yes
-					}
+					NOT = { has_state_category = pastoral }
 				}
 		    	add_extra_state_shared_building_slots = -1
 			}
-			add_popularity = {
-				ideology = oligarch
-				popularity = 0.05
-			}
+			add_political_power = 100
 		}
 	}
 
@@ -202,11 +223,11 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		modifier = {
-           war_support_weekly = -0.005
-           research_speed_factor = 0.05
+           consumer_goods_factor = 0.1
+           research_speed_factor = 0.1
         }
 	}
 
@@ -225,17 +246,14 @@ HNZ_production_shift = {
 
 		cost = 50
 		days_remove = 70
-		days_re_enable = 200
+		days_re_enable = 100
 
 		modifier = {
-			political_power_factor = -0.1
+			party_popularity_stability_factor = -0.2
 		}
 
 		remove_effect = {
-			add_popularity = {
-				ideology = oligarch
-				popularity = 0.05
-			}
+			add_stability = 0.05
 		}
 	}
 }
@@ -363,7 +381,6 @@ HNZ_scavenging_decisions = {
 ## If the Agenda is fufilled, Hansa gets rewarded
 ## Alongside a national spirit buff and strengthening unity
 
-## gotta do this 17 times for each focus. Lol
 HNZ_agendas = {
 	HNZ_mission_defensive_priority = {
 		days_mission_timeout = 360
@@ -374,8 +391,8 @@ HNZ_agendas = {
 
 		available = {	## We will complete the agenda if said requirements are met
 			OR = {
-				bunker > 10
-				bunker2 > 10
+				bunker > 14
+				bunker2 > 14
 			}
 			AND = {
 				capital_scope = { infrastructure > 7 }
@@ -408,21 +425,21 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			num_of_civilian_factories > 44
+			num_of_civilian_factories > 54
 			AND = {
 				has_resources_in_country = {
 					resource = scrap
-					amount > 49
+					amount > 59
 					extracted = yes
 				}
 				has_resources_in_country = {
 					resource = alloys
-					amount > 34
+					amount > 54
 					extracted = yes
 				}
 				has_resources_in_country = {
 					resource = components
-					amount > 34
+					amount > 54
 					extracted = yes
 				}
 			}
