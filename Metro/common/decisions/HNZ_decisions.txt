@@ -1062,7 +1062,7 @@ HNZ_agendas = {
 		}
 	}
 
-	HNZ_mission_spend_authority = {
+	HNZ_mission_spend_authority_eco_law = {
 
 		#icon = GFX_HNZ_increase_industrial_shift
 
@@ -1083,6 +1083,65 @@ HNZ_agendas = {
 
         remove_effect = {
         	HNZ_eco_laws_upgrade_scripted_effect = yes
+			subtract_from_variable = { var = HNZ_political_authority value = 1 }
+		}
+	}
+
+	HNZ_mission_spend_authority_pol = {
+
+		#icon = GFX_HNZ_increase_industrial_shift
+
+		visible = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		available = {
+		    check_variable = { HNZ_political_authority > 0 }
+		}
+
+		custom_cost_text = HNZ_political_authority_1_cost
+		custom_cost_trigger = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		days_remove = 200
+		days_re_enable = 0
+
+		modifier = {
+			political_power_gain = 0.5
+		}
+
+		complete_effect = {
+			subtract_from_variable = { var = HNZ_political_authority value = 1 }
+		}
+	}
+
+	HNZ_mission_spend_authority_eco = {
+
+		#icon = GFX_HNZ_increase_industrial_shift
+
+		visible = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		available = {
+		    check_variable = { HNZ_political_authority > 0 }
+		}
+
+		custom_cost_text = HNZ_political_authority_1_cost
+		custom_cost_trigger = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		days_remove = 200
+		days_re_enable = 0
+
+		modifier = {
+			consumer_goods_factor = -0.2
+		}
+
+		complete_effect = {
+			subtract_from_variable = { var = HNZ_political_authority value = 1 }
 		}
 	}
 
