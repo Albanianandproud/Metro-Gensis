@@ -17,7 +17,7 @@ focus_tree = {
 		icon = GFX_HNZ_league_of_steel
 		x = 14
 		y = 0
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -702,7 +702,7 @@ focus_tree = {
 		icon = GFX_HNZ_passports
 		x = 1
 		y = 0
-		cost = 5.8
+		cost = 6.5
 
 		available = { has_completed_focus = HNZ_new_quater }
 
@@ -714,7 +714,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 20
 		}
 	}
 
@@ -740,6 +740,10 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 2
+			modifier = {
+				factor = 0 
+				has_war_with = RCH
+			}
 		}
 	}
 
@@ -765,6 +769,10 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 2
+			modifier = {
+				factor = 0 
+				has_war_with = RED
+			}
 		}
 	}
 
@@ -875,7 +883,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_new_friends_2
-		cost = 6.4
+		cost = 6.5
 
 		completion_reward = {
 			## check opinion and add civs to both for relation
@@ -1677,7 +1685,11 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 20
+				date > "2034.1.1"
+			}
 		}
 	}
 
@@ -1754,7 +1766,17 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = SAT
+					has_opinion = {
+						target = SAT
+						value > 5
+					}
+				}
+			}
 		}
 	}
 
@@ -1803,7 +1825,21 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 50
+				is_ally_with = DIM
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = DIM
+					has_opinion = {
+						target = DIM
+						value > 5
+					}
+				}
+			}
 		}
 	}
 
@@ -1821,10 +1857,15 @@ focus_tree = {
 		cost = 6.5
 
 		completion_reward = {
+			country_event = nf_HNZ.72
 		}
 
 		ai_will_do = {
 			factor = 2
+			modifier = {
+				factor = 0 
+				has_war_with = SCA
+			}
 		}
 	}
 
@@ -1858,7 +1899,11 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 0
+				has_war_with = ULI
+			}
 		}
 	}
 
@@ -1907,7 +1952,19 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 25
+			modifier = {
+				factor = 0
+				ULI = { is_ai = no }
+			}
+			modifier = {
+				factor = 10
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 20
+				threat > 0.1
+			}
 		}
 	}
 
@@ -1945,6 +2002,10 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 2
+			modifier = {
+				factor = 0 
+				has_war_with = ULI
+			}
 		}
 	}
 
@@ -2023,7 +2084,15 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 10
+				date > "2033.10.1"
+			}
+			modifier = {
+				factor = 20
+				threat > 0.1
+			}
 		}
 	}
 
@@ -2102,7 +2171,15 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 10
+				date > "2033.10.1"
+			}
+			modifier = {
+				factor = 20
+				threat > 0.1
+			}
 		}
 	}
 
@@ -2117,11 +2194,7 @@ focus_tree = {
 		x = -26
 		y = 0
 		relative_position_id = HNZ_new_quater
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_ideas = HNZ_reclaimation_bureau
@@ -2137,6 +2210,10 @@ focus_tree = {
 			        amount = 3
 			    }
 			}
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -2194,15 +2271,16 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = HNZ_tunnel_cleansers
+		}
 
 		ai_will_do = {
 			factor = 2
 		}
 
-		completion_reward = {
-			add_ideas = HNZ_tunnel_cleansers
-		}
 	}
 
 	focus = {
@@ -2228,9 +2306,14 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
 					level = 1
 					instant_build = yes
 				}
@@ -2241,9 +2324,14 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
 					level = 1
 					instant_build = yes
 				}
@@ -2292,11 +2380,7 @@ focus_tree = {
 		x = 5
 		y = 2
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -2306,6 +2390,18 @@ focus_tree = {
 				category = industry
 			}
 			add_ideas = HNZ_engineering_academy
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 0.75
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 0.25
+				date > "2033.1.1"
+			}
 		}
 	}
 
@@ -2319,11 +2415,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_reclaimation_engineering_academy
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -2331,6 +2423,18 @@ focus_tree = {
 				bonus = 0.5
 				uses = 2
 				category = construction
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 0.75
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 0.25
+				date > "2033.1.1"
 			}
 		}
 	}
@@ -2345,11 +2449,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_reclaimation_engineering_academy
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -2357,6 +2457,18 @@ focus_tree = {
 				bonus = 0.5
 				uses = 2
 				category = tooling
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 0.75
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 0.25
+				date > "2033.1.1"
 			}
 		}
 	}
@@ -2372,11 +2484,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_engineering_academy_2
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -2385,6 +2493,18 @@ focus_tree = {
 				uses = 1
 				ahead_reduction = 1
 				category = support_weapons_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 1.25
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 1.5
+				date > "2033.1.1"
 			}
 		}
 	}
@@ -2399,11 +2519,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_engineering_academy_2
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -2412,6 +2528,18 @@ focus_tree = {
 				uses = 1
 				ahead_reduction = 1
 				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				factor = 1.25
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 1.5
+				date > "2033.1.1"
 			}
 		}
 	}
@@ -2453,11 +2581,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		relative_position_id = HNZ_reclaimation_engineering_academy
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			capital_scope = {
@@ -2465,6 +2589,18 @@ focus_tree = {
 			        type = chemicals
 			        amount = 10
 			    }
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0.2
+				has_resources_in_country = {
+					resource = chemicals
+					amount > 30
+					extracted = yes
+				}
 			}
 		}
 	}
@@ -2484,7 +2620,7 @@ focus_tree = {
 		x = -6
 		y = 2
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2515,7 +2651,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_reclaimation_repair_rail_carts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2558,15 +2694,29 @@ focus_tree = {
 		x = 3
 		y = 1
 		relative_position_id = HNZ_reclaimation_repair_rail_carts
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			BAU = { country_event = nf_HNZ.49 }
 			custom_effect_tooltip = HNZ_baumansky_joint_trade
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = BAU
+					has_opinion = {
+						target = BAU
+						value > 5
+					}
+				}
+			}
 		}
 	}
 
@@ -2597,11 +2747,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_railcart_34
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			BAU = {
@@ -2622,6 +2768,20 @@ focus_tree = {
 				producer = RUS
 			}
 		}
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = BAU
+					has_opinion = {
+						target = BAU
+						value > 5
+					}
+				}
+			}
+		}
 	}
 
 	focus = {
@@ -2634,7 +2794,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_reclaimation_repair_rail_carts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2661,7 +2821,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_railcart_2
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2694,7 +2854,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_railcart_1
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2759,7 +2919,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		relative_position_id = HNZ_reclaimation_repair_rail_carts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2784,7 +2944,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2839,10 +2999,6 @@ focus_tree = {
 		relative_position_id = HNZ_establish_reclaimation_bureau
 		cost = 5
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			random_owned_state = {
 				limit = {
@@ -2866,6 +3022,14 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				date > "2031.1.1"
+			}
+		}
 	}
 
 	focus = {
@@ -2884,11 +3048,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_civilian
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			random_owned_state = {
@@ -2917,6 +3077,14 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				threat > 0.1
+			}
+		}
 	}
 
 	focus = {
@@ -2930,11 +3098,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_civilian_2
-		cost = 6.4
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			random_owned_state = {
@@ -2980,6 +3144,10 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 10
+		}
 	}
 
 	focus = {
@@ -2995,10 +3163,6 @@ focus_tree = {
 		y = 3
 		relative_position_id = HNZ_establish_reclaimation_bureau
 		cost = 5
-
-		ai_will_do = {
-			factor = 2
-		}
 
 		completion_reward = {
 			random_owned_state = {
@@ -3020,6 +3184,14 @@ focus_tree = {
 				producer = RUS
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 10
+				date > "2031.1.1"
+			}
+		}
 	}
 
 	focus = {
@@ -3034,14 +3206,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_military
-		cost = 5.8
+		cost = 6.5
 
 		mutually_exclusive = {
 			focus = HNZ_reclaimation_bureau_2_civilian_2
-		}
-
-		ai_will_do = {
-			factor = 2
 		}
 
 		completion_reward = {
@@ -3064,6 +3232,18 @@ focus_tree = {
 				producer = RUS
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 10
+				threat > 0.1
+			}
+			modifier = {
+				factor = 10
+				date > "2031.1.1"
+			}
+		}
 	}
 
 	focus = {
@@ -3077,11 +3257,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_military_2
-		cost = 6.4
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			random_owned_state = {
@@ -3117,6 +3293,10 @@ focus_tree = {
 				category = infantry_weapons
 			}
 		}
+
+		ai_will_do = {
+			factor = 10
+		}
 	}
 
 	focus = {
@@ -3131,14 +3311,14 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_civilian_3
-		cost = 6.4
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 7.2
 
 		completion_reward = {
 			reclaimation_improve = yes
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -3160,14 +3340,14 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_bureau_2_improve
-		cost = 6.4
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 7.2
 
 		completion_reward = {
 			add_research_slot = 1
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -3182,7 +3362,7 @@ focus_tree = {
 		x = -13
 		y = 1
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3203,7 +3383,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HNZ_reclaimation_train_stalkers
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3238,7 +3418,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_reclaimation_stalker_combat_training
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3269,7 +3449,7 @@ focus_tree = {
 		x = -2
 		y = 1
 		relative_position_id = HNZ_reclaimation_train_stalkers
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3290,7 +3470,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_reclaimation_survey_posts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3311,7 +3491,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_reclaimation_survey_posts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3335,7 +3515,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_reclaimation_survey_posts
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3356,7 +3536,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		relative_position_id = HNZ_reclaimation_train_stalkers
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3395,7 +3575,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_renovate_vehicles
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3419,7 +3599,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_renovate_vehicles
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3444,7 +3624,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_renovate_vehicles
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3468,23 +3648,18 @@ focus_tree = {
 		y = 0
 		cost = 5
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			every_owned_state = {
-				limit = {
-					OR = {
-						region = 3
-					}
-				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -3525,10 +3700,6 @@ focus_tree = {
 		relative_position_id = HNZ_ring_of_steel
 		cost = 5
 	
-		ai_will_do = {
-			factor = 2
-		}
-	
 		completion_reward = {
 			266 = { 
 		    	add_extra_state_shared_building_slots = 1
@@ -3548,6 +3719,10 @@ focus_tree = {
 			hidden_effect = {
 				set_country_flag = HNZ_centralisation_underway
 			}
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -3575,18 +3750,14 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_north_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			359  = { 
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 				    instant_build = yes
 				}
 			}
@@ -3597,6 +3768,15 @@ focus_tree = {
 					level = 1
 				    instant_build = yes
 				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
 			}
 		}
 	}
@@ -3620,23 +3800,33 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_north_arsenals
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			add_timed_idea = { idea = HNZ_mushroom_tea days = 260 }
+		}
+
+		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
+			factor = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = VDN
+					has_opinion = {
+						target = VDN
+						value > 5
+					}
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = HNZ_DIM_help
-		icon = GFX_goal_tripartite_pact
+		icon = GFX_flamethrower_arms_1
 	
 		prerequisite = {
-			focus = HNZ_north_arsenals
+			focus = HNZ_capital_resources
 		}
 		available = { 
 			DIM = { exists = yes } 
@@ -3645,19 +3835,38 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_north_arsenals
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			add_equipment_to_stockpile = {
 		        type = flamethrower_equipment
-		        amount = 20
+		        amount = 25
 				producer = RUS
 		    }
-			DIM = { add_political_power = 50 }
+			DIM = { 
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 25
+					producer = RUS
+				}
+			}
+			add_opinion_modifier = {
+				target = DIM
+				modifier = SEV_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = SEV_assistance
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
+			}
 		}
 	}
 
@@ -3684,18 +3893,14 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_north_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			401 = { 
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 				    instant_build = yes
 				}
 			}
@@ -3708,6 +3913,15 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -3716,15 +3930,12 @@ focus_tree = {
 	
 		prerequisite = {
 			focus = HNZ_north_civilian
+			focus = HNZ_north_arsenals
 		}
 		x = 1
 		y = 1
 		relative_position_id = HNZ_north_civilian
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			capital_scope = {
@@ -3751,6 +3962,15 @@ focus_tree = {
 			    }
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -3758,16 +3978,12 @@ focus_tree = {
 		icon = GFX_HNZ_skull_spike
 	
 		prerequisite = {
-			focus = HNZ_capital_resources
+			focus = HNZ_north_civilian
 		}
 		x = -1
 		y = 1
 		relative_position_id = HNZ_capital_resources
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 7.2
 	
 		bypass = {
 			OR = {
@@ -3789,28 +4005,37 @@ focus_tree = {
  				generator = { 28 }
  			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
+			}
+		}
 	}
 
 	focus = {
 		id = HNZ_north_centralise
 		icon = GFX_HNZ_political_centralisation
 	
-		prerequisite = {
-			focus = HNZ_clear_out_dry_station
+		prerequisite = { 
+			focus = HNZ_clear_out_dry_station 
 			focus = HNZ_DIM_help
 		}
 		x = 0
 		y = 2
 		relative_position_id = HNZ_capital_resources
-		cost = 3.6
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 4.3
 	
 		completion_reward = {
 			centralise_commonwealth = yes 
 			clr_country_flag = HNZ_centralisation_underway
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
@@ -3825,10 +4050,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_ring_of_steel
 		cost = 5
-	
-		ai_will_do = {
-			factor = 2
-		}
 	
 		available = {
 			406 = {
@@ -3877,6 +4098,10 @@ focus_tree = {
 				set_country_flag = HNZ_centralisation_underway
 			}
 		}
+
+		ai_will_do = {
+			factor = 15
+		}
 	}
 
 	focus = {
@@ -3892,11 +4117,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_south_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		available = {
 			396 = {
@@ -3910,10 +4131,10 @@ focus_tree = {
 	
 		completion_reward = {
 			396  = { 
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 				    instant_build = yes
 				}
 			}
@@ -3926,6 +4147,15 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_north_arc
+				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -3935,36 +4165,42 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_south_civilian
 		}
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HNZ_south_civilian
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			# Decision list to trade with the Mobsters
 			custom_effect_tooltip = HNZ_trade_with_mobsters_tt
 		}
+
+		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
+			factor = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = MOB
+					has_opinion = {
+						target = MOB
+						value > 5
+					}
+				}
+			}
+		}
 	}
 
 	focus = {
 		id = HNZ_HNZ_clearing_southern_tunnels
-		icon = GFX_soldier_1
+		icon = GFX_generic_hansa_alliance
 	
 		prerequisite = {
 			focus = HNZ_south_civilian
 		}
-		x = 0
-		y = 2
+		x = -1
+		y = 1
 		relative_position_id = HNZ_south_civilian
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		available = {
 			controls_state = 405
@@ -3979,6 +4215,60 @@ focus_tree = {
 				SRA = {
 					set_capital = {state = 405 }
 				}
+			}
+		}
+
+		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = HNZ_contact_YAS
+		icon = GFX_generic_equipment_gasmask_1
+	
+		prerequisite = {
+			focus = HNZ_south_civilian
+		}
+		x = 0
+		y = 2
+		relative_position_id = HNZ_south_civilian
+		cost = 6.5
+	
+		ai_will_do = {
+			factor = 2
+		}
+
+		available = {
+			YAS = { exists = yes }
+		}
+
+		bypass = { YAS = { exists = no } }
+	
+		completion_reward = {
+			add_opinion_modifier = {
+				target = YAS
+				modifier = SEV_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = YAS
+				modifier = SEV_assistance
+			}
+			YAS = {
+				add_tech_bonus = {
+					name = hygiene_boost
+					uses = 2
+					bonus = 1
+					ahead_reduction = 1
+					category = health
+				}
+			}
+			add_tech_bonus = {
+				name = hygiene_boost
+				uses = 1
+				bonus = 1
+				ahead_reduction = 1
+				category = recycling
 			}
 		}
 	}
@@ -3996,11 +4286,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_south_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		available = {
 			396 = {
@@ -4014,10 +4300,10 @@ focus_tree = {
 	
 		completion_reward = {
 			396  = { 
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 				    instant_build = yes
 				}
 			}
@@ -4030,6 +4316,15 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_south_arc
+				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -4039,10 +4334,10 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_south_arc_military
 		}
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HNZ_south_arc_military
-		cost = 5.8
+		cost = 6.5
 	
 		available = {
 			363 = {
@@ -4094,25 +4389,26 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_south_arc
+				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
+			}
 		}
 	}
 
 	focus = {
 		id = HNZ_tulskaya_defense
-		icon = GFX_sandbags
+		icon = GFX_generic_medium_arms_2
 	
 		prerequisite = {
 			focus = HNZ_develope_serpukhovsko_timiryazevskaya
 		}
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HNZ_develope_serpukhovsko_timiryazevskaya
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		available = {
 			405 = {
@@ -4123,9 +4419,10 @@ focus_tree = {
 	
 		completion_reward = {
 			405 = { 
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = infrastructure
-					level = 1
+					level = 2
 				    instant_build = yes
 				}
 				add_building_construction = {
@@ -4138,28 +4435,38 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_south_arc
+				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
+			}
+		}
 	}
 
 	focus = {
 		id = HNZ_south_centralise
 		icon = GFX_HNZ_political_centralisation
 	
-		prerequisite = {
+
+		prerequisite = { 
 			focus = HNZ_tulskaya_defense
-			focus = HNZ_HNZ_clearing_southern_tunnels
+			focus = HNZ_contact_YAS
 		}
-		x = 0
+		x = -2
 		y = 2
 		relative_position_id = HNZ_develope_serpukhovsko_timiryazevskaya
-		cost = 3.6
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 4.3
 	
 		completion_reward = {
 			centralise_commonwealth = yes 
 			clr_country_flag = HNZ_centralisation_underway
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
@@ -4174,10 +4481,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_ring_of_steel
 		cost = 5
-	
-		ai_will_do = {
-			factor = 2
-		}
 
 		available = {
 			285 = {
@@ -4208,6 +4511,10 @@ focus_tree = {
 				set_country_flag = HNZ_centralisation_underway
 			}
 		}
+
+		ai_will_do = {
+			factor = 15
+		}
 	}
 
 	focus = {
@@ -4220,16 +4527,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_east_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		available = {
-			285 = {
-                is_owned_by = ROOT
-			}
+			285 = { is_owned_by = ROOT }
 			has_war = no
 		}
 	
@@ -4237,7 +4538,7 @@ focus_tree = {
 			285 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
-					type = industrial_complex
+					type = salvage_hub
 					level = 1
 					instant_build = yes
 				}
@@ -4264,6 +4565,15 @@ focus_tree = {
 			    }
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_east_arc
+				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -4276,18 +4586,14 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_krasnopresnenskaya_trade
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		available = {
-			398 = {
-                is_owned_by = ROOT
-			}
+			398 = { is_owned_by = ROOT }
 			has_war = no
 		}
+
+		bypass = { NOT = { 398 = { is_owned_by = ROOT } } }
 	
 		completion_reward = {
 			398 = { 
@@ -4304,6 +4610,15 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_east_arc
+				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
+			}
+		}
 	}
 
 	focus = {
@@ -4316,23 +4631,28 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_krasnopresnenskaya_trade
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
-				amount = 40
+				amount = 25
 				producer = RUS
 			}
 		    add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.66
+				bonus = 0.5
 				uses = 1
 				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_east_arc
+				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
 			}
 		}
 	}
@@ -4347,7 +4667,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_east_arc
-		cost = 5.8
+		cost = 6.5
 
 		available = {
 			274 = { is_owned_by = ROOT }
@@ -4378,7 +4698,12 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_east_arc
+				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
+			}
 		}
 	}
 
@@ -4397,7 +4722,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_protection_against_the_reds
-		cost = 5.8
+		cost = 6.5
 	
 		ai_will_do = {
 			factor = 2
@@ -4425,7 +4750,7 @@ focus_tree = {
 		x = -2
 		y = 0
 		relative_position_id = HNZ_trade_with_reich
-		cost = 5.8
+		cost = 6.5
 	
 		ai_will_do = {
 			factor = 2
@@ -4459,15 +4784,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_military_fund
-		cost = 3.6
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 4.3
 	
 		completion_reward = {
 			centralise_commonwealth = yes 
 			clr_country_flag = HNZ_centralisation_underway
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
@@ -4482,10 +4807,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_ring_of_steel
 		cost = 5
-	
-		ai_will_do = {
-			factor = 3
-		}
 
 		available = {
 			365 = {
@@ -4534,6 +4855,10 @@ focus_tree = {
 				set_country_flag = HNZ_centralisation_underway
 			}
 		}
+
+		ai_will_do = {
+			factor = 15
+		}
 	}
 
 	focus = {
@@ -4546,16 +4871,9 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_west_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 4
-		}
+		cost = 6.5
 	
 		available = {
-			259 = {
-                is_owned_by = ROOT
-			}
 			265 = {
                 is_owned_by = ROOT
 			}
@@ -4565,18 +4883,6 @@ focus_tree = {
 		}
 	
 		completion_reward = {
-			259 = {
-				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
 			265 = {
 				add_extra_state_shared_building_slots = 1
 		    	add_building_construction = {
@@ -4584,10 +4890,21 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HNZ_eastern_industry_2 }
+				}
+				265 = {
+					add_resource = {
+						type = scrap
+						amount = 2
+					}
+					add_resource = {
+						type = alloys
+						amount = 2
+					}
+				}
 			}
 			299 = {
 				add_extra_state_shared_building_slots = 1
@@ -4596,10 +4913,30 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_resource = {
-			        type = components
-			        amount = 2
-			    }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HNZ_eastern_industry_2 }
+				}
+				299 = {
+					add_resource = {
+						type = scrap
+						amount = 2
+					}
+					add_resource = {
+						type = components
+						amount = 2
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
 			}
 		}
 	}
@@ -4614,15 +4951,11 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_eastern_industry_1
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			308 = {
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
 					level = 1
@@ -4633,6 +4966,15 @@ focus_tree = {
 			add_timed_idea = {
 				idea = HNZ_shooting_range
 				days = 1095
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
 			}
 		}
 	}
@@ -4647,11 +4989,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_eastern_industry_1
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		available = {
 			259 = {
@@ -4663,19 +5001,11 @@ focus_tree = {
 			265 = {
                 is_owned_by = ROOT
 			}
-			65 = {
-                is_owned_by = ROOT
-			}
-			66 = {
-                is_owned_by = ROOT
-			}
-			64 = {
-                is_owned_by = ROOT
-			}
 		}
 	
 		completion_reward = {
 			259 = {
+				add_extra_state_shared_building_slots = 2
 			    add_building_construction = {
     				type = bunker
    					level = 1
@@ -4691,6 +5021,7 @@ focus_tree = {
 				}
 			}
 			299 = {
+				add_extra_state_shared_building_slots = 2
 			    add_building_construction = {
     				type = bunker
    					level = 1
@@ -4706,6 +5037,7 @@ focus_tree = {
 				}
 			}
 			265 = {
+				add_extra_state_shared_building_slots = 2
 			    add_building_construction = {
     				type = bunker
    					level = 1
@@ -4720,50 +5052,14 @@ focus_tree = {
     				instant_build = yes
 				}
 			}
-			65 = {
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
-				}
-			}
-			66 = {
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
-				}
-			}
-			64 = {
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
-				}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
 			}
 		}
 	}
@@ -4778,16 +5074,9 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_ring_of_steel_west_arc
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 3
-		}
+		cost = 6.5
 	
 		available = {
-			365 = {
-                is_owned_by = ROOT
-			}
 			355 = {
                 is_owned_by = ROOT
 			}
@@ -4797,18 +5086,6 @@ focus_tree = {
 		}
 	
 		completion_reward = {
-			365 = {
-				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
 			355 = {
 				add_extra_state_shared_building_slots = 1
 		    	add_building_construction = {
@@ -4816,10 +5093,17 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HNZ_eastern_industry_1 }
+				}
+				355 = {
+					add_resource = {
+						type = scrap
+						amount = 4
+					}
+				}
 			}
 			308 = {
 				add_extra_state_shared_building_slots = 1
@@ -4828,10 +5112,26 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_resource = {
-			        type = alloys
-			        amount = 2
-			    }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HNZ_eastern_industry_1 }
+				}
+				308 = {
+					add_resource = {
+						type = alloys
+						amount = 4
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
 			}
 		}
 	}
@@ -4851,14 +5151,24 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_eastern_industry_2
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			add_ideas = HNZ_gatling_boost
+			add_equipment_to_stockpile = {
+		        type = gatling_equipment_1
+		        amount = 25
+				producer = RUS
+		    }
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
+			}
 		}
 	}
 
@@ -4873,15 +5183,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		relative_position_id = HNZ_taganskaya_shooting_range
-		cost = 3.6
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 4.3
 	
 		completion_reward = {
 			centralise_commonwealth = yes 
 			clr_country_flag = HNZ_centralisation_underway
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 
@@ -4901,14 +5211,24 @@ focus_tree = {
 		x = 2
 		y = 0
 		relative_position_id = HNZ_west_gatling_boost
-		cost = 5.8
-	
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 	
 		completion_reward = {
 			add_ideas = HNZ_explosive_boost
+			add_equipment_to_stockpile = {
+		        type = explosive_equipment_1
+		        amount = 25
+				producer = RUS
+		    }
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 15
+				has_completed_focus = HNZ_ring_of_steel_west_arc
+				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
+			}
 		}
 	}
 
@@ -4927,10 +5247,6 @@ focus_tree = {
 		relative_position_id = HNZ_new_quater
 		cost = 4.3
 
-		ai_will_do = {
-			factor = 50
-		}
-
 		completion_reward = {
 			army_experience = 15
 			add_doctrine_cost_reduction = {
@@ -4938,6 +5254,22 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 2
 				category = land_doctrine
+			}
+		}
+
+		ai_will_do = { 
+			factor = 5
+			modifier = {
+				factor = 10
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 15
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 30
+				date > "2033.1.1"
 			}
 		}
 	}
@@ -4957,14 +5289,19 @@ focus_tree = {
 		x = -3
 		y = 1
 		relative_position_id = HNZ_lessons_from_conflict
-		cost = 5.8 
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5 
 
 		completion_reward = {
 			add_ideas = HNZ_planning
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -4981,12 +5318,17 @@ focus_tree = {
 		relative_position_id = HNZ_planning_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_planning_minister_1
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5003,12 +5345,17 @@ focus_tree = {
 		relative_position_id = HNZ_planning_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_planning_minister_2
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5025,12 +5372,17 @@ focus_tree = {
 		relative_position_id = HNZ_planning_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_planning_minister_3
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5053,13 +5405,13 @@ focus_tree = {
 		relative_position_id = HNZ_planning_military_advisor_2
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			remove_ideas = HNZ_poor_high_command
 			add_ideas = HNZ_high_command_planning
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -5078,14 +5430,19 @@ focus_tree = {
 		x = 3
 		y = 1
 		relative_position_id = HNZ_lessons_from_conflict
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			add_ideas = HNZ_logistics
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5102,12 +5459,17 @@ focus_tree = {
 		relative_position_id = HNZ_logistics_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_logistic_minister_1
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5124,12 +5486,17 @@ focus_tree = {
 		relative_position_id = HNZ_logistics_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_logistic_minister_2
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5146,12 +5513,17 @@ focus_tree = {
 		relative_position_id = HNZ_logistics_first
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_logistic_minister_3
+		}
+
+		ai_will_do = {
+			factor = 2
+
+			modifier = {
+				factor = 3
+				date > "2030.1.1"
+			}
 		}
 	}
 
@@ -5174,19 +5546,19 @@ focus_tree = {
 		relative_position_id = HNZ_logistics_military_advisor_2
 		cost = 3.6
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			remove_ideas = HNZ_poor_high_command
 			add_ideas = HNZ_high_command_logistics
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
 	focus = {
 		id = HNZ_establish_OVMSB
-		cost = 5.8
+		cost = 6.5
 		icon = GFX_HNZ_OVMSB
 
 		prerequisite = {
@@ -5206,10 +5578,6 @@ focus_tree = {
 		y = 3
 		relative_position_id = HNZ_lessons_from_conflict
 
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = HNZ_taubman
 			hidden_effect = { load_oob = HNZ_OVMSB }
@@ -5226,6 +5594,10 @@ focus_tree = {
 				logistics_skill = 2
 			}
 		}
+
+		ai_will_do = {
+			factor = 15
+		}
 	}
 
 	focus = {
@@ -5240,11 +5612,7 @@ focus_tree = {
 		x = 0
 		y = 4
 		relative_position_id = HNZ_lessons_from_conflict
-		cost = 5.8
-
-		ai_will_do = {
-			factor = 2
-		}
+		cost = 6.5
 
 		completion_reward = {
 			army_experience = 20
@@ -5254,6 +5622,10 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
+		}
+
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -5271,10 +5643,6 @@ focus_tree = {
 		y = 0
 		relative_position_id = HNZ_new_quater
 		cost = 4.3
-
-		ai_will_do = {
-			factor = 2
-		}
 
 		completion_reward = {
 			add_ideas = HNZ_war_committee
@@ -5312,6 +5680,18 @@ focus_tree = {
 				logistics_skill = 2
 			}
 		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 25
+				threat > 0.1
+			}
+		}
 	}
 
 	focus = {
@@ -5331,10 +5711,6 @@ focus_tree = {
 		relative_position_id = HNZ_establish_war_committee
 
 		cost = 3.6
-		 
-		ai_will_do = {
-			factor = 2
-		}
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -5348,6 +5724,18 @@ focus_tree = {
 				planning_skill = 4
 				logistics_skill = 3
 				legacy_id = -1
+			}
+		}
+
+		ai_will_do = { ## AI for some reason HATES using the branch unique conscription laws
+			factor = 1
+			modifier = {
+				factor = 2
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 15
+				threat > 0.1
 			}
 		}
 	}
@@ -5439,10 +5827,6 @@ focus_tree = {
 		relative_position_id = HNZ_establish_war_committee
 
 		cost = 3.6
-		 
-		ai_will_do = {
-			factor = 2
-		}
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -5455,6 +5839,18 @@ focus_tree = {
 				planning_skill = 4
 				logistics_skill = 4
 				legacy_id=-1
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 25
+				threat > 0.1
 			}
 		}
 	}
@@ -5598,10 +5994,6 @@ focus_tree = {
 		relative_position_id = HNZ_establish_war_committee
 
 		cost = 3.6
-		 
-		ai_will_do = {
-			factor = 2
-		}
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -5615,6 +6007,18 @@ focus_tree = {
 				planning_skill = 4
 				logistics_skill = 2
 				legacy_id = -1
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 25
+				threat > 0.1
 			}
 		}
 	}
@@ -5841,7 +6245,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_committee_war_plans
 
-		cost = 5.8
+		cost = 6.5
 
 		available = {
 			has_war = no
@@ -5867,7 +6271,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_committee_war_plans
 
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -5890,7 +6294,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_games
 
-		cost = 5.8
+		cost = 6.5
 
 		available = {
 			country_exists = PLS
@@ -5939,7 +6343,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_polis_joint_operations
 
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -5970,7 +6374,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_mobilisation_plans
 
-		cost = 5.8
+		cost = 6.5
 
 		available = {
 			has_war = no
@@ -6001,7 +6405,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HNZ_war_drafts
 
-		cost = 5.8
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2

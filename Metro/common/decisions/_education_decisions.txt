@@ -28,10 +28,10 @@ education_practise = {
 		visible = {
 			NOT = { has_country_flag = is_bandit_nation }
 			NOT = { has_idea = civics_education_level_5 }
+			hidden_trigger = { NOT = { has_country_flag = improving_education } }
 		}
 
 		cost = 0
-
 		days_re_enable = 300
 
 		complete_effect = {
@@ -97,6 +97,7 @@ education_practise = {
 		visible = {
 			NOT = { has_country_flag = is_bandit_nation }
 			has_idea = civics_education_level_5 
+			hidden_trigger = { NOT = { has_country_flag = improving_education } }
 		}
 
 		cost = 0
@@ -227,7 +228,7 @@ education_practise = {
 			}
 			modifier = {
 				factor = 0.1
-				political_power_daily < 1
+				political_power_daily < 0.8
 			}
 		}
 	}
@@ -282,7 +283,7 @@ education_practise = {
 			}
 			modifier = {
 				factor = 0.1
-				political_power_daily < 1
+				political_power_daily < 0.8
 			}
 		}
 	}
@@ -464,23 +465,17 @@ education_practise = {
 	improve_education_access_polis_repository = {
 
 		visible = {
-			hidden_trigger = {
-				NOT = {
-					tag = PLS
-				}
-			}
+			country_exists = PLS
+			hidden_trigger = { NOT = { original_tag = PLS }}
 			custom_trigger_tooltip = {
     			tooltip = is_improving_education
 				has_country_flag = improving_education
 			}
-			country_exists = PLS
 			OR = {
 				is_in_faction_with = PLS
-				PLS = {
-					has_opinion = {
-						target = ROOT
-						value > 75
-					}
+				has_opinion = {
+					target = PLS
+					value > 49
 				}
 			}
 		}
@@ -489,10 +484,11 @@ education_practise = {
 			country_exists = PLS
 			OR = {
 				is_in_faction_with = PLS
-				PLS = {
+				OR = {
+					is_in_faction_with = PLS
 					has_opinion = {
-						target = ROOT
-						value > 74
+						target = PLS
+						value > 49
 					}
 				}
 				custom_trigger_tooltip = {
@@ -500,8 +496,49 @@ education_practise = {
 					has_country_flag = allow_access_polis_education_decision
 				}
 			}
-			hidden_trigger = {
-				NOT = { tag = PLS }
+			hidden_trigger = { NOT = { tag = PLS } }
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+			PLS = { exists = no }
+		}
+
+		cost = 50
+		days_re_enable = 390
+		days_remove = 30
+
+		modifier = { research_speed_factor = -0.05 }
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -50
+			}
+			PLS = { add_political_power = 15 }
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power > 49
+			}
+		}
+	}
+
+	improve_education_efforts_HANZA_unique_1  = {
+
+		visible = {
+			original_tag = HNZ
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
 			}
 		}
 
@@ -512,36 +549,93 @@ education_practise = {
 					has_country_flag = improving_education
 				}
    			}
-			PLS = {
-				exists = no
-			}
 		}
 
 		cost = 50
 
-		days_re_enable = 390
+		days_re_enable = 90
 
-		days_remove = 30
+		days_remove = 50
 
 		modifier = {
-			research_speed_factor = -0.05
+			consumer_goods_expected_value = 0.1		
+			research_speed_factor = -0.1
 		}
 		
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
-				days = -50
-			}
-			PLS = {
-				add_political_power = 15
+				days = -75
 			}
 		}
 
 		ai_will_do = {
-			base = 5
+			base = 2
+			modifier = {
+				add = 3
+				has_civic_education_higher_3 = yes
+			}
 			modifier = {
 				add = 5
-				has_political_power > 49
+				has_civic_education_higher_2 = yes
+			}
+		}
+	}
+
+	improve_education_efforts_HANZA_unique_2  = {
+
+		available = { 
+			political_power_daily > 0.79 
+		}
+
+		visible = {
+			original_tag = HNZ
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		cost = 15
+
+		days_re_enable = 90
+
+		days_remove = 42
+
+		modifier = {
+			consumer_goods_expected_value = 0.1		
+			political_power_gain = -0.5
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -75
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 3
+				has_civic_education_higher_3 = yes
+			}
+			modifier = {
+				add = 5
+				has_civic_education_higher_2 = yes
+			}
+			modifier = {
+				add = 0
+				political_power_daily < 0.79 
 			}
 		}
 	}

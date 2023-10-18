@@ -7,6 +7,8 @@ HNZ_passport_enforcement = {
 		}
 	
 		cost = 5
+		days_remove = 1
+		days_re_enable = 14
 	
 		target_array = global.countries
 	
@@ -24,8 +26,21 @@ HNZ_passport_enforcement = {
 		}
 	
 		complete_effect = {
+			custom_effect_tooltip = HNZ_enforce_passport_tooltip
 			FROM = {
-				country_event = nf_HNZ.54
+				country_event = { 
+					id = nf_HNZ.54
+					days = 1
+					random_days = 1
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				has_political_power < 20
 			}
 		}
 	}
@@ -138,6 +153,28 @@ HNZ_production_shift = {
 					level = 1
 				}
 			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
 		}
 	}
 
@@ -204,7 +241,7 @@ HNZ_production_shift = {
 				}
 		    	add_extra_state_shared_building_slots = -1
 			}
-			add_political_power = 100
+			add_political_power = 75
 		}
 	}
 
@@ -727,10 +764,8 @@ HNZ_agendas = {
 		available = {	## We will complete the agenda if said requirements are met
 			custom_trigger_tooltip = {
 				tooltip = HNZ_mission_polis_condition
-				NOT = {
-					has_war_with = PLS
-					PLS = { exists = no }
-				}
+				has_war_with = PLS
+				PLS = { exists = no }
 			}
 		}
 
@@ -1023,6 +1058,48 @@ HNZ_agendas = {
 		complete_effect = { ## if we finish completing agenda
 			country_event = nf_HNZ.41 # Completion event
 			custom_effect_tooltip = HNZ_gain_political_control
+			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
+		}
+	}
+
+	HNZ_mission_spend_authority = {
+
+		#icon = GFX_HNZ_increase_industrial_shift
+
+		visible = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		available = {
+		    check_variable = { HNZ_political_authority > 0 }
+		}
+
+		custom_cost_text = HNZ_political_authority_1_cost
+		custom_cost_trigger = {
+			check_variable = { HNZ_political_authority > 0 }
+		}
+
+		days_remove = 7
+
+        remove_effect = {
+        	HNZ_eco_laws_upgrade_scripted_effect = yes
+		}
+	}
+
+	HNZ_mission_spend_authority_debug = {
+
+		#icon = GFX_HNZ_increase_industrial_shift
+
+		visible = { is_debug = yes }
+
+		available = { is_debug = yes }
+
+		cost = 0
+
+		days_remove = 7
+
+        remove_effect = {
+        	custom_effect_tooltip = HNZ_gain_political_control
 			hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 		}
 	}

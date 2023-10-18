@@ -49,7 +49,7 @@ country_event = {		##	What he did before the Hanza - Red Line War
 			}
 		}
 		ai_chance = {
-			factor = 5
+			factor = 10
 		}
 	}
 }
@@ -78,7 +78,7 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 			}
 		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 
@@ -116,7 +116,7 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 			}
 		}
 		ai_chance = {
-			factor = 8
+			factor = 15
 		}
 	}
 }
@@ -150,6 +150,10 @@ country_event = {		## New Quater
 	option = {
 		name = nf_HNZ.4.a
 		add_political_power = 45
+
+		ai_chance = {
+			factor = 5
+		}
 	}
 }
 
@@ -1201,7 +1205,7 @@ country_event = { ## Mobilise NOW
 	id = nf_HNZ.39
 	title = nf_HNZ.39.t
 	desc = nf_HNZ.39.d
-	picture = "GFX_event (31)"
+	picture = "GFX_event (163)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1299,7 +1303,7 @@ country_event = {	## Year 2 Agenda Events
 	id = nf_HNZ.43
 	title = nf_HNZ.43.t
 	desc = nf_HNZ.43.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	trigger = {
 		original_tag = HNZ
@@ -1311,6 +1315,12 @@ country_event = {	## Year 2 Agenda Events
 	option = {
 		name = nf_HNZ.43.a
 		complete_national_focus = HNZ_year_2_military_priority
+		custom_effect_tooltip = HNZ_agenda_military_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_military_priority_completion_reward
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1319,6 +1329,16 @@ country_event = {	## Year 2 Agenda Events
 	option = {
 		name = nf_HNZ.43.b
 		complete_national_focus = HNZ_year_2_armament_priority
+		custom_effect_tooltip = HNZ_agenda_armament_priority
+		activate_mission = HNZ_mission_armament_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_timed_idea = {
+				idea = HNZ_military_armament_prestige
+				days = 400
+			}
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1327,6 +1347,13 @@ country_event = {	## Year 2 Agenda Events
 	option = {
 		name = nf_HNZ.43.c
 		complete_national_focus = HNZ_year_2_reclaimation_priority
+		custom_effect_tooltip = HNZ_agenda_reclaimation_priority
+		activate_mission = HNZ_mission_reclaimation_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_reclaimation_reward
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1335,8 +1362,15 @@ country_event = {	## Year 2 Agenda Events
 	option = {
 		name = nf_HNZ.43.e
 		complete_national_focus = HNZ_year_2_research_priority
+		custom_effect_tooltip = HNZ_agenda_research_priority
+		activate_mission = HNZ_mission_research_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_research_reward
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 }
@@ -1345,7 +1379,7 @@ country_event = {	## Year 3 Agenda Events
 	id = nf_HNZ.44
 	title = nf_HNZ.44.t
 	desc = nf_HNZ.44.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	trigger = {
 		original_tag = HNZ
@@ -1357,6 +1391,13 @@ country_event = {	## Year 3 Agenda Events
 	option = {
 		name = nf_HNZ.44.a
 		complete_national_focus = HNZ_year_3_draisine_priority
+		custom_effect_tooltip = HNZ_agenda_draisine_priority
+		activate_mission = HNZ_mission_draisine_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_draisine_reward
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1365,16 +1406,38 @@ country_event = {	## Year 3 Agenda Events
 	option = {
 		name = nf_HNZ.44.b
 		complete_national_focus = HNZ_year_3_mutant_purge_priority
+		custom_effect_tooltip = HNZ_agenda_mutant_purge_priority
+		activate_mission = HNZ_mission_mutant_purge_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_purge_the_unclean
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 
 	option = {
 		name = nf_HNZ.44.c
 		complete_national_focus = HNZ_year_3_polis_priority
+		custom_effect_tooltip = HNZ_agenda_polis_priority
+		activate_mission = HNZ_mission_polis_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			custom_effect_tooltip = civic_unlock_tier_6
+			add_opinion_modifier = {
+				target = PLS
+				modifier = PLS_support
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = PLS_support
+			}
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 }
@@ -1383,7 +1446,7 @@ country_event = {	## Year 4 Agenda Events
 	id = nf_HNZ.45
 	title = nf_HNZ.45.t
 	desc = nf_HNZ.45.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	trigger = {
 		original_tag = HNZ
@@ -1395,14 +1458,28 @@ country_event = {	## Year 4 Agenda Events
 	option = {
 		name = nf_HNZ.45.a
 		complete_national_focus = HNZ_year_4_generals_priority
+		custom_effect_tooltip = HNZ_agenda_generals_priority
+		activate_mission = HNZ_mission_generals_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_generals_reward_idea
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 
 	option = {
 		name = nf_HNZ.45.b
 		complete_national_focus = HNZ_year_4_containment_priority
+		custom_effect_tooltip = HNZ_agenda_containment_priority
+		activate_mission = HNZ_mission_containment_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			add_ideas = HNZ_containment_protocols
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1411,6 +1488,29 @@ country_event = {	## Year 4 Agenda Events
 	option = {
 		name = nf_HNZ.45.c
 		complete_national_focus = HNZ_year_4_puppet_priority
+		custom_effect_tooltip = HNZ_agenda_puppet_priority
+		activate_mission = HNZ_mission_puppet_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			every_neighbor_country = { 
+				limit = {
+					NOT = {
+						has_idea = civics_border_4
+						OR = {
+							original_tag = RED
+							original_tag = HNZ
+							has_country_flag = is_savage_nation
+							has_country_flag = is_bandit_nation
+						}
+					}
+				}
+				add_timed_idea = {
+					idea = HNZ_subversion_efforts
+					days = 460
+				}
+			}
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1419,8 +1519,18 @@ country_event = {	## Year 4 Agenda Events
 	option = {
 		name = nf_HNZ.45.e
 		complete_national_focus = HNZ_year_4_industry_priority
+		custom_effect_tooltip = HNZ_agenda_industry_priority
+		activate_mission = HNZ_mission_industry_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			set_technology = {
+				tech_technician_machining = 1
+				tech_technician_toolkit = 1
+			}
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 }
@@ -1429,7 +1539,7 @@ country_event = {	## Year 5 Agenda Events
 	id = nf_HNZ.46
 	title = nf_HNZ.46.t
 	desc = nf_HNZ.46.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	trigger = {
 		original_tag = HNZ
@@ -1441,14 +1551,28 @@ country_event = {	## Year 5 Agenda Events
 	option = {
 		name = nf_HNZ.46.a
 		complete_national_focus = HNZ_year_5_hegemony_priority
+		custom_effect_tooltip = HNZ_agenda_hegemony_priority
+		activate_mission = HNZ_mission_hegemony_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			## Tooltip for doing something cool here
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 
 	option = {
 		name = nf_HNZ.46.b
 		complete_national_focus = HNZ_year_5_expansion_priority
+		custom_effect_tooltip = HNZ_agenda_expansion_priority
+		activate_mission = HNZ_mission_expansion_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			## Tooltip for doing something cool here
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1457,6 +1581,13 @@ country_event = {	## Year 5 Agenda Events
 	option = {
 		name = nf_HNZ.46.c
 		complete_national_focus = HNZ_year_5_coalition_priority
+		custom_effect_tooltip = HNZ_agenda_coalition_priority
+		activate_mission = HNZ_mission_coalition_priority
+		effect_tooltip = {
+			custom_effect_tooltip = HNZ_agenda_once_completed
+			## Tooltip for doing something cool here
+			custom_effect_tooltip = HNZ_gain_political_control
+		}
 		ai_chance = {
 			factor = 5
 		}
@@ -1467,7 +1598,7 @@ country_event = {	## Year 6
 	id = nf_HNZ.47
 	title = nf_HNZ.47.t
 	desc = nf_HNZ.47.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	trigger = {
 		original_tag = HNZ
@@ -1480,7 +1611,7 @@ country_event = {	## Year 6
 		name = nf_HNZ.46.a
 		complete_national_focus = HNZ_year_6
 		ai_chance = {
-			factor = 5
+			factor = 15
 		}
 	}
 }
@@ -1489,7 +1620,7 @@ country_event = {
 	id = nf_HNZ.48
 	title = nf_HNZ.48.t
 	desc = nf_HNZ.48.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (164)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1497,7 +1628,7 @@ country_event = {
 	option = {	## Central Metro Command Path
 		name = nf_HNZ.48.a
 		ai_chance = {
-			factor = 5
+			factor = 10
 		}
 	}
 
@@ -1529,7 +1660,7 @@ country_event = {
 	option = {	## Normal Hansa Path
 		name = nf_HNZ.48.c
 		ai_chance = {
-			factor = 5
+			factor = 25
 		}
 	}
 }
@@ -1538,7 +1669,7 @@ country_event = {
 	id = nf_HNZ.49
 	title = nf_HNZ.49.t
 	desc = nf_HNZ.49.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (51)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1577,7 +1708,7 @@ country_event = { ## BAU Success
 	id = nf_HNZ.50
 	title = nf_HNZ.50.t
 	desc = nf_HNZ.50.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (56)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1594,7 +1725,7 @@ country_event = { ## Bau Failure
 	id = nf_HNZ.51
 	title = nf_HNZ.51.t
 	desc = nf_HNZ.51.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (110)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1611,7 +1742,7 @@ country_event = { ## External Sphere Event
 	id = nf_HNZ.52
 	title = nf_HNZ.52.t
 	desc = nf_HNZ.52.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (162)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1619,16 +1750,19 @@ country_event = { ## External Sphere Event
 	option = {
 		name = nf_HNZ.52.a
 		add_ideas = civics_border_3
+		custom_effect_tooltip = NF_HNZ.52.a.tooltip
 		every_neighbor_country = { 
 			limit = {
 				NOT = {
 					has_country_flag = is_savage_nation
-					OR = {
-						has_idea = civics_border_4
-					}
+					OR = { has_idea = civics_border_4 }
 				}
 			}
-			country_event = nf_HNZ.53
+			country_event = { 
+				id = nf_HNZ.53
+				days = 1
+				random_days = 1
+			}
 		}
 		ai_chance = {
 			factor = 10
@@ -1640,7 +1774,7 @@ country_event = { ## External Sphere Event
 	id = nf_HNZ.53
 	title = nf_HNZ.53.t
 	desc = nf_HNZ.53.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (164)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1665,7 +1799,7 @@ country_event = { ## Force to take the passport requirement
 	id = nf_HNZ.54
 	title = nf_HNZ.54.t
 	desc = nf_HNZ.54.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (162)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1674,8 +1808,26 @@ country_event = { ## Force to take the passport requirement
 		name = nf_HNZ.54.a ## Compliance
 		add_ideas = civics_border_3
 		HNZ = { country_event = nf_HNZ.55 }
+
 		ai_chance = {
-			factor = 10
+			base = 2
+			modifier = {
+				add = 5
+				has_opinion = {
+					target = HNZ
+					value > 9
+				}
+			}	
+			modifier = {
+				factor = 0
+				OR = {
+					has_opinion = {
+						target = HNZ
+						value < 6
+					}
+					has_war_with = HNZ
+				}
+			}	
 		}
 	}
 
@@ -1683,7 +1835,24 @@ country_event = { ## Force to take the passport requirement
 		name = nf_HNZ.54.b ## Disobedience
 		HNZ = { country_event = nf_HNZ.56 }
 		ai_chance = {
-			factor = 10
+			base = 2
+			modifier = {
+				add = 0
+				has_opinion = {
+					target = HNZ
+					value > 9
+				}
+			}	
+			modifier = {
+				factor = 5
+				OR = {
+					has_opinion = {
+						target = HNZ
+						value < 6
+					}
+					has_war_with = HNZ
+				}
+			}	
 		}
 	}
 }
@@ -1692,7 +1861,7 @@ country_event = { ## FROM Complies
 	id = nf_HNZ.55
 	title = nf_HNZ.55.t
 	desc = nf_HNZ.55.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1710,7 +1879,7 @@ country_event = { ## From Disobeys
 	id = nf_HNZ.56
 	title = nf_HNZ.56.t
 	desc = nf_HNZ.56.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (161)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1727,7 +1896,7 @@ country_event = {
 	id = nf_HNZ.57
 	title = nf_HNZ.57.t
 	desc = nf_HNZ.57.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (145)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1764,7 +1933,7 @@ country_event = {
 	id = nf_HNZ.58
 	title = nf_HNZ.58.t
 	desc = nf_HNZ.58.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (144)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1841,7 +2010,7 @@ country_event = { ## Reich
 	id = nf_HNZ.59
 	title = nf_HNZ.59.t
 	desc = nf_HNZ.59.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (142)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1898,7 +2067,7 @@ country_event = { ## Redline
 	id = nf_HNZ.60
 	title = nf_HNZ.60.t
 	desc = nf_HNZ.60.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (71)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1953,17 +2122,25 @@ country_event = {
 	id = nf_HNZ.61
 	title = nf_HNZ.61.t
 	desc = nf_HNZ.61.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (49)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.61.a
+		add_war_support = 0.1
+		ai_chance = {
+			factor = 10
+		}
+	}
 }
 
 country_event = { ## KTG / HNZ War
 	id = nf_HNZ.62
 	title = nf_HNZ.62.t
 	desc = nf_HNZ.62.d
-	picture = "GFX_event (160)"
+	picture = "GFX_event (12)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2000,7 +2177,7 @@ country_event = {	## Invisible Observers Path
 	id = nf_HNZ.64
 	title = nf_HNZ.64.t
 	desc = nf_HNZ.64.d
-	picture = "GFX_event (27)"
+	picture = "GFX_event (31)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2025,7 +2202,7 @@ country_event = {	## Fuel For Slaves?
 	id = nf_HNZ.65
 	title = nf_HNZ.65.t
 	desc = nf_HNZ.65.d
-	picture = "GFX_event (27)"
+	picture = "GFX_event (30)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2053,7 +2230,7 @@ country_event = {	## Flamethrowers for troops?
 	id = nf_HNZ.66
 	title = nf_HNZ.66.t
 	desc = nf_HNZ.66.d
-	picture = "GFX_event (27)"
+	picture = "GFX_event (146)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2073,7 +2250,7 @@ country_event = {	## HNZ slaves
 	id = nf_HNZ.67
 	title = nf_HNZ.67.t
 	desc = nf_HNZ.67.d
-	picture = "GFX_event (27)"
+	picture = "GFX_event (30)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2089,11 +2266,11 @@ country_event = {	## HNZ slaves
 	}
 }
 
-country_event = {	## HNZ slaves
+country_event = {	## HNZ manpower
 	id = nf_HNZ.68
 	title = nf_HNZ.68.t
 	desc = nf_HNZ.68.d
-	picture = "GFX_event (27)"
+	picture = "GFX_event (152)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -2107,5 +2284,149 @@ country_event = {	## HNZ slaves
 	}
 }
 
+country_event = {	## Scaven
+	id = nf_HNZ.69
+	title = nf_HNZ.69.t
+	desc = nf_HNZ.69.d
+	picture = "GFX_event (122)"
 
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_HNZ.69.a
+		custom_effect_tooltip = HNZ_SCA_expedition_1
+		hidden_effect = {
+			country_event = { 
+				id = nf_HNZ.70
+				days = 20
+				random_days = 20
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.69.b
+		#add_ideas = HNZ_purge_ratfolk
+		add_political_power = 50
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Scaven
+	id = nf_HNZ.70
+	title = nf_HNZ.70.t
+	desc = nf_HNZ.70.d
+	picture = "GFX_event (122)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.70.a
+		custom_effect_tooltip = HNZ_SCA_expedition_2
+		hidden_effect = {
+			country_event = { 
+				id = nf_HNZ.71
+				days = 7
+				random_days = 14
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+
+	option = {
+		name = nf_HNZ.70.b
+		#add_ideas = HNZ_purge_ratfolk
+		add_political_power = 100
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Scaven
+	id = nf_HNZ.71
+	title = nf_HNZ.71.t
+	desc = nf_HNZ.71.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.71.a
+		custom_effect_tooltip = HNZ_SCA_expedition_3
+		hidden_effect = {
+			country_event = { 
+				id = nf_HNZ.72
+				days = 7
+				random_days = 14
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+	option = {
+		name = nf_HNZ.71.b
+		#add_ideas = HNZ_purge_ratfolk
+		add_political_power = 150
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {	## Scaven
+	id = nf_HNZ.72
+	title = nf_HNZ.72.t
+	desc = nf_HNZ.72.d
+	picture = "GFX_event (27)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.71.b
+		add_opinion_modifier = {
+			target = SCA
+			modifier = SEV_assistance
+		}
+		reverse_add_opinion_modifier = {
+			target = HNZ
+			modifier = SEV_assistance
+		}
+		SCA = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+	
+	option = {
+		name = nf_HNZ.71.b
+		add_ideas = HNZ_purge_ratfolk
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
 

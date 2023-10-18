@@ -4,7 +4,7 @@ country_event = { ## Underhanded Trader ##
 	id = HNZ_random_event.1
 	title = HNZ_random_event.1.t
 	desc = HNZ_random_event.1.d
-	picture = event_tunnel
+	picture = "GFX_event (15)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -20,9 +20,7 @@ country_event = { ## Underhanded Trader ##
 		custom_effect_tooltip = HNZ_random_event.1.a_tt
 		random_owned_state = {
 			limit = {
-				NOT = {
-					has_state_category = pastoral
-				}
+				NOT = { has_state_category = pastoral }
 			}
 			add_resource = {
 			    type = alloys
@@ -33,16 +31,12 @@ country_event = { ## Underhanded Trader ##
 			    amount = 1
 			}
 		}
-		add_popularity = {
-			ideology = oligarch
-			popularity = -0.02
-		}
+		add_stability = -0.02
+		add_political_power = -20
 	}
 
 	option = {	## Kick him out of the station ##
 		name = HNZ_random_event.1.b
-
-		add_stability = 0.03
 		add_political_power = 15
 	}
 }
@@ -51,7 +45,7 @@ country_event = { ## Tradesmen don't carry Passports ##
 	id = HNZ_random_event.2
 	title = HNZ_random_event.2.t
 	desc = HNZ_random_event.2.d
-	picture = event_tunnel
+	picture = "GFX_event (16)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -66,12 +60,8 @@ country_event = { ## Tradesmen don't carry Passports ##
 	option = { ## Turn them Away. No Passport no entry ##
 		name = HNZ_random_event.2.a
 
-		add_stability = 0.02
-		add_political_power = 5
-		add_popularity = {
-			ideology = oligarch
-			popularity = 0.02
-		}
+		add_stability = 0.025
+		add_political_power = 15
 	}
 
 	option = {	## Promising Wares, let them come ##
@@ -91,15 +81,9 @@ country_event = { ## Tradesmen don't carry Passports ##
 			    type = components
 			    amount = 1
 			}
-			add_resource = {
-			    type = chemicals
-			    amount = 1
-			}
 		}
-		add_popularity = {
-			ideology = oligarch
-			popularity = -0.025
-		}
+		add_stability = -0.02
+		add_political_power = -20
 	}
 }
 
@@ -107,7 +91,7 @@ country_event = { ## Bandit Raid on Caravan ##
 	id = HNZ_random_event.3
 	title = HNZ_random_event.3.t
 	desc = HNZ_random_event.3.d
-	picture = event_tunnel
+	picture = "GFX_event (14)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -122,10 +106,7 @@ country_event = { ## Bandit Raid on Caravan ##
 		name = HNZ_random_event.3.a
 		add_manpower = -10
 		add_stability = 0.02
-		add_popularity = {
-			ideology = oligarch
-			popularity = 0.02
-		}
+		army_experience = 5
 	}
 
 	option = {	## Approach them to hire ##
@@ -142,10 +123,8 @@ country_event = { ## Bandit Raid on Caravan ##
 
 	option = {	## Pay them to fuck off ##
 		name = HNZ_random_event.3.c
-		add_popularity = {
-			ideology = oligarch
-			popularity = 0.03
-		}
+		add_political_power = -20
+		add_stability = 0.02
 	}
 }
 
@@ -153,7 +132,7 @@ country_event = { ## Hire Successful ##
 	id = HNZ_random_event.4
 	title = HNZ_random_event.4.t
 	desc = HNZ_random_event.4.d
-	picture = event_mutants.1
+	picture = "GFX_event (11)"
 	is_triggered_only = yes
 
 	option = {	## Nice ##
@@ -193,13 +172,14 @@ country_event = { ## Hire Failed ##
 	id = HNZ_random_event.8
 	title = HNZ_random_event.8.t
 	desc = HNZ_random_event.8.d
-	picture = event_mutants.1
+	picture = "GFX_event (14)"
 	is_triggered_only = yes
 
 	option = {	## Nice ##
 		name = HNZ_random_event.8.a
 		add_manpower = -10
-		add_stability = -0.02
+		add_stability = -0.03
+		add_political_power = -5
 	}
 }
 
@@ -207,7 +187,7 @@ country_event = { ## Pipes ate my caravan ##
 	id = HNZ_random_event.5
 	title = HNZ_random_event.5.t
 	desc = HNZ_random_event.5.d
-	picture = event_tunnel
+	picture = "GFX_event (109)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -221,9 +201,22 @@ country_event = { ## Pipes ate my caravan ##
 	option = { 
 		name = HNZ_random_event.5.a
 		add_equipment_to_stockpile = {
-		    type = infantry_equipment
-		    amount = 20
-		} 
+			type = conventional_infantry_equipment_1
+			amount = 5
+			producer = RUS
+		}
+		random_owned_state = {
+			limit = {
+		    	has_resources_amount = {
+    				resource = scrap
+    				amount > 1
+				}
+			}
+		    add_resource = {
+    			type = scrap 
+    			amount = 2
+    		}
+    	}
 	}
 }
 
@@ -231,7 +224,7 @@ country_event = { ## Red Line Trade Crash ##
 	id = HNZ_random_event.6
 	title = HNZ_random_event.6.t
 	desc = HNZ_random_event.6.d
-	picture = event_tunnel
+	picture = "GFX_event (117)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -240,25 +233,20 @@ country_event = { ## Red Line Trade Crash ##
 	trigger = {
 		original_tag = HNZ
 		has_war = no
-		AND = {
-			RED = {
-				is_ai = yes
-			}
-		}
+		AND = { RED = { exists = yes } }
 	}
 
 	option = { 
 		name = HNZ_random_event.6.a
 		custom_effect_tooltip = HNZ_random_event.6.a_tt
 		add_equipment_to_stockpile = {
-		    type = infantry_equipment
-		    amount = 10
+			type = conventional_infantry_equipment_1
+			amount = 10
+			producer = RUS
 		}
 		random_owned_state = {
 			limit = {
-				NOT = {
-					has_state_category = pastoral
-				}
+				NOT = { has_state_category = pastoral }
 			}
 			add_resource = {
 			    type = alloys
@@ -291,7 +279,7 @@ country_event = { ## Staion Chief calls against Hansa ##
 	id = HNZ_random_event.7
 	title = HNZ_random_event.7.t
 	desc = HNZ_random_event.7.d
-	picture = event_tunnel
+	picture =  "GFX_event (161)"
 
 	mean_time_to_happen = {
 		days = 1800
@@ -318,10 +306,8 @@ country_event = { ## Staion Chief calls against Hansa ##
 
 	option = {
 		name = HNZ_random_event.7.b
-		trigger = {
-			has_government = dictatorial
-		}
+		trigger = { has_government = dictatorial }
 		custom_effect_tooltip = HNZ_random_event.7.b_tt
-		add_political_power = -20
+		add_political_power = -25
 	}
 }
