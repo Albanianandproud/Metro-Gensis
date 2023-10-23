@@ -1,0 +1,213 @@
+add_namespace = random_event_bad
+
+country_event = {
+	id = random_event_bad.1
+	title = random_event_bad.1.t
+	desc = random_event_bad.1.d
+	picture = "GFX_event (92)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = {
+			original_tag = GWC
+			original_tag = RED
+		}
+	}
+
+	option = {
+		name = random_event_bad.1.a
+		add_timed_idea = {
+			idea = metro_rat_infestation
+			days = 90
+		}
+	}
+}
+
+###############################################################################################################
+
+country_event = {	## Caravan Ambush
+	id = random_event_bad.2
+	title = random_event_bad.2.t
+	desc = random_event_bad.2.d
+	picture = "GFX_event (109)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = {
+			original_tag = GWC
+			original_tag = RED
+			original_tag = MSU
+		}
+	}
+
+	option = {
+		name = random_event_bad.2.a
+		add_timed_idea = {
+			idea = metro_caravan_ambush
+			days = 90
+		}
+	}
+}
+
+###############################################################################################################
+
+country_event = { ## Crop Failure
+	id = random_event_bad.3
+	title = random_event_bad.3.t
+	desc = random_event_bad.3.d
+	picture = "GFX_event (113)"
+
+	mean_time_to_happen = {
+		days = 4000
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = {
+			original_tag = GWC
+			AND = {
+				num_of_civilian_factories > 10
+				has_tech = tech_farming_4 
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.3.a
+		add_timed_idea = {
+			idea = metro_fallow_crops
+			days = 150
+		}
+	}
+
+	option = {
+		name = random_event_bad.3.b
+		add_timed_idea = {
+			idea = metro_swords_to_ploughs
+			days = 80
+		}
+	}
+}
+
+##############################################################################################
+
+country_event = {
+	id = random_event_bad.5
+	title = random_event_bad.5.t
+	desc = random_event_bad.5.d
+	picture = "GFX_event (152)"
+
+	mean_time_to_happen = {
+		days = 1750
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+						compliance < 40
+					}
+				}
+				add_resistance = 30
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.5.a
+		effect_tooltip = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+						compliance < 40
+					}
+				}
+				add_resistance = 30
+			}
+		}
+	}
+}
+
+country_event = {
+	id = random_event_bad.6
+	title = random_event_bad.6.t
+	desc = random_event_bad.6.d
+	picture = "GFX_event (106)"
+
+	mean_time_to_happen = {
+		days = 1750
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+						resistance > 10
+					}
+				}
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+				if = {
+					limit = {
+						industrial_complex > 10
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 2
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.6.a
+		effect_tooltip = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+						resistance > 10
+					}
+					AND = { has_manpower > 50 }
+				}
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+				if = {
+					limit = {
+						industrial_complex > 10
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 2
+					}
+				}
+			}
+		}
+	}
+}

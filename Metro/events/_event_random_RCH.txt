@@ -1,0 +1,304 @@
+add_namespace = RCH_random_event
+
+country_event = { ## RCH soldiers planning on mutiny
+	id = RCH_random_event.1
+	title = RCH_random_event.1.t
+	desc = RCH_random_event.1.d
+	picture = "GFX_event (56)"
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH }
+
+	option = { ## Just execute them
+		name = RCH_random_event.1.a
+		add_manpower = -10
+		add_command_power = -10
+		add_political_power = 5
+	}
+
+	option = { ## Public Execution 
+		name = RCH_random_event.1.b
+		add_manpower = -10
+		add_command_power = -15
+		add_war_support = 0.05
+	}
+
+	option = { ## Fuhrer convinces them to stay 
+		name = RCH_random_event.1.c
+		add_command_power = 5
+		add_political_power = -25
+	}
+}
+
+country_event = { ## Prominent officer accused of mutation
+	id = RCH_random_event.2
+	title = RCH_random_event.2.t
+	desc = RCH_random_event.2.d
+	picture = "GFX_event (142)"
+
+	immediate = {
+		random_unit_leader = { set_character_flag = RCH_mutant_rumours }
+	}
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH }
+
+	option = { ## Execute them on the spot
+		name = RCH_random_event.2.a
+		add_manpower = -1
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			retire = yes
+		}
+		add_war_support = 0.05
+		add_command_power = -15
+		add_political_power = 50
+	}
+
+	option = { ## Quash the rumours
+		name = RCH_random_event.2.b
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			clr_character_flag = RCH_mutant_rumours
+		}
+		add_war_support = -0.05
+		add_political_power = -30
+		army_experience = -5
+	}
+
+	option = { ## Examine rumours / Investigate the officer
+		name = RCH_random_event.2.c
+		hidden_effect = {
+			random_list = {
+				45 = { # Exposed for being a mutant !
+					country_event = {
+						id = RCH_random_event.3 
+						days = 1
+						random_hours = 12
+					}
+				} 
+				45 = { # Not A mutant
+					country_event = {
+						id = RCH_random_event.4 
+						days = 1
+						random_hours = 12
+					}
+				} 
+				10 = { # Escaped
+					country_event = {
+						id = RCH_random_event.5 
+						days = 1
+						random_hours = 12
+					}
+				} 
+			}
+		}
+	}
+}
+
+country_event = { # Exposed for being a mutant !
+	id = RCH_random_event.3
+	title = RCH_random_event.3.t
+	desc = RCH_random_event.3.d
+	picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = { ## Kill him !!
+		name = RCH_random_event.3.a
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			retire = yes
+		}
+		add_political_power = -10
+		add_command_power = -10
+	}
+}
+
+country_event = { # Not a Mutant
+	id = RCH_random_event.4
+	title = RCH_random_event.4.t
+	desc = RCH_random_event.4.d
+	picture = "GFX_event (15)"
+
+	is_triggered_only = yes
+
+	option = { ## dispell the rumours
+		name = RCH_random_event.4.a
+		hidden_effect = {
+			random_list = {
+				50 = { ## Military angry / stone him anyways
+					country_event = {
+						id = RCH_random_event.6 
+						days = 3
+						random_hours = 12
+					}
+				} 
+				50 = { ## Military discontent, but keep officer
+					country_event = {
+						id = RCH_random_event.7 
+						days = 3
+						random_hours = 12
+					}
+				} 
+			}
+		}
+	}
+
+	option = { ## Not a mutant / but dispose of him to keep military happy
+		name = RCH_random_event.4.b
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			retire = yes
+		}
+		add_war_support = 0.05
+		add_command_power = -5
+		add_political_power = 20
+	}
+}
+
+country_event = { # Escaped
+	id = RCH_random_event.5
+	title = RCH_random_event.5.t
+	desc = RCH_random_event.5.d
+	picture = "GFX_event (150)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCH_random_event.5.a
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			retire = yes
+		}
+		## Maybe give him over to Stortbeker. If they exist still?
+	}
+}
+
+country_event = { ## Military angry / stone him anyways
+	id = RCH_random_event.6
+	title = RCH_random_event.6.t
+	desc = RCH_random_event.6.d
+	picture = "GFX_event (58)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCH_random_event.6.a
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			retire = yes
+		}
+		add_command_power = -15
+		add_political_power = -15
+	}
+}
+
+country_event = { ## Military discontent, but keep officer
+	id = RCH_random_event.7
+	title = RCH_random_event.7.t
+	desc = RCH_random_event.7.d
+	picture = "GFX_event (106)"
+
+	immediate = {
+		every_unit_leader = {
+			limit = {
+				has_character_flag = RCH_mutant_rumours
+			}
+			clr_character_flag = RCH_mutant_rumours
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCH_random_event.7.a
+		add_political_power = -10
+	}
+}
+
+country_event = { ## Mysterious figure seeks passage
+	id = RCH_random_event.8
+	title = RCH_random_event.8.t
+	desc = RCH_random_event.8.d
+	picture = "GFX_event (108)"
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH }
+
+	option = { ## Refuse Entrance
+		name = RCH_random_event.8.a
+	}
+
+	option = { ## Let him pass 
+		name = RCH_random_event.8.b
+		add_political_power = -45
+		capital_scope = {
+			add_resource = {
+				type = components
+				amount = 1
+			}
+			add_resource = {
+				type = chemicals
+				amount = 1
+			}
+		}
+	}
+}
+
+country_event = { ## Manpower Shortages
+	id = RCH_random_event.9
+	title = RCH_random_event.9.t
+	desc = RCH_random_event.9.d
+	picture = "GFX_event (106)"
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH AND = { NOT = { has_idea = RCH_recruitment_surplus } } }
+
+	option = { ## Refuse Entrance
+		name = RCH_random_event.9.a
+		add_timed_idea = { idea = RCH_recruitment_shortage days = 90 }
+	}
+}
+
+country_event = { ## Manpower Surplus
+	id = RCH_random_event.10
+	title = RCH_random_event.10.t
+	desc = RCH_random_event.10.d
+	picture = "GFX_event (106)"
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH AND = { NOT = { has_idea = RCH_recruitment_shortage } } }
+
+	option = { ## Refuse Entrance
+		name = RCH_random_event.9.a
+		add_timed_idea = { idea = RCH_recruitment_surplus days = 90 }
+	}
+}
+
+country_event = { ## People clamour for war!
+	id = RCH_random_event.11
+	title = RCH_random_event.11.t
+	desc = RCH_random_event.11.d
+	picture = "GFX_event (142)"
+
+	mean_time_to_happen = { days = 1800 }
+	trigger = { original_tag = RCH AND = { has_war_support > 0.8 } }
+
+	option = { ## Refuse Entrance
+		name = RCH_random_event.11.a
+		add_timed_idea = { idea = RCH_clamour_for_conflict days = 60 }
+	}
+}

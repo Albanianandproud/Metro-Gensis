@@ -282,4 +282,79 @@ country_event = {
 
 ###############################################################################################################
 
+add_namespace = random_event_scientist
+
+country_event = {
+	id = random_event_scientist.01
+	title = random_event_scientist.01.t
+	desc = random_event_scientist.01.d
+	picture = "GFX_event (53)"
+
+	mean_time_to_happen = {
+		days = 2250
+	}
+
+	trigger = {
+		has_civic_education_higher_2 = yes
+	}
+
+	option = {	
+		name = random_event_scientist.01.a
+		add_timed_idea = { idea = random_event_science_boost days = 140 }
+	}
+
+	option = {	
+		name = random_event_scientist.01.b
+	}
+}
+
+###############################################################################################################
+
+add_namespace = random_event_printers
+
+country_event = {
+	id = random_event_printers.01
+	title = random_event_printers.01.t
+	desc = random_event_printers.01.d
+	picture = "GFX_event (150)"
+
+	mean_time_to_happen = {
+		days = 2250
+	}
+
+	trigger = {
+		has_civic_education_higher_2 = yes
+		AND = {
+			NOT = {
+				has_country_flag = is_bandit_nation
+			}
+		}
+	}
+
+	option = {	
+		name = random_event_printers.01.a
+		add_timed_idea = { idea = random_event_ban_printing days = 240 }
+		capital_scope = {
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+			add_resource = {
+				type = components
+				amount = 1
+			}
+		}
+	}
+
+	option = {	
+		name = random_event_printers.01.b
+		add_timed_idea = { idea = random_event_ban_printing days = 140 }
+	}
+
+	option = {	
+		name = random_event_printers.01.c
+		add_political_power = -50
+		add_stability = 0.05
+	}
+}
 
