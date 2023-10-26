@@ -11,7 +11,6 @@ SPT_spartans_hate_mutants = {
 			country_exists = MUT
 		}
 	}
-
 	ai_strategy = {
 		type = antagonize
 		id = "MUT"
@@ -28,61 +27,42 @@ SPT_be_friendly_with_polis = {
 	abort = {
 		NOT = { country_exists = PLS }
 	}
-
 	ai_strategy = {
 		type = befriend
-		id = "PLS"
-		value = 250
-	}
-	ai_strategy = {
-		type = protect
-		id = "PLS"
-		value = 250
+		id = PLS
+		value = 100
 	}
 	ai_strategy = {
 		type = alliance
-		id = "PLS"
-		value = 250
+		id = PLS
+		value = 100
 	}
-}
-SPT_help_out_polis_a_little = {
-	allowed = {
-		original_tag = SPT
-	}
-	enable = {
-		country_exists = PLS
-	}
-	abort = {
-		NOT = { country_exists = PLS }
-	}
-
 	ai_strategy = {
 		type = support
-		id = "PLS"
+		id = PLS
+		value = 100
+	}
+	ai_strategy = {
+		type = send_lend_lease_desire
+		id = PLS
 		value = 100
 	}
 }
 SPT_send_volunteers = {
+	allowed = {
+		original_tag = SPT
+	}
 	enable = {
-		NOT = {
-			OR = {
-				original_tag = SPT
-				tag = RCH
-				tag = GWC
-				tag = RED
-			}
-		}
+		threat > 0.02
 	}
 	abort = {
-		OR = {
-			original_tag = SPT
-		}
+		SPT = { exists = no }
 	}
 	reversed = yes
 
 	ai_strategy = {
 		type = send_volunteers_desire
-		id = "SPT"
+		id = SPT
 		value = 900
 	}
 }
