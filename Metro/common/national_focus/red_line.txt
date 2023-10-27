@@ -4114,6 +4114,24 @@ focus_tree = {
 				target = HUL
 				modifier = support
 			}
+			if = {
+				limit = {
+					has_opinion_modifier = RED_betrayed_revolution
+				}
+				remove_opinion_modifier = {
+					target = HUL
+					modifier = RED_betrayed_revolution
+				}
+			}
+			if = {
+				limit = {
+					has_opinion_modifier = RED_betrayed_revolution_for_now 
+				}
+				remove_opinion_modifier = {
+					target = HUL
+					modifier = RED_betrayed_revolution_for_now 
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -4170,6 +4188,15 @@ focus_tree = {
 				}
 			}
 			RED = { add_to_faction = HUL }
+			if = {
+				limit = {
+					HUL = { has_opinion_modifier = communist }
+				}
+				remove_opinion_modifier = {
+					target = HUL
+					modifier = communist
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -4343,7 +4370,14 @@ focus_tree = {
 		relative_position_id = RED_1905_flavor_1
 		completion_reward = {
 			ULI = {
-				remove_ideas = divided_stations
+				add_political_power = 150
+				if = {
+					limit = {
+						has_idea = ULI_1905_station_factionalism
+					}
+					add_stability = -0.1
+					remove_ideas = ULI_1905_station_factionalism
+				}
 			}
 		}
 		ai_will_do = {
@@ -4397,6 +4431,24 @@ focus_tree = {
 			add_opinion_modifier = {
 				target = AVT
 				modifier = support
+			}
+			if = {
+				limit = {
+					has_opinion_modifier = RED_betrayed_revolution
+				}
+				remove_opinion_modifier = {
+					target = AVT
+					modifier = RED_betrayed_revolution
+				}
+			}
+			if = {
+				limit = {
+					has_opinion_modifier = RED_betrayed_revolution_for_now 
+				}
+				remove_opinion_modifier = {
+					target = AVT
+					modifier = RED_betrayed_revolution_for_now 
+				}
 			}
 		}
 		ai_will_do = {
@@ -4527,6 +4579,24 @@ focus_tree = {
 		relative_position_id = RED_trotskyists
 		completion_reward = {
 			RED = { add_to_faction = AVT }
+			if = {
+				limit = {
+					has_opinion_modifier = communist
+				}
+				remove_opinion_modifier = {
+					target = AVT
+					modifier = communist
+				}
+			}
+			if = {
+				limit = {
+					AVT = { has_opinion_modifier = communist }
+				}
+				remove_opinion_modifier = {
+					target = AVT
+					modifier = communist
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
