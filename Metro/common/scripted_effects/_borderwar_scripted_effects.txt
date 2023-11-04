@@ -1,182 +1,62 @@
-flip_borderwar_initiative = {
+borderwar_initialize_variables = {
+	set_variable = {
+		var = initiate_borderwar_cost
+		value = 75
+	}
+	set_variable = {
+		var = borderwar_base_cooldown
+		value = 98
+	}
+}
+
+intensify_border_conflict = {
 	if = {
 		limit = {
-			check_variable = { GLOBAL.borderwar_attacker_tag = RED.id }
-			RED = { NOT = { controls_no_clash_states = yes } }
+			not = {
+				has_idea = redline_reich_borderwar_stage_1
+				has_idea = redline_reich_borderwar_stage_2
+				has_idea = redline_reich_borderwar_stage_3
+				has_idea = redline_reich_borderwar_stage_4
+				has_idea = redline_reich_borderwar_stage_5
+			}
 		}
-		set_variable = { GLOBAL.borderwar_attacker_tag = RCH.id }
-		set_variable = { GLOBAL.borderwar_defender_tag = RED.id }
+		add_ideas = redline_reich_borderwar_stage_1
 	}
 	else_if = {
 		limit = {
-			check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id }
-			RCH = { NOT = { controls_no_clash_states = yes } }
+			has_idea = redline_reich_borderwar_stage_1
 		}
-		set_variable = { GLOBAL.borderwar_attacker_tag = RED.id }
-		set_variable = { GLOBAL.borderwar_defender_tag = RCH.id }
+		swap_ideas = {
+			remove_idea = redline_reich_borderwar_stage_1
+			add_idea = redline_reich_borderwar_stage_2
+		}
 	}
 	else_if = {
 		limit = {
-			var:GLOBAL.borderwar_defender_tag = { controls_no_clash_states = yes }
+			has_idea = redline_reich_borderwar_stage_2
 		}
-	}
-	else = {
-		end_borderwar = yes
-	}
-}
-
-end_borderwar = {
-	every_country = {
-		limit = { has_idea = borderwar_the_flower_wars }
-		country_event = borderwar.5
-	}
-	set_global_flag = borderwar_ended
-}
-
-set_new_borderwar_target = {
-	flip_borderwar_initiative = yes
-	if = {
-		limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RED.id } }
-		if = {
-			limit = { 430   = { is_owned_and_controlled_by = RED } }
-			#should not happen!!
-			hidden_effect = {
-				if = {
-					limit = { NOT = { has_global_flag = flip_loop } }
-					set_global_flag = flip_loop
-					set_new_borderwar_target = yes
-				}
-			}
-		}
-		else_if = {
-			limit = { 431 = { is_owned_and_controlled_by = RED } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 814 }
-			set_variable = { GLOBAL.borderwar_defender_state = 430   }
-		}
-		else_if = {
-			limit = { 214 = { is_owned_and_controlled_by = RED } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 214 }
-			set_variable = { GLOBAL.borderwar_defender_state = 431 }
-		}
-		else_if = {
-			limit = { RED = { controls_no_clash_states = yes } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 810 }
-			set_variable = { GLOBAL.borderwar_defender_state = 214 }
+		swap_ideas = {
+			remove_idea = redline_reich_borderwar_stage_2
+			add_idea = redline_reich_borderwar_stage_3
 		}
 	}
 	else_if = {
-		limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id } }
-		if = {
-			limit = { 214 = { is_owned_and_controlled_by = RCH } }
-			#should not happen!!
-			hidden_effect = {
-				if = {
-					limit = { NOT = { has_global_flag = flip_loop } }
-					set_global_flag = flip_loop
-					set_new_borderwar_target = yes
-				}
-			}
+		limit = {
+			has_idea = redline_reich_borderwar_stage_3
 		}
-		else_if = {
-			limit = { 431 = { is_owned_and_controlled_by = RCH } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 431 }
-			set_variable = { GLOBAL.borderwar_defender_state = 214 }
+		swap_ideas = {
+			remove_idea = redline_reich_borderwar_stage_3
+			add_idea = redline_reich_borderwar_stage_4
 		}
-		else_if = {
-			limit = { 430   = { is_owned_and_controlled_by = RCH } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 430 }
-			set_variable = { GLOBAL.borderwar_defender_state = 431 }
-		}
-		else_if = {
-			limit = { RCH = { controls_no_clash_states = yes } }
-			set_variable = { GLOBAL.borderwar_attacker_state = 214 }
-			set_variable = { GLOBAL.borderwar_defender_state = 350   }
-		}
-	}
-	else = {
-		end_borderwar = yes
-	}
-	clr_global_flag = flip_loop
-}
-
-fire_clash = {
-	var:GLOBAL.borderwar_attacker_tag = {
-		if = {
-			limit = {
-				tag = RED
-			}
-			start_border_war = {
-				change_state_after_war = no # handled via event
-				attacker = {
-					state = var:GLOBAL.borderwar_attacker_state
-					num_provinces = 3
-					on_win = borderwar_clash.1
-					on_lose = borderwar_clash.2
-					on_cancel = borderwar_clash.3
-				}
-
-				defender = {
-					state = var:GLOBAL.borderwar_defender_state
-					num_provinces = 3
-					on_win = borderwar_clash.4
-					on_lose = borderwar_clash.5
-					on_cancel = borderwar_clash.6
-				}
-			}
-			hidden_effect = {
-				set_border_war_data = {
-					attacker = var:GLOBAL.borderwar_attacker_state
-					defender = var:GLOBAL.borderwar_defender_state
-					attacker_modifier = 1
-					defender_modifier = 1
-					combat_width = 60
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				tag = RCH
-			}
-			start_border_war = {
-				change_state_after_war = no
-				attacker = {
-					state = var:GLOBAL.borderwar_attacker_state
-					num_provinces = 3
-					on_win = borderwar_clash.4
-					on_lose = borderwar_clash.5
-					on_cancel = borderwar_clash.6
-				}
-
-				defender = {
-					state = var:GLOBAL.borderwar_defender_state
-					num_provinces = 3
-					on_win = borderwar_clash.1
-					on_lose = borderwar_clash.2
-					on_cancel = borderwar_clash.3
-				}
-			}
-			hidden_effect = {
-				set_border_war_data = {
-					attacker = var:GLOBAL.borderwar_attacker_state
-					defender = var:GLOBAL.borderwar_defender_state
-					attacker_modifier = 1
-					defender_modifier = 1
-					combat_width = 60
-				}
-			}
-		}
-	}
-}
-
-hidden_borderwar_flip = {
-	if = {
-		limit = { NOT = { has_global_flag = first_borderwar_click } }
-		set_global_flag = first_borderwar_click
 	}
 	else_if = {
-		limit = { has_global_flag = first_borderwar_click }
-		set_new_borderwar_target = yes
-		clr_global_flag = first_borderwar_click
+		limit = {
+			has_idea = redline_reich_borderwar_stage_4
+		}
+		swap_ideas = {
+			remove_idea = redline_reich_borderwar_stage_4
+			add_idea = redline_reich_borderwar_stage_5
+		}
 	}
 }
 

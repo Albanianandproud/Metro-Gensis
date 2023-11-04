@@ -1,185 +1,313 @@
-add_namespace = borderwar
+add_namespace = borderwar_introduction
+
+country_event = { ## Introductionary Event
+	id = borderwar_introduction.0
+	title = borderwar_introduction.0.t
+	desc = borderwar_introduction.0.d
+
+	trigger = {
+		RED = { exists = yes }
+		RCH = { exists = yes }
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			RED = { set_country_flag = borderwar_enabled_flag borderwar_initialize_variables = yes }
+			RCH = { set_country_flag = borderwar_enabled_flag borderwar_initialize_variables = yes }
+			intensify_border_conflict = yes
+		}
+	}
+
+	option = {
+		name = borderwar_introduction.0.a
+		custom_effect_tooltip = RED_RCH_borderwar_mechanic
+	}
+}
+
+add_namespace = border_conflict_won_attacker
 
 country_event = {
-	id = borderwar.1
-	title = borderwar.1.t
-	desc = borderwar.1.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar.1.a
-	}
-}
-
-country_event = { 
-	id = borderwar.2
-	title = borderwar.2.t
-	desc = borderwar.2.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar.2.a
-	}
-}
-
-country_event = { 
-	id = borderwar.3
-	title = borderwar.3.t
-	desc = borderwar.3.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar.3.a
-	}
-}
-
-country_event = { 
-	id = borderwar.4
-	title = borderwar.4.t
-	desc = borderwar.4.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar.4.a
-	}
-}
-
-add_namespace = borderwar_clash
-
-country_event = { # RED / victory
-	id = borderwar_clash.1
-	title = borderwar_clash.1.t
-	desc = borderwar_clash.1.d
-	#picture =
+	id = border_conflict_won_attacker.1
+	title = border_conflict_won_attacker.1.t
+	desc = border_conflict_won_attacker.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_city_ruin
 
 	is_triggered_only = yes
 
 	immediate = {
-		hidden_effect = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
-				if = {
-					limit = { has_global_flag = debug_logs }
-					log = "RED victory if borderwar attacker tag: [?GLOBAL.borderwar_attacker_tag], borderwar defender state: [?GLOBAL.borderwar_defender_state]"
+		save_event_target_as = our_country	   
+		FROM = { 
+			save_event_target_as = our_state 
+			clr_state_flag = border_incident_active
+		}
+		FROM.FROM = { save_event_target_as = their_country }                  
+		FROM.FROM.FROM = {
+			save_event_target_as = their_state
+			clr_state_flag = border_incident_active
+		}
+		remove_targeted_decision = { target = event_target:their_country decision = border_conflict_time_until_cancelled }
+	}
+	
+	option = {
+		name = border_conflict_won_attacker.1.a
+		if = {
+			limit = {
+				check_variable = {
+					FROM.FROM.num_owned_states > 1
 				}
-				transfer_state = var:GLOBAL.borderwar_defender_state
 			}
+			transfer_state = FROM.FROM.FROM
 		}
-	}
-
-	option = {
-		name = borderwar_clash.1.a
-		army_experience = 10
-		effect_tooltip = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
-				transfer_state = var:GLOBAL.borderwar_defender_state
-			}
+		else = {
+			FROM.FROM = { ROOT = { annex_country = { target = PREV } } }
 		}
-	}
-}
-
-country_event = { 
-	id = borderwar_clash.2
-	title = borderwar_clash.2.t
-	desc = borderwar_clash.2.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar_clash.2.a
 		army_experience = 5
-		effect_tooltip = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id } }
-				RCH = { transfer_state = var:GLOBAL.borderwar_defender_state }
-			}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.15
+			uses = 1
+			category = land_doctrine
 		}
 	}
 }
+
+add_namespace = border_conflict_won_defender
 
 country_event = {
-	id = borderwar_clash.3
-	title = borderwar_clash.3.t
-	desc = borderwar_clash.3.d
-	#picture =
-
-	is_triggered_only = yes
-
-	option = {
-		name = borderwar_clash.3.a
-		army_experience = 5
-	}
-}
-
-country_event = { # RCH / victory
-	id = borderwar_clash.4
-	title = borderwar_clash.4.t
-	desc = borderwar_clash.4.d
-	#picture =
+	id = border_conflict_won_defender.1
+	title = border_conflict_won_defender.1.t
+	desc = border_conflict_won_defender.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_mountain
 
 	is_triggered_only = yes
 
 	immediate = {
 		hidden_effect = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
-				transfer_state = var:GLOBAL.borderwar_defender_state
+			save_event_target_as = our_country
+			FROM = {
+				save_event_target_as = our_state
+				clr_state_flag = border_incident_active
 			}
+			FROM.FROM = { save_event_target_as = their_country }
+			FROM.FROM.FROM = {
+				save_event_target_as = their_state
+				clr_state_flag = border_incident_active
+			}
+			set_country_flag = show_effect_tooltips
+			clear_variable = attacker_state_vs_@FROM.FROM
+			clear_variable = defender_state_vs_@FROM.FROM
+			remove_targeted_decision = { target = event_target:their_country decision = border_conflict_time_until_cancelled }
 		}
 	}
-
+	
+	#Same effect as attacker. Tooltip for their effects
 	option = {
-		name = borderwar_clash.4.a
+		name = border_conflict_won_defender.1.a
 		army_experience = 10
-		effect_tooltip = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = THIS.id } }
-				transfer_state = var:GLOBAL.borderwar_defender_state
-			}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.15
+			uses = 1
+			category = land_doctrine
+		}
+	}	
+}
+
+add_namespace = border_conflict_lost_attacker
+
+country_event = {
+	id = border_conflict_lost_attacker.1
+	title = border_conflict_lost_attacker.1.t
+	desc = border_conflict_lost_attacker.1.desc
+	
+	picture = GFX_report_event_dead_soldiers
+
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = our_country
+		FROM = { save_event_target_as = our_state }
+		FROM.FROM = { save_event_target_as = their_country }
+		FROM.FROM.FROM = { save_event_target_as = their_state }
+		set_country_flag = show_effect_tooltips
+		remove_targeted_decision = { target = event_target:their_country decision = border_conflict_time_until_cancelled }
+	}
+	
+	#Same effect as defender. Tooltip for their effects	
+	option = {
+		name = border_conflict_lost_attacker.1.a
+		add_war_support = -0.02
+		add_political_power = -30
+		army_experience = 5
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.1
+			uses = 1
+			category = land_doctrine
 		}
 	}
 }
 
-country_event = { # RCH / loss
-	id = borderwar_clash.5
-	title = borderwar_clash.5.t
-	desc = borderwar_clash.5.d
-	#picture =
+add_namespace = border_conflict_lost_defender
+
+country_event = {
+	id = border_conflict_lost_defender.1
+	title = border_conflict_lost_defender.1.t
+	desc = border_conflict_lost_defender.1.desc
+	
+	picture = GFX_report_event_dead_soldiers
 
 	is_triggered_only = yes
 
-	option = {
-		name = borderwar_clash.5.a
-		army_experience = 5
-		effect_tooltip = {
-			if = {
-				limit = { check_variable = { GLOBAL.borderwar_attacker_tag = RCH.id } }
-				RED = { transfer_state = var:GLOBAL.borderwar_defender_state }
+	immediate = {
+		hidden_effect = {
+			save_event_target_as = our_country
+			FROM = {
+				save_event_target_as = our_state
+				clr_state_flag = border_incident_active
 			}
+			FROM.FROM = { save_event_target_as = their_country }
+			FROM.FROM.FROM = {
+				save_event_target_as = their_state
+				clr_state_flag = border_incident_active
+			}
+			set_country_flag = show_effect_tooltips
+			clear_variable = attacker_state_vs_@FROM.FROM
+			clear_variable = defender_state_vs_@FROM.FROM
+			remove_targeted_decision = { target = event_target:their_country decision = border_conflict_time_until_cancelled }
 		}
 	}
+	
+	option = {
+		name = border_conflict_lost_defender.1.a
+		add_stability = -0.04
+		add_war_support = 0.02
+		add_political_power = -25
+		army_experience = 5
+	}	
 }
 
-country_event = { 
-	id = borderwar_clash.6
-	title = borderwar_clash.6.t
-	desc = borderwar_clash.6.d
-	#picture =
+add_namespace = border_conflict_canceled_attacker
+
+country_event = {
+	id = border_conflict_canceled_attacker.1
+	title = border_conflict_canceled_attacker.1.t
+	desc = border_conflict_canceled_attacker.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_mountain
 
 	is_triggered_only = yes
 
-	option = {
-		name = borderwar_clash.6.a
-		army_experience = 5
+	immediate = {
+		save_event_target_as = our_country
+		FROM = { save_event_target_as = our_state }
+		FROM.FROM = { save_event_target_as = their_country }
+		FROM.FROM.FROM = { save_event_target_as = their_state }
+		set_country_flag = show_effect_tooltips
 	}
+	
+	option = {
+		name = border_conflict_canceled_attacker.1.a
+		army_experience = 5
+	}	
+}
+
+add_namespace = border_conflict_canceled_defender
+
+country_event = {
+	id = border_conflict_canceled_defender.1
+	title = border_conflict_canceled_defender.1.t
+	desc = border_conflict_canceled_defender.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_mountain
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			save_event_target_as = our_country
+			FROM = {
+				save_event_target_as = our_state
+				clr_state_flag = border_incident_active
+			}
+			FROM.FROM = { save_event_target_as = their_country }
+			FROM.FROM.FROM = {
+				save_event_target_as = their_state
+				clr_state_flag = border_incident_active
+			}
+			set_country_flag = show_effect_tooltips
+			clear_variable = attacker_state_vs_@FROM.FROM
+			clear_variable = defender_state_vs_@FROM.FROM
+		}
+	}
+	
+	option = {
+		name = border_conflict_canceled_defender.1.a
+		army_experience = 5
+	}	
+}
+
+add_namespace = border_incident_defender_warning
+
+country_event = {
+	id = border_incident_defender_warning.1
+	title = border_incident_defender_warning.1.t
+	desc = border_incident_defender_warning.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_mountain
+
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = our_country
+		FROM = { save_event_target_as = their_country }
+	}
+	
+	option = {
+		name = border_incident_defender_warning.1.a
+	}	
+}
+
+add_namespace = border_conflict_escalation
+
+country_event = {
+	id = border_conflict_escalation.1
+	title = border_conflict_escalation.1.t
+	desc = border_conflict_escalation.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers_01
+
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = our_country
+		FROM = { save_event_target_as = their_country }
+	}
+	
+	option = {
+		name = border_conflict_escalation.1.a
+	}	
+}
+
+add_namespace = border_conflict_escalate_to_war
+
+country_event = {
+	id = border_conflict_escalate_to_war.1
+	title = border_conflict_escalate_to_war.1.t
+	desc = border_conflict_escalate_to_war.1.desc
+	
+	picture = GFX_report_event_chinese_soldiers
+
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = our_country
+		FROM = { save_event_target_as = their_country }
+	}
+	
+	option = {
+		name = border_conflict_escalate_to_war.1.a
+	}	
 }
