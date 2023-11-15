@@ -1,11 +1,11 @@
 @border_incident_escalation_countdown = 7
 @border_conflict_incident_forgotten_timer = 14
 @border_conflict_escalate_to_war_countdown = 21
-@border_conflict_time_until_cancelled = 63
+@border_conflict_time_until_cancelled = 35
 
 ## Initalized in events !
 @initiate_borderwar_cost = 50
-@borderwar_base_cooldown = 84
+@borderwar_base_cooldown = 70
 
 RCH_RED_border_war = {
 
@@ -13,7 +13,7 @@ RCH_RED_border_war = {
 		icon = border_war		
 
 		available = {
-			has_border_war_with = FROM
+			NOT = { has_border_war_with = FROM }
 			FROM = {
 				any_owned_state = {
 					is_controlled_by = FROM
@@ -94,7 +94,8 @@ RCH_RED_border_war = {
 
 		war_with_target_on_remove = yes
 
-		complete_effect = {											 
+		complete_effect = {		
+			hidden_effect = { add_command_power = -initiate_borderwar_cost }									 
 			hidden_effect = {
 				FROM = {
 					random_owned_controlled_state = {
@@ -257,11 +258,7 @@ RCH_RED_border_war = {
 		allowed = { always = no } #Activated from effect
 
 		available = {
-			divisions_in_border_state = {
-				state = var:FROM.attacker_state_vs_@ROOT
-				border_state = var:FROM.defender_state_vs_@ROOT
-				size < 0
-			}
+			has_non_aggression_pact_with = FROM
 		}
 
 		highlight_states = {
