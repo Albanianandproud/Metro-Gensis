@@ -16,7 +16,7 @@ EUR_council_gui_decision_category = {
 			NOT = { has_completed_focus = EUR_a_european_union }
 		}
 		
-		days_remove = 15
+		days_remove = 14
 	
 		cost = 50
 		
@@ -24,16 +24,11 @@ EUR_council_gui_decision_category = {
 
 		complete_effect = { 
 			add_popularity = { ideology = council popularity = 0.05 }
-			add_stability = -0.04
-		} 
-
-		timeout_effect = {
+			add_stability = -0.05
 		} 
 	}
 	
 	EUR_decision_add_council_med = {
-		
-		#icon = 
 
 		priority = 6400
 
@@ -46,25 +41,19 @@ EUR_council_gui_decision_category = {
 			NOT = { has_completed_focus = EUR_a_european_union }
 		}
 		
-		days_remove = 20
+		days_remove = 21
 
-	
 		cost = 75
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_popularity = { ideology = council popularity = 0.1 }
-			add_stability = -0.08
-		} 
-
-		timeout_effect = {
+			add_stability = -0.075
 		} 
 	}
 	
 	EUR_decision_add_council_high = {
-		
-		#icon = 
 
 		priority = 6300
 
@@ -79,23 +68,18 @@ EUR_council_gui_decision_category = {
 	
 		cost = 125
 		
-		days_remove = 30
+		days_remove = 35
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_popularity = { ideology = council popularity = 0.15 }
-			add_stability = -0.12
-		} 
-
-		timeout_effect = {
+			add_stability = -0.1
 		} 
 	}
 	
 	EUR_decision_scare_the_nation_council = {
-		
-		#icon = 
-
+	
 		priority = 6600
 
 		allowed = { original_tag = EUR }
@@ -109,15 +93,13 @@ EUR_council_gui_decision_category = {
 		
 		days_remove = 20
 
-	
-		cost = 175
+		cost = 150
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_popularity = { ideology = council popularity = 0.1 }
-			add_war_support = 0.1
-			add_stability = -0.15
+			add_stability = -0.1
 		} 
 
 		timeout_effect = {
@@ -125,12 +107,19 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_purchase_RED_revolvers	= {
-		
-		#icon = 
 
 		priority = 6700
 
 		allowed = { original_tag = EUR }
+
+		available = {
+			NOT = { has_war_with = RED }
+			RED = { 
+				exists = yes 
+				has_war = no 
+				has_opinion = { target = ROOT value > 10 }
+			}
+		}
 
 		is_good = yes 
 
@@ -140,14 +129,14 @@ EUR_council_gui_decision_category = {
 	
 		cost = 50
 		
-		days_remove = 45
+		days_remove = 35
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_equipment_to_stockpile = {
 				type = basic_infantry_equipment
-				amount = 35
+				amount = 20
 				producer = RED
 			}
 			RED = {
@@ -157,57 +146,22 @@ EUR_council_gui_decision_category = {
 				}
 			}
 		} 
-
-		timeout_effect = {
-		} 
-	}
-
-	
-	EUR_purchase_RCH_revolvers	= {
-		
-		#icon = 
-
-		priority = 6700
-
-		allowed = { original_tag = EUR }
-
-		is_good = yes 
-
-		visible = {
-			has_completed_focus = EUR_foreign_arms_purchase
-		}
-	
-		cost = 50
-		
-		days_remove = 45
-		
-		fire_only_once = no
-
-		complete_effect = { 
-			add_equipment_to_stockpile = {
-				type = basic_infantry_equipment #conventional_infantry_equipment_1
-				amount = 35
-				producer = RCH
-			}
-			RCH = {
-				add_opinion_modifier = {
-					target = EUR
-					modifier = small_increase
-				}
-			}
-		} 
-
-		timeout_effect = {
-		} 
 	}
 	
 	EUR_purchase_HNZ_revolvers	= {
-		
-		#icon = 
 
 		priority = 6700
 
 		allowed = { original_tag = EUR }
+
+		available = {
+			NOT = { has_war_with = HNZ }
+			HNZ = { 
+				exists = yes 
+				has_war = no 
+				has_opinion = { target = ROOT value > 10 }
+			}
+		}
 
 		is_good = yes 
 
@@ -217,14 +171,14 @@ EUR_council_gui_decision_category = {
 	
 		cost = 50
 		
-		days_remove = 45
+		days_remove = 35
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_equipment_to_stockpile = {
-				type = basic_infantry_equipment #conventional_infantry_equipment_1
-				amount = 35
+				type = basic_infantry_equipment
+				amount = 20
 				producer = HNZ
 			}
 			HNZ = {
@@ -233,9 +187,6 @@ EUR_council_gui_decision_category = {
 					modifier = small_increase
 				}
 			}
-		} 
-
-		timeout_effect = {
 		} 
 	}
 	
@@ -255,111 +206,116 @@ EUR_council_gui_decision_category = {
 	
 		cost = 100
 		
-		days_remove = 90
+		days_remove = 45
 		
 		fire_only_once = no
 
 		complete_effect = { 
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
-				amount = 40
+				amount = 30
 				producer = RUS
 			}
-		} 
-
-		timeout_effect = {
 		} 
 	}
 	
 	##################  BUDGET DECISIONS
 	
 	EUR_decision_increase_public_services_budget = {
-		
-		#icon = 
-
 		priority = 6700
 
 		allowed = { original_tag = EUR }
-
 		is_good = yes 
 
-		visible = {
-			has_completed_focus = EUR_increase_budget
+		visible = { has_completed_focus = EUR_increase_budget }
+
+		available = {
+			has_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = EUR_disable_budget }
+			}
 		}
 	
-		cost = 30
-		
-		days_remove = 90
+		cost = 45
+		days_remove = 70
 		
 		fire_only_once = no
 
 		complete_effect = { 
-			add_stability = 0.02
-			add_war_support = 0.02
+			hidden_effect = {
+				set_country_flag = EUR_disable_budget
+			} 
 		} 
 
-		timeout_effect = {
-		} 
+		modifier = {
+			consumer_goods_factor = 0.1
+			stability_weekly = 0.0025
+		}
+
+		remove_effect = {
+			clr_country_flag = EUR_disable_budget
+		}
 	}
 	
 	EUR_decision_increase_military_services_budget = {
 		
-		#icon = 
-
-		priority = 6700
-
-		allowed = { 
-			original_tag = EUR 
-		}
-
-		is_good = yes 
-
-		visible = {
-			has_completed_focus = EUR_increase_budget
+		available = {
+			has_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = EUR_disable_budget }
+			}
 		}
 	
-		cost = 75
-		
-		days_remove = 270
+		cost = 45
+		days_remove = 70
 		
 		fire_only_once = no
 
 		complete_effect = { 
+			hidden_effect = {
+				set_country_flag = EUR_disable_budget
+			} 
 		} 
 
-		timeout_effect = {
-			add_offsite_building = { type = arms_factory level = 1 }
-		} 
+		modifier = {
+			command_power_gain = 0.08
+			consumer_goods_factor = 0.1
+		}
+
+		remove_effect = {
+			add_command_power = 10
+			clr_country_flag = EUR_disable_budget
+		}
 	}
 	
 	EUR_decision_increase_industrial_services_budget = {
 		
-		#icon = 
-
-		priority = 6700
-
-		allowed = { 
-			original_tag = EUR 
-		}
-
-		is_good = yes 
-
-		visible = {
-			has_completed_focus = EUR_increase_budget
+		available = {
+			has_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = EUR_disable_budget }
+			}
 		}
 	
-		cost = 75
-		
-		days_remove = 180
+		cost = 45
+		days_remove = 70
 		
 		fire_only_once = no
 
 		complete_effect = { 
+			hidden_effect = {
+				set_country_flag = EUR_disable_budget
+			} 
 		} 
 
-		timeout_effect = {
-			add_offsite_building = { type = industrial_complex level = 1 }
-		} 
+		modifier = {
+			production_factory_start_efficiency_factor = 0.1
+			consumer_goods_factor = 0.1
+		}
+
+		remove_effect = {
+			clr_country_flag = EUR_disable_budget
+		}
 	}
 	
 	#EUR_decrease_mil_power
@@ -374,11 +330,16 @@ EUR_council_gui_decision_category = {
 
 		is_good = yes 
 
-		visible = {
-			has_idea = EUR_mil_power_5
-		}
+		visible = { has_idea = EUR_mil_power_5 }
 	
-		cost = 15
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		days_remove = 28
+		
+		fire_only_once = yes
 		
 		fire_only_once = yes
 
@@ -392,20 +353,22 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_decrease_military_inefficiency_2 = {
-		
-		#icon = 
-
 		priority = 6900
 
 		allowed = { original_tag = EUR }
 
 		is_good = yes 
 
-		visible = {
-			has_idea = EUR_mil_power_4
-		}
+		visible = { has_idea = EUR_mil_power_4 }
 	
-		cost = 15
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		days_remove = 28
+		
+		fire_only_once = yes
 		
 		fire_only_once = yes
 
@@ -418,20 +381,20 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_decrease_military_inefficiency_3 = {
-		
-		#icon = 
-
 		priority = 6900
 
 		allowed = { original_tag = EUR }
 
 		is_good = yes 
 
-		visible = {
-			has_idea = EUR_mil_power_3
-		}
+		visible = { has_idea = EUR_mil_power_3 }
 	
-		cost = 15
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		days_remove = 28
 		
 		fire_only_once = yes
 
@@ -444,20 +407,20 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_decrease_military_inefficiency_4 = {
-		
-		#icon = 
-
 		priority = 6900
 
 		allowed = { original_tag = EUR }
 
 		is_good = yes 
 
-		visible = {
-			has_idea = EUR_mil_power_2
-		}
+		visible = { has_idea = EUR_mil_power_2 }
 	
-		cost = 15
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		days_remove = 28
 		
 		fire_only_once = yes
 
@@ -470,42 +433,27 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_decrease_military_inefficiency_5 = {
-		
-		#icon = 
-
 		priority = 6900
 
 		allowed = { original_tag = EUR }
 
 		is_good = yes 
 
-		visible = {
-			has_idea = EUR_mil_power_1
-		}
+		visible = { has_idea = EUR_mil_power_1 }
 	
 		custom_cost_text = command_power_20
 		custom_cost_trigger = {
 			command_power > 19.9
 		}
 
-		days_remove = 10
-		
+		days_remove = 28
 		
 		fire_only_once = yes
 		
 		complete_effect = { 
 			custom_effect_tooltip = europe_mil_is_good_again_tt
 			remove_ideas = EUR_mil_power_1
-			add_manpower = 10
-			add_equipment_to_stockpile = {
-				type = scrap_infantry_equipment_1
-				amount = 10
-				producer = RUS
-			}
 		}
-
-		timeout_effect = {
-		} 
 	}
 
 	######### Add dictatorial
@@ -753,134 +701,7 @@ EUR_council_gui_decision_category = {
 				add_idea = rome_slavery_2
 			}
 		} 
-
-		timeout_effect = {
-		} 
 	}
-
-
-	######### BRIT ECON STUFF
-
-#	EUR_decision_allow_outsiders = {
-#		
-#		#icon = 
-##
-#		priority = 5000
-#
-#		allowed = { original_tag = EUR }
-#
-#		is_good = yes 
-#
-#		visible = {
-#			has_completed_focus = EUR_british_influence
-#		}
-#
-#		cost = 10
-#
-#		days_remove = 135
-#		
-#		fire_only_once = no
-#
-#		complete_effect = { 
-#			EUR_increase_brit_economy = yes
-#			add_stability = -0.03
-#		}  
-#	}
-#
-#	EUR_decision_buy_mercs = {
-#		
-#		#icon = 
-#
-#		priority = 5000
-#
-#		allowed = { original_tag = EUR }
-#
-#		is_good = yes 
-#
-#		visible = {
-#			has_completed_focus = EUR_british_influence
-#		}
-#
-#		cost = 20
-#
-#		days_remove = 135
-#		
-#		fire_only_once = no
-#
-#		complete_effect = { 
-#			EUR_decrease_brit_economy = yes
-#			add_manpower = 50
-#			add_equipment_to_stockpile = {
-#				type = conventional_infantry_equipment_1
-#				amount = 50
-#				producer = RUS
-#			}
-#		}  
-#	}
-#
-#	EUR_decision_buy_mil_factory = {
-#		
-#		#icon = 
-#
-#		priority = 5000
-#
-#		allowed = { original_tag = EUR }
-#
-#		is_good = yes 
-#
-#		visible = {
-#			has_completed_focus = EUR_british_influence
-#		}
-#
-#		cost = 40
-#
-#		days_remove = 135
-#		
-#		fire_only_once = no
-#
-#		complete_effect = { 
-#			EUR_decrease_brit_economy = yes
-#			add_offsite_building = { type = arms_factory level = 1 }
-#		}  
-#	}
-#
-#	EUR_decision_buy_infrastructure = {
-#		
-#		#icon = 
-#
-#		priority = 5000
-#
-#		allowed = { original_tag = EUR }
-#
-#		is_good = yes 
-#
-#		visible = {
-#			has_completed_focus = EUR_british_influence
-#		}
-#
-#		cost = 40
-#
-#		days_remove = 135
-#		
-#		fire_only_once = no
-#
-#		complete_effect = { 
-#			EUR_decrease_brit_economy = yes
-#			random_owned_controlled_state = {
-#				limit = {
-#					NOT = {
-#						has_state_category = pastoral
-#					}
-#				}
-#				add_building_construction = {
-#					type = infrastructure
-#					level = 3
-#					instant_build = yes
-#				}
-#			}
-#		}  
-#	}
-#	
-}#
+}
 
 

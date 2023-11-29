@@ -19,7 +19,7 @@ reclaim_metro = {
             FROM = {
                 any_neighbor_state = {
                     is_fully_controlled_by = ROOT
-					NOT = { region = 1 }
+					NOT = { region = 1 is_demilitarized_zone = yes }
                 }
             }
             NOT = {
@@ -49,6 +49,9 @@ reclaim_metro = {
 						state = 1
 					}
 				}
+			}
+			AND = {
+				num_of_controlled_factories > 7
 			}
 		}
 		complete_effect = {
@@ -96,16 +99,16 @@ reclaim_metro = {
 		}
 
 		ai_will_do = {
-			factor = 0.5
+			base  = 5
 			modifier = {
-				factor = -15
+				factor = 0.1
 				has_war = yes
 			}
 			modifier = {
 				is_major = yes
-				factor = -5
+				factor = 0.1
 			}
-			modifier = { ## stop colonizing
+			modifier = { ## stop colonizing ## 
 				factor = 0
 				original_tag = KUZ
 				original_tag = PVL
