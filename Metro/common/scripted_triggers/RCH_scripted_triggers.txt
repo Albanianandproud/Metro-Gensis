@@ -8,3 +8,20 @@ RCH_tested_gatling_arms = {
 		}
 	}
 }
+RCH_state_name_should_change = {
+	OR = {
+		AND = {
+			ROOT = { original_tag = RCH }
+			NOT = { FROM = { original_tag = RCH } } #Not civil wars
+		}
+		AND = {
+			FROM = { original_tag = RCH }
+			NOT = { ROOT = { original_tag = RCH } } #Not civil wars
+		}
+	}
+	OR = {
+		FROM.FROM = { state = 337 }
+		FROM.FROM = { state = 306 }
+		FROM.FROM = { state = 275 }
+	}
+}

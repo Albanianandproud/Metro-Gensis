@@ -1,0 +1,27 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			if = {
+			limit = { NOT = { has_global_flag = name_enabled } }
+			set_global_flag = name_enabled
+			every_state = { activate_name = yes }
+			}
+		}
+	}
+	on_state_control_changed = {
+		effect = {
+			IF = {
+				limit = {
+					RED_state_name_should_change = yes
+				}
+				RED_change_name_of_state = yes
+			}
+			IF = {
+				limit = {
+					RCH_state_name_should_change = yes
+				}
+				RCH_change_name_of_state = yes
+			}
+		}
+	}
+}
