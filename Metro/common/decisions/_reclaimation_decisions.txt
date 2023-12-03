@@ -5,7 +5,7 @@
 reclaim_metro = {
 
  	reclaim_this_state = {
-        icon = decision_generic_military
+		icon = decision_generic_military
 		custom_cost_text = command_power_20
 		custom_cost_trigger = { command_power > 19.9 }
 		days_remove = 60
@@ -13,61 +13,60 @@ reclaim_metro = {
 		on_map_mode = map_only
 		state_target = yes
 		fixed_random_seed = no
-
-        visible = {
-            RUI = { owns_state = FROM }
-            FROM = {
-                any_neighbor_state = {
-                    is_fully_controlled_by = ROOT
-					NOT = { region = 1 is_demilitarized_zone = yes }
-                }
-            }
-            NOT = {
-            	original_tag = GWC
-				original_tag = VDN
-				original_tag = AVT
-            }
-			NOT = {
-            	has_idea = RCH_reclusive_nazis
-				has_country_flag = disable_reclaimation_mechanic
-            }
-        }
-		available = {
-			NOT = {
-				## These two tags use their own unique reclaimation system
-            	original_tag = GWC
-				original_tag = AVT
-            }
-			FROM = { is_owned_by = RUI }
-			has_manpower > 10
-			has_equipment = { infantry_equipment > 9 }
-			NOT = {
-				ROOT = { has_country_flag = reclaimation_underway }
-				FROM = {
-					OR = {
-						has_state_flag = state_being_colonised
-						state = 1
+		
+		visible = {
+			is_ai = no
+			RUI = { owns_state = FROM }
+			FROM = {
+				any_neighbor_state = {
+					is_fully_controlled_by = ROOT
+					NOT = { region = 1 }
 					}
 				}
-			}
-			AND = {
+				NOT = {
+					original_tag = GWC
+					original_tag = VDN
+					original_tag = AVT
+				}
+				NOT = {
+            		has_idea = RCH_reclusive_nazis
+					has_country_flag = disable_reclaimation_mechanic
+					FROM = { is_demilitarized_zone = yes }
+				}
+		}
+		available = {
+## These two tags use their own unique reclaimation system
+				NOT = {
+					original_tag = GWC
+					original_tag = AVT
+				}
+				FROM = { is_owned_by = RUI }
+				has_manpower > 10
+				has_equipment = { infantry_equipment > 9 }
+				NOT = {
+					ROOT = { has_country_flag = reclaimation_underway }
+					FROM = {
+						OR = {
+							has_state_flag = state_being_colonised
+							state = 1
+						}
+					}
+				}
 				num_of_controlled_factories > 7
-			}
 		}
 		complete_effect = {
-			add_manpower = -10
-		    add_equipment_to_stockpile = {
-		        type = infantry_equipment
-		        amount = -10
-		    }
-			set_country_flag = reclaimation_underway
-			FROM = { set_state_flag = state_being_colonised }
-			add_command_power = -20
+				add_manpower = -10
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -10
+				}
+				set_country_flag = reclaimation_underway
+				FROM = { set_state_flag = state_being_colonised }
+				add_command_power = -20
 		}
-
 		remove_effect = {
-		    random_list = {
-		        80 = {
+		    	random_list = {
+				80 = {
 					ROOT = {
 						set_variable = {
 							var = state_colonised_id
@@ -90,38 +89,128 @@ reclaim_metro = {
 		            country_event = reclaimation_event.mutants
 		            FROM = { clr_state_flag = state_being_colonised }
 		        }
-		        5 = { #Expedition lost
+				5 = { #Expedition lost
 		            country_event = reclaimation_event.3
 		        	FROM = { clr_state_flag = state_being_colonised }
 				}	
-		    }
+			}
 			ROOT = { clr_country_flag = reclaimation_underway }
 		}
+	}
 
+ 	reclaim_this_state_ai = {
+		icon = decision_generic_military
+		custom_cost_text = command_power_20
+		custom_cost_trigger = { command_power > 19.9 }
+		days_remove = 60
+		days_re_enable = 0
+		on_map_mode = map_only
+		state_target = yes
+		fixed_random_seed = no
+		
+		visible = {
+			is_ai = yes
+			RUI = { owns_state = FROM }
+			FROM = {
+				any_neighbor_state = {
+					is_fully_controlled_by = ROOT
+					NOT = { region = 1 }
+					}
+				}
+				NOT = {
+					original_tag = GWC
+					original_tag = VDN
+					original_tag = AVT
+					original_tag = KUZ
+					original_tag = BRN
+					original_tag = PVL
+					original_tag = MSU
+					original_tag = PAG
+				}
+				NOT = {
+            		has_idea = RCH_reclusive_nazis
+					has_country_flag = disable_reclaimation_mechanic
+					FROM = { is_demilitarized_zone = yes }
+				}
+		}
+		available = {
+## These two tags use their own unique reclaimation system
+				NOT = {
+					original_tag = GWC
+					original_tag = AVT
+				}
+				FROM = { is_owned_by = RUI }
+				has_manpower > 10
+				has_equipment = { infantry_equipment > 9 }
+				NOT = {
+					ROOT = { has_country_flag = reclaimation_underway }
+					FROM = {
+						OR = {
+							has_state_flag = state_being_colonised
+							state = 1
+						}
+					}
+				}
+				num_of_controlled_factories > 7
+		}
+		complete_effect = {
+				add_manpower = -10
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -10
+				}
+				set_country_flag = reclaimation_underway
+				FROM = { set_state_flag = state_being_colonised }
+				add_command_power = -20
+		}
+		remove_effect = {
+		    	random_list = {
+				80 = {
+					ROOT = {
+						set_variable = {
+							var = state_colonised_id
+							value = FROM
+						}
+					}
+		            ROOT = { country_event = reclaimation_event.2 }
+		            FROM = { clr_state_flag = state_being_colonised }
+					modifier = {
+						factor = 0.25
+						FROM = {
+							OR = {
+								has_state_flag = flooded_tunnel_flag
+								has_state_flag = anomaly_tunnel_flag
+							}
+						}
+					}
+		        }
+		        15 = { #Overwhelmed Mutants
+		            country_event = reclaimation_event.mutants
+		            FROM = { clr_state_flag = state_being_colonised }
+		        }
+				5 = { #Expedition lost
+		            country_event = reclaimation_event.3
+		        	FROM = { clr_state_flag = state_being_colonised }
+				}	
+			}
+			ROOT = { clr_country_flag = reclaimation_underway }
+		}
 		ai_will_do = {
 			base  = 5
 			modifier = {
-				factor = 0.1
-				has_war = yes
+			factor = 0.1
+			has_war = yes
 			}
 			modifier = {
 				is_major = yes
 				factor = 0.1
 			}
-			modifier = { ## stop colonizing ## 
-				factor = 0
-				original_tag = KUZ
-				original_tag = PVL
-				original_tag = MSU
-				original_tag = VDN
-				original_tag = PAG
-			}
 		}
-    }
+	}
 
-    GWC_reclaim_this_state = { 
-    	### Will always succeed. But takes far longer ## 
-        icon = decision_generic_military
+	GWC_reclaim_this_state = { 
+### Will always succeed. But takes far longer ## 
+		icon = decision_generic_military
 
 		custom_cost_text = command_power_25
 		custom_cost_trigger = { command_power > 24.9 }
@@ -133,19 +222,22 @@ reclaim_metro = {
 		state_target = yes
 		fixed_random_seed = no
 		
-        visible = {
-            RUI = { owns_state = FROM }
-            FROM = {
-                any_neighbor_state = {
-                    is_fully_controlled_by = ROOT
+		visible = {
+			RUI = { owns_state = FROM }
+			FROM = {
+				any_neighbor_state = {
+					is_fully_controlled_by = ROOT
 					NOT = { region = 1 }
-                }
-            }
-            AND = { original_tag = GWC }
+				}
+			}
+			original_tag = GWC
+			NOT = {
+				FROM = { is_demilitarized_zone = yes }
+			}
         }
-
+		
 		available = {
-			AND = { original_tag = GWC }
+			original_tag = GWC
 			FROM = { is_owned_by = RUI }
 			has_manpower > 9
 			has_equipment = { infantry_equipment > 9 }
@@ -161,10 +253,10 @@ reclaim_metro = {
 		}
 		complete_effect = {
 			add_manpower = -10
-		    add_equipment_to_stockpile = {
-		        type = infantry_equipment
-		        amount = -10
-		    }
+			add_equipment_to_stockpile = {
+		        	type = infantry_equipment
+		       		amount = -10
+			}
 			set_country_flag = reclaimation_underway
 			FROM = { set_state_flag = state_being_colonised }
 			add_command_power = -25
@@ -179,10 +271,9 @@ reclaim_metro = {
 			hidden_effect = {
 				ROOT = { country_event = reclaimation_event.2 }
 			}
-		    FROM = { clr_state_flag = state_being_colonised }
-		    ROOT = { clr_country_flag = reclaimation_underway }
+			FROM = { clr_state_flag = state_being_colonised }
+			ROOT = { clr_country_flag = reclaimation_underway }
 		}
-
 		ai_will_do = {
 			factor = 5
 			modifier = {
@@ -190,10 +281,8 @@ reclaim_metro = {
 				has_war = yes
 			}
 		}
-    }
-}
+	}
 
-AVT_reclaim_metro = {
 	AVT_reclaim_this_state = { 
         icon = decision_generic_military
 
@@ -213,10 +302,13 @@ AVT_reclaim_metro = {
 				NOT = { has_state_category = pastoral }
 			}
 			has_completed_focus = AVT_political_focus_1
+			NOT = {
+				FROM = { is_demilitarized_zone = yes }
+			}
 		}
 
 		available = {
-			AND = { original_tag = AVT }
+			original_tag = AVT
 			FROM = { is_owned_by = RUI }
 			has_manpower > 4
 			has_equipment = { infantry_equipment > 4 }
@@ -233,10 +325,10 @@ AVT_reclaim_metro = {
 		}
 		complete_effect = {
 			add_manpower = -5
-		    add_equipment_to_stockpile = {
+			add_equipment_to_stockpile = {
 		        type = infantry_equipment
 		        amount = -5
-		    }
+			}
 			set_country_flag = reclaimation_underway
 			FROM = { set_state_flag = state_being_colonised }
 			add_command_power = -20
@@ -254,7 +346,6 @@ AVT_reclaim_metro = {
 		    FROM = { clr_state_flag = state_being_colonised }
 		    ROOT = { clr_country_flag = reclaimation_underway }
 		}
-
 		ai_will_do = {
 			factor = 5
 			modifier = {
@@ -262,5 +353,5 @@ AVT_reclaim_metro = {
 				has_war = yes
 			}
 		}
-    }
+	}
 }
