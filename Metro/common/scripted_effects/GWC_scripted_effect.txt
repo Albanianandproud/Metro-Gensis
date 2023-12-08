@@ -31,3 +31,30 @@ GWC_war_craft_offence = {
 		}
 	}
 }
+
+GWC_infiltration_scripted_effect = {
+	if = {
+		limit = {
+			PREV = {
+				network_strength = {
+					target = FROM
+					value > 50
+				}
+			}
+		}
+		custom_effect_tooltip = GWC_infiltration_minor
+		ROOT = { country_event = nf_GWC.30 }
+	}
+	else_if = {
+		limit = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value < 50
+				}
+			}
+		}
+		custom_effect_tooltip = GWC_infiltration_considerable
+		ROOT = { country_event = nf_GWC.40 }
+	}
+}

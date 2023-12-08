@@ -164,23 +164,83 @@ GWC_burn_technology = {
 }
 
 GWC_infiltration_LR = {
+
 	GWC_LR_infiltration = {
-		cost = 15 
-		days_remove = 14
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = { 
+				NOT = { has_idea = civics_border_3 
+					OR = { 
+						original_tag = RUI 
+						original_tag = MSU
+					} 
+					has_country_flag = is_mutant_nation 
+				}
+				OR = { is_neighbor_of = ROOT has_country_flag = GWC_enable_infiltration } 
+			}
+		}
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 10
+				}
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = GWC_infiltration
+			effect_tooltip = {
+				GWC_infiltration_scripted_effect = yes
+			}
+		}
 
 		ai_will_do = {
-			base = 25
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
 		}
 	}
 }
 
 GWC_infiltration_non_LR = {
 	GWC_infiltration = {
-		cost = 15 
-		days_remove = 14
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = { 
+				NOT = { has_idea = civics_border_3 
+					OR = { 
+						original_tag = RUI 
+						original_tag = MSU
+					} 
+					has_country_flag = is_mutant_nation 
+				}
+				OR = { is_neighbor_of = ROOT } 
+			}
+		}
 
 		ai_will_do = {
-			base = 25
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
 		}
 	}
 }
