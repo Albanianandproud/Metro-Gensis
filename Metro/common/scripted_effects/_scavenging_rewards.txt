@@ -2,145 +2,62 @@ select_scavenging_reward_equipment = {
 	hidden_effect = {
 		random_list = {
 			### Guns ###
-			4 = {
-				modifier = {
-					factor = 0.5
-					has_tech = basic_infantry_equipment_tech
-				}
+			4 = {###REVOLVERS###
 				set_country_flag = scav_reward_eq_scrap_gun_basic
 			}
-			4 = { 
-				modifier = {
-					factor = 0.5
-					has_tech = scrap_infantry_equipment_tech_1
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = scrap_infantry_equipment_tech_1
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_scrap_1
-			}
-			4 = {
-				modifier = {
-					factor = 0.5
-					has_tech = scrap_infantry_equipment_tech_3
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = scrap_infantry_equipment_tech_3
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_scrap_2
-			}
-			4 = { 
-				modifier = {
-					factor = 0.5
-					has_tech = shotgun_infantry_equipment_tech_1 
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = shotgun_infantry_equipment_tech_1 
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_shotgun_1
-			}
-			3 = { 
-				modifier = {
-					factor = 0.5
-					has_tech = shotgun_infantry_equipment_tech_3
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = shotgun_infantry_equipment_tech_3
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_shotgun_2
-			}
-			3 = { 
-				modifier = {
-					factor = 0.5
-					has_tech = conventional_infantry_equipment_tech_1 
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = conventional_infantry_equipment_tech_1
-					}
-				}
+			3 = {###AKS-74U###
 				set_country_flag = scav_reward_eq_gun_conventional_1
 			}
-			3 = { 
+			3 = {###VSK-94###
 				modifier = {
-					add = 1
-					has_tech = conventional_infantry_equipment_tech_3 
+					factor = 0.2
 				}
+				set_country_flag = scav_reward_eq_gun_conventional_2
+			}
+			3 = {###Kalash 2012###
 				modifier = {
-					add = 1
-					NOT = {
-						has_tech = conventional_infantry_equipment_tech_3 
-					}
+					factor = 0.2
 				}
 				set_country_flag = scav_reward_eq_gun_conventional_3
 			}
-			3 = { 
+			3 = {###SPECIAL-1 PIECE OF HELLBREATH###
 				modifier = {
-					add = 1
-					has_tech = conventional_infantry_equipment_tech_5
+					factor = 0.01
 				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = conventional_infantry_equipment_tech_5
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_conventional_3
-			}
-			3 = { 
-				modifier = {
-					add = 1
-					has_tech = pheumatic_infantry_equipment_tech_1
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = pheumatic_infantry_equipment_tech_1
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_pheumatic_1
-			}
-			3 = { 
-				modifier = {
-					add = 1
-					has_tech = pheumatic_infantry_equipment_tech_3
-				}
-				modifier = {
-					add = 1
-					NOT = {
-						has_tech = pheumatic_infantry_equipment_tech_3
-					}
-				}
-				set_country_flag = scav_reward_eq_gun_pheumatic_3
+				set_country_flag = scav_reward_eq_gun_laser_1
 			}
 			## Unique Tech ##
-			1 = { 
+			1 = {###Saiga###
+				modifier = {
+					factor = 0.1
+				}
+				set_country_flag = scav_reward_eq_gun_shotgun_3
+			}
+			1 = {###Abzats### 
+				modifier = {
+					factor = 0.1
+				}
 				set_country_flag = scav_reward_eq_gun_shotgun_4
 			}
-			1 = { 
-				set_country_flag = scav_reward_eq_gun_shotgun_5
-			}
-			1 = { 
+			1 = {###RPK###
+				modifier = {
+					factor = 0.1
+				}
 				set_country_flag = scav_reward_eq_gun_conventional_4
 			}
-			## Unique Ideas ##
-			2 = { 
+			## Timed Ideas ##
+			2 = {
+				modifier = {
+					factor = -1
+					has_idea = scavenging_eq_gun_production_buff
+				}
 				set_country_flag = scav_reward_eq_gun_production_buff
 			}
-			2 = { 
+			2 = {
+				modifier = {
+					factor = -1
+					has_idea = scavenging_eq_gun_stat_buff
+				}
 				set_country_flag = scav_reward_eq_gun_stat_buff
 			}
 			### Spec Ops ###
@@ -407,66 +324,20 @@ select_scavenging_reward_equipment = {
 	}
 }
 give_scavenge_reward_equipment = {
+###REVOLVERS###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_scrap_gun_basic }
 
 		add_equipment_to_stockpile = {
 			type = basic_infantry_equipment
-			amount = 15
+			amount = 30
 			producer = RUS
 		}
 
 		clr_country_flag = scav_reward_eq_scrap_gun_basic
 		log = "basic_infantry_equipment granted"
 	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_scrap_1 }
-
-		add_equipment_to_stockpile = {
-			type = scrap_infantry_equipment_1 
-			amount = 15
-			producer = RUS
-		}
-
-		clr_country_flag = scav_reward_eq_gun_scrap_1
-		log = "scrap_infantry_equipment_1 granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_scrap_2 }
-
-		add_equipment_to_stockpile = {
-			type = scrap_infantry_equipment_2 
-			amount = 15
-			producer = RUS
-		}
-
-		clr_country_flag = scav_reward_eq_gun_scrap_2
-		log = "scrap_infantry_equipment_2 granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_shotgun_1 }
-
-		add_equipment_to_stockpile = {
-			type = shotgun_infantry_equipment_1 
-			amount = 15
-			producer = RUS
-		}
-
-		clr_country_flag = scav_reward_eq_gun_shotgun_1
-		log = "shotgun_infantry_equipment_1 granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_shotgun_2 }
-
-		add_equipment_to_stockpile = {
-			type = shotgun_infantry_equipment_2
-			amount = 15
-			producer = RUS
-		}
-
-		clr_country_flag = scav_reward_eq_gun_shotgun_2
-		log = "shotgun_infantry_equipment_2 granted"
-	}
+###AKS-74U###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_conventional_1 }
 
@@ -479,6 +350,7 @@ give_scavenge_reward_equipment = {
 		clr_country_flag = scav_reward_eq_gun_conventional_1
 		log = "conventional_infantry_equipment_1 granted"
 	}
+###VSK-94###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_conventional_2 }
 
@@ -491,6 +363,7 @@ give_scavenge_reward_equipment = {
 		clr_country_flag = scav_reward_eq_gun_conventional_2
 		log = "conventional_infantry_equipment_2 granted"
 	}
+###Kalash 2012###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_conventional_3 }
 
@@ -503,34 +376,22 @@ give_scavenge_reward_equipment = {
 		clr_country_flag = scav_reward_eq_gun_conventional_3
 		log = "conventional_infantry_equipment_3 granted"
 	}
+###SPECIAL-1 PIECE OF HELLBREATH###
 	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_pheumatic_1 }
+		limit = { has_country_flag = scav_reward_eq_gun_laser_1 }
 
 		ROOT = {
 			add_equipment_to_stockpile = {
-				type = pheumatic_infantry_equipment_1 
-				amount = 15
+				type = laser_infantry_equipment_1 
+				amount = 1
 				producer = RUS
 			}
 		}
 
-		clr_country_flag = scav_reward_eq_gun_pheumatic_1
-		log = "scav_reward_eq_gun_pheumatic_1 granted"
+		clr_country_flag = scav_reward_eq_gun_laser_1
+		log = "scav_reward_eq_gun_laser_1 granted"
 	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_pheumatic_2 }
-
-		ROOT= {
-			add_equipment_to_stockpile = {
-				type = pheumatic_infantry_equipment_2
-				amount = 15
-				producer = RUS
-			}
-		}
-
-		clr_country_flag = scav_reward_eq_gun_pheumatic_2
-		log = "pheumatic_infantry_equipment_2 granted"
-	}
+###SPECIAL-SAIGA###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_shotgun_3 }
 
@@ -540,11 +401,20 @@ give_scavenge_reward_equipment = {
 				amount = 15
 				producer = RUS
 			}
+			if = {
+				limit = {
+					has_country_flag = unlocked_saiga
+				}
+			}
+			else= {
+				set_country_flag = unlocked_saiga
+			}
 		}
 
 		clr_country_flag = scav_reward_eq_gun_shotgun_3
 		log = "shotgun_infantry_equipment_3 granted"
 	}
+###SPECIAL-ABZATS###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_shotgun_4 }
 
@@ -554,11 +424,20 @@ give_scavenge_reward_equipment = {
 				amount = 15
 				producer = RUS
 			}
+			if = {
+				limit = {
+					has_country_flag = unlocked_abzats
+				}
+			}
+			else= {
+				set_country_flag = unlocked_abzats
+			}
 		}
 
 		clr_country_flag =  scav_reward_eq_gun_shotgun_4
 		log = "shotgun_infantry_equipment_4  granted"
 	}
+###SPECIAL-RPK###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_conventional_4 }
 
@@ -568,11 +447,20 @@ give_scavenge_reward_equipment = {
 				amount = 15
 				producer = RUS
 			}
+			if = {
+				limit = {
+					has_country_flag = unlocked_rpk
+				}
+			}
+			else= {
+				set_country_flag = unlocked_rpk
+			}
 		}
 
 		clr_country_flag = scav_reward_eq_gun_conventional_4
 		log = "conventional_infantry_equipment_4  granted"
 	}
+###TIMED REWARDS###
 	if = {
 		limit = { has_country_flag = scav_reward_eq_gun_production_buff }
 
@@ -922,36 +810,6 @@ give_scavenge_reward_equipment = {
 
 		clr_country_flag = scav_reward_eq_explosive_production_buff
 		log = "scav_reward_eq_explosive_production_buff  granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_shotgun_3 }
-
-		set_country_flag = scav_reward_eq_gun_shotgun_infantry_equipment_4_tech_unlock
-
-		custom_effect_tooltip = scav_reward_eq_gun_shotgun_infantry_equipment_4_tech_unlock
-
-		clr_country_flag = scav_reward_eq_gun_shotgun_3
-		log = "scav_reward_eq_gun_shotgun_3 unlock granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_shotgun_4 }
-
-		set_country_flag = scav_reward_eq_gun_shotgun_infantry_equipment_5_tech_unlock
-
-		custom_effect_tooltip = scav_reward_eq_gun_shotgun_infantry_equipment_5_tech_unlock
-
-		clr_country_flag = scav_reward_eq_gun_shotgun_4
-		log = "scav_reward_eq_gun_shotgun_4 unlock granted"
-	}
-	if = {
-		limit = { has_country_flag = scav_reward_eq_gun_conventional_4 }
-
-		set_country_flag =  scav_reward_eq_gun_conventional_6_tech_unlock
-
-		custom_effect_tooltip = scav_reward_eq_gun_conventional_infantry_equipment_6_tech_unlock
-
-		clr_country_flag = scav_reward_eq_gun_conventional_4
-		log = "scav_reward_eq_gun_conventional_4 unlock granted"
 	}
 }
 select_scavenging_reward_resource = {
@@ -2227,15 +2085,10 @@ flush_scavenge_reward_technology = {
 
 flush_scavenge_reward_equipment = {
 	clr_country_flag = scav_reward_eq_scrap_gun_basic
-	clr_country_flag = scav_reward_eq_gun_scrap_1
-	clr_country_flag = scav_reward_eq_gun_scrap_2
-	clr_country_flag = scav_reward_eq_gun_shotgun_1
-	clr_country_flag = scav_reward_eq_gun_shotgun_2
 	clr_country_flag = scav_reward_eq_gun_conventional_1
 	clr_country_flag = scav_reward_eq_gun_conventional_3
 	clr_country_flag = scav_reward_eq_gun_conventional_3
-	clr_country_flag = scav_reward_eq_gun_pheumatic_1
-	clr_country_flag = scav_reward_eq_gun_pheumatic_3
+	clr_country_flag = scav_reward_eq_gun_laser_1
 	clr_country_flag = scav_reward_eq_gun_shotgun_3
 	clr_country_flag = scav_reward_eq_gun_shotgun_4
 	clr_country_flag = scav_reward_eq_gun_conventional_4
@@ -2270,8 +2123,5 @@ clr_country_flag = scav_reward_eq_explosive_2
 clr_country_flag = scav_reward_eq_explosive_production_buff
 clr_country_flag = scav_reward_eq_explosive_stat_buff
 
-clr_country_flag = shotgun_infantry_equipment_3_tech_unlock
-clr_country_flag = scav_reward_eq_gun_shotgun_4_tech_unlock
-clr_country_flag = scav_reward_eq_gun_conventional_6_tech_unlock
 log = "flushed equipment reward chances"
 }
