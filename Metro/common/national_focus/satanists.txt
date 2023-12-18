@@ -5,7 +5,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 25
 			tag = SAT
 		}
 	}
@@ -428,9 +428,7 @@ focus_tree = {
 				category = refinery
 			}
 			if = {
-				limit = {
-					fuel_ratio < 0.5
-				}
+				limit = { fuel_ratio < 0.5 }
 				set_fuel_ratio = 0.75
 			}
 		}
@@ -593,7 +591,7 @@ focus_tree = {
 	focus = {
 		id = SAT_inner_sphere
 		icon = GFX_
-		x = 18
+		x = 22
 		y = 0
 		cost = 5.8
 
@@ -670,6 +668,226 @@ focus_tree = {
 		cost = 5.8
 
 		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_1
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_sphere }
+		available = { NOT = { has_war = yes } }
+		x = -5
+		y = 1
+		relative_position_id = SAT_inner_sphere
+		cost = 5.8
+
+		completion_reward = {
+			custom_effect_tooltip = SAT_industry_timed_idea_lock
+			add_timed_idea = { idea = SAT_industry_reshuffling days = 280 }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_2
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_1 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = -2
+		y = 1
+		relative_position_id = SAT_inner_industry_1
+		cost = 5.8
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 1
+				category = casting
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_2a
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_1 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = 0
+		y = 1
+		relative_position_id = SAT_inner_industry_1
+		cost = 5.8
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 1
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_3
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_2 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = -1
+		y = 1
+		relative_position_id = SAT_inner_industry_2
+		cost = 5.8
+
+		completion_reward = {
+			add_timed_idea = { idea = SAT_ind_labour_hands days = 200 }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_3a
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_2 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = 1
+		y = 1
+		relative_position_id = SAT_inner_industry_2
+		cost = 5.8
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = -1
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 10
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment_1
+				amount = 5
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_4
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_3 }
+		mutually_exclusive = { focus = SAT_inner_industry_5 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = 0
+		y = 1
+		relative_position_id = SAT_inner_industry_3
+		cost = 5.8
+
+		completion_reward = {
+			add_timed_idea = { idea = SAT_whipped_into_overtime days = 160 }
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_2
+				amount = 15
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_5
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_3 }
+		mutually_exclusive = { focus = SAT_inner_industry_4 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = 2
+		y = 1
+		relative_position_id = SAT_inner_industry_3
+		cost = 5.8
+
+		completion_reward = {
+			add_timed_idea = { idea = SAT_whipped_into_overtime days = 160 }
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_industry_6
+		icon = GFX_SAT
+
+		prerequisite = { focus = SAT_inner_industry_4 focus = SAT_inner_industry_5 }
+		available = { has_idea = SAT_industry_reshuffling }
+		x = 1
+		y = 2
+		relative_position_id = SAT_inner_industry_3
+		cost = 5.8
+
+		completion_reward = {
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {

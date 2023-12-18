@@ -1,4 +1,5 @@
 add_namespace = nf_VDN
+add_namespace = VDNnews
 # the commonwealth starter event
 country_event = {
     id = nf_VDN.1
@@ -59,9 +60,7 @@ country_event = {
 		ai_chance = {
 			base = 50
 		}
-		
 		add_manpower = -1
-
 	}
 }
 
@@ -79,20 +78,11 @@ country_event = {
         add_stability = -0.2
         hidden_effect = {
 
-            add_popularity = { ideology = council popularity = 0.30}
-
-            add_country_leader_role = {
-				character = VDN_colonel_patronknov
-				country_leader={
-					ideology = military_junta
-					traits = {  }
-					expire="2050.1.1.1"
-				}
-				promote_leader = yes
-			}
+            add_popularity = { ideology = dictatorial popularity = 0.30}
 
             set_politics = {
-                ruling_party = council
+			ruling_party = dictatorial
+			elections_allowed = no
             }
         }
 
@@ -100,7 +90,6 @@ country_event = {
             base = 2
         }
     }
-
 }
 
 country_event = {
@@ -120,5 +109,728 @@ country_event = {
             base = 2
         }
     }
+}
 
+country_event = {
+    id = nf_VDN.6
+    title = nf_VDN.6.t
+    desc = nf_VDN.6.d
+    picture = GFX_event_164
+
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_VDN.6.a
+
+		add_opinion_modifier = { target = VDN modifier = border_conflict_reconciled }
+	  	remove_state_core = 359
+		VDN = { transfer_state = 359 }
+		VDN = { add_state_core = 359 }
+		if = {
+			limit = {
+				HNZ = { owns_state = 182 }
+			}
+			VDN = { transfer_state = 182 }
+	  		remove_state_core = 182
+			VDN = { add_state_core = 182 }
+		}
+		diplomatic_relation = {
+			country = VDN
+			relation = non_aggression_pact
+			active = yes
+		}
+		
+		hidden_effect = {
+			FROM = { country_event = { id = nf_VDN.7 hours = 4 } }
+		}
+        ai_chance = {
+            base = 2
+        }
+    }
+    option = { 
+        name = nf_VDN.6.b
+		
+		hidden_effect = {
+			FROM = { country_event = { id = nf_VDN.8 hours = 4 } }
+		}
+        ai_chance = {
+            base = 0
+        }
+    }
+}
+
+country_event = {
+	id = nf_VDN.7
+	title = nf_VDN.7.t
+	desc = nf_VDN.7.d
+	picture = GFX_event_164
+
+	is_triggered_only = yes
+			
+	option = {
+		name = nf_VDN.7.a
+
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = border_conflict_reconciled }
+				diplomatic_relation = {
+					country = HNZ
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = nf_VDN.8
+	title = nf_VDN.8.t
+	desc = nf_VDN.8.d
+	picture = GFX_event_164
+
+	is_triggered_only = yes
+			
+	option = {
+		name = nf_VDN.8.a
+
+	}
+}
+
+#Demand Overlordship over Sukharevskaya - Sukharevskaya independent
+country_event = {
+	id = nf_VDN.9
+	title = nf_VDN.9.t
+	desc = {
+		text = nf_VDN.9.d1
+		trigger = { 
+			DRY = { is_subject = no }
+		}
+	}
+	desc = {
+		text = nf_VDN.9.d2
+		trigger = { 
+			DRY = { is_subject = yes }
+		}
+	}
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# agree to being a puppet
+		name = nf_VDN.9.a
+		ai_chance = {
+			factor = 50
+		}
+		VDN = { country_event = nf_VDN.10 }
+		hidden_effect = {
+			news_event = { id = VDNnews.2 days = 1 }
+		}
+	}
+
+	option = {# refuse
+		name = nf_VDN.9.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				is_in_faction = yes
+				VDN = { is_in_faction = no }
+				factor = 5
+			}
+		}
+		VDN = { country_event = nf_VDN.11 }
+		
+	}	
+}
+
+#Demand Overlordship over Sukharevskaya - Sukharevskaya agrees to become a puppet
+country_event = {
+	id = nf_VDN.10
+	title = nf_VDN.10.t
+	desc = nf_VDN.10.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# good
+		name = nf_VDN.10.a
+		puppet = DRY
+	}
+
+	
+}
+
+#Demand Overlordship over Sukharevskaya - Sukharevskaya refuses to become a puppet
+country_event = {
+	id = nf_VDN.11
+	title = nf_VDN.11.t
+	desc = nf_VDN.11.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# war!
+		name = nf_VDN.11.a
+		create_wargoal = {
+				type = puppet_wargoal_focus
+				target = DRY
+		}
+		hidden_effect = {
+			news_event = { id = news.311 days = 1 }
+		}
+	}
+
+	
+}
+
+#Demand Overlordship over Sukharevskaya - Hanza holds Sukharevskaya
+country_event = {
+	id = nf_VDN.12
+	title = nf_VDN.12.t
+	desc = nf_VDN.12.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# hand over Sukharevskaya
+		name = nf_VDN.12.a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				strength_ratio = { tag = VDN ratio < 1 }
+				factor = 2
+			}
+		}
+		FROM = { country_event = { id = nf_VDN.13 hours = 3 } }
+		hidden_effect = {
+			news_event = { id = VDNnews.2 days = 1 }
+		}
+	}
+
+	option = {# refuse
+		name = nf_VDN.12.b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				has_war = yes
+				factor = 0.5
+			}
+			modifier = {
+				is_in_faction = yes
+				factor = 5
+			}
+		}
+		VDN = { country_event = { id = nf_VDN.14 hours = 4 } }
+	}
+}
+
+#Demand Overlordship over Sukharevskaya - Hanza agrees, VDNKH gets options on whether to annex or puppet
+country_event = {
+	id = nf_VDN.13
+	title = nf_VDN.13.t
+	desc = nf_VDN.13.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# annex
+		name = nf_VDN.13.a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				country_exists = DRY
+				factor = 0
+			}
+		}
+		DRY = {
+			transfer_state = 262
+		}
+		if = { #In case Sukharevskaya colonized any states on the line, this will transfer it.
+			limit = {
+				FROM = { owns_state = 182 }
+			}
+			VDN = { transfer_state = 182 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 183 }
+			}
+			VDN = { transfer_state = 183 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 338 }
+			}
+			VDN = { transfer_state = 338 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 204 }
+			}
+			VDN = { transfer_state = 204 }
+		}
+	}
+
+	option = {# puppet
+		name = nf_VDN.13.b
+		ai_chance = {
+			factor = 30
+		}
+		if = {
+			limit = {
+				182 = {
+					is_owned_by = HNZ
+				}
+			}
+			DRY = { transfer_state = 182 }
+			HNZ = { remove_state_core = 182 }
+		}
+		if = {
+			limit = {
+				183 = {
+					is_owned_by = HNZ	
+				}
+			}
+			DRY = { transfer_state = 183 }
+			HNZ = { remove_state_core = 183 }
+		}
+		if = {
+			limit = {
+				338 = {
+					is_owned_by = HNZ	
+				}
+			}
+			DRY = { transfer_state = 338 }
+			HNZ = { remove_state_core = 338 }
+		}
+		if = {
+			limit = {
+				204 = {
+					is_owned_by = HNZ	
+				}
+			}
+			DRY = { transfer_state = 204 }
+			HNZ = { remove_state_core = 204 }
+		}
+		puppet = DRY
+	}
+}
+
+#Demand Overlordship over Sukharevskaya - Hanza refuses to hand over Sukharevskaya
+country_event = {
+	id = nf_VDN.14
+	title = nf_VDN.14.t
+	desc = nf_VDN.14.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# let it go
+		name = nf_VDN.14.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				is_in_faction = no
+				HNZ = {
+					is_in_faction = yes
+				}
+				factor = 10
+			}
+		}
+	}
+
+	option = {# war goal
+		name = nf_VDN.14.b
+		ai_chance = {
+			factor = 90
+		}
+		create_wargoal = {
+				type = take_state_focus
+				target = HNZ
+				generator = { 262 }
+			}
+		hidden_effect = {
+			news_event = { id = VDNnews.3 days = 1 }
+		}
+	}
+}
+
+# Join the Hanza's Faction
+country_event = {
+	id = nf_VDN.15
+	title = nf_VDN.15.t
+	desc = nf_VDN.15.d
+	picture = GFX_report_event_generic_read_write
+
+	immediate = {
+		hidden_effect = {
+			save_event_target_as = alliance_inviter
+			FROM = {
+				save_event_target_as = alliance_applicant
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { #Agree
+		name = nf_VDN.15.a
+
+		ai_chance = {
+			factor = 1
+		}
+
+		add_to_faction = FROM
+		FROM = { country_event = { id = nf_VDN.16 hours = 6 } }
+		hidden_effect = {
+			set_country_flag = alliance_inviter@ROOT
+			FROM = { 
+				set_country_flag = alliance_applicant@ROOT
+			}
+			news_event = { id = VDNnews.4 hours = 12 }
+		}
+	}
+	
+	option = { #Reject
+		name = nf_VDN.15.b
+		ai_chance = {
+			factor = 0
+		}
+		FROM = { 
+			country_event = { id = nf_VDN.17 hours = 6 }
+		}
+	}
+}
+
+# Hanza accepted request to join their faction
+country_event = {
+	id = nf_VDN.16
+	title = nf_VDN.16.t
+	desc = nf_VDN.16.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = nf_VDN.16.a
+	}
+}
+
+# Hanza rejected request to join their faction
+country_event = {
+	id = nf_VDN.17
+	title = nf_VDN.17.t
+	desc = nf_VDN.17.d
+	
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = {
+		name = nf_VDN.17.a
+	}
+}
+
+#####NEWS#####
+
+#VDNKH claims overlordship over Sukharevskaya
+news_event = {
+	id = VDNnews.1
+	title = VDNnews.1.t
+	desc = {
+		text = VDNnews.1.d.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = DRY }
+				AND = {
+					country_exists = DRY
+					DRY = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = VDNnews.1.d.b
+		trigger = { 
+			country_exists = DRY
+			DRY = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = VDNnews.1.a
+		trigger = {
+			TAG = VDN
+		}
+	}
+	option = {
+		name = VDNnews.1.b
+		trigger = { 
+			TAG = HNZ
+			OR = {
+				NOT = { country_exists = DRY }
+				AND = {
+					country_exists = DRY
+					DRY = { is_subject = yes }
+				}
+			}
+		}
+	}
+	option = {
+		name = VDNnews.1.c
+		trigger = { 
+			AND = {
+				TAG = DRY
+				DRY = { is_subject = no }
+			}
+		}
+	}
+	option = {
+		name = VDNnews.1.d
+		trigger = { 
+			NOT = {
+				TAG = VDN
+				TAG = HNZ
+				AND = {
+					TAG = DRY
+					DRY = { is_subject = yes }
+				}
+			}
+		}
+	}
+}
+
+#HNZ/DRY folds and gives up Sukharevskaya
+news_event = {
+	id = VDNnews.2
+	title = VDNnews.2.t
+	desc = {
+		text = VDNnews.2.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = DRY }
+				AND = {
+					country_exists = DRY
+					DRY = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = VDNnews.2.d.b
+		trigger = { 
+			country_exists = DRY
+			DRY = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = VDNnews.2.a
+		trigger = {
+			TAG = VDN
+		}
+	}
+	option = {
+		name = VDNnews.2.b
+		trigger = { 
+			TAG = HNZ
+		}
+	}
+	option = {
+		name = VDNnews.2.c
+		trigger = { 
+			NOT = {
+				TAG = VDN
+				TAG = HNZ
+			}
+		}
+	}
+}
+
+#VDNKH and HNZ/DRY unable to find solution, war looms
+news_event = {
+	id = VDNnews.3
+	title = VDNnews.3.t
+	desc = {
+		text = VDNnews.3.d.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = DRY }
+				AND = {
+					country_exists = DRY
+					DRY = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = VDNnews.3.d.b
+		trigger = { 
+			country_exists = DRY
+			DRY = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = VDNnews.3.a
+		trigger = {
+			TAG = VDN
+		}
+	}
+	option = {
+		name = VDNnews.3.b
+		trigger = { 
+			OR = {
+				TAG = HNZ
+				TAG = DRY
+			}
+		}
+	}
+	option = {
+		name = VDNnews.3.c
+		trigger = { 
+			NOT = {
+				TAG = VDN
+				TAG = HNZ
+				TAG = DRY
+			}
+		}
+	}
+}
+
+# VDNKH joins to Hanza
+news_event = {
+	id = VDNnews.4
+	title = VDNnews.4.t
+	picture = GFX_news_event_8
+	desc = VDNnews.4.d
+
+	major = yes
+
+	is_triggered_only = yes
+
+	#Together we will prevail.
+	option = {
+		name = VDNnews.4.a
+		trigger = {
+			OR = {
+				has_country_flag = alliance_inviter@FROM
+				has_country_flag = alliance_applicant@FROM
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = alliance_inviter@FROM
+			clr_country_flag = alliance_applicant@FROM
+		}
+	}
+
+	#They prepare for what is coming.
+	option = {
+		name = VDNnews.4.b
+		trigger = {
+			NOT = { FROM = { has_war = yes } }
+			event_target:alliance_inviter = {
+				NOT = { has_war = yes }
+			}
+			NOT = {
+				any_allied_country = {
+					has_country_flag = alliance_applicant@FROM
+				}
+			}
+			AND = {
+				NOT = { has_country_flag = alliance_inviter@FROM }
+				NOT = { has_country_flag = alliance_applicant@FROM }
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = alliance_inviter@FROM
+			clr_country_flag = alliance_applicant@FROM
+		}
+	}
+
+	#It will not avail them!
+	option = {
+		name = VDNnews.4.c
+		trigger = {
+			any_enemy_country = {
+				OR = {
+					has_country_flag = alliance_inviter@FROM
+					has_country_flag = alliance_applicant@FROM
+				}
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = alliance_inviter@FROM
+			clr_country_flag = alliance_applicant@FROM
+		}
+	}
+
+	#The war escalates...
+	option = {
+		name = VDNnews.4.e
+		trigger = {
+			NOT = {
+				any_allied_country = {
+					OR = {
+						has_country_flag = alliance_inviter@FROM
+						has_country_flag = alliance_applicant@FROM
+					}
+				}
+				any_enemy_country = {
+					OR = {
+						has_country_flag = alliance_inviter@FROM
+						has_country_flag = alliance_applicant@FROM
+					}
+				}
+			}
+			event_target:alliance_inviter = {
+				has_war = yes
+			}
+			AND = {
+				NOT = { has_country_flag = alliance_inviter@FROM }
+				NOT = { has_country_flag = alliance_applicant@FROM }
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = alliance_inviter@FROM
+			clr_country_flag = alliance_applicant@FROM
+		}
+	}
+
+	#Our alliance grows stronger.
+	option = {
+		name = VDNnews.4.f
+		trigger = {
+			any_allied_country = {
+				OR = {
+					has_country_flag = alliance_inviter@FROM
+					has_country_flag = alliance_applicant@FROM
+				}
+			}
+			AND = {
+				NOT = { has_country_flag = alliance_inviter@FROM }
+				NOT = { has_country_flag = alliance_applicant@FROM }
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = alliance_inviter@FROM
+			clr_country_flag = alliance_applicant@FROM
+		}
+	}
 }
