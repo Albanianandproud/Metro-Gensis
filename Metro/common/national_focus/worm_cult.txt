@@ -10,7 +10,7 @@ focus_tree = {
 			tag = GWC
 		}
 	}
-	continuous_focus_position = { x = 2220 y = 1200 }
+	continuous_focus_position = { x = 2420 y = 1200 }
 	default = no
 
 	focus = {
@@ -126,7 +126,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_4a
-		icon = GFX_GWC_meat
+		icon = GFX_GWC_bloody_hand
 		x = 0
 		y = 3
 		cost = 5.8
@@ -309,7 +309,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_7
-		icon = GFX
+		icon = GFX_GWC_industry
 		x = 1
 		y = 1
 		cost = 5.8
@@ -342,7 +342,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_7a
-		icon = GFX
+		icon = GFX_GWC_meat
 		x = 0
 		y = 3
 		cost = 5.8
@@ -368,7 +368,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_8
-		icon = GFX
+		icon = GFX_
 		x = -1
 		y = 1
 		cost = 5.8
@@ -391,7 +391,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_8b
-		icon = GFX
+		icon = GFX_GWC_tribal_offence
 		x = -1
 		y = 1
 		cost = 5.8
@@ -584,7 +584,7 @@ focus_tree = {
 		id = GWC_focus_12
 		icon = GFX_GWC_tribal_dominance
 		x = 0
-		y = 2
+		y = 3
 		cost = 5.8
 
 		prerequisite = { focus = GWC_focus_11 focus = GWC_focus_15 }
@@ -644,7 +644,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_14aa
-		icon = GFX
+		icon = GFX_GWC_underground_military_tunnels
 		x = -1
 		y = 1
 		cost = 5.8
@@ -655,6 +655,26 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GWC_wanderlust
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = GWC_focus_14_HMS
+		icon = GFX_GWC_mutants_no_more
+		x = 0
+		y = 3
+		cost = 5.8
+
+		available = { HMS = { exists = no }}
+		prerequisite = { focus = GWC_focus_13 }
+
+		relative_position_id = GWC_focus_13
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -684,17 +704,37 @@ focus_tree = {
 
 	focus = {
 		id = GWC_focus_15aa
-		icon = GFX
+		icon = GFX_GWC_rend_for_worm
 		x = 3
 		y = 1
 		cost = 5.8
 
 		prerequisite = { focus = GWC_focus_11 focus = GWC_focus_11a }
+		available = { has_added_tension_amount > 4 }
+		relative_position_id = GWC_focus_11
+
+		completion_reward = {
+			add_ideas = GWC_rend_for_worm
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = GWC_focus_15_ARB
+		icon = GFX_GWC_re_decorate_station
+		x = 2
+		y = 3
+		cost = 5.8
+
+		prerequisite = { focus = GWC_focus_15 }
+		available = { ARB = { exists = no }}
 
 		relative_position_id = GWC_focus_11
 
 		completion_reward = {
-			add_manpower = 15
 		}
 
 		ai_will_do = {
@@ -705,7 +745,7 @@ focus_tree = {
 	focus = {
 		id = GWC_focus_14a
 		icon = GFX
-		x = -1
+		x = 0
 		y = 1
 		cost = 5.8
 
@@ -725,7 +765,7 @@ focus_tree = {
 	focus = {
 		id = GWC_focus_15a
 		icon = GFX
-		x = 1
+		x = 0
 		y = 1
 		cost = 5.8
 
@@ -746,7 +786,7 @@ focus_tree = {
 		id = GWC_pol_path_priest
 		icon = GFX_GWC_skull
 		x = 0
-		y = 7
+		y = 8
 		cost = 5.8
 
 		available = { has_completed_focus = GWC_focus_12 }
@@ -1039,16 +1079,18 @@ focus_tree = {
 
 	focus = {
 		id = GWC_pol_path_cult_6
-		icon = GFX_GWC_skull
+		icon = GFX_GWC_steal_technology_from_north
 		x = 0
 		y = 1
-		cost = 5.8
+		cost = 14.4
 
 		prerequisite = { focus = GWC_pol_path_cult_3  focus = GWC_pol_path_cult_4 }
 
 		relative_position_id = GWC_pol_path_cult_3
 
 		completion_reward = {
+			add_research_slot = 1
+			add_stability = -0.15
 		}
 
 		ai_will_do = {
@@ -1214,17 +1256,12 @@ focus_tree = {
 		icon = GFX_GWC_skull
 		x = 12
 		y = 1
-		cost = 5.7
+		cost = 5.8
 
-		available = {
-			has_completed_focus = GWC_focus_1
-		}
+		available = { has_completed_focus = GWC_focus_1 }
 
 		relative_position_id = GWC_followers_of_the_worm
 
-		ai_will_do = {
-			factor = 100
-		}
 		completion_reward = {
 			add_war_support = 0.05
 			capital_scope = {
@@ -1242,6 +1279,10 @@ focus_tree = {
 					}
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 100
 		}
 	}
 
@@ -1909,7 +1950,7 @@ focus_tree = {
 
 	focus = {
 		id = GWC_heart_of_darkness0a
-		icon = GFX_GWC_production_quotas
+		icon = GFX_GWC_tribal_skull
 		x = 3
 		y = 1
 		cost = 5.8
@@ -2134,7 +2175,7 @@ focus_tree = {
 		icon = GFX_GWC_battle_for_kuntsevskaya
 		x = -12
 		y = 1
-		cost = 5.7
+		cost = 5.8
 
 		available = {
 			has_completed_focus = GWC_focus_1
@@ -2166,7 +2207,7 @@ focus_tree = {
 		icon = GFX_GWC_military_path
 		x = 3
 		y = 2
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_1 }
 
@@ -2198,7 +2239,7 @@ focus_tree = {
 		icon = GFX_GWC_worm_generals
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_generals_1 }
 		available = { has_war_support > 0.8 } 
@@ -2219,7 +2260,7 @@ focus_tree = {
 		icon = GFX_GWC_wanderlust
 		x = -1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_generals_2 }
 		
@@ -2251,7 +2292,7 @@ focus_tree = {
 		icon = GFX_GWC_ancient_armaments
 		x = -3
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_1 }
 
@@ -2278,7 +2319,7 @@ focus_tree = {
 		icon = GFX_GWC_core
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 
 		available = { has_war_support > 0.54 }
 		
@@ -2306,7 +2347,7 @@ focus_tree = {
 		icon = GFX_GWC_tribal_offence
 		x = 1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 
 		available = { has_war_support > 0.64 }
 		
@@ -2337,7 +2378,7 @@ focus_tree = {
 		icon = GFX_GWC_tribal_defense
 		x = -1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 
 		available = { has_war_support > 0.64 }
 		
@@ -2368,7 +2409,7 @@ focus_tree = {
 		icon = GFX_GWC_tribal_skull
 		x = 0
 		y = 2
-		cost = 5.7
+		cost = 5.8
 
 		available = { has_war_support > 0.74 }
 		
@@ -2396,7 +2437,7 @@ focus_tree = {
 		icon = GFX_GWC_mushrooms
 		x = -1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_1 }
 
@@ -2417,7 +2458,7 @@ focus_tree = {
 		icon = GFX_GWC_cannibal
 		x = 1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_1 }
 
@@ -2434,10 +2475,10 @@ focus_tree = {
 
 	focus = {
 		id = GWC_worm_military_4
-		icon = GFX
+		icon = GFX_GWC_brain
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_2 }
 		mutually_exclusive = { focus = GWC_worm_military_5 }
@@ -2455,10 +2496,10 @@ focus_tree = {
 
 	focus = {
 		id = GWC_worm_military_5
-		icon = GFX
+		icon = GFX_GWC_bloody_hand
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_3 }
 
@@ -2479,7 +2520,7 @@ focus_tree = {
 		icon = GFX_GWC_seize_the_initiative
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_5 }
 
@@ -2510,7 +2551,7 @@ focus_tree = {
 		icon = GFX_GWC_skull_2
 		x = 0
 		y = 4
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_4 focus = GWC_worm_military_5 }
 
@@ -2531,7 +2572,7 @@ focus_tree = {
 		icon = GFX_GWC_culture_of_conflict
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_6 }
 
@@ -2551,7 +2592,7 @@ focus_tree = {
 		icon = GFX_GWC_worm_warriors
 		x = -2
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_6 }
 
@@ -2576,7 +2617,7 @@ focus_tree = {
 		icon = GFX_GWC_tribal_warlord
 		x = 0
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_7 }
 
@@ -2597,7 +2638,7 @@ focus_tree = {
 		icon = GFX_GWC_skull_axe
 		x = -1
 		y = 1
-		cost = 5.7
+		cost = 5.8
 		
 		prerequisite = { focus = GWC_worm_military_armaments_5 }
 		prerequisite = { focus = GWC_worm_military_8 }
