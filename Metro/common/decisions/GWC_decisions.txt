@@ -12,8 +12,7 @@ GWC_burn_technology = {
 		}	
 
 		fire_only_once = yes
-
-		cost = 75
+		cost = 200
 
 		complete_effect = {
 			set_technology = { underzealot_cultist_equipment_tech_1 = 1 }
@@ -50,7 +49,7 @@ GWC_burn_technology = {
 			war_support_weekly = 0.0075
 		}
 
-		cost = 15 
+		cost = 20
 		days_remove = 14
 
 		complete_effect = {
@@ -104,7 +103,7 @@ GWC_burn_technology = {
 			war_support_weekly = 0.0075
 		}
 
-		cost = 15 
+		cost = 20
 		days_remove = 14
 
 		complete_effect = {
@@ -136,9 +135,7 @@ GWC_burn_technology = {
 
 		available = {
 			has_completed_focus = GWC_focus_1
-			has_equipment = {
-				infantry_equipment > 9
-			}
+			has_equipment = { infantry_equipment > 9 }
 		}	
 		fire_only_once = no
 
@@ -146,14 +143,13 @@ GWC_burn_technology = {
 			war_support_weekly = 0.0075
 		}
 
-		cost = 15 
+		cost = 20 
 		days_remove = 14
 
 		complete_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
 				amount = -10
-				#producer = GER
 			}
 		}
 
@@ -169,6 +165,11 @@ GWC_infiltration_LR = {
 		custom_cost_text = command_power_20
 		custom_cost_trigger = {
 			command_power > 19.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
 		}
 
 		target_array = global.countries
@@ -210,14 +211,17 @@ GWC_infiltration_LR = {
 			}
 		}
 	}
-}
 
-GWC_infiltration_non_LR = {
-	GWC_infiltration = {
+	GWC_infiltration_non_LR = {
 
 		custom_cost_text = command_power_20
 		custom_cost_trigger = {
 			command_power > 19.9
+		}
+
+		visible = { 
+			NOT = { has_dlc = "La Resistance" }
+			has_completed_focus = GWC_focus_1 
 		}
 
 		target_array = global.countries
