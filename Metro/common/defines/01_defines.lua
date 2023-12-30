@@ -10,7 +10,7 @@ NDefines.NDiplomacy.VOLUNTEERS_TRANSFER_SPEED = 3
 NDefines.NDiplomacy.VOLUNTEERS_DIVISIONS_REQUIRED = 10
 NDefines.NDiplomacy.VOLUNTEERS_PER_TARGET_PROVINCE = 0.05
 NDefines.NDiplomacy.VOLUNTEERS_PER_COUNTRY_ARMY = 0.001
-NDefines.NDiplomacy.VOLUNTEERS_RETURN_EQUIPMENT = 0.001
+NDefines.NDiplomacy.VOLUNTEERS_RETURN_EQUIPMENT = 0.95
 NDefines.NDiplomacy.TENSION_TIME_SCALE_START_DATE = "2028.1.1.12"
 NDefines.NDiplomacy.GUARANTEE_COST = 100			
 NDefines.NDiplomacy.REVOKE_GUARANTEE_COST = 100
@@ -72,6 +72,8 @@ NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.45						--- if strength is less tha
 NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP gained per day from training
 NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7
+
+NDefines.BASE_CAPTURE_EQUIPMENT_RATIO = 0.			
 
 ---Characters
 NDefines.NCharacter.OFFICER_CORP_HIGH_COMMAND_SLOTS_IN_MENU = 5
