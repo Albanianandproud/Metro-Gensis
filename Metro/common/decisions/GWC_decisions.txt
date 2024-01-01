@@ -1,5 +1,31 @@
 GWC_burn_technology = {
 
+	GWC_announce_a_day_of_worship = {
+		icon = generic_research
+
+		available = {
+			political_power_daily > 0.9
+		}	
+
+		fire_only_once = yes
+		cost = 35
+		
+		modifier = {
+			stability_weekly = 0.025
+			consumer_goods_factor = 0.3
+			industrial_capacity_factory = -0.3
+			attrition = 0.3
+		}
+
+		cost = 55
+		days_remove = 7
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
 	GWC_deploy_the_cultists_into_field = {
 		icon = generic_research
 
@@ -13,9 +39,10 @@ GWC_burn_technology = {
 
 		fire_only_once = yes
 		cost = 200
-
+		
 		complete_effect = {
 			set_technology = { underzealot_cultist_equipment_tech_1 = 1 }
+			hidden_effect = { set_country_flag = GWC_has_deployed_cultists }
 		}
 
 		ai_will_do = {
@@ -245,6 +272,108 @@ GWC_infiltration_LR = {
 				add = 0
 				command_power < 30
 			}
+		}
+	}
+}
+
+GWC_militarization = {
+
+	GWC_purchase_military_buff_1 = {
+
+		available = { 
+			has_army_experience > 25 
+			custom_trigger_tooltip = {
+				tooltip = GWC_has_deployed_cultists
+				hidden_trigger = {
+					has_country_flag = GWC_has_deployed_cultists
+				}
+			}
+		}
+		custom_cost_text = army_experience_25
+		custom_cost_trigger = {
+			has_army_experience > 24.9
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { army_experience = -25 }
+			set_technology = { GWC_unique_tech_4 = 1 }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+
+	GWC_purchase_military_buff_2 = {
+		available = { has_army_experience > 25 }
+		custom_cost_text = army_experience_25
+		custom_cost_trigger = {
+			has_army_experience > 24.9
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { army_experience = -25 }
+			set_technology = { GWC_unique_tech_1 = 1 }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+
+	GWC_purchase_military_buff_3 = {
+		available = { has_army_experience > 30 }
+		custom_cost_text = army_experience_30
+		custom_cost_trigger = {
+			has_army_experience > 29.9
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { army_experience = -30 }
+			set_technology = { GWC_unique_tech_2 = 1 }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+
+	GWC_purchase_military_buff_4 = {
+		available = { has_army_experience > 30 }
+		custom_cost_text = army_experience_30
+		custom_cost_trigger = {
+			has_army_experience > 29.9
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { army_experience = -30 }
+			set_technology = { GWC_unique_tech_3 = 1 }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+
+	GWC_purchase_military_buff_5 = {
+		available = { has_army_experience > 40 }
+		custom_cost_text = army_experience_40
+		custom_cost_trigger = {
+			has_army_experience > 39.9
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { army_experience = -40 }
+			add_ideas = GWC_warriors_of_the_worm
+		}
+
+		ai_will_do = {
+			base = 4
 		}
 	}
 }

@@ -912,6 +912,7 @@ focus_tree = {
 		cost = 5.8
 
 		prerequisite = { focus = GWC_pol_path_priest_3}
+		mutually_exclusive = { focus = GWC_pol_path_priest_6 }
 
 		relative_position_id = GWC_pol_path_priest_3
 
@@ -931,48 +932,9 @@ focus_tree = {
 		cost = 5.8
 
 		prerequisite = { focus = GWC_pol_path_priest_4 }
+		mutually_exclusive = { focus = GWC_pol_path_priest_5 }
 
 		relative_position_id = GWC_pol_path_priest_4
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = GWC_pol_path_priest_7
-		icon = GFX_GWC_skull
-		x = 0
-		y = 1
-		cost = 5.8
-
-		mutually_exclusive = { focus = GWC_pol_path_priest_8 }
-		prerequisite = { focus = GWC_pol_path_priest_5}
-
-		relative_position_id = GWC_pol_path_priest_5
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = GWC_pol_path_priest_8
-		icon = GFX_GWC_skull
-		x = 0
-		y = 1
-		cost = 5.8
-
-		mutually_exclusive = { focus = GWC_pol_path_priest_7 }
-		prerequisite = { focus = GWC_pol_path_priest_6 }
-
-		relative_position_id = GWC_pol_path_priest_6
 
 		completion_reward = {
 		}
@@ -1057,51 +1019,13 @@ focus_tree = {
 	focus = {
 		id = GWC_pol_path_cult_3
 		icon = GFX_GWC_skull
-		x = 0
+		x = 1
 		y = 1
-		cost = 5.8
+		cost = 10
 
 		prerequisite = { focus = GWC_pol_path_cult_1}
 
 		relative_position_id = GWC_pol_path_cult_1
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = GWC_pol_path_cult_4
-		icon = GFX_GWC_skull
-		x = 0
-		y = 1
-		cost = 5.8
-
-		prerequisite = { focus = GWC_pol_path_cult_2 }
-
-		relative_position_id = GWC_pol_path_cult_2
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = GWC_pol_path_cult_6
-		icon = GFX_GWC_steal_technology_from_north
-		x = 0
-		y = 1
-		cost = 14.4
-
-		prerequisite = { focus = GWC_pol_path_cult_3  focus = GWC_pol_path_cult_4 }
-
-		relative_position_id = GWC_pol_path_cult_3
 
 		completion_reward = {
 			add_research_slot = 1
@@ -1186,28 +1110,9 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GWC_pol_path_warriors_3
-		icon = GFX_GWC_skull
-		x = 0
-		y = 1
-		cost = 5.8
-
-		prerequisite = { focus = GWC_pol_path_warriors_1}
-
-		relative_position_id = GWC_pol_path_warriors_1
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
 		id = GWC_pol_path_warriors_4
 		icon = GFX_GWC_skull
-		x = 0
+		x = -1
 		y = 1
 		cost = 5.8
 
@@ -1224,45 +1129,33 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GWC_pol_path_warriors_5
-		icon = GFX_GWC_skull
-		x = 0
-		y = 1
-		cost = 5.8
-
-		prerequisite = { focus = GWC_pol_path_warriors_4 focus = GWC_pol_path_warriors_3 }
-
-		relative_position_id = GWC_pol_path_warriors_4
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
 		id = GWC_pol_unleash_the_power_of_the_worm
 		icon = GFX_GWC_skull
 		x = 0
-		y = 5
+		y = 4
 		cost = 5.8
 
 		prerequisite = { 
-			focus = GWC_pol_path_warriors_5
-			focus = GWC_pol_path_priest_7 focus = GWC_pol_path_priest_8 
-			focus = GWC_pol_path_cult_6
+			focus = GWC_pol_path_warriors_4
+			focus = GWC_pol_path_priest_5 focus = GWC_pol_path_priest_6 
+			focus = GWC_pol_path_cult_3
+		}
+
+		available = {
+			ARB = { exists = no }
+			EUR = { exists = no }
+			HMS = { exists = no }
 		}
 
 		relative_position_id = GWC_pol_path_priest
 
 		completion_reward = {
 			## Spawn the worm meybe?
+			add_ideas = GWC_warriors_unleashed
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 0.1
 		}
 	}
 
@@ -2571,8 +2464,13 @@ focus_tree = {
 		relative_position_id = GWC_worm_military_1
 
 		completion_reward = {
-			custom_effect_tooltip = GWC_purchase_buffs_for_XP
 			GWC_warrior = { promote_leader = yes }
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.4
+				uses = 1
+				category = doctrine_overwhelm
+			}
 		}
 
 		ai_will_do = {
