@@ -154,11 +154,6 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			diplomatic_relation = {
-				country = HNZ
-				relation = non_aggression_pact
-				active = yes
-			}
 			add_opinion_modifier = {
 				target = HNZ
 				modifier = support
@@ -654,7 +649,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = ARB_curtail_activities
+			add_ideas = ARB_curtail_activities_idea
 		}
 	}
 
@@ -1128,7 +1123,7 @@ focus_tree = {
 			focus = ARB_hansa_alignment
 		}
 		available = {
-			398 = {
+			299 = {
 				is_owned_by = HNZ
 			}
 			AND = { HNZ = { exists = yes } }
@@ -1140,7 +1135,7 @@ focus_tree = {
 
 		completion_reward = {
 			HNZ = {
-				country_event = nf_ARB.8
+				country_event = nf_ARB.7
 			}
 		}
 	}
@@ -1156,7 +1151,7 @@ focus_tree = {
 			focus = ARB_bargain_state_1
 		}
 		available = {
-			398 = {
+			299 = {
 				is_owned_by = ARB
 			}
 		}
@@ -1166,7 +1161,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			398 = {
+			299 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = infrastructure
@@ -1178,17 +1173,79 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			175 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
+			if = { #In case you got any tunnels on the line, the infrastructure will be increased.
+				limit = { ARB = { owns_state = 67 } }
+				67 = { add_building_construction = { type = infrastructure level = 2 } }
+			}
+			if = {
+				limit = { ARB = { owns_state = 201 } }
+				201 = { add_building_construction = { type = infrastructure level = 2 } }
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_bargain_state_3
+		icon = GFX_generic_BAU_trade
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ARB_bargain_state_2
+		}
+		relative_position_id = ARB_bargain_state_2
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					BAU = {
+						is_puppet = no
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+				}
+				BAU = { country_event = { id = nf_ARB.14 hours = 3 } }
+			}
+			if = {
+				limit = {
+					BAU = {
+						is_puppet = yes
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+				}
+				BAU = { OVERLORD = { country_event = { id = nf_ARB.14 hours = 4 } } }
+			}
+			if = {
+				limit = {
+					262 = {
+						controller = {
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					BAU = { exists = no } 
+					any_other_country = {
+						NOT = {
+							owns_state = 251
+						}
+					}
+				}
+				251 = {
+					controller = {
+						country_event = { id = nf_ARB.17 hours = 5 } 
+					}
 				}
 			}
-			176 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-				}
+			hidden_effect = {
+				news_event = { id = ARBnews.1 hours = 8 }
 			}
 		}
 	}
@@ -1952,7 +2009,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = ARB_free_stalker_authority
+			add_ideas = ARB_free_stalker_authority_idea
 			add_popularity = {
     			ideology = community
     			popularity = 0.2

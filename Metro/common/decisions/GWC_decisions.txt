@@ -17,7 +17,7 @@ GWC_burn_technology = {
 			attrition = 0.3
 		}
 
-		cost = 55
+		cost = 50
 		days_remove = 7
 		days_re_enable = 180
 
@@ -203,14 +203,15 @@ GWC_infiltration_LR = {
 	
 		target_trigger = {
 			FROM = { 
-				NOT = { has_idea = civics_border_3 
+				has_country_flag = GWC_enable_infiltration
+				NOT = { 
+					has_idea = civics_border_3 
 					OR = { 
 						original_tag = RUI 
 						original_tag = MSU
 					} 
 					has_country_flag = is_mutant_nation 
 				}
-				OR = { is_neighbor_of = ROOT has_country_flag = GWC_enable_infiltration } 
 			}
 		}
 
@@ -218,7 +219,7 @@ GWC_infiltration_LR = {
 			ROOT = {
 				network_strength = {
 					target = FROM
-					value > 10
+					value > 14
 				}
 			}
 		}

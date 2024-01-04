@@ -1,4 +1,5 @@
 add_namespace = nf_ARB
+add_namespace = ARBnews
 
 ## Alliance with Europe
 country_event = { 
@@ -74,7 +75,7 @@ country_event = {
     option = { 
         name = nf_ARB.3.a
         add_timed_idea = {
-			idea = ARB_economic_revitalisation
+			idea = ARB_economic_revitalisation_idea
 			days = 210
 	    }
 
@@ -194,10 +195,43 @@ country_event = {
     option = { ## OK
         name = nf_ARB.7.a
         ARB = {
-            transfer_state = 398
-            transfer_state = 176
-            transfer_state = 175
-            hidden_effect = { country_event = { id = nf_ARB.8 days = 2 random_days = 2 } }
+		transfer_state = 299
+		299 = { add_core_of = PREV }
+		HNZ = { remove_state_core = 299 }
+		SRL = { remove_state_core = 299 }
+		if = { #In case Hanza colonized any states on the line, this will transfer it.
+			limit = {
+				HNZ = { owns_state = 67 }
+			}
+			ARB = { transfer_state = 67 }
+			67 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 67 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 136 }
+			}
+			ARB = { transfer_state = 136 }
+			136 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 136 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 165 }
+			}
+			ARB = { transfer_state = 165 }
+			165 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 165 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 201 }
+			}
+			ARB = { transfer_state = 201 }
+			201 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 201 }
+		}
+		hidden_effect = { country_event = { id = nf_ARB.8 days = 2 random_days = 2 } }
         }
         ai_chance = {
             base = 0.5
@@ -224,12 +258,42 @@ country_event = {
             }
         }
         ARB = {
-            transfer_state = 398
-            transfer_state = 176
-            transfer_state = 175
-            175 = { add_core_of = PREV }
-            176 = { add_core_of = PREV }
-            398 = { add_core_of = PREV }
+		transfer_state = 299
+		299 = { add_core_of = PREV }
+		HNZ = { remove_state_core = 299 }
+		SRL = { remove_state_core = 299 }
+		if = { #In case Hanza colonized any states on the line, this will transfer it.
+			limit = {
+				HNZ = { owns_state = 67 }
+			}
+			ARB = { transfer_state = 67 }
+			67 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 67 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 136 }
+			}
+			ARB = { transfer_state = 136 }
+			136 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 136 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 165 }
+			}
+			ARB = { transfer_state = 165 }
+			165 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 165 }
+		}
+		if = {
+			limit = {
+				HNZ = { owns_state = 201 }
+			}
+			ARB = { transfer_state = 201 }
+			201 = { add_core_of = ARB }
+			HNZ = { remove_state_core = 201 }
+		}
         }
         puppet = ARB
         ai_chance = {
@@ -252,9 +316,6 @@ country_event = {
 
     option = { ## OK
         name = nf_ARB.8.a
-        175 = { add_core_of = ROOT }
-        176 = { add_core_of = ROOT }
-        398 = { add_core_of = ROOT }
         ai_chance = {
             base = 2
         }
@@ -278,9 +339,31 @@ country_event = {
 
     option = { ## Bye
         name = nf_ARB.9.b
-        398 = { add_claim_by = ROOT }
-        176 = { add_claim_by = ROOT }
-        175 = { add_claim_by = ROOT }
+        299 = { add_claim_by = ROOT }
+	if = { #In case Hanza colonized any states on the line, this will transfer it.
+		limit = {
+			HNZ = { owns_state = 67 }
+		}
+		67 = { add_claim_by = ROOT }
+	}
+	if = {
+		limit = {
+			HNZ = { owns_state = 136 }
+		}
+		136 = { add_claim_by = ROOT }
+	}
+	if = {
+		limit = {
+			HNZ = { owns_state = 165 }
+		}
+		165 = { add_claim_by = ROOT }
+	}
+	if = {
+		limit = {
+			HNZ = { owns_state = 201 }
+		}
+		201 = { add_claim_by = ROOT }
+	}
         create_wargoal = {
             type = puppet_wargoal_focus
             target = HNZ
@@ -405,4 +488,426 @@ country_event = {
 			add_to_faction = EUR
 		}
     }
+}
+
+#Demand Overlordship over Baumansky - Baumansky independent
+country_event = {
+	id = nf_ARB.14
+	title = nf_ARB.14.t
+	desc = {
+		text = nf_ARB.14.d1
+		trigger = { 
+			BAU = { is_subject = no }
+		}
+	}
+	desc = {
+		text = nf_ARB.14.d2
+		trigger = { 
+			BAU = { is_subject = yes }
+		}
+	}
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# agree to being a puppet
+		name = nf_ARB.14.a
+		ai_chance = {
+			factor = 50
+		}
+		ARB = { country_event = nf_ARB.15 }
+		hidden_effect = {
+			news_event = { id = ARBnews.2 days = 1 }
+		}
+	}
+
+	option = {# refuse
+		name = nf_ARB.14.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				is_in_faction = yes
+				ARB = { is_in_faction = no }
+				factor = 5
+			}
+		}
+		ARB = { country_event = nf_ARB.16 }
+		
+	}	
+}
+
+#Demand Overlordship over Baumansky - Baumansky agrees to become a puppet
+country_event = {
+	id = nf_ARB.15
+	title = nf_ARB.15.t
+	desc = nf_ARB.15.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# good
+		name = nf_ARB.15.a
+		puppet = BAU
+	}
+
+	
+}
+
+#Demand Overlordship over Baumansky - Baumansky refuses to become a puppet
+country_event = {
+	id = nf_ARB.16
+	title = nf_ARB.16.t
+	desc = nf_ARB.16.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# war!
+		name = nf_ARB.16.a
+		create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BAU
+		}
+		hidden_effect = {
+			news_event = { id = ARBnews.3 days = 1 }
+		}
+	}
+
+	
+}
+
+#Demand Overlordship over Baumansky - Hanza holds Baumansky
+country_event = {
+	id = nf_ARB.17
+	title = nf_ARB.17.t
+	desc = nf_ARB.17.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# hand over Sukharevskaya
+		name = nf_ARB.17.a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				strength_ratio = { tag = ARB ratio < 1 }
+				factor = 2
+			}
+		}
+		FROM = { country_event = { id = nf_ARB.18 hours = 3 } }
+		hidden_effect = {
+			news_event = { id = ARBnews.2 days = 1 }
+		}
+	}
+
+	option = {# refuse
+		name = nf_ARB.17.b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				has_war = yes
+				factor = 0.5
+			}
+			modifier = {
+				is_in_faction = yes
+				factor = 5
+			}
+		}
+		ARB = { country_event = { id = nf_ARB.19 hours = 4 } }
+	}
+}
+
+#Demand Overlordship over Baumansky - Hanza agrees, Arbat gets options on whether to annex or puppet
+country_event = {
+	id = nf_ARB.18
+	title = nf_ARB.18.t
+	desc = nf_ARB.18.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# annex
+		name = nf_ARB.18.a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				country_exists = BAU
+				factor = 0
+			}
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 17 }
+			}
+			ARB = { transfer_state = 17 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 251 }
+			}
+			ARB = { transfer_state = 251 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 18 }
+			}
+			ARB = { transfer_state = 18 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 271 }
+			}
+			ARB = { transfer_state = 271 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 19 }
+			}
+			ARB = { transfer_state = 19 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 238 }
+			}
+			ARB = { transfer_state = 238 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 20 }
+			}
+			ARB = { transfer_state = 20 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 291 }
+			}
+			ARB = { transfer_state = 291 }
+		}
+	}
+
+	option = {# puppet
+		name = nf_ARB.18.b
+		ai_chance = {
+			factor = 30
+		}
+		puppet = BAU
+	}
+}
+
+#Demand Overlordship over Baumansky - Hanza refuses to hand over Baumansky
+country_event = {
+	id = nf_ARB.19
+	title = nf_ARB.19.t
+	desc = nf_ARB.19.d
+	picture = GFX_event_55
+	
+	is_triggered_only = yes
+
+	option = {# let it go
+		name = nf_ARB.19.a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				is_in_faction = no
+				HNZ = {
+					is_in_faction = yes
+				}
+				factor = 10
+			}
+		}
+	}
+
+	option = {# war goal
+		name = nf_ARB.19.b
+		ai_chance = {
+			factor = 90
+		}
+		create_wargoal = {
+				type = take_state_focus
+				target = HNZ
+				generator = { 262 }
+			}
+		hidden_effect = {
+			news_event = { id = ARBnews.3 days = 1 }
+		}
+	}
+}
+
+#####NEWS#####
+
+#Arbat claims overlordship over Baumansky
+news_event = {
+	id = ARBnews.1
+	title = ARBnews.1.t
+	desc = {
+		text = ARBnews.1.d.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = BAU }
+				AND = {
+					country_exists = BAU
+					BAU = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = ARBnews.1.d.b
+		trigger = { 
+			country_exists = BAU
+			BAU = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ARBnews.1.a
+		trigger = {
+			TAG = ARB
+		}
+	}
+	option = {
+		name = ARBnews.1.b
+		trigger = { 
+			TAG = HNZ
+			AND = {
+				country_exists = BAU
+				BAU = { is_subject = yes }
+			}
+		}
+	}
+	option = {
+		name = ARBnews.1.c
+		trigger = { 
+			AND = {
+				TAG = BAU
+				BAU = { is_subject = no }
+			}
+		}
+	}
+	option = {
+		name = ARBnews.1.d
+		trigger = { 
+			NOT = {
+				TAG = ARB
+				TAG = HNZ
+				AND = {
+					TAG = BAU
+					BAU = { is_subject = yes }
+				}
+			}
+		}
+	}
+}
+
+#HNZ/BAU folds and gives up Baumansky
+news_event = {
+	id = ARBnews.2
+	title = ARBnews.2.t
+	desc = {
+		text = ARBnews.2.d.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = BAU }
+				AND = {
+					country_exists = BAU
+					BAU = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = ARBnews.2.d.b
+		trigger = { 
+			country_exists = BAU
+			BAU = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ARBnews.2.a
+		trigger = {
+			TAG = ARB
+		}
+	}
+	option = {
+		name = ARBnews.2.b
+		trigger = { 
+			TAG = HNZ
+		}
+	}
+	option = {
+		name = ARBnews.2.c
+		trigger = { 
+			NOT = {
+				TAG = ARB
+				TAG = HNZ
+			}
+		}
+	}
+}
+
+#Arbat and HNZ/BAU unable to find solution, war looms
+news_event = {
+	id = ARBnews.3
+	title = ARBnews.3.t
+	desc = {
+		text = ARBnews.3.d.a
+		trigger = { 
+			OR = {
+				NOT = { country_exists = BAU }
+				AND = {
+					country_exists = BAU
+					BAU = { is_subject = yes }
+				}
+			}
+		}
+	}
+	desc = {
+		text = ARBnews.3.d.b
+		trigger = { 
+			country_exists = BAU
+			BAU = { is_subject = no }
+		}
+	}
+	picture = GFX_news_event_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ARBnews.3.a
+		trigger = {
+			TAG = ARB
+		}
+	}
+	option = {
+		name = ARBnews.3.b
+		trigger = { 
+			OR = {
+				TAG = HNZ
+				TAG = BAU
+			}
+		}
+	}
+	option = {
+		name = ARBnews.3.c
+		trigger = { 
+			NOT = {
+				TAG = ARB
+				TAG = HNZ
+				TAG = BAU
+			}
+		}
+	}
 }
