@@ -202,8 +202,8 @@ GWC_infiltration_LR = {
 		target_array = global.countries
 	
 		target_trigger = {
-			FROM = { 
-				has_country_flag = GWC_enable_infiltration
+			FROM = {
+				has_country_flag = GWC_enable_infiltration 
 				NOT = { 
 					has_idea = civics_border_3 
 					OR = { 
@@ -239,6 +239,50 @@ GWC_infiltration_LR = {
 			}
 		}
 	}
+
+	GWC_LR_infiltration_small_1 = {
+		custom_cost_text = command_power_15
+		custom_cost_trigger = {
+			command_power > 14.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				has_idea = GWC_infiltrated_small
+			}
+		}
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 25
+				}
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.31 }
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+
+
+
 
 	GWC_infiltration_non_LR = {
 
