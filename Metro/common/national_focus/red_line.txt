@@ -4202,66 +4202,6 @@ focus_tree = {
 			factor = 2
 		}
 	}
-	
-	focus = {
-		id = RED_dry_station_bandits
-		icon = GFX_gangster
-		prerequisite = {
-			focus = RED_breakaways
-		}
-		x = 6
-		y = 1
-		cost = 6.4
-		relative_position_id = RED_breakaways
-		bypass = {
-			OR = {
-				NOT = { country_exists = DRY }
-				has_war_with = DRY
-			}
-		}
-		available = {
-			has_war = no
-		}
-        will_lead_to_war_with = DRY
-		completion_reward = {
-			create_wargoal = {
- 				type = take_state_focus
- 				target = DRY
- 				expire = 0
- 				generator = { 28 }
- 			}
-		}
-		ai_will_do = {
-			factor = 201
-		}
-	}
-
-	focus = {
-		id = RED_taking_back_our_stuff
-		icon = GFX_RED_dry_station_annex
-		prerequisite = {
-			focus = RED_dry_station_bandits
-		}
-		x = 0
-		y = 1
-		cost = 5.7
-		relative_position_id = RED_dry_station_bandits
-		available = {
-			NOT = { country_exists = DRY }
-			262 = {
-				is_owned_by = ROOT
-			}
-		}
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = explosive_equipment
-		        amount = 40
-			}
-		}
-		ai_will_do = {
-			factor = 201
-		}
-	}
 
 	focus = {
 		id = RED_1905
@@ -4865,10 +4805,10 @@ focus_tree = {
 			focus = RED_technicians_2
 			focus = RED_anarchists_3
 		}
-		x = -3
-		y = 4
+		x = 0
+		y = 1
 		cost = 5
-		relative_position_id = RED_dry_station_bandits
+		relative_position_id = RED_trotskyists_2
 		completion_reward = {
 			every_country = {
 				limit = {
@@ -5114,24 +5054,56 @@ focus_tree = {
 		available = {
 			has_war = no
 			is_neighbor_of = RCH
+			OR = {
+				214 = { is_owned_by = ROOT }
+				218 = { is_owned_by = ROOT }
+			}
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		x = 10
 		y = 1
 		cost = 4.3
 		relative_position_id = RED_cemented_authority
 		completion_reward = {
-			214 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
+			if = {
+				limit = {
+					214 = { is_owned_by = ROOT }
 				}
-				add_building_construction = {
-					type = bunker
-					level = 1
-					instant_build = yes
-					province = {
-						all_provinces = yes
+				214 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						instant_build = yes
+						province = {
+							all_provinces = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					218 = { is_owned_by = ROOT }
+				}
+				218 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 1
+						instant_build = yes
+						province = {
+							all_provinces = yes
+						}
 					}
 				}
 			}
@@ -5151,6 +5123,9 @@ focus_tree = {
 		available = {
 			has_war = no
 			is_neighbor_of = RCH
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		mutually_exclusive = {
 			focus = RED_RCH_frontline_defensive
@@ -5176,6 +5151,9 @@ focus_tree = {
 		available = {
 			has_war = no
 			is_neighbor_of = RCH
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		mutually_exclusive = {
 			focus = RED_RCH_frontline_agressive
@@ -5203,6 +5181,9 @@ focus_tree = {
 			has_war = no
 			is_neighbor_of = RCH
 		}
+		bypass = {
+			RCH = { exists = no }
+		}
 		x = 0
 		y = 1
 		cost = 4.3
@@ -5225,6 +5206,16 @@ focus_tree = {
 		available = {
 			has_war = no
 			is_neighbor_of = RCH
+			OR = {
+				430 = { is_owned_by = ROOT }
+				431 = { is_owned_by = ROOT }
+				214 = { is_owned_by = ROOT }
+				432 = { is_owned_by = ROOT }
+				218 = { is_owned_by = ROOT }
+			}
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		prerequisite = {
 			focus = RED_RCH_frontline_defensive
@@ -5235,24 +5226,6 @@ focus_tree = {
 		relative_position_id = RED_RCH_frontline_defensive
 		completion_reward = {
 			custom_effect_tooltip = RED_frontline_hunker_down_tt
-		   if = {
-			    limit = {
-				   337 = { is_owned_by = ROOT }
-			    }
-			    337 = {
-				    add_building_construction = {
-					    type = bunker
-						level = 1
-					    instant_build = yes
-					    province = { all_provinces = yes }
-				    }
-				    add_building_construction = {
-					   type = infrastructure
-					   level = 1
-					   instant_build = yes
-				    }
-			    }
-		    }
 		    if = {
 			    limit = {
 				   430 = { is_owned_by = ROOT }
@@ -5307,6 +5280,42 @@ focus_tree = {
 				    }
 			    }
 		    }
+		    if = {
+			    limit = {
+				   432 = { is_owned_by = ROOT }
+			    }
+			    432 = {
+				   add_building_construction = {
+						type = bunker
+						level = 1
+					   	instant_build = yes
+					    province = { all_provinces = yes }
+				    }
+				   add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				    }
+			    }
+		    }
+		    if = {
+			    limit = {
+				   218 = { is_owned_by = ROOT }
+			    }
+			    218 = {
+				   add_building_construction = {
+						type = bunker
+						level = 1
+					   	instant_build = yes
+					    province = { all_provinces = yes }
+				    }
+				   add_building_construction = {
+					   type = infrastructure
+					   level = 1
+					   instant_build = yes
+				    }
+			    }
+		    }
 	    }
 		ai_will_do = {
 			factor = 2
@@ -5321,7 +5330,6 @@ focus_tree = {
 		}
 		available = {
 			has_war = no
-			is_neighbor_of = RCH
 		}
 		x = 0
 		y = 1
@@ -5343,7 +5351,6 @@ focus_tree = {
 		}
 		available = {
 			has_war = no
-			is_neighbor_of = RCH
 		}
 		x = 0
 		y = 1
@@ -5362,11 +5369,16 @@ focus_tree = {
 		icon = GFX_generic_3
 		prerequisite = {
 			focus = RED_RCH_frontline_reinforce
+		}
+		prerequisite = {
 			focus = RED_RCH_frontline_AT
 		}
 		available = {
 			has_war = no
 			is_neighbor_of = RCH
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		x = 0
 		y = 5
@@ -5417,7 +5429,6 @@ focus_tree = {
 		icon = GFX_RED_anti_fascism_2
 		prerequisite = {
 			focus = RED_RCH_frontline_reinforce
-			focus = RED_RCH_frontline_AT
 		}
 		prerequisite = {
 			focus = RED_RCH_frontline_AT
@@ -5433,6 +5444,9 @@ focus_tree = {
 			DIM = {
 				is_neighbor_of = RCH
 			}
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		mutually_exclusive = {
 			focus = RED_RCH_frontline_support_containment
@@ -5469,7 +5483,12 @@ focus_tree = {
 		icon = GFX_RED_containment
 		prerequisite = {
 			focus = RED_RCH_frontline_reinforce
+		}
+		prerequisite = {
 			focus = RED_RCH_frontline_AT
+		}
+		bypass = {
+			RCH = { exists = no }
 		}
 		mutually_exclusive = {
 			focus = RED_RCH_frontline_protect_reich_border
