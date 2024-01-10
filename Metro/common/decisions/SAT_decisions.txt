@@ -1,0 +1,43 @@
+SAT_blood_sacrifices = {
+
+	SAT_sacrifice_captives = {
+
+		available = {
+			has_completed_focus = SAT_sacrifices
+			capital_scope = {
+				has_manpower > 70
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			war_support_weekly = 0.01
+			political_power_factor = 0.2
+		}
+
+		complete_effect = {
+			capital_scope = {
+				add_manpower = -5
+			}
+			if = {
+				limit = { has_completed_focus = SAT_blood_altars }
+				add_command_power = 5
+				army_experience = 2
+			}
+		}
+
+		cost = 20
+		days_remove = 14
+
+		ai_will_do = {
+			base = 25
+			modifier = {
+				factor = 0.1
+				capital_scope = {
+					has_manpower < 100
+				}
+			}
+		}
+	}
+}
