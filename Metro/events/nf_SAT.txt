@@ -83,7 +83,7 @@ country_event = {
 	}
 }
 
-country_event = {	
+country_event = {	## Disciples of Shaytan
     id = nf_SAT.5
     title = nf_SAT.5.t
     desc = nf_SAT.5.d
@@ -92,19 +92,18 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.5.a
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment_2
+			amount = 10
+			producer = RUS
+		}
 		ai_chance = {
 			base = 0
 		}
 	}
-	option = { 
-		name = nf_SAT.5.b
-		ai_chance = {
-			base = 15
-		}
-	}
 }
 
-country_event = {	
+country_event = {	## Warriors to Moloch
     id = nf_SAT.6
     title = nf_SAT.6.t
     desc = nf_SAT.6.d
@@ -113,14 +112,13 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.6.a
+		add_equipment_to_stockpile = {
+			type = pheumatic_infantry_equipment_1
+			amount = 15
+			producer = RUS
+		}
 		ai_chance = {
 			base = 0
-		}
-	}
-	option = { 
-		name = nf_SAT.6.b
-		ai_chance = {
-			base = 15
 		}
 	}
 }
@@ -134,12 +132,24 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.7.a
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.5
+			uses = 2
+			category = land_doctrine
+		}
 		ai_chance = {
 			base = 0
 		}
 	}
 	option = { 
 		name = nf_SAT.7.b
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 1
+			uses = 1
+			category = land_doctrine
+		}
 		ai_chance = {
 			base = 15
 		}
@@ -155,19 +165,23 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.8.a
+		add_manpower = -15
+		add_timed_idea = { idea = SAT_driven_rats_out days = 90 }
 		ai_chance = {
 			base = 0
 		}
 	}
 	option = { 
 		name = nf_SAT.8.b
+		add_political_power = 100
+		hidden_effect = { set_country_flag = SAT_kingdom_of_the_rats_path }
 		ai_chance = {
 			base = 15
 		}
 	}
 }
 
-country_event = {	
+country_event = {	## "Places Time Forgot" 
     id = nf_SAT.9
     title = nf_SAT.9.t
     desc = nf_SAT.9.d
@@ -176,19 +190,22 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.9.a
+
+		add_timed_idea = { idea = SAT_texts_2 days = 360 }
 		ai_chance = {
 			base = 0
 		}
 	}
 	option = { 
 		name = nf_SAT.9.b
+		add_timed_idea = { idea = SAT_texts_1 days = 360 }
 		ai_chance = {
 			base = 15
 		}
 	}
 }
 
-country_event = {	
+country_event = {	## Something
     id = nf_SAT.10
     title = nf_SAT.10.t
     desc = nf_SAT.10.d
@@ -209,7 +226,7 @@ country_event = {
 	}
 }
 
-country_event = {	
+country_event = {	## Friends in KTG
     id = nf_SAT.11
     title = nf_SAT.11.t
     desc = nf_SAT.11.d
@@ -218,19 +235,40 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.11.a
+		KTG = {
+			capital_scope = {
+				add_manpower = -20
+			}
+		}
+		add_manpower = 20
+		add_opinion_modifier = {
+			target = KTG
+			modifier = SAT_dislocation
+		}
 		ai_chance = {
 			base = 0
 		}
 	}
 	option = { 
 		name = nf_SAT.11.b
+		DIM = {
+			add_timed_idea = { idea = SAT_indoctrination days = 480 } 
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+	option = { 
+		name = nf_SAT.11.b
+		trigger = { KTG = { has_government = dictatorial } }
+		puppet = KTG
 		ai_chance = {
 			base = 15
 		}
 	}
 }
 
-country_event = {	
+country_event = {	### KTG stuff but for DIM
     id = nf_SAT.12
     title = nf_SAT.12.t
     desc = nf_SAT.12.d
@@ -251,7 +289,7 @@ country_event = {
 	}
 }
 
-country_event = {	
+country_event = {	## "Gnawing in the Depths"
     id = nf_SAT.13
     title = nf_SAT.13.t
     desc = nf_SAT.13.d
@@ -260,12 +298,14 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.13.a
+		add_stability = 0.1
 		ai_chance = {
 			base = 0
 		}
 	}
 	option = { 
 		name = nf_SAT.13.b
+		add_political_power = 100
 		ai_chance = {
 			base = 15
 		}
@@ -281,14 +321,28 @@ country_event = {
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.14.a
+		division_template = {
+			name = "Special Forces"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				special_forces = { x = 0 y = 0 }
+				special_forces = { x = 0 y = 1 }
+				special_forces = { x = 0 y = 2 }
+				special_forces = { x = 0 y = 3 }
+			}
+			support = {
+				field_hospital = { x = 0 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
 		ai_chance = {
 			base = 0
-		}
-	}
-	option = { 
-		name = nf_SAT.14.b
-		ai_chance = {
-			base = 15
 		}
 	}
 }
