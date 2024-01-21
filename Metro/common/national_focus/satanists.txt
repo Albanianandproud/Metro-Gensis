@@ -14,7 +14,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_1
-		icon = GFX_
+		icon = GFX_domain_of_hell
 		x = 11
 		y = 0
 		cost = 6.5
@@ -31,7 +31,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_2a
-		icon = GFX_SAT
+		icon = GFX_SAT_cult_1
 
 		prerequisite = { focus = SAT_1 }
 		mutually_exclusive = { focus = SAT_2b }
@@ -54,7 +54,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_2b
-		icon = GFX_SAT
+		icon = GFX_gates_of_hell
 
 		prerequisite = { focus = SAT_1 }
 		mutually_exclusive = { focus = SAT_2a }
@@ -77,7 +77,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_3a
-		icon = GFX_SAT
+		icon = GFX_SAT_others
 
 		prerequisite = { focus = SAT_2a focus = SAT_2b }
 		mutually_exclusive = { focus = SAT_3b }
@@ -100,7 +100,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_3b
-		icon = GFX_SAT
+		icon = GFX_SAT_rats
 
 		prerequisite = { focus = SAT_2a focus = SAT_2b }
 		mutually_exclusive = { focus = SAT_3a }
@@ -123,7 +123,7 @@ focus_tree = {
 
 	focus = {	## Surface 
 		id = SAT_4a
-		icon = GFX_SAT
+		icon = GFX_SAT_heretical_thought
 
 		prerequisite = { focus = SAT_3a focus = SAT_3b }
 		mutually_exclusive = { focus = SAT_4b }
@@ -146,7 +146,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_4b
-		icon = GFX_SAT
+		icon = GFX_SAT_cult_gathering
 
 		prerequisite = { focus = SAT_3a focus = SAT_3b }
 		mutually_exclusive = { focus = SAT_4a }
@@ -169,7 +169,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_5a
-		icon = GFX_SAT
+		icon = GFX_GWC_underground_military_tunnels
 
 		prerequisite = { focus = SAT_4a focus = SAT_4b }
 		mutually_exclusive = { focus = SAT_5b }
@@ -192,7 +192,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_5b
-		icon = GFX_SAT
+		icon = GFX_SAT_against_the_southeners
 
 		prerequisite = { focus = SAT_4a focus = SAT_4b }
 		mutually_exclusive = { focus = SAT_5a }
@@ -215,7 +215,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_6a
-		icon = GFX_SAT
+		icon = GFX_SAT_skull_2
 
 		prerequisite = { focus = SAT_5a focus = SAT_5b }
 		mutually_exclusive = { focus = SAT_6b }
@@ -238,7 +238,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_6b
-		icon = GFX_SAT
+		icon = GFX_SAT_gate_guardians
 
 		prerequisite = { focus = SAT_5a focus = SAT_5b }
 		mutually_exclusive = { focus = SAT_6a }
@@ -261,7 +261,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_7
-		icon = GFX_SAT
+		icon = GFX_SAT_discovery
 
 		prerequisite = { focus = SAT_6a focus = SAT_6b }
 		x = 0
@@ -280,8 +280,8 @@ focus_tree = {
 
 	focus = {
 		id = SAT_armies_of_satan
-		icon = GFX_
-		x = 4
+		icon = GFX_SAT_cultist
+		x = 2
 		y = 0
 		cost = 6.5
 
@@ -295,11 +295,33 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SAT_promotion_of_devotion
-		icon = GFX_SAT
+		id = SAT_death_before_honor
+		icon = GFX_SAT_burn
 
 		prerequisite = { focus = SAT_armies_of_satan }
-		x = 0
+		available = { has_war = yes }
+		x = 1
+		y = 1
+		relative_position_id = SAT_armies_of_satan
+
+		cost = 1.5
+
+		completion_reward = {
+			set_fuel_ratio = 0.0
+			add_timed_idea = { idea = SAT_burn_burn_burn days = 45 }
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_promotion_of_devotion
+		icon = GFX_SAT_devotion
+
+		prerequisite = { focus = SAT_armies_of_satan }
+		x = -1
 		y = 1
 		relative_position_id = SAT_armies_of_satan
 
@@ -316,10 +338,10 @@ focus_tree = {
 
 	focus = {
 		id = SAT_drugged_up_thugs
-		icon = GFX_SAT
+		icon = GFX_SAT_drugged_up_thugs
 
 		prerequisite = { focus = SAT_armies_of_satan }
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = SAT_armies_of_satan
 
@@ -336,7 +358,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_taking_stock
-		icon = GFX_SAT
+		icon = GFX_SAT_stockpile
 
 		prerequisite = { focus = SAT_armies_of_satan }
 		x = 3
@@ -355,8 +377,34 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SAT_taking_stock_2
+		icon = GFX_flamethrower
+
+		prerequisite = { focus = SAT_taking_stock }
+		available = { has_completed_focus = SAT_upgrading_the_arsenal arms_factory > 4 }
+		x = 2
+		y = 1
+		relative_position_id = SAT_taking_stock
+
+		cost = 6.5
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = support_weapons_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
 		id = SAT_upgrading_the_arsenal
-		icon = GFX_SAT
+		icon = GFX_SAT_armed_cultist_1
 
 		prerequisite = { focus = SAT_taking_stock }
 		x = 0
@@ -386,10 +434,10 @@ focus_tree = {
 
 	focus = {
 		id = SAT_army_5
-		icon = GFX_SAT
+		icon = GFX_SAT_thugs_1
 
 		prerequisite = { focus = SAT_promotion_of_devotion }
-		x = 1
+		x = 2
 		y = 1
 		relative_position_id = SAT_promotion_of_devotion
 
@@ -408,8 +456,33 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SAT_army_doctrine
+		icon = GFX_SAT_skull
+
+		prerequisite = { focus = SAT_army_5 }
+		x = -1
+		y = 1
+		relative_position_id = SAT_army_5
+
+		cost = 6.5
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
 		id = SAT_barbed_armor
-		icon = GFX_SAT
+		icon = GFX_GWC_bone_armor
 
 		prerequisite = { focus = SAT_promotion_of_devotion focus = SAT_drugged_up_thugs }
 		x = -1
@@ -422,8 +495,8 @@ focus_tree = {
 			add_tech_bonus = {
 				name = infantry_bonus
 				bonus = 0.5
-				uses = 1
-				category = stalker_gear
+				uses = 2
+				category = clothing_kits
 			}
 		}
 
@@ -434,7 +507,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_forboding_attire
-		icon = GFX_SAT
+		icon = GFX_SAT_forbodding_attire
 
 		prerequisite = { focus = SAT_drugged_up_thugs }
 		x = -1
@@ -446,7 +519,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				category = entrench_kits
 			}
@@ -459,7 +532,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_fuel_stores
-		icon = GFX_SAT
+		icon = GFX_SAT_fuel
 
 		prerequisite = { focus = SAT_upgrading_the_arsenal focus = SAT_army_5 }
 		x = 1
@@ -489,7 +562,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_cohorts_of_the_fallen
-		icon = GFX_SAT
+		icon = GFX_SAT_cohorts
 
 		prerequisite = { focus = SAT_forboding_attire }
 		mutually_exclusive = { focus = SAT_thralls_of_sin }
@@ -510,7 +583,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_thralls_of_sin
-		icon = GFX_SAT
+		icon = GFX_SAT_trade
 
 		prerequisite = { focus = SAT_barbed_armor }
 		mutually_exclusive = { focus = SAT_cohorts_of_the_fallen }
@@ -531,7 +604,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_vile_forces_of_darkness
-		icon = GFX_SAT
+		icon = GFX_SAT_thugs_3
 
 		prerequisite = { focus = SAT_thralls_of_sin focus = SAT_cohorts_of_the_fallen }
 		x = -1
@@ -556,10 +629,10 @@ focus_tree = {
 
 	focus = {
 		id = SAT_promotion_of_devotion2
-		icon = GFX_SAT
+		icon = GFX_SAT_thugs_2
 
 		prerequisite = { focus = SAT_army_5 }
-		x = -1
+		x = -2
 		y = 2
 		relative_position_id = SAT_army_5
 
@@ -580,7 +653,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_hell_tanks
-		icon = GFX_SAT
+		icon = GFX_generic_rail_tank
 
 		prerequisite = { focus = SAT_fuel_stores }
 		mutually_exclusive = { focus = SAT_satans_maw }
@@ -607,7 +680,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_satans_maw
-		icon = GFX_SAT
+		icon = GFX_GWC_brain
 
 		prerequisite = { focus = SAT_fuel_stores }
 		mutually_exclusive = { focus = SAT_hell_tanks }
@@ -628,7 +701,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_darkness_stirs
-		icon = GFX_SAT
+		icon = GFX_GWC_wanderlust
 
 		prerequisite = { focus = SAT_upgrading_the_arsenal }
 		x = 1
@@ -653,8 +726,54 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SAT_satans_strongest
+		icon = GFX_SAT_armed_cultist_2
+
+		prerequisite = { focus = SAT_upgrading_the_arsenal }
+		x = 3
+		y = 1
+		relative_position_id = SAT_upgrading_the_arsenal
+
+		cost = 6.5
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = night_vision
+				uses = 1
+				bonus = 1
+				ahead_reduction = 1
+				category = stalker
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_satans_strongest_2
+		icon = GFX_SAT_armed_cultist
+
+		prerequisite = { focus = SAT_satans_strongest }
+		x = 0
+		y = 1
+		relative_position_id = SAT_satans_strongest
+
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = SAT_disciples
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
 		id = SAT_inner_sphere
-		icon = GFX_
+		icon = GFX_SAT_restructuring
 		x = 22
 		y = 0
 		cost = 6.5
@@ -669,11 +788,44 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SAT_the_godless
-		icon = GFX_SAT
+		id = SAT_war_against_the_caliph
+		icon = GFX_ISL_islamic_anti_satan
 
 		prerequisite = { focus = SAT_inner_sphere }
-		x = 6
+		available = {
+			is_neighbor_of = ISL
+			date > 2028.12.25
+			OR = {
+				has_completed_focus = SAT_borderwar_with_ISL
+				has_completed_focus = SAT_vile_forces_of_darkness
+				has_completed_focus = SAT_inner_sphere_5
+			}
+		}
+		x = -7
+		y = 1
+		relative_position_id = SAT_inner_sphere
+		cost = 5
+
+		will_lead_to_war_with = ISL
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = ISL
+				generator = { 368 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	focus = {
+		id = SAT_the_godless
+		icon = GFX_SAT_goddless
+
+		prerequisite = { focus = SAT_inner_sphere }
+		x = 7
 		y = 1
 		relative_position_id = SAT_inner_sphere
 		cost = 6.5
@@ -681,6 +833,7 @@ focus_tree = {
 		completion_reward = {
 			capital_scope = {
 				add_manpower = 25
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 
@@ -691,7 +844,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_and_the_unclean
-		icon = GFX_SAT
+		icon = GFX_SAT_unclean
 
 		prerequisite = { focus = SAT_the_godless }
 		x = -1
@@ -710,15 +863,16 @@ focus_tree = {
 
 	focus = {
 		id = SAT_the_sacred
-		icon = GFX_SAT
+		icon = GFX_SAT_sacred
 
 		prerequisite = { focus = SAT_inner_sphere }
-		x = 2
+		x = 3
 		y = 1
 		relative_position_id = SAT_inner_sphere
 		cost = 6.5
 
 		completion_reward = {
+			add_timed_idea = { idea = SAT_the_profane days = 85 }
 		}
 
 		ai_will_do = {
@@ -728,7 +882,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_and_propane
-		icon = GFX_SAT
+		icon = GFX_SAT_propane
 
 		prerequisite = { focus = SAT_the_sacred }
 		x = 1
@@ -737,11 +891,10 @@ focus_tree = {
 		cost = 6.5
 
 		completion_reward = {
-			add_timed_idea = { idea = SAT_the_profane days = 85 }
 			add_tech_bonus = {
 				name = entrench_kit_bonus
 				bonus = 1
-				uses = 1
+				uses = 2
 				category = refinery
 			}
 		}
@@ -753,11 +906,11 @@ focus_tree = {
 
 	focus = {
 		id = SAT_trade_with_the_hanza
-		icon = GFX_SAT
+		icon = GFX_generic_medium_arms_3
 
 		prerequisite = { focus = SAT_inner_sphere }
 		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
-		x = 4
+		x = 5
 		y = 1
 		relative_position_id = SAT_inner_sphere
 		cost = 6.5
@@ -777,16 +930,24 @@ focus_tree = {
 
 	focus = {
 		id = SAT_trade_with_the_hanza_2
-		icon = GFX_SAT
+		icon = GFX_generic_medium_arms_5
 
 		prerequisite = { focus = SAT_trade_with_the_hanza }
-		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
+		available = { 
+			HNZ = { 
+				exists = yes  
+				NOT = { has_war_with = SAT }
+				has_opinion = { target = ROOT value > 19 }
+			}
+			 
+		}
 		x = 0
 		y = 2
 		relative_position_id = SAT_trade_with_the_hanza
 		cost = 6.5
 
 		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 1 }
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3
 				amount = 25
@@ -801,7 +962,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_borderwar_with_ISL
-		icon = GFX_SAT
+		icon = GFX_anti_gwc_2
 
 		prerequisite = { focus = SAT_trade_with_the_hanza_2 }
 		available = { ISL = { exists = yes } NOT = { has_war_with = ISL } }
@@ -837,7 +998,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_industry_1
-		icon = GFX_SAT
+		icon = GFX_TRT_technician_trade
 
 		prerequisite = { focus = SAT_inner_sphere }
 		available = { NOT = { has_war = yes } }
@@ -849,6 +1010,10 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = SAT_industry_timed_idea_lock
 			add_timed_idea = { idea = SAT_industry_reshuffling days = 280 }
+
+			hidden_effect = {
+				set_variable = { var = SAT_slave_resource value = 2 }
+			}
 		}
 
 		ai_will_do = {
@@ -858,7 +1023,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_hell_forges
-		icon = GFX_SAT
+		icon = GFX_SAT_forges
 
 		prerequisite = { focus = SAT_inner_industry_1 }
 		available = { has_idea = SAT_industry_reshuffling }
@@ -874,6 +1039,7 @@ focus_tree = {
 				uses = 1
 				category = casting
 			}
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -883,7 +1049,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_slavery_industry
-		icon = GFX_SAT
+		icon = GFX_SAT_generic_1
 
 		prerequisite = { focus = SAT_inner_industry_1 }
 		available = { has_idea = SAT_industry_reshuffling }
@@ -893,16 +1059,8 @@ focus_tree = {
 		cost = 6.5
 
 		completion_reward = {
-			capital_scope = {
-				add_resource = {
-					type = scrap
-					amount = 2
-				}
-				add_resource = {
-					type = components
-					amount = 2
-				}
-			}
+			custom_effect_tooltip = SAT_slavery_industry_resource_gain
+			SAT_add_resources = yes
 		}
 
 		ai_will_do = {
@@ -912,7 +1070,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_rapid_cycle_labour
-		icon = GFX_SAT
+		icon = GFX_SAT_rapid_labor
 
 		prerequisite = { focus = SAT_hell_forges }
 		available = { has_idea = SAT_industry_reshuffling }
@@ -923,6 +1081,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_timed_idea = { idea = SAT_ind_labour_hands days = 200 }
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -932,7 +1091,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_nine_finger_production
-		icon = GFX_SAT
+		icon = GFX_SAT_nine_fingers
 
 		prerequisite = { focus = SAT_hell_forges }
 		available = { has_idea = SAT_industry_reshuffling }
@@ -955,6 +1114,7 @@ focus_tree = {
 				amount = 15
 				producer = RUS
 			}
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -964,7 +1124,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_industry_4
-		icon = GFX_SAT
+		icon = GFX_SAT_hurried_production
 
 		prerequisite = { focus = SAT_rapid_cycle_labour }
 		mutually_exclusive = { focus = SAT_inner_industry_5 }
@@ -990,6 +1150,7 @@ focus_tree = {
 				amount = 20
 				producer = RUS
 			}
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -999,7 +1160,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_industry_5
-		icon = GFX_SAT
+		icon = GFX_SAT_hurriedier_production
 
 		prerequisite = { focus = SAT_rapid_cycle_labour }
 		mutually_exclusive = { focus = SAT_inner_industry_4 }
@@ -1020,6 +1181,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -1029,7 +1191,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_industry_6
-		icon = GFX_SAT
+		icon = GFX_SAT_stockpile
 
 		prerequisite = { focus = SAT_inner_industry_4 focus = SAT_inner_industry_5 }
 		available = { has_idea = SAT_industry_reshuffling }
@@ -1048,6 +1210,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			hidden_effect = { SAT_add_to_slave_resource = yes }
 		}
 
 		ai_will_do = {
@@ -1057,7 +1220,7 @@ focus_tree = {
 	
 	focus = {
 		id = SAT_scary_effigies
-		icon = GFX_SAT
+		icon = GFX_GWC_re_decorate_station
 
 		prerequisite = { focus = SAT_inner_sphere }
 		x = -3
@@ -1083,10 +1246,10 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_sphere_1
-		icon = GFX_SAT
+		icon = GFX_SAT_cultist_2
 
 		prerequisite = { focus = SAT_inner_sphere }
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = SAT_inner_sphere
 		cost = 6.5
@@ -1102,7 +1265,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_sacrifices
-		icon = GFX_SAT
+		icon = GFX_GWC_head_trophy
 
 		prerequisite = { focus = SAT_inner_sphere_1 }
 		mutually_exclusive = { focus = SAT_enslavement }
@@ -1115,7 +1278,6 @@ focus_tree = {
 			capital_scope = {
 				add_manpower = -5
 			}
-			add_stability = -0.05
 			add_political_power = 90
 		}
 
@@ -1126,7 +1288,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_sacrifices_1
-		icon = GFX_SAT
+		icon = GFX_SAT_torture_rack
 
 		prerequisite = { focus = SAT_sacrifices }
 		x = 1
@@ -1137,10 +1299,11 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.75
+				cost_reduction = 0.25
 				uses = 1
 				category = land_doctrine
 			}
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -1150,7 +1313,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_blood_altars
-		icon = GFX_SAT
+		icon = GFX_SAT_sacrificial_altar
 
 		prerequisite = { focus = SAT_sacrifices }
 		x = -1
@@ -1159,7 +1322,7 @@ focus_tree = {
 		cost = 6.5
 
 		completion_reward = {
-			add_war_support = 0.1
+			add_war_support = 0.05
 			custom_effect_tooltip = SAT_sacrifices_decision_improvement
 		}
 
@@ -1169,8 +1332,28 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SAT_rites_of_initiation
+		icon = GFX_SAT_rites
+
+		prerequisite = { focus = SAT_blood_altars }
+		x = -1
+		y = 1
+		relative_position_id = SAT_blood_altars
+		cost = 6.5
+
+		completion_reward = {
+			add_war_support = 0.05
+			custom_effect_tooltip = SAT_sacrifices_rites_improvement
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
 		id = SAT_sacrifices_2
-		icon = GFX_SAT
+		icon = GFX_SAT_torture_2
 
 		prerequisite = { focus = SAT_sacrifices }
 		x = 0
@@ -1179,7 +1362,8 @@ focus_tree = {
 		cost = 6.5
 
 		completion_reward = {
-			add_timed_idea = { idea = SAT_ritual_sacrifices days = 28 }
+			add_timed_idea = { idea = SAT_ritual_sacrifices days = 54 }
+			add_command_power = 30
 		}
 
 		ai_will_do = {
@@ -1189,7 +1373,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_enslavement
-		icon = GFX_SAT
+		icon = GFX_GWC_bloody_hand
 
 		prerequisite = { focus = SAT_inner_sphere_1 }
 		mutually_exclusive = { focus = SAT_sacrifices }
@@ -1200,6 +1384,12 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = civics_work_ethics_5
+			if = {
+				limit = {
+					has_idea = civics_work_ethics_5
+				}
+				add_political_power = 100
+			}
 		}
 
 		ai_will_do = {
@@ -1209,7 +1399,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_wipped_into_servitude
-		icon = GFX_SAT
+		icon = GFX_GWC_slavery
 
 		prerequisite = { focus = SAT_enslavement }
 		x = 1
@@ -1235,7 +1425,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_kidnap_technicians
-		icon = GFX_SAT
+		icon = GFX_SAT_kidnap_technicians
 
 		prerequisite = { focus = SAT_wipped_into_servitude }
 		x = -1
@@ -1254,7 +1444,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_thralls
-		icon = GFX_SAT
+		icon = GFX_SAT_thralls
 
 		prerequisite = { focus = SAT_wipped_into_servitude }
 		x = 1
@@ -1273,7 +1463,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_enslavement_2
-		icon = GFX_SAT
+		icon = GFX_GWC_engineer_specialists
 
 		prerequisite = { focus = SAT_enslavement }
 		x = -1
@@ -1284,9 +1474,12 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.75
+				bonus = 1
 				uses = 1
 				category = tooling
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 
@@ -1297,7 +1490,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_sphere_5
-		icon = GFX_SAT
+		icon = GFX_GWC_mutants_no_more
 
 		prerequisite = { focus = SAT_sacrifices_1 focus = SAT_enslavement_2 }
 		x = 0
@@ -1307,16 +1500,21 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = tot_economic_mobilisation
+			add_research_slot = 1
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 0.1
+			modifier = {
+				factor = 20
+				has_war_with = ISL
+			}
 		}
 	}
 
 	focus = {
 		id = SAT_inner_sphere_5_1
-		icon = GFX_SAT
+		icon = GFX_GWC_head_trophy
 		available = { 
 			OR = {
 				SCA = { exists = yes } 
@@ -1333,6 +1531,8 @@ focus_tree = {
 		relative_position_id = SAT_inner_sphere_5
 		cost = 6.5
 
+		will_lead_to_war_with = SCA
+		will_lead_to_war_with = ALT
 		completion_reward = {
 			create_wargoal = {
 				type = take_state_focus
@@ -1353,7 +1553,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_sphere_5_2
-		icon = GFX_SAT
+		icon = GFX_GWC_head_trophy
 
 		prerequisite = { focus = SAT_inner_sphere_5 }
 		
@@ -1369,6 +1569,7 @@ focus_tree = {
 		}
 		cost = 6.5
 
+		will_lead_to_war_with = DIM
 		completion_reward = {
 			create_wargoal = {
 				type = take_state_focus
@@ -1384,7 +1585,7 @@ focus_tree = {
 
 	focus = {
 		id = SAT_inner_sphere_5_3
-		icon = GFX_SAT
+		icon = GFX_GWC_head_trophy
 
 		prerequisite = { focus = SAT_inner_sphere_5 }
 		available = { 
@@ -1399,12 +1600,94 @@ focus_tree = {
 		relative_position_id = SAT_inner_sphere_5
 		cost = 6.5
 
+		will_lead_to_war_with = RCH
 		completion_reward = {
 			create_wargoal = {
 				type = take_state_focus
 				target = RCH
 				generator = { 368 }
 			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_sphere_1a
+		icon = GFX_SAT_cultist_2
+
+		prerequisite = { focus = SAT_armies_of_satan }
+		available = {
+			has_army_manpower = {
+				size > 124
+			}
+		}
+		x = -6
+		y = 1
+		relative_position_id = SAT_armies_of_satan
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = SAT_troop_drill_1
+			army_experience = 5
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_sphere_1b
+		icon = GFX_SAT_generic_1
+
+		prerequisite = { focus = SAT_inner_sphere_1a }
+		available = {
+			has_army_manpower = {
+				size > 174
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAT_inner_sphere_1a
+		cost = 6.5
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAT_troop_drill_1
+				add_idea = SAT_troop_drill_2
+			}
+			army_experience = 5
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = SAT_inner_sphere_1c
+		icon = GFX_SAT_generic_1
+
+		prerequisite = { focus = SAT_inner_sphere_1b }
+		available = {
+			has_army_manpower = {
+				size > 224
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAT_inner_sphere_1b
+		cost = 6.5
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAT_troop_drill_2
+				add_idea = SAT_troop_drill_3
+			}
+			army_experience = 5
 		}
 
 		ai_will_do = {

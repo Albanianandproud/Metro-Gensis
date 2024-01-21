@@ -94,7 +94,7 @@ country_event = {	## Disciples of Shaytan
 		name = nf_SAT.5.a
 		add_equipment_to_stockpile = {
 			type = special_forces_equipment_2
-			amount = 10
+			amount = 20
 			producer = RUS
 		}
 		ai_chance = {
@@ -114,7 +114,7 @@ country_event = {	## Warriors to Moloch
 		name = nf_SAT.6.a
 		add_equipment_to_stockpile = {
 			type = pheumatic_infantry_equipment_1
-			amount = 15
+			amount = 20
 			producer = RUS
 		}
 		ai_chance = {
@@ -134,8 +134,8 @@ country_event = {
 		name = nf_SAT.7.a
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
-			cost_reduction = 0.5
-			uses = 2
+			cost_reduction = 1
+			uses = 1
 			category = land_doctrine
 		}
 		ai_chance = {
@@ -144,12 +144,10 @@ country_event = {
 	}
 	option = { 
 		name = nf_SAT.7.b
-		add_doctrine_cost_reduction = {
-			name = land_doc_bonus
-			cost_reduction = 1
-			uses = 1
-			category = land_doctrine
+		capital_scope = {
+			add_manpower = 10
 		}
+		army_experience = 5
 		ai_chance = {
 			base = 15
 		}
@@ -214,14 +212,31 @@ country_event = {	## Something
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.10.a
-		ai_chance = {
-			base = 0
+		division_template = {
+			name = "Slave Captives"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				irregulars = { x = 0 y = 0 }
+				irregulars = { x = 0 y = 1 }
+				irregulars = { x = 0 y = 2 }
+			}
+			support = {
+				flamethrower_support = { x = 0 y = 0 }
+			}
 		}
-	}
-	option = { 
-		name = nf_SAT.10.b
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Thralls\" division_template = \"Slave Captives\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"Thralls\" division_template = \"Slave Captives\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
 		ai_chance = {
-			base = 15
+			base = 5
 		}
 	}
 }
@@ -277,14 +292,11 @@ country_event = {	### KTG stuff but for DIM
 	fire_only_once = yes
 	option = { 
 		name = nf_SAT.12.a
+		add_manpower = -10
+		DIM = { country_event = nf_DIM.2 }
+		custom_effect_tooltip = DIM_excursion_tt
 		ai_chance = {
 			base = 0
-		}
-	}
-	option = { 
-		name = nf_SAT.12.b
-		ai_chance = {
-			base = 15
 		}
 	}
 }
@@ -355,16 +367,20 @@ country_event = {
     picture = "GFX_event (145)"
 	is_triggered_only = yes
 	fire_only_once = yes
+
 	option = { 
 		name = nf_SAT.15.a
+		add_stability = 0.1
+		add_war_support = 0.1
 		ai_chance = {
 			base = 0
 		}
 	}
-	option = { 
-		name = nf_SAT.15.b
-		ai_chance = {
-			base = 15
-		}
-	}
+	#option = { 
+	#	name = nf_SAT.15.b
+	#	trigger = { has_country_flag = SAT_kingdom_of_the_rats_path }
+	#	ai_chance = {
+	#		base = 15
+	#	}
+	#}
 }
