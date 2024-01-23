@@ -34,13 +34,93 @@ SAT_blood_sacrifices = {
 		days_remove = 14
 
 		ai_will_do = {
-			base = 25
+			base = 15
 			modifier = {
 				factor = 0.1
 				capital_scope = {
 					state_population < 100
 				}
 			}
+		}
+	}
+
+	SAT_sacrifice_captives_non_core = {
+
+		available = {
+			has_completed_focus = SAT_sacrifices
+			all_state = {
+				NOT = { is_core_of = ROOT }
+				state_population > 80
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			war_support_weekly = 0.01
+			political_power_factor = 0.2
+		}
+
+		complete_effect = {
+			if = {
+				limit = { has_completed_focus = SAT_blood_altars }
+				add_command_power = 5
+				army_experience = 2
+			}
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = { is_core_of = ROOT }
+					AND = {
+						FROM = { state_population > 80 }
+					}
+				}
+				add_manpower = -5
+			}
+		}
+
+		cost = 20
+		days_remove = 14
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 1.2
+				has_war = yes
+			}
+		}
+	}
+
+	SAT_initiate_commander = {
+		## make this a array to list every unit leader and then increase each individual xp and traits
+		available = {
+			has_completed_focus = SAT_rites_of_initiation
+
+			any_unit_leader = {
+				skill > 6
+			}
+			has_war = no
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			command_power_gain = -0.5
+		}
+
+		complete_effect = {
+			every_unit_leader = {
+				gain_xp = 1000
+			}
+		}
+
+		cost = 200
+		days_remove = 14
+
+		ai_will_do = {
+			base = 15
 		}
 	}
 }
