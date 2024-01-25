@@ -189,9 +189,9 @@ GWC_burn_technology = {
 GWC_infiltration_LR = {
 
 	GWC_LR_infiltration = {
-		custom_cost_text = command_power_20
+		custom_cost_text = command_power_25
 		custom_cost_trigger = {
-			command_power > 19.9
+			command_power > 24.9
 		}
 
 		visible = { 
@@ -210,7 +210,8 @@ GWC_infiltration_LR = {
 						original_tag = RUI 
 						original_tag = MSU
 					} 
-					has_country_flag = is_mutant_nation 
+					has_country_flag = GWC_infiltrated_small
+					has_country_flag = GWC_infiltrated_medium
 				}
 			}
 		}
@@ -226,9 +227,8 @@ GWC_infiltration_LR = {
 
 		complete_effect = {
 			custom_effect_tooltip = GWC_infiltration
-			effect_tooltip = {
-				GWC_infiltration_scripted_effect = yes
-			}
+
+			GWC_infiltration_scripted_effect = yes
 		}
 
 		ai_will_do = {
@@ -240,10 +240,10 @@ GWC_infiltration_LR = {
 		}
 	}
 
-	GWC_LR_infiltration_small_1 = {
-		custom_cost_text = command_power_15
+	GWC_LR_infiltration_small_steal_consumerables = {
+		custom_cost_text = command_power_20
 		custom_cost_trigger = {
-			command_power > 14.9
+			command_power > 19.9
 		}
 
 		visible = { 
@@ -259,17 +259,26 @@ GWC_infiltration_LR = {
 			}
 		}
 
+		visible = { NOT = { FROM = { has_idea = GWC_infiltrated_sabotage } } }
+
 		available = {
 			ROOT = {
 				network_strength = {
 					target = FROM
 					value > 25
 				}
+				NOT = { FROM = { has_idea = GWC_infiltrated_sabotage } }
 			}
 		}
 
 		complete_effect = {
 			FROM = { country_event = nf_GWC.31 }
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = { idea = GWC_infiltrated_frighten days = 90 }
+					add_stability = -0.05 
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -281,9 +290,367 @@ GWC_infiltration_LR = {
 		}
 	}
 
+	GWC_LR_infiltration_small_sabotage = {	##Sabotage
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
 
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
 
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				has_idea = GWC_infiltrated_small
+			}
+		}
 
+		visible = { NOT = { FROM = { has_idea =  GWC_infiltrated_frighten } } }
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 25
+				}
+				NOT = { FROM = { has_idea = GWC_infiltrated_frighten } }
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.32 } #Sabotage 
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = { idea = GWC_infiltrated_frighten days = 90 }
+					add_stability = -0.05 
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+
+	GWC_LR_infiltration_small_frighten_traders = {	## Frightened Traders
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				has_idea = GWC_infiltrated_small
+			}
+		}
+
+		visible = { NOT = { FROM = { has_idea =  GWC_infiltrated_trade_stall } } }
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 25
+				}
+				NOT = { FROM = { has_idea =  GWC_infiltrated_trade_stall } }
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.33 } #Frighten Traders
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = { idea = GWC_infiltrated_trade_stall days = 90 }
+					add_stability = -0.05 
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+	
+	GWC_LR_infiltration_medium_kidnap = {	##Kidnapping Children
+		custom_cost_text = command_power_35
+		custom_cost_trigger = {
+			command_power > 34.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		available = { has_completed_focus = GWC_focus_11 }
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_idea = GWC_infiltrated_medium
+					has_idea = GWC_infiltrated_frighten
+				}
+			}
+		}
+
+		visible = { NOT = { FROM = { has_idea =  GWC_infiltrated_kidnapped_children } } }
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 49
+				}
+				NOT = { FROM = { has_idea =  GWC_infiltrated_kidnapped_children } }
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.41 } #Kidnapped Children 
+			capital_scope = { add_manpower = 10 }
+			effect_tooltip = {
+				FROM = {
+					random_owned_state = {
+						limit = {
+							NOT = { has_state_category = pastoral }
+						}
+						add_manpower = -10
+					}
+					add_timed_idea = { idea = GWC_infiltrated_kidnapped_children days = 180 }
+					add_manpower = -10
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+
+	GWC_LR_infiltration_medium_steal_resources = {	##Steal Strategic Resources
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		available = { has_completed_focus = GWC_focus_11a }
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_idea = GWC_infiltrated_medium
+					has_idea = GWC_infiltrated_frighten
+				}
+			}
+		}
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 49
+				}
+				NOT = { FROM = { has_idea =  GWC_infiltrated_stolen_resources } }
+			}
+		}
+
+		visible = { has_completed_focus = GWC_focus_11a }
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.43 } #Steal resources
+			effect_tooltip = {
+				FROM = {
+					random_owned_state = {
+						limit = {
+							has_resources_amount = {
+								resource = scrap
+								amount > 1
+							}
+						}
+						add_resource = {
+							type = scrap 
+							amount = -2
+						}
+					}
+					random_owned_state = {
+						limit = {
+							has_resources_amount = {
+								resource = alloys 
+								amount > 1
+							}
+						}
+						add_resource = {
+							type = alloys
+							amount = -1
+						}
+					} 
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 1
+				}
+				add_resource = {
+					type = scrap 
+					amount = 2
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+
+	GWC_LR_infiltration_medium_strike_terror = {	##Strike Terror
+		custom_cost_text = command_power_35
+		custom_cost_trigger = {
+			command_power > 34.9
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_idea = GWC_infiltrated_medium
+					has_idea = GWC_infiltrated_frighten
+				}
+			}
+		}
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 49
+				}
+				NOT = { FROM = { has_idea =  GWC_infiltrated_frighten } }
+			}
+		}
+
+		complete_effect = {
+			FROM = { country_event = nf_GWC.42 } #Strike Terror
+			effect_tooltip = {
+				FROM = { add_timed_idea = { idea = GWC_infiltrated_frighten days = 140 } } 
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 0
+				command_power < 30
+			}
+		}
+	}
+
+	GWC_LR_infiltration_war = {	##WAR
+		
+		cost = 150
+		days_remove = 60
+
+		available = {
+			has_war_support > 0.94
+		}
+
+		visible = { 
+			has_dlc = "La Resistance"
+			has_completed_focus = GWC_focus_1 
+		}
+
+		target_array = global.countries
+
+		target_trigger = {
+			FROM = {
+				has_country_flag = GWC_enable_infiltration 
+				OR = {
+					has_country_flag = GWC_infiltrated_small
+					has_country_flag = GWC_infiltrated_medium
+				}
+				NOT = { 
+					OR = { 
+						original_tag = RUI 
+						original_tag = MSU
+					} 
+				}
+			}
+		}
+
+		available = {
+			ROOT = {
+				network_strength = {
+					target = FROM
+					value > 49
+				}
+			}
+		}
+
+		war_with_on_complete = FROM
+
+		complete_effect = {
+			create_wargoal = {
+				type = take_state_focus
+				target = FROM
+				expire = 0
+				generator = { 28 }
+			}
+		}
+
+		ai_will_do = {
+			base = 15
+			modifier = {
+				add = 0
+				strength_ratio = {
+					tag = FROM
+					ratio < 0.5
+				}
+			}
+		}
+	}
+	
 	GWC_infiltration_non_LR = {
 
 		custom_cost_text = command_power_20

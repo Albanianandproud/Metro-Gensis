@@ -255,7 +255,7 @@ country_event = {
 ### INFILTRATION EVENT STUFF ### 
 
 # Minor 
-country_event = {
+country_event = { ## Bump in the Night
     id = nf_GWC.30
     title = nf_GWC.30.t
     desc = nf_GWC.30.d
@@ -264,6 +264,10 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 
+	immediate = {
+		set_country_flag = GWC_infiltrated_small
+	}
+
 	option = {
 		name = nf_GWC.30.a
 		add_political_power = -20
@@ -271,11 +275,11 @@ country_event = {
 
 		add_timed_idea = {
 			idea = GWC_infiltrated_small
-			days = 250
+			days = 360
 		}
 
 		ai_chance = {
-            base = 0.5
+            base = 1
         }
 	}
 
@@ -289,18 +293,43 @@ country_event = {
 		}
 		add_timed_idea = {
 			idea = GWC_infiltrated_small
-			days = 150
+			days = 360
 		}
 		ai_chance = {
-            base = 1
+            base = 1.5
         }
 	}
 }
 
-country_event = {
+country_event = { ## Stolen Consumables
     id = nf_GWC.31
     title = nf_GWC.31.t
     desc = nf_GWC.31.d
+    picture = "GFX_event (109)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_timed_idea = { idea = GWC_infiltrated_frighten days = 180 }
+	}
+
+	option = {
+		name = nf_GWC.31.a
+		effect_tooltip = {
+			add_timed_idea = { idea = GWC_infiltrated_frighten days = 180 }
+		}
+		add_stability = -0.05 
+		ai_chance = {
+            base = 0.5
+        }
+	}
+}
+
+country_event = { ## Sabotage
+    id = nf_GWC.32
+    title = nf_GWC.32.t
+    desc = nf_GWC.32.d
     picture = "GFX_event (109)"
 
 	is_triggered_only = yes
@@ -322,30 +351,7 @@ country_event = {
 	}
 }
 
-country_event = {
-    id = nf_GWC.32
-    title = nf_GWC.32.t
-    desc = nf_GWC.32.d
-    picture = "GFX_event (109)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	immediate = {
-	}
-
-	option = {
-		name = nf_GWC.32.a
-		effect_tooltip = {
-		}
-		add_stability = -0.05 
-		ai_chance = {
-            base = 0.5
-        }
-	}
-}
-
-country_event = {
+country_event = { ## Frightened Traders
     id = nf_GWC.33
     title = nf_GWC.33.t
     desc = nf_GWC.33.d
@@ -371,7 +377,7 @@ country_event = {
 }
 
 # Considerable
-country_event = {
+country_event = { ## Eyes in the Deep
     id = nf_GWC.40
     title = nf_GWC.40.t
     desc = nf_GWC.40.d
@@ -379,6 +385,10 @@ country_event = {
 
 	is_triggered_only = yes
 	fire_only_once = yes
+
+	immediate = {
+		set_country_flag = GWC_infiltrated_medium
+	}
 
 	option = {
 		name = nf_GWC.40.a
@@ -411,7 +421,43 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = {	##Kidnapping Children
+    id = nf_GWC.41
+    title = nf_GWC.41.t
+    desc = nf_GWC.41.d
+    picture = "GFX_event (109)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		random_owned_state = {
+			limit = {
+				NOT = { has_state_category = pastoral }
+			}
+			add_manpower = -10
+		}
+	}
+
+	option = {
+		name = nf_GWC.41.a
+		add_timed_idea = { idea = GWC_infiltrated_kidnapped_children days = 180 }
+		effect_tooltip = {
+			random_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_manpower = -10
+			}
+		} 
+		add_stability = -0.1
+		ai_chance = {
+            base = 0.5
+        }
+	}
+}
+
+country_event = {	##Strike Terror
     id = nf_GWC.42
     title = nf_GWC.42.t
     desc = nf_GWC.42.d
@@ -431,6 +477,78 @@ country_event = {
 		} 
 		ai_chance = {
             base = 0.5
+        }
+	}
+}
+
+country_event = {	## Stolen Resources
+    id = nf_GWC.43
+    title = nf_GWC.43.t
+    desc = nf_GWC.43.d
+    picture = "GFX_event (109)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		random_owned_state = {
+			limit = {
+				has_resources_amount = {
+					resource = scrap
+					amount > 1
+				}
+			}
+			add_resource = {
+				type = scrap 
+				amount = -2
+			}
+		}
+		random_owned_state = {
+			limit = {
+				has_resources_amount = {
+					resource = alloys 
+					amount > 1
+				}
+			}
+			add_resource = {
+				type = alloys
+				amount = -1
+			}
+		}
+	}
+
+	option = {
+		name = nf_GWC.41.a
+		add_timed_idea = { idea = GWC_infiltrated_stolen_resources days = 90 }
+		effect_tooltip = {
+			random_owned_state = {
+				limit = {
+					has_resources_amount = {
+						resource = scrap
+						amount > 1
+					}
+				}
+				add_resource = {
+					type = scrap 
+					amount = -2
+				}
+			}
+			random_owned_state = {
+				limit = {
+					has_resources_amount = {
+						resource = alloys 
+						amount > 1
+					}
+				}
+				add_resource = {
+					type = alloys
+					amount = -1
+				}
+			}
+		} 
+		add_political_power = -25
+		ai_chance = {
+            base = 1
         }
 	}
 }
