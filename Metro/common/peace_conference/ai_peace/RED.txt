@@ -1,59 +1,233 @@
-# Scripted AI desire for peace actions.
-# See documentation.info file for more detailed scripting information.
+#Primary focus on taking stations on Lyubinsko-Dmitrovskaya Line
 
 peace_ai_desires = {
-
-    RED_wants_sokolnicheskaya = {
-        peace_action_type = take_states
-        enable = {
-            tag = RED # Negotiatior is soviet union
-            FROM = { tag = ROOT }  # And the negotiator is also taking for themselves
-            FROM.FROM.FROM = { state = 274 }
-            FROM.FROM.FROM = { state = 341 }
-            FROM.FROM.FROM = { state = 361 }
-            FROM.FROM.FROM = { state = 270 }
-        }
-
-        ai_desire = 50  # 50 percent higher desire
-    }
-
-
-    RED_puppet_KUZ = {
-        peace_action_type = puppet
-        enable = {
-            is_historical_focus_on = yes
-            ROOT.FROM = { tag = KUZ }
-            ROOT.FROM.FROM.FROM = { is_core_of = KUZ }
-            tag = RED
-        }
-        ai_desire = 150
-    }
-
-
-    RED_claims_histo = {
-        peace_action_type = take_state
-        enable = {
-            is_historical_focus_on = yes
-            ROOT.FROM.FROM.FROM = {
-                OR = {
-                    state = 274
-                    state = 341
-                    state = 361
-                    state = 270
-                }
-            }
-            ROOT.FROM = { tag = RED }
-        }
-        ai_desire = 400
-    }
-
-    RED_leave_TRB_alone = {
-        peace_action_type = { take_states puppet liberate force_government }
-        enable = {
-            is_historical_focus_on = yes
-            ROOT = { tag = RED }
-            ROOT.FROM.FROM.FROM = { is_core_of = TRB }
-        }
-        ai_desire = -50
-    }
+	RED_line_focus_1 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				state = 361 # Biblioteka  Im. Lenina is the highest priority
+			}
+		}
+		ai_desire = 600
+	}
+	RED_line_focus_2 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 304
+					state = 274 # Getting back lost stations on the Ring Line (thus cutting the Hanza into two) is the second priority
+				}
+			}
+		}
+		ai_desire = 550
+	}
+	RED_line_focus_3 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 288
+					state = 434
+					state = 133
+					state = 301
+					state = 132
+					state = 314
+					state = 131
+					state = 324 # Annexing Emerald City stations is the third priority
+				}
+			}
+		}
+		ai_desire = 500
+	}
+	RED_line_focus_4 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 432
+					state = 306
+					state = 427 # Higher priority on connected Reich stations
+				}
+			}
+		}
+		ai_desire = 450
+	}
+	RED_line_focus_5 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 431
+					state = 430
+					state = 80
+					state = 275
+					state = 428 # A bit lower on kuznetsky-connected Reich stations
+				}
+			}
+		}
+		ai_desire = 400
+	}
+	RED_line_focus_6 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 337
+					state = 426
+					state = 215 # Prio on the rest of the Reich stations
+				}
+			}
+		}
+		ai_desire = 350
+	}
+	RED_line_focus_7 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 180
+					state = 316
+					state = 179
+					state = 149
+					state = 418
+					state = 181
+					state = 312
+					state = 120
+					state = 429
+					state = 220 # Any stations the Reich could seize
+				}
+			}
+		}
+		ai_desire = 300
+	}
+	RED_line_focus_8 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				state = 270 # Borovitskaya for a possible additional partition
+			}
+		}
+		ai_desire = 250
+	}
+	RED_line_focus_9 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 206
+					state = 347
+					state = 121 # Higher prio Venice stations
+					state = 400 # Belorusskaya
+				}
+			}
+		}
+		ai_desire = 200
+	}
+	RED_line_focus_10 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 375
+					state = 440 # Paveletskaya
+					state = 127
+					state = 242
+					state = 128
+					state = 378
+					state = 129
+					state = 342
+					state = 125
+					state = 39
+					state = 121 # Take Farm stations for food
+				}
+			}
+		}
+		ai_desire = 150
+	}
+	RED_line_focus_11 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 107
+					state = 61
+					state = 320 # Annex Revolutionaires
+					state = 382
+					state = 124
+					state = 417
+					state = 123
+					state = 383 # Annex Anarchists
+				}
+			}
+		}
+		ai_desire = 100
+	}
+	RED_line_focus_12 = {
+       		peace_action_type = take_states
+		enable = {
+			tag = RED
+			FROM.FROM.FROM = {
+				OR = {
+					state = 227
+					state = 373
+					state = 281
+					state = 189
+					state = 109
+					state = 249
+					state = 108
+					state = 209
+					state = 349
+					state = 214
+					state = 144
+					state = 419
+					state = 146
+					state = 438
+					state = 420
+					state = 145
+					state = 267
+					state = 143
+					state = 302
+					state = 142
+					state = 246
+					state = 197
+					state = 310
+					state = 422
+					state = 311
+					state = 199
+					state = 71
+					state = 195
+					state = 203
+					state = 353
+					state = 200
+					state = 315
+					state = 204
+					state = 338
+					state = 183 # Additional interests
+				}
+			}
+		}
+		ai_desire = 50
+	}
+	RED_puppet_KUZ = {
+		peace_action_type = puppet
+		enable = {
+			is_historical_focus_on = yes
+			ROOT.FROM = { tag = KUZ }
+			ROOT.FROM.FROM.FROM = { is_core_of = KUZ }
+			tag = RED
+		}
+		ai_desire = 150
+	}
 }
