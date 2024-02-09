@@ -71,50 +71,120 @@ upgrade_education_tier_bandit = {
 }
 
 calculate_education_reform_timer_multiplier = {	## Yandere Dev code moment
-if = {
-	limit = {
-		has_idea = civics_education_level_2
+	if = {
+		limit = { has_idea = civics_education_level_2 }
+		set_variable = {
+			var = education_reform_tier_multiplier
+			value = 1
+		}
 	}
-	multiply_variable = {
-		var = education_reform_undertaking
-		value = 1
+	else_if = {
+		limit = { has_idea = civics_education_level_3 }
+		set_variable = {
+			var = education_reform_tier_multiplier
+			value = 1.2
+		}
+	}
+	else_if = {
+		limit = { has_idea = civics_education_level_4 }
+		set_variable = {
+			var = education_reform_tier_multiplier
+			value = 1.4
+		}
+	}
+	else_if = {
+		limit = { has_idea = civics_education_level_5 }
+		set_variable = {
+			var = education_reform_tier_multiplier
+			value = 1.7
+		}
+	}
+	else_if = {
+		limit = { has_idea = civics_education_level_6 }
+		set_variable = {
+			var = education_reform_tier_multiplier
+			value = 2
+		}
 	}
 }
-else_if = {
-	limit = {
-		has_idea = civics_education_level_3
-	}
-	multiply_variable = {
-		var = education_reform_undertaking
-		value = 1.5
-	}
+
+set_base_modifiers_education = {
+	set_variable = { education_reform_base_cost_multiplier = 2.5 }
+	set_variable = { education_reforms_cost_from_states_factor = 1.2 }
+	set_variable = { education_reforms_cost_from_population_factor = 1 }
+	set_variable = { education_reforms_cost_from_modifiers_factor = 1 }
 }
-else_if = {
-	limit = {
-		has_idea = civics_education_level_4
+	# Cleanse Variable to calculate
+
+calculate_education_reforms = {
+	set_variable = {
+		var = education_reform_undertaking
+		value = 0
+	}
+	## Calculate individual cost multipliers, and then add them at the end
+	# States
+	set_variable = { 
+		var = education_reforms_cost_from_states 
+		value = num_controlled_states
 	}
 	multiply_variable = {
-		var = education_reform_undertaking
-		value = 2
-	}
-}
-else_if = {
-	limit = {
-		has_idea = civics_education_level_5
+		var = education_reforms_cost_from_states 
+		value = education_reforms_cost_from_states_factor
 	}
 	multiply_variable = {
-		var = education_reform_undertaking
-		value = 2.5
+		var = education_reforms_cost_from_states
+		value = 10
 	}
-}
-else_if = {
-	limit = {
-		has_idea = civics_education_level_6
+	set_variable = { education_reforms_state_cost_tooltip = education_reforms_cost_from_states }
+	## Pop
+	set_variable = { 
+		var = education_reforms_cost_from_population
+		value = max_manpower_k
+	}
+	# we will need to multiply education_reforms_cost_from_population by a factor of 100 since the variable calculates manpower in the K
+	multiply_variable = {
+		var = education_reforms_cost_from_population
+		value = 100
 	}
 	multiply_variable = {
-		var = education_reform_undertaking
-		value = 3
+		var = education_reforms_cost_from_population
+		value = education_reforms_cost_from_population_factor
 	}
+	round_variable = education_reforms_cost_from_population
+	set_variable = { education_reforms_population_cost_tooltip = education_reforms_cost_from_population } ## tooltip variable
+	## add all vars together to form total Education Reform Cost
+	add_to_variable = {
+		var = education_reform_undertaking
+		value = education_reforms_cost_from_population
+	}
+	add_to_variable = {
+		var = education_reform_undertaking
+		value = education_reforms_cost_from_states
+	}
+	## we multiply the variable by education_reform_base_cost_multiplier
+	add_to_variable = {
+		var = education_reform_undertaking
+		value = education_reform_base_cost_multiplier
+	}
+	## Then we multiply variable by education_reforms_cost_from_modifiers_factor
+	multiply_variable = {
+		var = education_reform_undertaking
+		value = education_reforms_cost_from_modifiers_factor
+	}
+	## finally we clamp variables
+	clamp_variable = {
+		var = education_reform_undertaking
+		min = 180
+		max = 1800
+	}
+	# make cost increase for every education tier we have
+	calculate_education_reform_timer_multiplier = yes
+	multiply_variable = { 
+		variable = education_reform_undertaking 
+		value = education_reform_tier_multiplier
+	}
+	round_variable = education_reform_undertaking
+	set_country_flag = improving_education
 }
 
 #education_reforms_administer_increase_cost = {

@@ -43,6 +43,13 @@ on_actions = {
 				}
 			}
 		}
+		effect = {
+			every_country = {
+				## Education ##
+				set_base_modifiers_education = yes
+				set_base_modifiers_education = yes
+			}
+		}
         effect = {
             ### Welcome ### 
             every_country = {
@@ -51,7 +58,6 @@ on_actions = {
             }
         }
         effect = {
-            ### give AI equipment to stop death-spiral production 
             every_country = {
 				limit = { is_ai = yes }
                 add_equipment_to_stockpile = { type = rail_cart_equipment_1 amount = 10 }
@@ -67,86 +73,38 @@ on_actions = {
 			}
 		}	
         effect = {
-			### Nazi ###
 			every_country = {
 				limit = { tag = RCH }
 				every_country = {
-					limit = {
-						NOT = { tag = RCH }
-					}
-					reverse_add_opinion_modifier = {
-						target = PREV
-						modifier = mutant
-					}
-					add_opinion_modifier = {
-						target = PREV
-						modifier = fascist
-					}
+					limit = { NOT = { tag = RCH } }
+					reverse_add_opinion_modifier = { target = PREV modifier = mutant }
+					add_opinion_modifier = { target = PREV modifier = fascist }
 				}
 			}
-			### Fanatics ###
 			every_country = {
-				limit = {
-					tag = GWC
-				}
+				limit = { tag = GWC }
 				every_country = {
-					limit = {
-						NOT = { tag = GWC }
-					}
-					reverse_add_opinion_modifier = {
-						target = PREV
-						modifier = nonbelivers
-					}
-
-					add_opinion_modifier = {
-						target = PREV
-						modifier = fanatics
-					}
+					limit = { NOT = { tag = GWC } }
+					reverse_add_opinion_modifier = { target = PREV modifier = nonbelivers }
+					add_opinion_modifier = { target = PREV modifier = fanatics }
 				}
 			}
-			### Mutants ###
 			every_country = {
-				limit = {
-					tag = MUT
-				}
+				limit = { tag = MUT }
 				every_country = {
-					limit = {
-						NOT = { tag = MUT }
-					}
-					reverse_add_opinion_modifier = {
-						target = PREV
-						modifier = incapable_of_reason 
-					}
-
-					add_opinion_modifier = {
-						target = PREV
-						modifier = mutant
-					}
+					limit = { NOT = { tag = MUT } }
+					reverse_add_opinion_modifier = { target = PREV modifier = incapable_of_reason }
+					add_opinion_modifier = { target = PREV modifier = mutant }
 				}
 			}
-			MUT = { ##crutch to make beginning war a little challenging for Spartans
-				add_manpower = 50
-			}
-			### HMS ###
 			every_country = {
-				limit = {
-					tag = HMS
-				}
-				every_country = {
-					limit = {
-						NOT = { tag = HMS }
-					}
-					add_opinion_modifier = {
-						target = PREV
-						modifier = disfigured
-					}
+				limit = { tag = HMS }
+				every_country = { limit = { NOT = { tag = HMS } }
+					add_opinion_modifier = { target = PREV modifier = disfigured }
 				}
 			}
-			### SAT ###
 			every_country = {
-				limit = {
-					tag = SAT
-				}
+				limit = { tag = SAT }
 				every_country = {
 					limit = {
 						NOT = { tag = SAT }
@@ -163,9 +121,7 @@ on_actions = {
 			}
 			### Communist ###
 			every_country = {
-				limit = {
-					tag = RED
-				}
+				limit = { tag = RED }
 				every_country = {
 					limit = {
 						NOT = { 
@@ -257,15 +213,9 @@ on_actions = {
 			}
 			### Bandits ### 
 			every_country = {
-				limit = {
-					has_country_flag = is_bandit_nation
-				}
+				limit = { has_country_flag = is_bandit_nation }
 				every_country = {
-					limit = {
-						NOT = { 
-							has_country_flag = is_bandit_nation
-						}
-					}
+					limit = { NOT = { has_country_flag = is_bandit_nation } }
 					add_opinion_modifier = {
 						target = PREV
 						modifier = bandit

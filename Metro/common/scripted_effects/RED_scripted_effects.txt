@@ -1,3 +1,52 @@
+
+RED_berilag_POW_max_amount = {
+	custom_effect_tooltip = RED_berilag_max_POW_tooltip
+	add_to_variable = { var = berilag_POW value = berilag_add_POW_amount }
+	clamp_variable = {
+		var = berilag_POW
+		min = 0
+		max = berilag_MAX_POW
+	}
+}
+
+RED_berilag_POW_max_amount = {
+	custom_effect_tooltip = RED_berilag_max_GM_tooltip
+	add_to_variable = { var = berilag_POW value = berilag_add_GM_amount }
+	clamp_variable = {
+		var = berilag_GM
+		min = 0
+		max = berilag_MAX_GM
+	}
+}
+
+RED_berilag_check_POW_capacity = {
+	if = {
+		limit = {
+			RED_berilag_calc_max_POW = yes
+		}
+	}
+	set_variable = { var = berilag_POW_CAP val = temp_POW_CAP }
+}
+
+RED_berilag_check_GM_capacity = {
+	if = {
+		limit = {
+			RED_berilag_calc_max_GM = yes
+		}
+	}
+	set_variable = { var = berilag_GM_CAP val = temp_GM_CAP }
+}
+
+apply_red_name = {
+	if = { limit = { state = 228 } set_state_name = RED_228 }
+	if = { limit = { state = 264 } set_state_name = RED_264 }
+	if = { limit = { state = 329 } set_state_name = RED_329 }
+	if = { limit = { state = 245 } set_state_name = RED_245 }
+	if = { limit = { state = 330 } set_state_name = RED_330 }
+	if = { limit = { state = 362 } set_state_name = RED_362 }
+	if = { limit = { state = 250 } set_state_name = RED_250 }
+}
+
 RED_remove_volunteer_debuff = {
 	if = {
 		limit = {
