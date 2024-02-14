@@ -67,7 +67,7 @@ leader_traits = {
 		trait_type = personality_trait
 		
 		modifier = {
-			army_org_regain = 0.1
+			army_org_regain = 0.08
 
 			hills = {	## Collapsed Station Tunnel
 				movement = 0.05
@@ -89,7 +89,7 @@ leader_traits = {
 		planning_skill = 1
 
 		non_shared_modifier = {
-			experience_gain_army_unit_factor = 0.1
+			experience_gain_army_unit_factor = 0.08
 		}
 
 		new_commander_weight = {
@@ -135,7 +135,7 @@ leader_traits = {
 		modifier = {
 			army_morale_factor = -0.1
 			army_org_regain = -0.1
-			breakthrough_factor = 0.1
+			breakthrough_factor = 0.08
 		}
 
 		new_commander_weight = {
@@ -209,11 +209,11 @@ leader_traits = {
 			army_morale_factor = 0.02
 
 			hills = {	## Collapsed Station Tunnel
-				movement = 0.1
+				movement = 0.08
 				attack = 0.05
 			}
 			jungle = { # Collapsed Station
-				movement = 0.1
+				movement = 0.08
 				attack = 0.05
 			}
 		}
@@ -230,8 +230,8 @@ leader_traits = {
 		planning_skill_factor = -1
 		
 		modifier = {
-			planning_speed = 0.15
-			max_planning_factor = -0.15
+			planning_speed = 0.08
+			max_planning_factor = -0.08
 			wounded_chance_factor = 0.5
 		}
 
@@ -253,7 +253,7 @@ leader_traits = {
 		modifier = {
 			planning_speed = -0.05
 			max_planning_factor = -0.05
-			max_dig_in_factor = 0.1
+			max_dig_in_factor = 0.08
 
 			hills = {	## Collapsed Station Tunnel
 				movement = -0.1
@@ -336,7 +336,7 @@ leader_traits = {
 
 		cost = 850
 		modifier = {
-			terrain_penalty_reduction = 0.1
+			terrain_penalty_reduction = 0.08
 		}
 		ai_will_do = {
 			factor = 1
@@ -349,7 +349,7 @@ leader_traits = {
 		gain_xp = { always = yes }
 		cost = 850
 		modifier = {
-			experience_gain_army_unit = 0.1
+			experience_gain_army_unit = 0.08
 		}
 		ai_will_do = {
 			factor = 1
@@ -375,7 +375,7 @@ leader_traits = {
 		gain_xp = { always = yes }
 		cost = 850
 		modifier = {
-			planning_speed = 0.1
+			planning_speed = 0.08
 		}
 		ai_will_do = {
 			factor = 1
@@ -441,7 +441,7 @@ leader_traits = {
 		custom_gain_xp_trigger_tooltip = charismatic_commander_trait_tooltip
 		cost = 850
 		modifier = {
-			army_org_regain = 0.1
+			army_org_regain = 0.08
 		}
 		ai_will_do = {
 			factor = 1
@@ -479,7 +479,7 @@ leader_traits = {
 		custom_gain_xp_trigger_tooltip = guileful_commander_trait_tooltip
 		cost = 850
 		modifier = {
-			recon_factor = 0.1
+			recon_factor = 0.08
 		}
 		ai_will_do = {
 			factor = 1
@@ -509,14 +509,20 @@ leader_traits = {
 	# Corps Commander assignable traits.
 	##################################
 
-	zero_assign_trait = {
+	methodical_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = one_assign_trait
+		mutually_exclusive = stalwart_assign_trait
 		any_parent = { adaptable_commander_trait }
 
+		cost = 1000
 		modifier = {
+			max_commander_army_size = 2
+		}
+
+		field_marshal_modifier = {
+			max_army_group_size = 1
 		}
 
 		ai_will_do = {
@@ -525,14 +531,16 @@ leader_traits = {
 		gui_row = 0
 	}
 
-	one_assign_trait = {
+	stalwart_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = zero_assign_trait
+		mutually_exclusive = methodical_assign_trait
 		any_parent = { adaptable_commander_trait }
 
+		cost = 1000
 		modifier = {
+			org_loss_at_low_org_factor = -0.05
 		}
 
 		ai_will_do = {
@@ -541,13 +549,16 @@ leader_traits = {
 		gui_row = 1
 	}
 
-	two_assign_trait = {
+	rigorous_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		#mutually_exclusive =
 		any_parent = { educated_commander_trait }
 
+		cost = 1000
 		modifier = {
+			modifier_army_sub_unit_special_forces_max_org_factor = 0.04
+			modifier_army_sub_unit_special_forces_defence_factor = 0.04
 		}
 
 		ai_will_do = {
@@ -556,14 +567,16 @@ leader_traits = {
 		gui_row = 2
 	}
 
-	three_assign_trait = {
+	vigilant_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = four_assign_trait
+		mutually_exclusive = zealous_assign_trait
 		any_parent = { resilient_commander_trait }
 
+		cost = 1000
 		modifier = {
+			attrition = -0.05
 		}
 
 		ai_will_do = {
@@ -572,14 +585,16 @@ leader_traits = {
 		gui_row = 3
 	}
 
-	four_assign_trait = {
+	zealous_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = three_assign_trait
+		mutually_exclusive = vigilant_assign_trait
 		any_parent = { resilient_commander_trait }
 
+		cost = 1000
 		modifier = {
+			land_reinforce_rate = 0.025
 		}
 
 		ai_will_do = {
@@ -588,13 +603,15 @@ leader_traits = {
 		gui_row = 4
 	}
 
-	five_assign_trait = {
+	unorthodox_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		#mutually_exclusive =
 		any_parent = { grizzled_commander_trait }
 
+		cost = 1000
 		modifier = {
+			land_night_attack = 0.08
 		}
 
 		ai_will_do = {
@@ -603,13 +620,16 @@ leader_traits = {
 		gui_row = 5
 	}
 
-	six_assign_trait = {
+	unyielding_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		#mutually_exclusive =
 		any_parent = { fearsome_commander_trait }
 
+		cost = 1000
 		modifier = {
+			wounded_chance_factor = -0.25
+			winter_attrition_factor = -0.1
 		}
 
 		ai_will_do = {
@@ -618,14 +638,18 @@ leader_traits = {
 		gui_row = 6
 	}
 
-	seven_assign_trait = {
+	coordinated_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = eight_assign_trait
+		mutually_exclusive = decisive_assign_trait
 		any_parent = { charismatic_commander_trait }
 
+		cost = 1000
 		modifier = {
+			modifier_army_sub_unit_flamethrower_support_max_org_factor = 0.05
+			modifier_army_sub_unit_gatling_support_max_org_factor = 0.05
+			modifier_army_sub_unit_explosive_support_max_org_factor = 0.05
 		}
 
 		ai_will_do = {
@@ -634,29 +658,34 @@ leader_traits = {
 		gui_row = 7
 	}
 
-	eight_assign_trait = {
+	decisive_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = seven_assign_trait
+		mutually_exclusive = coordinated_assign_trait
 		any_parent = { charismatic_commander_trait }
 
+		cost = 1000
 		modifier = {
+			initiative_factor = 0.2
 		}
 
 		ai_will_do = {
 			factor = 1
 		}
+		
 		gui_row = 8
 	}
 
-	nine_assign_trait = {
+	tough_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		#mutually_exclusive =
 		any_parent = { insightful_commander_trait }
 
+		cost = 1000
 		modifier = {
+			dig_in_speed_factor = 0.2
 		}
 
 		ai_will_do = {
@@ -665,14 +694,16 @@ leader_traits = {
 		gui_row = 9
 	}
 
-	ten_assign_trait = {
+	innovative_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 
-		mutually_exclusive = eleven_assign_trait
+		mutually_exclusive = flexible_assign_trait
 		any_parent = { organized_commander_trait }
 
+		cost = 1000
 		modifier = {
+			max_planning = 0.08
 		}
 
 		ai_will_do = {
@@ -681,14 +712,16 @@ leader_traits = {
 		gui_row = 10
 	}
 
-	eleven_assign_trait = {
+	flexible_assign_trait = {
 		type = corps_commander
 		trait_type = assignable_trait
 		
-		mutually_exclusive = ten_assign_trait
+		mutually_exclusive = innovative_assign_trait
 		any_parent = { organized_commander_trait }
 
+		cost = 1000
 		modifier = {
+			planning_speed = 0.08
 		}
 
 		ai_will_do = {
@@ -807,9 +840,9 @@ leader_traits = {
 		}
 		
 		modifier = {
-			exiled_divisions_attack_factor = 0.1
+			exiled_divisions_attack_factor = 0.08
 			own_exiled_divisions_attack_factor = 0.05 
-			exiled_divisions_defense_factor = 0.1
+			exiled_divisions_defense_factor = 0.08
 			own_exiled_divisions_defense_factor = 0.05			
 		}
 		
