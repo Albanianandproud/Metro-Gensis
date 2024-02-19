@@ -290,7 +290,6 @@ formable_nations_category = {
 				}
 			}
 		}
-
         visible = {
             has_completed_focus = ARB_stalker_free_zone
         }
@@ -388,4 +387,50 @@ formable_nations_category = {
 			base = 200
 		}
     }
+
+	voikov_commonwealth = {
+		allowed = { original_tag = HUL }
+		available = {
+			count_triggers = {
+    			amount = 1
+				BRK = {
+					is_in_faction_with = HUL
+					is_puppet_of = HUL
+				}
+				BRK = {
+					exists = no
+					AND = {
+						capital_scope = { is_owned_and_controlled_by = HUL }
+					}
+				}
+			}
+		}
+		complete_effect = {
+			set_cosmetic_tag = HUL_voikov_commonwealth
+			effect_tooltip = {
+				BRK = {
+					every_owned_state = {
+						limit = {
+							is_core_of = BRK
+						}
+						add_core_of = HUL
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = BRK
+						is_owned_by = HUL
+					}
+					add_core_of = PREV
+				}
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+	}
 }

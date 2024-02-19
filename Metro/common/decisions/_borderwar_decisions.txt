@@ -5,7 +5,7 @@
 
 ## Initalized in events !
 @initiate_borderwar_cost = 50
-@borderwar_base_cooldown = 70
+@borderwar_base_cooldown = 90
 
 RCH_RED_border_war = {
 
@@ -13,7 +13,8 @@ RCH_RED_border_war = {
 		icon = border_war		
 
 		available = {
-			NOT = { has_border_war_with = FROM }
+			#NOT = { has_active_mission = border_conflict_time_until_cancelled }
+			NOT = { has_border_war_with = FROM FROM = { has_border_war_with = ROOT } }
 			FROM = {
 				any_owned_state = {
 					is_controlled_by = FROM

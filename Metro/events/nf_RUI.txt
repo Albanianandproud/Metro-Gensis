@@ -8,13 +8,11 @@ country_event = {	## Stortbeker spawns somewhere in the south
     picture = ccc_mutant
 	immediate = {
 		hidden_effect = {
-			random_owned_controlled_state = {
+			random_owned_state = {
 				prioritize = { 407 240 380 388 } ## Basically we prefer if Stortbeker spawns in these states.
-				limit = {
-					region = 2
-					NOT = { has_state_category = pastoral }
-				}
+				limit = { is_owned_by = ROOT }
 				set_state_flag = STB_starting_point
+				STB = { set_capital = { state = PREV } }
 			}
 			every_state = {
 				limit = { has_state_flag = STB_starting_point }
@@ -39,7 +37,6 @@ country_event = {	## Stortbeker spawns somewhere in the south
 				planning_skill = 4
 				logistics_skill = 4
 			}
-			## until I can be asked to make a mini tree. STB wont change ideology and do fucky stuff
 			complete_national_focus = dictatorial_1
 			complete_national_focus = dictatorial_ideology_change
 		}

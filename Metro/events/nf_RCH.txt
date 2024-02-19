@@ -409,15 +409,22 @@ country_event = {	## Stortbeker event
 		}
 	}
 
-	option = { ## Outcast him. Eventually allow SEV or another southern nation to pursue fascist path / allow AVT some gameplay lol
+	option = {
 		name = nf_RCH.11.b
 		add_popularity = {
 			ideology = dictatorial
 			popularity = 0.015
 		}
 		add_political_power = 10
-		## actually, fuck it. lets do that now
-		hidden_effect = { RUI = { country_event = { id = nf_RUI.1 days = 30 random_days = 30 } } }
+		hidden_effect = { 
+			RUI = { 
+				country_event = { 
+					id = nf_RUI.1 
+					days = 7
+					random_days = 7 
+				} 
+			} 
+		}
 		ai_chance = {
 			base = 25
 		}
@@ -482,5 +489,23 @@ country_event = {	## Reich Introduction stuff ##
 		name = nf_RCH.15.a
 		custom_effect_tooltip = RCH_tutorial_1_tt
 		add_war_support = 0.025
+	}
+}
+
+country_event = {	## Stortbeker event
+    id = nf_RCH.12
+    title = nf_RCH.12.t
+    desc = nf_RCH.12.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {	## Let him back in. Allows PVL to become RCH aligned through RCHs focuses.
+		name = nf_RCH.12.a
+	}
+
+	option = {
+		name = nf_RCH.12.b
+		STB = { change_tag_from = RCH }
 	}
 }
