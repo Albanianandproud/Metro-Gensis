@@ -39,9 +39,7 @@ RCH_RED_border_war = {
 
 		visible = {
 			FROM = { exists = yes }
-			NOT = { 
-				AND = { has_war_with = FROM }
-			}
+			NOT = { AND = { has_war_with = FROM } }
 			FROM = { has_not_initiated_border_incident_with_ROOT = yes }
 			FROM = {
 				NOT = { is_subject_of = ROOT }
@@ -64,9 +62,7 @@ RCH_RED_border_war = {
 		}
 		#target_root_trigger = { is_ai = no }
 		target_array = neighbors
-		target_trigger = {
-			FROM = { has_country_flag = borderwar_enabled_flag }
-		}
+		target_trigger = { FROM = { has_country_flag = borderwar_enabled_flag } }
 		highlight_states = {
 			highlight_states_trigger = {
 				OR = {
@@ -96,7 +92,7 @@ RCH_RED_border_war = {
 		war_with_target_on_remove = yes
 
 		complete_effect = {		
-			hidden_effect = { add_command_power = -initiate_borderwar_cost }									 
+			hidden_effect = { add_command_power = -50 }								 
 			hidden_effect = {
 				FROM = {
 					random_owned_controlled_state = {
@@ -178,14 +174,11 @@ RCH_RED_border_war = {
 
 	#Mission for defender warning that a conflict with FROM is coming
 	border_conflict_incident_warning_defender = {
-
 		icon = border_war
 
 		allowed = { always = no } #Activated from effect
 
-		available = {
-			hidden_trigger = { always = no }
-		}
+		available = { hidden_trigger = { always = no } }
 
 		highlight_states = {
  			highlight_state_targets = {
@@ -196,7 +189,7 @@ RCH_RED_border_war = {
 
 		war_with_target_on_timeout = yes
 		ai_will_do = {
-			base = 1
+			base = 10
 		}
 
 		days_mission_timeout = @border_incident_escalation_countdown
@@ -260,6 +253,7 @@ RCH_RED_border_war = {
 
 		available = {
 			has_non_aggression_pact_with = FROM
+			NOT = { has_border_war_with = FROM } 
 		}
 
 		highlight_states = {
@@ -268,8 +262,10 @@ RCH_RED_border_war = {
 			} 
 		}
 
-		cancel_trigger = {
-			is_in_faction_with = FROM
+		cancel_trigger = { 
+			is_in_faction_with = FROM 
+			has_war_with = FROM
+			has_border_war_with = FROM 
 		}
 
 		#selectable_mission = yes
@@ -293,6 +289,9 @@ RCH_RED_border_war = {
 					on_win = border_conflict_won_defender.1
 					on_lose = border_conflict_lost_defender.1
 					on_cancel = border_conflict_canceled_defender.1
+
+					modifier = 0.1
+        			dig_in_factor = 0.1
 				}
 			}
 			FROM = {
@@ -310,7 +309,6 @@ RCH_RED_border_war = {
 
 	#Mission for attacker to win border war against FROM in X days
 	border_conflict_time_until_cancelled = {
-
 		icon = border_war
 
 		allowed = { always = no } #Activated from effect
@@ -365,6 +363,10 @@ RCH_RED_border_war = {
 
 		allowed = { always = no } #Activated from effect
 
+		available = {
+			has_border_war = yes
+		}
+
 		visible = {
 			has_border_war_with = FROM
 		}
@@ -378,18 +380,19 @@ RCH_RED_border_war = {
 
 		custom_cost_text = RED_RCH_borderwar_cost
 		custom_cost_trigger = {
-			command_power > @initiate_borderwar_cost
+			command_power > @escalate_borderwar_cost
 		}
 
 		fire_only_once = yes #Reactivation handled in effect
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -50 } 
 			if = {
 				limit = { is_border_conflict_defender_vs_FROM = yes }
 				set_border_war_data = {
 					attacker = var:ROOT.defender_state_vs_@FROM
 					defender = var:ROOT.defender_state_vs_@FROM
-					defender_modifier = 0.15
+					defender_modifier = 0.1
 					combat_width = 60
 				}
 			}
@@ -397,7 +400,7 @@ RCH_RED_border_war = {
 				set_border_war_data = {
 					attacker = var:FROM.defender_state_vs_@ROOT
 					defender = var:FROM.defender_state_vs_@ROOT
-					attacker_modifier = 0.15
+					attacker_modifier = 0.05
 					combat_width = 60
 				}
 			}
@@ -442,12 +445,14 @@ RCH_RED_border_war = {
 			} 
 		}
 
+		cancel_trigger = { is_in_faction_with = FROM has_war_with = FROM has_border_war_with = FROM }
+
 		custom_cost_text = RED_RCH_borderwar_cost
 		custom_cost_trigger = {
 			command_power > @initiate_borderwar_cost
 		}
 
-		days_remove = 14
+		days_remove = 7
 		fire_only_once = yes #Reactivation handled in effect
 		war_with_target_on_remove = yes
 
@@ -470,6 +475,7 @@ RCH_RED_border_war = {
 		}
 
 		remove_effect = {
+			hidden_effect = {add_command_power = -50 }
 			cancel_border_war = {
 				dont_fire_events = yes
 				defender = var:FROM.defender_state_vs_@ROOT
