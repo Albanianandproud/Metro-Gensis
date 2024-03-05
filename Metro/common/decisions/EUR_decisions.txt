@@ -258,6 +258,8 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_increase_military_services_budget = {
+
+		allowed = { original_tag = EUR }
 		
 		available = {
 			has_war = no
@@ -289,6 +291,8 @@ EUR_council_gui_decision_category = {
 	}
 	
 	EUR_decision_increase_industrial_services_budget = {
+
+		allowed = { original_tag = EUR }
 		
 		available = {
 			has_war = no
@@ -318,141 +322,46 @@ EUR_council_gui_decision_category = {
 		}
 	}
 	
-	#EUR_decrease_mil_power
-	
-	EUR_decision_decrease_military_inefficiency_1 = {
-		
-		#icon = 
+	# Decisions to remove the military debuff we start with.
+
+	EUR_decision_decrease_military_inefficiency = {
+		#icon =
 
 		priority = 6900
 
 		allowed = { original_tag = EUR }
 
-		is_good = yes 
+		is_good = yes
 
-		visible = { has_idea = EUR_mil_power_5 }
-	
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
-		}
-
-		days_remove = 28
-		
-		fire_only_once = yes
-		
-		fire_only_once = yes
-
-		complete_effect = { 
-			swap_ideas = {
-				remove_idea = EUR_mil_power_5
-				add_idea = EUR_mil_power_4
+		visible = {
+			OR = {
+				has_idea = EUR_mil_power_5
+				has_idea = EUR_mil_power_4
+				has_idea = EUR_mil_power_3
+				has_idea = EUR_mil_power_2
+				has_idea = EUR_mil_power_1
 			}
-		} 
- 
-	}
-	
-	EUR_decision_decrease_military_inefficiency_2 = {
-		priority = 6900
+		}
 
-		allowed = { original_tag = EUR }
-
-		is_good = yes 
-
-		visible = { has_idea = EUR_mil_power_4 }
-	
 		custom_cost_text = command_power_20
 		custom_cost_trigger = {
 			command_power > 19.9
 		}
 
-		days_remove = 28
-		
-		fire_only_once = yes
-		
-		fire_only_once = yes
+		days_remove = 48
 
-		complete_effect = { 
-			swap_ideas = {
-				remove_idea = EUR_mil_power_4
-				add_idea = EUR_mil_power_3
-			}
-		} 
-	}
-	
-	EUR_decision_decrease_military_inefficiency_3 = {
-		priority = 6900
-
-		allowed = { original_tag = EUR }
-
-		is_good = yes 
-
-		visible = { has_idea = EUR_mil_power_3 }
-	
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
+		complete_effect = {
+			hidden_effect = { add_command_power = -20 }
 		}
 
-		days_remove = 28
-		
-		fire_only_once = yes
-
-		complete_effect = { 
-			swap_ideas = {
-				remove_idea = EUR_mil_power_3
-				add_idea = EUR_mil_power_2
-			}
-		}  
-	}
-	
-	EUR_decision_decrease_military_inefficiency_4 = {
-		priority = 6900
-
-		allowed = { original_tag = EUR }
-
-		is_good = yes 
-
-		visible = { has_idea = EUR_mil_power_2 }
-	
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
+		remove_effect = {
+			EUR_improve_military_efficiency_idea = yes
 		}
 
-		days_remove = 28
-		
-		fire_only_once = yes
-
-		complete_effect = { 
-			swap_ideas = {
-				remove_idea = EUR_mil_power_2
-				add_idea = EUR_mil_power_1
-			}
-		} 
-	}
-	
-	EUR_decision_decrease_military_inefficiency_5 = {
-		priority = 6900
-
-		allowed = { original_tag = EUR }
-
-		is_good = yes 
-
-		visible = { has_idea = EUR_mil_power_1 }
-	
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
-		}
-
-		days_remove = 28
-		
-		fire_only_once = yes
-		
-		complete_effect = { 
-			custom_effect_tooltip = europe_mil_is_good_again_tt
-			remove_ideas = EUR_mil_power_1
+		modifier = {
+			political_power_factor = -0.02
+			army_speed_factor = -0.05
+			army_org_factor = -0.05
 		}
 	}
 
