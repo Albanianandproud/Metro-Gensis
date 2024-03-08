@@ -43,19 +43,19 @@ flamethrower_restriction_treaty = {
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 1.5
 			modifier = {
-				factor = 5
-				date < 2029.1.1
+				factor = 0.5
+				date < 2030.1.1
 				AND = { threat < 0.1 }
 			}
 			modifier = {
 				factor = 3
 				date < 2030.1.1
-				AND = { threat < 0.1 }
+				AND = { threat > 0.1 }
 			}
 			modifier = {
-				factor = 0
+				factor = 5
 				date < 2030.1.1
 				AND = { threat > 0.1 }
 			}
@@ -95,14 +95,12 @@ flamethrower_restriction_treaty = {
 				OR = {
 					strength_ratio = {
 						tag = HNZ
-						ratio > 0.45
+						ratio > 0.4
 					}
 					ic_ratio = {
 						tag = HNZ
-						ratio > 0.45
+						ratio > 0.4
 					}
-					original_tag = RED
-					original_tag = RCH
 					has_government = dictatorial
 				}
 			}
@@ -113,8 +111,8 @@ flamethrower_restriction_treaty = {
 		
 		complete_effect = {
 			flamethrower_restrictions_lift = yes
-			remove_ideas = flamethrower_restriction_ban
-			add_threat = 3
+			hidden_effect = { remove_ideas = flamethrower_restriction_ban }
+			add_threat = 5
 		}
 
 		ai_will_do = {
@@ -143,7 +141,7 @@ flamethrower_restriction_treaty = {
 			has_idea = flamethrower_restriction_ban
 			AND = {
 				threat < 0.20
-				NOT = { is_puppet = yes is_subject = yes }
+				is_subject = no
 			}
 			NOT = {
 				has_active_mission = flamethrower_restrictions_timer_until_reapply
@@ -178,7 +176,7 @@ flamethrower_restriction_treaty = {
 
 		remove_effect = {
 			flamethrower_restrictions_lift = yes
-			remove_ideas = flamethrower_restriction_ban
+			hidden_effect = { remove_ideas = flamethrower_restriction_ban }
 			hidden_effect = { reduce_abandon_flamethrower_treaty_cost = yes }
 			add_stability = -0.05
 			add_war_support = -0.05
@@ -217,7 +215,7 @@ flamethrower_restriction_treaty = {
 		fire_only_once = yes
 		
 		complete_effect = {
-			remove_ideas = flamethrower_restriction_ban
+			hidden_effect = { remove_ideas = flamethrower_restriction_ban }
 			add_stability = -0.025
 			add_war_support = -0.025
 		}
@@ -301,7 +299,7 @@ sancity_of_life = {
 		
 		visible = { has_tech = tech_farming_1 }
 
-		available = { has_stability < 0.69 }
+		available = { has_stability < 0.49 }
 
 		fire_only_once = no
 
@@ -318,12 +316,12 @@ sancity_of_life = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 2
-				has_stability < 0.59
+				add = 1
+				has_stability < 0.49
 			}
 			modifier = {
-				add = 5
-				has_stability < 0.49
+				add = 3
+				has_stability < 0.39
 			}
 		}
 	}
@@ -333,7 +331,7 @@ sancity_of_life = {
 		icon = generic_research
 
 		available = {
-			has_stability < 0.69
+			has_stability < 0.59
 		}
 
 		visible = { has_tech = tech_hygiene_basic_hygiene }
@@ -354,11 +352,11 @@ sancity_of_life = {
 			base = 5
 			modifier = {
 				add = 2
-				has_stability < 0.59
+				has_stability < 0.49
 			}
 			modifier = {
 				add = 5
-				has_stability < 0.49
+				has_stability < 0.39
 			}
 		}
 	}
@@ -416,8 +414,8 @@ sancity_of_life = {
 		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_stability < 0.79
-			has_war_support < 0.79
+			has_stability < 0.69
+			has_war_support < 0.69
 		}
 
 		visible = { has_government = community }
@@ -428,6 +426,7 @@ sancity_of_life = {
 			stability_weekly = 0.005
 		    war_support_weekly = 0.005
 		    industrial_capacity_factory = -0.1
+			consumer_goods_factor = 0.1
 		}
 
 		days_remove = 64
@@ -455,11 +454,11 @@ sancity_of_life = {
 		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_war_support > 0.69
+			has_war_support > 0.59
 		}
 
 		visible = {
-			has_war_support > 0.69
+			has_war_support > 0.59
 		}
 
 		fire_only_once = no
@@ -478,7 +477,7 @@ sancity_of_life = {
 			base = 5
 			modifier = {
 				add = 2
-				has_war_support < 0.59
+				has_war_support < 0.49
 			}
 		}
 	}
