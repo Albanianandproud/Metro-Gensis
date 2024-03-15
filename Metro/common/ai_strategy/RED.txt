@@ -1,194 +1,102 @@
 ### RED Line ###
 
 RED_default_unit_production = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		always = yes
-	}
+	allowed = { original_tag = RED }
+	enable = { always = yes }
 	abort = { always = no }
-	ai_strategy = {
-		type = role_ratio
-		id = marines
-		value = 15
-	}
-	ai_strategy = {
-		type = role_ratio
-		id = infantry
-		value = 50
-	}
-	ai_strategy = {
-		type = equipment_production_factor
-		id = infantry
-		value = 5
-	}
-	ai_strategy = {
-		type = force_build_armies
-		value = 50
-	}
-	ai_strategy = {
-		type = build_army
-		id = infantry
-		value = 40
-	}
+
+	ai_strategy = { type = role_ratio id = garrison value = 1 }
+	ai_strategy = { type = role_ratio id = marines value = 15 }
+	ai_strategy = { type = role_ratio id = motorized value = 1 }
+	ai_strategy = { type = role_ratio id = armor value = 8 }
+	ai_strategy = { type = role_ratio id = infantry value = 40 }
+
+	ai_strategy = { type = equipment_production_factor id = infantry value = 5 }
+	ai_strategy = { type = equipment_production_factor id = armor value = 8 }
+
+	ai_strategy = { type = build_army id = infantry value = 40 }
+}
+
+RED_dont_sell_your_own_supply = {
+	allowed = { original_tag = RED }
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = equipment_market_for_sale_factor id = infantry value = -50 }
 }
 
 RED_late_game_production = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		date > 2032.1.1
-	}
+	allowed = { original_tag = RED }
+	enable = { date > 2032.6.1 }
 	abort = { always = no }
-	ai_strategy = {
-		type = role_ratio
-		id = marines
-		value = 35
-	}
 
-	ai_strategy = {
-		type = template_prio
-		id = infantry
-		value = 25
-	}
+	ai_strategy = { type = role_ratio id = garrison value = 1 }
+	ai_strategy = { type = role_ratio id = marines value = 25 }
+	ai_strategy = { type = role_ratio id = motorized value = 1 }
+	ai_strategy = { type = role_ratio id = armor value = 15 }
+	ai_strategy = { type = role_ratio id = infantry value = 35 }
 
-	ai_strategy = {
-		type = equipment_production_factor
-		id = armor
-		value = 15
-	}
+	ai_strategy = { type = equipment_production_factor id = infantry value = 5 }
+	ai_strategy = { type = equipment_production_factor id = armor value = 15 }
 
-	ai_strategy = {
-		type = template_prio
-		id = rail_panzer
-		value = 30
-	}
+	ai_strategy = { type = build_army id = infantry value = 40 }
+
+	ai_strategy = { type = land_xp_spend_priority id = division_template value = 100 }
 }
 
 RED_prioritise_flamethrower_equipment = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		always = yes
-	}
-	abort = {
-		always = no
-	}
-	ai_strategy = {
-		type = template_prio
-		id = flamethrower_support 
-		value = 25
-	}
+	allowed = { original_tag = RED }
+	enable = { always = yes }
+	abort = { always = no }
+
+	ai_strategy = { type = template_prio id = flamethrower_support value = 25 }
 }
 
 RED_hate_emerald_city = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		OR = {
-			country_exists = MSU
+	allowed = { original_tag = RED}
+	enable = { OR = { country_exists = MSU } }
+	abort = { 
+		NOT = { country_exists = MUS 
+			OR = { is_in_faction_with = MSU } 
 		}
 	}
-	abort = {
-		NOT = {
-			country_exists = MUS
-			OR = {
-				is_in_faction_with = MSU
-			}
-		}
-	}
-	ai_strategy = {
-		type = antagonize
-		id = "MSU"
-		value = 200
-	}
+	ai_strategy = { type = antagonize id = MSU value = 200 }
+	ai_strategy = { type = conquer id = MSU value = 200 }
 }
 
 RED_great_leap_forward = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		date < 2031.1.1
-	}
+	allowed = { original_tag = RED }
+	enable = { date < 2032.1.1 }
 	abort_when_not_enabled = yes
 
-	ai_strategy = {
-		type = building_target
-		id = industrial_complex
-		value = 200
-	}
-
-	ai_strategy = {
-		type = building_target
-		id = infrastructure
-		value = 25
-	}
-	
-	ai_strategy = {
-		type = force_build_armies
-		value = 150
-	}
+	ai_strategy = { type = building_target id = industrial_complex value = 65 }
+	ai_strategy = { type = building_target id = infrastructure value = 25 }
 }
 
 RED_mass_industrialisation = {
-	allowed = {
-		original_tag = RED
-	}
-	enable = {
-		date > 2031.2.1
-	}
-	abort = {
-		always = no
-	}
+	allowed = {	original_tag = RED }
+	enable = { date > 2031.2.1 }
+	abort_when_not_enabled = yes
 
-	ai_strategy = {
-		type = building_target
-		id = industrial_complex
-		value = -100
-	}
-
-	ai_strategy = {
-		type = building_target
-		id = arms_factory
-		value = 200
-	}
-
-	ai_strategy = {
-		type = force_build_armies
-		value = 300
-	}
+	ai_strategy = { type = building_target id = industrial_complex value = -50 }
+	ai_strategy = { type = building_target id = arms_factory value = 200 }
 }
+
 RED_its_now_or_never = {
 	allowed = { original_tag = RED }
-	enable = {
-		date > 2032.1.2
-	}
-	abort = { always = no }
-	ai_strategy = {
-		type = force_build_armies
-		value = 2000
-	}
+	enable = { date > 2033.1.1 }
+	abort_when_not_enabled = yes
 
-	ai_strategy = {
-		type = equipment_stockpile_surplus_ratio
-		value = -0.5
-	}
+	ai_strategy = { type = force_build_armies value = 200 }
+	ai_strategy = { type = equipment_stockpile_surplus_ratio value = -0.5 }
 }
+
 RED_guns_protect_our_nation = {
 	allowed = { original_tag = RED }
-	enable = {
-		always = yes
-	}
-	abort = { always = no }
-	ai_strategy = {
-		type = added_military_to_civilian_factory_ratio
-		value = 60
-	}
+	enable = { date > 2033.2.1 }
+	
+	abort_when_not_enabled = yes
+	ai_strategy = { type = added_military_to_civilian_factory_ratio value = 55 }
 }
 
 RED_drown_all_in_our_manpower = {

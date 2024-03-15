@@ -3,7 +3,7 @@
 
 focus_tree = {
     id = arbat_confederation
-	continuous_focus_position = { x = 5500 y = 150 }
+	continuous_focus_position = { x = 6150 y = 150 }
 	country = {
 		base = 0
 		modifier = {
@@ -17,7 +17,7 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation
 		icon = GFX_generic_consumer_goods
-		x = 32
+		x = 30
 		y = 1
 		cost = 6.5
 
@@ -137,7 +137,7 @@ focus_tree = {
 
 	focus = {
 		id = ARB_economic_revitalisation_contact_hansa
-		icon = GFX_HNZ_generic_treaty
+		icon = GFX_HNZ_league_of_steel
 		x = 0
 		y = 1
 		cost = 2.9
@@ -703,7 +703,7 @@ focus_tree = {
 	focus = {
 		id = ARB_hansa_alignment
 		icon = GFX_HNZ_league_of_steel
-		x = -12
+		x = -11
 		y = 1
 		cost = 6.5
 
@@ -1146,7 +1146,7 @@ focus_tree = {
 	focus = {
 		id = ARB_bargain_state_2
 		icon = GFX_mobilise_workforce
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 
@@ -1704,7 +1704,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revaunchism
 		icon = GFX_goal_generic_major_war
-		x = 6
+		x = 5
 		y = 2
 		cost = 6.5
 
@@ -2332,7 +2332,7 @@ focus_tree = {
 	focus = {
 		id = ARB_revive_caucasian_movement
 		icon = GFX_focus_TUR_turanist_ambition
-		x = 12
+		x = 10
 		y = 1
 		cost = 6.5
 
@@ -2705,7 +2705,7 @@ focus_tree = {
 	focus = {
 		id = ARB_stalker_civilian_prioritisation
 		icon = GFX_RED_allow_station_autonomy
-		x = 19
+		x = 17
 		y = 1
 		cost = 5
 
@@ -3667,6 +3667,344 @@ focus_tree = {
 
 		completion_reward = {
 			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = ARB_standing_guard
+		icon = GFX_ARB_fireteam
+		x = 38
+		y = 1
+		cost = 6.5
+
+		completion_reward = {
+			army_experience = 5
+			add_equipment_to_stockpile = {
+		        type = gatling_equipment
+		        amount = 10
+		    }
+			add_ideas = ARB_fireteam_emplacements
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ARB_deploy_conscripts
+		icon = GFX_TRT_bandit_2
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_standing_guard }
+		relative_position_id = ARB_standing_guard
+
+		completion_reward = {
+			army_experience = 5
+			division_template = {
+				name = "Conscripts"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Conscript Militia\" division_template = \"Conscripts\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Conscript Militia\" division_template = \"Conscripts\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 3
+				OR = {
+					threat > 0.1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_emergency_mobilization
+		icon = GFX_RED_specops
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { has_completed_focus = ARB_mandatory_draft }
+		prerequisite = { focus = ARB_deploy_conscripts }
+		relative_position_id = ARB_deploy_conscripts
+
+		completion_reward = {
+			add_war_support = 0.1
+			add_timed_idea = { idea = ARB_mobilization days = 100 } 
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				OR = {
+					has_war = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_4
+		icon = GFX_HNZ_logistics_2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_standing_guard }
+		relative_position_id = ARB_standing_guard
+
+		completion_reward = {
+			army_experience = 5
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_5
+		icon = GFX_ARB_generals
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_standing_guard }
+		relative_position_id = ARB_standing_guard
+
+		completion_reward = {
+			add_timed_idea = { idea = ARB_theorist_hiring days = 90 } 
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_6
+		icon = GFX_generic_equipment_gasmask_2
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { has_completed_focus = ARB_scrounging_the_good_stuff3 }
+		prerequisite = { focus = ARB_military_branch_5 }
+		relative_position_id = ARB_military_branch_5
+
+		completion_reward = {
+			add_ideas = ARB_seasoned_leaders
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_6a
+		icon = GFX_generic_hansa_alliance
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_military_branch_5 }
+		relative_position_id = ARB_military_branch_5
+
+		completion_reward = {
+			army_experience = 5
+			division_template = {
+				name = "Regulars"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					regulars = { x = 0 y = 2 }
+					regulars = { x = 0 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 5
+				threat > 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_6b
+		icon = GFX_ARB_night_vision
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_military_branch_6 }
+		relative_position_id = ARB_military_branch_6
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = night_vision
+				uses = 1
+				bonus = 1
+				ahead_reduction = 1
+				category = night_vision
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_6c
+		icon = GFX_generic_technician_focus
+		x = 3
+		y = 1
+		cost = 6.5
+		available = { has_tech = tech_pressing_punch_pressing }
+		prerequisite = { focus = ARB_military_branch_6 }
+		relative_position_id = ARB_military_branch_6
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 1
+				category = punch_pressing
+				ahead_reduction = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_7
+		icon = GFX_ARB_generals_3
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ARB_military_branch_4 }
+		relative_position_id = ARB_military_branch_4
+
+		completion_reward = {
+			add_ideas = ARB_conscript_1
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_7a
+		icon = GFX_ARB_conscript_1
+		x = -1
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = ARB_military_branch_7b }
+		prerequisite = { focus = ARB_military_branch_7 }
+		relative_position_id = ARB_military_branch_7
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ARB_conscript_1
+				add_idea = ARB_conscript_2b
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_7b
+		icon = GFX_ARB_conscript_2
+		x = -3
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = ARB_military_branch_7a }
+		prerequisite = { focus = ARB_military_branch_7 }
+		relative_position_id = ARB_military_branch_7
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ARB_conscript_1
+				add_idea = ARB_conscript_2a
+			}
+		}
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	focus = {
+		id = ARB_military_branch_8
+		icon = GFX_ARB_elites
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { is_in_faction_with = HNZ }
+		prerequisite = { focus = ARB_military_branch_7 }
+		prerequisite = { focus = ARB_military_branch_6 }
+		relative_position_id = ARB_military_branch_4
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1
+				uses = 2
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 }

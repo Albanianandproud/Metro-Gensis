@@ -57,12 +57,7 @@ not_too_fond_of_bandits = {
 	}
 }
 ate_mutants_not_racist_just_dont_like_em = {
-	enable = {
-		NOT = { 
-			is_subject_of = MUT
-			is_in_faction_with = MUT
-		}
-	}
+	enable = { always = yes }
 	abort = { always = no }
 
 	ai_strategy = {
@@ -114,11 +109,15 @@ ate_cannibals_not_racist_just_dont_like_em = {
 
 stop_death_spiral_production = {
 	enable = { always = yes }
-	abort = { always = no }
+	abort_when_not_enabled = yes
 	ai_strategy = {
 		type = equipment_production_min_factories
 		id = train
-		value = 2
+		value = 1
+	}
+	ai_strategy = {
+		type = min_wanted_supply_trains 
+		value = 5
 	}
 }
 
@@ -291,7 +290,7 @@ dont_build_armor_if_low_ic = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = -200
+		value = -50
 	}
 }
 
@@ -322,6 +321,12 @@ default_stockpile_management = {
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
 		value = 0.1 # double base stockpile #from 25 to 35
+	}
+
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = infantry_equipment
+		value = 4
 	}
 }
 
