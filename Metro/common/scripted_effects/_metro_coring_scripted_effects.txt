@@ -1,0 +1,25 @@
+cost_divider = {
+	ROOT = { divide_variable = { cost_to_core = 2 } }
+	claim_checker = yes
+}
+
+claim_checker = {
+	if = {
+		limit = {
+			PREV = { is_claimed_by = ROOT }
+		}
+		ROOT = { divide_variable = { cost_to_core = 2 } }
+	}
+	if = {
+		limit = {
+			ROOT = { check_variable = { cost_to_core < 1 } }
+		}
+		ROOT = { set_variable = { cost_to_core = 1 } }
+	}
+	if = {
+		limit = {
+			ROOT = { check_variable = { cost_to_core > 250 } }
+		}
+		ROOT = { set_variable = { cost_to_core = 250 } }
+	}
+}

@@ -1,0 +1,66 @@
+defined_text = {
+	name = check_core_button_enabled_desc
+
+	text = {
+		trigger = {
+			NOT = { PREV = { is_owned_and_controlled_by = ROOT } }
+		}
+		localization_key = [core_state_req_not_owned]
+	}
+
+	text = {
+		trigger = {
+			PREV = { is_core_of = ROOT }
+		}
+		localization_key = core_state_req_already_cored
+	}
+}
+
+defined_text = {
+	name = core_state_button_desc
+
+	text = {
+		trigger = {
+			PREV = { compliance < 94 } 
+		}
+		localization_key = core_state_req_no_compliance_94
+	}
+
+	text = {
+		trigger = {
+			PREV = { compliance > 94 } 
+		}
+		localization_key = core_state_req_compliance_94
+	}
+
+	text = {
+		trigger = {
+			ROOT = { check_variable = { cost_to_core > political_power } }
+		}
+		localization_key = core_state_req_no_pp
+	}
+}
+
+defined_text = {
+	name = core_state_claimed
+
+	text = {
+		trigger = {
+			PREV = {
+				is_claimed_by = ROOT
+			}
+		}
+		localization_key = core_state_claimed_true
+	}
+}
+
+defined_text = {
+	name = core_state_req_not_owned
+
+	text = {
+		trigger = {
+			NOT = { ROOT = { has_full_control_of_state = PREV } }
+		}
+		localization_key = core_state_req_not_owned_war
+	}
+}

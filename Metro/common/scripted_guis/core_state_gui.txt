@@ -1,0 +1,62 @@
+# ROOT = Player country
+# PREV = Clicked state
+
+scripted_gui = {
+	core_state_button_gui = {
+		context_type = selected_state_context
+		window_name = "core_state_button_window"
+		parent_window_token = selected_state_view
+
+		visible = { always = yes }
+
+		effects = {
+			check_core_button_click = {
+				ROOT = {
+					every_state = { clr_state_flag = core_cost_checked }
+					set_variable = { 
+						cost_to_core = PREV.state_population 
+					}
+					cost_divider = yes
+					round_variable = cost_to_core
+				}
+				PREV = { set_state_flag = core_cost_checked }
+			}
+
+			core_state_button_click = {
+				log = [?cost_to_core]
+				ROOT = {
+					multiply_variable = { cost_to_core = -1 }
+					add_political_power = cost_to_core
+					add_state_core = PREV
+					multiply_variable = { cost_to_core = -1 }
+				}
+			}
+		}
+
+		triggers = {
+			check_core_button_visible = {
+				NOT = {
+					PREV = { has_state_flag = core_cost_checked }
+				}
+			}
+			check_core_button_click_enabled = {
+				PREV = {
+					NOT = { is_core_of = ROOT }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+
+			core_state_button_click_enabled = {
+				OR  = {
+					check_variable = { ROOT.cost_to_core < ROOT.political_power }
+					check_variable = { ROOT.cost_to_core = ROOT.political_power }
+				}
+				PREV = {
+					is_owned_and_controlled_by = ROOT
+					compliance > 94
+					NOT = { is_core_of = ROOT }
+				}
+			}
+		}
+	}
+}
