@@ -30,6 +30,10 @@ NDefines.NDiplomacy.BASE_TRUCE_PERIOD = 90
 --- Buildings Stuff ---
 NDefines.NBuildings.INFRASTRUCTURE_RESOURCE_BONUS = 0.0
 NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
+NDefines.NBuildings.RADAR_RANGE_BASE = 12			
+NDefines.NBuildings.RADAR_RANGE_MIN = 12			
+NDefines.NBuildings.RADAR_RANGE_MAX = 20				
+NDefines.NBuildings.RADAR_INTEL_EFFECT = 10			
 
 ---Nation Stuff---
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 2
@@ -96,8 +100,8 @@ NDefines.NResistance.RESISTANCE_TARGET_BASE = 45.0
 NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_IS_AT_PEACE = 0
 
 NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance target modifier pairs for vp. first entry is total vp in state and second entry is amount of target modifier that applies for that threshold
-		5,   2.5, -- 0 - 5
-		10,   7.5, -- 5 - 20
+		10,   7.5, -- 0 - 5
+		15,   12.5, -- 5 - 20
 		25,  15.0, -- 20 - 50
 		50,  30.0, -- 50 - ...
 	}
@@ -112,8 +116,8 @@ NDefines.NMilitary.MAX_DIVISION_SUPPORT_WIDTH = 1
 NDefines.NMilitary.MAX_DIVISION_SUPPORT_HEIGHT = 4
 
 NDefines.NMilitary.BASE_DIVISION_BRIGADE_GROUP_COST = 10
-NDefines.NMilitary.BASE_DIVISION_BRIGADE_CHANGE_COST = 15
-NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 15
+NDefines.NMilitary.BASE_DIVISION_BRIGADE_CHANGE_COST = 10
+NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 10
 
 
 	NDefines.NMilitary.ENCIRCLED_PENALTY = -0.3
