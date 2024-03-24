@@ -2253,7 +2253,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HNZ_reclaimation_train_technicians
-		cost = 5
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -2295,7 +2295,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		relative_position_id = HNZ_establish_reclaimation_bureau
-		cost = 5
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 2
@@ -3043,6 +3043,8 @@ focus_tree = {
 			focus = HNZ_reclaimation_bureau_2_civilian
 		}
 
+		available = { NOT  = { has_idea = HNZ_exhausted_economy }}
+
 		mutually_exclusive = {
 			focus = HNZ_reclaimation_bureau_2_military_2
 		}
@@ -3067,15 +3069,15 @@ focus_tree = {
 				}
 				add_resource = {
 			        type = scrap
-			        amount = 3
+			        amount = 2
 			    }
 				add_resource = {
 					type = alloys
-					amount = 3
+					amount = 2
 				}
 				add_resource = {
 					type = components
-					amount = 3
+					amount = 2
 				}
 			}
 		}
@@ -3117,11 +3119,11 @@ focus_tree = {
 				}
 				add_resource = {
 			        type = scrap
-			        amount = 4
+			        amount = 2
 			    }
 				add_resource = {
 					type = alloys
-					amount = 4
+					amount = 2
 				}
 			}
 			random_owned_state = {
@@ -3138,11 +3140,11 @@ focus_tree = {
 				}
 				add_resource = {
 					type = components
-					amount = 4
+					amount = 2
 				}
 				add_resource = {
 					type = electronics
-					amount = 4
+					amount = 2
 				}
 			}
 		}
@@ -3182,7 +3184,7 @@ focus_tree = {
 			}
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
-				amount = 40
+				amount = 20
 				producer = RUS
 			}
 		}
@@ -3205,14 +3207,16 @@ focus_tree = {
 			focus = HNZ_reclaimation_bureau_2_civilian
 		}
 
-		x = 0
-		y = 1
-		relative_position_id = HNZ_reclaimation_bureau_2_military
-		cost = 6.5
+		available = { NOT  = { has_idea = HNZ_exhausted_economy }}
 
 		mutually_exclusive = {
 			focus = HNZ_reclaimation_bureau_2_civilian_2
 		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_reclaimation_bureau_2_military
+		cost = 6.5
 
 		completion_reward = {
 			random_owned_state = {
@@ -3288,11 +3292,10 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.5
-				uses = 1
-				category = infantry_weapons
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 40
+				producer = RUS
 			}
 		}
 
