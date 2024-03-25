@@ -110,9 +110,10 @@ calculate_education_reform_timer_multiplier = {	## Yandere Dev code moment
 
 set_base_modifiers_education = {
 	set_variable = { education_reform_base_cost_multiplier = 2.5 }
-	set_variable = { education_reforms_cost_from_states_factor = 1.2 }
-	set_variable = { education_reforms_cost_from_population_factor = 1 }
+	set_variable = { education_reforms_cost_from_states_factor = 1.25 }
+	set_variable = { education_reforms_cost_from_population_factor = 1.25 }
 	set_variable = { education_reforms_cost_from_modifiers_factor = 1 }
+	add_to_variable = { education_reforms_cost_from_modifiers_factor = education_reforms_cost_from_modifiers }
 }
 	# Cleanse Variable to calculate
 
@@ -166,16 +167,16 @@ calculate_education_reforms = {
 		var = education_reform_undertaking
 		value = education_reform_base_cost_multiplier
 	}
+	## finally we clamp variables
+	clamp_variable = {
+		var = education_reform_undertaking
+		min = 100
+		max = 1800
+	}
 	## Then we multiply variable by education_reforms_cost_from_modifiers_factor
 	multiply_variable = {
 		var = education_reform_undertaking
 		value = education_reforms_cost_from_modifiers_factor
-	}
-	## finally we clamp variables
-	clamp_variable = {
-		var = education_reform_undertaking
-		min = 180
-		max = 1800
 	}
 	# make cost increase for every education tier we have
 	calculate_education_reform_timer_multiplier = yes

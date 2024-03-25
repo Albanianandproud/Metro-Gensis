@@ -139,23 +139,29 @@ ideas = {
    		}
    	}
 
-	civics_rationing = { 
+	   civics_child_labour = { 
 		law = yes
 		use_list_view = yes
 
-		civics_rationing_1 = { #Half Rations
+		civics_child_labour_1 = { # Work
 			
-			available = {
-				always = no
-			}
+               available = {
+                    NOT = {
+                         has_government = community
+                         has_idea = civics_work_ethics_1
+                         has_idea = civics_work_ethics_2
+                         has_war_support > 0.24
+                    }
+               }
 
 			cost = 75
 			removal_cost = -1
 		
 			modifier = {
-				offensive_war_stability_factor = -0.1
-				defensive_war_stability_factor = -0.1
-				stability_factor = -0.15
+                    production_speed_buildings_factor = 0.05
+                    production_factory_efficiency_gain_factor = 0.05
+                    party_popularity_stability_factor = -0.1
+                    war_support_factor = -0.1
 			}
 
 			cancel_if_invalid = no
@@ -165,19 +171,24 @@ ideas = {
    			}
    		}
 
-		civics_rationing_2 = { #Normal Rations
+		civics_child_labour_2 = { # Safe Work
 			
 			available = {
-				always = no
+				NOT = {
+                         has_idea = civics_work_ethics_1
+                         has_idea = civics_work_ethics_2
+                    }
+                    has_war_support > 0.49
 			}
 
 			cost = 75
 			removal_cost = -1
 		
 			modifier = {
+                    production_speed_buildings_factor = 0.025
+                    production_factory_efficiency_gain_factor = 0.025
+                    party_popularity_stability_factor = -0.05
 			}
-
-			default = yes
 
 			cancel_if_invalid = no
 
@@ -186,27 +197,96 @@ ideas = {
    			}
    		}
 
-		civics_rationing_3 = { #Double Rations
+		civics_child_labour_3 = { # Exempt from Work
 			
 			available = {
-				always = no
+                    NOT = {
+                         has_idea = civics_work_ethics_4
+                         has_idea = civics_work_ethics_5
+                    }
 			}
 
 			cost = 75
 			removal_cost = -1
 		
 			modifier = {
+                    party_popularity_stability_factor = 0.05
+			}
+
+               default = yes
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 2
+   			}
+   		}
+
+		civics_child_labour_4 = { # Mandatory Education
+			
+		     available = {
+				has_civic_education_higher_3 = yes
+                    NOT = {
+					has_country_flag = is_savage_nation#
+                         has_country_flag = is_bandit_nation
+				}
+		     }
+
+		     cost = 75
+		     removal_cost = -1
+	   
+		     modifier = {
+			     political_power_gain = -0.1
+                    custom_modifier_tooltip = education_reform_cost_reduction_10
+                    ## Reduce Education Timer
+			}
+
+               on_remove = {
+				add_to_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
+			on_add = {
+				subtract_from_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
+
+		     cancel_if_invalid = no
+
+		     ai_will_do = {
+				factor = 2
+			}
+		}
+
+		civics_child_labour_5 = { # Indoctrination
+
+			visible = {
+				OR = {
+					has_government = dictatorial
+					has_country_flag = is_savage_nation
+				}
+			}
+			
+		     available = {
+				OR = {
+					has_government = dictatorial
+					has_country_flag = is_savage_nation
+				}
+		     }
+
+		     cost = 75
+		     removal_cost = -1
+	   
+		     modifier = {
+                    research_speed_factor = -0.05
 				offensive_war_stability_factor = 0.1
-				defensive_war_stability_factor = 0.1
-				stability_factor = 0.1
+				party_popularity_stability_factor = 0.1
+				political_power_gain = 0.05
+		     }
+
+		     cancel_if_invalid = no
+
+		     ai_will_do = {
+				factor = 2
 			}
-
-			cancel_if_invalid = no
-
-			ai_will_do = {
-   				factor = 2
-   			}
-   		}
+		}
    	}
 
 	civics_support = { 
