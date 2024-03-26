@@ -861,36 +861,6 @@ technologies = {
 			}
 		}
 	}
-	tech_flamethrower_infantry_gear = {
-
-		dependencies = { entrench_kits_2030 = 1 }
-
-		irregulars = {
-			need = { basic_flamethrower_equipment = 5 }
-		}
-
-		on_research_complete = {
-			custom_effect_tooltip = technology_irregulars_flamethrower_gear_tt
-		}
-
-		research_cost = 1.05
-		start_year = 2028
-		folder = {
-			name = support_folder
-			position = { x = -1 y = @TECH_YEAR_2020_Y }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			flamethrower_support_tech
-		}
-		
-		ai_research_weights = { support_weapons_tech = 1.05 }
-		ai_will_do = {
-			base = 2
-		}
-	}
 	tech_flamethrower_ballast = {
 
 		category_flamethrower = {
@@ -951,6 +921,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
+		path = {
+			leads_to_tech = tech_flamethrower_infantry_gear_regular
+			research_cost_coeff = 1
+		}
+
 		research_cost = 2.35
 		start_year = 2029
 		folder = {
@@ -977,7 +952,6 @@ technologies = {
 			}
 		}
 	}
-
 	tech_flamethrower_airtight_pneumatic_system = {
 
 		category_flamethrower = {
@@ -1329,44 +1303,6 @@ technologies = {
 			}
 		}
 	}
-	tech_explosive_infantry_gear = {
-
-		dependencies = { entrench_kits_2030 = 1 }
-
-		irregulars = {
-			need = { basic_explosive_equipment = 5 }
-		}
-
-		on_research_complete = {
-			custom_effect_tooltip = technology_irregulars_explosive_gear_tt
-		}
-
-		research_cost = 1.05
-		start_year = 2028
-		folder = {
-			name = support_folder
-			position = { x = 3 y = @TECH_YEAR_2020_Y }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			explosive_support_tech
-		}
-		
-		ai_research_weights = { support_weapons_tech = 1.05 }
-		ai_will_do = {
-			base = 2
-			modifier = {
-				factor = 2.5
-				date > "2028.1.1"
-			}
-			modifier = {
-				factor = 5
-				has_template_containing_unit = explosive_support 
-			}
-		}
-	}
 	tech_explosive_nail_bomb = {
 
 		category_explosive = {
@@ -1421,6 +1357,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
+		path = {
+			leads_to_tech = tech_explosive_infantry_gear_regular
+			research_cost_coeff = 1
+		}
+
 		research_cost = 2.35
 		start_year = 2029
 		folder = {
@@ -1447,7 +1388,6 @@ technologies = {
 			}
 		}
 	}
-
 	tech_explosive_flechette = {
 
 		category_explosive = {
@@ -1830,6 +1770,7 @@ technologies = {
 		}
 		
 		ai_research_weights = { support_weapons_tech = 1.8 }
+
 		ai_will_do = {
 			base = 2
 			modifier = {
@@ -2262,6 +2203,142 @@ technologies = {
 		
 		ai_will_do = {
 			factor = 6
+		}
+	}
+	tech_flamethrower_infantry_gear = {
+
+		dependencies = { entrench_kits_2030 = 1 }
+
+		XOR = { tech_explosive_infantry_gear }
+
+		irregulars = {
+			need = { basic_flamethrower_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_irregulars_flamethrower_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = -1 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			flamethrower_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+		}
+	}
+	tech_explosive_infantry_gear = {
+
+		dependencies = { entrench_kits_2030 = 1 }
+
+		XOR = { tech_flamethrower_infantry_gear }
+
+		irregulars = {
+			need = { basic_explosive_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_irregulars_explosive_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 3 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = explosive_support 
+			}
+		}
+	}
+	tech_flamethrower_infantry_gear_regular = {
+
+		dependencies = { entrench_kits_2033 = 1 }
+
+		XOR = { tech_explosive_infantry_gear_regular }
+
+		regulars = {
+			need = { flamethrower_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_regulars_flamethrower_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = -1 y = @TECH_YEAR_2029_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			flamethrower_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+		}
+	}
+	tech_explosive_infantry_gear_regular = {
+
+		dependencies = { entrench_kits_2033 = 1 }
+
+		XOR = { tech_flamethrower_infantry_gear_regular }
+
+		regulars = {
+			need = { explosive_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_regulars_explosive_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 3 y = @TECH_YEAR_2029_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			explosive_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
 		}
 	}
 }
