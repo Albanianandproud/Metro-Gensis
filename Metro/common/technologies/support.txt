@@ -835,6 +835,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
+		path = {
+			leads_to_tech = tech_flamethrower_infantry_gear_regular
+			research_cost_coeff = 1
+		}
+
 		research_cost = 2
 		start_year = 2028
 		folder = {
@@ -918,11 +923,6 @@ technologies = {
 
 		path = {
 			leads_to_tech = tech_flamethrower_automatic_pneumatic_system
-			research_cost_coeff = 1
-		}
-
-		path = {
-			leads_to_tech = tech_flamethrower_infantry_gear_regular
 			research_cost_coeff = 1
 		}
 
@@ -1277,6 +1277,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
+		path = {
+			leads_to_tech = tech_explosive_infantry_gear_regular
+			research_cost_coeff = 1
+		}
+
 		research_cost = 2
 		start_year = 2028
 		folder = {
@@ -1354,11 +1359,6 @@ technologies = {
 
 		path = {
 			leads_to_tech = tech_explosive_high_explosive
-			research_cost_coeff = 1
-		}
-
-		path = {
-			leads_to_tech = tech_explosive_infantry_gear_regular
 			research_cost_coeff = 1
 		}
 
@@ -2175,6 +2175,409 @@ technologies = {
 			}
 		}
 	}
+	tech_basic_piercing_equipment = {	## Valve ## 
+
+		enable_equipments = {
+		    basic_piercing_equipment
+		}
+
+		enable_subunits = {
+			piercing_support
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_elongated_barrel
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2020_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2.5
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_elongated_barrel = {
+
+		category_piercing = {
+			defense = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_sniper_handle_stock
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_assault_handle_stock
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2028_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2028.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_sniper_handle_stock = {
+
+		category_piercing = {
+			reliability = 0.075
+		}
+
+		XOR = { tech_piercing_assault_handle_stock }
+
+		path = {
+			leads_to_tech = tech_piercing_extended_magazine
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2029
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2029_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_assault_handle_stock = {
+
+		category_piercing = {
+			reliability = 0.025
+			soft_attack = 0.025
+			hard_attack = 0.025
+		}
+
+		XOR = { tech_piercing_sniper_handle_stock }
+
+		path = {
+			leads_to_tech = tech_piercing_extended_magazine
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2029
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2029_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2029.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_extended_magazine = {
+
+		category_piercing = {
+			breakthrough = 0.05
+			ap_attack = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_laser
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2030
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2030_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2030.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_laser = {
+
+		category_piercing = {
+			soft_attack = 0.1
+			hard_attack = 0.1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_equipment_1
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2031
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2031_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_equipment_1 = {
+
+		enable_equipments = {
+		    piercing_equipment_1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_telescopic_sight
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = tech_piercing_collimator_sight
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2.35 
+		start_year = 2032
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2032_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 2}
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_telescopic_sight = {
+
+		category_piercing = {
+			defense = 0.05
+			ap_attack = 0.1
+		}
+
+		XOR = { tech_piercing_collimator_sight }
+
+		path = {
+			leads_to_tech = tech_piercing_flame_trap
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2033
+		folder = {
+			name = support_folder
+			position = { x = 2 y = @TECH_YEAR_2033_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_collimator_sight = {
+
+		category_piercing = {
+			defense = 0.1
+			ap_attack = 0.05
+		}
+
+		XOR = { tech_piercing_telescopic_sight }
+
+		path = {
+			leads_to_tech = tech_piercing_flame_trap
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1.8
+		start_year = 2033
+		folder = {
+			name = support_folder
+			position = { x = 0 y = @TECH_YEAR_2033_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
+	tech_piercing_flame_trap = {
+
+		category_piercing = {
+			breakthrough = 0.15
+		}
+
+		research_cost = 1.8
+		start_year = 2034
+		folder = {
+			name = support_folder
+			position = { x = 1 y = @TECH_YEAR_2034_Y }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			piercing_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.8 }
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 2
+				date > "2034.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_template_containing_unit = piercing_support
+			}
+		}
+	}
+
 	### UNIQUE ###
 
 	nkvd_equipment_tech = {
@@ -2223,7 +2626,39 @@ technologies = {
 		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = -1 y = @TECH_YEAR_2020_Y }
+			position = { x = -1 y = 1 }
+		}
+	
+		categories = {
+			support_tech
+			support_weapons_tech
+			flamethrower_support_tech
+		}
+		
+		ai_research_weights = { support_weapons_tech = 1.05 }
+		ai_will_do = {
+			base = 2
+		}
+	}
+	tech_flamethrower_infantry_gear_regular = {
+
+		dependencies = { entrench_kits_2033 = 1 }
+
+		XOR = { tech_explosive_infantry_gear_regular }
+
+		regulars = {
+			need = { flamethrower_equipment = 5 }
+		}
+
+		on_research_complete = {
+			custom_effect_tooltip = technology_regulars_flamethrower_gear_tt
+		}
+
+		research_cost = 1.05
+		start_year = 2028
+		folder = {
+			name = support_folder
+			position = { x = -1 y = -1 }
 		}
 	
 		categories = {
@@ -2255,7 +2690,7 @@ technologies = {
 		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = 3 y = @TECH_YEAR_2020_Y }
+			position = { x = 3 y = 1 }
 		}
 	
 		categories = {
@@ -2277,38 +2712,6 @@ technologies = {
 			}
 		}
 	}
-	tech_flamethrower_infantry_gear_regular = {
-
-		dependencies = { entrench_kits_2033 = 1 }
-
-		XOR = { tech_explosive_infantry_gear_regular }
-
-		regulars = {
-			need = { flamethrower_equipment = 5 }
-		}
-
-		on_research_complete = {
-			custom_effect_tooltip = technology_regulars_flamethrower_gear_tt
-		}
-
-		research_cost = 1.05
-		start_year = 2028
-		folder = {
-			name = support_folder
-			position = { x = -1 y = @TECH_YEAR_2029_Y }
-		}
-	
-		categories = {
-			support_tech
-			support_weapons_tech
-			flamethrower_support_tech
-		}
-		
-		ai_research_weights = { support_weapons_tech = 1.05 }
-		ai_will_do = {
-			base = 2
-		}
-	}
 	tech_explosive_infantry_gear_regular = {
 
 		dependencies = { entrench_kits_2033 = 1 }
@@ -2327,7 +2730,7 @@ technologies = {
 		start_year = 2028
 		folder = {
 			name = support_folder
-			position = { x = 3 y = @TECH_YEAR_2029_Y }
+			position = { x = 3 y = -1 }
 		}
 	
 		categories = {
