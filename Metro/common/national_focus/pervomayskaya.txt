@@ -1,0 +1,2371 @@
+#!gfx:interface/metro_goals.gfx
+focus_tree = {
+	id = pervomayskaya
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = MDR
+		}
+	}
+	continuous_focus_position = { x = 2850 y = 1000}
+	default = no
+
+	focus = {
+		id = MDR_1
+		icon = GFX_MDR_pervomaiskaya
+		x = 13
+		y = 1
+		cost = 6.5
+		completion_reward = {
+			add_political_power = 50
+			country_event = { id = nf_MDR.16 }
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = MDR_2
+		icon = GFX_cityruins
+		x = 0
+		y = 3
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT }}
+		prerequisite = { focus = MDR_1 }
+		relative_position_id = MDR_1
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				ahead_reduction = 1.0
+				uses = 1
+				category = entrench_kits
+			}
+			set_state_owner = 208
+			hidden_effect = { 
+				MDR = { country_event = {  id = nf_MDR.32 days = 120 random_days = 120  } } 
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3
+		icon = GFX_generic_construction
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_1 }
+		relative_position_id = MDR_1
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+                bonus = 0.25
+                ahead_reduction = 1.0
+                uses = 1
+                category = tooling
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3a
+		icon = GFX_generic_construction_2
+		x = -0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_3 }
+		relative_position_id = MDR_3
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+                bonus = 0.25
+                ahead_reduction = 1.0
+                uses = 1
+                category = construction
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3b
+		icon = GFX_MDR_mutant_attack
+		x = -4
+		y = 1
+		cost = 6.5
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = MDR_izmailovskaya_mutants_tt
+				hidden_trigger = { 
+					has_country_flag = MDR_mutant_attacks 
+				} 
+			}
+		}
+		prerequisite = { focus = MDR_1 }
+		relative_position_id = MDR_1
+		completion_reward = {
+			add_timed_idea = { idea = MDR_emergency_emergency days = 300 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3f
+		icon = GFX_mushroom
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_3b }
+		relative_position_id = MDR_3b
+		completion_reward = {
+			add_tech_bonus = {
+                bonus = 0.25
+                ahead_reduction = 1.0
+                uses = 2
+                category = farming
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3fa
+		icon = GFX_ARB_weapons_to_plough
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_3b }
+		relative_position_id = MDR_3b
+		completion_reward = {
+			354 = { add_extra_state_shared_building_slots = 2 }
+			capital_scope = { add_extra_state_shared_building_slots = 1 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_3fa1
+		icon = GFX_generic_cement
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_3a }
+		prerequisite = { focus = MDR_3fa }
+		relative_position_id = MDR_3fa
+		completion_reward = {
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			354 = { 
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_route_out_mutants
+		icon = GFX_MDR_cull_mutants
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { 208 = { is_owned_by = ROOT } NOT = { has_idea = MDR_emergency_emergency } }
+		prerequisite = { focus = MDR_3b }
+		relative_position_id = MDR_3b
+		completion_reward = {
+			army_experience = 10
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_eliminate_mutants_1
+		icon = GFX_RED_reznov
+		x = -2
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_route_out_mutants }
+		relative_position_id = MDR_route_out_mutants
+		completion_reward = {
+			army_experience = 10
+			add_equipment_to_stockpile = {
+				type = basic_piercing_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_total_mutant_death
+		icon = GFX_nosalis
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_eliminate_mutants_1 }
+		relative_position_id = MDR_eliminate_mutants_1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = piercing_support_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_surface_recon
+		icon = GFX_HNZ_generic_bear_traps
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_route_out_mutants }
+		relative_position_id = MDR_route_out_mutants
+		completion_reward = {
+			capital_scope = { 
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = chemicals
+					amount = 4
+				}
+			}	
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_surface_checkpoints
+		icon = GFX_oil_lamp
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_surface_recon }
+		relative_position_id = MDR_surface_recon
+		completion_reward = {
+			208 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_route_out_mutants3
+		icon = GFX_stalker1
+		x = -1
+		y = 3
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_total_mutant_death }
+		prerequisite = { focus = MDR_surface_checkpoints }
+		relative_position_id = MDR_route_out_mutants
+		completion_reward = {
+			army_experience = 10
+			custom_effect_tooltip = MDR_no_more_mutant_random_events_tt
+			hidden_effect = {
+				208 = { set_state_flag = no_mutant_spawn }
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_4
+		icon = GFX_generic_technician_medical
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_1 }
+		relative_position_id = MDR_1
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+                bonus = 0.25
+                ahead_reduction = 1.0
+                uses = 1
+                category = health
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_pay_homage_to_the_fallen
+		icon = GFX_MDR_homage
+		x = 2
+		y = 1
+		cost = 6.5
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = MDR_disease_free_tt	
+				has_country_flag = MDR_disease_gone_tt
+			}
+		}
+		prerequisite = { focus = MDR_4 }
+		relative_position_id = MDR_4
+		completion_reward = {
+			add_timed_idea = { idea = MDR_pay_homage days = 300 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_4b
+		icon = GFX_generic_armaments_parts
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_4 }
+		relative_position_id = MDR_4
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+                bonus = 0.25
+                ahead_reduction = 1.0
+                uses = 1
+                category = punch_pressing
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_4baaa
+		icon = GFX_AVT_hey_you
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_4b }
+		relative_position_id = MDR_4b
+		completion_reward = {
+			add_timed_idea = { idea = MDR_reshuffle_cabinet days = 400 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_4ba
+		icon = GFX_generic_spec_ops_1
+		x = 3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_4b }
+		relative_position_id = MDR_4b
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 10
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_5
+		icon = GFX_MDR_to_the_surface
+		x = 3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_1 }
+		relative_position_id = MDR_1
+		completion_reward = {
+			add_tech_bonus = {
+                bonus = 0.5
+                ahead_reduction = 1.0
+                uses = 1
+                category = gas_mask
+            }
+			every_unit_leader = {
+				add_defense = 1
+			}
+			#country_event = { id = nf_MDR.25 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_contact_with_BAU
+		icon = GFX_generic_BAU_trade_2
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { BAU = { exists = yes } NOT = { has_war_with = BAU }}
+		prerequisite = { focus = MDR_route_out_mutants focus = MDR_2 focus = MDR_4ba }
+		relative_position_id = MDR_2
+		completion_reward = {
+			country_event = { id = nf_MDR.5 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_further_firepower
+		icon = GFX_flamethrower
+		x = -2
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_route_out_mutants focus = MDR_2 focus = MDR_4ba }
+		relative_position_id = MDR_2
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment_2 
+				amount = 10
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 1
+				category = flamethrower_support_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_political_3
+		icon = GFX_TRT_bandit_sitdown
+		x = 3
+		y = 1
+		cost = 6.5
+		available = { 208 = { is_owned_by = ROOT } has_country_flag = MDR_cherkizon_introduction }
+		prerequisite = { focus = MDR_route_out_mutants focus = MDR_2 focus = MDR_4ba }
+		relative_position_id = MDR_2
+		completion_reward = {
+			RUI = { release = CKZ }
+			## event to interact with CKZ
+			country_event = { id = nf_MDR.30 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_mutant_relative_free
+		icon = GFX_SAT_rats
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_further_firepower }
+		relative_position_id = MDR_further_firepower
+		completion_reward = {
+			add_war_support = 0.05
+			custom_effect_tooltip = MDR_izmailovskaya_attacks
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_political_5
+		icon = GFX_generic_phone_line
+		x = 0
+		y = 1
+		cost = 6.5
+		bypass = { BAU = { exists = no }}
+		available = { BAU = { exists = yes } NOT = { has_war_with = BAU }}
+		prerequisite = { focus = MDR_contact_with_BAU }
+		relative_position_id = MDR_contact_with_BAU
+		completion_reward = {
+			BAU = {
+				every_owned_state = {
+					limit = {
+						has_state_category = pastoral
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 1
+				category = punch_pressing
+			}
+			add_opinion_modifier = { target = BAU modifier = MDR_assistance }
+			BAU = { add_opinion_modifier = { target = ROOT modifier = MDR_assistance } }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_contact_kal
+		icon = GFX_generic_support_kalininskaya
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { has_stability > 0.45 KAL = { exists = yes } NOT = { has_war_with = KAL }}
+		prerequisite = { focus = MDR_mutant_relative_free focus = MDR_political_5 }
+		relative_position_id = MDR_political_5
+		completion_reward = {
+			custom_effect_tooltip = MDR_government_frown_tt
+			add_stability = -0.1
+			country_event = { id = nf_MDR.26 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_political_6
+		icon = GFX_generic_cherkizon_war
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { date > 2033.1.1 CKZ = { exists = yes } }
+		mutually_exclusive = { focus = MDR_political_6a }
+		prerequisite = { focus = MDR_political_3 }
+		relative_position_id = MDR_political_3
+		will_lead_to_war_with = CKZ
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = CKZ
+				generator = { 368 }
+			}
+			MDR_anton_knyazev = {
+				clr_character_flag = MDR_kidnapped
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_political_6a
+		icon = GFX_generic_cherkizon
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { 
+			date > 2033.1.1 
+			CKZ = { 
+				exists = yes
+				has_opinion = {
+					target = ROOT
+					value > 80
+				} 
+			} 
+		}
+		mutually_exclusive = { focus = MDR_political_6 }
+		prerequisite = { focus = MDR_political_3 }
+		relative_position_id = MDR_political_3
+		completion_reward = {
+			puppet = CKZ
+			MDR_anton_knyazev = {
+				clr_character_flag = MDR_kidnapped
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_contact_redline
+		icon = GFX_RED_soviet_soldier_myth
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { has_stability > 0.45 RED = { exists = yes } NOT = { has_war_with = RED } }
+		prerequisite = { focus = MDR_political_5 focus = MDR_political_6 focus = MDR_political_6a }
+		relative_position_id = MDR_political_5
+		completion_reward = {
+			custom_effect_tooltip = MDR_government_frown_tt
+			add_stability = -0.1
+			country_event = { id = nf_MDR.27 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_cherkizon_authority
+		icon = GFX_generic_microphone
+		x = 3
+		y = 1
+		cost = 8.6
+		available = {
+			208 = { is_owned_by = ROOT }
+			NOT = { 219 = { is_owned_by = RED } }
+			OR = {
+				has_completed_focus = MDR_politics_community
+				has_completed_focus = MDR_politics_council
+				has_completed_focus = MDR_politics_oligarch
+			}
+		}
+		prerequisite = { focus = MDR_political_5 focus = MDR_political_6 focus = MDR_political_6a }
+		relative_position_id = MDR_political_5
+		completion_reward = {
+			219 = { add_core_of = ROOT }
+			if = {
+				limit = { CKZ = { is_puppet_of = ROOT } }
+				annex_country = {
+					target = CKZ
+					transfer_troops = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_contact_hansa
+		icon = GFX_HNZ_league_of_steel
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { has_stability > 0.45 HNZ = { exists = yes } NOT = { has_war_with = HNZ }}
+		prerequisite = { focus = MDR_mutant_relative_free focus = MDR_political_5 focus = MDR_political_6 }
+		relative_position_id = MDR_political_5
+		completion_reward = {
+			country_event = { id = nf_MDR.28 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_repair_shchelkovskaya
+		icon = GFX_generic_winch
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { has_completed_focus = MDR_1 }
+		completion_reward = {
+			354 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_encourage_civilian_marketplace
+		icon = GFX_generic_market
+		x = 3
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_military_servitude }
+		prerequisite = { focus = MDR_repair_shchelkovskaya }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			354 = {
+				add_extra_state_shared_building_slots = 2 
+			}
+			add_timed_idea = { idea = MDR_encourage_civilian_growth days = 360 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_isolated_economy
+		icon = GFX_generic_domestics
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_military_servitude focus = MDR_encourage_civilian_marketplace }
+		relative_position_id = MDR_encourage_civilian_marketplace
+		completion_reward = {
+			354 = { 
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_servitude
+		icon = GFX_generic_winch
+		x = 5
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_encourage_civilian_marketplace }
+		prerequisite = { focus = MDR_repair_shchelkovskaya }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 10
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_tax
+		icon = GFX_generic_medium_arms_2
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_encourage_civilian_marketplace focus = MDR_military_servitude }
+		relative_position_id = MDR_military_servitude
+		completion_reward = {
+			354 = { 
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_repair_communications_line
+		icon = GFX_generic_phone_line
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_repair_shchelkovskaya }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			23 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_shchelkovskaya_1
+		icon = GFX_railroad_construction
+		x = -3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_repair_shchelkovskaya }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = construction
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_restructure_defences
+		icon = GFX_MDR_measures
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_repair_shchelkovskaya }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			add_ideas = MDR_measured_defence_bulwark
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_reinforce_the_frontline
+		icon = GFX_generic_defences
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_repair_communications_line }
+		relative_position_id = MDR_repair_communications_line
+		completion_reward = {
+			325 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_repair_rail_line
+		icon = GFX_RCH_railways
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_repair_communications_line }
+		relative_position_id = MDR_repair_communications_line
+		completion_reward = {
+			add_ideas = MDR_rail_line_repairs
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_medical_triage
+		icon = GFX_generic_medical_supplies
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_reinforce_the_frontline }
+		relative_position_id = MDR_reinforce_the_frontline
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = triage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_medical_triage_2
+		icon = GFX_ARB_happy_populace
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_medical_triage }
+		relative_position_id = MDR_medical_triage
+		completion_reward = {
+			add_ideas = MDR_casualty_replenishment
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_stockyard_quaters
+		icon = GFX_TRT_technician_trade
+		x = 0
+		y = 3
+		cost = 6.5
+		prerequisite = { focus = MDR_reinforce_the_frontline focus = MDR_sifting_debris }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_sifting_debris
+		icon = GFX_scrap_computers
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_restructure_defences }
+		relative_position_id = MDR_restructure_defences
+		completion_reward = {
+			add_timed_idea = { idea = MDR_sifting_through_trash days = 200 }
+			capital_scope = { 
+				add_resource = {
+					type = electronics
+					amount = 4
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_resource_collection
+		icon = GFX_components
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_sifting_debris }
+		relative_position_id = MDR_sifting_debris
+		completion_reward = {
+			354 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_sifting_debrisb
+		icon = GFX_scrap_metal_4
+		x = 3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_sifting_debris }
+		relative_position_id = MDR_sifting_debris
+		completion_reward = {
+			add_ideas = MDR_scrapper_union_1	
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_sifting_debrisc
+		icon = GFX_scrap_metal_3
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_sifting_debrisb focus = MDR_resource_collection }
+		relative_position_id = MDR_sifting_debrisb
+		completion_reward = {
+			add_ideas = MDR_scrapper_union_1
+			add_tech_bonus = {
+				name = recycling
+				uses = 1
+				bonus = 0.5
+				category = recycling
+			}
+			capital_scope = { 
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+			}	
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_sifting_debrisd
+		icon = GFX_scrap_metal_2
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_sifting_debrisb focus = MDR_resource_collection }
+		relative_position_id = MDR_sifting_debrisb 
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MDR_scrapper_union_1
+				add_idea = MDR_scrapper_union_2
+			}
+			add_tech_bonus = {
+				name = recycling
+				uses = 1
+				bonus = 0.5
+				category = recycling
+			}
+			capital_scope = { 
+				add_resource = {
+					type = chemicals
+					amount = 4
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_foresters
+		icon = GFX_MDR_forester_bonus_3
+		x = 0
+		y = 2
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_moles }
+		available = { 283 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_reinforce_the_frontline focus = MDR_sifting_debris }
+		relative_position_id = MDR_reinforce_the_frontline
+		completion_reward = {
+			## Must own Izmailovskaya
+			283 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_ideas = MDR_economic_foresters
+			MDR_bop_decrease_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_moles
+		icon = GFX_MDR_mole_bonus_2
+		x = 0
+		y = 2
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_foresters }
+		available = { 283 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_sifting_debris focus = MDR_reinforce_the_frontline }
+		relative_position_id = MDR_sifting_debris
+		completion_reward = {
+			## Must own Izmailovskaya
+			283 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_ideas = MDR_economic_moles
+			MDR_bop_increase_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_mole_1
+		icon = GFX_MDR_mole_bonus_4
+		x = 3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_moles }
+		relative_position_id = MDR_moles
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MDR_economic_moles
+				add_idea = MDR_economic_moles_2
+			}
+			MDR_bop_increase_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_mole_2
+		icon = GFX_MDR_mole_bonus_3
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_moles }
+		relative_position_id = MDR_moles
+		completion_reward = {
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			MDR_bop_increase_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_forester_1
+		icon = GFX_MDR_forester_bonus_2
+		x = -3
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_foresters }
+		relative_position_id = MDR_foresters
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MDR_economic_foresters
+				add_idea = MDR_economic_foresters_2
+			}
+			MDR_bop_decrease_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_forester_2
+		icon = GFX_MDR_forester_bonus_4
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_foresters }
+		relative_position_id = MDR_foresters
+		completion_reward = {
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			MDR_bop_decrease_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_surface_raids
+		icon = GFX_MDR_surface_raids
+		x = 0
+		y = 5
+		cost = 6.5
+		available = { 208 = { is_owned_by = ROOT } }
+		prerequisite = { focus = MDR_foresters focus = MDR_moles }
+		relative_position_id = MDR_repair_shchelkovskaya
+		completion_reward = {
+			country_event = nf_MDR.6
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_crack_the_depot
+		icon = GFX_generic_door
+		x = 0
+		y = 1
+		cost = 8.6
+		available = { 
+			date > 2034.1.1 
+			custom_trigger_tooltip = {
+				tooltip = MDR_recruited_MDR_anton_knyazev
+				AND = {
+					has_idea_with_trait = MDR_neutral_anton_knyazev
+				}
+			}
+		}
+		prerequisite = { focus = MDR_surface_raids }
+		relative_position_id = MDR_surface_raids
+		completion_reward = {
+			country_event = nf_MDR.7
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = MDR_old_world_organization
+		icon = GFX_MDR_omon_8
+		x = 25
+		y = 1
+		cost = 6.5
+		available = { has_completed_focus = MDR_1 }
+		completion_reward = {
+			army_experience = 15
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_good_old_fashioned_discipline
+		icon = GFX_MDR_omon_11
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = rallied_men_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_lessons_from_topside
+		icon = GFX_MDR_omon_4
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 2
+				category = gas_mask
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_good_old_fashioned_discipline_2
+		icon = GFX_MDR_omon_10
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_good_old_fashioned_discipline }
+		relative_position_id = MDR_good_old_fashioned_discipline
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MDR_respect_my_authority
+				add_idea = MDR_respect_my_authority_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_good_old_fashioned_discipline_3
+		icon = GFX_MDR_omon_12
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 
+			num_of_military_factories > 7
+			OR = { 
+				has_completed_focus = MDR_expand_OMON_jurisdiction_irregular
+				has_completed_focus = MDR_expand_OMON_jurisdiction_regular
+			} 
+		}
+		prerequisite = { focus = MDR_good_old_fashioned_discipline_2 }
+		relative_position_id = MDR_good_old_fashioned_discipline_2
+		completion_reward = {
+			set_technology = { riot_shield_specops = 1 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_law_and_order
+		icon = GFX_MDR_omon_2
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			add_ideas = MDR_respect_my_authority
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_1
+		icon = GFX_MDR_omon_6
+		x = 4
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			add_ideas = MDR_spec_ops
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_2
+		icon = GFX_generic_hansa_alliance
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_military_1 }
+		relative_position_id = MDR_military_1
+		completion_reward = {
+			army_experience = 20
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_expand_OMON_jurisdiction
+		icon = GFX_MDR_expand_OMON
+		x = -4
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MDR_omon
+				add_idea = MDR_omon_2 
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_question_of_conscription
+		icon = GFX_MDR_conscription_question
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_expand_OMON_jurisdiction }
+		relative_position_id = MDR_expand_OMON_jurisdiction
+		completion_reward = {
+			country_event = nf_MDR.11
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_question_of_rotation
+		icon = GFX_MDR_rotation_question
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_conscription }
+		relative_position_id = MDR_question_of_conscription
+		completion_reward = {
+			country_event = nf_MDR.13
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_question_of_servitude
+		icon = GFX_MDR_loyalty_question
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_rotation focus = MDR_question_of_pay }
+		relative_position_id = MDR_question_of_rotation
+		completion_reward = {
+			country_event = nf_MDR.15
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_expand_OMON_jurisdiction_irregular
+		icon = GFX_MDR_conscripts
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_servitude }
+		relative_position_id = MDR_question_of_servitude
+		completion_reward = {
+			add_ideas = MDR_irregular_OMON_expansion
+			division_template = {
+				name = "Auxillary Force"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+					irregulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Auxillary Force\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_expand_OMON_jurisdiction_regular
+		icon = GFX_MDR_regulars
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_servitude }
+		relative_position_id = MDR_question_of_servitude
+		completion_reward = {
+			add_ideas = MDR_regular_OMON_expansion
+			division_template = {
+				name = "Regulars"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					regulars = { x = 0 y = 2 }
+					regulars = { x = 0 y = 3 }
+					regulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_question_of_surplus
+		icon = GFX_MDR_surplus_question
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_expand_OMON_jurisdiction }
+		relative_position_id = MDR_expand_OMON_jurisdiction
+		completion_reward = {
+			country_event = nf_MDR.12
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_question_of_pay
+		icon = GFX_MDR_payment_question
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_surplus }
+		relative_position_id = MDR_question_of_surplus
+		completion_reward = {
+			country_event = nf_MDR.14
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_tight_knit_security
+		icon = GFX_MDR_omon_1
+		x = 6
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_old_world_organization }
+		relative_position_id = MDR_old_world_organization
+		completion_reward = {
+			add_ideas = MDR_tight_knit_defences
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_foresters
+		icon = GFX_MDR_forester_bonus_1
+		x = 1
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } has_completed_focus = MDR_foresters }
+		mutually_exclusive = { focus = MDR_military_moles }
+		prerequisite = { focus = MDR_tight_knit_security }
+		relative_position_id = MDR_tight_knit_security
+		completion_reward = {
+			add_ideas = MDR_foresters_military_lean
+			MDR_bop_decrease_10 = yes
+			
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_military_moles
+		icon = GFX_MDR_mole_bonus_1
+		x = -1
+		y = 1
+		cost = 6.5
+		available = { 283 = { is_owned_by = ROOT } has_completed_focus = MDR_moles }
+		mutually_exclusive = { focus = MDR_military_foresters }
+		prerequisite = { focus = MDR_tight_knit_security }
+		relative_position_id = MDR_tight_knit_security
+		completion_reward = {
+			add_ideas = MDR_mole_military_lean
+			MDR_bop_increase_10 = yes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_modified_armaments
+		icon = GFX_MDR_omon_9
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_good_old_fashioned_discipline focus = MDR_law_and_order }
+		relative_position_id = MDR_good_old_fashioned_discipline
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_gearing_the_army
+		icon = GFX_MDR_omon_5
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_modified_armaments }
+		relative_position_id = MDR_modified_armaments
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 30
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_raid_outer_hinterland
+		icon = GFX_MDR_raid_hinterlands
+		x = 4
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_modified_armaments }
+		relative_position_id = MDR_modified_armaments
+		completion_reward = {
+			country_event = nf_MDR.8
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_snipers
+		icon = GFX_MDR_sniper_rifle
+		x = 6
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_modified_armaments }
+		relative_position_id = MDR_modified_armaments
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_piercing_equipment
+				amount = 5
+				producer = RUS
+			}
+			add_ideas = MDR_VSD_sniper_training_1
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_snipers_2
+		icon = GFX_MDR_sniper_soldier
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_snipers }
+		relative_position_id = MDR_snipers
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_piercing_equipment
+				amount = 10
+				producer = RUS
+			}
+			swap_ideas = {
+				remove_idea = MDR_VSD_sniper_training_1
+				add_idea = MDR_VSD_sniper_training_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_equipment_upgrades
+		icon = GFX_SPT_equipment_2
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_modified_armaments }
+		relative_position_id = MDR_modified_armaments
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = stalker
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_superior_gear
+		icon = GFX_MDR_superior_gear
+		x = -2
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_superior_tactics focus = MDR_superior_firepower }
+		prerequisite = { focus = MDR_gearing_the_army }
+		relative_position_id = MDR_gearing_the_army
+		completion_reward = {
+			add_ideas = MDR_superior_gear
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_superior_firepower
+		icon = GFX_MDR_superior_firepower
+		x = 0
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_superior_gear focus = MDR_superior_tactics }
+		prerequisite = { focus = MDR_gearing_the_army }
+		relative_position_id = MDR_gearing_the_army
+		completion_reward = {
+			set_technology = { tech_technician_machining = 1 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_superior_tactics
+		icon = GFX_MDR_superior_tactics
+		x = 2
+		y = 1
+		cost = 6.5
+		mutually_exclusive = { focus = MDR_superior_gear focus = MDR_superior_firepower }
+		prerequisite = { focus = MDR_gearing_the_army }
+		relative_position_id = MDR_gearing_the_army
+		completion_reward = {
+			add_ideas = MDR_superior_tactics
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_new_world_force
+		icon = GFX_MDR_old_world_fighters
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_superior_gear focus = MDR_superior_firepower focus = MDR_superior_tactics }
+		relative_position_id = MDR_superior_firepower
+		completion_reward = {
+			add_ideas = MDR_old_world_force_to_reckon
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_community
+		icon = GFX_MDR_pervomaiskaya
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { always = no }
+		relative_position_id = MDR_contact_hansa
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 150
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_community_1
+		icon = GFX_RED_special_teams
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_community }
+		relative_position_id = MDR_politics_community
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits_bonus
+				bonus = 1
+				uses = 1
+				category = clothing_kits
+			}
+			every_unit_leader = {
+				add_planning = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_community_2
+		icon = GFX_TRT_law_1
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_community }
+		relative_position_id = MDR_politics_community
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 1
+				category = entrench_kits
+			}
+			every_unit_leader = {
+				add_planning = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_community_3
+		icon = GFX_workstation
+		x = -1
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_community_1 }
+		relative_position_id = MDR_politics_community
+		completion_reward = {
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+                bonus = 0.25
+                uses = 1
+                category = industry
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_community_4
+		icon = GFX_workstation_2
+		x = 1
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_community_2 }
+		relative_position_id = MDR_politics_community
+		completion_reward = {
+			354 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+                bonus = 0.25
+                uses = 1
+                category = industry
+            }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_council
+		icon = GFX_MDR_pervomaiskaya
+		x = 4
+		y = 1
+		cost = 6.5
+		available = { always = no }
+		relative_position_id = MDR_contact_hansa
+		completion_reward = {
+			MDR_bop_increase_10 = yes
+			add_stability = 0.1
+			add_political_power = 75
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_council_1
+		icon = GFX_generic_medical_supplies
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_council }
+		relative_position_id = MDR_politics_council
+		completion_reward = {
+			capital_scope = { 
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_council_2
+		icon = GFX_generic_machining
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_council }
+		relative_position_id = MDR_politics_council
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = construction
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_council_2a
+		icon = GFX_RCH_science
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_council_2 }
+		relative_position_id = MDR_politics_council_2
+		completion_reward = {
+			set_technology = { tech_technician_machining = 1 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_council_3
+		icon = GFX_ARB_construction_refurbishments
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_council }
+		relative_position_id = MDR_politics_council
+		completion_reward = {
+			354 = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_oligarch
+		icon = GFX_MDR_pervomaiskaya
+		x = -4
+		y = 1
+		cost = 6.5
+		available = { always = no }
+		relative_position_id = MDR_contact_hansa
+		completion_reward = {
+			MDR_bop_decrease_10 = yes
+			add_stability = 0.1
+			add_political_power = 75
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_oligarch_1
+		icon = GFX_generic_equipment_gasmask_6
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_oligarch }
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			every_unit_leader = {
+				add_skill_level = 2
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_oligarch_1a
+		icon = GFX_generic_spec_ops_3
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_oligarch_1 }
+		relative_position_id = MDR_politics_oligarch_1
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = rallied_men_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_oligarch_2
+		icon = GFX_generic_soviet
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_oligarch }
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 25
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_oligarch_3
+		icon = GFX_HNZ_generic_bullet_focus
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_politics_oligarch }
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			354 = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_10
+		icon = GFX_generic_medium_arms_2
+		x = 1
+		y = 3
+		cost = 6.5
+		prerequisite = { 
+			focus = MDR_politics_oligarch_3 
+			focus = MDR_politics_community_3 
+			focus = MDR_politics_community_4
+		}
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1.5
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_truth_nothing_else
+		icon = GFX_radio
+		x = 3
+		y = 3
+		cost = 6.5
+		prerequisite = { 
+			focus = MDR_politics_oligarch_3 
+			focus = MDR_politics_community_3 
+			focus = MDR_politics_community_4
+			focus = MDR_politics_council_3
+		}
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			if = {
+				limit = { has_idea = MDR_isolation }
+				remove_ideas = MDR_isolation
+			}
+			else_if = {
+				limit = { has_idea = MDR_isolation_2 }
+				remove_ideas = MDR_isolation_2
+			}
+			country_event = { id = nf_MDR.29 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_politics_12
+		icon = GFX_RED_specops
+		x = 5
+		y = 3
+		cost = 6.5
+		prerequisite = { 
+			focus = MDR_politics_oligarch_3 
+			focus = MDR_politics_community_3 
+			focus = MDR_politics_community_4
+			focus = MDR_politics_council_3
+		}
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			add_ideas = MDR_OMON_overhauls
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_make_contact_with_polis
+		icon = GFX_generic_support_polis
+		x = 7
+		y = 3
+		cost = 6.5
+		available = { PLS = { exists = yes } NOT = { has_war_with = PLS }}
+		prerequisite = { 
+			focus = MDR_politics_community_3 
+			focus = MDR_politics_community_4
+			focus = MDR_politics_council_3
+		}
+		relative_position_id = MDR_politics_oligarch
+		completion_reward = {
+			country_event = { id = nf_MDR.31 }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+}

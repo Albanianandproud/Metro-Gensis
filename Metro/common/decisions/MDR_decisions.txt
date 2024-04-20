@@ -1,0 +1,90 @@
+MDR_disease_prevention_category = {
+	MDR_disease_countdown_to_infection_outbreak = {
+		icon = GFX
+		is_good = yes
+		priority = 1001
+
+		activation  = {
+			has_country_flag = MDR_infection_plague
+		}
+
+		available = {
+			has_country_flag = MDR_infection_plague
+		}
+		selectable_mission = no
+		fire_only_once = no
+
+		cancel_trigger = {
+			OR = {
+				has_tech = tech_hygiene_sterilised_supplies
+				NOT = { has_idea = MDR_get_down_with_the_sickness }
+			}
+		}
+		days_mission_timeout = 100
+
+		timeout_effect = {
+			country_event = { id = nf_MDR.21 }
+			random_list = {
+				30 = { country_event = { id = nf_MDR.21 } }
+				40 = { country_event = { id = nf_MDR.22 } }
+				30 = { country_event = { id = nf_MDR.23 } }
+			}
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+	MDR_disease_hygiene = {
+		icon = generic_research
+
+		available = { has_tech = tech_hygiene_basic_hygiene }
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+		}
+
+		complete_effect = {
+			add_tech_bonus = {
+                bonus = 1
+                ahead_reduction = 1.0
+                uses = 1
+                category = health
+            }
+		}
+
+		days_remove = 50
+		days_re_enable = 0
+
+		cost = 50
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+	MDR_disease_restrict_travel = {
+		icon = generic_research
+
+		available = {}
+
+		available = { has_tech = tech_hygiene_basic_hygiene }
+
+		fire_only_once = no
+
+		modifier = {
+			industrial_capacity_factory = -0.1
+			consumer_goods_factor = 0.1
+			stability_weekly = 0.005
+		}
+
+		days_remove = 50
+		days_re_enable = 0
+
+		cost = 40
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+}

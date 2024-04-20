@@ -1,0 +1,789 @@
+add_namespace = nf_MDR
+
+country_event = {
+    id = nf_MDR.1
+    title = nf_MDR.1.t
+    desc = nf_MDR.1.d
+    picture = "GFX_event (182)"
+
+	trigger = {
+		date > 2028.2.25
+		tag = MDR
+	}
+	fire_only_once = yes
+
+	option = { 
+		name = nf_MDR.1.a
+		swap_ideas = {
+			remove_idea = MDR_isolation
+			add_idea = MDR_isolation_2
+		}
+		add_political_power = 45
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {	## Colonization of Izmailovskaya
+    id = nf_MDR.2
+    title = nf_MDR.2.t
+    desc = nf_MDR.2.d
+    picture = "GFX_event (75)"
+
+	trigger = {
+		283 = { 
+			is_owned_by = MDR 
+			NOT = { has_state_flag = MDR_izmailovskaya_colonized }
+		}
+		tag = MDR
+	}
+	fire_only_once = yes
+
+	immediate = {
+		283 = { set_state_flag = MDR_izmailovskaya_colonized }
+	} 
+
+	option = {
+		name = nf_MDR.2.a
+		hidden_effect = { 
+			MDR = { country_event = {  id = nf_MDR.18 days = 25 random_days = 25 } } 
+			MDR = { country_event = {  id = nf_MDR.4 days = 45 random_days = 45 }}
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = {	## Colonization of Partizanskaya
+    id = nf_MDR.3
+    title = nf_MDR.3.t
+    desc = nf_MDR.3.d
+    picture = "GFX_event (181)"
+
+	trigger = {
+		291 = { 
+			is_owned_by = MDR 
+			NOT = { has_state_flag = MDR_partizanskaya_colonized }
+		}
+		tag = MDR
+	}
+	fire_only_once = yes
+
+	immediate = {
+		291 = { set_state_flag = MDR_partizanskaya_colonized }
+	} 
+
+	option = {
+		name = nf_MDR.3.a
+		## Lead to 'Hunter' Event
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Mutant Encroachment at Izmailovskaya
+    id = nf_MDR.4
+    title = nf_MDR.4.t
+    desc = nf_MDR.4.d
+    picture = "GFX_event (167)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.4.a
+		set_country_flag = MDR_mutant_attacks
+		add_stability = -0.05
+		add_war_support = 05
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Contact with BAU
+    id = nf_MDR.5
+    title = nf_MDR.5.t
+    desc = nf_MDR.5.d
+    picture = "GFX_event (182)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.5.a
+		add_tech_bonus = {
+			bonus = 0.25
+			ahead_reduction = 1.0
+			uses = 1
+			category = industry
+		}
+		ai_chance = { base = 15 }
+	}
+
+	option = {	## Threat to mother russia / war declaration
+		name = nf_MDR.5.b
+		add_stability = -0.3
+		create_wargoal = {
+			type = take_state_focus
+			target = BAU
+			generator = { 368 }
+		}
+		ai_chance = { base = 0.5 }
+	}
+}
+
+country_event = { ## Surface Raids
+    id = nf_MDR.6
+    title = nf_MDR.6.t
+    desc = nf_MDR.6.d
+    picture = "GFX_event (177)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.6.a
+		add_research_slot = 1
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.6.b
+		set_technology = { shotgun_infantry_equipment_tech_4 = 1 }
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Depot Cracking
+    id = nf_MDR.7
+    title = nf_MDR.7.t
+    desc = nf_MDR.7.d
+    picture = "GFX_event (176)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.7.a
+		add_research_slot = 1
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.7.b
+		set_technology = { tech_hygiene_radiation_resistance = 1 }
+		add_tech_bonus = {
+			bonus = 2
+			ahead_reduction = 2
+			uses = 2
+			category = health
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Hinterlands Raids
+    id = nf_MDR.8
+    title = nf_MDR.8.t
+    desc = nf_MDR.8.d
+    picture = "GFX_event (182)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.8.a
+		add_stability = 0.05
+		add_political_power = 50
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.8.b
+		add_war_support = 0.05
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 10
+			producer = RUS
+		}
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.8.c
+		army_experience = 5
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.1
+			uses = 1
+			category = land_doctrine
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## civil_war_event
+    id = nf_MDR.10
+    title = nf_MDR.10.t
+    desc = nf_MDR.10.d
+    picture = "GFX_event (105)"
+
+	trigger = {
+		has_idea = MDR_isolation_2
+		AND = {
+			OR = {
+				has_war_with_major = yes
+				has_stability < 0.2
+			}
+			OR = {
+				power_balance_value = {
+					id = MDR_power_balance
+					value > 0.2
+				}
+				power_balance_value = {
+					id = MDR_power_balance
+					value > -0.2
+				}
+			}
+		}
+	}
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			MDR_launch_civil_war_event = yes
+		}
+	}
+
+	option = {
+		name = nf_MDR.10.a
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Question of Conscription
+    id = nf_MDR.11
+    title = nf_MDR.11.t
+    desc = nf_MDR.11.d
+    picture = "GFX_event (7)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.11.a
+		add_ideas = MDR_conscription_question_A 
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.11.b
+		add_ideas = MDR_conscription_question_B
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.11.c
+		add_ideas = MDR_conscription_question_C
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Question of surplus
+    id = nf_MDR.12
+    title = nf_MDR.12.t
+    desc = nf_MDR.12.d
+    picture = "GFX_event (5)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.12.a
+		add_ideas = MDR_surplus_question_A 
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.12.b
+		add_ideas = MDR_surplus_question_B
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.12.c
+		add_ideas = MDR_surplus_question_C
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Question of Rotation
+    id = nf_MDR.13
+    title = nf_MDR.13.t
+    desc = nf_MDR.13.d
+    picture = "GFX_event (133)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.13.a
+		add_ideas = MDR_rotation_question_A 
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.13.b
+		add_ideas = MDR_rotation_question_B
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.13.c
+		add_ideas = MDR_rotation_question_C
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Question of Pay
+    id = nf_MDR.14
+    title = nf_MDR.14.t
+    desc = nf_MDR.14.d
+    picture = "GFX_event (106)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.14.a
+		add_ideas = MDR_payment_question_A 
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.14.b
+		add_ideas = MDR_payment_question_B
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = nf_MDR.14.c
+		add_ideas = MDR_payment_question_C
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Question of Servitude
+    id = nf_MDR.15
+    title = nf_MDR.15.t
+    desc = nf_MDR.15.d
+    picture = "GFX_event (82)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		## do civil war shit
+		name = nf_MDR.15.a
+		add_ideas = MDR_serve_state
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		## do civil war shit
+		name = nf_MDR.15.b
+		add_ideas = MDR_serve_ideals
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		## do civil war shit
+		name = nf_MDR.15.c
+		add_ideas = MDR_serve_people
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Ignorance is Bliss
+    id = nf_MDR.16
+    title = nf_MDR.16.t
+    desc = nf_MDR.16.d
+    picture = "GFX_event (55)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.16.a
+		ai_chance = { base = 15 }
+		custom_effect_tooltip = nf_MDR_16.a.tt
+		hidden_effect = { 
+			MDR = { country_event = {  id = nf_MDR.17 days = 7 random_days = 7  } } 
+		}
+	}
+}
+
+country_event = { ## Factionalism
+    id = nf_MDR.17
+    title = nf_MDR.17.t
+    desc = nf_MDR.17.d
+    picture = "GFX_event (21)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.17.a
+		ai_chance = { base = 15 }
+		custom_effect_tooltip = nf_MDR_17.a.tt
+	}
+}
+
+### Disease Outbreak
+
+country_event = { ## Hauled Supplies - Beginning
+    id = nf_MDR.18
+    title = nf_MDR.18.t
+    desc = nf_MDR.18.d
+    picture = "GFX_event (19)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.18.a
+		## add timed idea which gives negative CG
+		add_timed_idea = { idea = MDR_food_haulage days = 90 }
+		hidden_effect = { 
+			MDR = { country_event = {  id = nf_MDR.19 days = 35 random_days = 35 } } 
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## People begin to become sick
+    id = nf_MDR.19
+    title = nf_MDR.19.t
+    desc = nf_MDR.19.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.19.a
+		## negative stab
+		add_stability = -0.05
+		hidden_effect = { 
+			MDR = { country_event = {  id = nf_MDR.20 days = 7 random_days = 7 } } 
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Decisions to mitigate disease
+    id = nf_MDR.20
+    title = nf_MDR.20.t
+    desc = nf_MDR.20.d
+    picture = "GFX_event (6)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.20.a
+		add_ideas = MDR_get_down_with_the_sickness
+		## Begin event chain
+		set_country_flag = MDR_infection_plague
+		#activate_mission = MDR_disease_countdown_to_infection_outbreak
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Death intensity 1
+    id = nf_MDR.21
+    title = nf_MDR.21.t
+    desc = nf_MDR.21.d
+    picture = "GFX_event (6)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.21.a
+		random_owned_controlled_state = {
+			limit = { state_population  > 10 }
+			add_manpower = -10
+		}
+		add_stability = -0.05
+		#activate_mission = MDR_disease_countdown_to_infection_outbreak
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Death intensity 2
+    id = nf_MDR.22
+    title = nf_MDR.22.t
+    desc = nf_MDR.22.d
+    picture = "GFX_event (6)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.22.a
+		random_owned_controlled_state = {
+			limit = { state_population  > 30 }
+			add_manpower = -20
+		}
+		add_stability = -0.1
+		#activate_mission = MDR_disease_countdown_to_infection_outbreak
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Death intensity 3
+    id = nf_MDR.23
+    title = nf_MDR.23.t
+    desc = nf_MDR.23.d
+    picture = "GFX_event (6)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.23.a
+		random_owned_controlled_state = {
+			limit = { state_population > 50 }
+			add_manpower = -40
+		}
+		add_stability = -0.15
+		#activate_mission = MDR_disease_countdown_to_infection_outbreak
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Disease Fanned / Medicated Populace
+    id = nf_MDR.24
+    title = nf_MDR.24.t
+    desc = nf_MDR.24.d
+    picture = "GFX_event (6)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.24.a
+		add_stability = 0.1
+		set_country_flag = MDR_disease_gone_tt
+		clr_country_flag = MDR_infection_plague
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## Lingers on the Surface
+    id = nf_MDR.25
+    title = nf_MDR.25.t
+    desc = nf_MDR.25.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.25.a
+		every_unit_leader = {
+			add_defense = 1
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+country_event = { ## KAL
+    id = nf_MDR.26
+    title = nf_MDR.26.t
+    desc = nf_MDR.26.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.26.a
+		add_opinion_modifier = { target = KAL modifier = MDR_assured_destruction }
+		KAL = { add_opinion_modifier = { target = ROOT modifier = MDR_assured_destruction } }
+		add_ideas = MDR_KAL_determined_extermination
+	}
+
+	option = {
+		name = nf_MDR.26.b
+		354 = { 
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_opinion_modifier = { target = KAL modifier = MDR_assistance  }
+		KAL = { add_opinion_modifier = { target = ROOT modifier = MDR_assistance  } }
+	}
+}
+
+country_event = { ## RED
+    id = nf_MDR.27
+    title = nf_MDR.27.t
+    desc = nf_MDR.27.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.27.a
+		add_opinion_modifier = { target = RED modifier = MDR_assured_destruction }
+		RED = { add_opinion_modifier = { target = ROOT modifier = MDR_assured_destruction } }
+		add_ideas = MDR_RED_determined_extermination
+	}
+
+	option = {
+		name = nf_MDR.27.b
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 15
+			producer = RUS
+		}
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 1
+			category = infantry_weapons
+		}
+		add_opinion_modifier = { target = RED modifier = MDR_assistance  }
+		RED = { add_opinion_modifier = { target = ROOT modifier = MDR_assistance  } }
+	}
+}
+
+country_event = { ## HNZ
+    id = nf_MDR.28
+    title = nf_MDR.28.t
+    desc = nf_MDR.28.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.28.a
+		add_opinion_modifier = { target = HNZ modifier = MDR_assured_destruction }
+		HNZ = { add_opinion_modifier = { target = ROOT modifier = MDR_assured_destruction } }
+		add_ideas = MDR_HNZ_determined_extermination
+	}
+
+	option = {
+		name = nf_MDR.28.b
+		354 = { 
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_opinion_modifier = { target = HNZ modifier = MDR_assistance  }
+		HNZ = { add_opinion_modifier = { target = ROOT modifier = MDR_assistance  } }
+	}
+}
+
+country_event = { ## World?
+    id = nf_MDR.29
+    title = nf_MDR.29.t
+    desc = nf_MDR.29.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.29.a
+		add_political_power = 200
+		add_ideas = MDR_moscow_unity
+	}
+
+	option = {
+		name = nf_MDR.29.b
+		add_ideas = MDR_us_against_the_world
+		add_war_support = 0.1
+	}
+}
+
+country_event = { ## Cherkizon
+    id = nf_MDR.30
+    title = nf_MDR.30.t
+    desc = nf_MDR.30.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.30.a
+		add_opinion_modifier = { target = CKZ modifier = MDR_affront }
+		CKZ = { add_opinion_modifier = { target = ROOT modifier = MDR_affront } }
+	}
+
+	option = {
+		name = nf_MDR.30.b
+		add_opinion_modifier = { target = CKZ modifier = MDR_peace }
+		CKZ = { add_opinion_modifier = { target = ROOT modifier = MDR_peace } }
+	}
+}
+
+country_event = { ## PLS
+    id = nf_MDR.31
+    title = nf_MDR.31.t
+    desc = nf_MDR.31.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.31.a
+		add_opinion_modifier = { target = PLS modifier = MDR_assured_destruction }
+		PLS = { add_opinion_modifier = { target = ROOT modifier = MDR_assured_destruction } }
+		add_ideas = MDR_PLS_determined_extermination
+		328 = { add_claim_by = ROOT }
+	}
+
+	option = {
+		name = nf_MDR.31.b
+		add_opinion_modifier = { target = PLS modifier = MDR_assistance  }
+		PLS = { add_opinion_modifier = { target = ROOT modifier = MDR_assistance  } }
+		capital_scope = { 
+			add_resource = {
+				type = chemicals
+				amount = 8
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment_spetnaz
+			amount = 20
+			producer = RUS
+		}
+	}
+}
+
+country_event = { ## Ignorance is Bliss
+    id = nf_MDR.32
+    title = nf_MDR.32.t
+    desc = nf_MDR.32.d
+    picture = "GFX_event (55)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_MDR.32.a
+		add_stability = -0.05
+		add_political_power = -25
+		hidden_effect = {
+			set_country_flag = MDR_cherkizon_introduction
+			MDR_anton_knyazev = {
+				set_character_flag = MDR_kidnapped
+			}
+		}
+		ai_chance = { base = 15 }
+	}
+}
