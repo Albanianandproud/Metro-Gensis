@@ -1,7 +1,6 @@
 MDR_disease_prevention_category = {
 	MDR_disease_countdown_to_infection_outbreak = {
 		icon = GFX
-		is_good = yes
 		priority = 1001
 
 		activation  = {
@@ -9,9 +8,14 @@ MDR_disease_prevention_category = {
 		}
 
 		available = {
-			has_country_flag = MDR_infection_plague
+			has_tech = tech_hygiene_sterilised_supplies
+			NOT = {
+				has_country_flag = MDR_infection_plague
+				has_idea = MDR_get_down_with_the_sickness
+			}
 		}
 		selectable_mission = no
+		is_good = yes
 		fire_only_once = no
 
 		cancel_trigger = {
@@ -20,14 +24,17 @@ MDR_disease_prevention_category = {
 				NOT = { has_idea = MDR_get_down_with_the_sickness }
 			}
 		}
-		days_mission_timeout = 100
+		#timeout_effect = {
+		#	country_event = { id = nf_MDR.24 }
+		#}
+		days_mission_timeout = 10
 
 		timeout_effect = {
-			country_event = { id = nf_MDR.21 }
 			random_list = {
 				30 = { country_event = { id = nf_MDR.21 } }
-				40 = { country_event = { id = nf_MDR.22 } }
-				30 = { country_event = { id = nf_MDR.23 } }
+				30 = { country_event = { id = nf_MDR.22 } }
+				20 = { country_event = { id = nf_MDR.23 } }
+				20 = { country_event = { id = nf_MDR.24 } }
 			}
 		}
 		ai_will_do = {
