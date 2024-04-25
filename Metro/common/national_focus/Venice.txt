@@ -637,6 +637,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			TRT_upgrade_city_on_stilts_idea = yes
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -718,6 +726,36 @@ focus_tree = {
 	}
 
 	focus = {
+		id = TRT_something_of_note
+		icon = GFX_generic_machining
+		x = -3
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_4
+		prerequisite = { 
+			focus = TRT_focus_4
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_2
+				amount = 15
+				producer = RUS
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	focus = {
 		id = TRT_shooting_range
 		icon = GFX_HNZ_shooting_range_military
 		x = -2
@@ -731,7 +769,7 @@ focus_tree = {
 			factor = 5
 		}
 		completion_reward = {
-			army_experience = 30
+			army_experience = 35
 			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 			}
@@ -756,7 +794,6 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_ideas = TRT_live_game_idea
-			## BOP Bandit Decision
 		}
 	}
 
@@ -776,8 +813,9 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.8
+				bonus = 0.75
 				uses = 2
+				ahead_reduction = 1
 				category = industry
 			}
 			capital_scope = {
@@ -790,6 +828,41 @@ focus_tree = {
 					amount = 3
 				}
 			}
+		}
+	}
+
+	focus = {
+		id = TRT_with_friends_like_these
+		icon = GFX_generic_bandit_friends_2
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_arms_in_the_arms_industry
+		prerequisite = { 
+			focus = TRT_arms_in_the_arms_industry
+		}
+		completion_reward = {
+			every_country = {
+				limit = { has_country_flag = is_bandit_nation }
+				capital_scope = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				TRT = {
+					add_equipment_to_stockpile = {
+						type = conventional_infantry_equipment_3
+						amount = 20
+						producer = RUS
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 15
 		}
 	}
 
@@ -817,7 +890,6 @@ focus_tree = {
 					modifier = anti_revolutionary_hiding
 				}
 			}
-			## BOP Vigil Decision
 		}
 	}
 
@@ -1050,9 +1122,7 @@ focus_tree = {
 			TRT_bop_decrease_10 = yes
 			every_neighbor_country = { 
     			limit = {
-        			NOT = {
-						original_tag = RUI
-					}
+        			NOT = { original_tag = RUI }
     			}
 				add_opinion_modifier = {
 					target = TRT
@@ -1203,6 +1273,41 @@ focus_tree = {
 	}
 
 	focus = {
+		id = TRT_kicking_the_brodyaga_into_gear
+		icon = GFX_generic_bandit_friends_1
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_focus_3
+		prerequisite = { focus = TRT_focus_3 }
+		completion_reward = {
+			division_template = {
+				name = "Brodyaga"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Brodyaga\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Brodyaga\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	focus = {
 		id = TRT_gambling_dens
 		icon = GFX_TRT_degeneracy_3
 		x = 0
@@ -1217,10 +1322,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			capital_scope = {
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -1357,6 +1462,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = 0.15
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -1443,11 +1556,11 @@ focus_tree = {
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
-		ai_will_do = {
-			factor = 5
-		}
 		completion_reward = {
 			country_event = nf_TRT.14
+		}
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -1464,11 +1577,11 @@ focus_tree = {
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
-		ai_will_do = {
-			factor = 5
-		}
 		completion_reward = {
 			country_event = nf_TRT.13
+		}
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -1491,12 +1604,12 @@ focus_tree = {
 			focus = TRT_big_problems_in_little_china
 			focus = TRT_check_in_with_the_inlaws
 		}
-		ai_will_do = {
-			factor = 100
-		}
 		completion_reward = {
 			add_political_power = 60
 			add_command_power = 20
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 
