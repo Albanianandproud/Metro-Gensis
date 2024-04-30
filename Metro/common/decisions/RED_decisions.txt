@@ -1,98 +1,120 @@
 @department_increase_cost = 100
 
 RED_ministry_departments = {
-	
-	RED_ministry_economics_upgrade = {
 
+	RED_ministry_upgrade = {
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_economics
-			AND = {
-				hidden_trigger = {
-					NOT = { has_idea_with_trait = RED_stepan_markelov_4 }
-				}
-			}
-		}
-		visible = { 
-			has_idea = RED_minister_of_economics
-			NOT = { 
-				has_idea_with_trait = RED_stepan_markelov_4 
-			} 
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
 		}
 
-		cost = 50
-		days_remove = 75
+		visible = {
+			check_variable = { RED_ministry_education_cost > 70 }
+		}
+
+		cost = RED_ministry_education_upgrade_departmentr_cost
+		days_remove = 1
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_economics_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_overhaul_scripted_effect = yes
+			custom_effect_tooltip = RED_ministry_overhaul_tooltip
+			clr_country_flag = RED_ministry_overhaul_underway
 		}
 
-		ai_will_do = {
-			base = 10
+		ai_will_do = { base = 10 }
+	}
+	
+	RED_ministry_economics_upgrade = {
+		icon = ministries
+
+		available = {
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_economics
+			}
+			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_stepan_markelov_4 } } }
 		}
+		visible = { 
+			is_debug = yes
+			has_idea = RED_minister_of_economics
+			NOT = { has_idea_with_trait = RED_stepan_markelov_4 } 
+		}
+
+		cost = RED_ministry_education_cost
+		days_remove = RED_ministry_education_timer
+		days_re_enable = 0
+
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_economics_upgrade_trait = yes 
+			clr_country_flag = RED_ministry_overhaul_underway
+		}
+
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_reclaimation_upgrade = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_reclaimation
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
+			}
 			AND = {
 				hidden_trigger = {
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_construction 
-					}
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_resource
-					} 
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 				}
 			}
 		}
 		visible = { 
+			is_debug = yes
 			has_idea = RED_minister_of_reclaimation
-			NOT = { 
-				has_idea_with_trait = RED_fyodor_akimov_3_construction 
-			}
-			NOT = { 
-				has_idea_with_trait = RED_fyodor_akimov_3_resource
-			} 
+			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
+			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_reclaimation_cost
+		days_remove = RED_ministry_reclaimation_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_reclaimation_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_reclaimation_upgrade_trait = yes
+			clr_country_flag = RED_ministry_overhaul_underway
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_reclaimation_construction = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_reclaimation
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
+			}
 			AND = {
 				has_completed_focus = RED_central_planning
 				hidden_trigger = {
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_construction 
-					}
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_resource
-					} 
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 				}
 			}
 		}
 		visible = { 
+			is_debug = yes
 			has_completed_focus = RED_central_planning
 			NOT = { 
 				has_idea_with_trait = RED_fyodor_akimov_3_construction 
@@ -102,186 +124,180 @@ RED_ministry_departments = {
 			} 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_reclaimation_cost
+		days_remove = RED_ministry_reclaimation_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_reclaimation_upgrade_trait_construction = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_reclaimation_upgrade_trait_construction = yes
+			clr_country_flag = RED_ministry_overhaul_underway 
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_reclaimation_resource = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_reclaimation
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
+			}
 			AND = {
 				has_completed_focus = RED_central_planning
 				hidden_trigger = {
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_construction 
-					}
-					NOT = { 
-						has_idea_with_trait = RED_fyodor_akimov_3_resource
-					} 
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
+					NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 				}
 			}
 		}
 		visible = { 
+			is_debug = yes
 			has_idea = RED_minister_of_reclaimation
-			NOT = { 
-				has_idea_with_trait = RED_fyodor_akimov_3_construction 
-			}
-			NOT = { 
-				has_idea_with_trait = RED_fyodor_akimov_3_resource
-			} 
+			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
+			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_reclaimation_cost
+		days_remove = RED_ministry_reclaimation_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_reclaimation_upgrade_trait_resource = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_reclaimation_upgrade_trait_resource = yes
+			clr_country_flag = RED_ministry_overhaul_underway 
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_domestics_upgrade = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_domestics
-			AND = {
-				hidden_trigger = {
-					NOT = { has_idea_with_trait = RED_arkady_antonov_3 }
-				}
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
 			}
+			has_idea = RED_minister_of_domestics
+			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_arkady_antonov_3 } } }
 		}
 		visible = { 
 			has_idea = RED_minister_of_domestics
-			NOT = { 
-				has_idea_with_trait = RED_arkady_antonov_3 
-			} 
+			NOT = { has_idea_with_trait = RED_arkady_antonov_3 } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_domestics_cost
+		days_remove = RED_ministry_domestics_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_domestics_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_domestics_upgrade_trait = yes 
+			clr_country_flag = RED_ministry_overhaul_underway
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_labour_upgrade = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_labour
-			AND = {
-				hidden_trigger = {
-					NOT = { has_idea_with_trait = RED_yevgeny_nikiforov_3 }
-				}
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_labour
 			}
+			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_yevgeny_nikiforov_3 } } }
 		}
 		visible = { 
+			is_debug = yes
 			has_idea = RED_minister_of_labour
-			NOT = { 
-				has_idea_with_trait = RED_yevgeny_nikiforov_3 
-			} 
+			NOT = { has_idea_with_trait = RED_yevgeny_nikiforov_3 } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_labour_cost
+		days_remove = RED_ministry_labour_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_labour_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_labour_upgrade_trait = yes 
+			clr_country_flag = RED_ministry_overhaul_underway
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_foreign_affairs_upgrade = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_foreign_affairs
-			AND = {
-				hidden_trigger = {
-					NOT = { has_idea_with_trait = RED_milan_melikhov_3 }
-				}
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_foreign_affairs
 			}
+			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_milan_melikhov_3 } } }
 		}
 		visible = { 
+			is_debug = yes
 			has_idea = RED_minister_of_foreign_affairs
-			NOT = { 
-				has_idea_with_trait = RED_milan_melikhov_3 
-			} 
+			NOT = { has_idea_with_trait = RED_milan_melikhov_3 } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_foreign_affairs_cost
+		days_remove = RED_ministry_foreign_affairs_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_foreign_affairs_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_foreign_affairs_upgrade_trait = yes
+			clr_country_flag = RED_ministry_overhaul_underway 
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 
 	RED_ministry_defense_upgrade = {
-
 		icon = ministries
 
 		available = {
-			has_idea = RED_minister_of_defense
-			AND = {
-				hidden_trigger = {
-					NOT = { has_idea_with_trait = RED_vasily_petrov_3 }
-				}
+			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_defense
 			}
+			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_vasily_petrov_3 } } }
 		}
 		visible = { 
+			is_debug = yes
 			has_idea = RED_minister_of_defense
-			NOT = { 
-				has_idea_with_trait = RED_vasily_petrov_3 
-			} 
+			NOT = { has_idea_with_trait = RED_vasily_petrov_3 } 
 		}
 
-		cost = 50
-		days_remove = 75
+		cost = RED_ministry_defense_cost
+		days_remove = RED_ministry_defense_timer
 		days_re_enable = 0
 
-        remove_effect = {
-        	RED_ministry_defense_upgrade_trait = yes
+		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
+
+        remove_effect = { 
+			RED_ministry_defense_upgrade_trait = yes 
+			clr_country_flag = RED_ministry_overhaul_underway
 		}
 
-		ai_will_do = {
-			base = 10
-		}
+		ai_will_do = { base = 10 }
 	}
 }
 
@@ -289,9 +305,7 @@ RED_crisis_category = {
 
 	RED_mushroom_revolt_mission_countdown = {
 
-		activation = {
-			always = no
-		}
+		activation = { always = no }
 		available = {
 			hidden_trigger = { always = no }
 		}

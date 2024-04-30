@@ -128,7 +128,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_assume_kulak_property
 		}
-		x = 0
+		x = 1
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_assume_kulak_property
@@ -265,7 +265,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_young_officer_academy
 		}
-		x = 0
+		x = -1
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_young_officer_academy
@@ -297,19 +297,61 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RED_new_economic_draft
-		icon = GFX_RED_new_economic_draft
-		prerequisite = {
-			focus = RED_question_of_brotherhood
-		}
+		id = RED_move_the_capital
+		icon = GFX_RED_megaphone_politburo
 		prerequisite = {
 			focus = RED_question_of_prodrazvyorstka
+			focus = RED_question_of_brotherhood
 		}
+		x = 1
+		y = 1
+		cost = 2.2
+		relative_position_id = RED_question_of_prodrazvyorstka
+		completion_reward = {	
+			add_victory_points = { province = 2200 value = 5 }
+			set_capital = { state = 241 }
+			241 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RED_new_economic_draft
+		icon = GFX_RED_new_economic_draft
 		prerequisite = {
 			focus = RED_unionise_inefficient_sectors
 		}
 		prerequisite = {
 			focus = RED_new_officer_corps
+		}
+		prerequisite = {
+			focus = RED_move_the_capital
 		}
 		cancel = {
 			hidden_trigger = {
@@ -4098,7 +4140,7 @@ focus_tree = {
         	custom_effect_tooltip = RED_minister_of_foreign_affairs_departments_tt
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 10
 		}
 	}
 
@@ -4114,6 +4156,7 @@ focus_tree = {
 		relative_position_id = RED_cemented_authority
 		completion_reward = {
 			add_political_power = 35
+			## Add decision to remove 'communist_scum' modifier from opinionated nations
 		}
 		ai_will_do = {
 			factor = 2
@@ -4498,6 +4541,10 @@ focus_tree = {
 		available = {
 			ROOT = { is_neighbor_of = KTG }
 			KTG = { exists = yes is_puppet = no }
+			OR = {
+				KTG = { has_added_tension_amount > 5 }
+				date > 2033.1.1
+			}
 		}
 		x = 2
 		y = 0
@@ -5699,13 +5746,14 @@ focus_tree = {
 		available = {
 			OR = {
 				date > 2034.1.1
+				threat > 85
 				HNZ = {
 					has_added_tension_amount > 15
 				}
 				106 = { is_owned_by = HNZ }
 			}
 		}
-		x = 6
+		x = 7
 		y = 1
 		cost = 6.5
 		relative_position_id = RED_cemented_authority

@@ -1,3 +1,4 @@
+#!gfx:interface\metro_goals.gfx
 focus_tree = {
 	id = nf_bauman_alliance
 	
@@ -16,4 +17,318 @@ focus_tree = {
 	shared_focus = satellite_defend_the_bulwark
 	shared_focus = satellite_economy
 	shared_focus = satellite_our_path
+
+	focus = {
+		id = BAU_technocratic_council
+		icon = GFX_HNZ_generic_tunnel_focus
+		cost = 6.5
+		x = 22
+		y = 0
+		completion_reward = {
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_2
+		icon = GFX_toolbox
+		prerequisite = { focus = BAU_technocratic_council }
+		cost = 6.5
+		relative_position_id = BAU_technocratic_council
+		x = 1
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 4
+				}
+			}
+			add_tech_bonus = {
+                bonus = 1
+                uses = 1
+				ahead_reduction = 1
+                category = tooling
+            }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_3
+		icon = GFX_generic_construction_2
+		prerequisite = { focus = BAU_technocratic_council }
+		cost = 6.5
+		relative_position_id = BAU_technocratic_council
+		x = -1
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+			}
+			add_tech_bonus = {
+                bonus = 1
+                uses = 1
+				ahead_reduction = 1
+                category = construction
+            }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_4
+		icon = GFX_generic_computer
+		prerequisite = { focus = BAU_2 }
+		cost = 6.5
+		relative_position_id = BAU_2
+		x = 0
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = electronics
+					amount = 4
+				}
+			}
+			add_tech_bonus = {
+                bonus = 1
+                uses = 1
+				ahead_reduction = 1
+                category = punch_pressing
+            }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_5
+		icon = GFX_generic_ammunition_box
+		prerequisite = { focus = BAU_3 }
+		cost = 6.5
+		relative_position_id = BAU_3
+		x = 0
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 4
+				}
+			}
+			add_tech_bonus = {
+                bonus = 1
+                uses = 1
+				ahead_reduction = 1
+                category = casting
+            }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_6
+		icon = GFX_workstation_4
+		mutually_exclusive = { focus = BAU_7 }
+		prerequisite = { focus = BAU_4 }
+		cost = 6.5
+		relative_position_id = BAU_4
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                category = industry
+            }
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_7
+		icon = GFX_workstation_3
+		mutually_exclusive = { focus = BAU_6 }
+		prerequisite = { focus = BAU_5 }
+		cost = 6.5
+		relative_position_id = BAU_5
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 2
+				uses = 1
+				category = infantry_weapons
+			}
+			capital_scope = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_contact_emerald_city
+		icon = GFX_RED_surface_waypoints
+		prerequisite = { focus = BAU_6 focus = BAU_7 }
+		available = { MSU = { exists = yes } }
+		cost = 10
+		relative_position_id = BAU_technocratic_council
+		x = 0
+		y = 4
+		completion_reward = {
+			country_event = { id = nf_BAU.1 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = BAU_secretive_sect
+		icon = GFX_SAT_kidnap_technicians
+		prerequisite = { focus = BAU_2 }
+		cost = 6.5
+		relative_position_id = BAU_2
+		x = 2
+		y = 1
+		completion_reward = {
+			set_technology = { tech_precision_tools = 1}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_equal_of_minds
+		icon = GFX_MDR_superior_tactics
+		available = { MDR = { exists = yes } is_neighbor_of = MDR }
+		bypass = {
+			OR = {
+				NOT = { country_exists = MDR }
+				has_war_with = MDR
+			}
+		}
+		mutually_exclusive = { focus = BAU_rid_the_northern_menace }
+		prerequisite = { focus = BAU_3 }
+		cost = 6.5
+		relative_position_id = BAU_3
+		x = -2
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				ahead_reduction = 1.0
+				uses = 1
+				category = entrench_kits
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 10
+				producer = RUS
+			}
+			add_ideas = BAU_MDR_friendship_pact
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_rid_the_northern_menace
+		icon = GFX_generic_subversion
+		available = { MDR = { exists = yes } is_neighbor_of = MDR }
+		bypass = {
+			OR = {
+				NOT = { country_exists = MDR }
+				has_war_with = MDR
+			}
+		}
+		mutually_exclusive = { focus = BAU_equal_of_minds }
+		prerequisite = { focus = BAU_3 }
+		cost = 6.5
+		relative_position_id = BAU_3
+		x = -4
+		y = 1
+		will_lead_to_war_with = MDR
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = MDR
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BAU_standing_guard
+		icon = GFX_ARB_2
+		cost = 6.5
+		prerequisite = { focus = BAU_technocratic_council }
+		relative_position_id = BAU_technocratic_council
+		x = -3
+		y = 1
+		completion_reward = {
+			division_template = {
+				name = "Auxillary Force"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+				}
+			}
+			capital_scope = {
+				army_experience = 10
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Auxillary Force\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Auxillary Force\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
 }

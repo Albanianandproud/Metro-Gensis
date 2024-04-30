@@ -1,0 +1,84 @@
+add_namespace = nf_BRK
+
+country_event = { ## Kurchatov Institute
+    id = nf_BRK.1
+    title = nf_BRK.1.t
+    desc = nf_BRK.1.d
+    picture = "GFX_event (8)"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = nf_BRK.1.a
+        add_ideas = BRK_kurchatov_institute_assistance
+        custom_effect_tooltip = nf_BRK.1.tt
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+
+country_event = { ## Aviators
+    id = nf_BRK.2
+    title = nf_BRK.2.t
+    desc = nf_BRK.2.d
+    picture = "GFX_event (8)"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = nf_BRK.2.a
+        add_ideas = BRK_aviator_assistance
+        custom_effect_tooltip = nf_BRK.1.tt
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+
+country_event = { ## Incident with HUL
+    id = nf_BRK.3
+    title = nf_BRK.3.t
+    desc = nf_BRK.3.d
+    picture = "GFX_event (8)"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = nf_BRK.3.a
+        add_stability = 0.05
+        add_political_power = 100
+        ai_chance = {
+            base = 5
+        }
+    }
+	
+	option = {
+        name = nf_BRK.3.b
+        add_opinion_modifier = {
+            target = HUL
+            modifier = BRK_treaty_backstabber
+        }
+        reverse_add_opinion_modifier = {
+            target = HUL
+            modifier = BRK_treaty_breaker
+        }
+        hidden_effect = {
+            remove_opinion_modifier = {
+                target = HUL
+                modifier = BRK_treaty_breaker
+            }
+            HUL = {
+                remove_opinion_modifier = {
+                    target = BRK
+                    modifier = BRK_treaty_breaker
+                }
+            }
+        }
+        add_timed_idea = { idea = BRK_death_to_anarchists days = 300 } 
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+

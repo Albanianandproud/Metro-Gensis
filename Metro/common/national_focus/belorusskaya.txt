@@ -1,3 +1,4 @@
+#!gfx:interface\metro_goals.gfx
 focus_tree = {
 	id = nf_belorusskaya
 	
@@ -16,4 +17,305 @@ focus_tree = {
 	shared_focus = satellite_defend_the_bulwark
 	shared_focus = satellite_economy
 	shared_focus = satellite_our_path
+
+	focus = {
+		id = BRK_feeding_the_metro
+		icon = GFX_BRK_feeding_the_metro
+		cost = 6.5
+		x = 22
+		y = 0
+		completion_reward = {
+			every_owned_state = {
+				limit = { is_core_of = ROOT }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_our_collective_onus
+		icon = GFX_BRK_collective_onus
+		prerequisite = { focus = BRK_feeding_the_metro }
+		cost = 6.5
+		relative_position_id = BRK_feeding_the_metro
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = BRK_collective_onus
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_defensive_armored_brigades
+		icon = GFX_generic_rail_tank
+		prerequisite = { focus = BRK_feeding_the_metro }
+		cost = 6.5
+		relative_position_id = BRK_feeding_the_metro
+		x = -1
+		y = 1
+		completion_reward = {
+			39 = { add_core_of = ROOT }
+			transfer_state = 39
+			add_tech_bonus = {
+				name = infantry_bonus
+				uses = 2
+				ahead_reduction = 2
+				category = armor
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_agriculture_of_scale
+		icon = GFX_BRK_agriculture_of_scale
+		prerequisite = { focus = BRK_feeding_the_metro }
+		cost = 6.5
+		relative_position_id = BRK_feeding_the_metro
+		x = -3
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_contact_kurchatov_institute
+		icon = GFX_BRK_kurchatov_institute
+		prerequisite = { focus = BRK_feeding_the_metro }
+		cost = 6.5
+		relative_position_id = BRK_feeding_the_metro
+		x = -5
+		y = 1
+		completion_reward = {
+			## event to contact Kurchatov Institute
+			country_event = { id = nf_BRK.1 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_crush_republic
+		icon = GFX_generic_bandit_friends_3
+		available = { HUL = { exists = yes } }
+		bypass = {
+			OR = {
+				NOT = { country_exists = HUL }
+				has_war_with = HUL
+			}
+		}
+		prerequisite = { focus = BRK_agriculture_of_scale }
+		mutually_exclusive = { focus = BRK_HUL_friendship }
+		cost = 6.5
+		relative_position_id = BRK_agriculture_of_scale
+		x = 0
+		y = 1
+		will_lead_to_war_with = HUL
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = HUL
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_pig_farms
+		icon = GFX_pig
+		prerequisite = { focus = BRK_our_collective_onus focus = BRK_new_fertilizer }
+		cost = 6.5
+		relative_position_id = BRK_our_collective_onus
+		x = 1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = BRK_civilian_economy
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}
+				random_owned_state = {
+					limit = { NOT = { has_state_category = pastoral } }
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_HUL_friendship
+		icon = GFX_gasmask
+		available = { HUL = { exists = yes } }
+		bypass = {
+			OR = {
+				NOT = { country_exists = HUL }
+				has_war_with = HUL
+			}
+		}
+		prerequisite = { focus = BRK_defensive_armored_brigades }
+		mutually_exclusive = { focus = BRK_crush_republic }
+		cost = 6.5
+		relative_position_id = BRK_defensive_armored_brigades
+		x = 0
+		y = 1
+		completion_reward = {
+			## Befriend HUL
+			add_political_power = 250
+			give_military_access = HUL
+			HUL = { give_guarantee = BRK }
+			add_opinion_modifier = {
+				target = HUL
+				modifier = BRK_friendship
+			}
+			reverse_add_opinion_modifier = {
+				target = HUL
+				modifier = BRK_friendship
+			}
+			hidden_effect = { 
+				BRK = { country_event = {  id = nf_BRK.3 days = 400 random_days = 400  } } 
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_surface_stalking
+		icon = GFX_EUR_the_coup
+		prerequisite = { focus = BRK_pig_farms focus = BRK_HUL_friendship }
+		cost = 6.5
+		relative_position_id = BRK_pig_farms
+		x = -1
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 8
+				}
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_contact_aviators
+		icon = GFX_BRK_contact_aviators
+		prerequisite = { focus = BRK_HUL_friendship focus = BRK_crush_republic }
+		cost = 6.5
+		relative_position_id = BRK_crush_republic
+		x = 2
+		y = 1
+		completion_reward = {
+			country_event = { id = nf_BRK.2 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_new_fertilizer
+		icon = GFX_BRK_new_fertilizer
+		prerequisite = { focus = BRK_feeding_the_metro }
+		cost = 6.5
+		relative_position_id = BRK_feeding_the_metro
+		x = 3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 2
+				ahead_reduction = 2
+				category = farming
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_annex_trade_outpost
+		icon = GFX_generic_spec_ops_2
+		available = { BRN = { is_puppet = no exists = yes }}
+		mutually_exclusive = { focus = BRK_with_hansa_consent }
+		prerequisite = { focus = BRK_contact_aviators }
+		cost = 6.5
+		relative_position_id = BRK_contact_aviators
+		x = 0
+		y = 1
+		completion_reward = {
+			add_threat = 5
+			annex_country = {
+   				target = BRN
+			}
+			BRN = { capital_scope = { add_core_of = FROM }}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = BRK_with_hansa_consent
+		icon = GFX_generic_support_hansa
+		available = { BRN = { is_puppet = no exists = yes }}
+		mutually_exclusive = { focus = BRK_annex_trade_outpost }
+		prerequisite = { focus = BRK_surface_stalking }
+		cost = 6.5
+		relative_position_id = BRK_surface_stalking
+		x = 0
+		y = 1
+		completion_reward = {
+			puppet = BRN
+			BRN = { capital_scope = { add_core_of = FROM }}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
 }

@@ -9,15 +9,15 @@ focus_tree = {
 			tag = ISL
 		}
 	}
-	continuous_focus_position = { x = 3000 y = 2000}
+	continuous_focus_position = { x = 2000 y = 950 }
 	default = no
 
 	focus = {
 		id = ISL_the_caliphate
 		icon = GFX_ISL_islamic_flag
-		x = 10
+		x = 0
 		y = 0
-		cost = 4
+		cost = 5
 
 		ai_will_do = {
 			factor = 50
@@ -31,9 +31,9 @@ focus_tree = {
 	focus = {
 		id = ISL_terrorist_approach
 		icon = GFX_ISL_islamic_terrorism
-		x = -5
+		x = -4
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_the_caliphate
@@ -61,12 +61,13 @@ focus_tree = {
 	focus = {
 		id = ISL_war_against_satan
 		icon = GFX_ISL_islamic_anti_satan
-		x = -1
+		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_terrorist_approach
+			focus = ISL_peace_approach
 		}
 
 		relative_position_id = ISL_terrorist_approach
@@ -82,9 +83,9 @@ focus_tree = {
 	focus = {
 		id = ISL_sword_of_islam
 		icon = GFX_ISL_islamic_sword
-		x = 2
+		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_terrorist_approach
@@ -105,9 +106,9 @@ focus_tree = {
 	focus = {
 		id = ISL_trust_in_emir
 		icon = GFX_ISL_islamic_emir
-		x = 1
+		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_sword_of_islam
@@ -128,7 +129,7 @@ focus_tree = {
 		icon = GFX_ISL_threepeople
 		x = 0
 		y = 2
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_sword_of_islam
@@ -147,9 +148,9 @@ focus_tree = {
 	focus = {
 		id = ISL_put_them_to_use
 		icon = GFX_RCH_industry3
-		x = -2
+		x = -1
 		y = 1
-		cost = 6
+		cost = 2.2
 
 		prerequisite = {
 			focus = ISL_war_against_satan
@@ -161,6 +162,7 @@ focus_tree = {
 		
 		available = {
 			owns_state = 303
+			303 = { compliance > 75 }
 		}
 
 		relative_position_id = ISL_war_against_satan
@@ -170,14 +172,16 @@ focus_tree = {
 
 		completion_reward = {
 			303 = {
-				add_extra_state_shared_building_slots = 4
-				add_building_construction = {
-					type = industrial_complex
-					level = 4
-					instant_build = yes
+				add_core_of = ROOT
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = alloys
+					amount = 4
 				}
 			}
-			add_stability = -0.3
 		}
 	}
 	
@@ -186,39 +190,36 @@ focus_tree = {
 		icon = GFX_ISL_gun_pointed
 		x = 1
 		y = 1
-		cost = 6
+		cost = 2.2
 
 		prerequisite = {
 			focus = ISL_war_against_satan
 		}
 		
-		mutually_exclusive = {
-			focus = ISL_put_them_to_use
-		}
+		mutually_exclusive = { focus = ISL_put_them_to_use }
 		
-		available = {
-			owns_state = 303
-		}
+		available = { owns_state = 303 }
 
 		relative_position_id = ISL_war_against_satan
-		ai_will_do = {
-			factor = 50
-		}
 
 		completion_reward = {
 			303 = {
-				add_manpower = -250
+				add_manpower = -50
+				add_core_of = ROOT
 			}
-			add_stability = 0.2
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 	
 	focus = {
 		id = ISL_peace_approach
 		icon = GFX_ISL_islamic_peace
-		x = 5
+		x = 4
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_the_caliphate
@@ -247,9 +248,9 @@ focus_tree = {
 	focus = {
 		id = ISL_cabinet_of_caliphate
 		icon = GFX_focus_hol_the_foundations_of_defense
-		x = -1
+		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_peace_approach
@@ -270,7 +271,7 @@ focus_tree = {
 		icon = GFX_ISL_farabi
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_cabinet_of_caliphate
@@ -301,7 +302,7 @@ focus_tree = {
 		icon = GFX_ISL_scaven_ally
 		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_peace_approach
@@ -326,7 +327,7 @@ focus_tree = {
 		icon = GFX_ISL_anti_libertines
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_unified_through_hardship
@@ -351,7 +352,7 @@ focus_tree = {
 		icon = GFX_ISL_anti_satan_symbol
 		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_unified_through_hardship
@@ -380,7 +381,7 @@ focus_tree = {
 		icon = GFX_ISL_scaven_supremacy
 		x = 1
 		y = 3
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_terrorist_approach
@@ -402,7 +403,7 @@ focus_tree = {
 		icon = GFX_ISL_government
 		x = 1
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_scaven_supremacy
@@ -423,7 +424,7 @@ focus_tree = {
 		icon = GFX_ISL_immigrant
 		x = 1
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_government_policies
@@ -447,7 +448,7 @@ focus_tree = {
 		icon = GFX_ISL_islam
 		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_scaven_supremacy
@@ -468,7 +469,7 @@ focus_tree = {
 		icon = GFX_ISL_hierarchy
 		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_islamic_culture
@@ -492,7 +493,7 @@ focus_tree = {
 		icon = GFX_ISL_emir_prayers
 		x = 0
 		y = 2
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_scaven_supremacy
@@ -514,7 +515,7 @@ focus_tree = {
 		icon = GFX_ISL_tank
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_cult_of_personality
@@ -560,22 +561,25 @@ focus_tree = {
 		icon = GFX_ISL_plan_pig
 		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 
-		prerequisite = {
-			focus = ISL_we_march_on
+		available = {
+			ROOT = { is_neighbor_of = HNZ }
+			HNZ = { exists = yes  }
 		}
 		
 		relative_position_id = ISL_we_march_on
-		ai_will_do = {
-			factor = 50
-		}
 
+		will_lead_to_war_with = HNZ
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
 				target = HNZ
 			}
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 	
@@ -584,22 +588,25 @@ focus_tree = {
 		icon = GFX_ISL_plan_eagle
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
-		prerequisite = {
-			focus = ISL_we_march_on
+		available = {
+			ROOT = { is_neighbor_of = RCH }
+			RCH = { exists = yes  }
 		}
 		
 		relative_position_id = ISL_we_march_on
-		ai_will_do = {
-			factor = 50
-		}
 
+		will_lead_to_war_with = RCH
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
 				target = RCH
 			}
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 	
@@ -608,31 +615,62 @@ focus_tree = {
 		icon = GFX_ISL_plan_bear
 		x = -2
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_we_march_on
 		}
 		
-		relative_position_id = ISL_we_march_on
-		ai_will_do = {
-			factor = 50
+		available = {
+			ROOT = { is_neighbor_of = RED }
+			RED = { exists = yes  }
 		}
+		
+		relative_position_id = ISL_we_march_on
 
+		will_lead_to_war_with = RED
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
 				target = RED
 			}
 		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_strike_down_the_kafir
+		icon = GFX_ISL_plan_bear
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_war_plan_bear
+			focus = ISL_war_plan_eagle
+			focus = ISL_war_plan_pig
+		}
+		
+		relative_position_id = ISL_war_plan_eagle
+
+		completion_reward = {
+			add_ideas = ISL_strike_down_the_kafir
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
 	}
 	
 	focus = {
 		id = ISL_war_plan_department
 		icon = GFX_ISL_war_plans
-		x = 23
+		x = 10
 		y = 0
-		cost = 6
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 50
@@ -648,23 +686,43 @@ focus_tree = {
 		icon = GFX_generic_defences
 		x = -2
 		y = 1
-		cost = 6
+		cost = 6.5
 
-		prerequisite = {
-			focus = ISL_war_plan_department
-		}
-		
-		mutually_exclusive = {
-			focus = ISL_offense_focus
-		}
-		
+		prerequisite = { focus = ISL_war_plan_department }
+		mutually_exclusive = { focus = ISL_offense_focus }
 		relative_position_id = ISL_war_plan_department
-		ai_will_do = {
-			factor = 50
-		}
 
 		completion_reward = {
 			add_ideas = ISL_defense_focus_idea
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = ISL_eternal_jihad
+		icon = GFX_generic_defences
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ISL_defense_focus focus = ISL_offense_focus}
+		relative_position_id = ISL_defense_focus
+		available = { has_war_support > 0.85 }
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1
+				uses = 2
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
 		}
 	}
 	
@@ -673,7 +731,7 @@ focus_tree = {
 		icon = GFX_generic_stalker_1
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_war_plan_department
@@ -698,7 +756,7 @@ focus_tree = {
 		icon = GFX_generic_equipment_gasmask_5
 		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_war_plan_department
@@ -710,7 +768,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_manpower = 30
+			if = {
+				limit = {
+					has_idea = mandatory_service
+				}
+				add_manpower = 40
+			}
+			else_if = {
+				limit = {
+					NOT = { has_idea = mandatory_service }
+				}
+				add_ideas = mandatory_service
+			}
 		}
 	}
 	
@@ -719,7 +788,7 @@ focus_tree = {
 		icon = GFX_domain_of_hell
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_rally_the_men
@@ -751,26 +820,65 @@ focus_tree = {
 		icon = GFX_ISL_plan_cat
 		x = 0
 		y = 2
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_defense_focus
 			focus = ISL_offense_focus
 		}
 		
-		prerequisite = {
-			focus = ISL_send_them_back
-		}
+		prerequisite = { focus = ISL_send_them_back }
+
+		available = { has_war_support > 0.65 }
 		
 		relative_position_id = ISL_offense_focus
-		ai_will_do = { factor = 10 }
-
+		will_lead_to_war_with = SAT
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
 				target = SAT
 			}
 		}
+
+		ai_will_do = { factor = 10 }
+	}
+
+	focus = {
+		id = ISL_all_hands_to_struggle
+		icon = GFX_ISL_plan_cat
+		x = 0
+		y = 1
+		cost = 4.4
+
+		prerequisite = {
+			focus = ISL_war_plan_qita
+		}
+		
+		prerequisite = { focus = ISL_send_them_back }
+
+		available = { has_war = yes }
+		
+		relative_position_id = ISL_war_plan_qita
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = war_economy
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_3
+					amount = 45
+					producer = RUS
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+				}
+				add_ideas = war_economy
+			}
+		}
+
+		ai_will_do = { factor = 100 }
 	}
 	
 	focus = {
@@ -778,7 +886,7 @@ focus_tree = {
 		icon = GFX_generic_political
 		x = -2
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_rats
@@ -807,7 +915,7 @@ focus_tree = {
 		icon = GFX_AVT_reconcile
 		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_rats
@@ -829,6 +937,16 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.10
 			add_stability = 0.05
+			every_country = {
+				limit = {
+					has_country_flag = is_skaven_nation
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_3
+					amount = 40
+					producer = RUS
+				}
+			}
 		}
 	}
 	
@@ -837,7 +955,7 @@ focus_tree = {
 		icon = GFX_peace
 		x = 1
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_rats
@@ -857,17 +975,21 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_manpower = 15
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 25
-				producer = RUS
+			every_country = {
+				limit = {
+					has_country_flag = is_skaven_nation
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_3
+					amount = 15
+					producer = RUS
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment 
+					amount = 10
+					producer = RUS
+				}
 			}
-			add_equipment_to_stockpile = {
-		        type = support_equipment 
-		        amount = 10
-				producer = ALT
-		    }
 		}
 	}
 	
@@ -876,7 +998,7 @@ focus_tree = {
 		icon = GFX_generic_equipment_gasmask_2
 		x = 2
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_rats
@@ -902,7 +1024,7 @@ focus_tree = {
 		icon = GFX_ISL_jannah
 		x = 0
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_rats
@@ -927,27 +1049,21 @@ focus_tree = {
 	focus = {
 		id = ISL_war_plan_far
 		icon = GFX_ISL_plan_rat
-		x = -2
+		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 		available = {
-			NOT = {
-				has_country_flag = ISL_i_love_rats
-			}
+			NOT = { has_country_flag = ISL_i_love_rats }
 		}
-		prerequisite = {
-			focus = ISL_gates_of_jannah
-		}
+		prerequisite = { focus = ISL_gates_of_jannah }
 		prerequisite = {
 			focus = ISL_brothers_in_arms
 			focus = ISL_nothing_more_than_mutual_interest
 		}
 		bypass_if_unavailable = yes
 		relative_position_id = ISL_gates_of_jannah
-		ai_will_do = {
-			factor = 50
-		}
 
+		will_lead_to_war_with = SCA
 		completion_reward = {
 			declare_war_on = {
 			    target = SCA
@@ -960,6 +1076,113 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_war_plan_dhib
+		icon = GFX_ISL_plan_rat
+		x = -4
+		y = 1
+		cost = 6.5
+		available = {
+			ROOT = { is_neighbor_of = SAV }
+			SAV = { exists = yes }
+		}
+		prerequisite = { focus = ISL_gates_of_jannah }
+		prerequisite = {
+			focus = ISL_brothers_in_arms
+			focus = ISL_nothing_more_than_mutual_interest
+		}
+		relative_position_id = ISL_gates_of_jannah
+
+		will_lead_to_war_with = SAV
+		completion_reward = {
+			declare_war_on = {
+			    target = SAV
+			    type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_our_own_flamethrowers
+		icon = GFX_SAT_stockpile
+		x = -1
+		y = 1
+		cost = 6.5
+		available = {
+			SAV = { exists = no }
+			326 = { is_owned_by = ROOT }
+		}
+		prerequisite = { focus = ISL_war_plan_dhib }
+		relative_position_id = ISL_war_plan_dhib
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = flamethrower_equipment_2 
+				amount = 25
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = flamethrower_support_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_core_sav
+		icon = GFX_ISL_plan_rat
+		x = 0
+		y = 2
+		cost = 6.5
+		available = {
+			SAV = { exists = no }
+			326 = { is_owned_by = ROOT }
+			368 = { is_owned_by = ROOT }
+		}
+		prerequisite = { focus = ISL_war_plan_dhib }
+		relative_position_id = ISL_war_plan_dhib
+
+		completion_reward = {
+			if = {
+				limit = {
+					ROOT = { owns_state = 326 }
+				}
+				326 = { add_core_of = ROOT }
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 368 }
+				}
+				368 = { add_core_of = ROOT }
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 312 }
+				}
+				312 = { add_core_of = ROOT }
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
 	}
 	
 	focus = {
@@ -967,7 +1190,7 @@ focus_tree = {
 		icon = GFX_scrap_computers
 		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_furries
@@ -1001,7 +1224,7 @@ focus_tree = {
 		icon = GFX_generic_medium_arms_2
 		x = 1
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_furries
@@ -1026,7 +1249,7 @@ focus_tree = {
 		icon = GFX_ISL_anti_libertines
 		x = -1
 		y = 1
-		cost = 6
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_furries
@@ -1060,7 +1283,7 @@ focus_tree = {
 		icon = GFX_ISL_plan_wolf
 		x = 0
 		y = 1
-		cost = 7
+		cost = 6.5
 		available = {
 			NOT = {
 				has_country_flag = ISL_i_love_furries
@@ -1086,25 +1309,25 @@ focus_tree = {
 	focus = {
 		id = ISL_skaven_army_culture
 		icon = GFX_skaven_generic_army
-		x = 31
+		x = 19
 		y = 0
-		cost = 6
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 50
 		}
 
 		completion_reward = {
-			army_experience = 100
+			army_experience = 30
 		}
 	}
 	
 	focus = {
 		id = ISL_darcy_school
 		icon = GFX_ISL_darcy
-		x = -3
+		x = -4
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_skaven_army_culture
@@ -1129,7 +1352,7 @@ focus_tree = {
 		icon = GFX_RCH_trubnaya_core
 		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_darcy_school
@@ -1164,7 +1387,7 @@ focus_tree = {
 		icon = GFX_scrap_metal_2
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_darcy_school
@@ -1198,7 +1421,7 @@ focus_tree = {
 		icon = GFX_ISL_bear
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_what_are_ethics
@@ -1216,13 +1439,36 @@ focus_tree = {
 			add_ideas = ISL_animal_spirit
 		}
 	}
+
+	focus = {
+		id = ISL_fight_like_the_savage_animals_we_are_2
+		icon = GFX_ARB_equipment
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ISL_fight_like_the_savage_animals_we_are }
+		relative_position_id = ISL_fight_like_the_savage_animals_we_are
+
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 2
+				bonus = 0.5
+				category = clothing_kits
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
 	
 	focus = {
 		id = ISL_mohammad_school
 		icon = GFX_ISL_mohammad
-		x = 3
+		x = 4
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_skaven_army_culture
@@ -1247,7 +1493,7 @@ focus_tree = {
 		icon = GFX_generic_spec_ops_2
 		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_mohammad_school
@@ -1279,7 +1525,7 @@ focus_tree = {
 		icon = GFX_flamethrower
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_mohammad_school
@@ -1300,7 +1546,7 @@ focus_tree = {
 		icon = GFX_campfire_2
 		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_quality_equipment
@@ -1319,13 +1565,37 @@ focus_tree = {
 			country_event = nf_ISL.7
 		}
 	}
+
+	focus = {
+		id = ISL_humans_at_heart_2
+		icon = GFX_MDR_mole_bonus_1
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = { focus = ISL_humans_at_heart }
+		prerequisite = { focus = ISL_humans_at_heart }
+		relative_position_id = ISL_humans_at_heart
+
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 2
+				bonus = 0.5
+				category = entrench_kits
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
 	
 	focus = {
 		id = ISL_recruitment_campaigns
 		icon = GFX_settle_minorities
 		x = 0
 		y = 2
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_skaven_army_culture
@@ -1337,7 +1607,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_manpower = 25
+			add_manpower = 35
+			add_war_support = 0.1
 		}
 	}
 	
@@ -1346,7 +1617,7 @@ focus_tree = {
 		icon = GFX_generic_stalker_4
 		x = 0
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_recruitment_campaigns
@@ -1362,13 +1633,96 @@ focus_tree = {
 			custom_effect_tooltip = ISL_free_scavenge_tt
 		}
 	}
+
+	focus = {
+		id = ISL_infantry_equipment_1
+		icon = GFX_generic_strike
+		x = 2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_recruitment_campaigns
+		}
+
+		relative_position_id = ISL_recruitment_campaigns
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 25
+		    }
+			division_template = {
+				name = "Thralls"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Thralls\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_infantry_equipment_2
+		icon = GFX_generic_soldier
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_recruitment_campaigns
+		}
+
+		relative_position_id = ISL_recruitment_campaigns
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 25
+				producer = RUS
+			}
+			division_template = {
+				name = "Thralls"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Thralls\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
 	
 	focus = {
 		id = ISL_scavenging_for_scrap
 		icon = GFX_scrap
 		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_establish_scavenger_teams
@@ -1389,21 +1743,20 @@ focus_tree = {
 		completion_reward = {
 			capital_scope = {
 				add_resource = {
-					type = components
-					amount = 3
-				}
-				add_resource = {
 					type = alloys
-					amount = 3
+					amount = 8
 				}
 				add_resource = {
 					type = scrap
-					amount = 3
+					amount = 8
 				}
-				add_resource = {
-					type = chemicals
-					amount = 3
-				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 2
+				uses = 2
+				ahead_reduction = 2
+				category = industry
 			}
 		}
 	}
@@ -1413,7 +1766,7 @@ focus_tree = {
 		icon = GFX_generic_defences_2
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_establish_scavenger_teams
@@ -1432,10 +1785,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 70
-				producer = RUS
+			add_tech_bonus = {
+				name = communist_tech_bonus
+				bonus = 1
+				ahead_reduction = 1.5
+				category = infantry_weapons
 			}
 		}
 	}
@@ -1445,7 +1799,7 @@ focus_tree = {
 		icon = GFX_generic_skaven
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_scavenging_for_scrap
@@ -1461,13 +1815,56 @@ focus_tree = {
 			add_ideas = ISL_skaven_army
 		}
 	}
+
+	focus = {
+		id = ISL_military_superiority_2
+		icon = GFX_ISL_government
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_military_superiority
+		}
+
+		relative_position_id = ISL_military_superiority
+
+		completion_reward = {
+			division_template = {
+				name = "Caliphs Immortals"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Caliphs Immortals\" division_template = \"Caliphs Immortals\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Caliphs Immortals\" division_template = \"Caliphs Immortals\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
 	
 	focus = {
 		id = ISL_update_the_infrastructure
 		icon = GFX_metro_infrastructure
-		x = 40
+		x = 28
 		y = 0
-		cost = 7
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 50
@@ -1475,11 +1872,6 @@ focus_tree = {
 
 		completion_reward = {
 			every_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -1494,7 +1886,7 @@ focus_tree = {
 		icon = GFX_bullets_3
 		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_update_the_infrastructure
@@ -1519,7 +1911,7 @@ focus_tree = {
 		icon = GFX_mob_reconciliation
 		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_update_the_infrastructure
@@ -1544,60 +1936,7 @@ focus_tree = {
 		icon = GFX_generic_skaven
 		x = -1
 		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = ISL_the_mosques_are_exempt
-			focus = ISL_charge_the_mosques
-		}
-
-		relative_position_id = ISL_the_mosques_are_exempt
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			263 = {
-				add_extra_state_shared_building_slots = 2
-			}
-		}
-	}
-	
-	focus = {
-		id = ISL_civilian_sector_expansion
-		icon = GFX_workstation
-		x = 1
-		y = 1
-		cost = 7
-
-		prerequisite = {
-			focus = ISL_the_mosques_are_exempt
-			focus = ISL_charge_the_mosques
-		}
-
-		relative_position_id = ISL_the_mosques_are_exempt
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			303 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = ISL_improve_station_communications
-		icon = GFX_radio
-		x = 3
-		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_the_mosques_are_exempt
@@ -1612,10 +1951,116 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				category = electronics
+				bonus = 0.25
+				uses = 3
+				category = industry
 			}
+		}
+	}
+	
+	focus = {
+		id = ISL_our_own_technicians
+		icon = GFX_generic_armaments
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_skaven_work_ethic
+		}
+
+		relative_position_id = ISL_skaven_work_ethic
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = punch_pressing
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	
+	focus = {
+		id = ISL_civilian_sector_expansion
+		icon = GFX_workstation
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_the_mosques_are_exempt
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_the_mosques_are_exempt
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ISL_improve_station_communications
+		icon = GFX_radio
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_the_mosques_are_exempt
+			focus = ISL_charge_the_mosques
+		}
+
+		relative_position_id = ISL_the_mosques_are_exempt
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = ISL_technological_volition
+		icon = GFX_generic_nuclear
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_improve_station_communications
+		}
+
+		relative_position_id = ISL_improve_station_communications
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
 		}
 	}
 	
@@ -1624,7 +2069,7 @@ focus_tree = {
 		icon = GFX_generic_electricity_2
 		x = 0
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_skaven_work_ethic
@@ -1649,9 +2094,9 @@ focus_tree = {
 	focus = {
 		id = ISL_increase_war_production
 		icon = GFX_generic_ammunition_1
-		x = -2
+		x = -1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_catching_up
@@ -1675,7 +2120,7 @@ focus_tree = {
 		icon = GFX_RED_formalise_ministry_of_economics
 		x = 0
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_increase_war_production
@@ -1694,9 +2139,9 @@ focus_tree = {
 	focus = {
 		id = ISL_tunnel_rats
 		icon = GFX_crate
-		x = 2
+		x = 1
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_catching_up
@@ -1722,7 +2167,7 @@ focus_tree = {
 					amount = 5
 				}
 				add_resource = {
-					type = chemicals
+					type = electronics
 					amount = 5
 				}
 			}
@@ -1734,7 +2179,7 @@ focus_tree = {
 		icon = GFX_equipment_backpack
 		x = 0
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_tunnel_rats
@@ -1751,32 +2196,11 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ISL_the_ratway_vaults
-		icon = GFX_scrap_metal_2
-		x = 2
-		y = 1
-		cost = 8
-
-		prerequisite = {
-			focus = ISL_supply_scavenging
-		}
-
-		relative_position_id = ISL_supply_scavenging
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-
-		}
-	}
-	
-	focus = {
 		id = ISL_revitalized_economy
 		icon = GFX_cog_idea
-		x = -2
+		x = -1
 		y = 1
-		cost = 8
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_minister_for_war
@@ -1791,7 +2215,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			263 = {
+			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
@@ -1799,7 +2223,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			263 = {
+			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
@@ -1813,9 +2237,9 @@ focus_tree = {
 	focus = {
 		id = ISL_southern_line_development
 		icon = GFX_cog_factories
-		x = -4
+		x = -3
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_catching_up
@@ -1823,15 +2247,11 @@ focus_tree = {
 		
 		available = {
 			owns_state = 303
-			owns_state = 114
-			owns_state = 263
-			owns_state = 115
+			owns_state = 368
+			owns_state = 326
 		}
 
 		relative_position_id = ISL_catching_up
-		ai_will_do = {
-			factor = 50
-		}
 
 		completion_reward = {
 			303 = {
@@ -1842,7 +2262,15 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			263 = {
+			368 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			326 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -1851,14 +2279,69 @@ focus_tree = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_southern_line_development_2
+		icon = GFX_MDR_mole_bonus_2
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = ISL_southern_line_development
+		}
+		
+		available = {
+			owns_state = 303
+			owns_state = 368
+			owns_state = 326
+		}
+
+		relative_position_id = ISL_southern_line_development
+
+		completion_reward = {
+			303 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			368 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			326 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
 	}
 	
 	focus = {
 		id = ISL_northern_line_development
 		icon = GFX_cog_factories
-		x = 4
+		x = 3
 		y = 1
-		cost = 7
+		cost = 6.5
 
 		prerequisite = {
 			focus = ISL_catching_up
@@ -1866,18 +2349,12 @@ focus_tree = {
 		
 		available = {
 			owns_state = 286
-			owns_state = 116
 			owns_state = 298
-			owns_state = 117
 			owns_state = 313
-			owns_state = 118
 			owns_state = 367
 		}
 
 		relative_position_id = ISL_catching_up
-		ai_will_do = {
-			factor = 50
-		}
 
 		completion_reward = {
 			286 = {
@@ -1912,6 +2389,68 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = ISL_northern_line_development_2
+		icon = GFX_MDR_mole_bonus_3
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = { focus = ISL_northern_line_development }
+		
+		available = {
+			owns_state = 286
+			owns_state = 298
+			owns_state = 313
+			owns_state = 367
+		}
+
+		relative_position_id = ISL_northern_line_development
+
+		completion_reward = {
+			286 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			298 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			313 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			367 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 50
 		}
 	}
 }
