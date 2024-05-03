@@ -1593,7 +1593,6 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
 		available = {
-			date > 2033.1.1
 			AND = {
 				capital_scope = {
 					infrastructure > 9
@@ -1605,8 +1604,8 @@ focus_tree = {
 			focus = TRT_check_in_with_the_inlaws
 		}
 		completion_reward = {
-			add_political_power = 60
-			add_command_power = 20
+			add_political_power = 75
+			add_command_power = 25
 		}
 		ai_will_do = {
 			factor = 100
@@ -1633,16 +1632,8 @@ focus_tree = {
 			}
 		}
 		relative_position_id = TRT_checking_the_gossip
-		prerequisite = {
-			focus = TRT_checking_the_gossip
-		}
-		mutually_exclusive = {
-			focus = TRT_chinatown_wargoal
-		}
-		ai_will_do = {
-			factor = 100
-			## We REALLY wanna do this
-		}
+		prerequisite = { focus = TRT_checking_the_gossip }
+		mutually_exclusive = { focus = TRT_chinatown_wargoal }
 		completion_reward = {
 			custom_effect_tooltip = TRT_coming_together
 			add_threat = 10
@@ -1650,6 +1641,10 @@ focus_tree = {
 				target = KTG
 				transfer_troops = yes
 			}
+		}
+		ai_will_do = {
+			factor = 100
+			## We REALLY wanna do this
 		}
 	}
 
@@ -1660,18 +1655,11 @@ focus_tree = {
 		y = 1
 		cost = 8.6
 		relative_position_id = TRT_checking_the_gossip
-		prerequisite = {
-			focus = TRT_checking_the_gossip
-		}
-		mutually_exclusive = {
-			focus = TRT_into_china_town
-		}
+		prerequisite = { focus = TRT_checking_the_gossip }
+		mutually_exclusive = { focus = TRT_into_china_town }
 		available = {
 			has_war = no
 			is_neighbor_of = KTG
-		}
-		ai_will_do = {
-			factor = 5
 		}
         will_lead_to_war_with = KTG
 		completion_reward = {
@@ -1683,12 +1671,15 @@ focus_tree = {
  				generator = { 28 }
  			}
 		}
+		ai_will_do = {
+			factor = 5
+		}
 	}
 
 	focus = { 
 		id = TRT_chinatown_core
 		icon = GFX_TRT_might_makes_right
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_chinatown_wargoal
@@ -1713,6 +1704,34 @@ focus_tree = {
 		ai_will_do = {
 			factor = 100
 			## We REALLY wanna do this
+		}
+	}
+
+	focus = { 
+		id = TRT_pavel
+		icon = GFX_PVL_diplomacy_2
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = TRT_chinatown_core
+		prerequisite = { focus = TRT_chinatown_core }
+		available = { PVL = { exists = yes } }
+		will_lead_to_war_with = PVL
+		completion_reward = {
+			add_threat = 5
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = PVL
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0.1
+				PVL = { is_puppet = yes }
+			}
 		}
 	}
 

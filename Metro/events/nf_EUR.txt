@@ -12,23 +12,14 @@ country_event = {
 
 	option = { ## Put them in armed forces
 		name = nf_EUR.1.a
-		hidden_effect = { 
-			add_ideas = immigranst_military 
-			set_country_flag = EUR_military_flag
-		}
-
+		add_ideas = immigranst_military 
         ai_chance = {
-            base = 1
+            base = 10
         }
 	}
-
     option = { ## Put them in industry
         name = nf_EUR.1.b
-		hidden_effect = { 
-			add_ideas = immigranst_industrial
-			set_country_flag = EUR_industrial_flag
-		}
-		
+		add_ideas = immigranst_industrial
         ai_chance = {
             base = 2.5
         }
@@ -127,81 +118,6 @@ country_event = {
             base = 1
         }
 	}
-}
-
-## Industrial Drive -- Increase Military Drive
-country_event = { 
-    id = nf_EUR.5
-    title = nf_EUR.5.t
-    desc = nf_EUR.5.d
-    picture = "GFX_event (125)"
-
-	is_triggered_only = yes
-
-	option = { ## :(
-		name = nf_EUR.5.a
-		add_ideas = EUR_military_drive_1
-        ai_chance = {
-            base = 1
-        }
-	}
-	option = { ## :(
-		name = nf_EUR.5.b
-		add_ideas = EUR_military_drive_2
-        ai_chance = {
-            base = 1
-        }
-	}
-	option = { ## :(
-		name = nf_EUR.5.c
-		add_ideas = EUR_military_drive_3
-        ai_chance = {
-            base = 1
-        }
-	}
-}
-
-## Westernisation 1
-country_event = { 
-    id = nf_EUR.6
-    title = nf_EUR.6.t
-    desc = nf_EUR.6.d
-    picture = "GFX_event (121)"
-	
-	is_triggered_only = yes
-
-    option = { ## Council
-        name = nf_EUR.6.a
-		hidden_effect = {
-			add_ideas = westernisation_1
-		}
-        ai_chance = {
-            base = 2.5
-        }
-    }
-}
-
-## Westernisation 2
-country_event = { 
-    id = nf_EUR.7
-    title = nf_EUR.7.t
-    desc = nf_EUR.7.d
-    picture = "GFX_event (121)"
-	
-	is_triggered_only = yes
-
-    option = { ## Council
-        name = nf_EUR.7.a
-		hidden_effect = {
-			swap_ideas = { 
-			  remove_idea = westernisation_1 
-			  add_idea = westernisation_2
-			}
-		}
-        ai_chance = {
-            base = 2.5
-        }
-    }
 }
 
 ## The Threat Realised
@@ -459,28 +375,6 @@ country_event = {
     }
 }
 
-## Schulz speech
-country_event = { 
-    id = nf_EUR.19
-    title = nf_EUR.19.t
-    desc = nf_EUR.19.d
-    picture = "GFX_event (15)"
-	
-	is_triggered_only = yes
-
-    option = { 
-        name = nf_EUR.19.a
-		
-		add_timed_idea = { idea = schulz_speech days = 730 }
-		
-        ai_chance = {
-            base = 2.5
-        }
-    }
-
-}
-
-
 ## hanza business deal
 country_event = { 
     id = nf_EUR.20
@@ -591,12 +485,8 @@ country_event = {
 
     option = { 
         name = nf_EUR.25.a
-		
-        add_stability = -0.1
+        add_war_support = 0.2
         hidden_effect = {
-
-            add_popularity = { ideology = dictatorial popularity = 0.438}
-
             add_country_leader_role = {
 				character = EUR_luca_bianachi
 				country_leader={
@@ -606,15 +496,12 @@ country_event = {
 				}
 				promote_leader = yes
 			}
-
             set_politics = {
                 ruling_party = dictatorial
                 long_name = EUR_romans_long
                 name = EUR_romans
             }
-
             remove_ideas = sabotaged_industry_despot2
-
         }
 
         ai_chance = {
@@ -701,33 +588,135 @@ country_event = {
 
     option = { 
         name = nf_EUR.27.a
-		
-        add_stability = -0.1
-        hidden_effect = {
-
-            add_popularity = { ideology = community popularity = 0.438}
-
-            add_country_leader_role = {
-				character = EUR_immigrant_collective
-				country_leader={
-					ideology = communal_party
-					traits = {  }
-					expire="2050.1.1.1"
-				}
-				promote_leader = yes
-			}
-
-            set_politics = {
-                ruling_party = community
-            }
-
-            remove_ideas = remain_centralised
-
+		add_political_power = 100
+        set_cosmetic_tag = EUR_oligarch_DDR
+		set_politics = {
+            ruling_party = oligarch
+            elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+            long_name = EUR_oligarch_DDR_DEF
+            name = EUR_oligarch_DDR
         }
+        division_template = {
+            name = "Volksarmee"
+            priority = 1
+            template_counter = 0
+            regiments = {
+                irregulars = { x = 0 y = 0 }
+                irregulars = { x = 0 y = 1 }
+                irregulars = { x = 0 y = 2 }
+                irregulars = { x = 0 y = 3 }
+                irregulars = { x = 0 y = 4 }
+            }
+        }
+        capital_scope = {
+            create_unit = {
+                division = "name = \"1st Standing Guard\" division_template = \"Volksarmee\" start_experience_factor = 0.24 start_equipment_factor = 1"
+                owner = ROOT
+            }
+            create_unit = {
+                division = "name = \"1st Standing Guard\" division_template = \"Volksarmee\" start_experience_factor = 0.24 start_equipment_factor = 1"
+                owner = ROOT
+            }
+        }
+        add_corps_commander_role = {
+            Character = EUR_marshal
+            skill = 4
+            attack_skill = 3
+            defense_skill = 3
+            planning_skill = 5
+            logistics_skill = 4
+        }
+        ai_chance = {
+            base = 25
+        }
+    }
+}
+country_event = { 
+    id = nf_EUR.28
+    title = nf_EUR.28.t
+    desc = nf_EUR.28.d
+    picture = "GFX_event (27)"
+	
+	is_triggered_only = yes
 
+    option = { 
+        name = nf_EUR.28.a
+        every_owned_state = {
+            limit = {
+                NOT = {
+                    has_state_category = pastoral
+                }
+            }
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+        }
         ai_chance = {
             base = 2
         }
     }
+}
+country_event = {
+    id = nf_EUR.29
+    title = nf_EUR.29.t
+    desc = nf_EUR.29.d
+    picture = "GFX_event (159)"
 
+	trigger = {
+		342 = { is_owned_by = EUR }
+        has_cosmetic_tag = EUR_oligarch_DDR
+        AND = { has_war = no }
+	}
+	fire_only_once = yes
+
+	option = {
+		name = nf_EUR.29.a
+        set_technology = { tech_technician_pressing = 1 }
+		set_technology = { tech_technician_machining = 1}
+        create_operative_leader = {
+            name = "Operative"
+            GFX = GFX_portrait_EUR_operative
+            traits = {}
+            bypass_recruitment = no
+            available_to_spy_master = yes
+            gender = female
+            nationalities = { EUR }
+        }
+		ai_chance = { base = 15 }
+	}
+}
+country_event = { 
+    id = nf_EUR.30
+    title = nf_EUR.30.t
+    desc = nf_EUR.30.d
+    picture = "GFX_event (27)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.30.a
+        retire_ideology_leader = oligarch
+        add_country_leader_role = {
+            character = EUR_amsel
+            promote_leader = yes
+            country_leader = {
+                ideology = vanguard_party
+                expire = "1965.1.1.1"
+                traits = { EUR_amsel_trait  }
+                desc= "EUR_AMSEL_DESC"
+            }
+            add_ideas = civis_border_3
+        }
+        EUR_marshal = {
+            add_skill_level = 1
+        }
+        ai_chance = {
+            base = 25
+        }
+    }
 }

@@ -4,6 +4,7 @@ ideas = {
 			picture = GFX_idea_europa
 
 			allowed = {
+				NOT = { has_government = oligarch has_government = dictatorial }
 			}
 
 			removal_cost = -1
@@ -18,6 +19,7 @@ ideas = {
 			picture = GFX_idea_lenin
 
 			allowed = {
+				NOT = { has_government = oligarch has_government = dictatorial }
 			}
 
 			removal_cost = -1
@@ -28,9 +30,6 @@ ideas = {
 				opinion_gain_monthly_factor = 0.2
 	        }	
 	    }
-		
-		##### National Focus
-		
 		immigranst_military = {
 			picture = europa
 
@@ -40,12 +39,11 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-                army_org_factor = -0.1
-				army_org_regain = -0.05
-				training_time_factor = -0.15
+				training_time_factor = -0.2
+				modifier_army_sub_unit_irregulars_attack_factor = -0.2
+				modifier_army_sub_unit_irregulars_max_org_factor = -0.2
 	        }	
 	    }
-		
 		immigranst_industrial = {
 			picture = europa
 
@@ -59,8 +57,19 @@ ideas = {
 				production_lack_of_resource_penalty_factor = 0.05
 	        }	
 	    }
-		
-		#### Military choice
+
+		EUR_military_drive_1 = {
+			picture = europa
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+                mobilization_speed = 0.05
+	        }		
+	    }
 		
 		EUR_military_drive_2 = {
 			picture = europa
@@ -71,23 +80,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-                conscription = 0.015
-				research_speed_factor = -0.03
+                mobilization_speed = 0.1
+				conscription_factor = 0.05
+				command_power_gain = -0.05
 	        }	
-	    }
-		
-		EUR_military_drive_1 = {
-			picture = europa
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-                conscription = 0.005
-				research_speed_factor = -0.015
-	        }		
 	    }
 		
 		EUR_military_drive_3 = {
@@ -99,13 +95,11 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-                conscription = 0.03
-				research_speed_factor = -0.05
-				stability_factor = -0.05
-	        }	
+                mobilization_speed = 0.15
+				conscription_factor = 0.1
+				command_power_gain = -0.1
+	        }		
 	    }
-		
-		##### Economy ideas #########################################
 		
 		EUR_economy_1 = {
 			picture = europa
@@ -116,10 +110,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-                stability_factor = 0.05
-				production_factory_efficiency_gain_factor = 0.1
-				consumer_goods_factor = -0.05
-				trade_opinion_factor = 0.1
+				stability_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+				trade_opinion_factor = 0.05
 	        }		
 	    }
 		
@@ -132,6 +125,7 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
+				stability_factor = 0.05
 				production_factory_efficiency_gain_factor = 0.05
 				trade_opinion_factor = 0.05
 	        }		
@@ -165,9 +159,6 @@ ideas = {
 				trade_opinion_factor = -0.1
 	        }		
 	    }
-		
-		
-		################################################
 		
 		EUR_interventionism_idea = {
 			picture = generic_manpower_bonus
@@ -206,7 +197,7 @@ ideas = {
 			modifier = {
 				stability_factor = -0.025
 				industrial_capacity_factory = -0.025
-				research_speed_factor = 0.02
+				research_speed_factor = 0.025
 	        }		
 	    }
 		
@@ -219,8 +210,6 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				stability_factor = -0.05
-				industrial_capacity_factory = -0.05
 				research_speed_factor = 0.04
 	        }		
 	    }
@@ -316,101 +305,6 @@ ideas = {
 			}
 	    }
 		
-		####
-		#### Political Support
-		####
-		
-		italian_majority = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = -0.1
-				political_power_gain = -0.1
-	        }		
-	    }
-		
-		british_majority = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = -0.1
-				political_power_gain = -0.1
-	        }		
-	    }
-		
-		### ----------
-		
-		italian_majority_1 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = -0.05
-				political_power_gain = -0.1
-	        }		
-	    }
-		
-		british_majority_1 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = -0.05
-				political_power_gain = -0.1
-	        }		
-	    }
-		
-		### ----------
-		
-		italian_majority_2 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = 0.02
-				political_power_gain = -0.05
-				dictatorial_drift = 0.01
-
-	        }		
-	    }
-		
-		british_majority_2 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = 0.02
-				political_power_gain = -0.05
-				oligarch_drift = 0.01
-	        }		
-	    }
-		
 		europe_pro_immigration = {
 			picture = generic_infantry_bonus
 
@@ -420,18 +314,15 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				stability_factor = -0.02
-				political_power_gain = -0.15
+				stability_factor = -0.05
+				war_support_factor = -0.5
+				political_power_gain = -0.1
 				monthly_population = 0.1
 	        }		
 	    }
 		
 		worm_rehabilitation = {
 			picture = generic_infantry_bonus
-
-			allowed = {
-				NOT = { original_tag = GWC } 
-			}
 
 			removal_cost = -1
 
@@ -466,8 +357,8 @@ ideas = {
 
 			modifier = {
 				consumer_goods_factor = -0.1
-				production_speed_industrial_complex_factor = 0.25
-				production_factory_efficiency_gain_factor = 0.25
+				production_speed_industrial_complex_factor = 0.2
+				production_factory_efficiency_gain_factor = 0.2
 	        }		
 	    }
 	
@@ -480,7 +371,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				community_drift = 0.05
+				oligarch_drift = 0.05
+				experience_gain_army = 0.02
 	        }		
 	    }
 		
@@ -624,8 +516,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				trade_opinion_factor = 0.05
-				opinion_gain_monthly_same_ideology_factor = 0.05
+				trade_opinion_factor = 0.03
+				local_resources_factor = 0.03
 	        }		
 	    }
 		
@@ -638,9 +530,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				research_speed_factor = 0.05
-				land_doctrine_cost_factor = -0.05
-	        }		
+				research_speed_factor = 0.03
+	        }			
 	    }
 		
 		hub_of_trade2 = {
@@ -652,8 +543,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				trade_opinion_factor = 0.075
-				opinion_gain_monthly_same_ideology_factor = 0.075
+				trade_opinion_factor = 0.06
+				local_resources_factor = 0.06
 	        }		
 	    }
 		
@@ -666,8 +557,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				research_speed_factor = 0.075
-				land_doctrine_cost_factor = -0.075
+				research_speed_factor = 0.06
+				land_doctrine_cost_factor = -0.02
 	        }		
 	    }
 		
@@ -680,8 +571,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				trade_opinion_factor = 0.1
-				opinion_gain_monthly_same_ideology_factor = 0.1
+				trade_opinion_factor = 0.09
+				local_resources_factor = 0.09
 	        }		
 	    }
 		
@@ -694,9 +585,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				research_speed_factor = 0.1
-				land_doctrine_cost_factor = -0.1
-	        }		
+				research_speed_factor = 0.08
+				land_doctrine_cost_factor = -0.05
+	        }	
 	    }
 		
 		hub_of_trade4 = {
@@ -708,9 +599,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				trade_opinion_factor = 0.125
-				opinion_gain_monthly_same_ideology_factor = 0.125
-	        }		
+				trade_opinion_factor = 0.12
+				local_resources_factor = 0.12
+	        }			
 	    }
 		
 		hub_of_science4 = {
@@ -722,8 +613,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				research_speed_factor = 0.125
-				land_doctrine_cost_factor = -0.125
+				research_speed_factor = 0.1
+				land_doctrine_cost_factor = -0.1
 	        }		
 	    }
 		
@@ -740,6 +631,7 @@ ideas = {
 				army_defence_factor = -0.1
 				army_speed_factor = -0.1
 				army_org_factor = -0.1
+				experience_gain_army = 0.01
 	        }		
 	    }
 		EUR_mil_power_4 = {
@@ -751,10 +643,11 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				army_attack_factor = -0.075
-				army_defence_factor = -0.075
-				army_speed_factor = -0.075
-				army_org_factor = -0.075
+				army_attack_factor = -0.08
+				army_defence_factor = -0.08
+				army_speed_factor = -0.08
+				army_org_factor = -0.08
+				experience_gain_army = 0.02
 	        }		
 	    }
 		EUR_mil_power_3 = {
@@ -770,6 +663,7 @@ ideas = {
 				army_defence_factor = -0.05
 				army_speed_factor = -0.05
 				army_org_factor = -0.05
+				experience_gain_army = 0.03
 	        }		
 	    }
 		EUR_mil_power_2 = {
@@ -781,10 +675,11 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				army_attack_factor = -0.025
-				army_defence_factor = -0.025
-				army_speed_factor = -0.025
-				army_org_factor = -0.025
+				army_attack_factor = -0.02
+				army_defence_factor = -0.02
+				army_speed_factor = -0.02
+				army_org_factor = -0.02
+				experience_gain_army = 0.04
 	        }		
 	    }
 		EUR_mil_power_1 = {
@@ -796,7 +691,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-
+				command_power_gain_mult = 0.1
+				experience_gain_army = 0.05
 	        }		
 	    }
 
@@ -809,7 +705,7 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				dictatorial_drift = 0.01
+				dictatorial_drift = 0.08
 	        }
 		}
 
@@ -817,14 +713,15 @@ ideas = {
 			picture = generic_production_bonus
 
 			allowed = { 
+				NOT = { has_government = dictatorial }
 			}
 
 			removal_cost = -1
 
 			modifier = {
 				dictatorial_drift = 0.05
-				industrial_capacity_factory = -0.1
-				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.15
 	        }
 		}
 
@@ -832,14 +729,15 @@ ideas = {
 			picture = generic_production_bonus
 
 			allowed = { 
+				NOT = { has_government = dictatorial }
 			}
 
 			removal_cost = -1
 
 			modifier = {
-				dictatorial_drift = 0.1
-				industrial_capacity_factory = -0.15
-				production_speed_buildings_factor = -0.15
+				dictatorial_drift = 0.35
+				industrial_capacity_factory = -0.25
+				production_speed_buildings_factor = -0.25
 	        }
 		}
 
@@ -991,7 +889,7 @@ ideas = {
 			modifier = {
 				stability_factor = 0.05
 				council_drift = 0.02
-				community_drift = 0.02
+				oligarch_drift = 0.02
 			}
 		}
 
@@ -1000,26 +898,29 @@ ideas = {
 		commie_mutiny = {
 			picture = generic_communism_drift_bonus
 
-			allowed = {}
+			allowed = {
+				NOT = { has_government = oligarch }
+			}
 
 			removal_cost = -1
 
 			modifier = {
-				community_drift = 0.02
-				consumer_goods_expected_value = 0.05
+				oligarch_drift = 0.1
+				consumer_goods_expected_value = 0.1
 			}
 		}
 
 		sabotaged_industry_community = {
 			picture = generic_production_bonus
 
-			allowed = { 
+			allowed = {
+				NOT = { has_government = oligarch }
 			}
 
 			removal_cost = -1
 
 			modifier = {
-				community_drift = 0.05
+				oligarch_drift = 0.1
 				industrial_capacity_factory = -0.1
 				production_speed_buildings_factor = -0.1
 	        }
@@ -1037,116 +938,6 @@ ideas = {
 				party_popularity_stability_factor = 0.1
 			}
 		}
-
-		#### British Economy stuff
-
-		brit_economy_3 = {
-			picture = generic_pp
-
-			allowed = {
-				tag = EUR
-			}
-
-			modifier = {
-				stability_factor = 0.01
-				army_attack_factor = -0.025
-				army_defence_factor = -0.025
-				army_org_factor = -0.025
-			}
-		}
-
-		#bad
-
-		brit_economy_1 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-				tag = EUR
-			}
-
-			modifier = {
-				stability_factor = -0.05
-				conscription_factor = -0.2
-				industrial_capacity_factory = -0.2
-				production_speed_buildings_factor = -0.1
-				consumer_goods_factor = 0.1
-				production_factory_efficiency_gain_factor = -0.2
-				production_factory_max_efficiency_factor = -0.2
-			}
-		}
-
-		brit_economy_2 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-				tag = EUR
-			}
-
-			modifier = {
-				stability_factor = -0.025
-				conscription_factor = -0.1
-				industrial_capacity_factory = -0.1
-				production_speed_buildings_factor = -0.05
-				consumer_goods_factor = 0.05
-				production_factory_efficiency_gain_factor = -0.1
-				production_factory_max_efficiency_factor = -0.1
-			}
-		}
-
-		# good
-		
-		brit_economy_4 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-				tag = EUR
-			}
-
-			modifier = {
-				stability_factor = 0.025
-				conscription_factor = 0.1
-				industrial_capacity_factory = 0.1
-				production_speed_buildings_factor = 0.05
-				consumer_goods_factor = -0.05
-				production_factory_efficiency_gain_factor = 0.1
-				production_factory_max_efficiency_factor = 0.1
-			}
-		}
-
-		brit_economy_5 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-				tag = EUR
-			}
-
-			modifier = {
-				stability_factor = 0.05
-				conscription_factor = 0.2
-				industrial_capacity_factory = 0.2
-				production_speed_buildings_factor = 0.1
-				consumer_goods_factor = -0.1
-				production_factory_efficiency_gain_factor = 0.2
-				production_factory_max_efficiency_factor = 0.2
-			}
-		}
-
-		british_majority_3 = {
-			picture = generic_pp_unity_bonus
-
-			allowed = {
-			}
-
-			removal_cost = -1
-
-			modifier = {
-				stability_factor = 0.02
-				political_power_gain = 0.25
-				council_drift = 0.01
-			}		
-		}
-
-		#####################################
 
 		steam_engines = {
 			picture = generic_pp_unity_bonus
@@ -1348,6 +1139,148 @@ ideas = {
 			modifier = {
                 army_leader_start_level = 2
 				military_leader_cost_factor = -0.25 
+	        }	
+	    }
+
+		EUR_europa_is_RED = {
+			picture = EUR_might_of_rome_3
+
+			removal_cost = -1
+			modifier = {
+                resistance_activity = -0.2
+				resistance_target = -0.2
+	        }	
+	    }
+
+		EUR_mandatory_conscription_service = {
+			picture = EUR_might_of_rome_3
+
+			removal_cost = -1
+			modifier = {
+                conscription = 0.03
+				modifier_army_sub_unit_irregulars_max_org_factor = 0.05
+	        }	
+	    }
+		EUR_stasi = {
+			picture = EUR_might_of_rome_3
+
+			removal_cost = -1
+			modifier = {
+                operative_slot = 1
+				supply_combat_penalties_on_core_factor = -0.1
+	        }	
+	    }
+		EUR_DDR_education = {
+			picture = EUR_might_of_rome_3
+
+			removal_cost = -1
+
+			on_remove = { set_country_flag = can_do_advanced_education  add_to_variable = { education_reforms_cost_from_modifiers = 0.2 } }
+			on_add = { clr_country_flag = can_do_advanced_education subtract_from_variable = { education_reforms_cost_from_modifiers = 0.2 } }
+			
+			modifier = { custom_modifier_tooltip = education_reform_cost_reduction_20 }
+		}
+		EUR_german_or_ELSE = {
+			picture = EUR_might_of_rome_3
+
+			removal_cost = -1
+			modifier = {
+                compliance_growth_on_our_occupied_states = 0.2
+				non_core_manpower = 0.5
+	        }		
+	    }
+		EUR_stasi_networks = {
+			picture = RED_revolutionist_plot
+			allowed = {
+			}
+			removal_cost = -1
+
+			modifier = {	
+				decryption_factor = 0.025
+				intel_network_gain_factor = 0.25
+				subversive_activites_upkeep = -0.25
+	        }	
+	    }
+		EUR_5_year_plan = {
+			picture = RED_revolutionist_plot
+			allowed = {
+			}
+			removal_cost = -1
+			on_remove = {
+				country_event = { id = nf_EUR.28 }
+			}
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.1
+				consumer_goods_factor = 0.1
+	        }	
+
+			research_bonus = { industry = 0.1 }
+	    }
+
+		EUR_diversity_is_weakness = {
+			picture = lenin
+			allowed = { NOT = { has_country_flag = EUR_diversity_intergration } }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.25
+				political_advisor_cost_factor = 0.25
+				materiel_manufacturer_cost_factor = 0.25
+				industrial_concern_cost_factor = 0.25
+				theorist_cost_factor = 0.25
+				mobilization_speed = -0.2
+				civics_work_ethics_cost_factor = 0.25
+				civics_child_labour_cost_factor = 0.25
+				civics_support_cost_factor = 0.25
+	        }	
+	    }
+		EUR_diversity_is_weakness_2 = {
+			picture = lenin
+			allowed = { NOT = { has_country_flag = EUR_diversity_intergration } }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.2
+				political_advisor_cost_factor = 0.2
+				materiel_manufacturer_cost_factor = 0.2
+				industrial_concern_cost_factor = 0.2
+				theorist_cost_factor = 0.2
+				mobilization_speed = -0.15
+				civics_work_ethics_cost_factor = 0.2
+				civics_child_labour_cost_factor = 0.2
+				civics_support_cost_factor = 0.2
+	        }	
+	    }
+		EUR_diversity_is_weakness_shared_identity = {
+			picture = lenin
+			allowed = { NOT = { has_country_flag = EUR_diversity_intergration } }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.2
+				political_advisor_cost_factor = 0.1
+				materiel_manufacturer_cost_factor = 0.1
+				industrial_concern_cost_factor = 0.1
+				theorist_cost_factor = 0.1
+				mobilization_speed = -0.15
+				civics_work_ethics_cost_factor = 0.1
+				civics_child_labour_cost_factor = 0.1
+				civics_support_cost_factor = 0.1
+	        }	
+	    }
+		EUR_diversity_is_weakness_intergration = {
+			picture = lenin
+
+			allowed = { NOT = { has_country_flag = EUR_diversity_intergration } }
+
+			removal_cost = -1
+
+			modifier = {
+				political_advisor_cost_factor = 0.2
+				materiel_manufacturer_cost_factor = 0.2
+				industrial_concern_cost_factor = 0.2
+				theorist_cost_factor = 0.2
+				civics_work_ethics_cost_factor = 0.2
+				civics_child_labour_cost_factor = 0.2
+				civics_support_cost_factor = 0.2
 	        }	
 	    }
 	}
