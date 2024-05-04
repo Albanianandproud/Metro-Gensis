@@ -37,62 +37,25 @@ country_event = {
 
     option = { ## Council
         name = nf_EUR.2.b
-		hidden_effect = {
-			set_country_flag = europe_has_council
-			remove_country_leader_role = {
-				character = EUR_immigrant_collective
+		set_country_flag = europe_has_council
+        add_stability = 0.05
+		remove_country_leader_role = {
+			character = EUR_immigrant_collective
+			ideology = labour_council
+		}
+		add_country_leader_role = {
+			character = EUR_elective_council
+			country_leader={
 				ideology = labour_council
+				traits = { }
+				expire="2050.1.1.1"
 			}
-			add_country_leader_role = {
-				character = EUR_elective_council
-				country_leader={
-					ideology = labour_council
-					traits = { }
-					expire="2050.1.1.1"
-				}
-				promote_leader = yes
-			}
+			promote_leader = yes
 		}
         ai_chance = {
             base = 2.5
         }
     }
-}
-
-## Scavenging Run -- Successful
-country_event = { 
-    id = nf_EUR.3
-    title = nf_EUR.3.t
-    desc = nf_EUR.3.d
-    picture = "GFX_event (121)"
-
-	is_triggered_only = yes
-
-	option = { ## Yippe!!!
-		name = nf_EUR.3.a
-		capital_scope = {
-			add_resource = {
-			    type = scrap
-			    amount = 2
-			}
-		}
-		capital_scope = {
-			add_resource = {
-			    type = alloys
-			    amount = 1
-			}
-		}
-		capital_scope = {
-			add_resource = {
-			    type = components
-			    amount = 1
-			}
-		}
-		add_manpower = 20
-        ai_chance = {
-            base = 1
-        }
-	}
 }
 
 ## Scavenging Run -- UnSuccessful
@@ -215,7 +178,8 @@ country_event = {
 
     option = { 
         name = nf_EUR.12.a
-		add_political_power = 25
+		add_political_power = 50
+        add_stability = 0.05
         ai_chance = {
             base = 2.5
         }
@@ -710,8 +674,8 @@ country_event = {
                 traits = { EUR_amsel_trait  }
                 desc= "EUR_AMSEL_DESC"
             }
-            add_ideas = civis_border_3
         }
+        add_ideas = civis_border_3
         EUR_marshal = {
             add_skill_level = 1
         }

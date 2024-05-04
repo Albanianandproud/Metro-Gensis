@@ -15,7 +15,7 @@ focus_tree = {
 		icon = GFX_HNZ_internal_affairs
 		x = 6
 		y = 0
-		cost = 4
+		cost = 5
 		completion_reward = {
 			country_event = nf_EUR.1
 		}
@@ -49,10 +49,9 @@ focus_tree = {
 		relative_position_id = EUR_industrial_drive
 		x = 0
 		y = 1
-		cost = 5
-
+		cost = 6.5
 		completion_reward = {
-			country_event = nf_EUR.2
+			add_stability = 0.1
 		}
 		ai_will_do = {
 			factor = 2
@@ -70,7 +69,24 @@ focus_tree = {
 		select_effect = { add_manpower = -10 }
 		completion_reward = {
 			add_manpower = 10
-			country_event = { id = nf_EUR.3 }
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 1
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 1
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = components
+					amount = 1
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -80,26 +96,22 @@ focus_tree = {
 	focus = {
 		id = EUR_increase_military_drive
 		icon = GFX_volunteer_expedition
-
 		prerequisite = { focus = EUR_industrial_drive }
-
 		relative_position_id = EUR_industrial_drive
 		x = -2
 		y = 1
 		cost = 6.5
-
+		completion_reward = {
+			add_manpower = 20
+		}
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			country_event = { id = nf_EUR.5 }
 		}
 	}
 
 	focus = {
 		id = EUR_further_industrial_drive
-		icon = GFX_cog_blueprints
+		icon = GFX_TRT_technician_trade
 
 		prerequisite = { focus = EUR_industrial_drive }
 
@@ -109,11 +121,15 @@ focus_tree = {
 		cost = 6.5
 		
 		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 1
-				uses = 1
-				category = construction
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
 			}
 		}
 
@@ -135,9 +151,7 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_controlled_state = {
-				limit = {
-					NOT = { has_state_category = pastoral }
-				}
+				limit = { NOT = { has_state_category = pastoral } }
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 				    type = industrial_complex
@@ -168,7 +182,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6.5
-
 		completion_reward = {
 			247 = {
 				add_resource = {
@@ -266,12 +279,17 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
 			random_owned_controlled_state = {
 				limit = { NOT = { has_state_category = pastoral } }
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 				    type = arms_factory
-				    level = 2
+				    level = 1
 				    instant_build = yes
 				}
 			}
@@ -470,7 +488,6 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6.5
-		available = { has_country_flag = EUR_military_flag }
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
@@ -896,7 +913,7 @@ focus_tree = {
 		available = { has_country_flag = europe_has_council }
 		x = 30
 		y = 0
-		cost = 4
+		cost = 5
 		completion_reward = {
 			country_event = nf_EUR.12
 		}
@@ -925,7 +942,7 @@ focus_tree = {
 	focus = {
 		id = EUR_remove_undesirables_from_council
 		icon = GFX_RED_squash_dissidents
-		available = { has_war_support > 0.75 NOT = { has_government = council has_government = community } }
+		available = { has_war_support > 0.85 NOT = { has_government = council has_government = community } }
 		prerequisite = { focus = EUR_start_of_political_reform }
 		mutually_exclusive = { focus = EUR_democratic_reforms }
 		relative_position_id = EUR_start_of_political_reform
@@ -933,6 +950,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
+			add_war_support = -0.25
 			add_popularity = { ideology = community popularity = -1 }
 			add_popularity = { ideology = council popularity = -1 }
 		}
@@ -963,7 +981,7 @@ focus_tree = {
 	focus = {
 		id = EUR_democratic_reforms
 		icon = GFX_HNZ_democracy_1
-		available = { has_stability > 0.75 NOT = { has_government = dictatorial has_government = oligarch } }
+		available = { has_stability > 0.85 NOT = { has_government = dictatorial has_government = oligarch } }
 		prerequisite = { focus = EUR_start_of_political_reform }
 		mutually_exclusive = { focus = EUR_remove_undesirables_from_council }
 		relative_position_id = EUR_start_of_political_reform
@@ -971,6 +989,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
+			add_stability = -0.25
 			add_popularity = { ideology = dictatorial popularity = -1 }
 			add_popularity = { ideology = oligarch popularity = -1 }
 		}
@@ -1034,6 +1053,8 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
+			add_war_support = 0.05
+			add_political_power = 100
 		}
 		ai_will_do = {
 			factor = 2
@@ -1146,6 +1167,8 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
 		}
 		ai_will_do = {
 			factor = 2
@@ -1797,16 +1820,15 @@ focus_tree = {
 		relative_position_id = EUR_an_economy
 		x = 0
 		y = 1
-		cost = 5
+		cost = 6.5
 		completion_reward = {
-			add_political_power = 100
+			add_stability = 0.75
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
-
-
 	focus = {
 		id = EUR_a_hub_of_science
 		icon = GFX_RCH_science
@@ -3256,7 +3278,7 @@ focus_tree = {
 		relative_position_id = EUR_ostalgie
 		x = 0
 		y = 1
-		cost = 3
+		cost = 6.5
 		completion_reward = {
 			add_popularity = { ideology = council popularity = -0.1 }
 		}
@@ -3267,11 +3289,12 @@ focus_tree = {
 	focus = {
 		id = EUR_mutinies_in_the_army
 		icon = GFX_RED_crowd_stills
+		available = { oligarch > 0.14 }
 		prerequisite = { focus = EUR_rising_dissent }
 		relative_position_id = EUR_rising_dissent
 		x = 0
 		y = 1
-		cost = 3
+		cost = 6.5
 		completion_reward = {
 			add_stability = -0.1
 			add_timed_idea = { idea = commie_mutiny days = 135 }
@@ -3289,7 +3312,7 @@ focus_tree = {
 		relative_position_id = EUR_mutinies_in_the_army
 		x = 0
 		y = 1
-		cost = 3
+		cost = 6.5
 		completion_reward = {
 			add_ideas = sabotaged_industry_community
 			add_popularity = { ideology = oligarch popularity = 0.05 }
@@ -3301,19 +3324,19 @@ focus_tree = {
 	focus = {
 		id = EUR_lessons_from_the_reds
 		icon = GFX_RED_collectivization_of_tunnels
-		available = { oligarch > 0.44 }
+		available = { oligarch > 0.49 }
 		prerequisite = { focus = EUR_workers_uprising }
 		relative_position_id = EUR_workers_uprising
 		x = 0
 		y = 1
-		cost = 2.2
+		cost = 5
 		completion_reward = {
 			country_event = nf_EUR.27
 			remove_ideas = sabotaged_industry_community
 			start_civil_war = {
 				ideology = council
 				size = 0.5
-				army_ratio = 0.5
+				army_ratio = 0.75
 			}
 		}
 		ai_will_do = {
@@ -3328,7 +3351,7 @@ focus_tree = {
 		relative_position_id = EUR_lessons_from_the_reds
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 5
 		completion_reward = {
 			country_event = nf_EUR.30
 		}
@@ -4114,7 +4137,7 @@ focus_tree = {
 	}
 	focus = {
 		id = EUR_true_eqaulity
-		icon = GFX_EUR_one_chain_one_aim
+		icon = GFX_EUR_civil_service_roles
 		prerequisite = { focus = EUR_forge_a_new_path }
 
 		relative_position_id = EUR_forge_a_new_path
