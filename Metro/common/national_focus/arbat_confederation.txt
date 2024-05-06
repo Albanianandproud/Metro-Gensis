@@ -3271,6 +3271,74 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = ARB_that_pygmy_thing_in_smolensk
+		icon = GFX_RED_special_teams
+		x = 7
+		y = 1
+		cost = 6.5
+		available = {
+			MUT = { exists = yes }
+			SPT = { exists = no }
+			has_war = no
+		}
+		prerequisite = { focus = ARB_stalker_civilian_prioritisation }
+		relative_position_id = ARB_stalker_civilian_prioritisation
+		will_lead_to_war_with = MUT
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = MUT
+			}
+		}
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 35
+				date > 2030.1.1
+			}
+		}
+	}
+
+	focus = {
+		id = ARB_that_pygmy_thing_in_smolensk_2
+		icon = GFX_RED_special_teams
+		x = 0
+		y = 1
+		cost = 6.5
+		available = {
+			MUT = { exists = no }
+		}
+		prerequisite = { focus = ARB_that_pygmy_thing_in_smolensk }
+		relative_position_id = ARB_that_pygmy_thing_in_smolensk
+		completion_reward = {
+			MUT = {
+				capital_scope = { add_manpower = 100 }
+			}
+			effect_tooltip = {
+				every_owned_state = {
+					limit = {
+						is_core_of = MUT
+						is_owned_by = ARB
+					}
+					add_core_of = PREV
+				}
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = MUT
+						is_owned_by = ARB
+					}
+					add_core_of = PREV
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
 	##
 	## Stalker Branch 
 	##
