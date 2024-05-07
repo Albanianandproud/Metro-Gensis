@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 	default = no
-	continuous_focus_position = { x = 8500 y = 50 }
+	continuous_focus_position = { x = 9500 y = 50 }
 
 	focus = {
 		id = RCH_movements_against_the_fuhrer
@@ -3940,8 +3940,8 @@ focus_tree = {
 	focus = {
 		id = RCH_outwards
 		icon = GFX_RCH_looking_outwards
-		cost = 2
-		x = 68
+		cost = 5
+		x = 70
 		y = 0
 		available = {
 			OR = {
@@ -3950,7 +3950,6 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			custom_effect_tooltip = RCH_incompleted_subtree_tt
 			RCH_reclusive_upgrade_idea = yes
 			country_event = nf_RCH.11
 		}
@@ -3969,11 +3968,9 @@ focus_tree = {
 				is_puppet = no
 				is_subject = no
 			}
-			AND = {
-				has_country_flag = RCH_recruit_stortbeker
-			}
+			has_country_flag = RCH_recruit_stortbeker
 		}
-		x = 5
+		x = 6
 		y = 1
 		cost = 5
 		relative_position_id = RCH_outwards
@@ -4183,21 +4180,19 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_outwards
 		}
-		available = {
-			
-		}
 		mutually_exclusive = {
 			focus = RCH_anti_communist_dogma
 		}
-		x = -5
+		x = -4
 		y = 1
-		cost = 3
+		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			add_ideas = RCH_anti_capitalist_dogma
+			add_war_support = 0.05
 		}
 		ai_will_do = {
-			factor = 0.8
+			factor = 2
 		}
 	}
 	focus = {
@@ -4214,13 +4209,65 @@ focus_tree = {
 		}
 		x = -2
 		y = 1
-		cost = 3
+		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			add_ideas = RCH_anti_communist_dogma
+			add_war_support = 0.05
 		}
 		ai_will_do = {
-			factor = 0.8
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_surface_expeditions_1
+		icon = GFX_RCH_reinburse_the_stockpile
+		prerequisite = { focus = RCH_outwards }
+		mutually_exclusive = { focus = RCH_surface_expeditions_2 }
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = components
+					amount = 6
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_surface_expeditions_2
+		icon = GFX_RCH_military_doctrine
+		prerequisite = { focus = RCH_outwards }
+		mutually_exclusive = { focus = RCH_surface_expeditions_1 }
+		x = 4
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_outwards
+		completion_reward = {
+			set_technology = {
+				tech_special_forces_equipment_reliability = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
 		}
 	}
 	focus = {
@@ -4233,7 +4280,7 @@ focus_tree = {
 				has_war_support > 0.75
 			}
 		}
-		cost = 2
+		cost = 2.2
 		x = 0
 		y = 3
 		relative_position_id = RCH_outwards
@@ -4287,7 +4334,6 @@ focus_tree = {
 			}
 		}
 	}
-
 	focus = {
 		id = RCH_expansion
 		icon = GFX_RCH_march_into_trubnaya
@@ -4364,9 +4410,7 @@ focus_tree = {
 
 		available = {
 			has_war = no
-			428 = {
-				is_owned_by = RCH
-			}
+			428 = { is_owned_by = RCH }
 		}
 		
         will_lead_to_war_with = ULI
@@ -4385,9 +4429,7 @@ focus_tree = {
  				generator = { 28 }
  			}
  			if = {
- 				limit = {
- 					is_ai = yes
- 				}
+ 				limit = { is_ai = yes }
  				428 = {
  					add_building_construction = {
     					type = supply_node 
@@ -4400,25 +4442,177 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_expansion3
+		icon = GFX_RCH_friendly
+		cost = 6.5
+		x = 3
+		y = 1
+		relative_position_id = RCH_lebensraum
+		mutually_exclusive = { focus = RCH_expansion4 }
+		prerequisite = { focus = RCH_lebensraum }
+		available = { is_neighbor_of = BRN BRN = { is_puppet = no has_government = dictatorial } }
+		bypass = {
+			OR = {
+				NOT = { country_exists = BRN }
+				has_war_with = BRN
+			}
+		}
+		completion_reward = {
+			puppet = BRN
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_expansion4
+		icon = GFX_RCH_commander4
+		cost = 6.5
+		x = 5
+		y = 1
+		relative_position_id = RCH_lebensraum
+		mutually_exclusive = { focus = RCH_expansion3 }
+		prerequisite = { focus = RCH_lebensraum }
+		available = { is_neighbor_of = BRN }
+		bypass = {
+			OR = {
+				NOT = { country_exists = BRN }
+				has_war_with = BRN
+			}
+		}
+		will_lead_to_war_with = BRN
+		completion_reward = {
+			400 = { add_claim_by = ROOT }
+			create_wargoal = {
+				type = take_state_focus
+				target = BRN
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_expansion5
+		icon = GFX_RCH_officer_purges
+		cost = 6.5
+		x = 1
+		y = 1
+		relative_position_id = RCH_expansion3
+		prerequisite = { focus = RCH_expansion3 focus = RCH_expansion4 }
+		available = { BRK = { exists = yes } }
+		bypass = {
+			OR = {
+				NOT = { country_exists = BRK }
+				has_war_with = BRK
+			}
+		}
+		will_lead_to_war_with = BRK
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = BRK
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_expansion6
+		icon = GFX_RCH_stalker_deathsquad
+		cost = 6.5
+		x = -3
+		y = 1
+		relative_position_id = RCH_lebensraum
+		prerequisite = { focus = RCH_lebensraum }
+		available = { is_neighbor_of = KUZ }
+		bypass = {
+			OR = {
+				NOT = { country_exists = KUZ }
+				has_war_with = RED
+			}
+		}
+		completion_reward = {
+			activate_decision = RCH_KUZ_borderwar
+			custom_effect_tooltip =  RCH_KUZ_borderwar_tooltip
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_expansion7
+		icon = GFX_RCH_stormtrooper
+		cost = 6.5
+		x = -5
+		y = 1
+		relative_position_id = RCH_lebensraum
+		prerequisite = { focus = RCH_lebensraum }
+		available = { is_neighbor_of = TRB }
+		bypass = {
+			OR = {
+				NOT = { country_exists = TRB }
+				has_war_with = TRB
+			}
+		}
+		will_lead_to_war_with = TRB
+		completion_reward = {
+			400 = { add_claim_by = ROOT }
+			create_wargoal = {
+				type = take_state_focus
+				target = TRB
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = RCH_expansion8
+		icon = GFX_RCH_elitearmy
+		cost = 6.5
+		x = -1
+		y = 1
+		relative_position_id = RCH_expansion6
+		prerequisite = { focus = RCH_expansion6 focus = RCH_expansion7 }
+		available = { KUZ = { exists = yes } }
+		bypass = {
+			OR = {
+				NOT = { country_exists = KUZ }
+				has_war_with = KUZ
+			}
+		}
+		will_lead_to_war_with = KUZ
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = KUZ
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = RCH_expansion_barrikadnaya_core
 		icon = GFX_RCH_barrikadnaya_core
 		cost = 6.5
-
 		x = 0
 		y = 1
 		relative_position_id = RCH_expansion2
-
-		prerequisite = {
-			focus = RCH_expansion2
-		}
-
+		prerequisite = { focus = RCH_expansion2 }
 		available = {
-			418 = {
-                is_owned_by = ROOT
-			}
-			149 = {
-                is_owned_by = ROOT
-			}
+			418 = { is_owned_by = ROOT }
+			149 = { is_owned_by = ROOT }
 			has_war = no
 		}
 
@@ -4435,37 +4629,46 @@ focus_tree = {
 				}
 			}
 		}
-		
-		ai_will_do = {
-			factor = 50
+		ai_will_do = { factor = 50 }
+	}
+	focus = {
+		id = RCH_finish_off_1905
+		icon = GFX_RCH_barrikadnaya_core
+		cost = 6.5
+		x = -1
+		y = 1
+		relative_position_id = RCH_expansion_barrikadnaya_core
+		prerequisite = { focus = RCH_expansion_barrikadnaya_core }
+		available = {
+			418 = { is_owned_by = ROOT }
+			ULI = { exists = yes }
+			is_neighbor_of = ULI
+			has_war = no
 		}
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = ULI
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = { factor = 50 }
 	}
 	focus = {
 		id = RCH_expansion_trubnaya_core
 		icon = GFX_RCH_trubnaya_core
 		cost = 6.5
-
 		x = 0
 		y = 1
 		relative_position_id = RCH_expansion
-
-		prerequisite = {
-			focus = RCH_expansion
-		}
-
+		prerequisite = { focus = RCH_expansion }
 		available = {
-			312 = {
-                is_owned_by = ROOT
-			}
-			181 = {
-                is_owned_by = ROOT
-			}
-			120 = {
-                is_owned_by = ROOT
-			}
+			312 = { is_owned_by = ROOT }
+			181 = { is_owned_by = ROOT }
+			120 = { is_owned_by = ROOT }
 			has_war = no
 		}
-
 		completion_reward = {
 			312 = { add_core_of = ROOT }
 			181 = { add_core_of = ROOT }
@@ -4480,87 +4683,47 @@ focus_tree = {
 				}
 			}
 		}
-
-		ai_will_do = {
-			factor = 50
-		}
+		ai_will_do = { factor = 50 }
 	}
-
 	focus = {
-		id = RCH_expansion_pls_tunnel
-		icon = GFX_RCH_expand_into_polis
+		id = RCH_finish_off_SAV
+		icon = GFX_RCH_trubnaya_core
 		cost = 6.5
-		prerequisite = {
-			focus = RCH_expansion_trubnaya_core
-			focus = RCH_expansion_barrikadnaya_core
-		}
 		x = 1
-		y = 2
-		relative_position_id = RCH_expansion2
-
-        available = {
-			429 = { is_owned_by = RUI }
-			220 = { is_owned_by = RUI }
-		}
-		bypass = {
-		    NOT = {
-			    429 = { is_owned_by = RUI }
-			    220 = { is_owned_by = RUI }
-			}
-	    }
-		completion_reward = {
-		    transfer_state = 429
-		    429 = { add_core_of = ROOT }
-
-		    transfer_state = 220
-		    220 = { add_core_of = ROOT }
-		}
-	}
-
-	focus = {
-		id = RCH_expansion_pls_annex
-		icon = GFX_RCH_polis_annex
-		cost = 6.5
-
-		x = 0
 		y = 1
-		relative_position_id = RCH_expansion_pls_tunnel
-
-		prerequisite = {
-			focus = RCH_expansion_pls_tunnel
-		}
-
+		relative_position_id = RCH_expansion_trubnaya_core
+		prerequisite = { focus = RCH_expansion_trubnaya_core }
 		available = {
+			312 = { is_owned_by = ROOT }
+			SAV = { exists = yes }
+			is_neighbor_of = SAV
 			has_war = no
 		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = PLS }
-				has_war_with = PLS
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = SAV
+				expire = 0
+				generator = { 28 }
 			}
 		}
-
-		completion_reward = {
-		    270 = { add_core_of = ROOT }
-		}
+		ai_will_do = { factor = 50 }
 	}
 
 	focus = {
 		id = RCH_targetreds
-		icon = GFX_RCH_new_order
-		cost = 4.3
-		prerequisite = {
-			focus = RCH_lebensraum
-		}
-		x = -3
-		y = 1
-		relative_position_id = RCH_lebensraum
+		icon = GFX_RCH_expand_our_domain
+		cost = 8.6
+		prerequisite = { focus = RCH_expansion_barrikadnaya_core }
+		prerequisite = { focus = RCH_expansion_trubnaya_core }
+		x = 0
+		y = 2
+		relative_position_id = RCH_expansion_barrikadnaya_core
 
 		available = {
 			RED = { exists = yes }
 			has_war = no
-			date > 2034.1.1
+			date > 2034.6.1
 		} 
 
 		bypass = {
@@ -4584,9 +4747,166 @@ focus_tree = {
 				factor = 10
 				date > 2034.6.1
 			}
-		 }
+		}
 	}
 
+	focus = {
+		id = RCH_targetreds_2
+		icon = GFX_RCH_bulwark_against_bolshevism
+		cost = 5
+		prerequisite = { focus = RCH_targetreds }
+		x = 0
+		y = 1
+		relative_position_id = RCH_targetreds
+		available = { has_war_with = RED } 
+		bypass = {
+			OR = {
+				NOT = { country_exists = RED }
+				has_war_with = RED
+			}
+		}
+		completion_reward = {
+			division_template = {
+				name = "Deathsquad"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+				support = {
+					field_hospital = { x = 0 y = 0 }
+					gatling_support = { x = 0 y = 1 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	focus = {
+		id = RCH_targetreds_3
+		icon = GFX_RCH_a_new_people
+		cost = 8.6
+		prerequisite = { focus = RCH_targetreds_2 }
+		x = -1
+		y = 1
+		relative_position_id = RCH_targetreds_2
+		available = { 
+			RED = { exists = no }
+			NOT = { has_war_with = RED } 
+			330 = { is_owned_by = ROOT }
+			241 = { is_owned_by = ROOT }
+			362 = { is_owned_by = ROOT }
+			350 = { is_owned_by = ROOT }
+			349 = { is_owned_by = ROOT }
+		} 
+		completion_reward = {
+			330 = { add_manpower = -250 add_core_of = ROOT }
+			241 = { add_manpower = -250 add_core_of = ROOT }
+			362 = { add_manpower = -250 add_core_of = ROOT }
+			350 = { add_manpower = -250 add_core_of = ROOT }
+			349 = { add_manpower = -250 add_core_of = ROOT }
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	focus = {
+		id = RCH_expansion_pls_tunnel
+		icon = GFX_RCH_expand_into_polis
+		cost = 6.5
+		prerequisite = { focus = RCH_expansion_barrikadnaya_core }
+		prerequisite = { focus = RCH_expansion_trubnaya_core }
+		x = 2
+		y = 3
+		relative_position_id = RCH_expansion2
+        available = {
+			220 = { is_owned_by = RUI }
+		}
+		bypass = {
+		    NOT = { 220 = { is_owned_by = RUI } }
+	    }
+		completion_reward = {
+		    transfer_state = 220
+		    220 = { add_core_of = ROOT }
+		}
+		ai_will_do = { factor = 50 }
+	}
+	focus = {
+		id = RCH_expansion_pls_annex
+		icon = GFX_RCH_polis_annex
+		cost = 8.6
+		x = 0
+		y = 1
+		relative_position_id = RCH_expansion_pls_tunnel
+		prerequisite = { focus = RCH_expansion_pls_tunnel }
+		available = { has_war = no }
+		bypass = {
+			OR = {
+				NOT = { country_exists = PLS }
+				has_war_with = PLS
+			}
+		}
+		completion_reward = {
+			270 = { add_core_of = ROOT }
+		}
+		ai_will_do = { factor = 50 }
+	}
+	focus = {
+		id = RCH_war_against_the_capitalists
+		icon = GFX_RCH_elite_force
+		cost = 8.6
+		x = -1
+		y = 1
+		relative_position_id = RCH_expansion_pls_annex
+		prerequisite = { focus = RCH_expansion_pls_annex }
+		available = { has_war = no }
+		bypass = {
+			OR = {
+				NOT = { country_exists = HNZ }
+				has_war_with = HNZ
+			}
+		}
+		will_lead_to_war_with = HNZ
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = HNZ
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = { factor = 50 }
+	}
+	focus = {
+		id = RCH_thousand_year_reich
+		icon = GFX_RCH_a_new_fuhrer
+		cost = 8.6
+		x = 1
+		y = 1
+		relative_position_id = RCH_expansion_pls_annex
+		prerequisite = { focus = RCH_expansion_pls_annex }
+		available = { 270 = { is_owned_by = ROOT } }
+		completion_reward = {
+			add_ideas = RCH_the_thousand_year_reich
+		}
+		ai_will_do = { factor = 50 }
+	}
 	focus = {
 		id = RCH_hole_alliance
 		icon = GFX_RCH_new_order
@@ -4594,10 +4914,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infiltrate_paveletskaya
 		}
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = RCH_infiltrate_paveletskaya
-
 		available = {
 			PVL = {
 				exists = yes
@@ -4640,11 +4959,11 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 3.5
+		cost = 4.4
 		relative_position_id = RCH_hole_alliance
 		completion_reward = {
 			PVL = { 
-				army_experience = 25 
+				army_experience = 35
 				add_equipment_to_stockpile = {
 					type = conventional_infantry_equipment_1
 					amount = 20
@@ -4676,7 +4995,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 3.5
+		cost = 4.4
 		relative_position_id = RCH_hole_alliance
 		completion_reward = {
 			PVL = {
@@ -4710,7 +5029,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 3.5
+		cost = 4.4
 		relative_position_id = RCH_hole_alliance1
 		completion_reward = {
 			375 = {

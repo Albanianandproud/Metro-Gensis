@@ -8,11 +8,35 @@ country_event = {	## Stortbeker spawns somewhere in the south
     picture = ccc_mutant
 	immediate = {
 		hidden_effect = {
-			random_owned_state = {
-				prioritize = { 407 240 380 388 } ## Basically we prefer if Stortbeker spawns in these states.
-				limit = { is_owned_by = ROOT }
-				set_state_flag = STB_starting_point
-				STB = { set_capital = { state = PREV } }
+			random_list = {
+				25 = {
+					407 = {
+						add_manpower = 50
+						set_state_flag = STB_starting_point
+						STB = { set_capital = { state = PREV } }
+					}
+				}
+				25 = {
+					240 = {
+						add_manpower = 50
+						set_state_flag = STB_starting_point
+						STB = { set_capital = { state = PREV } }
+					}
+				}
+				25 = {
+					380 = {
+						add_manpower = 50
+						set_state_flag = STB_starting_point
+						STB = { set_capital = { state = PREV } }
+					}
+				}
+				25= {
+					388 = {
+						add_manpower = 50
+						set_state_flag = STB_starting_point
+						STB = { set_capital = { state = PREV } }
+					}
+				}
 			}
 			every_state = {
 				limit = { has_state_flag = STB_starting_point }
@@ -39,10 +63,35 @@ country_event = {	## Stortbeker spawns somewhere in the south
 			}
 			complete_national_focus = dictatorial_1
 			complete_national_focus = dictatorial_ideology_change
+			hidden_effect = {
+				division_template = {
+					name = "Deathsquad"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						special_forces = { x = 0 y = 0 }
+						special_forces = { x = 0 y = 1 }
+						special_forces = { x = 0 y = 2 }
+						special_forces = { x = 0 y = 3 }
+						special_forces = { x = 0 y = 4 }
+					}
+					support = {
+						field_hospital = { x = 0 y = 0 }
+						gatling_support = { x = 0 y = 1 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}	
+			}
 		}
-		## send out 2 events
-		## 1 to RCH 
-		## and 1 to neighbouring countries
 		every_possible_country = {
 			limit = {
 				OR = {
