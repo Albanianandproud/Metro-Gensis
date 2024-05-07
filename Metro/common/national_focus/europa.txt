@@ -3338,6 +3338,12 @@ focus_tree = {
 				size = 0.5
 				army_ratio = 0.75
 			}
+			hidden_effect = {
+				remove_opinion_modifier = {
+					target = RED
+					modifier = communist
+				}	
+			}
 		}
 		ai_will_do = {
 			factor = 250
@@ -3379,6 +3385,20 @@ focus_tree = {
 				uses = 1
 				ahead_reduction = 1
 				category = punch_pressing
+			}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
 			}
 		}
 		ai_will_do = {
@@ -3616,14 +3636,16 @@ focus_tree = {
 		cost = 6.5
 		available = {
 			GWC = { exists = no }
-			334 = { is_owned_by = ROOT 
-				AND = { compliance > 80 }
-			}
-			280 = { is_owned_by = ROOT 
-				AND = { compliance > 80 }
-			}
-			385 = { is_owned_by = ROOT 
-				AND = { compliance > 80 }
+			OR = {
+				334 = { is_owned_by = ROOT 
+					AND = { compliance > 80 }
+				}
+				280 = { is_owned_by = ROOT 
+					AND = { compliance > 80 }
+				}
+				385 = { is_owned_by = ROOT 
+					AND = { compliance > 80 }
+				}
 			}
 		}
 		completion_reward = {
