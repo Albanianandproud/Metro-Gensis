@@ -1,0 +1,327 @@
+add_namespace = nf_PEC
+
+country_event = { ## Failing Health Event 1
+    id = nf_PEC.1
+    title = nf_PEC.1.t
+    desc = nf_PEC.1.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.1.a
+		PEC_stepanov_health_fail = yes
+		add_stability = -0.05
+		add_popularity = { ideology = council popularity = -0.05 }
+		hidden_effect = { country_event = { id = nf_PEC.2 days = 600 random_days = 600 } }
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Failing Health Event 2
+    id = nf_PEC.2
+    title = nf_PEC.2.t
+    desc = nf_PEC.2.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.2.a
+		PEC_stepanov_health_fail = yes
+		add_popularity = { ideology = council popularity = -0.05 }
+		hidden_effect = { country_event = { id = nf_PEC.3 days = 600 random_days = 600 } }
+		add_stability = -0.05
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Failing Health Event 3
+    id = nf_PEC.3
+    title = nf_PEC.3.t
+    desc = nf_PEC.3.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.3.a
+		PEC_stepanov_health_fail = yes
+		add_popularity = { ideology = council popularity = -0.05 }
+		hidden_effect = { country_event = { id = nf_PEC.4 days = 600 random_days = 600 } }
+		add_stability = -0.05
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Failing Health Event 4 // Death
+    id = nf_PEC.4
+    title = nf_PEC.4.t
+    desc = nf_PEC.4.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		retire_country_leader = yes
+		set_country_leader_ideology = plutocracy
+	}
+
+	option = {
+		name = nf_PEC.4.a
+		PEC_stepanov_health_fail = yes
+		add_popularity = { ideology = council popularity = -0.1 }
+		add_stability = -0.05
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Failing Health Event 5 // Rejuvenescence
+    id = nf_PEC.5
+    title = nf_PEC.5.t
+    desc = nf_PEC.5.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.5.a
+		PEC_stepanov_recovery = yes
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+## Bormann coup option
+country_event = {
+    id = nf_PEC.6
+    title = nf_PEC.6.t
+    desc = nf_PEC.6.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.6.a
+		add_stability = 0.2
+		ai_chance = {
+            base = 2.5
+        }
+	}
+
+	option = {
+		name = nf_PEC.6.b
+		custom_effect_tooltip = PEC_bormann_coup
+		hidden_effect = { country_event = { id = nf_PEC.7 days = 20 random_days = 20 } }
+		ai_chance = {
+            base = 0.5
+        }
+	}
+}
+
+## Bormann coup
+country_event = {
+    id = nf_PEC.7
+    title = nf_PEC.7.t
+    desc = nf_PEC.7.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			retire_country_leader = yes
+			set_country_leader_ideology = mafia_state
+			set_cosmetic_tag = PEC_oligarch_bandit
+			set_politics = {
+				ruling_party = oligarch
+				elections_allowed = no
+				last_election = "1935.12.17"
+				election_frequency = 48
+				long_name = PEC_mafia_state_long
+				name = PEC_mafia_state
+			}	
+		}
+	}
+
+	option = {
+		name = nf_PEC.7.a
+		start_civil_war = {
+			ideology = council
+			size = 0.35
+			army_ratio = 0.35
+		}
+		## change focus tree 
+		ai_chance = {
+            base = 2500
+        }
+	}
+}
+
+## Golubev coup option
+country_event = {
+    id = nf_PEC.8
+    title = nf_PEC.8.t
+    desc = nf_PEC.8.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.8.a
+		add_war_support = 0.2
+		ai_chance = {
+            base = 2.5
+        }
+	}
+
+	option = {
+		name = nf_PEC.8.b
+		custom_effect_tooltip = PEC_golubev_coup
+		hidden_effect = { country_event = { id = nf_PEC.9 days = 20 random_days = 20 } }
+		ai_chance = {
+            base = 0.5
+        }
+	}
+}
+
+## Golubev coup
+country_event = {
+    id = nf_PEC.9
+    title = nf_PEC.9.t
+    desc = nf_PEC.9.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_cosmetic_tag = PEC_dictatorial_king
+			set_politics = {
+				ruling_party = dictatorial
+				elections_allowed = no
+				last_election = "1935.12.17"
+				election_frequency = 48
+				long_name = PEC_king_in_yellow_long
+				name = PEC_king_in_yellow
+			}	
+		}
+	}
+
+	option = {
+		name = nf_PEC.9.a
+		start_civil_war = {
+			ideology = council
+			size = 0.35
+			army_ratio = 0.35
+		}
+		## change focus tree 
+		ai_chance = {
+            base = 2500
+        }
+	}
+}
+
+country_event = { ## Introduction to country / warning of failing health
+    id = nf_PEC.10
+    title = nf_PEC.10.t
+    desc = nf_PEC.10.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.10.a
+		custom_effect_tooltip = PEC_civil_war_warning
+		hidden_effect = { country_event = { id = nf_PEC.1 days = 360 random_days = 360 } }
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Bormann gang event
+    id = nf_PEC.11
+    title = nf_PEC.11.t
+    desc = nf_PEC.11.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.11.a
+		add_ideas = PEC_dope_peddling_1
+		add_popularity = { ideology = oligarch popularity = -0.1 }
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Bormann gang event
+    id = nf_PEC.12
+    title = nf_PEC.12.t
+    desc = nf_PEC.12.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.11.a
+		add_popularity = { ideology = council popularity = 0.1 }
+		set_country_flag = PEC_bormann_settled
+		add_stability = -0.05
+		## remove core on koluz
+		409 = { remove_core_of = ROOT }
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = { ## Brotherhood in Yellow
+    id = nf_PEC.13
+    title = nf_PEC.13.t
+    desc = nf_PEC.13.d
+    picture = "GFX_event (12)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.13.a
+		add_popularity = { ideology = dictatorial popularity = 0.1 }
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_3
+			amount = 40
+			producer = RUS
+		}
+	}
+
+	option = {
+		name = nf_PEC.13.b
+		add_war_support = 0.05
+		add_political_power = 150
+	}
+}

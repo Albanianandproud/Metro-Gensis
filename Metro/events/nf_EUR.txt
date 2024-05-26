@@ -94,8 +94,7 @@ country_event = {
 
     option = { ## Council
         name = nf_EUR.8.a
-		add_war_support = 0.5
-		add_stability = -0.1
+		add_war_support = 0.1
         ai_chance = {
             base = 2.5
         }
@@ -568,10 +567,10 @@ country_event = {
             template_counter = 0
             regiments = {
                 irregulars = { x = 0 y = 0 }
-                irregulars = { x = 0 y = 1 }
-                irregulars = { x = 0 y = 2 }
-                irregulars = { x = 0 y = 3 }
-                irregulars = { x = 0 y = 4 }
+                irregulars = { x = 1 y = 0 }
+                irregulars = { x = 2 y = 0 }
+                irregulars = { x = 3 y = 0 }
+                irregulars = { x = 4 y = 0 }
             }
         }
         capital_scope = {
@@ -592,6 +591,7 @@ country_event = {
             planning_skill = 5
             logistics_skill = 4
         }
+        hidden_effect = { country_event = { id = nf_EUR.31 days = 7 random_days = 7 } }
         ai_chance = {
             base = 25
         }
@@ -629,7 +629,7 @@ country_event = {
     id = nf_EUR.29
     title = nf_EUR.29.t
     desc = nf_EUR.29.d
-    picture = "GFX_event (159)"
+    picture = "GFX_event (155)"
 
 	trigger = {
 		342 = { is_owned_by = EUR }
@@ -643,7 +643,7 @@ country_event = {
         set_technology = { tech_technician_pressing = 1 }
 		set_technology = { tech_technician_machining = 1}
         create_operative_leader = {
-            name = "Operative"
+            name = "Replikant"
             GFX = GFX_portrait_EUR_operative
             traits = {}
             bypass_recruitment = no
@@ -658,7 +658,7 @@ country_event = {
     id = nf_EUR.30
     title = nf_EUR.30.t
     desc = nf_EUR.30.d
-    picture = "GFX_event (27)"
+    picture = "GFX_event (93)"
 	
 	is_triggered_only = yes
 
@@ -675,9 +675,35 @@ country_event = {
                 desc= "EUR_AMSEL_DESC"
             }
         }
-        add_ideas = civis_border_3
+        add_ideas = civics_border_3
         EUR_marshal = {
             add_skill_level = 1
+        }
+        ai_chance = {
+            base = 25
+        }
+    }
+}
+country_event = { 
+    id = nf_EUR.31
+    title = nf_EUR.31.t
+    desc = nf_EUR.31.d
+    picture = "GFX_event (65)"
+	
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_EUR.31.a
+        add_manpower = 25
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_1
+            amount = 30
+            producer = RUS
+        }
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_2
+            amount = 15
+            producer = RUS
         }
         ai_chance = {
             base = 25

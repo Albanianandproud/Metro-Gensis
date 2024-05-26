@@ -1,0 +1,291 @@
+military_inexperience_category = {
+	inexperience_hire_technicians = {
+		cost = 150
+		days_remove = 100
+		fire_only_once = yes
+	
+		modifier = {
+			materiel_manufacturer_cost_factor = -0.6
+			industrial_concern_cost_factor = -0.6
+			theorist_cost_factor = -0.6
+		}
+		remove_effect = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.25
+				uses = 1
+				category = infantry_weapons
+			}
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_seek_support_from_HNZ = {	
+		visible = { NOT = { has_war_with = HNZ } HNZ = { exists = yes }}
+		available = {
+			HNZ = {
+				exists = yes
+				is_puppet = no 
+				has_opinion = {
+					target = ROOT
+					value > 9
+				}
+			}
+			NOT = { has_war_with = HNZ }
+		}
+		modifier = {
+			production_factory_max_efficiency_factor = 0.15
+		}
+		cost = 50
+		days_remove = 100
+		fire_only_once = yes
+		remove_effect = {
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_seek_support_from_KUZ = {
+		visible = { NOT = { has_war_with = KUZ } KUZ = { exists = yes }}
+		available = {
+			KUZ = {
+				exists = yes
+				is_puppet = no 
+				has_opinion = {
+					target = ROOT
+					value > 9
+				}
+			}
+			NOT = { has_war_with = KUZ }
+		}
+		modifier = {
+			production_factory_start_efficiency_factor = 0.15
+		}
+		cost = 50
+		days_remove = 45
+		fire_only_once = yes
+		remove_effect = {
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_seek_support_from_BAU = {
+		visible = { NOT = { has_war_with = BAU } BAU = { exists = yes }}
+		available = {
+			BAU = {
+				exists = yes
+				is_puppet = no 
+				has_opinion = {
+					target = ROOT
+					value > 9
+				}
+			}
+			NOT = { has_war_with = BAU }
+		}
+		modifier = {
+			line_change_production_efficiency_factor = 0.15
+		}
+		cost = 50
+		days_remove = 100
+		fire_only_once = yes
+		remove_effect = {
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_conduct_field_tests = {
+		available = { has_equipment = { infantry_equipment > 24 } }
+		cost = 45
+		days_remove = 45
+		fire_only_once = no
+		days_re_enable = 45
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -25
+			}
+		}
+		remove_effect = {
+			army_experience = 10
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_remodel_workshops = {
+		available = { num_of_civilian_factories_available_for_projects > 4 }
+		modifier = { civilian_factory_use = 5 }
+		cost = 45
+		days_remove = 100
+		fire_only_once = no
+		days_re_enable = 45
+
+		remove_effect = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.25
+				uses = 1
+				category = construction
+			}
+			effect_tooltip = {
+				custom_effect_tooltip = military_current_threshold_increase
+				add_to_variable = {
+					var = military_current_threshold
+					value = 1
+				}
+			}
+		}
+	}
+	inexperience_apply_knowledge = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = military_inefficiency_tooltip
+				check_variable = {
+					var = military_current_threshold
+					value = military_competency_threshold
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		custom_cost_text = command_power_50
+		custom_cost_trigger = { command_power > 49.9 }
+		days_remove = 75
+		fire_only_once = no
+		days_re_enable = 100
+		complete_effect = {
+			add_command_power = -50
+		}
+		remove_effect = {
+			GENERIC_militarize_industry = yes
+		}
+	}
+}
+
+PEC_bormann_gang_problems = {
+
+	PEC_trade_with_bandits_begin = {
+		cost = 0
+		days_remove = 14
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				add_advisor_role = {
+					Character = PEC_bormann
+					advisor = {
+						slot = political_advisor
+						idea_token = PEC_bormann
+						removal_cost = -1
+						can_be_fired = no
+						traits = { PEC_criminal_bastard }
+						ai_will_do = { factor = 20 }
+					}
+					activate = yes
+				}
+			}
+			hidden_effect = {
+				set_country_flag = PEC_bormann_is_advisor	
+			}
+		}
+
+		remove_effect = {
+			add_popularity = { ideology = oligarch popularity = -0.05 }
+		}
+	}
+
+	PEC_trade_with_bandits_1 = {
+		cost = 75
+		days_remove = 60
+		fire_only_once = no
+		days_re_enable = 90
+		available = { num_of_civilian_factories_available_for_projects > 2 }
+		modifier = { 
+			civilian_factory_use = 3 
+			research_speed_factor = 0.1
+		}
+		remove_effect = {
+			add_popularity = { ideology = oligarch popularity = -0.05 }
+		}
+	}
+
+	PEC_trade_with_bandits_2 = {
+		cost = 50
+		days_remove = 45
+		fire_only_once = no
+		days_re_enable = 90
+		available = { num_of_civilian_factories_available_for_projects > 2 }
+		modifier = { civilian_factory_use = 3 }
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
+			add_popularity = { ideology = oligarch popularity = -0.05 }
+		}
+	}
+
+	PEC_trade_with_bandits_3 = {
+		cost = 75
+		days_remove = 60
+		fire_only_once = no
+		days_re_enable = 90
+		available = { num_of_civilian_factories_available_for_projects > 2 }
+		modifier = {
+			civilian_factory_use = 3
+			min_export = 0.25
+			consumer_goods_factor = -0.1
+		}
+		remove_effect = {
+			add_popularity = { ideology = oligarch popularity = -0.05 }
+		}
+	}
+
+	PEC_remove_the_bandits = {
+		visible = { NOT = { has_country_flag = PEC_bormann_is_advisor }}
+		cost = 75
+		days_remove = 28
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = PEC_remove_bormann
+		}
+	}
+
+	PEC_remove_the_bandits_2 = {
+		visible = { has_country_flag = PEC_bormann_is_advisor }
+		cost = 150
+		days_remove = 35
+		fire_only_once = yes
+
+		remove_effect = {
+			custom_effect_tooltip = PEC_remove_bormann
+			add_popularity = { ideology = council popularity = -1 }
+			retire_character = PEC_bormann
+		}
+	}
+}

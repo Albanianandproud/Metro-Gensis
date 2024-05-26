@@ -16,6 +16,22 @@ scripted_gui = {
 					set_variable = { 
 						cost_to_core = PREV.state_population 
 					}
+					set_variable = { cost_to_core_civs = 0 }
+					set_variable = { cost_to_core_arms = 0 }
+					set_variable = { cost_to_core_infrastructure = 0 }
+
+					add_to_variable = { cost_to_core_civs = PREV.@industrial_complex }
+					add_to_variable = { cost_to_core_arms = PREV.@arms_factory }
+					add_to_variable = { cost_to_core_infrastructure = PREV.@infrastructure_level }
+
+					multiply_variable = { cost_to_core_civs = 5 }
+					multiply_variable = { cost_to_core_arms = 7 }
+					multiply_variable = { cost_to_core_infrastructure = 3 }
+					
+					add_to_variable = { cost_to_core = cost_to_core_civs }
+					add_to_variable = { cost_to_core = cost_to_core_arms }
+					add_to_variable = { cost_to_core = cost_to_core_infrastructure }
+
 					cost_divider = yes
 					round_variable = cost_to_core
 				}

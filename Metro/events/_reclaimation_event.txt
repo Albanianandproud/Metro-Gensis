@@ -10,7 +10,7 @@ country_event = {
 	option = {
 		name = reclaimation_event.mutants.a
 		add_manpower = 5
-        	add_stability = -0.01
+        add_stability = -0.015
 		add_equipment_to_stockpile = {
 		    type = infantry_equipment 
 		    amount = 5
@@ -29,10 +29,59 @@ country_event = {
 
 	option = {
 		name = reclaimation_event.2.a
-		
+		custom_effect_tooltip = reclaimation_event.2_tt
 		transfer_state = ROOT.state_colonised_id
-		add_state_core = ROOT.state_colonised_id
+		activate_mission = reclaim_timed_decision
 		RUI = { remove_state_core = ROOT.state_colonised_id }
+		hidden_effect = {
+			set_country_flag = reclaim_mission_activated
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = { has_dynamic_modifier = { modifier = infested_tunnel_modifier } }
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 40
+				}
+			}
+			else_if = {
+				limit = {
+					FROM.FROM = {
+						OR = { has_dynamic_modifier = { modifier = radiation_tunnel_modifier } }
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 60
+				}
+			}
+			else_if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							has_dynamic_modifier = { modifier = flooded_station_modifier }
+							has_dynamic_modifier = { modifier = anomaly_tunnel_modifier }
+						}
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 90
+				}
+			}
+			else = {
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 30
+				}
+			}
+			set_variable = {
+				var = reclaim_cost
+				value = 0
+			}
+		}
 	}
 }
 

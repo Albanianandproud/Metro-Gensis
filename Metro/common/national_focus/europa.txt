@@ -15,9 +15,44 @@ focus_tree = {
 		icon = GFX_HNZ_internal_affairs
 		x = 6
 		y = 0
-		cost = 5
+		cost = 6.5
 		completion_reward = {
 			country_event = nf_EUR.1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = EUR_seeking_out_talents
+		icon = GFX_generic_telephone
+		prerequisite = { focus = EUR_organise_the_immigrants }
+		relative_position_id = EUR_organise_the_immigrants
+		available = { has_civic_education_higher_2 = yes }
+		x = 6
+		y = 1
+		cost = 6.5
+		completion_reward = {
+			add_timed_idea = { idea = EUR_RD_talents days = 300 }
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = EUR_seeking_out_talents_2
+		icon = GFX_HNZ_workforce
+		prerequisite = { focus = EUR_seeking_out_talents }
+		relative_position_id = EUR_seeking_out_talents
+		available = { has_civic_education_higher_3 = yes NOT = { has_idea = EUR_RD_talents } }
+		x = 0
+		y = 1
+		cost = 6.5
+		completion_reward = {
+			set_technology = {
+				tech_infantry_equipment_reliability = 1
+			}
+			add_ideas = EUR_RD_talents
 		}
 		ai_will_do = {
 			factor = 2
@@ -33,7 +68,7 @@ focus_tree = {
 		cost = 6.5
 		completion_reward = {
 			add_tech_bonus = {
-				bonus = 0.5
+				bonus = 0.35
 				uses = 1
 				category = industry
 			}
@@ -102,7 +137,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
-			add_manpower = 20
+			add_manpower = 25
 		}
 		ai_will_do = {
 			factor = 2
@@ -128,6 +163,10 @@ focus_tree = {
 				}
 				add_resource = {
 					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
 					amount = 2
 				}
 			}
@@ -225,8 +264,7 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
-	focus = {  ### SHARED FOCUS
+	focus = {
 		id = EUR_an_economy
 		icon = GFX_generic_ammunition_1
 
@@ -315,7 +353,6 @@ focus_tree = {
 		ai_will_do = {
 			factor = 2
 		}
-
 		completion_reward = {
 			add_war_support = 0.1
 			add_ideas = EUR_interventionism_idea
@@ -345,11 +382,7 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
-
-
 	### MILITARY BRANCH
-
 	focus = {
 		id = EUR_the_new_prussia
 		icon = GFX_generic_bandit_friends_2
@@ -357,11 +390,11 @@ focus_tree = {
 		relative_position_id = EUR_organise_the_immigrants
 		x = 2
 		y = 1
-		cost = 5
+		cost = 6.5
 		completion_reward = {
 			add_tech_bonus = {
-				bonus = 0.25
-				uses = 2
+				bonus = 0.35
+				uses = 1
 				category = entrench_kits
 			}
 		}
@@ -369,27 +402,27 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
 	focus = {
 		id = EUR_q_democracy
-		icon = GFX_courtroom
-
-		prerequisite = { focus = EUR_the_new_prussia}
-
-		relative_position_id = EUR_the_new_prussia
-		x = 4
+		icon = GFX_AVT_reconcile
+		prerequisite = { focus = EUR_organise_the_immigrants }
+		relative_position_id = EUR_organise_the_immigrants
+		available = { 
+			OR = {
+				has_completed_focus = EUR_an_economy
+				has_stability > 0.6
+			}
+		}
+		x = 0
 		y = 1
 		cost = 6.5
-
 		completion_reward = {
 			country_event = nf_EUR.2
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
 	}
-
 	focus = {
 		id = EUR_westernisation
 		icon = GFX_EUR_westernization
@@ -410,7 +443,7 @@ focus_tree = {
 
 	focus = {
 		id = EUR_further_westernisation
-		icon = GFX_EUR_westernization
+		icon = GFX_ARB_hearth
 
 		prerequisite = { focus = EUR_westernisation}
 
@@ -586,13 +619,6 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
-	#################################
-	#								#
-	#	Defense against worm people #
-	#								#
-	#################################
-
 	focus = {
 		id = EUR_realise_the_threat
 		icon = GFX_anti_gwc
@@ -609,7 +635,6 @@ focus_tree = {
 			factor = 50
 		}
 	}
-
 	focus = {
 		id = EUR_defensive_line
 		icon = GFX_sandbag_reinforcement
@@ -1822,7 +1847,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		completion_reward = {
-			add_stability = 0.75
+			add_stability = 0.075
 			add_war_support = 0.05
 		}
 		ai_will_do = {
@@ -3336,7 +3361,7 @@ focus_tree = {
 			start_civil_war = {
 				ideology = council
 				size = 0.5
-				army_ratio = 0.75
+				army_ratio = 0.65
 			}
 			hidden_effect = {
 				remove_opinion_modifier = {
@@ -3432,7 +3457,7 @@ focus_tree = {
 		icon = GFX_EUR_conscription
 		prerequisite = { focus = EUR_lessons_from_the_reds_2 }
 		relative_position_id = EUR_lessons_from_the_reds_2
-		x = 12
+		x = 13
 		y = 1
 		cost = 6.5
 		completion_reward = {
@@ -3506,7 +3531,7 @@ focus_tree = {
 		prerequisite = { focus = EUR_lessons_from_the_reds_2 }
 		mutually_exclusive = { focus = EUR_a_new_era }
 		relative_position_id = EUR_lessons_from_the_reds_2
-		x = 9
+		x = 10
 		y = 1
 		cost = 6.5
 		completion_reward = {
@@ -3583,7 +3608,7 @@ focus_tree = {
 		available = { has_war = no }
 		prerequisite = { focus = EUR_lessons_from_the_reds_2 }
 		relative_position_id = EUR_lessons_from_the_reds_2
-		x = 3
+		x = 4
 		y = 1
 		cost = 6.5
 		completion_reward = {
@@ -3601,6 +3626,30 @@ focus_tree = {
 				}
 			}
 			add_timed_idea = { idea = EUR_5_year_plan days = 1500 }
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = EUR_centralized_planning_2
+		icon = GFX_RED_collectivization
+		available = { has_war = no has_idea = EUR_5_year_plan }
+		prerequisite = { focus = EUR_centralized_planning }
+		relative_position_id = EUR_centralized_planning
+		x = 0
+		y = 1
+		cost = 6.5
+		completion_reward = {
+			every_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_timed_idea = { idea = EUR_5_year_plan days = -100 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -4035,7 +4084,7 @@ focus_tree = {
 		prerequisite = { focus = EUR_lessons_from_the_reds_2 }
 		mutually_exclusive = { focus = EUR_follow_in_their_footsteps }
 		relative_position_id = EUR_lessons_from_the_reds_2
-		x = 5
+		x = 6
 		y = 1
 		cost = 6.5
 		completion_reward = {
