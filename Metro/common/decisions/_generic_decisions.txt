@@ -430,7 +430,7 @@ sancity_of_life = {
 		}
 
 		days_remove = 64
-		days_re_enable = 256
+		days_re_enable = 124
 
 		cost = 50
 
@@ -454,22 +454,22 @@ sancity_of_life = {
 		icon = category_spr_the_seeds_of_revolution
 
 		available = {
-			has_war_support > 0.59
+			has_war_support > 0.79
 		}
 
 		visible = {
-			has_war_support > 0.59
+			has_war_support > 0.79
 		}
 
 		fire_only_once = no
 
 		modifier = {
 		    war_support_weekly = 0.005
-		    stability_weekly = -0.003
+		    stability_weekly = -0.0025
 		}
 
 		days_remove = 64
-		days_re_enable = 188
+		days_re_enable = 124
 
 		cost = 50
 
@@ -487,7 +487,11 @@ sancity_of_life = {
 		icon = generic_speech
 
 		available = {
-			has_war_support < 0.59
+			has_war_support < 0.79
+		}
+
+		visible = {
+			threat > 0.15
 		}
 
 		fire_only_once = no
@@ -497,12 +501,9 @@ sancity_of_life = {
 		}
 
 		days_remove = 72
-		days_re_enable = 144
+		days_re_enable = 100
 
 		cost = 50
-
-		complete_effect = {
-		}
 
 		ai_will_do = {
 			base = 5
@@ -524,8 +525,8 @@ warfare_drastic_measures = {
 
         	available = {
 		    	any_state = {  state_population > 34 }
-		    	has_war_support > 0.19
-				has_stability > 0.19
+		    	has_war_support > 0.3
+				has_stability > 0.3
 			}
 
 			days_remove = 14
@@ -578,8 +579,8 @@ warfare_drastic_measures = {
     					amount > 1
 					}
 				}
-				has_war_support > 0.19
-				has_stability > 0.19
+				has_war_support > 0.3
+				has_stability > 0.3
 			}
 
 			days_remove = 14
@@ -591,8 +592,8 @@ warfare_drastic_measures = {
 			}
 
 			modifier = {
-               stability_weekly = -0.05
-               war_support_weekly = -0.05
+               stability_weekly = -0.02
+               war_support_weekly = -0.02
           	}
 
           	complete_effect = {
@@ -642,8 +643,8 @@ warfare_drastic_measures = {
         	icon = ger_military_buildup
 
         	available = {
-		    	has_war_support > 0.2
-		    	has_stability > 0.2
+		    	has_war_support > 0.35
+		    	has_stability > 0.35
 			}
 
         	days_remove = 70
@@ -654,11 +655,18 @@ warfare_drastic_measures = {
 				command_power > 9.9
 			}
 
+			cancel_trigger = {
+				OR = {
+					has_war_support < 0.2
+		    		has_stability < 0.2
+				}
+			}
+
 			modifier = {
-               stability_weekly = -0.05
-               war_support_weekly = -0.05
+               stability_weekly = -0.02
+               war_support_weekly = -0.02
                consumer_goods_factor = 0.1
-               production_factory_efficiency_gain_factor = 0.2
+               production_factory_efficiency_gain_factor = 0.1
           	}
 
           	complete_effect = {
@@ -668,7 +676,7 @@ warfare_drastic_measures = {
 			}
 
           	ai_will_do = {
-				base = 5
+				base = 1
 				modifier = {
 					add = 10
 					surrender_progress > 0.15
