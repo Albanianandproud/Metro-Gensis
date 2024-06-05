@@ -27,3 +27,153 @@ country_event = {
 		upgrade_education_tier_bandit = yes
 	}
 }
+
+country_event = {	
+	id = nf_metro_education.3
+	title = nf_metro_education.3.t
+	desc = nf_metro_education.3.d
+	picture = "GFX_event (109)"
+
+	mean_time_to_happen = { days = 600 }
+
+	trigger = {
+		OR = {
+			has_active_mission = improve_education_efforts_mission
+			has_active_mission = improve_education_efforts_bandit_mission
+		}
+	}
+
+	immediate = {	
+	} 
+
+	option = {
+		name = nf_metro_education.3.a
+		if = {
+			limit = { has_country_flag = is_bandit_nation }
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = 40
+			}
+		}
+		else = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = 40
+			}	
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	option = {
+		name = nf_metro_education.3.b
+		add_political_power = -35
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = {	
+	id = nf_metro_education.4
+	title = nf_metro_education.4.t
+	desc = nf_metro_education.4.d
+	picture = "GFX_event (109)"
+
+	mean_time_to_happen = { days = 600 }
+
+	trigger = {
+		OR = {
+			has_active_mission = improve_education_efforts_mission
+			has_active_mission = improve_education_efforts_bandit_mission
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = is_bandit_nation }
+				add_days_mission_timeout = {
+					mission = improve_education_efforts_bandit_mission
+					days = 30
+				}
+			}
+			else = {
+				add_days_mission_timeout = {
+					mission = improve_education_efforts_mission 
+					days = 30
+				}	
+			}
+		}	
+	} 
+
+	option = {
+		name = nf_metro_education.4.a
+		effect_tooltip = {
+			if = {
+				limit = { has_country_flag = is_bandit_nation }
+				add_days_mission_timeout = {
+					mission = improve_education_efforts_bandit_mission
+					days = 30
+				}
+			}
+			else = {
+				add_days_mission_timeout = {
+					mission = improve_education_efforts_mission 
+					days = 30
+				}	
+			}	
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+country_event = {	
+	id = nf_metro_education.5
+	title = nf_metro_education.5.t
+	desc = nf_metro_education.5.d
+	picture = "GFX_event (109)"
+
+	mean_time_to_happen = { days = 1000 }
+
+	trigger = {
+		OR = {
+			has_active_mission = improve_education_efforts_mission
+			has_active_mission = improve_education_efforts_bandit_mission
+		}
+	}
+
+	immediate = {
+	} 
+
+	option = {
+		name = nf_metro_education.4.a
+		if = {
+			limit = { has_country_flag = is_bandit_nation }
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_bandit_mission
+				days = -30
+			}
+		}
+		else = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -30
+			}	
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	option = {
+		name = nf_metro_education.5.b
+		add_political_power = 50
+		ai_chance = {
+			base = 0
+		}
+	}
+}

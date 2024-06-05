@@ -1630,11 +1630,6 @@ technologies = {
 				load_oob = "_spec_ops_template"
 			}
 			custom_effect_tooltip = UNLOCK_DIVISION_TEMPLATE
-			add_to_variable = {
-				var = spec_ops_cap_from_tech
-				value = 5
-			}
-			calc_battalion_limit = yes
 		}
 
 		path = {
@@ -2162,13 +2157,9 @@ technologies = {
 			special_forces_equipment_spartan
 		}
 
-		on_research_complete = {
-			custom_effect_tooltip = has_unlocked_required_schematics
-		}
+		on_research_complete = { custom_effect_tooltip = has_unlocked_required_schematics }
 
-		allow = {
-            has_country_flag = scav_reward_eq_spec_ops_spartan
-        }
+		allow = { has_country_flag = scav_reward_eq_spec_ops_spartan }
 					
 		research_cost = 3
 	    xp_research_type = army
@@ -2180,16 +2171,98 @@ technologies = {
 			name = infantry_folder
 			position = { x = @TECH_COLUMN_INFANTRY_SPECOPS_2 y = @TECH_YEAR_2037_Y }
 		}
-		
-		categories = {
-			infantry_weapons
+
+		sub_technologies = {
+			spartan_equipment_sub_tech_1
+			spartan_equipment_sub_tech_2
+			spartan_equipment_sub_tech_3
 		}
+		
+		categories = { infantry_weapons }
 		
 		ai_will_do = {
 			factor = 5
 			modifier = {
 				factor = 10
 				date > "2034.1.1"
+			}
+		}
+	}
+
+	spartan_equipment_sub_tech_1 = {
+		category_special_forces = {
+			hardness = 0.05
+			default_morale = 0.025
+		}
+
+		research_cost = 3
+	    xp_research_type = army
+		start_year = 2033
+
+		categories = {
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 20
+				date > "2033.1.1"
+			}
+		}
+	}
+
+	spartan_equipment_sub_tech_2 = {
+		category_special_forces = {
+			hardness = 0.15
+			armor_value = 0.15
+			#hills = {
+			#	attack = 0.10
+			#	defence = 0.10
+			#}
+			#urban = {
+			#	attack = 0.10
+			#	defence = 0.10
+			#}
+			#jungle = {
+			#	attack = 0.10
+			#	defence = 0.10
+			#}
+		}
+
+		research_cost = 3.5
+	    xp_research_type = army
+		start_year = 2034
+
+		categories = {
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 20
+				date > "2034.1.1"
+			}
+		}
+	}
+
+	spartan_equipment_sub_tech_3 = {
+		category_special_forces = {
+			max_organisation = 5
+			max_strength = 1
+		}
+
+		research_cost = 4
+	    xp_research_type = army
+		start_year = 2035
+
+		categories = {
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 20
+				date > "2035.1.1"
 			}
 		}
 	}

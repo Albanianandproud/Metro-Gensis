@@ -13,6 +13,7 @@ country_event = { ## Failing Health Event 1
 		name = nf_PEC.1.a
 		PEC_stepanov_health_fail = yes
 		add_stability = -0.05
+		add_political_power = -50
 		add_popularity = { ideology = council popularity = -0.05 }
 		hidden_effect = { country_event = { id = nf_PEC.2 days = 600 random_days = 600 } }
 		ai_chance = {
@@ -37,6 +38,7 @@ country_event = { ## Failing Health Event 2
 		hidden_effect = { country_event = { id = nf_PEC.3 days = 600 random_days = 600 } }
 		hidden_effect = { country_event = { id = nf_PEC.14 days = 500 random_days = 500 } }
 		add_stability = -0.05
+		add_political_power = -50
 		ai_chance = {
             base = 2.5
         }
@@ -58,6 +60,7 @@ country_event = { ## Failing Health Event 3
 		add_popularity = { ideology = council popularity = -0.05 }
 		hidden_effect = { country_event = { id = nf_PEC.4 days = 600 random_days = 600 } }
 		add_stability = -0.05
+		add_political_power = -50
 		ai_chance = {
             base = 2.5
         }
@@ -83,6 +86,7 @@ country_event = { ## Failing Health Event 4 // Death
 		PEC_stepanov_health_fail = yes
 		add_popularity = { ideology = council popularity = -0.1 }
 		add_stability = -0.05
+		add_political_power = -100
 		ai_chance = {
             base = 2.5
         }
@@ -120,6 +124,8 @@ country_event = {
 	option = {
 		name = nf_PEC.6.a
 		add_stability = 0.2
+		add_political_power = -75
+		retire_character = PEC_bormann
 		ai_chance = {
             base = 2.5
         }
@@ -188,7 +194,14 @@ country_event = {
 	option = {
 		name = nf_PEC.8.a
 		add_war_support = 0.2
-		retire_character = PEC_vsevolod_golubev
+		if = {
+			limit = {
+				has_idea = PEC_vsevolod_golubev
+			}
+			retire_character = PEC_vsevolod_golubev
+			add_political_power = -75
+			add_popularity = { ideology = dictatorial popularity = -1 }
+		}
 		ai_chance = {
             base = 2.5
         }
@@ -296,7 +309,7 @@ country_event = { ## Bormann gang event
 
 	option = {
 		name = nf_PEC.11.a
-		add_popularity = { ideology = council popularity = 0.1 }
+		add_popularity = { ideology = council popularity = -0.1 }
 		set_country_flag = PEC_bormann_settled
 		add_stability = -0.05
 		409 = { remove_core_of = ROOT }
@@ -328,6 +341,7 @@ country_event = { ## Brotherhood in Yellow
 			amount = 15
 			producer = RUS
 		}
+		add_ideas = PEC_vsevolod_golubev
 		custom_effect_tooltip = nf_PEC.13.a.tooltip
 	}
 
@@ -335,6 +349,7 @@ country_event = { ## Brotherhood in Yellow
 		name = nf_PEC.13.b
 		add_war_support = 0.05
 		add_political_power = 150
+		retire_character = PEC_vsevolod_golubev
 	}
 }
 
@@ -349,13 +364,215 @@ country_event = { ## Target of Slander
 
 	immediate = {
 		hidden_effect = {
-			add_timed_idea = { idea = PEC_target_of_slander days = 300 }	
+			add_stability = -0.1
+			add_timed_idea = { idea = PEC_target_of_slander days = 600 }	
 		}
 	}
 	option = {
 		name = nf_PEC.14.a
 		effect_tooltip = {
-			add_timed_idea = { idea = PEC_target_of_slander days = 300 }
+			add_stability = -0.1
+			add_timed_idea = { idea = PEC_target_of_slander days = 600 }
 		}
+	}
+}
+
+country_event = { ## Pressure
+    id = nf_PEC.15
+    title = nf_PEC.15.t
+    desc = nf_PEC.15.d
+    picture = "GFX_event (10)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+	}
+
+	option = { ## accept /
+		name = nf_PEC.15.a
+		country_event = { id = nf_PEC.16 days = 2 random_days = 2 }
+		add_political_power = -75
+	}
+	option = { ## deny / perhaps risk war?
+		name = nf_PEC.15.b
+		country_event = { id = nf_PEC.17 days = 2 random_days = 2 }
+		add_war_support = 0.1
+	}
+}
+
+country_event = { ## Pressure success
+    id = nf_PEC.16
+    title = nf_PEC.16.t
+    desc = nf_PEC.16.d
+    picture = "GFX_event (10)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		transfer_state = 416
+		transfer_state = 32
+		transfer_state = 253
+	}
+
+	option = {
+		name = nf_PEC.16.a
+		effect_tooltip = {
+			transfer_state = 416
+			transfer_state = 32
+			transfer_state = 253
+		}
+	}
+}
+
+country_event = { ## Pressure fail
+    id = nf_PEC.17
+    title = nf_PEC.17.t
+    desc = nf_PEC.17.d
+    picture = "GFX_event (10)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ## back down
+		name = nf_PEC.17.a
+		add_political_power = -75
+		add_war_support = -0.1
+	}
+
+	option = { ## Fight
+		name = nf_PEC.17.a
+		416 = { add_claim_by = ROOT }
+		32 = { add_claim_by = ROOT }
+		253 = { add_claim_by = ROOT }
+		add_war_support = 0.1
+	}
+}
+
+country_event = { ## civil_war_event
+    id = nf_PEC.20
+    title = nf_PEC.20.t
+    desc = nf_PEC.20.d
+    picture = "GFX_event (105)"
+
+	trigger = {
+		has_idea = PEC_republic_stable
+		AND = {
+			OR = {
+				has_war_with_major = yes
+				has_stability < 0.25
+			}
+		}
+	}
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			PEC_launch_civil_war_event = yes
+		}
+	}
+
+	option = {
+		name = nf_PEC.20.a
+		ai_chance = { base = 150 }
+	}
+}
+
+country_event = { 
+    id = nf_PEC.21
+    title = nf_PEC.21.t
+    desc = nf_PEC.21.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.21.a
+		complete_national_focus = PEC_politics_vedeneev
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = nf_PEC.21.b
+		complete_national_focus = PEC_politics_danilov
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = { 
+    id = nf_PEC.22
+    title = nf_PEC.22.t
+    desc = nf_PEC.22.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.22.a
+		add_popularity = { ideology = council popularity = 0.15 }
+		army_experience = 15
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = nf_PEC.22.b
+		add_popularity = { ideology = community popularity = 0.15 }
+		capital_scope = {
+			add_resource = {
+				type = scrap
+				amount = 5
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = { 
+    id = nf_PEC.23
+    title = nf_PEC.23.t
+    desc = nf_PEC.23.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_PEC.23.a
+		add_popularity = { ideology = council popularity = 0.15 }
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 25
+			producer = RUS
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = nf_PEC.23.b
+		add_popularity = { ideology = community popularity = 0.15 }
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment_spetnaz
+			amount = 10
+			producer = RUS
+		}
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = { ## Born to Crawl
+    id = nf_PEC.24
+    title = nf_PEC.24.t
+    desc = nf_PEC.24.d
+    picture = "GFX_event (10)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ## back down
+		name = nf_PEC.24.a
+		add_ideas = PEC_born_to_crawl_idea
 	}
 }

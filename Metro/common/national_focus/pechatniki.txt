@@ -25,7 +25,7 @@ focus_tree = {
 		x = 23
 		y = 0
 		completion_reward = {
-			add_political_power = 45
+			add_political_power = 50
 			hidden_effect = { country_event = { id = nf_PEC.10 days = 7 random_days = 7 } }
 			hidden_effect = { country_event = { id = nf_PEC.12 days = 720 random_days = 720 } }
 		}
@@ -35,7 +35,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_brotherhood_in_yellow
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_yellow_sign
 		prerequisite = { focus = PEC_1 }
 		cost = 6.5
 		relative_position_id = PEC_1
@@ -63,6 +63,8 @@ focus_tree = {
 				uses = 3
 				category = farming
 			}
+			add_timed_idea = { idea = PEC_mushroom_civil_economy days = 360 }
+			custom_effect_tooltip = PEC_mushroom_economics
 		}
 		ai_will_do = {
 			factor = 3
@@ -70,7 +72,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_fixing_up_printers
-		icon = GFX_RCH_borzoi
+		icon = GFX_railroad_construction
 		prerequisite = { focus = PEC_1 }
 		cost = 6.5
 		relative_position_id = PEC_1
@@ -118,12 +120,12 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_dispell_the_rumours
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_dispell_rumours
 		prerequisite = { focus = PEC_fixing_up_printers }
 		available = { 
 			custom_trigger_tooltip = {
 				tooltip = PEC_targer_of_slander
-				hidden_trigger = { has_country_flag = PEC_targer_of_slander }
+				hidden_trigger = { has_idea = PEC_target_of_slander }
 			}
 		}
 		cost = 6.5
@@ -131,8 +133,9 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
-			add_stability = 0.1
+			add_stability = 0.05
 			add_political_power = 75
+			modify_timed_idea = { idea = PEC_target_of_slander days = 75 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -202,6 +205,21 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = PEC_kablooom
+		icon = GFX_generic_mine
+		prerequisite = { focus = PEC_defens_from_the_south }
+		cost = 6.5
+		relative_position_id = PEC_defens_from_the_south
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = PEC_IED_kabloom
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
 		id = PEC_produce_our_own
 		icon = GFX_generic_small_arms_1
 		prerequisite = { focus = PEC_military_reorganization }
@@ -249,6 +267,30 @@ focus_tree = {
 					owner = ROOT
 				}
 			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_conscription_reforms_2
+		icon = GFX_generic_medium_arms_2
+		prerequisite = { focus = PEC_conscription_reforms }
+		cost = 6.5
+		relative_position_id = PEC_conscription_reforms
+		x = 0
+		y = 2
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_2
+				amount = 30
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 5
+				producer = RUS
+			}	
 		}
 		ai_will_do = {
 			factor = 3
@@ -307,7 +349,7 @@ focus_tree = {
 				limit = {
 					has_idea = mandatory_service
 				}
-				add_political_power = 100
+				army_experience = 35
 				capital_scope = {
 					create_unit = {
 						division = "name = \"1st Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
@@ -355,6 +397,7 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PEC_sawdust_additives
+			modify_timed_idea = { idea = PEC_mushroom_civil_economy days = 90 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -372,6 +415,7 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PEC_watered_broth
+			modify_timed_idea = { idea = PEC_mushroom_civil_economy days = 90 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -405,6 +449,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			modify_timed_idea = { idea = PEC_mushroom_civil_economy days = 90 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -439,6 +484,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			modify_timed_idea = { idea = PEC_mushroom_civil_economy days = 90 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -450,11 +496,30 @@ focus_tree = {
 		prerequisite = { focus = PEC_reheating_solution focus = PEC_mushroom_output }
 		cost = 6.5
 		relative_position_id = PEC_sawdust_filling
-		available = { has_tech = tech_farming_5 }
+		available = { has_tech = tech_farming_5 NOT = { has_idea = closed_economy } }
 		x = 1
 		y = 2
 		completion_reward = {
+			modify_timed_idea = { idea = PEC_mushroom_civil_economy days = 90 }
+			custom_effect_tooltip = PEC_closed_economy_tt
 			add_ideas = PEC_mushroom_exports
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_mushroom_populace
+		icon = GFX_generic_support_pec
+		prerequisite = { focus = PEC_reheating_solution focus = PEC_mushroom_output }
+		cost = 6.5
+		relative_position_id = PEC_sawdust_filling
+		available = { has_idea = PEC_mushroom_civil_economy has_idea = civilian_economy }
+		x = 3
+		y = 2
+		completion_reward = {
+			remove_ideas = PEC_mushroom_civil_economy
+			add_ideas = PEC_mushroom_renaissance
 		}
 		ai_will_do = {
 			factor = 3
@@ -578,6 +643,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			add_political_power = 75
 			add_opinion_modifier = {
 				target = HNZ
 				modifier = PEC_rimskaya_trade
@@ -628,13 +694,14 @@ focus_tree = {
 		mutually_exclusive = { focus = PEC_11 }
 		cost = 6.5
 		relative_position_id = PEC_relations_with_the_league
-		available = { HNZ = { has_opinion = { target = PEC value > 59 } } }
-		## ALSO CHECK 364 // DUBROVKAYA ISN'T TARGET OF RUMOURS
+		available = { 
+			HNZ = { has_opinion = { target = PEC value > 59 } } 
+			364 = { is_owned_and_controlled_by = ROOT }
+		}
 		x = -1
 		y = 1
 		completion_reward = {
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
+			364 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
@@ -709,7 +776,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_1
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_support_pec
 		available = { 
 			has_country_leader = {
 				character = PEC_cofederation_collective
@@ -717,10 +784,13 @@ focus_tree = {
 			}
 		}
 		cost = 6.5
-		x = 48
+		x = 49
 		y = 0
 		completion_reward = {
 			custom_effect_tooltip = PEC_elections
+			hidden_effect = { country_event = { id = nf_PEC.22 days = 30 random_days = 30 } }
+			hidden_effect = { country_event = { id = nf_PEC.23 days = 90 random_days = 90 } }
+			hidden_effect = { country_event = { id = nf_PEC.21 days = 180 random_days = 180 } }
 		}
 		ai_will_do = {
 			factor = 3
@@ -728,10 +798,11 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_golubev_conclave
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_yellow_king_in_yellow
 		prerequisite = { focus = PEC_politics_1 }
 		available = { 
 			has_completed_focus = PEC_brotherhood_in_yellow
+			has_idea = PEC_vsevolod_golubev
 			has_war_support < 0.25  
 			NOT = {
 				has_country_leader = {
@@ -753,7 +824,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_bormann_gang
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_bormann
 		prerequisite = { focus = PEC_politics_1 }
 		available = { 
 			NOT = {
@@ -761,6 +832,10 @@ focus_tree = {
 				has_country_leader = {
 					character = PEC_stepanov
 					ruling_only = yes
+				}
+				OR = {
+					has_completed_focus = PEC_politics_vedeneev
+					has_completed_focus = PEC_politics_danilov
 				}
 			}
 		}
@@ -777,9 +852,10 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_danilov
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_danilov
 		prerequisite = { focus = PEC_politics_1 }
 		available = { 
+			always = no 
 			NOT = {
 				has_country_leader = {
 					character = PEC_stepanov
@@ -792,6 +868,7 @@ focus_tree = {
 		x = 3
 		y = 1
 		completion_reward = {
+			add_political_power = 100
 			set_politics = {
 				ruling_party = community
 				elections_allowed = no
@@ -805,27 +882,61 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_danilova
-		icon = GFX_RCH_borzoi
+		icon = GFX_gasmask
 		prerequisite = { focus = PEC_politics_danilov }
 		cost = 6.5
 		relative_position_id = PEC_politics_danilov
 		x = 0
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 15
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
 		}
 		ai_will_do = {
 			factor = 3
 		}
 	}
+	#focus = {
+	#	id = PEC_born_to_crawl
+	#	icon = GFX_focus_generic_copy_plane_designs
+	#	prerequisite = { focus = PEC_politics_danilov }
+	#	cost = 8.6
+	#	relative_position_id = PEC_politics_danilov
+	#	x = 2
+	#	y = 1
+	#	completion_reward = {
+	#		## we could give them the chance to build air
+	#		## but no
+	#		country_event = nf_PEC.24
+	#	}
+	#	ai_will_do = {
+	#		factor = 3
+	#	}
+	#}
 	focus = {
 		id = PEC_claim_the_surface
-		icon = GFX_RCH_borzoi
+		icon = GFX_binoculars
 		prerequisite = { focus = PEC_politics_danilova }
 		cost = 6.5
 		relative_position_id = PEC_politics_danilova
 		x = 1
 		y = 1
 		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 2
+				category = gas_mask
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -833,13 +944,37 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_stalker_loyal_forces
-		icon = GFX_RCH_borzoi
+		icon = GFX_gasmask_2
 		prerequisite = { focus = PEC_politics_danilova }
 		cost = 6.5
 		relative_position_id = PEC_politics_danilova
 		x = 3
 		y = 1
 		completion_reward = {
+			add_ideas = PEC_stalkers
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_stalker_loyal_forces_2
+		icon = GFX_SPT_generic
+		prerequisite = { focus = PEC_politics_danilova }
+		cost = 6.5
+		relative_position_id = PEC_politics_danilova
+		x = 5
+		y = 1
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_tech = tech_special_forces_equipment_reliability }
+				}
+				set_technology = { tech_special_forces_equipment_reliability = 1 }
+			}
+			else = {
+				set_technology = { special_forces_spetnaz_equipment_tech = 1 }
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -847,13 +982,20 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_drive_off_techno_savages
-		icon = GFX_RCH_borzoi
+		icon = GFX_anti_gwc
 		prerequisite = { focus = PEC_claim_the_surface }
+		available = { 208 = { is_owned_and_controlled_by = ROOT } }
 		cost = 6.5
 		relative_position_id = PEC_claim_the_surface
 		x = 0
 		y = 2
 		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = chemicals
+					amount = 16
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -861,14 +1003,20 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_expansion_onto_the_surface
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_stalker_6
 		prerequisite = { focus = PEC_politics_danilova focus = PEC_from_the_brink }
 		cost = 6.5
 		relative_position_id = PEC_politics_danilova
 		x = -2
 		y = 1
 		completion_reward = {
-			## control the surface passageway
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.2
+				uses = 1
+				category = entrench_kits
+			}
+			set_state_owner = 208
 		}
 		ai_will_do = {
 			factor = 3
@@ -876,13 +1024,19 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_sorties_into_the_dark
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_repair
 		prerequisite = { focus = PEC_expansion_onto_the_surface }
 		cost = 6.5
 		relative_position_id = PEC_expansion_onto_the_surface
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = PEC_autark
+			modify_building_resources = {
+				building = salvage_hub
+				resource = scrap
+				amount = 1
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -890,14 +1044,25 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_invade_RYZ
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_RYZ_war
 		prerequisite = { focus = PEC_claim_the_surface }
 		mutually_exclusive = { focus = PEC_alliance_with_RYZ }
+		available = {
+			has_war_support > 0.7
+			is_neighbor_of = RYZ
+		}
 		cost = 6.5
 		relative_position_id = PEC_claim_the_surface
 		x = 1
 		y = 1
+		will_lead_to_war_with = RYZ
 		completion_reward = {
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = RYZ
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -905,14 +1070,18 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_alliance_with_RYZ
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_RYZ_peace
 		prerequisite = { focus = PEC_claim_the_surface }
 		mutually_exclusive = { focus = PEC_politics_invade_RYZ }
-		cost = 6.5
+		available = {
+			is_neighbor_of = RYZ
+		}
+		cost = 8.6
 		relative_position_id = PEC_claim_the_surface
 		x = 3
 		y = 1
 		completion_reward = {
+			add_to_faction = RYZ
 		}
 		ai_will_do = {
 			factor = 3
@@ -920,9 +1089,10 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_vedeneev
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_vedeneev
 		prerequisite = { focus = PEC_politics_1 }
 		available = { 
+			always = no 
 			NOT = {
 				has_country_leader = {
 					character = PEC_stepanov
@@ -933,8 +1103,9 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PEC_politics_1
 		x = -3
-		y = 1
+		y = 1 
 		completion_reward = {
+			add_political_power = 100
 			set_politics = {
 				ruling_party = council
 				elections_allowed = no
@@ -948,19 +1119,23 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_develop_the_core
-		icon = GFX_RCH_borzoi
+		icon = GFX_workstation_4
 		prerequisite = { focus = PEC_politics_vedeneev }
 		cost = 6.5
 		relative_position_id = PEC_politics_vedeneev
 		x = 0
 		y = 1
 		completion_reward = {
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
+			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
 					level = 2
+					instant_build = yes
+				}
+				set_building_level = {
+					type = infrastructure
+					level = 10
 					instant_build = yes
 				}
 			}
@@ -971,14 +1146,59 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_develop_the_core_industry
-		icon = GFX_RCH_borzoi
+		icon = GFX_workstation_3
 		prerequisite = { focus = PEC_develop_the_core focus = PEC_from_the_brink }
 		cost = 6.5
 		relative_position_id = PEC_develop_the_core
+		available = { 
+			409 = { is_owned_and_controlled_by = ROOT } 
+			364 = { is_owned_and_controlled_by = ROOT }
+		}
 		x = 0
 		y = 1
 		completion_reward = {
-			## develop Lyublino and Volzhskaya stations
+			409 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+			364 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_technicians_of_the_east
+		icon = GFX_workers
+		prerequisite = { focus = PEC_develop_the_core_industry }
+		cost = 6.5
+		relative_position_id = PEC_develop_the_core
+		available = { arms_factory > 9 }
+		x = 0
+		y = 3
+		completion_reward = {
+			add_ideas = PEC_equipment_reliability
 		}
 		ai_will_do = {
 			factor = 3
@@ -986,7 +1206,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_remilitarize_the_confederation
-		icon = GFX_RCH_borzoi
+		icon = GFX_RED_squadron
 		prerequisite = { focus = PEC_develop_the_core }
 		cost = 6.5
 		relative_position_id = PEC_develop_the_core
@@ -1007,7 +1227,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_vedeneev_military
-		icon = GFX_RCH_borzoi
+		icon = GFX_PVL_diplomacy_2
 		prerequisite = { focus = PEC_remilitarize_the_confederation }
 		cost = 6.5
 		relative_position_id = PEC_remilitarize_the_confederation
@@ -1027,13 +1247,31 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_reestablish_relations_with_outsiders
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_bunker
 		prerequisite = { focus = PEC_develop_the_core focus = PEC_from_the_brink }
 		cost = 6.5
 		relative_position_id = PEC_develop_the_core
 		x = 2
 		y = 1
 		completion_reward = {
+			every_country = { 
+				limit = {
+					is_neighbor_of = HNZ
+					NOT = {
+						has_country_flag = is_savage_nation
+						has_country_flag = is_communist_nation
+						has_opinion = {
+							target = ROOT
+							value > 0
+						}
+						OR = { is_ally_with = RCH }
+					}
+				}
+				reverse_add_opinion_modifier = {
+					target = PEC
+					modifier = VDN_trade
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -1041,13 +1279,14 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_fight_against_organized_crime
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_bandit
 		prerequisite = { focus = PEC_reestablish_relations_with_outsiders }
 		cost = 6.5
 		relative_position_id = PEC_reestablish_relations_with_outsiders
 		x = -1
 		y = 1
 		completion_reward = {
+			add_ideas = PEC_fight_against_crime
 		}
 		ai_will_do = {
 			factor = 3
@@ -1055,9 +1294,13 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_invade_KAL
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_stalker_1
 		prerequisite = { focus = PEC_remilitarize_the_confederation }
-		cost = 6.5
+		cost = 8.6
+		available = { 
+			has_war_support > 0.7
+			is_neighbor_of = KAL
+		}
 		relative_position_id = PEC_remilitarize_the_confederation
 		x = -1
 		y = 1
@@ -1080,16 +1323,31 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_politics_preesure_for_RIM
-		icon = GFX_RCH_borzoi
+		icon = GFX_fist
 		prerequisite = { focus = PEC_remilitarize_the_confederation }
-		cost = 6.5
+		available = {
+			has_war_support > 0.7
+			has_army_manpower = {
+				size > 199
+			}
+		}
+		cost = 8.6
 		relative_position_id = PEC_remilitarize_the_confederation
 		x = 1
 		y = 1
-		will_lead_to_war_with = KAL
 		completion_reward = {
-			## pressure HNZ to hand over RIM
-			## or anyone who owns RIMSKAYA
+			## pressure HNZ to hand over 416 and 253
+			## or anyone who owns 416 and 253
+			every_possible_country = {
+				limit = {
+					owns_state = 416
+				}	
+				country_event = nf_PEC.15
+				add_opinion_modifier = {
+					target = PREV
+					modifier = PEC_pressured_for_cores
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0.5
@@ -1101,14 +1359,16 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_from_the_brink
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_stepanov
 		prerequisite = { focus = PEC_politics_1 }
+		available = { always = no }
 		cost = 6.5
 		relative_position_id = PEC_politics_1
 		x = 0
 		y = 2
 		completion_reward = {
 			add_stability = 0.15
+			add_political_power = 150
 		}
 		ai_will_do = {
 			factor = 3
@@ -1116,13 +1376,39 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_economic_recovery
-		icon = GFX_RCH_borzoi
+		icon = GFX_generic_constructions
 		prerequisite = { focus = PEC_from_the_brink }
 		cost = 6.5
 		relative_position_id = PEC_from_the_brink
 		x = 0
 		y = 2
 		completion_reward = {
+			if = {
+				limit = { has_idea = PEC_rumours_of_disease }
+				remove_ideas = PEC_rumours_of_disease
+			}
+			if = {
+				limit = { has_idea = PEC_target_of_slander }
+				remove_ideas = PEC_target_of_slander
+			}
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -1130,7 +1416,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PEC_dredge_the_south
-		icon = GFX_RCH_borzoi
+		icon = GFX_PEC_dredge
 		prerequisite = { focus = PEC_economic_recovery }
 		prerequisite = { focus = PEC_fight_against_organized_crime focus = PEC_sorties_into_the_dark }
 		cost = 6.5
@@ -1140,6 +1426,7 @@ focus_tree = {
 		completion_reward = {
 			## give claims on all the southern tunnels
 			custom_effect_tooltip = PEC_dredge_southern_tunnels
+			set_country_flag = metro_can_dredge
 		}
 		ai_will_do = {
 			factor = 3

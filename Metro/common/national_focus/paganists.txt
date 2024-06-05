@@ -1,0 +1,1141 @@
+#!gfx:interface\metro_goals.gfx
+focus_tree = {
+	id = paganists
+	country = {
+		factor = 0
+		modifier = {
+			add = 25
+			tag = PAG
+		}
+	}
+
+	focus = {
+		id = PAG_defence
+		icon = GFX_gates_of_hell
+		x = 26
+		y = 0
+		cost = 10
+		completion_reward = {
+			army_experience = 10
+			capital_scope = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_1
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defence
+		}
+		x = -1
+		y = 2
+		relative_position_id = PAG_defence
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = savage_equipment_1
+		        amount = 10
+				producer = RUS
+		    }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_1a
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_1
+		}
+		mutually_exclusive = { focus = PAG_military_1b }
+		x = 1
+		y = 1
+		relative_position_id = PAG_military_1
+
+		completion_reward = {
+			add_ideas = PAG_weapons_crafting
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_1b
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_1
+		}
+		mutually_exclusive = { focus = PAG_military_1a }
+		x = -1
+		y = 1
+		relative_position_id = PAG_military_1
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = savage_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
+			add_equipment_to_stockpile = {
+		        type = savage_equipment_3
+		        amount = 15
+				producer = RUS
+		    }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_1c
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_1b
+		}
+		x = 1
+		y = 1
+		relative_position_id = PAG_military_1b
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = savage_equipment_4
+		        amount = 20
+				producer = RUS
+		    }
+			add_ideas = PAG_weapons_crafting
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_2
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defence
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_defence
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = savage_weapons
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_2a
+		icon = GFX_workers
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defence
+		}
+		x = -2
+		y = 1
+		relative_position_id = PAG_defence
+		completion_reward = {
+			add_ideas = PAG_from_slag
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_military_2b
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_2a
+		}
+		x = -1
+		y = 1
+		relative_position_id = PAG_military_2a
+		completion_reward = {
+			add_ideas = PAG_pagindustry
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_military_2c
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_2b
+		}
+		x = 0
+		y = 2
+		relative_position_id = PAG_military_2b
+		completion_reward = {
+			add_ideas = PAG_toolmaking_smiths_idea
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_military_3
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = { focus = PAG_defence }
+		x = 3
+		y = 1
+		relative_position_id = PAG_defence
+		completion_reward = {
+			army_experience = 15
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_3a
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_3
+		}
+		x = 1
+		y = 1
+		relative_position_id = PAG_military_3
+
+		completion_reward = {
+			effect_tooltip = {
+				every_unit_leader = {
+					gain_xp = 1000
+				}
+			}
+			hidden_effect = {
+				every_unit_leader = {
+					gain_xp = 1000
+				}	
+			} 
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_3b
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_3
+		}
+		x = -1
+		y = 1
+		relative_position_id = PAG_military_3
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = savage_support
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_5c
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_3a
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_military_3a
+		completion_reward = {
+			add_command_power = 15
+			hidden_effect = {
+				every_unit_leader = {
+					add_skill_level = 1
+					add_attack = 1
+				}
+			}
+			effect_tooltip = {
+				every_unit_leader = {
+					add_skill_level = 1
+					add_attack = 1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_3d
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_military_3b
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_military_3b
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = savage_ranged_equipment_1
+		        amount = 15
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_military_6
+		icon = GFX_scrap_metal_3
+		cost = 6.5
+		prerequisite = { focus = PAG_defence }
+		x = 1
+		y = 4
+		relative_position_id = PAG_defence
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_1
+		icon = GFX_RCH_reich_2
+		x = 3
+		y = 0
+		cost = 10
+		completion_reward = {
+			add_ideas = PAG_defense_of_our_domain
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_2
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_political_focus_1
+		}
+		x = 1
+		y = 1
+		relative_position_id = PAG_political_focus_1
+		completion_reward = {
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_3
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_political_focus_1
+		}
+		available = { has_war_support > 0.5 }
+		x = -1
+		y = 1
+		relative_position_id = PAG_political_focus_1
+		completion_reward = {
+			army_experience = 20
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_4
+		icon = GFX_GWC_bloody_hand
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_political_focus_3
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_political_focus_3
+
+		completion_reward = {
+			add_ideas = PAG_conscription
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_5
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		available = { has_war = yes }
+		prerequisite = {
+			focus = PAG_political_focus_2
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_political_focus_2
+		completion_reward = {
+			PAG_yuriy = {
+				add_field_marshal_role = {
+					skill = 5
+					attack_skill = 3
+					defense_skill = 5
+					planning_skill = 3
+					logistics_skill = 3
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_6a
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		available = { has_war_support > 0.9 }
+		prerequisite = {
+			focus = PAG_political_focus_4
+		}
+		mutually_exclusive = { focus = PAG_political_focus_6b }
+		x = 1
+		y = 1
+		relative_position_id = PAG_political_focus_4
+		completion_reward = {
+			add_ideas = PAG_toleration
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_6b
+		icon = GFX_EUR_woe_to_the_vanquished
+		cost = 6.5
+		available = { has_war_support > 0.9 }
+		prerequisite = {
+			focus = PAG_political_focus_4
+		}
+		mutually_exclusive = { focus = PAG_political_focus_6a }
+		x = -1
+		y = 1
+		relative_position_id = PAG_political_focus_4
+		completion_reward = {
+			add_ideas = PAG_mein_herz_brennt
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_political_focus_6
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_political_focus_5
+		}
+		x = 0
+		y = 2
+		relative_position_id = PAG_political_focus_5
+		completion_reward = {
+			add_ideas = PAG_spec_ops
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_prepare_for_hyperborea
+		icon = GFX_RCH_reich_2
+		x = 14
+		y = 0
+		cost = 6.5
+
+		completion_reward = {
+			add_war_support = 0.05
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_economy
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+		}
+		available = { has_war = no }
+		cancel_if_invalid = yes
+		x = -4
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+		completion_reward = {
+			custom_effect_tooltip = PAG_peace_war
+			add_ideas = PAG_peace_economy
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2
+		icon = GFX_scrap_metal_4
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+		}
+		x = -6
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+			        type = scrap
+			        amount = 4
+			    }
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2a
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_internal_focus_2
+			focus = PAG_political_focus_2
+		}
+		x = -2
+		y = 1
+		relative_position_id = PAG_internal_focus_2
+
+		completion_reward = {
+			add_manpower = 20
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2a_1
+		icon = GFX_GWC_re_decorate_station
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_internal_focus_2a
+		}
+		x = 0
+		y = 2
+		relative_position_id = PAG_internal_focus_2a
+
+		completion_reward = {
+			add_ideas = PAG_bonus
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2b
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_internal_focus_2
+		}
+		x = 3
+		y = 1
+		relative_position_id = PAG_internal_focus_2
+
+		completion_reward = {
+			add_ideas = PAG_medicine
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2c
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_2b
+		}
+		x = 1
+		y = 1
+		relative_position_id = PAG_internal_focus_2b
+		completion_reward = {
+			add_war_support = 0.05
+			add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2d
+		icon = GFX_GWC_mushrooms
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_2b
+		}
+		x = 0
+		y = 2
+		relative_position_id = PAG_internal_focus_2b
+		completion_reward = {
+			add_ideas = PAG_improve_medicine
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_2e
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_2b
+		}
+		x = -1
+		y = 1
+		relative_position_id = PAG_internal_focus_2b
+		completion_reward = {
+			add_war_support = 0.1
+			add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_3
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_2
+		}
+		x = 0
+		y = 2
+		relative_position_id = PAG_internal_focus_2
+		completion_reward = {
+			custom_effect_tooltip = PAG_peace_war
+			add_ideas = PAG_eve_of_war
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_4
+		icon = GFX_GWC_reproduction_factories
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_3
+		}
+		available = { has_war = yes }
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_3
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_defences
+		icon = GFX_RCH_railways
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+		}
+		x = 2
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+
+		completion_reward = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_true_vril
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+		}
+		x = 5
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+
+		completion_reward = {
+			custom_effect_tooltip = PAG_specops_template
+			division_template = {
+				name = "VRIL Warriors"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					underzealot_special_forces = { x = 0 y = 0 }
+					underzealot_special_forces = { x = 0 y = 1 }
+					underzealot_special_forces = { x = 0 y = 2 }
+					underzealot_special_forces = { x = 0 y = 3 }
+					underzealot_special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Special Forces\" division_template = \"VRIL Warriors\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_armored_warriors
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+			focus = PAG_defence
+		}
+		x = 7
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+		completion_reward = {
+			add_ideas = PAG_savage_specops_crafting
+			add_equipment_to_stockpile = {
+		        type = savage_special_forces_equipment_2
+		        amount = 10
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_armored_warriors_2
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_armored_warriors
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_armored_warriors
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = savage_special_forces_equipment_3
+		        amount = 15
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_armored_warriors_3
+		icon = GFX_SAT_forbodding_attire
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_armored_warriors
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_armored_warriors_2
+		completion_reward = {
+			add_ideas = PAG_savage_specops_crafting_2
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PAG_internal_focus_6
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_prepare_for_hyperborea
+		}
+		x = -1
+		y = 1
+		relative_position_id = PAG_prepare_for_hyperborea
+		completion_reward = {
+			add_stability = 0.1
+			capital_scope = { add_extra_state_shared_building_slots = 1 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_7
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_internal_focus_6
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_6
+		completion_reward = {
+			add_stability = 0.05
+			capital_scope = { add_extra_state_shared_building_slots = 2 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defences
+		}
+		x = -1
+		y = 1
+		relative_position_id = PAG_defences
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = savage_society
+			}
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8aa
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_internal_focus_8
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_8
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = savage_society
+			}
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8a
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defences
+		}
+		mutually_exclusive = { focus = PAG_internal_focus_8c }
+		x = 1
+		y = 1
+		relative_position_id = PAG_defences
+
+		completion_reward = {
+			custom_effect_tooltip = PAG_zealot_template
+			division_template = {
+				name = "Pagan Warriors"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					underzealots = { x = 0 y = 0 }
+					underzealots = { x = 0 y = 1 }
+					underzealots = { x = 0 y = 2 }
+					underzealots = { x = 0 y = 3 }
+					underzealots = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Special Forces\" division_template = \"Pagan Warriors\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8b
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_8a
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_8a
+		completion_reward = {
+			army_experience = 50
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8c
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+
+		prerequisite = {
+			focus = PAG_defences
+		}
+		mutually_exclusive = { focus = PAG_internal_focus_8a }
+		x = 3
+		y = 1
+		relative_position_id = PAG_defences
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_9c
+		icon = GFX_RCH_reich_2
+		cost = 5
+
+		prerequisite = {
+			focus = PAG_internal_focus_8c
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_8c
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_8d
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_8b
+			focus = PAG_internal_focus_8c
+		}
+		x = 1
+		y = 2
+		relative_position_id = PAG_internal_focus_8a
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	
+	focus = {
+		id = PAG_internal_focus_8e
+		icon = GFX_RCH_reich_2
+		cost = 6.5
+		prerequisite = {
+			focus = PAG_internal_focus_8d
+		}
+		x = 0
+		y = 1
+		relative_position_id = PAG_internal_focus_8d
+		completion_reward = {
+			add_ideas = PAG_prepare_for_hyperborea_army
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = PAG_internal_focus_9
+		icon = GFX_RCH_reich_2
+		cost = 10
+		prerequisite = {
+			focus = PAG_internal_focus_7
+			focus = PAG_internal_focus_8
+		}
+		x = 0
+		y = 4
+		relative_position_id = PAG_prepare_for_hyperborea
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+}

@@ -26,8 +26,26 @@ ideas = {
 			allowed = {}
 			removal_cost = -1
 			modifier = {
-				defensive_war_stability_factor = 0.1
+				defensive_war_stability_factor = 0.15
 				custom_modifier_tooltip = RCH_reclusive_state_tt
+				custom_modifier_tooltip = PEC_civil_war_warning
+			}
+		}
+		PEC_mushroom_civil_economy = {
+			picture = PEC_generic_2
+			cancel = { NOT = { has_idea = civilian_economy } }
+			removal_cost = -1
+			modifier = {
+				monthly_population = 0.1
+				consumer_goods_expected_value = 0.1
+			}
+		}
+		PEC_mushroom_renaissance = {
+			picture = PEC_mushroom_renaissance
+			removal_cost = -1
+			modifier = {
+				monthly_population = 0.2
+				consumer_goods_expected_value = -0.1
 			}
 		}
 		PEC_sawdust_additives = {
@@ -51,6 +69,9 @@ ideas = {
 		PEC_mushroom_exports = {
 			picture = PEC_generic_5
 			allowed = {}
+			cancel = {
+				has_idea = closed_economy
+			}
 			removal_cost = -1
 			modifier = {
 				production_speed_industrial_complex_factor = 0.1
@@ -121,7 +142,7 @@ ideas = {
 	        }
 	    }
 		PEC_target_of_slander = {
-			picture = GFX_idea_HUL_narcotics
+			picture = draft
 
 			allowed = {
 			}
@@ -135,7 +156,7 @@ ideas = {
 	        }
 	    }
 		PEC_rumours_of_disease = {
-			picture = GFX_idea_HUL_narcotics
+			picture = ARB_devastation
 
 			allowed = {
 			}
@@ -150,10 +171,9 @@ ideas = {
 	    }
 
 		PEC_militarization = {
-			picture = GFX_idea_HUL_narcotics
+			picture = chevrons
 
 			allowed = {
-				has_war = NO
 			}
 
 			removal_cost = -1
@@ -162,6 +182,86 @@ ideas = {
 				command_power_gain = 0.1
 				experience_gain_army = 0.1
 				mobilization_laws_cost_factor = -0.2
+	        }
+	    }
+
+		PEC_stalkers = {
+			picture = ARB_hnz_volunteers
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				special_forces_out_of_supply_factor = -0.1
+				special_forces_min = 15
+	        }
+	    }
+		PEC_IED_kabloom = {
+			picture = PEC_kabloom
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_improvised_minefield_factor = 0.15
+	        }
+	    }
+		PEC_autark = {
+			picture = PEC_autark
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_salvage_hub_factor = 0.1
+	        }
+	    }
+		PEC_equipment_reliability = {
+			picture = PEC_autark
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = { production_factory_efficiency_gain_factor = 0.05 }	
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.05
+					reliability = 0.03
+					instant = yes
+				}
+			}
+	    }
+		PEC_fight_against_crime = {
+			picture = PEC_fight_against_crime
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = { tag = MOB attack_bonus_against_cores = 0.1 }
+			targeted_modifier = { tag = DRY attack_bonus_against_cores = 0.1 }
+			targeted_modifier = { tag = KTG attack_bonus_against_cores = 0.1 }
+			targeted_modifier = { tag = TRT attack_bonus_against_cores = 0.1 }	
+	    }
+		PEC_born_to_crawl_idea = {
+			picture = PEC_autark
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				supply_factor = 0.15
 	        }
 	    }
 	}
