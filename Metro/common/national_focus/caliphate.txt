@@ -162,7 +162,10 @@ focus_tree = {
 		
 		available = {
 			owns_state = 303
-			303 = { compliance > 75 }
+			OR = {
+				303 = { compliance > 75 }
+				303 = { is_core_of = ROOT }
+			}
 		}
 
 		relative_position_id = ISL_war_against_satan
@@ -179,6 +182,17 @@ focus_tree = {
 				}
 				add_resource = {
 					type = alloys
+					amount = 4
+				}
+			}
+			if = {
+				limit = { 303 = { is_core_of = ROOT } }
+				add_resource = {
+					type = components
+					amount = 4
+				}
+				add_resource = {
+					type = electronics
 					amount = 4
 				}
 			}
