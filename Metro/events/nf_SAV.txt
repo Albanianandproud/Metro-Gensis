@@ -57,3 +57,28 @@ country_event = {	### KTG stuff but for SAV
 		}
 	}
 }
+
+### Disintergration of the Alliance
+country_event = {
+    id = nf_SAV.3
+    title = nf_SAV.3.t
+    desc = nf_SAV.3.d
+    picture = "GFX_event (181)"
+
+	trigger = {
+		date > 2033.1.1
+		NOT = { 312 = { is_owned_by = ROOT } }
+		368 = { is_owned_by = ROOT }
+	}
+	fire_only_once = yes
+
+	immediate = { release = DIM } 
+
+	option = {
+		name = nf_SAV.3.a
+		if = {
+			limit = { has_idea = SAV_alliance }
+			remove_ideas = SAV_alliance
+		}
+	}
+}

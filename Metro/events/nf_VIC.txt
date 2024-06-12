@@ -1,0 +1,48 @@
+add_namespace = nf_VIC
+
+country_event = {
+    id = nf_VIC.1
+    title = nf_VIC.1.t
+    desc = nf_VIC.1.d
+    picture = event_mutant.3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VIC.1.a
+		hidden_effect = {
+			division_template = {
+				name = "STALKERS"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Remnants\" division_template = \"STALKERS\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Remnants\" division_template = \"STALKERS\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}	
+			add_equipment_to_stockpile = {
+				type = laser_infantry_equipment_1
+				amount = 50
+				producer = RUS
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+

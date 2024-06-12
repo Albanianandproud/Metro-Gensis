@@ -1,43 +1,40 @@
 PAG_decision_category = {
-
 	PAG_1 = {
 		icon = GFX_PAG_1
-		available = { political_power_daily > 0.9 }	
+		available = { has_stability < 0.7 has_war = no }	
 		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
 		cost = 50
-		days_remove = 7
+		days_remove = 70
 		days_re_enable = 180
-
+		modifier = { stability_weekly = 0.005 }
+		cancel_trigger = { has_war = yes }
 		ai_will_do = { base = 2 }
 	}
 	PAG_2 = {
 		icon = GFX_PAG_2
-		available = { political_power_daily > 0.9 }	
+		available = { has_stability < 0.6 has_war = yes }	
 		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
 		cost = 50
-		days_remove = 7
+		days_remove = 70
 		days_re_enable = 180
-
+		modifier = { war_support_weekly = 0.005 }
+		cancel_trigger = { has_war = no }
 		ai_will_do = { base = 2 }
 	}
 	PAG_3 = {
 		icon = GFX_PAG_3
-		available = { political_power_daily > 0.9 }	
+		available = { has_completed_focus = PAG_internal_focus_7 }	
 		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
 		cost = 50
-		days_remove = 7
+		modifier = { research_speed_factor = -0.1 }
+		days_remove = 45
 		days_re_enable = 180
-
+		remove_effect = { army_experience = 30 }
 		ai_will_do = { base = 2 }
 	}
 	PAG_4 = {
 		icon = GFX_PAG_4
+		visible = { always = no }
 		available = { political_power_daily > 0.9 }	
 		fire_only_once = no
 		cost = 35
@@ -50,6 +47,7 @@ PAG_decision_category = {
 	}
 	PAG_5 = {
 		icon = GFX_PAG_5
+		visible = { always = no }
 		available = { political_power_daily > 0.9 }	
 		fire_only_once = no
 		cost = 35
@@ -62,74 +60,64 @@ PAG_decision_category = {
 	}
 	PAG_6 = {
 		icon = GFX_PAG_6
-		available = { political_power_daily > 0.9 }	
 		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
+		available = { has_war_support < 0.7 has_war = no }	
 		cost = 50
-		days_remove = 7
+		days_remove = 45
 		days_re_enable = 180
-
+		modifier = {  consumer_goods_factor = 0.1 industrial_capacity_factory = -0.1 economy_cost_factor = -0.5 }
+		remove_effect = { 
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = savage_society
+			}
+		}
+		cancel_trigger = { has_war = yes }
 		ai_will_do = { base = 2 }
 	}
 	PAG_7 = {
 		icon = GFX_PAG_7
-		available = { political_power_daily > 0.9 }	
-		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
+		available = { has_war_support > 0.7 has_war = no }	
 		cost = 50
-		days_remove = 7
-		days_re_enable = 180
-
+		days_remove = 90
+		days_re_enable = 270
+		modifier = { training_time_factor = -0.15 special_forces_training_time_factor = -0.1 }
+		cancel_trigger = { has_war = yes }
 		ai_will_do = { base = 2 }
 	}
 	PAG_8 = {
 		icon = GFX_PAG_8
-		available = { political_power_daily > 0.9 }	
-		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
+		available = { has_war = yes  }	
 		cost = 50
-		days_remove = 7
-		days_re_enable = 180
-
+		days_remove = 90
+		days_re_enable = 270
+		modifier = { land_doctrine_cost_factor = -0.125 }
+		cancel_trigger = { has_war = no }
 		ai_will_do = { base = 2 }
 	}
 	PAG_9 = {
 		icon = GFX_PAG_9
-		available = { has_completed_focus = PAG_military_3 }	
-		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
-		cost = 50
-		days_remove = 7
-		days_re_enable = 180
-
+		available = { has_completed_focus = PAG_military_3 dictatorial > 0.74 }	
+		fire_only_once = yes
+		cost = 100
+		complete_effect = { set_technology = { PAG_unique_tech_1 = 1 } }
 		ai_will_do = { base = 2 }
 	}
 	PAG_10 = {
 		icon = GFX_PAG_10
-		available = { has_completed_focus = PAG_political_focus_1 }	
-		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
-		cost = 50
-		days_remove = 7
-		days_re_enable = 180
-
+		available = { has_completed_focus = PAG_political_focus_1 dictatorial > 0.74 }	
+		fire_only_once = yes
+		cost = 100
+		complete_effect = { set_technology = { PAG_unique_tech_3 = 1 } }
 		ai_will_do = { base = 2 }
 	}
 	PAG_11 = {
 		icon = GFX_PAG_11
-		available = { has_completed_focus = PAG_armored_warriors }	
-		fire_only_once = no
-		cost = 35
-		modifier = { war_support_weekly = 0.01 }
-		cost = 50
-		days_remove = 7
-		days_re_enable = 180
-
+		available = { has_completed_focus = PAG_armored_warriors dictatorial > 0.74 }	
+		fire_only_once = yes
+		cost = 100
+		complete_effect = { set_technology = { PAG_unique_tech_2 = 1 } }
 		ai_will_do = { base = 2 }
 	}
 }
