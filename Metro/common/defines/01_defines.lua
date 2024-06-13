@@ -96,14 +96,14 @@ NDefines.NMilitary.FIELD_MARSHAL_DIVISIONS_CAP = 10		--- Base is 24
 --- Resistance
 
 NDefines.NResistance.INITIAL_STATE_RESISTANCE = 5
-NDefines.NResistance.RESISTANCE_TARGET_BASE = 45.0 
+NDefines.NResistance.RESISTANCE_TARGET_BASE = 50
 NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_IS_AT_PEACE = 0
 
 NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance target modifier pairs for vp. first entry is total vp in state and second entry is amount of target modifier that applies for that threshold
-		10,   7.5, -- 0 - 5
-		15,   12.5, -- 5 - 20
-		25,  15.0, -- 20 - 50
-		50,  30.0, -- 50 - ...
+		10,   10, -- 0 - 5
+		15,   20, -- 5 - 20
+		25,  30, -- 20 - 50
+		50,  50, -- 50 - ...
 	}
 
 NDefines.NResistance.RESISTANCE_POP_LOW_CUTOFF = 5

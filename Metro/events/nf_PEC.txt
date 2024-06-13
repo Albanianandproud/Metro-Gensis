@@ -15,7 +15,7 @@ country_event = { ## Failing Health Event 1
 		add_stability = -0.05
 		add_political_power = -50
 		add_popularity = { ideology = council popularity = -0.05 }
-		hidden_effect = { country_event = { id = nf_PEC.2 days = 600 random_days = 600 } }
+		hidden_effect = { country_event = { id = nf_PEC.2 days = 600 random_days = 7 } }
 		ai_chance = {
             base = 2.5
         }
@@ -35,8 +35,8 @@ country_event = { ## Failing Health Event 2
 		name = nf_PEC.2.a
 		PEC_stepanov_health_fail = yes
 		add_popularity = { ideology = council popularity = -0.05 }
-		hidden_effect = { country_event = { id = nf_PEC.3 days = 600 random_days = 600 } }
-		hidden_effect = { country_event = { id = nf_PEC.14 days = 500 random_days = 500 } }
+		hidden_effect = { country_event = { id = nf_PEC.3 days = 600 random_days = 7 } }
+		hidden_effect = { country_event = { id = nf_PEC.14 days = 500 random_days = 7 } }
 		add_stability = -0.05
 		add_political_power = -50
 		ai_chance = {
@@ -58,7 +58,7 @@ country_event = { ## Failing Health Event 3
 		name = nf_PEC.3.a
 		PEC_stepanov_health_fail = yes
 		add_popularity = { ideology = council popularity = -0.05 }
-		hidden_effect = { country_event = { id = nf_PEC.4 days = 600 random_days = 600 } }
+		hidden_effect = { country_event = { id = nf_PEC.4 days = 600 random_days = 7 } }
 		add_stability = -0.05
 		add_political_power = -50
 		ai_chance = {
@@ -134,7 +134,7 @@ country_event = {
 	option = {
 		name = nf_PEC.6.b
 		custom_effect_tooltip = PEC_bormann_coup
-		hidden_effect = { country_event = { id = nf_PEC.7 days = 20 random_days = 20 } }
+		hidden_effect = { country_event = { id = nf_PEC.7 days = 20 random_days = 7 } }
 		ai_chance = {
             base = 0.5
         }
@@ -209,7 +209,7 @@ country_event = {
 
 	option = {
 		name = nf_PEC.8.b
-		hidden_effect = { country_event = { id = nf_PEC.9 days = 20 random_days = 20 } }
+		hidden_effect = { country_event = { id = nf_PEC.9 days = 20 random_days = 7 } }
 		custom_effect_tooltip = nf_PEC.8.b.tooltip
 		ai_chance = {
             base = 0.5
@@ -267,7 +267,7 @@ country_event = { ## Introduction to country / warning of failing health
 	option = {
 		name = nf_PEC.10.a
 		custom_effect_tooltip = PEC_civil_war_warning
-		hidden_effect = { country_event = { id = nf_PEC.1 days = 360 random_days = 360 } }
+		hidden_effect = { country_event = { id = nf_PEC.1 days = 360 random_days = 7 } }
 		ai_chance = {
             base = 2.5
         }
@@ -490,13 +490,37 @@ country_event = {
 
 	option = {
 		name = nf_PEC.21.a
+		trigger = {
+			oligarch > 0.3
+		}
 		complete_national_focus = PEC_politics_vedeneev
 		ai_chance = { base = 10 }
 	}
 
 	option = {
 		name = nf_PEC.21.b
+		trigger = {
+			community > 0.3
+		}
 		complete_national_focus = PEC_politics_danilov
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = nf_PEC.21.c
+		#trigger = {
+		#	has_tech = tech_hygiene_immunisation
+		#}
+		complete_national_focus = PEC_from_the_brink
+		add_country_leader_role = {
+			character = PEC_stepanov
+			promote_leader = yes
+			country_leader = {
+				ideology = trade_alliance
+				expire = "1965.1.1.1"
+				traits = { PEC_stepanov_health_5 }
+			}
+		}
 		ai_chance = { base = 10 }
 	}
 }
@@ -543,7 +567,7 @@ country_event = {
 		name = nf_PEC.23.a
 		add_popularity = { ideology = council popularity = 0.15 }
 		add_equipment_to_stockpile = {
-			type = scrap_infantry_equipment_2
+			type = shotgun_infantry_equipment_3
 			amount = 25
 			producer = RUS
 		}
