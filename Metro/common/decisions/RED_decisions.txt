@@ -641,24 +641,25 @@ RED_emerald_city_category = {
 
 		available = {
 			has_completed_focus = RED_MSU_bridge
-			288 = {
-                is_owned_by = RUI
-			}
+			288 = { is_owned_by = RUI }
+			num_of_civilian_factories_available_for_projects > 3
 		}
 
 		visible = {
 			has_completed_focus = RED_MSU_bridge
 		}
 
-		remove_effect = {
-			288 = { add_core_of = ROOT }
-			ROOT = {
-				set_state_owner = 288 
-			}
+		remove_effect = { 
+			434 = { transfer_state_to = ROOT } 
+			288 = { transfer_state_to = ROOT set_demilitarized_zone = no } 
 		}
 
-		cost = 50
-		days_remove = 80
+		custom_cost_text = command_power_30
+		custom_cost_trigger = { command_power > 29.9 }
+		days_remove = 45
+		modifier = { civilian_factory_use = 4 }
+		complete_effect = { hidden_effect = { add_command_power = -30 } }
+		cancel_trigger = { 288 = {  NOT = { is_owned_by = RUI } } }
 		fire_only_once = yes
 	}
 
@@ -666,48 +667,121 @@ RED_emerald_city_category = {
 		icon = GFX_RED_radio_jammers
 
 		available = {
-			has_completed_focus = RED_emerald_city
+			has_completed_focus = RED_MSU_bridge
+			num_of_civilian_factories_available_for_projects > 3
 		}
 
 		visible = {
-			has_completed_focus = RED_emerald_city
+			has_completed_focus = RED_MSU_bridge
 		}
 
 		remove_effect = {
-			MSU = {
-				country_event = nf_RED.65
+			MSU = { country_event = nf_MSU.3 }
+			effect_tooltip = {
+				MSU = {
+					add_timed_idea = {
+						idea = RED_radio_jamming
+						days = 180
+					}
+				}
 			}
-			add_command_power = 20
 		}
 
-		cost = 75
-		days_remove = 5
-
+		custom_cost_text = command_power_30
+		custom_cost_trigger = { command_power > 29.9 }
+		days_remove = 45
+		modifier = { civilian_factory_use = 4 }
+		complete_effect = { hidden_effect = { add_command_power = -30 } }
+		cancel_trigger = { 288 = {  NOT = { is_owned_by = RUI } } }
 		fire_only_once = yes
 	}
-	
-	RED_MSU_stalker_hit_squads = {
-		icon = GFX_RED_stalker_squads
 
+	RED_defend_sparrow_hills = {
+		icon = decision_generic_fortification
 		available = {
-			has_completed_focus = RED_emerald_city
+			288 = { is_owned_by = ROOT }
+			num_of_civilian_factories_available_for_projects > 3
+		}
+		custom_cost_text = command_power_25
+		custom_cost_trigger = { command_power > 24.9 }
+		days_remove = 45
+		modifier = { civilian_factory_use = 4 }
+		complete_effect = { hidden_effect = { add_command_power = -25 } }
+		remove_effect = { 
+			288 = { 
+				add_compliance = 10
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						limit_to_border = yes
+					}
+				}
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 1467
+				}
+			} 
+		}
+		cancel_trigger = { 
+			288 = {  NOT = { is_owned_by = RUI } } 
+		}
+		ai_will_do = { base = 51 }
+	}
+	
+	RED_MSU_launch_border_skirmish = {
+		icon = border_war
+		available = {
+			has_completed_focus = RED_MSU_bridge
+			288 = { is_owned_by = RED infrastructure > 3 }
 		}
 
 		visible = {
-			has_completed_focus = RED_emerald_city
-		}
-
-		modifier = {
-			special_forces_out_of_supply_factor = 0.1
+			has_completed_focus = RED_MSU_bridge
+			MSU = { exists = yes 
+				NOT = { 
+					is_puppet_of = RED 
+					is_in_faction_with = RED 
+				}
+			}
+			133 = { is_owned_by = MSU }
 		}
 
 		remove_effect = {
-			add_ideas = RED_hit_squads
+			#MSU = { country_event = nf_MSU.3 }
+			start_border_war = {
+				change_state_after_war = no
+				attacker = {
+					state = 288
+					num_provinces = 2
+					on_win = nf.MSU_borderwar.1
+					on_lose = nf.MSU_borderwar.2
+					on_cancel = nf.MSU_borderwar.3
+				}	
+				defender = {
+					state = 133
+					num_provinces = 3
+					on_win = nf.MSU_borderwar.1
+					on_lose = nf.MSU_borderwar.2
+					on_cancel = nf.MSU_borderwar.3
+				}
+			}
 		}
-		cost = 50
-		days_remove = 85
 
-		fire_only_once = yes
+		custom_cost_text = command_power_35
+		custom_cost_trigger = { command_power > 34.9 }
+		days_remove = 45
+		days_re_enable = 200
+		complete_effect = { hidden_effect = { add_command_power = -35 } MSU = { country_event = nf_MSU.4 }  }
+		cancel_trigger = { 288 = {  NOT = { is_owned_by = MSU } } }
 	}
 
 	#RED_MSU_borderwar = {
@@ -722,30 +796,6 @@ RED_emerald_city_category = {
 	#	
 	#	fire_only_once = yes
 	#}
-
-	RED_MSU_escalate_war = {
-		icon = GFX_RED_borderwar
-		available = {
-			has_completed_focus = RED_emerald_city
-			AND = { country_exists = MSU }
-		}
-
-		visible = {
-			has_completed_focus = RED_emerald_city
-		}
-
-		remove_effect = {
-			declare_war_on = {
-				target = MSU
-				type = annex_everything
-			}
-		}
-		
-		cost = 75
-		days_remove = 50
-
-		fire_only_once = yes
-	}
 }
 
 RED_frontline_decision_category =  {
