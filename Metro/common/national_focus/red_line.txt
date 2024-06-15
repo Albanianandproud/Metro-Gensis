@@ -37,7 +37,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
 			country_event = nf_RED.5
@@ -177,7 +177,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_bulwark_of_socialism
 		completion_reward = {
 			country_event = nf_RED.6
@@ -305,7 +305,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_question_of_prodrazvyorstka
 		completion_reward = {	
 			add_victory_points = { province = 2200 value = 5 }
@@ -429,7 +429,7 @@ focus_tree = {
 		}
 		x = 5
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_inaugerate_korbut
 		completion_reward = {
 			custom_effect_tooltip = RED_military_mutinies_decisions_tt
@@ -781,7 +781,7 @@ focus_tree = {
 		}
 		x = -5
 		y = 1
-		cost = 2.2
+		cost = 3
 		available = {
 			hidden_trigger = {
 				has_country_flag = RED_mushroom_revolts
@@ -856,7 +856,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_new_polis_treaty
 		completion_reward = {
 			random_owned_state = {
@@ -901,7 +901,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_new_polis_treaty
 		completion_reward = {
 			add_stability = 0.025
@@ -1146,7 +1146,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 1110
+			add = 1000
 			tag = RED
 		}
 	}
@@ -1157,7 +1157,7 @@ focus_tree = {
 		icon = GFX_RED_young_officer_academy
 		x = 12
 		y = 0
-		cost = 0.8
+		cost = 1
 		completion_reward = {
 			country_event = nf_RED.73
 		}
@@ -1174,7 +1174,7 @@ focus_tree = {
 		}
 		x = -6
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_2030
 		completion_reward = {
 			add_ideas = RED_minister_of_reclaimation
@@ -1262,7 +1262,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_central_planning_2
-		icon = GFX_RED_planned_infrastructure
+		icon = GFX_generic_constructions
 		prerequisite = {
 			focus = RED_central_planning
 		}
@@ -1291,7 +1291,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_central_planning_3
-		icon = GFX_RED_infrastructure
+		icon = GFX_generic_excavation
 		prerequisite = {
 			focus = RED_central_planning
 		}
@@ -1316,7 +1316,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_central_planning_4
-		icon = GFX_RED_infrastructure
+		icon = GFX_generic_bunker
 		prerequisite = {
 			focus = RED_central_planning_3
 		}
@@ -1334,6 +1334,14 @@ focus_tree = {
 					level = 10
 					instant_build = yes
 				}
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
 			}
 		}
 		ai_will_do = {
@@ -1343,7 +1351,7 @@ focus_tree = {
 
 	focus = {
 		id = RED_central_planning_5
-		icon = GFX_RED_infrastructure
+		icon = GFX_generic_bandit
 		prerequisite = {
 			focus = RED_central_planning_2
 		}
@@ -1384,9 +1392,7 @@ focus_tree = {
 		relative_position_id = RED_central_planning
 		completion_reward = {
 			every_owned_state = {
-				limit = {
-					has_state_category = pastoral
-				}
+				limit = { has_state_category = pastoral }
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -1434,21 +1440,28 @@ focus_tree = {
 		}
 		x = 3
 		y = 1
-		cost = 4.3
+		cost = 5
 		relative_position_id = RED_collectivization
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.2
+				category = construction
+			}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.2
+				category = tooling
+			}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.2
+				category = smithing
+			}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.2
+				category = casting
 			}
 		}
 		ai_will_do = {
@@ -1471,14 +1484,12 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4.3
+		cost = 5
 		relative_position_id = RED_unionize_artisans
 		completion_reward = {
 			random_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = {	has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -1515,9 +1526,7 @@ focus_tree = {
 			}
 			random_owned_state = {
 				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -1545,9 +1554,7 @@ focus_tree = {
 		completion_reward = {
 			random_owned_state = {
 				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 			    add_resource = {
 			        type = scrap
@@ -1556,9 +1563,7 @@ focus_tree = {
 			}
 			random_owned_state = {
 				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 			    add_resource = {
 			        type = alloys
@@ -1567,9 +1572,7 @@ focus_tree = {
 			}
 			random_owned_state = {
 				limit = {
-					NOT = {
-						has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_resource = {
 			        type = components
@@ -1591,6 +1594,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_retooling_artisans_for_war
 		}
+		available = { has_tech = tech_casting_electrolysis }
 		x = 0
 		y = 2
 		cost = 6.5
@@ -1636,14 +1640,12 @@ focus_tree = {
 		}
 		x = -4
 		y = 1
-		cost = 2.8
+		cost = 3.6
 		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
 			random_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -1812,24 +1814,29 @@ focus_tree = {
 	focus = {
 		id = RED_increased_pig_output
 		icon = GFX_RED_pig_output
-		prerequisite = {
-			focus = RED_agricultural_demand
+		prerequisite = { focus = RED_agricultural_demand }
+		available = {
+			any_state = {
+				region = 2
+				infrastructure > 3
+			}
 		}
 		x = 2
 		y = 1
-		cost = 2.2
+		cost = 6.5
 		relative_position_id = RED_agricultural_demand
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+			custom_effect_tooltip = RED_increased_pig_output_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					region = 2
+					infrastructure > 3
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1846,24 +1853,29 @@ focus_tree = {
 	focus = {
 		id = RED_increased_pig_output_2
 		icon = GFX_pig
-		prerequisite = {
-			focus = RED_increased_pig_output
+		prerequisite = { focus = RED_increased_pig_output }
+		available = {
+			any_state = {
+				region = 2
+				infrastructure > 5
+			}
 		}
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 6.5
 		relative_position_id = RED_increased_pig_output
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+			custom_effect_tooltip = RED_increased_pig_output_2_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					region = 2
+					infrastructure > 5
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1879,25 +1891,30 @@ focus_tree = {
 
 	focus = {
 		id = RED_pig_feed
-		icon = GFX_pig
-		prerequisite = {
-			focus = RED_increased_pig_output_2
+		icon = GFX_PAG_pigsty
+		prerequisite = { focus = RED_increased_pig_output_2 }
+		available = {
+			any_state = {
+				region = 2
+				infrastructure > 7
+			}
 		}
 		x = 0
 		y = 2
-		cost = 5.8
+		cost = 6.5
 		relative_position_id = RED_increased_pig_output_2
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+			custom_effect_tooltip = RED_increased_pig_output_3_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					region = 2
+					infrastructure > 7
 				}
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 3
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1978,6 +1995,9 @@ focus_tree = {
 			focus = RED_state_controlled_plots
 			focus = RED_allow_station_autonomy
 		}
+		available = {
+			num_of_civilian_factories > 59
+		}
 		x = 0
 		y = 4
 		cost = 5.8
@@ -2040,7 +2060,7 @@ focus_tree = {
 		}
 		x = 7
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_2030
 		completion_reward = {
 			add_stability = 0.05
@@ -2088,11 +2108,9 @@ focus_tree = {
 			focus = RED_workers_culture
 		}
 		bypass = {
-			330 = {
-				infrastructure > 9
-			}
+			330 = { infrastructure > 9 }
 		}
-		x = 0
+		x = -1
 		y = 1
 		cost = 4.4
 		relative_position_id = RED_workers_culture
@@ -2116,12 +2134,13 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_bolshoi_theatre
 		}
-		x = 0
+		x = 1
 		y = 1
-		cost = 4.4 
+		cost = 5
 		relative_position_id = RED_bolshoi_theatre
 		completion_reward = {
 			add_political_power = 200
+			add_stability = 0.05
 		}
 		ai_will_do = {
 			factor = 2
@@ -2134,9 +2153,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RED_bolshoi_theatre
 		}
-		x = -2
+		x = -1
 		y = 1
-		cost = 4.4 
+		cost = 5
 		relative_position_id = RED_bolshoi_theatre
 		completion_reward = {
 			country_event = nf_RED.31
@@ -2154,7 +2173,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4.4 
+		cost = 5
 		relative_position_id = RED_question_of_arts_and_culture
 		completion_reward = {
 			add_stability = 0.1
@@ -2173,7 +2192,7 @@ focus_tree = {
 		}
 		x = 2
 		y = 1
-		cost = 4.4 
+		cost = 5 
 		relative_position_id = RED_question_of_arts_and_culture
 		completion_reward = {
 			every_owned_state = {
@@ -2198,9 +2217,12 @@ focus_tree = {
 			focus = RED_repair_socialist_facades
 			focus = RED_propaganda_in_art
 		}
+		available = {
+			always = no
+		}
 		x = -1
 		y = 1
-		cost = 2
+		cost = 4.3
 		relative_position_id = RED_repair_socialist_facades
 		completion_reward = {
 			custom_effect_tooltip = RED_unlock_lenin_tomb_tt
@@ -2344,7 +2366,7 @@ focus_tree = {
 		}
 		x = 2
 		y = 1
-		cost = 3.8
+		cost = 4.4
 		relative_position_id = RED_workers_culture
 		completion_reward = {
 			add_ideas = RED_socialist_radio_idea
@@ -2397,9 +2419,8 @@ focus_tree = {
 	focus = {
 		id = RED_children_schools
 		icon = GFX_RED_education_department
-		prerequisite = {
-			focus = RED_fund_an_education_department
-		}
+		prerequisite = { focus = RED_fund_an_education_department }
+		available = { has_civic_education_higher_3 = yes }
 		x = -2
 		y = 1
 		cost = 5.8
@@ -2419,9 +2440,7 @@ focus_tree = {
 			}
 			random_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -2439,9 +2458,8 @@ focus_tree = {
 	focus = {
 		id = RED_fitness_schools
 		icon = GFX_RED_children_education
-		prerequisite = {
-			focus = RED_fund_an_education_department
-		}
+		prerequisite = { focus = RED_fund_an_education_department }
+		available = { has_civic_education_higher_3 = yes }
 		x = 0
 		y = 1
 		cost = 5.8
@@ -2471,9 +2489,8 @@ focus_tree = {
 	focus = {
 		id = RED_engineering_academy
 		icon = GFX_RED_engineering_academy
-		prerequisite = {
-			focus = RED_fund_an_education_department
-		}
+		prerequisite = { focus = RED_fund_an_education_department }
+		available = { has_civic_education_higher_3 = yes }
 		x = 2
 		y = 1
 		cost = 5.8
@@ -2493,9 +2510,7 @@ focus_tree = {
 			}
 			random_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -2513,17 +2528,12 @@ focus_tree = {
 	focus = {
 		id = RED_fund_an_education_department_4
 		icon = GFX_RED_research_slot
-		prerequisite = {
-			focus = RED_children_schools
-		}
-		prerequisite = {
-			focus = RED_engineering_academy
-		}
-		prerequisite = {
-			focus = RED_fitness_schools
-		}
+		prerequisite = { focus = RED_children_schools }
+		prerequisite = { focus = RED_engineering_academy }
+		prerequisite = { focus = RED_fitness_schools }
+		available = { has_civic_education_higher_4 = yes }
 		x = 0
-		y = 2
+		y = 1
 		cost = 5.8
 		relative_position_id = RED_fitness_schools
 		completion_reward = {
@@ -2605,7 +2615,14 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_propaganda_tune
 		completion_reward = {
-			RED_radio_idea_radio_relations = yes
+			hidden_effect = { RED_radio_idea_radio_relations = yes }
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RED_propaganda_tune_radio
+					add_idea = RED_propaganda_tune_radio_relations
+				}
+			}
+
 		}
 		ai_will_do = {
 			factor = 2
@@ -2626,7 +2643,13 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RED_propaganda_tune
 		completion_reward = {
-			RED_radio_idea_radio_subversion = yes
+			hidden_effect = { RED_radio_idea_radio_subversion = yes }
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RED_propaganda_tune_radio
+					add_idea = RED_propaganda_tune_radio_subversion
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2863,7 +2886,7 @@ focus_tree = {
 		}
 		x = -3
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_scientific_reportings
 		completion_reward = {
 		}
@@ -2937,7 +2960,7 @@ focus_tree = {
 		}
 		x = 3
 		y = 1
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_scientific_reportings
 		completion_reward = {
 		}
@@ -3003,7 +3026,7 @@ focus_tree = {
 		available = {
 			has_completed_focus = RED_2030
 		}
-		x = 29
+		x = 28
 		y = 0
 		cost = 6.5
 		relative_position_id = RED_development_of_the_red_line
@@ -3028,7 +3051,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
 			add_ideas = RED_conscription_reforms
@@ -3067,7 +3090,7 @@ focus_tree = {
 		}
 		x = -3
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_conscription_standardisation
 		completion_reward = {
 			add_ideas = RED_the_loyal_conscript
@@ -3088,7 +3111,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_conscription_standardisation_the_loyal_conscript
 		completion_reward = {
 			RED_conscription_irregulars_scripted_effect = yes
@@ -3106,7 +3129,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_conscription_standardisation_the_loyal_conscript
 		completion_reward = {
 			RED_conscription_irregulars_scripted_effect = yes
@@ -3273,7 +3296,7 @@ focus_tree = {
 		}
 		x = 3
 		y = 1
-		cost = 2.85
+		cost = 4.4
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
 			add_ideas = RED_heroic_deeds
@@ -3290,7 +3313,7 @@ focus_tree = {
 		}
 		x = 6
 		y = 1
-		cost = 5
+		cost = 6.5
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
 			add_tech_bonus = {
@@ -3319,7 +3342,7 @@ focus_tree = {
 		}
 		x = -2
 		y = 1
-		cost = 6.5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation
 		completion_reward = {
 			add_equipment_to_stockpile = {
@@ -3353,7 +3376,7 @@ focus_tree = {
 		}
 		x = 2
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation
 		completion_reward = {
 			349 = {
@@ -3387,7 +3410,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation_exploit_kuznetsky_most
 		completion_reward = {
 			random_owned_state = {
@@ -3402,6 +3425,14 @@ focus_tree = {
 					level = 2
 					instant_build = yes
 				}
+				add_resource = {
+			        type = components
+			        amount = 6
+			    }
+				add_resource = {
+			        type = electronics
+			        amount = 6
+			    }
 			}
 		}
 		ai_will_do = {
@@ -3479,7 +3510,7 @@ focus_tree = {
 		bypass = { KUZ = { exists = no } }
 		x = 0
 		y = 2
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation_exploit_kuznetsky_most
 		completion_reward = {
 			add_ideas = RED_gun_production_boost_kuznetsky_most
@@ -3500,7 +3531,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation_option_1
 		completion_reward = {
 			random_owned_state = {
@@ -3533,16 +3564,10 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_equipment_standardisation_option_1
 		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 1
-				uses = 3
-				ahead_reduction = 1
-				category = support_weapons_tech
-			}
+			set_technology = { tech_infantry_equipment_reliability = 1}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3621,7 +3646,7 @@ focus_tree = {
 		prerequisite = {
 			focus =  RED_general_standardisation
 		}
-		x = -1
+		x = 0
 		y = 1
 		cost = 5
 		relative_position_id =  RED_general_standardisation
@@ -3667,7 +3692,7 @@ focus_tree = {
 		}
 		x = -2
 		y = 1
-		cost = 5
+		cost = 5.8
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
 			add_ideas = RED_minister_of_defense
@@ -3690,7 +3715,7 @@ focus_tree = {
 			focus = RED_equipment_standardisation_weapon_arms
 		}
 		x = 0
-		y = 4
+		y = 3
 		cost = 6.5
 		relative_position_id =  RED_equipment_standardisation_option_1
 		completion_reward = {
@@ -3713,7 +3738,7 @@ focus_tree = {
 		}
 		x = 2
 		y = 1
-		cost = 4.7
+		cost = 5
 		relative_position_id =  RED_the_supreme_soviet
 		completion_reward = {
 			add_ideas = RED_army_maxims
@@ -3851,14 +3876,12 @@ focus_tree = {
 		icon = GFX_RED_NKVD
 		available = {
 			has_completed_focus = RED_development_of_the_red_line
-			NOT = {
-				has_completed_focus = RED_andrei_path
-			}
+			NOT = { has_completed_focus = RED_andrei_path }
 		}
-		x = 27
-		y = 7
-		cost = 3.5
-		relative_position_id = RED_development_of_the_red_line
+		x = 15
+		y = 0
+		cost = 4.3
+		relative_position_id = RED_the_might_of_the_soviet_union
 		completion_reward = {
 			if = {
 				limit = {
@@ -3880,40 +3903,24 @@ focus_tree = {
 	focus = {
 		id = RED_nkvd_military_units
 		icon = GFX_RED_NKVD_soldier_1
-		prerequisite = {
-			focus = RED_nkvd_primacy
-		}
-		x = -1
+		prerequisite = { focus = RED_nkvd_primacy }
+		prerequisite = { focus = RED_the_might_of_the_soviet_union }
+		x = -5
 		y = 1
-		cost = 4.3
+		cost = 5
 		relative_position_id = RED_nkvd_primacy
 		completion_reward = {
-			add_ideas = NKVD_military_units_buff
-
-			add_political_power = 25
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = RED_nkvd_equipment
-		icon = GFX_NKVD_eqipment
-		prerequisite = {
-			focus = RED_nkvd_primacy
-		}
-		x = 1
-		y = 1
-		cost = 4.3
-		relative_position_id = RED_nkvd_primacy
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = nkvd_equipment
-				amount = 25
-				producer = RUS
+			set_technology = { nkvd_technology_2 = 1 }
+			capital_scope = {
+				create_unit = {
+					division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"NKVD Diviziya\" division_template = \"NKVD Diviziya\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
-			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 2
@@ -3924,20 +3931,16 @@ focus_tree = {
 		id = RED_nkvd_exceptions
 		icon = GFX_RED_chekists2
 		prerequisite = {
-			focus = RED_nkvd_primacy
+			focus = RED_nkvd_military_units
 		}
-		x = -2
-		y = 2
-		cost = 4.3
-		relative_position_id = RED_nkvd_primacy
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RED_nkvd_military_units
 		completion_reward = {
 			if = {
-				limit = {
-					NOT = {
-						has_completed_focus = RED_korbut_path
-					}
-				}
-				add_stability = -0.025
+				limit = { NOT = { has_completed_focus = RED_korbut_path } }
+				RED_korbut_influence_grow = yes
 			}
 			RED_KGB_idea_buff = yes
 		}
@@ -3953,17 +3956,13 @@ focus_tree = {
 			focus = RED_nkvd_primacy
 		}
 		x = 2
-		y = 2
+		y = 1
 		cost = 4.3
 		relative_position_id = RED_nkvd_primacy
 		completion_reward = {
 			if = {
-				limit = {
-					NOT = {
-						has_completed_focus = RED_korbut_path
-					}
-				}
-				add_stability = -0.025
+				limit = { NOT = { has_completed_focus = RED_korbut_path } }
+				RED_korbut_influence_grow = yes
 			}
 			RED_KGB_idea_buff = yes
 		}
@@ -3979,8 +3978,8 @@ focus_tree = {
 			focus = RED_nkvd_primacy
 		}
 		x = 0
-		y = 2
-		cost = 4.3
+		y = 1
+		cost = 5
 		relative_position_id = RED_nkvd_primacy
 		completion_reward = {
 			add_political_power = 50
@@ -4005,6 +4004,10 @@ focus_tree = {
 		cost = 4.3
 		relative_position_id = RED_allow_special_jurisdiction
 		completion_reward = {
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
 			add_corps_commander_role = {
 				character = RED_korbut
 				traits = { cruel_personality_trait craven_personality_trait guileful_commander_trait }
@@ -4036,17 +4039,11 @@ focus_tree = {
 		relative_position_id = RED_allow_special_jurisdiction
 		completion_reward = {
 			if = {
-				limit = {
-					NOT = {
-						has_completed_focus = RED_korbut_path
-					}
-				}
-				add_political_power = -25
+				limit = { NOT = { has_completed_focus = RED_korbut_path } }
+				RED_korbut_influence_grow = yes
 			}
-			add_popularity = {
-				ideology = dictatorial
-				popularity = 0.025
-			}
+			add_ideas = NKVD_military_units_buff
+			set_technology = { nkvd_technology_3 = 1 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -4111,12 +4108,8 @@ focus_tree = {
 		relative_position_id = RED_allow_special_jurisdiction
 		completion_reward = {
 			if = {
-				limit = {
-					NOT = {
-						has_completed_focus = RED_korbut_path
-					}
-				}
-				add_political_power = -25
+				limit = { NOT = { has_completed_focus = RED_korbut_path } }
+				RED_korbut_influence_grow = yes
 			}
 			add_ideas = NKVD_administration_roles
 		}
@@ -4179,9 +4172,9 @@ focus_tree = {
 				has_idea = RED_polis_treaty_2
 			}
 		}
-		x = 50
+		x = 57
 		y = 0
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_development_of_the_red_line
 		completion_reward = {
 			add_ideas = RED_minister_of_foreign_affairs
@@ -5209,7 +5202,7 @@ focus_tree = {
 		icon = GFX_RED_sparrow_hills_bridge
 		prerequisite = { focus = RED_cemented_authority }
 		select_effect = { MSU = { country_event = nf_MSU.2 } }
-		x = 14
+		x = 13
 		y = 1
 		cost = 5
 		relative_position_id = RED_cemented_authority
@@ -5974,7 +5967,7 @@ focus_tree = {
 				}
 			}
 		}
-		x = 18
+		x = 17
 		y = 1
 		cost = 3.6
 		relative_position_id = RED_cemented_authority
@@ -6000,7 +5993,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 3.6
+		cost = 6.5
 		relative_position_id = RED_red_line_secured
 		completion_reward = {
 			274 = { add_core_of = ROOT }
@@ -6031,7 +6024,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 3.6
+		cost = 6.5
 		relative_position_id = RED_red_line_secured
 		completion_reward = {
 			274 = {
@@ -6115,7 +6108,7 @@ focus_tree = {
 	#	icon = GFX_RED_politburo
 	#	x = -5
 	#	y = 0
-	#	cost = 2.2
+	#	cost = 3
 	#	relative_position_id = RED_moskvin_path
 	#	completion_reward = {
 	#	}
@@ -6129,7 +6122,7 @@ focus_tree = {
 		icon = GFX_RED_head_of_kgb
 		x = 5
 		y = 8
-		cost = 2.2
+		cost = 3
 		available = {
 			always = no
 		}
@@ -6343,7 +6336,7 @@ focus_tree = {
 		icon = GFX_RED_moskvin
 		x = -9
 		y = 0
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_korbut_path
 		available = {
 			always = no
@@ -6597,7 +6590,7 @@ focus_tree = {
 		icon = GFX_RED_andrey
 		x = 7
 		y = 0
-		cost = 2.2
+		cost = 3
 		available = {
 			always = no
 		}
@@ -6703,7 +6696,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
-		cost = 2.2
+		cost = 3
 		relative_position_id = RED_andrei_path
 		completion_reward = {
 			###TODO###
@@ -6809,7 +6802,7 @@ focus_tree = {
 	#	icon = GFX_RED_generic_food
 	#	x = 5
 	#	y = 0
-	#	cost = 2.2
+	#	cost = 3
 	#	available = {
 	#		always = no
 	#	}
