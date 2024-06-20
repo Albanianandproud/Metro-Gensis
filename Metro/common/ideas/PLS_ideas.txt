@@ -2,21 +2,8 @@ ideas = {
 	country = {
 		PLS_kshatriya_defenders_of_polis = {
 			picture = PLS_kshatriya_defenders_of_polis
-
-			allowed = {
-			}
-
+			allowed = {}
 			removal_cost = -1
-
-			on_add = {
-				add_to_variable = { spec_ops_cap_from_national_spirits = 10 }
-				calc_battalion_limit = yes
-			}
-			on_remove = {
-				subtract_from_variable = { spec_ops_cap_from_national_spirits = 10 }
-				calc_battalion_limit = yes
-			}
-
 			modifier = {
 				experience_gain_army = 0.04
 			    weekly_manpower = 1
@@ -25,47 +12,177 @@ ideas = {
 			    special_forces_min = 10
 	        }	
 	    }
-
 		PLS_old_world_bastion = {
 			picture = PLS_old_world_bastion
-
 			allowed = {
 				361 = { is_owned_by = ROOT }
 				270 = { is_owned_by = ROOT }
 				328 = { is_owned_by = ROOT }
 				244 = { is_owned_by = ROOT }
 			}
-
 			removal_cost = -1
-
 			modifier = {
 				political_power_gain = 0.1
 				research_speed_factor = 0.05
 				enemy_justify_war_goal_time = 0.4
 	        }
 		}
-
 		PLS_ignorance = {
 			picture = PLS_ignorance
-
 			allowed = {
 				threat > 0.5
 				OR = {
 					has_defensive_war = yes
 				}
 			}
-
 			#on_add = { set_country_flag = disable_reclaimation_mechanic }
 			#on_remove = { clr_country_flag = disable_reclaimation_mechanic }
-
 			removal_cost = -1
-
 			modifier = {
-				generate_wargoal_tension = 0.5
+				generate_wargoal_tension = 1
 				justify_war_goal_time = 0.75
 				#custom_modifier_tooltip = disable_reclaimation_mechanic
 				mobilization_speed = -0.2
 	        }
 		}
+		PLS_assistance_from_SPARTA = {
+			picture = PLS_old_world_bastion
+			allowed = { is_in_faction_with = SPT }
+			removal_cost = -1
+			modifier = {
+				army_leader_start_logistics_level = 1 
+	        }
+		}
+
+		PLS_assistance_from_SPARTA_military = {
+			picture = PLS_old_world_bastion
+			allowed = { is_in_faction_with = SPT }
+			removal_cost = -1
+			modifier = {
+				special_forces_training_time_factor = -0.2
+				experience_gain_special_forces_combat_factor = 0.1
+	        }
+		}
+		PLS_SPT_political_leverage_PLS = {
+			picture = PLS_old_world_bastion
+			allowed = {
+				OR = {
+					is_in_faction_with = SPT
+					is_in_faction_with = PLS
+				}
+			}
+			removal_cost = -1
+			modifier = {
+				materiel_manufacturer_cost_factor = -0.1
+				industrial_concern_cost_factor = -0.1
+	        }
+		}
+		PLS_SPT_polis_assistance_equipment_tinkering = {
+			picture = PLS_old_world_bastion
+			allowed = {
+				OR = {
+					is_in_faction_with = SPT
+					is_in_faction_with = PLS
+				}
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				special_forces_equipment = {
+					defense = 0.1
+					hardness = 0.1
+					instant = yes
+				}
+			}
+			research_bonus = { stalker = 0.1 }
+		}
+		PLS_SPT_economic_fund = {
+			picture = PLS_old_world_bastion
+			allowed = {
+				OR = {
+					is_in_faction_with = SPT
+					is_in_faction_with = PLS
+				}
+			}
+			removal_cost = -1
+			modifier = {
+				country_resource_chemicals = 8
+				country_resource_components = 6
+				country_resource_alloys = 6
+	        }
+		}
+		PLS_core_defense_1 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				army_core_defence_factor = 0.05
+	        }
+		}
+		PLS_core_defense_2 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				army_core_defence_factor = 0.1
+				state_production_speed_bunker_factor = 0.05
+	        }
+		}
+		PLS_core_defense_3 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				army_core_defence_factor = 0.15
+				state_production_speed_bunker_factor = 0.15
+	        }
+		}
+		PLS_chop_shop_1 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			research_bonus = { motorized_tech = 0.1 }
+		}
+		PLS_chop_shop_2a = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			equipment_bonus = {
+				rail_cart_equipment = {
+					build_cost_ic = -0.075
+					instant = yes
+				}
+				rail_car_equipment = {
+					build_cost_ic = -0.075
+					instant = yes
+				}
+			}
+			research_bonus = { motorized_tech = 0.1 }
+		}
+		PLS_chop_shop_2b = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			equipment_bonus = {
+				rail_cart_equipment = {
+					breakthrough = 0.075
+					instant = yes
+				}
+				rail_car_equipment = {
+					breakthrough = 0.075
+					instant = yes
+				}
+			}
+			research_bonus = { motorized_tech = 0.1 }
+		}
+		PLS_strengthen_kshatriya = {
+			picture = PLS_kshatriya_defenders_of_polis
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				experience_gain_army = 0.03
+				experience_gain_regulars_combat_factor = 0.1
+				experience_gain_irregulars_combat_factor = 0.1
+	        }	
+	    }
 	}
 }

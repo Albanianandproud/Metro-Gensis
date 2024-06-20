@@ -1,0 +1,547 @@
+
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+
+focus_tree = {
+	id = polis
+	country = {
+		factor = 0
+		modifier = {
+			add = 25
+			tag = PLS
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 0 y = 50 }
+	focus = {
+		id = PLS_rangers_1
+		icon = GFX_SPT_patch
+		available = { is_in_faction_with = SPT }
+		cost = 5
+		x = 9
+		y = 0
+		completion_reward = {
+			army_experience = 5
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spartan
+				amount = 10
+				producer = RUS
+			}
+			SPT = { army_experience = 20 add_political_power = 20 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rangers_2
+		icon = GFX_SPT_experienced_rangers
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_rangers_1 }
+		cost = 5
+		relative_position_id = PLS_rangers_1
+		x = 0
+		y = 1
+		completion_reward = {
+			add_war_support = 0.025
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+			army_experience = 5
+			SPT = { army_experience = 20 add_political_power = 20 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_recall_order_detachment
+		icon = GFX_generic_support_polis
+		available = { NOT = { has_completed_focus = PLS_allow_operation_outside_polis } }
+		prerequisite = { focus = PLS_rangers_1 }
+		cost = 5
+		relative_position_id = PLS_rangers_1
+		x = 2
+		y = 1
+		completion_reward = {}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_recall_order_detachment_2
+		icon = GFX_generic_support_polis
+		available = { SPT = { exists = no } }
+		prerequisite = { focus = PLS_recall_order_detachment }
+		cost = 5
+		relative_position_id = PLS_recall_order_detachment
+		x = 0
+		y = 1
+		completion_reward = {}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_drive_mutants_from_smolensk
+		icon = GFX_generic_support_polis
+		available = { has_war_support > 0.34 SPT = { exists = no } 390 = { is_owned_by = MUT  } }
+		prerequisite = { focus = PLS_recall_order_detachment }
+		cost = 6.5
+		relative_position_id = PLS_recall_order_detachment
+		x = 1
+		y = 2
+		will_lead_to_war_with = MUT
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = MUT
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_allow_operation_outside_polis
+		icon = GFX_SPT_rangers_5
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_rangers_2 }
+		cost = 6.5
+		relative_position_id = PLS_rangers_2
+		x = 0
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_SPT_exchange_equipment_for_experience
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			SPT = { army_experience = 20 add_political_power = 20 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_cooperation_pact
+		icon = GFX_SPT_ranger
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_allow_operation_outside_polis }
+		mutually_exclusive = { focus = PLS_political_leverage }
+		cost = 6.5
+		relative_position_id = PLS_allow_operation_outside_polis
+		x = -1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_SPT_must_persevere
+			army_experience = 20
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spartan
+				amount = 10
+				producer = RUS
+			}
+			SPT = {
+				army_experience = 20
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_spartan
+					amount = 10
+					producer = RUS
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_cooperation_pact_1
+		icon = GFX_SPT_rangers_6
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_military_cooperation_pact }
+		cost = 6.5
+		relative_position_id = PLS_military_cooperation_pact
+		x = -1
+		y = 1
+		completion_reward = {
+			add_command_power = 20
+			hidden_effect = {
+				every_unit_leader = {
+					add_logistics = 1
+					add_defense = 1
+				}
+			}
+			effect_tooltip = {
+				every_unit_leader = {
+					add_logistics = 1
+					add_defense = 1
+				}
+			}
+			add_ideas = PLS_assistance_from_SPARTA
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spartan
+				amount = 10
+				producer = RUS
+			}
+			SPT = {
+				army_experience = 20
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_spartan
+					amount = 10
+					producer = RUS
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_cooperation_pact_2
+		icon = GFX_SPT_rangers_coilgun
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_military_cooperation_pact_1 }
+		cost = 6.5
+		relative_position_id = PLS_military_cooperation_pact_1
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_assistance_from_SPARTA_military
+			division_template = {
+				name = "Rangers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Ranger\" division_template = \"Rangers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			SPT = {
+				army_experience = 20
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_spartan
+					amount = 10
+					producer = RUS
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_political_leverage
+		icon = GFX_SPT_ranger_recruit
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_allow_operation_outside_polis }
+		mutually_exclusive = { focus = PLS_military_cooperation_pact }
+		cost = 6.5
+		relative_position_id = PLS_allow_operation_outside_polis
+		x = 1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_SPT_must_persevere
+			add_political_power = 100
+			SPT = { add_political_power = 20 add_ideas = PLS_SPT_economic_fund }
+			add_ideas = PLS_SPT_economic_fund
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_political_leverage_1
+		icon = GFX_SPT_rangers_3
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_political_leverage }
+		cost = 6.5
+		relative_position_id = PLS_political_leverage
+		x = 1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_SPT_unlock_spartan_spirits
+			add_ideas = PLS_SPT_political_leverage_PLS 
+			SPT = { add_political_power = 20 add_ideas = PLS_SPT_political_leverage_PLS  }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_political_leverage_2
+		icon = GFX_SPT_rangers_armor
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_political_leverage_1 }
+		cost = 6.5
+		relative_position_id = PLS_political_leverage_1
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_SPT_polis_assistance_equipment_tinkering
+			SPT = { add_political_power = 20 add_ideas = PLS_SPT_polis_assistance_equipment_tinkering }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_a_mutual_goal
+		icon = GFX_SPT_miller_2
+		available = { is_in_faction_with = SPT }
+		prerequisite = { focus = PLS_military_cooperation_pact focus = PLS_political_leverage }
+		cost = 6.5
+		relative_position_id = PLS_allow_operation_outside_polis
+		x = 0
+		y = 2
+		completion_reward = {
+			set_technology = { special_forces_spartan_equipment_tech = 1 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_a_mutual_goal_2
+		icon = GFX_generic_support_polis
+		available = { 
+			is_in_faction_with = SPT 
+			OR = { 
+				106 = { is_owned_by = ROOT } 
+				106 = { is_owned_by = SPT }
+			} 
+		}
+		prerequisite = { focus = PLS_a_mutual_goal }
+		cost = 6.5
+		relative_position_id = PLS_allow_operation_outside_polis
+		x = 0
+		y = 4
+		completion_reward = {
+			custom_effect_tooltip = PLS_SPT_D6
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_defense_of_polis
+		icon = GFX_MDR_measures
+		available = {}
+		cost = 5
+		x = 16
+		y = 0
+		completion_reward = {
+			add_ideas = PLS_core_defense_1
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_defense_of_polis_4
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_defense_of_polis }
+		cost = 6.5
+		relative_position_id = PLS_defense_of_polis
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_core_defense_1
+				add_idea = PLS_core_defense_2
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_kshatriya
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_defense_of_polis }
+		cost = 6.5
+		relative_position_id = PLS_defense_of_polis
+		x = -2
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_strengthen_kshatriya
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_infantry_defense
+		icon = GFX_MDR_measures
+		available = { has_manpower > 24 }
+		prerequisite = { focus = PLS_kshatriya }
+		cost = 6.5
+		relative_position_id = PLS_kshatriya
+		x = 1
+		y = 1
+		select_effect = { add_manpower = -25 }
+		completion_reward = {
+			custom_effect_tooltip = PLS_spawn_unit_when_in_defensive_war
+			division_template = {
+				name = "Defenders"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					regulars = { x = 0 y = 2 }
+					regulars = { x = 0 y = 3 }
+					regulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Polis Defenders\" division_template = \"Defenders\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_motorized_defence
+		icon = GFX_rail_cart
+		available = { }
+		prerequisite = { focus = PLS_infantry_defense }
+		prerequisite = { focus = PLS_chop_shop }
+		cost = 6.5
+		relative_position_id = PLS_infantry_defense
+		x = 0
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_armoured_carriage
+		icon = GFX_train
+		available = { }
+		prerequisite = { focus = PLS_motorized_defence}
+		prerequisite = { focus = PLS_motorized_defence_2 focus = PLS_motorized_defence_3 }
+		cost = 6.5
+		relative_position_id = PLS_motorized_defence
+		x = 0
+		y = 3
+		completion_reward = {
+			set_technology = { rail_armored_train_tech = 1 }
+			create_railway_gun = {
+				equipment = rail_armored_train_equipment_1
+				name = my_new_railcannon
+				location = 2322
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_kshatriya_2
+		icon = GFX_RCH_night_vision
+		available = { }
+		prerequisite = { focus = PLS_kshatriya }
+		cost = 6.5
+		relative_position_id = PLS_kshatriya
+		x = 0
+		y = 3
+		completion_reward = {
+			add_tech_bonus = {
+				name = night_vision
+				uses = 1
+				bonus = 3
+				category = night_vision
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_colonization_of_south
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_kshatriya_2 }
+		cost = 6.5
+		relative_position_id = PLS_kshatriya_2
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_core_defense_2
+				add_idea = PLS_core_defense_3
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_chop_shop
+		icon = GFX_wrench
+		available = { }
+		prerequisite = { focus = PLS_defense_of_polis_4 }
+		cost = 6.5
+		relative_position_id = PLS_defense_of_polis_4
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_chop_shop_1
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_arm
+		icon = GFX_workstation
+		available = { }
+		prerequisite = { focus = PLS_chop_shop }
+		cost = 6.5
+		relative_position_id = PLS_chop_shop
+		x = 0
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_motorized_defence_2
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_military_arm }
+		mutually_exclusive = { focus = PLS_motorized_defence_3 }
+		cost = 6.5
+		relative_position_id = PLS_military_arm
+		x = -1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_chop_shop_1
+				add_idea = PLS_chop_shop_2b
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_motorized_defence_3
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_military_arm }
+		mutually_exclusive = { focus = PLS_motorized_defence_2 }
+		cost = 6.5
+		relative_position_id = PLS_military_arm
+		x = 1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_chop_shop_1
+				add_idea = PLS_chop_shop_2a
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+}

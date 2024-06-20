@@ -4,1305 +4,816 @@
 ## Code above is for VSC HOI4 utility. pls leave ty
 
 technologies = {
+	@TECH_YEAR_2020_Y = 0
+	@TECH_YEAR_2028_Y = 4
+	@TECH_YEAR_2029_Y = 7
+	@TECH_YEAR_2030_Y = 10
+	@TECH_YEAR_2031_Y = 13
+	@TECH_YEAR_2032_Y = 16
+	@TECH_YEAR_2033_Y = 19
+	@TECH_YEAR_2034_Y = 22
+	@TECH_YEAR_2035_Y = 25
+	@TECH_YEAR_2036_Y = 31
+	@TECH_YEAR_2037_Y = 35
+	@TECH_YEAR_2038_Y = 39
+	@TECH_COLUMN_RAIL_CART = -4
+	@TECH_COLUMN_RAIL_BIKE = -1
+	@TECH_COLUMN_SALVAGING = 2
+	@TECH_COLUMN_RAIL_TANK = 4
+	@TECH_COLUMN_ENGINE = 7
+	@TECH_COLUMN_ARMAMENTS = 9
+	@TECH_COLUMN_ARMOR = 11
+	@TECH_COLUMN_STORAGE = 13
 
 	rail_cart_tech_2020 = {
-
-		enable_equipments = {
-			rail_cart_equipment_1
-		}
-
-		enable_subunits = {
-			rail_cart
-		}
-
-		path = {
-		    leads_to_tech = rail_cart_storage_compartment
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-		start_year = 2020
-
-		folder = {
-			name = rail_folder
-			position = { x = -4 y = 0 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_cart_storage_compartment = {
-
-		category_rail_vehicles = {
-			supply_consumption = -0.02
-		}
-
-		allow = {
-			NOT = { has_country_flag = cannot_make_vehicles_flag }
-		}
-
-		path = {
-		    leads_to_tech = rail_cart_jurry_rigged_handcrank 
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_fuel_storage		## Reduces supply usage of rail cart equipment
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.75
-	    xp_research_type = army
-
-		start_year = 2028
-
-		folder = {
-			name = rail_folder
-			position = { x = -4 y = 3 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_cart_jurry_rigged_handcrank = {
-
-		category_rail_cart = {
-			reliability = 0.02
-			maximum_speed = 0.03
-		}
-
+		enable_equipments = { rail_cart_equipment_1 }
+		enable_subunits = { rail_cart }
 		path = {
 		    leads_to_tech = rail_cart_tech_2029
 			research_cost_coeff = 1
 		}
-
-		path = {
-		    leads_to_tech = rail_automobile_salvaging
-			research_cost_coeff = 1
-		}
-
 		research_cost = 2
 	    xp_research_type = army
-
-
-
-		start_year = 2029
-
+		start_year = 2020
 		folder = {
 			name = rail_folder
-			position = { x = -4 y = 6 }
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2020_Y }
 		}
-		
 		categories = {
-		    rail_car
+		    rail_cart
 			armor
+			motorized_tech
 		}
-		
 		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
 	rail_cart_tech_2029 = {
-
-		enable_equipments = {
-			rail_cart_equipment_2
-		}
-
-		path = {
-		    leads_to_tech = rail_cart_durable_chassis
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-		start_year = 2030
-
-		folder = {
-			name = rail_folder
-			position = { x = -4 y = 9 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_cart_durable_chassis = {
-
 		category_rail_cart = {
 			armor_value = 0.1
-			max_organisation = 2
-		}	
-
+			max_organisation = 1
+		}
+		path = {
+		    leads_to_tech = rail_cart_tech_2030
+			research_cost_coeff = 1
+		}
+		research_cost = 2.375
+	    xp_research_type = army
+		start_year = 2029
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2029_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_cart_tech_2030 = {
+		enable_equipments = { rail_cart_equipment_2 }
 		path = {
 		    leads_to_tech = rail_cart_tech_2032
 			research_cost_coeff = 1
 		}
-
-		research_cost = 2
+		research_cost = 2.5
 	    xp_research_type = army
-
-
-
-		start_year = 2031
-
+		start_year = 2030
 		folder = {
 			name = rail_folder
-			position = { x = -4 y = 12 }
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2030_Y }
 		}
-		
 		categories = {
-		    rail_car
+		    rail_cart
 			armor
+			motorized_tech
 		}
-		
 		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
 	rail_cart_tech_2032 = {
+		category_rail_cart = {
+			reliability = 0.02
+			maximum_speed = 0.02
+		}
+		path = {
+		    leads_to_tech = rail_cart_tech_2033
+			research_cost_coeff = 1
+		}
+		research_cost = 2.75
+	    xp_research_type = army
+		start_year = 2032
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2032_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_cart_tech_2033 = {
+		enable_equipments = { rail_cart_equipment_3 }
+		path = {
+		    leads_to_tech = rail_cart_tech_2035
+			research_cost_coeff = 1
+		}
+		research_cost = 3
 
-		enable_equipments = {
-			rail_cart_equipment_3
+	    xp_research_type = army
+		start_year = 2033
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2033_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_cart_tech_2035 = {
+		category_rail_cart = {
+			breakthrough = 0.05
+		}
+		research_cost = 3.25
+	    xp_research_type = army
+		start_year = 2035
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2035_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_salvaging_2020 = {
+		category_rail_vehicles = {
+			reliability = 0.02
+			maximum_speed = 0.01 
 		}	
-
 		path = {
-		    leads_to_tech = rail_cart_mounted_emplacement_tech
+		    leads_to_tech = rail_cart_tech_2020
 			research_cost_coeff = 1
 		}
-
 		path = {
-		    leads_to_tech = rail_reinforced_chassis
+		    leads_to_tech = rail_salvaging_2030
 			research_cost_coeff = 1
 		}
-
+		research_cost = 2.25
+	    xp_research_type = army
+		start_year = 2020
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_SALVAGING y = @TECH_YEAR_2020_Y }
+		}
+		categories = {
+		    motorized_tech
+			rail_salvaging
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_salvaging_2030 = {
+		category_rail_vehicles = {
+			reliability = 0.02
+			maximum_speed = 0.01 
+		}	
+		path = {
+		    leads_to_tech = rail_salvaging_2033
+			research_cost_coeff = 1
+		}
+		path = {
+		    leads_to_tech = rail_bike_tech_2030
+			research_cost_coeff = 1
+		}
 		research_cost = 2.5
 	    xp_research_type = army
-
-
-
-		start_year = 2032
-
+		start_year = 2030
 		folder = {
 			name = rail_folder
-			position = { x = -4 y = 15 }
+			position = { x = @TECH_COLUMN_SALVAGING y = @TECH_YEAR_2030_Y }
 		}
-		
 		categories = {
-		    rail_car
-			armor
+		    motorized_tech
+			rail_salvaging
 		}
-		
 		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
-	rail_cart_mounted_emplacement_tech = {
-
-		category_rail_cart = {
-			soft_attack = 0.05
-			hard_attack = 0.05
-			breakthrough = 0.05
-		}	
-
-		research_cost = 1.85
-	    xp_research_type = army
-
-		start_year = 2033
-
-		path = {
-		    leads_to_tech = rail_cart_mounted_emplacement_tech_2
-			research_cost_coeff = 1
-		}
-
-		folder = {
-			name = rail_folder
-			position = { x = -4 y = 18 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_cart_mounted_emplacement_tech_2 = {
-
-		category_rail_cart = {
-			soft_attack = 0.05
-			hard_attack = 0.05
-			breakthrough = 0.05
-		}	
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-
-		start_year = 2035
-
-		folder = {
-			name = rail_folder
-			position = { x = -4 y = 24 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_fuel_storage = {
-
-		category_rail_vehicles = {
-			supply_consumption = -0.02
-		}	
-
-		path = {
-		    leads_to_tech = rail_improved_fuel_storage
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.75
-	    xp_research_type = army
-
-		start_year = 2028
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 3 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_automobile_salvaging = {
-
+	rail_salvaging_2033 = {
 		category_rail_vehicles = {
 			reliability = 0.02
 			maximum_speed = 0.01 
 		}	
-
-		path = {
-		    leads_to_tech = rail_car_tech_2029
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_military_vehicle_salvaging		## improves reliability
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.5
-	    xp_research_type = army
-
-
-
-		start_year = 2029
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 6 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_military_vehicle_salvaging = {
-
-		category_rail_vehicles = {
-			reliability = 0.02
-			maximum_speed = 0.01 
-		}
-
-		dependencies = {
-            rail_automobile_salvaging = 1
-        }	
-
-		path = {
-		    leads_to_tech = rail_industrial_vehicle_salvaging		## improves reliability
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_car_turret
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_cart_jurry_rigged_handcrank
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.75
-	    xp_research_type = army
-
-
-
-		start_year = 2030
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 9 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_industrial_vehicle_salvaging = {
-
-		category_rail_vehicles = {
-			reliability = 0.02
-			maximum_speed = 0.01 
-		}	
-
-		research_cost = 2
-	    xp_research_type = army
-		
-		start_year = 2031
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 12 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_tech_2029 = {
-
-		enable_subunits = {
-			rail_car
-		}
-
-		enable_equipments = {
-			rail_car_equipment_1
-		}
-
-		path = {
-		    leads_to_tech = rail_car_turret
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_reinforced_hull
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-		start_year = 2029
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 6 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_turret = {
-
-		category_rail_car = {
-			breakthrough = 0.025
-			soft_attack = 0.025 
-		}
-
-		category_rail_panzer = {
-			breakthrough = 0.025
-			soft_attack = 0.025 
-		}
-
-		dependencies = {
-            		rail_military_vehicle_salvaging = 1
-            		rail_car_tech_2029 = 1
-        	}
-
-		path = {
-		    leads_to_tech = rail_car_wiremesh_front
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_panzer_tech_2030
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.5
-	    xp_research_type = army
-
-
-
-		start_year = 2030
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 9 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_wiremesh_front = {
-
-		category_rail_car = {
-			hardness = 0.05
-			armor_value = 0.05
-		}	
-
-		path = {
-		    leads_to_tech = rail_car_tech_2032
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.5
-	    xp_research_type = army
-
-
-
-		start_year = 2031
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 12 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_tech_2032 = {
-
-		enable_equipments = {
-			rail_car_equipment_2
-		}
-
-		path = {
-		    leads_to_tech = rail_car_mounted_ammo_box
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_reinforced_chassis		## improve hardness / armor to cars and carts
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-		start_year = 2032
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 15 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_mounted_ammo_box = {
-
-		category_rail_car = {
-			soft_attack = 0.03
-			reliability = 0.02
-		}
-
-		path = {
-		    leads_to_tech = rail_car_reinforced_rollers
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.5
-	    xp_research_type = army
-
-
-
-		start_year = 2033
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 18 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_car_reinforced_rollers = {
-
-		category_rail_car = {
-			breakthrough = 0.025
-			maximum_speed = 0.025
-		}	
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-
-		start_year = 2035
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 24 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_reinforced_chassis = {
-
-		category_rail_cart = {
-			armor_value = 0.1
-			hardness = 0.1
-		}
-
-		category_rail_car = {
-			armor_value = 0.1
-			hardness = 0.1
-		}	
-
-		path = {
-		    leads_to_tech = rail_armor_plating		
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.85
-	    xp_research_type = army
-
-
-
-		start_year = 2032
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 15 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_armor_plating	 = {
-
-		category_rail_cart = {
-			armor_value = 0.1
-			hardness = 0.1
-		}
-
-		category_rail_car = {
-			armor_value = 0.1
-			hardness = 0.1
-		}
-
-		path = {
-		    leads_to_tech = rail_plough	
-			research_cost_coeff = 1
-		}	
-
-		research_cost = 1.85
-	    xp_research_type = army
-
-
-
-		start_year = 2033
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 18 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_plough	= {
-
-		category_rail_cart = {
-			armor_value = 0.05
-			breakthrough = 0.1
-		}
-
-		category_rail_car = {
-			armor_value = 0.05
-			breakthrough = 0.1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-
-		start_year = 2035
-
-		folder = {
-			name = rail_folder
-			position = { x = -2 y = 24 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_improved_fuel_storage = {
-
-		category_rail_vehicles = {
-			supply_consumption = -0.02
-		}	
-
-		path = {
-		    leads_to_tech = rail_reinforced_hull		
-			research_cost_coeff = 1
-		}
-
-		path = {
-		    leads_to_tech = rail_improved_fuel_storage_2	
-			research_cost_coeff = 1
-		}
-
-		research_cost = 1.75
-	    xp_research_type = army
-
-
-
-		start_year = 2028
-
-		folder = {
-			name = rail_folder
-			position = { x = 0 y = 3 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_improved_fuel_storage_2 = {
-
-		category_rail_vehicles = {
-			supply_consumption = -0.02
-		}	
-
-		research_cost = 1.75
-	    xp_research_type = army
-
-
-
-		start_year = 2028
-
-		folder = {
-			name = rail_folder
-			position = { x = 2 y = 3 }
-		}
-		
-		categories = {
-		    rail_car
-			armor
-		}
-		
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_reinforced_hull = {
-
-		category_rail_vehicles = {
-			max_strength = 0.1
-		}	
-
-		path = {
-		    leads_to_tech = rail_panzer_tech_2030		
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-
-		start_year = 2029
-
-		folder = {
-			name = rail_folder
-			position = { x = 3 y = 6 }
-		}
-		
-		categories = {
-		    rail_panzer
-		    armor
-		}
-		
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 1.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_panzer_tech_2030 = {
-
-		enable_subunits = {
-			rail_panzer
-		}
-
-		enable_equipments = {
-			rail_panzer_equipment_1 
-		}
-
-		dependencies = {
-            rail_car_turret = 1
-        }	
-
-        dependencies = {
-            rail_reinforced_hull = 1
-        }	
-
-		path = {
-		    leads_to_tech = rail_panzer_explosive_shell
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2.5
-	    xp_research_type = army
-
-		start_year = 2030
-
-		folder = {
-			name = rail_folder
-			position = { x = 3 y = 9 }
-		}
-		
-		categories = {
-		    rail_panzer
-		    armor
-		}
-		
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_panzer_explosive_shell = {
-
-		category_rail_panzer = {
-			hard_attack = 0.1
-			ap_attack = 0.1
-		}	
-
-		path = {
-		    leads_to_tech = rail_panzer_sloped_armor_tech
-			research_cost_coeff = 1
-		}
-
-		research_cost = 2
-	    xp_research_type = army
-
-
-
-		start_year = 2031
-
-		folder = {
-			name = rail_folder
-			position = { x = 3 y = 12 }
-		}
-		
-		categories = {
-		    rail_panzer
-		    armor
-		}
-		
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	rail_panzer_sloped_armor_tech = {
-
-		category_rail_panzer = {
-			armor_value = 0.1
-		}
-
 		path = {
 		    leads_to_tech = rail_panzer_tech_2033
 			research_cost_coeff = 1
 		}
-
-		research_cost = 2
+		research_cost = 3
 	    xp_research_type = army
-
-
-
-		start_year = 2032
-
+		start_year = 2033
 		folder = {
 			name = rail_folder
-			position = { x = 3 y = 15 }
+			position = { x = @TECH_COLUMN_SALVAGING y = @TECH_YEAR_2033_Y }
 		}
-		
 		categories = {
-		    rail_panzer
-		    armor
+		    motorized_tech
+			rail_salvaging
 		}
-		
 		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
-	rail_panzer_tech_2033 = {
-
-		enable_equipments = {
-			rail_panzer_equipment_2
-		}
-
+	rail_bike_tech_2030 = {
+		enable_equipments = { rail_car_equipment_1 }
+		enable_subunits = { rail_car }
 		path = {
-		    leads_to_tech = rail_panzer_periscope
+		    leads_to_tech = rail_bike_tech_2032
 			research_cost_coeff = 1
 		}
-
-		research_cost = 2.6
+		research_cost = 2.5
 	    xp_research_type = army
-
-
-
-		start_year = 2033
-
+		start_year = 2030
 		folder = {
 			name = rail_folder
-			position = { x = 3 y = 18 }
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2030_Y }
 		}
-		
 		categories = {
-		    rail_panzer
-		    armor
+		    rail_car
+			armor
+			motorized_tech
 		}
-		
 		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
-	rail_panzer_periscope  = {
-
-		category_rail_panzer = {
-			max_organisation = 2
+	rail_bike_tech_2032 = {
+		category_rail_car = {
+			hardness = 0.05
+			armor_value = 0.05
 		}
-
+		path = {
+		    leads_to_tech = rail_bike_tech_2033
+			research_cost_coeff = 1
+		}
+		research_cost = 2.75
+	    xp_research_type = army
+		start_year = 2032
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2032_Y }
+		}
+		categories = {
+		    rail_car
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_bike_tech_2033 = {
+		enable_equipments = { rail_car_equipment_2 }
+		path = {
+		    leads_to_tech = rail_bike_tech_2034
+			research_cost_coeff = 1
+		}
+		research_cost = 3
+	    xp_research_type = army
+		start_year = 2033
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2033_Y }
+		}
+		categories = {
+		    rail_car
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_bike_tech_2034 = {
+		category_rail_car = {
+			reliability = 0.02
+			supply_consumption = -0.1
+		}
+		path = {
+		    leads_to_tech = rail_bike_tech_2035
+			research_cost_coeff = 1
+		}
+		research_cost = 3.25
+	    xp_research_type = army
+		start_year = 2034
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2034_Y }
+		}
+		categories = {
+		    rail_car
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_bike_tech_2035 = {
+		category_rail_car = {
+			breakthrough = 0.05
+			maximum_speed = 0.05
+		}	
+		research_cost = 3.25
+	    xp_research_type = army
+		start_year = 2035
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2035_Y }
+		}
+		categories = {
+		    rail_car
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_panzer_tech_2033 = {
+		enable_subunits = { rail_panzer }
+		enable_equipments = { rail_panzer_equipment_1  }
+		path = {
+		    leads_to_tech = rail_panzer_tech_2034
+			research_cost_coeff = 1
+		}
+		research_cost = 3
+	    xp_research_type = army
+		start_year = 2033
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_TANK y = @TECH_YEAR_2033_Y }
+		}
+		categories = {
+		    rail_panzer
+			armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_panzer_tech_2034 = {
+		category_rail_panzer = {
+			armor_value = 0.1
+		}
 		path = {
 		    leads_to_tech = rail_panzer_tech_2035
 			research_cost_coeff = 1
 		}
-
-		research_cost = 2
+		research_cost = 3.25
 	    xp_research_type = army
-
-
-
-		start_year = 2035
-
+		start_year = 2034
 		folder = {
 			name = rail_folder
-			position = { x = 3 y = 24 }
+			position = { x = @TECH_COLUMN_RAIL_TANK y = @TECH_YEAR_2034_Y }
 		}
-		
 		categories = {
 		    rail_panzer
-		    armor
+			armor
+			motorized_tech
 		}
-		
 		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
 		}
 	}
-
-	rail_panzer_tech_2035  = {
-
-		enable_equipments = {
-			rail_panzer_equipment_3
+	rail_panzer_tech_2035 = {
+		category_rail_panzer = {
+			max_organisation = 1
+			max_strength = 0.1
 		}
-
-		research_cost = 2.8
+		research_cost = 3.25
 	    xp_research_type = army
-
 		start_year = 2035
-
 		folder = {
 			name = rail_folder
-			position = { x = 3 y = 27 }
+			position = { x = @TECH_COLUMN_RAIL_TANK y = @TECH_YEAR_2035_Y }
 		}
-		
 		categories = {
 		    rail_panzer
-		    armor
+			armor
+			motorized_tech
 		}
-		
 		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 2.5
-				is_major = yes
-			}
-			modifier = {
-				factor = 1.5
-				date > "2030.1.1"
-			}
+			factor = 1.5
+		}
+	}
+	rail_engine_tech_2028 = {
+		category_rail_vehicles = {
+			max_organisation = 1
+		}
+		path = {
+		    leads_to_tech = rail_engine_tech_2030
+			research_cost_coeff = 1
+		}
+		research_cost = 2.25
+	    xp_research_type = army
+		start_year = 2028
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ENGINE y = @TECH_YEAR_2020_Y }
+		}
+		categories = {
+		    rail_engine
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_engine_tech_2030 = {
+		category_rail_vehicles = {
+			max_organisation = 1
+		}
+		path = {
+		    leads_to_tech = rail_engine_tech_2033
+			research_cost_coeff = 1
+		}
+		research_cost = 2.5
+	    xp_research_type = army
+		start_year = 2030
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ENGINE y = @TECH_YEAR_2030_Y }
+		}
+		categories = {
+		    rail_engine
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_engine_tech_2033 = {
+		category_rail_vehicles = {
+			max_organisation = 1
+		}
+		path = {
+		    leads_to_tech = rail_panzer_tech_2033
+			research_cost_coeff = 1
+		}
+		research_cost = 3
+	    xp_research_type = army
+		start_year = 2033
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ENGINE y = @TECH_YEAR_2033_Y }
+		}
+		categories = {
+		    rail_engine
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armament_tech_2028 = {
+		category_rail_vehicles = {
+			breakthrough = 0.05
+		}
+		path = {
+		    leads_to_tech = rail_armament_tech_2029
+			research_cost_coeff = 1
+		}
+		research_cost = 2.25
+	    xp_research_type = army
+		start_year = 2028
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMAMENTS y = @TECH_YEAR_2020_Y }
+		}
+		categories = {
+		    rail_armament
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armament_tech_2029 = {
+		category_rail_vehicles = {
+			breakthrough = 0.05
+		}
+		path = {
+		    leads_to_tech = rail_armament_tech_2032
+			research_cost_coeff = 1
+		}
+		research_cost = 2.375
+	    xp_research_type = army
+		start_year = 2029
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMAMENTS y = @TECH_YEAR_2029_Y }
+		}
+		categories = {
+		    rail_armament
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armament_tech_2032 = {
+		category_rail_vehicles = {
+			breakthrough = 0.05
+		}
+		path = {
+		    leads_to_tech = rail_armament_tech_2035
+			research_cost_coeff = 1
+		}
+		research_cost = 2.75
+	    xp_research_type = army
+		start_year = 2032
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMAMENTS y = @TECH_YEAR_2032_Y }
+		}
+		categories = {
+		    rail_armament
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armament_tech_2035 = {
+		category_rail_vehicles = {
+			breakthrough = 0.05
+		}
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2035
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMAMENTS y = @TECH_YEAR_2035_Y }
+		}
+		categories = {
+		    rail_armament
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armor_tech_2028 = {
+		category_rail_vehicles = {
+			max_strength = 0.1
+		}
+		path = {
+		    leads_to_tech = rail_armor_tech_2029
+			research_cost_coeff = 1
+		}
+		research_cost = 2.5
+	    xp_research_type = army
+		start_year = 2028
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMOR y = @TECH_YEAR_2020_Y }
+		}
+		categories = {
+		    rail_armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armor_tech_2029 = {
+		category_rail_vehicles = {
+			max_strength = 0.1
+			armor_value = 0.05
+		}
+		path = {
+		    leads_to_tech = rail_armor_tech_2032
+			research_cost_coeff = 1
+		}
+		research_cost = 2.375
+	    xp_research_type = army
+		start_year = 2029
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMOR y = @TECH_YEAR_2029_Y }
+		}
+		categories = {
+		    rail_armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armor_tech_2032 = {
+		category_rail_vehicles = {
+			max_strength = 0.1
+			armor_value = 0.05
+		}
+		path = {
+		    leads_to_tech = rail_armor_tech_2035
+			research_cost_coeff = 1
+		}
+		research_cost = 2.75
+	    xp_research_type = army
+		start_year = 2032
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMOR y = @TECH_YEAR_2032_Y }
+		}
+		categories = {
+		    rail_armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armor_tech_2035 = {
+		category_rail_vehicles = {
+			max_strength = 0.1
+			armor_value = 0.05
+		}
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2035
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ARMOR y = @TECH_YEAR_2035_Y }
+		}
+		categories = {
+		    rail_armor
+			motorized_tech
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_storage_tech_2028 = {
+		category_rail_vehicles = {
+			supply_consumption = -0.1
+			fuel_consumption_factor = -0.02
+		}
+		path = {
+		    leads_to_tech = rail_storage_tech_2030
+			research_cost_coeff = 1
+		}
+		research_cost = 2.5
+	    xp_research_type = army
+		start_year = 2020
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_STORAGE y = @TECH_YEAR_2020_Y }
+		}
+		categories = {
+		    motorized_tech
+			rail_storage
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_storage_tech_2030 = {
+		category_rail_vehicles = {
+			supply_consumption = -0.1
+			fuel_consumption_factor = -0.02
+		}
+		path = {
+		    leads_to_tech = rail_storage_tech_2033
+			research_cost_coeff = 1
+		}
+		research_cost = 2.5
+	    xp_research_type = army
+		start_year = 2030
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_STORAGE y = @TECH_YEAR_2030_Y }
+		}
+		categories = {
+		    motorized_tech
+			rail_storage
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_storage_tech_2033 = {
+		category_rail_vehicles = {
+			supply_consumption = -0.1
+			fuel_consumption_factor = -0.02
+		}
+		research_cost = 3
+	    xp_research_type = army
+		start_year = 2033
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_STORAGE y = @TECH_YEAR_2033_Y }
+		}
+		categories = {
+		    motorized_tech
+			rail_storage
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_cart_tech_tachanka = {
+		enable_equipments = { rail_cart_equipment_4  }
+		allow = { always = no }
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2036
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_CART y = @TECH_YEAR_2036_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_car_tech_regina = {
+		enable_equipments = { rail_car_equipment_3 }
+		allow = { always = no }
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2036
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_BIKE y = @TECH_YEAR_2036_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_panzer_tech_sturmpanzer = {
+		enable_equipments = { rail_panzer_equipment_3  }
+		allow = { always = no }
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2036
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_RAIL_TANK y = @TECH_YEAR_2036_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+		}
+		ai_will_do = {
+			factor = 1.5
+		}
+	}
+	rail_armored_train_tech = {
+		enable_equipments = { rail_armored_train_equipment_1 }
+		enable_subunits = { railway_gun }
+		allow = { always = no }
+		research_cost = 2
+	    xp_research_type = army
+		start_year = 2036
+		folder = {
+			name = rail_folder
+			position = { x = @TECH_COLUMN_ENGINE y = @TECH_YEAR_2036_Y }
+		}
+		categories = {
+		    rail_cart
+			armor
+		}
+		ai_will_do = {
+			factor = 1.5
 		}
 	}
 }

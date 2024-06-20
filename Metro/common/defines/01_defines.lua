@@ -129,9 +129,9 @@ NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 10
 
 ---Railway Guns---
 
-NDefines.NRailwayGunRAILWAY_GUN_RANGE = 20
+NDefines.NRailwayGunRAILWAY_GUN_RANGE = 25
 NDefines.NRailwayGunOUT_OF_SUPPLY_SPEED = -0.99	
-NDefines.NRailwayGunBASE_CAPTURE_CHANCE = 0.5			
+NDefines.NRailwayGunBASE_CAPTURE_CHANCE = 0.2			
 
 ---NAI Stuff---
 NDefines.NAI.ESTIMATED_CONVOYS_PER_DIVISION = 1		---Base is 6. Pending Change.
