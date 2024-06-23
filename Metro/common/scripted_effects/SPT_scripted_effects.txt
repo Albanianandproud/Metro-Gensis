@@ -1,20 +1,68 @@
-SPT_upgrade_salvage_idea = {
+SPT_increase_debug = { # 3
+	ROOT = {
+        add_to_variable = { global.excavation_level = 100 }
+    }
+}
+
+D6_clear_second_level = {
+	remove_ideas = {
+		D6_second_level_uncovered
+		D6_second_level_uncovered_1
+		D6_second_level_uncovered_2
+		D6_second_level_uncovered_3
+		D6_second_level_uncovered_4
+		D6_second_level_uncovered_5
+		D6_second_level_uncovered_6
+		
+	}
+}
+
+D6_second_level_up = {
+	custom_effect_tooltip = D6_second_level_up_tt
 	if = {
-		limit = {
-			has_idea = SPT_salvage_resources_1
-		}
+		limit = { has_idea = D6_second_level_uncovered_5 }
 		swap_ideas = {
-			remove_idea = SPT_salvage_resources_1
-			add_idea = SPT_salvage_resources_2
+			remove_idea = D6_second_level_uncovered_5
+			add_idea = D6_second_level_uncovered_6
 		}
 	}
 	else_if = {
-		limit = {
-			has_idea = SPT_salvage_resources_2
-		}
+		limit = { has_idea = D6_second_level_uncovered_4 }
 		swap_ideas = {
-			remove_idea = SPT_salvage_resources_2
-			add_idea = SPT_salvage_resources_3
+			remove_idea = D6_second_level_uncovered_4
+			add_idea = D6_second_level_uncovered_5
 		}
+	}
+	else_if = {
+		limit = { has_idea = D6_second_level_uncovered_3 }
+		swap_ideas = {
+			remove_idea = D6_second_level_uncovered_3
+			add_idea = D6_second_level_uncovered_4
+		}
+	}
+	else_if = {
+		limit = { has_idea = D6_second_level_uncovered_2 }
+		swap_ideas = {
+			remove_idea = D6_second_level_uncovered_2
+			add_idea = D6_second_level_uncovered_3
+		}		
+	}
+    else_if = {
+		limit = { has_idea = D6_second_level_uncovered_1 }
+		swap_ideas = {
+			remove_idea = D6_second_level_uncovered_1
+			add_idea = D6_second_level_uncovered_2
+		}		
+	}
+    else_if = {
+		limit = { has_idea = D6_second_level_uncovered }
+		swap_ideas = {
+			remove_idea = D6_second_level_uncovered
+			add_idea = D6_second_level_uncovered_1
+		}		
+	}
+    else_if = {
+		limit = { NOT = { has_idea = D6_second_level_uncovered } }
+		add_ideas = D6_second_level_uncovered
 	}
 }

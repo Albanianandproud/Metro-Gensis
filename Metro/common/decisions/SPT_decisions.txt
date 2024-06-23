@@ -56,3 +56,294 @@ SPT_salvaging_duties = {
 		}
 	}
 }
+
+SPT_helping_polis = {
+	SPT_give_them_guns = {
+		icon = SPT_icon
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 29
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+		}
+
+		custom_cost_text = command_power_10
+		custom_cost_trigger = {
+			command_power > 9.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			SPT = {
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 30
+					target = PLS
+				}
+				send_equipment = {
+					equipment = special_forces_equipment
+					amount = 5
+					target = PLS
+				}
+				add_to_variable = {
+					var = POLISHELP
+					value = 2
+					tooltip = increase_polis_commitment
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	SPT_give_them_men = {
+		icon = SPT_icon
+
+		available = {
+			has_manpower > 19
+		}
+
+		custom_cost_text = command_power_10
+		custom_cost_trigger = {
+			command_power > 9.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			SPT = {
+				add_manpower = -20
+				add_to_variable = {
+					var = POLISHELP
+					value = 2
+					tooltip = increase_polis_commitment
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	SPT_invest_in_military_production = {
+		icon = SPT_icon
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+			has_completed_focus = SPT_spartan_construction_corps
+		}
+
+		custom_cost_text = command_power_10
+		custom_cost_trigger = {
+			command_power > 9.9
+		}
+		days_remove = 50
+		days_re_enable = 30
+
+		modifier = {
+			consumer_goods_factor = 0.1
+			civilian_factory_use = 2
+		}
+
+		remove_effect = {
+			PLS = {
+				add_offsite_building = { type = arms_factory level = 1 }
+			}
+			SPT = {
+				add_to_variable = {
+					var = POLISHELP
+					value = 2
+					tooltip = increase_polis_commitment
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+SPT_hunter_vs_miller = {
+	SPT_hunter_1 = {
+		icon = GFX_hunter_BP_icon
+
+		cost = 50
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			SPT = {
+				custom_effect_tooltip = SPT_hunter_influence_tt
+				hidden_effect = {
+					add_popularity = {
+						ideology = dictatorial
+						popularity = 0.05
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	SPT_hunter_2 = {
+		icon = GFX_hunter_BP_icon
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			custom_effect_tooltip = SPT_hunter_influence_tt
+			custom_effect_tooltip = SPT_generalxp_tt
+			280 = {
+				add_manpower = -5
+			}
+			GWC = { country_event = nf_SPT.18 }
+			SPT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = dictatorial
+						popularity = 0.05
+					}
+					random_unit_leader = {
+						gain_xp = 200
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	SPT_hunter_3 = {
+		icon = GFX_hunter_BP_icon
+
+		custom_cost_text = army_experience_10
+		custom_cost_trigger = {
+			has_army_experience > 9.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			custom_effect_tooltip = SPT_hunter_influence_tt
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}	
+			SPT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = dictatorial
+						popularity = 0.05
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	SPT_miller_1 = {
+		icon = GFX_miller_BP_icon
+
+		cost = 50
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			SPT = {
+				custom_effect_tooltip = SPT_colonel_influence_tt
+				hidden_effect = {
+					add_popularity = {
+						ideology = council
+						popularity = 0.05
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	SPT_miller_2 = {
+		icon = GFX_miller_BP_icon
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = {
+			command_power > 19.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			custom_effect_tooltip = SPT_colonel_influence_tt
+			custom_effect_tooltip = SPT_generalxp_tt
+			SPT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = council
+						popularity = 0.05
+					}
+					random_unit_leader = {
+						gain_xp = 200
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	SPT_miller_3 = {
+		icon = GFX_miller_BP_icon
+
+		custom_cost_text = army_experience_10
+		custom_cost_trigger = {
+			has_army_experience > 9.9
+		}
+		        
+		days_re_enable = 30
+
+		complete_effect = {
+			custom_effect_tooltip = SPT_colonel_influence_tt
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.15
+				uses = 1
+				category = land_doctrine
+			}	
+			SPT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = council
+						popularity = 0.05
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}
