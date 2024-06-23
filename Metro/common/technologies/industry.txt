@@ -27,7 +27,8 @@
 @TECH_COLUMN_REFINERY = 15
 @TECH_COLUMN_REFINERY_FUEL = 14
 @TECH_COLUMN_REFINERY_COST = 16
-@TECH_COLUMN_FARMING = 18
+@TECH_COLUMN_ELECTRICITY = 18
+@TECH_COLUMN_FARMING = 20
 
 technologies = {
 
@@ -484,6 +485,8 @@ technologies = {
 			leads_to_tech = tech_tooling_specialised_tools
 			research_cost_coeff = 1
 		}
+
+		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.55
 		start_year = 2033
@@ -682,6 +685,8 @@ technologies = {
 			leads_to_tech = tech_pressing_punch_pressing
 			research_cost_coeff = 1
 		}
+
+		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.7
 		start_year = 2033
@@ -761,6 +766,8 @@ technologies = {
 			leads_to_tech = tech_pressing_hydraulic_punch_press
 			research_cost_coeff = 1
 		}
+
+		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.8
 		start_year = 2033
@@ -930,6 +937,8 @@ technologies = {
 			leads_to_tech = tech_casting_laser_casting
 			research_cost_coeff = 1
 		}
+
+		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.65
 		start_year = 2033
@@ -1261,11 +1270,6 @@ technologies = {
 	}
 
 	tech_refinery_2 = {
-
-		enable_building = {
-            building = synthetic_refinery 
-            level = 2
-        }
 		
 		production_speed_synthetic_refinery_factor = 0.1
 
@@ -1275,14 +1279,7 @@ technologies = {
     			resource = chemicals
     			amount = 1
 			}
-			modify_building_resources = {
-    			building = synthetic_refinery
-    			resource = oil
-    			amount = 1
-			}
 		}
-
-		fuel_gain_factor = 0.25
 
 		path = {
 			leads_to_tech = tech_refinery_fuel_1
@@ -1312,16 +1309,13 @@ technologies = {
 
 	tech_refinery_fuel_1 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
-		fuel_gain_factor = 0.25
+		production_speed_synthetic_refinery_factor = 0.15
+		#fuel_gain_factor = 0.25
 
-		on_research_complete = {
-			modify_building_resources = {
-    			building = synthetic_refinery
-    			resource = oil
-    			amount = 1
-			}
-		}
+		enable_building = {
+            building = synthetic_refinery 
+            level = 2
+        }
 
 		XOR = {
             tech_refinery_chemical_1
@@ -1350,16 +1344,8 @@ technologies = {
 
 	tech_refinery_fuel_2 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
-		fuel_gain_factor = 0.25
-
-		on_research_complete = {
-			modify_building_resources = {
-    			building = synthetic_refinery
-    			resource = oil
-    			amount = 2
-			}
-		}
+		production_speed_synthetic_refinery_factor = 0.15
+		#fuel_gain_factor = 0.25
 		
 		research_cost = 2.5
 		start_year = 2036
@@ -1379,7 +1365,12 @@ technologies = {
 
 	tech_refinery_chemical_1 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
+		#production_speed_synthetic_refinery_factor = 0.1
+
+		enable_building = {
+            building = synthetic_refinery 
+            level = 2
+        }
 
         on_research_complete = {
 			modify_building_resources = {
@@ -1416,13 +1407,13 @@ technologies = {
 
 	tech_refinery_chemical_2 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
+		#production_speed_synthetic_refinery_factor = 0.1
 
 		on_research_complete = {
 			modify_building_resources = {
     			building = synthetic_refinery
     			resource = chemicals
-    			amount = 2
+    			amount = 1
 			}
 		}
 		
@@ -1961,11 +1952,6 @@ technologies = {
     			resource = chemicals
     			amount = 1
 			}
-			modify_building_resources = {
-    			building = synthetic_refinery
-    			resource = oil
-    			amount = 1
-			}
 		}
 		
 		research_cost = 3
@@ -1990,17 +1976,7 @@ technologies = {
             always = no
         }
 
-        on_research_complete = {
-			modify_building_resources = {
-    			building = synthetic_refinery
-    			resource = oil
-    			amount = 1
-			}
-		}
-
-		production_speed_synthetic_refinery_factor = 0.1
-		fuel_gain_factor = 0.25
-		
+		production_speed_synthetic_refinery_factor = 0.2
 
 		on_research_complete = {
 			custom_effect_tooltip = has_unlocked_required_schematics
@@ -2050,6 +2026,114 @@ technologies = {
 		ai_will_do = {
 			factor = 50
 		}
+		
+		categories = {
+			refinery
+		}
+	}
+
+	tech_energy_1 = {
+
+		enable_building = {
+            building = fuel_silo
+            level = 1
+        }
+
+		path = {
+			leads_to_tech = tech_energy_2
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2029
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2029_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			refinery
+		}
+	}
+
+	tech_energy_2 = {
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+
+		path = {
+			leads_to_tech = tech_energy_3
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2031
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2031_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			refinery
+		}
+	}
+
+	tech_energy_3 = {
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+
+		path = {
+			leads_to_tech = tech_energy_4
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2033
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2033_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			refinery
+		}
+	}
+
+	tech_energy_4 = {
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+		
+		research_cost = 2
+		start_year = 2035
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2035_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
 		
 		categories = {
 			refinery
