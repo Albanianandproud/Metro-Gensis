@@ -431,3 +431,66 @@ TRT_testing_the_red_line = {
 		}
 	}
 }
+
+TRT_testing_the_hansa = {
+	TRT_testing_the_hansa_borderwar = {
+		available = {
+			NOT = {
+				has_war_with = HNZ
+				is_in_faction_with = HNZ
+				has_non_aggression_pact_with = HNZ
+				HNZ = { is_puppet_of = TRT }
+			}
+			71 = {
+				any_neighbor_state = {
+					is_controlled_by = HNZ
+				}
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 71
+				state = 433
+			} 
+		}
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 1
+			modifier = { # We won't do this if RED are our friends c;
+				OR = {
+					TRT = {
+						has_opinion = {
+							target = RED
+							value > 20
+						}
+					}
+				}
+				factor = 0
+			}
+		}
+		cost = 0
+		days_remove = 14
+		war_with_on_remove = HNZ
+		complete_effect = {
+			HNZ = { country_event = nf_TRT.18 }
+		}
+		remove_effect = {
+			add_threat = 0.01
+			start_border_war = {
+				attacker = {
+					state = 71
+					num_provinces = 3
+					on_win = nf_TRT.19
+					on_lose = nf_TRT.20
+					modifier = 0.1
+				}	
+				defender = {
+					state = 433
+					num_provinces = 3
+					on_win = nf_TRT.19
+					on_lose = nf_TRT.20
+				}	
+			}
+		}
+	}
+}
