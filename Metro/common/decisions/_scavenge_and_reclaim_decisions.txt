@@ -8,10 +8,10 @@ reclaim_metro = {
 	   on_map_mode = map_only
 	   state_target = yes
 	   
-	   visible = {
+	    visible = {
 		    RUI = { owns_state = FROM }
 		    FROM = {
-			   any_neighbor_state = {
+			    any_neighbor_state = {
 				   is_fully_controlled_by = ROOT
 				   NOT = {
 					   AND = {
@@ -628,6 +628,7 @@ reclaim_metro = {
 	}
 
 	reclaim_mission_build_defences = {
+		icon = protection 
 		cost = 20
 		days_remove = 7
 		days_re_enable = 20
@@ -662,6 +663,7 @@ reclaim_metro = {
 	}
 
 	reclaim_exert_authority = {
+		icon = generic_police_action
 		custom_cost_text = command_power_10
 		custom_cost_trigger = { command_power > 9.9 }
 		days_re_enable = 15
@@ -682,6 +684,7 @@ reclaim_metro = {
 		}
 	}
 	reclaim_extend_influence_further = {
+		icon = generic_political_discourse
 		custom_cost_text = command_power_20
 		custom_cost_trigger = { command_power > 19.9 }
 		days_re_enable = 21
@@ -703,6 +706,7 @@ reclaim_metro = {
 		}
 	}
 	reclaim_mission_send_soldiers = {
+		icon = decision_generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
 		custom_cost_trigger = { has_manpower > 9 }
 		days_re_enable = 21
@@ -729,6 +733,7 @@ reclaim_metro = {
 	}
 
 	reclaim_mission_build_up_station = {
+		icon = generic_mountain_fortification
 		cost = 50
 		days_remove = 7
 		days_re_enable = 50
@@ -765,6 +770,7 @@ reclaim_metro = {
 		}
 	}
 	reclaim_relocate_citizens = {
+		icon = eng_blackshirt_march
 		cost = 75
 		days_remove = 21
 		days_re_enable = 100
@@ -804,7 +810,65 @@ reclaim_metro = {
 		}
 	}
 
+	reclaim_remove_tunnel_blockers = {
+		icon = trade_unions_demand
+		available = { num_of_civilian_factories_available_for_projects > 4 }
+		custom_cost_text = command_power_30
+	    custom_cost_trigger = { command_power > 29.9 }
+		cost = 0
+		days_remove = 60
+		on_map_mode = map_only
+	    state_target = yes
+	   
+	    visible = {
+		    FROM = {
+				is_demilitarized_zone = yes
+			    any_neighbor_state = {
+				   is_fully_controlled_by = ROOT
+				}
+				NOT = { state = 288 }
+			}
+		    RUI = { owns_state = FROM }
+		}
+
+		available = {
+		    hidden_trigger = {
+			    NOT = {
+				   original_tag = GWC
+				   original_tag = PAG
+				   #original_tag = AVT
+			    }
+		    }
+		    FROM = { is_owned_by = RUI }
+		    has_manpower > 10
+		    NOT = {
+			   ROOT = { has_country_flag = reclaimation_underway }
+			    FROM = {
+				    OR = {
+					   has_state_flag = state_being_colonised
+					   state = 1
+				    }
+			    }
+			}
+		}
+	
+		modifier = { civilian_factory_use = 5 }
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -30 }
+	    }
+	
+		remove_effect = {
+			FROM = { set_demilitarized_zone = no  }
+		}
+	
+		ai_will_do = {
+			base = 51
+		}
+	}
+
 	dredge_decision = {
+		icon = hol_inundate_water_lines
 		on_map_mode = map_only
 	    state_target = yes
 	    fixed_random_seed = no
