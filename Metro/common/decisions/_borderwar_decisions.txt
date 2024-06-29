@@ -1,7 +1,8 @@
 @border_incident_escalation_countdown = 7
 @border_conflict_incident_forgotten_timer = 14
-@border_conflict_escalate_to_war_countdown = 21
-@border_conflict_time_until_cancelled = 35
+@border_conflict_escalate_to_war_countdown = 14
+@border_conflict_time_until_cancelled = 60
+@escalate_borderwar_cost = 30
 
 ## Initalized in events !
 @initiate_borderwar_cost = 50
@@ -13,7 +14,8 @@ RCH_RED_border_war = {
 		icon = border_war		
 
 		available = {
-			#NOT = { has_active_mission = border_conflict_time_until_cancelled }
+			NOT = { has_active_mission = border_conflict_time_until_cancelled }
+			NOT = { has_active_mission = escalate_incident_to_border_conflict }
 			NOT = { has_border_war_with = FROM FROM = { has_border_war_with = ROOT } }
 			FROM = {
 				any_owned_state = {
@@ -164,7 +166,7 @@ RCH_RED_border_war = {
 					set_temp_variable = { attacker_state_temp = id }
 				}
 			}
-			#-activate_targeted_decision = { target = FROM decision = escalate_incident_to_border_conflict }
+			activate_targeted_decision = { target = FROM decision = escalate_incident_to_border_conflict }
 		}
 
 		ai_will_do = {
@@ -269,7 +271,7 @@ RCH_RED_border_war = {
 		}
 
 		#selectable_mission = yes
-		#fire_only_once = yes #Reactivation handled in effect
+		fire_only_once = yes #Reactivation handled in effect
 		is_good = yes
 		days_mission_timeout = @border_conflict_incident_forgotten_timer
 
@@ -294,9 +296,11 @@ RCH_RED_border_war = {
         			dig_in_factor = 0.1
 				}
 			}
-			FROM = {
-				activate_targeted_decision = { target = ROOT decision = border_conflict_escalate_conflict }
-				activate_targeted_decision = { target = ROOT decision = border_conflict_time_until_cancelled }
+			hidden_effect = {
+				FROM = {
+					activate_targeted_decision = { target = ROOT decision = border_conflict_escalate_conflict }
+					activate_targeted_decision = { target = ROOT decision = border_conflict_time_until_cancelled }
+				}	
 			}
 			activate_targeted_decision = { target = FROM decision = border_conflict_escalate_conflict }
 			activate_targeted_decision = { target = FROM decision = border_conflict_time_until_cancelled }
@@ -344,6 +348,10 @@ RCH_RED_border_war = {
 				cancel_border_war = {
 					defender = var:FROM.defender_state_vs_@ROOT
 					attacker = var:FROM.attacker_state_vs_@ROOT
+				}
+				cancel_border_war = {
+					defender = var:defender_state_vs_@FROM
+					attacker = var:attacker_state_vs_@FROM
 				}
 			}
 			hidden_effect = {
