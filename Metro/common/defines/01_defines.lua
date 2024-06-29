@@ -69,7 +69,7 @@ NDefines.NProduction.RAILWAY_GUN_REPAIR_SPEED = 8.0
 NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.1
 NDefines.NMilitary.INFRA_ORG_IMPACT = 0.25
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.125
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.15
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
 NDefines.NMilitary.TRAINING_ORG = 0.65								--- Base is 0.2
 NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.45						--- if strength is less than this, the unit will pause training until it's been reinforced
@@ -108,6 +108,9 @@ NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance t
 
 NDefines.NResistance.RESISTANCE_POP_LOW_CUTOFF = 5
 NDefines.NResistance.RESISTANCE_POP_VERY_LOW_CUTOFF = 1
+
+NDefines.NTechnology.BASE_RESEARCH_POINTS_SAVED = 60.0
+NDefines.NTechnology.MIN_RESEARCH_SPEED = 0.025
 	
 ---Division Designer
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_WIDTH = 5			

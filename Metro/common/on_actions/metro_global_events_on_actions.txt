@@ -4,7 +4,6 @@ on_actions = {
 			1 = { every_state = { set_variable = { original_owner = OWNER } } }
 		}
 	}
-
 	on_state_control_changed = {
 		effect = {
 			if = {
@@ -209,6 +208,15 @@ on_actions = {
 	on_capitulation = {
 		effect = {
 			news_event = { id = global_event.18 days = 0 }
+			ROOT = { country_event = { id = random_event_victory.1 days = 2 } }
+			#ROOT = { limit = { not = { has_country_flag = is_savage_nation } } country_event = { id = tech_transfer.1 days = 1 } }
+			tech_transfer = yes
+		}
+	}
+
+	on_annex = {
+		effect = {
+			tech_transfer = yes
 		}
 	}
 

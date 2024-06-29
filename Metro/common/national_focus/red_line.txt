@@ -3299,7 +3299,7 @@ focus_tree = {
 		cost = 4.4
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
-			add_ideas = RED_heroic_deeds
+			add_timed_idea = { idea = RED_heroic_deeds days = 360 }
 		}
 		ai_will_do = {
 			factor = 25
@@ -3617,23 +3617,26 @@ focus_tree = {
 		cost = 5
 		relative_position_id =  RED_the_might_of_the_soviet_union
 		completion_reward = {
-			add_corps_commander_role = {
-				character = RED_luzhkov
-				traits = { brave_personality_trait brazen_commander_trait }
-				skill = 3
-				attack_skill = 2
-				defense_skill = 2
-				planning_skill = 2
-				logistics_skill = 4
-			}
-			add_corps_commander_role = {
-				character = RED_ukolov
-				traits = { determined_personality_trait resilient_commander_trait }
-				skill = 3
-				attack_skill = 2
-				defense_skill = 2
-				planning_skill = 3
-				logistics_skill = 3
+			custom_effect_tooltip = RED_new_generals
+			hidden_effect = {
+				add_corps_commander_role = {
+					character = RED_luzhkov
+					traits = { brave_personality_trait brazen_commander_trait }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 4
+				}
+				add_corps_commander_role = {
+					character = RED_ukolov
+					traits = { determined_personality_trait resilient_commander_trait }
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 3
+				}
 			}
 		}
 		ai_will_do = {
@@ -4472,10 +4475,7 @@ focus_tree = {
 		available = { 
 			SSK = { 
 				exists = yes
-				ic_ratio = {
-					tag = RED
-					ratio < 0.1
-				} 
+				is_puppet = no
 			}
 		}
 		x = -1
@@ -4529,7 +4529,7 @@ focus_tree = {
 		completion_reward = {
 			puppet = SSK
 			add_named_threat = {
-				threat = 1.5
+				threat = 2.5
 				name = RED_puppet_SSK
 			}
 			news_event = { id = global_event.54 } 
@@ -4827,6 +4827,9 @@ focus_tree = {
 		icon = GFX_RED_NKVD
 		prerequisite = {
 			focus = RED_technicians
+		}
+		available = {
+			KUZ = { exists = yes }
 		}
 		x = 0
 		y = 1
@@ -5928,8 +5931,8 @@ focus_tree = {
 				106 = { is_owned_by = HNZ }
 			}
 		}
-		x = 5
-		y = 1
+		x = 6
+		y = 2
 		cost = 6.5
 		relative_position_id = RED_cemented_authority
 

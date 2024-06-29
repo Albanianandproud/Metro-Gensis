@@ -498,3 +498,214 @@ country_event = {
 	}
 }
 
+add_namespace = random_event_war
+
+country_event = { 
+	id = random_event_war.1
+	title = random_event_war.1.t
+	desc = random_event_war.1.d
+	picture = "GFX_event (114)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		NOT = {
+			has_country_flag = is_savage_nation
+		}
+		has_war = yes
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.1.a
+		add_war_support = 0.05
+		add_manpower = 10
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+
+	option = {
+		name = random_event_war.1.b
+		add_stability = -0.05
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = 0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.05 } }
+	}
+
+	option = {
+		name = random_event_war.1.c
+		add_political_power = -25
+	}
+}
+
+country_event = { 
+	id = random_event_war.2
+	title = random_event_war.2.t
+	desc = random_event_war.2.d
+	picture = "GFX_event (129)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		NOT = {
+			has_country_flag = is_savage_nation
+		}
+		has_war = yes
+		OR = {
+			has_war_support < 0.5
+			has_stability < 0.5
+		}
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.2.a
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+		add_ideas = metro_war_rationing
+	}
+
+	option = {
+		name = random_event_war.2.b
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = 0.025 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.025 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.025 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.025 } }
+	}
+}
+
+country_event = { 
+	id = random_event_war.3
+	title = random_event_war.3.t
+	desc = random_event_war.3.d
+	picture = "GFX_event (151)"
+
+	mean_time_to_happen = { days = 360 }
+	trigger = {
+		has_idea = metro_war_rationing
+		has_war = yes
+		OR = {
+			has_war_support < 0.36
+			has_stability < 0.36
+		}
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.3.a
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+
+	option = {
+		name = random_event_war.3.c
+		remove_ideas = metro_war_rationing
+		add_stability = 0.03
+		add_war_support = 0.03
+	}
+}
+
+country_event = { 
+	id = random_event_war.4
+	title = random_event_war.4.t
+	desc = random_event_war.4.d
+	picture = "GFX_event (42)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_war = yes
+		has_war_support < 0.36
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.4.a
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = random_event_war.4.b
+		add_political_power = -35
+	}
+}
+
+country_event = { 
+	id = random_event_war.5
+	title = random_event_war.5.t
+	desc = random_event_war.5.d
+	picture = "GFX_event (115)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_war = yes
+		has_war_support < 0.36
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.5.a
+		add_war_support = 0.05
+	}
+
+	option = {
+		name = random_event_war.5.b
+		add_political_power = 35
+	}
+}
+
+###
+
+add_namespace = random_event_victory
+
+country_event = { 
+	id = random_event_victory.1
+	title = random_event_victory.1.t
+	desc = random_event_victory.1.d
+	picture = "GFX_event (65)"
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_victory.1.a
+		trigger = {
+			original_tag = RED
+			original_tag = RCH
+			NOT = {
+				has_government = community
+			}
+		}
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.025 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.025 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.025 } }
+		add_political_power = 50
+	}
+
+	option = {
+		name = random_event_victory.1.b
+		trigger = {
+			NOT = {
+				original_tag = RED
+				original_tag = RCH
+			}
+		}
+		add_political_power = 50
+	}
+}
