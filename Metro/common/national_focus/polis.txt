@@ -15,7 +15,7 @@ focus_tree = {
 	continuous_focus_position = { x = 0 y = 50 }
 	focus = {
 		id = PLS_rangers_1
-		icon = GFX_SPT_patch
+		icon = GFX_SPT_patch_guns
 		available = { is_in_faction_with = SPT }
 		cost = 5
 		x = 9
@@ -55,7 +55,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_recall_order_detachment
-		icon = GFX_generic_support_polis
+		icon = GFX_SPT_miller
 		available = { NOT = { has_completed_focus = PLS_allow_operation_outside_polis } }
 		prerequisite = { focus = PLS_rangers_1 }
 		cost = 5
@@ -67,19 +67,21 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_recall_order_detachment_2
-		icon = GFX_generic_support_polis
+		icon = GFX_SPT_generic_soldier
 		available = { SPT = { exists = no } }
 		prerequisite = { focus = PLS_recall_order_detachment }
 		cost = 5
 		relative_position_id = PLS_recall_order_detachment
 		x = 0
 		y = 1
-		completion_reward = {}
+		completion_reward = {
+			custom_effect_tooltip = PLS_gain_SPT_advisors
+		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_drive_mutants_from_smolensk
-		icon = GFX_generic_support_polis
+		icon = GFX_MDR_cull_mutants
 		available = { has_war_support > 0.34 SPT = { exists = no } 390 = { is_owned_by = MUT  } }
 		prerequisite = { focus = PLS_recall_order_detachment }
 		cost = 6.5
@@ -326,7 +328,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_defense_of_polis_4
-		icon = GFX_MDR_measures
+		icon = GFX_ARB_conscript_2
 		available = { }
 		prerequisite = { focus = PLS_defense_of_polis }
 		cost = 6.5
@@ -343,7 +345,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_kshatriya
-		icon = GFX_MDR_measures
+		icon = GFX_ARB_conscript_1
 		available = { }
 		prerequisite = { focus = PLS_defense_of_polis }
 		cost = 6.5
@@ -357,7 +359,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_infantry_defense
-		icon = GFX_MDR_measures
+		icon = GFX_EUR_the_coup
 		available = { has_manpower > 24 }
 		prerequisite = { focus = PLS_kshatriya }
 		cost = 6.5
@@ -409,7 +411,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_armoured_carriage
-		icon = GFX_train
+		icon = GFX_generic_rail_tank
 		available = { }
 		prerequisite = { focus = PLS_motorized_defence}
 		prerequisite = { focus = PLS_motorized_defence_2 focus = PLS_motorized_defence_3 }
@@ -448,7 +450,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_colonization_of_south
-		icon = GFX_MDR_measures
+		icon = GFX_HNZ_stalker_training
 		available = { }
 		prerequisite = { focus = PLS_kshatriya_2 }
 		cost = 6.5
@@ -510,7 +512,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_motorized_defence_2
-		icon = GFX_MDR_measures
+		icon = GFX_rail_cart
 		available = { }
 		prerequisite = { focus = PLS_military_arm }
 		mutually_exclusive = { focus = PLS_motorized_defence_3 }
@@ -528,7 +530,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_motorized_defence_3
-		icon = GFX_MDR_measures
+		icon = GFX_rail_cart
 		available = { }
 		prerequisite = { focus = PLS_military_arm }
 		mutually_exclusive = { focus = PLS_motorized_defence_2 }
@@ -1378,19 +1380,25 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military
-		icon = GFX_MDR_measures
+		icon = GFX_ARB_elites
 		available = { }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
 		x = -13
 		y = 0
 		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.25
+				uses = 2
+				category = entrench_kits
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_2a
-		icon = GFX_MDR_measures
+		icon = GFX_generic_equipment_gasmask_1
 		available = { }
 		prerequisite = { focus = PLS_military }
 		cost = 6.5
@@ -1398,12 +1406,18 @@ focus_tree = {
 		x = 1
 		y = 2
 		completion_reward = {
+			add_tech_bonus = {
+				name = gas_mask
+				uses = 3
+				bonus = 0.5
+				category = gas_mask
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_1
-		icon = GFX_MDR_measures
+		icon = GFX_generic_equipment_gasmask_4
 		available = { }
 		prerequisite = { focus = PLS_military }
 		cost = 6.5
@@ -1411,39 +1425,57 @@ focus_tree = {
 		x = 0
 		y = 3
 		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits_bonus
+				bonus = 0.25
+				uses = 2
+				category = clothing_kits
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_military_1a
-		icon = GFX_MDR_measures
+		id = PLS_military_self_sufficency
+		icon = GFX_generic_special_arms_1
 		available = { }
 		prerequisite = { focus = PLS_military_1 }
-		mutually_exclusive = { focus = PLS_military_6454 }
+		mutually_exclusive = { focus = PLS_military_reliance_on_hansa }
 		cost = 6.5
 		relative_position_id = PLS_military_1
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_pheumatic_weapons_tech
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_1b
-		icon = GFX_MDR_measures
+		icon = GFX_generic_armaments_parts
 		available = { }
-		prerequisite = { focus = PLS_military_1a }
+		prerequisite = { focus = PLS_military_self_sufficency }
 		cost = 6.5
-		relative_position_id = PLS_military_1a
+		relative_position_id = PLS_military_self_sufficency
 		x = 0
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = pheumatic_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
+			add_ideas = PLS_hand_crafted_weapons
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_1c
-		icon = GFX_MDR_measures
+		icon = GFX_generic_ammunition_box
 		available = { }
 		prerequisite = { focus = PLS_military_1b }
 		cost = 6.5
@@ -1451,66 +1483,94 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = pheumatic_infantry_equipment_2
+				amount = 20
+				producer = RUS
+			}
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 1
+				category = pheumatic_weapons
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_military_6454
-		icon = GFX_MDR_measures
+		id = PLS_military_reliance_on_hansa
+		icon = GFX_HNZ_armaments
 		available = { }
 		prerequisite = { focus = PLS_military_1 }
-		mutually_exclusive = { focus = PLS_military_1a }
+		mutually_exclusive = { focus = PLS_military_self_sufficency }
 		cost = 6.5
 		relative_position_id = PLS_military_1
 		x = 3
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_conventional_weapons_tech
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_military_6454_1
-		icon = GFX_MDR_measures
+		id = PLS_military_reliance_on_hansa_1
+		icon = GFX_HNZ_armory_forge
 		available = { }
-		prerequisite = { focus = PLS_military_6454 }
+		prerequisite = { focus = PLS_military_reliance_on_hansa }
 		cost = 6.5
-		relative_position_id = PLS_military_6454
+		relative_position_id = PLS_military_reliance_on_hansa
 		x = 0
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_2
+				amount = 20
+				producer = RUS
+			}
+			add_ideas = PLS_hansa_weapons
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_military_6454_2
-		icon = GFX_MDR_measures
+		id = PLS_military_reliance_on_hansa_2
+		icon = GFX_HNZ_economy
 		available = { }
-		prerequisite = { focus = PLS_military_6454_1 }
+		prerequisite = { focus = PLS_military_reliance_on_hansa_1 }
 		cost = 6.5
-		relative_position_id = PLS_military_6454_1
+		relative_position_id = PLS_military_reliance_on_hansa_1
 		x = 0
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 20
+				producer = RUS
+			}
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 1
+				category = infantry_weapons
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_1d
-		icon = GFX_MDR_measures
+		icon = GFX_generic_soldier
 		available = { }
-		prerequisite = { focus = PLS_military_1c focus = PLS_military_6454_2 }
+		prerequisite = { focus = PLS_military_1c focus = PLS_military_reliance_on_hansa_2 }
 		prerequisite = { focus = PLS_military_4 }
 		cost = 6.5
 		relative_position_id = PLS_military_1c
 		x = -1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_military_spec_ops
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_2
-		icon = GFX_MDR_measures
+		icon = GFX_generic_repair
 		available = { }
 		prerequisite = { focus = PLS_military }
 		prerequisite = { focus = PLS_defense_of_polis_4 }
@@ -1524,7 +1584,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_3
-		icon = GFX_MDR_measures
+		icon = GFX_generic_equipment_gasmask_6
 		available = { }
 		prerequisite = { focus = PLS_military_1 }
 		cost = 6.5
@@ -1532,12 +1592,18 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_4
-		icon = GFX_MDR_measures
+		icon = GFX_generic_equipment_gasmask_2
 		available = { }
 		prerequisite = { focus = PLS_military_3 }
 		cost = 6.5
@@ -1545,12 +1611,18 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_military_5
-		icon = GFX_MDR_measures
+		icon = GFX_generic_defences_2
 		available = { }
 		prerequisite = { focus = PLS_military_3 }
 		cost = 6.5
@@ -1558,6 +1630,12 @@ focus_tree = {
 		x = -2
 		y = 1
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = support_weapons_tech
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
