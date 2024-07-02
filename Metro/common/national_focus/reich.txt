@@ -1264,7 +1264,7 @@ focus_tree = {
 				uses = 1
 				bonus = 1.5
 				ahead_reduction = 3
-				category = refinery
+				category = energy
 			}
 		}
 		ai_will_do = {
@@ -1836,7 +1836,7 @@ focus_tree = {
 			306 = { add_extra_state_shared_building_slots = 3 }
 			275 = { add_extra_state_shared_building_slots = 3 }
 			337 = { add_extra_state_shared_building_slots = 3 }
-			custom_effect_tooltip = RCH_future_update_tt
+			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -1886,7 +1886,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			custom_effect_tooltip = RCH_future_update_tt
+			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -3452,6 +3452,11 @@ focus_tree = {
 				category = infantry_weapons
 			}
 			add_ideas = RCH_firearm_production
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -3554,6 +3559,11 @@ focus_tree = {
 				uses = 2
 				category = gatling_support_tech
 			}
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3574,6 +3584,11 @@ focus_tree = {
 		relative_position_id = RCH_gattling_production
 		completion_reward = {
 			add_ideas = RCH_gattling_proficiency
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3936,7 +3951,7 @@ focus_tree = {
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = scrap_infantry_equipment_1
-				amount = 65
+				amount = 75
 				producer = RUS
 			}
 			## TODO Do something Else, too
@@ -4016,7 +4031,11 @@ focus_tree = {
 			country_event = nf_RCH.10
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 1
+			modifier = {
+				factor = 2
+				date > 2031.1.1
+			}
 		}
 	}
 	focus = {
@@ -4297,7 +4316,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 2
+			modifier = {
+				factor = 250
+				date > 2033.10.1
+			}
 		}
 	}
 
