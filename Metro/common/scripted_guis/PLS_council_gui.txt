@@ -1,0 +1,54 @@
+scripted_gui = {
+	pls_council_gui = {
+		context_type = decision_category
+		window_name = "pls_council_gui_container"
+
+		dynamic_lists = {
+			pls_council_main_grid = {
+				array = pls_council_main_array
+				index = pls_council_main_index
+				change_scope = no
+				entry_container = pls_council_main_entry
+			}
+			pls_council_semicircle_main_grid = {
+				array = pls_council_main_array
+				index = pls_council_main_index
+				change_scope = no
+				entry_container = pls_council_semicircle_main_entry
+			}
+			pls_council_member_grid = {
+				array = pls_council_member_array
+				index = pls_council_member_index
+				change_scope = no
+				entry_container = pls_council_member_entry
+			}
+		}
+
+		effects = {
+			pls_council_modify_button_control_click = {
+				set_temp_variable = { temp_member = v }
+				set_temp_variable = { temp_seats = 5 }
+				modify_pls_council_seat = yes
+			}
+			pls_council_modify_button_shift_click = {
+				set_temp_variable = { temp_member = v }
+				set_temp_variable = { temp_seats = -5 }
+				modify_pls_council_seat = yes
+			}
+		}
+
+		properties = {
+			pls_council_main_icon = {
+				frame = v
+			}
+			pls_council_semicircle_main_icon = {
+				frame = v
+				x = pls_council_x_array^pls_council_main_index
+				y = pls_council_y_array^pls_council_main_index
+			}
+			pls_council_member_icon = {
+				frame = v
+			}
+		}
+	}
+}
