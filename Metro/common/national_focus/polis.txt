@@ -56,26 +56,60 @@ focus_tree = {
 	focus = {
 		id = PLS_recall_order_detachment
 		icon = GFX_SPT_miller
-		available = { NOT = { has_completed_focus = PLS_allow_operation_outside_polis } }
+		available = { 
+			NOT = { 
+				has_completed_focus = PLS_allow_operation_outside_polis 
+			} 
+			SPT = { is_ai = yes }
+		}
 		prerequisite = { focus = PLS_rangers_1 }
 		cost = 5
 		relative_position_id = PLS_rangers_1
 		x = 2
 		y = 1
-		completion_reward = {}
-		ai_will_do = { factor = 1 }
+		completion_reward = {
+			custom_effect_tooltip = PLS_recall_rangers
+			SPT = { country_event = nf_PLS.7 }
+		}
+		ai_will_do = { factor = 0 }
 	}
 	focus = {
 		id = PLS_recall_order_detachment_2
 		icon = GFX_SPT_generic_soldier
-		available = { SPT = { exists = no } }
-		prerequisite = { focus = PLS_recall_order_detachment }
+		prerequisite = { focus = PLS_recall_order_detachment focus = PLS_rangers_2 }
 		cost = 5
 		relative_position_id = PLS_recall_order_detachment
 		x = 0
 		y = 1
 		completion_reward = {
 			custom_effect_tooltip = PLS_gain_SPT_advisors
+			add_corps_commander_role = {
+				character = PLS_detachment_1
+				traits = { bright_personality_trait fearsome_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = PLS_detachment_3
+				traits = { loyal_personality_trait educated_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = PLS_detachment_4
+				traits = { impatient_personality_trait charismatic_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -369,6 +403,7 @@ focus_tree = {
 		select_effect = { add_manpower = -25 }
 		completion_reward = {
 			custom_effect_tooltip = PLS_spawn_unit_when_in_defensive_war
+			hidden_effect = { set_country_flag = PLS_infantry_defense_flag }
 			division_template = {
 				name = "Defenders"
 				priority = 1
@@ -546,6 +581,34 @@ focus_tree = {
 		}
 		ai_will_do = { factor = 1 }
 	}
+	focus = {
+		id = PLS_motorized_defence_4
+		icon = GFX_generic_winch
+		available = { }
+		prerequisite = { focus = PLS_motorized_defence_2 focus = PLS_motorized_defence_3 }
+		cost = 6.5
+		relative_position_id = PLS_motorized_defence_2
+		x = 1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_2
+				amount = 25
+				producer = RUS
+			}
+			capital_scope = {
+				add_resource = {
+			        type = scrap
+			        amount = 2
+			    }
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
 	## Castes of Polis
 	focus = {
 		id = PLS_the_last_redoubt
@@ -555,7 +618,8 @@ focus_tree = {
 		x = 34
 		y = 0
 		completion_reward = {
-			add_research_slot = 1
+			#add_research_slot = 1
+			country_event = nf_PLS.6
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1074,7 +1138,7 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = chemicals
-			        amount = 7
+			        amount = 8
 			    }
 			}
 		}
@@ -2086,6 +2150,20 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
+		id = PLS_civilization_project
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_preservation_of_humanity }
+		available = { date > 2032.1.1 has_idea_with_trait = PLS_alexander_rasanov_trait }
+		cost = 6.5
+		relative_position_id = PLS_preservation_of_humanity
+		x = 2
+		y = 1
+		completion_reward = {
+			## project civilization event
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
 		id = PLS_internal_1
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_preservation_of_humanity }
@@ -2685,12 +2763,19 @@ focus_tree = {
 						has_country_flag = is_bandit_nation
 						has_country_flag = is_feral_nation
 						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
 					}
+					has_opinion = { target = PLS value > 0 }
 				}
 				add_opinion_modifier = {
 					target = PLS
 					modifier = PLS_polis_acknowledged
 				}
+				PLS = { add_political_power = 5 } 
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -2701,9 +2786,10 @@ focus_tree = {
 		prerequisite = { focus = PLS_contemptive_neighbours }
 		cost = 6.5
 		relative_position_id = PLS_contemptive_neighbours
-		x = -4
+		x = -1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_defence_against_external_threats_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2716,6 +2802,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_defence_against_external_threats_1
+				add_idea = PLS_defence_against_external_threats_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2749,6 +2839,18 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 35
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+		        type = gatling_equipment_1
+		        amount = 10
+				producer = RUS
+		    }
+			army_experience = 5
+			HNZ = { army_experience = 10 }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2761,6 +2863,8 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			army_experience = 35
+			HNZ = { army_experience = 35 }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2795,10 +2899,10 @@ focus_tree = {
 		prerequisite = { focus = PLS_contemptive_neighbours }
 		cost = 6.5
 		relative_position_id = PLS_contemptive_neighbours
-		x = -1
+		x = -3
 		y = 1
 		completion_reward = {
-			custom_effect_tooltip = PLS_send_advisors
+			custom_effect_tooltip = PLS_send_books
 			every_country = {
 				limit = {
 					NOT = {
@@ -2807,6 +2911,11 @@ focus_tree = {
 						has_country_flag = is_bandit_nation
 						has_country_flag = is_feral_nation
 						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
 					}
 				}
 				country_event = nf_PLS.5
@@ -2820,9 +2929,27 @@ focus_tree = {
 		prerequisite = { focus = PLS_advisor_leases }
 		cost = 6.5
 		relative_position_id = PLS_advisor_leases
-		x = -1
+		x = 0
 		y = 1
 		completion_reward = {
+			custom_effect_tooltip = PLS_send_books
+			every_country = {
+				limit = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						has_country_flag = is_feral_nation
+						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
+					}
+				}
+				country_event = nf_PLS.8
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2836,6 +2963,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			add_political_power = 300
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2849,6 +2977,14 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			custom_effect_tooltip = PLS_books_for_political_power
+			every_country = {
+				limit = {
+					has_idea = PLS_book_support
+				}
+				add_timed_idea = { idea = PLS_support days = 150 }
+				PLS = { add_political_power = 20 }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -2860,6 +2996,7 @@ focus_tree = {
 		x = 34
 		y = 10
 		completion_reward = {
+			add_research_slot = 1
 		}
 		ai_will_do = { factor = 1 }
 	}

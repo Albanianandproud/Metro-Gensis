@@ -156,6 +156,124 @@ country_event = {
 
     option = {
         name = nf_PLS.5.a
+        add_ideas = PLS_book_support
+        PLS = { add_political_power = 10 }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_PLS.5.b
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_PLS.5.c
+        add_timed_idea = { idea = PLS_books_fuel days = 60 } 
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = nf_PLS.6
+    title = nf_PLS.6.t
+    desc = nf_PLS.6.d
+    picture = "GFX_event (7)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = nf_PLS.6.a
+        ## Explain how the branches work.
+        ## How a balance of power between each sect must linger at 25% or approx
+        add_research_slot = 1
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = nf_PLS.7
+    title = nf_PLS.7.t
+    desc = nf_PLS.7.d
+    picture = "GFX_event (7)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = nf_PLS.7.a
+        PLS = { puppet = SPT }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_PLS.7.a
+        add_war_support = 0.1
+        leave_faction = yes
+        remove_opinion_modifier = {
+            target = PLS
+            modifier = joint_operations_mutual_defense
+        }
+        PLS = {
+            add_opinion_modifier = {
+                target = SPT
+                modifier = joint_operations_mutual_defense
+            }
+        }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = nf_PLS.8
+    title = nf_PLS.8.t
+    desc = nf_PLS.8.d
+    picture = "GFX_event (7)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = nf_PLS.8.a
+        generate_character = {
+            token_base = metro_polis_advisor
+            advisor = {
+                slot = theorist
+                research_bonus = { health = 0.1 }
+                research_bonus = { farming = 0.1 }
+                cost = 100
+                ai_will_do = {
+                    factor = 16
+                }
+                available = {
+                    PLS = { exists = yes }
+				    NOT = { has_war_with = PLS }
+                }
+            }
+            portraits = { 
+                army = { small = GFX_idea_PLS_minister_2 }
+            }
+        }
+        PLS = { add_political_power = 10 }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_PLS.8.b
         ai_chance = {
             base = 3.5
         }

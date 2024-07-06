@@ -23,8 +23,7 @@ ideas = {
 			removal_cost = -1
 			modifier = {
 				political_power_gain = 0.1
-				research_speed_factor = 0.05
-				enemy_justify_war_goal_time = 0.4
+				enemy_justify_war_goal_time = 0.5
 	        }
 		}
 		PLS_ignorance = {
@@ -610,6 +609,69 @@ ideas = {
 				custom_modifier_tooltip = polis_scavenging_energy
 			}
 	    }
+
+		PLS_book_support = {
+			picture = PLS_old_world_bastion
+			allowed = {
+				PLS = { exists = yes }
+				NOT = { has_war_with = PLS }
+			}
+			removal_cost = -1
+			modifier = {
+				war_support_factor = -0.1
+			    custom_modifier_tooltip = education_reform_cost_reduction_10
+                ## Reduce Education Timer
+			}
+            on_remove = {
+				add_to_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
+			on_add = {
+				subtract_from_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
+		}
+		PLS_support = {
+			picture = PLS_old_world_bastion
+			allowed = {
+				PLS = { exists = yes }
+				NOT = { has_war_with = PLS }
+			}
+			removal_cost = -1
+			modifier = {
+				research_speed_factor = 0.15
+	        }
+		}
+		PLS_books_fuel = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				consumer_goods_expected_value  = -0.1
+	        }
+		}
+		PLS_defence_against_external_threats_1 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			targeted_modifier = {
+				tag = RCH
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = RED
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+		}
+		PLS_defence_against_external_threats_2 = {
+			picture = PLS_old_world_bastion
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				army_core_defence_factor = 0.1
+				army_core_attack_factor = 0.1
+	        }
+		}
 	}
 	hidden_ideas = {
 
