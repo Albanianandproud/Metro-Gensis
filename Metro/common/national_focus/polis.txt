@@ -56,26 +56,60 @@ focus_tree = {
 	focus = {
 		id = PLS_recall_order_detachment
 		icon = GFX_SPT_miller
-		available = { NOT = { has_completed_focus = PLS_allow_operation_outside_polis } }
+		available = { 
+			NOT = { 
+				has_completed_focus = PLS_allow_operation_outside_polis 
+			} 
+			SPT = { is_ai = yes }
+		}
 		prerequisite = { focus = PLS_rangers_1 }
 		cost = 5
 		relative_position_id = PLS_rangers_1
 		x = 2
 		y = 1
-		completion_reward = {}
-		ai_will_do = { factor = 1 }
+		completion_reward = {
+			custom_effect_tooltip = PLS_recall_rangers
+			SPT = { country_event = nf_PLS.7 }
+		}
+		ai_will_do = { factor = 0 }
 	}
 	focus = {
 		id = PLS_recall_order_detachment_2
 		icon = GFX_SPT_generic_soldier
-		available = { SPT = { exists = no } }
-		prerequisite = { focus = PLS_recall_order_detachment }
+		prerequisite = { focus = PLS_recall_order_detachment focus = PLS_rangers_2 }
 		cost = 5
 		relative_position_id = PLS_recall_order_detachment
 		x = 0
 		y = 1
 		completion_reward = {
 			custom_effect_tooltip = PLS_gain_SPT_advisors
+			add_corps_commander_role = {
+				character = PLS_detachment_1
+				traits = { bright_personality_trait fearsome_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = PLS_detachment_3
+				traits = { loyal_personality_trait educated_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = PLS_detachment_4
+				traits = { impatient_personality_trait charismatic_commander_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -369,6 +403,7 @@ focus_tree = {
 		select_effect = { add_manpower = -25 }
 		completion_reward = {
 			custom_effect_tooltip = PLS_spawn_unit_when_in_defensive_war
+			hidden_effect = { set_country_flag = PLS_infantry_defense_flag }
 			division_template = {
 				name = "Defenders"
 				priority = 1
@@ -441,8 +476,8 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = night_vision
-				uses = 1
-				bonus = 3
+				uses = 2
+				bonus = 2
 				category = night_vision
 			}
 		}
@@ -546,6 +581,34 @@ focus_tree = {
 		}
 		ai_will_do = { factor = 1 }
 	}
+	focus = {
+		id = PLS_motorized_defence_4
+		icon = GFX_generic_winch
+		available = { }
+		prerequisite = { focus = PLS_motorized_defence_2 focus = PLS_motorized_defence_3 }
+		cost = 6.5
+		relative_position_id = PLS_motorized_defence_2
+		x = 1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_2
+				amount = 25
+				producer = RUS
+			}
+			capital_scope = {
+				add_resource = {
+			        type = scrap
+			        amount = 2
+			    }
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
 	## Castes of Polis
 	focus = {
 		id = PLS_the_last_redoubt
@@ -555,7 +618,8 @@ focus_tree = {
 		x = 34
 		y = 0
 		completion_reward = {
-			add_research_slot = 1
+			#add_research_slot = 1
+			country_event = nf_PLS.6
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -569,6 +633,7 @@ focus_tree = {
 		x = -7
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_kshatriya_advisors
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -582,6 +647,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			army_experience = 50
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -595,6 +661,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_kshatriya_commanders_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -608,6 +675,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_kshatriya_commanders_cost_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -621,6 +689,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_kshatriya_commanders_cost_1
+				add_idea = PLS_kshatriya_commanders_cost_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -634,6 +706,10 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_kshatriya_commanders_1
+				add_idea = PLS_kshatriya_commanders_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -647,6 +723,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_kshatriya_troops_improvement
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -660,6 +737,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_kshatriya_cp_gain
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -673,6 +751,17 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_command_power = 15
+			hidden_effect = {
+				every_unit_leader = {
+					add_defense = 1
+				}
+			}
+			effect_tooltip = {
+				every_unit_leader = {
+					add_defense = 1
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -686,6 +775,17 @@ focus_tree = {
 		x = -2
 		y = 1
 		completion_reward = {
+			add_command_power = 15
+			effect_tooltip = {
+				every_unit_leader = {
+					gain_xp = 1000
+				}
+			}
+			hidden_effect = {
+				every_unit_leader = {
+					gain_xp = 1000
+				}	
+			} 
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -699,6 +799,17 @@ focus_tree = {
 		x = 2
 		y = 1
 		completion_reward = {
+			add_command_power = 15
+			hidden_effect = {
+				every_unit_leader = {
+					add_skill_level = 1
+				}
+			}
+			effect_tooltip = {
+				every_unit_leader = {
+					add_skill_level = 1
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -714,6 +825,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_kshatriya_backing
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -727,6 +839,7 @@ focus_tree = {
 		x = -2
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_vaishyas_advisors
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -740,6 +853,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_vaishyas_trading_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -753,6 +867,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_vaishyas_trade_law
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -766,6 +881,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_vaishyas_relations_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -779,6 +895,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_vaishyas_relations_1
+				add_idea = PLS_vaishyas_relations_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -792,6 +912,20 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = scrap
+			        amount = 4
+			    }
+			    add_resource = {
+			        type = components
+			        amount = 4
+			    }
+			    add_resource = {
+			        type = alloys
+			        amount = 4
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -806,6 +940,10 @@ focus_tree = {
 		x = 0
 		y = 3
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_vaishyas_trading_1
+				add_idea = PLS_vaishyas_trading_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -819,6 +957,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_vaishyas_trading_1
+				add_idea = PLS_vaishyas_trading_3
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -832,6 +974,18 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+			        type = alloys
+			        amount = 2
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -845,6 +999,18 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+			        type = scrap
+			        amount = 2
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -859,6 +1025,18 @@ focus_tree = {
 		x = 1
 		y = 2
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+			        type = electronics
+			        amount = 2
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -873,6 +1051,18 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+			        type = components
+			        amount = 2
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -886,6 +1076,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_brahmin_advisors
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -899,6 +1090,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_brahmin_benefit_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -912,6 +1104,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_brahmin_benefit_1
+				add_idea = PLS_brahmin_benefit_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -925,6 +1121,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_brahmin_old_world_knows
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -938,6 +1135,12 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = chemicals
+			        amount = 8
+			    }
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -951,6 +1154,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_offsite_building = { type = synthetic_refinery level = 3 }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -965,6 +1169,10 @@ focus_tree = {
 		x = 0
 		y = 3
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_brahmin_benefit_2
+				add_idea = PLS_brahmin_benefit_3
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -978,6 +1186,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_brahmin_benefit_3
+				add_idea = PLS_brahmin_benefit_4
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -991,6 +1203,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_fuel_consumption
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1004,6 +1217,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_brahmin_marvel_of_the_old_world
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1018,6 +1232,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_brahmin_synthetics
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1032,6 +1247,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_brahmin_silos
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1045,6 +1261,7 @@ focus_tree = {
 		x = 7
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_shudras_advisors
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1076,6 +1293,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_shudras_building_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1089,6 +1307,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_shudras_salvage_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1102,6 +1321,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_shudras_building_1
+				add_idea = PLS_shudras_building_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1115,6 +1338,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_shudras_war_eco_1
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1128,6 +1352,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_shudras_salvage_1
+				add_idea = PLS_shudras_salvage_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1159,6 +1387,18 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1172,6 +1412,18 @@ focus_tree = {
 		x = -2
 		y = 1
 		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+				add_resource = {
+					type = scrap
+					amount = 6
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1185,6 +1437,18 @@ focus_tree = {
 		x = 2
 		y = 1
 		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+				add_resource = {
+					type = components
+					amount = 6
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1200,6 +1464,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_ideas = PLS_shudras_backing
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1213,7 +1478,12 @@ focus_tree = {
 		x = 12
 		y = 1
 		completion_reward = {
-			capital_scope = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
 				add_extra_state_shared_building_slots = 1
 			}
 			add_stability = 0.05
@@ -1228,7 +1498,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_1
 		x = 0
-		y = 2
+		y = 1
 		completion_reward = {
 		}
 		ai_will_do = { factor = 1 }
@@ -1268,6 +1538,10 @@ focus_tree = {
 				uses = 1
 				category = support_tech
 			}
+			add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 15
+		    }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1281,11 +1555,11 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
-			add_tech_bonus = {
-				bonus = 0.75
-				uses = 2
-				category = support_tech
-			}
+			add_ideas = PLS_support_improvement
+			add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 15
+		    }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1318,6 +1592,7 @@ focus_tree = {
 		x = 5
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_room_to_live
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1329,7 +1604,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_2
 		x = 0
-		y = 1
+		y = 2
 		completion_reward = {
 		}
 		ai_will_do = { factor = 1 }
@@ -1386,6 +1661,26 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_2
+				amount = 20
+				producer = RUS
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_cultural_path_stalker_no
+		icon = GFX_MDR_measures
+		available = { }
+		prerequisite = { focus = PLS_cultural_path_X }
+		mutually_exclusive = { focus = PLS_cultural_path_stalkers }
+		cost = 6.5
+		relative_position_id = PLS_cultural_path_X
+		x = 0
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_spec_ops_increase
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1394,11 +1689,17 @@ focus_tree = {
 		icon = GFX_MDR_measures
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_X }
+		mutually_exclusive = { focus = PLS_cultural_path_stalker_no  }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_X
-		x = 3
+		x = 2
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1409,9 +1710,22 @@ focus_tree = {
 		prerequisite = { focus = PLS_cultural_path_stalkers }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_stalkers
-		x = 2
+		x = 1
 		y = 1
 		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1423,8 +1737,14 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_stalkers
 		x = 0
-		y = 1
+		y = 2
 		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				ahead_reduction = 1
+				category = stalker
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1435,9 +1755,16 @@ focus_tree = {
 		prerequisite = { focus = PLS_cultural_path_stalkers }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_stalkers
-		x = -2
+		x = -1
 		y = 1
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = stalker
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1499,7 +1826,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PLS_military
 		x = 1
-		y = 1
+		y = 2
 		completion_reward = {
 			add_tech_bonus = {
 				name = gas_mask
@@ -1507,6 +1834,80 @@ focus_tree = {
 				bonus = 0.5
 				category = gas_mask
 			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_doctrine_1
+		icon = GFX_generic_equipment_gasmask_1
+		available = { }
+		prerequisite = { focus = PLS_military }
+		cost = 6.5
+		relative_position_id = PLS_military
+		x = 4
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_doctrine_2
+		icon = GFX_generic_equipment_gasmask_1
+		available = { }
+		prerequisite = { focus = PLS_military_doctrine_1 }
+		mutually_exclusive = { focus = PLS_military_doctrine_3 }
+		cost = 6.5
+		relative_position_id = PLS_military_doctrine_1
+		x = -1
+		y = 1
+		completion_reward = {
+			army_experience = 50
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_doctrine_3
+		icon = GFX_generic_equipment_gasmask_1
+		available = { }
+		prerequisite = { focus = PLS_military_doctrine_1 }
+		mutually_exclusive = { focus = PLS_military_doctrine_2 }
+		cost = 6.5
+		relative_position_id = PLS_military_doctrine_1
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_military_doctrine_4
+		icon = GFX_generic_equipment_gasmask_1
+		available = { }
+		prerequisite = { focus = PLS_military_2a }
+		prerequisite = { focus = PLS_military_doctrine_2 focus = PLS_military_doctrine_3 }
+		cost = 6.5
+		relative_position_id = PLS_military_doctrine_2
+		x = 1
+		y = 1
+		completion_reward = {
+			army_experience = 50
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
+			custom_effect_tooltip = PLS_cancelled_when_at_war
+			add_ideas = PLS_doctrine_study
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1674,6 +2075,8 @@ focus_tree = {
 		x = -1
 		y = 2
 		completion_reward = {
+			## give reliability improvements
+			add_ideas = PLS_armament_reliability
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1747,20 +2150,599 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
+		id = PLS_civilization_project
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_preservation_of_humanity }
+		available = { date > 2032.1.1 has_idea_with_trait = PLS_alexander_rasanov_trait }
+		cost = 6.5
+		relative_position_id = PLS_preservation_of_humanity
+		x = 2
+		y = 1
+		completion_reward = {
+			## project civilization event
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_1
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_preservation_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_preservation_of_humanity
+		x = -8
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_1 }
+		mutually_exclusive = { focus = PLS_internal_3 }
+		cost = 6.5
+		relative_position_id = PLS_internal_1
+		x = -1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_1 }
+		mutually_exclusive = { focus = PLS_internal_2 }
+		cost = 6.5
+		relative_position_id = PLS_internal_1
+		x = 1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_4
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_2 focus = PLS_internal_3 }
+		mutually_exclusive = { focus = PLS_internal_5 }
+		cost = 6.5
+		relative_position_id = PLS_internal_3
+		x = 0
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_5
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_2 focus = PLS_internal_3 }
+		mutually_exclusive = { focus = PLS_internal_4 }
+		cost = 6.5
+		relative_position_id = PLS_internal_2
+		x = 0
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_manpower = 50
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_6
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_5 focus = PLS_internal_4 }
+		mutually_exclusive = { focus = PLS_internal_7 }
+		cost = 6.5
+		relative_position_id = PLS_internal_4
+		x = 0
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_resource = {
+					type = chemicals
+					amount = 1
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_7
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_5 focus = PLS_internal_4 }
+		mutually_exclusive = { focus = PLS_internal_6 }
+		cost = 6.5
+		relative_position_id = PLS_internal_5
+		x = 0
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_resource = {
+					type = scrap
+					amount = 1
+				}
+				add_resource = {
+					type = components
+					amount = 1
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_internal_8
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_internal_7 focus = PLS_internal_6 }
+		cost = 6.5
+		relative_position_id = PLS_internal_7
+		x = 1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
 		id = PLS_stalk_the_surface
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_preservation_of_humanity }
 		cost = 6.5
 		relative_position_id = PLS_preservation_of_humanity
-		x = -6
+		x = 7
 		y = 1
 		completion_reward = {
-			### EVENTS
-			### SCAVENGE SURFACE
-			### GAIN UNIQUE TECH IN RETURN
-			### ALL
-			### UNIQUE
-			### TECH !!!!!!!!
+			custom_effect_tooltip = PLS_scavenge_surface_mechanic
+			hidden_effect = {
+				add_ideas = pls_scavenge_surface	
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_tooling
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface
+		x = -3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = tooling
+			}
+			custom_effect_tooltip = pls_scavenging_allow_tooling
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_smithing
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = smithing
+			}
+			custom_effect_tooltip = pls_scavenging_allow_smithing
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_industry
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_smithing }
+		prerequisite = { focus = PLS_stalk_the_surface_tooling }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_tooling
+		x = 1
+		y = 1
+		completion_reward = {
+			country_event = nf_PLS.2
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_health
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = health
+			}
+			custom_effect_tooltip = pls_scavenging_allow_health
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_farming
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface
+		x = 3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = farming
+			}
+			custom_effect_tooltip = pls_scavenging_allow_farming
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_civilian
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_health }
+		prerequisite = { focus = PLS_stalk_the_surface_farming }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_health
+		x = 1
+		y = 1
+		completion_reward = {
+			country_event = nf_PLS.1
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface
+		x = 0
+		y = 2
+		completion_reward = {
+			country_event = nf_PLS.3
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_punch_press
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_2
+		x = -3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = punch_pressing
+			}
+			custom_effect_tooltip = pls_scavenging_allow_punch_pressing
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_energy
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_2
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = energy
+			}
+			custom_effect_tooltip = pls_scavenging_allow_energy
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_punch_press_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_punch_press }
+		prerequisite = { focus = PLS_stalk_the_surface_energy }
+		mutually_exclusive = { focus = PLS_stalk_the_surface_energy_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_punch_press
+		x = -1
+		y = 1
+		completion_reward = {
+			set_technology = { tech_smithing_machine_pressing = 1 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_energy_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_energy }
+		prerequisite = { focus = PLS_stalk_the_surface_punch_press }
+		mutually_exclusive = { focus = PLS_stalk_the_surface_punch_press_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_energy
+		x = -1
+		y = 1
+		completion_reward = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_infantry_gear
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_2
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = infantry_tech
+			}
+			custom_effect_tooltip = pls_scavenging_allow_infantry_tech
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_support_gear
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_2
+		x = 3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = support_tech
+			}
+			custom_effect_tooltip = pls_scavenging_allow_support_tech
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_infantry_gear_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_infantry_gear }
+		prerequisite = { focus = PLS_stalk_the_surface_support_gear }
+		mutually_exclusive = { focus = PLS_stalk_the_surface_support_gear_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_infantry_gear
+		x = 1
+		y = 1
+		completion_reward = {
+			set_technology = { tech_infantry_equipment_stats = 1 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_support_gear_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_support_gear }
+		prerequisite = { focus = PLS_stalk_the_surface_infantry_gear }
+		mutually_exclusive = { focus = PLS_stalk_the_surface_infantry_gear_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_support_gear
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				ahead_reduction = 1
+				category = support_tech
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_2
+		x = 0
+		y = 2
+		completion_reward = {
+			country_event = nf_PLS.3
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_elite_arms
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_3 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_3
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = support_weapons_tech
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_elite_arms_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_elite_arms }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_elite_arms
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = support_weapons_tech
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_elite_arms_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_elite_arms_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_elite_arms_2
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = support_weapons_tech
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_draisines
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_3 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_3
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = rail_salvaging
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_draisines_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_draisines }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_draisines
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = rail_engine
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = rail_storage
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_stalk_the_surface_draisines_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_stalk_the_surface_draisines_2 }
+		cost = 6.5
+		relative_position_id = PLS_stalk_the_surface_draisines_2
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = motorized_tech
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1770,13 +2752,524 @@ focus_tree = {
 		prerequisite = { focus = PLS_preservation_of_humanity }
 		cost = 6.5
 		relative_position_id = PLS_preservation_of_humanity
+		x = -1
+		y = 1
+		completion_reward = {
+			every_country = {
+				limit = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						has_country_flag = is_feral_nation
+						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
+					}
+					has_opinion = { target = PLS value > 0 }
+				}
+				add_opinion_modifier = {
+					target = PLS
+					modifier = PLS_polis_acknowledged
+				}
+				PLS = { add_political_power = 5 } 
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_the_others
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_contemptive_neighbours }
+		cost = 6.5
+		relative_position_id = PLS_contemptive_neighbours
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_defence_against_external_threats_1
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_the_others_1
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_the_others }
+		cost = 6.5
+		relative_position_id = PLS_the_others
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_defence_against_external_threats_1
+				add_idea = PLS_defence_against_external_threats_2
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_hanza
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_contemptive_neighbours }
+		cost = 6.5
+		relative_position_id = PLS_contemptive_neighbours
+		x = 2
+		y = 1
+		completion_reward = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = PLS_polis
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = PLS_polis
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_hanza_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_hanza }
+		mutually_exclusive = { focus = PLS_contemplate_neutrality }
+		cost = 6.5
+		relative_position_id = PLS_hanza
+		x = -1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 35
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+		        type = gatling_equipment_1
+		        amount = 10
+				producer = RUS
+		    }
+			army_experience = 5
+			HNZ = { army_experience = 10 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_hanza_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_hanza_2 }
+		cost = 6.5
+		relative_position_id = PLS_hanza_2
+		x = 0
+		y = 1
+		completion_reward = {
+			army_experience = 35
+			HNZ = { army_experience = 35 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_contemplate_neutrality
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_hanza }
+		mutually_exclusive = { focus = PLS_hanza_2 }
+		cost = 6.5
+		relative_position_id = PLS_hanza
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_contemplate_neutrality_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_contemplate_neutrality }
+		cost = 6.5
+		relative_position_id = PLS_contemplate_neutrality
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_advisor_leases
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_contemptive_neighbours }
+		cost = 6.5
+		relative_position_id = PLS_contemptive_neighbours
+		x = -3
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_send_books
+			every_country = {
+				limit = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						has_country_flag = is_feral_nation
+						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
+					}
+				}
+				country_event = nf_PLS.5
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_advisor_leases_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_advisor_leases }
+		cost = 6.5
+		relative_position_id = PLS_advisor_leases
+		x = 0
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_send_books
+			every_country = {
+				limit = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_bandit_nation
+						has_country_flag = is_feral_nation
+						has_country_flag = is_skaven_nation
+						original_tag = PLS
+						original_tag = SPT
+						original_tag = RED
+						original_tag = RCH
+						original_tag = HNZ
+					}
+				}
+				country_event = nf_PLS.8
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_advisor_leases_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_advisor_leases_2 }
+		mutually_exclusive = { focus = PLS_advisor_leases_4 }
+		cost = 6.5
+		relative_position_id = PLS_advisor_leases_2
+		x = -1
+		y = 1
+		completion_reward = {
+			add_political_power = 300
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_advisor_leases_4
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_advisor_leases_2 }
+		mutually_exclusive = { focus = PLS_advisor_leases_3 }
+		cost = 6.5
+		relative_position_id = PLS_advisor_leases_2
+		x = 1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = PLS_books_for_political_power
+			every_country = {
+				limit = {
+					has_idea = PLS_book_support
+				}
+				add_timed_idea = { idea = PLS_support days = 150 }
+				PLS = { add_political_power = 20 }
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_the_last_redoubt_2
+		icon = GFX_MDR_measures
+		available = { date > 2034.1.1 }
+		cost = 5
+		x = 34
+		y = 10
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_of_knowledge
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_the_last_redoubt_2 }
+		mutually_exclusive = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_the_last_redoubt_2
 		x = 4
 		y = 1
 		completion_reward = {
-			### RELATIONS
-			### PROVIDE ADVISOR LEASES
-			### SUPPORT HANZA
-			### CONTEMPLATE NEUTRALITY
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_1
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_1 }
+		cost = 6.5
+		relative_position_id = PLS_guardians_1
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_2 }
+		cost = 6.5
+		relative_position_id = PLS_guardians_2
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_4
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_3 }
+		cost = 6.5
+		relative_position_id = PLS_guardians_3
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_secrets_of_the_old_world
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge
+		x = 2
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_follow_the_yellow_brick_road
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_secrets_of_the_old_world }
+		available = { MSU = { exists = yes }}
+		cost = 6.5
+		relative_position_id = PLS_secrets_of_the_old_world
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_of_knowledge_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge
+		x = 0
+		y = 2
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_of_knowledge_rationalism
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge_2 }
+		mutually_exclusive = { focus = PLS_guardians_of_knowledge_progress }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge_2
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_of_knowledge_progress
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge_2 }
+		mutually_exclusive = { focus = PLS_guardians_of_knowledge_rationalism }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge_2
+		x = 3
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_guardians_of_knowledge_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_guardians_of_knowledge_2 }
+		cost = 6.5
+		relative_position_id = PLS_guardians_of_knowledge_2
+		x = 0
+		y = 2
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_the_last_redoubt_2 }
+		mutually_exclusive = { focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_the_last_redoubt_2
+		x = -4
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = -2
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_2 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_2
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_1
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 0
+		y = 4
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_mutants
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_bandits
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 3
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_authoritarians
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 5
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
+		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
+		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_2 }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		x = 1
+		y = 1
+		completion_reward = {
 		}
 		ai_will_do = { factor = 1 }
 	}
