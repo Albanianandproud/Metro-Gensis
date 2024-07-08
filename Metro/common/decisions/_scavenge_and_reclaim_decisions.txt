@@ -779,13 +779,13 @@ reclaim_metro = {
 
 		available = { 
 			NOT = { has_country_flag = reclaim_mission_activated }
-			any_state = {
+			any_controlled_state = {
 				NOT = { has_state_category = pastoral }
 				infrastructure > 1
-				is_core_of = ROOT
-				state_population < 100
+				NOT = { is_core_of = ROOT }
+				state_population < 70
 			}
-			any_state = { state_population > 70 is_core_of = ROOT }
+			any_controlled_state = { state_population > 100 is_core_of = ROOT }
 		}
 
 		modifier = {
@@ -879,6 +879,7 @@ reclaim_metro = {
 		days_re_enable = 0
 
 		visible = { 
+			has_country_flag = metro_can_dredge
 			FROM.FROM = {
 				has_dynamic_modifier = { modifier = flooded_state_modifier }
 				any_state = {

@@ -30,9 +30,9 @@ NDefines.NDiplomacy.BASE_TRUCE_PERIOD = 90
 --- Buildings Stuff ---
 NDefines.NBuildings.INFRASTRUCTURE_RESOURCE_BONUS = 0.0
 NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
-NDefines.NBuildings.RADAR_RANGE_BASE = 12			
-NDefines.NBuildings.RADAR_RANGE_MIN = 12			
-NDefines.NBuildings.RADAR_RANGE_MAX = 20				
+NDefines.NBuildings.RADAR_RANGE_BASE = 15	
+NDefines.NBuildings.RADAR_RANGE_MIN = 15			
+NDefines.NBuildings.RADAR_RANGE_MAX = 30				
 NDefines.NBuildings.RADAR_INTEL_EFFECT = 10			
 
 ---Nation Stuff---

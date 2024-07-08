@@ -89,3 +89,72 @@ country_event = {
         set_variable = { global.excavation_level = 0 }
 	}
 }
+
+
+
+
+
+
+
+add_namespace = nf_D6_advisor
+
+country_event = { 
+    id = nf_D6_advisor.1
+    title = nf_D6_advisor.1.t
+    desc = nnf_D6_advisor.1.d
+    picture = "GFX_event (182)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			generate_character = {
+				token_base = PLS_captain
+				portraits = { 
+					army = { 
+						large = "gfx/leaders/PLS/PLS_captain.dds" 
+						small = GFX_idea_PLS_minister_captain
+					} 
+				}
+			}
+		}
+	}
+
+    option = {
+        name = nf_D6_advisor.1.a
+		custom_effect_tooltip = nf_D6_advisor.1_tt
+		hidden_effect = { set_country_flag = recruited_captain_flag }
+		add_corps_commander_role = {
+			Character = PLS_captain
+			traits = { adaptable_commander_trait grizzled_commander_trait flexible_assign_trait }
+			skill = 5
+			attack_skill = 4
+			defense_skill = 4
+			planning_skill = 4
+			logistics_skill = 4
+			legacy_id=0
+		}
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = nf_D6_advisor.2
+    title = nf_D6_advisor.2.t
+    desc = nf_D6_advisor.2.d
+    picture = "GFX_event (190)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = nf_D6_advisor.2.a
+		retire_character = PLS_captain
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}

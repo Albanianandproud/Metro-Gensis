@@ -49,7 +49,10 @@ focus_tree = {
 				category = land_doctrine
 			}
 			army_experience = 5
-			SPT = { army_experience = 20 add_political_power = 20 }
+			SPT = { 
+				add_to_tech_sharing_group = PLS_faction_tech_group
+				army_experience = 20 add_political_power = 20 
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -345,6 +348,10 @@ focus_tree = {
 		y = 4
 		completion_reward = {
 			custom_effect_tooltip = PLS_SPT_D6
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PLS_chukchi
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PLS_anastasius
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -357,6 +364,8 @@ focus_tree = {
 		y = 0
 		completion_reward = {
 			add_ideas = PLS_core_defense_1
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PLS_colonel_sychev
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -441,6 +450,11 @@ focus_tree = {
 				amount = 10
 				producer = RUS
 			}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = rail_engine
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -486,7 +500,7 @@ focus_tree = {
 	focus = {
 		id = PLS_colonization_of_south
 		icon = GFX_HNZ_stalker_training
-		available = { }
+		available = { 212 = { is_owned_by = RUI } 369 = { is_owned_by = RUI } }
 		prerequisite = { focus = PLS_kshatriya_2 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_2
@@ -496,6 +510,32 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = PLS_core_defense_2
 				add_idea = PLS_core_defense_3
+			}
+			transfer_state = 212
+			transfer_state = 369
+			212 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			369 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -541,6 +581,11 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 20
+				producer = RUS
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -618,15 +663,14 @@ focus_tree = {
 		x = 34
 		y = 0
 		completion_reward = {
-			#add_research_slot = 1
 			country_event = nf_PLS.6
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = { factor = 21 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_1
 		icon = GFX_MDR_measures
-		available = { date > 2028.10.1 }
+		available = { date > 2028.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_the_last_redoubt }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
@@ -634,13 +678,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_kshatriya_advisors
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.005
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_2
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_1
@@ -648,13 +696,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			army_experience = 50
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_3
 		icon = GFX_MDR_measures
-		available = { date > 2029.10.1 }
+		available = { date > 2029.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_1
@@ -662,6 +714,10 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_kshatriya_commanders_1
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.01
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -676,13 +732,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_kshatriya_commanders_cost_1
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.02
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_5
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_3 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_3
@@ -693,13 +753,17 @@ focus_tree = {
 				remove_idea = PLS_kshatriya_commanders_cost_1
 				add_idea = PLS_kshatriya_commanders_cost_2
 			}
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_6
 		icon = GFX_MDR_measures
-		available = { date > 2033.10.1 }
+		available = { date > 2033.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_4
@@ -710,13 +774,17 @@ focus_tree = {
 				remove_idea = PLS_kshatriya_commanders_1
 				add_idea = PLS_kshatriya_commanders_2
 			}
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.03
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_7
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_4
@@ -724,13 +792,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_kshatriya_troops_improvement
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_8
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_4
@@ -738,13 +810,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_kshatriya_cp_gain
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_9
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_6
@@ -762,13 +838,17 @@ focus_tree = {
 					add_defense = 1
 				}
 			}
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_10
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_6
@@ -786,13 +866,17 @@ focus_tree = {
 					gain_xp = 1000
 				}	
 			} 
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_11
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_kshatriya_branch_6
@@ -810,13 +894,17 @@ focus_tree = {
 					add_skill_level = 1
 				}
 			}
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_kshatriya_branch_12
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 dictatorial > 0.2 }
 		prerequisite = { focus = PLS_kshatriya_branch_9 }
 		prerequisite = { focus = PLS_kshatriya_branch_10 }
 		prerequisite = { focus = PLS_kshatriya_branch_11 }
@@ -826,13 +914,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_kshatriya_backing
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_1
 		icon = GFX_MDR_measures
-		available = { date > 2028.10.1 }
+		available = { date > 2028.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_the_last_redoubt }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
@@ -840,13 +932,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_vaishyas_advisors
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.005
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_2
 		icon = GFX_MDR_measures
-		available = { date > 2029.10.1 }
+		available = { date > 2029.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_1
@@ -854,13 +950,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_vaishyas_trading_1
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.01
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_3
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_2 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_2
@@ -868,13 +968,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_vaishyas_trade_law
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_8
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_1
@@ -882,13 +986,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_vaishyas_relations_1
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_10
 		icon = GFX_MDR_measures
-		available = { date > 2031.10.1 }
+		available = { date > 2031.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_8 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_8
@@ -899,13 +1007,17 @@ focus_tree = {
 				remove_idea = PLS_vaishyas_relations_1
 				add_idea = PLS_vaishyas_relations_2
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.02
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_11
 		icon = GFX_MDR_measures
-		available = { date > 2031.10.1 }
+		available = { date > 2031.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_3 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_3
@@ -915,16 +1027,20 @@ focus_tree = {
 			capital_scope = {
 			    add_resource = {
 			        type = scrap
-			        amount = 4
+			        amount = 5
 			    }
 			    add_resource = {
 			        type = components
-			        amount = 4
+			        amount = 5
 			    }
 			    add_resource = {
 			        type = alloys
-			        amount = 4
+			        amount = 5
 			    }
+			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.02
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -932,7 +1048,7 @@ focus_tree = {
 	focus = {
 		id = PLS_vaishyas_branch_9
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_8 }
 		prerequisite = { focus = PLS_vaishyas_branch_3 }
 		cost = 6.5
@@ -944,13 +1060,17 @@ focus_tree = {
 				remove_idea = PLS_vaishyas_trading_1
 				add_idea = PLS_vaishyas_trading_2
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_4
 		icon = GFX_MDR_measures
-		available = { date > 2033.10.1 }
+		available = { date > 2033.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_9 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_9
@@ -961,13 +1081,17 @@ focus_tree = {
 				remove_idea = PLS_vaishyas_trading_1
 				add_idea = PLS_vaishyas_trading_3
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.03
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_5
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_4
@@ -986,13 +1110,17 @@ focus_tree = {
 			        amount = 2
 			    }
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_6
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_vaishyas_branch_4
@@ -1011,13 +1139,17 @@ focus_tree = {
 			        amount = 2
 			    }
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_7
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_5 }
 		prerequisite = { focus = PLS_vaishyas_branch_6 }
 		cost = 6.5
@@ -1037,13 +1169,17 @@ focus_tree = {
 			        amount = 2
 			    }
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_vaishyas_branch_12
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_5 }
 		prerequisite = { focus = PLS_vaishyas_branch_6 }
 		cost = 6.5
@@ -1063,13 +1199,17 @@ focus_tree = {
 			        amount = 2
 			    }
 			}
+			add_popularity = {
+				ideology = oligarch
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_1
 		icon = GFX_MDR_measures
-		available = { date > 2028.10.1 }
+		available = { date > 2028.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_the_last_redoubt }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
@@ -1077,13 +1217,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_brahmin_advisors
+			add_popularity = {
+				ideology = council
+				popularity = 0.005
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_2
 		icon = GFX_MDR_measures
-		available = { date > 2029.10.1 }
+		available = { date > 2029.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_1
@@ -1091,13 +1235,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_brahmin_benefit_1
+			add_popularity = {
+				ideology = council
+				popularity = 0.01
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_3
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_2 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_2
@@ -1108,13 +1256,17 @@ focus_tree = {
 				remove_idea = PLS_brahmin_benefit_1
 				add_idea = PLS_brahmin_benefit_2
 			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_8
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_1
@@ -1122,13 +1274,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_brahmin_old_world_knows
+			add_popularity = {
+				ideology = council
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_10
 		icon = GFX_MDR_measures
-		available = { date > 2031.10.1 }
+		available = { date > 2031.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_8 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_8
@@ -1141,13 +1297,17 @@ focus_tree = {
 			        amount = 8
 			    }
 			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.02
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_11
 		icon = GFX_MDR_measures
-		available = { date > 2031.10.1 }
+		available = { date > 2031.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_3 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_3
@@ -1155,13 +1315,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_offsite_building = { type = synthetic_refinery level = 3 }
+			add_popularity = {
+				ideology = council
+				popularity = 0.02
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_9
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_8 }
 		prerequisite = { focus = PLS_brahmin_branch_3 }
 		cost = 6.5
@@ -1173,13 +1337,17 @@ focus_tree = {
 				remove_idea = PLS_brahmin_benefit_2
 				add_idea = PLS_brahmin_benefit_3
 			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_4
 		icon = GFX_MDR_measures
-		available = { date > 2033.10.1 }
+		available = { date > 2033.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_9 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_9
@@ -1190,13 +1358,17 @@ focus_tree = {
 				remove_idea = PLS_brahmin_benefit_3
 				add_idea = PLS_brahmin_benefit_4
 			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.03
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_5
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_4
@@ -1204,13 +1376,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_fuel_consumption
+			add_popularity = {
+				ideology = council
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_6
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_brahmin_branch_4
@@ -1218,13 +1394,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_brahmin_marvel_of_the_old_world
+			add_popularity = {
+				ideology = council
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_7
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_5 }
 		prerequisite = { focus = PLS_brahmin_branch_6 }
 		cost = 6.5
@@ -1233,13 +1413,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_brahmin_synthetics
+			add_popularity = {
+				ideology = council
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_12
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_5 }
 		prerequisite = { focus = PLS_brahmin_branch_6 }
 		cost = 6.5
@@ -1248,13 +1432,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_brahmin_silos
+			add_popularity = {
+				ideology = council
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_1
 		icon = GFX_MDR_measures
-		available = { date > 2028.10.1 }
+		available = { date > 2028.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_the_last_redoubt }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
@@ -1262,13 +1450,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_shudras_advisors
+			add_popularity = {
+				ideology = community
+				popularity = 0.005
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_2
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_1
@@ -1280,13 +1472,17 @@ focus_tree = {
 				resource = scrap
 				amount = 1
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_3
 		icon = GFX_MDR_measures
-		available = { date > 2029.10.1 }
+		available = { date > 2029.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_1 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_1
@@ -1294,13 +1490,17 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = PLS_shudras_building_1
+			add_popularity = {
+				ideology = community
+				popularity = 0.01
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_4
 		icon = GFX_MDR_measures
-		available = { date > 2031.10.1 }
+		available = { date > 2031.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_3 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_3
@@ -1308,13 +1508,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_shudras_salvage_1
+			add_popularity = {
+				ideology = community
+				popularity = 0.02
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_5
 		icon = GFX_MDR_measures
-		available = { date > 2030.10.1 }
+		available = { date > 2030.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_3 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_3
@@ -1325,13 +1529,17 @@ focus_tree = {
 				remove_idea = PLS_shudras_building_1
 				add_idea = PLS_shudras_building_2
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.015
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_6
 		icon = GFX_MDR_measures
-		available = { date > 2033.10.1 }
+		available = { date > 2033.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_4
@@ -1339,13 +1547,17 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_shudras_war_eco_1
+			add_popularity = {
+				ideology = community
+				popularity = 0.03
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_7
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_4
@@ -1356,13 +1568,17 @@ focus_tree = {
 				remove_idea = PLS_shudras_salvage_1
 				add_idea = PLS_shudras_salvage_2
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_8
 		icon = GFX_MDR_measures
-		available = { date > 2032.10.1 }
+		available = { date > 2032.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_4
@@ -1374,13 +1590,17 @@ focus_tree = {
 				resource = alloys
 				amount = 1
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.025
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_9
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_6
@@ -1399,13 +1619,17 @@ focus_tree = {
 					amount = 6
 				}
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_10
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_6
@@ -1424,13 +1648,17 @@ focus_tree = {
 					amount = 6
 				}
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_11
 		icon = GFX_MDR_measures
-		available = { date > 2034.10.1 }
+		available = { date > 2034.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_6 }
 		cost = 6.5
 		relative_position_id = PLS_shudras_branch_6
@@ -1449,13 +1677,17 @@ focus_tree = {
 					amount = 6
 				}
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.035
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_shudras_branch_12
 		icon = GFX_MDR_measures
-		available = { date > 2035.10.1 }
+		available = { date > 2035.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_9 }
 		prerequisite = { focus = PLS_shudras_branch_10 }
 		prerequisite = { focus = PLS_shudras_branch_11 }
@@ -1465,6 +1697,10 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			add_ideas = PLS_shudras_backing
+			add_popularity = {
+				ideology = community
+				popularity = 0.04
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1500,6 +1736,13 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_stability = 0.05
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_manpower = 20
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1606,6 +1849,19 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_stability = 0.05
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_manpower = 20
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1620,6 +1876,13 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			add_stability = 0.1
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_manpower = 25
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1634,6 +1897,8 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			add_war_support = 0.1
+			add_manpower = 50
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1647,6 +1912,41 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_war_support = 0.1
+			if = {
+				limit = {
+					NOT = { has_idea = mandatory_service }
+				}
+				add_ideas = mandatory_service
+			}
+			else_if = { 
+				limit = {
+					has_idea = mandatory_service
+				}
+				army_experience = 35
+				division_template = {
+					name = "Tunnel Sentries"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 0 y = 1 }
+						irregulars = { x = 0 y = 2 }
+						irregulars = { x = 0 y = 3 }
+						irregulars = { x = 0 y = 4 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1st Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"2nd Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1928,7 +2228,7 @@ focus_tree = {
 				category = clothing_kits
 			}
 			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
+				type = conventional_infantry_equipment_3
 				amount = 20
 				producer = RUS
 			}
@@ -2140,14 +2440,14 @@ focus_tree = {
 	focus = {
 		id = PLS_preservation_of_humanity
 		icon = GFX_MDR_measures
-		available = {}
+		available = { has_completed_focus = PLS_the_last_redoubt }
 		cost = 5
 		x = 63
 		y = 0
 		completion_reward = {
 			add_research_slot = 1
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = { factor = 21 }
 	}
 	focus = {
 		id = PLS_civilization_project
@@ -2174,9 +2474,7 @@ focus_tree = {
 		completion_reward = {
 			every_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_building_construction = {
 					type = infrastructure
@@ -2755,6 +3053,8 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PLS_alexander_rasanov	
 			every_country = {
 				limit = {
 					NOT = {
@@ -2894,6 +3194,19 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
+		id = PLS_contemplate_neutrality_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_contemplate_neutrality_2 focus = PLS_hanza_3 }
+		cost = 6.5
+		relative_position_id = PLS_contemplate_neutrality_2
+		x = -1
+		y = 1
+		completion_reward = {
+			remove_ideas = PLS_aloof
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
 		id = PLS_advisor_leases
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_contemptive_neighbours }
@@ -3007,9 +3320,10 @@ focus_tree = {
 		mutually_exclusive = { focus = PLS_safekeepers_of_humanity }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt_2
-		x = 4
+		x = 5
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_safekeepers_of_knowledge
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3022,6 +3336,8 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+
+			# Faction neighbors
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3034,6 +3350,8 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+
+			# Faction Ideology
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3046,6 +3364,13 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PLS
+				}
+				add_political_power = 200
+				add_to_tech_sharing_group = PLS_faction_tech_group
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3058,6 +3383,19 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PLS
+				}
+				capital_scope = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = arms_factory
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3070,6 +3408,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		completion_reward = {
+			## IDK?
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3083,6 +3422,8 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+
+			### Go find MSU or smth
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3095,6 +3436,8 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
+			add_offsite_building = { type = synthetic_refinery level = 3 }
+			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3108,6 +3451,12 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 3
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3121,18 +3470,32 @@ focus_tree = {
 		x = 3
 		y = 1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				set_building_level = {
+					type = infrastructure
+					level = 10
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_guardians_of_knowledge_3
 		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_guardians_of_knowledge_2 }
+		prerequisite = { focus = PLS_guardians_of_knowledge_2 focus = PLS_guardians_3 }
 		cost = 6.5
 		relative_position_id = PLS_guardians_of_knowledge_2
 		x = 0
 		y = 2
 		completion_reward = {
+			every_country = {
+				limit = { is_in_faction_with = PLS }
+				add_research_slot = 1
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3143,9 +3506,10 @@ focus_tree = {
 		mutually_exclusive = { focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt_2
-		x = -4
+		x = -5
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_safekeepers_of_humanity
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3153,11 +3517,13 @@ focus_tree = {
 		id = PLS_rage_against_the_light
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		available = { has_war_support > 0.9 }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity
-		x = -2
+		x = -1
 		y = 1
 		completion_reward = {
+			remove_ideas = PLS_ignorance
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3165,11 +3531,34 @@ focus_tree = {
 		id = PLS_rage_against_the_light_2
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_rage_against_the_light }
+		available = { 
+			SPT = { 
+				is_in_faction_with = ROOT 
+				is_ai = yes 
+				has_war = no
+			}
+			has_war = no
+		}
 		cost = 6.5
 		relative_position_id = PLS_rage_against_the_light
 		x = 1
 		y = 1
 		completion_reward = {
+			SPT = {
+				every_owned_state = {
+					limit = {
+						is_core_of = SPT
+					}
+					add_core_of = PLS
+				}
+			}
+			annex_country = {
+				target = SPT
+				transfer_troops = yes
+			}
+			inherit_technology = SPT
+			add_threat = 5
+			## launch global event or something
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3182,68 +3571,204 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			set_technology = { laser_infantry_equipment_1_tech = 1 }
+			set_technology = { special_forces_spartan_equipment_tech = 1 }
+			if = {
+				limit = {
+					NOT = { has_completed_focus = PLS_recall_order_detachment_2 }
+				}
+				complete_national_focus = PLS_recall_order_detachment_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_1
+		id = PLS_rage_against_the_light_4
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_3 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_3
+		x = 2
+		y = 1
+		completion_reward = {
+			## war goal against RCH
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_5
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_3 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_3
+		x = 0
+		y = 1
+		completion_reward = {
+			## war goal against RED
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_6
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_3 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_3
+		x = -2
+		y = 1
+		completion_reward = {
+			## war goal against GWC / ARB or puppet
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_7
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_3 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_3
+		x = -1
+		y = 2
+		completion_reward = {
+			## war goal against SCA / ISL / ATF / SAT
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_8
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_3 }
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_3
+		x = 1
+		y = 2
+		completion_reward = {
+			## war goal against EUR / GWC / HMS
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_safekeepers_of_humanity }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity
-		x = 0
-		y = 4
+		x = -3
+		y = 1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safeguard_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safeguard_humanity
+		x = 0
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_safekeepers_of_humanity_rid_mutants
 		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity
-		x = 1
+		x = 2
 		y = 1
 		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = PLS_rid_mutants
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_safekeepers_of_humanity_rid_bandits
 		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity
-		x = 3
+		x = 4
 		y = 1
 		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = PLS_rid_bandits
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_safekeepers_of_humanity_rid_authoritarians
 		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity
-		x = 5
+		x = 6
 		y = 1
 		completion_reward = {
+			add_ideas = PLS_rid_authoritarians
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_igorance
+		icon = GFX_MDR_measures
+		available = { has_completed_focus = PLS_guardians_of_knowledge }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.1
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_safekeepers_of_humanity_remember_the_word
 		icon = GFX_MDR_measures
+		available = { has_completed_focus = PLS_safekeepers_of_humanity }
 		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
 		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
 		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
 		cost = 6.5
 		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
-		x = 0
+		x = -1
 		y = 1
 		completion_reward = {
+			add_war_support = 0.1
+			army_experience = 50
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3257,6 +3782,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_safekeepers_of_humanity
+				add_idea = PLS_safekeepers_of_humanity_2
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3270,6 +3799,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_safekeepers_of_humanity
+				add_idea = PLS_safekeepers_of_humanity_3
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
