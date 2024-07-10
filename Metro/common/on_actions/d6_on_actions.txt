@@ -1,0 +1,60 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			106 = {
+				set_state_flag = SPT_D6_FLAG
+			}
+		}
+		effect = {
+			every_country = {
+				set_variable = { 
+					var = global.D6_command_power 
+					value = .25 
+				}
+				set_variable = { 
+					var = global.D6_division_org 
+					value = .07 
+				}
+				set_variable = { 
+					var = global.D6_division_recovery 
+					value = .07 
+				}
+			}
+		}
+	}
+	on_state_control_changed = {
+        effect = {
+            if = {
+                limit = {   ### If Control D6. Get Captain Event. Captain leader will assign only duration that D6 is owned by country
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_reich_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_skaven_nation
+					}
+                    106 = { 
+						NOT = { is_owned_by = RUI }
+						NOT = { has_state_flag = D6_annexed }
+					}
+                }
+				ROOT = {
+                    country_event = { id = nf_D6_advisor.1 days = 4 random_hours = 12 }
+                }
+				106 = { set_state_flag = D6_annexed }
+            }
+        }
+    }
+	on_state_control_changed = {
+        effect = {
+            if = {
+                limit = {
+					has_country_flag = recruited_captain_flag
+                    106 = { 
+						NOT = { is_owned_by = ROOT }
+					}
+                }
+                ROOT = { country_event = { id = nf_D6_advisor.2 random_hours = 20 } }
+            }
+        }
+    }
+}

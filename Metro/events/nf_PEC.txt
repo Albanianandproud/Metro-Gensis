@@ -174,7 +174,33 @@ country_event = {
 			size = 0.35
 			army_ratio = 0.35
 		}
-		## change focus tree 
+		every_country = {
+			limit = { NOT = { has_country_flag = is_bandit_nation } }
+			every_country = {
+				limit = { NOT = { has_country_flag = is_bandit_nation } }
+				add_opinion_modifier = {
+					target = PEC
+					modifier = bandit
+				}
+			}
+		}
+		## fuck it every_country isnt working like on_actions
+		remove_opinion_modifier = {
+			target = TRT
+			modifier = bandit
+		}
+		remove_opinion_modifier = {
+			target = KTG
+			modifier = bandit
+		}
+		remove_opinion_modifier = {
+			target = MOB
+			modifier = bandit
+		}
+		remove_opinion_modifier = {
+			target = DRY
+			modifier = bandit
+		}
 		ai_chance = {
             base = 2500
         }
@@ -248,7 +274,14 @@ country_event = {
 			size = 0.35
 			army_ratio = 0.35
 		}
-		## change focus tree 
+		every_country = {
+			limit = { tag = PEC }
+			every_country = {
+				limit = { NOT = { tag = PEC } }
+				reverse_add_opinion_modifier = { target = PREV modifier = nonbelivers }
+				add_opinion_modifier = { target = PREV modifier = fanatics }
+			}
+		}
 		ai_chance = {
             base = 2500
         }

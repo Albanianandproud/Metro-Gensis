@@ -30,9 +30,9 @@ NDefines.NDiplomacy.BASE_TRUCE_PERIOD = 90
 --- Buildings Stuff ---
 NDefines.NBuildings.INFRASTRUCTURE_RESOURCE_BONUS = 0.0
 NDefines.NBuildings.SUPPLY_ROUTE_RESOURCE_BONUS = 0.0
-NDefines.NBuildings.RADAR_RANGE_BASE = 12			
-NDefines.NBuildings.RADAR_RANGE_MIN = 12			
-NDefines.NBuildings.RADAR_RANGE_MAX = 20				
+NDefines.NBuildings.RADAR_RANGE_BASE = 15	
+NDefines.NBuildings.RADAR_RANGE_MIN = 15			
+NDefines.NBuildings.RADAR_RANGE_MAX = 30				
 NDefines.NBuildings.RADAR_INTEL_EFFECT = 10			
 
 ---Nation Stuff---
@@ -49,8 +49,8 @@ NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.0001		--- Adding is done manually 
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
 NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 
-	NDefines.NCountry.STARTING_FUEL_RATIO = 0.25						-- starting fuel ratio compared to max fuel for countries
-	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 1						-- base amount of fuel gained hourly per excess oil
+	NDefines.NCountry.STARTING_FUEL_RATIO = 0						-- starting fuel ratio compared to max fuel for countries
+	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 0.4167				-- base amount of fuel gained hourly per excess oil
 	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
 	NDefines.NCountry.BASE_FUEL_CAPACITY = 1000							-- base amount of fuel capacity
 
@@ -69,7 +69,7 @@ NDefines.NProduction.RAILWAY_GUN_REPAIR_SPEED = 8.0
 NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.1
 NDefines.NMilitary.INFRA_ORG_IMPACT = 0.25
 NDefines.NMilitary.ENGAGEMENT_WIDTH_PER_WIDTH = 4.0
-NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.125
+NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.15
 NDefines.NMilitary.BASE_FORT_PENALTY = -0.05						--- Base is 0.15
 NDefines.NMilitary.TRAINING_ORG = 0.65								--- Base is 0.2
 NDefines.NMilitary.TRAINING_MIN_STRENGTH = 0.45						--- if strength is less than this, the unit will pause training until it's been reinforced
@@ -108,6 +108,9 @@ NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance t
 
 NDefines.NResistance.RESISTANCE_POP_LOW_CUTOFF = 5
 NDefines.NResistance.RESISTANCE_POP_VERY_LOW_CUTOFF = 1
+
+NDefines.NTechnology.BASE_RESEARCH_POINTS_SAVED = 60.0
+NDefines.NTechnology.MIN_RESEARCH_SPEED = 0.025
 	
 ---Division Designer
 NDefines.NMilitary.MAX_DIVISION_BRIGADE_WIDTH = 5			
@@ -129,9 +132,9 @@ NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 10
 
 ---Railway Guns---
 
-NDefines.NRailwayGunRAILWAY_GUN_RANGE = 20
+NDefines.NRailwayGunRAILWAY_GUN_RANGE = 25
 NDefines.NRailwayGunOUT_OF_SUPPLY_SPEED = -0.99	
-NDefines.NRailwayGunBASE_CAPTURE_CHANCE = 0.5			
+NDefines.NRailwayGunBASE_CAPTURE_CHANCE = 0.2			
 
 ---NAI Stuff---
 NDefines.NAI.ESTIMATED_CONVOYS_PER_DIVISION = 1		---Base is 6. Pending Change.

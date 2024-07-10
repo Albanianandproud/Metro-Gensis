@@ -815,6 +815,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_assasinate_the_fuhrer
 		completion_reward = {
+			remove_ideas = RCH_plot_against_fuhrer
 			add_political_power = 75
 			add_popularity = {
 				ideology = council
@@ -1264,7 +1265,7 @@ focus_tree = {
 				uses = 1
 				bonus = 1.5
 				ahead_reduction = 3
-				category = refinery
+				category = energy
 			}
 		}
 		ai_will_do = {
@@ -1836,7 +1837,7 @@ focus_tree = {
 			306 = { add_extra_state_shared_building_slots = 3 }
 			275 = { add_extra_state_shared_building_slots = 3 }
 			337 = { add_extra_state_shared_building_slots = 3 }
-			custom_effect_tooltip = RCH_future_update_tt
+			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -1886,7 +1887,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			custom_effect_tooltip = RCH_future_update_tt
+			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = {
 			factor = 2
@@ -3359,7 +3360,7 @@ focus_tree = {
 			focus = RCH_military_research_and_development
 		}
 		available = { 
-			has_tech = rail_automobile_salvaging
+			has_tech = rail_salvaging_2033
 		}
 		x = 1
 		y = 1
@@ -3452,6 +3453,11 @@ focus_tree = {
 				category = infantry_weapons
 			}
 			add_ideas = RCH_firearm_production
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -3554,6 +3560,11 @@ focus_tree = {
 				uses = 2
 				category = gatling_support_tech
 			}
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3574,6 +3585,11 @@ focus_tree = {
 		relative_position_id = RCH_gattling_production
 		completion_reward = {
 			add_ideas = RCH_gattling_proficiency
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3646,6 +3662,7 @@ focus_tree = {
 			has_equipment = {
 				rail_panzer_equipment > 9
 			}
+			has_tech = rail_panzer_tech_2033
 		}
 		cancel_if_invalid = yes
 		x = 1
@@ -3658,6 +3675,7 @@ focus_tree = {
 				amount = -10
 			}
 			add_ideas = RCH_panzer_1
+			set_technology = { rail_panzer_tech_sturmpanzer = 1}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3670,7 +3688,7 @@ focus_tree = {
 			focus = RCH_test_out_rail_tanks
 		}
 		available = {
-			has_tech = rail_panzer_tech_2035
+			has_tech = rail_panzer_tech_2033
 		}
 		x = -1
 		y = 1
@@ -3709,7 +3727,7 @@ focus_tree = {
 			focus = RCH_test_out_rail_tanks
 		}
 		available = {
-			has_tech = rail_panzer_tech_2035
+			has_tech = rail_panzer_tech_2033
 		}
 		x = 1
 		y = 1
@@ -3934,7 +3952,7 @@ focus_tree = {
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = scrap_infantry_equipment_1
-				amount = 65
+				amount = 75
 				producer = RUS
 			}
 			## TODO Do something Else, too
@@ -4012,9 +4030,29 @@ focus_tree = {
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			country_event = nf_RCH.10
+			if = { 
+				limit = { is_ai = yes }
+				427 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = supply_node
+						level = 1
+						province = 447
+						instant_build = yes
+					}
+				}
+			}	
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 1
+			modifier = {
+				factor = 2
+				date > 2031.1.1
+			}
 		}
 	}
 	focus = {
@@ -4295,7 +4333,11 @@ focus_tree = {
 			add_political_power = 100
 		}
 		ai_will_do = {
-			factor = 10
+			factor = 2
+			modifier = {
+				factor = 250
+				date > 2033.10.1
+			}
 		}
 	}
 
@@ -4380,9 +4422,7 @@ focus_tree = {
  				generator = { 28 }
  			}
  			if = {
- 				limit = {
- 					is_ai = yes
- 				}
+ 				limit = { is_ai = yes }
  				426 = {
  					add_building_construction = {
     					type = supply_node 

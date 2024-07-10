@@ -1,0 +1,122 @@
+scripted_gui = {
+	d6_gui_button = {
+		window_name = "d6_gui_button_container"
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+
+		visible = {
+			ROOT = { 
+				NOT = {
+					has_country_flag = SPT_disable_the_gui
+				}
+			}
+			has_d6_gui = yes
+		}
+
+		effects = {
+			d6_gui_button_click = {
+				if = {
+					limit = {
+						ROOT = {
+							has_country_flag = GUI_show_d6_gui
+						}
+					}
+					ROOT = {
+						clr_country_flag = GUI_show_d6_gui
+					}
+				}
+				else = {
+					ROOT = {
+						set_country_flag = GUI_show_d6_gui
+					}
+				}
+			}
+		}
+	}
+	
+
+	d6_gui_window = {
+		window_name = "d6_gui_window"
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		dirty = SPT_extraction_weight_var
+
+		visible = {
+			ROOT = {
+				has_country_flag = GUI_show_d6_gui
+				NOT = {
+					has_country_flag = SPT_disable_the_gui
+				}
+			}
+			has_d6_gui = yes
+		}
+
+		properties = {
+			excavation_progressbar = {
+				frame = global.excavation_level
+			}
+		}
+
+		effects = {
+			level_one_click = {
+				set_country_flag = SPT_level_one_selected
+				clr_country_flag = SPT_level_two_selected
+				clr_country_flag = SPT_level_three_selected
+			}
+		}
+
+		triggers = {
+			level_one_visible = {
+				ROOT = {
+					NOT = {
+						has_country_flag = SPT_level_two_unlocked
+					}
+				}
+			}
+			level_one_selected_visible = {
+				ROOT = {
+					NOT = {
+						has_country_flag = SPT_level_two_unlocked
+					}
+				}
+			}
+			level_two_visible = {
+				ROOT = {
+					has_country_flag = SPT_level_two_unlocked
+					AND = {
+						NOT = {
+							has_country_flag = SPT_level_three_unlocked
+						}
+					}
+				}
+			}
+			level_two_selected_visible = {
+				ROOT = {
+					has_country_flag = SPT_level_two_unlocked
+					AND = {
+						NOT = {
+							has_country_flag = SPT_level_three_unlocked_two_trigger
+						}
+					}
+				}
+			}
+			level_two_locked_visible = {
+				ROOT = {
+					NOT = {
+						has_country_flag = SPT_level_three_unlocked_two_trigger
+					}
+				}
+			}
+			level_three_visible = {
+				ROOT = {
+					has_country_flag = SPT_level_three_unlocked
+				}
+			}
+			level_three_selected_visible = {
+				ROOT = {
+					has_country_flag = SPT_level_three_unlocked
+				}
+			}
+		}	
+	}
+}

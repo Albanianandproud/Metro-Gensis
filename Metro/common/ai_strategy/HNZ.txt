@@ -154,6 +154,41 @@ HNZ_protect_potential_trade_interests_only = {
 		value = 30
 	}
 }
+HNZ_be_friendly_with_polis = {
+	allowed = { original_tag = HNZ }
+
+	enable = {
+		country_exists = PLS
+	}
+	abort = {
+		OR = {
+			NOT = { country_exists = PLS }
+			PLS = { has_war_with = HNZ }
+		}
+	}
+	ai_strategy = {
+		type = befriend
+		id = "PLS"
+		value = 300
+	}
+	ai_strategy = {
+        type = support
+        id = PLS
+        value = 100
+    }
+    ai_strategy = {
+    	type = diplo_action_acceptance
+    	id = PLS
+    	value = 100
+    	target = non_aggression_pact
+	}
+	ai_strategy = {
+    	type = diplo_action_desire
+    	id = PLS
+    	value = 100
+    	target = improve_relation
+	}
+}
 HNZ_ring_line_is_very_very_important = {
 	allowed = {
 		original_tag = HNZ

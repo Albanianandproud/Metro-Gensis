@@ -843,7 +843,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			every_country = {
-				limit = { has_country_flag = is_bandit_nation }
+				limit = { has_country_flag = is_bandit_nation NOT = { has_war_with = TRT }}
 				capital_scope = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -993,6 +993,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = TRT_andrew
+			add_research_slot = 1
 		}
 	}
 
@@ -1550,9 +1551,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
-		bypass = {
-			MOB = { exists = no }
-		}
+		bypass = { MOB = { exists = no } }
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
@@ -1571,9 +1570,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
-		bypass = {
-			KTG = { exists = no }
-		}
+		bypass = { KTG = { exists = no } }
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
@@ -1658,7 +1655,7 @@ focus_tree = {
 		}
         will_lead_to_war_with = KTG
 		completion_reward = {
-			add_threat = 5
+			add_threat = 1
 			create_wargoal = {
  				type = take_state_focus
  				target = KTG
@@ -1735,7 +1732,7 @@ focus_tree = {
 		icon = GFX_RCH_metromacht
 		x = 2
 		y = 1
-		cost = 8.6
+		cost = 6.5
 		relative_position_id = TRT_checking_the_gossip
 		prerequisite = {
 			focus = TRT_checking_the_gossip
@@ -1798,15 +1795,13 @@ focus_tree = {
 		icon = GFX_RCH_new_age_fascism
 		x = -1
 		y = 1
-		cost = 8.6
+		cost = 6.5
 		relative_position_id = TRT_dealings_with_the_reich
 		prerequisite = {
 			focus = TRT_dealings_with_the_reich
 		}
 		available = {
-			NOT = {
-				has_completed_focus = TRT_soviet_connection
-			}
+			NOT = { has_completed_focus = TRT_soviet_connection }
 		}
 		mutually_exclusive = {
 			focus = TRT_RCH_trade
@@ -1849,7 +1844,7 @@ focus_tree = {
 		icon = GFX_generic_medium_arms_5
 		x = 1
 		y = 1
-		cost = 8.6
+		cost = 6.5
 		relative_position_id = TRT_dealings_with_the_reich
 		prerequisite = {
 			focus = TRT_dealings_with_the_reich
@@ -1883,7 +1878,7 @@ focus_tree = {
 		icon = GFX_TRT_soviet_connection
 		x = 4
 		y = 1
-		cost = 8.6
+		cost = 6.5
 		relative_position_id = TRT_checking_the_gossip
 		prerequisite = {
 			focus = TRT_checking_the_gossip
@@ -1923,6 +1918,7 @@ focus_tree = {
 		y = 2
 		cost = 8.6
 		relative_position_id = TRT_soviet_connection
+		mutually_exclusive = { focus = TRT_operation_screw_commmunists }
 		prerequisite = {
 			focus = TRT_soviet_connection
 		}
@@ -1965,7 +1961,7 @@ focus_tree = {
 		icon = GFX_TRT_testing_the_reds
 		x = 6
 		y = 1
-		cost = 8.6
+		cost = 6.5
 		relative_position_id = TRT_checking_the_gossip
 		prerequisite = {
 			focus = TRT_checking_the_gossip
@@ -1974,9 +1970,8 @@ focus_tree = {
 			focus = TRT_soviet_connection
 		}
 		available = {
-			RED = {
-				exists = yes
-			}
+			RED = { exists = yes }
+			is_puppet = no
 		}
 		completion_reward = {
 			add_war_support = 0.05
@@ -1987,7 +1982,6 @@ focus_tree = {
 			factor = 2.5
 		}
 	}
-	
 	focus = { 
 		id = TRT_testing_the_sokol_2
 		icon = GFX_TRT_testing_the_reds_2
@@ -2016,7 +2010,128 @@ focus_tree = {
 			factor = 0.5
 		}
 	}
-
+	focus = { 
+		id = TRT_hanza_friendship
+		icon = GFX_HNZ_subversion
+		x = 4
+		y = 0
+		cost = 6.5
+		relative_position_id = TRT_soviet_connection
+		mutually_exclusive = { focus = TRT_a_tunnel_too_far }
+		prerequisite = {
+			focus = TRT_checking_the_gossip
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_puppet = no
+		}
+		completion_reward = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = trade_partner
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = trade_partner
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = { 
+		id = TRT_operation_screw_commmunists
+		icon = GFX_HNZ_knight_to_remember
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = TRT_hanza_friendship
+		mutually_exclusive = { focus = TRT_operation_red_alert }
+		prerequisite = {
+			focus = TRT_hanza_friendship
+		}
+		available = {
+			RED = { exists = yes }
+			is_neighbor_of = red
+		}
+		completion_reward = {
+			## If we do this focus we will HAVE to join a war against RED
+			## IF RED goes to war with them
+			custom_effect_tooltip = TRT_screw_redline_preparation
+			custom_effect_tooltip = TRT_redline_assistance
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.25
+				uses = 1
+				category = clothing_kits
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = support_weapons_tech
+			}
+			army_experience = 20
+		}
+		ai_will_do = {
+			factor = 0.8 ## Do we REALLY wanna do this?
+		}
+	}
+	focus = { 
+		id = TRT_a_tunnel_too_far
+		icon = GFX_TRT_gopniks
+		x = 6
+		y = 0
+		cost = 6.5
+		relative_position_id = TRT_soviet_connection
+		mutually_exclusive = { focus = TRT_hanza_friendship }
+		prerequisite = { focus = TRT_checking_the_gossip
+		}
+		available = {
+			HNZ = { exists = yes }
+			is_puppet = no
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			activate_decision = TRT_testing_the_hansa_borderwar
+			custom_effect_tooltip = TRT_borderwar_hansa
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = { 
+		id = TRT_a_direct_confrontation
+		icon = GFX_generic_hansa_alliance
+		x = -1
+		y = 1
+		cost = 8.6
+		relative_position_id = TRT_a_tunnel_too_far
+		prerequisite = { focus = TRT_a_tunnel_too_far }
+		available = {
+			has_war = no
+			is_neighbor_of = HNZ
+			is_puppet = no 
+		}
+        will_lead_to_war_with = HNZ
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = HNZ
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
 	focus = {
 		id = TRT_hunt_for_the_silo
 		icon = GFX_generic_silo

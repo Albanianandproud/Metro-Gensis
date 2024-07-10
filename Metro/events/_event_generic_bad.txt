@@ -95,6 +95,23 @@ country_event = { ## Crop Failure
 			days = 80
 		}
 	}
+
+	option = {
+		name = random_event_bad.3.c
+		trigger = {
+			has_government = oligarch
+			NOT = {
+				has_country_flag = is_bandit_nation
+				has_country_flag = is_savage_nation
+				has_idea = civics_border_4
+			}
+        }
+		add_timed_idea = {
+			idea = metro_buy_crops
+			days = 70
+		}
+		add_political_power = -30
+	}
 }
 
 ##############################################################################################
@@ -111,6 +128,9 @@ country_event = {
 
 	trigger = {
 		has_global_flag = random_events_bad_enabled
+		any_owned_state = {
+			has_active_resistance = yes
+		}
 	}
 
 	immediate = {
@@ -119,7 +139,6 @@ country_event = {
 				limit = {
 					NOT = {
 						is_core_of = ROOT
-						compliance < 40
 					}
 				}
 				add_resistance = 30
@@ -134,7 +153,6 @@ country_event = {
 				limit = {
 					NOT = {
 						is_core_of = ROOT
-						compliance < 40
 					}
 				}
 				add_resistance = 30
@@ -155,6 +173,9 @@ country_event = {
 
 	trigger = {
 		has_global_flag = random_events_bad_enabled
+		any_state = {
+			has_active_resistance = yes
+		}
 	}
 
 	immediate = {
@@ -163,7 +184,6 @@ country_event = {
 				limit = {
 					NOT = {
 						is_core_of = ROOT
-						resistance > 10
 					}
 				}
 				damage_building = {
@@ -189,7 +209,6 @@ country_event = {
 				limit = {
 					NOT = {
 						is_core_of = ROOT
-						resistance > 10
 					}
 				}
 				damage_building = {
@@ -204,6 +223,69 @@ country_event = {
 						type = industrial_complex
 						damage = 2
 					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { ## Fire !
+	id = random_event_bad.7
+	title = random_event_bad.7.t
+	desc = random_event_bad.7.d
+	picture = "GFX_event (44)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_state = {
+				damage_building = {
+					type = industrial_complex
+					damage = 0.75
+				}
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.7.a
+		effect_tooltip = {
+			random_owned_state = {
+				damage_building = {
+					type = industrial_complex
+					damage = 0.75
+				}
+			}
+		}
+	}
+}
+
+country_event = { ## Fire, Son !
+	id = random_event_bad.8
+	title = random_event_bad.8.t
+	desc = random_event_bad.8.d
+	picture = "GFX_event (44)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		has_built = {
+			type = fuel_silo
+			value > 0
+		}
+	}
+
+	option = {
+		name = random_event_bad.8.a
+		effect_tooltip = {
+			random_owned_state = {
+				damage_building = {
+					type = fuel_silo
+					damage = 0.85
 				}
 			}
 		}

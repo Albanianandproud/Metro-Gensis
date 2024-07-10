@@ -1,0 +1,331 @@
+add_namespace = random_event_military
+
+country_event = { ## Fight ## 
+	id = random_event_military.1
+	title = random_event_military.1.t
+	desc = random_event_military.1.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { has_war = no is_acting_major = no }
+
+	immediate = {
+		random_unit_leader = { set_character_flag = random_event_fighting_flag }
+	}
+
+	option = {
+		name = random_event_military.1.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_fighting_flag }
+			gain_xp = 500
+			add_timed_unit_leader_trait = {
+				trait = wounded
+				days = 90
+			}
+			clr_character_flag = random_event_fighting_flag
+		}
+	}
+}
+
+country_event = { ## Leader Better skills ## 
+	id = random_event_military.2
+	title = random_event_military.2.t
+	desc = random_event_military.2.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { has_war = no is_acting_major = no any_unit_leader = { skill < 6 } }
+
+	immediate = {
+		random_unit_leader = { set_character_flag = random_event_genius_flag }
+	}
+
+	option = {
+		name = random_event_military.2.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_genius_flag }
+			random_list = {
+				25 = { add_defense = 1 }
+				25 = { add_planning = 1 }
+				25 = { add_logistics = 1 }
+				25 = { add_attack = 1 }
+			}
+			clr_character_flag = random_event_genius_flag
+		}
+	}
+}
+
+country_event = { ## Leader remove Paranoid Trait
+	id = random_event_military.3
+	title = random_event_military.3.t
+	desc = random_event_military.3.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { any_unit_leader = { has_trait = paranoid_personality_trait } }
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { has_trait = paranoid_personality_trait } 
+			set_character_flag = random_event_remove_paranoid_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.3.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_remove_paranoid_flag }
+			remove_trait = { trait = paranoid_personality_trait }
+			clr_character_flag = random_event_remove_paranoid_flag
+		}
+	}
+}
+
+country_event = { ## Leader remove Fainthearted Trait ## 
+	id = random_event_military.4
+	title = random_event_military.4.t
+	desc = random_event_military.4.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { any_unit_leader = { has_trait = fainthearted_personality_trait } }
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { has_trait = fainthearted_personality_trait } 
+			set_character_flag = random_event_remove_fainthearted_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.4.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_remove_fainthearted_flag }
+			remove_trait = { trait = fainthearted_personality_trait }
+			clr_character_flag = random_event_remove_fainthearted_flag
+		}
+	}
+}
+
+country_event = { ## Leader remove Irrational Trait ## 
+	id = random_event_military.5
+	title = random_event_military.5.t
+	desc = random_event_military.5.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { any_unit_leader = { has_trait = irrational_personality_trait } }
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { has_trait = irrational_personality_trait } 
+			set_character_flag = random_event_remove_fainthearted_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.5.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_remove_irrational_flag }
+			remove_trait = { trait =  irrational_personality_trait }
+			clr_character_flag = random_event_remove_irrational_flag
+		}
+	}
+}
+
+
+country_event = { ## Leader add Paranoid Trait ## 
+	id = random_event_military.6
+	title = random_event_military.6.t
+	desc = random_event_military.6.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { any_unit_leader = { NOT = { has_trait = paranoid_personality_trait has_trait = fearless_personality_trait } } }
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = paranoid_personality_trait has_trait = fearless_personality_trait } 
+			}
+			set_character_flag = random_event_add_paranoid_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.6.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_paranoid_flag }
+			add_trait = { trait =  paranoid_personality_trait }
+			clr_character_flag = random_event_add_paranoid_flag
+		}
+	}
+}
+
+country_event = { ## Leader add Fainthearted Trait ## 
+	id = random_event_military.7
+	title = random_event_military.7.t
+	desc = random_event_military.7.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { 
+		any_unit_leader = { 
+			NOT = { has_trait = fainthearted_personality_trait has_trait = brave_personality_trait } 
+		} 
+	}
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = fainthearted_personality_trait has_trait = brave_personality_trait } 
+			}
+			set_character_flag = random_event_add_fainthearted_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.7.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_fainthearted_flag }
+			add_trait = { trait =  fainthearted_personality_trait }
+			clr_character_flag = random_event_add_fainthearted_flag
+		}
+	}
+}
+
+country_event = { ## Leader add Irrational Trait ## 
+	id = random_event_military.8
+	title = random_event_military.8.t
+	desc = random_event_military.8.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { 
+		any_unit_leader = { 
+			NOT = { has_trait = irrational_personality_trait } 
+		} 
+	}
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = irrational_personality_trait } 
+			}
+			set_character_flag = random_event_add_irrational_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.7.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_irrational_flag }
+			add_trait = { trait = irrational_personality_trait }
+			clr_character_flag = random_event_add_irrational_flag
+		}
+	}
+}
+
+country_event = { ## Stupid Idiot gets hurt
+	id = random_event_military.10
+	title = random_event_military.10.t
+	desc = random_event_military.10.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { has_war = no is_acting_major = no }
+
+	immediate = {
+		random_unit_leader = { set_character_flag = random_event_injury_flag }
+	}
+
+	option = {
+		name = random_event_military.10.a
+		add_political_power = -10
+		army_experience = 5
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_injury_flag }
+			add_timed_unit_leader_trait = {
+				trait = wounded
+				days = 90
+			}
+			clr_character_flag = random_event_injury_flag
+		}
+	}
+}
+
+
+
+### Bandit Leader Events ### 
+
+add_namespace = random_event_military_bandit
+
+country_event = { ## bullet stunt ## 
+	id = random_event_military_bandit.1
+	title = random_event_military_bandit.1.t
+	desc = random_event_military_bandit.1.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { has_war = no has_country_flag = is_bandit_nation }
+
+	immediate = {
+		random_unit_leader = { set_character_flag = random_event_bandit_stunt }
+	}
+
+	option = {
+		name = random_event_military_bandit.1.a
+		hidden_effect = {
+			random_list = {
+				50 = { ROOT = { country_event = { id = random_event_military_bandit.2 random_hours = 3 } } }
+				50 = { ROOT = { country_event = { id = random_event_military_bandit.3 random_hours = 3 } } }
+			}	
+		}
+	}
+}
+
+country_event = { ## bullet stunt succeed ## 
+	id = random_event_military_bandit.2
+	title = random_event_military_bandit.2.t
+	desc = random_event_military_bandit.2.d
+	picture = "GFX_event (15)"
+	is_triggered_only = yes
+
+	option = {
+		name = random_event_military_bandit.2.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_bandit_stunt }
+			gain_xp = 650
+			clr_character_flag = random_event_bandit_stunt
+		}
+	}
+}
+
+country_event = { ## bullet stunt fails ## 
+	id = random_event_military_bandit.3
+	title = random_event_military_bandit.3.t
+	desc = random_event_military_bandit.3.d
+	picture = "GFX_event (15)"
+	is_triggered_only = yes
+
+	option = {
+		name = random_event_military_bandit.3.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_bandit_stunt }
+			clr_character_flag = random_event_bandit_stunt
+		}
+		add_manpower = -1
+		add_war_support = -0.05
+		add_command_power = -20
+	}
+}

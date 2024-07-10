@@ -1,4 +1,6 @@
 add_namespace = nf_SPT
+add_namespace = nf_SPT_FLAVOR
+add_namespace = nf_TSH
 
 country_event = {
     id = nf_SPT.1
@@ -17,7 +19,7 @@ country_event = {
 		hidden_effect = {
 			set_country_flag = SPT_enable_scavenging
 		}
-		custom_effect_tooltip = SPT_salvaging_duties_tt
+		custom_effect_tooltip = SPT_salvaging_duties
 		ai_chance = {
 			base = 50
 		}
@@ -83,6 +85,916 @@ country_event = {
 			type = special_forces_equipment
 			amount = 5
 		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT.3
+    title = nf_SPT.3.t
+    desc = nf_SPT.3.d
+    picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT.3.a
+		set_country_flag = SPT_help_tushinskaya_flag
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = {
+    id = nf_SPT.4
+    title = nf_SPT.4.t
+    desc = nf_SPT.4.d
+    picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT.4.a
+		246 = {
+			transfer_state_to = TSH
+			add_core_of = TSH
+		}
+		141 = {
+			transfer_state_to = TSH
+			add_core_of = TSH
+		}
+		142 = {
+			transfer_state_to = TSH
+			add_core_of = TSH
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT.5
+    title = nf_SPT.5.t
+    desc = nf_SPT.5.d
+    picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT.5.a
+		division_template = {
+			name = "Pervomayskaya Veterans"
+			priority = 1
+			is_locked = yes
+			regiments = {
+				regulars = { x = 0 y = 0 }
+				regulars = { x = 0 y = 1 }
+				regulars = { x = 0 y = 2 }
+				regulars = { x = 0 y = 3 }
+				special_forces = { x = 0 y = 4 }
+			}
+			support = {
+				field_hospital = { x = 0 y = 0 }
+				gatling_support = { x = 0 y = 1 }
+			}
+		}
+		390 = {
+			create_unit = {
+				division = "name = \"1st 'Mayday' Ranger Detachment\" division_template = \"Pervomayskaya Veterans\" start_experience_factor = 0.8 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+		390 = {
+			create_unit = {
+				division = "name = \"2nd 'OMON's Finest' Ranger Detachment\" division_template = \"Pervomayskaya Veterans\" start_experience_factor = 0.8 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}		
+	}
+}
+
+country_event = {	## losing the pagan war
+	id = nf_SPT.6
+	title = nf_SPT.6.t
+	desc = nf_SPT.6.d
+	picture = "GFX_event (87)"
+
+	trigger = {
+		PAG = {
+			controls_state = 294
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.6.a
+		white_peace = PAG
+		PLS = {
+			white_peace = PAG
+		}
+		294 = {
+			add_core_of = PAG
+			transfer_state_to = PAG
+		}
+		140 = {
+			add_core_of = PAG
+			transfer_state_to = PAG
+		}
+		246 = {
+			add_core_of = PAG
+			transfer_state_to = PAG
+		}
+		142 = {
+			add_core_of = PAG
+			transfer_state_to = PAG
+		}
+		add_stability = -0.1
+		add_war_support = -0.1
+		delete_unit_template_and_units = {
+			division_template = "Spartan Ranger Detachment"
+			disband = no
+		}
+	}
+}
+
+country_event = {	## mutants attacking mayday
+	id = nf_SPT.7
+	title = nf_SPT.7.t
+	desc = nf_SPT.7.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.7.a
+		set_country_flag = SPT_mutants_attack_MDR
+		add_war_support = 0.05
+		hidden_effect = {
+			MUT = {
+				country_event = {
+					id = nf_SPT.8
+					days = 1
+				}
+				add_ideas = war_of_attrition
+			}
+			MDR = {
+				add_stability = -0.1
+				add_war_support = 0.05
+				add_ideas = war_of_attrition
+			}
+			22 = {
+				transfer_state_to = MUT
+				add_core_of = MUT
+			}
+			283 = {
+				transfer_state_to = MUT
+				add_core_of = MUT
+			}	
+		}
+		MUT = {
+			declare_war_on = {
+				target = MDR
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = {	## mutant divs spawning
+	id = nf_SPT.8
+	title = nf_SPT.8.t
+	desc = nf_SPT.8.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.8.a
+		hidden_effect = {
+			division_template = {
+				name = "Mutants"
+				priority = 1
+				is_locked = no
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					regulars = { x = 1 y = 0 }
+					regulars = { x = 1 y = 1 }
+				}
+			}
+			283 = {
+				create_unit = {
+					division = "name = \"Mutant Horde\" division_template = \"Mutants\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Mutant Horde\" division_template = \"Mutants\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Mutant Horde\" division_template = \"Mutants\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Mutant Horde\" division_template = \"Mutants\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## losing the mayday war
+	id = nf_SPT.9
+	title = nf_SPT.9.t
+	desc = nf_SPT.9.d
+	picture = "GFX_event (87)"
+
+	trigger = {
+		MUT = {
+			controls_state = 354
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.9.a
+		white_peace = MUT
+		PLS = {
+			white_peace = MUT
+		}
+		354 = {
+			add_core_of = MUT
+			transfer_state_to = MUT
+		}
+		23 = {
+			add_core_of = MUT
+			transfer_state_to = MUT
+		}
+		325 = {
+			add_core_of = MUT
+			transfer_state_to = MUT
+		}
+		142 = {
+			add_core_of = MUT
+			transfer_state_to = MUT
+		}
+		add_stability = -0.1
+		add_war_support = -0.1
+		delete_unit_template_and_units = {
+			division_template = "Spartan Ranger Detachment"
+			disband = no
+		}
+	}
+}
+
+country_event = {	## 2031 charter
+	id = nf_SPT.10
+	title = nf_SPT.10.t
+	desc = nf_SPT.10.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.10.a
+		add_political_power = 100
+	}
+}
+
+country_event = {	## bar argument
+	id = nf_SPT.11
+	title = nf_SPT.11.t
+	desc = nf_SPT.11.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.11.a
+		set_capital = { state = 261 }
+		261 = {
+			add_manpower = 200
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_stability = -0.05
+		add_ideas = {
+			SPT_hunters_growing_influence
+		}
+	}
+	option = {
+		name = nf_SPT.11.b
+		add_stability = 0.05
+	}
+}
+
+country_event = {	## arbat road treaty
+	id = nf_SPT.12
+	title = nf_SPT.12.t
+	desc = nf_SPT.12.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.12.a
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.13
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+            base = 5
+        }
+	}
+	option = {
+		name = nf_SPT.12.b
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.14
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+            base = 1
+        }
+	}
+}
+
+country_event = {	## arbat road treaty accepted
+	id = nf_SPT.13
+	title = nf_SPT.13.t
+	desc = nf_SPT.13.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.13.a
+		set_country_flag = SPT_arbat_accepted
+		add_opinion_modifier = { target = ARB modifier = PLS_support }
+		ARB = { add_opinion_modifier = { target = SPT modifier = PLS_support } }
+		390 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		171 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		421 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = {	## arbat road treaty denied
+	id = nf_SPT.14
+	title = nf_SPT.14.t
+	desc = nf_SPT.14.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.14.a
+		add_opinion_modifier = {
+			target = ARB
+			modifier = small_decrease
+		}
+	}
+}
+
+country_event = {	## who will win the election thingy setup
+	id = nf_SPT.15
+	title = nf_SPT.15.t
+	desc = nf_SPT.15.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.15.a
+		if = {
+            limit = {    	
+                council > party_popularity@dictatorial
+            }
+            SPT = { country_event = nf_SPT.16 }
+        }
+        if = {
+            limit = {    	
+                dictatorial > party_popularity@council
+            }
+            SPT = { country_event = nf_SPT.17 }
+        }
+	}
+}
+
+country_event = {	## colonel miller wins
+	id = nf_SPT.16
+	title = nf_SPT.16.t
+	desc = nf_SPT.16.d
+	picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.16.a
+		hidden_effect = {
+			complete_national_focus = SPT_miller_leader
+		}
+	}
+}
+
+country_event = {	## hunter wins
+	id = nf_SPT.17
+	title = nf_SPT.17.t
+	desc = nf_SPT.17.d
+	picture = "GFX_event (45)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.17.a
+		set_politics = {
+			ruling_party = dictatorial
+		}
+		retire_character = SPT_miller
+		retire_character = SPT_anna
+		hidden_effect = {
+			complete_national_focus = SPT_hunter_leader
+		}
+	}
+}
+
+country_event = {	## attack the gwc
+	id = nf_SPT.18
+	title = nf_SPT.18.t
+	desc = nf_SPT.18.d
+	picture = "GFX_event (30)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.18.a
+		add_political_power = -10
+	}
+}
+
+country_event = {	## what to do with hunter?
+	id = nf_SPT.19
+	title = nf_SPT.19.t
+	desc = nf_SPT.19.d
+	picture = "GFX_event (45)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.19.a
+		add_stability = 0.05
+		ai_chance = {
+            base = 200.5
+        }
+	}
+	option = {
+		name = nf_SPT.19.b
+		add_stability = -0.1
+		add_war_support = -0.1
+		retire_character = SPT_hunter
+		ai_chance = {
+            base = 25.5
+        }
+	}
+	option = {
+		name = nf_SPT.19.c
+		add_stability = -0.15
+		add_war_support = -0.15
+		retire_character = SPT_hunter
+		add_timed_idea = {
+			idea = SPT_memories_of_hunter
+			days = 240
+		}
+		ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+country_event = {	## first contact mayday
+	id = nf_SPT.20
+	title = nf_SPT.20.t
+	desc = nf_SPT.20.d
+	picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.20.a # accept
+		SPT = {
+			set_country_flag = SPT_MDR_accepts
+		}
+		hidden_effect = {
+			SPT = { country_event = nf_SPT.21 }
+		}
+		ai_chance = {
+            base = 5
+        }
+	}
+	option = {
+		name = nf_SPT.20.a # deny
+		hidden_effect = {
+			SPT = { country_event = nf_SPT.22 }
+		}
+	}
+}
+
+country_event = {	## first contact mayday accepted
+	id = nf_SPT.21
+	title = nf_SPT.21.t
+	desc = nf_SPT.21.d
+	picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.21.a # accept
+		add_opinion_modifier = {
+			target = MDR
+			modifier = PLS_support
+		}
+		reverse_add_opinion_modifier = {
+			target = SPT
+			modifier = PLS_support
+		}
+	}
+}
+
+country_event = {	## first contact mayday denied
+	id = nf_SPT.22
+	title = nf_SPT.22.t
+	desc = nf_SPT.22.d
+	picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.22.a # deny
+		add_opinion_modifier = {
+			target = MDR
+			modifier = medium_decrease
+		}
+		reverse_add_opinion_modifier = {
+			target = SPT
+			modifier = medium_decrease
+		}
+	}
+}
+
+country_event = {	## look for d6
+	id = nf_SPT.23
+	title = nf_SPT.23.t
+	desc = nf_SPT.23.d
+	picture = "GFX_event (3)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.23.a 
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.24
+					days = 40
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## at the library
+	id = nf_SPT.24
+	title = nf_SPT.24.t
+	desc = nf_SPT.24.d
+	picture = "GFX_event (96)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.24.a 
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.25
+					days = 58
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## go to kievskaya
+	id = nf_SPT.25
+	title = nf_SPT.25.t
+	desc = nf_SPT.25.d
+	picture = "GFX_event (88)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.25.a 
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.26
+					days = 12
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## go to locate the inner entrance
+	id = nf_SPT.26
+	title = nf_SPT.26.t
+	desc = nf_SPT.26.d
+	picture = "GFX_event (88)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.26.a 
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT.27
+					days = 74
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## unlocks d6 gui
+	id = nf_SPT.27
+	title = nf_SPT.27.t
+	desc = nf_SPT.27.d
+	picture = "GFX_event (88)"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {
+		name = nf_SPT.27.a
+		custom_effect_tooltip = SPT_d6_unlock_tt
+		106 = {
+			add_core_of = SPT
+			transfer_state_to = SPT
+		}
+	}
+}
+
+
+########################
+#     FLAVOR TEXT      #
+########################
+
+country_event = {
+    id = nf_SPT_FLAVOR.1
+    title = nf_SPT_FLAVOR.1.t
+    desc = nf_SPT_FLAVOR.1.d
+    picture = "GFX_event (200)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT_FLAVOR.1.a
+		hidden_effect = {
+			SPT = {
+				country_event = {
+					id = nf_SPT_FLAVOR.2
+					days = 12
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT_FLAVOR.2
+    title = nf_SPT_FLAVOR.2.t
+    desc = nf_SPT_FLAVOR.2.d
+    picture = "GFX_event (45)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT_FLAVOR.2.a
+
+	}
+}
+
+country_event = {
+    id = nf_SPT_FLAVOR.3
+    title = nf_SPT_FLAVOR.3.t
+    desc = nf_SPT_FLAVOR.3.d
+    picture = "GFX_event (45)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT_FLAVOR.3.a
+		custom_effect_tooltip = SPT_hunter_influence_tt
+		hidden_effect = {
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.05
+			}
+			SPT = {
+				country_event = {
+					id = nf_SPT_FLAVOR.4
+					days = 48
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT_FLAVOR.4
+    title = nf_SPT_FLAVOR.4.t
+    desc = nf_SPT_FLAVOR.4.d
+    picture = "GFX_event (45)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT_FLAVOR.4.a
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.5
+			uses = 1
+			category = infantry_weapons
+		}
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 15
+			producer = RUS
+		}
+		custom_effect_tooltip = SPT_hunter_influence_tt
+		hidden_effect = {
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.05
+			}
+			SPT = {
+				country_event = {
+					id = nf_SPT_FLAVOR.5
+					days = 50
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+    id = nf_SPT_FLAVOR.5
+    title = nf_SPT_FLAVOR.5.t
+    desc = nf_SPT_FLAVOR.5.d
+    picture = "GFX_event (87)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_SPT_FLAVOR.5.a
+		add_war_support = 0.05
+		custom_effect_tooltip = SPT_colonel_influence_tt
+		hidden_effect = {
+			add_popularity = {
+				ideology = council
+				popularity = 0.05
+			}
+			SPT = {
+				country_event = {
+					id = nf_SPT_FLAVOR.5
+					days = 50
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+########################
+#       TUSHINO        #
+########################
+
+country_event = {
+    id = nf_TSH.1
+    title = nf_TSH.1.t
+    desc = nf_TSH.1.d
+    picture = "GFX_event (87)"
+
+	trigger = {
+		TSH = {
+			has_country_flag = TSH_pagan_rebellions
+		}
+		tag = TSH
+	}
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { 
+		name = nf_TSH.1.a
+		hidden_effect = {
+			TSH = {
+				country_event = {
+					id = nf_TSH.1
+					days = 50
+				}
+			}
+		}
+		add_stability = -0.05
+		add_war_support = -0.025
 		ai_chance = {
 			base = 50
 		}

@@ -11,6 +11,7 @@ SPT_spartans_hate_mutants = {
 			country_exists = MUT
 		}
 	}
+
 	ai_strategy = {
 		type = antagonize
 		id = "MUT"
@@ -27,42 +28,130 @@ SPT_be_friendly_with_polis = {
 	abort = {
 		NOT = { country_exists = PLS }
 	}
+
 	ai_strategy = {
 		type = befriend
-		id = PLS
-		value = 100
+		id = "PLS"
+		value = 250
+	}
+	ai_strategy = {
+		type = protect
+		id = "PLS"
+		value = 250
 	}
 	ai_strategy = {
 		type = alliance
-		id = PLS
-		value = 100
-	}
-	ai_strategy = {
-		type = support
-		id = PLS
-		value = 100
-	}
-	ai_strategy = {
-		type = send_lend_lease_desire
-		id = PLS
-		value = 100
+		id = "PLS"
+		value = 250
 	}
 }
-SPT_send_volunteers = {
+MDR_be_friendly_with_sparta = {
+    allowed = {
+        original_tag = MDR
+    }
+    enable = {
+        focus_progress = {
+			focus = SPT_the_mayday_gamble
+			progress > 0.01
+		}
+    }
+    abort = {
+		NOT = { country_exists = MDR }
+	}
+    abort_when_not_enabled = yes
+    ai_strategy = {
+		type = befriend
+		id = "PLS"
+		value = 250
+	}
+	ai_strategy = {
+		type = alliance
+		id = "PLS"
+		value = 250
+	}
+	ai_strategy = {
+		type = befriend
+		id = "SPT"
+		value = 250
+	}
+	ai_strategy = {
+		type = alliance
+		id = "SPT"
+		value = 250
+	}
+}
+SPT_help_out_polis_a_little = {
 	allowed = {
 		original_tag = SPT
 	}
 	enable = {
-		threat > 0.02
+		country_exists = PLS
 	}
 	abort = {
-		SPT = { exists = no }
+		NOT = { country_exists = PLS }
+	}
+
+	ai_strategy = {
+		type = support
+		id = "PLS"
+		value = 100
+	}
+}
+SPT_send_volunteers = {
+	enable = {
+		NOT = {
+			OR = {
+				original_tag = SPT
+				tag = RCH
+				tag = GWC
+				tag = RED
+			}
+		}
+	}
+	abort = {
+		has_global_Flag = thisflagwillneverend
 	}
 	reversed = yes
 
 	ai_strategy = {
 		type = send_volunteers_desire
-		id = SPT
+		id = "SPT"
 		value = 900
+	}
+}
+SPT_volunteers_mdr = {
+	allowed = {
+		original_tag = SPT
+	}
+	enable = {
+		country_exists = MDR
+	}
+
+	abort = {
+		has_global_flag = mdrwarover
+	}
+
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = "MDR"
+		value = 800
+	}
+}
+SPT_volunteers_yas = {
+	allowed = {
+		original_tag = SPT
+	}
+	enable = {
+		country_exists = YAS
+	}
+
+	abort = {
+		has_global_flag = yaswarover
+	}
+
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = "YAS"
+		value = 800
 	}
 }

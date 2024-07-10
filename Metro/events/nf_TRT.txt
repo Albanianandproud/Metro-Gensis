@@ -51,7 +51,7 @@ country_event = {
 		name = nf_TRT.3.a
         add_political_power = 50
         ### Prelude to flooding mechanic
-        hidden_effect = { country_event = { id = nf_TRT.4 days = 40 random_days = 40 } }
+        hidden_effect = { country_event = { id = nf_TRT.4 days = 40 } }
 	}
 }
 
@@ -454,6 +454,18 @@ country_event = {   ## KTG
             target = KTG
             modifier = TRT_blood_brothers 
         }
+        KTG = {
+            add_equipment_to_stockpile = {
+                type = conventional_infantry_equipment_3
+                amount = 15
+                producer = RUS
+            }
+        }
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_3
+            amount = 15
+            producer = RUS
+        }
 	}
 
     option = {
@@ -465,6 +477,18 @@ country_event = {   ## KTG
         reverse_add_opinion_modifier = {
             target = KTG
             modifier = TRT_partners_in_crime
+        }
+        KTG = {
+            add_equipment_to_stockpile = {
+                type = conventional_infantry_equipment_2
+                amount = 25
+                producer = RUS
+            }
+        }
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_2
+            amount = 25
+            producer = RUS
         }
 	}
 }
@@ -492,6 +516,18 @@ country_event = {   ## MOB
             target = MOB
             modifier = TRT_blood_brothers 
         }
+        MOB = {
+            add_equipment_to_stockpile = {
+                type = conventional_infantry_equipment_3
+                amount = 15
+                producer = RUS
+            }
+        }
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_3
+            amount = 15
+            producer = RUS
+        }
 	}
 
     option = {
@@ -503,6 +539,18 @@ country_event = {   ## MOB
         reverse_add_opinion_modifier = {
             target = MOB
             modifier = TRT_partners_in_crime
+        }
+        MOB = {
+            add_equipment_to_stockpile = {
+                type = conventional_infantry_equipment_2
+                amount = 25
+                producer = RUS
+            }
+        }
+        add_equipment_to_stockpile = {
+            type = conventional_infantry_equipment_2
+            amount = 25
+            producer = RUS
         }
 	}
 }
@@ -517,7 +565,7 @@ country_event = {   ## Silo event
 
     option = {
 		name = nf_TRT.15.a
-        add_offsite_building = { type = industry_complex level = 5 }
+        add_offsite_building = { type = industrial_complex level = 5 }
         add_research_slot = 1
 	}
 
@@ -613,13 +661,19 @@ country_event = { ## Borderwar Victory
         trigger = {
             tag = RED
         }
-        text = TRT_borderwar_RED_defeat
+        text = TRT_borderwar_RED_WIN
+    }
+    desc = {
+        trigger = {
+            tag = HNZ
+        }
+        text = TRT_borderwar_HNZ_WIN
     }
     desc = {
         trigger = {
             tag = TRT
         }
-        text = TRT_borderwar_TRT_defeat
+        text = TRT_borderwar_TRT_WIN
     }
     picture = "GFX_event (129)"
 
@@ -645,6 +699,12 @@ country_event = { ## Borderwar Defeat
             tag = RED
         }
         text = TRT_borderwar_RED_defeat
+    }
+    desc = {
+        trigger = {
+            tag = HNZ
+        }
+        text = TRT_borderwar_HNZ_defeat
     }
     desc = {
         trigger = {
@@ -705,6 +765,34 @@ country_event = {
 
     option = {
 		name = nf_TRT.22.b
+        add_political_power = -150
+        add_war_support = -0.1
+	}
+}
+
+country_event = { 
+    id = nf_TRT.23
+    title = nf_TRT.23.t
+    desc = nf_TRT.23.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    trigger = {
+        TRT_operation_fuck_communism_begun = yes
+    }
+
+	option = { 
+		name = nf_TRT.23.a
+        declare_war_on = {
+            target = RED
+            type = annex_everything
+        }
+        add_war_support = 0.1
+	}
+
+    option = {
+		name = nf_TRT.23.b
         add_political_power = -150
         add_war_support = -0.1
 	}

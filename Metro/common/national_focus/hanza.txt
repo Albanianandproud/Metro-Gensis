@@ -1974,6 +1974,13 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_ULI_1
 		}
+		available = {
+			ULI = { 
+				exists = yes 
+				is_puppet = no 
+				is_in_faction = no
+			}
+		}
 		mutually_exclusive = { focus = HNZ_ULI_2 }
 		x = -1
 		y = 1
@@ -2058,6 +2065,13 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_PVL_1
 		}
+		available = {
+			PVL = { 
+				exists = yes 
+				is_puppet = no 
+				is_in_faction = no
+			}
+		}
 		x = -1
 		y = 1
 		relative_position_id = HNZ_PVL_1
@@ -2105,6 +2119,7 @@ focus_tree = {
 		}
 		available = {
 			BRN = {
+				exists = yes 
 				NOT = { 
 					has_government = dictatorial 
 					is_puppet = yes
@@ -2146,6 +2161,12 @@ focus_tree = {
 		icon = GFX_HNZ_BRN_2
 		prerequisite = {
 			focus = HNZ_BRN_1
+		}
+		available = {
+			BRN = {
+				exists = yes 
+				is_puppet_of = HNZ
+			}
 		}
 		x = 1
 		y = 1
@@ -2594,11 +2615,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 2
-				uses = 1
-				category = refinery
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
 			}
 		}
 	}
@@ -3582,20 +3602,22 @@ focus_tree = {
 			if = {
 				limit = {
 					NOT = {
-						has_tech = rail_automobile_salvaging
+						OR = {
+							has_tech = rail_salvaging_2030
+							has_tech = rail_salvaging_2020
+						}
 					}
 				}
 				add_tech_bonus = {
-					name = infantry_bonus
-					bonus = 0.33
+					bonus = 0.5
 					uses = 2
-					category = armor
+					category = rail_salvaging
 				}
 			}
 			else_if = {
 				set_technology = {
-   					rail_automobile_salvaging = 1
-   					rail_military_vehicle_salvaging = 1
+					rail_salvaging_2030 = 1
+					rail_salvaging_2020 = 1
 				}
 			}
 		}

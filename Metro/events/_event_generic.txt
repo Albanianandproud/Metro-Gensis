@@ -68,13 +68,13 @@ country_event = {
 		name = random_event_glitters.01.a
 		random_list = {
 		    20 = { ## Mutant Attack
-		        ROOT = { country_event = random_event_glitters.02 }
+		        ROOT = { country_event = { id = random_event_glitters.02 random_hours = 3 } }
 		    }
 		    40 = { ## Nothing of Value
-		        ROOT = { country_event = random_event_glitters.03}
+		        ROOT = { country_event = { id = random_event_glitters.03 random_hours = 3 } }
 		    }
 		    40 = { ## Found Something
-		        ROOT = { country_event = random_event_glitters.04 }
+		        ROOT = { country_event = { id = random_event_glitters.04 random_hours = 3 } }
 		    }
 		}
 	}
@@ -498,3 +498,336 @@ country_event = {
 	}
 }
 
+add_namespace = random_event_war
+
+country_event = { 
+	id = random_event_war.1
+	title = random_event_war.1.t
+	desc = random_event_war.1.d
+	picture = "GFX_event (114)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		NOT = {
+			has_country_flag = is_savage_nation
+		}
+		has_war = yes
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.1.a
+		add_war_support = 0.05
+		add_manpower = 10
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+
+	option = {
+		name = random_event_war.1.b
+		add_stability = -0.05
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = 0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.05 } }
+	}
+
+	option = {
+		name = random_event_war.1.c
+		add_political_power = -25
+	}
+}
+
+country_event = { 
+	id = random_event_war.2
+	title = random_event_war.2.t
+	desc = random_event_war.2.d
+	picture = "GFX_event (129)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		NOT = {
+			has_country_flag = is_savage_nation
+		}
+		has_war = yes
+		OR = {
+			has_war_support < 0.5
+			has_stability < 0.5
+		}
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.2.a
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+		add_ideas = metro_war_rationing
+	}
+
+	option = {
+		name = random_event_war.2.b
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = 0.025 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.025 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.025 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.025 } }
+	}
+}
+
+country_event = { 
+	id = random_event_war.3
+	title = random_event_war.3.t
+	desc = random_event_war.3.d
+	picture = "GFX_event (151)"
+
+	mean_time_to_happen = { days = 360 }
+	trigger = {
+		has_idea = metro_war_rationing
+		has_war = yes
+		OR = {
+			has_war_support < 0.36
+			has_stability < 0.36
+		}
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.3.a
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+
+	option = {
+		name = random_event_war.3.c
+		remove_ideas = metro_war_rationing
+		add_stability = 0.03
+		add_war_support = 0.03
+	}
+}
+
+country_event = { 
+	id = random_event_war.4
+	title = random_event_war.4.t
+	desc = random_event_war.4.d
+	picture = "GFX_event (42)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_war = yes
+		has_war_support < 0.36
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.4.a
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = random_event_war.4.b
+		add_political_power = -35
+	}
+}
+
+country_event = { 
+	id = random_event_war.5
+	title = random_event_war.5.t
+	desc = random_event_war.5.d
+	picture = "GFX_event (115)"
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_war = yes
+		has_war_support < 0.36
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_war.5.a
+		add_war_support = 0.05
+	}
+
+	option = {
+		name = random_event_war.5.b
+		add_political_power = 35
+	}
+}
+
+###
+
+add_namespace = random_event_victory
+
+country_event = { 
+	id = random_event_victory.1
+	title = random_event_victory.1.t
+	desc = random_event_victory.1.d
+	picture = "GFX_event (65)"
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = random_event_victory.1.a
+		trigger = {
+			original_tag = RED
+			original_tag = RCH
+			NOT = {
+				has_government = community
+			}
+		}
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.025 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.025 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.025 } }
+		add_political_power = 50
+	}
+
+	option = {
+		name = random_event_victory.1.b
+		trigger = {
+			NOT = {
+				original_tag = RED
+				original_tag = RCH
+			}
+		}
+		add_political_power = 50
+	}
+}
+
+### 
+
+add_namespace = random_event_detained
+
+country_event = {
+	id = random_event_detained.1
+	title = random_event_detained.1.t
+	desc = random_event_detained.1.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	mean_time_to_happen = { days = 1950 }
+	trigger = {
+		has_war = no
+	}
+
+	option = {
+		name = random_event_detained.1.a
+		add_political_power = -30
+		add_stability = -0.05
+	}
+	option = {
+		name = random_event_detained.1.b
+		custom_effect_tooltip = random_event_detained.1.b_tt
+		random_other_country = {
+			limit = {
+				NOT = {
+					has_country_flag = is_bandit_nation
+					has_country_flag = is_savage_nation
+					has_country_flag = is_skaven_nation
+					has_country_flag = is_mutant_nation
+					original_tag = MSU
+					has_idea = civics_border_4
+				}
+			}
+			random_list = {
+				34 = {
+					add_opinion_modifier = { 
+						target = ROOT
+						modifier =  disgruntled_diplomats_1
+					}
+				}
+				33 = {
+					add_opinion_modifier = { 
+						target = ROOT
+						modifier =  disgruntled_diplomats_2
+					}
+				}
+				33 = {
+					add_opinion_modifier = { 
+						target = ROOT
+						modifier =  disgruntled_diplomats_3
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+### Base HOI4 ###
+
+add_namespace = generic
+
+# Notification event that leader has gotten sick
+unit_leader_event = {
+	id = generic.17
+	title = generic.17.t
+	desc = generic.17.d
+	
+	picture = GFX_report_event_military_planning
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				set_unit_leader_flag = {
+					flag = recently_sick
+					value = 1
+					days = 200
+				}
+			}
+		}
+	}
+
+	option = {
+		name = unfortunate
+		effect_tooltip = {
+			FROM = {
+				add_timed_unit_leader_trait = {
+					trait = sick
+					days = 45
+				}
+			}
+		}
+	}	
+}
+
+# Notification event that leader has been wounded
+country_event = {
+	id = generic.18
+	title = generic.18.t
+	desc = generic.18.d
+	
+	picture = GFX_report_event_military_planning
+
+	is_triggered_only = yes
+
+	option = {
+		name = unfortunate
+		effect_tooltip = {
+			FROM = {
+				add_timed_unit_leader_trait = {
+					trait = wounded
+					days = 90
+				}
+			}
+		}
+	}	
+}

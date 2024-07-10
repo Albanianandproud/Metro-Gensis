@@ -882,9 +882,9 @@ RED_generic_decision_category = {
    			}
 		}
 
-		cost = 10
-		days_remove = 7
-		days_re_enable = 180
+		cost = RED_lobby_politburo_cost
+		days_remove = 10
+		days_re_enable = 200
 
 		visible = {
 			NOT = {
@@ -895,6 +895,13 @@ RED_generic_decision_category = {
 		available = {
 			NOT = {
 				has_completed_focus = RED_lenins_descendant
+			}
+		}
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_lobby_politburo_cost
+				value = 10
 			}
 		}
 
@@ -927,9 +934,9 @@ RED_generic_decision_category = {
    			}
 		}
 
-		cost = 60
-		days_remove = 30
-		days_re_enable = 360
+		cost = RED_lobby_politburo_cost
+		days_remove = 14
+		days_re_enable = 200
 
 		visible = {
 			has_completed_focus = RED_lenins_descendant
@@ -937,6 +944,13 @@ RED_generic_decision_category = {
 
 		available = {
 			has_completed_focus = RED_lenins_descendant
+		}
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_lobby_politburo_cost
+				value = 10
+			}
 		}
 
 		modifier = {
@@ -966,10 +980,14 @@ RED_generic_decision_category = {
 					has_country_flag = RED_mushroom_revolts
    				}
    			}
+			OR = {
+				has_idea = RED_planned_economy
+				num_of_civilian_factories < 45
+			}
 		}
 
-		cost = 60
-		days_remove = 49
+		cost = RED_economic_rejuvination_cost
+		days_remove = 50
 		days_re_enable = 360
 
 		available = {
@@ -980,8 +998,17 @@ RED_generic_decision_category = {
 
 		modifier = {
 			industrial_capacity_factory = -0.15
-			consumer_goods_factor = -0.08
+			production_speed_arms_factory_factor = -0.15 
+			consumer_goods_expected_value = -0.1
+			conversion_cost_mil_to_civ_factor = -0.2
         }
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_economic_rejuvination_cost
+				value = 35
+			}
+		}
 
 		ai_will_do = {
 			base = 2.5
@@ -1009,11 +1036,12 @@ RED_generic_decision_category = {
 					has_country_flag = RED_mushroom_revolts
    				}
    			}
+			has_war = no
 		}
 
-		cost = 60
-		days_remove = 56
-		days_re_enable = 150
+		cost = RED_idolize_cult_cost
+		days_remove = 50
+		days_re_enable = 300
 
 		visible = {
 			NOT = {
@@ -1028,9 +1056,18 @@ RED_generic_decision_category = {
 		}
 
 		modifier = {
+			political_power_factor = -0.1
+			party_popularity_stability_factor = 0.1
 			stability_weekly = 0.005
 			war_support_weekly = 0.005
         }
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_idolize_cult_cost
+				value = 25
+			}
+		}
 
 		ai_will_do = {
 			base = 2.5
@@ -1060,9 +1097,9 @@ RED_generic_decision_category = {
    			}
 		}
 
-		cost = 60
-		days_remove = 54
-		days_re_enable = 150
+		cost = RED_idolize_cult_cost
+		days_remove = 50
+		days_re_enable = 300
 
 		visible = {
 			has_completed_focus = RED_preach_the_word_of_lenin
@@ -1073,10 +1110,17 @@ RED_generic_decision_category = {
 		}
 
 		modifier = {
-			political_power_factor = 0.1
-			stability_weekly = 0.005
-			war_support_weekly = 0.005
+			party_popularity_stability_factor = 0.1
+			stability_weekly = 0.003
+			war_support_weekly = 0.003
         }
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_idolize_cult_cost
+				value = 25
+			}
+		}
 
 		ai_will_do = {
 			base = 2.5
@@ -1093,6 +1137,13 @@ RED_generic_decision_category = {
 		icon = rebates
 
 		available = {
+			has_war = no
+			NOT = {
+				OR = {
+					has_idea = RED_civics_support_army_pilfering
+					has_idea = RED_civics_support_requesition_share
+				}
+			}
 			custom_trigger_tooltip = {
 				tooltip = RED_not_in_crisis_tt 
    				NOT = {
@@ -1106,14 +1157,24 @@ RED_generic_decision_category = {
    			}
 		}
 
-		cost = 60
-		days_remove = 45
+		cost = RED_grain_rebates_cost
+		days_remove = 60
 		days_re_enable = 360
 
 		modifier = {
-			stability_weekly = 0.003
-			production_speed_industrial_complex_factor = 0.2 
+			party_popularity_stability_factor = 0.1
+			stability_weekly = 0.002
+			consumer_goods_expected_value = 0.1
+			production_speed_industrial_complex_factor = 0.1
+			production_speed_salvage_hub_factor = 0.1 
         }
+
+		complete_effect = {
+			add_to_variable = {
+				var = RED_grain_rebates_cost
+				value = 25
+			}
+		}
 
 		ai_will_do = {
 			base = 5
@@ -1177,240 +1238,6 @@ RED_generic_decision_category = {
 					instant_build = yes
 				}
 			}
-		}
-	}
-}
-
-RED_rebuilding_the_line_category = {
-	RED_rebuild_line_264 = {
-
-		available = {
-			264 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			264 = {	
-				set_state_name = "RED_264"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_rebuild_line_329 = {
-
-		available = {
-			329 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			329 = {	
-				set_state_name = "RED_329"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_rebuild_line_245 = {
-
-		available = {
-			245 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			245 = {	
-				set_state_name = "RED_245"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_rebuild_line_330 = {
-
-		available = {
-			330 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			330 = {	
-				set_state_name = "RED_330"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_rebuild_line_362 = {
-
-		available = {
-			362 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			362 = {	
-				set_state_name = "RED_362"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_rebuild_line_250 = {
-
-		available = {
-			250 = {
-                is_owned_by = ROOT
-			}
-		}
-
-		visible = {
-			has_completed_focus = RED_development_of_the_red_line
-		}
-
-		cost = 10
-		days_remove = 14
-		fire_only_once = yes
-
-		remove_effect = {
-			add_stability = 0.02
-			250 = {	
-				set_state_name = "RED_250"
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 5
-		}
-	}
-
-	RED_hunt_for_lenin_tomb = {
-
-		icon = politburo
-
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = RED_not_in_crisis_tt 
-   				NOT = {
-					has_idea = RED_mushroom_revolt
-					has_idea = RED_military_mutinies 
-					has_idea = RED_military_mutinies_2
-					has_idea = RED_military_mutinies_3
-					has_country_flag = RED_military_mutinies
-					has_country_flag = RED_mushroom_revolts
-   				}
-   			}
-		}
-
-		cost = 0
-		days_remove = 45
-
-		visible = {
-			has_completed_focus = RED_scouring_lenins_tomb
-		}
-
-		remove_effect = {
-			 country_event = nf_RED.86
-		}
-
-		ai_will_do = {
-			factor = 0
 		}
 	}
 }
