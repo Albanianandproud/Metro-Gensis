@@ -2081,6 +2081,7 @@ shared_focus = {
 	cost = 6.5
 
 	available = { 
+		date > 2030.1.1
 		if = { 
 			limit = { original_tag = PEC }
 			has_completed_focus = PEC_1
@@ -2091,7 +2092,6 @@ shared_focus = {
 		# activate decisions to do business with neighbours
 		add_political_power = 50
 	}
-
 	ai_will_do = {
 		factor = 0.5
 		modifier = {
@@ -2107,7 +2107,6 @@ shared_focus = {
 	x = -3
 	y = 1
 	cost = 6.5
-
 	prerequisite = { 
 		focus = satellite_our_path
 	}
@@ -2117,7 +2116,7 @@ shared_focus = {
 	relative_position_id = satellite_our_path
 
 	completion_reward = {
-		add_political_power = 50
+		add_war_support = 0.1
 	}
 
 	ai_will_do = {
@@ -2590,15 +2589,17 @@ shared_focus = {
 	relative_position_id = satellite_our_path
 
 	completion_reward = {
-		add_political_power = 150
+		add_stability = 0.1
 	}
-
 	ai_will_do = {
 		factor = 2.5
-
 		modifier = {
 			factor = 2
 			tag = PEC
+			NOT = {
+				has_government = dictatorial
+				has_government = oligarch
+			}
 		}
 		modifier = {
 			factor = 2

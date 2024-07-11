@@ -657,8 +657,30 @@ country_event = {		## Trade Tech with MOB Succeeds
 	option = {	## Awesome ##
 		name = nf_HNZ.18.a
 		custom_effect_tooltip = HNZ_MOB_merc_tt
-		hidden_effect = {
-			load_oob = HNZ_MOB_merc
+		division_template = {
+			name = "Mobsters for Lease"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				irregulars =  { x = 0 y = 0 }
+				irregulars =  { x = 1 y = 0 }
+				irregulars =  { x = 2 y = 0 }
+				irregulars =  { x = 3 y = 0 }
+				irregulars =  { x = 4 y = 0 }
+			}
+			support = {
+				explosive_support = { x = 0 y = 0 }  
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Guns Blazing\" division_template = \"Mobsters for Lease\" start_experience_factor = 0.24 start_equipment_factor = 1"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"Roller Mobsters\" division_template = \"Mobsters for Lease\" start_experience_factor = 0.24 start_equipment_factor = 1"
+				owner = ROOT
+			}
 		}
 		add_opinion_modifier = {
 			target = MOB
@@ -1138,25 +1160,17 @@ country_event = {
 	option = {
 		name = nf_HNZ.38.a
 		add_ideas = HNZ_tank_production
-		hidden_effect = {
-			load_oob = HNZ_panzer
-		}
 		add_equipment_to_stockpile = {
-		    type = rail_panzer_equipment
-		    amount = 5
+			type = rail_panzer_equipment_3
+			amount = 20
+			producer = RUS
 		}
-		custom_effect_tooltip = HNZ_nf_HNZ.38_tt
-		if = {
-    		limit = {
-        		NOT = {
-					OR = {
-						has_tech = rail_panzer_tech_2033
-						is_researching_technology = rail_panzer_tech_2033
-					}
-        		}
-    		}
-    		set_technology = { rail_panzer_tech_2033 = 1 }
-    	}
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			ahead_reduction = 1
+			category = rail_panzer
+		}
 	}
 	option = {
 		name = nf_HNZ.38.b

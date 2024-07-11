@@ -1,15 +1,12 @@
 ARB_mercenary_recruitment = {
 	ARB_recruitment_1 = {
-		
 		icon = hol_war_on_pacifism
-
 		days_remove = 7
-
+		fire_only_once = yes
 		custom_cost_text = army_experience_20
 		custom_cost_trigger = {
 			has_army_experience > 19.9
 		}
-
 		available = {
 			MOB = {
 				exists = yes
@@ -17,6 +14,9 @@ ARB_mercenary_recruitment = {
 					target = ARB
 					value > 0
 				}
+			}
+			NOT = {
+				has_war_with = MOB
 			}
 		}
 
@@ -29,22 +29,39 @@ ARB_mercenary_recruitment = {
 		remove_effect = {
 			custom_effect_tooltip = ARB_recruitment_1_tt
 			hidden_effect = {
-				load_oob = ARB_recruitment_MOB
+				division_template = {
+					name = "Mobniks"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars =  { x = 0 y = 0 }
+						irregulars =  { x = 1 y = 0 }
+						irregulars =  { x = 2 y = 0 }
+						irregulars =  { x = 3 y = 0 }
+						irregulars =  { x = 4 y = 0 }
+					}
+					support = {
+						explosive_support = { x = 0 y = 0 }  
+					}	
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Mobster Squad\" division_template = \"Mobniks\" start_experience_factor = 0.44 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 	}
 
 	ARB_recruitment_2 = {
-		
 		icon = hol_war_on_pacifism
-
 		days_remove = 7
-
+		fire_only_once = yes
 		custom_cost_text = army_experience_20
 		custom_cost_trigger = {
 			has_army_experience > 19.9
 		}
-
 		available = {
 			TRT = {
 				exists = yes
@@ -52,6 +69,9 @@ ARB_mercenary_recruitment = {
 					target = ARB
 					value > 0
 				}
+			}
+			NOT = {
+				has_war_with = TRT
 			}
 		}
 
@@ -64,22 +84,38 @@ ARB_mercenary_recruitment = {
 		remove_effect = {
 			custom_effect_tooltip = ARB_recruitment_2_tt
 			hidden_effect = {
-				load_oob = ARB_recruitment_TRT
+				division_template = {
+					name = "Gangsters"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars =  { x = 0 y = 0 }
+						irregulars =  { x = 1 y = 0 }
+						irregulars =  { x = 2 y = 0 }
+						irregulars =  { x = 3 y = 0 }
+						irregulars =  { x = 4 y = 0 }
+					}
+					support = {
+						flamethrower_support = { x = 0 y = 0 }  
+					}	
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Gangsters Squad\" division_template = \"Gangsters\" start_experience_factor = 0.44 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 	}
-
 	ARB_recruitment_3 = {
-		
 		icon = hol_war_on_pacifism
-
 		days_remove = 7
-
+		fire_only_once = yes
 		custom_cost_text = army_experience_20
 		custom_cost_trigger = {
 			has_army_experience > 19.9
 		}
-
 		available = {
 			EUR = {
 				exists = yes
@@ -88,33 +124,50 @@ ARB_mercenary_recruitment = {
 					value > 0
 				}
 			}
+			NOT = { has_war_with = EUR }
 		}
-
 		complete_effect = {
 			hidden_effect = {
 				army_experience = -20
 			}
 		}
-
 		remove_effect = {
 			custom_effect_tooltip = ARB_recruitment_3_tt
 			hidden_effect = {
-				load_oob = ARB_recruitment_EUR
+				division_template = {
+					name = "Mercs"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars =  { x = 0 y = 0 }
+						irregulars =  { x = 1 y = 0 }
+						irregulars =  { x = 2 y = 0 }
+						irregulars =  { x = 3 y = 0 }
+						irregulars =  { x = 4 y = 0 }
+					}
+					support = {
+						field_hospital = { x = 0 y = 0 }  
+						logistics_company  = { x = 0 y = 1 }    
+					}	
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Mercenary Squad\" division_template = \"Mercs\" start_experience_factor = 0.44 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 	}
 
 	ARB_recruitment_4 = {
-		
 		icon = hol_war_on_pacifism
-
 		days_remove = 7
-
+		fire_only_once = yes
 		custom_cost_text = army_experience_20
 		custom_cost_trigger = {
 			has_army_experience > 19.9
 		}
-
 		available = {
 			SEV = {
 				exists = yes
@@ -123,19 +176,38 @@ ARB_mercenary_recruitment = {
 					value > 0
 				}
 			}
+			NOT = { has_war_with = SEV }
 		}
-
 		complete_effect = {
 			hidden_effect = {
 				army_experience = -20
 			}
 		}
-
 		remove_effect = {
 			custom_effect_tooltip = ARB_recruitment_4_tt
-			hidden_effect = {
-				load_oob = ARB_recruitment_SEV
-			}
+				hidden_effect = {
+					division_template = {
+						name = "Gate Guards"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							irregulars =  { x = 0 y = 0 }
+							irregulars =  { x = 1 y = 0 }
+							irregulars =  { x = 2 y = 0 }
+							irregulars =  { x = 3 y = 0 }
+							irregulars =  { x = 4 y = 0 }
+						}
+						support = {
+							gatling_support  = { x = 0 y = 1 }    
+						}	
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Mercenary Squad\" division_template = \"Gate Guards\" start_experience_factor = 0.44 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
 		}
 	}
 }

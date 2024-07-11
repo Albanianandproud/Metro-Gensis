@@ -138,7 +138,6 @@ country_event = { ## Leader remove Irrational Trait ##
 	}
 }
 
-
 country_event = { ## Leader add Paranoid Trait ## 
 	id = random_event_military.6
 	title = random_event_military.6.t
@@ -225,11 +224,44 @@ country_event = { ## Leader add Irrational Trait ##
 	}
 
 	option = {
-		name = random_event_military.7.a
+		name = random_event_military.8.a
 		every_unit_leader = {
 			limit = { has_character_flag = random_event_add_irrational_flag }
 			add_trait = { trait = irrational_personality_trait }
 			clr_character_flag = random_event_add_irrational_flag
+		}
+	}
+}
+
+country_event = { ## Leader add Cruel Trait ## 
+	id = random_event_military.9
+	title = random_event_military.9.t
+	desc = random_event_military.9.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { 
+		any_unit_leader = { 
+			NOT = { has_trait = cruel_personality_trait } 
+		} 
+	}
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = cruel_personality_trait } 
+			}
+			set_character_flag = random_event_add_cruel_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.9.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_cruel_flag }
+			add_trait = { trait = cruel_personality_trait }
+			clr_character_flag = random_event_add_cruel_flag
 		}
 	}
 }
@@ -259,6 +291,72 @@ country_event = { ## Stupid Idiot gets hurt
 				days = 90
 			}
 			clr_character_flag = random_event_injury_flag
+		}
+	}
+}
+
+country_event = { ## Leader add Fearless Trait ## 
+	id = random_event_military.11
+	title = random_event_military.11.t
+	desc = random_event_military.11.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { 
+		any_unit_leader = { 
+			NOT = { has_trait = fearless_personality_trait has_trait = fainthearted_personality_trait } 
+		} 
+	}
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = fearless_personality_trait has_trait = fainthearted_personality_trait } 
+			}
+			set_character_flag = random_event_add_fearless_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.11.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_fearless_flag }
+			add_trait = { trait = fearless_personality_trait }
+			clr_character_flag = random_event_add_fearless_flag
+		}
+	}
+}
+
+country_event = { ## Leader add Loyal Trait ## 
+	id = random_event_military.12
+	title = random_event_military.12.t
+	desc = random_event_military.12.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = { days = 1800 }
+
+	trigger = { 
+		any_unit_leader = { 
+			NOT = { has_trait = loyal_personality_trait has_trait = craven_personality_trait } 
+		} 
+	}
+
+	immediate = {
+		random_unit_leader = { 
+			limit = { 
+				NOT = { has_trait = loyal_personality_trait has_trait = craven_personality_trait } 
+			}
+			set_character_flag = random_event_add_loyal_flag 
+		}
+	}
+
+	option = {
+		name = random_event_military.12.a
+		every_unit_leader = {
+			limit = { has_character_flag = random_event_add_loyal_flag }
+			add_trait = { trait = loyal_personality_trait }
+			clr_character_flag = random_event_add_loyal_flag
 		}
 	}
 }

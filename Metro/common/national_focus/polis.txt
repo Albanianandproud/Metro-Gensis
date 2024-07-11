@@ -499,7 +499,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_colonization_of_south
-		icon = GFX_HNZ_stalker_training
+		icon = GFX_BAU_generic_2
 		available = { 212 = { is_owned_by = RUI } 369 = { is_owned_by = RUI } }
 		prerequisite = { focus = PLS_kshatriya_2 }
 		cost = 6.5
@@ -2084,7 +2084,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_B
-		icon = GFX_MDR_measures
+		icon = GFX_generic_electricity_2
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_A }
 		cost = 6.5
@@ -2120,7 +2120,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_2a
-		icon = GFX_generic_equipment_gasmask_1
+		icon = GFX_equipment_gasmask
 		available = { }
 		prerequisite = { focus = PLS_military }
 		cost = 6.5
@@ -2139,7 +2139,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_doctrine_1
-		icon = GFX_generic_equipment_gasmask_1
+		icon = GFX_goal_generic_allies_build_infantry
 		available = { }
 		prerequisite = { focus = PLS_military }
 		cost = 6.5
@@ -2183,7 +2183,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				uses = 1
-				bonus = 0.5
+				bonus = 1
 				category = land_doctrine
 			}
 		}
@@ -2191,7 +2191,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_doctrine_4
-		icon = GFX_generic_equipment_gasmask_1
+		icon = GFX_goal_generic_army_doctrines
 		available = { }
 		prerequisite = { focus = PLS_military_2a }
 		prerequisite = { focus = PLS_military_doctrine_2 focus = PLS_military_doctrine_3 }
@@ -2952,9 +2952,10 @@ focus_tree = {
 		id = PLS_stalk_the_elite_arms_2
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_stalk_the_elite_arms }
+		mutually_exclusive = { focus = PLS_stalk_the_surface_draisines_2 }
 		cost = 6.5
 		relative_position_id = PLS_stalk_the_elite_arms
-		x = -1
+		x = 0
 		y = 1
 		completion_reward = {
 			add_tech_bonus = {
@@ -2986,7 +2987,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_stalk_the_surface_draisines
-		icon = GFX_MDR_measures
+		icon = GFX_spartan_truck
 		prerequisite = { focus = PLS_stalk_the_surface_3 }
 		cost = 6.5
 		relative_position_id = PLS_stalk_the_surface_3
@@ -3006,9 +3007,10 @@ focus_tree = {
 		id = PLS_stalk_the_surface_draisines_2
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_stalk_the_surface_draisines }
+		mutually_exclusive = { focus = PLS_stalk_the_elite_arms_2 }
 		cost = 6.5
 		relative_position_id = PLS_stalk_the_surface_draisines
-		x = 1
+		x = 0
 		y = 1
 		completion_reward = {
 			add_tech_bonus = {
@@ -3113,6 +3115,8 @@ focus_tree = {
 		id = PLS_hanza
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_contemptive_neighbours }
+		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
+		bypass = { OR = { HNZ = { exists = no has_war_with = ROOT } } }
 		cost = 6.5
 		relative_position_id = PLS_contemptive_neighbours
 		x = 2
@@ -3131,9 +3135,10 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_hanza_2
-		icon = GFX_MDR_measures
+		icon = GFX_generic_support_hansa
 		prerequisite = { focus = PLS_hanza }
 		mutually_exclusive = { focus = PLS_contemplate_neutrality }
+		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
 		cost = 6.5
 		relative_position_id = PLS_hanza
 		x = -1
@@ -3156,8 +3161,9 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_hanza_3
-		icon = GFX_MDR_measures
+		icon = GFX_HNZ_subversion
 		prerequisite = { focus = PLS_hanza_2 }
+		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
 		cost = 6.5
 		relative_position_id = PLS_hanza_2
 		x = 0
@@ -3172,12 +3178,18 @@ focus_tree = {
 		id = PLS_contemplate_neutrality
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_hanza }
+		available = { has_war_support > 0.54 }
 		mutually_exclusive = { focus = PLS_hanza_2 }
 		cost = 6.5
 		relative_position_id = PLS_hanza
 		x = 1
 		y = 1
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 50
+				producer = ROOT
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3185,11 +3197,28 @@ focus_tree = {
 		id = PLS_contemplate_neutrality_2
 		icon = GFX_MDR_measures
 		prerequisite = { focus = PLS_contemplate_neutrality }
+		available = { has_war_support > 0.64 }
 		cost = 6.5
 		relative_position_id = PLS_contemplate_neutrality
 		x = 0
 		y = 1
 		completion_reward = {
+			army_experience = 15
+			if = {
+				limit = {
+					community < 0.14
+					oligarch < 0.14
+				}
+				add_popularity = {
+					ideology = community
+					popularity = -0.02
+				}
+				add_popularity = {
+					ideology = oligarch
+					popularity = -0.02
+				}
+			}
+			add_ideas = PLS_conscription
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3405,7 +3434,7 @@ focus_tree = {
 		prerequisite = { focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_guardians_of_knowledge
-		x = 2
+		x = 1
 		y = 1
 		completion_reward = {
 			## IDK?
@@ -3419,7 +3448,7 @@ focus_tree = {
 		available = { MSU = { exists = yes }}
 		cost = 6.5
 		relative_position_id = PLS_secrets_of_the_old_world
-		x = 0
+		x = 1
 		y = 1
 		completion_reward = {
 
@@ -3429,7 +3458,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_guardians_of_knowledge_2
-		icon = GFX_MDR_measures
+		icon = GFX_generic_electricity
 		prerequisite = { focus = PLS_guardians_of_knowledge }
 		cost = 6.5
 		relative_position_id = PLS_guardians_of_knowledge
@@ -3563,12 +3592,269 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_rage_against_the_light_3
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_rage_against_the_light_2 }
+		id = PLS_rage_against_the_light_war
+		icon = GFX_generic_special_arms_1
+		prerequisite = { focus = PLS_rage_against_the_light }
+		available = { 
+		}
 		cost = 6.5
-		relative_position_id = PLS_rage_against_the_light_2
+		relative_position_id = PLS_rage_against_the_light
+		x = 0
+		y = 2
+		completion_reward = {
+			set_technology = { laser_infantry_equipment_1_tech = 1 }
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_war_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_war }
+		available = { 
+		}
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_war
+		x = 1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = laser_infantry_equipment_1
+				producer = RUS
+				amount = 30
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_war_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_rage_against_the_light_war }
+		available = { 
+		}
+		cost = 6.5
+		relative_position_id = PLS_rage_against_the_light_war
 		x = -1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = laser_infantry_equipment_1
+				producer = RUS
+				amount = 30
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = -3
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safeguard_humanity }
+		cost = 6.5
+		relative_position_id = PLS_safeguard_humanity
+		x = 1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safeguard_humanity_2 }
+		cost = 6.5
+		relative_position_id = PLS_safeguard_humanity_2
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_tool_procurement
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safeguard_humanity_4
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safeguard_humanity_3 }
+		cost = 6.5
+		relative_position_id = PLS_safeguard_humanity_3
+		x = -1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_tool_procurement
+				add_idea = PLS_efficient_tools
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_mutants
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 2
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = PLS_rid_mutants
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_bandits
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 4
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = PLS_rid_bandits
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_rid_authoritarians
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity
+		x = 6
+		y = 1
+		completion_reward = {
+			add_ideas = PLS_rid_authoritarians
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_ignorance
+		icon = GFX_MDR_measures
+		available = { has_completed_focus = PLS_guardians_of_knowledge }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		x = 1
+		y = 1
+		completion_reward = {
+			add_stability = 0.1
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word
+		icon = GFX_MDR_measures
+		available = { has_completed_focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
+		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		x = -1
+		y = 1
+		completion_reward = {
+			add_war_support = 0.1
+			army_experience = 50
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word_2
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
+		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		x = -2
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_safekeepers_of_humanity
+				add_idea = PLS_safekeepers_of_humanity_2
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_remember_the_word_3
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
+		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_2 }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_safekeepers_of_humanity
+				add_idea = PLS_safekeepers_of_humanity_3
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_safekeepers_of_humanity_polis_authority_mandate
+		icon = GFX_MDR_measures
+		prerequisite = { focus = PLS_safekeepers_of_humanity_ignorance focus = PLS_safekeepers_of_humanity_remember_the_word_2 focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		x = 0
+		y = 3
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PLS_safekeepers_of_humanity
+				add_idea = PLS_safekeepers_of_humanity_3
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	focus = {
+		id = PLS_rage_against_the_light_3
+		icon = GFX_SPT_miller_2
+		prerequisite = { focus = PLS_safekeepers_of_humanity_polis_authority_mandate }
+		cost = 6.5
+		relative_position_id = PLS_safekeepers_of_humanity_polis_authority_mandate
+		x = 0
 		y = 1
 		completion_reward = {
 			set_technology = { laser_infantry_equipment_1_tech = 1 }
@@ -3644,165 +3930,6 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			## war goal against EUR / GWC / HMS
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safeguard_humanity
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
-		x = -3
-		y = 1
-		completion_reward = {
-			every_owned_state = {
-				limit = {
-					NOT = { has_state_category = pastoral }
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safeguard_humanity_2
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safeguard_humanity }
-		cost = 6.5
-		relative_position_id = PLS_safeguard_humanity
-		x = 0
-		y = 1
-		completion_reward = {
-			every_owned_state = {
-				limit = {
-					NOT = { has_state_category = pastoral }
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_rid_mutants
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
-		x = 2
-		y = 1
-		completion_reward = {
-			add_war_support = 0.05
-			add_ideas = PLS_rid_mutants
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_rid_bandits
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
-		x = 4
-		y = 1
-		completion_reward = {
-			add_war_support = 0.05
-			add_ideas = PLS_rid_bandits
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_rid_authoritarians
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
-		x = 6
-		y = 1
-		completion_reward = {
-			add_ideas = PLS_rid_authoritarians
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_igorance
-		icon = GFX_MDR_measures
-		available = { has_completed_focus = PLS_guardians_of_knowledge }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
-		x = 1
-		y = 1
-		completion_reward = {
-			add_stability = 0.1
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word
-		icon = GFX_MDR_measures
-		available = { has_completed_focus = PLS_safekeepers_of_humanity }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
-		x = -1
-		y = 1
-		completion_reward = {
-			add_war_support = 0.1
-			army_experience = 50
-			add_tech_bonus = {
-				uses = 1
-				bonus = 0.5
-				category = land_doctrine
-			}
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word_2
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
-		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
-		x = -1
-		y = 1
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = PLS_safekeepers_of_humanity
-				add_idea = PLS_safekeepers_of_humanity_2
-			}
-		}
-		ai_will_do = { factor = 1 }
-	}
-	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word_3
-		icon = GFX_MDR_measures
-		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
-		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_2 }
-		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
-		x = 1
-		y = 1
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = PLS_safekeepers_of_humanity
-				add_idea = PLS_safekeepers_of_humanity_3
-			}
 		}
 		ai_will_do = { factor = 1 }
 	}

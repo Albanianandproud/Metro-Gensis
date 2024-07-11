@@ -581,53 +581,40 @@ ideas = {
 		}
 
 		civics_property_6 = { ## State-Economy
-			
 		    available = { has_country_flag = is_communist_nation }
 			visible = { has_country_flag = is_communist_nation }
-
 			cancel = {
 				NOT = {
 					has_country_flag = is_communist_nation
 				}
 			}
-
-		   cost = 75
-		   removal_cost = -1		
-
+		    cost = 75
+		    removal_cost = -1		
 		    modifier = {
 			   consumer_goods_expected_value = 0.05
 			   global_building_slots_factor = 0.1
 			   production_speed_buildings_factor = 0.05
 		    }
-
 		    cancel_if_invalid = no
-
 		    ai_will_do = {
 				factor = 2
 			}
 		}
    	}
-	
 	civics_border = { 
 		law = yes
 		use_list_view = yes
-
 		civics_border_1 = { ## Open Access
-			
 			available = {
 				NOT = {
-					tag = RCH
-					tag = GWC
 					has_government = dictatorial
 					has_country_flag = is_savage_nation
 					has_country_flag = is_bandit_nation
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
-
 			cost = 75
 			removal_cost = -1
-
 			modifier = {
 				monthly_population = 0.2
 				conscription_factor = 0.1
@@ -642,29 +629,21 @@ ideas = {
 				trade_opinion_factor = 0.3
 				local_resources_factor = 0.15
 			}
-
 			cancel_if_invalid = no
-
 			ai_will_do = {
    				factor = 0.1
    			}
    		}
-
 		civics_border_2 = { ## Opening Hours
-			
 			available = {
 				NOT = {
-					tag = RCH
-					tag = GWC
 					has_government = dictatorial
 					has_country_flag = is_savage_nation
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
-
 			cost = 75
 			removal_cost = -1
-
 			modifier = {
 				monthly_population = 0.05
 				conscription_factor = 0.05
@@ -677,31 +656,21 @@ ideas = {
 				trade_opinion_factor = 0.1
 				local_resources_factor = 0.05
 			}
-
 			default = yes
-
 			cancel_if_invalid = no
-
 			ai_will_do = {
    				factor = 2
    			}
    		}
 
 		civics_border_3 = { ## Passport Requirements
-			
 			available = {
 				NOT = {
-					tag = RCH
-					tag = GWC
-					OR = {
-						has_country_flag = is_savage_nation
-					} 
+					has_country_flag = is_savage_nation
 				}
 			}
-
 			cost = 75
 			removal_cost = -1
-
 			modifier = {
 				enemy_operative_detection_chance = 0.1
 				intelligence_agency_defense = 0.05
@@ -722,23 +691,33 @@ ideas = {
    		}
 
 		civics_border_4 = { ## Isolationism
-			
 			available = {
-				tag = GWC
-				tag = MSU
 				NOT = {
-					tag = HNZ
-					has_idea = export_focus
-					has_idea = free_trade
-					has_idea = limited_exports
+					OR = {
+						original_tag = HNZ
+						original_tag = ARB
+						original_tag = KAL
+						original_tag = ULI
+					}
 				}
+				has_idea = closed_economy
 			}
-
 			allowed_to_remove = {
 				NOT = {
-					has_country_flag = is_savage_nation
+					tag = GWC
 					tag = MSU
 					tag = MDR
+				}
+				IF = {
+					limit = {
+						OR = {
+							original_tag =  KRY
+							original_tag =  MIT
+							original_tag =  HMS
+							original_tag =  STG
+						}
+					}
+					GWC = { exists = no }
 				}
 			}
 

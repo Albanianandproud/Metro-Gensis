@@ -4,10 +4,8 @@ ideas = {
 		use_list_view = yes
 		
 		civilian_economy = {
-			
 			cost = 150
 			removal_cost = -1
-			
 			modifier = {
 				### Economy 
 				consumer_goods_expected_value = 0.35
@@ -16,7 +14,6 @@ ideas = {
 				production_speed_buildings_factor = 0.1
 				offensive_war_stability_factor = -0.15
 			}
-
 			available = {
 				hidden_trigger = {
 					NOT = {
@@ -37,23 +34,36 @@ ideas = {
 			}
 			default = yes
 			cancel_if_invalid = no
+			allowed_to_remove = {
+				IF = {
+					limit = {
+						original_tag = BRK
+					}
+					OR = {
+						has_war_support > 0.39
+						threat > 0.1
+					}
+				}
+				ELSE = {
+					OR = {
+						has_war_support > 0.44
+						has_war = yes
+					}
+				}
+			}
 		}
 		
 		low_economic_mobilisation = {
-			
 			available = {
 				has_war_support > 0.34
 			}
-
 			cost = 150
 			removal_cost = -1
-			
 			modifier = {
 				consumer_goods_expected_value = 0.25
 				production_speed_arms_factory_factor = -0.2
 				conversion_cost_civ_to_mil_factor = 0.2
 			}
-
 			available = {
 				hidden_trigger = {
 					NOT = {
@@ -73,12 +83,9 @@ ideas = {
 					}
 				}
 			}
-			
 			cancel_if_invalid = no
-
 			ai_will_do = {
    				factor = 2
-
    				modifier = {
 					factor = 20
 					
@@ -90,151 +97,132 @@ ideas = {
 				}
    			}
 		}
-		
 		partial_economic_mobilisation = {
-			
+			available = {
+				hidden_trigger = {
+					NOT = { ## All use their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH		
+					}
+				}
+				has_war_support > 0.44
+				OR = {
+					threat > 0.09
+					has_war = yes
+					has_army_manpower = { size > 249 }
+				}
+			}
 			cost = 150
 			removal_cost = -1
-			
 			modifier = {
 				consumer_goods_expected_value = 0.2
 				production_speed_arms_factory_factor = 0.05
 				production_factory_max_efficiency_factor = 0.05
 				political_power_gain = -0.05
 			}
-
-
-			available = {
-				hidden_trigger = {
-					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
-					}
-				}
-
-				has_war_support > 0.44
-				OR = {
-					threat > 0.09
-					date > 2030.1.1
-				}
-			}
 			visible = {
-				hidden_trigger = {
+				hidden_trigger = { ## All use their own unique conscription law.
 					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH	
 					}
 				}
 			}
-			
 			cancel_if_invalid = no
 			ai_will_do = {
    				factor = 2
-
    				modifier = {
 					factor = 20
-					
 					is_major = yes
 				}
    			}
 		}
-		
 		war_economy = {
-			
 			available = {
 				hidden_trigger = {
-					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
+					NOT = { ## All use their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH		
 					}
 				}
-
 				has_war_support > 0.49
 				OR = {
-					date > 2032.1.1
-					AND = {
-						has_war = yes
-						enemies_strength_ratio > 0.24
+					threat > 0.09
+					has_army_manpower = { size > 249 }
+					AND = { 
+						OR = {
+							has_war = yes 
+							threat > 0.19
+						}
 					}
 				}
 			}
-
 			visible = {
-				hidden_trigger = {
+				hidden_trigger = { ## All use their own unique conscription law.
 					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH	
 					}
 				}
 			}
-		
 			cost = 150
 			removal_cost = -1
-			
 			modifier = {
 				### Economy 
 				consumer_goods_expected_value = 0.15
 				production_speed_arms_factory_factor = 0.2
 				political_power_gain = -0.15
 			}
-			
 			cancel_if_invalid = no
-
 			ai_will_do = {
    				factor = 5
-
 				modifier = {
 					#High prio on production
 					factor = 20
 					manpower_per_military_factory >  5
 				}
-				
 				modifier = {
 					add = 1800
 					has_idea = closed_economy
 				}
    			}
 		}
-		
 		tot_economic_mobilisation = {
-
 			available = {
 				hidden_trigger = {
-					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
+					NOT = { ## All use their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH		
 					}
 				}
-				
 				has_war_support > 0.49
-				date > 2033.1.1
 				OR = {
-					has_war = yes
+					threat > 0.19
+					has_war = yes 
 					AND = {
-						enemies_strength_ratio > 0.39
-						surrender_progress > 0.24
+						OR = {
+							enemies_strength_ratio > 0.24
+							surrender_progress > 0.24
+						}
 					}
 				}
 			}
-
 			visible = {
-				hidden_trigger = {
+				hidden_trigger = { ## All use their own unique conscription law.
 					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
-						tag = HNZ 		## Hanza uses their own unique conscription law. 
-						tag = RCH		## Reich uses their own unique conscription law.
+						tag = RED 		
+						tag = HNZ 		
+						tag = RCH	
 					}
 				}
 			}
-			
 			cost = 150
-			removal_cost = -1
-			
+			removal_cost = -1	
 			modifier = {
 				### Economy 
 				consumer_goods_expected_value = 0.1
@@ -244,16 +232,13 @@ ideas = {
 				production_factory_start_efficiency_factor = -0.1
 				political_power_gain = -0.25
 			}
-	
 			ai_will_do = {
    				factor = 1
-
 				modifier = {
 					factor = 25
 					#Prio this if nation has a lot of manpower compared to MIC
 					manpower_per_military_factory > 15
 				}
-
 				modifier = {
 					#Block  unless nation has a lot of manpower
 					factor = 0
@@ -267,9 +252,7 @@ ideas = {
 	trade_laws = { 
 		law = yes
 		use_list_view = yes
-		
 		free_trade = {
-
 			available = {
 				NOT = {
 					OR = {
@@ -281,16 +264,14 @@ ideas = {
 						original_tag = GWC
 					}
 				}
-			}
-						
+			}		
 			cost = 150
 			removal_cost = -1
-			
 			modifier = {
-				min_export = 0.75
-				trade_opinion_factor = 0.2
-				production_speed_buildings_factor = 0.1
 				consumer_goods_expected_value = -0.05
+				monthly_population = 0.1
+				production_speed_buildings_factor = 0.1
+				min_export = 0.75
 				civilian_intel_to_others = 40.0
 			}
 			
@@ -320,9 +301,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				min_export = 0.5
-				trade_opinion_factor = 0.1
+				monthly_population = 0.05
 				production_speed_buildings_factor = 0.05
+				min_export = 0.5
 				civilian_intel_to_others = 20.0
 			}
 			
@@ -374,7 +355,6 @@ ideas = {
 			modifier = {
 				monthly_population = -0.05
 				min_export = 0.25
-				production_speed_buildings_factor = 0.025
 				civilian_intel_to_others = 5.0
 			}
 			
@@ -430,18 +410,30 @@ ideas = {
 			modifier = {
 				monthly_population = -0.1
 				min_export = 0
-				research_speed_factor = -0.025
 			}
 			
 			on_add = {
 				custom_effect_tooltip = closed_economy_TT
+				set_rule = { can_access_market = no }
+			}
+			on_remove = { 
+				set_rule = { can_access_market = yes }
 			}
 
 			allowed_to_remove = {
 				NOT = {
-					has_country_flag = is_savage_nation
+					tag = GWC
 					tag = MSU
 					tag = MDR
+				}
+				if = {
+					limit = {
+						tag = KRY
+						tag = MIT
+						tag = HMS
+						tag = STG
+					}
+					GWC = { exists = no }
 				}
 			}
 			

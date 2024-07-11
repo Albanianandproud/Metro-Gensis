@@ -291,3 +291,243 @@ country_event = { ## Fire, Son !
 		}
 	}
 }
+
+country_event = { ## Infrastructure Derailment
+	id = random_event_bad.9
+	title = random_event_bad.9.t
+	desc = random_event_bad.9.d
+	picture = "GFX_event (44)"
+
+	trigger = { has_global_flag = random_events_bad_enabled NOT = { has_country_flag = is_savage_nation } }
+
+	mean_time_to_happen = { 
+		days = 1800
+		modifier = {
+			factor = 0.2
+			is_neighbor_of = RUI
+		}
+	}
+
+	option = {
+		name = random_event_bad.9.a
+		effect_tooltip = {
+			random_owned_state = {
+				limit = { has_state_category = pastoral }
+				damage_building = {
+					type = infrastructure
+					damage = 0.85
+				}
+				damage_building = {
+					type = rail_way
+					damage = 0.85
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = random_event_bad.10
+	title = random_event_bad.10.t
+	desc = random_event_bad.10.d
+	picture = "GFX_event (44)"
+
+	mean_time_to_happen = { 
+		days = 1800
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = { has_country_flag = is_savage_nation has_government = dictatorial has_government = community }
+		any_controlled_state = {
+			NOT = { has_state_category = pastoral }
+			infrastructure > 1
+			NOT = { is_core_of = ROOT }
+			state_population > 50
+		}
+	}
+
+	option = {
+		name = random_event_bad.10.a
+		add_timed_idea = { idea = metro_sentry_attack days = 60 }	
+	}
+}
+
+country_event = {
+	id = random_event_bad.11
+	title = random_event_bad.11.t
+	desc = random_event_bad.11.d
+	picture = "GFX_event (44)"
+
+	mean_time_to_happen = { 
+		days = 1800
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = {
+			has_country_flag = is_savage_nation
+			OR = {
+				original_tag = HUL
+				original_tag = AVT
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.11.a
+		add_political_power = -50
+	}
+
+	option = {
+		name = random_event_bad.11.b
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+}
+
+country_event = {
+	id = random_event_bad.12
+	title = random_event_bad.12.t
+	desc = random_event_bad.12.d
+	picture = "GFX_event (44)"
+
+	mean_time_to_happen = { 
+		days = 1800
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = {
+			OR = {
+				original_tag = HUL
+				original_tag = AVT
+				has_country_flag = is_bandit_nation
+				has_country_flag = is_savage_nation
+			}
+		}
+	}
+
+	option = {
+		name = random_event_bad.12.a
+		add_political_power = -50
+		add_stability = 0.05
+	}
+
+	option = {
+		name = random_event_bad.12.b
+		add_political_power = 50
+		add_stability = -0.05
+	}
+}
+
+###
+
+add_namespace = random_event_bad_protests
+
+country_event = { ## Protests
+	id = random_event_bad_protests.1
+	title = random_event_bad_protests.1.t
+	desc = random_event_bad_protests.1.d
+	picture = "GFX_event (92)"
+
+	mean_time_to_happen = { 
+		days = 1850 
+		modifier = {
+			factor = 0.1
+			has_stability < 0.15
+			has_war_support < 0.15
+		}
+	}
+
+	trigger = {
+		has_global_flag = random_events_bad_enabled
+		NOT = { has_country_flag = is_savage_nation }
+		has_war = no 
+		OR = {
+			has_stability < 0.25
+			has_war_support < 0.25
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			add_timed_idea = { idea = metro_protests days = 60 }	
+		}	
+	} 
+
+	option = { 
+		name = random_event_bad_protests.1.a
+		effect_tooltip = {
+			add_timed_idea = { idea = metro_protests days = 60 }	
+		}
+		custom_effect_tooltip = random_event_bad_protests.1.a.tt
+		add_command_power = -50
+		add_political_power = -50
+		hidden_effect = {
+			random_list = {
+				50 = { ROOT = { country_event = { id = random_event_bad_protests.2 random_days = 7 } } }
+				50 = { ROOT = { country_event = { id = random_event_bad_protests.3 random_days = 7 } } }
+			}	
+		}
+	}
+
+	option = {
+		name = random_event_bad_protests.1.b
+		effect_tooltip = {
+			add_timed_idea = { idea = metro_protests days = 60 }	
+		}
+		if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+		hidden_effect = {
+			random_list = {
+				70 = { ROOT = { country_event = { id = random_event_bad_protests.2 random_days = 7 } } }
+				30 = { ROOT = { country_event = { id = random_event_bad_protests.3 random_days = 7 } } }
+			}	
+		}
+	}
+
+	option = {
+		name = random_event_bad_protests.1.c
+		custom_effect_tooltip = random_event_bad_protests.1.c.tt
+		add_political_power = -125
+		if = {
+			limit = { has_stability < 0.20 }
+			set_stability = 0.2
+		}
+		if = {
+			limit = { has_war_support < 0.20 }
+			set_war_support = 0.2
+		}
+	}
+}
+
+country_event = {
+	id = random_event_bad_protests.2
+	title = random_event_bad_protests.2.t
+	desc = random_event_bad_protests.2.d
+	picture = "GFX_event (15)"
+	is_triggered_only = yes
+
+	option = {
+		name = random_event_bad_protests.2.a
+		custom_effect_tooltip = random_event_bad_protests.2.a.tt
+	}
+}
+
+country_event = {
+	id = random_event_bad_protests.3
+	title = random_event_bad_protests.3.t
+	desc = random_event_bad_protests.3.d
+	picture = "GFX_event (15)"
+	is_triggered_only = yes
+
+	option = {
+		name = random_event_bad_protests.3.a
+		remove_ideas = metro_protests
+	}
+}
