@@ -904,7 +904,7 @@ focus_tree = {
 		icon = GFX_VDN_economy_down
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 8.5
 
 		prerequisite = {
 			focus = VDN_prepare_against_hanza
@@ -950,7 +950,7 @@ focus_tree = {
 		icon = GFX_VDN_crusade
 		x = 0
 		y = 2
-		cost = 8.6
+		cost = 1
 
 		prerequisite = {
 			focus = VDN_crash_the_economy
@@ -1012,11 +1012,11 @@ focus_tree = {
 			}
 		}
 	}
-	
+
 	focus = {
-		id = VDN_demand_overlordship_over_sukharevskaya
-		icon = GFX_HNZ_generic_agreement
-		x = 0
+		id = VDN_outwards_into_sukharevskaya
+		icon = GFX_RCH_tunnel_excavation
+		x = -1
 		y = 3
 		cost = 6.5
 
@@ -1024,7 +1024,51 @@ focus_tree = {
 			focus = VDN_ask_control_over_prospekt
 			focus = VDN_an_economic_crusade
 		}
-		
+		mutually_exclusive = {
+			focus = VDN_demand_overlordship_over_sukharevskaya
+		}
+		available = {
+			262 = { is_owned_by = RUI }
+			has_army_manpower = { size > 299 }
+		}
+		bypass = {
+			262 = { is_owned_by = VDN }
+		}
+		relative_position_id = VDN_ask_control_over_prospekt
+		completion_reward = {
+			country_event = nf_VDN.18
+		}
+		ai_will_do = {
+			factor = 1.5
+			modifier = {
+				factor = 5
+				date > 2033.1.1
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_demand_overlordship_over_sukharevskaya
+		icon = GFX_HNZ_generic_agreement
+		x = 1
+		y = 3
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_ask_control_over_prospekt
+			focus = VDN_an_economic_crusade
+		}
+		mutually_exclusive = {
+			focus = VDN_outwards_into_sukharevskaya
+		}
+		available = {
+			NOT = {
+				262 = { is_owned_by = RUI }
+			}
+		}
+		bypass = {
+			262 = { is_owned_by = VDN }
+		}
 		relative_position_id = VDN_ask_control_over_prospekt
 		ai_will_do = {
 			factor = 50
@@ -1079,6 +1123,152 @@ focus_tree = {
 			}
 			hidden_effect = {
 				news_event = { id = VDNnews.1 hours = 8 }
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_the_darkness_of_turgenevskaya
+		icon = GFX_generic_3
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = VDN_outwards_into_sukharevskaya
+			focus = VDN_demand_overlordship_over_sukharevskaya
+		}
+		available = {
+			262 = { is_owned_by = VDN }
+		}
+		bypass = {
+			338 = { is_owned_by = VDN }
+			NOT = {
+				338 = { is_owned_by = RUI }
+			}
+		}
+		
+		relative_position_id = VDN_outwards_into_sukharevskaya
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					RUI = { owns_state = 183 }
+				}
+				VDN = { transfer_state = 183 }
+			}
+			if = {
+				limit = {
+					RUI = { owns_state = 338 }
+				}
+				VDN = { transfer_state = 338 }
+			}
+			if = {
+				limit = {
+					RUI = { owns_state = 204 }
+				}
+				VDN = { transfer_state = 204 }
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_war_on_crime
+		icon = GFX_VDN_fire_soldiers
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = VDN_the_darkness_of_turgenevskaya
+		}
+		
+		available = {
+			OR = {
+				is_neighbor_of = KTG
+				is_neighbor_of = TRT
+				is_neighbor_of = MOB
+			}
+		}
+		
+		relative_position_id = VDN_the_darkness_of_turgenevskaya
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = VDN_war_on_crime_idea
+		}
+	}
+	
+	focus = {
+		id = VDN_invite_yasenevskaya
+		icon = GFX_VDN_deal
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_war_on_crime
+		}
+		
+		relative_position_id = VDN_war_on_crime
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_faction = YAS
+		}
+	}
+	
+	focus = {
+		id = VDN_integrate_yasenevskaya
+		icon = GFX_VDN_deal
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_invite_yasenevskaya
+		}
+		
+		relative_position_id = VDN_invite_yasenevskaya
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			puppet = YAS
+		}
+	}
+	
+	focus = {
+		id = VDN_completing_the_line
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = VDN_integrate_yasenevskaya
+		}
+		
+		relative_position_id = VDN_integrate_yasenevskaya
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -1145,6 +1335,55 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = VDN_consumerism_act
+		icon = GFX_VDN_politics_generic
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_economic_reforms
+		}
+
+		relative_position_id = VDN_economic_reforms
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = VDN_consumer_act
+		}
+	}
+	
+	focus = {
+		id = VDN_true_capitalism
+		icon = GFX_VDN_capitalist
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_consumerism_act
+		}
+		
+		relative_position_id = VDN_consumerism_act
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
 		id = VDN_church_academies
 		icon = GFX_metro_industry
 		x = -1
@@ -1154,8 +1393,7 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_economic_reforms
 		}
-		
-		
+
 		relative_position_id = VDN_economic_reforms
 		ai_will_do = {
 			factor = 50
@@ -1176,7 +1414,7 @@ focus_tree = {
 	focus = {
 		id = VDN_resource_collectivization
 		icon = GFX_generic_resource_chemicals_1
-		x = -2
+		x = 0
 		y = 1
 		cost = 6.5
 
@@ -1211,7 +1449,7 @@ focus_tree = {
 	focus = {
 		id = VDN_invite_hanza_scientist
 		icon = GFX_radio
-		x = 0
+		x = 2
 		y = 1
 		cost = 6.5
 
@@ -1828,7 +2066,7 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = VDN_political_situation
+		id = VDN_solidify_our_government
 		icon = GFX_VDN_politics_generic
 		x = 0
 		y = 1
@@ -1845,51 +2083,73 @@ focus_tree = {
 
 		completion_reward = {
 			country_event = nf_VDN.5
+			add_timed_idea = {
+				idea = VDN_solidified_government
+				days = 365
+			}
 		}
 	}
-	
-	focus = {
-		id = VDN_solidify_our_government
-		icon = GFX_VDN_politics_generic
-		x = 3
-		y = 1
-		cost = 6.5
 
+	focus = {
+		id = VDN_depot
+		icon = GFX_generic_door
 		prerequisite = {
-			focus = VDN_political_situation
+			focus = VDN_solidify_our_government
 		}
-		
 		available = {
-			check_variable = {
-				vdn_army < 1
-			}
-			
-			NOT = {
-				has_country_flag = VDN_military_has_taken_over
-			}
+			172 = { is_owned_by = VDN }
 		}
-		
-		relative_position_id = VDN_political_situation
-		ai_will_do = {
-			factor = 50
-		}
-
+		x = 2
+		y = 1
+		cost = 2.9
+		relative_position_id = VDN_solidify_our_government
 		completion_reward = {
-			custom_effect_tooltip = VDN_army_destroyed_tt
-			set_country_flag = VDN_military_destroyed
-			add_to_variable = { var = vdn_army value = -500 }
+			172 = {
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+				add_resource = {
+					type = components
+					amount = 3
+				}
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 	
 	focus = {
-		id = VDN_consumerism_act
-		icon = GFX_VDN_politics_generic
+		id = VDN_integrate_the_northern_territories
+		icon = GFX_RCH_tunnel_excavation
 		x = 0
 		y = 1
 		cost = 6.5
 
 		prerequisite = {
 			focus = VDN_solidify_our_government
+		}
+
+		available = {
+			VDN = {
+				owns_state = 216
+				owns_state = 307
+				owns_state = 4
+				owns_state = 272
+				owns_state = 3
+				owns_state = 248
+				owns_state = 2
+			}
 		}
 		
 		relative_position_id = VDN_solidify_our_government
@@ -1898,32 +2158,52 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = VDN_consumer_act
-		}
-	}
-	
-	focus = {
-		id = VDN_true_capitalism
-		icon = GFX_VDN_politics_generic
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = VDN_consumerism_act
-		}
-		
-		relative_position_id = VDN_consumerism_act
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			capital_scope = {
-				add_extra_state_shared_building_slots = 4
+			216 = {
 				add_building_construction = {
-					type = industrial_complex
-					level = 2
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			307 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			4 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			272 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			3 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			248 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			2 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -1931,161 +2211,8 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = VDN_end_the_factionalism
-		icon = GFX_VDN_politics_generic
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = VDN_consumerism_act
-		}
-		
-		available = {
-			check_variable = {
-				vdn_politician < 1
-			}
-			check_variable = {
-				vdn_commonfolk < 1
-			}
-		}
-		
-		relative_position_id = VDN_consumerism_act
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = VDN_everyoneelse_destroyed_tt
-			set_country_flag = VDN_commonfolk_destroyed
-			add_to_variable = { var = vdn_commonfolk value = -500 }
-			set_country_flag = VDN_politician_destroyed
-			add_to_variable = { var = vdn_politician value = -500 }
-		}
-	}
-	
-	focus = {
-		id = VDN_expand_christ_domain
-		icon = GFX_RCH_tunnel_excavation
-		x = 0
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = VDN_political_situation
-		}
-		
-		available = {
-			has_country_flag = VDN_darkonerepelled_tt
-			has_army_manpower = {
-				size > 299
-			}
-		}
-		
-		relative_position_id = VDN_political_situation
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			VDN = {
-				transfer_state = 4
-				transfer_state = 272
-				transfer_state = 3
-				transfer_state = 172
-			}
-			hidden_effect = {
-				RUI = {
-					remove_state_core = 4
-					remove_state_core = 272
-					remove_state_core = 3
-					remove_state_core = 172
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_completing_the_line
-		icon = GFX_RCH_tunnel_excavation
-		x = 0
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = VDN_expand_christ_domain
-		}
-		
-		available = {
-			has_army_manpower = {
-				size > 449
-			}
-		}
-		
-		relative_position_id = VDN_expand_christ_domain
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			VDN = {
-				transfer_state = 248
-				transfer_state = 2
-				transfer_state = 366
-			}
-			hidden_effect = {
-				RUI = {
-					remove_state_core = 248
-					remove_state_core = 2
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_integrate_the_northern_territories
-		icon = GFX_VDN_politics_generic
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = VDN_completing_the_line
-		}
-		
-		relative_position_id = VDN_completing_the_line
-		ai_will_do = {
-			factor = 50
-		}
-
-		completion_reward = {
-			307 = {
-				add_core_of = VDN
-			}
-			4 = {
-				add_core_of = VDN
-			}
-			272 = {
-				add_core_of = VDN
-			}
-			3 = {
-				add_core_of = VDN
-			}
-			248 = {
-				add_core_of = VDN
-			}
-			366 = {
-				add_core_of = VDN
-			}
-			172 = {
-				add_core_of = VDN
-			}
-		}
-	}
-	
-	focus = {
-		id = VDN_strengthen_the_line
-		icon = GFX_VDN_politics_generic
+		id = VDN_incorporate_medvedkovo
+		icon = GFX_HNZ_generic_agreement
 		x = 0
 		y = 1
 		cost = 6.5
@@ -2093,6 +2220,8 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_integrate_the_northern_territories
 		}
+
+		available = { MED = { is_puppet = no exists = yes }}
 		
 		relative_position_id = VDN_integrate_the_northern_territories
 		ai_will_do = {
@@ -2100,13 +2229,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			every_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			MED = { country_event = { id = nf_VDN.19 hours = 3 } }
 		}
 	}
 	
@@ -2122,7 +2245,7 @@ focus_tree = {
 		}
 
 		prerequisite = {
-			focus = VDN_integrate_the_northern_territories
+			focus = VDN_incorporate_medvedkovo
 		}
 
 		prerequisite = {
@@ -2130,7 +2253,7 @@ focus_tree = {
 			focus = VDN_the_great_adventure
 		}
 		
-		relative_position_id = VDN_integrate_the_northern_territories
+		relative_position_id = VDN_incorporate_medvedkovo
 		ai_will_do = {
 			factor = 50
 		}

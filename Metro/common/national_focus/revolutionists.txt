@@ -3,7 +3,7 @@
 
 focus_tree = {
     id = revolutionists
-	continuous_focus_position = { x = 5350 y = 100 }
+	continuous_focus_position = { x = 200 y = 1000 }
 	country = {
 		base = 0
 		modifier = {
@@ -21,12 +21,19 @@ focus_tree = {
 		y = 0
 		cost = 6.5
 
-		select_effect = {
-			country_event = nf_AVT.1
-		}
+		select_effect = { country_event = nf_AVT.12 }
 
 		completion_reward = {
 			country_event = nf_AVT.1
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
 		}
 
 		ai_will_do = {
@@ -47,14 +54,7 @@ focus_tree = {
 		relative_position_id = AVT_introduction
 
 		completion_reward = {
-			capital_scope = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
+			add_offsite_building = { type = industrial_complex level = 1 }
 		}
 
 		ai_will_do = {
@@ -65,7 +65,7 @@ focus_tree = {
 	focus = {
 		id = AVT_industry_2
 		icon = GFX_workshop_2
-		cost = 3.6
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_collectivization
@@ -243,10 +243,6 @@ focus_tree = {
 		y = 1
 		relative_position_id =  AVT_collectivization
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			capital_scope = {
 				add_building_construction = {
@@ -254,6 +250,10 @@ focus_tree = {
 					level = 2
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
@@ -264,9 +264,6 @@ focus_tree = {
 
 		prerequisite = {
 			focus =  AVT_gas_lighting
-		}
-		available = {
-		    num_of_controlled_states > 3
 		}
 		x = 1
 		y = 1
@@ -392,7 +389,7 @@ focus_tree = {
 	focus = {
 		id = AVT_community_resource_share
 		icon = GFX_scrap_metal_4
-		cost = 3.6
+		cost = 6.5
 
 		prerequisite = {
 			focus =  AVT_collectivization
@@ -438,19 +435,17 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			random_owned_controlled_state = {
-				limit = {
-					is_in_home_area = yes
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
+			capital_scope = {
 				add_resource = {
 			        type = scrap
 			        amount = 3
 			    }
 			    add_resource = {
 			        type = alloys
+			        amount = 3
+			    }
+				add_resource = {
+			        type = components
 			        amount = 3
 			    }
 			}
@@ -479,15 +474,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
+			add_offsite_building = { type = industrial_complex level = 2 }
 		}
 	}
 
@@ -508,15 +495,15 @@ focus_tree = {
 		y = 1
 		relative_position_id =  AVT_equal_duty
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			add_timed_idea = { 
 				idea = AVT_kvass_for_the_people
-				days = 250
+				days = 300
 			}
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
@@ -688,8 +675,8 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
-				uses = 1
+				bonus = 0.33
+				uses = 2
 				category = industry
 			}
 		}
@@ -899,6 +886,21 @@ focus_tree = {
 	}
 
 	focus = {
+		id = AVT_industry_tech_buff_5
+		icon = GFX_communist_book
+		cost = 6.5
+		prerequisite = { focus = AVT_industry_tech_buff_2 }
+		prerequisite = { focus = AVT_industry_tech_buff_4 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_industry_tech_buff_2
+		completion_reward = { add_research_slot = 1 }
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
 		id = AVT_eco_idea_buff_1
 		icon = GFX_wrench
 		cost = 6.5
@@ -1040,7 +1042,24 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_manpower = 25
+			division_template = {
+				name = "Tunnel Sentries"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 1 y = 0 }
+					irregulars = { x = 2 y = 0 }
+					irregulars = { x = 3 y = 0 }
+					irregulars = { x = 4 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
 		}
 	}
 
@@ -1072,7 +1091,6 @@ focus_tree = {
 		id = AVT_recruitment_4
 		icon = GFX_RED_female_soldiers
 		cost = 6.5
-
 		prerequisite = {
 			focus = AVT_recruitment_3
 			focus = AVT_recruitment_2
@@ -1083,13 +1101,9 @@ focus_tree = {
 		x = 0
 		y = 3
 		relative_position_id = AVT_recruitment_1
-
+		completion_reward = { add_ideas = AVT_equality_in_armed_forces }
 		ai_will_do = {
 			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = AVT_equality_in_armed_forces
 		}
 	}
 
@@ -1341,7 +1355,7 @@ focus_tree = {
 
 	focus = {
 		id = AVT_our_own_advisors_3
-		icon = GFX_RCH_expedition
+		icon = GFX_RCH_uber_soldaten_2
 		cost = 6.5
 
 		prerequisite = {
@@ -1386,41 +1400,34 @@ focus_tree = {
 	focus = {
 		id = AVT_military_1
 		icon = GFX_generic_small_arms_2
-		cost = 3.6
-
+		cost = 6.5
 		prerequisite = { focus = AVT_world_tension_unlock }
-
 		prerequisite = { focus = AVT_military_0 }
-
 		x = 4
 		y = 1
 		relative_position_id = AVT_world_tension_unlock
-
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 25
+				producer = RUS
+			}
+			add_timed_idea = { idea = AVT_firearm_manufacturing days = 200 }
+		}
 		ai_will_do = {
 			factor = 3
-		}
-
-		completion_reward = {
-			add_timed_idea = { idea = AVT_firearm_manufacturing days = 200 }
 		}
 	}
 
 	focus = {
 		id = AVT_military_2
 		icon = GFX_generic_medium_arms_2
-		cost = 5
-
+		cost = 6.5
 		prerequisite = { focus = AVT_military_1 }
-
 		available = { has_tech = tech_tooling_modern_tools }
 		x = 0
 		y = 1
 		relative_position_id = AVT_military_1
-
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			if = {
 				limit = {
@@ -1435,26 +1442,24 @@ focus_tree = {
 				add_timed_idea = { idea = AVT_firearm_manufacturing days = 250 }
 			}
 		}
+		ai_will_do = {
+			factor = 3
+		}
 	}
 
 	focus = {
 		id = AVT_military_3
 		icon = GFX_generic_medium_arms_3
 		cost = 6.5
-
 		prerequisite = { focus = AVT_military_2 }
-
 		available = { has_tech = tech_tooling_power_tools }
 		x = 0
 		y = 2
 		relative_position_id = AVT_military_2
-
 		completion_reward = {
 			random_owned_state = {
 				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
+					NOT = { has_state_category = pastoral }
 				}
 				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
@@ -1464,7 +1469,6 @@ focus_tree = {
 				}
 			}
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
@@ -1961,12 +1965,9 @@ focus_tree = {
 			AVT_tomsky = { 
 				gain_xp = 2000 
 			}
-			army_experience = 15
-
+			army_experience = 20
 			if = {
-				limit = {
-					ROOT = { is_in_faction = no }
-				}
+				limit = { ROOT = { is_in_faction = no } }
 				create_faction = AVT_FACTION
 			}
 		}
@@ -1984,8 +1985,8 @@ focus_tree = {
 		prerequisite = {
 			focus = AVT_inner_sphere_1
 		}
-		x = 2
-		y = 1
+		x = 1
+		y = 2
 		relative_position_id = AVT_inner_sphere_1
 
 		completion_reward = {
@@ -2005,6 +2006,7 @@ focus_tree = {
 					rail_cart = { x = 0 y = 1 }
 					rail_cart = { x = 0 y = 2 }
 					rail_cart = { x = 0 y = 3 }
+					rail_cart = { x = 0 y = 4 }
 				}
 				support = {
 					mot_recon = { x = 0 y = 0 }
@@ -2048,81 +2050,251 @@ focus_tree = {
 	}
 
 	focus = {
-		id = AVT_inner_sphere_2
-		icon = GFX_barscene
+		id = AVT_avtozavodskaya
+		icon = GFX_AVT_partisan
 		cost = 6.5
-
-		prerequisite = { focus = AVT_inner_sphere_1 }
-
-		mutually_exclusive = { focus = AVT_inner_sphere_3 }
-		x = 1
-		y = 2
-		relative_position_id = AVT_inner_sphere_1
-
-		completion_reward = {
-			diplomatic_relation = {
-				country = PVL
-				relation = non_aggression_pact
-				active = yes
-			}
-			PVL = { add_political_power = 100 }
-			capital_scope = {
-			    add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
+		prerequisite = { focus = AVT_introduction }
+		available = { has_country_flag = AVT_moved_avtozavodskaya }
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = { has_completed_focus = AVT_partizanskaya }
+				NOT = { has_completed_focus = AVT_turgenevskaya }
+				NOT = { has_completed_focus = AVT_mayakovskaya }
 			}
 		}
-
+		x = 30
+		y = 1
+		offset = {
+			x = 4
+			y = 0
+			trigger = { has_completed_focus = AVT_avtozavodskaya }
+		}
+		relative_position_id = AVT_introduction
+		select_effect = { mark_focus_tree_layout_dirty = yes }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_3
+				amount = 25
+				producer = RUS
+			}
+		}
 		ai_will_do = {
 			factor = 3
 		}
 	}
-
 	focus = {
-		id = AVT_inner_sphere_3
-		icon = GFX_AVT_reconcile
+		id = AVT_avtozavodskaya_1
+		icon = GFX_AVT_anatoly
 		cost = 6.5
-
-		prerequisite = { focus = AVT_inner_sphere_1 }
-
-		mutually_exclusive = { focus = AVT_inner_sphere_2 }
-		x = -1
-		y = 2
-		relative_position_id = AVT_inner_sphere_1
-		available = { 
-			PVL = { exists = yes is_puppet = no }
+		prerequisite = { focus = AVT_avtozavodskaya }
+		x = 0
+		y = 1
+		relative_position_id = AVT_avtozavodskaya
+		completion_reward = {
+			add_research_slot = 1
+			add_stability = 0.1
 		}
-
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_PVL_0
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_1 }
+		available = { 
+			61 = { is_owned_by = RUI }
+			107 = { is_owned_by = RUI }
+		}
+		x = 1
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_1
+		completion_reward = {
+			transfer_state = 61
+			transfer_state = 107
+			61 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			107 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_PVL_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_1 }
+		bypass = { PVL = { exists = no } }
+		available = { 
+			PVL = { exists = yes } 
+			NOT = { 
+				has_war_with = PVL 
+				PVL = { has_government = dictatorial } 
+			} 
+		}
+		x = 2
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_1
 		completion_reward = {
 			give_guarantee = PVL
 			add_political_power = 100
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
 	}
-
 	focus = {
-		id = AVT_inner_sphere_4
-		icon = GFX_PVL_diplomacy_1
+		id = AVT_avtozavodskaya_PVL_1a
+		icon = GFX_AVT_anatoly
 		cost = 6.5
-
-		prerequisite = { 
-			focus = AVT_inner_sphere_2
-			focus = AVT_inner_sphere_3 
-		}
-
+		prerequisite = { focus = AVT_avtozavodskaya_PVL_1 }
 		available = { 
-			PVL = { exists = yes is_puppet = no }
+			PVL = { exists = yes } 
+			NOT = { 
+				has_war_with = PVL 
+				PVL = { has_government = dictatorial } 
+			} 
+			has_manpower > 19
 		}
-
-		x = 0
-		y = 3
-		relative_position_id = AVT_inner_sphere_anatoly
-
+		x = 1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_PVL_1
 		completion_reward = {
+			add_manpower = -20
+			army_experience = 20
+			PVL = { 
+				division_template = {
+					name = "Tunnel Sentries"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 1 y = 0 }
+						irregulars = { x = 2 y = 0 }
+						irregulars = { x = 3 y = 0 }
+						irregulars = { x = 4 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1st Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+			add_opinion_modifier = {
+				target = PVL
+				modifier = jointoperations
+			}
+			reverse_add_opinion_modifier = {
+				target = PVL
+				modifier = jointoperations
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_technopark
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_PVL_1a }
+		bypass = { 374 = { is_owned_by = ROOT } }
+		x = 1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_PVL_1a
+		completion_reward = {
+			transfer_state = 374
+			374 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_compliance = 20
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_technopark_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_technopark }
+		x = 0
+		y = 1
+		relative_position_id = AVT_technopark
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_PVL_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_PVL_1 }
+		available = { 
+			PVL = { exists = yes is_puppet = no } 
+			NOT = { 
+				has_war_with = PVL 
+				PVL = { has_government = dictatorial } 
+			} 
+		}
+		x = 0
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_PVL_1
+		completion_reward = {
+			add_political_power = 100
 			add_opinion_modifier = {
 				target = PVL
 				modifier = AVT_mutual_assistance
@@ -2140,7 +2312,1716 @@ focus_tree = {
 				add_research_slot = 1
 			}
 		}
-
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_PVL_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_PVL_2 }
+		mutually_exclusive = { focus = AVT_avtozavodskaya_PVL_4 }
+		available = { 
+			PVL = { exists = yes is_puppet = no } 
+			NOT = { 
+				has_war_with = PVL 
+				PVL = { has_government = dictatorial } 
+			} 
+		}
+		x = 1
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_PVL_2
+		completion_reward = {
+			puppet = PVL
+			set_technology = { shotgun_infantry_equipment_tech_4 = 1 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_PVL_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_PVL_2 }
+		mutually_exclusive = { focus = AVT_avtozavodskaya_PVL_3 }
+		available = { 
+			PVL = { exists = yes is_puppet = no } 
+			NOT = { 
+				has_war_with = PVL 
+				PVL = { has_government = dictatorial } 
+			} 
+		}
+		x = -1
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_PVL_2
+		completion_reward = {
+			PVL = {
+				every_owned_state = {
+					limit = {
+						is_core_of = PVL
+					}
+					add_core_of = AVT
+				}
+			}
+			annex_country = {
+				target = PVL
+				transfer_troops = yes
+			}
+			inherit_technology = PVL
+			add_threat = 3
+			## launch global event or something
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_hunt_for_STB_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_1 }
+		available = { 
+			OR = { 
+				STB = { exists = yes } 
+				PVL = { has_government = dictatorial } 
+			} 
+		}
+		x = -2
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_1
+		completion_reward = {
+			add_ideas = AVT_STB_attack
+			if = {
+				limit = {
+					PVL = { has_government = dictatorial } 
+				}
+				add_ideas = AVT_PVL_attack
+			}
+			if = {
+				limit = {
+					STB = { exists = yes } 
+				}
+				add_ideas = AVT_STB_attack
+			}
+			division_template = {
+				name = "Interstational Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Stalker Team\" division_template = \"Interstational Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_hunt_for_STB_2a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_hunt_for_STB_1 }
+		available = {
+			STB = { exists = yes }
+		}
+		x = -1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_hunt_for_STB_1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 2
+				bonus = 0.5
+				ahead_reduction = 1
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_hunt_for_STB_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_hunt_for_STB_1 }
+		available = {
+			OR = { 
+				STB = { exists = yes } 
+				PVL = { has_government = dictatorial } 
+			} 
+			OR = {
+				is_neighbor_of = STB
+				is_neighbor_of = PVL
+			}
+		}
+		x = -2
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_hunt_for_STB_1
+		will_lead_to_war_with = STB
+		will_lead_to_war_with = PVL
+		completion_reward = {
+			if = {
+				limit = { PVL = { has_government = dictatorial } }
+				create_wargoal = {
+					type = take_state_focus
+					target = PVL
+					expire = 0
+					generator = { 28 }
+				}
+			}
+			if = {
+				limit = { STB = { exists = yes } }
+				create_wargoal = {
+					type = take_state_focus
+					target = STB
+					expire = 0
+					generator = { 28 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_hunt_for_STB_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_hunt_for_STB_2 }
+		available = {
+			STB = {
+				exists = no 
+				capital_scope = {
+					is_owned_by = ROOT
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_hunt_for_STB_2
+		completion_reward = {
+			army_experience = 50
+			add_ideas = AVT_death_to_all_fascists
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_1 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_1
+		completion_reward = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_2 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_avtozavodskaya_2
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_resource = {
+					type = electronics
+					amount = 6
+				}
+				add_resource = {
+					type = alloys
+					amount = 4
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_3 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_3
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 30
+				producer = RUS
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_sevastopol
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_2 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_2
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 3
+				ahead_reduction = 1
+				category = rail_salvaging
+			}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_2
+				amount = 20
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_sevastopol_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_sevastopol }
+		x = -1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_sevastopol
+		completion_reward = {
+			add_ideas = AVT_rail_draisines
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_sevastopol_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_sevastopol_2 }
+		available = { has_tech = rail_salvaging_2033 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_sevastopol_2
+		completion_reward = {
+			set_technology = { rail_cart_tech_tachanka = 1 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_4
+				amount = 20
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_sevastopol_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_sevastopol_3 }
+		available = {
+			is_neighbor_of = SEV
+		}
+		mutually_exclusive = { focus = AVT_avtozavodskaya_sevastopol_5 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_sevastopol_3
+		will_lead_to_war_with = SEV
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = SEV
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_avtozavodskaya_sevastopol_5
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_avtozavodskaya_sevastopol_3 }
+		mutually_exclusive = { focus = AVT_avtozavodskaya_sevastopol_4 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_avtozavodskaya_sevastopol_3
+		completion_reward = {
+			diplomatic_relation = {
+				country = SEV
+				relation = non_aggression_pact
+				active = yes
+			}
+			add_ideas = AVT_SEV_trade_offer_deal
+			add_offsite_building = { type = fuel_silo level = 3 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya
+		icon = GFX_AVT_partisan
+		cost = 6.5
+		prerequisite = { focus = AVT_introduction }
+		available = { has_country_flag = AVT_moved_partizanskaya }
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = { has_completed_focus = AVT_avtozavodskaya }
+				NOT = { has_completed_focus = AVT_turgenevskaya }
+				NOT = { has_completed_focus = AVT_mayakovskaya }
+			}
+		}
+		x = 40
+		y = 1
+		relative_position_id = AVT_introduction
+		select_effect = { mark_focus_tree_layout_dirty = yes }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_4
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya }
+		x = 0
+		y = 1
+		relative_position_id = AVT_partizanskaya
+		completion_reward = {
+			add_research_slot = 1
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_1 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_partizanskaya_1
+		completion_reward = {
+			291 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_2 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_partizanskaya_2
+		completion_reward = {
+			291 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_3 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_partizanskaya_3
+		completion_reward = {
+			291 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_4a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_4 }
+		prerequisite = { focus = AVT_partizanskaya_4  focus = AVT_pervomayskaya_3 }
+		available = { MDR = { exists = no }}
+		x = -1
+		y = 1
+		relative_position_id = AVT_partizanskaya_4
+		completion_reward = {
+			set_technology = { special_forces_riot_equipment_tech = 1 }
+			ROOT = {
+				every_owned_state = {
+					limit = {
+						is_core_of = MDR
+					}
+					add_compliance = 20
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_partizanskaya_4b
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_4 }
+		prerequisite = { focus = AVT_baumansky_4 }
+		available = { BAU = { exists = no }}
+		x = 1
+		y = 1
+		relative_position_id = AVT_partizanskaya_4
+		completion_reward = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+			ROOT = {
+				every_owned_state = {
+					limit = {
+						is_core_of = BAU
+					}
+					add_compliance = 20
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_baumansky
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_1 }
+		x = 2
+		y = 1
+		relative_position_id = AVT_partizanskaya_1
+		completion_reward = {
+			add_ideas = AVT_partizanskaya
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_baumansky_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_baumansky }
+		x = 0
+		y = 1
+		relative_position_id = AVT_baumansky
+		completion_reward = {
+			add_offsite_building = { type = synthetic_refinery level = 1 }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = refinery
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_baumansky_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_baumansky }
+		x = 1
+		y = 2
+		relative_position_id = AVT_baumansky
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = rail_car
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_baumansky_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_baumansky }
+		x = -1
+		y = 2
+		relative_position_id = AVT_baumansky
+		completion_reward = {
+			add_ideas = AVT_rail_cars
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_baumansky_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_baumansky_3 focus = AVT_baumansky_2 }
+		available = { is_neighbor_of = BAU }
+		x = 1
+		y = 1
+		relative_position_id = AVT_baumansky_3
+		will_lead_to_war_with = BAU
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = BAU
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_pervomayskaya
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_partizanskaya_1 }
+		x = -2
+		y = 1
+		relative_position_id = AVT_partizanskaya_1
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+			division_template = {
+				name = "Interstational Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Stalker Team\" division_template = \"Interstational Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_pervomayskaya_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_pervomayskaya }
+		x = 0
+		y = 2
+		relative_position_id = AVT_pervomayskaya
+		completion_reward = {
+			add_ideas = AVT_spec_ops_equipment
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_3
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_pervomayskaya_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_pervomayskaya }
+		x = -1
+		y = 1
+		relative_position_id = AVT_pervomayskaya
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 2
+				bonus = 1
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_pervomayskaya_2a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_pervomayskaya_2 }
+		mutually_exclusive = { focus = AVT_pervomayskaya_3 }
+		x = -1
+		y = 2
+		relative_position_id = AVT_pervomayskaya_2
+		completion_reward = {
+			add_ideas = AVT_pervomayskaya_trade
+			diplomatic_relation = {
+				country = MDR
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_pervomayskaya_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_pervomayskaya_1 }
+		mutually_exclusive = { focus = AVT_pervomayskaya_2a }
+		available = { is_neighbor_of = SEV }
+		x = 0
+		y = 1
+		relative_position_id = AVT_pervomayskaya_1
+		will_lead_to_war_with = MDR
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = MDR
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya
+		icon = GFX_AVT_partisan
+		cost = 6.5
+		prerequisite = { focus = AVT_introduction }
+		available = { has_country_flag = AVT_moved_turgenevskaya }
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {	has_completed_focus = AVT_avtozavodskaya }
+				NOT = {	has_completed_focus = AVT_partizanskaya }
+				NOT = {	has_completed_focus = AVT_mayakovskaya }
+			}
+		}
+		x = 50
+		y = 1
+		offset = {
+			x = -4
+			y = 0
+			trigger = { has_completed_focus = AVT_turgenevskaya }
+		}
+		relative_position_id = AVT_introduction
+		select_effect = { mark_focus_tree_layout_dirty = yes }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya }
+		x = 0
+		y = 1
+		relative_position_id = AVT_turgenevskaya
+		completion_reward = {
+			add_research_slot = 1
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_1 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_turgenevskaya_1
+		completion_reward = {
+			338 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_2 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_turgenevskaya_2
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = construction
+			}
+			338 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_3 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_turgenevskaya_3
+		completion_reward = {
+			338 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_5
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_4 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_4
+		completion_reward = {
+			338 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_6
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_4 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_4
+		completion_reward = {
+			338 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_1 }
+		mutually_exclusive = { focus = AVT_turgenevskaya_anti_redline }
+		x = -2
+		y = 1
+		relative_position_id = AVT_turgenevskaya_1
+		completion_reward = {
+			add_opinion_modifier = { target = RED modifier = jointoperations }
+			RED = { add_opinion_modifier = { target = AVT modifier = jointoperations } }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline
+		completion_reward = {
+			## Add to faction
+			RED = { add_to_faction = ROOT }
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 1
+				category = entrench_kits
+			}
+			every_unit_leader = {
+				add_planning = 1
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_2 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_2
+		completion_reward = {
+			army_experience = 5
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 30
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+			division_template = {
+				name = "Redline Specialists"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Redline Specialists\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_7
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_2 }
+		available = {
+			SSK = { 
+				exists = yes
+				strength_ratio = {
+					tag = RED
+					ratio < 0.1
+				} 
+			}
+		}
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_2
+		completion_reward = {
+			puppet = SSK
+			add_named_threat = {
+				threat = 2.5
+				name = RED_puppet_SSK
+			}
+			news_event = { id = global_event.54 } 
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_7a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_7 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_7
+		completion_reward = {
+			SSK = {
+				every_owned_state = {
+					limit = {
+						is_core_of = PVL
+					}
+					add_core_of = AVT
+				}
+			}
+			annex_country = {
+				target = SSK
+				transfer_troops = yes
+			}
+			inherit_technology = SSK
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_8
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_7a }
+		available = {
+			ROOT = { is_neighbor_of = KTG }
+			KTG = { exists = yes is_puppet = no }
+		}
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_7a
+		will_lead_to_war_with = KTG
+		completion_reward = {
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = KTG
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_2 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_turgenevskaya_pro_redline_2
+		completion_reward = {
+			add_to_tech_sharing_group = RED_faction_tech_group
+			army_experience = 50
+			add_political_power = 100
+			RED = { army_experience = 25 } 
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_5
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_4 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_4
+		completion_reward = {
+			add_ideas = AVT_pro_redline_1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_pro_redline_6
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_pro_redline_4 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_pro_redline_4
+		completion_reward = {
+			add_ideas = AVT_pro_redline_2
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_1 }
+		mutually_exclusive = { focus = AVT_turgenevskaya_pro_redline }
+		x = 2
+		y = 1
+		relative_position_id = AVT_turgenevskaya_1
+		completion_reward = {
+			army_experience = 25
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline }
+		x = 1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_5
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_2 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline_2
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 15
+				producer = RUS
+			}
+			division_template = {
+				name = "Interstational Fighting Force"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					rail_cart = { x = 0 y = 0 }
+					rail_cart = { x = 0 y = 1 }
+					rail_cart = { x = 0 y = 2 }
+					rail_cart = { x = 0 y = 3 }
+					rail_cart = { x = 0 y = 4 }
+				}
+				support = {
+					mot_recon = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Fighting Force\" division_template = \"Interstational Fighting Force\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_6
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_5 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline_5
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 15
+				producer = RUS
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Fighting Force\" division_template = \"Interstational Fighting Force\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Fighting Force\" division_template = \"Interstational Fighting Force\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_2 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline_2
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 15
+				producer = RUS
+			}
+			division_template = {
+				name = "Interstational Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Stalker Team\" division_template = \"Interstational Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_4
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_3 }
+		x = 0
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline_3
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 15
+				producer = RUS
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Stalker Team\" division_template = \"Interstational Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Interstational Stalker Team\" division_template = \"Interstational Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_turgenevskaya_anti_redline_7
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_6 }
+		prerequisite = { focus = AVT_turgenevskaya_anti_redline_4 }
+		available = { is_neighbor_of = RED }
+		x = -1
+		y = 1
+		relative_position_id = AVT_turgenevskaya_anti_redline_6
+		will_lead_to_war_with = RED
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = RED
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya
+		icon = GFX_AVT_partisan
+		cost = 6.5
+		prerequisite = { focus = AVT_introduction }
+		available = { has_country_flag = AVT_moved_mayakovskaya }
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = { has_completed_focus = AVT_avtozavodskaya }
+				NOT = { has_completed_focus = AVT_partizanskaya }
+				NOT = {	has_completed_focus = AVT_turgenevskaya }
+			}
+		}
+		x = 58
+		y = 1
+		offset = {
+			x = -10
+			y = 0
+			trigger = { has_completed_focus = AVT_mayakovskaya }
+		}
+		relative_position_id = AVT_introduction
+		select_effect = { mark_focus_tree_layout_dirty = yes }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = pheumatic_infantry_equipment_2
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya }
+		x = 0
+		y = 1
+		relative_position_id = AVT_mayakovskaya
+		completion_reward = {
+			add_research_slot = 1
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1 }
+		x = -1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 30
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1b
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1 }
+		x = -3
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1e
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1a }
+		prerequisite = { focus = AVT_mayakovskaya_1b }
+		x = -1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1a
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1c
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1 }
+		x = 1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = basic_piercing_equipment
+				amount = 15
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1d
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1 }
+		x = 3
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_1f
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1c }
+		prerequisite = { focus = AVT_mayakovskaya_1d }
+		x = 1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_1c
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_2
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_1 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_mayakovskaya_1
+		completion_reward = {
+			316 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_2a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_2 }
+		mutually_exclusive = { focus = AVT_mayakovskaya_2b }
+		x = -1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_2c
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_2a }
+		x = -1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_2a
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_2b
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_2 }
+		mutually_exclusive = { focus = AVT_mayakovskaya_2a }
+		x = 1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_2d
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_2b }
+		x = 1
+		y = 1
+		relative_position_id = AVT_mayakovskaya_2b
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_3
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_2 }
+		x = 0
+		y = 2
+		relative_position_id = AVT_mayakovskaya_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_3a
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_3 }
+		x = -2
+		y = 1
+		relative_position_id = AVT_mayakovskaya_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_3b
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_3 }
+		available = { is_neighbor_of = RCH }
+		x = 0
+		y = 2
+		relative_position_id = AVT_mayakovskaya_3
+		will_lead_to_war_with = RCH
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = RCH
+				expire = 0
+				generator = { 28 }
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = AVT_mayakovskaya_3c
+		icon = GFX_AVT_anatoly
+		cost = 6.5
+		prerequisite = { focus = AVT_mayakovskaya_3 }
+		x = 2
+		y = 1
+		relative_position_id = AVT_mayakovskaya_3
+		completion_reward = {
+		}
 		ai_will_do = {
 			factor = 3
 		}
