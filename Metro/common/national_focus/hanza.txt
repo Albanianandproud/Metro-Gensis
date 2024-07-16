@@ -1701,8 +1701,10 @@ focus_tree = {
 			focus = HNZ_old_comrades0
 		}
 		bypass = {
-			RIZ = { exists = no is_puppet_of = VDN }
-			ALK = { exists = no is_puppet_of = VDN }
+			OR = {
+				RIZ = { exists = no }
+				RIZ = { is_puppet_of = VDN }
+			}
 		}
 		x = -1
 		y = 1
@@ -1808,7 +1810,7 @@ focus_tree = {
 					amount = 1
 				}
 			}
-			DIM = {
+			SAV = {
 				capital_scope = {
 					add_resource = {
 						type = scrap
@@ -2052,6 +2054,7 @@ focus_tree = {
 				threat = 2
 				name = HNZ_puppet_PVL
 			}
+			PVL_set_hanza_puppet_cosmetic_tag = yes
 		}
 
 		ai_will_do = {
@@ -2133,8 +2136,12 @@ focus_tree = {
 			}
 		}
 		bypass = {
-			is_in_faction_with = BRN
-			is_puppet_of = BRN
+			OR = {
+				NOT = { country_exists = BRN }
+				has_war_with = BRN
+				is_puppet_of = BRN
+				BRN = { is_puppet = yes }
+			}
 		}
 		x = 3
 		y = 1
@@ -2166,6 +2173,14 @@ focus_tree = {
 			BRN = {
 				exists = yes 
 				is_puppet_of = HNZ
+			}
+		}
+		bypass = {
+			OR = {
+				NOT = { country_exists = BRN }
+				has_war_with = BRN
+				is_puppet_of = BRN
+				BRN = { is_puppet_of = BRK }
 			}
 		}
 		x = 1

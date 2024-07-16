@@ -647,6 +647,92 @@ country_event = {
 	
 }
 
+country_event = {
+    id = nf_VDN.22
+    title = nf_VDN.22.t
+    desc = nf_VDN.22.d
+    picture = GFX_event_164
+
+	is_triggered_only = yes
+
+    option = { 
+        name = nf_VDN.22.a
+
+		add_opinion_modifier = { target = VDN modifier = border_conflict_reconciled }
+	  	remove_state_core = 406
+		VDN = { transfer_state = 406 }
+		VDN = { add_state_core = 406 }
+		if = {
+			limit = {
+				HNZ = { owns_state = 195 }
+			}
+			VDN = { transfer_state = 195 }
+	  		remove_state_core = 195
+			VDN = { add_state_core = 195 }
+		}
+		diplomatic_relation = {
+			country = VDN
+			relation = non_aggression_pact
+			active = yes
+		}
+		
+		hidden_effect = {
+			FROM = { country_event = { id = nf_VDN.23 hours = 4 } }
+		}
+        ai_chance = {
+            base = 2
+        }
+    }
+    option = { 
+        name = nf_VDN.22.b
+		
+		hidden_effect = {
+			FROM = { country_event = { id = nf_VDN.24 hours = 4 } }
+		}
+        ai_chance = {
+            base = 0
+        }
+    }
+}
+
+country_event = {
+	id = nf_VDN.23
+	title = nf_VDN.23.t
+	desc = nf_VDN.23.d
+	picture = GFX_event_164
+
+	is_triggered_only = yes
+			
+	option = {
+		name = nf_VDN.23.a
+
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = border_conflict_reconciled }
+				diplomatic_relation = {
+					country = HNZ
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = nf_VDN.24
+	title = nf_VDN.8.t
+	desc = nf_VDN.8.d
+	picture = GFX_event_164
+
+	is_triggered_only = yes
+			
+	option = {
+		name = nf_VDN.8.a
+
+	}
+}
+
 #####NEWS#####
 
 #VDNKH claims overlordship over Sukharevskaya

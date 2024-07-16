@@ -51,7 +51,7 @@ focus_tree = {
 	}
 	
 	focus = { ### Oligarch Pro Hanza path ###
-		id = VDN_a_heavenly_leader
+		id = VDN_traders_council
 		icon = GFX_courtroom
 		x = -7
 		y = 1
@@ -95,7 +95,7 @@ focus_tree = {
 		}
 
 		mutually_exclusive = {
-			focus = VDN_a_heavenly_leader
+			focus = VDN_traders_council
 		}
 
 		mutually_exclusive = {
@@ -128,7 +128,7 @@ focus_tree = {
 		}
 
 		mutually_exclusive = {
-			focus = VDN_a_heavenly_leader
+			focus = VDN_traders_council
 		}
 
 		mutually_exclusive = {
@@ -403,11 +403,11 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_a_heavenly_leader
+			focus = VDN_traders_council
 		}
 	
 		
-		relative_position_id = VDN_a_heavenly_leader
+		relative_position_id = VDN_traders_council
 		
 		ai_will_do = {
 			factor = 50
@@ -429,7 +429,7 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_a_heavenly_leader
+			focus = VDN_traders_council
 		}
 		
 		relative_position_id = VDN_work_to_be_done
@@ -468,10 +468,10 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_a_heavenly_leader
+			focus = VDN_traders_council
 		}
 		
-		relative_position_id = VDN_a_heavenly_leader
+		relative_position_id = VDN_traders_council
 		ai_will_do = {
 			factor = 50
 		}
@@ -786,7 +786,7 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = VDN_alexander_stays
+		id = VDN_sukhoi
 		icon = GFX_VDN_sukhoi
 		x = 2
 		y = 1
@@ -989,6 +989,19 @@ focus_tree = {
 
 		mutually_exclusive = {
 			focus = VDN_prepare_against_hanza
+		}
+		
+		available = {
+			AND = {
+				is_neighbor_of = HNZ
+				HNZ = { owns_state = 359 }
+			}
+		}
+
+		bypass = {
+			NOT = {
+				359 = { is_owned_by = HNZ }
+			}
 		}
 		
 		relative_position_id = VDN_rizhskaya
@@ -1201,6 +1214,64 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = VDN_war_on_crime_idea
+			create_wargoal = {
+				type = annex_everything
+				target = KTG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = TRT
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MOB
+			}
+		}
+	}
+	
+	focus = {
+		id = VDN_ask_control_over_oktabrskaya
+		icon = GFX_HNZ_generic_agreement
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = VDN_war_on_crime
+		}
+		
+		available = {
+			AND = {
+				OR = {
+					owns_state = 195
+					AND = {
+						owns_state = 311
+						HNZ = { owns_state = 195 }
+					}
+				}
+				is_neighbor_of = HNZ
+				HNZ = { owns_state = 406 }
+			}
+		}
+		
+		relative_position_id = VDN_war_on_crime
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			HNZ = {
+				country_event = { id = nf_VDN.22 hours = 12 random_hours = 6 }
+				custom_effect_tooltip = if_they_accept
+				effect_tooltip = {
+					transfer_state = 406
+					diplomatic_relation = {
+						country = HNZ
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+			}
 		}
 	}
 	
@@ -1212,10 +1283,10 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_war_on_crime
+			focus = VDN_ask_control_over_oktabrskaya
 		}
 		
-		relative_position_id = VDN_war_on_crime
+		relative_position_id = VDN_ask_control_over_oktabrskaya
 		ai_will_do = {
 			factor = 50
 		}
@@ -1384,7 +1455,7 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = VDN_church_academies
+		id = VDN_products_of_the_station
 		icon = GFX_metro_industry
 		x = -1
 		y = 1
@@ -1419,11 +1490,11 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_church_academies
+			focus = VDN_products_of_the_station
 		}
 		
 		
-		relative_position_id = VDN_church_academies
+		relative_position_id = VDN_products_of_the_station
 		ai_will_do = {
 			factor = 50
 		}
@@ -1454,11 +1525,11 @@ focus_tree = {
 		cost = 6.5
 
 		prerequisite = {
-			focus = VDN_church_academies
+			focus = VDN_products_of_the_station
 		}
 		
 		
-		relative_position_id = VDN_church_academies
+		relative_position_id = VDN_products_of_the_station
 		ai_will_do = {
 			factor = 50
 		}

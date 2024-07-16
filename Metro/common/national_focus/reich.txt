@@ -1959,7 +1959,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = RCH_military_industry_ge }
 		prerequisite = { focus = RCH_internal_civilian_7 }
-		available = { has_civic_education_higher_4 = yes date > 2033.1.1 }
+		available = { has_civic_education_higher_4 = yes }
 		x = 0
 		y = 2
 		cost = 6.5
@@ -2321,7 +2321,7 @@ focus_tree = {
 			337 = { is_owned_by = ROOT }
 		}
 		x = 1
-		y = 2
+		y = 3
 		cost = 3
 		relative_position_id = RCH_the_iron_legion_1
 		completion_reward = {
@@ -2849,7 +2849,7 @@ focus_tree = {
 			focus = RCH_would_you_like_total_war
 		}
 		x = -1
-		y = 2
+		y = 3
 		cost = 3
 		relative_position_id = RCH_ss_integration_1
 		completion_reward = {
@@ -3034,7 +3034,7 @@ focus_tree = {
 			}
 		}
 		x = 1
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_1
 		completion_reward = {
@@ -3348,20 +3348,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_inaugerate_the_new_blood
 		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				ahead_reduction = 1
-				category = infantry_weapons
-			}
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				ahead_reduction = 1
-				category = armor
-			}
+			add_research_slot = 1
 		}
 		ai_will_do = {
 			factor = 2
@@ -3690,6 +3677,15 @@ focus_tree = {
 			}
 			add_ideas = RCH_panzer_1
 			set_technology = { rail_panzer_tech_sturmpanzer = 1}
+			add_equipment_production = {
+				equipment = {
+					type = rail_panzer_equipment_3
+					#creator = "ROOT"
+				}
+				requested_factories = 5
+				progress = 0.15
+				efficiency = 100
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3774,6 +3770,41 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_kampfmachine
+		icon = GFX_focus_generic_tank_production
+		prerequisite = {
+			focus = RCH_blitzkrieg_tactics
+			focus = RCH_fist_of_the_reich
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_fist_of_the_reich
+		completion_reward = {
+			division_template = {
+				name = "Kampf Machines"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					rail_panzer = { x = 0 y = 0 }
+					rail_panzer = { x = 0 y = 1 }
+					rail_panzer = { x = 0 y = 2 }
+					rail_panzer = { x = 0 y = 3 }
+					rail_panzer = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Rail Tanks\" division_template = \"Kampf Machines\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
 		id = RCH_superiority_of_the_reich
 		icon = GFX_RCH_science
 		prerequisite = {
@@ -3790,6 +3821,20 @@ focus_tree = {
 		relative_position_id = RCH_fist_of_the_reich
 		completion_reward = {
 			add_research_slot = 1
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = armor
+			}
 		}
 		ai_will_do = {
 			factor = 2
