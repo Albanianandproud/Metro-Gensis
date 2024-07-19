@@ -10,7 +10,7 @@ focus_tree = {
 			tag = GWC
 		}
 	}
-	continuous_focus_position = { x = 2420 y = 1200 }
+	continuous_focus_position = { x = 2720 y = 1200 }
 	default = no
 
 	focus = {
@@ -19,36 +19,288 @@ focus_tree = {
 		x = 10
 		y = 0
 		cost = 5.8
-
-		select_effect = {
-			country_event = nf_GWC.3
-		}
-
+		select_effect = { country_event = nf_GWC.3 }
 		completion_reward = {
 			add_political_power = 50
 		}
-
 		ai_will_do = {
 			factor = 20
 		}
 	}
-
 	focus = {
-		id = GWC_focus_1
+		id = GWC_branching_from_park_pobedy
 		icon = GFX_GWC_skull_2
 		x = 0
 		y = 1
 		cost = 5.8
 		prerequisite = { focus = GWC_followers_of_the_worm }
 		relative_position_id = GWC_followers_of_the_worm
+		completion_reward = {
+			army_experience = 5
+			add_command_power = 15
+			division_template = {
+				name = "Underzealot Followers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					underzealots = { x = 0 y = 0 }
+					underzealots = { x = 0 y = 1 }
+					underzealots = { x = 0 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_branching_from_park_pobedy_2
+		icon = GFX_GWC_skull_2
+		x = 0
+		y = 2
+		cost = 5.8
+		prerequisite = { focus = GWC_branching_from_park_pobedy }
+		relative_position_id = GWC_branching_from_park_pobedy
+		completion_reward = {
+			army_experience = 15
+			add_command_power = 5
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar
+		icon = GFX_GWC_skull_2
+		x = 3
+		y = 1
+		cost = 5.8
+		available = { 167 = { is_owned_by = RUI } 385 = { is_owned_by = RUI }}
+		prerequisite = { focus = GWC_followers_of_the_worm }
+		relative_position_id = GWC_followers_of_the_worm
+		completion_reward = {
+			transfer_state = 385
+			transfer_state = 167 
+			hidden_effect = { 
+				ROOT = { country_event = {  id = nf_GWC.10 days = 90 random_days = 90  } } 
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_2
+		icon = GFX_GWC_skull_2
+		x = -1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar
+		completion_reward = {
+			385 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			167  = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_4
+		icon = GFX_GWC_skull_2
+		x = 2
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar
+		completion_reward = {
+			385 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_5
+		icon = GFX_GWC_skull_2
+		x = 1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_4 }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_4
+		completion_reward = {
+			add_ideas = GWC_blowguns
+			385 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_6
+		icon = GFX_GWC_skull_2
+		x = 1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_5 }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_5
+		completion_reward = {
+			GWC_blowguns = yes
+			add_equipment_to_stockpile = {
+		        type = savage_ranged_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_7
+		icon = GFX_GWC_skull_2
+		x = -1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_5 }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_5
+		completion_reward = {
+			GWC_blowguns = yes
+			add_equipment_to_stockpile = {
+		        type = savage_ranged_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_colonization_of_slaviansky_bulvar_3
+		icon = GFX_GWC_skull_2
+		x = 1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_2 }
+		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_2
+		completion_reward = {
+			385 = { 
+				add_core_of = ROOT
+				add_resource = {
+			        type = scrap
+			        amount = 3
+			    }
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_decrees_of_priest
+		icon = GFX_GWC_skull_2
+		x = -3
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_followers_of_the_worm }
+		relative_position_id = GWC_followers_of_the_worm
+		completion_reward = {
+			add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_decrees_of_priest_2
+		icon = GFX_GWC_skull_2
+		x = 1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_decrees_of_priest }
+		relative_position_id = GWC_focus_decrees_of_priest
+		completion_reward = {
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_decrees_of_priest_3
+		icon = GFX_GWC_skull_2
+		x = -1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_focus_decrees_of_priest_2 }
+		relative_position_id = GWC_focus_decrees_of_priest_2
+		completion_reward = {
+			add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = GWC_focus_1
+		icon = GFX_GWC_skull_2
+		x = 0
+		y = 4
+		cost = 5.8
+		prerequisite = { focus = GWC_branching_from_park_pobedy_2 }
+		prerequisite = { focus = GWC_focus_decrees_of_priest_3 }
+		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_3 }
+		relative_position_id = GWC_followers_of_the_worm
 
 		completion_reward = {
 			add_war_support = 0.05
 			custom_effect_tooltip = GWC_call_to_war
 			if = {
-				limit = {
-					has_dlc = "La Resistance"
-				}
+				limit = { has_dlc = "La Resistance" }
 				create_intelligence_agency = {
 					name = GWC_intelligence_agency
 					icon = "GFX_intelligence_agency_logo_GWC"
@@ -57,7 +309,6 @@ focus_tree = {
 				upgrade_intelligence_agency = upgrade_espionage_ability
 			}
 		}
-
 		ai_will_do = {
 			factor = 20
 		}
@@ -66,7 +317,7 @@ focus_tree = {
 	focus = {
 		id = GWC_supremacy_of_wit
 		icon = GFX_GWC_battle_for_kuntsevskaya
-		x = 5
+		x = 7
 		y = 1
 		cost = 5.8
 
@@ -281,7 +532,7 @@ focus_tree = {
 	focus = {
 		id = GWC_supremacy_of_force
 		icon = GFX_GWC_deploy_the_reserves
-		x = -5
+		x = -7
 		y = 1
 		cost = 5.8
 
@@ -577,7 +828,7 @@ focus_tree = {
 		id = GWC_focus_12
 		icon = GFX_GWC_tribal_dominance
 		x = 0
-		y = 4
+		y = 3
 		cost = 5.8
 
 		prerequisite = { focus = GWC_focus_11 focus = GWC_focus_15 }
@@ -861,8 +1112,8 @@ focus_tree = {
 	focus = {
 		id = GWC_heart_of_darkness
 		icon = GFX_GWC_skull
-		x = 12
-		y = 1
+		x = 13
+		y = 0
 		cost = 5.8
 		available = { has_completed_focus = GWC_focus_1 }
 		relative_position_id = GWC_followers_of_the_worm
@@ -884,16 +1135,14 @@ focus_tree = {
 				}
 			}
 		}
-
 		ai_will_do = {
 			factor = 100
 		}
 	}
-
 	focus = {
 		id = GWC_rid_the_machines
 		icon = GFX_GWC_warfare_2
-		x = -2
+		x = -3
 		y = 1
 		cost = 5.8
 		prerequisite = { focus = GWC_heart_of_darkness }
@@ -917,23 +1166,12 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_rid_the_machines
-		}
-
-		mutually_exclusive = {
-			focus = GWC_scarier_stakes
-		}
-
+		prerequisite = { focus = GWC_rid_the_machines }
+		mutually_exclusive = { focus = GWC_scarier_stakes }
 		relative_position_id = GWC_rid_the_machines
-
+		completion_reward = { add_ideas = GWC_sharper_sticks_idea }
 		ai_will_do = {
 			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = GWC_sharper_sticks_idea
 		}
 	}
 
@@ -943,23 +1181,14 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_rid_the_machines
-		}
-
-		mutually_exclusive = {
-			focus = GWC_sharper_sticks
-		}
-
+		prerequisite = { focus = GWC_rid_the_machines }
+		mutually_exclusive = { focus = GWC_sharper_sticks }
 		relative_position_id = GWC_rid_the_machines
-
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = GWC_scarier_stakes_idea
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
@@ -1122,7 +1351,7 @@ focus_tree = {
 	focus = {
 		id = GWC_toolmaking_smiths
 		icon = GFX_GWC_reproduction_factories
-		x = -3
+		x = -4
 		y = 1
 		cost = 5.8
 
@@ -1145,26 +1374,20 @@ focus_tree = {
 			}
 		}
 	}
-
 	focus = {
 		id = GWC_cave_fungus
 		icon = GFX_mushroom
 		x = -1
-		y = 1
+		y = 2
 		cost = 5.8
-
-		prerequisite = {
-			focus = GWC_toolmaking_smiths
-		}
-
+		available = { 385 = { is_owned_by = ROOT } }
+		prerequisite = { focus = GWC_toolmaking_smiths }
 		relative_position_id = GWC_toolmaking_smiths
-
-		ai_will_do = {
-			factor = 2
-		}
-
 		completion_reward = {
 			add_ideas = GWC_cave_fungus_idea
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 
@@ -1764,20 +1987,14 @@ focus_tree = {
 			set_technology = { GWC_unique_tech_3 = 1 }
 		}
 	}
-
 	focus = {
 		id = GWC_worm_military_1
 		icon = GFX_GWC_battle_for_kuntsevskaya
-		x = -12
-		y = 1
+		x = -11
+		y = 0
 		cost = 5.8
-
-		available = {
-			has_completed_focus = GWC_focus_1
-		}
-
+		available = { has_completed_focus = GWC_focus_1 }
 		relative_position_id = GWC_followers_of_the_worm
-
 		completion_reward = {
 			add_war_support = 0.05
 			add_corps_commander_role = {
@@ -1796,7 +2013,82 @@ focus_tree = {
 			factor = 100
 		}
 	}
-
+	focus = {
+		id = GWC_worm_spec_ops_1
+		icon = GFX_GWC_military_path
+		x = 5
+		y = 1
+		cost = 5.8
+		available = { has_tech = savage_spec_ops_equipment_1_tech }
+		prerequisite = { focus = GWC_worm_military_1 }
+		relative_position_id = GWC_worm_military_1
+		completion_reward = {
+			division_template = {
+				name = "Underzealot"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					underzealot_special_forces = { x = 0 y = 0 }
+					underzealot_special_forces = { x = 1 y = 0 }
+					underzealot_special_forces = { x = 2 y = 0 }
+					underzealot_special_forces = { x = 3 y = 0 }
+					underzealot_special_forces = { x = 4 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Warriors of the Worm\" division_template = \"Underzealot\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = GWC_worm_spec_ops_2
+		icon = GFX_GWC_military_path
+		x = 1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_worm_spec_ops_1 }
+		relative_position_id = GWC_worm_spec_ops_1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 1
+				category = savage_spec_ops
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = GWC_worm_spec_ops_3
+		icon = GFX_GWC_military_path
+		x = -1
+		y = 1
+		cost = 5.8
+		prerequisite = { focus = GWC_worm_spec_ops_2 }
+		relative_position_id = GWC_worm_spec_ops_2
+		completion_reward = {
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Warriors of the Worm\" division_template = \"Underzealot\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Warriors of the Worm\" division_template = \"Underzealot\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 	focus = {
 		id = GWC_worm_military_generals_1
 		icon = GFX_GWC_military_path
