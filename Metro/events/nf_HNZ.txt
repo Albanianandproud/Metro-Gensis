@@ -2442,3 +2442,117 @@ country_event = {	## Scaven
 	}
 }
 
+country_event = {	## Tulskaya Outbreak
+	id = nf_HNZ.73
+	title = nf_HNZ.73.t
+	desc = nf_HNZ.73.d
+	picture = ccc_mutant
+	fire_only_once = yes
+	trigger = {
+		controls_state = 405
+		date > 2034.1.1
+	}
+	mean_time_to_happen = {
+		days = 15
+	}
+	option = { # Quarantine the stations
+		name = nf_DMD.73.a
+		RUI = {
+			transfer_state = 75
+			transfer_state = 405
+			363 = { set_demilitarized_zone = yes }
+			75 = { set_demilitarized_zone = yes }
+			405 = { set_demilitarized_zone = yes }
+		}
+		if = { #In case Hanza colonized any southern states, those will be abandoned as well.
+			limit = {
+				FROM = { owns_state = 76 }
+			}
+			RUI = { transfer_state = 76 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 404 }
+			}
+			RUI = { transfer_state = 404 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 77 }
+			}
+			RUI = { transfer_state = 77 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 403 }
+			}
+			RUI = { transfer_state = 403 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 78 }
+			}
+			RUI = { transfer_state = 78 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 402 }
+			}
+			RUI = { transfer_state = 402 }
+		}
+		405 = { add_manpower = -200 }
+		363 = { add_manpower = -50 }
+		hidden_effect = {
+			SEV = {
+				country_event = {
+					id = nf_SEV.2
+				}
+			}
+			RUI = { add_state_core = 75 }
+			RUI = { add_state_core = 405 }
+			every_owned_state = {
+				if = {
+					limit = {
+						FROM = { owns_state = 76 }
+					}
+					RUI = { add_state_core = 76 }
+				}
+				if = {
+					limit = {
+						FROM = { owns_state = 404 }
+					}
+					RUI = { add_state_core = 404 }
+				}
+				if = {
+					limit = {
+						FROM = { owns_state = 77 }
+					}
+					RUI = { add_state_core = 77 }
+				}
+				if = {
+					limit = {
+						FROM = { owns_state = 403 }
+					}
+					RUI = { add_state_core = 403 }
+				}
+				if = {
+					limit = {
+						FROM = { owns_state = 78 }
+					}
+					RUI = { add_state_core = 78 }
+				}
+				if = {
+					limit = {
+						FROM = { owns_state = 402 }
+					}
+					RUI = { add_state_core = 402 }
+				}
+			}
+		}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+

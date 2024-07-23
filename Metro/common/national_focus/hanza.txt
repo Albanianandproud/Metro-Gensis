@@ -2098,6 +2098,14 @@ focus_tree = {
 				}
 				add_core_of = HNZ
 			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = PVL
+					}
+					add_core_of = SRL
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -4153,9 +4161,6 @@ focus_tree = {
 			363 = {
                 is_owned_by = ROOT
 			}
-			405 = {
-                is_owned_by = ROOT
-			}
 			296 = {
                 is_owned_by = ROOT
 			}
@@ -4194,10 +4199,13 @@ focus_tree = {
 			    }
 			}
 			405 = { 
-		    	add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
+				if = {
+					limit = { is_controlled_by = ROOT }
+		    			add_extra_state_shared_building_slots = 1
+					add_resource = {
+					type = scrap
+					amount = 2
+				}
 			    }
 			}
 			296 = { 
@@ -4315,18 +4323,75 @@ focus_tree = {
 		relative_position_id = HNZ_south_civilian
 		cost = 6.5
 
-		available = {
-			controls_state = 405
-			controls_state = 75
+		ai_will_do = {
+			factor = 5
 		}
+
+		available = {
+			date > 2035.01.01
+			OR = {
+				AND = {
+					controls_state = 405
+					404 = { is_owned_by = RUI }
+				}
+				AND = {
+					controls_state = 363
+					405 = { is_owned_by = RUI }
+					404 = { is_owned_by = RUI }
+				}
+			}
+		}
+
+		bypass = { 404 = { is_owned_by = ROOT } }
 	
 		completion_reward = {
-			custom_effect_tooltip = HNZ_southern_reclaimation_authority_tt
+			HNZ = {
+				transfer_state = 76
+				add_state_core = 76
+				transfer_state = 404
+				add_state_core = 404
+			}
+			if = {
+				limit = {
+					RUI = { owns_state = 75 }
+				}
+				HNZ = {
+					add_state_core = 75
+					transfer_state = 75
+				}
+			}
+			if = {
+				limit = {
+					RUI = { owns_state = 405 }
+				}
+				HNZ = {
+					add_state_core = 405
+					transfer_state = 405
+				}
+			}
 			hidden_effect = {
-				405 = { add_core_of = SRA }
-				75 = { add_core_of = SRA }
-				SRA = {
-					set_capital = {state = 405 }
+				RUI = {
+					remove_state_core = 76
+					remove_state_core = 404
+				}
+				404 = {
+					add_manpower = 50
+				}
+				SRL = {
+					add_state_core = 76
+					add_state_core = 404
+				}
+				if = {
+					limit = {
+						RUI = { owns_state = 75 }
+					}
+					RUI = { remove_state_core = 75 }
+				}
+				if = {
+					limit = {
+						RUI = { owns_state = 405 }
+					}
+					RUI = { remove_state_core = 405 }
 				}
 			}
 		}

@@ -1,0 +1,306 @@
+add_namespace = nf_SEV
+# sevastopolskaya starter event
+country_event = {
+    id = nf_SEV.1
+    title = nf_SEV.1.t
+    desc = nf_SEV.1.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = { # accept
+		name = nf_SEV.1.a
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.2
+	title = nf_SEV.2.t
+	desc = nf_SEV.2.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.2.a
+			add_manpower = -23
+			remove_ideas = SEV_hanseatic_reliance
+			hidden_effect = {
+				country_event = { id = nf_SEV.3 hours = 36 random_hours = 6 }
+			}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.3
+	title = nf_SEV.3.t
+	desc = nf_SEV.3.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.3.a
+			hidden_effect = {
+				country_event = { id = nf_SEV.4 hours = 72 random_hours = 6 }
+			}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.4
+	title = nf_SEV.4.t
+	desc = nf_SEV.4.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.4.a
+			add_manpower = -20
+			hidden_effect = {
+				country_event = { id = nf_SEV.5 hours = 36 random_hours = 6 }
+			}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.5
+	title = nf_SEV.5.t
+	desc = nf_SEV.5.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.5.a
+			add_manpower = 20
+			hidden_effect = {
+				country_event = { id = nf_SEV.6 hours = 36 random_hours = 6 }
+			}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.6
+	title = nf_SEV.6.t
+	desc = nf_SEV.6.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.6.a
+			363 = { set_demilitarized_zone = no }
+			75 = { set_demilitarized_zone = no }
+			405 = { set_demilitarized_zone = no }
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.7
+	title = nf_SEV.7.t
+	desc = nf_SEV.7.d
+	picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SEV.7.a
+		random_list = {
+		    20 = { ## Mutant Attack
+		        ROOT = { country_event = { id = nf_SEV.8 random_hours = 3 } }
+		    }
+		    40 = { ## Nothing of Value
+		        ROOT = { country_event = { id = nf_SEV.9 random_hours = 3 } }
+		    }
+		    40 = { ## Found Something
+		        ROOT = { country_event = { id = nf_SEV.10 random_hours = 3 } }
+		    }
+		}
+
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_SEV.8
+	title = nf_SEV.8.t
+	desc = nf_SEV.8.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+
+	option = {
+		name = nf_SEV.8.a
+		add_stability = -0.05
+		add_manpower = -10
+		126 = { set_demilitarized_zone = yes }
+		SEV = {
+			remove_state_core = 126
+		}
+		hidden_effect = {
+			RUI = {
+				add_state_core = 126
+				transfer_state = 126
+			}
+		}
+	}
+}
+
+## Found Nothing of Value ##
+country_event = {
+	id = nf_SEV.9
+	title = nf_SEV.9.t
+	desc = nf_SEV.9.d
+	picture = event_tunnel.8
+	is_triggered_only = yes
+
+	option = {
+		name = nf_SEV.9.a
+		126 = {
+			add_resource = {
+				type = scrap
+				amount = 3
+			}
+		}
+	}
+}
+
+## Found Valuables ##
+country_event = {
+	id = nf_SEV.10
+	title = nf_SEV.10.t
+	desc = nf_SEV.10.d
+	picture = "GFX_event (20)"
+	is_triggered_only = yes
+
+	option = {	## Sweet ##
+		name = nf_SEV.10.a
+		126 = {
+			add_resource = {
+				type = scrap
+				amount = 3
+			}
+			add_resource = {
+				type = components
+				amount = 3
+			}
+			add_resource = {
+				type = alloys
+				amount = 3
+			}
+		}
+	}
+}
+
+# Join the Hanza's Faction
+country_event = {
+	id = nf_SEV.11
+	title = nf_SEV.11.t
+	desc = nf_SEV.11.d
+	picture = GFX_report_event_generic_read_write
+
+	immediate = {
+		hidden_effect = {
+			save_event_target_as = alliance_inviter
+			FROM = {
+				save_event_target_as = alliance_applicant
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { #Agree
+		name = nf_SEV.11.a
+
+		ai_chance = {
+			factor = 1
+		}
+
+		add_to_faction = FROM
+		FROM = { country_event = { id = nf_SEV.12 hours = 6 } }
+		hidden_effect = {
+			set_country_flag = alliance_inviter@ROOT
+			FROM = { 
+				set_country_flag = alliance_applicant@ROOT
+			}
+		}
+	}
+	
+	option = { #Reject
+		name = nf_SEV.11.b
+		ai_chance = {
+			factor = 0
+		}
+		FROM = { 
+			country_event = { id = nf_SEV.13 hours = 6 }
+		}
+	}
+}
+
+# Hanza accepted request to join their faction
+country_event = {
+	id = nf_SEV.12
+	title = nf_SEV.12.t
+	desc = nf_SEV.12.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = nf_SEV.12.a
+	}
+}
+
+# Hanza rejected request to join their faction
+country_event = {
+	id = nf_SEV.13
+	title = nf_SEV.13.t
+	desc = nf_SEV.13.d
+	
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = {
+		name = nf_SEV.13.a
+	}
+}
