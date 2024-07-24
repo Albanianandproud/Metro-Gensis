@@ -1432,4 +1432,119 @@ focus_tree = {
 			factor = 3
 		}
 	}
+	focus = {
+		id = PEC_carcosa_1
+		icon = GFX_PEC_yellow_cultists
+		available = { 
+			has_completed_focus = PEC_golubev_conclave
+			has_government = dictatorial
+		}
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_completed_focus = PEC_golubev_conclave
+			}
+		}
+		cost = 6.5
+		relative_position_id = PEC_golubev_conclave
+		x = 1
+		y = 6
+		completion_reward = {
+			set_technology = { cultist_infantry_unlock_tech = 1 }
+			division_template = {
+				name = "Cultist"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					cultist_infantry = { x = 0 y = 0 }
+					cultist_infantry = { x = 0 y = 1 }
+					cultist_infantry = { x = 0 y = 2 }
+					cultist_infantry = { x = 0 y = 3 }
+					cultist_infantry = { x = 0 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Cultist\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Standing Guard\" division_template = \"Cultist\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_carcosa_2
+		icon = GFX_PEC_yellow_sign
+		cost = 6.5
+		prerequisite = { focus = PEC_carcosa_1 }
+		relative_position_id = PEC_carcosa_1
+		x = 1
+		y = 1
+		completion_reward = {
+			PEC_cultist_idea = yes
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Cultist\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_carcosa_3
+		icon = GFX_PEC_yellow_the_sign
+		cost = 6.5
+		prerequisite = { focus = PEC_carcosa_1 }
+		relative_position_id = PEC_carcosa_1
+		x = -1
+		y = 1
+		completion_reward = {
+			PEC_cultist_idea = yes
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Cultist\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			add_war_support = 0.05
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = PEC_carcosa_4
+		icon = GFX_GWC_tunnels
+		cost = 6.5
+		prerequisite = { focus = PEC_carcosa_2 focus = PEC_carcosa_3 }
+		relative_position_id = PEC_carcosa_1
+		x = 0
+		y = 2
+		completion_reward = {
+			add_state_claim = 309
+			add_state_claim = 44
+			add_state_claim = 254
+			add_state_claim = 45
+			add_state_claim = 233
+			add_state_claim = 46
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
 }
