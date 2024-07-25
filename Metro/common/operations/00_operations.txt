@@ -1,0 +1,1112 @@
+
+operation_capture_cipher = { ### 3 1/55
+	icon = GFX_operations_capture_ciphers
+	map_icon = GFX_operations_capture_ciphers_map
+	name = operation_capture_cipher
+	desc = operation_capture_cipher_desc
+	priority = 3
+
+	days = 70
+	network_strength = 50
+	operatives = 2
+
+	visible = {
+		network_strength = {
+			target = FROM
+			value > 25
+		}
+		has_done_agency_upgrade = upgrade_form_department
+	}
+
+	equipment = {}
+	risk_chance = 0.2
+	outcome_extra_chance = 0.25
+	outcome_execute = {
+		ROOT = {
+			add_decryption = {
+				target = FROM
+				ratio = 0.1
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				ROOT = {
+					add_decryption = {
+						target = FROM
+						ratio = 0.2
+					}
+					random_list = {
+						25 = {
+							add_intel = {
+								target = FROM
+								civilian_intel = 10
+							}
+						}
+						25 = {
+							add_intel = {
+								target = FROM
+								army_intel = 10
+							}
+						}
+						25 = {
+							add_intel = {
+								target = FROM
+								navy_intel = 10
+							}
+						}
+						25 = {
+							add_intel = {
+								target = FROM
+								airforce_intel = 10
+							}
+						}
+					}
+				}
+			}
+			67 = {
+				ROOT = {
+					add_decryption = {
+						target = FROM
+						ratio = 0.2
+					}
+				}
+			}
+		}
+	}
+
+	outcome_potential = {
+		ROOT = {
+			add_decryption = {
+				target = FROM
+				ratio = 0.1
+			}
+		}
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+		}
+	}
+	phases = { #capturing cyphers
+		capture_cyphers_bribe = { base = 20 }
+		capture_cyphers_raid = {
+			base = 20
+			modifier = {
+				ROOT = { has_war = no }
+				factor = 0
+			}
+		}
+		capture_cyphers_seduction = { base = 20 }
+		capture_cyphers_smuggle = { base = 20 }
+		capture_cyphers_reverse_engineer = { base = 20 }
+	}
+
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_rescue_operative = { ### 0 1/35
+	icon = GFX_operations_rescue_captured_operative
+	map_icon = GFX_operations_rescue_captured_operative_map
+	name = operation_rescue_operative
+	desc = operation_rescue_operative_desc
+	priority = 0
+	prevent_captured_operative_to_die = yes
+
+	days = 35
+	network_strength = 30
+	operatives = 1
+
+	visible = {
+		FROM = {
+			has_captured_operative = ROOT
+		}
+	}
+
+	available = {}
+
+	requirements = {
+		FROM = {
+			has_captured_operative = ROOT
+		}
+	}
+
+	equipment = {}
+	risk_chance = 0.1
+	experience = 2
+	cost_multiplier = 0 # we dont scale in cost for rescues
+
+	outcome_execute = { # SCOPE_OPERATION
+		ROOT = {
+			free_random_operative = {
+				captured_by = FROM
+				all = yes
+			}
+		}
+		ROOT = {
+			hidden_effect = {
+				set_country_flag = just_freed_operative_flag
+			}
+		}
+	}
+
+	outcome_potential = {
+		ROOT = {
+			free_random_operative = {
+				captured_by = FROM
+				all = yes
+			}
+		}
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+			modifier = {
+				FROM = {
+					has_war_with = ROOT
+				}
+				factor = 0
+			}
+		}
+	}
+	phases = {
+		free_operative_free_in_transit = { base = 33 }
+		free_operative_liberate_camp = { base = 33 }
+		free_operative_smuggle_in_escape_gear = { base = 33 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_infiltrate_civilian = { ### 1 1/35
+	icon = GFX_operations_infiltrate_civilian_govt
+	map_icon = GFX_operations_infiltrate_civilian_govt_map
+	name = operation_infiltrate_civilian
+	desc = operation_infiltrate_civilian_desc
+	priority = 1
+
+	days = 90
+	network_strength = 35
+	operatives = 2
+
+	visible = {
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+		NOT = {
+			has_operation_token = {
+				tag = FROM
+				token = token_civilian
+			}
+		}
+	}
+	equipment = {}
+	available = {}
+
+	awarded_tokens = {
+		token_civilian
+	}
+	risk_chance = 0.1
+	outcome_extra_chance = 0.25
+	risk_modifiers = { operation_infiltrate_risk operation_risk }
+	outcome_modifiers = { operation_infiltrate_outcome operation_outcome }
+	cost_modifiers = { operation_infiltrate_cost operation_cost }
+	outcome_execute = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_civilian
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_civilian
+					}
+					add_intel = {
+						target = FROM
+						civilian_intel = 15
+					}
+				}
+			}
+			67 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_civilian
+					}
+					add_political_power = 25
+				}	
+			}
+		}
+	}
+	outcome_potential = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_civilian
+			}
+		}
+	}
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+		}
+	}
+	phases = { #infiltrate military
+		infiltrate_military_bribe = { base = 25 }
+		infiltrate_military_seduction = { base = 25 }
+		infiltrate_military_ideological_supporter = {
+			base = 25
+			modifier = {
+				FROM = { has_government = ROOT }
+				factor = 0
+			}
+		}
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+operation_infiltrate_armed_forces_army = { ### 4 1/55
+	icon = GFX_operations_infiltrate_armed_forces
+	map_icon = GFX_operations_infiltrate_armed_forces_map
+	name = operation_infiltrate_armed_forces_army
+	desc = operation_infiltrate_armed_forces_army_desc
+	priority = 4
+	
+	days = 75
+	network_strength = 50
+	operatives = 2
+
+	visible = {
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+		NOT = {
+			has_operation_token = {
+				tag = FROM
+				token = token_army
+			}
+		}
+	}
+	equipment = {}
+	available = {}
+	awarded_tokens = {
+		token_army
+	}
+	risk_chance = 0.1
+	risk_modifiers = { operation_infiltrate_risk operation_risk }
+	outcome_extra_chance = 0.25
+	outcome_modifiers = { operation_infiltrate_outcome operation_outcome }
+	cost_modifiers = { operation_infiltrate_cost operation_cost }
+	outcome_execute = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_army
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_army
+					}
+					army_experience = 10
+					add_intel = {
+						target = FROM
+						army_intel = 10
+					}
+				}
+			}
+			67 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_army
+					}
+					army_experience = 10
+				}
+			}
+		}
+	}
+	outcome_potential = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_army
+			}
+		}
+	}
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+		}
+	}
+	phases = { #infiltrate military
+		infiltrate_military_bribe = { base = 25 }
+		infiltrate_military_seduction = { base = 25 }
+		infiltrate_military_turned_pow = {
+			base = 25
+			modifier = {
+				FROM = { has_war = no }
+				factor = 0
+			}
+		}
+		infiltrate_military_ideological_supporter = {
+			base = 25
+			modifier = {
+				FROM = { has_government = ROOT }
+				factor = 0
+			}
+		}
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_boost_resistance = { ### 8 2/40
+	icon = GFX_operations_boost_resistance
+	map_icon = GFX_operations_boost_resistance_map
+	name = operation_boost_resistance
+	desc = operation_boost_resistance_desc
+	priority = 8
+	
+	cost_multiplier = 0.25
+	
+	days = 50
+	network_strength = 35
+	operatives = 2
+
+	visible = {
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+
+		has_operation_token = {
+			tag = FROM
+			token = token_resistance_contacts
+		}
+	}
+
+	selection_target = {
+		targets = { FROM }
+	}
+
+	selection_target_state = {
+		has_resistance = yes
+	}
+
+	equipment = {
+
+	}
+
+	required_tokens = {
+		token_resistance_contacts
+	}
+	risk_chance = 0.2
+	experience = 1.5
+	outcome_extra_chance = 0.25
+	outcome_modifiers = { boost_resistance_factor }
+	outcome_execute = {
+		FROM.FROM = {
+			add_resistance_target = {
+				amount = 10
+				tooltip = intelligency_agency_resistance_boost_tt
+			}
+			subtract_from_variable = { boost_resistance_chance = 10 }
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = { #critical success
+				FROM.FROM = {
+					add_resistance_target = {
+						amount = 20
+						tooltip = intelligency_agency_resistance_boost_tt
+					}
+					subtract_from_variable = { boost_resistance_chance = 10 }
+				}
+				FROM.FROM = {
+					add_compliance = -10
+				}
+			}
+			67 = { #normal success
+				FROM.FROM = {
+					add_resistance_target = {
+						amount = 20
+						tooltip = intelligency_agency_resistance_boost_tt
+					}
+					subtract_from_variable = { boost_resistance_chance = 10 }
+				}
+			}
+		}
+	}
+
+	outcome_potential = {
+		FROM.FROM = {
+			add_resistance_target = {
+				amount = 10
+				tooltip = intelligency_agency_resistance_boost_tt
+			}
+		}
+	}
+
+	
+	target_weight = {
+		base = 100
+		
+		modifier = {
+			add = boost_resistance_chance
+		}
+		
+		modifier = {
+			set_temp_variable = { t = distance_to@ROOT.capital }
+			divide_temp_variable = { t = 600 }
+			clamp_temp_variable = { var = t min = 0 max = 1 }
+			multiply_temp_variable = { t = -40 }
+			add = t
+		}
+	}
+	
+	phases = { #infiltration
+		infiltration_border = { base = 50 }
+	}
+	phases = { #resistance support
+		resistance_support_arms_depots = { base = 25 }
+		resistance_support_distribute_weapons = { base = 25 }
+		resistance_support_organize_training = { base = 25 }
+		resistance_support_coordinate_groups = { base = 25 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_make_resistance_contacts = { ### 9 2/40
+	icon = GFX_operations_make_resistance_contacts
+	map_icon = GFX_operations_make_resistance_contacts_map
+	name = operation_make_resistance_contacts
+	desc = operation_make_resistance_contacts_desc
+	priority = 9
+
+	days = 60
+	network_strength = 40
+	operatives = 2
+
+	visible = {
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+		FROM = {
+			any_controlled_state = {
+				has_resistance = yes
+			}
+		}
+		NOT = {
+			has_operation_token = {
+				tag = FROM
+				token = token_resistance_contacts
+			}
+		}
+		
+		FROM = {
+			any_controlled_state = {
+				has_resistance = yes
+			}
+		}		
+	}
+
+	equipment = {}
+	
+	selection_target = {
+		targets = { FROM }
+	}
+
+	selection_target_state = {
+		has_resistance = yes
+	}
+
+	available = {
+	}
+	
+	awarded_tokens = {
+		token_resistance_contacts
+	}
+	risk_chance = 0.1
+	outcome_extra_chance = 0.25
+	risk_modifiers = { operation_infiltrate_risk operation_risk }
+	outcome_modifiers = { operation_infiltrate_outcome operation_outcome }
+	cost_modifiers = { operation_infiltrate_cost operation_cost }
+	outcome_execute = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_resistance_contacts
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_resistance_contacts
+					}
+				}
+				FROM.FROM = {
+					add_resistance_target = {
+						amount = 10
+						tooltip = intelligency_agency_resistance_boost_tt
+						days = 180
+					}
+					subtract_from_variable = { boost_resistance_chance = 10 }
+				}
+			}
+			67 = {
+				ROOT = {
+					add_operation_token = {
+						tag = FROM
+						token = token_resistance_contacts
+					}
+				}
+				FROM.FROM = {
+					add_resistance_target = {
+						amount = 10
+						tooltip = intelligency_agency_resistance_boost_tt
+						days = 60
+					}
+					subtract_from_variable = { boost_resistance_chance = 10 }
+				}
+			}
+		}
+	}
+
+	outcome_potential = {
+		ROOT = {
+			add_operation_token = {
+				tag = FROM
+				token = token_resistance_contacts
+			}
+		}
+	}
+
+	target_weight = {
+		base = 100
+		
+		modifier = {
+			add = boost_resistance_chance
+		}
+		
+		modifier = {
+			set_temp_variable = { t = distance_to@ROOT.capital }
+			divide_temp_variable = { t = 600 }
+			clamp_temp_variable = { var = t min = 0 max = 1 }
+			multiply_temp_variable = { t = -40 }
+			
+			add = t
+		}
+	}
+	
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+	}
+	phases = { #resistance contacts
+		resistance_contacts_radio_circuits = { base = 33 }
+		resistance_contacts_briefings = { base = 33 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_collaboration_government = { ### 10 2/55
+	icon = GFX_operations_collaboration_government
+	map_icon = GFX_operations_collaboration_government_map
+	name = operation_collaboration_government
+	desc = operation_collaboration_government_desc
+	priority = 10
+
+	days = 90
+	network_strength = 50
+	operatives = 2
+	
+	cost_multiplier = 0.25
+	
+	visible = {
+		network_strength = {
+			target = FROM
+			value > 25
+		}
+	}
+
+	equipment = {
+		civilian_factories = {
+			amount = 5
+			days = 100
+		}
+	}
+
+	allowed = {
+		has_rule = can_create_collaboration_government
+	}
+
+	available = {
+		has_collaboration = {
+			target = FROM
+			value < 1.0
+		}
+	}
+	risk_chance = 0.1
+	experience = 1.5
+	outcome_extra_chance = 0.33
+	outcome_execute = { # SCOPE_OPERATION
+		ROOT = {
+			add_collaboration = {
+				target = FROM
+				value = 0.3
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		ROOT = {
+			add_collaboration = {
+				target = FROM
+				value = 0.45
+			}
+		}
+	}
+
+	outcome_potential = {
+		ROOT = {
+			add_collaboration = {
+				target = FROM
+				value = 0.3
+			}
+		}
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+		}
+	}
+	phases = {
+		collaboration_government_set_up_planning_committees = { base = 33 }
+		collaboration_government_train_paramilitary_forces = { base = 33 }
+		collaboration_government_contact_military_officers = { base = 33 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_steal_tech_civilian = { ### 12 3/35
+	icon = GFX_operations_steal_blueprints
+	map_icon = GFX_operations_steal_blueprints_map
+	name = operation_steal_tech_civilian
+	desc = operation_steal_tech_civilian_desc
+	priority = 12
+
+	days = 120
+	network_strength = 35
+	operatives = 3
+	cost_multiplier = 0.05
+
+	visible = {
+		num_of_operatives > 0
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+
+		has_operation_token = {
+			tag = FROM
+			token = token_civilian
+		}
+	}
+
+	equipment = {}
+
+	required_tokens = {
+		token_civilian
+	}
+	risk_chance = 0.2
+	experience = 2
+	outcome_extra_chance = 0.25
+	risk_modifiers = { operation_steal_tech_risk operation_risk }
+	outcome_modifiers = { operation_steal_tech_outcome operation_outcome }
+	cost_modifiers = { operation_cost }
+
+	outcome_execute = {
+		ROOT = {
+			steal_random_tech_bonus = {
+				folder = industry_folder
+				bonus = 1
+				name = operation_steal_tech_civilian
+				target = FROM
+				dynamic = yes
+				instant = yes
+				uses = 1
+			}
+			remove_operation_token = {
+				tag = FROM
+				token = token_civilian
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				ROOT = {
+					steal_random_tech_bonus = {
+						folder = industry_folder
+						bonus = 1
+						ahead_reduction = 2
+						dynamic = yes
+						instant = yes
+						name = operation_steal_tech_civilian
+						target = FROM
+						uses = 1
+					}
+				}
+			}
+			67 = {
+				ROOT = {
+					steal_random_tech_bonus = {
+						folder = industry_folder
+						bonus = 1
+						ahead_reduction = 1
+						dynamic = yes
+						instant = yes
+						name = operation_steal_tech_civilian
+						target = FROM
+						uses = 1
+					}
+				}
+			}
+		}	
+	}
+	outcome_potential = {
+		ROOT = {
+			steal_random_tech_bonus = {
+				folder = industry_folder
+				bonus = 1
+				dynamic = yes
+				instant = yes
+				name = operation_steal_tech_civilian
+				target = FROM
+				uses = 1
+			}
+		}
+		custom_effect_tooltip = operation_outcome_consumes_token_tt
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+			modifier = {
+				FROM = {
+					has_war_with = ROOT
+				}
+				factor = 0
+			}
+		}
+	}
+	phases = { #blueprint theft
+		steal_blueprints_bribe = { base = 40 }
+		steal_blueprints_seduction = { base = 40 }
+		steal_blueprints_middle_manager = { base = 20 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_targeted_sabotage_industry = { ### 13 3/35
+	icon = GFX_operations_targeted_sabotage
+	map_icon = GFX_operations_targeted_sabotage_map
+	name = operation_targeted_sabotage_industry
+	desc = operation_targeted_sabotage_industry_desc
+	priority = 13
+	
+	days = 90
+	network_strength = 35
+	operatives = 3
+
+	visible = {
+		num_of_operatives > 1
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+
+		has_operation_token = {
+			tag = FROM
+			token = token_resistance_contacts
+		}
+	}
+
+	requirements = {
+		FROM = {
+			any_controlled_state = {
+				has_resistance = yes
+			}
+		}
+	}
+	selection_target = {
+		targets = { FROM }
+	}
+
+	selection_target_state = {
+		has_resistance = yes
+	}
+	required_tokens = { token_resistance_contacts }
+	equipment = {}
+	risk_chance = 0.2
+	experience = 2
+	outcome_extra_chance = 0.25
+	outcome_modifiers = { target_sabotage_factor operation_risk }
+	risk_modifiers = { target_sabotage_risk operation_outcome }
+	cost_modifiers = { target_sabotage_cost operation_cost }
+	outcome_execute = {
+		FROM.FROM = {
+			add_to_variable = {
+				var = targeted_sabotage_industry
+				value = 5
+			}
+			custom_effect_tooltip = targeted_sabotage_industry_2_tt
+		}
+		ROOT = {
+			remove_operation_token = {
+				tag = FROM
+				token = token_resistance_contacts
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		FROM.FROM = {
+			add_to_variable = {
+				var = targeted_sabotage_industry
+				value = 8
+			}
+			custom_effect_tooltip = targeted_sabotage_industry_3_tt
+		}		
+	}
+
+	outcome_potential = {
+		custom_effect_tooltip = operation_outcome_sabotage_industry_tt
+		custom_effect_tooltip = operation_outcome_consumes_token_tt
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+			modifier = {
+				FROM = {
+					has_war_with = ROOT
+				}
+				factor = 0
+			}
+		}
+	}
+	phases = { #exfiltration
+		targeted_sabotage_plant_explosives = { base = 90 }
+		targeted_sabotage_organize_more_meetings = { base = 10 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
+operation_targeted_sabotage_infrastructure = { ### 14 3/35
+	icon = GFX_operations_targeted_sabotage
+	map_icon = GFX_operations_targeted_sabotage_map
+	name = operation_targeted_sabotage_infrastructure
+	desc = operation_targeted_sabotage_infrastructure_desc
+	priority = 14
+	
+	days = 90
+	network_strength = 35
+	operatives = 2
+
+	visible = {
+		num_of_operatives > 1
+		network_national_coverage = {
+			target = FROM
+			value > 0
+		}
+
+		has_operation_token = {
+			tag = FROM
+			token = token_resistance_contacts
+		}
+	}	
+
+	requirements = {
+		FROM = {
+			any_controlled_state = {
+				has_resistance = yes
+			}
+		}
+	}
+	selection_target_state = {
+		has_resistance = yes
+	}
+	selection_target = {
+		targets = { FROM }
+	}
+	required_tokens = { token_resistance_contacts }
+	equipment = {
+		
+	}
+	risk_chance = 0.2
+	experience = 2
+	outcome_extra_chance = 0.25
+	outcome_modifiers = { target_sabotage_factor operation_risk }
+	risk_modifiers = { target_sabotage_risk operation_outcome }
+	cost_modifiers = { target_sabotage_cost operation_cost }
+	
+	outcome_execute = {
+		FROM.FROM = {
+			add_to_variable = {
+				var = targeted_sabotage_infrastructure
+				value = 5
+			}
+			custom_effect_tooltip = targeted_sabotage_infrastructure_2_tt
+		}
+		ROOT = {
+			remove_operation_token = {
+				tag = FROM
+				token = token_resistance_contacts
+			}
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		FROM.FROM = {
+			add_to_variable = {
+				var = targeted_sabotage_infrastructure
+				value = 8
+			}
+			custom_effect_tooltip = targeted_sabotage_infrastructure_3_tt
+		}
+	}
+	outcome_potential = {
+		custom_effect_tooltip = operation_outcome_sabotage_infrastructure_tt
+		custom_effect_tooltip = operation_outcome_consumes_token_tt
+	}
+	phases = { #infiltration
+		infiltration_border = { base = 25 }
+		infiltration_diplomatic = {
+			base = 25
+			modifier = {
+				factor = 20
+				ROOT = { has_war = no }
+				FROM = {
+					has_war = no
+				}
+			}
+			modifier = {
+				FROM = {
+					has_war_with = ROOT
+				}
+				factor = 0
+			}
+		}
+	}
+	phases = {
+		targeted_sabotage_destroy_bridge = { base = 25 }
+		targeted_sabotage_collapse_tunnel = { base = 25 }
+		targeted_sabotage_immobilize_rolling_stock = { base = 25 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 30 }
+		exfiltration_go_to_ground = { base = 30 }
+	}
+}
+
