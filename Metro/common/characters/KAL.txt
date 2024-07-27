@@ -14,6 +14,7 @@ characters = {
 			desc= "KAL_CONFEDERATION_DESC"
 		}
 	}
+
 	KAL_mad_king = {
 		name = KAL_mad_king
 		portraits = {
@@ -26,6 +27,145 @@ characters = {
 			traits = { _vigorous_orator }
 			expire="2050.1.1.1"
 			id = -1
+		}
+	}
+
+	KAL_holy_hierarchy_leader = {
+		name = KAL_holy_hierarchy_leader
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAL/holyhierarchy.dds"
+			}
+		}
+	}
+
+	KAL_troshin = {
+		name = KAL_troshin
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAL/troshin.dds"
+			}
+			army = {
+				small = "GFX_idea_KAL_minister_troshin"
+			}
+		}
+
+		country_leader = {
+			traits = { }
+			ideology = militia_council
+			expire = "3000.1.1"
+			id = -1
+		}
+		corps_commander = {
+			traits = { loyal_personality_trait }
+			skill = 3
+			legacy_id=-1
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 2
+		}
+	}
+
+	KAL_master_at_arms = {
+		name = KAL_master_at_arms
+		portraits = {
+			army = {
+				small = "GFX_idea_KAL_minister_hierarchy"
+			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			idea_token = KAL_master_at_arms
+			name = KAL_master_at_arms
+			ledger = army
+			removal_cost = -1
+			can_be_fired = no
+			allowed = {
+				original_tag = KAL
+			}
+			on_add = {
+				set_country_flag = KAL_master_added
+			}
+			available = {
+				has_completed_focus = KAL_tsarist_victory
+				NOT = {
+					has_completed_focus = KAL_in_the_name_of_the_tsar
+				}
+			}
+			traits = {
+				_master_at_arms
+			}
+			cost = 100
+		}
+	}
+
+	KAL_grand_inquisitor = {
+		name = KAL_grand_inquisitor
+		portraits = {
+			army = {
+				small = "GFX_idea_KAL_minister_hierarchy"
+			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			idea_token = KAL_grand_inquisitor
+			name = KAL_grand_inquisitor
+			ledger = army
+			removal_cost = -1
+			can_be_fired = no
+			allowed = {
+				original_tag = KAL
+			}
+			on_add = {
+				set_country_flag = KAL_inquisitor_added
+			}
+			available = {
+				has_completed_focus = KAL_tsarist_victory
+				NOT = {
+					has_completed_focus = KAL_in_the_name_of_the_tsar
+				}
+			}
+			traits = {
+				_grand_inquisitor
+			}
+			cost = 100
+		}
+	}
+
+	KAL_minister_of_gatekeeping = {
+		name = KAL_minister_of_gatekeeping
+		portraits = {
+			army = {
+				small = "GFX_idea_KAL_minister_hierarchy"
+			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			idea_token = KAL_minister_of_gatekeeping
+			name = KAL_minister_of_gatekeeping
+			ledger = army
+			removal_cost = -1
+			can_be_fired = no
+			allowed = {
+				original_tag = KAL
+			}
+			on_add = {
+				set_country_flag = KAL_minister_added
+			}
+			available = {
+				has_completed_focus = KAL_tsarist_victory
+				NOT = {
+					has_completed_focus = KAL_in_the_name_of_the_tsar
+				}
+			}
+			traits = {
+				_minister_of_gatekeeping
+			}
+			cost = 100
 		}
 	}
 }

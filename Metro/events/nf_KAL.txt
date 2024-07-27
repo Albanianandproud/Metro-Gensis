@@ -1,0 +1,541 @@
+add_namespace = nf_KAL
+
+country_event = {
+    id = nf_KAL.1
+    title = nf_KAL.1.t
+    desc = nf_KAL.1.d
+    picture = "GFX_event (49)"
+
+	trigger = {
+		date > 2028.2.1
+		tag = KAL
+	}
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.1.a
+		add_ideas = KAL_anarchist_rumors
+	}
+}
+
+country_event = {
+    id = nf_KAL.2
+    title = nf_KAL.2.t
+    desc = nf_KAL.2.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.2.a
+		swap_ideas = {
+			remove_idea = KAL_news
+			add_idea = KAL_news2
+		}
+	}
+}
+
+country_event = {
+    id = nf_KAL.3
+    title = nf_KAL.3.t
+    desc = nf_KAL.3.d
+    picture = "GFX_event (50)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.3.a
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = KAL_peace_approach
+		add_ideas = KAL_peace
+	}
+	option = { 
+		name = nf_KAL.3.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = KAL_nonpeace_approach
+		add_ideas = KAL_nonpeace
+	}
+}
+
+country_event = {
+    id = nf_KAL.4
+    title = nf_KAL.4.t
+    desc = nf_KAL.4.d
+    picture = "GFX_event (51)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.4.a
+		ai_chance = {
+			factor = 50
+		}
+		KAL = {
+			country_event = nf_KAL.5
+		}
+		add_stability = -0.1
+		add_war_support = 0.075
+		KAL = {
+			transfer_state = 24
+			transfer_state = 232
+		}
+		232 = {
+			add_manpower = -300
+		}
+		410 = {
+			add_manpower = 300
+		}
+		add_opinion_modifier = {
+			target = KAL
+			modifier = growing_disatisfaction
+		}
+		reverse_add_opinion_modifier = {
+			target = KAL
+			modifier = growing_disatisfaction
+		}
+	}
+	option = { 
+		name = nf_KAL.4.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 15
+				strength_ratio = {
+					tag = KAL
+					ratio > 2
+				}
+			}
+		}
+		KAL = {
+			country_event = nf_KAL.6
+		}
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_opinion_modifier = {
+			target = KAL
+			modifier = growing_disatisfaction
+		}
+		reverse_add_opinion_modifier = {
+			target = KAL
+			modifier = growing_disatisfaction
+		}
+	}
+}
+
+country_event = { ## pec accepts ##
+    id = nf_KAL.5
+    title = nf_KAL.5.t
+    desc = nf_KAL.5.d
+    picture = "GFX_event (51)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.5.a
+		ai_chance = {
+			factor = 50
+		}
+		add_war_support = 0.05
+	}
+}
+
+country_event = { ## pec denies ##
+    id = nf_KAL.6
+    title = nf_KAL.6.t
+    desc = nf_KAL.6.d
+    picture = "GFX_event (51)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.6.a
+		ai_chance = {
+			factor = 50
+		}
+		add_war_support = 0.075
+		KAL = {
+			add_state_claim = 232
+		}
+	}
+}
+
+country_event = { ## army reforms ##
+    id = nf_KAL.7
+    title = nf_KAL.7.t
+    desc = nf_KAL.7.d
+    picture = "GFX_event (11)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.7.a
+		ai_chance = {
+			factor = 50
+		}
+		add_ideas = KAL_army_modernization2
+	}
+}
+
+country_event = {
+    id = nf_KAL.8
+    title = nf_KAL.8.t
+    desc = nf_KAL.8.d
+    picture = "GFX_event (49)"
+
+	trigger = {
+		date > 2029.2.5
+		tag = KAL
+	}
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.8.a
+		add_stability = -0.05
+		hidden_effect = {
+			country_event = { id = nf_KAL.9 days = 180 }
+		}
+	}
+}
+
+country_event = {
+    id = nf_KAL.9
+    title = nf_KAL.9.t
+    desc = nf_KAL.9.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.9.a
+		add_stability = -0.075
+		hidden_effect = {
+			country_event = { id = nf_KAL.10 days = 240 }
+		}
+	}
+}
+
+country_event = {
+    id = nf_KAL.10
+    title = nf_KAL.10.t
+    desc = nf_KAL.10.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.10.a
+		add_stability = -0.1
+		243 = {
+			add_manpower = -5
+		}
+		hidden_effect = {
+			country_event = { id = nf_KAL.11 days = 170 }
+		}
+	}
+}
+
+country_event = {
+    id = nf_KAL.11
+    title = nf_KAL.11.t
+    desc = nf_KAL.11.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.10.a
+		add_stability = -0.125
+		hidden_effect = {
+			country_event = { id = nf_KAL.12 days = 130 }
+		}
+		set_country_flag = KAL_king_in_charge
+	}
+}
+
+country_event = {
+    id = nf_KAL.12
+    title = nf_KAL.12.t
+    desc = nf_KAL.12.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.12.a
+		custom_effect_tooltip = KAL_confederation_choice_tt
+		start_civil_war = {
+			ruling_party = council 
+			ideology = dictatorial 
+			size = 0.4
+			capital = 243
+			states = { 243 411 331 30 29 }
+			hidden_effect = {
+				set_cosmetic_tag = KAL_tsardom_cosmetic
+                load_focus_tree = { tree = nf_kalininskaya keep_completed = yes }
+				complete_national_focus = KAL_standoff_in_perovo
+				set_victory_points = {
+					province = 2030
+					value = 5
+				}
+				add_ideas = KAL_mad_king_2
+				division_template = {
+					name = "Civilian Militia"
+					is_locked = yes
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 0 y = 1 }
+						irregulars = { x = 0 y = 2 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Perovo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Perovo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+				}
+				411 = {
+					create_unit = {
+						division = "name = \"Novogireevo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+				}
+            }
+		}
+		hidden_effect = {
+			complete_national_focus = KAL_standoff_in_perovo
+			division_template = {
+				name = "Civilian Militia"
+					is_locked = yes
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 0 y = 1 }
+						irregulars = { x = 0 y = 2 }
+					}
+				}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+			}
+			292 = {
+				create_unit = {
+					division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+			}
+        }
+	}
+	option = { 
+		name = nf_KAL.12.b
+		custom_effect_tooltip = KAL_russian_empire_choice_tt
+		start_civil_war = {
+			ruling_party = dictatorial 
+			ideology = council 
+			size = 0.4
+			capital = 340
+			states = { 340 66 26 292 27 239 28 }
+			hidden_effect = {
+                load_focus_tree = { tree = nf_kalininskaya keep_completed = yes }
+				set_cosmetic_tag = KAL_loyalist_cosmetic
+				complete_national_focus = KAL_standoff_in_perovo
+				set_victory_points = {
+					province = 2030
+					value = 5
+				}
+				division_template = {
+					name = "Civilian Militia"
+					is_locked = yes
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 0 y = 1 }
+						irregulars = { x = 0 y = 2 }
+					}
+				}
+				
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+				}
+				292 = {
+					create_unit = {
+						division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Loyalist Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+				}
+            }
+		}
+		hidden_effect = {
+			complete_national_focus = KAL_standoff_in_perovo
+			set_cosmetic_tag = KAL_tsardom_cosmetic
+			add_ideas = KAL_mad_king_2
+			set_capital = { state = 243 } 
+			division_template = {
+				name = "Civilian Militia"
+				is_locked = yes
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+				}
+			}
+			
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Perovo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Perovo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Perovo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+			}
+			411 = {
+				create_unit = {
+					division = "name = \"Novogireevo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Novogireevo Milita\" division_template = \"Civilian Militia\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = ROOT
+				}
+			}			
+        }
+	}
+}
+
+country_event = { ## hierarchy extermination ##
+    id = nf_KAL.13
+    title = nf_KAL.13.t
+    desc = nf_KAL.13.d
+    picture = "GFX_event (107)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.13.a
+		ai_chance = {
+			factor = 50
+		}
+		340 = {
+			add_manpower = -100
+		}
+		292 = {
+			add_manpower = -50
+		}
+		239 = {
+			add_manpower = -50
+		}
+	}
+}
+
+country_event = { ## invitation to ryazan ##
+    id = nf_KAL.14
+    title = nf_KAL.14.t
+    desc = nf_KAL.14.d
+    picture = "GFX_event (5)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.14.a
+		ai_chance = {
+			factor = 50
+		}
+		KAL = { add_to_faction = RYZ }
+	}
+	option = { 
+		name = nf_KAL.14.b
+		ai_chance = {
+			factor = 25
+		}
+		KAL = {
+			country_event = nf_KAL.15
+		}
+	}
+}
+
+country_event = { ## ryazan decline ##
+    id = nf_KAL.15
+    title = nf_KAL.15.t
+    desc = nf_KAL.15.d
+    picture = "GFX_event (5)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.15.a
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+country_event = { ## choosing government ##
+    id = nf_KAL.16
+    title = nf_KAL.16.t
+    desc = nf_KAL.16.d
+    picture = "GFX_event (51)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KAL.16.a
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = KAL_troshin
+	}
+	option = { 
+		name = nf_KAL.16.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = KAL_council
+	}
+	
+}

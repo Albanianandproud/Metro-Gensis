@@ -16,4 +16,1773 @@ focus_tree = {
 	shared_focus = satellite_defend_the_bulwark
 	shared_focus = satellite_economy
 	shared_focus = satellite_our_path
+
+	focus = {
+		id = KAL_intro
+		icon = GFX_generic_support_kalininskaya
+		cost = 6.5
+		x = 23
+		y = 0
+
+		completion_reward = {
+			add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 800
+		}
+	}
+
+	focus = {
+		id = KAL_the_kalinin_bulletin
+		icon = GFX_KAL_reading
+		x = -6
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_intro
+		}
+
+		relative_position_id = KAL_intro
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_ideas = KAL_news
+		}
+	}
+
+	focus = {
+		id = KAL_invest_in_paper_production
+		icon = GFX_generic_electricity
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_the_kalinin_bulletin
+		}
+		
+		available = {
+			has_tech = tech_tooling_simple_tools
+		}
+
+		relative_position_id = KAL_the_kalinin_bulletin
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = KAL_news_cost
+				days = 180
+			}
+			country_event = { id = nf_KAL.2 days = 180 }
+		}
+	}
+
+	focus = {
+		id = KAL_dispel_rumors
+		icon = GFX_KAL_kkfire
+		x = 7
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_intro
+		}
+
+		available = {
+			has_idea = KAL_anarchist_rumors
+		}
+
+		relative_position_id = KAL_intro
+		ai_will_do = {
+			factor = 175
+		}
+
+		completion_reward = {
+			remove_ideas = KAL_anarchist_rumors
+		}
+	}
+
+	focus = {
+		id = KAL_counter_the_anarchists
+		icon = GFX_KAL_anarchist
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_dispel_rumors
+		}
+
+		available = {
+			has_completed_focus = KAL_the_kalinin_bulletin
+		}
+
+		relative_position_id = KAL_dispel_rumors
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			HUL = {
+				add_ideas = KAL_anarchist_counterattack
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_foreign_policy
+		icon = GFX_generic_political_2
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_intro
+		}
+
+		relative_position_id = KAL_intro
+		ai_will_do = {
+			factor = 175
+		}
+
+		completion_reward = {
+			country_event = nf_KAL.3
+		}
+	}
+
+	focus = {
+		id = KAL_tea_trade
+		icon = GFX_KAL_mushrooms
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_foreign_policy
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_peace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_peace_approach }
+			}
+		}
+
+		relative_position_id = KAL_foreign_policy
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = farming
+			}
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				category = health
+			}
+			PEC = {
+				add_resource = {
+					type = oil
+					amount = 6
+					state = 410
+				}
+			}
+			add_opinion_modifier = {
+				target = PEC
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = PEC
+				modifier = VDN_trade
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_hanza_cooperation
+		icon = GFX_generic_support_hansa
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_foreign_policy
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_peace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_peace_approach }
+			}
+		}
+
+		relative_position_id = KAL_foreign_policy
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = KAL_payments_from_hanza
+				days = 360
+			}
+			HNZ = {
+				add_resource = {
+					type = oil
+					amount = 6
+					state = 365
+				}
+			}
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = VDN_trade
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_benefits_of_trade
+		icon = GFX_workshop_3
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_tea_trade
+		}
+		prerequisite = {
+			focus = KAL_hanza_cooperation
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_peace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_peace_approach }
+			}
+		}
+
+		relative_position_id = KAL_tea_trade
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			292 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = KAL_cooperation_factory_tt
+			if = {
+				limit = {
+					HNZ = {
+						has_opinion = {
+							target = KAL
+							value > 35
+						}
+					}
+				}
+				KAL = {
+					capital_scope = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					PEC = {
+						has_opinion = {
+							target = KAL
+							value > 35
+						}
+					}
+				}
+				KAL = {
+					capital_scope = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_surface_expansion
+		icon = GFX_cityruins
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_benefits_of_trade
+			focus = KAL_strengthen_west
+			focus = KAL_strengthen_north
+		}
+
+		available = {
+			OR = {
+				date > 2033.01.01
+				
+			}
+		}
+
+		relative_position_id = KAL_benefits_of_trade
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				category = gas_mask
+			}
+			KAL = {
+				transfer_state = 194
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_baumansky_contact
+		icon = GFX_generic_BAU_peace
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_benefits_of_trade
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_peace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_peace_approach }
+			}
+		}
+
+		relative_position_id = KAL_benefits_of_trade
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = smithing
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = refinery
+			}
+			add_opinion_modifier = {
+				target = BAU
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = BAU
+				modifier = VDN_trade
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_ready_for_war
+		icon = GFX_KAL_skeleton
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_foreign_policy
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_nonpeace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_nonpeace_approach }
+			}
+		}
+
+		relative_position_id = KAL_foreign_policy
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 15
+			division_template = {
+				name = "Home Guard"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Home Guard\" division_template = \"Home Guard\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Home Guard\" division_template = \"Home Guard\" start_experience_factor = 0.3 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_strengthen_north
+		icon = GFX_generic_bunker
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_ready_for_war
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_nonpeace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_nonpeace_approach }
+			}
+		}
+
+		relative_position_id = KAL_ready_for_war
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			340 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			    add_building_construction = {
+    				type = bunker
+   					level = 1
+    				instant_build = yes
+    				province = {
+       					all_provinces = yes
+   					}
+				}
+				add_building_construction = {
+    				type = infrastructure
+    				level = 1
+    				instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_strengthen_west
+		icon = GFX_generic_bunker
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_ready_for_war
+		}
+
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = KAL_nonpeace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_nonpeace_approach }
+			}
+		}
+
+		relative_position_id = KAL_ready_for_war
+		ai_will_do = {
+			factor = 7
+		}
+
+		completion_reward = {
+			66 = {
+			    add_building_construction = {
+    				type = bunker
+   					level = 2
+    				instant_build = yes
+    				province = {
+       					all_provinces = yes
+   					}
+				}
+				add_building_construction = {
+    				type = infrastructure
+    				level = 1
+    				instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_demand_rimskaya
+		icon = GFX_KAL_pec_attack
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_strengthen_north
+		}
+		prerequisite = {
+			focus = KAL_strengthen_west
+		}
+
+		available = { 
+			date > 2032.01.01
+			custom_trigger_tooltip = {
+				tooltip = KAL_nonpeace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_nonpeace_approach }
+			}
+		}
+
+		relative_position_id = KAL_strengthen_west
+		ai_will_do = {
+			factor = 175
+		}
+
+		completion_reward = {
+			PEC = {
+				country_event = nf_KAL.4
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_modernize_the_military
+		icon = GFX_RED_army_helmet
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_intro
+		}
+
+		relative_position_id = KAL_intro
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = KAL_army_modernization
+				days = 720
+			}
+			custom_effect_tooltip = KAL_army_modernization_tt
+		}
+	}
+
+	focus = {
+		id = KAL_call_up_reserves
+		icon = GFX_generic_equipment_gasmask_5
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_modernize_the_military
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_modernize_the_military
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			army_experience = 15
+			division_template = {
+				name = "Tunnel Sentries"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"51st Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"52nd Standing Guard\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_weaponsmith_specialists
+		icon = GFX_generic_defences_2
+		x = 2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_modernize_the_military
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_modernize_the_military
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_ideas = KAL_weaponsmith_specialists
+		}
+	}
+
+	focus = {
+		id = KAL_stalker_revitalization
+		icon = GFX_generic_stalker_5
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_call_up_reserves
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_call_up_reserves
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_2
+				amount = 25
+				producer = RUS
+			}
+			division_template = {
+				name = "Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+					special_forces = { x = 0 y = 4 }
+				}
+			}
+			custom_effect_tooltip = PEC_add_spec_ops_template
+		}
+	}
+
+	focus = {
+		id = KAL_investments_from_the_hanza
+		icon = GFX_generic_support_hansa
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_weaponsmith_specialists
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_weaponsmith_specialists
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			KAL = {
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_scavenge_the_surface
+		icon = GFX_generic_5
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_stalker_revitalization
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_stalker_revitalization
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_resource = {
+					type = components
+					amount = 3
+				}
+				add_resource = {
+					type = chemicals
+					amount = 3
+				}
+				add_resource = {
+					type = electronics
+					amount = 3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_biggest_little_army_in_the_east
+		icon = GFX_generic_spec_ops_3
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_stalker_revitalization
+		}
+		prerequisite = {
+			focus = KAL_investments_from_the_hanza
+		}
+
+		available= {
+			date > 2034.01.01
+		}
+
+		relative_position_id = KAL_stalker_revitalization
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = KAL_army_modernization2
+				add_idea = KAL_biggest_little_army_in_the_east
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_open_the_stockpiles
+		icon = GFX_generic_medium_arms_3
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_investments_from_the_hanza
+		}
+
+		available= {
+			has_idea = KAL_army_modernization2
+		}
+
+		relative_position_id = KAL_investments_from_the_hanza
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_war_support = -0.05
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_2
+				amount = 30
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 5
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_standoff_in_perovo
+		icon = GFX_KAL_trouble
+		cost = 0
+		x = 57
+		y = 0
+
+		available = {
+			always = no
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 900
+		}
+	}
+
+	focus = {
+		id = KAL_tsarist_victory
+		icon = GFX_KAL_icon2
+		x = 8
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = KAL_standoff_in_perovo
+		}
+
+		available= {
+			has_country_leader = {
+				character = KAL_mad_king
+				ruling_only = yes
+			}
+			has_civil_war = no
+		}
+
+		relative_position_id = KAL_standoff_in_perovo
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			set_capital = {state = 340}
+			add_stability = 0.1
+		}
+	}
+
+	focus = {
+		id = KAL_counter_coup
+		icon = GFX_KAL_hierarchy
+		x = -4
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_tsarist_victory
+		}
+
+		mutually_exclusive = {
+			focus = KAL_in_the_name_of_the_tsar
+		}
+
+		available= {
+			custom_trigger_tooltip = {
+				tooltip = KAL_master_tt
+				hidden_trigger = { has_country_flag = KAL_master_added }
+			}
+			custom_trigger_tooltip = {
+				tooltip = KAL_inquisitor_tt
+				hidden_trigger = { has_country_flag = KAL_inquisitor_added }
+			}
+			custom_trigger_tooltip = {
+				tooltip = KAL_minister_tt
+				hidden_trigger = { has_country_flag = KAL_minister_added }
+			}
+		}
+
+		relative_position_id = KAL_tsarist_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			country_event = nf_KAL.13
+			set_cosmetic_tag = KAL_hierarchy_cosmetic
+			add_country_leader_role = {
+                character = KAL_holy_hierarchy_leader
+				promote_leader = yes
+                country_leader = {
+                    ideology = military_junta
+                    expire = 2065.1.1.1
+                    traits =  { }
+                }
+            }
+			set_politics = {
+				ruling_party = council
+				elections_allowed = no
+				last_election = "2028.1.1"
+			}
+			add_popularity = {
+				ideology = council
+				popularity = 0.8
+			}
+			hidden_effect = {
+				add_stability = -0.15
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_levies_of_sol
+		icon = GFX_KAL_mob
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_counter_coup
+		}
+
+		relative_position_id = KAL_counter_coup
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = KAL_levies
+		}
+	}
+
+	focus = {
+		id = KAL_corpse_thy_enemy
+		icon = GFX_KAL_king
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_counter_coup
+		}
+
+		relative_position_id = KAL_counter_coup
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_pledge_allegiance_to_sol
+		icon = GFX_KAL_pope
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_counter_coup
+		}
+
+		relative_position_id = KAL_counter_coup
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = KAL_make_examples
+		icon = GFX_KAL_poster
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_counter_coup
+		}
+
+		relative_position_id = KAL_counter_coup
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = KAL_rule_thru_fear
+		}
+	}
+
+	focus = {
+		id = KAL_knights_of_sol
+		icon = GFX_KAL_sol_knight
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_levies_of_sol
+		}
+
+		relative_position_id = KAL_corpse_thy_enemy
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+		    custom_effect_tooltip = KAL_knights_tt
+			division_template = {
+				name = "The Knights of Sol"
+				is_locked = yes
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 1 y = 0 }
+					special_forces = { x = 2 y = 0 }
+					special_forces = { x = 3 y = 0 }
+					special_forces = { x = 4 y = 0 }
+				}
+				support = {
+					explosive_support = { x = 0 y = 0 }  
+					gatling_support  = { x = 0 y = 1 }    
+				}
+			}
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"The Anointed Ones\" division_template = \"The Knights of Sol\" start_experience_factor = 0.85 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Inquisitor's Guard\" division_template = \"The Knights of Sol\" start_experience_factor = 0.85 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_thy_will_be_done
+		icon = GFX_KAL_god
+		x = 1
+		y = 1
+		cost = 6.5
+
+		available = {
+			owns_state = 303
+			owns_state = 289
+		}
+
+		prerequisite = {
+			focus = KAL_corpse_thy_enemy
+		}
+		prerequisite = {
+			focus = KAL_pledge_allegiance_to_sol
+		}
+
+		relative_position_id = KAL_corpse_thy_enemy
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
+			303 = {
+				add_core_of = KAL
+			}
+			289  = {
+				add_core_of = KAL
+			}
+			add_ideas = KAL_the_light_shines_on_the_metro
+		}
+	}
+
+	focus = {
+		id = KAL_bring_back_feudalism
+		icon = GFX_KAL_whipping
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_make_examples
+		}
+
+		relative_position_id = KAL_make_examples
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = civics_work_ethics_5
+			add_ideas = civics_child_labour_1
+		}
+	}
+
+	focus = {
+		id = KAL_in_the_name_of_the_tsar
+		icon = GFX_KAL_madking3
+		x = 4
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_tsarist_victory
+		}
+
+		mutually_exclusive = {
+			focus = KAL_counter_coup
+		}
+
+		relative_position_id = KAL_tsarist_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_trait = {
+				character = KAL_mad_king
+				ideology = king
+				trait = _tsar_of_russia
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_the_new_white_army
+		icon = GFX_KAL_principles_of_white_army
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_in_the_name_of_the_tsar
+		}
+
+		relative_position_id = KAL_in_the_name_of_the_tsar
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_ideas = KAL_white_army
+		}
+	}
+
+	focus = {
+		id = KAL_traditions_of_old
+		icon = GFX_KAL_army_officer
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_the_new_white_army
+		}
+
+		relative_position_id = KAL_the_new_white_army
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_foster_nationalism
+		icon = GFX_KAL_national_flag
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_in_the_name_of_the_tsar
+		}
+
+		relative_position_id = KAL_in_the_name_of_the_tsar
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = KAL_establish_okhrana
+		icon = GFX_KAL_eye
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_foster_nationalism
+		}
+
+		available = {
+			has_intelligence_agency = yes
+		}
+
+		relative_position_id = KAL_foster_nationalism
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = KAL_okhrana
+			upgrade_intelligence_agency = upgrade_passive_defense
+		}
+	}
+
+	focus = {
+		id = KAL_the_dvoryanstvo
+		icon = GFX_KAL_upper_class
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_foster_nationalism
+		}
+
+		relative_position_id = KAL_foster_nationalism
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_reclaiming_the_empire
+		icon = GFX_KAL_map
+		x = 3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_in_the_name_of_the_tsar
+		}
+
+		relative_position_id = KAL_in_the_name_of_the_tsar
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = KAL_renaming_tt
+			set_province_name = { id = 1745 name = "Saint Petersburg" }
+		}
+	}
+
+	focus = {
+		id = KAL_back_the_army
+		icon = GFX_KAL_supplies
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_reclaiming_the_empire
+		}
+
+		relative_position_id = KAL_reclaiming_the_empire
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			army_experience = 25
+			KAL = {
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_the_ultimate_revenge
+		icon = GFX_KAL_soldiers_mad
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_traditions_of_old
+		}
+		prerequisite = {
+			focus = KAL_back_the_army
+		}
+		prerequisite = {
+			focus = KAL_establish_okhrana
+		}
+		prerequisite = {
+			focus = KAL_the_dvoryanstvo
+		}
+
+		relative_position_id = KAL_establish_okhrana
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RED
+			}
+			add_ideas = KAL_death_to_the_reds
+		}
+	}
+
+	focus = {
+		id = KAL_loyalist_victory
+		icon = GFX_KAL_icon
+		x = -8
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = KAL_standoff_in_perovo
+		}
+
+		available= {
+			has_country_leader = {
+				character = KAL_confederation_board
+				ruling_only = yes
+			}
+			has_civil_war = no
+		}
+
+		relative_position_id = KAL_standoff_in_perovo
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			set_capital = {state = 340}
+			add_stability = 0.1
+			KAL = {
+				country_event = nf_KAL.16
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_troshin_victory
+		icon = GFX_KAL_stalker
+		x = -3
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_loyalist_victory
+		}
+
+		available = {
+			has_country_flag = KAL_troshin
+		}
+
+		relative_position_id = KAL_loyalist_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			set_cosmetic_tag = KAL_stalker_cosmetic
+			set_politics = {
+				ruling_party = community
+				elections_allowed = no
+				last_election = "2028.1.1"
+			}
+			add_popularity = {
+				ideology = community
+				popularity = 0.6
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_stalker_expertise
+		icon = GFX_generic_equipment_gasmask_2
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_troshin_victory
+		}
+
+		relative_position_id = KAL_troshin_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 8
+				}
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 1
+				category = stalker
+			}
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 1
+				uses = 1
+				category = stalker_expedition
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_only_the_best_for_the_best
+		icon = GFX_generic_defences
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_troshin_victory
+		}
+
+		relative_position_id = KAL_troshin_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_ideas = ARB_arms_processing
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = gatling_support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_the_experts_of_the_surface
+		icon = GFX_generic_equipment_gasmask_6
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_stalker_expertise
+		}
+		prerequisite = {
+			focus = KAL_only_the_best_for_the_best
+		}
+
+		relative_position_id = KAL_stalker_expertise
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			division_template = {
+				name = "Kalinin Stalkers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 1 y = 0 }
+					special_forces = { x = 2 y = 0 }
+					special_forces = { x = 3 y = 0 }
+					special_forces = { x = 4 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Stalkers of Perovo\" division_template = \"Kalinin Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Stalkers of Novokosino\" division_template = \"Kalinin Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			custom_effect_tooltip = expert_scavengers_tt
+			set_country_flag = free_scavenging_cost
+		}
+	}
+
+	focus = {
+		id = KAL_status_quo
+		icon = GFX_KAL_council
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_loyalist_victory
+		}
+
+		available = {
+			has_country_flag = KAL_council
+		}
+
+		relative_position_id = KAL_loyalist_victory
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			add_trait = {
+				character = KAL_confederation_board
+				ideology = confederation
+				trait = _cemented_authority
+			}
+			add_stability = 0.1
+			add_popularity = {
+				ideology = council
+				popularity = 0.2
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_civilian_industrial_sectors
+		icon = GFX_workstation_4
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_status_quo
+		}
+
+		relative_position_id = KAL_status_quo
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_military_industrial_sectors
+		icon = GFX_workstation_3
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_status_quo
+		}
+
+		relative_position_id = KAL_status_quo
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_protector_of_the_east
+		icon = GFX_generic_a_new_power_dawns
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_civilian_industrial_sectors
+		}
+		prerequisite = {
+			focus = KAL_military_industrial_sectors
+		}
+
+		relative_position_id = KAL_civilian_industrial_sectors
+		ai_will_do = {
+			factor = 550
+		}
+
+		completion_reward = {
+			create_faction = "United Stations of the East"
+			RYZ = {
+				country_event = nf_KAL.14
+			}
+		}
+	}
 }
