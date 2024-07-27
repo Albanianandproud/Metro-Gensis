@@ -15,7 +15,7 @@ focus_tree = {
 	focus = {
 		id = SEV_the_SEVHPP
 		icon = GFX_HNZ_sevastopol_power
-		x = -7
+		x = 0
 		y = 0
 		cost = 3
 
@@ -62,9 +62,58 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SEV_tooling
+		icon = GFX_generic_construction
+		x = -4
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_improve_living_space
+		}
+		relative_position_id = SEV_improve_living_space
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				category = tooling
+            		}
+		}
+	}
+
+	focus = {
+		id = SEV_medical
+		icon = GFX_generic_technician_medical
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_improve_living_space
+		}
+		relative_position_id = SEV_improve_living_space
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				category = health
+            		}
+		}
+	}
+
+	focus = {
 		id = SEV_expand_living_space
 		icon = GFX_generic_winch
-		x = -1
+		x = 0
 		y = 1
 		cost = 6.5
 
@@ -84,9 +133,80 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SEV_construction
+		icon = GFX_generic_construction_2
+		x = -4
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_expand_living_space
+		}
+		relative_position_id = SEV_expand_living_space
+		completion_reward = {
+			add_tech_bonus = {
+                		bonus = 0.25
+                		uses = 1
+                		category = construction
+            		}
+		}
+	}
+
+	focus = {
+		id = SEV_reconstruction
+		icon = GFX_generic_winch
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_construction
+		}
+		relative_position_id = SEV_construction
+		completion_reward = {
+			273 = {
+				add_extra_state_shared_building_slots = 4
+			}
+		}
+	}
+
+	focus = {
+		id = SEV_recyle
+		icon = GFX_components
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_reconstruction
+		}
+		relative_position_id = SEV_reconstruction
+		completion_reward = {
+			add_tech_bonus = {
+				name = recycling
+				uses = 1
+				bonus = 0.5
+				category = recycling
+			}
+		}
+	}
+
+	focus = {
 		id = SEV_isolated_economy
 		icon = GFX_cog_cement
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 
@@ -141,7 +261,7 @@ focus_tree = {
 	focus = {
 		id = SEV_strengthen_defense
 		icon = GFX_tunnel_bunker
-		x = 1
+		x = 2
 		y = 1
 		cost = 6.5
 
@@ -261,9 +381,65 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SEV_weapon_bonus
+		icon = GFX_generic_medium_arms_2
+		x = 2
+		y = 2
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_strengthen_defense
+		}
+		relative_position_id = SEV_improve_living_space
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = SEV_weapon_bonus_2
+		icon = GFX_generic_medium_arms_3
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = SEV_weapon_bonus
+		}
+		relative_position_id = SEV_weapon_bonus
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
 		id = SEV_research_boost
 		icon = GFX_cog_blueprints
-		x = 0
+		x = -1
 		y = 3
 		cost = 6.5
 
@@ -303,7 +479,7 @@ focus_tree = {
 	focus = {
 		id = SEV_hanza_trade
 		icon = GFX_HNZ_league_of_steel
-		x = -6
+		x = -5
 		y = 1
 		cost = 6.5
 
@@ -350,7 +526,7 @@ focus_tree = {
 	focus = {
 		id = SEV_contact_domodedovskaya
 		icon = GFX_generic_support_sevastopol
-		x = -4
+		x = -3
 		y = 1
 		cost = 6.5
 
@@ -391,7 +567,7 @@ focus_tree = {
 	focus = {
 		id = SEV_autarky
 		icon = GFX_generic_microphone
-		x = -2
+		x = -1
 		y = 1
 		cost = 6.5
 
@@ -432,7 +608,7 @@ focus_tree = {
 
 	focus = { ### Oligarch Pro Hanza path ###
 		id = SEV_hanza_joint_operations
-		icon = GFX_generic_support_hansa
+		icon = GFX_generic_support_hanza
 		x = 0
 		y = 1
 		cost = 6.5
@@ -463,7 +639,7 @@ focus_tree = {
 	
 	focus = {
 		id = SEV_join_hanza
-		icon = GFX_generic_support_hansa
+		icon = GFX_generic_support_hanza
 		x = 0
 		y = 1
 		cost = 6.5
@@ -550,6 +726,10 @@ focus_tree = {
 			set_politics = {
 				ruling_party = community
 			}
+			add_popularity = {
+				ideology = community
+				popularity = 1
+			}
 		}
 	}
 
@@ -607,6 +787,10 @@ focus_tree = {
 		completion_reward = {
 			set_politics = {
 				ruling_party = council
+			}
+			add_popularity = {
+				ideology = council
+				popularity = 1
 			}
 		}
 	}
@@ -895,7 +1079,7 @@ focus_tree = {
 	focus = {
 		id = SEV_military_contributions
 		icon = GFX_HNZ_sevastopol_arms_trade
-		x = 4
+		x = 5
 		y = 1
 		cost = 6.5
 
