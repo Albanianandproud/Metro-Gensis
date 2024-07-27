@@ -118,20 +118,12 @@ calculate_bullet_income = {
 	# Exports 
 	set_temp_variable = { income_from_exports_temp = 0 }
 
-    set_temp_variable = { scrap_export = resource_exported@scrap}
-    add_to_temp_variable = { income_from_exports_temp = scrap_import }
-
-    set_temp_variable = { alloys_export = resource_exported@alloys}
-    add_to_temp_variable = { income_from_exports_temp = alloys_import }
-
-    set_temp_variable = { electronics_export = resource_exported@electronics}
-    add_to_temp_variable = { income_from_exports_temp = electronics_import }
-
-    set_temp_variable = { components_export = resource_exported@components}
-    add_to_temp_variable = { income_from_exports_temp = components_import }
-
-    set_temp_variable = { chemicals_export = resource_exported@chemicals}
-    add_to_temp_variable = { income_from_exports_temp = chemicals_import }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@scrap }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@alloys }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@electronics }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@components }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@chemicals }
+	add_to_temp_variable = { income_from_exports_temp = resource_exported@oil }
 
 	## TODO ADD MODIFIER
 	add_to_temp_variable = { total_income_temp = income_from_exports_temp }
@@ -266,25 +258,20 @@ calculate_bullet_expenses = {
 	add_to_temp_variable = { total_expenses_temp = expenses_from_our_used_mil_factories }
 
 
-	# Imported
+	# Imports
 	set_temp_variable = { expenses_from_imports_temp = 0 }
-	set_temp_variable = { scrap_import = resource_imported@scrap}
-	add_to_temp_variable = { expenses_from_imports_temp = scrap_import }
 
-	set_temp_variable = { alloys_import = resource_imported@alloys}
-	add_to_temp_variable = { expenses_from_imports_temp = alloys_import }
-
-	set_temp_variable = { electronics_import = resource_imported@electronics}
-	add_to_temp_variable = { expenses_from_imports_temp = electronics_import }
-
-	set_temp_variable = { components_import = resource_imported@components}
-	add_to_temp_variable = { expenses_from_imports_temp = components_import }
-
-	set_temp_variable = { chemicals_import = resource_imported@chemicals}
-	add_to_temp_variable = { expenses_from_imports_temp = chemicals_import }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@scrap }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@alloys }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@electronics }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@components }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@chemicals }
+	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@oil }
 
 	## TODO ADD MODIFIER
+	multiply_temp_variable = { expenses_from_imports_temp = -1 }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_imports_temp }
+
 
 
 	# Other Expanses:
