@@ -1,0 +1,14 @@
+## bullet Console Commands
+metro_add_bullet = {
+	if = {
+		limit = { exists = yes }
+		set_temp_variable = { bullet_to_gain = args^0?1000 }
+		add_bullet_with_tooltip_effect = yes
+		if = {
+			limit = { check_variable = { bullet_to_gain > 0 } }
+			log = M_ADD_bullet_TT
+		}
+		else = { log = M_SUBTRACT_bullet_TT }
+	}
+	else = { log = "Command was used in wrong scope!" }
+}

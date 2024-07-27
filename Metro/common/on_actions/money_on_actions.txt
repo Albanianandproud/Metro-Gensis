@@ -1,0 +1,44 @@
+on_actions = {
+	on_weekly = {
+		effect = {
+			if = {
+				# BULLET SYSTEM #
+				set_temp_variable = { gained_bullet = 0 }
+				if = {
+					limit = {
+						calculate_bullet_balance = yes # calculates the bullet
+						OR = {
+							check_variable = { bullet < 2000000 }
+							NOT = { check_variable = { total_balance_temp > 0 } }
+						}
+						OR = {
+							check_variable = { bullet > -2000000 }
+							NOT = { check_variable = { total_balance_temp < 0 } }
+						}
+					}
+					set_temp_variable = { gained_bullet = total_balance_temp }
+					add_to_variable = { bullet = gained_bullet }
+				}
+				if = {
+					limit = {
+						check_variable = { bullet > 2000000 }
+					}
+					set_variable = { bullet = 2000000 }
+				}
+				else_if = {
+					limit = {
+						check_variable = { bullet < -2000000 }
+					}
+					set_variable = { bullet = -2000000 }
+				}
+				if = {
+					limit = {
+						is_ai = yes
+						check_variable = { bullet < 0 }
+					}
+					add_to_variable = { bullet = 2000 }
+				}
+			}
+		}
+	}
+}

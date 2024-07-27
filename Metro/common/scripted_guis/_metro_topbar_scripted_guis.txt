@@ -2,10 +2,52 @@ scripted_gui = {
 	topbar_resources = {
 		context_type = player_context
 		window_name = "topbar_resource_container"
+		parent_window_token = top_bar
 		visible = {
-			check_variable = {resources_disabled = 0 }
+			check_variable = { resources_disabled = 0 }
 		}
 		triggers = {
+		}
+	}
+}
+scripted_gui = {
+	topbar_bullet_info_window = {
+		context_type = player_context
+
+		window_name = "topbar_bullet_info_window"
+		parent_window_token = top_bar
+
+		visible = {
+			always = yes
+			if = {
+				limit = { is_ai = no }
+				calculate_bullet_balance = yes
+			}
+			set_temp_variable = { balance_indicator_icon_frame = 1 }
+			if = {
+				limit = {
+					check_variable = { total_balance_temp < 0 }
+				}
+				set_temp_variable = { balance_indicator_icon_frame = 2 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { total_balance_temp = 0 }
+				}
+				set_temp_variable = { balance_indicator_icon_frame = 3 }
+			}
+		}
+
+		triggers = {
+			balance_indicator_icon_visible = {
+				is_ai = no
+			}
+		}
+
+		properties = {
+			balance_indicator_icon = {
+				frame = balance_indicator_icon_frame
+			}
 		}
 	}
 }

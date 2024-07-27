@@ -1,0 +1,76 @@
+add_bullet_with_tooltip_effect = {
+	if = {
+		limit = {
+			check_variable = { bullet_to_gain < 0 }
+		}
+		custom_effect_tooltip = LOSE_bullet_TT
+	}
+	else = {
+		custom_effect_tooltip = GAIN_bullet_TT
+	}
+	hidden_effect = {
+		set_temp_variable = { bullet_temp = bullet }
+		add_to_variable = { bullet = bullet_to_gain }
+		clamp_variable = {
+			var = bullet
+			min = -2000000
+			max = 2000000
+		}
+		if = {
+			limit = {
+				check_variable = { bullet_to_gain > 0 }
+				check_variable = { bullet < bullet_temp }
+			}
+			set_variable = { bullet = 2000000 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { bullet_to_gain < 0 }
+				check_variable = { bullet > bullet_temp }
+			}
+			set_variable = { bullet = -2000000 }
+		}
+	}
+}
+
+# example usage:
+## set_temp_variable = { bullet_to_gain = 100 }
+## add_bullet_with_inflation_included_with_tooltip_effect = yes
+add_bullet_with_inflation_included_with_tooltip_effect = {
+	set_temp_variable = { inflation_calc_temp = 1 }
+	add_to_temp_variable = { inflation_calc_temp = current_inflation }
+	multiply_temp_variable = { bullet_to_gain = inflation_calc_temp }
+	if = {
+		limit = {
+			check_variable = { bullet_to_gain < 0 }
+		}
+		custom_effect_tooltip = LOSE_bullet_TT
+	}
+	else = {
+		custom_effect_tooltip = GAIN_bullet_TT
+	}
+	hidden_effect = {
+		set_temp_variable = { bullet_temp = bullet }
+		add_to_variable = { bullet = bullet_to_gain }
+		clamp_variable = {
+			var = bullet
+			min = -2000000
+			max = 2000000
+		}
+		if = {
+			limit = {
+				check_variable = { bullet_to_gain > 0 }
+				check_variable = { bullet < bullet_temp }
+			}
+			set_variable = { bullet = 2000000 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { bullet_to_gain < 0 }
+				check_variable = { bullet > bullet_temp }
+			}
+			set_variable = { bullet = -2000000 }
+		}
+	}
+}
+
