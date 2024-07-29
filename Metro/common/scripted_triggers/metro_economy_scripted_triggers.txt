@@ -136,6 +136,7 @@ calculate_bullet_income = {
 
 	# Other Income:
 	set_temp_variable = { income_from_other_sources = modifier@bullet_income }
+	add_to_temp_variable = { income_from_other_sources = modifier@bullet_income_from_ideas }
 	if = {
 		limit = {
 			check_variable = { income_from_other_sources < 0 }
@@ -274,11 +275,12 @@ calculate_bullet_expenses = {
 
 
 
-	# Other Expanses:
-	set_temp_variable = { expenses_from_other_sources = modifier@bullet_expenses }
+	# Other Income:
+	set_temp_variable = { expenses_from_other_sources = modifier@bullet_expense }
+	add_to_temp_variable = { expenses_from_other_sources = modifier@bullet_expense_from_ideas }
 	if = {
 		limit = {
-			check_variable = { expenses_from_other_sources > 0 }
+			check_variable = { expenses_from_other_sources < 0 }
 		}
 		set_temp_variable = { expenses_from_other_sources = 0 }
 	}
