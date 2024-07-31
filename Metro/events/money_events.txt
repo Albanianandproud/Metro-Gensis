@@ -1,17 +1,33 @@
-add_namespace = money_event
+add_namespace = bullet_event
 
+
+## Bankruptcy
 country_event = {
-	id = money_event.1
-	title = money_event.1.t
-	desc = money_event.1.d
+	id = bullet_event.1
+	title = bullet_event.1.t
+	desc = bullet_event.1.d
 	picture = "GFX_event (15)"
     is_triggered_only = yes
-
+	immediate = { hidden_effect = { add_ideas = bankruptcy } }
 	option = {
-		name = money_event.1.a
-		add_timed_idea = {
-			idea = bankruptcy
-			days = 40
-		}
+		name = bullet_event.1.a
+		custom_effect_tooltip = bullet_event.1.a.tt
+		effect_tooltip = { add_ideas = bankruptcy }
+
+		set_country_flag = is_bankrupt
+		activate_mission = bankruptcy_time
+    }
+}
+
+country_event = {
+	id = bullet_event.2
+	title = bullet_event.2.t
+	desc = bullet_event.2.d
+	picture = "GFX_event (15)"
+    is_triggered_only = yes
+	option = {
+		name = bullet_event.2.a
+		set_temp_variable = { bullet_to_gain = 150 }
+		add_bullet_with_tooltip_effect = yes
     }
 }

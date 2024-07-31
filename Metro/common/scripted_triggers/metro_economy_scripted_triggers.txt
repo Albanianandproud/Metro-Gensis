@@ -24,7 +24,7 @@ has_balance_in_positive = {
 	custom_trigger_tooltip = {
 		tooltip = HAS_BALANCE_IN_POSITIVE
 		calculate_bullet_balance = yes
-		check_variable = { total_balance_temp > 0 }
+		check_variable = { bullet > 0 }
 	}
 }
 
@@ -34,7 +34,7 @@ has_balance_in_negative = {
 	custom_trigger_tooltip = {
 		tooltip = HAS_BALANCE_IN_NEGATIVE
 		calculate_bullet_balance = yes
-		check_variable = { total_balance_temp < 0 }
+		check_variable = { bullet < 0 }
 	}
 }
 
@@ -102,6 +102,18 @@ calculate_bullet_income = {
 	# Tax Affecting Modifiers:
 	calculate_tax_modifiers = yes
 
+	# Active Factories 
+	set_temp_variable = { income_from_our_free_civilian_factories = num_of_civilian_factories_available_for_projects }
+	multiply_temp_variable = { income_from_our_free_civilian_factories = 2 }
+
+	# Active Modifier:
+	set_temp_variable = { free_factory_income_modifier = 1  }
+	add_to_temp_variable = { free_factory_income_modifier = modifier@free_factories_income_factor  }
+	#multiply_temp_variable = { consumer_goods_income_modifier = 1 }
+	multiply_temp_variable = { income_from_our_free_civilian_factories = free_factory_income_modifier }
+	add_to_temp_variable = { total_income_temp = income_from_our_free_civilian_factories }
+
+
 	# Consumer Goods Factories:
 	set_temp_variable = { income_from_our_consumer_goods_factories = num_of_civilian_factories }
 	subtract_from_temp_variable = { income_from_our_consumer_goods_factories = num_of_civilian_factories_available_for_projects }
@@ -112,8 +124,12 @@ calculate_bullet_income = {
 	}
 	multiply_temp_variable = { income_from_our_consumer_goods_factories = 1 }
 
-	# Consumer Goods Factories Modifiers:
-	calculate_consumer_goods_modifiers = yes
+	# Consumer Goods Modifier:
+	set_temp_variable = { consumer_goods_income_modifier = 1  }
+	add_to_temp_variable = { consumer_goods_income_modifier = modifier@consumer_goods_income_factor  }
+	#multiply_temp_variable = { consumer_goods_income_modifier = 1 }
+	multiply_temp_variable = { income_from_our_consumer_goods_factories = consumer_goods_income_modifier }
+	add_to_temp_variable = { total_income_temp = income_from_our_consumer_goods_factories }
 
 	# Exports 
 	set_temp_variable = { income_from_exports_temp = 0 }
@@ -127,12 +143,6 @@ calculate_bullet_income = {
 
 	## TODO ADD MODIFIER
 	add_to_temp_variable = { total_income_temp = income_from_exports_temp }
-
-    #set_temp_variable = { resource_import_modifier = modifier@resource_import_modifier }
-    #add_to_temp_variable = { resource_import_modifier = 1 }
-    #multiply_temp_variable = { income_from_exports_temp = resource_import_modifier }
-	#round_temp_variable = resourceimportspending
-    #subtract_from_temp_variable = { bullet_count = resourceimportspending }
 
 	# Other Income:
 	set_temp_variable = { income_from_other_sources = modifier@bullet_income }
@@ -176,34 +186,6 @@ calculate_tax_modifiers = {
 }
 
 # example usage:
-## calculate_consumer_goods_modifiers = yes
-calculate_consumer_goods_modifiers = {
-	# Consumer Goods Factories Modifiers:
-	set_temp_variable = { consumer_goods_income_modifier = 1 }
-	add_to_temp_variable = { consumer_goods_income_modifier = modifier@consumer_goods_income_factor }
-	if = {
-		limit = { check_variable = { consumer_goods_income_modifier < 0 } }
-		set_temp_variable = { consumer_goods_income_modifier = 0 }
-	}
-	multiply_temp_variable = { income_from_our_consumer_goods_factories = consumer_goods_income_modifier }
-	add_to_temp_variable = { total_income_temp = income_from_our_consumer_goods_factories }
-
-	# Setting Display Variable:
-	set_temp_variable = { consumer_goods_modifier = modifier@consumer_goods_income_factor }
-	set_temp_variable = { consumer_goods_modifier_from_ideas = modifier@consumer_goods_income_factor_from_ideas }
-	set_temp_variable = { consumer_goods_modifier_from_decisions = modifier@consumer_goods_income_factor_from_decisions }
-	set_temp_variable = { consumer_goods_modifier_from_other = consumer_goods_modifier }
-	subtract_from_temp_variable = { consumer_goods_modifier_from_other = consumer_goods_modifier_from_ideas }
-	subtract_from_temp_variable = { consumer_goods_modifier_from_other = consumer_goods_modifier_from_decisions }
-	if = {
-		limit = {
-			check_variable = { consumer_goods_modifier < -1 }
-		}
-		set_temp_variable = { consumer_goods_modifier = -1 }
-	}
-}
-
-# example usage:
 ## calculate_bullet_income_modifiers = yes
 calculate_bullet_income_modifiers = {
 	# Calculation:
@@ -243,19 +225,27 @@ calculate_bullet_expenses = {
 	# Army Spending:
 	set_temp_variable = { expenses_from_our_army_spending = num_battalions }
 	multiply_temp_variable = { expenses_from_our_army_spending = -2 }
-	# Add +1 for Spec ops
-	
+	# Add +1 for Spec ops, & other forces
 	subtract_from_temp_variable = { expenses_from_our_army_spending = num_battalions_with_type@special_forces }
 	subtract_from_temp_variable = { expenses_from_our_army_spending = num_battalions_with_type@regulars }
 
-	# Army Spending Affecting Modifiers:
-	calculate_army_spending_modifiers = yes
+	# Army Spending Modifiers:
+	set_temp_variable = { army_spending_modifier = modifier@army_spending_cost_factor  }
+	multiply_temp_variable = { army_spending_modifier = -1 }
+	multiply_temp_variable = { expenses_from_our_army_spending = army_spending_modifier }
+	add_to_temp_variable = { total_expenses_temp = expenses_from_our_army_spending }
 
-	# Used Military Factories:
+
+	# Used Military Factories // Technicians Cost:
 	set_temp_variable = { expenses_from_our_used_mil_factories = num_of_military_factories }
 	subtract_from_temp_variable = { expenses_from_our_used_mil_factories = num_of_available_military_factories }
 	round_temp_variable = expenses_from_our_used_mil_factories
 	multiply_temp_variable = { expenses_from_our_used_mil_factories = -5 }
+
+	# Military Spending Modifiers:
+	set_temp_variable = { military_spending_modifier = modifier@military_spending_cost_factor  }
+	multiply_temp_variable = { military_spending_modifier = -1 }
+	multiply_temp_variable = { expenses_from_our_used_mil_factories = military_spending_modifier }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_our_used_mil_factories }
 
 
@@ -273,8 +263,6 @@ calculate_bullet_expenses = {
 	multiply_temp_variable = { expenses_from_imports_temp = -1 }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_imports_temp }
 
-
-
 	# Other Income:
 	set_temp_variable = { expenses_from_other_sources = modifier@bullet_expense }
 	add_to_temp_variable = { expenses_from_other_sources = modifier@bullet_expense_from_ideas }
@@ -291,64 +279,13 @@ calculate_bullet_expenses = {
 }
 
 # example usage:
-## calculate_army_spending_modifiers = yes
-calculate_army_spending_modifiers = {
-	# Army Spending Modifiers:
-	set_temp_variable = { army_spending_modifier = 1 }
-	add_to_temp_variable = { army_spending_modifier = modifier@army_spending_cost_factor }
-	if = {
-		limit = {
-			check_variable = { army_spending_modifier < 0 }
-		}
-		set_temp_variable = { army_spending_modifier = 0 }
-	}
-	multiply_temp_variable = { expenses_from_our_army_spending = army_spending_modifier }
-	add_to_temp_variable = { total_expenses_temp = expenses_from_our_army_spending }
-
-	# Setting Display Variable:
-	set_temp_variable = { army_spending_cost_modifier = modifier@army_spending_cost_factor }
-	set_temp_variable = { army_spending_cost_modifier_from_ideas = modifier@army_spending_cost_factor_from_ideas }
-	set_temp_variable = { army_spending_cost_modifier_from_decisions = modifier@army_spending_cost_factor_from_decisions }
-	set_temp_variable = { army_spending_cost_modifier_from_other = army_spending_cost_modifier }
-	subtract_from_temp_variable = { army_spending_cost_modifier_from_other = army_spending_cost_modifier_from_ideas }
-	subtract_from_temp_variable = { army_spending_cost_modifier_from_other = army_spending_cost_modifier_from_decisions }
-	if = {
-		limit = {
-			check_variable = { army_spending_cost_modifier < -1 }
-		}
-		set_temp_variable = { army_spending_cost_modifier = -1 }
-	}
-}
-
-# example usage:
 ## calculate_bullet_expenses_modifiers = yes
 calculate_bullet_expenses_modifiers = {
-	# Calculation:
-	set_temp_variable = { expenses_modifier_calculation = 1 }
-
-	# Inflation:
-	add_to_temp_variable = { expenses_modifier_calculation = current_inflation }
-
-	# Other Sources:
-	add_to_temp_variable = { expenses_modifier_calculation = modifier@bullet_expenses_factor }
-
-	if = {
-		limit = {
-			check_variable = { expenses_modifier_calculation < 0 }
-		}
-		set_temp_variable = { expenses_modifier_calculation = 0 }
-	}
-	multiply_temp_variable = { total_expenses_temp = expenses_modifier_calculation }
-
 	# Setting Display Variable:
 	set_temp_variable = { expenses_modifier = modifier@bullet_expenses_factor }
-	add_to_temp_variable = { expenses_modifier = current_inflation }
-	set_temp_variable = { expenses_modifier_from_ideas = modifier@bullet_expenses_factor_from_ideas }
-	set_temp_variable = { expenses_modifier_from_decisions = modifier@bullet_expenses_factor_from_decisions }
 	set_temp_variable = { expenses_modifier_from_other = expenses_modifier }
 	subtract_from_temp_variable = { expenses_modifier_from_other = expenses_modifier_from_ideas }
 	subtract_from_temp_variable = { expenses_modifier_from_other = expenses_modifier_from_decisions }
-	subtract_from_temp_variable = { expenses_modifier_from_other = current_inflation }
 	if = {
 		limit = {
 			check_variable = { expenses_modifier < -1 }
