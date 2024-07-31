@@ -100,7 +100,11 @@ calculate_bullet_income = {
 	}
 
 	# Tax Affecting Modifiers:
-	calculate_tax_modifiers = yes
+	set_temp_variable = { taxes_income_modifier = 1  }
+	add_to_temp_variable = { taxes_income_modifier = modifier@tax_efficiency_modifier  }
+	#multiply_temp_variable = { consumer_goods_income_modifier = 1 }
+	multiply_temp_variable = { income_from_our_taxes = taxes_income_modifier }
+	add_to_temp_variable = { total_income_temp = income_from_our_taxes }
 
 	# Active Factories 
 	set_temp_variable = { income_from_our_free_civilian_factories = num_of_civilian_factories_available_for_projects }
@@ -122,7 +126,7 @@ calculate_bullet_income = {
 		limit = { check_variable = { income_from_our_consumer_goods_factories < 0 } }
 		set_temp_variable = { income_from_our_consumer_goods_factories = 0 }
 	}
-	multiply_temp_variable = { income_from_our_consumer_goods_factories = 1 }
+	multiply_temp_variable = { income_from_our_consumer_goods_factories = 2 }
 
 	# Consumer Goods Modifier:
 	set_temp_variable = { consumer_goods_income_modifier = 1  }
@@ -157,32 +161,6 @@ calculate_bullet_income = {
 
 	# Income Affecting Modifiers:
 	calculate_bullet_income_modifiers = yes
-}
-
-# example usage:
-## calculate_tax_modifiers = yes
-calculate_tax_modifiers = {
-	# Tax Modifiers:
-	set_temp_variable = { tax_efficiency_modifier = 1 }
-	if = {
-		limit = {
-			check_variable = { tax_efficiency_modifier < 0 }
-		}
-		set_temp_variable = { tax_efficiency_modifier = 0 }
-	}
-	multiply_temp_variable = { income_from_our_taxes = tax_efficiency_modifier }
-	add_to_temp_variable = { total_income_temp = income_from_our_taxes }
-
-	# Setting Display Variable:
-	set_temp_variable = { tax_modifier_from_other = tax_modifier }
-	subtract_from_temp_variable = { tax_modifier_from_other = tax_modifier_from_ideas }
-	subtract_from_temp_variable = { tax_modifier_from_other = tax_modifier_from_decisions }
-	if = {
-		limit = {
-			check_variable = { tax_modifier < -1 }
-		}
-		set_temp_variable = { tax_modifier = -1 }
-	}
 }
 
 # example usage:
