@@ -1,58 +1,53 @@
-scripted_diplomatic_actions = {
-	send_bullet_gift = {
-		allowed = {
-			always = yes
-		}
-		visible = {
-			always = yes
-		}
-		selectable = {
-			ROOT = {
-				set_temp_variable = { amount_of_bullet_to_check = 1 }
-				has_specific_amount_of_bullet = yes
-			}
-			NOT = { has_war_with = ROOT }
-		}
-
-		requires_acceptance = no
-
-		icon = 1
-
-		on_sent_effect = {
-		}
-
-		complete_effect = {
-			set_temp_variable = { bullet_to_gain = ROOT.send_bullet_value }
-			add_bullet_with_tooltip_effect = yes
-			ROOT = {
-				set_temp_variable = { bullet_to_gain = send_bullet_value }
-				multiply_temp_variable = { bullet_to_gain = -1 }
-				add_bullet_with_tooltip_effect = yes
-				clear_variable = send_bullet_value
-			}
-		}
-
-		# SEND POPUP CUSTOMIZATION
-		# use diplomatic_action as context in scripted gui
-		send_scripted_gui = send_bullet_gift_gui
-		reset_send_effect = {
-			ROOT = {
-				set_variable = { send_bullet_value = 1 }
-			}
-		}
-		can_be_sent = {
-			ROOT = {
-				check_variable = { send_bullet_value > 0 }
-				set_temp_variable = { amount_of_bullet_to_check = send_bullet_value }
-				has_specific_amount_of_bullet = yes
-			}
-		}
-
-		accept_title = SEND_bullet_GIFT_ACCEPT_TITLE
-		accept_description = SEND_bullet_GIFT_ACCEPT_DESC
-
-		ai_desire = {
-			base = 0
-		}
-	}
-}
+#scripted_diplomatic_actions = {
+#	send_bullet_gift = {
+#		allowed = { always = yes }
+#		visible = { always = yes }
+#		selectable = {
+#			ROOT = {
+#				#set_temp_variable = { amount_of_bullet_to_check = 1 }
+#				#has_specific_amount_of_bullet = yes
+#				bullet > 2
+#			}
+#			NOT = { has_war_with = ROOT }
+#		}
+#
+#		requires_acceptance = no
+#		icon = 1
+#
+#		on_sent_effect = {}
+#
+#		complete_effect = {
+#			set_temp_variable = { bullet_to_gain = ROOT.send_bullet_value }
+#			add_bullet_with_tooltip_effect = yes
+#			ROOT = {
+#				set_temp_variable = { bullet_to_gain = send_bullet_value }
+#				multiply_temp_variable = { bullet_to_gain = -1 }
+#				add_bullet_with_tooltip_effect = yes
+#				clear_variable = send_bullet_value
+#			}
+#		}
+#
+#		# SEND POPUP CUSTOMIZATION
+#		# use diplomatic_action as context in scripted gui
+#		send_scripted_gui = send_bullet_gift_gui
+#		reset_send_effect = {
+#			ROOT = {
+#				set_variable = { send_bullet_value = 1 }
+#			}
+#		}
+#		can_be_sent = {
+#			ROOT = {
+#				check_variable = { send_bullet_value > 0 }
+#				set_temp_variable = { amount_of_bullet_to_check = send_bullet_value }
+#				has_specific_amount_of_bullet = yes
+#			}
+#		}
+#
+#		accept_title = SEND_bullet_GIFT_ACCEPT_TITLE
+#		accept_description = SEND_bullet_GIFT_ACCEPT_DESC
+#
+#		ai_desire = {
+#			base = 0
+#		}
+#	}
+#}
