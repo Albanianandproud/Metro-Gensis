@@ -558,8 +558,8 @@ focus_tree = {
 	focus = {
 		id = KAL_demand_rimskaya
 		icon = GFX_KAL_pec_attack
-		x = -1
-		y = 1
+		x = -2
+		y = 2
 		cost = 6.5
 
 		prerequisite = {
@@ -579,12 +579,46 @@ focus_tree = {
 
 		relative_position_id = KAL_strengthen_west
 		ai_will_do = {
-			factor = 175
+			factor = 0
 		}
 
 		completion_reward = {
 			PEC = {
 				country_event = nf_KAL.4
+			}
+		}
+	}
+
+	focus = {
+		id = KAL_demand_marksistkaya
+		icon = GFX_fist
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = KAL_strengthen_north
+		}
+		prerequisite = {
+			focus = KAL_strengthen_west
+		}
+
+		available = { 
+			date > 2032.01.01
+			custom_trigger_tooltip = {
+				tooltip = KAL_nonpeace_approach_tt
+				hidden_trigger = { has_country_flag = KAL_nonpeace_approach }
+			}
+		}
+
+		relative_position_id = KAL_strengthen_west
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			HNZ = {
+				country_event = nf_KAL.17
 			}
 		}
 	}

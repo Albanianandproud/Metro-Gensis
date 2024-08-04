@@ -444,17 +444,31 @@ country_event = { ## Pressure success
 	fire_only_once = yes
 
 	immediate = {
-		transfer_state = 416
-		transfer_state = 32
-		transfer_state = 253
+		transfer_state = 265
 	}
 
 	option = {
 		name = nf_PEC.16.a
 		effect_tooltip = {
-			transfer_state = 416
-			transfer_state = 32
-			transfer_state = 253
+			transfer_state = 265
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 223 }
+			}
+			PEC = { transfer_state = 223 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 176 }
+			}
+			PEC = { transfer_state = 176 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 73 }
+			}
+			PEC = { transfer_state = 73 }
 		}
 	}
 }
@@ -476,10 +490,26 @@ country_event = { ## Pressure fail
 
 	option = { ## Fight
 		name = nf_PEC.17.a
-		416 = { add_claim_by = ROOT }
-		32 = { add_claim_by = ROOT }
-		253 = { add_claim_by = ROOT }
+		265 = { add_claim_by = ROOT }
 		add_war_support = 0.1
+		if = {
+			limit = {
+				FROM = { owns_state = 223 }
+			}
+			PEC = { add_state_claim = 223 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 176 }
+			}
+			PEC = { add_state_claim = 176 }
+		}
+		if = {
+			limit = {
+				FROM = { owns_state = 73 }
+			}
+			PEC = { add_state_claim = 73 }
+		}
 	}
 }
 

@@ -428,16 +428,26 @@ country_event = {
             set_compliance = 55
             set_resistance = 0
         }
-        280 = {
-            add_manpower = -50
-            set_compliance = 55
-            set_resistance = 0
-        }
-        385 = {
-            add_manpower = -50
-            set_compliance = 55
-            set_resistance = 0
-        }
+	if = {
+		limit = {
+			ROOT = { owns_state = 280 }
+			}
+        		280 = {
+            			add_manpower = -50
+            			set_compliance = 55
+            			set_resistance = 0
+        		}
+	}
+	if = {
+		limit = {
+			ROOT = { owns_state = 385 }
+			}
+        		385 = {
+            			add_manpower = -50
+            			set_compliance = 55
+            			set_resistance = 0
+        		}
+	}
     }
 
     option = { 
@@ -446,14 +456,24 @@ country_event = {
             add_manpower = -200
             add_core_of = ROOT
         }
-        280 = {
-            add_manpower = -100
-            add_core_of = ROOT 
-        }
-        385 = {
-            add_manpower = -100
-            add_core_of = ROOT
-        }
+	if = {
+		limit = {
+			ROOT = { owns_state = 280 }
+			}
+        		280 = {
+            			add_manpower = -100
+            			add_core_of = ROOT
+        		}
+	}
+	if = {
+		limit = {
+			ROOT = { owns_state = 385 }
+			}
+        		385 = {
+            			add_manpower = -100
+            			add_core_of = ROOT
+        		}
+	}
     }
 }
 
@@ -481,9 +501,6 @@ country_event = {
     option = { 
         name = nf_ARB.13.a
         ARB = {
-			set_rule = {
-				can_create_factions = yes
-			}
 			create_faction = ARB_FACTION_NAME
 			add_to_faction = EUR
 		}
@@ -731,6 +748,141 @@ country_event = {
 			news_event = { id = ARBnews.3 days = 1 }
 		}
 	}
+}
+
+country_event = { 
+    id = nf_ARB.20
+    title = nf_ARB.20.t
+    desc = nf_ARB.20.d
+    picture = "GFX_event (55)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.20.a
+        ARB = {
+		transfer_state = 241
+		241 = { add_core_of = PREV }
+		RED = { remove_state_core = 241 }
+		361 = { add_core_of = RED }
+		ARB = { remove_state_core = 361 }
+		ARB = { remove_state_claim = 361 }
+		RED = { transfer_state = 361 }
+		if = { #In case Reds colonized any states on the line, this will transfer it.
+			limit = {
+				RED = { owns_state = 186 }
+			}
+			ARB = { transfer_state = 186 }
+			186 = { add_core_of = ARB }
+			RED = { remove_state_core = 186 }
+		}
+		if = {
+			limit = {
+				RED = { owns_state = 67 }
+			}
+			ARB = { transfer_state = 67 }
+			67 = { add_core_of = ARB }
+			RED = { remove_state_core = 67 }
+		}
+		if = {
+			limit = {
+				RED = { owns_state = 201 }
+			}
+			ARB = { transfer_state = 201 }
+			201 = { add_core_of = ARB }
+			RED = { remove_state_core = 201 }
+		}
+		hidden_effect = { country_event = { id = nf_ARB.21 days = 2 random_days = 2 } }
+        }
+        ai_chance = {
+            base = 1
+            modifier = {
+                factor = 25
+                ARB = { is_ai = no } ## Player ARB should get the station
+            }
+        }
+    }
+
+    option = { ## No Fuck off
+        name = nf_ARB.20.b
+        hidden_effect = { country_event = { id = nf_ARB.22 days = 2 random_days = 2 } }
+        ai_chance = {
+            base = 0.25
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.21
+    title = nf_ARB.21.t
+    desc = nf_ARB.21.d
+    picture = "GFX_event (56)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.21.a
+        ai_chance = {
+            base = 2
+        }
+    }
+}
+
+country_event = { 
+    id = nf_ARB.22
+    title = nf_ARB.22.t
+    desc = nf_ARB.22.d
+    picture = "GFX_event (89)"
+	
+	is_triggered_only = yes
+
+    option = { ## OK
+        name = nf_ARB.22.a
+        ai_chance = {
+            base = 2
+        }
+    }
+
+    option = { ## Bye
+        name = nf_ARB.22.b
+        241 = { add_claim_by = ROOT }
+	if = { #In case the reds colonized any states on the line, we will claim it.
+		limit = {
+			RED = { owns_state = 186 }
+		}
+		186 = { add_claim_by = ROOT }
+	}
+	if = {
+		limit = {
+			RED = { owns_state = 67 }
+		}
+		67 = { add_claim_by = ROOT }
+	}
+	if = {
+		limit = {
+			RED = { owns_state = 201 }
+		}
+		201 = { add_claim_by = ROOT }
+	}
+        create_wargoal = {
+		type = take_state_focus
+		target = RED
+		generator = { 241 }
+        }
+        ai_chance = {
+            base = 0
+            modifier = {
+                factor = 15
+                ARB = { is_ai = yes }
+                AND = {
+                    ic_ratio = {
+                        tag = RED
+                        ratio > 0.34
+                    }
+                }
+            }
+        }
+    }
 }
 
 #####NEWS#####

@@ -2,6 +2,9 @@
 NDefines.NGame.START_DATE = "2028.1.1.12"
 NDefines.NGame.END_DATE = "2055.1.1.1"
 
+---Map scale---
+NDefines.NGame.MAP_SCALE_PIXEL_TO_KM = 0.01804242424
+
 ---Diplomacy Stuff---
 NDefines.NDiplomacy.TRUCE_BREAK_COST_PP = 100
 NDefines.NDiplomacy.NAP_EXPIRY_MONTHS = 24
@@ -229,5 +232,8 @@ NDefines.NTrade.BASE_LAND_TRADE_RANGE = 800
 NDefines.NTrade.PARTY_SUPPORT_TRADE_FACTOR = 50
 NDefines.NTrade.ANTI_MONOPOLY_TRADE_FACTOR_THRESHOLD = 0.665
 
+-- Military Speed -- 
+
+NDefines.NMilitary.LAND_SPEED_MODIFIER = 1.0
 
 
