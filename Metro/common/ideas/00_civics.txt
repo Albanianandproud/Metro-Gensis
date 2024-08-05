@@ -13,7 +13,7 @@ ideas = {
 				NOT = { has_cosmetic_tag = EUR_oligarch_DDR }
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
@@ -40,7 +40,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -62,7 +62,7 @@ ideas = {
 				NOT = { tag = PLS }
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -92,7 +92,7 @@ ideas = {
 				} 
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
@@ -122,7 +122,7 @@ ideas = {
 				} 
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -157,7 +157,7 @@ ideas = {
                 }
             }
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
@@ -216,7 +216,7 @@ ideas = {
                 has_war_support > 0.39
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
@@ -240,7 +240,7 @@ ideas = {
                 }
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
@@ -266,7 +266,7 @@ ideas = {
 				}
 		    }
 
-		     cost = 75
+		     cost = 100
 		     removal_cost = -1
 	   
 		    modifier = {
@@ -307,7 +307,7 @@ ideas = {
 				}
 		    }
 
-		    cost = 75
+		    cost = 100
 		    removal_cost = -1
 	   
 		    modifier = {
@@ -330,29 +330,29 @@ ideas = {
 
 		civics_support_1 = { ## No Welfare
 			
-			available = {
-				always = no
+			allowed = {
+				NOT = { has_country_flag = has_bullets_disabled }
 			}
 
 			visible = {
 				hidden_trigger = {
 					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = RED
 					}
 				}
 			}
 
-			cost = 75
+			level = 1
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
-				#consumer_goods_factor = -0.02 
-				#army_org_factor = -0.035
-				#army_org_regain = -0.035
-				#army_morale_factor = -0.035
+				army_spending_cost_factor = -0.2
+				army_org_regain = -0.2
+			   	army_morale_factor = -0.2
+			   	experience_gain_army_unit_factor = -0.1
+			   	initiative_factor = -0.1
 			}
-
-			default = yes
 
 			cancel_if_invalid = no
 
@@ -361,30 +361,27 @@ ideas = {
    			}
    		}
 
-		civics_support_2 = { #Community Support
+		civics_support_2 = { # No change
 			
-			available = {
-				always = no
+			allowed = {
+				NOT = { has_country_flag = has_bullets_disabled }
 			}
 
 			visible = {
 				hidden_trigger = {
 					NOT = {
-						tag = RED 		## Red Line uses their own unique conscription law.
+						tag = RED
 					}
 				}
 			}
 
-			cost = 75
+			level = 2
+			cost = 100
 			removal_cost = -1
 		
-			modifier = {
-				#consumer_goods_factor = 0.02 
-				#army_org_factor = 0.03
-				#army_org_regain = 0.02
-				#army_morale_factor = 0.04
-			}
+			modifier = {}
 
+			default = yes
 			cancel_if_invalid = no
 
 			ai_will_do = {
@@ -394,8 +391,8 @@ ideas = {
 
 		civics_support_3 = { #Pension
 			
-			available = {
-				always = no
+			allowed = {
+				NOT = { has_country_flag = has_bullets_disabled }
 			}
 
 			visible = {
@@ -406,15 +403,17 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			level = 3
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
-				#consumer_goods_factor = 0.04 
-				#army_org_factor = 0.06
-				#army_org_regain = 0.06
-				#army_morale_factor = 0.08
-			}
+				army_spending_cost_factor = 0.1
+				army_org_regain = 0.05
+				army_morale_factor = 0.05
+				max_training = 0.05
+				experience_gain_army_factor = 0.05
+			 }
 
 			cancel_if_invalid = no
 
@@ -422,6 +421,35 @@ ideas = {
    				factor = 2
    			}
    		}
+
+		civics_support_4 = { # Double Wage
+			
+			allowed = {
+				NOT = { has_country_flag = has_bullets_disabled }
+			}
+
+		    visible = {
+			   hidden_trigger = { NOT = { tag = RED } }
+		    }
+
+			level = 4
+		    cost = 100
+		    removal_cost = -1
+	   
+		    modifier = {
+			   army_spending_cost_factor = 0.2
+			   army_org_regain = 0.1
+			   army_morale_factor = 0.1
+			   experience_gain_army_unit_factor = 0.05
+			   initiative_factor = 0.05
+			   max_training = 0.10
+			   experience_gain_army_factor = 0.1
+		    }
+
+		   cancel_if_invalid = no
+
+		    ai_will_do = { factor = 2 } 
+		}
    	}
 
 	civics_property = { 
@@ -444,7 +472,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -472,7 +500,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -503,7 +531,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 
 			modifier = {
@@ -538,7 +566,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1		
 
 			modifier = {
@@ -562,7 +590,7 @@ ideas = {
 
 			allowed_to_remove = { NOT = { has_country_flag = is_bandit_nation } }
 
-		   cost = 75
+		   cost = 100
 		   removal_cost = -1		
 
 		    modifier = {
@@ -588,7 +616,7 @@ ideas = {
 					has_country_flag = is_communist_nation
 				}
 			}
-		    cost = 75
+		    cost = 100
 		    removal_cost = -1		
 		    modifier = {
 			   consumer_goods_expected_value = 0.05
@@ -613,7 +641,7 @@ ideas = {
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
-			cost = 75
+			cost = 100
 			removal_cost = -1
 			modifier = {
 				monthly_population = 0.2
@@ -642,7 +670,7 @@ ideas = {
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
-			cost = 75
+			cost = 100
 			removal_cost = -1
 			modifier = {
 				monthly_population = 0.05
@@ -669,7 +697,7 @@ ideas = {
 					has_country_flag = is_savage_nation
 				}
 			}
-			cost = 75
+			cost = 100
 			removal_cost = -1
 			modifier = {
 				enemy_operative_detection_chance = 0.1
@@ -721,7 +749,7 @@ ideas = {
 				}
 			}
 
-			cost = 75
+			cost = 100
 			removal_cost = -1
 		
 			modifier = {
