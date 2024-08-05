@@ -8,7 +8,10 @@ country_event = { ## Fight ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { has_war = no is_acting_major = no }
+	trigger = {
+		has_war = no is_acting_major = no 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { set_character_flag = random_event_fighting_flag }
@@ -36,7 +39,10 @@ country_event = { ## Leader Better skills ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { has_war = no is_acting_major = no any_unit_leader = { skill < 6 } }
+	trigger = { 
+		has_war = no is_acting_major = no any_army_leader = { skill < 6 } 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { set_character_flag = random_event_genius_flag }
@@ -65,7 +71,10 @@ country_event = { ## Leader remove Paranoid Trait
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { any_unit_leader = { has_trait = paranoid_personality_trait } }
+	trigger = { 
+		any_army_leader = { has_trait = paranoid_personality_trait } 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { 
@@ -92,7 +101,10 @@ country_event = { ## Leader remove Fainthearted Trait ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { any_unit_leader = { has_trait = fainthearted_personality_trait } }
+	trigger = { 
+		any_army_leader = { has_trait = fainthearted_personality_trait } 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { 
@@ -119,7 +131,10 @@ country_event = { ## Leader remove Irrational Trait ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { any_unit_leader = { has_trait = irrational_personality_trait } }
+	trigger = { 
+		any_army_leader = { has_trait = irrational_personality_trait } 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { 
@@ -146,7 +161,10 @@ country_event = { ## Leader add Paranoid Trait ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { any_unit_leader = { NOT = { has_trait = paranoid_personality_trait has_trait = fearless_personality_trait } } }
+	trigger = { 
+		any_army_leader = { NOT = { has_trait = paranoid_personality_trait has_trait = fearless_personality_trait } } 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { 
@@ -176,9 +194,10 @@ country_event = { ## Leader add Fainthearted Trait ##
 	mean_time_to_happen = { days = 1800 }
 
 	trigger = { 
-		any_unit_leader = { 
+		any_army_leader = { 
 			NOT = { has_trait = fainthearted_personality_trait has_trait = brave_personality_trait } 
-		} 
+		}
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation } 
 	}
 
 	immediate = {
@@ -209,9 +228,10 @@ country_event = { ## Leader add Irrational Trait ##
 	mean_time_to_happen = { days = 1800 }
 
 	trigger = { 
-		any_unit_leader = { 
+		any_army_leader = { 
 			NOT = { has_trait = irrational_personality_trait } 
 		} 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
 	}
 
 	immediate = {
@@ -242,9 +262,10 @@ country_event = { ## Leader add Cruel Trait ##
 	mean_time_to_happen = { days = 1800 }
 
 	trigger = { 
-		any_unit_leader = { 
+		any_army_leader = { 
 			NOT = { has_trait = cruel_personality_trait } 
 		} 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
 	}
 
 	immediate = {
@@ -274,7 +295,10 @@ country_event = { ## Stupid Idiot gets hurt
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { has_war = no is_acting_major = no }
+	trigger = { 
+		has_war = no is_acting_major = no 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
+	}
 
 	immediate = {
 		random_unit_leader = { set_character_flag = random_event_injury_flag }
@@ -304,9 +328,10 @@ country_event = { ## Leader add Fearless Trait ##
 	mean_time_to_happen = { days = 1800 }
 
 	trigger = { 
-		any_unit_leader = { 
+		any_army_leader = { 
 			NOT = { has_trait = fearless_personality_trait has_trait = fainthearted_personality_trait } 
 		} 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
 	}
 
 	immediate = {
@@ -337,9 +362,10 @@ country_event = { ## Leader add Loyal Trait ##
 	mean_time_to_happen = { days = 1800 }
 
 	trigger = { 
-		any_unit_leader = { 
+		any_army_leader = { 
 			NOT = { has_trait = loyal_personality_trait has_trait = craven_personality_trait } 
 		} 
+		NOT = { has_country_flag = is_mutant_nation has_country_flag = is_savage_nation }
 	}
 
 	immediate = {
@@ -375,7 +401,8 @@ country_event = { ## bullet stunt ##
 
 	mean_time_to_happen = { days = 1800 }
 
-	trigger = { has_war = no has_country_flag = is_bandit_nation }
+	trigger = { 
+		has_war = no has_country_flag = is_bandit_nation }
 
 	immediate = {
 		random_unit_leader = { set_character_flag = random_event_bandit_stunt }

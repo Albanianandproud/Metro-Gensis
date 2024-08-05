@@ -7,7 +7,7 @@ country_event = {
 	picture = "GFX_event (23)"
 
 	mean_time_to_happen = {
-		days = 4000
+		days = 3000
 	}
 
 	trigger = {
@@ -52,7 +52,7 @@ country_event = {
 	picture = "GFX_event (3)"
 
 	mean_time_to_happen = {
-		days = 4000
+		days = 3000
 	}
 
 	trigger = {
@@ -159,7 +159,7 @@ country_event = {
 	picture = "GFX_event (17)"
 
 	mean_time_to_happen = {
-		days = 4000
+		days = 3000
 	}
 
 	trigger = {
@@ -199,7 +199,7 @@ country_event = {
 	picture = "GFX_event (82)"
 
 	mean_time_to_happen = {
-		days = 4000
+		days = 3000
 	}
 
 	immediate = {
@@ -319,7 +319,7 @@ country_event = {
 	picture = "GFX_event (150)"
 
 	mean_time_to_happen = {
-		days = 2250
+		days = 2000
 	}
 
 	trigger = {
@@ -368,7 +368,7 @@ country_event = {
 	desc = random_event_civics.01.d
 	picture = "GFX_event (150)"
 
-	mean_time_to_happen = { days = 2000 }
+	mean_time_to_happen = { days = 360 }
 
 	trigger = {
 		has_civic_labor_work = yes
@@ -405,7 +405,7 @@ country_event = {
 	desc = random_event_civics.02.d
 	picture = "GFX_event (150)"
 
-	mean_time_to_happen = { days = 2000 }
+	mean_time_to_happen = { days = 360 }
 
 	trigger = {
 		has_civic_labor_work = yes
@@ -446,7 +446,7 @@ country_event = {
 	desc = random_event_civics.03.d
 	picture = "GFX_event (150)"
 
-	mean_time_to_happen = { days = 2000 }
+	mean_time_to_happen = { days = 360 }
 
 	trigger = {
 		has_civic_labor_in_education = yes
@@ -469,7 +469,7 @@ country_event = {
 	desc = random_event_civics.04.d
 	picture = "GFX_event (37)"
 
-	mean_time_to_happen = { days = 2000 }
+	mean_time_to_happen = { days = 290 }
 
 	trigger = {
 		has_civic_labor_work = yes
@@ -506,11 +506,9 @@ country_event = {
 	desc = random_event_war.1.d
 	picture = "GFX_event (114)"
 
-	mean_time_to_happen = { days = 1950 }
+	mean_time_to_happen = { days = 950 }
 	trigger = {
-		NOT = {
-			has_country_flag = is_savage_nation
-		}
+		NOT = { has_country_flag = is_savage_nation }
 		has_war = yes
 	}
 
@@ -548,7 +546,7 @@ country_event = {
 	desc = random_event_war.2.d
 	picture = "GFX_event (129)"
 
-	mean_time_to_happen = { days = 1950 }
+	mean_time_to_happen = { days = 950 }
 	trigger = {
 		NOT = {
 			has_country_flag = is_savage_nation
@@ -587,7 +585,7 @@ country_event = {
 	desc = random_event_war.3.d
 	picture = "GFX_event (151)"
 
-	mean_time_to_happen = { days = 360 }
+	mean_time_to_happen = { days = 300 }
 	trigger = {
 		has_idea = metro_war_rationing
 		has_war = yes
@@ -622,7 +620,7 @@ country_event = {
 	desc = random_event_war.4.d
 	picture = "GFX_event (42)"
 
-	mean_time_to_happen = { days = 1950 }
+	mean_time_to_happen = { days = 950 }
 	trigger = {
 		has_war = yes
 		has_war_support < 0.36
@@ -648,7 +646,7 @@ country_event = {
 	desc = random_event_war.5.d
 	picture = "GFX_event (115)"
 
-	mean_time_to_happen = { days = 1950 }
+	mean_time_to_happen = { days = 950 }
 	trigger = {
 		has_war = yes
 		has_war_support < 0.36
@@ -721,9 +719,7 @@ country_event = {
 	picture = GFX_report_event_generic_sign_treaty3
 
 	mean_time_to_happen = { days = 1950 }
-	trigger = {
-		has_war = no
-	}
+	trigger = { has_war = no }
 
 	option = {
 		name = random_event_detained.1.a
@@ -830,4 +826,110 @@ country_event = {
 			}
 		}
 	}	
+}
+
+add_namespace = random_event_circus
+
+country_event = {
+	id = random_event_circus.01
+	title = random_event_circus.01.t
+	desc = random_event_circus.01.d
+	picture = "GFX_event (5)"
+
+	mean_time_to_happen = {
+		days = 3000
+	}
+
+	trigger = {
+		NOT = {
+			has_country_flag = is_mutant_nation
+			has_country_flag = is_savage_nation
+			has_country_flag = is_bandit_nation
+			has_idea = civics_border_4
+			has_idea = closed_economy
+			original_tag = RED
+			original_tag = MSU
+			original_tag = RCH
+			original_tag = HNZ
+			original_tag = SPT
+		}
+		has_war = no
+		num_of_controlled_states > 2
+	}
+
+	option = {
+		name = random_event_circus.01.a
+		trigger = {
+			set_temp_variable = { temp_bullet_cost = 100 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		random_list = {
+		    50 = {
+		        ROOT = { country_event = { id = random_event_circus.02 random_hours = 3 } }
+		    }
+		    50 = { 
+		        ROOT = { country_event = { id = random_event_circus.03 random_hours = 3 } }
+		    }
+		}
+	}
+
+	option = {
+		name = random_event_circus.01.b
+	}
+
+	option = {
+		name = random_event_circus.01.c
+		hidden_effect = {
+			ROOT = { country_event = { id = random_event_circus.04 random_hours = 3 } }
+		}
+	}
+}
+
+country_event = {
+	id = random_event_circus.02
+	title = random_event_circus.02.t
+	desc = random_event_circus.02.d
+	picture = "GFX_event (136)"
+	is_triggered_only = yes
+
+	option = {
+		set_temp_variable = { bullet_to_gain = -100 }
+		add_bullet_with_tooltip_effect = yes
+		name = random_event_circus.02.a
+		add_timed_idea = { idea = random_event_circus days = 45 }
+	}
+}
+
+country_event = {
+	id = random_event_circus.03
+	title = random_event_circus.03.t
+	desc = random_event_circus.03.d
+	picture = "GFX_event (136)"
+	is_triggered_only = yes
+
+	option = {
+		name = random_event_circus.03.a
+		add_timed_idea = { idea = random_event_circus days = 65 }
+	}
+}
+
+country_event = {
+	id = random_event_circus.04
+	title = random_event_circus.04.t
+	desc = random_event_circus.04.d
+	picture = "GFX_event (6)"
+	is_triggered_only = yes
+
+	option = {	## Owch ##
+		name = random_event_circus.04.a
+		set_variable_to_random = {
+			var = random_num
+			max = 65
+			integer = yes
+		}
+		set_temp_variable = { bullet_to_gain = random_num }
+		add_bullet_with_tooltip_effect = yes
+	}
 }
