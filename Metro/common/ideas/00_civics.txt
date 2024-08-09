@@ -266,8 +266,8 @@ ideas = {
 				}
 		    }
 
-		     cost = 100
-		     removal_cost = -1
+		    cost = 100
+		    removal_cost = -1
 	   
 		    modifier = {
 			    political_power_gain = -0.1
@@ -290,6 +290,14 @@ ideas = {
 		}
 
 		civics_child_labour_5 = { # Indoctrination
+		
+			available = {
+				has_civic_education_higher_2 = yes
+					NOT = {
+					has_country_flag = is_savage_nation#
+					has_country_flag = is_bandit_nation
+				}
+			}
 
 			visible = {
 				OR = {
@@ -309,12 +317,20 @@ ideas = {
 
 		    cost = 100
 		    removal_cost = -1
-	   
-		    modifier = {
-                research_speed_factor = -0.05
+
+			modifier = {
 				offensive_war_stability_factor = 0.1
-				political_power_gain = 0.075
-		    }
+			    political_power_gain = 0.1
+                custom_modifier_tooltip = education_reform_cost_reduction_10
+                ## Reduce Education Timer
+			}
+
+            on_remove = {
+				add_to_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
+			on_add = {
+				subtract_from_variable = { education_reforms_cost_from_modifiers = 0.1 }
+			}
 
 		    cancel_if_invalid = no
 

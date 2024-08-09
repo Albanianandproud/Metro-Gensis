@@ -1,7 +1,6 @@
 
 #!gfx:interface\metro_goals.gfx
 ## Code above is for VSC HOI4 utility. pls leave ty
-
 focus_tree = {
 	id = polis
 	country = {
@@ -16,8 +15,8 @@ focus_tree = {
 	focus = {
 		id = PLS_rangers_1
 		icon = GFX_SPT_patch_guns
-		available = { is_in_faction_with = SPT }
-		cost = 5
+		available = { is_in_faction_with = SPT has_completed_focus = PLS_the_last_redoubt }
+		cost = 6.5
 		x = 9
 		y = 0
 		completion_reward = {
@@ -36,7 +35,7 @@ focus_tree = {
 		icon = GFX_SPT_experienced_rangers
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_rangers_1 }
-		cost = 5
+		cost = 6.5
 		relative_position_id = PLS_rangers_1
 		x = 0
 		y = 1
@@ -66,7 +65,7 @@ focus_tree = {
 			SPT = { is_ai = yes }
 		}
 		prerequisite = { focus = PLS_rangers_1 }
-		cost = 5
+		cost = 6.5
 		relative_position_id = PLS_rangers_1
 		x = 2
 		y = 1
@@ -80,7 +79,7 @@ focus_tree = {
 		id = PLS_recall_order_detachment_2
 		icon = GFX_SPT_generic_soldier
 		prerequisite = { focus = PLS_recall_order_detachment focus = PLS_rangers_2 }
-		cost = 5
+		cost = 6.5
 		relative_position_id = PLS_recall_order_detachment
 		x = 0
 		y = 1
@@ -358,8 +357,8 @@ focus_tree = {
 	focus = {
 		id = PLS_defense_of_polis
 		icon = GFX_PLS_spartan
-		available = {}
-		cost = 5
+		available = { has_completed_focus = PLS_the_last_redoubt }
+		cost = 6.5
 		x = 16
 		y = 0
 		completion_reward = {
@@ -464,7 +463,7 @@ focus_tree = {
 		available = { }
 		prerequisite = { focus = PLS_motorized_defence}
 		prerequisite = { focus = PLS_motorized_defence_2 focus = PLS_motorized_defence_3 }
-		cost = 6.5
+		cost = 10
 		relative_position_id = PLS_motorized_defence
 		x = 0
 		y = 3
@@ -659,11 +658,14 @@ focus_tree = {
 		id = PLS_the_last_redoubt
 		icon = GFX_PLS_council
 		available = {}
-		cost = 5
+		cost = 6.5
 		x = 34
 		y = 0
 		completion_reward = {
 			country_event = nf_PLS.6
+			hidden_effect = { 
+				PLS = { country_event = {  id = nf_PLS.10 days = 1 random_days = 1  } } 
+			}
 		}
 		ai_will_do = { factor = 21 }
 	}
@@ -682,6 +684,7 @@ focus_tree = {
 				ideology = dictatorial
 				popularity = 0.005
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.41 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -718,6 +721,7 @@ focus_tree = {
 				ideology = dictatorial
 				popularity = 0.01
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.42 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -736,6 +740,7 @@ focus_tree = {
 				ideology = dictatorial
 				popularity = 0.02
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.43 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -778,6 +783,7 @@ focus_tree = {
 				ideology = dictatorial
 				popularity = 0.03
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.44 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -959,7 +965,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_trade_1
 		available = { date > 2030.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_2 }
 		cost = 6.5
@@ -1016,7 +1022,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_11
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_refined
 		available = { date > 2031.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_3 }
 		cost = 6.5
@@ -1047,7 +1053,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_9
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_trade_2
 		available = { date > 2032.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_8 }
 		prerequisite = { focus = PLS_vaishyas_branch_3 }
@@ -1069,7 +1075,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_4
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_trade_3
 		available = { date > 2033.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_9 }
 		cost = 6.5
@@ -1090,7 +1096,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_5
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_toolbox
 		available = { date > 2034.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_4 }
 		cost = 6.5
@@ -1119,7 +1125,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_6
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_scrap_resource
 		available = { date > 2034.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_4 }
 		cost = 6.5
@@ -1148,7 +1154,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_7
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_electronics
 		available = { date > 2035.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_5 }
 		prerequisite = { focus = PLS_vaishyas_branch_6 }
@@ -1178,7 +1184,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_vaishyas_branch_12
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_components
 		available = { date > 2035.10.1 oligarch > 0.2 }
 		prerequisite = { focus = PLS_vaishyas_branch_5 }
 		prerequisite = { focus = PLS_vaishyas_branch_6 }
@@ -1221,12 +1227,13 @@ focus_tree = {
 				ideology = council
 				popularity = 0.005
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.45 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_brahmin_branch_2
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_science
 		available = { date > 2029.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_1 }
 		cost = 6.5
@@ -1239,6 +1246,7 @@ focus_tree = {
 				ideology = council
 				popularity = 0.01
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.46 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1341,6 +1349,7 @@ focus_tree = {
 				ideology = council
 				popularity = 0.025
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.47 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1362,6 +1371,7 @@ focus_tree = {
 				ideology = council
 				popularity = 0.03
 			}
+			hidden_effect = { PLS = { country_event = {  id = nf_PLS.48 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -1403,7 +1413,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_brahmin_branch_7
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_generator
 		available = { date > 2035.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_5 }
 		prerequisite = { focus = PLS_brahmin_branch_6 }
@@ -1422,7 +1432,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_brahmin_branch_12
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_distillery
 		available = { date > 2035.10.1 council > 0.2 }
 		prerequisite = { focus = PLS_brahmin_branch_5 }
 		prerequisite = { focus = PLS_brahmin_branch_6 }
@@ -1459,7 +1469,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_2
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_scrap_bins
 		available = { date > 2030.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_1 }
 		cost = 6.5
@@ -1481,7 +1491,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_hardhat
 		available = { date > 2029.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_1 }
 		cost = 6.5
@@ -1499,7 +1509,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_4
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_scrap
 		available = { date > 2031.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_3 }
 		cost = 6.5
@@ -1517,7 +1527,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_5
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_toolbox
 		available = { date > 2030.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_3 }
 		cost = 6.5
@@ -1538,7 +1548,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_6
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_tunnel
 		available = { date > 2033.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
@@ -1556,7 +1566,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_7
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_refined
 		available = { date > 2032.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
@@ -1577,7 +1587,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_8
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_construction
 		available = { date > 2032.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_4 }
 		cost = 6.5
@@ -1686,7 +1696,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_shudras_branch_12
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_vice
 		available = { date > 2035.10.1 community > 0.2 }
 		prerequisite = { focus = PLS_shudras_branch_9 }
 		prerequisite = { focus = PLS_shudras_branch_10 }
@@ -1748,7 +1758,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_immunization
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_1 }
 		cost = 6.5
@@ -1790,8 +1800,8 @@ focus_tree = {
 	focus = {
 		id = PLS_cultural_path_3b
 		icon = GFX_ARB_equipment
-		available = { }
 		prerequisite = { focus = PLS_cultural_path_3a }
+		available = { has_completed_focus = PLS_military_1 }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_3a
 		x = 0
@@ -1807,7 +1817,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_3c
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_health
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_3 }
 		cost = 6.5
@@ -1818,7 +1828,7 @@ focus_tree = {
 			add_tech_bonus = {
 				bonus = 0.75
 				uses = 2
-				category = health
+				category = support_tech
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -1839,7 +1849,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_5
-		icon = GFX_PLS_generic
+		icon = GFX_generic_bunker
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_2 }
 		cost = 6.5
@@ -1865,7 +1875,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_6
-		icon = GFX_PLS_generic
+		icon = GFX_generic_constructions
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_5 }
 		mutually_exclusive = { focus = PLS_cultural_path_7 }
@@ -1886,7 +1896,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_7
-		icon = GFX_PLS_generic
+		icon = GFX_generic_stalker_6
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_5 }
 		mutually_exclusive = { focus = PLS_cultural_path_6 }
@@ -1902,7 +1912,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_8
-		icon = GFX_PLS_generic
+		icon = GFX_generic_bandit
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_6 focus = PLS_cultural_path_7 }
 		cost = 6.5
@@ -1984,7 +1994,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_cultural_path_stalkers
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_stalkers
 		available = { }
 		prerequisite = { focus = PLS_cultural_path_X }
 		mutually_exclusive = { focus = PLS_cultural_path_stalker_no  }
@@ -2055,7 +2065,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_1
 		x = -2
-		y = 1
+		y = 2
 		completion_reward = {
 			add_offsite_building = { type = fuel_silo level = 3 }
 		}
@@ -2064,7 +2074,7 @@ focus_tree = {
 	focus = {
 		id = PLS_cultural_path_B
 		icon = GFX_PLS_wind_generator
-		available = { }
+		available = { has_completed_focus = PLS_stalk_the_surface_2 }
 		prerequisite = { focus = PLS_cultural_path_A }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_A
@@ -2082,7 +2092,7 @@ focus_tree = {
 	focus = {
 		id = PLS_military
 		icon = GFX_ARB_elites
-		available = { }
+		available = { has_completed_focus = PLS_the_last_redoubt }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt
 		x = -14
@@ -2136,7 +2146,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_doctrine_2
-		icon = GFX_generic_equipment_gasmask_1
+		icon = GFX_PLS_generic_military_doctrine
 		available = { }
 		prerequisite = { focus = PLS_military_doctrine_1 }
 		mutually_exclusive = { focus = PLS_military_doctrine_3 }
@@ -2151,7 +2161,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_military_doctrine_3
-		icon = GFX_generic_equipment_gasmask_1
+		icon = GFX_PLS_generic_doctrine
 		available = { }
 		prerequisite = { focus = PLS_military_doctrine_1 }
 		mutually_exclusive = { focus = PLS_military_doctrine_2 }
@@ -2207,8 +2217,13 @@ focus_tree = {
 				category = clothing_kits
 			}
 			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_3
-				amount = 20
+				type = conventional_infantry_equipment_2
+				amount = 10
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = pheumatic_infantry_equipment_1
+				amount = 10
 				producer = RUS
 			}
 		}
@@ -2420,7 +2435,7 @@ focus_tree = {
 		id = PLS_preservation_of_humanity
 		icon = GFX_PLS_polis_2
 		available = { has_completed_focus = PLS_the_last_redoubt }
-		cost = 5
+		cost = 6.5
 		x = 63
 		y = 0
 		completion_reward = {
@@ -2466,7 +2481,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_internal_2
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_gondola
 		prerequisite = { focus = PLS_internal_1 }
 		cost = 6.5
 		relative_position_id = PLS_internal_1
@@ -2484,7 +2499,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_internal_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_construction
 		prerequisite = { focus = PLS_internal_1 }
 		cost = 6.5
 		relative_position_id = PLS_internal_1
@@ -2547,7 +2562,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_internal_6
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_chemicals
 		prerequisite = { focus = PLS_internal_5 focus = PLS_internal_4 }
 		cost = 6.5
 		relative_position_id = PLS_internal_4
@@ -2568,7 +2583,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_internal_7
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_scrap_resource
 		prerequisite = { focus = PLS_internal_5 focus = PLS_internal_4 }
 		cost = 6.5
 		relative_position_id = PLS_internal_5
@@ -2612,6 +2627,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			custom_effect_tooltip = PLS_COMMUNITY_PASS_LAW_ECO_COST_REDUCE
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3024,7 +3040,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_contemptive_neighbours
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_neighbours
 		prerequisite = { focus = PLS_preservation_of_humanity }
 		cost = 6.5
 		relative_position_id = PLS_preservation_of_humanity
@@ -3060,7 +3076,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_the_others
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_defense
 		prerequisite = { focus = PLS_contemptive_neighbours }
 		cost = 6.5
 		relative_position_id = PLS_contemptive_neighbours
@@ -3073,7 +3089,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_the_others_1
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_military_2
 		prerequisite = { focus = PLS_the_others }
 		cost = 6.5
 		relative_position_id = PLS_the_others
@@ -3089,7 +3105,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_hanza
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_flag
 		prerequisite = { focus = PLS_contemptive_neighbours }
 		available = { HNZ = { exists = yes } NOT = { has_war_with = HNZ } }
 		bypass = { OR = { HNZ = { exists = no has_war_with = ROOT } } }
@@ -3171,9 +3187,9 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_contemplate_neutrality_2
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_conscription
 		prerequisite = { focus = PLS_contemplate_neutrality }
-		available = { has_war_support > 0.64 }
+		available = { has_war_support > 0.74 }
 		cost = 6.5
 		relative_position_id = PLS_contemplate_neutrality
 		x = 0
@@ -3200,7 +3216,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_contemplate_neutrality_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_neutrality
 		prerequisite = { focus = PLS_contemplate_neutrality_2 focus = PLS_hanza_3 }
 		cost = 6.5
 		relative_position_id = PLS_contemplate_neutrality_2
@@ -3208,6 +3224,7 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			remove_ideas = PLS_aloof
+			custom_effect_tooltip = PLS_COMMUNITY_PASS_LAW_MIL_COST_REDUCE
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3243,7 +3260,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_advisor_leases_2
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_scientist
 		prerequisite = { focus = PLS_advisor_leases }
 		cost = 6.5
 		relative_position_id = PLS_advisor_leases
@@ -3273,7 +3290,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_advisor_leases_3
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_ignorance
 		prerequisite = { focus = PLS_advisor_leases_2 }
 		mutually_exclusive = { focus = PLS_advisor_leases_4 }
 		cost = 6.5
@@ -3287,7 +3304,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_advisor_leases_4
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_books_2
 		prerequisite = { focus = PLS_advisor_leases_2 }
 		mutually_exclusive = { focus = PLS_advisor_leases_3 }
 		cost = 6.5
@@ -3310,7 +3327,7 @@ focus_tree = {
 		id = PLS_the_last_redoubt_2
 		icon = GFX_PLS_polis
 		available = { date > 2034.1.1 }
-		cost = 5
+		cost = 6.5
 		x = 34
 		y = 10
 		completion_reward = {
@@ -3322,7 +3339,7 @@ focus_tree = {
 		id = PLS_guardians_of_knowledge
 		icon = GFX_PLS_safekeepers_of_humanity
 		prerequisite = { focus = PLS_the_last_redoubt_2 }
-		mutually_exclusive = { focus = PLS_safekeepers_of_humanity }
+		mutually_exclusive = { focus = PLS_with_fire_and_sword }
 		cost = 6.5
 		relative_position_id = PLS_the_last_redoubt_2
 		x = 5
@@ -3341,8 +3358,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
-
-			# Faction neighbors
+			add_ideas = PLS_safekeepers_of_knowledge_leaders
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3355,8 +3371,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		completion_reward = {
-
-			# Faction Ideology
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3467,7 +3481,7 @@ focus_tree = {
 	}
 	focus = {
 		id = PLS_guardians_of_knowledge_progress
-		icon = GFX_PLS_generic
+		icon = GFX_PLS_construction
 		prerequisite = { focus = PLS_guardians_of_knowledge_2 }
 		mutually_exclusive = { focus = PLS_guardians_of_knowledge_rationalism }
 		cost = 6.5
@@ -3505,7 +3519,7 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity
+		id = PLS_with_fire_and_sword
 		icon = GFX_PLS_fire_and_sword
 		prerequisite = { focus = PLS_the_last_redoubt_2 }
 		mutually_exclusive = { focus = PLS_guardians_of_knowledge }
@@ -3521,10 +3535,10 @@ focus_tree = {
 	focus = {
 		id = PLS_rage_against_the_light
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_with_fire_and_sword }
 		available = { has_war_support > 0.9 }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
+		relative_position_id = PLS_with_fire_and_sword
 		x = -1
 		y = 1
 		completion_reward = {
@@ -3623,9 +3637,9 @@ focus_tree = {
 	focus = {
 		id = PLS_safeguard_humanity
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity }
+		prerequisite = { focus = PLS_with_fire_and_sword }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
+		relative_position_id = PLS_with_fire_and_sword
 		x = -3
 		y = 1
 		completion_reward = {
@@ -3696,11 +3710,11 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_rid_mutants
+		id = PLS_with_fire_and_sword_rid_mutants
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		prerequisite = { focus = PLS_with_fire_and_sword focus = PLS_guardians_of_knowledge }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
+		relative_position_id = PLS_with_fire_and_sword
 		x = 2
 		y = 1
 		completion_reward = {
@@ -3710,11 +3724,11 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_rid_bandits
+		id = PLS_with_fire_and_sword_rid_bandits
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		prerequisite = { focus = PLS_with_fire_and_sword focus = PLS_guardians_of_knowledge }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
+		relative_position_id = PLS_with_fire_and_sword
 		x = 4
 		y = 1
 		completion_reward = {
@@ -3724,11 +3738,11 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_rid_authoritarians
+		id = PLS_with_fire_and_sword_rid_authoritarians
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity focus = PLS_guardians_of_knowledge }
+		prerequisite = { focus = PLS_with_fire_and_sword focus = PLS_guardians_of_knowledge }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity
+		relative_position_id = PLS_with_fire_and_sword
 		x = 6
 		y = 1
 		completion_reward = {
@@ -3737,14 +3751,14 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_ignorance
+		id = PLS_with_fire_and_sword_ignorance
 		icon = GFX_PLS_generic
 		available = { has_completed_focus = PLS_guardians_of_knowledge }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_mutants }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_bandits }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_authoritarians }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		relative_position_id = PLS_with_fire_and_sword_rid_bandits
 		x = 1
 		y = 1
 		completion_reward = {
@@ -3753,14 +3767,14 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word
+		id = PLS_with_fire_and_sword_remember_the_word
 		icon = GFX_PLS_generic
-		available = { has_completed_focus = PLS_safekeepers_of_humanity }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_mutants }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_bandits }
-		prerequisite = { focus = PLS_safekeepers_of_humanity_rid_authoritarians }
+		available = { has_completed_focus = PLS_with_fire_and_sword }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_mutants }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_bandits }
+		prerequisite = { focus = PLS_with_fire_and_sword_rid_authoritarians }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		relative_position_id = PLS_with_fire_and_sword_rid_bandits
 		x = -1
 		y = 1
 		completion_reward = {
@@ -3775,50 +3789,54 @@ focus_tree = {
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word_2
+		id = PLS_with_fire_and_sword_remember_the_word_2
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
-		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
+		prerequisite = { focus = PLS_with_fire_and_sword_remember_the_word }
+		mutually_exclusive = { focus = PLS_with_fire_and_sword_remember_the_word_3 }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		relative_position_id = PLS_with_fire_and_sword_remember_the_word
 		x = -2
 		y = 1
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = PLS_safekeepers_of_humanity
-				add_idea = PLS_safekeepers_of_humanity_2
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 30
+				producer = RUS
 			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_remember_the_word_3
+		id = PLS_with_fire_and_sword_remember_the_word_3
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity_remember_the_word }
-		mutually_exclusive = { focus = PLS_safekeepers_of_humanity_remember_the_word_2 }
+		prerequisite = { focus = PLS_with_fire_and_sword_remember_the_word }
+		mutually_exclusive = { focus = PLS_with_fire_and_sword_remember_the_word_2 }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_remember_the_word
+		relative_position_id = PLS_with_fire_and_sword_remember_the_word
 		x = 0
 		y = 1
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = PLS_safekeepers_of_humanity
-				add_idea = PLS_safekeepers_of_humanity_3
-			}
+			army_experience = 100
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
-		id = PLS_safekeepers_of_humanity_polis_authority_mandate
+		id = PLS_with_fire_and_sword_polis_authority_mandate
 		icon = GFX_PLS_generic
-		prerequisite = { focus = PLS_safekeepers_of_humanity_ignorance focus = PLS_safekeepers_of_humanity_remember_the_word_2 focus = PLS_safekeepers_of_humanity_remember_the_word_3 }
+		prerequisite = { focus = PLS_with_fire_and_sword_ignorance focus = PLS_with_fire_and_sword_remember_the_word_2 focus = PLS_with_fire_and_sword_remember_the_word_3 }
+		available = {
+			OR = {
+				has_stability > 0.94
+				has_war_support > 0.94
+			}
+		}
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_rid_bandits
+		relative_position_id = PLS_with_fire_and_sword_rid_bandits
 		x = 0
 		y = 3
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = PLS_safekeepers_of_humanity
+				remove_idea = PLS_safekeepers_of_humanity_2
 				add_idea = PLS_safekeepers_of_humanity_3
 			}
 		}
@@ -3827,9 +3845,9 @@ focus_tree = {
 	focus = {
 		id = PLS_rage_against_the_light_3
 		icon = GFX_SPT_miller_2
-		prerequisite = { focus = PLS_safekeepers_of_humanity_polis_authority_mandate }
+		prerequisite = { focus = PLS_with_fire_and_sword_polis_authority_mandate }
 		cost = 6.5
-		relative_position_id = PLS_safekeepers_of_humanity_polis_authority_mandate
+		relative_position_id = PLS_with_fire_and_sword_polis_authority_mandate
 		x = 0
 		y = 1
 		completion_reward = {
@@ -3841,6 +3859,7 @@ focus_tree = {
 				}
 				complete_national_focus = PLS_recall_order_detachment_2
 			}
+			add_ideas = PLS_rage_against_the_dying_light
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3852,10 +3871,25 @@ focus_tree = {
 		relative_position_id = PLS_rage_against_the_light_3
 		x = 2
 		y = 1
+		will_lead_to_war_with = RCH
 		completion_reward = {
-			## war goal against RCH
+			RCH = {
+				capital_scope = { add_core_of = ROOT }
+			}
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = RCH
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 5
+				date > 2035.1.1
+			}
+		}
 	}
 	focus = {
 		id = PLS_rage_against_the_light_5
@@ -3865,10 +3899,22 @@ focus_tree = {
 		relative_position_id = PLS_rage_against_the_light_3
 		x = 0
 		y = 1
+		will_lead_to_war_with = RED
 		completion_reward = {
-			## war goal against RED
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = RED
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 5
+				date > 2035.1.1
+			}
+		}
 	}
 	focus = {
 		id = PLS_rage_against_the_light_6
@@ -3878,8 +3924,24 @@ focus_tree = {
 		relative_position_id = PLS_rage_against_the_light_3
 		x = -2
 		y = 1
+		will_lead_to_war_with = GWC
 		completion_reward = {
-			## war goal against GWC / ARB or puppet
+			ARB = {
+				capital_scope = { add_core_of = ROOT }
+			}
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = GWC
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 5
+				date > 2035.1.1
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3891,10 +3953,36 @@ focus_tree = {
 		relative_position_id = PLS_rage_against_the_light_3
 		x = -1
 		y = 2
+		will_lead_to_war_with = SCA
+		will_lead_to_war_with = ISL
+		will_lead_to_war_with = SAT
 		completion_reward = {
-			## war goal against SCA / ISL / ATF / SAT
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = SCA
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			 create_wargoal = {
+				type = puppet_wargoal_focus
+				target = SAT
+				expire = 0
+				generator = { 28 }
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ISL
+				expire = 0
+				generator = { 28 }
+			}
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 5
+				date > 2035.1.1
+			}
+		}
 	}
 	focus = {
 		id = PLS_rage_against_the_light_8
@@ -3904,8 +3992,21 @@ focus_tree = {
 		relative_position_id = PLS_rage_against_the_light_3
 		x = 1
 		y = 2
+		will_lead_to_war_with = TRT
 		completion_reward = {
-			## war goal against EUR / GWC / HMS
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = TRT
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+		}
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 5
+				date > 2035.1.1
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}

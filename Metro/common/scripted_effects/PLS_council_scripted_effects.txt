@@ -3,17 +3,13 @@ pls_council_gui_initial = {
 	# Put simply an array stores a list of things, used here to store the list of parties and list of seats.
 
 	# pls_council_seat_array stores the list of seat numbers for each party
-	add_to_array = { pls_council_seat_array = 23 } # Party A
-	add_to_array = { pls_council_seat_array = 0 } # Party B
-	add_to_array = { pls_council_seat_array = 22 } # Party C
-	add_to_array = { pls_council_seat_array = 0 } # Party D
+	add_to_array = { pls_council_seat_array = 30 } # Party A
+	add_to_array = { pls_council_seat_array = 15 } # Party B
 
 	# pls_council_member_array stores the list of parties
 	# This basically assigns an id for each party, so Party A = 1, Party B = 2, etc. (must start from 1 and is in order)
-	add_to_array = { pls_council_member_array = 1 } # Kshatriya 	/ dictatorial
-	add_to_array = { pls_council_member_array = 2 } # Vaishyas 		/ oligarch
-	add_to_array = { pls_council_member_array = 3 } # Brahmin 		/ council
-	add_to_array = { pls_council_member_array = 4 } # Shudras 		/ community
+	add_to_array = { pls_council_member_array = 1 } # Support
+	add_to_array = { pls_council_member_array = 2 } # Oppose
 
 	# Set up the positions of the dots for the semicircle pls_council
 	pls_council_gui_positions = yes
@@ -283,74 +279,34 @@ pls_council_gui_positions = {
 #}
 
 
-PLS_council_add_community = {
-	custom_effect_tooltip = PLS_council_community_support
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 4 }
-	set_temp_variable = { temp_seats = 5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_remove_community = {
-	custom_effect_tooltip = PLS_council_community_oppose
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 4 }
-	set_temp_variable = { temp_seats = -5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_add_council = {
-	custom_effect_tooltip = PLS_council_council_support
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 3 }
-	set_temp_variable = { temp_seats = 5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_remove_council = {
-	custom_effect_tooltip = PLS_council_council_oppose
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 3 }
-	set_temp_variable = { temp_seats = -5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_add_oligarch = {
-	custom_effect_tooltip = PLS_council_oligarch_support
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 2 }
-	set_temp_variable = { temp_seats = 5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_remove_oligarch = {
-	custom_effect_tooltip = PLS_council_oligarch_oppose
-	reload_pls_council_gui = yes
-	modify_pls_council_seat = yes
-	set_temp_variable = { temp_member = 2 }
-	set_temp_variable = { temp_seats = -5 }
-	modify_pls_council_seat = yes
-}
-
-PLS_council_add_dictatorial = {
-	custom_effect_tooltip = PLS_council_dictatorial_support
+PLS_council_add_support = {
+	custom_effect_tooltip = PLS_council_add_support_tt
 	reload_pls_council_gui = yes
 	modify_pls_council_seat = yes
 	set_temp_variable = { temp_member = 1 }
-	set_temp_variable = { temp_seats = 5 }
+	hidden_effect = {
+		random_list = {
+			25 = { set_temp_variable = { temp_seats = 2 } }
+			25 = { set_temp_variable = { temp_seats = 4 } }
+			25 = { set_temp_variable = { temp_seats = 6 } }
+			25 = { set_temp_variable = { temp_seats = 8 } }
+		}
+	}
 	modify_pls_council_seat = yes
 }
 
-PLS_council_remove_dictatorial = {
-	custom_effect_tooltip = PLS_council_dictatorial_oppose
+PLS_council_remove_support = {
+	custom_effect_tooltip = PLS_council_remove_support_tt
 	reload_pls_council_gui = yes
 	modify_pls_council_seat = yes
 	set_temp_variable = { temp_member = 1 }
-	set_temp_variable = { temp_seats = -5 }
+	hidden_effect = {
+		random_list = {
+			25 = { }
+			25 = { set_temp_variable = { temp_seats = -3 } }
+			25 = { set_temp_variable = { temp_seats = -5 } }
+			25 = { set_temp_variable = { temp_seats = -7 } }
+		}
+	}
 	modify_pls_council_seat = yes
 }

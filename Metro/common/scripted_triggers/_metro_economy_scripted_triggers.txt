@@ -56,7 +56,6 @@ calculate_bullet_balance = {
 
 	# Income:
 	calculate_bullet_income = yes
-
 	# Expenses:
 	calculate_bullet_expenses = yes
 
@@ -199,7 +198,6 @@ calculate_bullet_income_modifiers = {
 ## calculate_bullet_expenses = yes
 calculate_bullet_expenses = {
 	set_temp_variable = { total_expenses_temp = 0 }
-	
 	# Army Spending:
 	set_temp_variable = { expenses_from_our_army_spending = num_battalions }
 	multiply_temp_variable = { expenses_from_our_army_spending = -2 }
@@ -208,11 +206,11 @@ calculate_bullet_expenses = {
 	subtract_from_temp_variable = { expenses_from_our_army_spending = num_battalions_with_type@regulars }
 
 	# Army Spending Modifiers:
-	set_temp_variable = { army_spending_modifier = modifier@army_spending_cost_factor  }
-	multiply_temp_variable = { army_spending_modifier = -1 }
+	set_temp_variable = { army_spending_modifier = 1 }
+	add_to_temp_variable = { army_spending_modifier = modifier@army_spending_cost_factor  }
+	multiply_temp_variable = { army_spending_modifier = 1 }
 	multiply_temp_variable = { expenses_from_our_army_spending = army_spending_modifier }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_our_army_spending }
-
 
 	# Used Military Factories // Technicians Cost:
 	set_temp_variable = { expenses_from_our_used_mil_factories = num_of_military_factories }
@@ -221,8 +219,9 @@ calculate_bullet_expenses = {
 	multiply_temp_variable = { expenses_from_our_used_mil_factories = -5 }
 
 	# Military Spending Modifiers:
-	set_temp_variable = { military_spending_modifier = modifier@military_spending_cost_factor  }
-	multiply_temp_variable = { military_spending_modifier = -1 }
+	set_temp_variable = { military_spending_modifier = 1 }
+	add_to_temp_variable = { military_spending_modifier = modifier@military_spending_cost_factor  }
+	multiply_temp_variable = { military_spending_modifier = 1 }
 	multiply_temp_variable = { expenses_from_our_used_mil_factories = military_spending_modifier }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_our_used_mil_factories }
 
@@ -253,7 +252,7 @@ calculate_bullet_expenses = {
 	add_to_temp_variable = { total_expenses_temp = expenses_from_other_sources }
 
 	# Expenses Affecting Modifiers:
-	calculate_bullet_expenses_modifiers = yes
+	#calculate_bullet_expenses_modifiers = yes
 }
 
 # example usage:

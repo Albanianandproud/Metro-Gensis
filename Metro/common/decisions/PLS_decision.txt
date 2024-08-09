@@ -1,42 +1,519 @@
+@PLS_OLIGARCH_MEMBER_COST = 100
+@PLS_COMMUNITY_MEMBER_COST = 100
+@PLS_COMMUNITY_PASS_LAW_ECO_COST = 200
 PLS_council_decision_category = {
-	pls_council_add_community = {
+	PLS_council_allow_community_membership = {
+		cost = @PLS_OLIGARCH_MEMBER_COST
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PLS_council_community_membership_raised
+				has_country_flag = community_membership_allowed
+			}
+		}
 		complete_effect = {
-			PLS_council_add_community = yes
+			custom_effect_tooltip = pls_council_allow_community_membership_tt
+			add_stability = -0.05
+			PLS_council_remove_support = yes
 		}
 	}
-	pls_council_add_council = {
+	PLS_council_allow_oligarch_membership = {
+		cost = @PLS_COMMUNITY_MEMBER_COST
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PLS_council_oligarch_membership_raised
+				has_country_flag = oligarch_membership_allowed
+			}
+		}
 		complete_effect = {
-			PLS_council_add_council = yes
+			custom_effect_tooltip = pls_council_allow_oligarch_membership_tt
+			add_stability = -0.05
+			PLS_council_remove_support = yes
 		}
 	}
-	pls_council_add_oligarch = {
-		complete_effect = {
-			PLS_council_add_oligarch = yes
+	PLS_lobby_efforts = {
+		available = {
+			political_power_daily > 0.79
 		}
-	}
-	pls_council_add_dictatorial = {
-		complete_effect = {
-			PLS_council_add_dictatorial = yes
+		cost = 0
+		days_re_enable = 300
+		days_remove = 45
+		modifier = {
+			political_power_gain = -0.3
+		}
+		remove_effect = {
+			PLS_council_add_support = yes
 		}	
 	}
-	pls_council_remove_community = {
-		complete_effect = {
-			PLS_council_remove_community = yes
+	PLS_amend_budget = {
+		available = {
+			has_war = no 
 		}
-	}
-	pls_council_remove_council = {
-		complete_effect = {
-			PLS_council_remove_council = yes
+		cost = 50
+		days_re_enable = 300
+		days_remove = 65
+		modifier = {
+			consumer_goods_factor = 0.1
 		}
-	}
-	pls_council_remove_oligarch = {
-		complete_effect = {
-			PLS_council_remove_oligarch = yes
-		}
-	}
-	pls_council_remove_dictatorial = {
-		complete_effect = {
-			PLS_council_remove_dictatorial = yes
+		remove_effect = {
+			PLS_council_add_support = yes
 		}	
+	}
+	PLS_pay_increases = {
+		available = {
+			has_war = no 
+		}
+		cost = 50
+		days_re_enable = 300
+		days_remove = 65
+		modifier = {
+			tax_efficiency_modifier = -0.1
+		}
+		remove_effect = {
+			PLS_council_add_support = yes
+		}	
+	}
+	PLS_amend_internal_issues = {
+		available = {
+			political_power_daily > 0.79
+		}
+		cost = 50
+		days_re_enable = 300
+		days_remove = 65
+		modifier = {
+			political_power_gain = -0.3
+		}
+		remove_effect = {
+			PLS_council_add_support = yes
+		}	
+	}
+	PLS_council_pass_new_legislation_economic = {
+		available = {
+			has_stability > 0.69
+		}
+		cost = @PLS_COMMUNITY_PASS_LAW_ECO_COST
+		fire_only_once = yes
+		days_remove = 7
+		remove_effect = {
+			custom_effect_tooltip = PLS_council_allow_eco_law_change
+			add_ideas = PLS_economic_law
+			if = {
+				limit = {
+					NOT = { 
+						has_completed_focus = PLS_internal_8
+					}
+				}
+				PLS_council_remove_support = yes
+			}
+		}	
+	}
+	PLS_council_pass_new_legislation_military = {
+		available = {
+			has_war_support > 0.69
+		}
+		cost = 200
+		fire_only_once = yes
+		days_remove = 7
+		remove_effect = {
+			custom_effect_tooltip = PLS_council_dictatorial_law_change
+			add_ideas = PLS_military_law
+			if = {
+				limit = {
+					NOT = { 
+						OR = {
+							has_completed_focus = PLS_contemplate_neutrality_3
+							has_war = yes
+						}
+					}
+				}
+				PLS_council_remove_support = yes
+			}
+		}	
+	}
+	PLS_council_pass_new_legislation_economic_laws = {
+		cost = 75
+		fire_only_once = yes
+		days_remove = 100
+		days_re_enable = 360
+		modifier = {
+			materiel_manufacturer_cost_factor = -0.25
+			industrial_concern_cost_factor = -0.25
+			theorist_cost_factor = -0.25
+		}
+	}
+	PLS_council_pass_new_legislation_military_laws = {
+		cost = 75
+		fire_only_once = yes
+		days_remove = 100
+		days_re_enable = 360
+		modifier = {
+			high_command_cost_factor = -0.25
+			army_chief_cost_factor = -0.25
+		}
+	}
+
+	### M I S S I O N S ###
+	PLS_mission_dictatorial_1 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_dictatorial_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_built = {
+				type = arms_factory
+				value > 3
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_war_support = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.334
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_dictatorial_2 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_dictatorial_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			command_power > 79
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_war_support = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_command_power = -80
+			set_temp_variable = { mission_reward = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_reward = 200 }
+			army_experience = mission_reward
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.334
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_dictatorial_3 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_dictatorial_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_army_manpower = {
+				size > 249
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_war_support = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_reward = 0.3 }
+			add_war_support = mission_reward
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.334
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_dictatorial_4 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_dictatorial_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_equipment = { infantry_equipment > 49 }
+			command_power > 49
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_war_support = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_command_power = -50
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+				producer = ROOT
+			}
+			set_temp_variable = { mission_reward = party_popularity@dictatorial }
+			multiply_temp_variable = { mission_reward = 200 }
+			army_experience = mission_reward
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.334
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	##
+	PLS_mission_council_1 = {
+		days_mission_timeout = 360
+		activation = { always = no } 
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_political_power > 100
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@council }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_war_support = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_political_power = -100 
+			set_temp_variable = { mission_reward = party_popularity@council }
+			multiply_temp_variable = { mission_reward = 600 }
+			add_timed_idea = { idea = PLS_brahmin_unimpeded_research days = mission_reward }
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_council_2 = {
+		days_mission_timeout = 360
+		activation = { always = no } 
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			OR = {
+				has_tech = tech_hygiene_sterilised_supplies
+				has_tech = tech_farming_4
+				has_tech = tech_recycling_1
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@council }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@council }
+			multiply_temp_variable = { mission_reward = 20 }
+			capital_scope = {
+				add_resource = {
+					type = chemicals
+					amount = mission_reward
+				}
+			}
+			multiply_temp_variable = { mission_reward = 10 }
+			add_political_power = mission_reward
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_council_3 = {
+		days_mission_timeout = 360
+		activation = { always = no } 
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_equipment = { support_equipment > 49 }
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@council }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -50
+				producer = ROOT
+			}
+			if = {
+				limit = {
+					NOT = { has_tech = gas_mask_scientific }
+				}
+				set_technology = { gas_mask_scientific = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					uses = 1
+					bonus = 1
+					ahead_reduction = 2
+					category = gas_mask
+				}
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_council_4 = {
+		days_mission_timeout = 360
+		activation = { always = no }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_political_power > 99
+			command_power > 99
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@council }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_command_power = -100
+			add_political_power = -100
+			add_ideas = PLS_council_spec_ops
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	### D E B U G      C O M M A N D S ###
+	pls_council_clear_debug_commands = {
+		visible = { is_debug = yes NOT = { has_country_flag = pls_council_clr_debug }}
+		complete_effect = {
+			set_country_flag = pls_council_clr_debug
+		}
+	}
+	pls_council_add_support = {
+		visible = { is_debug = yes NOT = { has_country_flag = pls_council_clr_debug }}
+		complete_effect = {
+			PLS_council_add_support = yes
+		}
+	}
+	pls_council_remove_support = {
+		visible = { is_debug = yes NOT = { has_country_flag = pls_council_clr_debug }}
+		complete_effect = {
+			PLS_council_remove_support = yes
+		}
+	}
+}
+
+PLS_surface_stalk_decisions = {
+	PLS_scavenge_mission = {
+		icon = electronics
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = scavenging_underway }
+				NOT = { has_country_flag = scavenging_disabled }
+			}
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+				special_forces_equipment > 4
+			}
+		}
+		fixed_random_seed = no
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+			set_country_flag = scavenging_underway
+		}
+		days_remove = 30
+		days_re_enable = 0
+		remove_effect = {
+			clr_country_flag = scavenging_underway
+			random_list = {
+				scav_successChance = { #Found something
+					country_event = nf_PLS.49
+				}
+				scav_failureChance = { #Loss
+					country_event = nf_PLS.50
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0.05
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.05
+				has_manpower < 19
+			}
+		}
 	}
 }
