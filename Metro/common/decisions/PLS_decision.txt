@@ -14,6 +14,7 @@ PLS_council_decision_category = {
 			custom_effect_tooltip = pls_council_allow_community_membership_tt
 			add_stability = -0.05
 			PLS_council_remove_support = yes
+			set_country_flag = PLS_council_allow_community
 		}
 	}
 	PLS_council_allow_oligarch_membership = {
@@ -427,6 +428,274 @@ PLS_council_decision_category = {
 			add_command_power = -100
 			add_political_power = -100
 			add_ideas = PLS_council_spec_ops
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_community_1 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_community_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_tech = tech_construction_tarpaulin
+			has_tech = tech_tooling_simple_tools
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@community }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.025
+			add_war_support = -0.025
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@community }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			add_timed_idea = { idea = PLS_fixing_things days = 360 }
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_community_2 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_community_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_equipment = { rail_cart_equipment  > 34 }
+			OR = {
+				has_tech = rail_armor_tech_2032
+				has_tech = rail_armament_tech_2032
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@community }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.025
+			add_war_support = -0.025
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@community }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -35
+			}
+			add_ideas = PLS_rail_cart_community
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_community_3 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_community_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_built = {
+				type = infrastructure
+				value > 4
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@community }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.025
+			add_war_support = -0.025
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@community }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			set_temp_variable = { bullet_to_gain = 100 }
+			add_bullet_with_tooltip_effect = yes
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_community_4 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_community_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_tech = tech_construction_scrap_metal
+			has_tech = tech_tooling_power_tools
+			has_tech = tech_smithing_power_hammer
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@community }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.025
+			add_war_support = -0.025
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@community }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			add_ideas = PLS_fixing_things
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_oligarch_1 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_oligarch_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			has_built = {
+				type = industrial_complex
+				value > 3
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@oligarch }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@oligarch }
+			multiply_temp_variable = { mission_reward = 200 }
+			add_political_power = mission_reward
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				    instant_build = yes
+				}
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_oligarch_2 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_oligarch_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete the agenda if said requirements are met
+			AND = {
+				has_resources_in_country = {
+					resource = scrap
+					amount > 24
+					extracted = yes
+				}
+				has_resources_in_country = {
+					resource = alloys
+					amount > 19
+					extracted = yes
+				}
+				has_resources_in_country = {
+					resource = components
+					amount > 19
+					extracted = yes
+				}
+			}
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@oligarch }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				ahead_reduction = 1
+				category = industry
+			}
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_oligarch_3 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_oligarch_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			capital_scope = { infrastructure > 9 }
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@oligarch }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			set_temp_variable = { mission_reward = party_popularity@oligarch }
+			multiply_temp_variable = { mission_reward = 0.3 }
+			add_political_power = mission_reward
+			add_timed_idea = { idea = PLS_trade days = 360 }
+			custom_effect_tooltip = PLS_gain_council_sway
+			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
+		}
+	}
+	PLS_mission_oligarch_4 = {
+		days_mission_timeout = 360
+		activation = { always = no } #has_country_flag = PLS_mission_oligarch_1 }
+		is_good = no
+		custom_cost_text = HNZ_agenda_requirement
+		available = {	## We will complete if requirements are met
+			num_of_civilian_factories > 24
+		}
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { has_war = yes }
+		timeout_effect = { ## if we fail
+			custom_effect_tooltip = PLS_mission_failure
+			set_temp_variable = { mission_failure = party_popularity@oligarch }
+			multiply_temp_variable = { mission_failure = -200 }
+			add_political_power = mission_failure
+			add_stability = -0.05
+			PLS_council_remove_support = yes
+		}
+		complete_effect = { ## if we finish
+			add_ideas = PLS_trade
 			custom_effect_tooltip = PLS_gain_council_sway
 			hidden_effect = { add_to_variable = { var = PLS_gain_council_sway value = 1 } }
 		}
