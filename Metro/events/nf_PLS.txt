@@ -165,8 +165,13 @@ country_event = {
 
     option = {
         name = nf_PLS.5.b
+        add_political_power = 15
         ai_chance = {
             base = 3.5
+            modifier = {
+                factor = 1.25
+                has_opinion = { target = PLS value < 10 }
+            }
         }
     }
 
@@ -175,6 +180,10 @@ country_event = {
         add_timed_idea = { idea = PLS_books_fuel days = 60 } 
         ai_chance = {
             base = 3.5
+            modifier = {
+                factor = 2
+                has_opinion = { target = PLS value < 5 }
+            }
         }
     }
 }
@@ -190,9 +199,7 @@ country_event = {
 
     option = {
         name = nf_PLS.6.a
-        ## Explain how the branches work.
-        ## How a balance of power between each sect must linger at 25% or approx
-        add_research_slot = 1
+        add_political_power = 50
         custom_effect_tooltip = nf_PLS.6.a.tt
         ai_chance = {
             base = 3.5
@@ -213,8 +220,20 @@ country_event = {
         name = nf_PLS.7.a
         PLS = { puppet = SPT }
         ai_chance = {
-            base = 3.5
-        }
+			base = 30
+			modifier = {
+				add = -25
+				PLS = { has_army_size = { size < 30 } }
+			}
+			modifier = {
+				add = 25
+				PLS = { has_army_size = { size > 29 } }
+			}
+			modifier = {
+				add = 10
+				is_in_faction_with = PLS
+			}
+		}
     }
 
     option = {
@@ -275,6 +294,7 @@ country_event = {
 
     option = {
         name = nf_PLS.8.b
+        add_political_power = 10
         ai_chance = {
             base = 3.5
         }
@@ -655,4 +675,57 @@ country_event = {
             base = 3.5
         }
     }
+}
+
+
+
+add_namespace = PLS_random_event
+
+country_event = {
+	id = PLS_random_event.1
+	title = PLS_random_event.1.t
+	desc = PLS_random_event.1.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = {
+		days = 1000
+	}
+
+	trigger = {
+		original_tag = PLS
+		has_war = no
+        PLS_council_slight_support = yes
+	}
+
+	option = {
+		name = PLS_random_event.1.a
+        PLS_council_remove_support = yes
+	}
+
+	option = {
+		name = PLS_random_event.1.b
+		add_political_power = -50
+	}
+}
+
+country_event = {
+	id = PLS_random_event.2
+	title = PLS_random_event.2.t
+	desc = PLS_random_event.2.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = {
+		days = 1000
+	}
+
+	trigger = {
+		original_tag = PLS
+		has_war = no
+        PLS_council_low_support = yes
+	}
+
+	option = {
+		name = PLS_random_event.2.a
+        PLS_council_add_support = yes
+	}
 }

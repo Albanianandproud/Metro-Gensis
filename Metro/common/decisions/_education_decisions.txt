@@ -227,7 +227,12 @@ education_practise = {
 
 		cost = education_books_cost
 		days_re_enable = education_books_duration
-		
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = education_books_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
@@ -235,10 +240,6 @@ education_practise = {
 			}
 			custom_effect_tooltip = education_reform_increase_cost_and_duration_tt
 			hidden_effect = {
-				hidden_effect = { 
-					set_temp_variable = { bullet_to_gain = education_books_cost }
-					add_bullet_with_tooltip_effect = yes
-				}
 				add_to_variable = {
 					var = education_books_cost
 					value = 20
@@ -353,14 +354,16 @@ education_practise = {
 			consumer_goods_factor = 0.05			
 			industrial_capacity_factory = -0.1
 		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -100 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = improve_education_efforts_mission 
 				days = -40
-			}
-			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -100 }
-				add_bullet_with_tooltip_effect = yes
 			}
 		}
 		ai_will_do = {

@@ -7,8 +7,20 @@ reclaim_metro = {
 	   days_re_enable = 0
 	   on_map_mode = map_only
 	   state_target = yes
-	   
 	    visible = {
+			NOT = {
+				OR = {
+					has_idea = RCH_reclusive_nazis
+					has_idea = SEV_mutants
+					has_idea = VDN_dark_ones_idea
+					has_idea = ARB_devastation
+					has_idea = bump_in_the_night
+					has_idea = PLS_ignorance
+					has_country_flag = disable_reclaimation_mechanic
+				}
+				original_tag = GWC
+				original_tag = PAG
+			}
 		    RUI = { owns_state = FROM }
 		    FROM = {
 			    any_neighbor_state = {
@@ -227,29 +239,15 @@ reclaim_metro = {
 					   }
 				   }
 				   NOT = { region = 1 }
-				   }
-			   }
-			    NOT = {
-				   original_tag = GWC
-				   original_tag = PAG
-				   #original_tag = AVT
-			    }
-			    NOT = {
-				   has_idea = RCH_reclusive_nazis
-				   has_idea = SEV_mutants
-				   has_idea = VDN_dark_ones_idea
-				   has_idea = ARB_devastation
-				   has_idea = bump_in_the_night
-				   has_country_flag = disable_reclaimation_mechanic
-				   FROM = { is_demilitarized_zone = yes }
-			    }
+				}
+			}
 	    }
 	    available = {
 		    hidden_trigger = {
 			    NOT = {
 				   original_tag = GWC
 				   original_tag = PAG
-				   #original_tag = AVT
+				   has_country_flag = disable_reclaimation_mechanic
 			    }
 		    }
 		    FROM = { is_owned_by = RUI }

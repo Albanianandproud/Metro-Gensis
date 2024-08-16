@@ -1,6 +1,5 @@
 @PLS_OLIGARCH_MEMBER_COST = 100
 @PLS_COMMUNITY_MEMBER_COST = 100
-@PLS_COMMUNITY_PASS_LAW_ECO_COST = 200
 PLS_council_decision_category = {
 	PLS_council_allow_community_membership = {
 		cost = @PLS_OLIGARCH_MEMBER_COST
@@ -35,9 +34,21 @@ PLS_council_decision_category = {
 		available = {
 			political_power_daily > 0.79
 		}
-		cost = 0
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
 		days_re_enable = 300
 		days_remove = 45
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 		modifier = {
 			political_power_gain = -0.3
 		}
@@ -67,7 +78,7 @@ PLS_council_decision_category = {
 		days_re_enable = 300
 		days_remove = 65
 		modifier = {
-			tax_efficiency_modifier = -0.1
+			tax_efficiency_modifier = -0.2
 		}
 		remove_effect = {
 			PLS_council_add_support = yes
@@ -91,11 +102,11 @@ PLS_council_decision_category = {
 		available = {
 			has_stability > 0.69
 		}
-		cost = @PLS_COMMUNITY_PASS_LAW_ECO_COST
+		cost = 250
 		fire_only_once = yes
 		days_remove = 7
 		remove_effect = {
-			custom_effect_tooltip = PLS_council_allow_eco_law_change
+			custom_effect_tooltip = PLS_council_economic_law_change
 			add_ideas = PLS_economic_law
 			if = {
 				limit = {
@@ -111,11 +122,11 @@ PLS_council_decision_category = {
 		available = {
 			has_war_support > 0.69
 		}
-		cost = 200
+		cost = 250
 		fire_only_once = yes
 		days_remove = 7
 		remove_effect = {
-			custom_effect_tooltip = PLS_council_dictatorial_law_change
+			custom_effect_tooltip = PLS_council_military_law_change
 			add_ideas = PLS_military_law
 			if = {
 				limit = {
