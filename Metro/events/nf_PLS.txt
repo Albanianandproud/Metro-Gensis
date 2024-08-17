@@ -729,3 +729,81 @@ country_event = {
         PLS_council_add_support = yes
 	}
 }
+
+country_event = {
+	id = PLS_random_event.3
+	title = PLS_random_event.3.t
+	desc = PLS_random_event.3.d
+	picture = "GFX_event (15)"
+
+	mean_time_to_happen = {
+		days = 1000
+	}
+
+	trigger = {
+		original_tag = PLS
+		has_war = no
+	}
+
+	option = {
+		name = PLS_random_event.3.a
+        add_political_power = -50
+	}
+
+	option = {
+		name = PLS_random_event.3.b
+        random_list = {
+            50 = { ROOT = { country_event = { id = PLS_random_event.4 random_hours = 9 } } }
+            50 = { ROOT = { country_event = { id = PLS_random_event.5 random_hours = 8 } } }
+        }
+	}
+
+    option = {
+		name = PLS_random_event.3.c
+        add_war_support = -0.1
+        if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+	}
+}
+
+country_event = { 
+    id = PLS_random_event.4
+    title = PLS_random_event.4.t
+    desc = PLS_random_event.4.d
+    picture = "GFX_event (7)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = PLS_random_event.4.a
+        add_political_power = 50
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { 
+    id = PLS_random_event.5
+    title = PLS_random_event.5.t
+    desc = PLS_random_event.5.d
+    picture = "GFX_event (7)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    option = {
+        name = PLS_random_event.5.a
+        add_political_power = -20
+        if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.02 } }
+		if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.02 } }
+		if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.02 } }
+		if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.02 } }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}

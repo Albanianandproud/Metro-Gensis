@@ -1,0 +1,204 @@
+METRO_dont_build_useless_stuff = {
+	enable = { always = yes }
+	abort = { always = no }
+	ai_strategy = {
+		type = building_target
+		id = fuel_silo 
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = synthetic_refinery
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = radar_station 
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = air_base
+		value = -10000
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = rocket_site
+		value = -10000
+	}
+}
+
+METRO_build_mils_whilst_at_war = {
+	enable = {
+		OR = {
+			has_war = yes
+			has_idea = war_economy
+			has_idea = tot_economic_mobilisation
+			check_variable = { modifier@production_speed_arms_factory_factor > 0.2 }
+		}
+		num_of_civilian_factories_available_for_projects > 10
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 50
+	}
+}
+
+METRO_save_pp_for_manpower_laws = {
+	enable = {
+		manpower_per_military_factory < 5
+		has_war = yes
+	}
+	abort = {
+		OR = {
+			manpower_per_military_factory > 5
+			has_war = no
+		}
+	}
+
+	ai_strategy = {
+		type = pp_spend_priority
+		id = relation
+		value = -9999
+	}
+
+	ai_strategy = {
+		type = pp_spend_priority
+		id = guarantee
+		value = -9999
+	}
+}
+
+METRO_prioritize_ministers_early = {
+	enable = {
+		date < 2030.1.1
+		NOT = { has_war = yes }
+	}
+	abort = { always = no }
+
+	ai_strategy = {
+		type = pp_spend_amount
+		id = idea
+		value = 25
+	}
+}
+
+METRO_default_pp_priority = {
+	enable = {
+		if = {
+			limit = {
+				NOT = {
+					original_tag = PLS
+				}
+			}
+			always = yes
+		}
+		else = {
+			date > 2029.1.1
+		}
+	}
+	abort = { always = no }
+	ai_strategy = {
+		type = pp_spend_amount
+		id = idea
+		value = 100
+	}
+	ai_strategy = {
+		type = pp_spend_amount
+		id = decision
+		value = 20
+	}
+}
+
+
+METRO_default_market_stockpile_management = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_market_for_sale_threshold
+		id = train
+		value = 20 
+	}
+	ai_strategy = {
+		type = equipment_market_min_for_sale
+		id = train
+		value = 5
+	}
+	ai_strategy = {
+		type = equipment_market_for_sale_factor
+		id = train
+		value = -50
+	}
+	ai_strategy = {
+		type = equipment_market_for_sale_threshold
+		id = convoy
+		value = 100 
+	}
+	ai_strategy = {
+		type = equipment_market_min_for_sale
+		id = convoy
+		value = 30 
+	}
+}
+
+METRO_default_market_stockpile_management_if_at_war = {
+	enable = {
+		has_war = yes
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_market_for_sale_threshold
+		id = infantry
+		value = 20000
+	}
+	#ai_strategy = {
+	#	type = equipment_market_for_sale_threshold
+	#	id = flamethrower_equipment
+	#	value = 100
+	#}
+	#ai_strategy = {
+	#	type = equipment_market_for_sale_threshold
+	#	id = explosive_equipment
+	#	value = 100
+	#}
+	#ai_strategy = {
+	#	type = equipment_market_for_sale_threshold
+	#	id = piercing_equipment
+	#	value = 100
+	#}
+	#ai_strategy = {
+	#	type = equipment_market_for_sale_threshold
+	#	id = gatling_equipment
+	#	value = 100
+	#}
+	ai_strategy = {
+		type = equipment_market_for_sale_threshold
+		id = train
+		value = 50
+	}
+	ai_strategy = {
+		type = equipment_market_for_sale_threshold
+		id = convoy
+		value = 50
+	}
+}
+
+METRO_never_buy_revolvers = {
+	enable = {
+		always = yes
+	}
+	abort = { always = no }
+	ai_strategy = {
+    	type = equipment_market_buy
+    	equipment_type = basic_infantry_equipment
+    	value = -50000
+	}
+}

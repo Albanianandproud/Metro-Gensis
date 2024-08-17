@@ -1,0 +1,159 @@
+
+METRO_be_spy_as_major = {
+	enable = {
+		is_major = yes
+		OR = {
+			has_war = yes
+			date > 2030.1.1
+		}
+	}
+	abort = { always = no }
+	ai_strategy = {
+		type = intelligence_agency_usable_factories
+		value = 5
+	}
+}
+METRO_do_intelligence_agency = {
+	enable = {
+		date > 2031.1.1
+		has_war = no
+		num_of_civilian_factories > 8
+	}
+	abort = {
+		OR = {
+			has_war = yes
+			num_of_civilian_factories < 8
+		}
+	}
+	ai_strategy = {
+		type = intelligence_agency_usable_factories
+		value = 5
+	}
+}
+METRO_upgrade_agency_as_spy_master = {
+	enable = {
+		is_spymaster = yes
+		OR = {
+			has_war = no
+			num_of_civilian_factories > 12
+		}
+	}
+	abort = {
+		is_spymaster = no
+		num_of_civilian_factories < 12
+	}
+	ai_strategy = {
+		type = intelligence_agency_usable_factories
+		value = 10
+	}
+}
+METRO_agency_normal_upgrade_piority = {
+	enable = { 
+		NOT = {
+			original_tag = RED
+			original_tag = RCH
+		}
+	}
+	abort = { always = no }
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_agency_capacity
+		value = 150
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_spy_capacity
+		value = 100
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_encryption
+		value = 50
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_decryption
+		value = 50
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_passive_defense
+		value = 50
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_anti_partisan
+		value = 50
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_secret_police
+		value = 50
+	}
+}
+
+METRO_agency_police_state_upgrade_piority = {
+	enable = { 
+		original_tag = RED
+		original_tag = RCH
+	}
+	abort = { always = no }
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_agency_capacity
+		value = 150
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_spy_capacity
+		value = 150
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_encryption
+		value = 100
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_decryption
+		value = 100
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_passive_defense
+		value = 50
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_anti_partisan
+		value = 150
+	}
+	ai_strategy = {
+		type = intelligence_agency_branch_desire_factor
+		id = upgrade_secret_police
+		value = 150
+	}
+}
+
+METRO_more_upgrades_as_spymaster = {
+	enable = { is_spymaster = yes }
+	abort = { is_spymaster = no }
+	ai_strategy = {
+		type = agency_ai_base_num_factories_factor
+		value = -50
+	}
+	ai_strategy = {
+		type = agency_ai_per_upgrade_factories_factor
+		value = -25
+	}
+}
+
+METRO_espionage_stop_upgrades = {
+	enable = { has_war = yes }
+	abort = { has_war = no }
+	ai_strategy = {
+		type = intelligence_agency_usable_factories
+		value = -15
+	}
+}
+
