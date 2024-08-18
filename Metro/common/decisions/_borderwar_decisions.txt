@@ -27,6 +27,7 @@ RCH_RED_border_war = {
 						hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
 					}
 					NOT = { has_state_flag = border_incident_active }
+					NOT = { state = 330 state = 306 }
 					set_temp_variable = { var:defender_state_temp = id }
 				}
 			}
@@ -442,6 +443,11 @@ RCH_RED_border_war = {
 		allowed = { always = no } #Activated from effect
 
 		visible = {
+			OR = {
+				has_idea = redline_reich_borderwar_stage_3
+				has_idea = redline_reich_borderwar_stage_4
+				has_idea = redline_reich_borderwar_stage_5
+			}
 			NOT = { has_country_flag = border_conflict_escalate_to_war_cooldown_@FROM }
 			has_border_war_with = FROM
 		}
