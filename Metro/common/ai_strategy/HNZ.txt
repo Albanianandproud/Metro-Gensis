@@ -3,18 +3,28 @@ HNZ_default_unit_production = {
 	## Prioritise ELITE Divisions backed up by competent Mobile troops ##
 	allowed = { original_tag = HNZ }
 	enable = { always = yes }
-	abort = { date > 2033.1.1 }
+	abort = { always = no }
 
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 10
+		value = 80
 	}
-
 	ai_strategy = {
 		type = role_ratio
 		id = motorized
 		value = 5
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 15
+	}
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 25
 	}
 
 	ai_strategy = {
@@ -24,6 +34,12 @@ HNZ_default_unit_production = {
 	}
 
 	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = -5
+	}
+
+	ai_strategy = {
 		type = template_prio
 		id = explosive_support
 		value = 15
@@ -31,16 +47,22 @@ HNZ_default_unit_production = {
 
 	ai_strategy = {
 		type = template_prio
-		id = rail_car
-		value = 2
+		id = rail_cart
+		value = 10
 	}
 
 	ai_strategy = {
 		type = template_prio
 		id = explosive_support
 		value = 15
+	}
+
+	ai_strategy = {
+		type = force_build_armies
+		value = 25
 	}
 }
+
 HNZ_motorised_army = {
 	allowed = { original_tag = HNZ }
 	enable = {
@@ -58,6 +80,36 @@ HNZ_motorised_army = {
 	}
 }
 
+HNZ_highered_armored_production = {
+	allowed = { original_tag = HNZ }
+	enable = { num_of_military_factories > 24 }
+	abort = { num_of_military_factories < 23 }
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 10
+	}
+}
+
+
+HNZ_template_1 = {
+	allowed = { tag = HNZ }
+	enable = { date < 2030.1.1 }
+	abort = { date > 2030.1.1 }
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 60
+	}
+}
+
 HNZ_stockpile_more_early_game = {
 	allowed = { original_tag = HNZ }
 
@@ -68,7 +120,7 @@ HNZ_stockpile_more_early_game = {
 
 	ai_strategy = {
 		type = equipment_stockpile_surplus_ratio
-		value = 0.3 ## Brace for the oncoming storm...
+		value = 0.2 ## Brace for the oncoming storm...
 	}
 }
 HNZ_be_wary_of_commies = {
