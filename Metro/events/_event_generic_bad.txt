@@ -73,6 +73,8 @@ country_event = { ## Crop Failure
 		has_global_flag = random_events_bad_enabled
 		NOT = {
 			original_tag = GWC
+			original_tag = SUF
+			original_tag = MUT
 			AND = {
 				num_of_civilian_factories > 10
 				has_tech = tech_farming_4 
@@ -105,12 +107,31 @@ country_event = { ## Crop Failure
 				has_country_flag = is_savage_nation
 				has_idea = civics_border_4
 			}
+			set_temp_variable = { temp_bullet_cost = 80 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
         }
+		set_temp_variable = { bullet_to_gain = -80 }
+		add_bullet_with_tooltip_effect = yes
 		add_timed_idea = {
 			idea = metro_buy_crops
 			days = 70
 		}
-		add_political_power = -30
+	}
+
+	option = {
+		name = random_event_bad.3.e
+		trigger = {
+			OR = {
+				has_government = dictatorial
+				has_country_flag = is_communist_nation
+			}
+        }
+		add_timed_idea = {
+			idea = metro_ration
+			days = 70
+		}
 	}
 }
 

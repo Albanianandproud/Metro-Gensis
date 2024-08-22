@@ -1045,10 +1045,10 @@ scavenging_expeditions = {
 		remove_effect = {
 			clr_country_flag = scavenging_underway
 			random_list = {
-				70 = { #Found something
+				scav_successChance = { #Success
 					country_event = scavenge_mission.1
 				}
-				30 = { #Loss
+				scav_failureChance = { #Loss
 					country_event = scavenge_mission.2
 				}
 			}
@@ -1070,6 +1070,7 @@ scavenging_expeditions = {
 			}
 		}
     }
+
 	execute_scavenge_mission_debug = {
 		icon = electronics
 
@@ -1093,6 +1094,429 @@ scavenging_expeditions = {
 
 		ai_will_do = {
 			factor = 0
+		}
+	}
+}
+
+hunt_for_D6 = {
+	execute_scavenge_D6_search = {
+		icon = GFX_D6_search
+		visible = {
+			106 = { is_owned_by = RUI }
+			has_global_flag = D6_activate
+		}
+		available = {
+			has_global_flag = D6_activate
+			106 = { is_owned_by = RUI }
+
+			custom_trigger_tooltip = {
+				tooltip = D6_meet_required_threshold
+				NOT = {
+					check_variable = {
+						var = D6_discovery_threshold
+						value = 10
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 30 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+		fixed_random_seed = no
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -30 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+		}
+		days_remove = 21
+		days_re_enable = 0
+		remove_effect = {
+			random_list = {
+				D6_success_chance = {	## Gives Event to get +1 lead
+					country_event = nf_D6_discovery.2
+					modifier = {
+						factor = 1.2
+						has_country_flag = D6_priority_country_flag		## Lets certain nations like PLS or SPT get an edge in the search
+					}
+					modifier = {
+						factor = 1.1
+						check_variable = {
+							var = D6_discovery_threshold
+							value = 2
+							compare = greater_than_or_equals
+						}
+					}
+					modifier = {
+						factor = 1.1
+						check_variable = {
+							var = D6_discovery_threshold
+							value = 4
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				D6_failure_chance = { 
+					country_event = nf_D6_discovery.3
+				}
+				D6_breakthrough_chance = {		## Automatically gives +1 lead
+					country_event = nf_D6_discovery.4
+					modifier = {
+						factor = 1.5
+						has_country_flag = D6_breakthrough_country_flag
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1.5
+			modifier = {
+				factor = 0.05
+				is_major = no
+			}
+			modifier = {
+				factor = 0.05
+				has_manpower < 19
+			}
+			modifier = {
+				factor = 0.01
+				has_country_flag = is_skaven_nation
+				has_country_flag = is_bandit_nation
+			}
+			modifier = {
+				factor = 1.5
+				original_tag = RCH
+				original_tag = RED
+				original_tag = HNZ
+				original_tag = SPT
+				original_tag = PLS
+			}
+		}
+	}
+
+	execute_scavenge_METRO_2_search = {
+		icon = GFX_D6_explore_2
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = D6_meet_required_threshold
+				check_variable = {
+					var = D6_discovery_threshold
+					value = 10
+					compare = greater_than_or_equals
+				}
+			}
+			has_country_flag = D6_METRO_2_available
+			NOT = { has_country_flag = can_now_find_D6 }
+		}
+
+		visible = {
+			NOT = { has_country_flag = can_now_find_D6 }
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 5 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 1
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -5 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = execute_scavenge_METRO_2_search_mission_tt
+			activate_mission = execute_scavenge_METRO_2_search_mission
+			hidden_effect = {
+				set_country_flag = searching_for_METRO_2	
+			}
+		}
+		fire_only_once = yes
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 0.05
+				is_major = no
+			}
+			modifier = {
+				factor = 0.05
+				has_manpower < 19
+			}
+			modifier = {
+				factor = 0.01
+				has_country_flag = is_skaven_nation
+				has_country_flag = is_bandit_nation
+			}
+		}
+	}
+
+	execute_scavenge_METRO_2_search_mission = {
+		icon = GFX_D6_explore_2
+		days_mission_timeout = 180
+		is_good = yes
+		custom_cost_text = HNZ_agenda_requirement
+		activation = { always = no }
+		available = { hidden_trigger = { always = no } }
+		selectable_mission = no
+		fire_only_once = yes
+		#cancel_trigger = { has_war = yes }
+		timeout_effect = {                 
+            country_event = nf_D6_discovery.5
+            custom_effect_tooltip = execute_scavenge_METRO_2_search_mission_first_reward
+			hidden_effect = {
+				clr_country_flag = searching_for_METRO_2	
+			}
+		}
+	}
+
+	METRO_2_search_mission_send_sorties = {
+		icon = GFX_D6_stalker
+		visible = {
+			has_country_flag = searching_for_METRO_2
+		}
+
+		available = {
+			has_manpower > 4
+			has_equipment = { infantry_equipment > 4 }
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = searching_has_cancelled
+   				NOT = {
+					has_country_flag = searching_for_METRO_2
+				}
+   			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 1
+		fire_only_once = no
+		complete_effect = {
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		days_re_enable = 21
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = execute_scavenge_METRO_2_search_mission 
+				days = -15
+			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+	METRO_2_search_mission_fund_expeditions = {
+		icon = GFX_D6_stalker
+		visible = {
+			has_country_flag = searching_for_METRO_2
+		}
+
+		available = {
+			has_manpower > 4
+			has_equipment = { infantry_equipment > 4 }
+			has_equipment = { special_forces_equipment > 4 }
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = searching_has_cancelled
+   				NOT = {
+					has_country_flag = searching_for_METRO_2
+				}
+   			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 25 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 1
+		fire_only_once = no
+		complete_effect = {
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -25 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		days_re_enable = 30
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = execute_scavenge_METRO_2_search_mission 
+				days = -20
+			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	execute_scavenge_D6_lead = {
+		icon = GFX_D6_explore
+		visible = {
+			106 = { is_owned_by = RUI }
+			has_country_flag = D6_discovered_METRO2
+			hidden_trigger = { has_country_flag = can_now_find_D6 }
+		}
+		available = {
+			hidden_trigger = { has_country_flag = can_now_find_D6 }
+			has_global_flag = D6_activate
+			has_country_flag = D6_discovered_METRO2
+			106 = { is_owned_by = RUI }
+
+			has_manpower > 4
+			has_equipment = { infantry_equipment > 4 }
+			has_equipment = { special_forces_equipment > 4 }
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+
+		days_remove = 2
+		days_re_enable = 0
+
+		complete_effect = {
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+		}
+
+		remove_effect = {	## Random Chance discovery Leads to D6 or something else entirely
+			random_list = {
+				50 = {
+					country_event = nf_D6_discovery.11
+				}
+				50 = {
+					country_event = nf_D6_discovery.12
+					modifier = {
+						factor = 2
+						has_country_flag = D6_discovery_book_found
+					}
+				}
+			}
+		}	
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0.1
+				is_major = no
+			}
+			modifier = {
+				factor = 5
+				original_tag = SPT
+				original_tag = PLS
+			}
+			modifier = {
+				factor = 0.01
+				has_country_flag = is_skaven_nation
+				has_country_flag = is_bandit_nation
+			}
+		}
+	}
+
+	## Buy From collector
+
+	execute_scavenge_D6_buy_from_collector = {
+		icon = GFX_D6_search
+		visible = {
+			106 = { is_owned_by = RUI }
+			has_global_flag = D6_activate
+			has_country_flag = D6_discovery_random_event_1_flag
+		}
+		available = {
+			has_global_flag = D6_activate
+			106 = { is_owned_by = RUI }
+			custom_trigger_tooltip = {
+				tooltip = D6_meet_required_threshold
+				NOT = {
+					check_variable = {
+						var = D6_discovery_threshold
+						value = 10
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 100 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -100 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		days_remove = 1
+		fire_only_once = yes 
+		remove_effect = {
+			custom_effect_tooltip = D6_lead_add_tt
+			add_to_variable = {
+				var = D6_discovery_threshold
+				value = 1
+			} 
+			clr_country_flag = D6_discovery_random_event_1_flag
+		}
+		ai_will_do = {
+			factor = 5
 		}
 	}
 }

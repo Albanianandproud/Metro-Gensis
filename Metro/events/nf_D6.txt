@@ -90,18 +90,12 @@ country_event = {
 	}
 }
 
-
-
-
-
-
-
 add_namespace = nf_D6_advisor
 
 country_event = { 
     id = nf_D6_advisor.1
     title = nf_D6_advisor.1.t
-    desc = nnf_D6_advisor.1.d
+    desc = nf_D6_advisor.1.d
     picture = "GFX_event (182)"
 	
 	is_triggered_only = yes
@@ -156,5 +150,528 @@ country_event = {
         ai_chance = {
             base = 3.5
         }
+    }
+}
+
+###
+
+add_namespace = nf_D6_discovery
+
+country_event = { 
+    id = nf_D6_discovery.1
+    title = nf_D6_discovery.1.t
+    desc = nf_D6_discovery.1.d
+    picture = "GFX_event (183)"
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    immediate = {
+        hidden_effect = {
+            set_global_flag = D6_activate
+        }
+    }
+
+    option = {	## ACTIVATES SEARCH FOR D6
+        name = nf_D6_discovery.1.a
+		custom_effect_tooltip = nf_D6_discovery.1_tt
+        set_country_flag = D6_participant
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_D6_discovery.1.b
+        trigger = {     ## Stop retarded ass nations like Trubnaya AI from trying to find D6
+            NOT = {
+            	is_acting_performer = no
+                is_major = yes
+            }
+        }
+		custom_effect_tooltip = nf_D6_discovery_refusal_tt
+		add_political_power = 200
+        set_country_flag = D6_refuse
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Success
+    id = nf_D6_discovery.2
+    title = nf_D6_discovery.2.t
+    picture = "GFX_event (173)"
+
+    desc = {
+        text = nf_D6_discovery.2.d_1
+        trigger = {
+            OR = {
+                check_variable = { D6_discovery_threshold = 1 }
+                check_variable = { D6_discovery_threshold = 2 }
+            }
+        }
+    }
+    desc = {
+        text = nf_D6_discovery.2.d_2
+        trigger = {
+            OR = {
+                check_variable = { D6_discovery_threshold = 3 }
+                check_variable = { D6_discovery_threshold = 4 }
+            }
+        }
+    }
+    desc = {
+        text = nf_D6_discovery.2.d_3
+        trigger = {
+            OR = {
+                check_variable = { D6_discovery_threshold = 5 }
+                check_variable = { D6_discovery_threshold = 6 }
+            }
+        }
+    }
+	desc = {
+        text = nf_D6_discovery.2.d_4
+        trigger = {
+            check_variable = { D6_discovery_threshold > 7 }
+        }
+    }
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.2.a
+		#custom_effect_tooltip = D6_discovery_success_tt
+		custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 1
+		} 
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Failure
+    id = nf_D6_discovery.3
+    title = nf_D6_discovery.3.t
+    desc = nf_D6_discovery.3.d
+    picture = "GFX_event (22)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.3.a
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Breakthrough
+    id = nf_D6_discovery.4
+    title = nf_D6_discovery.4.t
+    desc = nf_D6_discovery.4.d
+    picture = "GFX_event (2)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.4.a
+		custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 2
+		}
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : METRO-2 Discovered
+    id = nf_D6_discovery.5
+    title = nf_D6_discovery.5.t
+    desc = nf_D6_discovery.5.d
+    picture = "GFX_event (3)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    immediate = {
+        add_to_variable = {
+            var = first_discoverer
+            value = 1
+        }
+        hidden_effect = { set_country_flag = can_now_find_D6 } 
+    }
+
+    option = {
+        name = nf_D6_discovery.5.a
+        set_country_flag = D6_discovered_METRO2
+        if = {
+            limit = {
+                check_variable = { first_discoverer < 2 }
+            }
+            ROOT = { news_event = { id = global_event.31 } }
+            add_political_power = 100
+        }
+        custom_effect_tooltip = D6_now_can_search_for_D6
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : METRO-2 BOOK Found
+    id = nf_D6_discovery.6
+    title = nf_D6_discovery.6.t
+    desc = nf_D6_discovery.6.d
+    picture = "GFX_event (201)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.6.a
+		custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 2
+		} 
+		set_country_flag = D6_discovery_book_found
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Signal direct pathway to METRO_2
+    id = nf_D6_discovery.10
+    title = nf_D6_discovery.10.t
+    desc = nf_D6_discovery.10.d
+    picture = "GFX_event (190)"
+
+	mean_time_to_happen = { days = 2 }
+
+	trigger = {
+        NOT = { has_country_flag = D6_METRO_2_available }
+		check_variable = {
+			var = D6_discovery_threshold
+			value = 10
+			compare = greater_than_or_equals
+		}
+	}
+
+    immediate = { set_country_flag = D6_METRO_2_available }
+
+    option = {
+        name = nf_D6_discovery.10.a
+		custom_effect_tooltip = nf_D6_discovery_lead_tt
+		## Activate Direct Decision to Discovery Metro-2
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Path leads into nothing
+    id = nf_D6_discovery.11
+    title = nf_D6_discovery.11.t
+    desc = nf_D6_discovery.11.d
+    picture = "GFX_event (206)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.11.a
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Path leads to D6
+    id = nf_D6_discovery.12
+    title = nf_D6_discovery.12.t
+    desc = nf_D6_discovery.12.d
+    picture = "GFX_event (106)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.12.a
+        country_event = { id = nf_D6_discovery.13 random_hours = 3 }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Found : Discovery
+    id = nf_D6_discovery.13
+    title = nf_D6_discovery.13.t
+    desc = nf_D6_discovery.13.d
+    picture = "GFX_event (155)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+	## Once discovered claiming is not instant. Have to pursue options to deal with Biomass and cleansing D6 first 
+	
+    option = { ### Guns Blazing
+        name = nf_D6_discovery.13.a
+        add_equipment_to_stockpile = {
+            type = infantry_equipment
+            amount = -5
+        }
+        random_list = {
+            70 = { country_event = { id = nf_D6_discovery.14 random_hours = 2 } }
+            30 = { country_event = { id = nf_D6_discovery.15 random_hours = 2 } }
+        }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+	option = { ### Blow up the Biomass
+        name = nf_D6_discovery.13.b
+        random_list = {
+            60 = { country_event = { id = nf_D6_discovery.14 random_hours = 2 } }
+            40 = { country_event = { id = nf_D6_discovery.15 random_hours = 2 } }
+        }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Biomass Event Chain : 1 Biomass Attacks!!
+    id = nf_D6_discovery.14
+    title = nf_D6_discovery.14.t
+    desc = nf_D6_discovery.14.d
+    picture = "GFX_event (198)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+	
+    option = { ## Costly Attack
+        name = nf_D6_discovery.14.a
+        country_event = { id = nf_D6_discovery.15 random_hours = 2 }
+        106 = {
+            damage_building = {
+                type = infrastructure
+                damage = 5
+            }
+        }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+
+    option = {
+        name = nf_D6_discovery.14.b
+        country_event = { id = nf_D6_discovery.15 random_hours = 4 }
+        106 = {
+            add_resource = {
+                type = scrap
+                amount = -10
+            }
+        }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+country_event = { ### D-6 : Biomass Event Chain : 2 Turning on the Generator
+    id = nf_D6_discovery.15
+    title = nf_D6_discovery.15.t
+    desc = nf_D6_discovery.15.d
+    picture = "GFX_event (178)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    option = {
+        name = nf_D6_discovery.15.a
+        trigger = {
+            has_tech = tech_energy_3
+        }
+        country_event = { id = nf_D6_discovery.16 random_hours = 4 }
+        ai_chance = {
+            base = 20   
+        }
+    }
+
+    option = {
+        name = nf_D6_discovery.15.b
+        trigger = {
+            NOT = {
+                has_tech = tech_energy_4
+            }
+        }
+        106 = {
+            damage_building = {
+                type = infrastructure
+                damage = 2
+            }
+        }
+        country_event = { id = nf_D6_discovery.16 random_hours = 6 }
+        ai_chance = {
+            base = 5
+        }
+    }
+}
+
+country_event = { ### D-6 : UNLOCK D6
+    id = nf_D6_discovery.16
+    title = nf_D6_discovery.16.t
+    desc = nf_D6_discovery.16.d
+    picture = "GFX_event (116)"
+	
+	is_triggered_only = yes
+	fire_only_once = no
+
+    immediate = {
+        hidden_effect = {
+			RUI = { remove_state_core = 106 }
+            clr_global_flag = D6_activate
+		}  
+    }
+	
+    option = {
+        name = nf_D6_discovery.16.a
+        custom_effect_tooltip = SPT_d6_unlock_tt
+		106 = {
+			add_core_of = ROOT
+			transfer_state_to = ROOT
+		}
+        ## Launch News event
+        ROOT = { news_event = { id = global_event.33 } }
+        ai_chance = {
+            base = 3.5
+        }
+    }
+}
+
+add_namespace = nf_D6_discovery_random_event
+
+country_event = {
+	id = nf_D6_discovery_random_event.1
+	title = nf_D6_discovery_random_event.1.t
+	desc = nf_D6_discovery_random_event.1.d
+	picture = "GFX_event (7)"
+
+	mean_time_to_happen = {
+		days = 720
+	}
+
+    immediate = {
+        hidden_effect = { set_country_flag = D6_discovery_random_event_1_flag }
+    }
+
+	trigger = {
+		has_global_flag = D6_activate
+        106 = { is_owned_by = RUI }
+        check_variable = {
+            var = D6_discovery_threshold
+            value = 10
+            compare = less_than
+        }
+        NOT = { has_country_flag = D6_discovery_random_event_1_flag }
+	}
+
+	option = {
+		name = nf_D6_discovery_random_event.1.a
+        trigger = {
+			set_temp_variable = { temp_bullet_cost = 100 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+        set_temp_variable = { bullet_to_gain = -100 }
+        add_bullet_with_tooltip_effect = yes
+        custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 2
+		} 
+        clr_country_flag = D6_discovery_random_event_1_flag 
+	}
+
+    option = {
+		name = nf_D6_discovery_random_event.1.b
+        ## DO DECISION
+        custom_effect_tooltip = nf_D6_discovery_random_event.1.b_tt
+	}
+
+    option = {
+		name = nf_D6_discovery_random_event.1.c
+        trigger = {
+            has_government = dictatorial
+        }
+        custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 2
+		} 
+        clr_country_flag = D6_discovery_random_event_1_flag 
+	}
+}
+
+country_event = {
+	id = nf_D6_discovery_random_event.2
+	title = nf_D6_discovery_random_event.2.t
+	desc = nf_D6_discovery_random_event.2.d
+	picture = "GFX_event (6)"
+
+	mean_time_to_happen = {
+		days = 720
+	}
+
+    immediate = {
+        hidden_effect = { set_country_flag = D6_discovery_random_event_2_flag }
+    }
+
+	trigger = {
+		has_global_flag = D6_activate
+        106 = { is_owned_by = RUI }
+        check_variable = {
+            var = D6_discovery_threshold
+            value = 10
+            compare = less_than
+        }
+        NOT = { has_country_flag = D6_discovery_random_event_2_flag }
+	}
+
+	option = {
+		name = nf_D6_discovery_random_event.2.a
+        custom_effect_tooltip = D6_lead_add_tt
+		add_to_variable = {
+			var = D6_discovery_threshold
+			value = 2
+		} 
+        clr_country_flag = D6_discovery_random_event_2_flag 
     }
 }
