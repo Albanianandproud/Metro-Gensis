@@ -144,7 +144,11 @@ calculate_bullet_income = {
 	add_to_temp_variable = { income_from_exports_temp = resource_exported@chemicals }
 	add_to_temp_variable = { income_from_exports_temp = resource_exported@oil }
 
-	## TODO ADD MODIFIER
+	# EXPORTS Modifier:
+	set_temp_variable = { exports_income_modifier = 1  }
+	add_to_temp_variable = { exports_income_modifier = modifier@bullet_income_factor_from_exports  }
+	#multiply_temp_variable = { exports_income_modifier = 1 }
+	multiply_temp_variable = { income_from_exports_temp = exports_income_modifier }
 	add_to_temp_variable = { total_income_temp = income_from_exports_temp }
 
 	# Other Income:
@@ -236,8 +240,11 @@ calculate_bullet_expenses = {
 	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@chemicals }
 	add_to_temp_variable = { expenses_from_imports_temp = resource_imported@oil }
 
-	## TODO ADD MODIFIER
-	multiply_temp_variable = { expenses_from_imports_temp = -1 }
+	## IMPORT SPENDING
+	set_temp_variable = { imports_spending_modifier = 1 }
+	add_to_temp_variable = { imports_spending_modifier = modifier@bullet_expense_factor_from_imports  }
+	multiply_temp_variable = { imports_spending_modifier = -1 }
+	multiply_temp_variable = { expenses_from_imports_temp = imports_spending_modifier }
 	add_to_temp_variable = { total_expenses_temp = expenses_from_imports_temp }
 
 	# Other Income:

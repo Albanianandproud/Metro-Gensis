@@ -30,6 +30,26 @@ PLS_council_decision_category = {
 			PLS_council_remove_support = yes
 		}
 	}
+	PLS_council_reshuffle_cabinet = {
+		cost = 100
+		days_remove = 7
+		available = {
+			PLS_council_medium_support = yes
+			OR = {
+				dictatorial > 0.2
+				oligarch > 0.2
+				community > 0.2
+				council > 0.2
+			}
+		}
+		complete_effect = {
+			PLS_council_remove_support = yes
+			set_political_party = { ideology = dictatorial popularity = 20 }
+			set_political_party = { ideology = oligarch popularity = 20 }
+			set_political_party = { ideology = community popularity = 20 }
+			set_political_party = { ideology = council popularity = 20 }
+		}
+	}
 	PLS_lobby_efforts = {
 		available = {
 			political_power_daily > 0.79
