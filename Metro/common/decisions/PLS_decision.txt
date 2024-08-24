@@ -50,6 +50,19 @@ PLS_council_decision_category = {
 			set_political_party = { ideology = council popularity = 20 }
 		}
 	}
+	PLS_council_lobby_for_war = {
+		cost = 50
+		days_remove = 64
+		available = {
+			PLS_council_medium_support = yes
+			has_war_support < 0.7
+			has_stability > 0.4
+		}
+		modifier = {
+			stability_weekly = -0.006
+			war_support_weekly = 0.006
+		}
+	}
 	PLS_lobby_efforts = {
 		available = {
 			political_power_daily > 0.79
@@ -754,7 +767,7 @@ PLS_council_decision_category = {
 
 PLS_surface_stalk_decisions = {
 	PLS_scavenge_mission = {
-		icon = electronics
+		icon = GFX_D6_stalker
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 50 }
 			check_variable = {
@@ -769,8 +782,10 @@ PLS_surface_stalk_decisions = {
 			}
 			has_manpower > 4
 			has_equipment = {
-				infantry_equipment > 4
 				special_forces_equipment > 4
+			}
+			has_equipment = {
+				infantry_equipment > 4
 			}
 		}
 		fixed_random_seed = no
@@ -791,18 +806,11 @@ PLS_surface_stalk_decisions = {
 			}
 			set_country_flag = scavenging_underway
 		}
-		days_remove = 30
+		days_remove = 35
 		days_re_enable = 0
 		remove_effect = {
 			clr_country_flag = scavenging_underway
-			random_list = {
-				scav_successChance = { #Found something
-					country_event = nf_PLS.49
-				}
-				scav_failureChance = { #Loss
-					country_event = nf_PLS.50
-				}
-			}
+			country_event = nf_PLS.49
 		}
 		ai_will_do = {
 			factor = 3
@@ -816,4 +824,85 @@ PLS_surface_stalk_decisions = {
 			}
 		}
 	}
+}
+
+PLS_sell_equipment_to_SPARTA = {
+	PLS_SPT_send_guns = {
+		available = {
+			has_equipment = {
+				infantry_equipment > 19
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = { command_power > 19.9 }
+		days_re_enable = 40
+		days_remove = 1
+		remove_effect = {
+			SPT = { country_event = nf_PLS.62 }
+		}
+		complete_effect = { 
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -20
+			}
+			army_experience = 5
+		}
+	}
+	PLS_SPT_send_support_equipment = {
+		available = {
+			has_equipment = {
+				support_equipment > 19
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = { command_power > 19.9 }
+		days_re_enable = 40
+		days_remove = 1
+		remove_effect = {
+			SPT = { country_event = nf_PLS.63 }
+		}
+		complete_effect = { 
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -15
+			}
+			army_experience = 10
+		}
+	}
+	PLS_SPT_send_spec_ops_equipment = {
+		available = {
+			has_equipment = {
+				special_forces_equipment > 9
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+
+		custom_cost_text = command_power_20
+		custom_cost_trigger = { command_power > 19.9 }
+		days_re_enable = 40
+		days_remove = 1
+		remove_effect = {
+			SPT = { country_event = nf_PLS.64 }
+		}
+		complete_effect = { 
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -10
+			}
+			army_experience = 15
+		}
+	}
+
+	#PLS_SPT_request_guns = {}
+	#PLS_SPT_request_spec_ops_equipment = {}
 }
