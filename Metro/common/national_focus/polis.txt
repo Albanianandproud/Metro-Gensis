@@ -16,7 +16,7 @@ focus_tree = {
 		id = PLS_rangers_1
 		icon = GFX_SPT_patch_guns
 		available = { is_in_faction_with = SPT has_completed_focus = PLS_the_last_redoubt }
-		cost = 6.5
+		cost = 2.9
 		x = 9
 		y = 0
 		completion_reward = {
@@ -41,7 +41,7 @@ focus_tree = {
 		icon = GFX_SPT_experienced_rangers
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_rangers_1 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_rangers_1
 		x = 0
 		y = 1
@@ -77,7 +77,7 @@ focus_tree = {
 			SPT = { is_ai = yes }
 		}
 		prerequisite = { focus = PLS_rangers_1 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_rangers_1
 		x = 2
 		y = 1
@@ -97,7 +97,7 @@ focus_tree = {
 		id = PLS_recall_order_detachment_2
 		icon = GFX_SPT_generic_soldier
 		prerequisite = { focus = PLS_recall_order_detachment focus = PLS_rangers_2 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_recall_order_detachment
 		x = 0
 		y = 1
@@ -144,7 +144,7 @@ focus_tree = {
 		icon = GFX_MDR_cull_mutants
 		available = { has_war_support > 0.34 SPT = { exists = no } 390 = { is_owned_by = MUT  } }
 		prerequisite = { focus = PLS_recall_order_detachment }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_recall_order_detachment
 		x = 1
 		y = 2
@@ -170,7 +170,7 @@ focus_tree = {
 		icon = GFX_SPT_rangers_5
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_rangers_2 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_rangers_2
 		x = 0
 		y = 1
@@ -194,7 +194,7 @@ focus_tree = {
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_allow_operation_outside_polis }
 		mutually_exclusive = { focus = PLS_political_leverage }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_allow_operation_outside_polis
 		x = -1
 		y = 1
@@ -228,7 +228,7 @@ focus_tree = {
 		icon = GFX_SPT_rangers_6
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_military_cooperation_pact }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_military_cooperation_pact
 		x = -1
 		y = 1
@@ -274,7 +274,7 @@ focus_tree = {
 		icon = GFX_SPT_rangers_coilgun
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_military_cooperation_pact_1 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_military_cooperation_pact_1
 		x = 1
 		y = 1
@@ -321,7 +321,7 @@ focus_tree = {
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_allow_operation_outside_polis }
 		mutually_exclusive = { focus = PLS_military_cooperation_pact }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_allow_operation_outside_polis
 		x = 1
 		y = 1
@@ -338,7 +338,7 @@ focus_tree = {
 		icon = GFX_SPT_rangers_3
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_political_leverage }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_political_leverage
 		x = 1
 		y = 1
@@ -360,7 +360,7 @@ focus_tree = {
 		icon = GFX_SPT_rangers_armor
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_political_leverage_1 }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_political_leverage_1
 		x = -1
 		y = 1
@@ -381,7 +381,7 @@ focus_tree = {
 		icon = GFX_SPT_miller_2
 		available = { is_in_faction_with = SPT }
 		prerequisite = { focus = PLS_military_cooperation_pact focus = PLS_political_leverage }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_allow_operation_outside_polis
 		x = 0
 		y = 2
@@ -407,7 +407,7 @@ focus_tree = {
 			} 
 		}
 		prerequisite = { focus = PLS_a_mutual_goal }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_allow_operation_outside_polis
 		x = 0
 		y = 4
@@ -430,7 +430,7 @@ focus_tree = {
 		id = PLS_defense_of_polis
 		icon = GFX_PLS_spartan
 		available = { has_completed_focus = PLS_the_last_redoubt }
-		cost = 6.5
+		cost = 5
 		x = 16
 		y = 0
 		completion_reward = {
@@ -1966,13 +1966,26 @@ focus_tree = {
 				uses = 2
 				category = health
 			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}
 	focus = {
 		id = PLS_cultural_path_3a
 		icon = GFX_ARB_keep_surface_wares
-		available = { }
+		available = { has_completed_focus = PLS_stalk_the_surface }
 		prerequisite = { focus = PLS_cultural_path_3 }
 		cost = 6.5
 		relative_position_id = PLS_cultural_path_3
@@ -2023,6 +2036,19 @@ focus_tree = {
 				bonus = 0.75
 				uses = 2
 				category = support_tech
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = { factor = 1 }
@@ -2304,14 +2330,15 @@ focus_tree = {
 		id = PLS_military
 		icon = GFX_ARB_elites
 		available = { has_completed_focus = PLS_the_last_redoubt }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_the_last_redoubt
 		x = -14
 		y = 0
 		completion_reward = {
+			army_experience = 5
 			add_tech_bonus = {
 				name = entrench_kit_bonus
-				bonus = 0.25
+				bonus = 0.2
 				uses = 2
 				category = entrench_kits
 			}
@@ -2414,7 +2441,7 @@ focus_tree = {
 	focus = {
 		id = PLS_military_1
 		icon = GFX_generic_equipment_gasmask_4
-		available = { }
+		available = { has_tech = conventional_infantry_equipment_tech_1 }
 		prerequisite = { focus = PLS_military }
 		cost = 6.5
 		relative_position_id = PLS_military
@@ -2443,7 +2470,7 @@ focus_tree = {
 	focus = {
 		id = PLS_military_self_sufficency
 		icon = GFX_generic_special_arms_1
-		available = { }
+		available = { has_tech = pheumatic_infantry_equipment_tech_1 }
 		prerequisite = { focus = PLS_military_1 }
 		mutually_exclusive = { focus = PLS_military_reliance_on_hanza }
 		cost = 6.5
@@ -2458,7 +2485,7 @@ focus_tree = {
 	focus = {
 		id = PLS_military_1b
 		icon = GFX_generic_armaments_parts
-		available = { }
+		available = { has_tech = pheumatic_infantry_equipment_tech_1 }
 		prerequisite = { focus = PLS_military_self_sufficency }
 		cost = 6.5
 		relative_position_id = PLS_military_self_sufficency
@@ -2477,7 +2504,7 @@ focus_tree = {
 	focus = {
 		id = PLS_military_1c
 		icon = GFX_generic_ammunition_box
-		available = { }
+		available = { has_tech = pheumatic_infantry_equipment_tech_1 }
 		prerequisite = { focus = PLS_military_1b }
 		cost = 6.5
 		relative_position_id = PLS_military_1b
@@ -2646,7 +2673,7 @@ focus_tree = {
 		id = PLS_preservation_of_humanity
 		icon = GFX_PLS_polis_2
 		available = { has_completed_focus = PLS_the_last_redoubt }
-		cost = 6.5
+		cost = 5
 		x = 63
 		y = 0
 		completion_reward = {
@@ -2951,6 +2978,12 @@ focus_tree = {
 	focus = {
 		id = PLS_stalk_the_surface_civilian
 		icon = GFX_PLS_thingmabob
+		available = {
+			OR = {
+				has_completed_focus = PLS_stalk_the_surface_industry
+				has_completed_focus = PLS_stalk_the_surface_civilian
+			}
+		}
 		prerequisite = { focus = PLS_stalk_the_surface_health }
 		prerequisite = { focus = PLS_stalk_the_surface_farming }
 		cost = 4.3
@@ -3123,6 +3156,16 @@ focus_tree = {
 	focus = {
 		id = PLS_stalk_the_surface_3
 		icon = GFX_PLS_thumbs_up
+		available = {
+			OR = {
+				has_completed_focus = PLS_stalk_the_surface_punch_press_2
+				has_completed_focus = PLS_stalk_the_surface_energy_2
+			}
+			OR = {
+				has_completed_focus = PLS_stalk_the_surface_infantry_gear_2
+				has_completed_focus = PLS_stalk_the_surface_support_gear_2
+			}
+		}
 		prerequisite = { focus = PLS_stalk_the_surface_2 }
 		cost = 4.3
 		relative_position_id = PLS_stalk_the_surface_2
@@ -3253,7 +3296,7 @@ focus_tree = {
 		id = PLS_contemptive_neighbours
 		icon = GFX_PLS_neighbours
 		prerequisite = { focus = PLS_preservation_of_humanity }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_preservation_of_humanity
 		x = -1
 		y = 1
@@ -3491,7 +3534,6 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			remove_ideas = PLS_aloof
-			custom_effect_tooltip = PLS_COMMUNITY_PASS_LAW_MIL_COST_REDUCE
 		}
 		ai_will_do = { factor = 1 }
 	}
@@ -3499,7 +3541,7 @@ focus_tree = {
 		id = PLS_advisor_leases
 		icon = GFX_PLS_books
 		prerequisite = { focus = PLS_contemptive_neighbours }
-		cost = 6.5
+		cost = 5
 		relative_position_id = PLS_contemptive_neighbours
 		x = -3
 		y = 1

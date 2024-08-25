@@ -36,8 +36,8 @@ ability = {
 			}
 		}
 		
-		cost = 0.22
-		duration = 168
+		cost = 0.33
+		duration = 96
 		
 		one_time_effect = {
 			add_temporary_buff_to_units = {
@@ -67,8 +67,8 @@ ability = {
 			is_border_war = no
 		}
 		
-		cost = 0.22
-		duration = 168
+		cost = 0.33
+		duration = 96
 		
 		one_time_effect = {
 			add_temporary_buff_to_units = {
@@ -114,11 +114,11 @@ ability = {
 			is_border_war = no
 		}
 		
-		cost = 0.12
-		duration = 168
+		cost = 0.23
+		duration = 96
 		
 		unit_modifiers = {
-			planning_speed = 4.0
+			planning_speed = 3.0
 		}
 		
 		
@@ -136,6 +136,67 @@ ability = {
 			}
 		}
 	}
+
+	use_MGR = {
+		name = ABILITY_USE_MGR
+		desc = ABILITY_USE_MGR_DESC
+
+		sound_effect = command_power_ability_offensive
+
+		type = army_leader
+
+		allowed = {
+			is_border_war = no
+			set_temp_variable = { temp_bullet_cost = 5000 }
+			OWNER = {
+			   check_variable = {
+				   bullet > temp_bullet_cost
+			   }
+			}
+		}
+		one_time_effect = {
+			OWNER = {
+				hidden_effect = { 
+				   set_temp_variable = { bullet_to_gain = -5000 }
+				   add_bullet_with_tooltip_effect = yes
+			   }
+			}
+		    add_temporary_buff_to_units = {
+			   combat_offense = 0.15
+			   combat_breakthrough = 0.15
+			   org_damage_multiplier = -0.15
+			   str_damage_multiplier = -0.15
+
+			   days = 4
+			   tooltip = ABILITY_FORCE_ATTACK_TOOLTIP
+		   }
+		}
+
+		cost = 0.33
+		duration = 96
+
+		unit_modifiers = {
+			attrition = 0.2
+			supply_consumption_factor = 0.2
+			out_of_supply_factor = -0.2
+		}
+
+		ai_will_do = {
+			factor = -1
+			modifier = {
+				FROM = {
+					has_war_support > 0.4
+				}
+
+				check_variable = { num_units_defensive_combats > 6 }
+
+				set_temp_variable = { temp = avg_defensive_combat_status }
+				check_variable = { temp < 0.40 }
+				check_variable = { ai_random > temp }
+				add = 2
+			}
+		}
+    }
 	
 	
 	siege_artillery = {
@@ -292,64 +353,4 @@ ability = {
 			}
 		}
 	}
-
-	use_MGR = {
-	 	name = ABILITY_USE_MGR
-	 	desc = ABILITY_USE_MGR_DESC
-
-	 	sound_effect = command_power_ability_offensive
-
-	 	type = army_leader
-
-	 	allowed = {
-	 		is_leading_army_group = no
-	 		is_border_war = no
-	 		set_temp_variable = { temp_bullet_cost = 500 }
-	 		OWNER = {
-				check_variable = {
-					bullet > temp_bullet_cost
-				}
-	 		}
-	 	}
-	 	one_time_effect = {
-	 		OWNER = {
-	 			hidden_effect = { 
-					set_temp_variable = { bullet_to_gain = -500 }
-					add_bullet_with_tooltip_effect = yes
-				}
-	 		}
-			add_temporary_buff_to_units = {
-				combat_offense = 0.2
-				combat_breakthrough = 0.2
-				org_damage_multiplier = -0.2
-				str_damage_multiplier = -0.2
-
-				days = 7
-				tooltip = ABILITY_FORCE_ATTACK_TOOLTIP
-			}
-	 	}
-
-	 	cost = 0
-	 	duration = 14
-
-	 	unit_modifiers = {
-	 		supply_consumption_factor = 0.2
-	 	}
-
-	 	ai_will_do = {
-	 		factor = -1
-	 		modifier = {
-	 			FROM = {
-	 				has_war_support > 0.4
-	 			}
-
-	 			check_variable = { num_units_defensive_combats > 6 }
-
-	 			set_temp_variable = { temp = avg_defensive_combat_status }
-	 			check_variable = { temp < 0.40 }
-	 			check_variable = { ai_random > temp }
-	 			add = 2
-	 		}
-	 	}
-	 }
 }
