@@ -1060,6 +1060,7 @@ country_event = { ## loads 2030 tree
 
     option = {
         name = nf_RED.30.a
+        complete_national_focus = RED_2030
         ai_chance = {
             base = 2500
         }
@@ -1680,52 +1681,9 @@ country_event = { # Election Warning Tooltip
 
     fire_only_once = yes
 
-    immediate = {
-        set_country_flag = RED_election_happening
-    }
-
     option = {
         name = nf_RED.73.a
-        custom_effect_tooltip = RED_2033_election_tt
-        activate_mission = RED_2033_election_countdown_mission
-        hidden_effect = { country_event = { id = nf_RED.74 days = 60 random_days = 60 } }
-    }
-}
-
-country_event = { # Maxim plans on running
-    id = nf_RED.74
-    title = nf_RED.74.t
-    desc = nf_RED.74.d
-    picture = "GFX_event (65)"
-
-    is_triggered_only = yes
-
-    option = { ### We want to win as Maxim
-        name = nf_RED.74.a
-        custom_effect_tooltip = RED_plan_taking_maxim_route
-        add_political_power = -5
-        add_popularity = {
-            ideology = council
-            popularity = -0.01
-        }
-        hidden_effect = {
-            set_country_flag = RED_allow_maxim_meddling_election
-        }
-        custom_effect_tooltip = RED_allow_maxim_moskvin_decisions
-    }
-
-    option = { ### Lets keep Andrey
-        name = nf_RED.74.b
-        add_political_power = -5
-        add_timed_idea = { 
-            idea = RED_maxim_moskvin_runs_andrey_path 
-            days = 720
-        }
-        add_popularity = {
-            ideology = council
-            popularity = -0.02
-        }
-        hidden_effect = { country_event = { id = nf_RED.86 days = 80 random_days = 75 } }
+        hidden_effect = { country_event = { id = nf_RED_election.1 days = 360 } }
     }
 }
 
@@ -2003,25 +1961,6 @@ country_event = { ### ELECTION EVENT
         ai_chance = {
             base = 500
         }
-    }
-}
-
-country_event = { # Maxim and Andrey fallout
-    id = nf_RED.86
-    title = nf_RED.86.t
-    desc = nf_RED.86.d
-    picture = "GFX_event (65)"
-
-    is_triggered_only = yes
-
-    option = {
-        name = nf_RED.86.a
-        add_political_power = -10
-        add_popularity = {
-            ideology = council
-            popularity = -0.01
-        }
-        add_ideas = RED_brother_fallout
     }
 }
 

@@ -2,7 +2,7 @@ RED_2033_election_category = {
 
 	RED_2033_election_countdown_mission = {
 		activation = {
-			always = no
+			date > 2033.1.1
 		}
 		available = {                    
 			custom_trigger_tooltip = {
@@ -13,7 +13,7 @@ RED_2033_election_category = {
 		priority = 2501
 		allowed = { tag = RED }
 		is_good = no
-		days_mission_timeout = 630
+		days_mission_timeout = 300
 		cancel_trigger = {
 			custom_trigger_tooltip = {
     			tooltip = RED_cancelled_election
@@ -31,40 +31,38 @@ RED_2033_election_category = {
 		icon = remove_military_mutiny
 		available = {                           
 			OR = {  
-				oligarch > 0.75
-				council > 0.75
+				oligarch > 0.74
+				council > 0.74
 			}
+			NOT  = { date > 2033.8.1 }
         }
 		priority = 105
 		days_remove = 2
-		cost = 100
+		cost = 300
 		fire_only_once = yes
 		complete_effect = {
 			country_event = nf_RED.85 
 		}
 		ai_will_do = {
-			factor = 15
+			factor = 0
 		}
 	}
 	### Andrey Route
 	RED_andrey_council_boost_1 = {
 		icon = remove_military_mutiny
 		available = {                           
-			has_country_flag = RED_plan_taking_andrey_route	
+			has_country_flag = RED_election_council_pursuit	
         }
 		visible = {
 			NOT = {
-				has_country_flag = RED_player_pursues_maxim_route
+				has_country_flag = RED_election_oligarch_pursuit
 			}
 		}
-		days_remove = 15
-		cost = 75
+		days_remove = 35
+		cost = 50
 		days_re_enable = 30
-		remove_effect = {
-			add_popularity = {
-				ideology = council
-				popularity = 0.05
-			}
+		modifier = {
+			council_drift = 0.5
 		}
 		ai_will_do = {
 			factor = 10
@@ -74,54 +72,80 @@ RED_2033_election_category = {
 	RED_maxim_oligarch_boost_1 = {
 		icon = remove_military_mutiny
 		available = {                           
-			has_country_flag = RED_player_pursues_maxim_route
+			has_country_flag = RED_election_oligarch_pursuit
         }
 		visible = {
 			NOT = {
-				has_country_flag = RED_plan_taking_andrey_route	
+				has_country_flag = RED_election_council_pursuit	
 			}
 		}
-		days_remove = 15
-		cost = 75
+		days_remove = 35
+		cost = 50
 		days_re_enable = 30
-		remove_effect = {
-			add_popularity = {
-				ideology = oligarch
-				popularity = 0.05
-			}
+		modifier = {
+			oligarch_drift = 0.5
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	RED_maxim_tarnish_brothers_rule = {
+	RED_maxim_oligarch_tarnish_brother = {
 		icon = remove_military_mutiny
 		available = {                           
-			has_country_flag = RED_player_pursues_maxim_route
-			AND = {
-				has_country_flag = RED_tarnished_brother_relationship
-			}
+			has_country_flag = RED_election_oligarch_pursuit
         }
 		visible = {
 			NOT = {
-				has_country_flag = RED_plan_taking_andrey_route	
+				has_country_flag = RED_election_council_pursuit	
 			}
 		}
+		cost = 0
 		days_remove = 7
-		cost = 50
-		days_re_enable = 60
-		remove_effect = {
+		fire_only_once = yes
+		modifier = { political_power_gain = -0.8 }
+		remove_effect = { 
 			add_popularity = {
 				ideology = council
 				popularity = -0.05
 			}
-			hidden_effect = {
-				## Make some variable which calculates how many times this decision has been done
-				## if over a certain threshold, give Andrey debuffs
+			hidden_effect = { set_country_flag = RED_election_oligarch_tarnish }
+			country_event = { id = nf_RED_election.3 hours = 3 random_hours = 3 }
+		}
+
+		ai_will_do = {
+			factor = 16
+		}
+	}
+	RED_maxim_oligarch_korbut_support = {
+		icon = remove_military_mutiny
+		available = {    
+			AND = {
+				has_country_flag = RED_election_oligarch_pursuit
+				has_country_flag = RED_election_oligarch_korbut
+			}                       
+        }
+		visible = {
+			has_country_flag = RED_election_oligarch_korbut
+			NOT = {
+				has_country_flag = RED_election_council_pursuit	
 			}
 		}
+		cost = 0
+		days_remove = 7
+		days_re_enable = 45
+		modifier = { 
+			political_power_gain = -0.25
+			council_drift = -0.5
+		}
+		remove_effect = { 
+			add_popularity = {
+				ideology = dictatorial
+				popularity = 0.01
+			}
+		}
+
 		ai_will_do = {
-			factor = 10
+			factor = 16
 		}
 	}
 }

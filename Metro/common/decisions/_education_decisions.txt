@@ -453,6 +453,136 @@ education_practise = {
 		}
 	}
 
+	improve_education_efforts_RED_social_science = {
+
+		visible = {
+			original_tag = RED
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			has_equipment = { rail_cart_equipment  > 1 }
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 150 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_re_enable = 70
+		days_remove = 7
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -150 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -75
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power > 10
+			}
+			modifier = {
+				factor = 0.1
+				num_of_available_civilian_factories < 5
+			}
+		}
+	}
+
+	improve_education_efforts_RED_pursuit_of_lenin = {
+
+		visible = {
+			original_tag = RED
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			has_war = no
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 200 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_re_enable = 70
+		days_remove = 28
+		modifier = {
+			research_speed_factor = -0.1
+			political_power_factor = -0.1
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -200 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -80
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power > 10
+			}
+			modifier = {
+				factor = 0.1
+				num_of_available_civilian_factories < 5
+			}
+		}
+	}
+
 	### | Unique Decisions | ###
 
 	improve_education_access_polis_repository = {

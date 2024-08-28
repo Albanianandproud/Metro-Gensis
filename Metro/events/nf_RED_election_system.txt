@@ -76,3 +76,410 @@ country_event = { # Maxim and Andrey fallout
         }
     }
 }
+
+add_namespace = nf_RED_election
+
+country_event = { # Maxim plans on running
+    id = nf_RED_election.1
+    title = nf_RED_election.1.t
+    desc = nf_RED_election.1.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    immediate = { set_country_flag = RED_election_happening }
+
+    option = { ### We want to win as Maxim Moskvin
+        name = nf_RED_election.1.a
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+        custom_effect_tooltip = nf_RED_election.1.oligarch
+        custom_effect_tooltip = nf_RED_election.1.election_mechanic
+
+        hidden_effect = { country_event = { id = nf_RED_election.11 days = 80 random_days = 80 } }
+        hidden_effect = { set_country_flag = RED_election_oligarch_pursuit }
+    }
+
+    option = { ### We want to win as Andrey Moskvin
+        name = nf_RED_election.1.b
+        add_popularity = {
+            ideology = oligarch
+            popularity = -0.01
+        }
+        custom_effect_tooltip = nf_RED_election.1.council
+        custom_effect_tooltip = nf_RED_election.1.election_mechanic
+
+        hidden_effect = { country_event = { id = nf_RED_election.21 days = 80 random_days = 80 } }
+        hidden_effect = { country_event = { id = nf_RED_election.26 days = 80 random_days = 80 } }
+        hidden_effect = { set_country_flag = RED_election_council_pursuit }
+
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = { # Maxim and Andrey fallout
+    id = nf_RED_election.2
+    title = nf_RED_election.2.t
+    desc = nf_RED_election.2.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.2.a
+        add_political_power = -10
+        add_popularity = {
+            ideology = council
+            popularity = -0.02
+        }
+        add_ideas = RED_brother_fallout
+        country_event = { id = nf_RED_election.14 days = 35 random_days = 35 }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = { # Maxim targets brother for slander
+    id = nf_RED_election.3
+    title = nf_RED_election.3.t
+    desc = nf_RED_election.3.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.3.a
+        add_political_power = -15
+        add_popularity = {
+            ideology = council
+            popularity = -0.025
+        }
+        country_event = { id = nf_RED_election.2 days = 8 random_days = 8 }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+ # Oligarch Election Event Path
+
+country_event = {       ## Asuring the Loyalty of the Military
+    id = nf_RED_election.11
+    title = nf_RED_election.11.t
+    desc = nf_RED_election.11.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    immediate = { country_event = { id = nf_RED_election.12 days = 80 random_days = 80 } }
+
+    option = {
+        name = nf_RED_election.11.a
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+    }
+
+    option = {
+        name = nf_RED_election.11.b
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+        add_political_power = -20
+        ai_chance = {
+            base = 10
+        }
+    }
+
+    option = {
+        name = nf_RED_election.11.c
+        trigger = { RED_andrey_moskvin = { has_trait = maxim_resolute } }
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = {       ## Asuring the Loyalty of the Apparatchik
+    id = nf_RED_election.12
+    title = nf_RED_election.12.t
+    desc = nf_RED_election.12.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.12.a
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+    }
+
+    option = {
+        name = nf_RED_election.12.b
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+        add_political_power = -20
+        ai_chance = {
+            base = 10
+        }
+    }
+
+    option = {
+        name = nf_RED_election.12.c
+        trigger = { RED_andrey_moskvin = { has_trait = maxim_resolute } }
+        add_popularity = {
+            ideology = council
+            popularity = -0.01
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = {       ## Korbut
+    id = nf_RED_election.14
+    title = nf_RED_election.14.t
+    desc = nf_RED_election.14.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.14.a
+        trigger = { NOT = { dictatorial > 0.09 } }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+    }
+
+    option = {
+        name = nf_RED_election.14.b
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.01
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = 0.01
+        }
+        custom_effect_tooltip = nf_RED_election.14.b_korbut
+        hidden_effect = { country_event = { id = nf_RED_election.15 days = 60 random_days = 60 } }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = {       ## Korbut
+    id = nf_RED_election.15
+    title = nf_RED_election.15.t
+    desc = nf_RED_election.15.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.15.a
+        custom_effect_tooltip = nf_RED_election.15.a_tt
+        ## Use Korbut
+        add_popularity = {
+            ideology = dictatorial
+            popularity = 0.01
+        }
+        hidden_effect = { set_country_flag = RED_election_oligarch_korbut }
+        hidden_effect = { country_event = { id = nf_RED_election.16 days = 7 random_days = 7 } }
+        ai_chance = {
+            base = 10
+        }
+    }
+
+    option = {
+        name = nf_RED_election.15.b
+        custom_effect_tooltip = nf_RED_election.15.b_tt
+        ## Win Naturally
+    }
+}
+
+country_event = {       ## Korbut 2
+    id = nf_RED_election.16
+    title = nf_RED_election.16.t
+    desc = nf_RED_election.16.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+    
+    option = {   ## Poison him
+        name = nf_RED_election.16.a
+        custom_effect_tooltip = nf_RED_election_16.a_tt
+    }
+
+    option = { ## Poison him
+        name = nf_RED_election.16.b
+        custom_effect_tooltip = nf_RED_election_16.b_tt
+        hidden_effect = { country_event = { id = nf_RED_election.17 days = 7 random_days = 7 } }
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = { ## Et tu, Frater?
+    id = nf_RED_election.17
+    title = nf_RED_election.17.t
+    desc = nf_RED_election.17.d
+    picture = "GFX_event (126)"
+
+    is_triggered_only = yes
+
+    immediate = {
+        set_country_flag = et_tu_frater
+    }
+
+    option = { ## OK ## 
+        name = nf_RED_election.17.a
+        kill_country_leader = yes
+        set_politics = {
+            ruling_party = oligarch
+            elections_allowed = no
+        }
+        add_popularity = {
+            ideology = council
+            popularity = -0.2
+        }
+        #hidden_effect = { country_event = { id = nf_RED.78 days = 720 random_days = 720 } }
+        # TO DO use BOP to reflect attitude and mental faculty of Maxim Moskvin
+        complete_national_focus = RED_moskvin_path
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+
+ # Council Election Event Path
+
+country_event = {   ## Asuring the Loyalty of the Military
+    id = nf_RED_election.21
+    title = nf_RED_election.21.t
+    desc = nf_RED_election.21.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    immediate = { country_event = { id = nf_RED_election.22 days = 80 random_days = 80 } }
+
+    option = {
+        name = nf_RED_election.21.a
+        add_popularity = {
+            ideology = council
+            popularity = 0.01
+        }
+        add_political_power = -25
+    }
+
+    option = {
+        name = nf_RED_election.21.b
+        add_popularity = {
+            ideology = oligarch
+            popularity = -0.01
+        }
+    }
+
+    option = {
+        name = nf_RED_election.21.c
+        trigger = { RED_andrey_moskvin = { has_trait = RED_andrey_just_and_fair } }
+        add_popularity = {
+            ideology = council
+            popularity = 0.01
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = -0.01
+        }
+    }
+}
+
+country_event = {       ## Asuring the Loyalty of the Apparatchik
+    id = nf_RED_election.22
+    title = nf_RED_election.22.t
+    desc = nf_RED_election.22.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    immediate = { country_event = { id = nf_RED_election.23 days = 80 random_days = 80 } }
+
+    option = {
+        name = nf_RED_election.22.a
+        add_popularity = {
+            ideology = council
+            popularity = 0.01
+        }
+        add_political_power = -25
+    }
+
+    option = {
+        name = nf_RED_election.22.b
+        add_popularity = {
+            ideology = oligarch
+            popularity = -0.01
+        }
+    }
+
+    option = {
+        name = nf_RED_election.22.c
+        trigger = { RED_andrey_moskvin = { has_trait = RED_champion_of_the_party } }
+        add_popularity = {
+            ideology = council
+            popularity = 0.01
+        }
+        add_popularity = {
+            ideology = oligarch
+            popularity = -0.01
+        }
+
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+country_event = {       ## Maxim Plans on running
+    id = nf_RED_election.26
+    title = nf_RED_election.26.t
+    desc = nf_RED_election.26.d
+    picture = "GFX_event (65)"
+
+    is_triggered_only = yes
+
+    option = {
+        name = nf_RED_election.26.a
+        add_ideas = RED_oligarch_election_drift
+        add_political_power = -15
+    }
+}

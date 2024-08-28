@@ -1,21 +1,36 @@
-@department_increase_cost = 100
+@department_increase_cost = 1000
 
 RED_ministry_departments = {
 
 	RED_ministry_upgrade = {
 		icon = ministries
 
-		available = {
-			NOT = { has_country_flag = RED_ministry_overhaul_underway }
+		available = { 
+			NOT = { 
+				has_country_flag = RED_ministry_overhaul_underway 
+			} 
 		}
 
-		visible = {
-			check_variable = { RED_ministry_education_cost > 70 }
+		visible = { 
+			check_variable = { RED_ministry_education_cost > 750 }
 		}
 
-		cost = RED_ministry_education_upgrade_departmentr_cost
-		days_remove = 1
-		days_re_enable = 0
+		days_remove = 60
+		days_re_enable = 28
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 350 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -350 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -40,14 +55,29 @@ RED_ministry_departments = {
 			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_stepan_markelov_4 } } }
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_economics
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_economics
+			}
 			NOT = { has_idea_with_trait = RED_stepan_markelov_4 } 
 		}
 
-		cost = RED_ministry_education_cost
-		days_remove = RED_ministry_education_timer
+		days_remove = ministry_economic
 		days_re_enable = 0
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_economic_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_economic_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -76,15 +106,30 @@ RED_ministry_departments = {
 			}
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_reclaimation
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
+			}
 			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
 			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 		}
 
-		cost = RED_ministry_reclaimation_cost
 		days_remove = RED_ministry_reclaimation_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_reclaimation_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_reclaimation_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -114,8 +159,10 @@ RED_ministry_departments = {
 			}
 		}
 		visible = { 
-			is_debug = yes
-			has_completed_focus = RED_central_planning
+			OR = {
+				is_debug = yes
+				has_completed_focus = RED_central_planning
+			}
 			NOT = { 
 				has_idea_with_trait = RED_fyodor_akimov_3_construction 
 			}
@@ -124,9 +171,23 @@ RED_ministry_departments = {
 			} 
 		}
 
-		cost = RED_ministry_reclaimation_cost
+		#cost = RED_ministry_reclaimation_cost
 		days_remove = RED_ministry_reclaimation_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_reclaimation_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_reclaimation_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -156,15 +217,31 @@ RED_ministry_departments = {
 			}
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_reclaimation
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_reclaimation
+			}
 			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_construction }
 			NOT = { has_idea_with_trait = RED_fyodor_akimov_3_resource } 
 		}
 
-		cost = RED_ministry_reclaimation_cost
+		#cost = RED_ministry_reclaimation_cost
 		days_remove = RED_ministry_reclaimation_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_reclaimation_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_reclaimation_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -189,13 +266,29 @@ RED_ministry_departments = {
 			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_arkady_antonov_3 } } }
 		}
 		visible = { 
-			has_idea = RED_minister_of_domestics
+			OR = {
+				has_idea = RED_minister_of_domestics
+			}
 			NOT = { has_idea_with_trait = RED_arkady_antonov_3 } 
 		}
 
-		cost = RED_ministry_domestics_cost
+		#cost = RED_ministry_domestics_cost
 		days_remove = RED_ministry_domestics_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_domestics_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_domestics_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -219,14 +312,30 @@ RED_ministry_departments = {
 			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_yevgeny_nikiforov_3 } } }
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_labour
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_labour
+			}
 			NOT = { has_idea_with_trait = RED_yevgeny_nikiforov_3 } 
 		}
 
-		cost = RED_ministry_labour_cost
+		#cost = RED_ministry_labour_cost
 		days_remove = RED_ministry_labour_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_labour_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_labour_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -250,14 +359,30 @@ RED_ministry_departments = {
 			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_milan_melikhov_3 } } }
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_foreign_affairs
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_foreign_affairs
+			}
 			NOT = { has_idea_with_trait = RED_milan_melikhov_3 } 
 		}
 
-		cost = RED_ministry_foreign_affairs_cost
+		#cost = RED_ministry_foreign_affairs_cost
 		days_remove = RED_ministry_foreign_affairs_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_foreign_affairs_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_foreign_affairs_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
@@ -281,14 +406,30 @@ RED_ministry_departments = {
 			AND = { hidden_trigger = { NOT = { has_idea_with_trait = RED_vasily_petrov_3 } } }
 		}
 		visible = { 
-			is_debug = yes
-			has_idea = RED_minister_of_defense
+			OR = {
+				is_debug = yes
+				has_idea = RED_minister_of_defense
+			}
 			NOT = { has_idea_with_trait = RED_vasily_petrov_3 } 
 		}
 
-		cost = RED_ministry_defense_cost
+		#cost = RED_ministry_defense_cost
 		days_remove = RED_ministry_defense_timer
-		days_re_enable = 0
+		days_re_enable = 100
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = RED_ministry_defense_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = RED_ministry_defense_cost }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
 
 		complete_effect = {	set_country_flag = RED_ministry_overhaul_underway }
 
