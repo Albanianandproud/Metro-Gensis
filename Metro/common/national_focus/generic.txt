@@ -3,7 +3,7 @@
 
 focus_tree = {
 	id = generic_focus
-	continuous_focus_position = { x = 1950 y = 750 }
+	continuous_focus_position = { x = 1950 y = 800 }
 	country = {
 		factor = 1
 	}
@@ -1313,6 +1313,10 @@ focus_tree = {
 		y = 0
 		cost = 6.5
 
+		allow_branch = { 
+			NOT = { original_tag = MSU }
+		}
+
 		ai_will_do = {
 			factor = 2
 		}
@@ -1826,6 +1830,250 @@ focus_tree = {
 		completion_reward = {
 		    add_ideas = do_or_die
 		    add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_1
+		icon = GFX_PLS_contemplate_neutrality
+		x = 24
+		y = 0
+		cost = 6.5
+
+		allow_branch = { 
+			original_tag = MSU
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = MSU_effort_2
+		icon = GFX_generic_bandit
+		cost = 6.5
+
+		prerequisite = {
+			focus = MSU_effort_1 
+		}
+
+		available = { has_war_support > 0.5 }
+		
+		x = 0
+		y = 1
+		relative_position_id = MSU_effort_1
+
+		completion_reward = {
+		    add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_3
+		icon = GFX_PLS_scientist
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_2 }
+		x = 2
+		y = 1
+		relative_position_id = MSU_effort_2
+
+		completion_reward = {
+		    add_equipment_to_stockpile = {
+				type = special_forces_equipment_3
+				amount = 25
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_5
+		icon = GFX_PLS_thingmabob_2
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_3 }
+		mutually_exclusive = { focus = MSU_effort_6 }
+		x = -1
+		y = 1
+		relative_position_id = MSU_effort_3
+
+		completion_reward = {
+			set_technology = { tech_special_forces_equipment_reliability = 1 }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_6
+		icon = GFX_PLS_scientist_2
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_3 }
+		mutually_exclusive = { focus = MSU_effort_5 }
+		x = 1
+		y = 1
+		relative_position_id = MSU_effort_3
+
+		completion_reward = {
+			set_technology = { tech_special_forces_equipment_stats = 1 }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_7
+		icon = GFX_PLS_stalkers
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_6 focus = MSU_effort_5 }
+		x = 0
+		y = 2
+		relative_position_id = MSU_effort_3
+
+		completion_reward = {
+			add_ideas = MSU_spec_ops
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_4
+		icon = GFX_generic_armaments_parts
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_2 }
+		x = -2
+		y = 1
+		relative_position_id = MSU_effort_2
+
+		completion_reward = {
+		    add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4
+				amount = 25
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_8
+		icon = GFX_ARB_ammo_stockpile_2
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_4 }
+		mutually_exclusive = { focus = MSU_effort_9 }
+		x = -1
+		y = 1
+		relative_position_id = MSU_effort_4
+
+		completion_reward = {
+			set_technology = { tech_infantry_equipment_stats = 1}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_9
+		icon = GFX_ARB_armories
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_4 }
+		mutually_exclusive = { focus = MSU_effort_8 }
+		x = 1
+		y = 1
+		relative_position_id = MSU_effort_4
+
+		completion_reward = {
+			set_technology = { tech_infantry_equipment_reliability = 1}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_10
+		icon = GFX_generic_special_arms_1
+		cost = 6.5
+		prerequisite = { focus = MSU_effort_8 focus = MSU_effort_9 }
+		x = 0
+		y = 2
+		relative_position_id = MSU_effort_4
+
+		completion_reward = {
+			set_technology = { laser_infantry_equipment_1_tech = 1 }
+			add_equipment_to_stockpile = {
+				type = laser_infantry_equipment_1
+				producer = RUS
+				amount = 20
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = MSU_effort_11
+		icon = GFX_RED_crush_the_msu
+		cost = 8.6
+		prerequisite = { focus = MSU_effort_10 focus = MSU_effort_7 }
+		available = { 288 = { is_owned_by = ROOT } }
+		x = 0
+		y = 4
+		relative_position_id = MSU_effort_2
+
+		will_lead_to_war_with = RED
+		completion_reward = {
+			remove_ideas = MSU_isolationism
+			create_wargoal = {
+ 				type = puppet_wargoal_focus
+ 				target = RED
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			add_war_support = 0.2
+			if = {
+				limit = {
+					NOT = { has_idea = mandatory_service }
+				}
+				add_ideas = mandatory_service
+			}
+			if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+				}
+				add_ideas = war_economy
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
 		}
 	}
 }
