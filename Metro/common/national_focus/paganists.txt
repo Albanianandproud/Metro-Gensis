@@ -553,7 +553,13 @@ focus_tree = {
 		prerequisite = {
 			focus = PAG_prepare_for_hyperborea
 		}
-		available = { has_war = no }
+		available = { has_war = no has_idea = civilian_economy }
+		bypass = { 
+			OR = { 
+				has_war = yes 
+				NOT = { has_idea = civilian_economy }
+			}
+		}
 		cancel_if_invalid = yes
 		x = -4
 		y = 1
@@ -561,6 +567,14 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = PAG_peace_war
 			add_ideas = PAG_peace_economy
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -720,6 +734,13 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = PAG_internal_focus_2
+		}
+		available = { has_war = no has_idea = civilian_economy }
+		bypass = { 
+			OR = { 
+				has_war = yes 
+				NOT = { has_idea = civilian_economy }
+			}
 		}
 		x = 0
 		y = 2
@@ -890,7 +911,6 @@ focus_tree = {
 		id = PAG_internal_focus_6
 		icon = GFX_GWC_tribal_encampment_1
 		cost = 6.5
-
 		prerequisite = {
 			focus = PAG_prepare_for_hyperborea
 		}

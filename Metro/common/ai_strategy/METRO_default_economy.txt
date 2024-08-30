@@ -1,15 +1,10 @@
 
 division_limiter = {
-enable = {
-		if = {
-			limit = {
-				date > 2035.1.1
-			}
-		}
-		check_variable = { bullet < 100 }
-		NOT = { surrender_progress > 0.25 }
-
+	enable = {
+		date < 2035.1.1
+		check_variable = { bullet < 1000 }
 		check_variable = { total_balance_temp < 0 }
+		NOT = { surrender_progress > 0.45 }
 	}
 	abort_when_not_enabled = yes
 
@@ -28,4 +23,5 @@ enable = {
 		id = infantry
 		value = -300
 	}
+	ai_strategy = { type = force_build_armies value = -300 }
 }

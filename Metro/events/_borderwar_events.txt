@@ -63,9 +63,23 @@ country_event = {
 				check_variable = {
 					FROM.FROM.num_owned_states > 1
 				}
+				NOT = { 432 = { is_owned_by = RED } }
+				NOT = { 218 = { is_owned_by = RCH } }
 			}
 			transfer_state = FROM.FROM.FROM
 		}
+		else_if = {
+			limit = {
+				432 = { is_owned_by = RED }
+				218 = { is_owned_by = RCH }
+			}
+			FROM.FROM = {
+				declare_war_on = {
+            	    target = PREV
+            	    type = annex_everything
+				}
+			}
+		} 
 		else = {
 			FROM.FROM = { ROOT = { annex_country = { target = PREV } } }
 		}
