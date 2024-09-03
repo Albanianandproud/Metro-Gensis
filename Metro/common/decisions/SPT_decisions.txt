@@ -347,3 +347,113 @@ SPT_hunter_vs_miller = {
 		}
 	}
 }
+
+D6_debug_category = {
+	D6_small_increase = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		cost = 15
+
+		days_re_enable = 40
+
+		complete_effect = {
+			SPT_increase_small = yes
+			custom_effect_tooltip = SPT_increase_small_tt
+		}
+		ai_will_do = {
+			factor = 5
+			
+		}
+	}
+
+	D6_minor_increase = {
+		icon = GFX_decision_eng_trade_unions_demand
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 25 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		available = {
+
+			has_equipment = {
+				infantry_equipment > 4
+			}
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -25 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+		}
+		days_remove = 40
+		days_re_enable = 10
+		remove_effect = {
+			SPT_increase_minor = yes
+			custom_effect_tooltip = SPT_increase_minor_tt
+		}
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				has_equipment = {
+					infantry_equipment > 4
+				}
+			}
+		}
+	}
+
+	D6_moderate_increase = {
+		icon = GFX_decision_eng_trade_unions_demand
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		available = {
+
+			has_equipment = {
+				infantry_equipment > 9
+			}
+		}
+
+		fixed_random_seed = no
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10
+			}
+		}
+		days_remove = 60
+		days_re_enable = 20
+		remove_effect = {
+			SPT_increase_moderate = yes
+			custom_effect_tooltip = SPT_increase_moderate_tt
+		}
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				has_equipment = {
+					infantry_equipment > 9
+				}
+			}
+		}
+	}
+}
