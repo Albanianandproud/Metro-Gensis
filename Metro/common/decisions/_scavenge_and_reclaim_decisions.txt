@@ -689,6 +689,7 @@ reclaim_metro = {
 			factor = 5
 		}
 	}
+
 	reclaim_extend_influence_further = {
 		icon = generic_political_discourse
 		custom_cost_text = command_power_20
@@ -711,13 +712,14 @@ reclaim_metro = {
 			factor = 5
 		}
 	}
+
 	reclaim_mission_send_soldiers = {
 		icon = decision_generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
 		custom_cost_trigger = { has_manpower > 9 }
 		days_re_enable = 21
 
-		visible = { has_country_flag = reclaim_mission_activated }
+		visible = { NOT = { has_country_flag = is_savage_nation } has_country_flag = reclaim_mission_activated }
 		available = { has_manpower > 9 has_equipment = { infantry_equipment > 9 } } 
 		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
 
@@ -729,6 +731,33 @@ reclaim_metro = {
 			}
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
+				amount = -10
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	reclaim_mission_send_soldiers_savage = {
+		icon = decision_generic_reorganize_irregulars
+		custom_cost_text = reclaim_manpower_10
+		custom_cost_trigger = { has_manpower > 9 }
+		days_re_enable = 21
+
+		visible = {  has_country_flag = is_savage_nation has_country_flag = reclaim_mission_activated }
+		available = { has_manpower > 9 has_equipment = { savage_equipment > 9 } } 
+		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
+
+		complete_effect = {
+			custom_effect_tooltip = reclaim_cost_10 
+			add_to_variable = {
+				var = reclaim_cost
+				value = 10
+			}
+			add_equipment_to_stockpile = {
+				type = savage_equipment
 				amount = -10
 			}
 		}
@@ -775,57 +804,58 @@ reclaim_metro = {
 			factor = 5
 		}
 	}
-	reclaim_relocate_citizens = {
-		icon = eng_blackshirt_march
-		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
-			check_variable = {
-				bullet > temp_bullet_cost
-			}
-		}
-		custom_cost_text = "bullet_decisions_cost_text"
-		complete_effect = {
-			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
-				add_bullet_with_tooltip_effect = yes
-			}
-		}
-		days_remove = 21
-		days_re_enable = 100
-
-		visible = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		available = { 
-			NOT = { has_country_flag = reclaim_mission_activated }
-			any_controlled_state = {
-				NOT = { has_state_category = pastoral }
-				infrastructure > 1
-				NOT = { is_core_of = ROOT }
-				state_population < 70
-			}
-			any_controlled_state = { state_population > 100 is_core_of = ROOT }
-		}
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			random_owned_state = {
-				limit = {
-					is_core_of = ROOT
-					state_population > 70
-					NOT = { has_state_category = pastoral has_state_category = rural }
-				}
-				add_manpower = -20
-			}
-			random_owned_state = {
-				limit = { NOT = { is_core_of = ROOT has_state_category = pastoral has_state_category = rural } }
-				add_manpower = 20
-				add_compliance = 20
-			}
-		}
-	}
+	
+	#reclaim_relocate_citizens = {
+	#	icon = eng_blackshirt_march
+	#	custom_cost_trigger = {
+	#		set_temp_variable = { temp_bullet_cost = 50 }
+	#		check_variable = {
+	#			bullet > temp_bullet_cost
+	#		}
+	#	}
+	#	custom_cost_text = "bullet_decisions_cost_text"
+	#	complete_effect = {
+	#		hidden_effect = { 
+	#			set_temp_variable = { bullet_to_gain = -50 }
+	#			add_bullet_with_tooltip_effect = yes
+	#		}
+	#	}
+	#	days_remove = 21
+	#	days_re_enable = 100
+	#
+	#	visible = { NOT = { has_country_flag = reclaim_mission_activated } }
+	#
+	#	available = { 
+	#		NOT = { has_country_flag = reclaim_mission_activated }
+	#		any_controlled_state = {
+	#			NOT = { has_state_category = pastoral }
+	#			infrastructure > 1
+	#			NOT = { is_core_of = ROOT }
+	#			state_population < 70
+	#		}
+	#		any_controlled_state = { state_population > 100 is_core_of = ROOT }
+	#	}
+	#
+	#	modifier = {
+	#		political_power_gain = -0.2
+	#	}
+	#
+	#	complete_effect = {
+	#		random_owned_state = {
+	#			limit = {
+	#				is_core_of = ROOT
+	#				state_population > 70
+	#				NOT = { has_state_category = pastoral has_state_category = rural }
+	#			}
+	#			add_manpower = -20
+	#		}
+	#		random_owned_state = {
+	#			limit = { NOT = { is_core_of = ROOT has_state_category = pastoral has_state_category = rural } }
+	#			add_manpower = 20
+	#			add_compliance = 20
+	#		}
+	#	}
+	#}
 
 	reclaim_remove_tunnel_blockers = {
 		icon = trade_unions_demand

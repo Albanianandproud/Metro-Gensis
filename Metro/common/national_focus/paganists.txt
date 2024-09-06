@@ -624,6 +624,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_manpower = 20
+			add_timed_idea = { idea = PAG_gathering_throngs days = 140 }
 		}
 
 		ai_will_do = {
@@ -801,6 +802,39 @@ focus_tree = {
 					level = 2
 					instant_build = yes
 				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	
+
+	focus = {
+		id = PAG_thrust_into_tushino
+		icon = GFX_GWC_underground_military_tunnels
+		cost = 8.6
+		available = { 
+			has_war_support > 0.9 
+			AND = {
+				has_army_manpower = { size > 149 }
+				NOT = { has_idea = civilian_economy }
+			}
+		}
+		prerequisite = {
+			focus = PAG_defences
+		}
+		x = 0
+		y = 4
+		relative_position_id = PAG_defences
+		 will_lead_to_war_with = TSH
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = TSH
+				expire = 0
+				generator = { 28 }
 			}
 		}
 
