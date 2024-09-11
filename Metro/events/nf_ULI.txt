@@ -49,7 +49,26 @@ country_event = {
     picture = ccc_mutant
 
 	trigger = {
-		date > 2033.3.1
+		date > 2030.3.1
+
+		302 = { is_owned_by = ROOT }
+		267 = { is_owned_by = ROOT }
+	}
+
+	immediate = {
+		delete_unit = {
+			state = 302
+			disband = no
+		}
+		delete_unit = {
+			state = 143
+			disband = no
+		}
+		delete_unit = {
+			state = 267
+			disband = no
+		}
+		set_country_flag = ULI_polezhaevsky_incident_flag
 	}
 
 	fire_only_once = yes
@@ -57,20 +76,30 @@ country_event = {
 	option = { # Evacuate stations
 		name = nf_ULI.2.a
 		RUI = {
-			transfer_state = 302
+			transfer_state = 302 
 			transfer_state = 143
+			transfer_state = 267
 		}
-		302 = { add_manpower = -1150 set_demilitarized_zone = yes }
-		143 = { set_demilitarized_zone = yes }
-		267 = { add_manpower = 100 }
-
 		add_timed_idea = { idea = ULI_polezhaevsky_incident days = 1080 }
-		news_event = global_event.###
-		hidden_effect = {
+		news_event = global_event.66
+		hidden_effect = { 
+			remove_state_core = 302
+			remove_state_core = 143
+			remove_state_core = 267
 			RUI = {
 				add_state_core = 302
 				add_state_core = 143
+				add_state_core = 267
 			}
+			302 = { add_manpower = -1150 set_demilitarized_zone = yes }
+			143 = { add_manpower = -1150 set_demilitarized_zone = yes }
+			267 = { add_manpower = -1150 set_demilitarized_zone = yes }
+		}
+		capital_scope = { add_manpower = 200 }
+		420 = { add_manpower = 200 }
+		add_named_threat = {
+			threat = 10
+			name = INCIDENT_POLEZHAEVSKAYA
 		}
 		ai_chance = {
 			base = 50
@@ -78,47 +107,18 @@ country_event = {
 	}
 }
 
-# Polezhaevskaya - late 2030
 country_event = {
     id = nf_ULI.3
     title = nf_ULI.3.t
     desc = nf_ULI.3.d
     picture = ccc_mutant
-	trigger = {
-		ULI_meets_darkones_introduction_criteria = yes
-	}
 
+	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = { # Evacuate stations
+	option = {
 		name = nf_ULI.3.a
-		RUI = {
-			transfer_state = 267
-			transfer_state = 145
-		}
-		267 = { add_manpower = -1350 }
-		145 = { set_demilitarized_zone = yes }
-		420 = { add_manpower = 100 }
-		419 = { add_manpower = 50 }
-
-		add_timed_idea = { idea = ULI_polezhaevsky_incident days = 1080 }
-		news_event = global_event.66
-		hidden_effect = {
-			RUI = {
-				add_state_core = 267
-				add_state_core = 145
-			}
-		}
-		ai_chance = {
-			base = 50
-		}
-	}
-	option = { # Try to defend the station
-		name = nf_ULI.3.b
-		267 = { add_manpower = -50 }
-
-		ai_chance = {
-			factor = 0
-		}
+		add_Political_power = 50
+		custom_effect_tooltip = nf_ULI.3.a.tt
 	}
 }

@@ -1,3 +1,4 @@
+#!gfx:interface\metro_goals.gfx
 focus_tree = {
 	id = nf_ulitsa
 	
@@ -17,4 +18,507 @@ focus_tree = {
 	shared_focus = satellite_economy
 	shared_focus = satellite_our_path
 	shared_focus = satellite_defense_against_facism
+
+	focus = {
+		id = ULI_focus_1
+		icon = GFX_RED_1905_2
+		x = 24
+		y = 0
+		cost = 10
+		completion_reward = {
+			country_event = nf_ULI.3
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_2
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_1 }
+		available = { has_country_flag = ULI_polezhaevsky_incident_flag }
+		x = -3
+		y = 1
+		relative_position_id = ULI_focus_1
+		completion_reward = {
+			add_stability = -0.05
+			division_template = {
+				name = "Militia"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+					irregulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Militias\" division_template = \"Militia\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_3
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_1 }
+		available = { has_country_flag = ULI_polezhaevsky_incident_flag }
+		x = 2
+		y = 1
+		relative_position_id = ULI_focus_1
+		completion_reward = {
+			add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_4
+		icon = GFX_RED_1905_2
+		cost = 4.3
+		prerequisite = { focus = ULI_focus_3 }
+		x = 2
+		y = 1
+		relative_position_id = ULI_focus_3
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 2
+				ahead_reduction = 1
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_5
+		icon = GFX_RED_1905_2
+		cost = 4.3
+		prerequisite = { focus = ULI_focus_3 }
+		x = 0
+		y = 1
+		relative_position_id = ULI_focus_3
+		completion_reward = {
+			add_tech_bonus = {
+                bonus = 1
+                ahead_reduction = 1.0
+                uses = 2
+                category = tooling
+            }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_6
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_4 }
+		available = {
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+		}
+		x = 1
+		y = 2
+		relative_position_id = ULI_focus_4
+		completion_reward = {
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -5
+				}
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment
+					amount = -5
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 15
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+			add_ideas = ULI_stalkers
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_7
+		icon = GFX_RED_1905_2
+		cost = 4.3
+		prerequisite = { focus = ULI_focus_4 }
+		mutually_exclusive = { focus = ULI_focus_8 }
+		x = 0
+		y = 1
+		relative_position_id = ULI_focus_4
+		completion_reward = {
+			add_timed_idea = { idea = ULI_rebuild_seek_external days = 360 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_8
+		icon = GFX_RED_1905_2
+		cost = 4.3
+		prerequisite = { focus = ULI_focus_5 }
+		mutually_exclusive = { focus = ULI_focus_7 }
+		x = 0
+		y = 1
+		relative_position_id = ULI_focus_5
+		completion_reward = {
+			add_timed_idea = { idea = ULI_rebuild_relief_fund days = 360 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_8a
+		icon = GFX_RED_1905_2
+		cost = 4.3
+		prerequisite = { focus = ULI_focus_8 }
+		available = { 418 = { is_owned_by = ROOT }}
+		x = 0
+		y = 1
+		relative_position_id = ULI_focus_8
+		completion_reward = {
+			add_manpower = 20
+			418 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = triage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 0.25
+				ahead_reduction = 1
+				uses = 1
+				category = health
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_emergency_women_draft
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_7 focus = ULI_focus_8 }
+		available = { date > 2030.3.1 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
+		x = 1
+		y = 2
+		relative_position_id = ULI_focus_8
+		completion_reward = {
+			add_timed_idea = { idea = ULI_1905_women_soldiers days = 360 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_depose_zotov
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_2 }
+		available = { NOT = { has_completed_focus = ULI_focus_14 }}
+		x = -3
+		y = 1
+		relative_position_id = ULI_focus_2
+		completion_reward = {
+			custom_effect_tooltip = ULI_depose_zotov_tooltip
+			## option to depose zotov. Either plunging the nation into
+			## civil war, for significant buffs by leaning eaither spectrum
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_11
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_2 }
+		mutually_exclusive = { focus = ULI_focus_12 }
+		x = -1
+		y = 1
+		relative_position_id = ULI_focus_2
+		completion_reward = {
+			add_political_power = 150
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_focus_12
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_2 }
+		mutually_exclusive = { focus = ULI_focus_11 }
+		x = 1
+		y = 1
+		relative_position_id = ULI_focus_2
+		completion_reward = {
+			add_ideas = mandatory_service
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_12a
+		icon = GFX_RED_1905_2
+		cost = 8.6
+		prerequisite = { focus = ULI_focus_12 focus = ULI_focus_15 }
+		available = {
+			NOT = { has_idea = ULI_polezhaevsky_incident }
+			count_triggers = {
+				amount = 1
+				AND = {
+					is_subject = no 
+					has_war_support > 0.74
+				}
+				AND = {
+					is_subject = yes
+					date > 2034.10.1
+				}
+				AND = {
+					has_war_support > 0.89
+				}
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = ULI_focus_12
+		completion_reward = {
+			302 = { set_demilitarized_zone = no }
+			143 = { set_demilitarized_zone = no }
+			267 = { set_demilitarized_zone = no }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_13
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_12 }
+		x = 0
+		y = 2
+		relative_position_id = ULI_focus_12
+		completion_reward = {
+			add_ideas = ULI_conscription_rounds
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_14
+		icon = GFX_RED_1905_2
+		cost = 8.6
+		prerequisite = { focus = ULI_focus_11 focus = ULI_focus_12 }
+		x = -1
+		y = 1
+		relative_position_id = ULI_focus_12
+		completion_reward = {
+			remove_ideas = ULI_1905_station_factionalism
+			if = {
+				limit = {  NOT = { has_completed_focus = ULI_depose_zotov } }
+				add_stability = -0.15
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_15
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_3 }
+		x = -2
+		y = 1
+		relative_position_id = ULI_focus_3
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 50 }
+			add_bullet_with_tooltip_effect = yes
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_16
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_15 }
+		x = 0
+		y = 2
+		relative_position_id = ULI_focus_15
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 50 }
+			add_bullet_with_tooltip_effect = yes
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_focus_16a
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_16 }
+		available = { NOT = { has_completed_focus = satellite_kick_out_foreign_merchants } }
+		x = 1
+		y = 1
+		relative_position_id = ULI_focus_16
+		completion_reward = {
+			add_ideas = ULI_trade_west
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = ULI_revaunchist_rhetoric
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_13 }
+		prerequisite = { focus = ULI_focus_16 }
+		available = { date > 2030.3.10 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
+		x = -1
+		y = 1
+		relative_position_id = ULI_focus_16
+		completion_reward = {
+			add_timed_idea = { idea = ULI_1905_revaunchism days = 360 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_rage_against_the_light
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_focus_11 }
+		available = { date > 2030.3.10 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
+		x = 0
+		y = 3
+		relative_position_id = ULI_focus_11
+		completion_reward = {
+			add_timed_idea = { idea = ULI_rage_against_the_light days = 360 }
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = ULI_reclaim_the_republic
+		icon = GFX_RED_1905_2
+		cost = 6.5
+		prerequisite = { focus = ULI_revaunchist_rhetoric focus = ULI_emergency_women_draft focus = ULI_rage_against_the_light }
+		available = { 
+			NOT = { has_completed_focus = satellite_status_quo }
+			count_triggers = {
+				amount = 1
+				AND = {
+					is_subject = no 
+					has_war_support > 0.74
+				}
+				AND = {
+					is_subject = yes
+					date > 2034.10.1
+				}
+				AND = {
+					has_war_support > 0.89
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = ULI_revaunchist_rhetoric
+		completion_reward = {
+			IF = {
+				limit = {
+					NOT = {
+						302 = { is_owned_by = ROOT }
+					}
+				}
+				add_state_claim = 302
+				add_state_claim = 143
+				add_state_claim = 267
+			}
+			ELSE = {
+				every_state = {
+					limit = {
+						OR = {
+							region = 10
+						}
+					}
+					add_claim_by = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
 }
