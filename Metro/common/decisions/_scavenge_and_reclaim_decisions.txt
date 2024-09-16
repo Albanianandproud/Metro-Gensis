@@ -597,18 +597,7 @@ reclaim_metro = {
 
 	reclaim_timed_decision = {
 		activation = { always = no }
-		available = { 
-			IF = {
-				limit = {
-					check_variable = { 
-						var = reclaim_cost
-						value = reclaim_cost_requirement
-						compare = less_than_or_equals  
-					}
-				}
-				RUI = { transfer_state = ROOT.state_colonised_id }
-			}
-		}
+		available = { }
 		is_good = no
 		days_mission_timeout = 45
 		selectable_mission = yes
@@ -616,16 +605,6 @@ reclaim_metro = {
 		cancel_trigger = {
 			hidden_trigger = { has_country_flag = cancel_reclaim }
 			var:state_colonised_id = { resistance > 95 }
-			IF = {
-				limit = {
-					check_variable = { 
-						var = reclaim_cost
-						value = reclaim_cost_requirement
-						compare = greater_than_or_equals  
-					}
-				}
-				RUI = { transfer_state = ROOT.state_colonised_id }
-			}
 		}
 		custom_cost_text = reclaim_cost_text
 		custom_cost_trigger = {
