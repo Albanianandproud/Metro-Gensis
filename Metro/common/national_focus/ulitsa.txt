@@ -5,7 +5,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 25
 			tag = ULI
 		}
 	}
@@ -21,20 +21,65 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_1
-		icon = GFX_RED_1905_2
+		icon = GFX_ULI_generic
 		x = 24
 		y = 0
-		cost = 10
+		cost = 4.3
 		completion_reward = {
 			country_event = nf_ULI.3
+			hidden_effect = { ULI = { country_event = {  id = nf_ULI.5 days = 7 random_days = 7  } } }
 		}
 		ai_will_do = {
 			factor = 3
 		}
 	}
 	focus = {
+		id = ULI_focus_100
+		icon = GFX_equipment_gasmask
+		cost = 8.6
+		prerequisite = { focus = ULI_focus_1 }
+		available = { has_war_support > 0.6 NOT = { has_country_flag = ULI_polezhaevsky_incident_flag } }
+		x = 6
+		y = 1
+		relative_position_id = ULI_focus_1
+		completion_reward = {
+			army_experience = 5
+			add_tech_bonus = {
+                bonus = 1
+                ahead_reduction = 1.0
+                uses = 2
+                category = stalker
+            }
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	focus = {
+		id = ULI_focus_110
+		icon = GFX_dark_ones
+		cost = 10
+		prerequisite = { focus = ULI_focus_100 }
+		available = { 
+			has_tech = spec_ops_equipment_4_tech
+			NOT = { has_country_flag = ULI_polezhaevsky_incident_flag } 
+		}
+		x = 0
+		y = 1
+		relative_position_id = ULI_focus_100
+		completion_reward = {
+			custom_effect_tooltip = ULI_fight_the_threat
+			add_war_support = 0.05
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	focus = {
 		id = ULI_focus_2
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_redline_alliance
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_1 }
 		available = { has_country_flag = ULI_polezhaevsky_incident_flag }
@@ -68,7 +113,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_3
-		icon = GFX_RED_1905_2
+		icon = GFX_gates_of_hell
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_1 }
 		available = { has_country_flag = ULI_polezhaevsky_incident_flag }
@@ -84,7 +129,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_4
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_equipment_gasmask_3
 		cost = 4.3
 		prerequisite = { focus = ULI_focus_3 }
 		x = 2
@@ -105,7 +150,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_5
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_construction
 		cost = 4.3
 		prerequisite = { focus = ULI_focus_3 }
 		x = 0
@@ -125,7 +170,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_6
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_equipment_gasmask_1
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_4 }
 		available = {
@@ -169,7 +214,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_7
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_ammunition_1
 		cost = 4.3
 		prerequisite = { focus = ULI_focus_4 }
 		mutually_exclusive = { focus = ULI_focus_8 }
@@ -185,7 +230,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_8
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_cement
 		cost = 4.3
 		prerequisite = { focus = ULI_focus_5 }
 		mutually_exclusive = { focus = ULI_focus_7 }
@@ -201,7 +246,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_8a
-		icon = GFX_RED_1905_2
+		icon = GFX_equipment_medical
 		cost = 4.3
 		prerequisite = { focus = ULI_focus_8 }
 		available = { 418 = { is_owned_by = ROOT }}
@@ -236,7 +281,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_emergency_women_draft
-		icon = GFX_RED_1905_2
+		icon = GFX_RED_female_soldiers
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_7 focus = ULI_focus_8 }
 		available = { date > 2030.3.1 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
@@ -252,7 +297,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_depose_zotov
-		icon = GFX_RED_1905_2
+		icon = GFX_RCH_commander3
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_2 }
 		available = { NOT = { has_completed_focus = ULI_focus_14 }}
@@ -263,6 +308,7 @@ focus_tree = {
 			custom_effect_tooltip = ULI_depose_zotov_tooltip
 			## option to depose zotov. Either plunging the nation into
 			## civil war, for significant buffs by leaning eaither spectrum
+			country_event = nf_ULI.6
 		}
 		ai_will_do = {
 			factor = 3
@@ -270,7 +316,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_11
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_microphone
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_2 }
 		mutually_exclusive = { focus = ULI_focus_12 }
@@ -286,7 +332,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_focus_12
-		icon = GFX_RED_1905_2
+		icon = GFX_AVT_hey_you
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_2 }
 		mutually_exclusive = { focus = ULI_focus_11 }
@@ -303,7 +349,7 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_12a
-		icon = GFX_RED_1905_2
+		icon = GFX_RED_sight_seeing
 		cost = 8.6
 		prerequisite = { focus = ULI_focus_12 focus = ULI_focus_15 }
 		available = {
@@ -338,7 +384,7 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_13
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_soldier
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_12 }
 		x = 0
@@ -354,9 +400,36 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_14
-		icon = GFX_RED_1905_2
+		icon = GFX_radio
 		cost = 8.6
 		prerequisite = { focus = ULI_focus_11 focus = ULI_focus_12 }
+		available = {
+			count_triggers = {
+				amount = 1
+				AND = {
+					power_balance_value = {
+						id = ULI_power_balance
+						value > 0.7
+					}
+				}
+				AND = {
+					power_balance_value = {
+						id = ULI_power_balance
+						value < -0.7
+					}
+				}
+				AND = {
+					power_balance_value = {
+						id = ULI_power_balance
+						value > -0.1
+					}
+					power_balance_value = {
+						id = ULI_power_balance
+						value < 0.1
+					}
+				}
+			}
+		}
 		x = -1
 		y = 1
 		relative_position_id = ULI_focus_12
@@ -374,7 +447,7 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_15
-		icon = GFX_RED_1905_2
+		icon = GFX_generic_domestics
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_3 }
 		x = -2
@@ -394,7 +467,7 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_16
-		icon = GFX_RED_1905_2
+		icon = GFX_RED_collectivization
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_15 }
 		x = 0
@@ -422,7 +495,7 @@ focus_tree = {
 
 	focus = {
 		id = ULI_focus_16a
-		icon = GFX_RED_1905_2
+		icon = GFX_HNZ_generic_bullet_focus
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_16 }
 		available = { NOT = { has_completed_focus = satellite_kick_out_foreign_merchants } }
@@ -443,7 +516,7 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_13 }
 		prerequisite = { focus = ULI_focus_16 }
-		available = { date > 2030.3.10 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
+		available = { date > 2030.3.10 }
 		x = -1
 		y = 1
 		relative_position_id = ULI_focus_16
@@ -456,7 +529,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_rage_against_the_light
-		icon = GFX_RED_1905_2
+		icon = GFX_RED_honorguard
 		cost = 6.5
 		prerequisite = { focus = ULI_focus_11 }
 		available = { date > 2030.3.10 NOT = { 267 = { is_owned_by = ROOT } 302 = { is_owned_by = ROOT } } }
@@ -464,7 +537,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = ULI_focus_11
 		completion_reward = {
-			add_timed_idea = { idea = ULI_rage_against_the_light days = 360 }
+			add_timed_idea = { idea = ULI_rage_rage_rage days = 360 }
 		}
 		ai_will_do = {
 			factor = 3
@@ -472,7 +545,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ULI_reclaim_the_republic
-		icon = GFX_RED_1905_2
+		icon = GFX_1905
 		cost = 6.5
 		prerequisite = { focus = ULI_revaunchist_rhetoric focus = ULI_emergency_women_draft focus = ULI_rage_against_the_light }
 		available = { 
