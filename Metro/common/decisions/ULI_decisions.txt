@@ -1,14 +1,778 @@
 ULI_evacuate_north_category = {
 
-	ULI_evacuate_nortH_cowndown_risk = {
-		## MAKE THIS A FLOODING STYLE TIMER
+	ULI_evacuate_north_cowndown_risk = {
+		activation = { has_country_flag = ULI_dark_ones_crisis }
+		is_good = no
+		priority = 1001
+		available = {
+			NOT = {
+				count_triggers = {
+					amount = 4
+					has_country_flag = ULI_dark_ones_crisis
+					302 = { is_owned_by = ROOT }
+					143 = { is_owned_by = ROOT }
+					267 = { is_owned_by = ROOT }
+				}
+			}
+		}
 
-		## TO DO MAKE THE INCIDENT FIRE DIRECTLY FROM THIS DECISION
+		selectable_mission = no
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			NOT = { has_country_flag = ULI_dark_ones_crisis }
+		}
+
+		days_mission_timeout = 720
+
+		timeout_effect = {
+			country_event = { id = nf_ULI.2 } 
+			remove_ideas = ULI_rising_tension
+		}
+
+		ai_will_do = {
+			factor = 101
+		}
 	}
 	
-	ULI_evacuate_north_resources = {}
+	ULI_evacuate_north_resources_scrap = {
+		icon = scrap
 
-	ULI_evacuate_north_factories = {}
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						has_resources_amount = {
+							resource = scrap
+							amount > 0
+						}
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						has_resources_amount = {
+							resource = scrap
+							amount > 0
+						}
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
 
-	ULI_evacuate_build_up_defences = {}
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						has_resources_amount = {
+							resource = scrap
+							amount > 0
+						}
+					}
+				}
+				302 = {
+					add_resource = {
+						type = scrap 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = scrap 
+						amount = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						has_resources_amount = {
+							resource = scrap
+							amount > 0
+						}
+					}
+				}
+				267 = {
+					add_resource = {
+						type = scrap 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = scrap 
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_resources_alloys = {
+		icon = alloys
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						has_resources_amount = {
+							resource = alloys
+							amount > 0
+						}
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						has_resources_amount = {
+							resource = alloys
+							amount > 0
+						}
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						has_resources_amount = {
+							resource = alloys
+							amount > 0
+						}
+					}
+				}
+				302 = {
+					add_resource = {
+						type = alloys 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = alloys 
+						amount = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						has_resources_amount = {
+							resource = alloys
+							amount > 0
+						}
+					}
+				}
+				267 = {
+					add_resource = {
+						type = alloys 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = alloys 
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_resources_components = {
+		icon = components
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						has_resources_amount = {
+							resource = components
+							amount > 0
+						}
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						has_resources_amount = {
+							resource = components
+							amount > 0
+						}
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						has_resources_amount = {
+							resource = components
+							amount > 0
+						}
+					}
+				}
+				302 = {
+					add_resource = {
+						type = components 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = components 
+						amount = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						has_resources_amount = {
+							resource = components
+							amount > 0
+						}
+					}
+				}
+				267 = {
+					add_resource = {
+						type = components 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = components 
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_resources_chemicals = {
+		icon = chemicals
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						has_resources_amount = {
+							resource = chemicals
+							amount > 0
+						}
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						has_resources_amount = {
+							resource = chemicals
+							amount > 0
+						}
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						has_resources_amount = {
+							resource = chemicals
+							amount > 0
+						}
+					}
+				}
+				302 = {
+					add_resource = {
+						type = chemicals 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = chemicals 
+						amount = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						has_resources_amount = {
+							resource = chemicals
+							amount > 0
+						}
+					}
+				}
+				267 = {
+					add_resource = {
+						type = chemicals 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = chemicals 
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_resources_electronics = {
+		icon = electronics
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						has_resources_amount = {
+							resource = electronics
+							amount > 0
+						}
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						has_resources_amount = {
+							resource = electronics
+							amount > 0
+						}
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						has_resources_amount = {
+							resource = electronics
+							amount > 0
+						}
+					}
+				}
+				302 = {
+					add_resource = {
+						type = electronics 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = electronics 
+						amount = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						has_resources_amount = {
+							resource = electronics
+							amount > 0
+						}
+					}
+				}
+				267 = {
+					add_resource = {
+						type = electronics 
+						amount = -1
+					}
+				}
+				capital_scope = {
+					add_resource = {
+						type = electronics 
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_factories_civilian = {
+		icon = electronics
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						industrial_complex > 0
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						industrial_complex > 0
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						industrial_complex > 0
+					}
+				}
+				302 = {
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						NOT = {
+							state = 267
+							state = 302
+							has_state_category = pastoral
+						}
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						industrial_complex > 0
+					}
+				}
+				267 = {
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						NOT = {
+							state = 267
+							state = 302
+							has_state_category = pastoral
+						}
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_north_factories_military = {
+		icon = electronics
+
+		available = {
+			has_equipment = { rail_cart_equipment > 1 }
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_full_control_of_state = 302
+					302 = {
+						arms_factory > 0
+					}
+				}
+				AND = {
+					has_full_control_of_state = 267
+					267 = {
+						arms_factory > 0
+					}
+				}
+			}
+		}
+		days_remove = 1
+		cost = 10
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		modifier = { production_speed_buildings_factor = -0.9}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = -10 }
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -2
+			}
+			if = {
+				limit = {
+					302 = {
+						arms_factory > 0
+					}
+				}
+				302 = {
+					remove_building = {
+						type = arms_factory
+						level = 1
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						NOT = {
+							state = 267
+							state = 302
+							has_state_category = pastoral
+						}
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					267 = {
+						arms_factory > 0
+					}
+				}
+				267 = {
+					remove_building = {
+						type = arms_factory
+						level = 1
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						NOT = {
+							state = 267
+							state = 302
+							has_state_category = pastoral
+						}
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	ULI_evacuate_build_up_defences = {
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_1 
+		}
+
+		cost = 10
+		days_remove = 0 
+		days_re_enable = 20
+		custom_cost_text = ULI_manpower_cost
+		custom_cost_trigger = {
+			has_manpower > 9
+		}
+
+		available = {
+			has_equipment = { infantry_equipment > 9 }
+			has_manpower > 9
+		}
+
+		cancel_effect = {
+			add_manpower = 10
+		}
+
+		complete_effect = {
+			add_manpower = -10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10
+			}
+		}
+
+		remove_effect = {
+			add_days_mission_timeout = { mission = ULI_evacuate_north_cowndown_risk days = 20 }
+		}
+	}
+
+	ULI_strike_the_source = {
+
+		visible = {
+			has_idea = ULI_rising_tension
+			has_completed_focus = ULI_focus_110 
+		}
+		
+		cost = 0
+		days_remove = 2
+		fire_only_once = yes
+
+		available = {
+			divisions_in_border_state = {
+				type = infantry
+				size > 3
+				state = 302
+				border_state = 142
+			}
+
+			has_manpower > 9
+			has_equipment = {
+				infantry_equipment > 9
+			}
+			has_equipment = {
+				special_forces_equipment > 9
+			}
+		}
+
+		complete_effect = {
+			add_manpower = -10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -10
+			}
+		}
+
+		remove_effect = {
+			country_event = { id = nf_ULI.4 } 
+		}
+	}
 }

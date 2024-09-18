@@ -4,7 +4,7 @@ country_event = {
     id = nf_ULI.1
     title = nf_ULI.1.t
     desc = nf_ULI.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (51)"
 	trigger = {
 		RCH = {
 			controls_state = 418
@@ -46,7 +46,7 @@ country_event = {
     id = nf_ULI.2
     title = nf_ULI.2.t
     desc = nf_ULI.2.d
-    picture = ccc_mutant
+    picture = "GFX_event (163)"
 
 	trigger = {
 		date > 2030.3.1
@@ -111,14 +111,260 @@ country_event = {
     id = nf_ULI.3
     title = nf_ULI.3.t
     desc = nf_ULI.3.d
-    picture = ccc_mutant
+    picture = "GFX_event (180)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = { set_country_flag = ULI_dark_ones_crisis }
+	}
+
+	option = {
+		name = nf_ULI.3.a
+		add_political_power = 50
+		custom_effect_tooltip = nf_ULI.3.a.tt
+
+		activate_mission = ULI_evacuate_north_cowndown_risk
+		add_ideas = ULI_rising_tension
+
+		add_ideas = ULI_1905_ULI_defences
+	}
+}
+
+country_event = {
+    id = nf_ULI.4
+    title = nf_ULI.4.t
+    desc = nf_ULI.4.d
+    picture = "GFX_event (112)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = { clr_country_flag = ULI_dark_ones_crisis }
+	}
+
+	option = {
+		name = nf_ULI.4.a
+		add_political_power = 100
+		complete_national_focus = ULI_focus_2
+		complete_national_focus = ULI_focus_3
+		remove_ideas = ULI_rising_tension
+	}
+}
+
+country_event = { ### civil stuff
+    id = nf_ULI.5
+    title = nf_ULI.5.t
+    desc = nf_ULI.5.d
+    picture = "GFX_event (36)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { hidden_effect = { ULI = { country_event = {  id = nf_ULI.7 days = 90 random_days = 90 } } } }
+
+	option = {
+		name = nf_ULI.5.a
+		custom_effect_tooltip = nf_ULI.5.a.tt
+	}
+}
+
+country_event = {
+    id = nf_ULI.6
+    title = nf_ULI.6.t
+    desc = nf_ULI.6.d
+    picture = "GFX_event (50)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
-		name = nf_ULI.3.a
-		add_Political_power = 50
-		custom_effect_tooltip = nf_ULI.3.a.tt
+		name = nf_ULI.6.a
+		trigger = {
+			power_balance_value = {
+				id = ULI_power_balance
+				value > 0.6
+			}
+		}
+		set_politics = {
+			ruling_party = oligarch
+			elections_allowed = no
+		}
+	}
+
+	option = {
+		name = nf_ULI.6.b
+		trigger = {
+			power_balance_value = {
+				id = ULI_power_balance
+				value < -0.6
+			}
+		}
+		set_politics = {
+			ruling_party = community
+			elections_allowed = no
+		}
+	}
+
+	option = {
+		name = nf_ULI.6.c
+		trigger = {
+			power_balance_value = {
+				id = ULI_power_balance
+				value > -0.1
+			}
+			power_balance_value = {
+				id = ULI_power_balance
+				value < 0.1
+			}
+		}
+		add_political_power = 100 
+		ULI_ilya = { add_country_leader_trait = ULI_capable_leader }
+	}
+}
+
+country_event = { ### civil stuff 2
+    id = nf_ULI.7
+    title = nf_ULI.7.t
+    desc = nf_ULI.7.d
+    picture = "GFX_event (48)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { hidden_effect = { ULI = { country_event = {  id = nf_ULI.8 days = 90 random_days = 90 } } } }
+
+	option = {
+		name = nf_ULI.7.a
+		add_ideas = ULI_fuel_sell
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = 0.2
+		}
+	}
+
+	option = {
+		name = nf_ULI.7.b
+		add_ideas = ULI_fuel_forfeit
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = -0.2
+		}
+	}
+}
+
+country_event = { ### civil stuff 2
+    id = nf_ULI.8
+    title = nf_ULI.8.t
+    desc = nf_ULI.8.d
+    picture = "GFX_event (49)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { hidden_effect = { ULI = { country_event = {  id = nf_ULI.9 days = 90 random_days = 90 } } } }
+
+	option = {
+		name = nf_ULI.8.a
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = 0.2
+		}
+		add_timed_idea = { idea = ULI_building days = 360 }
+	}
+
+	option = {
+		name = nf_ULI.8.b
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = -0.2
+		}
+		418 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_stability = -0.1
+	}
+}
+
+country_event = { ### civil stuff 2
+    id = nf_ULI.9
+    title = nf_ULI.9.t
+    desc = nf_ULI.9.d
+    picture = "GFX_event (46)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_ULI.9.a
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = 0.2
+		}
+		add_political_power = -50
+	}
+
+	option = {
+		name = nf_ULI.9.b
+		add_power_balance_value = {
+			id = ULI_power_balance
+			value = -0.2
+		}
+		set_temp_variable = { bullet_to_gain = 250 }
+		add_bullet_with_tooltip_effect = yes
+		add_stability = -0.1
+	}
+}
+
+
+country_event = { ## civil_war_event
+    id = nf_ULI.10
+    title = nf_ULI.10.t
+    desc = nf_ULI.10.d
+    picture = "GFX_event (110)"
+
+	trigger = {
+		NOT = { has_completed_focus = ULI_focus_14 }
+		count_triggers = {
+			amount = 1
+			AND = {
+				power_balance_value = {
+					id = ULI_power_balance
+					value > 0.6
+				}
+				has_stability < 0.2
+			}
+			AND = {
+				power_balance_value = {
+					id = ULI_power_balance
+					value < -0.6
+				}
+				has_stability < 0.2
+			}
+		}
+	}
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			ULI_launch_civil_war_event = yes
+		}
+	}
+
+	option = {
+		name = nf_ULI.10.a
+		complete_national_focus = ULI_focus_14
+		if = { 
+			limit = { NOT = { has_completed_focus = ULI_depose_zotov } }
+			complete_national_focus = ULI_depose_zotov
+		}
+		ai_chance = { base = 150 }
 	}
 }
