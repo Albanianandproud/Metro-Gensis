@@ -1639,6 +1639,7 @@ country_event = {
 	
 	option = {	## Central Metro Command Path
 		name = nf_HNZ.48.a
+		add_political_power = 100
 		ai_chance = {
 			factor = 10
 		}
@@ -1647,6 +1648,7 @@ country_event = {
 	option = {	## Invisible Observers
 		name = nf_HNZ.48.b
 		### Throw a Hidden Event which causes the Observers to pop up
+		custom_effect_tooltip = nf_HNZ.48.b.tt
 		hidden_effect = {
 			country_event = { 
 				id = nf_HNZ.64
@@ -1671,6 +1673,7 @@ country_event = {
 
 	option = {	## Normal Hanza Path
 		name = nf_HNZ.48.c
+		add_political_power = 100
 		ai_chance = {
 			factor = 25
 		}
@@ -2193,15 +2196,76 @@ country_event = {	## Invisible Observers Path
 
 	is_triggered_only = yes
 	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			ROOT = {
+				set_cosmetic_tag = HNZ_invisible_observers_tag
+				set_politics = { 
+					ruling_party = dictatorial
+					elections_allowed = no 
+				}
+			}
+		}
+	}
 	
 	option = {
 		name = nf_HNZ.64.a
+		add_threat = 20
 		ROOT = { news_event = { id = global_event.68 } }
-
-		set_cosmetic_tag = HNZ_invisible_observers_tag
-		set_politics = { 
-			ruling_party = dictatorial
-			elections_allowed = no 
+		if = {
+			limit = {
+				NOT = { has_country_flag = HNZ_bypass_civil_war }
+			}
+			release = SRL
+			add_civil_war_target = SRL
+			declare_war_on = {
+				target = SRL
+				type = civil_war
+			}
+			transfer_units_fraction= {
+				target = SRL
+				size = 0.5
+				stockpile_ratio = 0.5
+			}
+			hidden_effect = {
+				SRL = {
+					add_offsite_building = { type = arms_factory level = 10 }
+					division_template = {
+						name = "OVMSB Brigade"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							rail_cart = { x = 0 y = 0 }
+							rail_cart = { x = 0 y = 1 }
+							rail_cart = { x = 0 y = 2 }
+							rail_cart = { x = 0 y = 3 }
+							rail_cart = { x = 0 y = 4 }
+						}
+						support = {
+							logistics_company  = { x = 0 y = 1 }    
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "name = \"1st OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
+						create_unit = {
+							division = "name = \"2nd OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
+						create_unit = {
+							division = "name = \"3rd OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
+						create_unit = {
+							division = "name = \"4th OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
+					}
+				}
+			}
 		}
 
 		ai_chance = {

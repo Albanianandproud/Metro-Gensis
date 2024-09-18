@@ -206,7 +206,6 @@ GWC_burn_technology = {
 }
 
 GWC_infiltration_LR = {
-
 	GWC_LR_infiltration = {
 		custom_cost_text = command_power_25
 		custom_cost_trigger = {
@@ -214,7 +213,6 @@ GWC_infiltration_LR = {
 		}
 
 		visible = { 
-			has_dlc = "La Resistance"
 			has_completed_focus = GWC_focus_1 
 		}
 
@@ -245,6 +243,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -25 }
 			custom_effect_tooltip = GWC_infiltration
 
 			GWC_infiltration_scripted_effect = yes
@@ -274,7 +273,8 @@ GWC_infiltration_LR = {
 	
 		target_trigger = {
 			FROM = {
-				has_idea = GWC_infiltrated_small
+				has_country_flag = GWC_infiltrated_small
+				has_country_flag = GWC_infiltrated_medium
 			}
 		}
 
@@ -291,6 +291,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -25 }
 			FROM = { country_event = nf_GWC.31 }
 			effect_tooltip = {
 				FROM = {
@@ -341,6 +342,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -25 }
 			FROM = { country_event = nf_GWC.32 } #Sabotage 
 			effect_tooltip = {
 				FROM = {
@@ -391,6 +393,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -25 }
 			FROM = { country_event = nf_GWC.33 } #Frighten Traders
 			effect_tooltip = {
 				FROM = {
@@ -446,6 +449,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -35 }
 			FROM = { country_event = nf_GWC.41 } #Kidnapped Children 
 			capital_scope = { add_manpower = 10 }
 			effect_tooltip = {
@@ -508,6 +512,7 @@ GWC_infiltration_LR = {
 		visible = { has_completed_focus = GWC_focus_11a }
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -25 }
 			FROM = { country_event = nf_GWC.43 } #Steal resources
 			effect_tooltip = {
 				FROM = {
@@ -591,6 +596,7 @@ GWC_infiltration_LR = {
 		}
 
 		complete_effect = {
+			hidden_effect = { add_command_power = -35 }
 			FROM = { country_event = nf_GWC.42 } #Strike Terror
 			effect_tooltip = {
 				FROM = { add_timed_idea = { idea = GWC_infiltrated_frighten days = 140 } } 
@@ -612,7 +618,8 @@ GWC_infiltration_LR = {
 		days_remove = 60
 
 		available = {
-			has_war_support > 0.94
+			has_war_support > 0.9
+			is_neighbor_of = FROM
 		}
 
 		visible = { 
