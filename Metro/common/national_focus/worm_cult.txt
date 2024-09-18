@@ -16,7 +16,7 @@ focus_tree = {
 	focus = {
 		id = GWC_followers_of_the_worm
 		icon = GFX_GWC_skull
-		x = 10
+		x = 9
 		y = 0
 		cost = 6.5
 		select_effect = { country_event = nf_GWC.3 }
@@ -293,7 +293,7 @@ focus_tree = {
 		id = GWC_focus_1
 		icon = GFX_GWC_skull_2
 		x = 0
-		y = 5
+		y = 4
 		cost = 6.5
 		prerequisite = { focus = GWC_branching_from_park_pobedy_2 }
 		prerequisite = { focus = GWC_focus_decrees_of_priest_3 }
@@ -815,6 +815,36 @@ focus_tree = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = GWC_herald_of_the_worm
 			add_ideas = GWC_warriors_unleashed
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = GWC_focus_133
+		icon = GFX_GWC_rend_for_worm
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = GWC_focus_12 }
+		relative_position_id = GWC_focus_12
+		available = { 
+			OR = {
+				106 = { is_owned_by = ROOT }
+				has_war_with = HNZ
+				has_war_with = RED
+				has_war_with = RCH
+			}
+		}
+
+		completion_reward = {
+			set_technology = { underzealot_worm_rail_equipment_tech_1 = 1 }
+			create_railway_gun = {
+				equipment = underzealot_worm_rail_equipment_tech_1
+				name = my_new_railcannon
+				location = 1856
+			}
 		}
 
 		ai_will_do = {
@@ -2597,6 +2627,45 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 100
+		}
+	}
+
+	focus = {
+		id = GWC_focus_espionage_1
+		icon = GFX_SAT_cultist
+		x = 4
+		y = 2
+		cost = 6.5
+		allow_branch = {
+			OR = {
+				has_dlc = "La Resistance"
+			}
+		}
+		prerequisite = { focus = GWC_supremacy_of_force focus = GWC_supremacy_of_wit }
+		relative_position_id = GWC_focus_1
+		completion_reward = {
+			add_ideas = GWC_espionage_1
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = GWC_focus_espionage_2
+		icon = GFX_RED_sight_seeing
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = GWC_focus_espionage_1 }
+		relative_position_id = GWC_focus_espionage_1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GWC_espionage_1
+				add_idea = GWC_espionage_2
+			}
+		}
+		ai_will_do = {
+			factor = 2
 		}
 	}
 }
