@@ -587,6 +587,166 @@ education_practise = {
 		}
 	}
 
+	improve_education_efforts_RCH_1 = {
+		
+		visible = {
+			original_tag = RCH
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			has_war = no
+			has_completed_focus = RCH_moc_path_3
+		}
+
+		custom_cost_text = command_power_20
+			custom_cost_trigger = {
+				command_power > 19.9
+			}
+		}
+
+		days_re_enable = 80
+		days_remove = 21
+		complete_effect = {
+			hidden_effect = { add_command_power = -20 }
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -50
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				command_power > 25
+			}
+		}
+	}
+
+	improve_education_efforts_RCH_2 = {
+
+		visible = {
+			original_tag = RCH
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			has_war = no
+			has_completed_focus = RCH_moc_path_3
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 100 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_re_enable = 70
+		days_remove = 14
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -100 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -45
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power > 10
+			}
+		}
+	}
+
+	improve_education_efforts_RCH_3 = {
+
+		visible = {
+			original_tag = RCH
+			custom_trigger_tooltip = {
+    			tooltip = is_improving_education
+				has_country_flag = improving_education
+			}
+		}
+
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+   				tooltip = not_currently_under_education_reforms
+   				NOT = {
+					has_country_flag = improving_education
+				}
+   			}
+		}
+
+		available = {
+			has_completed_focus = RCH_slavic_aryanism_character_1
+			has_war = no
+		}
+
+		cost = 100
+
+		days_re_enable = 100
+		days_remove = 7
+
+		modifier = {
+			compliance_growth_on_our_occupied_states = -0.9
+			resistance_activity = 0.9
+		}
+		
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = improve_education_efforts_mission 
+				days = -80
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power > 10
+			}
+		}
+	}
+
 	### | Unique Decisions | ###
 
 	improve_education_access_polis_repository = {
@@ -1086,4 +1246,3 @@ education_practise = {
 			}
 		}
 	}
-}
