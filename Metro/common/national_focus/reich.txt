@@ -538,6 +538,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = RCH_unamed_3
+			custom_effect_tooltip = RCH_unlock_science
 		}
 		ai_will_do = {
 			factor = 1
@@ -2051,7 +2052,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 25
+			factor = 250
 		}
 	}
 	focus = {
@@ -2412,7 +2413,7 @@ focus_tree = {
 			RCH_bop_increase_4 = yes
 			add_timed_idea = { 
 				idea = RCH_festung_reich 
-				days = 95 
+				days = 100
 			}
 		}
 		ai_will_do = {
@@ -2492,7 +2493,7 @@ focus_tree = {
 			add_command_power = 20
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
-				amount = 35
+				amount = 40
 				producer = RUS
 			}
 		}
@@ -2918,6 +2919,7 @@ focus_tree = {
 		relative_position_id = RCH_ss_integration_2
 		completion_reward = {
 			RCH_bop_decrease_4 = yes
+			add_command_power = 100
 		}
 		ai_will_do = {
 			factor = 2
@@ -2941,6 +2943,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = clothing_kits_bonus
 				bonus = 1
+				ahead_reduction = 1
 				uses = 1
 				category = clothing_kits
 			}
@@ -2988,6 +2991,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = entrench_kit_bonus
 				bonus = 0.5
+				ahead_reduction = 1
 				uses = 1
 				category = entrench_kits
 			}
@@ -3132,10 +3136,10 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
-		cost = 6.5
+		cost = 2.8
 		relative_position_id = RCH_would_you_like_total_war
 		completion_reward = {
-			add_stability = -0.04
+			add_ideas = RCH_volkssturm_idea_1
 			add_manpower = 100
 			capital_scope = {
 				add_manpower = -100
@@ -3156,12 +3160,13 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 6.5
+		cost = 2.8
 		relative_position_id = RCH_volkssturm
 		completion_reward = {
-			##
-			##
-			##
+			swap_ideas = {
+				remove_idea = RCH_volkssturm_idea_1
+				add_idea = RCH_volkssturm_idea_2
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3178,10 +3183,11 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 6.5
+		cost = 2.8
 		relative_position_id = RCH_volkssturm
 		completion_reward = {
-			add_command_power = 20
+			add_command_power = 100
+			RCH_bop_decrease_10 = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -3198,7 +3204,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 2.8
 		relative_position_id = RCH_old_and_decrepit
 		completion_reward = {
 			add_stability = -0.08
@@ -3222,10 +3228,32 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 2.8
 		relative_position_id = RCH_SS_overview
 		completion_reward = {
-			add_command_power = 20
+			capital_scope = {
+				set_building_level = {
+					type = infrastructure
+					level = 10
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -4070,6 +4098,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			RCH_reclusive_upgrade_idea = yes
+			add_threat = 5
 			country_event = nf_RCH.11
 		}
 		ai_will_do = {
@@ -4103,7 +4132,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 25
 		}
 	}
 	focus = {
@@ -4430,6 +4459,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = RCH_unlock_max_tier_mobilisation
 			add_political_power = 100
+			add_threat = 5
 		}
 		ai_will_do = {
 			factor = 0.1
