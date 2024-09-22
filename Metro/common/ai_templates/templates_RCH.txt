@@ -1,85 +1,26 @@
-metro_infantry_default = {
+RCH_infantry_default = {
 	roles = { infantry }
 	upgrade_prio = { base = 100 }
-	match_to_count = 0.5
+	match_to_count = 0.6
 
-	blocked_for = {
-		RED
+	available_for = {
 		RCH
 	}
 
-	##
-	## Ideally, Majors (or countries with large enough IC) shouldn't ever produce straight naked divisions
-	## But instead switch straight to early templates.
-	##
-
-	metro_infantry_irregulars_naked = {
-		production_prio = { 
-			base = 1
-			modifier = {
-				factor = 0.01
-				date > 2029.1.1
-			}
-			modifier = {
-				factor = 0.1
-				has_tech = entrench_kits_2031
-				has_tech = cultist_infantry_unlock_tech
-			}
-		}
-		upgrade_prio = { 
-			base = 20
-			modifier = {
-				factor = 25
-				date > 2029.1.1
-			}
-		}
-
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
-		reinforce_prio = 1
-
-		target_template = {
-			weight = 100
-			match_value = 100
-
-			regiments = { irregulars = 5 }
-		}
-
-		allowed_types = {
-			irregulars
-		}
-
-		replace_at_match = 0.9
-		replace_with = metro_infantry_irregulars_early
-		target_min_match = 0.8
-
-		can_upgrade_in_field = {
-			stockpile_ratio = {
-				archetype = infantry_equipment
-				ratio > 0.4
-			}
-		}
-	}
-
-	metro_infantry_irregulars_early = {
+	RCH_infantry_irregulars_early = {
 		production_prio = { 
 			base = 5 
 			modifier = {
-				factor = 0.01
-				date > 2030.1.1
-			}
-			modifier = {
 				factor = 0.1
 				has_tech = entrench_kits_2031
-				has_tech = cultist_infantry_unlock_tech
+				has_tech = regular_infantry_unlock_tech
 			}
 		}
 		upgrade_prio = { 
-			base = 8  
+			base = 10
 			modifier = {
-				factor = 20
-				date > 2030.1.1
+				factor = 25
+				date > 2031.1.1
 			}
 		}
 
@@ -95,15 +36,12 @@ metro_infantry_default = {
 			regiments = { irregulars = 5 }
 
 			support = {
-				flamethrower_support = 1
-				explosive_support = 1
 				gatling_support = 1
 			}
 		}
 
 		allowed_types = {
 			irregulars
-			flamethrower_support 
 			explosive_support
 			gatling_support
 			field_hospital
@@ -112,7 +50,7 @@ metro_infantry_default = {
 		}
 
 		replace_at_match = 0.9
-		replace_with = metro_infantry_irregulars_late
+		replace_with = RCH_infantry_irregulars_late
 		target_min_match = 0.8
 
 		can_upgrade_in_field = {
@@ -123,15 +61,20 @@ metro_infantry_default = {
 		}
 	}
 
-	metro_infantry_irregulars_late = {
+	RCH_infantry_irregulars_late = {
 		production_prio = { 
 			base = 8 
+			modifier = {
+				factor = 0.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
 		}
 		upgrade_prio = { 
 			base = 10 
 			modifier = {
 				factor = 20
-				date > 2032.1.1
+				date > 2033.1.1
 			}
 		}
 
@@ -167,63 +110,20 @@ metro_infantry_default = {
 		}
 	}
 
-	metro_infantry_regulars_naked = {
+	RCH_infantry_regulars_early = {
 		production_prio = { 
-			base = 12
-			modifier = {
-				factor = 0.1
-				date < 2031.10.1
-			}
-		}
-		upgrade_prio = { 
-			base = 20
+			base = 8 
 			modifier = {
 				factor = 20
-				date > 2032.10.1
-			}
-		}
-
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
-		reinforce_prio = 1
-
-		target_template = {
-			weight = 100
-			match_value = 100
-
-			regiments = { regulars = 5 }
-		}
-
-		allowed_types = {
-			regulars
-		}
-
-		replace_at_match = 0.9
-		replace_with = metro_infantry_regulars_early
-		target_min_match = 0.8
-
-		can_upgrade_in_field = {
-			stockpile_ratio = {
-				archetype = infantry_equipment
-				ratio > 0.5
-			}
-		}
-	}
-
-	metro_infantry_regulars_early = {
-		production_prio = { 
-			base = 16 
-			modifier = {
-				factor = 0.01
-				date > 2033.10.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
 			}
 		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
-				date > 2033.10.1
+				date > 2033.1.1
 			}
 		}
 
@@ -256,7 +156,7 @@ metro_infantry_default = {
 		}
 
 		replace_at_match = 0.9
-		replace_with = metro_infantry_regulars_late
+		replace_with = RCH_infantry_regulars_late
 		target_min_match = 0.8
 
 		can_upgrade_in_field = {
@@ -267,13 +167,19 @@ metro_infantry_default = {
 		}
 	}
 
-	metro_infantry_regulars_late = {
-		production_prio = { base = 18 }
+	RCH_infantry_regulars_late = {
+		production_prio = { 
+			modifier = {
+				factor = 20
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
+		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
-				date > 2034.1.1
+				date > 2035.1.1
 			}
 		}
 
@@ -295,6 +201,7 @@ metro_infantry_default = {
 				field_hospital = 1
 				logistics_company = 1
 				inf_recon = 1
+				riot_shields = 1
 			}
 		}
 
@@ -306,6 +213,7 @@ metro_infantry_default = {
 			field_hospital
 			logistics_company
 			inf_recon
+			riot_shields
 		}
 	}
 }
@@ -320,65 +228,17 @@ special_forces_templates = {
 		base = 5 
 		modifier = { 
 			factor = 0.5
-			num_of_military_factories < 10
+			num_of_military_factories < 12
 		} 
 	}
 	match_to_count = 0.5
 
-	metro_infantry_special_forces_naked = {
-		production_prio = { 
-			base = 2
-			modifier = {
-				factor = 20
-				num_of_military_factories < 8
-			}
-			modifier = {
-				factor = 0.1
-				date > 2030.1.1
-			}
-		}
-		upgrade_prio = { 
-			base = 20
-			modifier = {
-				factor = 20
-				date > 2030.1.1
-			}
-		}
-
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
-		reinforce_prio = 1
-
-		target_template = {
-			weight = 100
-			match_value = 100
-
-			regiments = { special_forces = 5 }
-		}
-
-		allowed_types = {
-			special_forces
-		}
-
-		replace_at_match = 0.9
-		replace_with = metro_infantry_special_forces_early
-		target_min_match = 0.8
-
-		can_upgrade_in_field = {
-			stockpile_ratio = {
-				archetype = special_forces_equipment
-				ratio > 0.5
-			}
-		}
-	}
-
-	metro_infantry_special_forces_early = {
+	RCH_infantry_special_forces_early = {
 		production_prio = {
 			base = 8
 			modifier = { 
 				factor = 0.5
-				num_of_military_factories < 8
+				num_of_military_factories < 12
 			} 
 		}
 		upgrade_prio = { 
@@ -418,7 +278,7 @@ special_forces_templates = {
 		}
 
 		replace_at_match = 0.9
-		replace_with = metro_infantry_special_forces_late
+		replace_with = RCH_infantry_special_forces_late
 		target_min_match = 0.8
 
 		can_upgrade_in_field = {
@@ -429,12 +289,12 @@ special_forces_templates = {
 		}
 	}
 
-	metro_infantry_special_forces_late = {
+	RCH_infantry_special_forces_late = {
 		production_prio = {
 			base = 10
 			modifier = { 
 				factor = 0.5
-				num_of_military_factories < 8
+				num_of_military_factories < 12
 			} 
 		}
 		upgrade_prio = { 
