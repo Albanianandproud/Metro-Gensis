@@ -245,7 +245,7 @@ focus_tree = {
 	focus = {
 		id = SPT_run_circles_around_spartak
 		icon = GFX_SPT_generic_soldier
-		x = -2
+		x = -1
 		y = 1
 		cost = 5
 
@@ -270,15 +270,15 @@ focus_tree = {
 	focus = {
 		id = SPT_trade_on_the_down_low
 		icon = GFX_SPT_generic_gear_repair
-		x = -2
-		y = 2
+		x = 0
+		y = 1
 		cost = 5
 
 		prerequisite = {
 			focus = SPT_run_circles_around_spartak
 		}
 
-		relative_position_id = SPT_the_sensible_plan
+		relative_position_id = SPT_run_circles_around_spartak
 		ai_will_do = {
 			factor = 100
 		}
@@ -1064,66 +1064,62 @@ focus_tree = {
 		completion_reward = {
 			390 = {
 				add_building_construction = {
-					type = bunker
-					level = 1
+					type = infrastructure
+					level = 2
 					instant_build = yes
-					province = 2295
 				}
 				add_building_construction = {
-					type = bunker2
+					type = radar_station
 					level = 1
 					instant_build = yes
-					province = 2295
 				}
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					instant_build = yes
-					province = 2306
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 				add_building_construction = {
-					type = bunker2
+					type = bunker
 					level = 1
 					instant_build = yes
-					province = 2306
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 			}
 			211 = {
 				add_building_construction = {
-					type = bunker
-					level = 1
+					type = infrastructure
+					level = 2
 					instant_build = yes
-					province = 3969
 				}
 				add_building_construction = {
-					type = bunker2
+					type = radar_station
 					level = 1
 					instant_build = yes
-					province = 3969
 				}
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					instant_build = yes
-					province = 3962
-				}
-				add_building_construction = {
-					type = bunker2
-					level = 1
-					instant_build = yes
-					province = 3962
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 				add_building_construction = {
 					type = bunker
 					level = 1
 					instant_build = yes
-					province = 3956
-				}
-				add_building_construction = {
-					type = bunker2
-					level = 1
-					instant_build = yes
-					province = 3956
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 			}
 		}
@@ -1152,28 +1148,32 @@ focus_tree = {
 		completion_reward = {
 			270 = {
 				add_building_construction = {
-					type = bunker
-					level = 1
+					type = infrastructure
+					level = 2
 					instant_build = yes
-					province = 2104
 				}
 				add_building_construction = {
-					type = bunker2
+					type = radar_station
 					level = 1
 					instant_build = yes
-					province = 2104
 				}
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					instant_build = yes
-					province = 2105
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 				add_building_construction = {
-					type = bunker2
+					type = bunker
 					level = 1
 					instant_build = yes
-					province = 2105
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 			}
 		}
@@ -1202,55 +1202,107 @@ focus_tree = {
 		completion_reward = {
 			361 = {
 				add_building_construction = {
-					type = bunker
-					level = 1
+					type = infrastructure
+					level = 2
 					instant_build = yes
-					province = 2159
 				}
 				add_building_construction = {
-					type = bunker2
+					type = radar_station
 					level = 1
 					instant_build = yes
-					province = 2159
 				}
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					instant_build = yes
-					province = 2180
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 				add_building_construction = {
-					type = bunker2
+					type = bunker
 					level = 1
 					instant_build = yes
-					province = 2180
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 			}
 			244 = {
 				add_building_construction = {
-					type = bunker
-					level = 1
+					type = infrastructure
+					level = 2
 					instant_build = yes
-					province = 2278
 				}
 				add_building_construction = {
-					type = bunker2
+					type = radar_station
 					level = 1
 					instant_build = yes
-					province = 2278
 				}
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					instant_build = yes
-					province = 3635
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
 				add_building_construction = {
-					type = bunker2
+					type = bunker
 					level = 1
 					instant_build = yes
-					province = 3635
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
 				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_war_against_tyranny
+		icon = GFX_SPT_generic_soldier_4
+		x = 1
+		y = 1
+		cost = 5
+
+		available = {
+			OR = {
+				has_war_with = RED
+				has_war_with = RCH
+			}
+		}
+
+		prerequisite = {
+			focus = SPT_the_nazi_pigs
+			focus = SPT_the_red_scum
+		}
+
+		relative_position_id = SPT_the_nazi_pigs
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_2
+				amount = 10
+				producer = RUS
 			}
 		}
 	}
@@ -1577,6 +1629,114 @@ focus_tree = {
 			build_railway = {
 				path = { 2330 154 221 2331 }
 			}
+		}
+	}
+	focus = {
+		id = SPT_surface_waypoints
+		icon = GFX_PLS_thingmabob_2
+		x = 0
+		y = 1
+		cost = 5
+
+		available = {
+			451 = { is_owned_by = SUF }
+			452 = { is_owned_by = SUF }
+			453 = { is_owned_by = SUF }
+		}
+		prerequisite = {
+			focus = SPT_rebuild_the_filyovskaya_line
+		}
+
+		relative_position_id = SPT_rebuild_the_filyovskaya_line
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			transfer_state = 451
+			transfer_state = 452
+			transfer_state = 453
+			452 = { add_core_of = ROOT }
+		}
+
+		cancel_if_invalid = yes
+
+		cancel = {
+			NOT = {
+				451 = { is_owned_by = SUF }
+				452 = { is_owned_by = SUF }
+				453 = { is_owned_by = SUF }
+			}
+		}
+	}
+	focus = {
+		id = SPT_surface_waypoints_2
+		icon = GFX_PLS_thumbs_up
+		x = 0
+		y = 1
+		cost = 5
+
+		available = {
+			452 = { is_owned_by = ROOT }
+			has_manpower > 10
+		}
+		prerequisite = {
+			focus = SPT_surface_waypoints
+		}
+
+		relative_position_id = SPT_surface_waypoints
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_manpower = -10
+			452 = { 
+				add_manpower = 10
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 15
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2
+				amount = 5
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetnaz
+				amount = 5
+				producer = RUS
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		cancel = {
+			NOT = {
+				452 = { is_owned_by = ROOT }
+			}
+			has_manpower < 10
 		}
 	}
 
