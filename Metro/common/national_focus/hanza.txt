@@ -728,7 +728,7 @@ focus_tree = {
 			NOT = { has_war_with = RCH }
 			RCH = { exists = yes }
 		}
-		x = 8
+		x = 9
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 5.8
@@ -748,6 +748,38 @@ focus_tree = {
 	}
 
 	focus = {
+		id = HNZ_HNZ_trade_with_MOB
+		icon = GFX_TRT_bandit_sitdown
+	
+		prerequisite = {
+			focus = HNZ_external_sphere
+		}
+		x = 5
+		y = 1
+		relative_position_id = HNZ_external_sphere
+		cost = 6.5
+	
+		completion_reward = {
+			# Decision list to trade with the Mobsters
+			custom_effect_tooltip = HNZ_trade_with_mobsters_tt
+		}
+
+		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
+			factor = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_war_with = MOB
+					has_opinion = {
+						target = MOB
+						value > 5
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
 		id = HNZ_redline_stance
 		icon = GFX_RED_the_thing_1
 		prerequisite = {
@@ -757,7 +789,7 @@ focus_tree = {
 			NOT = { has_war_with = RED }
 			RED = { exists = yes }
 		}
-		x = 6
+		x = 7
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 5.8
@@ -4222,7 +4254,7 @@ focus_tree = {
 				}
 			    }
 			}
-			406 = { 
+			405 = { 
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_extra_state_shared_building_slots = 1
@@ -4271,7 +4303,7 @@ focus_tree = {
 			396 = {
             	is_owned_by = ROOT
 			}
-			406 = {
+			231 = {
             	is_owned_by = ROOT
 			}
 			has_war = no
@@ -4286,7 +4318,7 @@ focus_tree = {
 				    instant_build = yes
 				}
 			}
-			406 = { 
+			231 = { 
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -4307,11 +4339,14 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_HNZ_trade_with_MOB
-		icon = GFX_RED_pig_farm
+		id = HNZ_annex_oktyabrskaya
+		icon = GFX_PLS_generic_military_doctrine
 	
 		prerequisite = {
 			focus = HNZ_south_civilian
+		}
+		available = {
+			OKT = { is_puppet_of = ROOT }
 		}
 		x = 1
 		y = 1
@@ -4319,22 +4354,19 @@ focus_tree = {
 		cost = 6.5
 	
 		completion_reward = {
-			# Decision list to trade with the Mobsters
-			custom_effect_tooltip = HNZ_trade_with_mobsters_tt
+			406 = { add_core_of = ROOT }
+			annex_country = {
+				target = OKT
+				transfer_troops = yes
+			}
+			add_named_threat = {
+				threat = 2
+				name = HNZ_ANNEX_OKT
+			}
 		}
 
 		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
 			factor = 5
-			modifier = {
-				factor = 0
-				OR = {
-					has_war_with = MOB
-					has_opinion = {
-						target = MOB
-						value > 5
-					}
-				}
-			}
 		}
 	}
 
@@ -4497,7 +4529,7 @@ focus_tree = {
 			396 = {
             	is_owned_by = ROOT
 			}
-			406 = {
+			231 = {
             	is_owned_by = ROOT
 			}
 			has_war = no
@@ -4512,7 +4544,7 @@ focus_tree = {
 				    instant_build = yes
 				}
 			}
-			406 = { 
+			231 = { 
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
