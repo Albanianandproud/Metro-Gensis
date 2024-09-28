@@ -869,6 +869,36 @@ focus_tree = {
 	}
 
 	focus = {
+		id = TRT_support_oktyabrskaya
+		icon = GFX_generic_microphone
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { OKT = { is_puppet_of = HNZ }}
+		relative_position_id = TRT_with_friends_like_these
+		prerequisite = { 
+			focus = TRT_with_friends_like_these
+		}
+		completion_reward = {
+			add_political_power = 45
+			OKT = {
+				add_timed_idea = { idea = TRT_break_on_out days = 360 }
+				add_opinion_modifier = {
+					target = TRT
+					modifier = trade_relations_3
+				}
+			}
+			add_opinion_modifier = {
+				target = TRT
+				modifier = trade_relations_3
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	focus = {
 		id = TRT_hideout_for_kuznetsky_most
 		icon = GFX_Technicians
 		x = 0
@@ -1594,7 +1624,7 @@ focus_tree = {
 		id = TRT_checking_the_gossip
 		icon = GFX_courtroom
 		x = 0
-		y = 3
+		y = 4
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
 		prerequisite = { 
@@ -1606,6 +1636,65 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 75
 			add_command_power = 25
+			if = {
+				limit = {
+					is_in_faction = NO
+				}
+				create_faction = "The Bandit Triangle"
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = { 
+		id = TRT_oktyabrskaya_annex
+		icon = GFX_oil_lamp
+		x = -5
+		y = 1
+		cost = 8.6
+		available = {
+			is_neighbor_of = OKT
+			OKT = {
+				is_puppet = no
+			}
+		}
+		bypass = { 406 = { is_owned_by = ROOT }}
+		relative_position_id = TRT_checking_the_gossip
+		prerequisite = { focus = TRT_checking_the_gossip }
+		completion_reward = {
+			add_threat = 3
+			annex_country = {
+				target = OKT
+				transfer_troops = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = { 
+		id = TRT_criminal_syndicate
+		icon = GFX_mob_reconciliation
+		x = 0
+		y = 2
+		cost = 8.6
+		available = {
+			is_neighbor_of = MOB
+			MOB = {
+				has_government = dictatorial
+				has_opinion = {
+					target = ROOT
+					value > 39
+				}
+			}
+		}
+		relative_position_id = TRT_oktyabrskaya_annex
+		prerequisite = { focus = TRT_oktyabrskaya_annex }
+		completion_reward = {
+			add_to_faction = MOB
 		}
 		ai_will_do = {
 			factor = 100
@@ -2021,7 +2110,7 @@ focus_tree = {
 	focus = { 
 		id = TRT_hanza_friendship
 		icon = GFX_HNZ_subversion
-		x = 4
+		x = 6
 		y = 0
 		cost = 6.5
 		relative_position_id = TRT_soviet_connection
@@ -2094,7 +2183,7 @@ focus_tree = {
 	focus = { 
 		id = TRT_a_tunnel_too_far
 		icon = GFX_TRT_gopniks
-		x = 6
+		x = 4
 		y = 0
 		cost = 6.5
 		relative_position_id = TRT_soviet_connection
@@ -2117,7 +2206,7 @@ focus_tree = {
 	focus = { 
 		id = TRT_a_direct_confrontation
 		icon = GFX_generic_hanza_alliance
-		x = -1
+		x = 1
 		y = 1
 		cost = 8.6
 		relative_position_id = TRT_a_tunnel_too_far
