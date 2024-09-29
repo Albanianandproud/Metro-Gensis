@@ -14,7 +14,7 @@ focus_tree = {
 	}
 
 	default = no
-	continuous_focus_position = { x = 2170 y = 850 }
+	continuous_focus_position = { x = 2270 y = 850 }
 
 	shared_focus = satellite_our_path
 	
@@ -37,7 +37,7 @@ focus_tree = {
 	focus = {
 		id = SEV_improve_living_space
 		icon = GFX_generic_winch
-		x = -10
+		x = -11
 		y = 1
 		cost = 6.5
 
@@ -485,7 +485,7 @@ focus_tree = {
 	focus = {
 		id = SEV_hanza_trade
 		icon = GFX_HNZ_league_of_steel
-		x = -5
+		x = -7
 		y = 1
 		cost = 6.5
 
@@ -532,7 +532,7 @@ focus_tree = {
 	focus = {
 		id = SEV_contact_domodedovskaya
 		icon = GFX_generic_support_sevastopol
-		x = -3
+		x = -5
 		y = 1
 		cost = 6.5
 
@@ -571,12 +571,59 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SEV_autarky
-		icon = GFX_generic_microphone
-		x = -1
+		id = SEV_repel_the_mutants
+		icon = GFX_BAU_generic_2
+		x = 3
 		y = 1
 		cost = 6.5
+		available = { 
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_war_support > 0.84
+				}
+				AND = {
+					threat > 0.45
+				}
+				AND = {
+					has_army_manpower = {
+						size > 149
+					}
+				}
+				AND = {
+					arms_factory > 7
+				}
+				AND = {
+					date > 2033.6.1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = { 
+			focus = SEV_the_SEVHPP
+		}
 
+		relative_position_id = SEV_the_SEVHPP
+
+		completion_reward = {
+			remove_ideas = SEV_mutants
+		}
+	}
+
+	focus = {
+		id = SEV_autarky
+		icon = GFX_generic_microphone
+		x = -3
+		y = 1
+		cost = 6.5
+		available = { 
+			NOT = {
+				has_idea = export_focus
+				has_idea = free_trade
+			}
+		}
 		ai_will_do = {
 			factor = 50
 		}
@@ -1085,7 +1132,7 @@ focus_tree = {
 	focus = {
 		id = SEV_military_contributions
 		icon = GFX_HNZ_sevastopol_arms_trade
-		x = 5
+		x = 6
 		y = 1
 		cost = 6.5
 
@@ -1531,9 +1578,14 @@ focus_tree = {
 		}
 		
 		available = {
-			date > 2034.01.01
-			has_army_manpower = {
-				size > 299
+			count_triggers = {
+				amount = 1
+				AND = {
+					has_completed_focus = SEV_repel_the_mutants
+				}
+				AND = {
+					date > 2034.01.01
+				}
 			}
 		}
 		
@@ -1571,19 +1623,12 @@ focus_tree = {
 			focus = SEV_attack_chertanovskaya
 		}
 		
-		available = {
-			has_army_manpower = {
-				size > 399
-			}
-		}
-		
 		relative_position_id = SEV_attack_chertanovskaya
 		ai_will_do = {
 			factor = 50
 		}
 
 		completion_reward = {
-			remove_ideas = SEV_mutants
 			SEV = {
 				transfer_state = 84
 				transfer_state = 110
@@ -1634,7 +1679,7 @@ focus_tree = {
 	focus = {
 		id = SEV_hunter
 		icon = GFX_SPT_hunter
-		x = -4
+		x = -3
 		y = 1
 		cost = 6.5
 		
@@ -1651,6 +1696,262 @@ focus_tree = {
 		}
 
 		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = SEV_energy_1
+		icon = GFX_generic_electricity_2
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 
+		}
+		prerequisite = { 
+			focus = SEV_the_SEVHPP
+		}
+
+		relative_position_id = SEV_the_SEVHPP
+
+		completion_reward = {
+			add_ideas = SEV_HPP_energy_1
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_2
+		icon = GFX_PLS_generator
+		x = 0
+		y = 1
+		cost = 6.5
+		available = { 
+		}
+		prerequisite = { 
+			focus = SEV_energy_1
+		}
+
+		relative_position_id = SEV_energy_1
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SEV_HPP_energy_1
+				add_idea = SEV_HPP_energy_2
+			}
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_2b
+		icon = GFX_bullets_4
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { 
+			focus = SEV_energy_2
+		}
+		relative_position_id = SEV_energy_2
+		available = { 
+			HNZ = { exists = yes } 
+			NOT = { has_war_with = HNZ }
+		}
+		completion_reward = {
+			add_ideas = SEV_income
+		}
+		cancel = {
+			HNZ = { exists = no }
+			has_war_with = HNZ
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_2a
+		icon = GFX_PLS_trade_3
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { 
+			focus = SEV_energy_2
+		}
+		relative_position_id = SEV_energy_2
+		available = { 
+			HNZ = { exists = yes } 
+			NOT = { has_war_with = HNZ }
+		}
+		completion_reward = {
+			add_ideas = SEV_exports
+		}
+		cancel = {
+			HNZ = { exists = no }
+			has_war_with = HNZ
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_3
+		icon = GFX_PLS_stalkers
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { 
+		}
+		prerequisite = { 
+			focus = SEV_energy_2
+		}
+
+		relative_position_id = SEV_energy_2
+
+		completion_reward = {
+			transfer_state = 81
+			transfer_state = 332
+			add_offsite_building = { type = fuel_silo level = 3 }
+		}
+		cancel = {
+			NOT = {
+				81 = { is_owned_by = RUI }
+				332 = { is_owned_by = RUI }
+			}
+			has_manpower < 10
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_3a
+		icon = GFX_workstation_3
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { 
+			focus = SEV_energy_3
+		}
+		relative_position_id = SEV_energy_3
+		available = { 
+			HNZ = { exists = yes } 
+			NOT = { has_war_with = HNZ }
+			332 = { is_owned_by = ROOT }
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+				add_resource = {
+					type = electronics
+					amount = 1
+				}
+			}
+		}
+		cancel = {
+			HNZ = { exists = no }
+			has_war_with = HNZ
+			NOT = { 332 = { is_owned_by = ROOT } }
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_3b
+		icon = GFX_generic_medium_arms_2
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { 
+			focus = SEV_energy_3
+		}
+		relative_position_id = SEV_energy_3
+		available = { 
+			HNZ = { exists = yes } 
+			NOT = { has_war_with = HNZ }
+			332 = { is_owned_by = ROOT }
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_2
+				amount = 20
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 5
+				producer = RUS
+			}
+		}
+		cancel = {
+			HNZ = { exists = no }
+			has_war_with = HNZ
+			NOT = { 332 = { is_owned_by = ROOT } }
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+	focus = {
+		id = SEV_energy_4
+		icon = GFX_TRT_technician_trade
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { 
+			332 = { is_core_of = ROOT is_owned_by = ROOT }
+		}
+		prerequisite = { 
+			focus = SEV_energy_3
+		}
+
+		relative_position_id = SEV_energy_3
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SEV_HPP_energy_2
+				add_idea = SEV_HPP_energy_3
+			}
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+			332 = {
+				add_manpower = 100
+				set_state_category = city
+				remove_dynamic_modifier = { modifier = radiation_station_modifier }
+			}
+		}
+		ai_will_do = {
+			factor = 50
 		}
 	}
 }
