@@ -195,455 +195,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SPT_the_sensible_plan
-		icon = GFX_SPT_tushino_help
-		x = -9
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_phase_two
-		}
-
-		relative_position_id = SPT_phase_two
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = SPT_colonel_influence_tt
-			hidden_effect = {
-				SPT = {
-					country_event = {
-						id = nf_SPT_FLAVOR.3
-						days = 20
-						random_hours = 12
-						random_days = 15
-					}
-				}
-			}
-			TSH = {
-				add_ideas = the_order_help
-			}
-			add_opinion_modifier = {
-				target = TSH
-				modifier = PLS_support
-			}
-			reverse_add_opinion_modifier = {
-				target = SPT
-				modifier = PLS_support
-			}
-			PLS = {
-				add_to_faction = TSH
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_run_circles_around_spartak
-		icon = GFX_SPT_generic_soldier
-		x = -1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_the_sensible_plan
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_command_power = 15
-			add_political_power = 50
-			TSH = {
-				add_manpower = 10
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_trade_on_the_down_low
-		icon = GFX_SPT_generic_gear_repair
-		x = 0
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_run_circles_around_spartak
-		}
-
-		relative_position_id = SPT_run_circles_around_spartak
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			capital_scope = {
-				add_resource = {
-					type = alloys
-					amount = 2
-				}
-				add_resource = {
-					type = scrap
-					amount = 2
-				}
-			}
-			TSH = {
-				capital_scope = {
-					add_resource = {
-						type = alloys
-						amount = 2
-					}
-					add_resource = {
-						type = scrap
-						amount = 2
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_a_slice_of_our_home_in_tushino
-		icon = GFX_SPT_patch_guns
-		x = 1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_the_sensible_plan
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			246 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-				    instant_build = yes
-				}
-			}
-			TSH = {
-				army_experience = 20
-				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_1
-					amount = 20
-					producer = RUS
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_joint_planning
-		icon = GFX_SPT_miller_2
-		x = 1
-		y = 2
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_a_slice_of_our_home_in_tushino
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_ideas = joint_planning
-			TSH = {
-				add_ideas = joint_planning
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_set_up_shop_in_the_south
-		icon = GFX_SPT_rangers_6
-		x = 3
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_the_sensible_plan
-		}
-
-		available = {
-			RUI = {
-				controls_state = 246
-			}
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 1000
-		}
-
-		completion_reward = {
-			246 = {
-				transfer_state_to = SPT
-			}
-			hidden_effect = { RUI = { remove_state_core = 246 } }
-			set_country_flag = SPT_owns_schukinskaya
-		}
-	}
-
-	focus = {
-		id = SPT_deploy_the_pagan_killers
-		icon = GFX_SPT_rangers_3
-		x = -1
-		y = 2
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_set_up_shop_in_the_south
-		}
-
-		available = {
-			SPT = {
-				controls_state = 246
-				has_manpower > 29
-			}
-		}
-
-		relative_position_id = SPT_set_up_shop_in_the_south
-		ai_will_do = {
-			factor = 1000
-		}
-
-		completion_reward = {
-			add_manpower = -30
-			division_template = {
-				name = "Spartan Ranger Detachment"
-				priority = 1
-				is_locked = yes
-				regiments = {
-					regulars = { x = 0 y = 0 }
-					regulars = { x = 0 y = 1 }
-					special_forces = { x = 1 y = 0 }
-					special_forces = { x = 1 y = 1 }
-				}
-			}
-			246 = {
-				create_unit = {
-					division = "name = \"1st Spartan Detachment\" division_template = \"Spartan Ranger Detachment\" start_experience_factor = 0.6 start_equipment_factor = 1"
-					owner = ROOT
-				}
-			}
-			246 = {
-				create_unit = {
-					division = "name = \"2nd Spartan Detachment\" division_template = \"Spartan Ranger Detachment\" start_experience_factor = 0.6 start_equipment_factor = 1"
-					owner = ROOT
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_give_the_order
-		icon = GFX_SPT_experienced_rangers
-		x = 0
-		y = 3
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_trade_on_the_down_low
-		}
-		prerequisite = {
-			focus = SPT_joint_planning
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			TSH = {
-				declare_war_on = {
-					target = PAG
-					type = annex_everything
-				}
-			}
-			SPT = {
-				declare_war_on = {
-					target = PAG
-					type = annex_everything
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_tushinos_safety_secured
-		icon = GFX_generic_support_rangers
-		x = 0
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_give_the_order
-		}
-
-		available = {
-			OR = {
-				TSH = {
-					controls_state = 289
-				}
-				controls_state = 289
-			}
-		}
-
-		relative_position_id = SPT_give_the_order
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = SPT_colonel_influence_tt
-			hidden_effect = { 
-				add_popularity = {
-					ideology = council
-					popularity = 0.05
-				}
-				remove_ideas = joint_planning
-				TSH = {
-					remove_ideas = joint_planning
-					set_country_flag = TSH_pagan_rebellions
-					country_event = {
-						id = nf_TSH.1
-						days = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					SPT = {
-						has_country_flag = SPT_owns_schukinskaya
-					}
-				}
-				SPT = { country_event = nf_SPT.4 }
-			}
-			TSH = {
-				swap_ideas = {
-					remove_idea = TSH_city_state
-					add_idea = TSH_city_states
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_first_contact
-		icon = GFX_SPT_omon
-		x = -3
-		y = 1
-		cost = 4
-
-		prerequisite = {
-			focus = SPT_phase_two
-		}
-
-		relative_position_id = SPT_phase_two
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			MDR = { country_event = nf_SPT.20 }
-		}
-	}
-
-	focus = {
-		id = SPT_trade_technology
-		icon = GFX_SPT_gun_mdr
-		x = -1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_first_contact
-		}
-
-		available = {
-			has_country_flag = SPT_MDR_accepts
-		}
-
-		relative_position_id = SPT_first_contact
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.5
-				uses = 1
-				category = infantry_weapons
-			}
-			MDR = {
-				add_tech_bonus = {
-					name = industrial_bonus
-					bonus = 0.5
-					uses = 1
-					category = infantry_weapons
-				}
-			}
-			add_tech_bonus = {
-				name = clothing_kits
-				bonus = 0.5
-				uses = 1
-				category = stalker
-			}
-			MDR = {
-				add_tech_bonus = {
-					name = clothing_kits
-					bonus = 0.5
-					uses = 1
-					category = stalker
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_trade_expertise
-		icon = GFX_SPT_rangers_armor
-		x = 1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_first_contact
-		}
-
-		available = {
-			has_country_flag = SPT_MDR_accepts
-		}
-
-		relative_position_id = SPT_first_contact
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			army_experience = 50
-			MDR = {
-				army_experience = 50
-			}
-		}
-	}
-
-	focus = {
 		id = SPT_focus_on_the_inner_sphere
 		icon = GFX_SPT_generic_logo
 		x = 0
@@ -1262,79 +813,6 @@ focus_tree = {
 				type = conventional_infantry_equipment_2
 				amount = 10
 				producer = RUS
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_quell_the_pagans
-		icon = GFX_SPT_pagan
-		x = -3
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_the_sensible_plan
-		}
-
-		available = {
-			SPT = {
-				has_completed_focus = SPT_tushinos_safety_secured
-			}
-			TSH = {
-				has_country_flag = TSH_pagan_rebellions
-			}
-		}
-
-		relative_position_id = SPT_the_sensible_plan
-		ai_will_do = {
-			factor = 90
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = TSH_kill_the_rebels
-			TSH = {
-				clr_country_flag = TSH_pagan_rebellions
-				add_stability = 0.05
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_preempt_the_nazi_threat
-		icon = GFX_SPT_hitler
-		x = 1
-		y = 2
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_quell_the_pagans
-		}
-		available = {
-			SPT = {
-				has_country_flag = SPT_help_tushinskaya_flag
-			}
-		}
-
-		relative_position_id = SPT_quell_the_pagans
-		ai_will_do = {
-			factor = 90
-		}
-
-		completion_reward = {
-			246 = {
-				add_building_construction = {
-					type = bunker2
-					level = 2
-					instant_build = yes
-					province = 2819
-				}
-				add_building_construction = {
-					type = bunker2
-					level = 2
-					instant_build = yes
-					province = 2805
-				}
 			}
 		}
 	}
@@ -1983,244 +1461,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SPT_circulating_rumors
-		icon = GFX_SPT_d6_book
-		x = 0
-		y = 1
-		cost = 4
-		available = { 
-			has_global_flag = D6_activate
-			has_country_flag = D6_METRO_2_available 
-		}
-		prerequisite = { focus = SPT_phase_two }
-		relative_position_id = SPT_phase_two
-		completion_reward = {
-			SPT = { country_event = nf_SPT.23 }
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
-	focus = {
-		id = SPT_miller_leader
-		icon = GFX_SPT_miller
-		x = 3
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_phase_two
-		}
-
-		available = {
-			always = no
-		}
-
-		relative_position_id = SPT_phase_two
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_political_power = 100
-			add_ideas = PLS_spec_ops_equipment_reduction
-		}
-	}
-
-	focus = {
-		id = SPT_question_of_hunter
-		icon = GFX_SPT_hunter_question
-		x = -1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_miller_leader
-		}
-
-		available = {
-			
-		}
-
-		relative_position_id = SPT_miller_leader
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			SPT = { country_event = nf_SPT.19 }
-			remove_ideas = SPT_hunters_growing_influence
-			add_popularity = {
-				ideology = dictatorial
-				popularity = -0.5
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_the_benefits_of_a_long_career
-		icon = GFX_SPT_miller_2
-		x = 1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_miller_leader
-		}
-
-		available = {
-			
-		}
-
-		relative_position_id = SPT_miller_leader
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			army_experience = 50
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
-			}
-			SPT_miller = {
-				gain_xp = 2500
-				add_skill_level = 1
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_rebuild_spartan_morale
-		icon = GFX_SPT_generic_soldier_3
-		x = -1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_question_of_hunter
-		}
-
-		available = {
-			OR = {
-				MUT = {
-					exists = no
-				}
-				GWC = {
-					exists = no
-				}
-			}
-		}
-
-		relative_position_id = SPT_question_of_hunter
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_stability = 0.1
-			add_war_support = 0.1
-		}
-	}
-
-	focus = {
-		id = SPT_vladimirs_storerooms
-		icon = GFX_SPT_equipment_2
-		x = 1
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_question_of_hunter
-		}
-		prerequisite = {
-			focus = SPT_the_benefits_of_a_long_career
-		}
-
-		available = {
-			SPT_vladimir = {
-				is_hired_as_advisor = yes
-			}
-		}
-
-		relative_position_id = SPT_question_of_hunter
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_the_right_hand_man
-		icon = GFX_SPT_idiot
-		x = 3
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_question_of_hunter
-		}
-
-		relative_position_id = SPT_question_of_hunter
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = SPT_idiot
-			add_corps_commander_role = {
-				character = SPT_idiot
-				traits = { spartan_personality_trait }
-				skill = 3
-				attack_skill = 3
-				defense_skill = 3
-				planning_skill = 3
-				logistics_skill = 3
-			}
-		}
-	}
-
-	focus = {
-		id = SPT_hunter_leader
-		icon = GFX_SPT_hunter
-		x = 7
-		y = 1
-		cost = 5
-
-		prerequisite = {
-			focus = SPT_phase_two
-		}
-
-		available = {
-			always = no
-		}
-
-		relative_position_id = SPT_phase_two
-		ai_will_do = {
-			factor = 100
-		}
-
-		completion_reward = {
-			add_political_power = 100
-			add_ideas = SPT_hostile_kill_it
-		}
-	}
-
-	focus = {
 		id = SPT_reforge_the_armory
 		icon = GFX_SPT_generic_logo
 		x = -12
@@ -2563,4 +1803,763 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = SPT_the_sensible_plan
+		icon = GFX_SPT_tushino_help
+		x = -9
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_phase_two
+		}
+
+		relative_position_id = SPT_phase_two
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SPT_colonel_influence_tt
+			hidden_effect = {
+				SPT = {
+					country_event = {
+						id = nf_SPT_FLAVOR.3
+						days = 20
+						random_hours = 12
+						random_days = 15
+					}
+				}
+			}
+			TSH = {
+				add_ideas = the_order_help
+			}
+			add_opinion_modifier = {
+				target = TSH
+				modifier = PLS_support
+			}
+			reverse_add_opinion_modifier = {
+				target = SPT
+				modifier = PLS_support
+			}
+			PLS = {
+				add_to_faction = TSH
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_run_circles_around_spartak
+		icon = GFX_SPT_generic_soldier
+		x = -1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_the_sensible_plan
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_command_power = 15
+			add_political_power = 50
+			TSH = {
+				add_manpower = 10
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_trade_on_the_down_low
+		icon = GFX_SPT_generic_gear_repair
+		x = 0
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_run_circles_around_spartak
+		}
+
+		relative_position_id = SPT_run_circles_around_spartak
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
+			TSH = {
+				capital_scope = {
+					add_resource = {
+						type = alloys
+						amount = 2
+					}
+					add_resource = {
+						type = scrap
+						amount = 2
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_a_slice_of_our_home_in_tushino
+		icon = GFX_SPT_patch_guns
+		x = 1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_the_sensible_plan
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			246 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
+			TSH = {
+				army_experience = 20
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 20
+					producer = RUS
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_joint_planning
+		icon = GFX_SPT_miller_2
+		x = 1
+		y = 2
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_a_slice_of_our_home_in_tushino
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_ideas = joint_planning
+			TSH = {
+				add_ideas = joint_planning
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_set_up_shop_in_the_south
+		icon = GFX_SPT_rangers_6
+		x = 3
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_the_sensible_plan
+		}
+
+		available = {
+			RUI = {
+				controls_state = 246
+			}
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			246 = {
+				transfer_state_to = SPT
+			}
+			hidden_effect = { RUI = { remove_state_core = 246 } }
+			set_country_flag = SPT_owns_schukinskaya
+		}
+	}
+
+	focus = {
+		id = SPT_deploy_the_pagan_killers
+		icon = GFX_SPT_rangers_3
+		x = -1
+		y = 2
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_set_up_shop_in_the_south
+		}
+
+		available = {
+			SPT = {
+				controls_state = 246
+				has_manpower > 29
+			}
+		}
+
+		relative_position_id = SPT_set_up_shop_in_the_south
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_manpower = -30
+			division_template = {
+				name = "Spartan Ranger Detachment"
+				priority = 1
+				is_locked = yes
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					special_forces = { x = 1 y = 0 }
+					special_forces = { x = 1 y = 1 }
+				}
+			}
+			246 = {
+				create_unit = {
+					division = "name = \"1st Spartan Detachment\" division_template = \"Spartan Ranger Detachment\" start_experience_factor = 0.6 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			246 = {
+				create_unit = {
+					division = "name = \"2nd Spartan Detachment\" division_template = \"Spartan Ranger Detachment\" start_experience_factor = 0.6 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_give_the_order
+		icon = GFX_SPT_experienced_rangers
+		x = 0
+		y = 3
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_trade_on_the_down_low
+		}
+		prerequisite = {
+			focus = SPT_joint_planning
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			TSH = {
+				declare_war_on = {
+					target = PAG
+					type = annex_everything
+				}
+			}
+			SPT = {
+				declare_war_on = {
+					target = PAG
+					type = annex_everything
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_tushinos_safety_secured
+		icon = GFX_generic_support_rangers
+		x = 0
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_give_the_order
+		}
+
+		available = {
+			OR = {
+				TSH = {
+					controls_state = 289
+				}
+				controls_state = 289
+			}
+		}
+
+		relative_position_id = SPT_give_the_order
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SPT_colonel_influence_tt
+			hidden_effect = { 
+				add_popularity = {
+					ideology = council
+					popularity = 0.05
+				}
+				remove_ideas = joint_planning
+				TSH = {
+					remove_ideas = joint_planning
+					set_country_flag = TSH_pagan_rebellions
+					country_event = {
+						id = nf_TSH.1
+						days = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					SPT = {
+						has_country_flag = SPT_owns_schukinskaya
+					}
+				}
+				SPT = { country_event = nf_SPT.4 }
+			}
+			TSH = {
+				swap_ideas = {
+					remove_idea = TSH_city_state
+					add_idea = TSH_city_states
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_first_contact
+		icon = GFX_SPT_omon
+		x = -3
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = SPT_phase_two
+		}
+
+		relative_position_id = SPT_phase_two
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			MDR = { country_event = nf_SPT.20 }
+		}
+	}
+
+	focus = {
+		id = SPT_trade_technology
+		icon = GFX_SPT_gun_mdr
+		x = -1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_first_contact
+		}
+
+		available = {
+			has_country_flag = SPT_MDR_accepts
+		}
+
+		relative_position_id = SPT_first_contact
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			MDR = {
+				add_tech_bonus = {
+					name = industrial_bonus
+					bonus = 0.5
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+			MDR = {
+				add_tech_bonus = {
+					name = clothing_kits
+					bonus = 0.5
+					uses = 1
+					category = stalker
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_trade_expertise
+		icon = GFX_SPT_rangers_armor
+		x = 1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_first_contact
+		}
+
+		available = {
+			has_country_flag = SPT_MDR_accepts
+		}
+
+		relative_position_id = SPT_first_contact
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 50
+			MDR = {
+				army_experience = 50
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_miller_leader
+		icon = GFX_SPT_miller
+		x = 3
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_phase_two
+		}
+
+		available = {
+			always = no
+		}
+
+		relative_position_id = SPT_phase_two
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = PLS_spec_ops_equipment_reduction
+		}
+	}
+
+	focus = {
+		id = SPT_question_of_hunter
+		icon = GFX_SPT_hunter_question
+		x = -1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_miller_leader
+		}
+
+		available = {
+			
+		}
+
+		relative_position_id = SPT_miller_leader
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			SPT = { country_event = nf_SPT.19 }
+			remove_ideas = SPT_hunters_growing_influence
+			add_popularity = {
+				ideology = dictatorial
+				popularity = -0.5
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_the_benefits_of_a_long_career
+		icon = GFX_SPT_miller_2
+		x = 1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_miller_leader
+		}
+
+		available = {
+			
+		}
+
+		relative_position_id = SPT_miller_leader
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			SPT_miller = {
+				gain_xp = 2500
+				add_skill_level = 1
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_rebuild_spartan_morale
+		icon = GFX_SPT_generic_soldier_3
+		x = -1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_question_of_hunter
+		}
+
+		available = {
+			OR = {
+				MUT = {
+					exists = no
+				}
+				GWC = {
+					exists = no
+				}
+			}
+		}
+
+		relative_position_id = SPT_question_of_hunter
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = SPT_vladimirs_storerooms
+		icon = GFX_SPT_equipment_2
+		x = 1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_question_of_hunter
+		}
+		prerequisite = {
+			focus = SPT_the_benefits_of_a_long_career
+		}
+
+		available = {
+			SPT_vladimir = {
+				is_hired_as_advisor = yes
+			}
+		}
+
+		relative_position_id = SPT_question_of_hunter
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_the_right_hand_man
+		icon = GFX_SPT_idiot
+		x = 3
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_question_of_hunter
+		}
+
+		relative_position_id = SPT_question_of_hunter
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = SPT_idiot
+			add_corps_commander_role = {
+				character = SPT_idiot
+				traits = { spartan_personality_trait }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 3
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_hunter_leader
+		icon = GFX_SPT_hunter
+		x = 7
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_phase_two
+		}
+
+		available = {
+			always = no
+		}
+
+		relative_position_id = SPT_phase_two
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = SPT_hostile_kill_it
+		}
+	}
+
+	focus = {
+		id = SPT_quell_the_pagans
+		icon = GFX_SPT_pagan
+		x = -3
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_the_sensible_plan
+		}
+
+		available = {
+			SPT = {
+				has_completed_focus = SPT_tushinos_safety_secured
+			}
+			TSH = {
+				has_country_flag = TSH_pagan_rebellions
+			}
+		}
+
+		relative_position_id = SPT_the_sensible_plan
+		ai_will_do = {
+			factor = 90
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = TSH_kill_the_rebels
+			TSH = {
+				clr_country_flag = TSH_pagan_rebellions
+				add_stability = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_preempt_the_nazi_threat
+		icon = GFX_SPT_hitler
+		x = 1
+		y = 2
+		cost = 5
+
+		prerequisite = {
+			focus = SPT_quell_the_pagans
+		}
+		available = {
+			SPT = {
+				has_country_flag = SPT_help_tushinskaya_flag
+			}
+		}
+
+		relative_position_id = SPT_quell_the_pagans
+		ai_will_do = {
+			factor = 90
+		}
+
+		completion_reward = {
+			246 = {
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = 2819
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = 2805
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SPT_circulating_rumors
+		icon = GFX_SPT_d6_book
+		x = 0
+		y = 1
+		cost = 4
+		available = { 
+			has_global_flag = D6_activate
+			has_country_flag = D6_METRO_2_available 
+		}
+		prerequisite = { focus = SPT_phase_two }
+		relative_position_id = SPT_phase_two
+		completion_reward = {
+			SPT = { country_event = nf_SPT.23 }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 }
