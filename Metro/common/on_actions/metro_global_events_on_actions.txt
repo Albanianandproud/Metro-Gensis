@@ -3,12 +3,21 @@ on_actions = {
 		effect = {
 			1 = { every_state = { set_variable = { original_owner = OWNER } } }
 			## D6
+			if = {
+				limit = {
+					106 = { is_owned_by = RUI }
+				}
+				every_country = {
+					limit = {
+						NOT = { 
+							original_tag = RUI
+							original_tag = SUF
+						}
+					}
+					country_event = { id = nf_D6_discovery.1 days = 1830 } ## should fire sometime in 2032
+				}
+			}
 		}
-		effect = {
-            every_country = {
-				country_event = { id = nf_D6_discovery.1 days = 1830 }
-            }
-        }
 	}
 	on_state_control_changed = {
 		effect = {
