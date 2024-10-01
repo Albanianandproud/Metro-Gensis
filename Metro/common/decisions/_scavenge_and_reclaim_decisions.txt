@@ -3,7 +3,7 @@ reclaim_metro = {
 	   icon = decision_generic_military
 	   custom_cost_text = command_power_50
 	   custom_cost_trigger = { command_power > 49.9 }
-	   days_remove = 45
+	   days_remove = 35
 	   days_re_enable = 0
 	   on_map_mode = map_only
 	   state_target = yes
@@ -612,7 +612,7 @@ reclaim_metro = {
 		activation = { always = no }
 		available = { }
 		is_good = no
-		days_mission_timeout = 45
+		days_mission_timeout = 35
 		selectable_mission = yes
 
 		cancel_trigger = {
@@ -634,10 +634,20 @@ reclaim_metro = {
 					check_variable = { 
 						var = reclaim_cost
 						value = reclaim_cost_requirement
-						compare = greater_than_or_equals  
+						compare = less_than_or_equals  
 					}
 				}
 				RUI = { transfer_state = ROOT.state_colonised_id }
+			}
+			else_if = {
+				limit = {
+					check_variable = { 
+						var = reclaim_cost
+						value = reclaim_cost_requirement
+						compare = greater_than_or_equals  
+					}
+				}
+				custom_effect_tooltip = hello
 			}
 		}
 		complete_effect = {
@@ -728,11 +738,11 @@ reclaim_metro = {
 	reclaim_mission_send_soldiers = {
 		icon = decision_generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
-		custom_cost_trigger = { has_manpower > 9 }
+		custom_cost_trigger = { has_manpower > 4 }
 		days_re_enable = 21
 
 		visible = { NOT = { has_country_flag = is_savage_nation } has_country_flag = reclaim_mission_activated }
-		available = { has_manpower > 9 has_equipment = { infantry_equipment > 9 } } 
+		available = { has_manpower > 4 has_equipment = { infantry_equipment > 4 } } 
 		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
 
 		complete_effect = {
@@ -743,7 +753,7 @@ reclaim_metro = {
 			}
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
-				amount = -10
+				amount = -5
 			}
 		}
 
@@ -755,11 +765,11 @@ reclaim_metro = {
 	reclaim_mission_send_soldiers_savage = {
 		icon = decision_generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
-		custom_cost_trigger = { has_manpower > 9 }
+		custom_cost_trigger = { has_manpower > 4 }
 		days_re_enable = 21
 
 		visible = {  has_country_flag = is_savage_nation has_country_flag = reclaim_mission_activated }
-		available = { has_manpower > 9 has_equipment = { savage_equipment > 9 } } 
+		available = { has_manpower > 4 has_equipment = { savage_equipment > 4 } } 
 		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
 
 		complete_effect = {
@@ -770,7 +780,7 @@ reclaim_metro = {
 			}
 			add_equipment_to_stockpile = {
 				type = savage_equipment
-				amount = -10
+				amount = -5
 			}
 		}
 
