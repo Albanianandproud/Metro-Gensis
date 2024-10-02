@@ -164,7 +164,7 @@ country_event = {
     picture = "GFX_event (183)"
 	
 	is_triggered_only = yes
-	fire_only_once = yes
+	#fire_only_once = yes
 
     immediate = {
         hidden_effect = {
@@ -178,15 +178,16 @@ country_event = {
         set_country_flag = D6_participant
         ai_chance = {
             base = 3.5
+            modifier = { is_acting_performer = yes factor = 20 }
         }
     }
 
     option = {
         name = nf_D6_discovery.1.b
         trigger = {     ## Stop retarded ass nations like Trubnaya AI from trying to find D6
-            NOT = {
-            	is_acting_performer = yes
-                is_major = yes
+            OR = {
+                is_acting_performer = no
+                is_major = no
             }
         }
 		custom_effect_tooltip = nf_D6_discovery_refusal_tt
