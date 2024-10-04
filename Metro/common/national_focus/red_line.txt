@@ -393,17 +393,17 @@ focus_tree = {
 		x = 5
 		y = 6
 		cost = 1
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				NOT = { has_completed_focus = RED_2030 }
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		NOT = { has_completed_focus = RED_2030 }
+		#	}
+		#}
 		select_effect = { mark_focus_tree_layout_dirty = yes }
 		available = {
 			always = no
@@ -779,7 +779,7 @@ focus_tree = {
         	hidden_effect = {
             	clr_country_flag = RED_military_mutinies
         	}
-			custom_effect_tooltip = RED_unlock_next_focus_tree_tt
+			#custom_effect_tooltip = RED_unlock_next_focus_tree_tt
 		}
 		ai_will_do = {
 			factor = 50
@@ -1146,7 +1146,7 @@ focus_tree = {
 		completion_reward = {
 			clr_country_flag = RED_mushroom_revolts
 			remove_ideas = RED_mushroom_revolt      
-			custom_effect_tooltip = RED_unlock_next_focus_tree_tt
+			#custom_effect_tooltip = RED_unlock_next_focus_tree_tt
 		}
 		ai_will_do = {
 			factor = 100
@@ -1162,7 +1162,15 @@ focus_tree = {
 		prerequisite = { focus = RED_the_crowd_stills }
 		prerequisite = { focus = RED_staff_purge }
 		completion_reward = {
-			country_event = nf_RED.73
+			if = {
+				limit = {
+					RED_andrey_moskvin = { is_country_leader = yes }
+				}
+				country_event = nf_RED.73
+			}
+			else = {
+				add_political_power = 250
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3840,10 +3848,10 @@ focus_tree = {
 				template_counter = 0
 				regiments = {
 					rail_cart = { x = 0 y = 0 }
-					rail_cart = { x = 0 y = 1 }
-					rail_cart = { x = 0 y = 2 }
-					rail_cart = { x = 0 y = 3 }
-					rail_cart = { x = 0 y = 4 }
+					rail_cart = { x = 1 y = 0 }
+					rail_cart = { x = 2 y = 0 }
+					rail_cart = { x = 3 y = 0 }
+					rail_cart = { x = 4 y = 0 }
 				}
 			}
 			capital_scope = {
