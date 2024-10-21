@@ -1024,9 +1024,9 @@ focus_tree = {
 			}
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = SPT_arbat_advisor_1
-			army_experience = 35
+			army_experience = 50
 			ARB = {
-				army_experience = 35
+				army_experience = 50
 			}
 		}
 	}
@@ -1463,7 +1463,7 @@ focus_tree = {
 	focus = {
 		id = SPT_reforge_the_armory
 		icon = GFX_SPT_generic_logo
-		x = -11
+		x = -12
 		y = 1
 		cost = 5
 
@@ -1806,7 +1806,7 @@ focus_tree = {
 	focus = {
 		id = SPT_the_sensible_plan
 		icon = GFX_SPT_tushino_help
-		x = -10
+		x = -9
 		y = 1
 		cost = 5
 
@@ -1842,6 +1842,9 @@ focus_tree = {
 				target = SPT
 				modifier = PLS_support
 			}
+			PLS = {
+				add_to_faction = TSH
+			}
 		}
 	}
 
@@ -1866,7 +1869,6 @@ focus_tree = {
 			add_political_power = 50
 			TSH = {
 				add_manpower = 10
-				add_command_power = 20
 			}
 		}
 	}
@@ -1985,10 +1987,8 @@ focus_tree = {
 		}
 
 		available = {
-			has_manpower > 4
-			RUI = { controls_state = 246 }
-			NOT = {
-				ULI = { has_country_flag = ULI_polezhaevsky_incident_flag }
+			RUI = {
+				controls_state = 246
 			}
 		}
 
@@ -2003,15 +2003,6 @@ focus_tree = {
 			}
 			hidden_effect = { RUI = { remove_state_core = 246 } }
 			set_country_flag = SPT_owns_schukinskaya
-		}
-
-		cancel_if_invalid = yes
-
-		cancel = {
-			has_manpower < 5
-			NOT = {
-				246 = { is_owned_by = RUI }
-			}
 		}
 	}
 
@@ -2039,19 +2030,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			246 = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = radar_station
-					level = 1
-					instant_build = yes
-				}
-			}
-			add_manpower = -20
+			add_manpower = -30
 			division_template = {
 				name = "Spartan Ranger Detachment"
 				priority = 1
@@ -2059,8 +2038,8 @@ focus_tree = {
 				regiments = {
 					regulars = { x = 0 y = 0 }
 					regulars = { x = 0 y = 1 }
-					regulars = { x = 0 y = 2 }
-					regulars = { x = 0 y = 3 }
+					special_forces = { x = 1 y = 0 }
+					special_forces = { x = 1 y = 1 }
 				}
 			}
 			246 = {
@@ -2069,13 +2048,12 @@ focus_tree = {
 					owner = ROOT
 				}
 			}
-		}
-
-		cancel_if_invalid = yes
-
-		cancel = {
-			NOT = { controls_state = 246 }
-			has_manpower < 20
+			246 = {
+				create_unit = {
+					division = "name = \"2nd Spartan Detachment\" division_template = \"Spartan Ranger Detachment\" start_experience_factor = 0.6 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
 		}
 	}
 
@@ -2085,22 +2063,30 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost = 5
-		available = {
-			PAG = { exists = yes }
-		}
+
 		prerequisite = {
 			focus = SPT_trade_on_the_down_low
 		}
 		prerequisite = {
 			focus = SPT_joint_planning
 		}
+
 		relative_position_id = SPT_the_sensible_plan
-		will_lead_to_war_with = PAG
+		ai_will_do = {
+			factor = 100
+		}
+
 		completion_reward = {
 			TSH = {
-				create_wargoal = {
-					type = take_state_focus
+				declare_war_on = {
 					target = PAG
+					type = annex_everything
+				}
+			}
+			SPT = {
+				declare_war_on = {
+					target = PAG
+					type = annex_everything
 				}
 			}
 		}
@@ -2118,7 +2104,6 @@ focus_tree = {
 		}
 
 		available = {
-			PAG = { exists = no }
 			OR = {
 				TSH = {
 					controls_state = 289
@@ -2163,16 +2148,13 @@ focus_tree = {
 					add_idea = TSH_city_states
 				}
 			}
-			PLS = {
-				add_to_faction = TSH
-			}
 		}
 	}
 
 	focus = {
 		id = SPT_first_contact
 		icon = GFX_SPT_omon
-		x = 4
+		x = -3
 		y = 1
 		cost = 4
 
@@ -2273,7 +2255,7 @@ focus_tree = {
 	focus = {
 		id = SPT_miller_leader
 		icon = GFX_SPT_miller
-		x = 10
+		x = 3
 		y = 1
 		cost = 5
 
@@ -2465,7 +2447,7 @@ focus_tree = {
 	focus = {
 		id = SPT_hunter_leader
 		icon = GFX_SPT_hunter
-		x = 14
+		x = 9
 		y = 1
 		cost = 5
 
@@ -2565,7 +2547,7 @@ focus_tree = {
 		id = SPT_circulating_rumors
 		icon = GFX_SPT_d6_book
 		x = 0
-		y = 4
+		y = 1
 		cost = 4
 		available = { 
 			has_global_flag = D6_activate
@@ -2582,382 +2564,145 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SPT_the_arbat_help_1
-		icon = GFX_generic_support_arbat
-		x = -16
+		id = SPT_sparta_on_the_warpath
+		icon = GFX_SPT_d6_book
+		x = 15
 		y = 1
-		cost = 5
-		available = {
-			has_completed_focus = SPT_pact_with_arbat
-			ARB = { exists = yes }
-		}
+		cost = 4
+		
 		prerequisite = { focus = SPT_phase_two }
 		relative_position_id = SPT_phase_two
-		completion_reward = { 
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = ARB_miguel
-			add_opinion_modifier = {
-				target = ARB
-				modifier = MDR_assistance
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_2
-		icon = GFX_ARB_generals_3
-		x = -1
-		y = 1
-		cost = 5
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_1 }
-		relative_position_id = SPT_the_arbat_help_1
-		completion_reward = { 
-			ARB = {
-				add_tech_bonus = {
-					name = clothing_kits
-					bonus = 0.5
-					uses = 1
-					category = stalker
-				}
-			}
-			add_tech_bonus = {
-				name = clothing_kits
-				bonus = 0.5
-				uses = 1
-				category = stalker
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_3
-		icon = GFX_ARB_2
-		x = 1
-		y = 1
-		cost = 5
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_1 }
-		relative_position_id = SPT_the_arbat_help_1
-		completion_reward = { 
-			ARB = {
-				add_equipment_to_stockpile = {
-					type = special_forces_equipment_spetnaz
-					amount = 10
-					producer = RUS
-				}
-			}
-			capital_scope = {
-				add_resource = {
-					type = alloys
-					amount = 2
-				}
-				add_resource = {
-					type = components
-					amount = 2
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_4
-		icon = GFX_ARB_generic
-		x = 0
-		y = 1
-		cost = 2.2
-		available = {
-			NOT = { has_war_with = ARB }
-			435 = { is_owned_by = ARB }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_2 }
-		mutually_exclusive = { focus = SPT_the_arbat_help_5 }
-		relative_position_id = SPT_the_arbat_help_2
-		completion_reward = { 
-			435 = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = radar_station
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = bunker
-					level = 2
-					instant_build = yes
-					province = {
-						all_provinces = yes
-						limit_to_border = yes
-					}
-				}
-			}
-		}
-		cancel_if_invalid = yes
-		cancel = { 
-			435 = { NOT = { is_owned_by = ARB } } 
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_5
-		icon = GFX_ARB_generic_2
-		x = 0
-		y = 1
-		cost = 10
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-			197 = { is_owned_by = ROOT }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_3 }
-		mutually_exclusive = { focus = SPT_the_arbat_help_4 }
-		relative_position_id = SPT_the_arbat_help_3
-		completion_reward = { 
-			197 = { transfer_state_to = ARB set_demilitarized_zone = no }
-		}
-		cancel_if_invalid = yes
-		cancel = { 
-			288 = { NOT = { is_owned_by = RUI } } 
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_6
-		icon = GFX_ARB_hearth
-		x = 0
-		y = 3
-		cost = 5
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_4 focus = SPT_the_arbat_help_5 }
-		relative_position_id = SPT_the_arbat_help_1
-		completion_reward = { 
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-			ARB = {
-				add_doctrine_cost_reduction = {
-					cost_reduction = 0.5
-					uses = 1
-					category = land_doctrine
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_7
-		icon = GFX_PLS_thumbs_up
-		x = 1
-		y = 1
-		cost = 2.2
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-			GWC = { exists = no }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_6 }
-		relative_position_id = SPT_the_arbat_help_6
 		completion_reward = {
-			effect_tooltip = {
-				every_owned_state = {
-					limit = {
-						is_core_of = GWC
-						is_owned_by = ARB
-					}
-					add_resistance = -20
-				}
-				GWC = {
-					every_owned_state = {
-						limit = {
-							is_core_of = GWC
-						}
-						add_resistance = -20
-					}
-				}
-			}
-			hidden_effect = {
-				every_owned_state = {
-					limit = {
-						is_core_of = GWC
-						is_owned_by = ARB
-					}
-					add_resistance = -20
-				}
-			}
+			add_ideas = SPT_sparta_on_the_warpath
 		}
 		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_8
-		icon = GFX_anti_gwc
-		x = -1
-		y = 1
-		cost = 2.2
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-			GWC = { exists = no }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_6 }
-		prerequisite = { focus = SPT_the_arbat_help_2b }
-		relative_position_id = SPT_the_arbat_help_6
-		completion_reward = {
-			effect_tooltip = {
-				every_owned_state = {
-					limit = {
-						is_core_of = GWC
-						is_owned_by = ARB
-					}
-					add_compliance = 20
-				}
-				GWC = {
-					every_owned_state = {
-						limit = {
-							is_core_of = GWC
-						}
-						add_compliance = 20
-					}
-				}
-			}
-			hidden_effect = {
-				every_owned_state = {
-					limit = {
-						is_core_of = GWC
-						is_owned_by = ARB
-					}
-					add_compliance = 20
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_2a
-		icon = GFX_ARB_armories_of_the_west
-		x = -3
-		y = 1
-		cost = 3
-		available = {
-			ARB = { exists = yes }
-			NOT = { has_war_with = ARB }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_1 }
-		relative_position_id = SPT_the_arbat_help_1
-		completion_reward = { 
-			ARB = {
-				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_3
-					amount = 20
-					producer = RUS
-				}
-			}
-			add_political_power = 30
-			army_experience = 5
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_2b
-		icon = GFX_ARB_conscript_2
-		x = 1
-		y = 2
-		cost = 2.2
-		available = {
-			ARB = { exists = yes }
-			ARB = { has_war_with = GWC }
-		}
-		prerequisite = { focus = SPT_the_arbat_help_2a }
-		relative_position_id = SPT_the_arbat_help_2a
-		completion_reward = {
-			army_experience = 5
-			ARB = { add_war_support = 0.05 }
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = SPT_the_arbat_help_3a
-		icon = GFX_SPT_generic_logo
-		x = 2
-		y = 3
-		cost = 2.2
-		available = {
-			ARB = { 
-				exists = yes 
-				has_completed_focus = ARB_assist_the_rangers
-			}
-		}
-		prerequisite = { focus = SPT_the_arbat_help_1 }
-		relative_position_id = SPT_the_arbat_help_1
-		completion_reward = {
-			army_experience = 5
-			add_ideas = SPT_ARBAT_equipment
-			ARB = {
-				add_ideas = SPT_ARBAT_equipment
-				army_experience = 5
-				every_unit_leader = { 
-					limit = {
-						has_trait = spartan_personality_trait
-					}
-					gain_xp = 750
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 100
+			factor = 70
 		}
 	}
 
-	##focus = {
-	##	id = SPT_yasenevskaya_help
-	##	icon = GFX_SPT_tushino_help
-	##	x = -3
-	##	y = 1
-	##	cost = 5
-	##	available = {
-	##		has_completed_focus = SPT_pact_with_arbat
-	##		YAS = { exists = yes }
-	##	}
-	##	prerequisite = { focus = SPT_phase_two }
-	##	relative_position_id = SPT_phase_two
-	##	completion_reward = { 
-	##	}
-	##	ai_will_do = {
-	##		factor = 100
-	##	}
-	##}
+	focus = {
+		id = SPT_fire_and_fury
+		icon = GFX_explosive_arms_1
+		x = -3
+		y = 1
+		cost = 4
+		
+		prerequisite = { focus = SPT_sparta_on_the_warpath }
+		relative_position_id = SPT_sparta_on_the_warpath
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		        type = explosive_equipment_2
+		        amount = 15
+				producer = RUS
+		    }
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+
+	focus = {
+		id = SPT_spray_and_pray
+		icon = GFX_SPT_equipment
+		x = -1
+		y = 1
+		cost = 4
+		
+		prerequisite = { focus = SPT_sparta_on_the_warpath }
+		relative_position_id = SPT_sparta_on_the_warpath
+		completion_reward = {
+			add_ideas = SPT_spray_and_pray
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+
+	focus = {
+		id = SPT_every_man_some_gauze
+		icon = GFX_PLS_medical
+		x = 1
+		y = 1
+		cost = 4
+		
+		prerequisite = { focus = SPT_sparta_on_the_warpath }
+		relative_position_id = SPT_sparta_on_the_warpath
+		completion_reward = {
+			set_technology = {
+				spartan_equipment_sub_tech_1 = 1
+			}
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+
+	focus = {
+		id = SPT_anti_tank_training
+		icon = GFX_PLS_stalkers
+		x = 3
+		y = 1
+		cost = 4
+		
+		prerequisite = { focus = SPT_sparta_on_the_warpath }
+		relative_position_id = SPT_sparta_on_the_warpath
+		completion_reward = {
+			add_ideas = SPT_antitank_training
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+
+	focus = {
+		id = SPT_peacekeeping_on_the_sokol
+		icon = GFX_generic_soviet
+		x = 1
+		y = 1
+		cost = 4
+		
+		prerequisite = { 
+			focus = SPT_fire_and_fury 
+			focus = SPT_spray_and_pray
+		}
+		available = {
+			date < 2034.01.01
+		}
+		relative_position_id = SPT_fire_and_fury
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = RED
+			}
+		}
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+	focus = {
+		id = SPT_downfall_once_more
+		icon = GFX_RCH_soldat_5
+		x = 1
+		y = 1
+		cost = 4
+		
+		prerequisite = { 
+			focus = SPT_anti_tank_training
+			focus = SPT_every_man_some_gauze
+		}
+		available = {
+			date < 2034.01.01
+		}
+		relative_position_id = SPT_every_man_some_gauze
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = RCH
+			}
+		}
+		ai_will_do = {
+			factor = 200
+		}
+	}
 }
