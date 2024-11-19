@@ -1,15 +1,23 @@
 savage_infantry_default = {
-	roles = { infantry }
+	role = infantry 
 	upgrade_prio = { base = 100 }
-	match_to_count = 0.6
 
 	available_for = {
 		PAG
 		GWC
 	}
 
+	upgrade_prio = {
+		factor = 2
+		modifier = {
+			factor = 25
+			OR = {
+				threat > 0.2
+			}
+		}
+	}
+
 	savage_underzealot_early = {
-		production_prio = { base = 5 }
 		upgrade_prio = { 
 			base = 8  
 			modifier = {
@@ -18,20 +26,11 @@ savage_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { underzealot = 5 }
-		}
-
-		allowed_types = {
-			underzealot
 		}
 
 		replace_at_match = 0.9
@@ -47,7 +46,6 @@ savage_infantry_default = {
 	}
 
 	savage_underzealot_late = {
-		production_prio = { base = 8 }
 		upgrade_prio = { 
 			base = 10 
 			modifier = {
@@ -56,14 +54,9 @@ savage_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { underzealot = 5 }
 
@@ -72,60 +65,44 @@ savage_infantry_default = {
 				underzealot_support_cultist = 1
 			}
 		}
-
-		allowed_types = {
-			underzealot
-			underzealot_support_cultist
-			underzealot_support_team
-		}
 	}
 }
 
 underzealot_special_forces_templates = {
-	roles = {
-		mountaineers
-		marines
+	role = mountaineers
+
+	available_for = {
+		PAG
+		GWC
 	}
 
-	upgrade_prio = { 
-		base = 5 
-		modifier = { 
-			factor = 0.5
-			num_of_military_factories < 12
-		} 
+	upgrade_prio = {
+		factor = 2
+		modifier = {
+			factor = 25
+			OR = {
+				threat > 0.2
+			}
+		}
 	}
-	match_to_count = 0.5
 
 	savage_underzealot_special_forces_early = {
-		production_prio = {
-			base = 8
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
 				date > 2030.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 10
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
-
 			regiments = { underzealot_special_forces = 5 }
-		}
-
-		allowed_types = {
-			underzealot_special_forces
 		}
 
 		replace_at_match = 0.9
@@ -141,29 +118,21 @@ underzealot_special_forces_templates = {
 	}
 
 	savage_underzealot_special_forces_late = {
-		production_prio = {
-			base = 10
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
 				date > 2030.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 10
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { underzealot_special_forces = 5 }
 
@@ -171,12 +140,6 @@ underzealot_special_forces_templates = {
 				underzealot_support_team = 1
 				underzealot_support_cultist = 1
 			}
-		}
-
-		allowed_types = {
-			underzealot_special_forces
-			underzealot_support_cultist
-			underzealot_support_team
 		}
 	}
 }

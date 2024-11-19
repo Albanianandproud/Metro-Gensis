@@ -1,53 +1,30 @@
 metro_infantry_default = {
-	roles = { infantry }
-	upgrade_prio = { base = 100 }
-	match_to_count = 0.5
+	role = infantry
+	upgrade_prio = { base = 2 }
 
 	blocked_for = {
 		RED
 		RCH
 	}
 
-	##
-	## Ideally, Majors (or countries with large enough IC) shouldn't ever produce straight naked divisions
-	## But instead switch straight to early templates.
-	##
-
 	metro_infantry_irregulars_naked = {
-		production_prio = { 
-			base = 1
+		upgrade_prio = { 
+			base = 20
 			modifier = {
-				factor = 0.01
+				factor = 2
 				date > 2029.1.1
 			}
 			modifier = {
-				factor = 0.1
+				factor = 25
 				has_tech = entrench_kits_2031
 				has_tech = cultist_infantry_unlock_tech
 			}
 		}
-		upgrade_prio = { 
-			base = 20
-			modifier = {
-				factor = 25
-				date > 2029.1.1
-			}
-		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
-
 			regiments = { irregulars = 5 }
-		}
-
-		allowed_types = {
-			irregulars
 		}
 
 		replace_at_match = 0.9
@@ -63,34 +40,22 @@ metro_infantry_default = {
 	}
 
 	metro_infantry_irregulars_early = {
-		production_prio = { 
-			base = 5 
-			modifier = {
-				factor = 0.01
-				date > 2030.1.1
-			}
-			modifier = {
-				factor = 0.1
-				has_tech = entrench_kits_2031
-				has_tech = cultist_infantry_unlock_tech
-			}
-		}
 		upgrade_prio = { 
 			base = 8  
 			modifier = {
 				factor = 20
 				date > 2030.1.1
 			}
+			modifier = {
+				factor = 25
+				has_tech = entrench_kits_2031
+				has_tech = cultist_infantry_unlock_tech
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
@@ -99,16 +64,6 @@ metro_infantry_default = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			irregulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -124,25 +79,17 @@ metro_infantry_default = {
 	}
 
 	metro_infantry_irregulars_late = {
-		production_prio = { 
-			base = 8 
-		}
 		upgrade_prio = { 
 			base = 10 
 			modifier = {
-				factor = 20
+				factor = 35
 				date > 2032.1.1
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
@@ -155,26 +102,9 @@ metro_infantry_default = {
 				inf_recon = 1
 			}
 		}
-
-		allowed_types = {
-			irregulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-		}
 	}
 
 	metro_infantry_regulars_naked = {
-		production_prio = { 
-			base = 12
-			modifier = {
-				factor = 0.1
-				date < 2031.10.1
-			}
-		}
 		upgrade_prio = { 
 			base = 20
 			modifier = {
@@ -183,20 +113,11 @@ metro_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
-		}
-
-		allowed_types = {
-			regulars
 		}
 
 		replace_at_match = 0.9
@@ -212,13 +133,6 @@ metro_infantry_default = {
 	}
 
 	metro_infantry_regulars_early = {
-		production_prio = { 
-			base = 16 
-			modifier = {
-				factor = 0.01
-				date > 2033.10.1
-			}
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
@@ -227,14 +141,9 @@ metro_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -243,16 +152,6 @@ metro_infantry_default = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -268,7 +167,6 @@ metro_infantry_default = {
 	}
 
 	metro_infantry_regulars_late = {
-		production_prio = { base = 18 }
 		upgrade_prio = { 
 			base = 12
 			modifier = {
@@ -277,14 +175,9 @@ metro_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -297,21 +190,11 @@ metro_infantry_default = {
 				inf_recon = 1
 			}
 		}
-
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-		}
 	}
 }
 
 special_forces_templates = {
-	roles = {
+	role = {
 		mountaineers
 		marines
 	}
@@ -323,42 +206,25 @@ special_forces_templates = {
 			num_of_military_factories < 10
 		} 
 	}
-	match_to_count = 0.5
 
 	metro_infantry_special_forces_naked = {
-		production_prio = { 
-			base = 2
-			modifier = {
-				factor = 20
-				num_of_military_factories < 8
-			}
-			modifier = {
-				factor = 0.1
-				date > 2030.1.1
-			}
-		}
 		upgrade_prio = { 
 			base = 20
 			modifier = {
 				factor = 20
 				date > 2030.1.1
 			}
+			modifier = {
+				factor = 0.1
+				date > 2030.1.1
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
-		}
-
-		allowed_types = {
-			special_forces
 		}
 
 		replace_at_match = 0.9
@@ -374,29 +240,21 @@ special_forces_templates = {
 	}
 
 	metro_infantry_special_forces_early = {
-		production_prio = {
-			base = 8
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 8
-			} 
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
 				date > 2032.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 6
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
 
@@ -405,16 +263,6 @@ special_forces_templates = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -430,29 +278,21 @@ special_forces_templates = {
 	}
 
 	metro_infantry_special_forces_late = {
-		production_prio = {
-			base = 10
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 8
-			} 
-		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
 				date > 2033.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 6
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
 
@@ -464,16 +304,6 @@ special_forces_templates = {
 				logistics_company = 1
 				inf_recon = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 	}
 }

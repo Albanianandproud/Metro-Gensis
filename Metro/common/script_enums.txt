@@ -18,11 +18,16 @@ script_enum_equipment_category = {
 	cas
 	naval_bomber
 	missile
+	emplacement_gun_ammo
+	ballistic_missile
+	nuclear_missile
+	sam_missile
 	suicide
 	scout_plane
 	maritime_patrol_plane
 	air_transport
 	carrier
+	missile_launcher
 	support
 	amphibious
 	anti_air
@@ -30,16 +35,12 @@ script_enum_equipment_category = {
 	anti_tank
 	rocket
 	flame
+	land_cruiser
 }
 
 script_enum_equipment_bonus_type = {
-
-	infantry_equipment 
-
-	# Equipment categories
-
+	infantry_equipment
 	convoy
-	convoy_1
 	train
 	floating_harbor
 	railway_gun
@@ -58,11 +59,16 @@ script_enum_equipment_bonus_type = {
 	cas
 	naval_bomber
 	missile
+	emplacement_gun_ammo
+	ballistic_missile
+	nuclear_missile
+	sam_missile
 	suicide
 	scout_plane
 	maritime_patrol_plane
 	air_transport
 	carrier
+	missile_launcher
 	support
 	amphibious
 	anti_air
@@ -70,6 +76,7 @@ script_enum_equipment_bonus_type = {
 	anti_tank
 	rocket
 	flame
+	land_cruiser
 
 	## This script enum contains all equipment types that can be used in equipment_bonus
 	## or in game/common/military_industrial_organization scripts.
@@ -82,6 +89,7 @@ script_enum_equipment_bonus_type = {
 
 	## METRO ##
 
+	convoy_1
 	# Equipment archetypes & types
 	basic_infantry_equipment
 	scrap_infantry_equipment_1
@@ -204,7 +212,8 @@ script_enum_advisor_slot_type = {
 
 script_enum_equipment_stat = {	
 								#Viktors note for modders and future CDs: If you want to use a stat in the MIOs it has to be in the equipment category itself, not on the battalion level. So stuff like defense works because its contained within the equipment, but stuff like recon will not work because its owned by the battalion. Adding stuff like recon will not throw an error, but it will _not_ work. Moving stats to the equipment level from the bat-level might fix this if you are brave enough, but it is very risk and might break other stuff. Ive commented what is currently on the battalion level below and should not be used with MIOs.
-
+	recovery
+	additional_collateral_damage
 	default_morale 					#Cannot be used with MIOS
 	defense
 	breakthrough
@@ -257,7 +266,9 @@ script_enum_equipment_stat = {
 	air_ground_attack
 	air_visibility_factor
 	railway_gun_attack 			#Cannot be used with MIOS
-	railway_gun_attack_range 	#I think this needs to be changed in a define, not here since its cached at start
+	railway_gun_attack_range_index_in_define # This cannot be used with MIOs or equipment_bonus - only in equipment definition
+	railway_gun_annex_ratio
+	railway_gun_hours_between_redistribution
 	max_organisation			#Cannot be used with MIOS
 	max_strength				##Cannot be used with MIOS
 	maximum_speed	

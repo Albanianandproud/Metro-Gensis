@@ -1,0 +1,63 @@
+
+SPT_instigate_revolution_in_mobsters = {
+	icon = GFX_operations_coup_government
+	map_icon = GFX_operations_coup_government_map
+	name = SPT_instigate_revolution_in_mobsters
+	desc = SPT_instigate_revolution_in_mobsters_desc
+	days = 240
+
+	allowed = { original_tag = SPT }
+
+	available = { 
+		MOB = {
+			NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+		}
+	}
+
+	visible = {
+		has_country_flag = SPT_can_operate_MOB
+		FROM = { tag = MOB }
+	}
+
+	operatives = 1
+	network_strength = 50
+
+	requirements = {}
+	
+	equipment = {
+		infantry_equipment = 50
+		support_equipment = 5
+	}
+
+	risk_chance = 0.1
+	outcome_extra_chance = 0.25
+	risk_modifiers = { operation_infiltrate_risk operation_risk }
+	outcome_modifiers = { operation_infiltrate_outcome operation_outcome }
+	cost_modifiers = { operation_infiltrate_cost operation_cost }
+
+	outcome_potential = {
+		MOB= {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+	}
+
+	outcome_execute = {
+		MOB= {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+	}
+
+	phases = { 
+		SPT_operation_MOB_phase_1 = { base = 30 }
+	}
+	phases = { 
+		SPT_operation_MOB_phase_2 = { base = 30 }
+	}
+	phases = { 
+		SPT_operation_MOB_phase_3 = { base = 30 }
+	}
+}

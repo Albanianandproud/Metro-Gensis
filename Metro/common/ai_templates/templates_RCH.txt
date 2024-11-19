@@ -1,52 +1,43 @@
 RCH_infantry_default = {
-	roles = { infantry }
-	upgrade_prio = { base = 100 }
-	match_to_count = 0.6
+	role = infantry 
 
 	available_for = {
 		RCH
 	}
 
-	RCH_infantry_irregulars_early = {
-		production_prio = { 
-			base = 5 
-			modifier = {
-				factor = 0.1
-				has_tech = entrench_kits_2031
-				has_tech = regular_infantry_unlock_tech
+	upgrade_prio = {
+		factor = 2
+		modifier = {
+			factor = 25
+			OR = {
+				threat > 0.2
 			}
 		}
+	}
+
+	RCH_infantry_irregulars_early = {
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 25
 				date > 2031.1.1
 			}
+			modifier = {
+				factor = 0.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
 			support = {
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			irregulars
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -62,30 +53,22 @@ RCH_infantry_default = {
 	}
 
 	RCH_infantry_irregulars_late = {
-		production_prio = { 
-			base = 8 
-			modifier = {
-				factor = 0.1
-				has_tech = entrench_kits_2031
-				has_tech = regular_infantry_unlock_tech
-			}
-		}
 		upgrade_prio = { 
 			base = 10 
 			modifier = {
 				factor = 20
 				date > 2033.1.1
 			}
+			modifier = {
+				factor = 0.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
@@ -99,42 +82,25 @@ RCH_infantry_default = {
 			}
 		}
 
-		allowed_types = {
-			irregulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-		}
 	}
 
 	RCH_infantry_regulars_early = {
-		production_prio = { 
-			base = 8 
-			modifier = {
-				factor = 20
-				has_tech = entrench_kits_2031
-				has_tech = regular_infantry_unlock_tech
-			}
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
 				date > 2033.1.1
 			}
+			modifier = {
+				factor = 20
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -143,16 +109,6 @@ RCH_infantry_default = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -168,29 +124,22 @@ RCH_infantry_default = {
 	}
 
 	RCH_infantry_regulars_late = {
-		production_prio = { 
-			modifier = {
-				factor = 20
-				has_tech = entrench_kits_2031
-				has_tech = regular_infantry_unlock_tech
-			}
-		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
 				date > 2035.1.1
 			}
+			modifier = {
+				factor = 20
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -205,23 +154,17 @@ RCH_infantry_default = {
 			}
 		}
 
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-			riot_shields
-		}
 	}
 }
 
-special_forces_templates = {
-	roles = {
+RCH_special_forces_templates = {
+	role = {
 		mountaineers
 		marines
+	}
+
+	available_for = {
+		RCH
 	}
 
 	upgrade_prio = { 
@@ -231,32 +174,23 @@ special_forces_templates = {
 			num_of_military_factories < 12
 		} 
 	}
-	match_to_count = 0.5
 
 	RCH_infantry_special_forces_early = {
-		production_prio = {
-			base = 8
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
 				date > 2032.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 10
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
 
@@ -265,16 +199,6 @@ special_forces_templates = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -290,30 +214,21 @@ special_forces_templates = {
 	}
 
 	RCH_infantry_special_forces_late = {
-		production_prio = {
-			base = 10
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
 				date > 2033.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 12
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
-
 			regiments = { special_forces = 5 }
 
 			support = {
@@ -324,16 +239,6 @@ special_forces_templates = {
 				logistics_company = 1
 				inf_recon = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 	}
 }

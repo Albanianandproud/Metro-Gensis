@@ -57,6 +57,16 @@ NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
 	NDefines.NCountry.BASE_FUEL_CAPACITY = 1000							-- base amount of fuel capacity
 
+	NDefines.FEMALE_UNIT_LEADER_BASE_CHANCE = {
+		-- applies as a factor to female unit leader randomization
+		-- the values needs to be zero if you don't actually have random portraits
+		0, -- country leaders
+		0, -- army leaders
+		0, -- navy leaders
+		0, -- air leaders
+		0, -- operatives
+	}
+
 ---Production Stuff---
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
 NDefines.NProduction.MAX_CIV_FACTORIES_PER_LINE = 10

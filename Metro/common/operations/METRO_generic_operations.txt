@@ -1,0 +1,129 @@
+## TEST Operations
+
+METRO_operation_steal_supplies = {
+	icon = GFX_operations_infiltrate_armed_forces
+	map_icon = GFX_operations_infiltrate_armed_forces_map
+	name = METRO_operation_steal_supplies
+	desc = METRO_operation_steal_supplies_desc
+	priority = 1
+
+	days = 35
+	network_strength = 50
+	operatives = 2
+
+	visible = {
+		network_national_coverage = {
+			target = FROM
+			value > 14
+		}
+		has_operation_token = {
+			tag = FROM
+			token = token_army
+		}
+	}
+
+	equipment = { }
+
+	available = {
+	}
+
+	required_tokens = {
+		token_army
+	}
+
+	risk_chance = 0.2
+	risk_modifiers = { operation_steal_tech_risk operation_risk }
+	outcome_extra_chance = 0.25
+	outcome_modifiers = { operation_infiltrate_outcome operation_outcome }
+	cost_modifiers = { operation_infiltrate_cost operation_cost }
+	outcome_execute = {
+		FROM = { 
+			hidden_effect = { country_event = metro_LR.1 }
+			effect_tooltip = { add_timed_idea = { idea = METRO_LR_stolen_supplies days = 65 } }
+		}
+	}
+	outcome_extra_execute = { # SCOPE_OPERATION
+		random_list = {
+			33 = {
+				FROM = {
+					hidden_effect = { country_event = metro_LR.1 }
+					effect_tooltip = { add_timed_idea = { idea = METRO_LR_stolen_supplies days = 65 } }
+				}
+			}
+			67 = {
+				FROM = {
+					hidden_effect = { country_event = metro_LR.2 }
+					effect_tooltip = { add_timed_idea = { idea = METRO_LR_stolen_supplies days = 95 } }
+				}
+			}
+		}
+	}
+	outcome_potential = {
+		FROM = {
+			hidden_effect = { country_event = metro_LR.1 }
+			effect_tooltip = { add_timed_idea = { idea = METRO_LR_stolen_supplies days = 65 } }
+		}
+		custom_effect_tooltip = operation_outcome_consumes_token_tt
+	}
+	phases = { #infiltration 
+		infiltration_border = { base = 100 }
+	}
+	phases = { #infiltrate military
+		steal_blueprints_bribe = { base = 50 }
+		steal_blueprints_seduction = { base = 50 }
+	}
+	phases = { #exfiltration
+		METRO_operation_phase_3_tunnel = { 
+			base = 20 
+			modifier = {
+				ROOT = { 
+					has_equipment = {
+						infantry_equipment < 1
+						special_forces_equipment < 1
+					}
+				}
+				factor = 0
+			}
+		}
+		METRO_operation_phase_3_surface = { 
+			base = 20 
+			modifier = {
+				ROOT = { 
+					has_equipment = {
+						infantry_equipment < 1
+						support_equipment < 1
+						special_forces_equipment < 1
+					}
+				}
+				factor = 0
+			}
+		}
+		METRO_operation_phase_3_border = { 
+			base = 20 
+		}
+		METRO_operation_phase_3_smuggle = { 
+			base = 20 
+			modifier = {
+				ROOT = { 
+					has_equipment = {
+						rail_cart_equipment < 1
+					}
+				}
+				factor = 0
+			}
+		}
+		METRO_operation_phase_3_metro_2 = { 
+			modifier = {
+				ROOT = { 
+					has_equipment = {
+						infantry_equipment < 1
+						special_forces_equipment < 1
+					}
+					has_country_flag = D6_METRO_2_available
+				}
+				factor = 0
+			}
+			base = 20 
+		}
+	}
+}

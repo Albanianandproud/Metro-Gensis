@@ -1,14 +1,21 @@
 RED_infantry_default = {
-	roles = { infantry }
-	upgrade_prio = { base = 100 }
-	match_to_count = 0.6
+	role = infantry 
 
 	available_for = {
 		RED
 	}
 
+	upgrade_prio = {
+		factor = 2
+		modifier = {
+			factor = 25
+			OR = {
+				threat > 0.2
+			}
+		}
+	}
+
 	RED_infantry_irregulars_early = {
-		production_prio = { base = 5 }
 		upgrade_prio = { 
 			base = 10
 			modifier = {
@@ -17,14 +24,9 @@ RED_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
@@ -34,17 +36,6 @@ RED_infantry_default = {
 				gatling_support = 1
 				nkvd_support = 1
 			}
-		}
-
-		allowed_types = {
-			irregulars
-			nkvd_support
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -60,7 +51,6 @@ RED_infantry_default = {
 	}
 
 	RED_infantry_irregulars_late = {
-		production_prio = { base = 8 }
 		upgrade_prio = { 
 			base = 10 
 			modifier = {
@@ -69,14 +59,9 @@ RED_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { irregulars = 5 }
 
@@ -90,21 +75,9 @@ RED_infantry_default = {
 				nkvd_support = 1
 			}
 		}
-
-		allowed_types = {
-			irregulars
-			nkvd_support
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-		}
 	}
 
 	RED_infantry_regulars_early = {
-		production_prio = { base = 8 }
 		upgrade_prio = { 
 			base = 10
 			modifier = {
@@ -113,14 +86,9 @@ RED_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -129,16 +97,6 @@ RED_infantry_default = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -154,7 +112,6 @@ RED_infantry_default = {
 	}
 
 	RED_infantry_regulars_late = {
-		production_prio = { base = 10 }
 		upgrade_prio = { 
 			base = 12
 			modifier = {
@@ -163,14 +120,9 @@ RED_infantry_default = {
 			}
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { regulars = 5 }
 
@@ -184,24 +136,14 @@ RED_infantry_default = {
 				riot_shields = 1
 			}
 		}
-
-		allowed_types = {
-			regulars
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
-			riot_shields
-		}
 	}
 }
 
-special_forces_templates = {
-	roles = {
-		mountaineers
-		marines
+RED_special_forces_templates = {
+	role = mountaineers
+
+	available_for = {
+		RED
 	}
 
 	upgrade_prio = { 
@@ -211,32 +153,23 @@ special_forces_templates = {
 			num_of_military_factories < 12
 		} 
 	}
-	match_to_count = 0.5
 
 	RED_infantry_special_forces_early = {
-		production_prio = {
-			base = 8
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 10
 			modifier = {
 				factor = 20
 				date > 2032.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 12
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
 
@@ -245,16 +178,6 @@ special_forces_templates = {
 				explosive_support = 1
 				gatling_support = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 
 		replace_at_match = 0.9
@@ -270,29 +193,21 @@ special_forces_templates = {
 	}
 
 	RED_infantry_special_forces_late = {
-		production_prio = {
-			base = 10
-			modifier = { 
-				factor = 0.5
-				num_of_military_factories < 12
-			} 
-		}
 		upgrade_prio = { 
 			base = 12
 			modifier = {
 				factor = 20
 				date > 2033.1.1
 			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 12
+			} 
 		}
 
-		target_width = 20
-		width_weight = 100
-		column_swap_factor = 1.5
 		reinforce_prio = 1
 
 		target_template = {
-			weight = 100
-			match_value = 100
 
 			regiments = { special_forces = 5 }
 
@@ -304,16 +219,6 @@ special_forces_templates = {
 				logistics_company = 1
 				inf_recon = 1
 			}
-		}
-
-		allowed_types = {
-			special_forces
-			flamethrower_support 
-			explosive_support
-			gatling_support
-			field_hospital
-			logistics_company
-			inf_recon
 		}
 	}
 }
