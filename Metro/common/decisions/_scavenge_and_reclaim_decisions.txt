@@ -791,21 +791,13 @@ reclaim_metro = {
 
 	reclaim_mission_build_up_station = {
 		icon = generic_mountain_fortification
-		cost = 50
+		cost = 35
 		days_remove = 7
 		days_re_enable = 50
 
 		visible = { has_country_flag = reclaim_mission_activated }
 		available = { 
 			num_of_civilian_factories_available_for_projects > 2 
-			var:state_colonised_id = {
-				NOT = { has_state_category = pastoral }
-				free_building_slots = {
-					building = arms_factory
-					size < 5 
-					include_locked = yes
-				}	
-			}
 		}
 		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
 
@@ -817,9 +809,7 @@ reclaim_metro = {
 				var = reclaim_cost
 				value = 15
 			}
-			var:state_colonised_id = {
-				add_extra_state_shared_building_slots = 1
-			}
+			add_political_power = 10
 		}
 
 		ai_will_do = {

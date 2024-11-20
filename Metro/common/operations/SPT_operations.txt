@@ -11,6 +11,7 @@ SPT_instigate_revolution_in_mobsters = {
 	available = { 
 		MOB = {
 			NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+			has_government = dictatorial
 		}
 	}
 
@@ -22,7 +23,10 @@ SPT_instigate_revolution_in_mobsters = {
 	operatives = 1
 	network_strength = 50
 
-	requirements = {}
+	requirements = {
+		NOT = { has_war_with = MOB }
+		MOB = { has_government = dictatorial }
+	}
 	
 	equipment = {
 		infantry_equipment = 50
@@ -36,7 +40,7 @@ SPT_instigate_revolution_in_mobsters = {
 	cost_modifiers = { operation_infiltrate_cost operation_cost }
 
 	outcome_potential = {
-		MOB= {
+		MOB = {
 			start_civil_war = {
 				ideology = COMMUNITY
 			}
@@ -44,7 +48,7 @@ SPT_instigate_revolution_in_mobsters = {
 	}
 
 	outcome_execute = {
-		MOB= {
+		MOB = {
 			start_civil_war = {
 				ideology = COMMUNITY
 			}

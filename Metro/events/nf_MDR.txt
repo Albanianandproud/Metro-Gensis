@@ -464,6 +464,16 @@ country_event = { ## People begin to become sick
 		}
 		ai_chance = { base = 15 }
 	}
+
+	option = {
+		name = nf_MDR.19.b
+		## add timed idea which gives negative CG
+		trigger = { has_tech = tech_hygiene_sterilised_supplies }
+		add_political_power = -50
+		add_stability = 0.02
+		add_timed_idea = { idea = MDR_disease_legacy days = 180 }
+		ai_chance = { base = 1500 }
+	}
 }
 
 country_event = { ## Decisions to mitigate disease
@@ -477,11 +487,21 @@ country_event = { ## Decisions to mitigate disease
 
 	option = {
 		name = nf_MDR.20.a
+		trigger = { NOT = { has_tech = tech_hygiene_sterilised_supplies } }
 		add_ideas = MDR_get_down_with_the_sickness
 		## Begin event chain
 		set_country_flag = MDR_infection_plague
-		#activate_mission = MDR_disease_countdown_to_infection_outbreak
 		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = nf_MDR.20.b
+		## add timed idea which gives negative CG
+		trigger = { has_tech = tech_hygiene_sterilised_supplies }
+		add_timed_idea = { idea = MDR_disease_legacy days = 180 }
+		add_political_power = -50
+		add_stability = 0.02
+		ai_chance = { base = 1500 }
 	}
 }
 
@@ -563,6 +583,7 @@ country_event = { ## Disease Fanned / Medicated Populace
 		set_country_flag = MDR_disease_gone_tt
 		clr_country_flag = MDR_infection_plague
 		remove_ideas = MDR_get_down_with_the_sickness
+		add_timed_idea = { idea = MDR_disease_aftermath days = 180 }
 		ai_chance = { base = 15 }
 	}
 }
