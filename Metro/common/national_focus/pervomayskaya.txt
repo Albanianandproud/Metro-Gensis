@@ -15,7 +15,7 @@ focus_tree = {
 		id = MDR_1
 		icon = GFX_MDR_pervomaiskaya
 		x = 13
-		y = 1
+		y = 0
 		cost = 6.5
 		completion_reward = {
 			add_political_power = 50
@@ -417,10 +417,11 @@ focus_tree = {
 		icon = GFX_AVT_hey_you
 		x = 1
 		y = 1
-		cost = 6.5
+		cost = 3.6
 		prerequisite = { focus = MDR_4b }
 		relative_position_id = MDR_4b
 		completion_reward = {
+			add_political_power = 6
 			add_timed_idea = { idea = MDR_reshuffle_cabinet days = 400 }
 		}
 
@@ -981,9 +982,11 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 6.5
+		available = { has_tech = tech_hygiene_designated_triages }
 		prerequisite = { focus = MDR_reinforce_the_frontline }
 		relative_position_id = MDR_reinforce_the_frontline
 		completion_reward = {
+			add_ideas = MDR_casualty_replenishment
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -1009,10 +1012,14 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6.5
+		available = { has_tech = tech_field_hospital3 }
 		prerequisite = { focus = MDR_medical_triage }
 		relative_position_id = MDR_medical_triage
 		completion_reward = {
-			add_ideas = MDR_casualty_replenishment
+			swap_ideas = {
+				remove_idea = MDR_casualty_replenishment
+				add_idea = MDR_casualty_replenishment_1
+			}
 		}
 
 		ai_will_do = {
