@@ -595,7 +595,7 @@ focus_tree = {
 		prerequisite = {
 			focus = industrial_research_effort
 		}
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = industrial_research_effort
 
@@ -707,7 +707,7 @@ focus_tree = {
 		prerequisite = {
 			focus = industrial_research_effort
 		}
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = industrial_research_effort
 
@@ -1274,12 +1274,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			capital_scope = {
-			    add_resource = {
-			        type = components
-			        amount = 6
-			    }
-			}
+			add_offsite_building = { type = fuel_silo level = 1 }
 		}
 	}
 
@@ -1300,7 +1295,151 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_offsite_building = { type = fuel_silo level = 1 }
+			add_offsite_building = { type = synthetic_refinery level = 1 }
+		}
+	}
+
+	focus = {
+		id = scavenging_alloys
+		icon = GFX_PLS_refined
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_fuel
+		}
+		x = -1
+		y = 1
+		relative_position_id = scavenging_fuel
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = alloys
+			        amount = 4
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = scavenging_components
+		icon = GFX_PLS_components
+		cost = 6.5
+
+		prerequisite = {
+			focus = scavenging_fuel
+		}
+		x = 1
+		y = 1
+		relative_position_id = scavenging_fuel
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			capital_scope = {
+			    add_resource = {
+			        type = components
+			        amount = 4
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = gun_draisines_effort_1
+		icon = GFX_generic_repair
+		cost = 6.5
+
+		prerequisite = {
+			focus = gunsmith_2
+			focus = gun_production_boost
+		}
+		available = {
+			count_triggers = {
+				amount = 1
+				any_owned_state = {
+					has_state_category = rural
+				}
+				arms_factory > 6
+			}
+		}
+		x = -3
+		y = 1
+		relative_position_id = gunsmith_2
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = rail_cart_effort_idea
+		    add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = gun_spec_ops_effort_1
+		icon = GFX_generic_stalker_4
+		cost = 6.5
+
+		prerequisite = {
+			focus = military_doctrine_II
+			focus = regimental_training
+		}
+		available = {
+			has_tech = spec_ops_equipment_1_tech
+		}
+		x = -1
+		y = 1
+		relative_position_id = regimental_training
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = spec_ops_effort_idea
+		    add_equipment_to_stockpile = {
+				type = special_forces_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = military_tactics_2
+		icon = GFX_HNZ_planning_advisor
+		cost = 6.5
+
+		prerequisite = {
+			focus = gun_spec_ops_effort_1
+			focus = gun_draisines_effort_1
+		}
+		prerequisite = {
+			focus = military_tactics
+		}
+		x = 0
+		y = 1
+		relative_position_id = military_tactics
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_command_power = 30
+		    add_ideas = command_ability_idea
 		}
 	}
 
