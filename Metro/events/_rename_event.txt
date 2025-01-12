@@ -1,0 +1,555 @@
+add_namespace = communist_rename_event
+
+country_event = {
+    id = communist_rename_event.1
+    title = communist_rename_event.1.t
+    desc = communist_rename_event.1.d
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		name = communist_rename_event.1.a
+		add_political_power = 20
+		add_stability = 0.02
+		330 = { set_state_name = communist_330A }
+		330 = { set_state_flag = state_was_renamed_communist }
+	}
+
+	option = {
+		name = communist_rename_event.1.b
+		add_political_power = 20
+		add_stability = 0.02
+		330 = { set_state_name = communist_330B }
+		330 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.2
+    title = communist_rename_event.2.t
+    desc = communist_rename_event.2.d
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+	
+	option = {
+		name = communist_rename_event.2.a
+		add_political_power = 20
+		add_stability = 0.02
+		244 = { set_state_name = communist_244A }
+		244 = { set_state_flag = state_was_renamed_communist }
+	}
+
+	option = {
+		name = communist_rename_event.2.b
+		add_political_power = 20
+		add_stability = 0.02
+		244 = { set_state_name = communist_244B }
+		244 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.3
+    title = communist_rename_event.3.t
+	desc = {
+		text = communist_rename_event.3_berilag
+		trigger = {
+			NOT = { 
+				tag = RED
+				tag = BRL 
+			}
+			228 = { has_state_flag = state_was_renamed_berilag }
+		}
+	}
+	desc = {
+		text = communist_rename_event.3_trotskyist
+		trigger = {
+			NOT = { tag = AVT }
+			228 = { has_state_flag = state_was_renamed_trotskyist }
+		}
+	}
+	desc = {
+		text = communist_rename_event.3_desc
+		trigger = {
+			OR = {
+				228 = { NOT = { has_state_flag = preserved_soviet_legacy } }
+				228 = { NOT = { has_state_flag = state_was_renamed_trotskyist } }
+				228 = { NOT = { has_state_flag = state_was_renamed_berilag } }
+			}
+		}
+	}
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+	
+	option = {
+		trigger = { 
+			tag = RED
+			tag = BRL
+		}
+		name = communist_rename_event.3.a
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { set_state_name = berilag_228 }
+		228 = { clr_state_flag = state_was_renamed_communist }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = state_was_renamed_trotskyist }
+		228 = { set_state_flag = state_was_renamed_berilag }
+	}
+
+	option = {
+		trigger = { 
+			tag = AVT
+		}
+		name = communist_rename_event.3.b
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { set_state_name = trotskyist_228 }
+		228 = { clr_state_flag = state_was_renamed_communist }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = preserved_soviet_legacy }
+		228 = { set_state_flag = state_was_renamed_trotskyist }
+	}
+
+	option = {
+		trigger = { 
+			NOT = { tag = AVT }
+			NOT = { tag = BRL }
+		}
+		name = communist_rename_event.3.c
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { reset_state_name = yes }
+		228 = { clr_state_flag = preserved_soviet_legacy }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = state_was_renamed_trotskyist }
+		228 = { set_state_flag = state_was_renamed_communist }
+	}
+
+	option = {
+		trigger = { 
+			NOT = { tag = AVT }
+			NOT = { tag = BRL }
+		}
+		name = communist_rename_event.3.d
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { set_state_name = SOVIET_228 }
+		228 = { clr_state_flag = state_was_renamed_communist }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = state_was_renamed_trotskyist }
+		228 = { set_state_flag = preserved_soviet_legacy }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.4
+    title = communist_rename_event.4.t
+    desc = communist_rename_event.4_communist
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		name = communist_rename_event.4.a
+		add_political_power = 20
+		add_stability = 0.02
+		250 = { set_state_name = communist_250 }
+		250 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.5
+    title = communist_rename_event.5.t
+	desc = {
+		text = communist_rename_event.5_trotskyist
+		trigger = {
+			NOT = { tag = AVT }
+			329 = { has_state_flag = state_was_renamed_trotskyist }
+		}
+	}
+	desc = {
+		text = communist_rename_event.5_desc
+		trigger = {
+			329 = { NOT = { has_state_flag = state_was_renamed_trotskyist } }
+		}
+	}
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		trigger = {
+			NOT = { tag = AVT }
+		}
+		name = communist_rename_event.5.a
+		add_political_power = 20
+		add_stability = 0.02
+		329 = { set_state_name = stalinist_329 }
+		329 = { set_state_flag = state_was_renamed_stalinist }
+		329 = { clr_state_flag = state_was_renamed_trotskyist }
+		ROOT = { set_country_flag = supported_stalinism }
+	}
+
+	option = {
+		trigger = {
+			tag = AVT
+		}
+		name = communist_rename_event.5.b
+		add_political_power = 20
+		add_stability = 0.02
+		329 = { set_state_name = trotskyist_329 }
+		329 = { set_state_flag = state_was_renamed_trotskyist }
+		329 = { clr_state_flag = state_was_renamed_stalinist }
+	}
+
+	option = {
+		trigger = {
+			NOT = { tag = RED }
+			NOT = { tag = BRL }
+			NOT = { tag = AVT }
+		}
+		name = communist_rename_event.5.c
+		add_political_power = 20
+		add_stability = 0.02
+		329 = { reset_state_name = yes }
+		329 = { clr_state_flag = state_was_renamed_trotskyist }
+		329 = { clr_state_flag = state_was_renamed_stalinist }
+		ROOT = { set_country_flag = returned_to_the_historical_name }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.6
+    title = communist_rename_event.6.t
+    desc = communist_rename_event.6.d
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		name = communist_rename_event.6.a
+		add_political_power = 20
+		add_stability = 0.02
+		264 = { set_state_name = communist_264 }
+		264 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.7
+    title = communist_rename_event.7.t
+    desc = communist_rename_event.7.d
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		name = communist_rename_event.7.a
+		add_political_power = 20
+		add_stability = 0.02
+		245 = { set_state_name = communist_245 }
+		245 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = communist_rename_event.8
+    title = communist_rename_event.8.t
+    desc = communist_rename_event.8.d
+    picture = "GFX_event (69)"
+    is_triggered_only = yes
+
+	option = {
+		name = communist_rename_event.8.a
+		add_political_power = 20
+		add_stability = 0.02
+		362 = { set_state_name = communist_362 }
+		362 = { set_state_flag = state_was_renamed_communist }
+	}
+}
+
+add_namespace = denazification_event
+
+country_event = {
+    id = denazification_event.1
+    title = denazification_event.1.t
+    desc = denazification_event.1.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		trigger = { 
+			NOT = { tag = AVT } 
+			NOT = { tag = ULI }
+			NOT = { tag = KUZ }
+			NOT = { has_country_flag = is_communist_nation }
+			NOT = { ROOT = { has_completed_focus = EUR_lessons_from_the_reds } }
+		}
+		name = denazification_event.1.a
+		add_political_power = 20
+		add_stability = 0.02
+		306 = { reset_state_name = yes }
+		306 = { clr_state_flag = state_was_renamed_nazi }
+		ROOT = { set_country_flag = a_look_into_the_future }
+	}
+
+	option = {
+		trigger = { 
+			NOT = { tag = PLS }
+			NOT = { tag = HNZ }
+			NOT = {	ROOT = { has_completed_focus = KAL_tsarist_victory } }
+			NOT = { ROOT = { has_completed_focus = satellite_de_sovietization } }
+			NOT = { ROOT = { has_completed_focus = satellite_anti_communist_coalition } }
+		}
+		name = denazification_event.1.b
+		add_political_power = 20
+		add_stability = 0.02
+		306 = { set_state_name = SOVIET_306 }
+		306 = { clr_state_flag = state_was_renamed_nazi }
+		306 = { set_state_flag = preserved_soviet_legacy }
+		ROOT = { set_country_flag = kept_the_soviet_name_306 }
+	}
+}
+
+country_event = {
+    id = denazification_event.2
+    title = denazification_event.2.t
+    desc = denazification_event.2.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = denazification_event.2.a
+		add_political_power = 20
+		add_stability = 0.02
+		275 = { reset_state_name = yes }
+		275 = { clr_state_flag = state_was_renamed_nazi }
+	}
+}
+
+country_event = {
+    id = denazification_event.3
+    title = denazification_event.3.t
+    desc = denazification_event.3.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = denazification_event.3.a
+		add_political_power = 20
+		add_stability = 0.02
+		337 = { reset_state_name = yes }
+		337 = { clr_state_flag = state_was_renamed_nazi }
+	}
+}
+
+add_namespace = generic_rename_event
+
+country_event = {
+    id = generic_rename_event.1
+    title = generic_rename_event.1.t
+    desc = generic_rename_event.1.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.1.a
+		add_political_power = 20
+		add_stability = 0.02
+		330 = { reset_state_name = yes }
+		330 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.2
+    title = generic_rename_event.2.t
+    desc = generic_rename_event.2.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.2.a
+		add_political_power = 20
+		add_stability = 0.02
+		244 = { reset_state_name = yes }
+		244 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.3
+    title = generic_rename_event.3.t
+	desc = {
+		text = generic_rename_event.3_desc.a
+		trigger = {
+			228 = { NOT = { has_state_flag = preserved_soviet_legacy } }
+		}
+	}
+	desc = {
+		text = generic_rename_event.3_desc.b
+		trigger = {
+			228 = { has_state_flag = preserved_soviet_legacy }
+		}
+	}
+	desc = {
+		text = generic_rename_event.3_kill_soviet
+		trigger = {
+			OR = {
+				tag = RCH
+				AND = {
+					tag = KAL
+					KAL = { has_completed_focus = KAL_tsarist_victory }
+				}
+			}
+		}
+	}
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		trigger = { 
+			NOT = {	tag = RCH }
+			NOT = {	ROOT = { has_completed_focus = KAL_tsarist_victory } }
+			NOT = {	ROOT = { has_completed_focus = PLS_with_fire_and_sword_rid_authoritarians } }
+			NOT = { ROOT = { has_completed_focus = satellite_de_sovietization } }
+			NOT = { ROOT = { has_completed_focus = satellite_anti_communist_coalition } }
+		}
+		name = generic_rename_event.3.a
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { set_state_name = SOVIET_228 }
+		228 = { clr_state_flag = state_was_renamed_communist }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = state_was_renamed_trotskyist }
+		228 = { set_state_flag = preserved_soviet_legacy }
+		ROOT = { set_country_flag = kept_the_soviet_name_228 }
+	}
+
+	option = {
+		trigger = {
+			NOT = { ROOT = { has_completed_focus = satellite_align_the_sokol } }
+		}
+		name = generic_rename_event.3.b
+		add_political_power = 20
+		add_stability = 0.02
+		228 = { set_state_name = NEW_228 }
+		228 = { clr_state_flag = state_was_renamed_communist }
+		228 = { clr_state_flag = state_was_renamed_trotskyist }
+		228 = { clr_state_flag = state_was_renamed_berilag }
+		228 = { clr_state_flag = preserved_soviet_legacy }
+		228 = { set_state_flag = conducted_desovietization }
+		ROOT = { set_country_flag = kept_the_new_name_228 }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.4
+    title = generic_rename_event.4.t
+    desc = generic_rename_event.4.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.4.a
+		add_political_power = 20
+		add_stability = 0.02
+		250 = { reset_state_name = yes }
+		250 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.5
+    title = generic_rename_event.5.t
+    desc = generic_rename_event.5.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.5.a
+		add_political_power = 20
+		add_stability = 0.02
+		329 = { reset_state_name = yes }
+		329 = { clr_state_flag = state_was_renamed_stalinist }
+		329 = { clr_state_flag = state_was_renamed_trotskyist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.6
+    title = generic_rename_event.6.t
+    desc = generic_rename_event.6.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.6.a
+		add_political_power = 20
+		add_stability = 0.02
+		264 = { reset_state_name = yes }
+		264 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.7
+    title = generic_rename_event.7.t
+    desc = generic_rename_event.7.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.7.a
+		add_political_power = 20
+		add_stability = 0.02
+		245 = { reset_state_name = yes }
+		245 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.8
+    title = generic_rename_event.8.t
+    desc = generic_rename_event.8.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		name = generic_rename_event.8.a
+		add_political_power = 20
+		add_stability = 0.02
+		362 = { reset_state_name = yes }
+		362 = { clr_state_flag = state_was_renamed_communist }
+	}
+}
+
+country_event = {
+    id = generic_rename_event.9
+    title = generic_rename_event.9.t
+    desc = generic_rename_event.9.d
+    picture = "GFX_event (52)"
+    is_triggered_only = yes
+
+	option = {
+		trigger = { 
+			NOT = { tag = AVT } 
+			NOT = { tag = ULI }
+			NOT = { tag = KUZ }
+			NOT = { has_country_flag = is_communist_nation }
+			NOT = { ROOT = { has_completed_focus = EUR_lessons_from_the_reds } }
+		}
+		name = generic_rename_event.9.a
+		add_political_power = 20
+		add_stability = 0.02
+		306 = { reset_state_name = yes }
+		306 = { clr_state_flag = preserved_soviet_legacy }
+		ROOT = { set_country_flag = a_look_into_the_future }
+	}
+
+	option = {
+		name = generic_rename_event.9.b
+		add_political_power = 20
+		add_stability = 0.02
+		306 = { set_state_name = SOVIET_306 }
+		306 = { set_state_flag = preserved_soviet_legacy }
+		ROOT = { set_country_flag = kept_the_soviet_name_306 }
+	}
+}
