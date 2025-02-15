@@ -114,6 +114,9 @@ set_base_modifiers_education = {
 	set_variable = { education_reforms_cost_from_population_factor = 1.5 }
 	set_variable = { education_reforms_cost_from_modifiers_factor = 1 }
 	add_to_variable = { education_reforms_cost_from_modifiers_factor = education_reforms_cost_from_modifiers }
+
+	set_temp_variable = { education_reforms_modifier_from_states = 1 }
+	add_to_temp_variable = { education_reforms_modifier_from_states = modifier@education_reform_state_cost_reduction_modifier }
 }
 	# Cleanse Variable to calculate
 
@@ -172,11 +175,6 @@ calculate_education_reforms = {
 		var = education_reform_undertaking
 		min = 360
 		max = 1800
-	}
-	## Then we multiply variable by education_reforms_cost_from_modifiers_factor
-	multiply_variable = {
-		var = education_reform_undertaking
-		value = education_reforms_cost_from_modifiers_factor
 	}
 	# make cost increase for every education tier we have
 	calculate_education_reform_timer_multiplier = yes

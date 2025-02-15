@@ -307,24 +307,22 @@ country_event = { ## Infrastructure Derailment
 	mean_time_to_happen = { 
 		days = 2000
 		modifier = {
-			factor = 0.15
+			factor = 0.1
 			is_neighbor_of = RUI
 		}
 	}
 
 	option = {
 		name = random_event_bad.9.a
-		effect_tooltip = {
-			random_owned_state = {
-				limit = { has_state_category = pastoral }
-				damage_building = {
-					type = infrastructure
-					damage = 0.85
-				}
-				damage_building = {
-					type = rail_way
-					damage = 0.85
-				}
+		random_owned_state = {
+			limit = { has_state_category = pastoral }
+			damage_building = {
+				type = infrastructure
+				damage = 0.85
+			}
+			damage_building = {
+				type = rail_way
+				damage = 0.85
 			}
 		}
 	}
@@ -454,7 +452,7 @@ country_event = { ## Protests
 	trigger = {
 		has_global_flag = random_events_bad_enabled
 		NOT = { has_country_flag = is_savage_nation }
-		has_war = no 
+		has_war = yes
 		OR = {
 			has_stability < 0.25
 			has_war_support < 0.25
