@@ -25,17 +25,28 @@ country_event = {
     is_triggered_only = yes
 
     immediate = {
-        311 = {
-            add_dynamic_modifier = {
-                modifier = flooding_station_modifier
-                scope = TRT
-                days = 60
+        hidden_effect = {
+            311 = {
+                add_dynamic_modifier = {
+                    modifier = flooding_station_modifier
+                    scope = TRT
+                    days = 75
+                }
             }
         }
     }
 
     option = {
 		name = nf_TRT.2.a
+        effect_tooltip = {
+            311 = {
+                add_dynamic_modifier = {
+                    modifier = flooding_station_modifier
+                    scope = TRT
+                    days = 75
+                }
+            }
+        }
 	}
 }
 
@@ -65,41 +76,13 @@ country_event = {   ## First Time introduction to flooding mechanic
 
     immediate = {
         set_country_flag = TRT_flooding_country_flag
-        add_to_variable = { ## initial variable
-            var = TRT_preparedness_requirement
-            value = 20
-        }
-        ### We set the timer until flooding variable through event
-        set_variable = {
-            var = TRT_timer_until_flooding
-            value = 120
-        }
+        set_flooding_requirements = yes 
     }
     option = {
 		name = nf_TRT.4.a
         custom_effect_tooltip = TRT_begin_flooding_mission
         ### Setting initial decision costs
-        set_variable = {
-            var = TRT_flooding_shrimp_problems
-            value = 20
-        }
-        clamp_temp_variable = {
-            var = TRT_flooding_shrimp_problems
-            min = 0
-            max = 100
-        }
-        set_variable = {
-            var = TRT_preparation_cost_factories
-            value = 1
-        }
-        set_variable = {
-            var = TRT_preparation_cost_pp  
-            value = 10
-        }
-        set_variable = {
-            var = TRT_preparation_explosives_duration
-            value = 5
-        }
+        set_flooding_parameters = yes
 	}
 }
 
@@ -110,24 +93,7 @@ country_event = {   ## Repeated Mechanic
     picture = "GFX_event (120)"
 
     is_triggered_only = yes
-
-    trigger = {
-        OR = {
-            date > 2029.04.01
-            date > 2030.04.01
-            date > 2031.04.01
-            date > 2032.04.01
-            date > 2033.04.01
-            date > 2034.04.01
-            date > 2035.04.01
-            date > 2036.04.01
-            #AND = {
-            #    NOT = {
-            #        has_completed_focus = TRT_venitian_determination
-            #    }
-            #}
-        }
-    }
+    fire_only_once = no
 
     immediate = {
         set_country_flag = TRT_flooding_country_flag

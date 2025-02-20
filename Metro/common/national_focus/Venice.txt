@@ -308,6 +308,7 @@ focus_tree = {
 		x = -2
 		y = 0
 		cost = 6.5
+		available = { has_tech = tech_explosive_nail_bomb }
 		relative_position_id = TRT_cleansing_nests
 		prerequisite = { 
 			focus = TRT_depth_charges
@@ -1194,6 +1195,16 @@ focus_tree = {
 		x = 5
 		y = 1
 		cost = 4.3
+		available = {
+			count_triggers = {
+				amount = 1
+				NOT = { has_idea = bandit_law_1 }
+				OR = {
+					threat > 0.1
+					has_war_support > 0.5
+				}
+			}
+		}
 		relative_position_id = TRT_focus_3
 		prerequisite = { 
 			focus = TRT_focus_3
@@ -1313,9 +1324,25 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 6.5
+		available = {
+			count_triggers = {
+				amount = 1
+				NOT = { has_idea = bandit_law_1 }
+				OR = {
+					threat > 0.1
+					has_war_support > 0.5
+				}
+			}
+		}
 		relative_position_id = TRT_focus_3
 		prerequisite = { focus = TRT_focus_3 }
 		completion_reward = {
+			if = {
+				limit = {
+					has_idea = bandit_law_1
+				}
+				add_stability = -0.05
+			}
 			division_template = {
 				name = "Brodyaga"
 				priority = 1

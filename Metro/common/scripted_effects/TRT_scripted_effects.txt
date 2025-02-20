@@ -154,3 +154,39 @@ TRT_bop_increase_25 = {
 		value = 0.25
 	}
 }
+
+## Flooding ## 
+set_flooding_requirements = {
+	add_to_variable = { ## initial variable
+        var = TRT_preparedness_requirement
+        value = 20
+    }
+    ### We set the timer until flooding variable through event
+    set_variable = {
+        var = TRT_timer_until_flooding
+        value = 120
+    }
+}
+set_flooding_parameters = {
+	set_variable = {
+		var = TRT_flooding_shrimp_problems
+		value = 15
+	}
+	clamp_temp_variable = {
+		var = TRT_flooding_shrimp_problems
+		min = 0
+		max = 100
+	}
+	set_variable = {
+		var = TRT_preparation_cost_factories
+		value = 1
+	}
+	set_variable = {
+		var = TRT_preparation_cost_pp  
+		value = 10
+	}
+	set_variable = {
+		var = TRT_preparation_explosives_duration
+		value = 5
+	}
+}
