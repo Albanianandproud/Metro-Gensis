@@ -1,0 +1,199 @@
+add_namespace = reclamation_event
+
+country_event = {
+    id = reclamation_event.mutants
+    title = reclamation_event.mutants.t
+    desc = reclamation_event.mutants.d
+    picture = GFX_event_them
+    is_triggered_only = yes
+
+	option = {
+		name = reclamation_event.mutants.a
+		add_manpower = 5
+        add_stability = -0.015
+		add_equipment_to_stockpile = {
+		    type = infantry_equipment 
+		    amount = 5
+		}
+	}
+}
+
+country_event = {
+    id = reclamation_event.2
+    title = reclamation_event.2.t
+    desc = reclamation_event.2.d
+    picture = GFX_event_station_defence_2
+
+    is_triggered_only = yes
+	#state_event = yes
+
+	option = {
+		name = reclamation_event.2.a
+		custom_effect_tooltip = reclamation_event.2_tt
+		transfer_state = ROOT.state_colonized_id
+		activate_mission = reclaim_timed_decision
+		RUI = { remove_state_core = ROOT.state_colonized_id }
+		hidden_effect = {
+			set_country_flag = reclaim_mission_activated
+			if = {
+				limit = {
+					FROM.FROM = {
+						OR = { has_dynamic_modifier = { modifier = infested_tunnel_modifier } }
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 40
+				}
+			}
+			else_if = {
+				limit = {
+					FROM.FROM = {
+						OR = { has_dynamic_modifier = { modifier = radiation_tunnel_modifier } }
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 60
+				}
+			}
+			else_if = {
+				limit = {
+					FROM.FROM = {
+						OR = {
+							has_dynamic_modifier = { modifier = flooded_tunnel_modifier }
+							has_dynamic_modifier = { modifier = flooded_station_modifier }
+							has_dynamic_modifier = { modifier = anomaly_tunnel_modifier }
+							has_dynamic_modifier = { modifier = anomaly_station_modifier }
+						}
+					}
+				}
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 90
+				}
+			}
+			else = {
+				set_variable = {
+					var = reclaim_cost_requirement
+					value = 30
+				}
+			}
+			set_variable = {
+				var = reclaim_cost
+				value = 0
+			}
+		}
+	}
+}
+
+country_event = {
+    id = reclamation_event.3
+    title = reclamation_event.3.t
+    desc = reclamation_event.3.d
+    picture = GFX_event_bump_in_the_night
+
+    is_triggered_only = yes
+
+	option = {
+		name = reclamation_event.3.a
+        add_stability = -0.02	
+	}
+}
+
+## Unique Reclamation Events ## 
+
+country_event = {	## Colonization of FILI Depot
+    id = reclamation_event.4
+    title = reclamation_event.4.t
+    picture = "GFX_event (175)"
+
+	desc = {
+        text = reclamation_event.4.d.b
+        trigger = {
+            NOT = { 
+				OR = {
+					tag = GWC 
+					tag = PAG
+					tag = SAT 
+					tag = ISL 
+					tag = RCH 
+				}
+			} 
+        }
+    }
+	desc = {
+        text = reclamation_event.4.d.a
+		trigger = {
+            OR = {
+				tag = GWC 
+				tag = PAG
+				tag = SAT 
+				tag = ISL 
+				tag = RCH 
+			}
+        }
+    }
+
+	trigger = {
+		50 = { NOT = { has_state_flag = state_colonized is_owned_by = ROOT } }
+	}
+	fire_only_once = yes
+
+	immediate = {
+		50 = { set_state_flag = state_colonized }
+	} 
+
+	option = {
+		trigger = { 
+			NOT = { 
+				OR = {
+					tag = GWC 
+					tag = PAG
+					tag = SAT 
+					tag = ISL 
+					tag = RCH 
+				}
+			}  
+		}
+		name = reclamation_event.4.a
+		add_manpower = 10
+		add_equipment_to_stockpile = {
+			type = laser_infantry_equipment_1
+			amount = 20
+			producer = RUS
+		}
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		trigger = { 
+			OR = {
+				tag = GWC 
+				tag = PAG
+				tag = SAT 
+				tag = ISL 
+				tag = RCH 
+			}
+		}
+		hidden_effect = {
+			50 = { add_core_of = VIC }
+			RUI = { release = VIC }
+			VIC = {
+				set_capital = {state = 50 }
+				add_offsite_building = { type = arms_factory level = 3 }
+				add_equipment_to_stockpile = { type = infantry_equipment amount = 35 }
+				declare_war_on = {
+					target = GWC
+					type = annex_everything
+				}
+				add_manpower = 20
+				country_event = nf_VIC.1
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}	
+}
+
