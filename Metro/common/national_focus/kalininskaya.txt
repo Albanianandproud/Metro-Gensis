@@ -129,7 +129,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			HUL = {
+			GUL = {
 				add_ideas = KAL_anarchist_counterattack
 			}
 		}
@@ -1405,7 +1405,9 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = KAL_renaming_tt
-			set_province_name = { id = 1745 name = "Saint Petersburg" }
+			add_stability = 0.025
+			340 = { set_state_name = KAL_madness_340 }
+			340 = { set_state_flag = KAL_madness }
 		}
 	}
 
@@ -1445,7 +1447,7 @@ focus_tree = {
 		icon = GFX_KAL_soldiers_mad
 		x = 1
 		y = 1
-		cost = 6.5
+		cost = 8.6
 
 		prerequisite = {
 			focus = KAL_traditions_of_old
@@ -1461,16 +1463,21 @@ focus_tree = {
 		}
 
 		relative_position_id = KAL_establish_okhrana
-		ai_will_do = {
-			factor = 550
+		available = {
+			ROOT = { is_neighbor_of = RED }
 		}
-
+		will_lead_to_war_with = RED
 		completion_reward = {
 			create_wargoal = {
-				type = annex_everything
-				target = RED
-			}
+ 				type = puppet_wargoal_focus
+ 				target = RED
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 			add_ideas = KAL_death_to_the_reds
+		}
+		ai_will_do = {
+			factor = 550
 		}
 	}
 
@@ -1810,7 +1817,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			create_faction = "United Stations of the East"
+			create_faction = KAL_FACTION_NAME
 			RYZ = {
 				country_event = nf_KAL.14
 			}

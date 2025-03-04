@@ -36,6 +36,12 @@ on_actions = {
 	}
     on_startup = {
 		effect = {
+			every_country = {
+				limit = { original_tag = RUI }
+				country_event = { id = nf_RUI.2 }
+			}
+		}
+		effect = {
 			every_possible_country = {
 				set_variable = { cost_to_core = 0 }
 			}
@@ -50,7 +56,7 @@ on_actions = {
 						has_country_flag = is_skaven_nation
 						original_tag = RUI
 						## Marxists are exempt
-						original_tag = HUL
+						original_tag = GUL
 						original_tag = AVT
 						## MSU shouldn't care
 						original_tag = MSU
@@ -169,11 +175,27 @@ on_actions = {
 							tag = RED 
 							tag = ULI
 							tag = KUZ
+							tag = AVT
+							tag = GUL
 						}
 					}
 					add_opinion_modifier = {
 						target = PREV
 						modifier = communist
+					}
+				}
+			}
+			## Tankies
+			every_country = {
+				limit = { tag = RED }
+				every_country = {
+					limit = {
+						tag = AVT
+						tag = GUL
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = tankies
 					}
 				}
 			}
