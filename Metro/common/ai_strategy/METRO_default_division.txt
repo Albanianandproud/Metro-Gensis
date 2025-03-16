@@ -58,18 +58,12 @@ METRO_default_AI_self_preservation = {
 
 METRO_AI_puppet_do_something = {
 	enable = {
-		has_army_size = {
-    		size < 5
-    		type = infantry
-		}
+		has_army_size = { size < 10 }
 		is_subject = yes
 	}
 	abort = {
 		OR = {
-			has_army_size = {
-    			size > 17
-    			type = infantry
-			}
+			NOT = { has_army_size = { size < 10 } }
 		}
 	}
 	ai_strategy = {
@@ -230,6 +224,6 @@ METRO_garrison_priority = {
 
 	ai_strategy = {
 		type = garrison_reinforcement_priority
-		value = 50
+		value = 30
 	}
 }

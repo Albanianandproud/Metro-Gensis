@@ -1,5 +1,4 @@
-
-division_limiter = {
+METRO_division_limiter = {
 	enable = {
 		date < 2035.1.1
 		check_variable = { bullet < 1000 }
@@ -29,4 +28,99 @@ division_limiter = {
 		value = -3000
 	}
 	ai_strategy = { type = force_build_armies value = 0 }
+}
+
+METRO_reduce_infantry_equipment_at_high_IC = {
+	enable = {
+		OR = {
+			num_of_military_factories > 19
+			AND = {
+				num_of_military_factories > 20
+				stockpile_ratio = {
+					archetype = infantry_equipment
+					ratio > 1
+				}
+			}
+		}
+	}
+	abort = { always = no }
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = -15
+	}
+}
+
+METRO_dont_forget_to_produce_trains = {
+	enable = {
+		num_of_military_factories > 3
+		date < 2028.4.1
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = min_wanted_supply_trains
+		value = 5
+	}
+}
+
+METRO_factory_ratio_default = {
+	allowed = {
+		NOT = {
+			has_country_flag = is_bandit_nation
+			has_country_flag = is_reich_nation
+			has_country_flag = is_mutant_nation
+			has_country_flag = is_savage_nation
+		}
+	}
+	enable = {
+		NOT = { 
+			has_war = yes
+			threat < 0.29
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 35
+	}
+}
+METRO_factory_ratio_hostile = {
+	allowed = {
+		has_country_flag = is_bandit_nation
+		has_country_flag = is_reich_nation
+		has_country_flag = is_mutant_nation
+		has_country_flag = is_savage_nation
+	}
+	enable = {
+		NOT = { 
+			surrender_progress > 0.01
+			threat > 0.49
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 45
+	}
+}
+METRO_factory_ratio_high_threat = {
+	allowed = {
+		NOT = {
+			has_country_flag = is_bandit_nation
+			has_country_flag = is_reich_nation
+			has_country_flag = is_mutant_nation
+			has_country_flag = is_savage_nation
+		}
+	}
+	enable = {
+		OR = { 
+			has_war = yes
+			threat < 0.29
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 45
+	}
 }

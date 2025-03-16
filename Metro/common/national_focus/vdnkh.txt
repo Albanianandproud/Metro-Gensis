@@ -13,14 +13,320 @@ focus_tree = {
 			tag = VDN
 		}
 	}
-	continuous_focus_position = { x = 2720 y = 1100}
+	continuous_focus_position = { x = 3020 y = 1100}
 	default = no
+
+	focus = {
+		id = VDN_branching_out
+		icon = GFX_VDN_flag
+		x = 5
+		y = 0
+		cost = 3.6
+		
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = { has_country_flag = VDNK_threat_from_botanical }
+			}
+		}
+		available = {
+			5 = { is_owned_by = RUI }
+		}
+		completion_reward = {
+			5 = { transfer_state_to = ROOT }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = VDN_establish_defensive_watch
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_branching_out
+		}
+		relative_position_id = VDN_branching_out
+		completion_reward = {
+			5 = {
+				add_compliance = 50
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						limit_to_border = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_repair_routelines
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_branching_out
+		}
+		relative_position_id = VDN_branching_out
+		completion_reward = {
+			5 = {
+				add_compliance = 50
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_drawing_from_populace
+		icon = GFX_VDN_flag
+		x = -2
+		y = 2
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_establish_defensive_watch
+		}
+		available = {
+			5 = { is_owned_by = ROOT }
+		}
+		relative_position_id = VDN_branching_out
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = -10
+			division_template = {
+				name = "Tunnel Sentries"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					sentries = { x = 0 y = 0 }
+					sentries = { x = 0 y = 1 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Tunnel Runners\" division_template = \"Tunnel Sentries\" start_experience_factor = 0.21 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_establish_defensive_watch_3
+		icon = GFX_VDN_flag
+		x = 0
+		y = 3
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_drawing_from_populace
+		}
+		prerequisite = {
+			focus = VDN_funding_expansion
+		}
+		available = {
+			5 = { is_owned_by = ROOT compliance > 95 }
+		}
+		relative_position_id = VDN_branching_out
+		completion_reward = {
+			5 = { add_core_of = ROOT }
+			216 = { transfer_state_to = ROOT }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_funding_expansion
+		icon = GFX_VDN_flag
+		x = 2
+		y = 2
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_repair_routelines
+		}
+		available = {
+			5 = { is_owned_by = ROOT }
+		}
+		relative_position_id = VDN_branching_out
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = -25 }
+			add_bullet_with_tooltip_effect = yes
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_1
+				amount = 10
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 10
+				producer = RUS
+			}
+			hidden_effect = {
+				country_event = nf_VDNK.7
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_communication_lines
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_establish_defensive_watch_3
+		}
+		available = {
+			5 = { is_owned_by = ROOT is_core_of = ROOT }
+			216 = { is_owned_by = ROOT }
+		}
+		relative_position_id = VDN_establish_defensive_watch_3
+		completion_reward = {
+			216 = {
+				add_compliance = 50
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_fortifications
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_establish_defensive_watch_3
+		}
+		available = {
+			5 = { is_owned_by = ROOT is_core_of = ROOT }
+			216 = { is_owned_by = ROOT }
+		}
+		relative_position_id = VDN_establish_defensive_watch_3
+		completion_reward = {
+			216 = {
+				add_compliance = 50
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						limit_to_border = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_funding_outwards
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 2.2
+		prerequisite = {
+			focus = VDN_establish_defensive_watch_3
+		}
+		available = {
+			5 = { is_owned_by = ROOT is_core_of = ROOT }
+			216 = { is_owned_by = ROOT }
+		}
+		relative_position_id = VDN_establish_defensive_watch_3
+		completion_reward = {
+			add_timed_idea = {
+				idea = VDNKh_funding_expansions
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_explore_botanical_gardens
+		icon = GFX_VDN_flag
+		x = 0
+		y = 3
+		cost = 3.6
+		prerequisite = {
+			focus = VDN_fortifications
+		}
+		prerequisite = {
+			focus = VDN_communication_lines
+		}
+		prerequisite = {
+			focus = VDN_funding_outwards
+		}
+		available = {
+			216 = { is_owned_by = ROOT compliance > 95 }
+			has_army_manpower = {
+				size > 14
+			}
+			NOT = {
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		select_effect = {
+			216 = { add_core_of = ROOT }
+			216 = { transfer_state_to = ROOT }
+		}
+		relative_position_id = VDN_establish_defensive_watch_3
+		completion_reward = {
+			custom_effect_tooltip = VDNK_botanical
+			country_event = { id = nf_VDNK.5 hours = 2 }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
 	focus = {
 		id = VDN_the_VDNKH
 		icon = GFX_VDN_flag
 		x = 5
 		y = 0
 		cost = 6.5
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		completion_reward = {
 			country_event = nf_VDN.1
 		}
@@ -29,13 +335,19 @@ focus_tree = {
 		}
 	}	
 	focus = {
-		id = VDN_domestics_1
+		id = VDN_commercialized_fungiculture
 		icon = GFX_VDN_flag
 		x = -15
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_the_VDNKH
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
@@ -51,15 +363,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_2
+		id = VDN_establish_libraries
 		icon = GFX_VDN_flag
 		x = -1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_domestics_1
+			focus = VDN_commercialized_fungiculture
 		}
-		relative_position_id = VDN_domestics_1
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+		}
+		relative_position_id = VDN_commercialized_fungiculture
 		completion_reward = {
 			add_ideas = VDN_library
 		}
@@ -68,16 +383,17 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_3
+		id = VDN_social_support
 		icon = GFX_VDN_flag
 		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_domestics_1
+			focus = VDN_commercialized_fungiculture
 		}
-		relative_position_id = VDN_domestics_1
+		relative_position_id = VDN_commercialized_fungiculture
 		completion_reward = {
+			add_stability = 0.05
 			add_tech_bonus = {
 				bonus = 0.5
 				uses = 2
@@ -89,20 +405,25 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_a
+		id = VDN_health_hygiene
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_research_3
+			focus = VDN_social_support
 		}
-		relative_position_id = VDN_research_3
+		relative_position_id = VDN_social_support
 		completion_reward = {
 			add_tech_bonus = {
 				bonus = 0.5
-				uses = 2
+				uses = 1
 				category = health
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = hospital_tech
 			}
 		}
 		ai_will_do = {
@@ -110,7 +431,27 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_4a
+		id = VDN_medical_wards
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_health_hygiene
+		}
+		relative_position_id = VDN_health_hygiene
+		completion_reward = {
+			add_ideas = VDN_triage_hubs
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_exports
 		icon = GFX_VDN_flag
 		x = 3
 		y = 1
@@ -119,9 +460,9 @@ focus_tree = {
 			num_of_civilian_factories > 3
 		}
 		prerequisite = {
-			focus = VDN_domestics_1
+			focus = VDN_commercialized_fungiculture
 		}
-		relative_position_id = VDN_domestics_1
+		relative_position_id = VDN_commercialized_fungiculture
 		completion_reward = {
 			add_ideas = VDN_peaceful_trade
 		}
@@ -130,15 +471,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_4
+		id = VDN_mushroom_tea_industry
 		icon = GFX_VDN_flag
 		x = 2
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_research_3
+			focus = VDN_social_support
 		}
-		relative_position_id = VDN_research_3
+		relative_position_id = VDN_social_support
 		completion_reward = {
 			swap_ideas = {
 				remove_idea = VDN_mushroom_cultivations
@@ -150,16 +491,29 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_7
+		id = VDN_piggies
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_research_4
+			focus = VDN_mushroom_tea_industry
 		}
-		relative_position_id = VDN_research_4
+		available = {
+			custom_trigger_tooltip = {
+			tooltip = bullet_sum_amount
+				check_variable = {
+					bullet > 100
+				}
+			}
+			has_civic_education_higher_2 = yes
+		}
+		select_effect = {
+			set_temp_variable = { bullet_to_gain = -100 }
+		}
+		relative_position_id = VDN_mushroom_tea_industry
 		completion_reward = {
+			add_ideas = VDN_pig_sty
 			capital_scope = { 
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -174,15 +528,29 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_research_5
+		id = VDN_fund_bookreading
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
 		cost = 6.5
-		prerequisite = {
-			focus = VDN_research_2
+		available = {
+			custom_trigger_tooltip = {
+			tooltip = bullet_sum_amount
+				check_variable = {
+					bullet > 200
+				}
+			}
+			has_civic_education_higher_2 = yes
 		}
-		relative_position_id = VDN_research_2
+		select_effect = {
+			set_temp_variable = { bullet_to_gain = -200 }
+			add_bullet_with_tooltip_effect = yes
+			hidden_effect = { country_event = { id = nf_VDNK.3 days = 14 } }
+		}
+		prerequisite = {
+			focus = VDN_establish_libraries
+		}
+		relative_position_id = VDN_establish_libraries
 		completion_reward = {
 			custom_effect_tooltip = VDN_trade_for_research
 		}
@@ -194,13 +562,18 @@ focus_tree = {
 		id = VDN_research_6
 		icon = GFX_VDN_flag
 		x = -1
-		y = 2
+		y = 3
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_research_3
-			focus = VDN_research_5
+			focus = VDN_social_support
 		}
-		relative_position_id = VDN_research_3
+		prerequisite = {
+			focus = VDN_fund_bookreading
+		}
+		available = {
+			has_civic_education_higher_3 = yes
+		}
+		relative_position_id = VDN_social_support
 		completion_reward = {
 			add_research_slot = 1
 		}
@@ -211,49 +584,37 @@ focus_tree = {
 	focus = {
 		id = VDN_research_6a
 		icon = GFX_VDN_flag
-		x = -1
+		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_research_6
 		}
-		mutually_exclusive = {
-			focus = VDN_research_6b
+		available = {
+			has_civic_education_higher_4 = yes
 		}
 		relative_position_id = VDN_research_6
 		completion_reward = {
+			remove_ideas = VDN_estrangled_from_everyone
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_research_6b
-		icon = GFX_VDN_flag
-		x = 1
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_research_6
-		}
-		mutually_exclusive = {
-			focus = VDN_research_6a
-		}
-		relative_position_id = VDN_research_6
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_pennises
+		id = VDN_planning_zones
 		icon = GFX_VDN_flag
 		x = -9
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_the_VDNKH
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
@@ -266,7 +627,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_pennises2
+		id = VDN_exhibition_station
 		icon = GFX_VDN_flag
 		x = -7
 		y = 1
@@ -274,9 +635,22 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_the_VDNKH
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
 			capital_scope = { 
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			6 = { 
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -289,34 +663,47 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_king_von
+		id = VDN_citizens_to_work
 		icon = GFX_VDN_flag
 		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_pennises
-			focus = VDN_pennises2
+			focus = VDN_planning_zones
+			focus = VDN_exhibition_station
 		}
-		relative_position_id = VDN_pennises
+		select_effect = {
+			hidden_effect = { country_event = { id = nf_VDNK.4 days = 14 } }
+		}
+		relative_position_id = VDN_planning_zones
 		completion_reward = {
+			add_stability = 0.05
 			set_temp_variable = { bullet_to_gain = 25 }
 			add_bullet_with_tooltip_effect = yes
+			336 = { 
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.15
+						state_production_speed_infrastructure_factor = 0.3
+						state_production_speed_industrial_complex_factor = 0.1
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_king_von_2
+		id = VDN_salvage
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_king_von
+			focus = VDN_citizens_to_work
 		}
-		relative_position_id = VDN_king_von
+		relative_position_id = VDN_citizens_to_work
 		completion_reward = {
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
@@ -337,15 +724,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_king_von_2a
+		id = VDN_procure_tools
 		icon = GFX_VDN_flag
 		x = -2
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_king_von
+			focus = VDN_citizens_to_work
 		}
-		relative_position_id = VDN_king_von
+		relative_position_id = VDN_citizens_to_work
 		completion_reward = {
 			add_tech_bonus = {
                 bonus = 0.25
@@ -358,15 +745,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_king_von_3
+		id = VDN_shared_tooling
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_king_von_2
+			focus = VDN_salvage
 		}
-		relative_position_id = VDN_king_von_2
+		relative_position_id = VDN_salvage
 		completion_reward = {
 			capital_scope = { 
 				add_extra_state_shared_building_slots = 2
@@ -382,15 +769,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_king_von_3a
+		id = VDN_wooden_shacks
 		icon = GFX_VDN_flag
 		x = -2
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_king_von_2
+			focus = VDN_salvage
 		}
-		relative_position_id = VDN_king_von_2
+		relative_position_id = VDN_salvage
 		completion_reward = {
 			add_tech_bonus = {
                 bonus = 0.25
@@ -403,17 +790,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_economy_1
+		id = VDN_burgeoning_station
 		icon = GFX_VDN_flag
 		x = -2
 		y = 2
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_king_von_3
-			focus = VDN_research_7
+			focus = VDN_shared_tooling
+			focus = VDN_piggies
 		}
-		relative_position_id = VDN_king_von_2
+		relative_position_id = VDN_salvage
 		completion_reward = {
+			add_ideas = VDN_resources
 			capital_scope = {
 				add_resource = {
 					type = scrap
@@ -428,6 +816,7 @@ focus_tree = {
 					amount = 2
 				}
 			}
+			country_event = { id = nf_VDNK.2 days = 2 }
 		}
 		ai_will_do = {
 			factor = 10
@@ -440,9 +829,12 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_economy_1
+			focus = VDN_burgeoning_station
 		}
-		relative_position_id = VDN_economy_1
+		available = {
+			has_completed_focus = VDN_shared_tooling
+		}
+		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
 			add_tech_bonus = {
 				bonus = 0.5
@@ -479,10 +871,18 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_economy_1
+			focus = VDN_burgeoning_station
 		}
-		relative_position_id = VDN_economy_1
+		available = {
+			num_of_civilian_factories > 4
+			has_completed_focus = VDN_piggies
+		}
+		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = VDN_pig_sty
+				add_idea = VDN_food_reliance
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -511,9 +911,9 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_economy_1
+			focus = VDN_burgeoning_station
 		}
-		relative_position_id = VDN_economy_1
+		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
 			swap_ideas = {
 				remove_idea = VDN_mushroom_cultivations
@@ -531,7 +931,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		available = {
-			has_completed_focus = VDN_commonwealth_peace_5
+			has_completed_focus = VDN_commonwealth_telecommunications_5
 		}
 		prerequisite = {
 			focus = VDN_economy_4
@@ -553,7 +953,7 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		available = {
-			has_completed_focus = VDN_commonwealth_peace_5
+			has_completed_focus = VDN_commonwealth_telecommunications_5
 		}
 		prerequisite = {
 			focus = VDN_economy_4
@@ -640,7 +1040,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_economy_10
+		id = VDN_burgeoning_station0
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
@@ -676,7 +1076,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_economy_11
+		id = VDN_burgeoning_station1
 		icon = GFX_VDN_flag
 		x = 2
 		y = 1
@@ -693,7 +1093,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_economy_12
+		id = VDN_burgeoning_station2
 		icon = GFX_VDN_flag
 		x = -2
 		y = 1
@@ -736,8 +1136,15 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_the_VDNKH
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
+			add_political_power = 75
 		}
 		ai_will_do = {
 			factor = 10
@@ -1119,40 +1526,58 @@ focus_tree = {
 	focus = {
 		id = VDN_military_0
 		icon = GFX_VDN_flag
-		x = 21
+		x = 22
 		y = 0
 		cost = 6.5
-		available = {
-			has_completed_focus = VDN_the_VDNKH
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		completion_reward = {
-			army_experience = 25
+			army_experience = 10
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}	
 	focus = {
-		id = VDN_military_1
+		id = VDN_threat_from_botanical
 		icon = GFX_VDN_flag
 		x = 8
 		y = 1
-		cost = 6.5
+		cost = 3
+		available = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		prerequisite = {
 			focus = VDN_military_0
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
-			army_experience = 25
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_military_1_0
+		id = VDN_equipment_standards
 		icon = GFX_VDN_flag
-		x = 3
+		x = 5
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -1160,6 +1585,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
+			add_ideas = VDN_equipment_standards
 			add_tech_bonus = {
 				name = infantry_bonus
 				bonus = 0.25
@@ -1172,54 +1598,36 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_militarc23y44422
-		icon = GFX_VDN_flag
-		x = 0
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_military_1_0
-		}
-		relative_position_id = VDN_military_1_0
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				category = entrench_kits
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_military_2
+		id = VDN_purchase_arms
 		icon = GFX_VDN_flag
 		x = 4
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_1
+			focus = VDN_threat_from_botanical
 		}
-		relative_position_id = VDN_military_1
+		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
+			## GIVE EQUIPMENT
+			## +CG MODIFIER SPIRIT FOR 90 DAYS
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_military_3
+		id = VDN_fortified_emplacements
 		icon = GFX_VDN_flag
 		x = 2
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_1
+			focus = VDN_threat_from_botanical
 		}
-		relative_position_id = VDN_military_1
+		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
+			## PLACE SANDBAGS ON TUNNEL OF BOTANICAL
+			## PLACE BARBED WIRE
 		}
 		ai_will_do = {
 			factor = 10
@@ -1232,11 +1640,14 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_3
-			focus = VDN_military_2
+			focus = VDN_fortified_emplacements
+			focus = VDN_purchase_arms
 		}
-		relative_position_id = VDN_military_3
+		relative_position_id = VDN_fortified_emplacements
 		completion_reward = {
+			set_technology = {
+				sentries_buff_1 = 1
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1249,10 +1660,10 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_2
-			focus = VDN_military_3
+			focus = VDN_purchase_arms
+			focus = VDN_fortified_emplacements
 		}
-		relative_position_id = VDN_military_2
+		relative_position_id = VDN_purchase_arms
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1270,6 +1681,9 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_5
 		completion_reward = {
+			set_technology = {
+				sentries_buff_2 = 1
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1292,21 +1706,36 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_military_4
+		id = VDN_defence_beyond_thresholds
 		icon = GFX_VDN_flag
 		x = -1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_1
+			focus = VDN_threat_from_botanical
 		}
-		relative_position_id = VDN_military_1
+		available = {
+			6 = { is_owned_and_controlled_by = ROOT }
+		}
+		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.5
+				cost_reduction = 0.25
 				uses = 1
 				category = land_doctrine
+			}
+			6 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = {
@@ -1314,18 +1743,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_military_4_1
+		id = VDN_safe_distance
 		icon = GFX_VDN_flag
 		x = -1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_4
+			focus = VDN_defence_beyond_thresholds
 		}
 		mutually_exclusive = {
-			focus = VDN_military_4_2
+			focus = VDN_aggressive_containment
 		}
-		relative_position_id = VDN_military_4
+		relative_position_id = VDN_defence_beyond_thresholds
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1333,18 +1762,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_military_4_2
+		id = VDN_aggressive_containment
 		icon = GFX_VDN_flag
 		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_4
+			focus = VDN_defence_beyond_thresholds
 		}
 		mutually_exclusive = {
-			focus = VDN_military_4_1
+			focus = VDN_safe_distance
 		}
-		relative_position_id = VDN_military_4
+		relative_position_id = VDN_defence_beyond_thresholds
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1352,16 +1781,16 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_military_4_3
+		id = VDN_into_botanical
 		icon = GFX_VDN_flag
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_4_2
-			focus = VDN_military_4_1
+			focus = VDN_aggressive_containment
+			focus = VDN_safe_distance
 		}
-		relative_position_id = VDN_military_4
+		relative_position_id = VDN_defence_beyond_thresholds
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
@@ -1383,6 +1812,12 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_military_0
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
 			add_equipment_to_stockpile = {
@@ -1402,6 +1837,12 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_0
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
@@ -1427,6 +1868,12 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_military_economy_1
 		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		relative_position_id = VDN_military_economy_1
 		completion_reward = {
 			capital_scope = {
@@ -1445,13 +1892,19 @@ focus_tree = {
 	focus = {
 		id = VDN_military_defence_1
 		icon = GFX_VDN_flag
-		x = 3
+		x = 2
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_economy_3
+			focus = VDN_military_economy_1
 		}
-		relative_position_id = VDN_military_economy_3
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		relative_position_id = VDN_military_economy_1
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1501,6 +1954,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_3
 		completion_reward = {
+			add_ideas = VDN_military_surplus
 		}
 		ai_will_do = {
 			factor = 10
@@ -1513,7 +1967,8 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_military_economy_3
+			focus = VDN_military_hard_line_2
+			focus = VDN_military_hard_line_2_A
 		}
 		relative_position_id = VDN_military_economy_3
 		completion_reward = {
@@ -1543,7 +1998,7 @@ focus_tree = {
 		id = VDN_military_economy_4
 		icon = GFX_VDN_flag
 		x = 0
-		y = 3
+		y = 2
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_economy_3
@@ -1602,7 +2057,7 @@ focus_tree = {
 	focus = {
 		id = VDN_military_economy_7
 		icon = GFX_VDN_flag
-		x = 2
+		x = 3
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -1634,11 +2089,12 @@ focus_tree = {
 	focus = {
 		id = VDN_military_economy_9
 		icon = GFX_VDN_flag
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_economy_5
+			focus = VDN_military_economy_7
 		}
 		relative_position_id = VDN_military_economy_5
 		completion_reward = {
@@ -1666,11 +2122,17 @@ focus_tree = {
 	focus = {
 		id = VDN_military_hard_line_1
 		icon = GFX_VDN_flag
-		x = -3
+		x = -4
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_0
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
@@ -1688,7 +2150,29 @@ focus_tree = {
 	focus = {
 		id = VDN_military_hard_line_2
 		icon = GFX_VDN_flag
-		x = 0
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_military_hard_line_1
+		}
+		relative_position_id = VDN_military_hard_line_1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = clothing_kits
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_military_hard_line_2_A
+		icon = GFX_VDN_flag
+		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -1712,11 +2196,22 @@ focus_tree = {
 		icon = GFX_VDN_flag
 		x = 14
 		y = 0
-		cost = 11.5
+		cost = 12.9
 		available = {
 			has_completed_focus = VDN_the_VDNKH
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
+		}
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
 		}
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
@@ -1752,11 +2247,45 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_commonwealth_peace
+		id = VDN_commonwealth_fight
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 8.6
+		available = {
+			has_war_support > 0.64
+			threat > 0.1
+			OR = {
+				ALK = { exists = no }
+				RIZ = { exists = no }
+			}
+		}
+		prerequisite = {
+			focus = VDN_commonwealth
+		}
+		relative_position_id = VDN_commonwealth
+		completion_reward = {
+			ALK = {
+				capital_scope = {
+					add_core_of = ROOT
+				}
+			}
+			RIZ = {
+				capital_scope = {
+					add_core_of = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_telecommunications
 		icon = GFX_VDN_flag
 		x = 1
 		y = 3
-		cost = 11.5
+		cost = 12.9
 		available = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
@@ -1767,15 +2296,17 @@ focus_tree = {
 		relative_position_id = VDN_commonwealth
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
-			capital_scope = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
+			ROOT = {
+				every_owned_state = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
 				}
 			}
 			ALK = {
-				capital_scope = { 
+				every_owned_state = {
 					add_building_construction = {
 						type = infrastructure
 						level = 2
@@ -1784,7 +2315,7 @@ focus_tree = {
 				}
 			}
 			RIZ = {
-				capital_scope = { 
+				every_owned_state = {
 					add_building_construction = {
 						type = infrastructure
 						level = 2
@@ -1798,11 +2329,11 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_commonwealth_peace_2
+		id = VDN_commonwealth_humanitarian_aid
 		icon = GFX_VDN_flag
 		x = -1
 		y = 3
-		cost = 11.5
+		cost = 12.9
 		available = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
@@ -1821,21 +2352,22 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_commonwealth_peace_3
+		id = VDN_commonwealth_mutual_defense
 		icon = GFX_VDN_flag
 		x = 0
 		y = 2
-		cost = 11.5
+		cost = 12.9
 		available = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
 		}
 		prerequisite = {
-			focus = VDN_commonwealth_peace
+			focus = VDN_commonwealth_telecommunications
 		}
-		relative_position_id = VDN_commonwealth_peace
+		relative_position_id = VDN_commonwealth_telecommunications
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
+			army_experience = 50
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_3
 				amount = 45
@@ -1891,19 +2423,19 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_commonwealth_peace_4
+		id = VDN_commonwealth_friendship_pact
 		icon = GFX_VDN_flag
 		x = 0
 		y = 2
-		cost = 11.5
+		cost = 12.9
 		available = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
 		}
 		prerequisite = {
-			focus = VDN_commonwealth_peace_2
+			focus = VDN_commonwealth_humanitarian_aid
 		}
-		relative_position_id = VDN_commonwealth_peace_2
+		relative_position_id = VDN_commonwealth_humanitarian_aid
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
 			diplomatic_relation = {
@@ -1923,35 +2455,661 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_commonwealth_peace_5
+		id = VDN_commonwealth_telecommunications_5
 		icon = GFX_VDN_flag
 		x = 0
 		y = 7
-		cost = 11.5
+		cost = 12.9
 		available = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
 		}
 		prerequisite = {
-			focus = VDN_commonwealth_peace_3
+			focus = VDN_commonwealth_mutual_defense
 		}
 		prerequisite = {
-			focus = VDN_commonwealth_peace_4
+			focus = VDN_commonwealth_friendship_pact
 		}
 		relative_position_id = VDN_commonwealth
 		completion_reward = {
-			custom_effect_tooltip = VDNK_commonwealth_forming
-			annex_country = {
-				target = RIZ
-				transfer_troops = yes
-			}
-			annex_country = {
-				target = ALK
-				transfer_troops = yes
-			}
+			country_event = nf_VDNK.1
 		}
 		ai_will_do = {
 			factor = 2
+		}
+	}
+	focus = {
+		id = VDN_novo_homo
+		icon = GFX_VDN_flag
+		x = 1
+		y = 9
+		cost = 6.5
+		available = {
+			always = no
+		}
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		relative_position_id = VDN_the_VDNKH
+		completion_reward = {
+			country_event = nf_VDN.1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_ties
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_novo_homo
+		}
+		relative_position_id = VDN_novo_homo
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_homo_1
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_novo_homo
+		}
+		relative_position_id = VDN_novo_homo
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_economic_ties
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_homo_1
+		}
+		relative_position_id = VDN_homo_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_economic_ties_1
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_novo_homo
+		}
+		relative_position_id = VDN_novo_homo
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_homo_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_homo_1
+		}
+		relative_position_id = VDN_homo_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_homo_3
+		icon = GFX_VDN_flag
+		x = -1
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_homo_2
+		}
+		relative_position_id = VDN_homo_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_economic_ties_2
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_economic_ties_1
+		}
+		relative_position_id = VDN_economic_ties_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_economic_ties_3
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_economic_ties_1
+		}
+		relative_position_id = VDN_economic_ties_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_economic_ties_4
+		icon = GFX_VDN_flag
+		x = 3
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_economic_ties_2
+			focus = VDN_economic_ties_3
+		}
+		prerequisite = {
+			focus = VDN_economic_ties
+		}
+		relative_position_id = VDN_economic_ties_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_macrophage
+		icon = GFX_VDN_flag
+		x = 6
+		y = 0
+		cost = 6.5
+		available = {
+			always =  no
+		}
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		relative_position_id = VDN_novo_homo
+		completion_reward = {
+			country_event = nf_VDN.1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = VDN_macrophage_2
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage
+		}
+		relative_position_id = VDN_macrophage
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_macrophage_3
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage_2
+		}
+		relative_position_id = VDN_macrophage_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_macrophage_5
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage_3
+		}
+		relative_position_id = VDN_macrophage_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_macrophage_6
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage_3
+		}
+		relative_position_id = VDN_macrophage_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_macrophage_4
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage_2
+		}
+		relative_position_id = VDN_macrophage_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_threat_of_the_dark_ones
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_macrophage
+		}
+		relative_position_id = VDN_macrophage
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_threat_of_the_dark_ones_spartan_faction
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_threat_of_the_dark_ones
+		}
+		relative_position_id = VDN_threat_of_the_dark_ones
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_threat_of_the_dark_ones_1
+		icon = GFX_VDN_flag
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_threat_of_the_dark_ones
+		}
+		relative_position_id = VDN_threat_of_the_dark_ones
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_faction_2
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_threat_of_the_dark_ones_spartan_faction
+		}
+		prerequisite = {
+			focus = VDN_macrophage_4
+		}
+		relative_position_id = VDN_threat_of_the_dark_ones_spartan_faction
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_eliminate_dark_ones
+		icon = GFX_VDN_flag
+		x = 1
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_threat_of_the_dark_ones_1
+		}
+		prerequisite = {
+			focus = VDN_macrophage_4
+		}
+		relative_position_id = VDN_threat_of_the_dark_ones_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_artyom
+		icon = GFX_VDN_flag
+		x = -1
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_homo_2
+			focus = VDN_threat_of_the_dark_ones_1
+		}
+		relative_position_id = VDN_threat_of_the_dark_ones_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_the_tower
+		icon = GFX_VDN_flag
+		x = 2
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_homo_3
+			focus = VDN_artyom
+		}
+		prerequisite = {
+			focus = VDN_eliminate_dark_ones
+			focus = VDN_artyom
+		}
+		relative_position_id = VDN_homo_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = VDN_humanitys_fate
+		icon = GFX_VDN_flag
+		x = 0
+		y = 0
+		cost = 1
+		available = {
+			always = no
+		}
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		relative_position_id = VDN_the_tower
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = VDN_and_nothing_was_learned
+		icon = GFX_VDN_flag
+		x = 4
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_humanitys_fate
+		}
+		relative_position_id = VDN_humanitys_fate
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_grows
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_and_nothing_was_learned
+		}
+		relative_position_id = VDN_and_nothing_was_learned
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_grows_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_grows
+		}
+		relative_position_id = VDN_commonwealth_grows
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_saviour_of_metro
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_and_nothing_was_learned
+		}
+		relative_position_id = VDN_and_nothing_was_learned
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_saviour_of_the_metro_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_saviour_of_metro
+		}
+		relative_position_id = VDN_saviour_of_metro
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_last_light
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_grows_2
+		}
+		prerequisite = {
+			focus = VDN_saviour_of_the_metro_2
+		}
+		relative_position_id = VDN_saviour_of_the_metro_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_genesis
+		icon = GFX_VDN_flag
+		x = -3
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_humanitys_fate
+		}
+		relative_position_id = VDN_humanitys_fate
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_our_future
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_genesis
+		}
+		relative_position_id = VDN_genesis
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_and_now
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_our_future
+		}
+		relative_position_id = VDN_our_future
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_the_dark_ones
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_genesis
+		}
+		relative_position_id = VDN_genesis
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_the_dark_ones_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_the_dark_ones
+		}
+		relative_position_id = VDN_the_dark_ones
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_dying_dreams
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_the_dark_ones_2
+		}
+		prerequisite = {
+			focus = VDN_and_now
+		}
+		relative_position_id = VDN_the_dark_ones_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
 		}
 	}
 }

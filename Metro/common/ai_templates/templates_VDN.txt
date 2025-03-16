@@ -1,0 +1,239 @@
+VDN_infantry_default = {
+	role = infantry 
+
+	available_for = {
+		VDN
+	}
+
+	upgrade_prio = {
+		factor = 2
+		modifier = {
+			factor = 25
+			OR = {
+				threat > 0.2
+			}
+		}
+	}
+
+	VDN_infantry_sentries_early = {
+		upgrade_prio = { 
+			base = 10
+			modifier = {
+				factor = 25
+				date > 2031.1.1
+			}
+			modifier = {
+				factor = 0.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+
+			regiments = { sentries = 5 }
+
+			support = {
+				gatling_support = 1
+			}
+		}
+
+		replace_at_match = 0.9
+		replace_with = VDN_infantry_sentries_late
+		target_min_match = 0.8
+
+		can_upgrade_in_field = {
+			stockpile_ratio = {
+				archetype = infantry_equipment
+				ratio > 0.5
+			}
+		}
+	}
+
+	VDN_infantry_sentries_late = {
+		upgrade_prio = { 
+			base = 10 
+			modifier = {
+				factor = 20
+				date > 2033.1.1
+			}
+			modifier = {
+				factor = 0.1
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+
+			regiments = { sentries = 5 }
+
+			support = {
+				explosive_support = 1
+				gatling_support = 1
+				field_hospital = 1
+				logistics_company = 1
+				inf_recon = 1
+			}
+		}
+
+	}
+
+	VDN_infantry_regulars_early = {
+		upgrade_prio = { 
+			base = 10
+			modifier = {
+				factor = 20
+				date > 2033.1.1
+			}
+			modifier = {
+				factor = 20
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+
+			regiments = { regulars = 5 }
+
+			support = {
+				explosive_support = 1
+				gatling_support = 1
+			}
+		}
+
+		replace_at_match = 0.9
+		replace_with = VDN_infantry_regulars_late
+		target_min_match = 0.8
+
+		can_upgrade_in_field = {
+			stockpile_ratio = {
+				archetype = infantry_equipment
+				ratio > 0.5
+			}
+		}
+	}
+
+	VDN_infantry_regulars_late = {
+		upgrade_prio = { 
+			base = 12
+			modifier = {
+				factor = 20
+				date > 2035.1.1
+			}
+			modifier = {
+				factor = 20
+				has_tech = entrench_kits_2031
+				has_tech = regular_infantry_unlock_tech
+			}
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+
+			regiments = { regulars = 5 }
+
+			support = {
+				explosive_support = 1
+				gatling_support = 1
+				field_hospital = 1
+				logistics_company = 1
+				inf_recon = 1
+				riot_shields = 1
+			}
+		}
+
+	}
+}
+
+VDN_special_forces_templates = {
+	role = {
+		mountaineers
+		marines
+	}
+
+	available_for = {
+		VDN
+	}
+
+	upgrade_prio = { 
+		base = 5 
+		modifier = { 
+			factor = 0.5
+			num_of_military_factories < 12
+		} 
+	}
+
+	VDN_infantry_special_forces_early = {
+		upgrade_prio = { 
+			base = 10
+			modifier = {
+				factor = 20
+				date > 2032.1.1
+			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 10
+			} 
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+
+			regiments = { special_forces = 5 }
+
+			support = {
+				explosive_support = 1
+				gatling_support = 1
+			}
+		}
+
+		replace_at_match = 0.9
+		replace_with = VDN_infantry_special_forces_late
+		target_min_match = 0.8
+
+		can_upgrade_in_field = {
+			stockpile_ratio = {
+				archetype = special_forces_equipment
+				ratio > 0.5
+			}
+		}
+	}
+
+	VDN_infantry_special_forces_late = {
+		upgrade_prio = { 
+			base = 12
+			modifier = {
+				factor = 20
+				date > 2033.1.1
+			}
+			modifier = { 
+				factor = 0.5
+				num_of_military_factories < 12
+			} 
+		}
+
+		reinforce_prio = 1
+
+		target_template = {
+			regiments = { special_forces = 5 }
+
+			support = {
+				explosive_support = 1
+				gatling_support = 1
+				field_hospital = 1
+				logistics_company = 1
+				inf_recon = 1
+			}
+		}
+	}
+}

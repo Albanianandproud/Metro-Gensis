@@ -1,5 +1,232 @@
 add_namespace = nf_VDN
 add_namespace = VDNnews
+add_namespace = nf_VDNK
+
+
+country_event = { # Commonwealth Forms
+    id = nf_VDNK.1
+    title = nf_VDNK.1.t
+    desc = nf_VDNK.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK.1.a
+		set_cosmetic_tag = VDN_commonwealth
+		annex_country = {
+			target = ALK
+			transfer_troops = yes
+		}
+		annex_country = {
+			target = RIZ
+			transfer_troops = yes
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = ALK
+					is_core_of = RIZ
+				}
+			}
+			add_core_of = ROOT
+		}
+		add_timed_idea = { idea = VDNK_commonwealth_formed days = 480 }
+		hidden_effect = { set_country_flag = vdnk_achievement }
+		news_event = { id = global_event.51 days = 1 }
+		ai_chance = { base = 2500 }
+	}
+}
+
+country_event = { # Settlers Arrive
+    id = nf_VDNK.2
+    title = nf_VDNK.2.t
+    desc = nf_VDNK.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK.2.a
+		336 = { 
+			add_manpower = 50 
+			add_state_modifier = {
+				modifier = {
+					local_resources = 0.1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDNK.2.b
+		336 = { 
+			add_manpower = 50 
+			add_state_modifier = {
+				modifier = {
+					state_production_speed_industrial_complex_factor = 0.1
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Research Book
+    id = nf_VDNK.3
+    title = nf_VDNK.3.t
+    desc = nf_VDNK.3.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK.3.a
+		trigger = {
+			NOT = {
+				has_completed_focus = VDN_commonwealth_humanitarian_aid
+			}
+		}
+		complete_national_focus = VDN_commonwealth_humanitarian_aid
+	}
+
+	option = {
+		name = nf_VDNK.3.b
+		trigger = {
+			has_completed_focus = VDN_commonwealth_humanitarian_aid
+		}
+		modify_tech_sharing_bonus = {
+			id = VDN_faction_tech_group
+			bonus = 0.15
+		}
+	}
+}
+
+country_event = { # Communication wires
+    id = nf_VDNK.4
+    title = nf_VDNK.4.t
+    desc = nf_VDNK.4.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK.4.a
+		trigger = {
+			NOT = {
+				has_completed_focus = VDN_commonwealth_telecommunications
+			}
+		}
+		complete_national_focus = VDN_commonwealth_telecommunications
+	}
+
+	option = {
+		name = nf_VDNK.4.b
+		trigger = {
+			has_completed_focus = VDN_commonwealth_telecommunications
+		}
+		add_ideas = VDN_communication_wires
+	}
+}
+
+country_event = { # Fake event
+    id = nf_VDNK.5
+    title = nf_VDNK.5.t
+    desc = nf_VDNK.5.d
+    picture = "GFX_event (207)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {}
+
+	option = {
+		name = nf_VDNK.5.a
+	}
+}
+
+country_event = { ## Real Event
+    id = nf_VDNK.6
+    title = nf_VDNK.6.t
+    desc = nf_VDNK.6.d
+    picture = "GFX_event (207)"
+
+	trigger = { VDNKh_botanical_disaster = yes }
+    fire_only_once = yes
+
+	immediate = {
+		hidden_effect = { 
+			add_ideas = VDN_botanical_scare_3 
+			set_country_flag = VDNK_threat_from_botanical
+			country_event = { id = nf_VDNK.8 days = 7 }
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	option = {
+		name = nf_VDNK.6.a
+		effect_tooltip = {
+			add_ideas = VDN_botanical_scare_3
+			custom_effect_tooltip = nf_VDNKh.6_tt
+		}
+		5 = { remove_core_of = ROOT }
+		216 = { remove_core_of = ROOT }
+		5 = { transfer_state_to = RUI }
+		216 = { transfer_state_to = RUI }
+		307 = { add_dynamic_modifier = { modifier = infested_station_modifier } }
+		complete_national_focus = VDN_the_VDNKH
+	}
+}
+
+country_event = { # Recieve Funding
+    id = nf_VDNK.7
+    title = nf_VDNK.7.t
+    desc = nf_VDNK.7.d
+    picture = "GFX_event (193)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {}
+
+	option = {
+		name = nf_VDNK.7.a
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_opinion_modifier = {
+			target = HNZ
+			modifier = trade_relations_1
+		}
+	}
+}
+
+country_event = { # Hanza pull back funding
+    id = nf_VDNK.8
+    title = nf_VDNK.8.t
+    desc = nf_VDNK.8.d
+    picture = "GFX_event (173)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {}
+
+	option = {
+		name = nf_VDNK.8.a
+		add_offsite_building = { type = industrial_complex level = -1 }
+		remove_opinion_modifier = {
+			target = HNZ
+			modifier = trade_relations_1
+		}
+	}
+}
+
+
+## DEPCRECIATE EVERYTHING BELOW
+
+
 # the commonwealth starter event
 country_event = {
     id = nf_VDN.1
