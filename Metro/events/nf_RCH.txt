@@ -1,4 +1,7 @@
 add_namespace = nf_RCH
+add_namespace = nf_RCH_terror_campaign
+add_namespace = nf_RCH_fuhrer
+
 country_event = {
     id = nf_RCH.1
     title = nf_RCH.1.t
@@ -519,7 +522,7 @@ country_event = { ## Should auto complete the focuses ##
     id = nf_RCH.20
     title = nf_RCH.20.t
     desc = nf_RCH.20.d
-    picture = ""
+    picture = "GFX_event (81)"
 
 	is_triggered_only = yes
 
@@ -533,3 +536,350 @@ country_event = { ## Should auto complete the focuses ##
 		complete_national_focus = RCH_german_authenticity
 	}
 }
+
+country_event = { ## Bulwark of Bolshevism ##
+    id = nf_RCH.21
+    title = nf_RCH.21.t
+    desc = nf_RCH.21.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = RCH.21.a		#join
+		
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 4
+				has_opinion = {
+					target = RED
+					value < -10
+				}
+			}
+			modifier = {
+				factor = 0.5
+				has_opinion = {
+					target = RCH
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.1
+				tag = HNZ
+				RED = {
+					has_added_tension_amount < 10
+				}
+			}
+			modifier = {
+				factor = 0.1
+				tag = ULI
+				RCH = {
+					owns_state = 418
+				}
+			}
+			modifier = {
+				factor = 0.1
+				tag = SAV
+				RCH = {
+					owns_state = 312
+				}
+			}
+			modifier = {
+				factor = 0.1
+				has_completed_focus = satellite_align_the_sokol
+			}
+		}
+
+		set_country_flag = bulwark_against_bolshevism_applicant
+		RCH = { 
+			add_opinion_modifier = { 
+				target = ROOT 
+				modifier = bulwark_against_bolshevism_modifier 
+			} 
+		}
+		add_opinion_modifier = { 
+			target = RCH
+			modifier = bulwark_against_bolshevism_modifier 
+		}
+		RED = { 
+			add_opinion_modifier = { 
+				target = ROOT modifier = pact_threat 
+			} 
+		}
+	}
+
+	option = {
+		name = RCH.21.b		#refuse
+		trigger = { NOT = { is_subject_of = RCH } }
+		ai_chance = {
+			base = 25
+		}
+		RCH =  { add_opinion_modifier = { target = ROOT modifier = refused_pact_member } }
+	}
+}
+
+country_event = { ## Concession to Non Slavs Decision ##
+    id = nf_RCH.22
+    title = nf_RCH.22.t
+    desc = nf_RCH.22.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = RCH.22.a
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				tag = ULI
+				RCH = {
+					owns_state = 418
+				}
+			}
+			modifier = {
+				factor = 0
+				tag = SAV
+				RCH = {
+					owns_state = 31
+				}
+			}
+			modifier = {
+				factor = 0.5
+				RCH = {
+					has_added_tension_amount > 5
+				}
+			}
+		}
+		remove_opinion_modifier = {
+			target = RCH
+			modifier = fascist
+		}
+		RCH = {
+			remove_opinion_modifier = {
+				target = ROOT
+				modifier = mutant
+			}
+		}
+	}
+
+	option = {
+		name = RCH.22.b
+		trigger = { NOT = { is_subject_of = RCH } }
+		hidden_effect = { set_country_flag = RCH_deny_opinion_improvement }
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = { 
+	id = nf_RCH.23
+	title = nf_RCH.23.t
+	desc =  nf_RCH.23.d
+	picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = nf_RCH.23.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 20
+				RCH = {
+					has_added_tension_amount < 10
+				}
+			}
+		}		
+		effect_tooltip = {
+			ROOT = {
+				add_ideas = HNZ_RCH_trade
+				add_opinion_modifier = {
+					target = FROM
+					modifier = RCH_trading_partners
+				}
+			}
+		}
+		custom_effect_tooltip = war_with_HNZ_cancel
+		FROM = {
+			country_event = { id = RCH.24 hours = 5 random_hours = 5 }
+		}
+	}
+
+	option = { 
+		name = nf_RCH.23.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 15
+				RCH = {
+					has_added_tension_amount > 10
+				}
+			}
+			modifier = {
+				add = 100
+				has_war_with = PLS
+			}
+		}		
+		FROM = {
+			country_event = { id = RCH.25 hours = 5 random_hours = 5 }
+		}
+	}
+}
+country_event = { 
+	id = nf_RCH.24
+	title = nf_RCH.24.t
+	desc = nf_RCH.24.d
+	picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = nf_RCH.24.a 
+		FROM = {
+			add_ideas = HNZ_RCH_trade
+			add_opinion_modifier = {
+				target = FROM
+				modifier = RCH_trading_partners
+			}
+		}
+		custom_effect_tooltip = war_will_cancel_deal_tt
+	}
+}
+
+country_event = { 
+	id = nf_RCH.25
+	title = nf_RCH.25.t
+	desc = nf_RCH.25.d
+	picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = nf_RCH.25.a	
+	}
+}
+
+country_event = { ## Denazify Internal Politics Civil War
+	id = nf_RCH.26
+	title = nf_RCH.26.t
+	desc = nf_RCH.26.d
+	picture = "GFX_event (81)"
+
+	trigger = { RCH_denazify_attempt_civil_war = yes }
+    fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			complete_national_focus = RCH_denazify_internal_politics
+
+			start_civil_war = {
+				ruling_party = dictatorial
+				ideology = council
+				size = 0.5
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
+
+			unlock_national_focus = RCH_ss_integration_flavour_3
+			unlock_national_focus = RCH_ss_integration_flavour_6
+			unlock_national_focus = RCH_ss_integration_flavour_4
+		}
+	}
+
+	option = { 
+		name = nf_RCH.26.a	
+		effect_tooltip = {
+			start_civil_war = {
+				ruling_party = dictatorial
+				ideology = council
+				size = 0.5
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
+
+			unlock_national_focus = RCH_ss_integration_flavour_3
+			unlock_national_focus = RCH_ss_integration_flavour_6
+			unlock_national_focus = RCH_ss_integration_flavour_4
+			unlock_national_focus = RCH_ss_integration_flavour_55
+
+			retire_character = RCH_roman_orlov
+		}
+	}
+}
+
+
+country_event = {
+    id = nf_RCH_terror_campaign.1
+    title = nf_RCH_terror_campaign.1.t
+    desc = nf_RCH_terror_campaign.d
+    picture = ""
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_RCH_terror_campaign.1.a
+		custom_effect_tooltip = nf_RCH_terror_campaign.1.a.tt
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = RCH_commander_7
+	}
+}
+
+
+country_event = {
+    id = nf_RCH_fuhrer.1
+    title = nf_RCH_fuhrer.1.t
+    desc = nf_RCH_fuhrer.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_RCH_fuhrer.1.a
+		custom_effect_tooltip = nf_RCH_fuhrer.1.a.tt
+
+		hidden_effect = {
+			country_event = {
+				id = nf_RCH_fuhrer.2 days = 300
+			}
+		}
+	}
+}
+
+country_event = { ## Wife is pregnant
+    id = nf_RCH_fuhrer.2
+    title = nf_RCH_fuhrer.2.t
+    desc = nf_RCH_fuhrer.d
+    picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_RCH_fuhrer.2.a
+		add_stability = 0.05
+
+		hidden_effect = {
+			country_event = {
+				id = nf_RCH_fuhrer.3 days = 240
+			}
+		}
+	}
+}
+
+country_event = { ## Mutant child
+    id = nf_RCH_fuhrer.3
+    title = nf_RCH_fuhrer.3.t
+    desc = nf_RCH_fuhrer.d
+   picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_RCH_fuhrer.3.a
+	}
+}
+

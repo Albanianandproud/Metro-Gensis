@@ -42,12 +42,12 @@ NDefines.NBuildings.RADAR_INTEL_EFFECT = 10
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 2
 NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0
 NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
-NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.05
+NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.1
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.25
 NDefines.NCountry.BASE_MAX_COMMAND_POWER = 100
 NDefines.NCountry.LOCAL_MANPOWER_ACCESSIBLE_NON_CORE_FACTOR = 0.1
 NDefines.NCountry.MAX_NON_CORE_MANPOWER_FACTOR = 0.75
-NDefines.NCountry.ATTACHE_XP_SHARE = 0.4
+NDefines.NCountry.ATTACHE_XP_SHARE = 0.5
 NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.0001		--- Adding is done manually through script		
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
 NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
@@ -90,7 +90,7 @@ NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP g
 NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7
 
-NDefines.BASE_CAPTURE_EQUIPMENT_RATIO = 0.02		
+NDefines.BASE_CAPTURE_EQUIPMENT_RATIO = 0.334	
 
 ---Characters
 NDefines.NCharacter.OFFICER_CORP_HIGH_COMMAND_SLOTS_IN_MENU = 5
@@ -136,7 +136,7 @@ NDefines.NMilitary.BASE_DIVISION_BRIGADE_CHANGE_COST = 10
 NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 10
 
 
-	NDefines.NMilitary.ENCIRCLED_PENALTY = -0.3
+	NDefines.NMilitary.ENCIRCLED_PENALTY = -0.15
 
 	NDefines.NMilitary.OUT_OF_FUEL_EQUIPMENT_MULT = 0.1				-- ratio of the stats that you get from equipments that uses fuel and you lack it
 	NDefines.NMilitary.OUT_OF_FUEL_SPEED_MULT = 0.1					-- speed mult that armies get when out of fuel

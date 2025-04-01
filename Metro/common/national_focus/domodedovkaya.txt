@@ -1,0 +1,812 @@
+
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+
+focus_tree = {
+	id = nf_domodedovskaya
+	
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = DMD
+		}
+	}
+
+	default = no
+	continuous_focus_position = { x = 2270 y = 850 }
+
+	shared_focus = satellite_our_path
+	
+	focus = {
+		id = DMD_the_DMD
+		icon = GFX_campfire_3
+		x = 22
+		y = 0
+		cost = 3
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			country_event = nf_DMD.1
+		}
+	}
+
+	focus = {
+		id = DMD_improve_Orekhovo
+		icon = GFX_generic_winch
+		x = -7
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_the_DMD
+		}
+		relative_position_id = DMD_the_DMD
+		completion_reward = {
+			322 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_improve_Domodedovskaya
+		icon = GFX_generic_winch
+		x = -5
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_the_DMD
+		}
+		relative_position_id = DMD_the_DMD
+		completion_reward = {
+			333 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_Orekhovo_workshop
+		icon = GFX_workshop_1
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_improve_Orekhovo
+		}
+		relative_position_id = DMD_improve_Orekhovo
+		completion_reward = {
+			322 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_Domodedovskaya_workshop
+		icon = GFX_workshop_2
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_improve_Domodedovskaya
+		}
+		relative_position_id = DMD_improve_Domodedovskaya
+		completion_reward = {
+			333 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_reconstruct_Orekhovo
+		icon = GFX_generic_winch
+		x = 0
+		y = 5
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_generator
+		}
+		prerequisite = {
+			focus = DMD_Orekhovo_workshop
+		}
+		relative_position_id = DMD_Orekhovo_workshop
+		completion_reward = {
+			322 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_reconstruct_Domodedovskaya
+		icon = GFX_generic_winch
+		x = 0
+		y = 5
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_generator
+		}
+		prerequisite = {
+			focus = DMD_Domodedovskaya_workshop
+		}
+		relative_position_id = DMD_Domodedovskaya_workshop
+		completion_reward = {
+			333 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_reconstruct_Krasnogvardenskaya
+		icon = GFX_generic_winch
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = {
+			focus = DMD_reconstruct_Domodedovskaya
+		}
+		relative_position_id = DMD_reconstruct_Domodedovskaya
+		completion_reward = {
+			370 = {
+				add_extra_state_shared_building_slots = 4
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_tunnel_infrastructure
+		icon = GFX_RCH_tunnel_excavation
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_reconstruct_Orekhovo
+		}
+		prerequisite = {
+			focus = DMD_reconstruct_Domodedovskaya
+		}
+		relative_position_id = DMD_reconstruct_Domodedovskaya
+		completion_reward = {
+			54 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			53 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			52 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = DMD_military_drill
+		icon = GFX_soldier_2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_the_DMD
+		}
+		relative_position_id = DMD_the_DMD
+		completion_reward = {
+			army_experience = 15
+		}
+	}
+
+	focus = {
+		id = DMD_Krasnogvardenskaya_weaponsmith
+		icon = GFX_small_arms_1
+		x = -4
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_improve_Domodedovskaya
+		}
+
+		prerequisite = {
+			focus = DMD_military_drill
+		}
+		relative_position_id = DMD_military_drill
+		completion_reward = {
+			333 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = DMD_surface_exploration
+		icon = GFX_generic_equipment_gasmask_6
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = DMD_military_drill
+		}
+		
+		relative_position_id = DMD_military_drill
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = scavenging_efforts_idea
+		}
+	}
+
+	focus = {
+		id = DMD_pechatniki_trade
+		icon = GFX_generic_support_pec
+		x = -1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = {
+			focus = DMD_surface_exploration
+		}
+		relative_position_id = DMD_surface_exploration
+		available = { PEC = { exists = yes } NOT = { has_war_with = PEC }}
+		completion_reward = {
+			add_opinion_modifier = {
+				target = PEC
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = PEC
+				modifier = VDN_trade
+			}
+			capital_scope = {
+				add_resource = {
+					type = components
+					amount = 1
+				}
+			}
+			PEC = {
+				capital_scope = {
+					add_resource = {
+						type = components
+						amount = 1
+					}
+				}
+			}
+			hidden_effect = {
+				remove_ideas = DMD_full_isolation
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_contact_sevastopolskaya
+		icon = GFX_generic_support_sevastopol
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = {
+			focus = DMD_surface_exploration
+		}
+		relative_position_id = DMD_surface_exploration
+		available = { SEV = { exists = yes } NOT = { has_war_with = SEV }}
+		completion_reward = {
+			add_opinion_modifier = {
+				target = SEV
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = SEV
+				modifier = VDN_trade
+			}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 1
+				}
+			}
+			SEV = {
+				capital_scope = {
+					add_resource = {
+						type = scrap
+						amount = 1
+					}
+				}
+			}
+			hidden_effect = {
+				remove_ideas = DMD_full_isolation
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_trade
+		icon = GFX_PLS_trade_3
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = { 
+			focus = DMD_pechatniki_trade
+		}
+		relative_position_id = DMD_pechatniki_trade
+		available = { 
+			PEC = { exists = yes } 
+			NOT = { has_war_with = PEC }
+		}
+		completion_reward = {
+			add_ideas = SEV_exports
+		}
+		cancel = {
+			PEC = { exists = no }
+			has_war_with = PEC
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = DMD_weapon_bonus
+		icon = GFX_generic_medium_arms_2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_military_drill
+		}
+		relative_position_id = DMD_military_drill
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = DMD_weapon_bonus_2
+		icon = GFX_generic_medium_arms_3
+		x = 0
+		y = 3
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_weapon_bonus
+		}
+
+		prerequisite = {
+			focus = DMD_trade
+		}
+		relative_position_id = DMD_weapon_bonus
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = DMD_airship
+		icon = GFX_airship
+		x = -3
+		y = 1
+		cost = 6.5
+		available = {
+			has_country_flag = airship
+		}
+
+		relative_position_id = DMD_trade
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = DMD_generator
+		icon = GFX_generic_electricity_2
+		x = 0
+		y = 1
+		cost = 6.5
+		available = {
+			has_country_flag = generator_found
+		}
+
+		relative_position_id = DMD_airship
+
+		completion_reward = {
+			remove_ideas = DMD_lack_of_energy
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = DMD_M2
+		icon = GFX_generic_door
+		x = 2
+		y = 0
+		cost = 6.5
+		available = {
+			has_country_flag = metro2
+		}
+
+		relative_position_id = DMD_airship
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+			322 = {
+				add_resource = {
+			        	type = electronics
+			        	amount = 2
+				}
+				add_resource = {
+			        	type = scrap
+			        	amount = 4
+				}
+				add_resource = {
+					type = alloys
+					amount = 4
+				}
+				add_resource = {
+					type = components
+					amount = 4
+				}
+				add_resource = {
+					type = chemicals
+					amount = 1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	focus = {
+		id = DMD_strengthen_defense
+		icon = GFX_tunnel_bunker
+		x = 2
+		y = 1
+		cost = 6.5
+		available = {
+			has_country_flag = defense_focus
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		relative_position_id = DMD_airship
+		completion_reward = {
+			add_ideas = satellite_defensive_barricades
+			370 = {
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 950
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 951
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 3426
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 907
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 927
+				}
+			}
+			54 = {
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 979
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 982
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 3429
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_research_boost
+		icon = GFX_cog_blueprints
+		x = 1
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_generator
+		}
+		relative_position_id = DMD_generator
+		completion_reward = {
+			add_ideas = satellite_establish_library
+		}
+	}
+
+	focus = {
+		id = DMD_research_institute
+		icon = GFX_cog_idea
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_research_boost
+		}
+		relative_position_id = DMD_research_boost
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = DMD_isolated_economy
+		icon = GFX_cog_cement
+		x = 6
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_the_DMD
+		}
+		relative_position_id = DMD_the_DMD
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_tooling
+		icon = GFX_generic_construction
+		x = -2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_isolated_economy
+		}
+		relative_position_id = DMD_isolated_economy
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				category = tooling
+            		}
+		}
+	}
+
+	focus = {
+		id = DMD_medical
+		icon = GFX_generic_technician_medical
+		x = 0
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_isolated_economy
+		}
+		relative_position_id = DMD_isolated_economy
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				category = health
+            		}
+		}
+	}
+
+	focus = {
+		id = DMD_recyle
+		icon = GFX_components
+		x = 2
+		y = 1
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_isolated_economy
+		}
+		relative_position_id = DMD_isolated_economy
+		completion_reward = {
+			add_tech_bonus = {
+				name = recycling
+				uses = 1
+				bonus = 0.5
+				category = recycling
+			}
+		}
+	}
+
+	focus = {
+		id = DMD_construction
+		icon = GFX_generic_construction_2
+		x = -2
+		y = 4
+		cost = 6.5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		prerequisite = {
+			focus = DMD_isolated_economy
+		}
+		prerequisite = {
+			focus = DMD_trade
+		}
+		relative_position_id = DMD_isolated_economy
+		completion_reward = {
+			add_tech_bonus = {
+                		bonus = 0.25
+                		uses = 1
+                		category = construction
+            		}
+		}
+	}
+}

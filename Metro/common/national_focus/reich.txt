@@ -13,6 +13,7 @@ focus_tree = {
 	default = no
 	continuous_focus_position = { x = 9500 y = 50 }
 
+	## ALL OF THIS SHIT NEEDSA FIXING
 	focus = {
 		id = RCH_movements_against_the_fuhrer
 		icon = GFX_RCH_reich_2
@@ -22,7 +23,7 @@ focus_tree = {
 		available= {	
 		}
 		cost = 6.5
-		x = -7
+		x = -10
 		y = 0
 		completion_reward = {
 			add_ideas = RCH_plot_against_fuhrer
@@ -38,7 +39,7 @@ focus_tree = {
 			focus = RCH_movements_against_the_fuhrer
 		}
 		cost = 3.6
-		x = 6
+		x = 7
 		y = 0
 		select_effect = {
 			hidden_effect = { add_stability = 0.001 }
@@ -66,15 +67,20 @@ focus_tree = {
 				}
 			}
 		}
-		x = 6
+		x = 0
 		y = 1
-		cost = 3.6
+		cost = 4.4
 		relative_position_id = RCH_uncontested_authority
 		completion_reward = {
 			add_ideas = RCH_campaigns_of_terror_idea
-			RCH_bop_decrease_4 = yes
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RCH_commander_7
+
+			country_event = nf_RCH_terror_campaign.1 
+
+			hidden_effect = {
+				country_event = {
+					id = nf_RCH_fuhrer.1 random_days = 3
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 15
@@ -88,19 +94,13 @@ focus_tree = {
 			focus = RCH_dabble_into_occult
 		}
 		available = {
-			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value > 0.335
-				}
-			}
 		}
-		x = -5
+		x = -9
 		y = 2
-		cost = 3.6
+		cost = 5
 		relative_position_id = RCH_uncontested_authority
 		completion_reward = {
-			RCH_bop_decrease_4 = yes
+			RCH_bop_decrease_10 = yes
 			add_political_power = 50
 			add_popularity = {
 				ideology = council
@@ -117,13 +117,13 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_yield_power_to_gestapo
 		}
-		x = 1
-		y = 1
-		cost = 3.6
+		x = 0
+		y = 3
+		cost = 6.5
 		relative_position_id = RCH_yield_power_to_gestapo
 		completion_reward = {
 			add_ideas = RCH_total_mutant_death
-			add_war_support = 0.04
+			add_war_support = 0.02
 		}
 		ai_will_do = {
 			factor = 5
@@ -137,10 +137,10 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 3.6
+		cost = 6.5
 		relative_position_id = RCH_the_mutant_threat
 		completion_reward = {
-			add_war_support = 0.04
+			add_war_support = 0.02
 			effect_tooltip = {
 				add_ideas = RCH_no_more_mutant_2
 			}
@@ -161,12 +161,12 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_campaigns_of_terror
 		}
-		x = -1
+		x = 0
 		y = 1
-		cost = 2.9
+		cost = 6.5
 		relative_position_id = RCH_campaigns_of_terror
 		completion_reward = {
-			add_political_power = 40
+			add_political_power = 45
 			army_experience = 10
 		}
 		ai_will_do = {
@@ -182,14 +182,48 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_concession_to_non_slavs
 		}
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_definition_of_human
+		select_effect = { }
+		completion_reward = {
+			RCH_bop_decrease_10 = yes
+			add_stability = -0.05
+			add_ideas = RCH_metro_for_the_russians
+			army_experience = 10
+			hidden_effect = {
+				set_country_flag = RCH_purge_first_flag
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_fortify_the_borders
+		icon = GFX_RCH_festung_reykh
+		prerequisite = {
+			focus = RCH_earth_for_the_russians
+		}
+		available = {
+		}
 		x = 1
 		y = 1
-		cost = 8.6
-		relative_position_id = RCH_definition_of_human
+		cost = 6.5
+		relative_position_id = RCH_earth_for_the_russians
 		completion_reward = {
-			add_ideas = RCH_metro_for_the_russians
-			RCH_bop_decrease_2 = yes
-			army_experience = 10
+			add_ideas = RCH_fortify_the_demense
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -201,15 +235,129 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_earth_for_the_russians
 		}
+		available = {
+			has_country_flag = {
+				flag = RCH_purge_first_flag
+				days > 180
+			}
+			custom_trigger_tooltip = {
+				tooltip = RCH_first_purge_focus_days_tt
+				has_country_flag = {
+					flag = RCH_purge_first_flag
+					days > 180
+				}
+			}
+		}
 		x = 0
-		y = 1
-		cost = 8.6
+		y = 2
+		cost = 6.5
 		relative_position_id = RCH_earth_for_the_russians
+		select_effect = { }
 		completion_reward = {
 			add_stability = -0.05
 			add_ideas = RCH_purity_1
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_10 = yes
 			army_experience = 15
+			hidden_effect = {
+				clr_country_flag = RCH_purge_first_flag
+				set_country_flag = RCH_purge_second_flag
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_secure_loyalties
+		icon = GFX_RCH_zealotry_3
+		prerequisite = {
+			focus = RCH_burn_the_dissident
+		}
+		available = {
+		}
+		x = 3
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_burn_the_dissident
+		select_effect = { }
+		completion_reward = {
+			custom_effect_tooltip = RCH_secure_loyalties_tooltip
+			if = {
+				limit = {
+					RCH_evgeny_petrovich  = {
+						has_trait = RCH_position_questioned
+					}
+				}
+				remove_country_leader_trait = RCH_position_questioned
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = RCH_remove_BOP_effects
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_loyal_zealotry
+		icon = GFX_RCH_zealotry_1
+		prerequisite = {
+			focus = RCH_secure_loyalties
+		}
+		mutually_exclusive = {
+			focus = RCH_zealotry_loyalist
+		}
+		available = {}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_secure_loyalties
+		completion_reward = {
+			custom_effect_tooltip = enable_tactic_overwhelming_rush_tt
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_zealotry_loyalist
+		icon = GFX_RCH_zealotry_2
+		prerequisite = {
+			focus = RCH_secure_loyalties
+		}
+		mutually_exclusive = {
+			focus = RCH_loyal_zealotry
+		}
+		available = {}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_secure_loyalties
+		select_effect = { }
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_cult_of_personality
+		icon = GFX_RCH_fuhrers_ascendancy
+		prerequisite = {
+			focus = RCH_loyal_zealotry
+			focus = RCH_zealotry_loyalist
+		}
+		available = {
+		}
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = RCH_secure_loyalties
+		select_effect = { }
+		completion_reward = {
+			remove_ideas = RCH_campaigns_of_terror_idea
+			custom_effect_tooltip = RCH_cult_of_personality_tooltip
+
+			swap_ruler_traits = { remove = RCH_natural_orator add = RCH_the_fuhrer }
 		}
 		ai_will_do = {
 			factor = 5
@@ -221,10 +369,24 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_burn_the_dissident
 		}
+		available = {
+			has_country_flag = {
+				flag = RCH_purge_second_flag
+				days > 180
+			}
+			custom_trigger_tooltip = {
+				tooltip = RCH_second_purge_focus_days_tt
+				has_country_flag = {
+					flag = RCH_purge_second_flag
+					days > 180
+				}
+			}
+		}
 		x = 0
-		y = 1
-		cost = 8.6
+		y = 2
+		cost = 6.5
 		relative_position_id = RCH_burn_the_dissident
+		select_effect = { }
 		completion_reward = {
 			add_stability = -0.05
 			effect_tooltip = {
@@ -236,8 +398,43 @@ focus_tree = {
 			hidden_effect = {
 				RCH_purity_upgrade_idea = yes
 			}
-			RCH_bop_decrease_2 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 			army_experience = 20
+			hidden_effect = {
+				clr_country_flag = RCH_purge_second_flag
+				set_country_flag = RCH_purge_third_flag
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_superiority_of_the_slavs
+		icon = GFX_RCH_superiority_complex
+		prerequisite = {
+			focus = RCH_sweep_the_filth
+		}
+		available = {
+			NOT = {
+				has_war = yes
+				surrender_progress > 0.44
+			}
+		}
+		x = 1
+		y = 1
+		cost = 8.6
+		relative_position_id = RCH_sweep_the_filth
+		select_effect = { }
+		completion_reward = {
+			add_political_power = 75
+			add_ideas = RCH_superior_hubris
+			custom_effect_tooltip = RCH_hubris_tooltip
 		}
 		ai_will_do = {
 			factor = 5
@@ -249,10 +446,24 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_sweep_the_filth
 		}
+		available = {
+			has_country_flag = {
+				flag = RCH_purge_third_flag
+				days > 180
+			}
+			custom_trigger_tooltip = {
+				tooltip = RCH_third_purge_focus_days_tt
+				has_country_flag = {
+					flag = RCH_purge_third_flag
+					days > 180
+				}
+			}
+		}
 		x = 0
 		y = 2
 		cost = 8.6
 		relative_position_id = RCH_sweep_the_filth
+		select_effect = { }
 		completion_reward = {
 			add_stability = 0.1
 			effect_tooltip = {
@@ -264,8 +475,15 @@ focus_tree = {
 			hidden_effect = {
 				RCH_purity_upgrade_idea = yes
 			}
-			RCH_bop_decrease_2 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 			army_experience = 50
+
+			hidden_effect = { clr_country_flag = RCH_purge_third_flag }
 		}
 		ai_will_do = {
 			factor = 5
@@ -287,14 +505,80 @@ focus_tree = {
 					value < -0.335
 				}
 			}
-			always = no
 		}
-		x = -1
+		x = -3
 		y = 1
-		cost = 4.3
+		cost = 6.5
 		relative_position_id = RCH_definition_of_human
 		completion_reward = {
-			custom_effect_tooltip = RCH_future_update_tt
+			RCH_bop_increase_10 = yes
+			effect_tooltip = {
+				remove_ideas = RCH_genetic_supremacy
+			}
+			add_war_support = -0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = RCH_concessions_denazification_descisions
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_open_spheres
+		icon = GFX_RCH_open_spheres
+		prerequisite = {
+			focus = RCH_concession_to_non_slavs
+		}
+		available = {}
+		x = -1
+		y = 1
+		cost = 8.6
+		relative_position_id = RCH_concession_to_non_slavs
+		completion_reward = {
+			add_war_support = -0.05
+			swap_ideas = {
+				remove_idea = closed_economy
+				add_idea = limited_exports
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_old_rightist_campaigns
+		icon = GFX_RCH_slogan
+		prerequisite = {
+			focus = RCH_concession_to_non_slavs
+		}
+		available = {}
+		x = 1
+		y = 1
+		cost = 8.6
+		relative_position_id = RCH_concession_to_non_slavs
+		completion_reward = {
+			add_ideas = RCH_clean_up_the_metro_spirit
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_denazify_internal_politics
+		icon = GFX_RCH_military_purges
+		prerequisite = {
+			focus = RCH_concession_to_non_slavs
+		}
+		available = {}
+		x = 0
+		y = 3
+		cost = 8.6
+		relative_position_id = RCH_concession_to_non_slavs
+		completion_reward = {
+			RCH_bop_increase_10 = yes
+			## Certain requesites will need to be completed for this to happen
+			## if requesites are not done, a CIVIL war against the gestapo will happen
+			remove_ideas = RCH_campaigns_of_terror_idea
 		}
 		ai_will_do = {
 			factor = 5
@@ -302,24 +586,27 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_permit_outside_recruitment
-		icon = GFX_RCH_military_purges
+		icon = GFX_RCH_outside_volunteers
 		prerequisite = {
-			focus = RCH_concession_to_non_slavs
+			focus = RCH_denazify_internal_politics
 		}
 		available = {
 			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value < -0.335
-				}
+				has_civil_war = no
+				has_war = no
 			}
 		}
 		x = 0
-		y = 2
+		y = 1
 		cost = 6.5
-		relative_position_id = RCH_concession_to_non_slavs
+		relative_position_id = RCH_denazify_internal_politics
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_10 = yes
+			add_timed_idea = {
+				idea = RCH_outsider_recruitment
+				days = 100
+			}
+			custom_effect_tooltip = RCH_request_voluntter_campaigns_tooltip
 		}
 		ai_will_do = {
 			factor = 5
@@ -333,10 +620,7 @@ focus_tree = {
 		}
 		available = {
 			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value < -0.335
-				}
+				has_war = no
 			}
 		}
 		x = -1
@@ -344,7 +628,46 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_permit_outside_recruitment
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_10 = yes
+			add_war_support = -0.05
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_fight_against_bolshevism
+		icon = GFX_RCH_fight_against_bolshevism
+		prerequisite = {
+			focus = RCH_foreign_support
+		}
+		available = {
+			NOT = { is_in_faction_with = RED }
+			RED = { exists = yes is_subject = no }
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_foreign_support
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					NOT = { tag = RCH }
+					NOT = { has_war_with = RCH }
+					NOT = { is_in_faction_with = RED }
+					is_subject = no
+					OR = {
+						tag = RUI
+						has_country_flag = is_communist_nation
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_idea = metro_thump_in_the_night
+					}
+				}
+				country_event = nf_RCH.21
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -358,10 +681,7 @@ focus_tree = {
 		}
 		available = {
 			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value < -0.335
-				}
+				has_war = no
 			}
 		}
 		x = 1
@@ -369,60 +689,40 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_permit_outside_recruitment
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_10 = yes
+			add_war_support = -0.05
+			add_ideas = foreign_staff
 		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
-		id = RCH_RNU_leanings
-		icon = GFX_RCH_RNU_leanings_3
+		id = RCH_metromacht_volunteers
+		icon = GFX_RCH_outsiders
 		prerequisite = {
-			focus = RCH_yield_power_to_gestapo
+			focus = RCH_foreign_support
+			focus = RCH_outside_generals
 		}
-		mutually_exclusive = {
-			focus = RCH_slavic_aryanism
+		available = {
 		}
-		x = -5
-		y = 1
-		cost = 2.8
-		relative_position_id = RCH_yield_power_to_gestapo
-		completion_reward = {
-			add_political_power = 50
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = RCH_RNU_character_1
-		icon = GFX_RCH_RNU_leanings_2
-		prerequisite = {
-			focus = RCH_RNU_leanings
-		}
-		mutually_exclusive = {
-			focus = RCH_RNU_character_2
-		}
-		x = -3 
-		y = 1
+		x = 1
+		y = 2
 		cost = 6.5
-		relative_position_id = RCH_RNU_leanings
+		relative_position_id = RCH_permit_outside_recruitment
 		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RCH_unamed_1
-			add_corps_commander_role = {
-				traits = { impatient_personality_trait }
-				character = RCH_unamed_1
-				skill = 2
-				attack_skill = 2
-				defense_skill = 2
-				planning_skill = 1
-				logistics_skill = 2
+			add_timed_idea = {
+				idea = RCH_outsider_recruitment
+				days = 350
 			}
-			RCH_unamed_1 = {
-				add_skill_level = 2
-				promote_leader = yes
+			custom_effect_tooltip = RCH_request_volunteer_campaigns_twice_tooltip
+			hidden_effect = {
+				every_country = {
+					limit = {
+						has_country_flag = has_been_drawn_manpower_from
+					}
+					clr_country_flag = has_been_drawn_manpower_from
+				}
 			}
 		}
 		ai_will_do = {
@@ -430,196 +730,284 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RCH_RNU_character_2
-		icon = GFX_RCH_nationalism_2
+		id = RCH_counter_operations
+		icon = GFX_RCH_ryan_gosling_nazi_wth
 		prerequisite = {
-			focus = RCH_RNU_leanings
+			focus = RCH_concession_to_non_slavs
+			focus = RCH_earth_for_the_russians
 		}
-		mutually_exclusive = {
-			focus = RCH_RNU_character_1
-		}
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_RNU_leanings
-		completion_reward = {
-			army_experience = 25
-			add_ideas = RCH_nationalism_foster_1
-			add_war_support = 0.025
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_RNU_character_3
-		icon = GFX_RCH_RNU_leanings_1
-		prerequisite = {
-			focus = RCH_RNU_character_1
-		}
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_RNU_character_1
-		completion_reward = {
-			add_war_support = 0.05
-			add_political_power = 60
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_RNU_choice_1
-		icon = GFX_RCH_nationalism_3
-		prerequisite = {
-			focus = RCH_RNU_character_2
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_RNU_character_2
-		completion_reward = {
-			RCH_nationalism_foster_scripted_effect = yes
-			add_war_support = 0.025
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_RNU_choice_2
-		icon = GFX_RCH_nationalism_4
-		prerequisite = {
-			focus = RCH_RNU_character_2
-		}
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_RNU_character_2
-		completion_reward = {
-			RCH_nationalism_foster_scripted_effect = yes
-			add_war_support = 0.025
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_slavic_aryanism
-		icon = GFX_RCH_slavic_leanings_3
-		prerequisite = {
-			focus = RCH_yield_power_to_gestapo
-		}
-		mutually_exclusive = {
-			focus = RCH_RNU_leanings
-		}
-		x = -2
-		y = 1
-		cost = 5.7
-		relative_position_id = RCH_yield_power_to_gestapo
-		completion_reward = {
-			add_war_support = 0.05
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_slavic_aryanism_character_1
-		icon = GFX_RCH_barrikadnaya_core
-		prerequisite = {
-			focus = RCH_slavic_aryanism
-		}
-		x = -1
-		y = 1
-		cost = 3.6
-		relative_position_id = RCH_slavic_aryanism
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RCH_unamed_3
-			custom_effect_tooltip = RCH_unlock_science
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_slavic_aryanism_character_2
-		icon = GFX_RCH_slavic_leanings_2
-		prerequisite = {
-			focus = RCH_slavic_aryanism
-		}
-		x = 1
-		y = 1
-		cost = 3.6
-		relative_position_id = RCH_slavic_aryanism
-		completion_reward = {
-			army_experience = 15
-
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_slavic_aryanism_choice_1
-		icon = GFX_RCH_conscription2
-		prerequisite = {
-			focus = RCH_slavic_aryanism_character_1
-		}
-		mutually_exclusive = {
-			focus = RCH_slavic_aryanism_choice_2
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_slavic_aryanism_character_1
-		completion_reward = {
-			add_corps_commander_role = {
-				character = RCH_unamed_2
-				traits = { paranoid_personality_trait resilient_commander_trait }
-				skill = 2
-				attack_skill = 3
-				defense_skill = 2
-				planning_skill = 1
-				logistics_skill = 2
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = RCH_slavic_aryanism_choice_2
-		icon = GFX_RCH_reich_2
-		prerequisite = {
-			focus = RCH_slavic_aryanism_character_1
-		}
-		mutually_exclusive = {
-			focus = RCH_slavic_aryanism_choice_1
+		allow_branch = {
+			has_dlc = "La Resistance"
 		}
 		x = 3
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_slavic_aryanism_character_1
+		relative_position_id = RCH_concession_to_non_slavs
 		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RCH_unamed_2
+			add_ideas = RCH_NSB_counter_intelligence_operations
+			upgrade_intelligence_agency = upgrade_discrete_operations
+			upgrade_intelligence_agency = upgrade_espionage_ability
+
+			create_operative_leader = {
+				name = "Hildegard Falk"
+				GFX = GFX_portrait_RCH_operative
+				traits = { }
+				bypass_recruitment = yes
+				available_to_spy_master = yes
+				nationalities = { RCH }
+			}
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
+	## CHANGE ALL THIS ##
+
+	#focus = {
+	#	id = RCH_RNU_leanings
+	#	icon = GFX_RCH_RNU_leanings_3
+	#	prerequisite = {
+	#		focus = RCH_yield_power_to_gestapo
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_slavic_aryanism
+	#	}
+	#	x = -5
+	#	y = 1
+	#	cost = 2.8
+	#	relative_position_id = RCH_yield_power_to_gestapo
+	#	completion_reward = {
+	#		add_political_power = 50
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_RNU_character_1
+	#	icon = GFX_RCH_RNU_leanings_2
+	#	prerequisite = {
+	#		focus = RCH_RNU_leanings
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_RNU_character_2
+	#	}
+	#	x = -2
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_RNU_leanings
+	#	completion_reward = {
+	#		custom_effect_tooltip = available_political_advisor
+	#		show_ideas_tooltip = RCH_unamed_1
+	#		add_corps_commander_role = {
+	#			traits = { impatient_personality_trait }
+	#			character = RCH_unamed_1
+	#			skill = 2
+	#			attack_skill = 2
+	#			defense_skill = 2
+	#			planning_skill = 1
+	#			logistics_skill = 2
+	#		}
+	#		RCH_unamed_1 = {
+	#			add_skill_level = 2
+	#			promote_leader = yes
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_RNU_character_2
+	#	icon = GFX_RCH_nationalism_2
+	#	prerequisite = {
+	#		focus = RCH_RNU_leanings
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_RNU_character_1
+	#	}
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_RNU_leanings
+	#	completion_reward = {
+	#		army_experience = 25
+	#		add_ideas = RCH_nationalism_foster_1
+	#		add_war_support = 0.02
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_RNU_character_3
+	#	icon = GFX_RCH_RNU_leanings_1
+	#	prerequisite = {
+	#		focus = RCH_RNU_character_1
+	#	}
+	#	x = -1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_RNU_character_1
+	#	completion_reward = {
+	#		add_war_support = 0.02
+	#		add_political_power = 60
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_RNU_choice_1
+	#	icon = GFX_RCH_nationalism_3
+	#	prerequisite = {
+	#		focus = RCH_RNU_character_2
+	#	}
+	#	x = 1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_RNU_character_2
+	#	completion_reward = {
+	#		RCH_nationalism_foster_scripted_effect = yes
+	#		add_war_support = 0.02
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_RNU_choice_2
+	#	icon = GFX_RCH_nationalism_4
+	#	prerequisite = {
+	#		focus = RCH_RNU_character_2
+	#	}
+	#	x = -1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_RNU_character_2
+	#	completion_reward = {
+	#		RCH_nationalism_foster_scripted_effect = yes
+	#		add_war_support = 0.02
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_slavic_aryanism
+	#	icon = GFX_RCH_slavic_leanings_3
+	#	prerequisite = {
+	#		focus = RCH_yield_power_to_gestapo
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_RNU_leanings
+	#	}
+	#	x = -2
+	#	y = 1
+	#	cost = 5.7
+	#	relative_position_id = RCH_yield_power_to_gestapo
+	#	completion_reward = {
+	#		add_war_support = 0.05
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_slavic_aryanism_character_1
+	#	icon = GFX_RCH_barrikadnaya_core
+	#	prerequisite = {
+	#		focus = RCH_slavic_aryanism
+	#	}
+	#	x = -1
+	#	y = 1
+	#	cost = 3.6
+	#	relative_position_id = RCH_slavic_aryanism
+	#	completion_reward = {
+	#		custom_effect_tooltip = available_political_advisor
+	#		show_ideas_tooltip = RCH_unamed_3
+	#		custom_effect_tooltip = RCH_unlock_science
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_slavic_aryanism_character_2
+	#	icon = GFX_RCH_slavic_leanings_2
+	#	prerequisite = {
+	#		focus = RCH_slavic_aryanism
+	#	}
+	#	x = 1
+	#	y = 1
+	#	cost = 3.6
+	#	relative_position_id = RCH_slavic_aryanism
+	#	completion_reward = {
+	#		army_experience = 15
+#
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_slavic_aryanism_choice_1
+	#	icon = GFX_RCH_conscription2
+	#	prerequisite = {
+	#		focus = RCH_slavic_aryanism_character_1
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_slavic_aryanism_choice_2
+	#	}
+	#	x = 1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_slavic_aryanism_character_1
+	#	completion_reward = {
+	#		add_corps_commander_role = {
+	#			character = RCH_unamed_2
+	#			traits = { paranoid_personality_trait resilient_commander_trait }
+	#			skill = 2
+	#			attack_skill = 3
+	#			defense_skill = 2
+	#			planning_skill = 1
+	#			logistics_skill = 2
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 1
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_slavic_aryanism_choice_2
+	#	icon = GFX_RCH_reich_2
+	#	prerequisite = {
+	#		focus = RCH_slavic_aryanism_character_1
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_slavic_aryanism_choice_1
+	#	}
+	#	x = 3
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_slavic_aryanism_character_1
+	#	completion_reward = {
+	#		custom_effect_tooltip = available_political_advisor
+	#		show_ideas_tooltip = RCH_unamed_2
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#}
 	focus = {
 		id = RCH_gestapo_jurisdiction
 		icon = GFX_RCH_political
 		prerequisite = {
 			focus = RCH_yield_power_to_gestapo
 		}
-		x = 3
-		y = 2
-		cost = 2
+		x = 2
+		y = 1
+		cost = 5
 		relative_position_id = RCH_yield_power_to_gestapo
 		completion_reward = {
 			add_command_power = 15
@@ -674,6 +1062,24 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_military_roles
+		icon = GFX_RCH_judiciary_roles
+		prerequisite = {
+			focus = RCH_domestic_role_1
+			focus = RCH_domestic_role_2
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_gestapo_jurisdiction
+		completion_reward = {
+			add_ideas = RCH_domestic_role_2_idea
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = RCH_dabble_into_occult
 		icon = GFX_RCH_ahnenerbe
 		prerequisite = {
@@ -684,7 +1090,7 @@ focus_tree = {
 			## Yevgeny requires leaning Gestapo Power
 			## Kreipp no BOP needed
 		}
-		x = 0
+		x = -3
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_movements_against_the_fuhrer
@@ -705,13 +1111,13 @@ focus_tree = {
 		id = RCH_depose_the_fuhrer
 		icon = GFX_RCH_kill_fuhrer
 		prerequisite = {
-			focus = RCH_dabble_into_occult
+			focus = RCH_movements_against_the_fuhrer
 		}
 		available= {}
-		x = -1
+		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_dabble_into_occult
+		relative_position_id = RCH_movements_against_the_fuhrer
 		completion_reward = {
 			add_political_power = 50
 			custom_effect_tooltip = RCH_assasination_tooltip
@@ -730,7 +1136,7 @@ focus_tree = {
 		available= {
 			
 		}
-		x = -1
+		x = -5
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_depose_the_fuhrer
@@ -776,13 +1182,13 @@ focus_tree = {
 		id = RCH_assasinate_the_fuhrer
 		icon = GFX_RCH_kreipp_focus
 		prerequisite = {
-			focus = RCH_depose_the_fuhrer
+			focus = RCH_assasinate_rudolf
 		}
 		
-		x = -4
+		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_depose_the_fuhrer
+		relative_position_id = RCH_assasinate_rudolf
 		completion_reward = {
 			custom_effect_tooltip = RCH_assasinate_warning
 			set_country_flag = RCH_assasination_is_over
@@ -892,105 +1298,129 @@ focus_tree = {
 		id = RCH_establish_stalags
 		icon = GFX_RCH_stalag4
 		prerequisite = {
-			focus = RCH_campaigns_of_terror
+			focus = RCH_burn_the_dissident
 		}
 		available= {
 			has_completed_focus = RCH_air_vent_discovery
 		}
-		x = -5
+		x = -2
 		y = 1
 		cost = 6.5
-		relative_position_id = RCH_campaigns_of_terror
+		relative_position_id = RCH_burn_the_dissident
 		completion_reward = {
-			add_ideas = RCH_worker_stalags
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = RCH_adler
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-			}
+			add_ideas = civics_work_ethics_6
+			hidden_effect = { set_country_flag = work_ethics_lock }
+			custom_effect_tooltip = RCH_stalags_unable_to_be_removed
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
 	focus = {
-		id = RCH_establish_stalags_work_the_mines
+		id = RCH_war_economics_labour
 		icon = GFX_RCH_stalag3
 		prerequisite = {
 			focus = RCH_establish_stalags
 		}
 		available= {
-			RCH_adler = { is_hired_as_advisor = yes }
+			## check if we occupy any station which is NON-CORED
+			custom_trigger_tooltip = {
+				tooltip = occupy_noncore_station
+				hidden_trigger = {
+					any_owned_state = {
+						NOT = {
+							has_state_category = pastoral
+							is_core_of = ROOT
+						}
+					}
+				}
+			}
 		}
-		mutually_exclusive = {
-			focus = RCH_establish_stalags_work_the_forges
-		}
-		x = -1
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_establish_stalags
 		completion_reward = {
-			hidden_effect = {
-				remove_trait = {
-					character = RCH_adler
-					slot = theorist
-					trait = _RCH_adler
-				}	
-			}
-			add_trait = {
-				character = RCH_adler
-				slot = theorist
-				trait = _RCH_adler_mines 
-			}
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-			}
+			add_ideas = RCH_worker_stalags
+			#custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_adler
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
-	focus = {
-		id = RCH_establish_stalags_work_the_forges
-		icon = GFX_RCH_stalag2
-		prerequisite = {
-			focus = RCH_establish_stalags
-		}
-		available= {
-			RCH_adler = { is_hired_as_advisor = yes }
-		}
-		mutually_exclusive = {
-			focus = RCH_establish_stalags_work_the_mines
-		}
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = RCH_establish_stalags
-		completion_reward = {
-			hidden_effect = {
-				remove_trait = {
-					character = RCH_adler
-					slot = theorist
-					trait = _RCH_adler
-				}	
-			}
-			add_trait = {
-				character = RCH_adler
-				slot = theorist
-				trait = _RCH_adler_forges
-			}
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-			}
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
+	#focus = {
+	#	id = RCH_establish_stalags_work_the_mines
+	#	icon = GFX_RCH_stalag3
+	#	prerequisite = {
+	#		focus = RCH_establish_stalags
+	#	}
+	#	available= {
+	#		RCH_adler = { is_hired_as_advisor = yes }
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_establish_stalags_work_the_forges
+	#	}
+	#	x = -1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_establish_stalags
+	#	completion_reward = {
+	#		hidden_effect = {
+	#			remove_trait = {
+	#				character = RCH_adler
+	#				slot = theorist
+	#				trait = _RCH_adler
+	#			}	
+	#		}
+	#		add_trait = {
+	#			character = RCH_adler
+	#			slot = theorist
+	#			trait = _RCH_adler_mines 
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#}
+	#focus = {
+	#	id = RCH_establish_stalags_work_the_forges
+	#	icon = GFX_RCH_stalag2
+	#	prerequisite = {
+	#		focus = RCH_establish_stalags
+	#	}
+	#	available= {
+	#		RCH_adler = { is_hired_as_advisor = yes }
+	#	}
+	#	mutually_exclusive = {
+	#		focus = RCH_establish_stalags_work_the_mines
+	#	}
+	#	x = 1
+	#	y = 1
+	#	cost = 6.5
+	#	relative_position_id = RCH_establish_stalags
+	#	completion_reward = {
+	#		hidden_effect = {
+	#			remove_trait = {
+	#				character = RCH_adler
+	#				slot = theorist
+	#				trait = _RCH_adler
+	#			}	
+	#		}
+	#		add_trait = {
+	#			character = RCH_adler
+	#			slot = theorist
+	#			trait = _RCH_adler_forges
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#}
 	focus = {
 		id = RCH_establish_the_ministry_of_culture
 		icon = GFX_RCH_cultural_institutions
-		cost = 4
+		cost = 3.6
 		x = 22
 		y = 0
 		available = {
@@ -1233,21 +1663,39 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_moc_path_8
-		icon = GFX_RCH_military_industry_2
+		icon = GFX_HNZ_all_is_well
 		prerequisite = {
 			focus = RCH_moc_path_7
 			focus = RCH_moc_path_6
 		}
 		available = {
-			num_of_civilian_factories > 14
+			is_subject = no
+			AND = {
+				country_exists = HNZ
+				HNZ = { is_subject = no }
+				NOT = { has_war_with = RCH }
+			}
 		}
 		x = 0
-		y = 3
+		y = 4
 		cost = 6.5
 		relative_position_id = RCH_moc_path_3
 		completion_reward = {
-			add_stability = 0.05
-			add_research_slot = 1
+			HNZ = {
+				country_event = { id = nf_RCH.23 days = 2 }
+			}
+
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				HNZ = {
+					add_ideas = HNZ_RCH_trade
+					add_opinion_modifier = {
+						target = PREV
+						modifier = RCH_trading_partners
+					}
+				}
+				custom_effect_tooltip = war_will_cancel_deal_tt
+			}
 		}
 		ai_will_do = {
 			factor = 20
@@ -1255,7 +1703,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_moc_path_10
-		icon = GFX_RCH_reich_2
+		icon = GFX_RCH_energy
 		prerequisite = {
 			focus = RCH_moc_path_8
 		}
@@ -1270,7 +1718,7 @@ focus_tree = {
 		relative_position_id = RCH_moc_path_8
 		completion_reward = {
 			RCH_chairman_of_ministry_upgrade_trait = yes
-			add_war_support = 0.05
+			add_war_support = 0.025
 			add_offsite_building = { type = synthetic_refinery level = 2 }
 		}
 		ai_will_do = {
@@ -1304,7 +1752,7 @@ focus_tree = {
 	focus = {
 		id = RCH_infrastructure_path_1
 		icon = GFX_RCH_infrastructure
-		cost = 4
+		cost = 3.6
 		x = 19
 		y = 0
 		completion_reward = {
@@ -1333,7 +1781,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4
+		cost = 3.6
 		relative_position_id = RCH_infrastructure_path_1
 		completion_reward = {
 			every_owned_state = {
@@ -1358,7 +1806,7 @@ focus_tree = {
 	focus = {
 		id = RCH_infrastructure_path_2
 		icon = GFX_RCH_infrastructure
-		cost = 4
+		cost = 3.6
 		x = 25
 		y = 0
 		completion_reward = {
@@ -1387,7 +1835,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4
+		cost = 3.6
 		relative_position_id = RCH_infrastructure_path_2
 		completion_reward = {
 			every_owned_state = {
@@ -1420,7 +1868,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 5
+		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_3
 		completion_reward = {
 			306 = {
@@ -1570,7 +2018,7 @@ focus_tree = {
 			337 = { is_owned_by = ROOT }
 		}
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_rearmament_tech_choice
 		completion_reward = {
@@ -1730,7 +2178,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 4.3
+		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_4
 		completion_reward = {
 			add_tech_bonus = {
@@ -1816,8 +2264,8 @@ focus_tree = {
 		}
 		available = { has_civic_education_higher_3 = yes }
 		x = 4
-		y = 1
-		cost = 5
+		y = 2
+		cost = 6.5
 		relative_position_id = RCH_four_year_plan
 		completion_reward = {
 			add_tech_bonus = {
@@ -1842,8 +2290,8 @@ focus_tree = {
 		}
 		available = { has_civic_education_higher_3 = yes }
 		x = 2
-		y = 1
-		cost = 5
+		y = 2
+		cost = 6.5
 		relative_position_id = RCH_four_year_plan
 		completion_reward = {
 			add_tech_bonus = {
@@ -1866,7 +2314,7 @@ focus_tree = {
 		available = { has_civic_education_higher_4 = yes }
 		x = -1
 		y = 2
-		cost = 5.8
+		cost = 6.5
 		relative_position_id = RCH_internal_civilian_3
 		completion_reward = {
 			set_technology = {
@@ -1885,7 +2333,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4.3
+		cost = 6.5
 		relative_position_id = RCH_internal_civilian_3
 		completion_reward = {
 			306 = { add_extra_state_shared_building_slots = 3 }
@@ -1906,7 +2354,7 @@ focus_tree = {
 		available = { has_civic_education_higher_4 = yes }
 		x = 1
 		y = 2
-		cost = 5.8
+		cost = 6.5
 		relative_position_id = RCH_internal_civilian_2
 		completion_reward = {
 			set_technology = {
@@ -1925,7 +2373,7 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4.3
+		cost = 6.5
 		relative_position_id = RCH_internal_civilian_2
 		available = {
 			275 = { is_owned_by = ROOT }
@@ -2000,7 +2448,7 @@ focus_tree = {
 		available = { has_civic_education_higher_4 = yes }
 		x = 0
 		y = 2
-		cost = 6.5
+		cost = 8.6
 		relative_position_id = RCH_moc_path_8
 		completion_reward = {
 			add_research_slot = 1
@@ -2026,7 +2474,7 @@ focus_tree = {
 			show_ideas_tooltip = RCH_karl_krainer
 			add_corps_commander_role = {
 				character = RCH_karl_krainer
-				traits = { bright_personality_trait cruel_personality_trait }
+				traits = { named_character bright_personality_trait cruel_personality_trait }
 				skill = 3
 				attack_skill = 3
 				defense_skill = 2
@@ -2037,7 +2485,7 @@ focus_tree = {
 			show_ideas_tooltip = RCH_dorian
 			add_corps_commander_role = {
 				character = RCH_dorian
-				traits = { stoic_personality_trait brazen_commander_trait }
+				traits = { named_character stoic_personality_trait brazen_commander_trait }
 				skill = 3
 				attack_skill = 2
 				defense_skill = 3
@@ -2074,7 +2522,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_inaugerate_the_new_blood
 		completion_reward = {
-			RCH_bop_increase_4 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_4 = yes
+			}
 			RCH_dorian = { add_skill_level = 1 }
 			army_experience = 25
 		}
@@ -2104,7 +2557,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion
 		completion_reward = {
-			RCH_bop_increase_10 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_10 = yes
+			}
 			add_ideas = RCH_iron_legion_advisors
 		}
 		ai_will_do = {
@@ -2130,8 +2588,13 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion
 		completion_reward = {
-			RCH_bop_increase_2 = yes
 			add_ideas = RCH_metromacht_drills
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_10 = yes
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2199,7 +2662,7 @@ focus_tree = {
 			show_ideas_tooltip = RCH_commander_3
 			add_corps_commander_role = {
 				character = RCH_commander_3
-				traits = { determined_personality_trait resilient_commander_trait }
+				traits = { named_character determined_personality_trait resilient_commander_trait }
 				skill = 3
 				attack_skill = 2
 				defense_skill = 3
@@ -2255,8 +2718,13 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion_flavour_7
 		completion_reward = {
-			RCH_bop_increase_6 = yes
 			add_ideas = RCH_metromacht_conscription
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_6 = yes
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2281,12 +2749,17 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion
 		completion_reward = {
-			RCH_bop_increase_2 = yes
 			add_tech_bonus = {
 				name = entrench_kit_bonus
 				bonus = 0.5
 				uses = 2
 				category = entrench_kits
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_10 = yes
 			}
 		}
 		ai_will_do = {
@@ -2411,10 +2884,15 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion_2
 		completion_reward = {
-			RCH_bop_increase_4 = yes
 			add_timed_idea = { 
 				idea = RCH_festung_reich 
 				days = 100
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_increase_10 = yes
 			}
 		}
 		ai_will_do = {
@@ -2432,10 +2910,10 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		cost = 4.3
+		cost = 3.6
 		relative_position_id = RCH_the_iron_legion_3
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_4 = yes
 			306 = {
 				add_building_construction = {
 					type = bunker
@@ -2464,7 +2942,7 @@ focus_tree = {
 			show_ideas_tooltip = RCH_commander_8
 			add_corps_commander_role = {
 				character = RCH_commander_8
-				traits = { fearless_personality_trait adaptable_commander_trait }
+				traits = { named_character fearless_personality_trait adaptable_commander_trait }
 				skill = 3
 				attack_skill = 2
 				defense_skill = 3
@@ -2490,7 +2968,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion_3
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_4 = yes
 			add_command_power = 20
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
@@ -2516,7 +2994,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion_3
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_4 = yes
 			add_offsite_building = {
 				type = arms_factory
 				level = 2
@@ -2543,7 +3021,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_til_1
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_4 = yes
 			set_technology = {
 				riot_shield_specops = 1
 			}
@@ -2569,7 +3047,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_til_2
 		completion_reward = {
-			RCH_bop_increase_2 = yes
+			RCH_bop_increase_4 = yes
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetnaz
 				amount = 45
@@ -2593,6 +3071,7 @@ focus_tree = {
 					value > 0.335
 				}
 			}
+			has_completed_focus = RCH_gestapo_jurisdiction
 		}
 		x = -2
 		y = 1
@@ -2602,6 +3081,12 @@ focus_tree = {
 			RCH_bop_decrease_4 = yes
 			add_ideas = RCH_SS_idea_1
 			RCH_karl_krainer = { add_skill_level = 2 }
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2629,7 +3114,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_ss_integration
 		completion_reward = {
-			RCH_bop_decrease_10 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 			add_ideas = RCH_ss_advisors
 		}
 		ai_will_do = {
@@ -2655,7 +3145,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_ss_integration
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_6 = yes
+			}
 			swap_ideas = {
 				remove_idea = RCH_SS_idea_1
 				add_idea = RCH_SS_idea_2
@@ -2708,7 +3203,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_flavour_1
 		completion_reward = {
-			RCH_bop_decrease_10 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 			add_ideas = RCH_SS_elites
 		}
 		ai_will_do = {
@@ -2745,7 +3245,12 @@ focus_tree = {
 				planning_skill = 2
 				logistics_skill = 1
 			}
-			RCH_bop_decrease_2 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_6 = yes
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -2800,7 +3305,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_flavour_1
 		completion_reward = {
-			RCH_bop_decrease_4 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_4 = yes
+			}
 			add_ideas = RCH_SS_recruitment
 		}
 		ai_will_do = {
@@ -2815,19 +3325,12 @@ focus_tree = {
 			focus = RCH_ss_integration_flavour_5
 		}
 		available = {
-			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value > 0.335
-				}
-			}
 		}
 		x = 1
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_flavour_2
 		completion_reward = {
-			RCH_bop_decrease_4 = yes
 			add_corps_commander_role = {
 				character = RCH_roman_orlov
 				skill = 5
@@ -2920,7 +3423,12 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_ss_integration_2
 		completion_reward = {
-			RCH_bop_decrease_4 = yes
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
 			add_command_power = 100
 		}
 		ai_will_do = {
@@ -2941,7 +3449,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_waffen_ss
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_4 = yes
 			add_tech_bonus = {
 				name = clothing_kits_bonus
 				bonus = 1
@@ -2989,7 +3497,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_waffen_ss
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_4 = yes
 			add_tech_bonus = {
 				name = entrench_kit_bonus
 				bonus = 0.5
@@ -3020,7 +3528,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_military_ss_1
 		completion_reward = {
-			RCH_bop_decrease_2 = yes
+			RCH_bop_decrease_4 = yes
 		}
 		ai_will_do = {
 			factor = 2
@@ -3160,7 +3668,7 @@ focus_tree = {
 		available = {
 			has_war = yes
 		}
-		x = -1
+		x = 1
 		y = 1
 		cost = 2.8
 		relative_position_id = RCH_volkssturm
@@ -3183,7 +3691,7 @@ focus_tree = {
 		available = {
 			has_war = yes
 		}
-		x = 1
+		x = -1
 		y = 1
 		cost = 2.8
 		relative_position_id = RCH_volkssturm
@@ -3301,7 +3809,7 @@ focus_tree = {
 	focus = {
 		id = RCH_bulwark_against_the_red
 		icon = GFX_RCH_military_army
-		cost = 4.3
+		cost = 3.6
 		x = 0
 		y = 1
 		available = {
@@ -3409,7 +3917,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_inaugerate_the_new_blood
 		}
-		x = 12
+		x = 13
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_inaugerate_the_new_blood
@@ -3422,7 +3930,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_draisine_salvaging
-		icon = GFX_RCH_draisines
+		icon = GFX_RCH_rail_bogie
 		prerequisite = {
 			focus = RCH_military_research_and_development
 		}
@@ -3467,8 +3975,106 @@ focus_tree = {
 			capital_scope = {
 				add_resource = {
 					type = alloys
-					amount = 3
+					amount = 4
 				}
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_draisine_fitting
+		icon = GFX_RCH_factory_hammer
+		prerequisite = {
+			focus = RCH_draisine_production
+		}
+		mutually_exclusive = {
+			focus = RCH_draisine_armaments
+		}
+		cancel_if_invalid = yes
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_draisine_production
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.25
+				uses = 3
+				category = rail_salvaging
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_rail_carts
+		icon = GFX_RCH_railcar
+		prerequisite = {
+			focus = RCH_draisine_fitting
+		}
+		cancel_if_invalid = yes
+		x = -1
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_draisine_fitting
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_cart
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_draisine_armaments
+		icon = GFX_RCH_draisines
+		prerequisite = {
+			focus = RCH_draisine_salvaging
+		}
+		mutually_exclusive = {
+			focus = RCH_draisine_fitting
+		}
+		cancel_if_invalid = yes
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_draisine_salvaging
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.25
+				uses = 3
+				category = rail_armament
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_rail_bikes
+		icon = GFX_RCH_rail_bikes
+		prerequisite = {
+			focus = RCH_draisine_armaments
+		}
+		cancel_if_invalid = yes
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_draisine_armaments
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_car
 			}
 		}
 		ai_will_do = {
@@ -3484,8 +4090,8 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_draisine_salvaging
 		}
-		x = 0
-		y = 1
+		x = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_draisine_production
 		completion_reward = {
@@ -3507,9 +4113,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_military_research_and_development
 		}
-		x = 7
+		x = 10
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_military_research_and_development
 		completion_reward = {
 			army_experience = 10
@@ -3536,9 +4142,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_firearms_development
 		}
-		x = 1
+		x = 0
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_firearms_development
 		completion_reward = {
 			country_event = nf_RCH.20
@@ -3549,7 +4155,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_flammenwerfer_teams
-		icon = GFX_RCH_stormtrooper_2
+		icon = GFX_RCH_guns
 		prerequisite = {
 			focus = RCH_firearms_development
 		}
@@ -3557,19 +4163,24 @@ focus_tree = {
 			focus = RCH_gasoline_siphoning
 		}
 		available = {
-			has_tech = tech_flamethrower_equipment_1
+			NOT = { has_idea = flamethrower_restriction_ban }
 		}
-		x = -4
+		x = -5
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_firearms_development
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
-				uses = 2
+				bonus = 0.25
+				uses = 3
 				category = flamethrower_support_tech
 			}
+			add_equipment_to_stockpile = {
+		        type = flamethrower_equipment
+		        amount = 15
+				producer = RUS
+		    }
 		}
 		ai_will_do = {
 			factor = 2
@@ -3582,7 +4193,7 @@ focus_tree = {
 			focus = RCH_flammenwerfer_teams
 		}
 		available = {
-			has_tech = tech_flamethrower_equipment_2
+			RCH_tested_flamethrower_arms = yes
 		}
 		x = 0
 		y = 1
@@ -3590,10 +4201,10 @@ focus_tree = {
 		relative_position_id = RCH_flammenwerfer_teams
 		completion_reward = {
 			add_equipment_to_stockpile = {
-		        type = flamethrower_equipment
-		        amount = 25
+				type = flamethrower_equipment_2
+				amount = 20
 				producer = RUS
-		    }
+			}
 			add_tech_bonus = {
 				name = infantry_bonus
 				bonus = 1
@@ -3615,13 +4226,34 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_flammenwerfer_teams
 		}
-		x = -6
+		x = -7
 		y = 1
-		cost = 4.4
+		cost = 6.5
 		relative_position_id = RCH_firearms_development
 		completion_reward = {
 			add_ideas = RCH_gasoline_for_vehicles
 			add_ideas = RCH_improved_vehicles
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_gasoline_siphoning_2
+		icon = GFX_Fuel
+		prerequisite = {
+			focus = RCH_firearms_development
+			focus = RCH_rail_armor
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_gasoline_siphoning
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = RCH_gasoline_for_vehicles
+				add_idea = RCH_rail_consumption
+			}
 		}
 		ai_will_do = {
 			factor = 2
@@ -3633,15 +4265,15 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_firearms_development
 		}
-		x = -2
+		x = -3
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_firearms_development
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
-				uses = 2
+				bonus = 0.25
+				uses = 3
 				category = gatling_support_tech
 			}
 			add_equipment_to_stockpile = {
@@ -3673,6 +4305,30 @@ focus_tree = {
 				type = gatling_equipment_2
 				amount = 20
 				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = RCH_integrated_support_teams
+		icon = GFX_SPT_equipment_2
+		prerequisite = {
+			focus = RCH_gattling_production_2
+			focus = RCH_hanz_get_ze_flamethrower
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_gattling_production_2
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.25
+				uses = 3
+				ahead_reduction = 1
+				category = support_tech
 			}
 		}
 		ai_will_do = {
@@ -3721,7 +4377,6 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_firearms_choice
 		completion_reward = {
-			RCH_eos_upgrade_idea = yes
 			effect_tooltip = {
 				swap_ideas = {
 					remove_idea = RCH_firearm_production
@@ -3749,7 +4404,7 @@ focus_tree = {
 			has_tech = rail_panzer_tech_2033
 		}
 		cancel_if_invalid = yes
-		x = 1
+		x = 0
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_rail_armor
@@ -3783,7 +4438,7 @@ focus_tree = {
 		available = {
 			has_tech = rail_panzer_tech_2033
 		}
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_test_out_rail_tanks
@@ -3822,7 +4477,7 @@ focus_tree = {
 		available = {
 			has_tech = rail_panzer_tech_2033
 		}
-		x = 1
+		x = 2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_test_out_rail_tanks
@@ -3853,16 +4508,46 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_stormwind_project
+		icon = GFX_rail_panzer
+		prerequisite = {
+			focus = RCH_test_out_rail_tanks
+		}
+		available = {
+			has_completed_focus = RCH_gasoline_siphoning
+			has_idea = RCH_improved_vehicles
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_test_out_rail_tanks
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = RCH_improved_vehicles
+				add_idea = RCH_panzer_focusing
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				uses = 2
+				bonus = 0.25
+				category = rail_panzer
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
 		id = RCH_kampfmachine
-		icon = GFX_focus_generic_tank_production
+		icon = GFX_RCH_rail_tanks
 		prerequisite = {
 			focus = RCH_blitzkrieg_tactics
 			focus = RCH_fist_of_the_reich
 		}
-		x = -1
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.5
-		relative_position_id = RCH_fist_of_the_reich
+		relative_position_id = RCH_test_out_rail_tanks
 		completion_reward = {
 			division_template = {
 				name = "Kampf Machines"
@@ -3897,7 +4582,7 @@ focus_tree = {
 			focus = RCH_simple_arms_for_simple_people
 			focus = RCH_sturmgewehr_2033
 		}
-		x = 3
+		x = 5
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_kampfmachine
@@ -3991,6 +4676,7 @@ focus_tree = {
 					name = infantry_bonus
 					bonus = 0.5
 					uses = 1
+					ahead_reduction = 1
 					category = infantry_weapons
 				}
 			}
@@ -4106,7 +4792,7 @@ focus_tree = {
 		id = RCH_outwards
 		icon = GFX_RCH_looking_outwards
 		cost = 5
-		x = 70
+		x = 73
 		y = 0
 		available = {
 			OR = {
@@ -4155,7 +4841,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_outwards_into_mayakovskaya
-		icon = GFX_RCH_spec
+		icon = GFX_RCH_expedition
 		prerequisite = {
 			focus = RCH_outwards
 		}
@@ -4163,7 +4849,7 @@ focus_tree = {
 			180 = { is_owned_by = RUI }
 			316 = { is_owned_by = RUI }
 			179 = { is_owned_by = RUI }
-			has_army_manpower = { size > 399 }
+			has_army_manpower = { size > 374 }
 		}
 		bypass = {
 			180 = { is_owned_by = RCH }
@@ -4373,7 +5059,7 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_anti_communist_dogma
 		}
-		x = -4
+		x = -7
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards
@@ -4391,13 +5077,11 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_outwards
 		}
-		available= {
-			
-		}
+		available= {}
 		mutually_exclusive = {
 			focus = RCH_anti_capitalist_dogma
 		}
-		x = -2
+		x = -5
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards
@@ -4464,13 +5148,15 @@ focus_tree = {
 		id = RCH_proclaimation_of_slavic_unity
 		icon = GFX_RCH_hitler
 		available= {
-			has_war_support > 0.95
-			OR = {
-				date > 2033.1.1
-				has_war_support > 0.75
+			count_triggers = {
+				amount = 1
+				has_war_support > 0.99
+				OR = {
+					date > 2033.8.1
+				}
 			}
 		}
-		cost = 2.2
+		cost = 6.5
 		x = 0
 		y = 3.5
 		relative_position_id = RCH_outwards
@@ -4491,7 +5177,7 @@ focus_tree = {
 	focus = {
 		id = RCH_lebensraum
 		icon = GFX_RCH_lebensraum_2
-		cost = 3
+		cost = 6.5
 		prerequisite = {
 			focus = RCH_proclaimation_of_slavic_unity
 		}
@@ -4502,7 +5188,14 @@ focus_tree = {
 		y = 1
 		relative_position_id = RCH_proclaimation_of_slavic_unity
 		completion_reward = {
-			add_ideas = RCH_economy_law_4
+			if = {
+				limit = {
+					NOT = {
+						has_idea = RCH_economy_law_4
+					}
+				}
+				add_ideas = RCH_economy_law_4
+			}
 			306 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -4879,7 +5572,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_finish_off_1905
-		icon = GFX_RCH_barrikadnaya_core
+		icon = GFX_RCH_superiority_2
 		cost = 6.5
 		x = -1
 		y = 1
@@ -5168,11 +5861,11 @@ focus_tree = {
 	focus = {
 		id = RCH_hole_alliance
 		icon = GFX_RCH_new_order
-		cost = 4.3
+		cost = 3.6
 		prerequisite = {
 			focus = RCH_infiltrate_paveletskaya
 		}
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = RCH_infiltrate_paveletskaya
 		available = {
@@ -5217,7 +5910,7 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_hole_alliance
 		completion_reward = {
 			PVL = { 
@@ -5253,7 +5946,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_hole_alliance
 		completion_reward = {
 			PVL = {
@@ -5287,7 +5980,7 @@ focus_tree = {
 		}
 		x = -1
 		y = 1
-		cost = 4.4
+		cost = 3.6
 		relative_position_id = RCH_hole_alliance1
 		completion_reward = {
 			375 = {

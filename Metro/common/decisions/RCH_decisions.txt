@@ -162,3 +162,207 @@ RCH_KUZ_borderwar_decision = {
 		}
 	}
 }
+
+RCH_concession_to_non_slavs_decision_category = {
+
+	RCH_concessions_open_sphere = {
+		icon = eng_propaganda_campaigns
+		available = {
+			NOT = {
+				ROOT = { has_idea = RCH_genetic_supremacy }
+			}
+		}
+
+		cost = 5
+		days_remove = 2
+		days_re_enable = 14
+
+		target_array = global.countries
+
+		target_trigger = {
+			hidden_trigger = { NOT = { has_country_flag = RCH_deny_opinion_improvement }}
+			
+			FROM = { 
+				#has_opinion_modifier = fascist
+				NOT = { 
+					has_opinion = {
+						target = RED
+						value > 10
+					}
+					OR = {  
+						num_of_factories < 6
+						exists = no
+						has_idea = civics_border_4
+						original_tag = RUI
+						original_tag = AVT
+						original_tag = HUL
+						original_tag = SPT
+						has_country_flag = is_communist_nation
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_idea = metro_thump_in_the_night
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_RCH.22
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				FROM = {
+					remove_opinion_modifier = {
+						target = RCH
+						modifier = fascist
+					}
+				}
+				remove_opinion_modifier = {
+					target = FROM
+					modifier = mutant
+				}
+			}
+		}
+	}
+}
+
+RCH_permit_outside_recruitment_decision_category = {
+
+	RCH_permit_outside_recruitment_decision = {
+		icon = eng_propaganda_campaigns
+		available = {
+			NOT = {
+				#ROOT = { has_idea = RCH_genetic_supremacy }
+			}
+		}
+
+		custom_cost_text = command_power_25
+		custom_cost_trigger = {
+			command_power > 24.9
+		}
+
+		days_remove = 45
+		days_re_enable = 180
+
+		target_array = global.countries
+
+		target_trigger = {
+			NOT = { ROOT = { has_country_flag = RCH_recruitment_rounds } }
+			hidden_trigger = { NOT = { has_country_flag = RCH_deny_opinion_improvement }}
+			
+			FROM = { 
+				NOT = { has_country_flag = has_been_drawn_manpower_from }
+				has_opinion_modifier = fascist
+				NOT = { 
+					has_opinion = {
+						target = RED
+						value > 10
+					}
+					OR = {  
+						num_of_factories < 10
+						exists = no
+						has_idea = civics_border_4
+						original_tag = RUI
+						original_tag = AVT
+						original_tag = HUL
+						original_tag = SPT
+						has_country_flag = is_communist_nation
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_idea = metro_thump_in_the_night
+					}
+				}
+			}
+		}
+
+		modifier = {
+			command_power_gain_mult = -0.15
+		}
+
+		complete_effect = {
+			FROM = { set_country_flag = has_been_drawn_manpower_from }
+			add_manpower = 1
+		}
+
+		remove_effect = {
+			clr_country_flag = RCH_recruitment_rounds
+			random_list = {
+				50 = {
+					add_manpower = 15
+				}
+				20 = {
+					add_manpower = 30
+				}
+				15 = {
+					division_template = {
+						name = "Irregular Volunteers"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							irregulars = { x = 0 y = 0 }
+							irregulars = { x = 0 y = 1 }
+							irregulars = { x = 0 y = 2 }
+							irregulars = { x = 0 y = 3 }
+							irregulars = { x = 0 y = 4 }
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "name = \"Volunteers\" division_template = \"Volunteers\" start_experience_factor = 0.24 start_equipment_factor = 1"
+							owner = ROOT
+						}
+					}
+				}
+				10 = {
+					division_template = {
+						name = "Regular Volunteers"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							regulars = { x = 0 y = 0 }
+							regulars = { x = 0 y = 1 }
+							regulars = { x = 0 y = 2 }
+							regulars = { x = 0 y = 3 }
+							regulars = { x = 0 y = 4 }
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "name = \"Volunteers\" division_template = \"Regular Volunteers\" start_experience_factor = 0.24 start_equipment_factor = 1"
+							owner = ROOT
+						}
+					}
+				}
+				5 = {
+					division_template = {
+						name = "Spec Ops Volunteers"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							special_forces = { x = 0 y = 0 }
+							special_forces = { x = 0 y = 1 }
+							special_forces = { x = 0 y = 2 }
+							special_forces = { x = 0 y = 3 }
+							special_forces = { x = 0 y = 4 }
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "name = \"Volunteers\" division_template = \"Spec Ops Volunteers\" start_experience_factor = 0.24 start_equipment_factor = 1"
+							owner = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -36,20 +36,20 @@ ideas = {
 	        }	
 	    }
 		RCH_the_thousand_year_reich = { ## Tier II of RN spirit
-		picture = RCH_reclusive_nazis
-		allowed = {
-			always = no
+			picture = RCH_reclusive_nazis
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				justify_war_goal_time = -0.25
+				army_core_attack_factor = 0.1
+				conscription = 0.03
+			}	
 		}
-		allowed_civil_war = {
-			always = yes
-		}
-		removal_cost = -1
-		modifier = {
-			justify_war_goal_time = -0.25
-			army_core_attack_factor = 0.1
-			conscription = 0.03
-		}	
-	}
 		RCH_dreams_of_kreipp = {
 			picture = RCH_genetic_supremacy
 			allowed = {
@@ -73,6 +73,9 @@ ideas = {
 			picture = RCH_genetic_supremacy
 			allowed = {
 				always = no
+			}
+			available = {
+				NOT = { has_completed_focus = RCH_concession_to_non_slavs }
 			}
 			allowed_civil_war = {
 				always = yes
@@ -112,6 +115,23 @@ ideas = {
 			}
 	    }
 
+		RCH_clean_up_the_metro_spirit = {
+			picture = RCH_genetic_supremacy
+			allowed = {
+				has_completed_focus = RCH_concession_to_non_slavs 
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				send_volunteer_divisions_required = -0.1
+				send_volunteer_size = 2
+				send_volunteers_tension = -0.25
+			}
+				
+		}
+
 		RCH_the_metromacht = {
 			picture = RCH_the_metromacht
 			allowed = {
@@ -147,11 +167,10 @@ ideas = {
 			equipment_bonus = {
 				infantry_equipment = {
 					reliability = 0.025
-					build_cost_ic = 0.05
+					build_cost_ic = 0.08
 					instant = yes
 				}
 			}
-			research_bonus = { infantry_tech = 0.05 }
 			research_bonus = { clothing_kits = 0.05 }
 			research_bonus = { entrench_kits = 0.05 }
 	    }
@@ -168,7 +187,7 @@ ideas = {
 			removal_cost = -1
 			modifier = {
 				experience_gain_army = 0.05
-				stability_weekly = 0.002
+				political_power_gain = 0.1
 	        }
 	    }
 		RCH_plot_against_fuhrer = {
@@ -191,10 +210,8 @@ ideas = {
 			}
 			removal_cost = -1
 			modifier = {
-				political_power_gain = 0.05
-				war_support_weekly = 0.001
-				dictatorial_drift = 0.01
-				stability_factor = -0.1
+				political_power_gain = 0.15
+				stability_weekly = -0.005
 	        }	
 	    }
 		##
@@ -265,8 +282,8 @@ ideas = {
 			research_bonus = { infantry_tech = 0.1 }
 			equipment_bonus = {
 				infantry_equipment = {
-					build_cost_ic = -0.05
-					reliability = -0.05
+					build_cost_ic = -0.1
+					reliability = -0.1
 					instant = yes
 				}
 			}
@@ -278,7 +295,8 @@ ideas = {
 			removal_cost = -1
 			equipment_bonus = {
 				infantry_equipment = {
-					build_cost_ic = -0.1
+					build_cost_ic = -0.2
+					reliability = -0.05
 					instant = yes
 				}
 			}
@@ -290,8 +308,9 @@ ideas = {
 			removal_cost = -1
 			equipment_bonus = {
 				infantry_equipment = {
-					build_cost_ic = -0.15
+					build_cost_ic = -0.25
 					reliability = -0.05
+					defense = -0.05
 					ap_attack = -0.1
 					instant = yes
 				}
@@ -308,7 +327,7 @@ ideas = {
 				infantry_equipment = {
 					reliability = 0.05
 					breakthrough = 0.05
-					build_cost_ic = 0.05
+					build_cost_ic = 0.15
 					instant = yes
 				}
 			}
@@ -318,11 +337,12 @@ ideas = {
 			allowed = {
 			}
 			removal_cost = -1
-			research_bonus = { infantry_tech = 0.15 }
+			research_bonus = { infantry_tech = 0.1 }
 			equipment_bonus = {
 				infantry_equipment = {
 					reliability = 0.05
-					breakthrough = 0.05
+					breakthrough = 0.1
+					build_cost_ic = 0.1
 					instant = yes
 				}
 			}
@@ -349,7 +369,9 @@ ideas = {
 			allowed = {
 			}
 			removal_cost = -1
-			research_bonus = { motorized_tech = 0.08 }
+			research_bonus = { 
+				motorized_tech = 0.1
+			}
 	    }
 		RCH_draisine_tech_bonus_2 = {
 			picture = RCH_fuhrer_leaning
@@ -357,9 +379,7 @@ ideas = {
 			}
 			removal_cost = -1
 			research_bonus = { 
-				rail_panzer = 0.15
-				rail_car = 0.10
-				rail_part = 0.10
+				motorized_tech = 0.2
 			}
 	    }
 		RCH_gasoline_for_vehicles = {
@@ -368,12 +388,15 @@ ideas = {
 			}
 			removal_cost = -1
 			research_bonus = { 
-				flamethrower_support_tech = -0.5
+				flamethrower_support_tech = -1
+			}
+			modifier = {
+				army_fuel_consumption_factor = -0.25
 			}
 			equipment_bonus = {
 				flamethrower_equipment = {
-					build_cost_ic = 0.25
-					reliability = -0.1
+					build_cost_ic = 0.5
+					reliability = -0.15
 					instant = yes
 				}
 			}
@@ -385,18 +408,50 @@ ideas = {
 			removal_cost = -1
 			equipment_bonus = {
 				rail_panzer_equipment = {
-					reliability = 0.03
-					maximum_speed = 0.025
+					reliability = 0.02
+					supply_consumption = -0.02 
 					instant = yes
 				}
 				rail_car_equipment = {
-					reliability = 0.03
-					maximum_speed = 0.025
+					reliability = 0.02
+					supply_consumption = -0.02 
 					instant = yes
 				}
 				rail_cart_equipment = {
-					reliability = 0.03
-					maximum_speed = 0.025
+					reliability = 0.02
+					supply_consumption = -0.02 
+					instant = yes
+				}
+			}
+	    }
+		RCH_rail_consumption = {
+			picture = RCH_fuhrer_leaning
+			allowed = {
+			}
+			removal_cost = -1
+			research_bonus = { 
+				flamethrower_support_tech = -1
+			}
+			modifier = {
+				army_fuel_consumption_factor = -0.5
+			}
+			equipment_bonus = {
+				flamethrower_equipment = {
+					build_cost_ic = 0.5
+					reliability = -0.15
+					instant = yes
+				}
+			}
+	    }
+		RCH_panzer_focusing = {
+			picture = RCH_fuhrer_leaning
+			allowed = {
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				rail_panzer_equipment = {
+					reliability = 0.02
+					supply_consumption = -0.05
 					instant = yes
 				}
 			}
@@ -532,7 +587,7 @@ ideas = {
 			removal_cost = -1
 			modifier = {
 				war_support_factor = 0.1
-				resistance_activity = -0.08
+				resistance_activity = -0.1
 				resistance_growth_on_our_occupied_states = -0.2
 				army_defence_factor = 0.04
 	        }	
@@ -544,7 +599,7 @@ ideas = {
 			removal_cost = -1
 			modifier = {
 				war_support_factor = 0.15
-				resistance_activity = -0.12
+				resistance_activity = -0.15
 				resistance_growth_on_our_occupied_states = -0.3
 				army_defence_factor = 0.06
 	        }	
@@ -598,10 +653,37 @@ ideas = {
 			allowed_civil_war = { always = yes }
 			removal_cost = -1
 			modifier = {
-				compliance_growth = -0.2
-				industry_repair_factor = 0.2
-				industry_free_repair_factor = 0.2
+				resistance_growth = 0.02
+				compliance_growth = -0.01
+				industrial_capacity_factory = 0.025
+				production_factory_start_efficiency_factor = 0.075
 			}
+		}
+		RCH_worker_stalags_2 = {
+			picture = GFX_idea_fourth_reich_2
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			modifier = {
+				resistance_growth = 0.04
+				compliance_growth = -0.02
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.08
+				production_factory_start_efficiency_factor = 0.08
+			}
+	    }
+		RCH_superior_hubris = {
+			picture = RCH_fuhrer_leaning
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				justify_war_goal_time = -0.1
+                research_speed_factor = 0.08
+	        }	
 	    }
 		##
 		## Internal Branch
@@ -632,6 +714,21 @@ ideas = {
 			modifier = {				
 				industrial_capacity_factory = 0.1
 	        }	
+	    }
+		HNZ_RCH_trade = {
+			picture = GFX_idea_fourth_reich_2
+			allowed = {
+				country_exists = HNZ
+				HNZ = { is_subject = no }
+				NOT = { has_war_with = RCH }
+			}
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = { 
+				tag = RCH
+				trade_cost_for_target_factor = -0.5
+				trade_opinion_factor = 0.5
+			}	
 	    }
 		##
 		## Iron Legion
@@ -786,6 +883,52 @@ ideas = {
 				conscription_factor = 0.1
 			}
 		}
+
+		RCH_fortify_the_demense = {
+			picture = RCH_fuhrer_leaning
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+                state_production_speed_bunker_factor = 0.1
+				state_production_speed_bunker2_factor = 0.1
+				production_speed_infrastructure_factor = 0.1
+	        }	
+	    }
+
+		RCH_NSB_counter_intelligence_operations = {
+			picture = RCH_fuhrer_leaning
+
+			allowed = {
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				intel_network_gain_factor = 0.2
+				own_operative_capture_chance_factor = -0.2
+				operative_slot = 1
+	        }	
+	    }
+
+		RCH_outsider_recruitment = {
+			picture = soldier
+
+			allowed = {
+				always = no
+			}
+
+			removal_cost = 1
+
+			modifier = {
+				weekly_manpower = 2
+				mobilization_speed = 0.2
+			}
+		}
+
 		### Depreciate!!! ###
 		purge_mutant = {
 			picture = RCH_fuhrer_leaning
@@ -916,7 +1059,7 @@ ideas = {
 
 			modifier = {
 			    army_leader_cost_factor = -0.25
-                army_leader_start_level = 2
+                army_leader_start_level = 1
                 army_leader_start_logistics_level = 1
 	        }	
 	    }
@@ -1332,7 +1475,6 @@ ideas = {
 				}
 			}
 	    }
-
 
 		RCH_volkssturm_idea_1 = {
 			picture = RCH_volkssturm_2

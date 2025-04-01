@@ -198,7 +198,6 @@ ability = {
 		}
     }
 	
-	
 	siege_artillery = {
 		name = ABILITY_SIEGE_ARTILLERY
 		desc = ABILITY_SIEGE_ARTILLERY_DESC
@@ -350,6 +349,56 @@ ability = {
 				check_variable = { temp < 0.5 }
 				
 				add = 2
+			}
+		}
+	}
+
+	overwhelming_rush = {
+		name = ABILITY_OVERWHELMING_RUSH
+		desc = ABILITY_OVERWHELMING_RUSH_DESC
+		
+		sound_effect = command_power_ability_offensive
+		
+		type = army_leader
+		
+		allowed = {
+			is_leading_army_group = no
+			is_border_war = no
+			OWNER = { has_country_flag = allow_army_ability_overwhelming_rush }
+		}
+		
+		ai_will_do = {
+			factor = -1
+			modifier = {
+				FROM = {
+					has_war_support > 0.1
+					command_power > 1.5
+				}
+				check_variable = { num_units_offensive_combats > 6 }
+				
+				set_temp_variable = { temp = avg_offensive_combat_status }
+				check_variable = { temp > 0.45 }
+				check_variable = { ai_random > temp }
+				
+				add = 2
+			}
+		}
+		
+		cost = 0.35
+		duration = 96
+		
+		one_time_effect = {
+			add_temporary_buff_to_units = {
+				combat_offense = 0.3
+				combat_breakthrough = 0.3
+				org_damage_multiplier = -1.0
+				str_damage_multiplier = 0.8
+				cannot_retreat_while_attacking = 1.0
+				attrition = 0.25
+				army_speed_factor = 0.05
+				
+				days = 7
+				tooltip = ABILITY_OVERWHELMING_RUSH_TOOLTIP
 			}
 		}
 	}

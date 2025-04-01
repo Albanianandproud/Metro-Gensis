@@ -13,7 +13,7 @@ focus_tree = {
 			tag = VDN
 		}
 	}
-	continuous_focus_position = { x = 3020 y = 1100}
+	continuous_focus_position = { x = 3020 y = 500}
 	default = no
 
 	focus = {
@@ -23,17 +23,17 @@ focus_tree = {
 		y = 0
 		cost = 3.6
 		
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				NOT = { has_country_flag = VDNK_threat_from_botanical }
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		NOT = { has_country_flag = VDNK_threat_from_botanical }
+		#	}
+		#}
 		available = {
 			5 = { is_owned_by = RUI }
 		}
@@ -276,7 +276,7 @@ focus_tree = {
 		id = VDN_explore_botanical_gardens
 		icon = GFX_VDN_flag
 		x = 0
-		y = 3
+		y = 2
 		cost = 3.6
 		prerequisite = {
 			focus = VDN_fortifications
@@ -314,7 +314,7 @@ focus_tree = {
 		id = VDN_the_VDNKH
 		icon = GFX_VDN_flag
 		x = 5
-		y = 0
+		y = 7
 		cost = 6.5
 		allow_branch = { 
 			if = {
@@ -337,7 +337,7 @@ focus_tree = {
 	focus = {
 		id = VDN_commercialized_fungiculture
 		icon = GFX_VDN_flag
-		x = -15
+		x = -17
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -433,8 +433,8 @@ focus_tree = {
 	focus = {
 		id = VDN_medical_wards
 		icon = GFX_VDN_flag
-		x = 0
-		y = 1
+		x = 1
+		y = 3
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_health_hygiene
@@ -453,7 +453,7 @@ focus_tree = {
 	focus = {
 		id = VDN_exports
 		icon = GFX_VDN_flag
-		x = 3
+		x = 5
 		y = 1
 		cost = 6.5
 		available = {
@@ -463,6 +463,26 @@ focus_tree = {
 			focus = VDN_commercialized_fungiculture
 		}
 		relative_position_id = VDN_commercialized_fungiculture
+		completion_reward = {
+			add_ideas = VDN_peaceful_trade
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_exports_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 2
+		cost = 6.5
+		available = {
+			num_of_civilian_factories > 6
+		}
+		prerequisite = {
+			focus = VDN_exports
+		}
+		relative_position_id = VDN_exports
 		completion_reward = {
 			add_ideas = VDN_peaceful_trade
 		}
@@ -769,6 +789,22 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = VDN_shared_tooling_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_shared_tooling
+		}
+		relative_position_id = VDN_shared_tooling
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = VDN_wooden_shacks
 		icon = GFX_VDN_flag
 		x = -2
@@ -836,12 +872,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
-			add_tech_bonus = {
-				bonus = 0.5
-				uses = 2
-				ahead_reduction = 1
-				category = farming
-			}
+			add_ideas = VDN_mushroom_economy
 		}
 		ai_will_do = {
 			factor = 10
@@ -850,11 +881,14 @@ focus_tree = {
 	focus = {
 		id = VDN_economy_2a
 		icon = GFX_VDN_flag
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_economy_2
+		}
+		prerequisite = {
+			focus = VDN_medical_wards
 		}
 		relative_position_id = VDN_economy_2
 		completion_reward = {
@@ -928,7 +962,7 @@ focus_tree = {
 		id = VDN_economy_5
 		icon = GFX_VDN_flag
 		x = 1
-		y = 1
+		y = 2
 		cost = 6.5
 		available = {
 			has_completed_focus = VDN_commonwealth_telecommunications_5
@@ -950,7 +984,7 @@ focus_tree = {
 		id = VDN_economy_6
 		icon = GFX_VDN_flag
 		x = -1
-		y = 1
+		y = 2
 		cost = 6.5
 		available = {
 			has_completed_focus = VDN_commonwealth_telecommunications_5
@@ -969,9 +1003,26 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = VDN_economy_commonwealth
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_economy_6
+			focus = VDN_economy_5
+		}
+		relative_position_id = VDN_economy_6
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = VDN_economy_7
 		icon = GFX_VDN_flag
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -987,7 +1038,7 @@ focus_tree = {
 	focus = {
 		id = VDN_economy_8
 		icon = GFX_VDN_flag
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -1003,7 +1054,7 @@ focus_tree = {
 	focus = {
 		id = VDN_economy_9
 		icon = GFX_VDN_flag
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		available = {
@@ -1042,7 +1093,7 @@ focus_tree = {
 	focus = {
 		id = VDN_burgeoning_station0
 		icon = GFX_VDN_flag
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 		available = {
@@ -1526,8 +1577,8 @@ focus_tree = {
 	focus = {
 		id = VDN_military_0
 		icon = GFX_VDN_flag
-		x = 22
-		y = 0
+		x = 23
+		y = 7
 		cost = 6.5
 		allow_branch = { 
 			if = {
@@ -1541,7 +1592,7 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			army_experience = 10
+			army_experience = 20
 		}
 		ai_will_do = {
 			factor = 5
@@ -1569,6 +1620,8 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
+			add_stability = -0.1
+			add_manpower = 25
 		}
 		ai_will_do = {
 			factor = 10
@@ -1608,6 +1661,20 @@ focus_tree = {
 		}
 		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
+			set_temp_variable = { bullet_to_gain = -50 }
+			add_bullet_with_tooltip_effect = yes
+
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = scrap_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+
 			## GIVE EQUIPMENT
 			## +CG MODIFIER SPIRIT FOR 90 DAYS
 		}
@@ -2195,7 +2262,7 @@ focus_tree = {
 		id = VDN_commonwealth
 		icon = GFX_VDN_flag
 		x = 14
-		y = 0
+		y = 7
 		cost = 12.9
 		available = {
 			has_completed_focus = VDN_the_VDNKH
@@ -2369,7 +2436,7 @@ focus_tree = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
 			army_experience = 50
 			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_3
+				type = conventional_infantry_equipment_1
 				amount = 45
 				producer = RUS
 			}
@@ -2385,7 +2452,7 @@ focus_tree = {
 			}
 			ALK = {
 				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_3
+					type = conventional_infantry_equipment_1
 					amount = 45
 					producer = RUS
 				}
@@ -2402,7 +2469,7 @@ focus_tree = {
 			}
 			RIZ = {
 				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_3
+					type = conventional_infantry_equipment_1
 					amount = 45
 					producer = RUS
 				}
@@ -2481,8 +2548,8 @@ focus_tree = {
 	focus = {
 		id = VDN_novo_homo
 		icon = GFX_VDN_flag
-		x = 1
-		y = 9
+		x = 6
+		y = 8
 		cost = 6.5
 		available = {
 			always = no
@@ -2869,7 +2936,7 @@ focus_tree = {
 		id = VDN_the_tower
 		icon = GFX_VDN_flag
 		x = 2
-		y = 2
+		y = 1
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_homo_3
@@ -2891,7 +2958,7 @@ focus_tree = {
 		id = VDN_humanitys_fate
 		icon = GFX_VDN_flag
 		x = 0
-		y = 0
+		y = 1
 		cost = 1
 		available = {
 			always = no

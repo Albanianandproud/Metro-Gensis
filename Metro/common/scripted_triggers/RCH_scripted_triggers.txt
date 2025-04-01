@@ -1,13 +1,56 @@
 RCH_tested_gatling_arms = {
-	has_offensive_war = yes
 	AND = {
 		count_triggers = {
     		amount = 2
             has_army_experience > 5
+			has_offensive_war = yes
 			has_tech = tech_gatling_equipment_1
 		}
 	}
 }
+RCH_tested_flamethrower_arms = {
+	AND = {
+		count_triggers = {
+    		amount = 2
+            has_army_experience > 5
+			has_offensive_war = yes
+			has_tech = tech_flamethrower_equipment_1
+		}
+	}
+}
+
+RCH_denazify_attempt_civil_war = {
+	focus_progress = { focus = RCH_denazify_internal_politics progress > 0.7 }
+	count_triggers = {
+		amount = 3
+
+		NOT = {
+			has_completed_focus = RCH_open_spheres
+			has_completed_focus = RCH_old_rightist_campaigns
+		}
+
+		power_balance_value = {
+			id = RCH_power_balance
+			value < -0.334
+		}
+
+		date > 2033.1.1
+
+		if = {
+			limit = {
+				has_government = dictatorial 
+			}
+			dictatorial < 0.5
+		}
+		
+		OR = {
+			has_stability < 0.35
+    		has_war_support < 0.35
+		}
+	}
+}
+
+
 # RCH_state_name_should_change = {
 	# original_tag = RCH
 	#OR = { 		## This stuff causes crashes needs to be fixed

@@ -283,9 +283,7 @@ on_actions = {
             every_country = {
                 every_state = {
                     limit = {
-                        OR = {
-                            has_state_category = pastoral
-                        }
+                        OR = { has_state_category = pastoral }
                     }
                     if = {
                         limit = {
@@ -293,7 +291,12 @@ on_actions = {
                                 controls_state = PREV
                             }
                         }
-                        if = { limit = { PREV = { NOT = { has_variable = delete_manpower_from_tunnel } } }
+                        if = { 
+							limit = { 
+								PREV = { 
+									NOT = { has_variable = delete_manpower_from_tunnel } 
+								} 
+							}
                             PREV = {
                                 set_variable = { delete_manpower_from_tunnel = -1 }
                             }
@@ -308,48 +311,15 @@ on_actions = {
             }
         }
     }
-    #on_monthly = {
-    #    effect = {
-    #        every_state = {
-    #            limit = {
-    #                NOT = {
-    #                    state = 1
-	#				}
-    #            }
-    #            if = {
-    #                limit = {
-    #                    ROOT = {
-    #                        controls_state = PREV
-    #                    }
-    #                }
-    #                THIS = { add_manpower = -1 }
-    #            }
-    #        }
-    #        if = {
-    #            limit = {
-    #                has_variable = delete_manpower_from_tunnel
-    #            }
-    #            add_manpower = var:delete_manpower_from_tunnel
-    #            log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower removed"
-    #        }
-    #    }
-    #}
-    on_state_control_changed = {
+		
+	on_monthly = {
 		effect = {
-			if = {
-				limit = {
-					FROM.FROM = {
-						OR = {
-							has_state_category = pastoral
-						}
-					}
-				}
-				ROOT = {
-					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove before changed"
-					add_to_variable = { delete_manpower_from_tunnel = -1 }
-					log = "[THIS.GetName] [?delete_manpower_from_tunnel] manpower to remove after change"
-				}
-			}
+			log = "[THIS.GetName] [?num_owned_states] owned states"
+			set_temp_variable = { remove_manpower = 0 }
+			add_to_temp_variable = { remove_manpower = num_owned_states }
+			multiply_temp_variable = { remove_manpower = -1 }
+			log = "[THIS.GetName] [?remove_manpower] manpower to remove"
+			add_manpower = remove_manpower
 		}
 	}
 }
