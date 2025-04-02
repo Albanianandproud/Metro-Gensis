@@ -528,12 +528,22 @@ country_event = { ## Should auto complete the focuses ##
 
 	option = {
 		name = nf_RCH.20.a
-		complete_national_focus = RCH_economies_of_scale
+		set_country_flag = RCH_economies_of_scale_choice
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 25
+			producer = RUS
+		}
 	}
 
 	option = {
 		name = nf_RCH.20.b
-		complete_national_focus = RCH_german_authenticity
+		set_country_flag = RCH_german_authenticity_choice
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 25
+			producer = RUS
+		}
 	}
 }
 
@@ -807,6 +817,82 @@ country_event = { ## Denazify Internal Politics Civil War
 			unlock_national_focus = RCH_ss_integration_flavour_55
 
 			retire_character = RCH_roman_orlov
+		}
+	}
+}
+
+country_event = { 
+	id = nf_RCH.27
+	title = nf_RCH.27.t
+	desc = nf_RCH.27.d
+	picture = "GFX_event (81)"
+
+	is_triggered_only = yes
+
+	option = { 
+		name = nf_RCH.27.a	
+		add_political_power = 100
+	}
+
+	option = { 
+		name = nf_RCH.27.b	
+		every_other_country = {
+			limit = {
+				OR = {
+					tag = TRT
+					tag = KTG
+					tag = ARB
+					tag = HNZ
+					tag = MOB
+				}
+			}
+			add_opinion_modifier = {
+				target = FROM
+				modifier = RCH_tolerance
+			}
+		}
+	}
+}
+
+country_event = { ## Easter Egg, if you were to join a faction with the Reich
+	id = nf_RCH.28
+	title = nf_RCH.28.t
+	desc = nf_RCH.28.d
+	picture = "GFX_event (81)"
+
+	trigger = { 
+		original_tag = RCH
+		OR = {
+			is_in_faction_with = HMS
+			is_in_faction_with = MUT
+		}
+		NOT = { has_country_flag = RCH_mutant_rebellion_disgust }
+	}
+    fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = RCH_mutant_rebellion_disgust
+			start_civil_war = {
+				ruling_party = dictatorial
+				ideology = council
+				size = 0.5
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
+		}
+	}
+
+	option = { 
+		name = nf_RCH.26.a	
+		effect_tooltip = {
+			start_civil_war = {
+				ruling_party = dictatorial
+				ideology = council
+				size = 0.5
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
 		}
 	}
 }

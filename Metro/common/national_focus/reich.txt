@@ -564,6 +564,24 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = RCH_question_of_non_slavs
+		icon = GFX_campfire_3
+		prerequisite = {
+			focus = RCH_old_rightist_campaigns
+		}
+		available = {}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_old_rightist_campaigns
+		completion_reward = {
+			country_event = nf_RCH.27
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = RCH_denazify_internal_politics
 		icon = GFX_RCH_military_purges
 		prerequisite = {
@@ -592,8 +610,8 @@ focus_tree = {
 		}
 		available = {
 			NOT  = {
-				has_civil_war = no
-				has_war = no
+				has_civil_war = yes
+				has_war = yes
 			}
 		}
 		x = 0
@@ -1299,11 +1317,12 @@ focus_tree = {
 		icon = GFX_RCH_stalag4
 		prerequisite = {
 			focus = RCH_burn_the_dissident
+			focus = RCH_question_of_non_slavs
 		}
 		available= {
 			has_completed_focus = RCH_air_vent_discovery
 		}
-		x = -2
+		x = -3
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_burn_the_dissident
@@ -1318,7 +1337,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_war_economics_labour
-		icon = GFX_RCH_stalag3
+		icon = GFX_RCH_stalag2
 		prerequisite = {
 			focus = RCH_establish_stalags
 		}
@@ -1337,18 +1356,59 @@ focus_tree = {
 			}
 		}
 		x = 0
-		y = 2
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_establish_stalags
 		completion_reward = {
 			add_ideas = RCH_worker_stalags
-			#custom_effect_tooltip = available_political_advisor
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = RCH_adler
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
+	focus = {
+		id = RCH_mass_slavery_of_lesser_races
+		icon = GFX_RCH_stalag3
+		prerequisite = {
+			focus = RCH_war_economics_labour
+		}
+		prerequisite = {
+			focus = RCH_sweep_the_filth
+		}
+		available= {
+			## check if we occupy any station which is NON-CORED
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = occupy_noncore_station
+				hidden_trigger = {
+					any_owned_state = {
+						NOT = {
+							has_state_category = pastoral
+							is_core_of = ROOT
+						}
+					}
+				}
+			}
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_sweep_the_filth
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = RCH_worker_stalags
+				add_idea = RCH_worker_stalags_2 
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
 	#focus = {
 	#	id = RCH_establish_stalags_work_the_mines
 	#	icon = GFX_RCH_stalag3
@@ -1918,7 +1978,7 @@ focus_tree = {
 		completion_reward = {
 			add_offsite_building = {
 				type = arms_factory
-				level = 2
+				level = 1
 			}
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetnaz
@@ -4118,7 +4178,10 @@ focus_tree = {
 		cost = 3.6
 		relative_position_id = RCH_military_research_and_development
 		completion_reward = {
-			army_experience = 10
+			add_offsite_building = {
+				type = arms_factory
+				level = 1
+			}
 			add_tech_bonus = {
 				name = infantry_bonus
 				bonus = 0.5
@@ -4126,11 +4189,6 @@ focus_tree = {
 				category = infantry_weapons
 			}
 			add_ideas = RCH_firearm_production
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_2
-				amount = 35
-				producer = RUS
-			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -4344,6 +4402,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_economies_of_scale
 		}
+		available = {
+			has_country_flag = RCH_german_authenticity_choice
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -4371,6 +4432,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = RCH_german_authenticity
+		}
+		available = {
+			has_country_flag = RCH_economies_of_scale_choice
 		}
 		x = -1
 		y = 1
@@ -4790,7 +4854,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_outwards
-		icon = GFX_RCH_looking_outwards
+		icon = GFX_RCH_ss_operatives
 		cost = 5
 		x = 73
 		y = 0
