@@ -360,12 +360,6 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				monthly_population = -0.05
-				min_export = 0.25
-				civilian_intel_to_others = 5.0
-			}
-
-			modifier = {
 				bullet_income_factor_from_exports = 0.05
 				min_export = 0.25
 			}
@@ -398,6 +392,45 @@ ideas = {
 					# revert from closed_economy if we have large allies
 					has_idea = closed_economy
 				}
+   			}
+		}
+
+		autarkic_economy = {
+			available = {
+				original_tag = RCH
+				NOT = {
+					original_tag = HNZ
+				}
+				OR = {
+					has_government = oligarch
+					has_government = dictatorial
+				}
+			}
+
+			available = {
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				min_export = 0.15
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 100
+
+   				modifier = {
+   					add = 500
+   					has_idea = limited_exports
+   				}
+
+   				modifier = {
+   					add = 1500
+   					has_idea = closed_economy
+   				}
    			}
 		}
 		

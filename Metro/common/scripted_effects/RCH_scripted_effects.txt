@@ -403,3 +403,39 @@ apply_rch_name = {
 	if = { limit = { state = 306 } set_state_name = RCH_306 }
 	if = { limit = { state = 275 } set_state_name = RCH_275 }
 }
+
+RCH_intensify_campaign_of_terror = {
+	custom_effect_tooltip = campaign_of_terror_length_30_tt
+	subtract_from_variable = { campaign_of_terror_length = 30 }
+}
+RCH_modify_campaign_of_terror_modifier = {
+	add_to_variable = { RCH_political_power_gain = -0.05 tooltip = political_power_gain_tt }
+	add_to_variable = { RCH_stability_factor = -0.05 tooltip = stability_factor_tt }
+	add_to_variable = { RCH_recruitable_population_factor = -0.05 tooltip = recruitable_population_factor_tt }
+	##add_to_variable = { RCH_dictatorial_drift = 0.05 tooltip = dictatorial_drift_tt }
+}
+
+RCH_modify_campaign_of_terror_modifier_military = {
+	add_to_variable = { RCH_training_time_factor = 0.1 tooltip = training_time_factor_tt }
+	add_to_variable = { RCH_army_leader_cost_factor = 0.1 tooltip = army_leader_cost_factor_tt }
+	add_to_variable = { RCH_experience_gain_army_factor = -0.1 tooltip = experience_gain_army_factor_tt }
+}
+
+RCH_modify_campaign_of_terror_modifier_admin = {
+	add_to_variable = { RCH_theorist_cost_factor = 0.1 tooltip = theorist_cost_factor_tt }
+	add_to_variable = { RCH_high_command_cost_factor = 0.1 tooltip = high_command_cost_factor_tt }
+	add_to_variable = { RCH_materiel_manufacturer_cost_factor = 0.1 tooltip = materiel_manufacturer_cost_factor_tt }
+	add_to_variable = { RCH_industrial_concern_cost_factor = 0.1 tooltip = industrial_concern_cost_factor_tt }
+}
+
+RCH_campaign_of_terror_timeout_event_effect = {
+	every_owned_state = { 
+		limit = {
+			is_core_of = ROOT
+			NOT = {
+				has_state_category = pastoral
+			}
+		}
+		add_manpower = -15
+	}
+}

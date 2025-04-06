@@ -12,21 +12,23 @@ country_event = { ## RCH soldiers planning on mutiny
 	option = { ## Just execute them
 		name = RCH_random_event.1.a
 		add_manpower = -10
-		add_command_power = -10
+		add_command_power = -5
 		add_political_power = 5
 	}
 
 	option = { ## Public Execution 
 		name = RCH_random_event.1.b
 		add_manpower = -10
-		add_command_power = -15
-		add_war_support = 0.05
+		add_stability = -0.025
+		add_war_support = 0.025
+		add_political_power = 5
 	}
 
 	option = { ## Fuhrer convinces them to stay 
 		name = RCH_random_event.1.c
-		add_command_power = 5
-		add_political_power = -25
+		add_political_power = -10
+		add_stability = 0.025
+		add_war_support = -0.025
 	}
 }
 
@@ -40,7 +42,17 @@ country_event = { ## Prominent officer accused of mutation
 		random_unit_leader = { set_character_flag = RCH_mutant_rumours }
 	}
 
-	mean_time_to_happen = { days = 1800 }
+	mean_time_to_happen = { 
+		days = 1800 
+		modifier = {
+			factor = 0.75
+			NOT = { has_completed_focus = RCH_eradicate_the_impure }
+		}
+		modifier = {
+			factor = 25
+			has_completed_focus = RCH_eradicate_the_impure	
+		}
+	}
 	trigger = { original_tag = RCH }
 
 	option = { ## Execute them on the spot
@@ -53,7 +65,7 @@ country_event = { ## Prominent officer accused of mutation
 			retire = yes
 		}
 		add_war_support = 0.05
-		add_command_power = -15
+		add_command_power = -20
 		add_political_power = 50
 	}
 
@@ -65,9 +77,9 @@ country_event = { ## Prominent officer accused of mutation
 			}
 			clr_character_flag = RCH_mutant_rumours
 		}
-		add_war_support = -0.05
-		add_political_power = -30
-		army_experience = -5
+		add_war_support = -0.025
+		add_command_power = -20
+		add_political_power = -25
 	}
 
 	option = { ## Examine rumours / Investigate the officer
@@ -116,8 +128,8 @@ country_event = { # Exposed for being a mutant !
 			}
 			retire = yes
 		}
-		add_political_power = -10
-		add_command_power = -10
+		add_political_power = -25
+		add_command_power = -25
 	}
 }
 

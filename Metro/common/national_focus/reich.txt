@@ -72,11 +72,14 @@ focus_tree = {
 		cost = 4.4
 		relative_position_id = RCH_uncontested_authority
 		completion_reward = {
-			add_ideas = RCH_campaigns_of_terror_idea
+			add_dynamic_modifier = { modifier = RCH_campaign_of_terror_modifier }
+			RCH_modify_campaign_of_terror_modifier = yes
 
+			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_RCH_terror_campaign.1 
 
 			hidden_effect = {
+				set_variable = { campaign_of_terror_length = 180 }
 				country_event = {
 					id = nf_RCH_fuhrer.1 random_days = 3
 				}
@@ -189,12 +192,18 @@ focus_tree = {
 		select_effect = { }
 		completion_reward = {
 			RCH_bop_decrease_10 = yes
-			add_stability = -0.05
+			add_war_support = 0.05
 			add_ideas = RCH_metro_for_the_russians
 			army_experience = 10
 			hidden_effect = {
 				set_country_flag = RCH_purge_first_flag
 			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+			RCH_modify_campaign_of_terror_modifier = yes
+			RCH_intensify_campaign_of_terror = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -254,14 +263,19 @@ focus_tree = {
 		relative_position_id = RCH_earth_for_the_russians
 		select_effect = { }
 		completion_reward = {
-			add_stability = -0.05
 			add_ideas = RCH_purity_1
 			RCH_bop_decrease_10 = yes
-			army_experience = 15
+			add_war_support = 0.05
 			hidden_effect = {
 				clr_country_flag = RCH_purge_first_flag
 				set_country_flag = RCH_purge_second_flag
 			}
+			
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+			RCH_modify_campaign_of_terror_modifier = yes
+			RCH_intensify_campaign_of_terror = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -277,7 +291,7 @@ focus_tree = {
 		}
 		x = 3
 		y = 1
-		cost = 6.5
+		cost = 8.6
 		relative_position_id = RCH_burn_the_dissident
 		select_effect = { }
 		completion_reward = {
@@ -290,8 +304,28 @@ focus_tree = {
 				}
 				remove_country_leader_trait = RCH_position_questioned
 			}
+			else_if = {
+				limit = {
+					RCH_evgeny_petrovich = {
+						has_trait = RCH_mutant_child_rumours
+					}
+				}
+				remove_country_leader_trait = RCH_mutant_child_rumours
+			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = RCH_remove_BOP_effects
+
+			effect_tooltip = {
+				custom_effect_tooltip = generic_skip_one_line_tt
+				remove_power_balance = {
+					id = RCH_power_balance
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nf_RCH_fuhrer.4 random_days = 3
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -334,6 +368,8 @@ focus_tree = {
 		relative_position_id = RCH_secure_loyalties
 		select_effect = { }
 		completion_reward = {
+			add_war_support = 0.1
+			add_stability = 0.1
 		}
 		ai_will_do = {
 			factor = 5
@@ -354,7 +390,7 @@ focus_tree = {
 		relative_position_id = RCH_secure_loyalties
 		select_effect = { }
 		completion_reward = {
-			remove_ideas = RCH_campaigns_of_terror_idea
+			#remove_ideas = RCH_campaigns_of_terror_idea
 			custom_effect_tooltip = RCH_cult_of_personality_tooltip
 
 			swap_ruler_traits = { remove = RCH_natural_orator add = RCH_the_fuhrer }
@@ -388,7 +424,6 @@ focus_tree = {
 		relative_position_id = RCH_burn_the_dissident
 		select_effect = { }
 		completion_reward = {
-			add_stability = -0.05
 			effect_tooltip = {
 				swap_ideas = {
 					remove_idea = RCH_purity_1
@@ -404,11 +439,17 @@ focus_tree = {
 				}
 				RCH_bop_decrease_10 = yes
 			}
-			army_experience = 20
+			add_war_support = 0.05
 			hidden_effect = {
 				clr_country_flag = RCH_purge_second_flag
 				set_country_flag = RCH_purge_third_flag
 			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+			RCH_modify_campaign_of_terror_modifier = yes
+			RCH_intensify_campaign_of_terror = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -465,7 +506,6 @@ focus_tree = {
 		relative_position_id = RCH_sweep_the_filth
 		select_effect = { }
 		completion_reward = {
-			add_stability = 0.1
 			effect_tooltip = {
 				swap_ideas = {
 					remove_idea = RCH_purity_2
@@ -481,9 +521,13 @@ focus_tree = {
 				}
 				RCH_bop_decrease_10 = yes
 			}
-			army_experience = 50
 
-			hidden_effect = { clr_country_flag = RCH_purge_third_flag }
+			army_experience = 50
+			add_war_support = 0.1
+
+			hidden_effect = { clr_country_flag = RCH_purge_third_flag clr_country_flag = begin_campaign_of_terror_decision_flag }
+
+			remove_dynamic_modifier = { modifier = RCH_campaign_of_terror_modifier }
 		}
 		ai_will_do = {
 			factor = 5
@@ -710,6 +754,29 @@ focus_tree = {
 			RCH_bop_increase_10 = yes
 			add_war_support = -0.05
 			add_ideas = foreign_staff
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_advisor_role = {
+				character = RCH_unamed_4
+				activate = yes
+				advisor = {
+					slot = high_command
+					cost = 100
+					idea_token = RCH_unamed_4
+					traits = {
+						_RCH_unamed_4
+					}
+				}
+			}
+			add_corps_commander_role = {
+				character = RCH_unamed_4
+				traits = { named_character fearless_personality_trait brazen_commander_trait }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -1813,7 +1880,7 @@ focus_tree = {
 		id = RCH_infrastructure_path_1
 		icon = GFX_RCH_infrastructure
 		cost = 3.6
-		x = 19
+		x = 17
 		y = 0
 		completion_reward = {
 			every_owned_state = {
@@ -1867,7 +1934,7 @@ focus_tree = {
 		id = RCH_infrastructure_path_2
 		icon = GFX_RCH_infrastructure
 		cost = 3.6
-		x = 25
+		x = 26
 		y = 0
 		completion_reward = {
 			every_owned_state = {
@@ -1923,11 +1990,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infrastructure_path_3
 		}
+		prerequisite = {
+			focus = RCH_moc_path_3
+		}
 		available = {
 			has_completed_focus = RCH_establish_the_ministry_of_culture
 		}
-		x = 1
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_3
 		completion_reward = {
@@ -1971,7 +2041,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infrastructure_path_3
 		}
-		x = -2
+		x = -1
 		y = 1
 		cost = 5
 		relative_position_id = RCH_infrastructure_path_3
@@ -2009,7 +2079,7 @@ focus_tree = {
 			focus = RCH_rearmament_factory_choice
 		}
 		available = { has_civic_education_higher_3 = yes }
-		x = -5
+		x = 2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_rearmament
@@ -2031,7 +2101,7 @@ focus_tree = {
 			focus = RCH_rearmament_construction_choice
 		}
 		available = { has_civic_education_higher_3 = yes }
-		x = -3
+		x = 0
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_rearmament
@@ -2053,7 +2123,7 @@ focus_tree = {
 			focus = RCH_rearmament_construction_choice
 		}
 		available = { has_civic_education_higher_3 = yes }
-		x = -1
+		x = -2
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_rearmament
@@ -2078,7 +2148,7 @@ focus_tree = {
 			337 = { is_owned_by = ROOT }
 		}
 		x = 0
-		y = 2
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_rearmament_tech_choice
 		completion_reward = {
@@ -2233,11 +2303,14 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infrastructure_path_4
 		}
+		prerequisite = {
+			focus = RCH_moc_path_3
+		}
 		available = {
 			has_completed_focus = RCH_establish_the_ministry_of_culture
 		}
-		x = -1
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_infrastructure_path_4
 		completion_reward = {
@@ -2259,7 +2332,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_infrastructure_path_4
 		}
-		x = 1
+		x = -1
 		y = 1
 		cost = 5
 		relative_position_id = RCH_infrastructure_path_4
@@ -2282,7 +2355,7 @@ focus_tree = {
 		bypass = {
 			80 = { NOT = { is_owned_by = RUI } }
 		}
-		x = 3
+		x = 1
 		y = 1
 		cost = 2.9
 		relative_position_id = RCH_infrastructure_path_4
@@ -2323,8 +2396,8 @@ focus_tree = {
 			focus = RCH_internal_civilian_3
 		}
 		available = { has_civic_education_higher_3 = yes }
-		x = 4
-		y = 2
+		x = 1
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_four_year_plan
 		completion_reward = {
@@ -2349,8 +2422,8 @@ focus_tree = {
 			focus = RCH_internal_civilian_2
 		}
 		available = { has_civic_education_higher_3 = yes }
-		x = 2
-		y = 2
+		x = -1
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_four_year_plan
 		completion_reward = {
@@ -2554,7 +2627,7 @@ focus_tree = {
 			}
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.75
+				cost_reduction = 0.5
 				uses = 1
 				category = land_doctrine
 			}
@@ -2748,8 +2821,8 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 2
+				cost_reduction = 0.334
+				uses = 3
 				category = land_doctrine
 			}
 		}
@@ -6016,7 +6089,7 @@ focus_tree = {
 			PVL = {
 				add_doctrine_cost_reduction = {
 					name = land_doc_bonus
-					cost_reduction = 0.8
+					cost_reduction = 0.5
 					uses = 1
 					category = land_doctrine
 				}

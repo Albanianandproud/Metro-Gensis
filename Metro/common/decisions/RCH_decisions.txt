@@ -366,3 +366,135 @@ RCH_permit_outside_recruitment_decision_category = {
 		}
 	}
 }
+
+RCH_campaigns_of_terror_descision_category = {
+
+	RCH_campaign_of_terror_countdown_mission = {
+
+		#activation = {
+		#	always = no
+		#}
+		#
+		#allowed = { always = no }
+
+		icon = ger_mefo_bills
+		priority = 1001
+
+		available = {
+			NOT = { has_dynamic_modifier = { modifier = RCH_campaign_of_terror_modifier } }
+		}
+
+		days_mission_timeout = campaign_of_terror_length
+		is_good = yes
+
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { has_dynamic_modifier = { modifier = RCH_campaign_of_terror_modifier } }
+			}
+		}
+		
+		remove_effect = {}
+
+		complete_effect = {}
+
+		timeout_effect = {
+			effect_tooltip = {
+				#custom_effect_tooltip = RCH_campaign_population_displacement
+				custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+				RCH_modify_campaign_of_terror_modifier = yes
+
+				RCH_campaign_of_terror_timeout_event_effect = yes
+			}
+
+			country_event = nf_RCH_terror_campaign.3
+			## Do purge Event. Random pops are displaced
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+	RCH_campaign_of_terror_tighten_standards = {		
+
+		visible = {
+			has_active_mission = RCH_campaign_of_terror_countdown_mission
+		}
+
+		cost = 50
+		days_re_enable = 180
+		days_remove = 7
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = RCH_campaign_of_terror_countdown_mission 
+				days = 30
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_list = {
+				50 = {
+					custom_effect_tooltip = RCH_terror_campaign_tighten_standard
+					country_event = nf_RCH_terror_campaign.2
+					effect_tooltip = {
+						custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+						RCH_modify_campaign_of_terror_modifier_military = yes
+					}
+				}
+				50 = {
+					#custom_effect_tooltip = RCH_terror_campaign_standards_met
+				}
+			}
+		}
+	}
+
+	RCH_campaign_of_terror_inspect_administration = {
+	
+		visible = {
+			has_active_mission = RCH_campaign_of_terror_countdown_mission
+		}
+
+		cost = 50
+		days_re_enable = 180
+		days_remove = 7
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = RCH_campaign_of_terror_countdown_mission 
+				days = 30
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_list = {
+				50 = {
+					custom_effect_tooltip = RCH_terror_campaign_tighten_standard
+					country_event = nf_RCH_terror_campaign.4
+					effect_tooltip = {
+						custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+						RCH_modify_campaign_of_terror_modifier_admin = yes
+					}
+				}
+				50 = {
+					#custom_effect_tooltip = RCH_terror_campaign_standards_met
+				}
+			}
+		}	
+	}
+
+	RCH_campaign_of_terror_forge_reports = {
+
+		cost = 50
+		days_re_enable = 180
+		days_remove = 30
+
+		modifier =  {
+			#production_speed_buildings_factor = -0.25
+			production_factory_efficiency_gain_factor = -0.15
+		}
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = RCH_campaign_of_terror_countdown_mission 
+				days = 20
+			}
+		}
+	}
+}
