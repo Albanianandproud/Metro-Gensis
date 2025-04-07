@@ -42,12 +42,10 @@ focus_tree = {
 		x = 7
 		y = 0
 		select_effect = {
-			hidden_effect = { add_stability = 0.001 }
-			custom_effect_tooltip = RCH_cannot_be_cancelled
 		}
 		completion_reward = {
 			add_country_leader_trait = RCH_unquestioned_fuhrer
-			add_timed_idea = { idea = RCH_cemented_authority days = 270 } 
+			add_timed_idea = { idea = RCH_cemented_authority days = 300 } 
 			hidden_effect = {
 				country_event = nf_RCH.15	
 			} 
@@ -77,7 +75,7 @@ focus_tree = {
 
 			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_RCH_terror_campaign.1 
-
+			add_political_power = 100
 			hidden_effect = {
 				set_variable = { campaign_of_terror_length = 180 }
 				country_event = {
@@ -139,7 +137,7 @@ focus_tree = {
 			focus = RCH_the_mutant_threat
 		}
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_the_mutant_threat
 		completion_reward = {
@@ -476,6 +474,8 @@ focus_tree = {
 			add_political_power = 75
 			add_ideas = RCH_superior_hubris
 			custom_effect_tooltip = RCH_hubris_tooltip
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = unlock_RCH_education_decision_3
 		}
 		ai_will_do = {
 			factor = 5
@@ -714,18 +714,20 @@ focus_tree = {
 		completion_reward = {
 			every_other_country = {
 				limit = {
-					NOT = { tag = RCH }
-					NOT = { has_war_with = RCH }
-					NOT = { is_in_faction_with = RED }
 					is_subject = no
-					OR = {
+					NOT = {
+						is_in_faction_with = RED
+						has_war_with = RCH
+						tag = RCH
 						tag = RUI
+						tag = MSU
 						has_country_flag = is_communist_nation
 						has_country_flag = is_mutant_nation
 						has_country_flag = is_skaven_nation
 						has_country_flag = is_scientist_nation
 						has_country_flag = is_savage_nation
 						has_idea = metro_thump_in_the_night
+						has_idea = civics_border_4
 					}
 				}
 				country_event = nf_RCH.21
@@ -1095,11 +1097,11 @@ focus_tree = {
 		cost = 5
 		relative_position_id = RCH_yield_power_to_gestapo
 		completion_reward = {
-			add_command_power = 15
+			add_command_power = 25
 			custom_effect_tooltip = allow_ss_integration_tree
 			add_popularity = {
 				ideology = council
-				popularity = 0.02
+				popularity = 0.025
 			}
 		}
 		ai_will_do = {
@@ -1148,7 +1150,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_military_roles
-		icon = GFX_RCH_judiciary_roles
+		icon = GFX_RCH_ss_align
 		prerequisite = {
 			focus = RCH_domestic_role_1
 			focus = RCH_domestic_role_2
@@ -1158,7 +1160,15 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_gestapo_jurisdiction
 		completion_reward = {
-			add_ideas = RCH_domestic_role_2_idea
+			add_corps_commander_role = {
+				traits = { named_character brave_personality_trait brazen_commander_trait }
+				character = RCH_SS_1
+				skill = 3
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -1365,7 +1375,7 @@ focus_tree = {
 			
 		}
 		x = -1
-		y = 2
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_cult_recruitment
 		completion_reward = {
@@ -1644,6 +1654,10 @@ focus_tree = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = RCH_propaganda_minister
 			add_stability = 0.025
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = unlock_RCH_education_decision_1
+			custom_effect_tooltip = unlock_RCH_education_decision_2
 		}
 		ai_will_do = {
 			factor = 3.5
@@ -2593,7 +2607,7 @@ focus_tree = {
 	focus = {
 		id = RCH_inaugerate_the_new_blood
 		icon = GFX_RCH_a_new_fuhrer
-		x = 40
+		x = 38
 		y = 0
 		available = {
 			OR = {
@@ -2847,7 +2861,7 @@ focus_tree = {
 			}
 		}
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		relative_position_id = RCH_the_iron_legion_flavour_7
 		completion_reward = {
@@ -3915,7 +3929,7 @@ focus_tree = {
 				owns_state = 241
 			}
 		}
-		x = -9
+		x = 26
 		y = 1
 		cost = 2.8
 		relative_position_id = RCH_inaugerate_the_new_blood
@@ -4928,20 +4942,38 @@ focus_tree = {
 	focus = {
 		id = RCH_outwards
 		icon = GFX_RCH_ss_operatives
-		cost = 5
-		x = 73
+		cost = 6.5
+		x = 74
 		y = 0
 		available = {
 			OR = {
-				has_completed_focus = RCH_movements_against_the_fuhrer
-				has_completed_focus = RCH_uncontested_authority 
+				has_completed_focus = RCH_assasinate_the_fuhrer
+				has_completed_focus = RCH_definition_of_human
+			}
+			NOT = { 
+				has_dynamic_modifier = {
+					modifier = RCH_campaign_of_terror_modifier
+					scope = RCH
+				} 
 			}
 		}
 		completion_reward = {
 			RCH_reclusive_upgrade_idea = yes
+			
 			add_threat = 5
-			country_event = nf_RCH.11
+
+			every_neighbor_country = {
+				limit = {
+					NOT = { tag = RUI }
+				}
+				country_event = nf_RCH.30
+			} 
+
+			country_event = {
+				id =  nf_RCH.11 random_days = 7
+			}
 		}
+
 		ai_will_do = {
 			factor = 1
 			modifier = {
@@ -4952,7 +4984,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RCH_infiltrate_paveletskaya
-		icon = GFX_RCH_gestapo
+		icon = GFX_RCH_commander2
 		prerequisite = {
 			focus = RCH_outwards
 		}
@@ -4983,9 +5015,11 @@ focus_tree = {
 			focus = RCH_outwards
 		}
 		available = {
-			180 = { is_owned_by = RUI }
-			316 = { is_owned_by = RUI }
-			179 = { is_owned_by = RUI }
+			NOT = {
+				180 = { is_owned_by = RCH }
+				316 = { is_owned_by = RCH }
+				179 = { is_owned_by = RCH }
+			}
 			has_army_manpower = { size > 374 }
 		}
 		bypass = {
@@ -4998,7 +5032,33 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
-			country_event = nf_RCH.10
+			if = {
+				limit = {
+					316 = {
+						is_owned_by = RUI
+					}
+				}
+				country_event = nf_RCH.10
+			}
+			else_if = {
+				limit = {
+					NOT = { 
+						316 = { is_owned_by = RUI }
+					}
+				}
+				every_country = {
+					limit = {
+						owns_state = 316
+					}
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = take_state_focus
+							generator = { 316 }
+						}
+					}
+				}
+			}
 			if = { 
 				limit = { is_ai = yes }
 				427 = {
@@ -5084,6 +5144,7 @@ focus_tree = {
 					province = { all_provinces = yes }
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
@@ -5114,6 +5175,7 @@ focus_tree = {
 			316 = {
 				add_extra_state_shared_building_slots = 2
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
@@ -5144,6 +5206,7 @@ focus_tree = {
 			316 = {
 				add_manpower = -100
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
@@ -5171,8 +5234,6 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_outwards_into_mayakovskaya
 		completion_reward = {
-			add_stability = -0.05
-			add_political_power = -45
 			316 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -5181,6 +5242,7 @@ focus_tree = {
 				    instant_build = yes
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			RCH_mayakov_core = yes
 		}
 		ai_will_do = {
