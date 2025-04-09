@@ -39,14 +39,26 @@ country_event = { # Fallout
 
     option = {
         name = nf_RED.2.a
-        reverse_add_opinion_modifier = {
-            target = AVT
-            modifier = RED_betrayed_revolution
-        }
-        reverse_add_opinion_modifier = {
-            target = HUL
-            modifier = RED_betrayed_revolution
-        }
+        add_opinion_modifier = {
+				target = HUL
+				modifier = RED_betrayed_revolution
+		}
+		HUL = {
+			add_opinion_modifier = {
+				target = RED
+				modifier = RED_betrayed_revolution
+			}
+		}
+        add_opinion_modifier = {
+				target = AVT
+				modifier = RED_betrayed_revolution
+		}
+		AVT = {
+			add_opinion_modifier = {
+				target = RED
+				modifier = RED_betrayed_revolution
+			}
+		}
         hidden_effect = { country_event = { id = nf_RED.3 days = 7 random_days = 7 } }
 
         ai_chance = {
@@ -213,7 +225,7 @@ country_event = { # Q of Military
     #}
 }
 
-country_event = { # Q of grain requesition
+country_event = { # Q of grain requisition
     id = nf_RED.7
     title = nf_RED.7.t
     desc = nf_RED.7.d
@@ -223,7 +235,7 @@ country_event = { # Q of grain requesition
 
     option = {
         name = nf_RED.7.a
-        RED_decrease_requesition_intensity = yes
+        RED_decrease_requisition_intensity = yes
         add_stability = 0.025
         hidden_effect = { country_event = { id = nf_RED.36 days = 14 random_days = 28 } }
         ai_chance = {
@@ -234,9 +246,9 @@ country_event = { # Q of grain requesition
     option = {
         name = nf_RED.7.b
         hidden_effect = {
-            remove_ideas = RED_heavy_produce_requesition
+            remove_ideas = RED_heavy_produce_requisition
         }
-        add_ideas = RED_station_requesition
+        add_ideas = RED_station_requisition
         add_stability = 0.025
         hidden_effect = { country_event = { id = nf_RED.36 days = 14 random_days = 28 } }
         ai_chance = {
@@ -784,7 +796,7 @@ country_event = { # Great Show Trial
             popularity = 0.05
         }
         add_ideas = RED_standing_army
-        add_ideas = RED_produce_requesition 
+        add_ideas = RED_produce_requisition 
         ai_chance = {
             base = 2.5
         }
@@ -1998,7 +2010,7 @@ country_event = { # Korbut Manipulations, stage 1
                 amount = 2
                 date > 2029.1.1
                 dictatorial > 0.1
-                has_completed_focus = RED_inaugerate_korbut
+                has_completed_focus = RED_inaugurate_korbut
             }
         }
     }

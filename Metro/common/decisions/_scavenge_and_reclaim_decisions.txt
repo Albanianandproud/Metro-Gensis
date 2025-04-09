@@ -18,7 +18,7 @@ reclaim_metro = {
 					has_idea = PLS_ignorance
 					has_idea = ULI_1905_station_factionalism
 					has_idea = DMD_lack_of_energy
-					has_country_flag = disable_reclaimation_mechanic
+					has_country_flag = disable_reclamation_mechanic
 				}
 				original_tag = GWC
 				original_tag = PAG
@@ -271,17 +271,17 @@ reclaim_metro = {
 			    NOT = {
 				   original_tag = GWC
 				   original_tag = PAG
-				   has_country_flag = disable_reclaimation_mechanic
+				   has_country_flag = disable_reclamation_mechanic
 			    }
 		    }
 		    FROM = { is_owned_by = RUI }
 		    has_manpower > 10
 		    has_equipment = { infantry_equipment > 9 }
 		    NOT = {
-			   ROOT = { has_country_flag = reclaimation_underway }
+			   ROOT = { has_country_flag = reclamation_underway }
 			    FROM = {
 				    OR = {
-					   has_state_flag = state_being_colonised
+					   has_state_flag = state_being_colonized
 					   state = 1
 				    }
 			    }
@@ -294,19 +294,19 @@ reclaim_metro = {
 				type = infantry_equipment
 				amount = -10
 			}
-			set_country_flag = reclaimation_underway
-			FROM = { set_state_flag = state_being_colonised }
+			set_country_flag = reclamation_underway
+			FROM = { set_state_flag = state_being_colonized }
 			hidden_effect = { add_command_power = -50 }
 	    }
 	   	remove_effect = {
 			ROOT = {
 				set_variable = {
-					var = state_colonised_id
+					var = state_colonized_id
 					value = FROM
 				}
 			}
-			ROOT = { country_event = reclaimation_event.2 }
-			FROM = { clr_state_flag = state_being_colonised }
+			ROOT = { country_event = reclamation_event.2 }
+			FROM = { clr_state_flag = state_being_colonized }
 	    }
 		ai_will_do = {
 			base = 1
@@ -608,10 +608,10 @@ reclaim_metro = {
 		   	has_manpower > 9
 		   	has_equipment = { savage_equipment > 9 }
 		   	NOT = {
-			   	ROOT = { has_country_flag = reclaimation_underway }
+			   	ROOT = { has_country_flag = reclamation_underway }
 			   	FROM = {
 				   	OR = {
-					   	has_state_flag = state_being_colonised
+					   	has_state_flag = state_being_colonized
 					   	state = 1
 				   	}
 			   	}
@@ -623,22 +623,22 @@ reclaim_metro = {
 				type = savage_equipment
 				amount = -10
 			}
-		   set_country_flag = reclaimation_underway
-		   FROM = { set_state_flag = state_being_colonised }
+		   set_country_flag = reclamation_underway
+		   FROM = { set_state_flag = state_being_colonized }
 		   hidden_effect = { add_command_power = -50 }
 	    }
 	   	remove_effect = {
 		   	ROOT = {
 			   	set_variable = {
-				   	var = state_colonised_id
+				   	var = state_colonized_id
 				   	value = FROM
 			   	}
 		   	}
 		   	hidden_effect = {
-			   	ROOT = { country_event = reclaimation_event.2 }
+			   	ROOT = { country_event = reclamation_event.2 }
 		   	}
-		   	FROM = { clr_state_flag = state_being_colonised }
-		   	ROOT = { clr_country_flag = reclaimation_underway }
+		   	FROM = { clr_state_flag = state_being_colonized }
+		   	ROOT = { clr_country_flag = reclamation_underway }
 	   	}
 	   	ai_will_do = {
 		   	factor = 5
@@ -658,7 +658,7 @@ reclaim_metro = {
 
 		cancel_trigger = {
 			hidden_trigger = { has_country_flag = cancel_reclaim }
-			var:state_colonised_id = { resistance > 95 }
+			var:state_colonized_id = { resistance > 95 }
 		}
 		custom_cost_text = reclaim_cost_text
 		custom_cost_trigger = {
@@ -669,7 +669,7 @@ reclaim_metro = {
 			}
 		}
 		timeout_effect = {
-			ROOT = { clr_country_flag = reclaimation_underway clr_country_flag = reclaim_mission_activated }
+			ROOT = { clr_country_flag = reclamation_underway clr_country_flag = reclaim_mission_activated }
 			IF = {
 				limit = {
 					check_variable = { 
@@ -678,7 +678,7 @@ reclaim_metro = {
 						compare = less_than_or_equals  
 					}
 				}
-				RUI = { transfer_state = ROOT.state_colonised_id }
+				RUI = { transfer_state = ROOT.state_colonized_id }
 			}
 			else_if = {
 				limit = {
@@ -692,7 +692,7 @@ reclaim_metro = {
 			}
 		}
 		complete_effect = {
-			ROOT = { clr_country_flag = reclaimation_underway clr_country_flag = reclaim_mission_activated }
+			ROOT = { clr_country_flag = reclamation_underway clr_country_flag = reclaim_mission_activated }
 		}
 	}
 
@@ -714,7 +714,7 @@ reclaim_metro = {
 				var = reclaim_cost
 				value = 10
 			}
-			var:state_colonised_id = {
+			var:state_colonized_id = {
 				add_building_construction = {
 					type = bunker
 					level = 1
@@ -965,10 +965,10 @@ reclaim_metro = {
 		    FROM = { is_owned_by = RUI }
 		    has_manpower > 10
 		    NOT = {
-			   ROOT = { has_country_flag = reclaimation_underway }
+			   ROOT = { has_country_flag = reclamation_underway }
 			    FROM = {
 				    OR = {
-					   has_state_flag = state_being_colonised
+					   has_state_flag = state_being_colonized
 					   state = 1
 				    }
 			    }
