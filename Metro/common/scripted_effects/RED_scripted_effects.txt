@@ -37,16 +37,6 @@ RED_berilag_check_GM_capacity = {
 	set_variable = { var = berilag_GM_CAP val = temp_GM_CAP }
 }
 
-apply_red_name = {
-	if = { limit = { state = 228 } set_state_name = RED_228 }
-	if = { limit = { state = 264 } set_state_name = RED_264 }
-	if = { limit = { state = 329 } set_state_name = RED_329 }
-	if = { limit = { state = 245 } set_state_name = RED_245 }
-	if = { limit = { state = 330 } set_state_name = RED_330 }
-	if = { limit = { state = 362 } set_state_name = RED_362 }
-	if = { limit = { state = 250 } set_state_name = RED_250 }
-}
-
 RED_remove_volunteer_debuff = {
 	if = {
 		limit = {
@@ -97,78 +87,78 @@ RED_demobilise_economy = {
 		}
 		swap_ideas = {
 			remove_idea = RED_war_socialism_stale
-			add_idea = RED_demobilising_economy 
+			add_idea = RED_demobilizing_economy 
 		}
 	}
 	else_if = {
 		limit = {
-			has_idea = RED_demobilising_economy 
+			has_idea = RED_demobilizing_economy 
 		}
-		remove_ideas = RED_demobilising_economy 
+		remove_ideas = RED_demobilizing_economy 
 		add_ideas = RED_new_economic_plan
 	}
 }
-RED_decrease_requesition_intensity = {
+RED_decrease_requisition_intensity = {
 	#if = {
 	#	limit = {
 	#		has_idea = RED_army_ransacking
 	#	}
 	#	swap_ideas = {
 	#		remove_idea = RED_army_ransacking
-	#		add_idea = RED_heavy_produce_requesition
+	#		add_idea = RED_heavy_produce_requisition
 	#	}
 	#}
 	#else_if = {
 	#	limit = {
-	#		has_idea = RED_heavy_produce_requesition
+	#		has_idea = RED_heavy_produce_requisition
 	#	}
-	#	remove_ideas = RED_heavy_produce_requesition
-	#	add_ideas = RED_produce_requesition
+	#	remove_ideas = RED_heavy_produce_requisition
+	#	add_ideas = RED_produce_requisition
 	#}
 	#else_if = {
 	#	limit = {
-	#		has_idea = RED_produce_requesition
+	#		has_idea = RED_produce_requisition
 	#	}
-	#	remove_ideas = RED_station_requesition
-	#	add_ideas = RED_station_requesition
+	#	remove_ideas = RED_station_requisition
+	#	add_ideas = RED_station_requisition
 	#}
 	#else_if = {
 	#	limit = {
-	#		has_idea = RED_station_requesition
+	#		has_idea = RED_station_requisition
 	#	}
-	#	remove_ideas = RED_station_requesition
-	#	add_ideas = RED_export_requesition
+	#	remove_ideas = RED_station_requisition
+	#	add_ideas = RED_export_requisition
 	#}
 }
-#RED_increase_requesition_intensity = {
+#RED_increase_requisition_intensity = {
 #	if = {
 #		limit = {
-#			has_idea = RED_export_requesition
+#			has_idea = RED_export_requisition
 #		}
 #		swap_ideas = {
-#			remove_idea = RED_export_requesition
-#			add_idea = RED_station_requesition
+#			remove_idea = RED_export_requisition
+#			add_idea = RED_station_requisition
 #		}
 #	}
 #	else_if = {
 #		limit = {
-#			has_idea = RED_station_requesition
+#			has_idea = RED_station_requisition
 #		}
-#		remove_ideas = RRED_station_requesition
-#		add_ideas = RED_produce_requesition
+#		remove_ideas = RRED_station_requisition
+#		add_ideas = RED_produce_requisition
 #	}
 #	else_if = {
 #		limit = {
-#			has_idea = RED_produce_requesition
+#			has_idea = RED_produce_requisition
 #		}
-#		remove_ideas = RED_produce_requesition
-#		add_ideas = RED_heavy_produce_requesition
+#		remove_ideas = RED_produce_requisition
+#		add_ideas = RED_heavy_produce_requisition
 #	}
 #	else_if = {
 #		limit = {
-#			has_idea = RED_heavy_produce_requesition
+#			has_idea = RED_heavy_produce_requisition
 #		}
-#		remove_ideas = RED_heavy_produce_requesition
+#		remove_ideas = RED_heavy_produce_requisition
 #		add_ideas = RED_army_ransacking
 #	}
 #}
@@ -359,70 +349,70 @@ RED_ministry_economics_upgrade_trait = {
         }
 	}
 }
-RED_ministry_reclaimation_upgrade_trait = {
+RED_ministry_reclamation_upgrade_trait = {
 	if = {
 		limit = {
 			has_idea_with_trait = RED_fyodor_akimov
 		}
 		hidden_effect = {
 			add_to_variable = {
-				var = RED_ministry_reclaimation_cost
+				var = RED_ministry_reclamation_cost
 				value = 200		## MOVE
 			} 
 			remove_trait = {
-            	character = RED_minister_of_reclaimation
+            	character = RED_minister_of_reclamation
             	slot = industrial_concern
             	trait = RED_fyodor_akimov
         	}
         }
         add_trait = {
-            character = RED_minister_of_reclaimation
+            character = RED_minister_of_reclamation
             slot = industrial_concern
             trait = RED_fyodor_akimov_2
         }
 	}
 }
-RED_ministry_reclaimation_upgrade_trait_construction = {
+RED_ministry_reclamation_upgrade_trait_construction = {
 	if = {
 		limit = {
 			has_idea_with_trait = RED_fyodor_akimov_2
 		}
 		hidden_effect = {
 			add_to_variable = {
-				var = RED_ministry_reclaimation_cost
+				var = RED_ministry_reclamation_cost
 				value = 200		## MOVE
 			} 
 			remove_trait = {
-            	character = RED_minister_of_reclaimation
+            	character = RED_minister_of_reclamation
             	slot = industrial_concern
             	trait = RED_fyodor_akimov_2
         	}
         }
         add_trait = {
-            character = RED_minister_of_reclaimation
+            character = RED_minister_of_reclamation
             slot = industrial_concern
             trait = RED_fyodor_akimov_3_construction
         }
 	}
 }
-RED_ministry_reclaimation_upgrade_trait_resource = {
+RED_ministry_reclamation_upgrade_trait_resource = {
 	if = {
 		limit = {
 			has_idea_with_trait = RED_fyodor_akimov_2
 		}
 		hidden_effect = {
 			add_to_variable = {
-				var = RED_ministry_reclaimation_cost
+				var = RED_ministry_reclamation_cost
 				value = 200		## MOVE
 			} 
 			remove_trait = {
-            	character = RED_minister_of_reclaimation
+            	character = RED_minister_of_reclamation
             	slot = industrial_concern
             	trait = RED_fyodor_akimov_2
         	}
         }
         add_trait = {
-            character = RED_minister_of_reclaimation
+            character = RED_minister_of_reclamation
             slot = industrial_concern
             trait = RED_fyodor_akimov_3_resource
         }
@@ -516,24 +506,24 @@ RED_ministry_labour_upgrade_trait = {
         }
 	}
 }
-RED_ministry_defense_upgrade_trait = {
+RED_ministry_defence_upgrade_trait = {
 	if = {
 		limit = {
 			has_idea_with_trait = RED_vasily_petrov
 		}
 		hidden_effect = {
 			add_to_variable = {
-				var = RED_ministry_defense_cost
+				var = RED_ministry_defence_cost
 				value = 200		## MOVE
 			} 
 			remove_trait = {
-            	character = RED_minister_of_defense
+            	character = RED_minister_of_defence
             	slot = political_advisor
             	trait = RED_vasily_petrov
         	}
         }
         add_trait = {
-            character = RED_minister_of_defense slot = political_advisor
+            character = RED_minister_of_defence slot = political_advisor
             trait = RED_vasily_petrov_2
         }
 	}
@@ -543,17 +533,17 @@ RED_ministry_defense_upgrade_trait = {
 		}
 		hidden_effect = {
 			add_to_variable = {
-				var = RED_ministry_defense_cost
+				var = RED_ministry_defence_cost
 				value = 200		## MOVE
 			} 
 			remove_trait = {
-            	character = RED_minister_of_defense
+            	character = RED_minister_of_defence
             	slot = political_advisor
             	trait = RED_vasily_petrov_2
         	}
         }
         add_trait = {
-            character = RED_minister_of_defense
+            character = RED_minister_of_defence
             slot = political_advisor
             trait = RED_vasily_petrov_3
         }
@@ -605,11 +595,11 @@ RED_ministry_foreign_affairs_upgrade_trait = {
 }
 RED_ministry_overhaul_scripted_effect = {
 	subtract_from_variable = { var = RED_ministry_economic_cost value = 50 }
-	subtract_from_variable  = { var = RED_ministry_reclaimation_cost value = 50 }
+	subtract_from_variable  = { var = RED_ministry_reclamation_cost value = 50 }
 	subtract_from_variable  = { var = RED_ministry_domestics_cost value = 50 }
 	subtract_from_variable  = { var = RED_ministry_labour_cost value = 50 }
 	subtract_from_variable  = { var = RED_ministry_foreign_affairs_cost value = 50 }
-	subtract_from_variable  = { var = RED_ministry_defense_cost value = 50 }
+	subtract_from_variable  = { var = RED_ministry_defence_cost value = 50 }
 	subtract_from_variable  = { var = RED_ministry_culture_cost value = 50 }
 }
 RED_KGB_idea_buff = {
@@ -671,141 +661,7 @@ RED_conscription_irregulars_scripted_effect = {
 		}
 	}
 }
-RED_change_name_of_state = {
-	if = {
-		limit = {
-			FROM.FROM = {
-				state = 228
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_228 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 264
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_264 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 329
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_329 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 245
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_245 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 330
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_330 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 362
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_362 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-	else_if = {
-		limit = {
-			FROM.FROM = {
-				state = 250
-			}
-		}
-		if = {
-			limit = {
-				ROOT = { original_tag = RED }
-			}
-			FROM.FROM = { set_state_name = RED_250 }
-		}
-		else_if = {
-			limit = {
-				FROM = { original_tag = RED }
-			}
-			FROM.FROM = { reset_state_name = yes }
-		}
-	}
-}
+
 RED_korbut_influence_grow = {
 	add_popularity = {
 		ideology = dictatorial
