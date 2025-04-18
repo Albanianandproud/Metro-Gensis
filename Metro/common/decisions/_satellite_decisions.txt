@@ -8,7 +8,6 @@ _satellite_against_fascism_decisions = {
 		}
 
 		cost = 45
-
 		days_remove = 30
 		fire_only_once = yes
 
@@ -19,7 +18,7 @@ _satellite_against_fascism_decisions = {
 
 		remove_effect = {
 			satellite_build_fortifications_next_reich = yes
-			add_war_support = 0.03
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 1.5
@@ -33,9 +32,9 @@ _satellite_against_fascism_decisions = {
 			NOT = { has_war = yes }
 			has_war_support > 0.3
 		}
-		cost = 55
+		cost = 50
 		days_remove = 45
-		days_re_enable = 80
+		days_re_enable = 90
 
 		modifier = {
 			production_factory_efficiency_gain_factor = 0.15
@@ -54,7 +53,7 @@ _satellite_against_fascism_decisions = {
 			has_war_support > 0.3
 		}
 		cost = 50
-		days_remove = 50
+		days_remove = 60
 		
 		fire_only_once = yes
 
@@ -91,24 +90,37 @@ _satellite_against_fascism_decisions = {
 				RCH = { is_puppet_of = ROOT }
 			}
 			has_army_manpower = { size > 175 }
-			has_war_support > 0.4
+			has_war_support > 0.5
 		}
 
 		visible = {
 			has_completed_focus = satellite_antifascist_decisions
 		}
 
-		days_remove = 15
+		days_remove = 14
 		war_with_on_remove = RCH
-		days_re_enable = 95
+		days_re_enable = 150
 
-		custom_cost_text = command_power_20
-		custom_cost_trigger = { command_power > 19.9 }
+		custom_cost_text = command_power_25
+		custom_cost_trigger = { command_power > 24.9 }
 
-		remove_effect = { }
+		remove_effect = {
+			start_border_conflict_with_reich = yes
+			custom_effect_tooltip = if_we_win_tt
+			effect_tooltip = {
+				army_experience = 15
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 0.25
+					uses = 1
+					category = land_doctrine
+				}
+			}
+		} 
+
 
 		complete_effect = { 
-			start_border_conflict_with_reich = yes
+			RCH = { country_event = nf_satellite.0 }
 		}
 
 		ai_will_do = {
