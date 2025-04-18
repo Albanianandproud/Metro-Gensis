@@ -15,6 +15,7 @@ country_event = {
 			original_tag = GWC
 			original_tag = RED
 			original_tag = MSU
+			original_tag = RCH
 		}
 		has_war = no
 		num_of_controlled_states > 2
@@ -38,6 +39,11 @@ country_event = {
 	option = {	## Turn them Away ##
 		custom_effect_tooltip = random_event_vagrants.b_tt
 		name = random_event_vagrants.01.b
+	}
+
+	option = {	## Shoot them ##
+		name = random_event_vagrants.01.c
+		army_experience = 5
 	}
 }
 
@@ -719,7 +725,17 @@ country_event = {
 	picture = GFX_report_event_generic_sign_treaty3
 
 	mean_time_to_happen = { days = 1950 }
-	trigger = { has_war = no }
+	trigger = { 
+		has_war = no 
+		NOT = { 
+			has_idea = civics_border_4 
+			has_country_flag = is_bandit_nation
+			has_country_flag = is_savage_nation
+			has_country_flag = is_skaven_nation
+			has_country_flag = is_mutant_nation
+			original_tag = MSU
+		}
+	}
 
 	option = {
 		name = random_event_detained.1.a

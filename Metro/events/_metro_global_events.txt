@@ -1107,9 +1107,51 @@ news_event = { ## D6
 #	id = global_event.39 ## Rats in the North
 #}
 
-#news_event = {
-#	id = global_event.40 ## Proclaimation of Slavic Unity
-#}
+news_event = {
+	id = global_event.40 ## Proclaimation of Slavic Unity!
+	title = global_event.40.t
+	desc = global_event.40.d
+	picture = GFX_news_event_20
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = global_event.40.a
+		trigger = { original_tag = RCH }
+		play_song = "Reich Propaganda"
+	}
+
+	option = {
+		name = global_event.40.b
+		trigger = {
+			is_in_faction_with = RCH
+			NOT = { original_tag = RCH }
+		}
+	}
+
+	option = {
+		name = global_event.40.c
+		trigger = { original_tag = ROOT }
+	}
+
+	option = {
+		name = global_event.40.e
+		trigger = {
+			is_in_faction_with = ROOT
+			NOT = { original_tag = ROOT }
+		}
+	}
+
+	option = {
+		name = global_event.40.f
+		trigger = {
+			NOT = { original_tag = RCH }
+			NOT = { is_in_faction_with = RCH }
+			NOT = { original_tag = ROOT }
+			NOT = { is_in_faction_with = ROOT }
+		}
+	}
+}
 
 ## 41 - 50 Redline Related Events
 

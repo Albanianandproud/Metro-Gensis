@@ -71,7 +71,7 @@ focus_tree = {
 		relative_position_id = RCH_uncontested_authority
 		completion_reward = {
 			add_dynamic_modifier = { modifier = RCH_campaign_of_terror_modifier }
-			RCH_modify_campaign_of_terror_modifier = yes
+			hidden_effect = { RCH_modify_campaign_of_terror_modifier = yes }
 
 			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_RCH_terror_campaign.1 
@@ -124,7 +124,7 @@ focus_tree = {
 		relative_position_id = RCH_yield_power_to_gestapo
 		completion_reward = {
 			add_ideas = RCH_total_mutant_death
-			add_war_support = 0.02
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 5
@@ -141,7 +141,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_the_mutant_threat
 		completion_reward = {
-			add_war_support = 0.02
+			add_war_support = 0.05
 			effect_tooltip = {
 				add_ideas = RCH_no_more_mutant_2
 			}
@@ -189,19 +189,23 @@ focus_tree = {
 		relative_position_id = RCH_definition_of_human
 		select_effect = { }
 		completion_reward = {
+			add_political_power = 100
+
 			RCH_bop_decrease_10 = yes
 			add_war_support = 0.05
+
 			add_ideas = RCH_metro_for_the_russians
 			army_experience = 10
-			hidden_effect = {
-				set_country_flag = RCH_purge_first_flag
-			}
 
 			custom_effect_tooltip = generic_skip_one_line_tt
 
 			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
 			RCH_modify_campaign_of_terror_modifier = yes
 			RCH_intensify_campaign_of_terror = yes
+
+			hidden_effect = {
+				set_country_flag = RCH_purge_first_flag
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -261,16 +265,75 @@ focus_tree = {
 		relative_position_id = RCH_earth_for_the_russians
 		select_effect = { }
 		completion_reward = {
+			add_political_power = 100
 			add_ideas = RCH_purity_1
 			RCH_bop_decrease_10 = yes
 			add_war_support = 0.05
+			
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
+			RCH_modify_campaign_of_terror_modifier = yes
+			RCH_intensify_campaign_of_terror = yes
+
 			hidden_effect = {
 				clr_country_flag = RCH_purge_first_flag
 				set_country_flag = RCH_purge_second_flag
 			}
-			
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_sweep_the_filth
+		icon = GFX_RCH_trubnaya_core
+		prerequisite = {
+			focus = RCH_burn_the_dissident
+		}
+		available = {
+			has_country_flag = {
+				flag = RCH_purge_second_flag
+				days > 180
+			}
+			custom_trigger_tooltip = {
+				tooltip = RCH_second_purge_focus_days_tt
+				has_country_flag = {
+					flag = RCH_purge_second_flag
+					days > 180
+				}
+			}
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = RCH_burn_the_dissident
+		select_effect = { }
+		completion_reward = {
+			add_political_power = 100 
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = RCH_purity_1
+					add_idea = RCH_purity_2
+				}
+			}
+			hidden_effect = {
+				RCH_purity_upgrade_idea = yes
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RCH_secure_loyalties }
+				}
+				RCH_bop_decrease_10 = yes
+			}
+			add_war_support = 0.05
+			hidden_effect = {
+				clr_country_flag = RCH_purge_second_flag
+				set_country_flag = RCH_purge_third_flag
+			}
+
 			custom_effect_tooltip = generic_skip_one_line_tt
-			
+
 			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
 			RCH_modify_campaign_of_terror_modifier = yes
 			RCH_intensify_campaign_of_terror = yes
@@ -283,14 +346,14 @@ focus_tree = {
 		id = RCH_secure_loyalties
 		icon = GFX_RCH_zealotry_3
 		prerequisite = {
-			focus = RCH_burn_the_dissident
+			focus = RCH_sweep_the_filth
 		}
 		available = {
 		}
 		x = 3
 		y = 1
 		cost = 8.6
-		relative_position_id = RCH_burn_the_dissident
+		relative_position_id = RCH_sweep_the_filth
 		select_effect = { }
 		completion_reward = {
 			custom_effect_tooltip = RCH_secure_loyalties_tooltip
@@ -383,71 +446,16 @@ focus_tree = {
 		available = {
 		}
 		x = 0
-		y = 3
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_secure_loyalties
 		select_effect = { }
 		completion_reward = {
 			#remove_ideas = RCH_campaigns_of_terror_idea
+
 			custom_effect_tooltip = RCH_cult_of_personality_tooltip
 
 			swap_ruler_traits = { remove = RCH_natural_orator add = RCH_the_fuhrer }
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = RCH_sweep_the_filth
-		icon = GFX_RCH_trubnaya_core
-		prerequisite = {
-			focus = RCH_burn_the_dissident
-		}
-		available = {
-			has_country_flag = {
-				flag = RCH_purge_second_flag
-				days > 180
-			}
-			custom_trigger_tooltip = {
-				tooltip = RCH_second_purge_focus_days_tt
-				has_country_flag = {
-					flag = RCH_purge_second_flag
-					days > 180
-				}
-			}
-		}
-		x = 0
-		y = 2
-		cost = 6.5
-		relative_position_id = RCH_burn_the_dissident
-		select_effect = { }
-		completion_reward = {
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = RCH_purity_1
-					add_idea = RCH_purity_2
-				}
-			}
-			hidden_effect = {
-				RCH_purity_upgrade_idea = yes
-			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = RCH_secure_loyalties }
-				}
-				RCH_bop_decrease_10 = yes
-			}
-			add_war_support = 0.05
-			hidden_effect = {
-				clr_country_flag = RCH_purge_second_flag
-				set_country_flag = RCH_purge_third_flag
-			}
-
-			custom_effect_tooltip = generic_skip_one_line_tt
-
-			custom_effect_tooltip = RCH_modify_campaign_of_terror_modifier_tt
-			RCH_modify_campaign_of_terror_modifier = yes
-			RCH_intensify_campaign_of_terror = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -501,11 +509,12 @@ focus_tree = {
 			}
 		}
 		x = 0
-		y = 2
+		y = 3
 		cost = 8.6
 		relative_position_id = RCH_sweep_the_filth
 		select_effect = { }
 		completion_reward = {
+			add_political_power = 100
 			effect_tooltip = {
 				swap_ideas = {
 					remove_idea = RCH_purity_2
@@ -831,7 +840,18 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_concession_to_non_slavs
 		completion_reward = {
+			if = {
+				limit = {
+					has_intelligence_agency = no
+				}
+				create_intelligence_agency = {
+					name = "Wolfsnetzwerk"
+					icon = GFX_intelligence_agency_logo_agency
+				}
+			}
+
 			add_ideas = RCH_NSB_counter_intelligence_operations
+
 			upgrade_intelligence_agency = upgrade_discrete_operations
 			upgrade_intelligence_agency = upgrade_espionage_ability
 
@@ -1750,7 +1770,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_moc_path_4
 		completion_reward = {
-			custom_effect_tooltip = RCH_gauleiters_ideology_drift
+			#custom_effect_tooltip = RCH_gauleiters_ideology_drift
 			RCH_gauleiters_ideology_drift_scripted_effect = yes
 			306 = {
 				add_extra_state_shared_building_slots = 1
@@ -1783,7 +1803,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_moc_path_5
 		completion_reward = {
-			custom_effect_tooltip = RCH_gauleiters_political_power
+			#custom_effect_tooltip = RCH_gauleiters_political_power
 			RCH_gauleiters_political_power_scripted_effect = yes
 			306 = {
 				add_extra_state_shared_building_slots = 1
@@ -1849,9 +1869,7 @@ focus_tree = {
 			focus = RCH_moc_path_8
 		}
 		available = {
-			RCH_chairman_of_ministry = {
-				is_character_slot = industrial_concern
-			}
+			has_tech = tech_refinery_1
 		}
 		x = -1
 		y = 1
@@ -1872,6 +1890,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_moc_path_8
 		}
+		available = {
+			has_tech = tech_energy_1
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1880,9 +1901,9 @@ focus_tree = {
 			add_tech_bonus = {
 				name = industry
 				uses = 1
-				bonus = 1.5
-				ahead_reduction = 3
-				category = energy
+				bonus = 2
+				ahead_reduction = 2
+				technology = tech_energy_4
 			}
 			add_offsite_building = { type = fuel_silo level = 2 }
 		}
@@ -2060,19 +2081,21 @@ focus_tree = {
 		cost = 5
 		relative_position_id = RCH_infrastructure_path_3
 		completion_reward = {
-			add_offsite_building = {
-				type = arms_factory
-				level = 1
-			}
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetsnaz
-				amount = 15
+				amount = 10
 				producer = RUS
 			}
 			add_equipment_to_stockpile = {
 		        type = support_equipment 
-		        amount = 15
+		        amount = 10
 		    }
+			add_tech_bonus = {
+				name = industry
+				uses = 1
+				bonus = 1
+				category = recycling
+			}
 		}
 		ai_will_do = {
 			factor = 3
@@ -2463,11 +2486,29 @@ focus_tree = {
 		y = 2
 		cost = 6.5
 		relative_position_id = RCH_internal_civilian_3
+		
 		completion_reward = {
-			set_technology = {
-				tech_technician_machining = 1
+			custom_effect_tooltip = unlock_industry_technician_pressing
+			hidden_effect = { set_country_flag = unlock_industry_technician_pressing_tech }
+			random_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
+
 		ai_will_do = {
 			factor = 2
 		}
@@ -2482,10 +2523,46 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_internal_civilian_3
+
+		available = {
+			OR = {
+				has_full_control_of_state = 275
+				has_full_control_of_state = 306
+				has_full_control_of_state = 337
+			}
+		}
+		bypass = {
+			has_civil_war = no
+			NOT = { has_full_control_of_state = 275 }
+			NOT = {	has_full_control_of_state = 306 }
+			NOT = {	has_full_control_of_state = 337 }
+		}
+
 		completion_reward = {
-			306 = { add_extra_state_shared_building_slots = 3 }
-			275 = { add_extra_state_shared_building_slots = 3 }
-			337 = { add_extra_state_shared_building_slots = 3 }
+			306 = { 
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 3 
+				}
+			}
+			275 = { 
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 3 
+				}
+			}
+			337 = { 
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_extra_state_shared_building_slots = 3 
+				}
+			}
+			add_tech_bonus = {
+				name = industry
+				uses = 2
+				bonus = 0.5
+				category = energy
+			}
 			add_offsite_building = { type = fuel_silo level = 3 }
 		}
 		ai_will_do = {
@@ -2504,8 +2581,24 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_internal_civilian_2
 		completion_reward = {
-			set_technology = {
-				tech_technician_toolkit = 1
+			custom_effect_tooltip = unlock_industry_technician_toolkit
+			hidden_effect = { set_country_flag = unlock_industry_technician_toolkit_tech }
+			random_owned_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = {
@@ -2522,18 +2615,50 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_internal_civilian_2
+
 		available = {
-			275 = { is_owned_by = ROOT }
+			OR = {
+				has_full_control_of_state = 275
+				has_full_control_of_state = 306
+				has_full_control_of_state = 337
+			}
 		}
 		bypass = {
-			infrastructure > 9
+			has_civil_war = no
+			NOT = { has_full_control_of_state = 275 }
+			NOT = {	has_full_control_of_state = 306 }
+			NOT = {	has_full_control_of_state = 337 }
 		}
+
 		completion_reward = {
-			capital_scope = {
-				set_building_level = {
-					type = infrastructure
-					level = 10
-					instant_build = yes
+			275 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					set_building_level = {
+						type = infrastructure
+						level = 10
+						instant_build = yes
+					}
+				}
+			}
+			306 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					set_building_level = {
+						type = infrastructure
+						level = 10
+						instant_build = yes
+					}
+				}
+			}
+			337 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					set_building_level = {
+						type = infrastructure
+						level = 10
+						instant_build = yes
+					}
 				}
 			}
 			add_offsite_building = { type = fuel_silo level = 3 }
@@ -2660,10 +2785,17 @@ focus_tree = {
 			focus = RCH_inaugurate_the_new_blood
 		}
 		available = {
-			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value < -0.335
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = RCH_secure_loyalties
+					}
+				}
+				NOT  = {
+					power_balance_value = {
+						id = RCH_power_balance
+						value < -0.335
+					}
 				}
 			}
 		}
@@ -3215,10 +3347,17 @@ focus_tree = {
 			focus = RCH_inaugurate_the_new_blood
 		}
 		available = {
-			NOT  = {
-				power_balance_value = {
-					id = RCH_power_balance
-					value > 0.335
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = RCH_secure_loyalties
+					}
+				}
+				NOT  = {
+					power_balance_value = {
+						id = RCH_power_balance
+						value > 0.335
+					}
 				}
 			}
 			has_completed_focus = RCH_gestapo_jurisdiction
@@ -3230,7 +3369,7 @@ focus_tree = {
 		completion_reward = {
 			RCH_bop_decrease_4 = yes
 			add_ideas = RCH_SS_idea_1
-			RCH_karl_krainer = { add_skill_level = 2 }
+			RCH_karl_krainer = { add_skill_level = 1 }
 			if = {
 				limit = {
 					NOT = { has_completed_focus = RCH_secure_loyalties }
@@ -3389,6 +3528,7 @@ focus_tree = {
 			show_ideas_tooltip = RCH_commander_6
 			add_corps_commander_role = {
 				character = RCH_commander_6
+				traits = { named_character }
 				skill = 2
 				attack_skill = 2
 				defense_skill = 2
@@ -3483,6 +3623,7 @@ focus_tree = {
 		completion_reward = {
 			add_corps_commander_role = {
 				character = RCH_roman_orlov
+				traits = { named_character }
 				skill = 5
 				attack_skill = 3
 				defense_skill = 2
@@ -4084,9 +4225,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_military_research_and_development
 		}
-		available = { 
-			has_tech = rail_salvaging_2033
-		}
+		#available = { 
+		#	has_tech = rail_salvaging_2033
+		#}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -4110,11 +4251,11 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_military_research_and_development
 		}
-		available = { 
-			has_equipment = {
-				rail_cart_equipment > 9
-			}
-		}
+		#available = { 
+		#	has_equipment = {
+		#		rail_cart_equipment > 9
+		#	}
+		#}
 		cancel_if_invalid = yes
 		x = -1
 		y = 1
@@ -4150,7 +4291,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.25
+				bonus = 0.5
 				uses = 3
 				category = rail_salvaging
 			}
@@ -4167,7 +4308,7 @@ focus_tree = {
 		}
 		cancel_if_invalid = yes
 		x = -1
-		y = 2
+		y = 1
 		cost = 6.5
 		relative_position_id = RCH_draisine_fitting
 		completion_reward = {
@@ -4175,6 +4316,7 @@ focus_tree = {
 				name = infantry_bonus
 				bonus = 0.5
 				uses = 2
+				ahead_reduction = 1
 				category = rail_cart
 			}
 		}
@@ -4199,7 +4341,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.25
+				bonus = 0.5
 				uses = 3
 				category = rail_armament
 			}
@@ -4224,6 +4366,7 @@ focus_tree = {
 				name = infantry_bonus
 				bonus = 0.5
 				uses = 2
+				ahead_reduction = 1
 				category = rail_car
 			}
 		}
@@ -4296,6 +4439,7 @@ focus_tree = {
 		relative_position_id = RCH_firearms_development
 		completion_reward = {
 			country_event = nf_RCH.20
+			custom_effect_tooltip = RCH_firearms_choice_tooltip
 		}
 		ai_will_do = {
 			factor = 3
@@ -4390,8 +4534,7 @@ focus_tree = {
 		id = RCH_gasoline_siphoning_2
 		icon = GFX_Fuel
 		prerequisite = {
-			focus = RCH_firearms_development
-			focus = RCH_rail_armor
+			focus = RCH_gasoline_siphoning
 		}
 		x = 0
 		y = 2
@@ -4806,11 +4949,11 @@ focus_tree = {
 			if = {
 				limit = {
 					NOT = {
-						has_country_flag = unlocked_rpk
+						has_country_flag = unlock_conventional_infantry_equipment_tech_7
 					}
 				}
-				set_country_flag = unlocked_rpk
-				custom_effect_tooltip = RCH_unlock_sturmgewehr_tt
+				custom_effect_tooltip = unlock_conventional_infantry_equipment_7
+				hidden_effect = { set_country_flag = unlock_conventional_infantry_equipment_tech_7 }
 			}
 			else_if = {
 				limit = {
@@ -4950,8 +5093,8 @@ focus_tree = {
 		y = 0
 		available = {
 			OR = {
-				has_completed_focus = RCH_assasinate_the_fuhrer
 				has_completed_focus = RCH_definition_of_human
+				has_completed_focus = RCH_dreams_of_cult_realized
 			}
 			NOT = { 
 				has_dynamic_modifier = {
@@ -5366,7 +5509,15 @@ focus_tree = {
 			custom_effect_tooltip = RCH_unlock_max_tier_mobilization
 			add_political_power = 100
 			add_threat = 5
+
+			every_country = {
+				limit = {
+					NOT = { tag = RUI }
+				}
+				news_event = { id = global_event.40 hours = 8 }
+			} 
 		}
+
 		ai_will_do = {
 			factor = 0.1
 			modifier = {
