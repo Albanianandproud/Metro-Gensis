@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 	default = no
-	continuous_focus_position = { x = 9500 y = 50 }
+	continuous_focus_position = { x = 9700 y = 50 }
 
 	## ALL OF THIS SHIT NEEDSA FIXING
 	focus = {
@@ -279,6 +279,44 @@ focus_tree = {
 			hidden_effect = {
 				clr_country_flag = RCH_purge_first_flag
 				set_country_flag = RCH_purge_second_flag
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = RCH_executioner_squads
+		icon = GFX_RCH_soldat_4
+		prerequisite = {
+			focus = RCH_burn_the_dissident
+		}
+		available = {
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_burn_the_dissident
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_SS_2
+			division_template = {
+				name = "Execution Squad"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces =  { x = 0 y = 0 }
+					special_forces =  { x = 1 y = 0 }
+					special_forces =  { x = 2 y = 0 }
+					special_forces =  { x = 3 y = 0 }
+					special_forces =  { x = 4 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Purge Squad\" division_template = \"Execution Squad\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 		ai_will_do = {
@@ -650,6 +688,7 @@ focus_tree = {
 			## Certain requesites will need to be completed for this to happen
 			## if requesites are not done, a CIVIL war against the gestapo will happen
 			remove_ideas = RCH_campaigns_of_terror_idea
+			custom_effect_tooltip = RCH_denazify_warning
 		}
 		ai_will_do = {
 			factor = 5
@@ -1182,7 +1221,7 @@ focus_tree = {
 		completion_reward = {
 			add_corps_commander_role = {
 				traits = { named_character brave_personality_trait brazen_commander_trait }
-				character = RCH_SS_1
+				character = RCH_SS_2
 				skill = 3
 				attack_skill = 2
 				defense_skill = 2
@@ -2236,15 +2275,29 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_military_industry_be
 		completion_reward = {
-			capital_scope = {
-				add_resource = {
-					type = components
-					amount = 12
+			add_tech_bonus = {
+				name = industry
+				uses = 1
+				bonus = 1
+				category = recycling
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_tech = tech_recycling_1
+					}
 				}
-				add_resource = {
-					type = alloys
-					amount = 12
-				}
+				set_technology = { tech_recycling_1 = 1 }
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = scrap
+    			amount = 1
+			}
+			modify_building_resources = {
+    			building = salvage_hub
+    			resource = alloys
+    			amount = 1
 			}
 		}
 		ai_will_do = {
@@ -2265,23 +2318,24 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_military_industry_be
 		completion_reward = {
-			capital_scope = {
-				add_resource = {
-					type = scrap
-					amount = 5
+			add_tech_bonus = {
+				name = industry
+				uses = 1
+				bonus = 1
+				category = refinery
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_tech = tech_refinery_1
+					}
 				}
-				add_resource = {
-					type = components
-					amount = 5
-				}
-				add_resource = {
-					type = alloys
-					amount = 5
-				}
-				add_resource = {
-					type = chemicals
-					amount = 5
-				}
+				set_technology = { tech_refinery_1 = 1 }
+			}
+			modify_building_resources = {
+    			building = synthetic_refinery
+    			resource = chemicals
+    			amount = 1
 			}
 		}
 		ai_will_do = {
@@ -2300,6 +2354,7 @@ focus_tree = {
 			275 = { is_owned_by = ROOT }
 			337 = { is_owned_by = ROOT }
 		}
+
 		x = 0
 		y = 2
 		cost = 6.5
@@ -4066,6 +4121,9 @@ focus_tree = {
 		prerequisite = {
 			focus = RCH_inaugurate_the_new_blood
 		}
+		prerequisite = {
+			focus = RCH_outwards
+		}
 		available = {
 			has_war_with = RED
 			RCH = {
@@ -4073,20 +4131,20 @@ focus_tree = {
 				owns_state = 241
 			}
 		}
-		x = 26
+		x = 28
 		y = 1
-		cost = 2.8
+		cost = 2.9
 		relative_position_id = RCH_inaugurate_the_new_blood
 		completion_reward = {
 			330 = {
-				add_manpower = -50
+				#add_manpower = -50
 				damage_building = {
 					type = infrastructure
 					damage = 2
 				}
 			}
 			241 = {
-				add_manpower = -50
+				#add_manpower = -50
 				damage_building = {
 					type = infrastructure
 					damage = 2
@@ -5141,9 +5199,9 @@ focus_tree = {
 			}
 			has_country_flag = RCH_recruit_stortbeker
 		}
-		x = 6
+		x = 7
 		y = 1
-		cost = 5
+		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			PVL = {
@@ -5174,7 +5232,7 @@ focus_tree = {
 			179 = { is_owned_by = RCH }
 		}
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
@@ -5404,7 +5462,7 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_anti_communist_dogma
 		}
-		x = -7
+		x = -3
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards
@@ -5426,7 +5484,7 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = RCH_anti_capitalist_dogma
 		}
-		x = -5
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = RCH_outwards
@@ -5484,6 +5542,37 @@ focus_tree = {
 			set_technology = {
 				tech_special_forces_equipment_reliability = 1
 			}
+			add_tech_bonus = {
+				name = industry
+				uses = 1
+				bonus = 0.5
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = RCH_surface_expeditions_3
+		icon = GFX_cityruins3
+		prerequisite = { 
+			focus = RCH_surface_expeditions_1
+			focus = RCH_surface_expeditions_2 
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = RCH_surface_expeditions_2
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry
+				uses = 1
+				bonus = 0.5
+				category = stalker
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = RCH_unamed_4
 		}
 		ai_will_do = {
 			factor = 1
@@ -5503,7 +5592,7 @@ focus_tree = {
 		}
 		cost = 6.5
 		x = 0
-		y = 3.5
+		y = 4
 		relative_position_id = RCH_outwards
 		completion_reward = {
 			custom_effect_tooltip = RCH_unlock_max_tier_mobilization

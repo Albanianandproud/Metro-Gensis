@@ -170,12 +170,13 @@ RCH_concession_to_non_slavs_decision_category = {
 		available = {
 			NOT = {
 				ROOT = { has_idea = RCH_genetic_supremacy }
+				has_war_with = FROM
 			}
 		}
 
 		cost = 5
 		days_remove = 2
-		days_re_enable = 14
+		days_re_enable = 180
 
 		target_array = global.countries
 
@@ -183,25 +184,30 @@ RCH_concession_to_non_slavs_decision_category = {
 			hidden_trigger = { NOT = { has_country_flag = RCH_deny_opinion_improvement }}
 			
 			FROM = { 
-				#has_opinion_modifier = fascist
+				#has_opinion_modifier = fascit
 				NOT = { 
 					has_opinion = {
 						target = RED
 						value > 10
 					}
-					OR = {  
+					OR = {
+						is_subject = yes
 						num_of_factories < 6
 						exists = no
 						has_idea = civics_border_4
+
 						original_tag = RUI
 						original_tag = AVT
 						original_tag = HUL
 						original_tag = SPT
+
 						has_country_flag = is_communist_nation
 						has_country_flag = is_mutant_nation
 						has_country_flag = is_skaven_nation
 						has_country_flag = is_scientist_nation
 						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
 						has_idea = metro_thump_in_the_night
 					}
 				}
@@ -253,11 +259,24 @@ RCH_permit_outside_recruitment_decision_category = {
 
 		target_array = global.countries
 
+		available = {
+			FROM = { 
+				has_opinion = {
+					target = RCH
+					value > 9
+				}
+			}
+		}
+		
 		target_trigger = {
 			NOT = { ROOT = { has_country_flag = RCH_recruitment_rounds } }
 			hidden_trigger = { NOT = { has_country_flag = RCH_deny_opinion_improvement }}
 			
 			FROM = { 
+				has_opinion = {
+					target = RCH
+					value > 0
+				}
 				NOT = { has_country_flag = has_been_drawn_manpower_from }
 				has_opinion_modifier = fascist
 				NOT = { 
