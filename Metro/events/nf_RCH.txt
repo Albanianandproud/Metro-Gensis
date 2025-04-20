@@ -1139,24 +1139,9 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		has_idea = RCH_campaigns_of_terror_idea
-		AND =  {
-			OR = {
-				AND = {
-					power_balance_value = {
-						id = RCH_power_balance
-						value < -0.334
-					}
-					has_war_support < 0.35
-				}
-				AND = {
-					power_balance_value = {
-						id = RCH_power_balance
-						value > 0.334
-					}
-					has_stability < 0.35
-				}
-			}
+		OR = {
+			RCH_SS_pissed_off = yes
+			RCH_metromacht_pissed_off = yes
 		}
 	}
 
@@ -1170,6 +1155,9 @@ country_event = {
 				value < -0.334
 			}
 		}
+		add_timed_idea = {
+			idea = RCH_SS_upset days = 180
+		}
 	}
 
 	option = { ## Metromacht upset
@@ -1179,6 +1167,9 @@ country_event = {
 				id = RCH_power_balance
 				value > 0.334
 			}
+		}
+		add_timed_idea = {
+			idea = RCH_metromacht_upset days = 180
 		}
 	}
 }
