@@ -285,6 +285,7 @@ on_actions = {
                     limit = {
                         OR = { has_state_category = pastoral }
                     }
+					add_manpower = -100
                     if = {
                         limit = {
                             PREV = {
@@ -313,11 +314,39 @@ on_actions = {
     }
 		
 	on_monthly = {
+		#effect = {
+		#	log = "[THIS.GetName] [?num_controlled_states] owned controlled states"
+		#	set_temp_variable = { remove_manpower = 0 }
+		#	add_to_temp_variable = { remove_manpower = num_controlled_states }
+		#	multiply_temp_variable = { remove_manpower = -1 }
+		#	log = "[THIS.GetName] [?remove_manpower] manpower to remove"
+		#	add_manpower = remove_manpower
+		#	multiply_temp_variable = { remove_manpower = -0.5 }
+		#	add_manpower = remove_manpower
+		#}
+
+		
+		# Code for some reason breaks when tag switching. But should work NOW
 		effect = {
-			log = "[THIS.GetName] [?num_owned_states] owned states"
+			if = { limit = { is_debug = yes } log = "[THIS.GetName] [?num_controlled_states] owned states" } 
+
 			set_temp_variable = { remove_manpower = 0 }
-			add_to_temp_variable = { remove_manpower = num_owned_states }
+			set_temp_variable = { num_stations = 0 }
+
+			add_to_temp_variable = { remove_manpower = num_controlled_states }
+
+			every_controlled_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_to_temp_variable = { num_stations = 1 }
+			}
+
+			add_to_temp_variable = { remove_manpower = num_stations }
+			if = { limit = { is_debug = yes } log = "[THIS.GetName] [?num_stations] stations" } 
+
 			multiply_temp_variable = { remove_manpower = -1 }
+
 			log = "[THIS.GetName] [?remove_manpower] manpower to remove"
 			add_manpower = remove_manpower
 		}
