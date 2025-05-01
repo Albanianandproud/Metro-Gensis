@@ -279,53 +279,42 @@ on_actions = {
 			106 = { add_dynamic_modifier = { modifier = d6_modifier } }
 			228 = { add_dynamic_modifier = { modifier = berilag_modifier } }
         }
-        effect = {
-            every_country = {
-                every_state = {
-                    limit = {
-                        OR = { has_state_category = pastoral }
-                    }
-					add_manpower = -100
-                    if = {
-                        limit = {
-                            PREV = {
-                                controls_state = PREV
-                            }
-                        }
-                        if = { 
-							limit = { 
-								PREV = { 
-									NOT = { has_variable = delete_manpower_from_tunnel } 
-								} 
-							}
-                            PREV = {
-                                set_variable = { delete_manpower_from_tunnel = -1 }
-                            }
-                        }
-                        else = {
-                            PREV = {
-                                add_to_variable = { delete_manpower_from_tunnel = -1 }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+		
+		#effect = {
+      	#   every_country = {
+      	#       every_state = {
+      	#           limit = {
+      	#               OR = { has_state_category = pastoral }
+      	#           }
+		#			add_manpower = -100
+      	#           if = {
+      	#               limit = {
+      	#                   PREV = {
+      	#                       controls_state = PREV
+      	#                   }
+      	#               }
+      	#               if = { 
+		#					limit = { 
+		#						PREV = { 
+		#							NOT = { has_variable = delete_manpower_from_tunnel } 
+		#						} 
+		#					}
+      	#                   PREV = {
+      	#                       set_variable = { delete_manpower_from_tunnel = -1 }
+      	#                   }
+      	#               }
+      	#               else = {
+      	#                   PREV = {
+      	#                       add_to_variable = { delete_manpower_from_tunnel = -1 }
+      	#                    }
+      	#                }
+      	#           }
+      	#        }
+      	#    }
+		#}
     }
 		
-	on_monthly = {
-		#effect = {
-		#	log = "[THIS.GetName] [?num_controlled_states] owned controlled states"
-		#	set_temp_variable = { remove_manpower = 0 }
-		#	add_to_temp_variable = { remove_manpower = num_controlled_states }
-		#	multiply_temp_variable = { remove_manpower = -1 }
-		#	log = "[THIS.GetName] [?remove_manpower] manpower to remove"
-		#	add_manpower = remove_manpower
-		#	multiply_temp_variable = { remove_manpower = -0.5 }
-		#	add_manpower = remove_manpower
-		#}
-
-		
+	on_monthly = {		
 		# Code for some reason breaks when tag switching. But should work NOW
 		effect = {
 			if = { limit = { is_debug = yes } log = "[THIS.GetName] [?num_controlled_states] owned states" } 
