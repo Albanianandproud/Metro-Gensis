@@ -3,7 +3,7 @@
 shared_focus = {
 	id = satellite_military
 	icon = GFX_generic_equipment_gasmask_4
-	x = -5
+	x = -10
 	y = 0
 	cost = 6.5
 
@@ -18,8 +18,10 @@ shared_focus = {
 		}
 	}
 
+	relative_position_id = satellite_defend_the_bulwark
+
 	completion_reward = {
-		army_experience = 15
+		army_experience = 20
 	}
 
 	ai_will_do = {
@@ -28,24 +30,24 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_standardization
-	icon = GFX_generic_spec_ops_3
+	id = satellite_military_1
+	icon = GFX_PLS_generic_military_doctrine
 	x = 0
-	y = 4
+	y = 2
 	cost = 6.5
 
 	prerequisite = { focus = satellite_military }
 
-	prerequisite = { 
-		focus = satellite_doctrine_2 
-		focus = satellite_standing_military
-	}
-
 	relative_position_id = satellite_military
 
 	completion_reward = {
-		army_experience = 5
-		add_timed_idea = { idea = satellite_military_efforts days = 180 }
+		army_experience = 20
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.25
+			uses = 2
+			category = land_doctrine
+		}
 	}
 
 	ai_will_do = {
@@ -54,203 +56,21 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_organized_containment
-	icon = GFX_EUR_the_coup
-	x = 1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_military }
-
-	mutually_exclusive = { focus = satellite_defensive_force }
-
-	relative_position_id = satellite_military
-
-	completion_reward = {
-		add_ideas = satellite_organization_effort_1
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_training_drills
-	icon = GFX_generic_stalker_2
+	id = satellite_military_2
+	icon = GFX_PLS_generic_doctrine
 	x = 0
-	y = 1
+	y = 2
 	cost = 6.5
 
-	prerequisite = { focus = satellite_organized_containment }
+	prerequisite = { focus = satellite_military_1 }
 
-	relative_position_id = satellite_organized_containment
-
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = satellite_organization_effort_1
-			add_idea = satellite_organization_effort_2
-		}
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_standing_military
-	icon = GFX_HNZ_mercenary_army
-	x = 1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { 
-		focus = satellite_training_drills 
-		focus = satellite_station_watch 
-	}
-
-	relative_position_id = satellite_training_drills
+	relative_position_id = satellite_military_1
 
 	completion_reward = {
-		add_ideas = satellite_standing_army
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_defensive_force
-	icon = GFX_soldier_1
-	x = 3
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_military }
-
-	mutually_exclusive = { focus = satellite_organized_containment }
-
-	relative_position_id = satellite_military
-
-	completion_reward = {
-		add_ideas = satellite_defensive_army
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_station_watch
-	icon = GFX_TRT_bandit_1
-	x = 0
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_defensive_force }
-
-	relative_position_id = satellite_defensive_force
-
-	completion_reward = {
-		add_ideas = satellite_station_garrison
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_mandatory_service
-	icon = GFX_RED_squadron
-	x = 1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { 
-		focus = satellite_station_watch 
-		focus = satellite_training_drills 
-	}
-
-	relative_position_id = satellite_station_watch
-
-	completion_reward = {
-		add_ideas = satellite_mandatory_service_idea
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_adopt_doctrine
-	icon = GFX_goal_generic_major_war
-	x = -1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_military }
-
-	mutually_exclusive = { focus = satellite_cp_1 }
-
-	relative_position_id = satellite_military
-
-	completion_reward = {
+		army_experience = 20
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
-			cost_reduction = 0.5
-			uses = 1
-			category = land_doctrine
-		}
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_doctrine_1
-	icon = GFX_generic_telephone
-	x = 0
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_adopt_doctrine }
-
-	relative_position_id = satellite_adopt_doctrine
-
-	completion_reward = {
-		add_ideas = satellite_doctrine_cost_reduction
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_doctrine_2
-	icon = GFX_focus_generic_military_mission
-	x = -1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { 
-		focus = satellite_doctrine_1
-		focus = satellite_localize_command
-	}
-
-	relative_position_id = satellite_doctrine_1
-
-	completion_reward = {
-		add_doctrine_cost_reduction = {
-			name = land_doc_bonus
-			cost_reduction = 0.5
+			cost_reduction = 0.25
 			uses = 2
 			category = land_doctrine
 		}
@@ -262,140 +82,125 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_cp_1
-	icon = GFX_generic_political_2
+	id = satellite_military_research_1
+	icon = GFX_generic_ammunition_1
 	x = -3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_2 }
+
+	mutually_exclusive = {
+		focus = satellite_military_research_2
+		focus = satellite_military_research_3
+		focus = satellite_military_research_4
+	}
+
+	relative_position_id = satellite_military_2
+
+	completion_reward = {
+		set_technology = { tech_infantry_equipment_cost = 1 }
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_military_research_2
+	icon = GFX_generic_ammunition_box
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_2 }
+
+	mutually_exclusive = {
+		focus = satellite_military_research_1
+		focus = satellite_military_research_3
+		focus = satellite_military_research_4
+	}
+
+	relative_position_id = satellite_military_2
+
+	completion_reward = {
+		set_technology = { tech_explosive_equipment_cost = 1 }
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_military_research_3
+	icon = GFX_generic_defences_2
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_2 }
+
+	mutually_exclusive = {
+		focus = satellite_military_research_1
+		focus = satellite_military_research_2
+		focus = satellite_military_research_4
+	}
+
+	relative_position_id = satellite_military_2
+
+	completion_reward = {
+		set_technology = { tech_gatling_equipment_cost = 1 }
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_military_research_4
+	icon = GFX_stalker1
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military_2 }
+
+	mutually_exclusive = {
+		focus = satellite_military_research_1
+		focus = satellite_military_research_2
+		focus = satellite_military_research_3
+	}
+
+	relative_position_id = satellite_military_2
+
+	completion_reward = {
+		set_technology = { tech_special_forces_equipment_cost = 1 }
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_guard
+	icon = GFX_generic_medium_arms_4
+	x = 2
 	y = 1
 	cost = 6.5
 
 	prerequisite = { focus = satellite_military }
 
-	mutually_exclusive = { focus = satellite_adopt_doctrine }
-
 	relative_position_id = satellite_military
-
-	completion_reward = {
-		add_ideas = satellite_cp_gain
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_localize_command
-	icon = GFX_generic_stalker_4
-	x = 0
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_cp_1 }
-
-	relative_position_id = satellite_cp_1
-
-	completion_reward = {
-		add_ideas = satellite_localized_command
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_improve_military_staff
-	icon = GFX_generic_soldier
-	x = -1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { 
-		focus = satellite_localize_command 
-		focus = satellite_doctrine_1
-	}
-
-	relative_position_id = satellite_localize_command
-
-	completion_reward = {
-		add_ideas = satellite_improve_staff
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_specops
-	icon = GFX_generic_spec_ops_2
-	x = -3
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_standardization }
-
-	relative_position_id = satellite_standardization
-
-	completion_reward = {
-		add_ideas = satellite_specops_bonus
-		add_equipment_to_stockpile = {
-			type = special_forces_equipment_spetsnaz
-			amount = 5
-			producer = RUS
-		}
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_draisines
-	icon = GFX_generic_carriage
-	x = 3
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_standardization }
-
-	relative_position_id = satellite_standardization
-
-	completion_reward = {
-		add_ideas = satellite_railcart_bonus
-		add_tech_bonus = {
-			name = industrial_bonus
-			bonus = 0.667
-			uses = 2
-			category = rail_car
-		}
-	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-shared_focus = {
-	id = satellite_military_4
-	icon = GFX_generic_special_arms_1
-	x = 1
-	y = 1
-	cost = 6.5
-
-	prerequisite = { focus = satellite_standardization }
-
-	mutually_exclusive = { focus = satellite_military_5 }
-
-	relative_position_id = satellite_standardization
 
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.667
+			bonus = 0.5
 			uses = 1
-			ahead_reduction = 1
 			category = infantry_weapons
 		}
 	}
@@ -406,20 +211,23 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = satellite_military_5
-	icon = GFX_HNZ_call_stalkers_military_duty
-	x = -1
+	id = satellite_station_arms
+	icon = GFX_generic_stalker_2
+	x = 0
 	y = 1
 	cost = 6.5
 
-	prerequisite = { focus = satellite_standardization }
+	prerequisite = { focus = satellite_station_guard }
 
-	mutually_exclusive = { focus = satellite_military_4 }
-
-	relative_position_id = satellite_standardization
+	relative_position_id = satellite_station_guard
 
 	completion_reward = {
-		set_technology = { gas_mask_military = 1 }
+		add_tech_bonus = {
+			name = clothing_kits_bonus
+			bonus = 0.5
+			uses = 2
+			category = entrench_kits
+		}
 	}
 
 	ai_will_do = {
@@ -428,9 +236,198 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = satellite_station_arms_2
+	icon = GFX_generic_spec_ops_3
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_station_arms }
+
+	relative_position_id = satellite_station_arms
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = clothing_kits_bonus
+			bonus = 0.25
+			uses = 2
+			category = clothing_kits
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_arms_3
+	icon = GFX_equipment_gasmask
+	x = 2
+	y = 2
+	cost = 6.5
+
+	prerequisite = { focus = satellite_station_guard }
+
+	relative_position_id = satellite_station_guard
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = clothing_kits_bonus
+			bonus = 0.5
+			uses = 2
+			category = gas_mask
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_special_forces
+	icon = GFX_generic_equipment_gasmask_2
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_station_arms_3 focus = satellite_station_arms_2 }
+
+	relative_position_id = satellite_station_arms_3
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = clothing_kits_bonus
+			bonus = 0.5
+			uses = 2
+			category = stalker
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_guard_explosive
+	icon = GFX_explosive_arms_1
+	x = 3
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_station_guard }
+
+	mutually_exclusive = {
+		focus = satellite_station_guard_gattling
+	}
+
+	relative_position_id = satellite_station_guard
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.25
+			uses = 3
+			category = explosive_support_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_guard_gattling
+	icon = GFX_gatling_arms_1
+	x = 5
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_station_guard }
+
+	mutually_exclusive = {
+		focus = satellite_station_guard_explosive
+	}
+
+	relative_position_id = satellite_station_guard
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.25
+			uses = 3
+			category = gatling_support_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_guard_support_1
+	icon = GFX_SPT_equipment_2
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_station_guard_explosive 
+		focus = satellite_station_guard_gattling
+	}
+
+	relative_position_id = satellite_station_guard_gattling
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.25
+			uses = 3
+			category = support_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_station_guard_support_2
+	icon = GFX_equipment_backpack
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { 
+		focus = satellite_station_guard_support_1 
+	}
+
+	relative_position_id = satellite_station_guard_support_1
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.5
+			uses = 2
+			category = support_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+
+shared_focus = {
 	id = satellite_defend_the_bulwark
 	icon = GFX_generic_construction_2
-	x = 2
+	x = -7
 	y = 0
 	cost = 6.5
 
@@ -454,6 +451,219 @@ shared_focus = {
 				province = { all_provinces = yes }
 			}
 		}
+	}
+
+	relative_position_id = satellite_economy
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_the_bigger_picture
+	icon = GFX_generic_political
+	x = -2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_ideas = satellite_cp_gain
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_commander_1
+	icon = GFX_generic_phone_line
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_the_bigger_picture }
+
+	relative_position_id = satellite_the_bigger_picture
+
+	completion_reward = {
+		add_ideas = satellite_improve_staff
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_commander_2
+	icon = GFX_generic_microphone
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_commander_1 }
+
+	relative_position_id = satellite_commander_1
+
+	completion_reward = {
+		add_ideas = satellite_doctrine_cost_reduction
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_mandatory_servitude
+	icon = GFX_HNZ_battle_hardened_brothers
+	x = -2
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_the_bigger_picture }
+
+	relative_position_id = satellite_the_bigger_picture
+
+	completion_reward = {
+		add_ideas = satellite_mandatory_service_idea
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_rigorous_training
+	icon = GFX_generic_equipment_gasmask_1
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_mandatory_servitude }
+
+	relative_position_id = satellite_mandatory_servitude
+
+	completion_reward = {
+		add_ideas = satellite_standing_army
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_rigorous_training_A
+	icon = GFX_generic_equipment_gasmask_7
+	x = -1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_mandatory_servitude }
+
+	mutually_exclusive = {
+		focus = satellite_rigorous_training_B
+	}
+
+	relative_position_id = satellite_rigorous_training
+
+	completion_reward = {
+		add_ideas = satellite_military_A_idea
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_rigorous_training_B
+	icon = GFX_generic_equipment_gasmask_6
+	x = 1
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_mandatory_servitude }
+
+	mutually_exclusive = {
+		focus = satellite_rigorous_training_A
+	}
+
+	relative_position_id = satellite_rigorous_training
+
+	completion_reward = {
+		add_ideas = satellite_military_B_idea
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_army_military_1
+	icon = GFX_generic_stalker_6
+	x = -6
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_military }
+
+	relative_position_id = satellite_military
+
+	completion_reward = {
+		add_ideas = satellite_organization_effort_1
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_army_military_2
+	icon = GFX_HNZ_mercenary_army
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_army_military_1 }
+
+	relative_position_id = satellite_army_military_1
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = satellite_organization_effort_1
+			add_idea = satellite_organization_effort_2
+		}
+	}
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
+	id = satellite_army_military_3
+	icon = GFX_generic_stalker_3
+	x = 0
+	y = 1
+	cost = 6.5
+
+	prerequisite = { focus = satellite_army_military_2 }
+
+	relative_position_id = satellite_army_military_2
+
+	completion_reward = {
+		army_experience = 30
 	}
 
 	ai_will_do = {
@@ -620,7 +830,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_economy
 	icon = GFX_generic_construction
-	x = 9
+	x = 8
 	y = 0
 	cost = 6.5
 
@@ -978,7 +1188,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = entrench_kit_bonus
-			bonus = 0.667
+			bonus = 0.5
 			uses = 1
 			category = casting
 		}
@@ -1169,8 +1379,9 @@ shared_focus = {
 	cost = 6.5
 
 	prerequisite = { 
-		focus = satellite_domestics_1
+		focus = satellite_arsenal
 		focus = satellite_trade
+		focus = satellite_domestics_1
 	}
 
 	available = { 
@@ -1219,6 +1430,7 @@ shared_focus = {
 	prerequisite = { 
 		focus = satellite_arsenal
 		focus = satellite_trade
+		focus = satellite_domestics_1
 	}
 
 	available = { 
@@ -1405,7 +1617,7 @@ shared_focus = {
 		}
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.667
+			bonus = 0.5
 			uses = 1
 			category = support_weapons_tech
 		}
@@ -1439,7 +1651,7 @@ shared_focus = {
 		}
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.667
+			bonus = 0.5
 			uses = 1
 			category = infantry_weapons
 		}
@@ -1509,7 +1721,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = industrial_bonus
-			bonus = 0.33
+			bonus = 0.5
 			uses = 1
 			category = industry
 		}
@@ -2126,13 +2338,13 @@ shared_focus = {
 
 	completion_reward = {
 		# activate decisions to do business with neighbours
-		add_political_power = 50
+		add_political_power = 75
 	}
 	ai_will_do = {
 		factor = 0.5
 		modifier = {
 			factor = 5
-			date > 2033.1.1
+			date > 2030.1.1
 		}
 	}
 }
@@ -2628,9 +2840,9 @@ shared_focus = {
 		add_stability = 0.1
 	}
 	ai_will_do = {
-		factor = 2.5
+		factor = 2
 		modifier = {
-			factor = 2
+			factor = 0.5
 			tag = PEC
 			NOT = {
 				has_government = dictatorial
