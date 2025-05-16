@@ -5536,182 +5536,56 @@ focus_tree = {
 		}
 	}
 
-	### Get rid of our Generals ### 
-
 	focus = {
-		id = HNZ_lessons_from_conflict
-		icon = GFX_HNZ_eagle_1
+		id = HNZ_armed_forces_1
+		icon = GFX_pig
 
-		available = {
-			has_completed_focus = HNZ_new_quarter
-		}
+		available = { has_completed_focus = HNZ_new_quarter }
 
-		x = 28
+		x = 41
 		y = 0
-		relative_position_id = HNZ_new_quarter
-		cost = 4.3
+		cost = 6.5
 
 		completion_reward = {
-			army_experience = 15
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 50
+				producer = RUS
 			}
 		}
 
-		ai_will_do = { 
+		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 10
-				date > "2030.1.1"
-			}
-			modifier = {
-				factor = 15
-				date > "2032.1.1"
-			}
-			modifier = {
-				factor = 30
-				date > "2033.1.1"
-			}
 		}
 	}
 
 	focus = {
-		id = HNZ_planning_first
-		icon = GFX_HNZ_planning_1
-
+		id = HNZ_armed_forces_2
+		icon = GFX_pig
+	
 		prerequisite = {
-			focus = HNZ_lessons_from_conflict
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_logistics_first
+			focus = HNZ_armed_forces_1
 		}
 
 		x = -3
 		y = 1
-		relative_position_id = HNZ_lessons_from_conflict
-		cost = 6.5 
+		relative_position_id = HNZ_armed_forces_1
 
+		cost = 6.5
+	
 		completion_reward = {
-			add_ideas = HNZ_planning
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = clothing_kits
 			}
-		}
-	}
-
-	focus = {
-		id = HNZ_planning_military_advisor_1
-		icon = GFX_HNZ_planning_advisor
-
-		prerequisite = {
-			focus = HNZ_planning_first
-		}
-
-		x = 2
-		y = 1
-		relative_position_id = HNZ_planning_first
-		cost = 3.6
-
-		completion_reward = {
-			add_ideas = HNZ_planning_minister_1
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_planning_military_advisor_2
-		icon = GFX_HNZ_planning_advisor
-
-		prerequisite = {
-			focus = HNZ_planning_first
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = HNZ_planning_first
-		cost = 3.6
-
-		completion_reward = {
-			add_ideas = HNZ_planning_minister_2
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_planning_military_advisor_3
-		icon = GFX_HNZ_planning_advisor
-
-		prerequisite = {
-			focus = HNZ_planning_first
-		}
-
-		x = -2
-		y = 1
-		relative_position_id = HNZ_planning_first
-		cost = 3.6
-
-		completion_reward = {
-			add_ideas = HNZ_planning_minister_3
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_planning_general_boost
-		icon = GFX_HNZ_planning_1
-
-		prerequisite = {
-			focus = HNZ_planning_military_advisor_1
-		}
-		prerequisite = {
-			focus = HNZ_planning_military_advisor_2
-		}
-		prerequisite = {
-			focus = HNZ_planning_military_advisor_3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = HNZ_planning_military_advisor_2
-		cost = 3.6
-
-		completion_reward = {
-			remove_ideas = HNZ_poor_high_command
-			add_ideas = HNZ_high_command_planning
 		}
 
 		ai_will_do = {
@@ -5720,139 +5594,494 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_logistics_first
-		icon = GFX_HNZ_logistics_2
-
+		id = HNZ_armed_forces_3
+		icon = GFX_pig
+	
 		prerequisite = {
-			focus = HNZ_lessons_from_conflict
+			focus = HNZ_armed_forces_2
 		}
 
-		mutually_exclusive = {
-			focus = HNZ_planning_first
+		x = 0
+		y = 1
+		relative_position_id = HNZ_armed_forces_2
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = entrench_kits
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_4
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_1
+		}
+
+		available = {
+			NOT = { has_war_with_major = yes }
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_armed_forces_1
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_timed_idea = {
+				idea = HNZ_mobilize_station_guard
+				days = 360
+			}
+			division_template = {
+				name = "Station Militia"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 1 y = 0 }
+					irregulars = { x = 2 y = 0 }
+					irregulars = { x = 3 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Militia\" division_template = \"Station Militia\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Standing Militia\" division_template = \"Station Militia\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"3rd Standing Militia\" division_template = \"Station Militia\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_5
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_1
 		}
 
 		x = 3
 		y = 1
-		relative_position_id = HNZ_lessons_from_conflict
+		relative_position_id = HNZ_armed_forces_1
+
 		cost = 6.5
-
+	
 		completion_reward = {
-			add_ideas = HNZ_logistics
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 3
+				category = support_tech
+			}
 		}
 
 		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = HNZ_logistics_military_advisor_1
-		icon = GFX_HNZ_logistics_advisor
-
+		id = HNZ_armed_forces_6
+		icon = GFX_pig
+	
 		prerequisite = {
-			focus = HNZ_logistics_first
-		}
-
-		x = 2
-		y = 1
-		relative_position_id = HNZ_logistics_first
-		cost = 3.6
-
-		completion_reward = {
-			add_ideas = HNZ_logistic_minister_1
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_logistics_military_advisor_2
-		icon = GFX_HNZ_logistics_advisor
-
-		prerequisite = {
-			focus = HNZ_logistics_first
+			focus = HNZ_armed_forces_5
 		}
 
 		x = 0
 		y = 1
-		relative_position_id = HNZ_logistics_first
-		cost = 3.6
+		relative_position_id = HNZ_armed_forces_5
 
+		cost = 6.5
+	
 		completion_reward = {
-			add_ideas = HNZ_logistic_minister_2
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 3
+				category = support_weapons_tech
+			}
 		}
 
 		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = HNZ_logistics_military_advisor_3
-		icon = GFX_HNZ_logistics_advisor
+		id = HNZ_armed_forces_7
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_6
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_armed_forces_6
+
+		cost = 6.5
+	
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_8
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_3
+			focus = HNZ_armed_forces_6
+		}
+
+		x = 0
+		y = 3
+		relative_position_id = HNZ_armed_forces_1
+
+		cost = 6.5
+	
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = unlock_special_forces_heavy_equipment_tech
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_heavy
+					amount = 20
+					producer = RUS
+				}
+				custom_effect_tooltip = unlock_special_forces_heavy_equipment
+				hidden_effect = { set_country_flag = unlock_special_forces_heavy_equipment_tech }
+			}
+
+			else_if = {
+				limit = {
+					has_tech = special_forces_heavy_equipment_tech
+				}
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_heavy
+					amount = 50
+					producer = HNZ
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_9
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_8
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_armed_forces_10
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_armed_forces_8
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_advisor_role = {
+    			character = HNZ_mihail_turetsky
+    			advisor = {
+    			    slot = industrial_concern
+    			    cost = 150
+    			    idea_token = HNZ_mihail_turetsky
+    			    traits = {
+    			        HNZ_mihail_turetsky_trait_A
+    			    }
+    			}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_10
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_8
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_armed_forces_9
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_armed_forces_8
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_advisor_role = {
+    			character = HNZ_mihail_turetsky
+    			advisor = {
+    			    slot = industrial_concern
+    			    cost = 150
+    			    idea_token = HNZ_mihail_turetsky
+    			    traits = {
+    			        HNZ_mihail_turetsky_trait_B
+    			    }
+    			}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_11
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_9
+			focus = HNZ_armed_forces_10
+		}
+
+		x = -1
+		y = 2
+		relative_position_id = HNZ_armed_forces_8
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_ideas = HNZ_stalker_techniques
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_12
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_9
+			focus = HNZ_armed_forces_10
+		}
+
+		x = 1
+		y = 2
+		relative_position_id = HNZ_armed_forces_8
+
+		cost = 6.5
+	
+		completion_reward = {
+			add_ideas = HNZ_go_big_or_go_home
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_armed_forces_13
+		icon = GFX_pig
+	
+		prerequisite = {
+			focus = HNZ_armed_forces_11
+		}
 
 		prerequisite = {
-			focus = HNZ_logistics_first
+			focus = HNZ_armed_forces_12
+		}
+
+		x = 0
+		y = 3
+		relative_position_id = HNZ_armed_forces_8
+
+		cost = 6.5
+	
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = unlock_special_forces_heavy_equipment_tech
+					}
+				}
+				custom_effect_tooltip = unlock_special_forces_heavy_equipment
+				hidden_effect = { set_country_flag = unlock_special_forces_heavy_equipment_tech }
+			}
+			else_if = {
+				limit = {
+					has_tech = special_forces_heavy_equipment_tech
+				}
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_heavy
+					amount = 50
+					producer = HNZ
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_preparedness_1
+		icon = GFX_pig
+
+		available = { has_completed_focus = HNZ_new_quarter }
+
+		x = 10
+		y = 0
+		relative_position_id = HNZ_armed_forces_1
+
+		cost = 6.5
+
+		completion_reward = {
+			add_war_support = 0.1
+			army_experience = 25
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_preparedness_2
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_preparedness_1
+		}
+
+		bypass = {
+			has_war = yes
 		}
 
 		x = -2
 		y = 1
-		relative_position_id = HNZ_logistics_first
-		cost = 3.6
+		relative_position_id = HNZ_preparedness_1
+
+		cost = 6.5
 
 		completion_reward = {
-			add_ideas = HNZ_logistic_minister_3
+			army_experience = 10
+			add_timed_idea = {
+				idea = HNZ_prepare_conflict_resolutions
+				days = 360
+			}
 		}
 
 		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 3
-				date > "2030.1.1"
-			}
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = HNZ_logistics_general_boost
-		icon = GFX_HNZ_logistics_2
+		id = HNZ_preparedness_3
+		icon = GFX_pig
 
 		prerequisite = {
-			focus = HNZ_logistics_military_advisor_1
+			focus = HNZ_preparedness_2
 		}
-		prerequisite = {
-			focus = HNZ_logistics_military_advisor_2
+		
+		available = {
+			has_war_support > 0.39
+			OR = {
+				threat > 0.29
+				date > 2031.1.1
+			}
 		}
-		prerequisite = {
-			focus = HNZ_logistics_military_advisor_3
+
+		bypass = {
+			has_war = yes
 		}
 
 		x = 0
 		y = 1
-		relative_position_id = HNZ_logistics_military_advisor_2
-		cost = 3.6
+		relative_position_id = HNZ_preparedness_2
+
+		cost = 6.5
 
 		completion_reward = {
-			remove_ideas = HNZ_poor_high_command
-			add_ideas = HNZ_high_command_logistics
+			add_ideas = HNZ_secret_rearmament_schemes
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_motorization_effort_1
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_armed_forces_1
+
+		}
+
+		x = -2
+		y = 0
+		relative_position_id = HNZ_preparedness_2
+
+		cost = 6.5
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_salvaging
+				category = rail_engine
+				category = rail_armor
+				category = rail_armament
+			}
 		}
 
 		ai_will_do = {
@@ -5862,29 +6091,25 @@ focus_tree = {
 
 	focus = {
 		id = HNZ_establish_OVMSB
-		cost = 6.5
 		icon = GFX_HNZ_OVMSB
 
 		prerequisite = {
-			focus = HNZ_logistics_military_advisor_3
-			focus = HNZ_planning_military_advisor_3
-		}
-		prerequisite = {
-			focus = HNZ_logistics_military_advisor_2
-			focus = HNZ_planning_military_advisor_2
-		}
-		prerequisite = {
-			focus = HNZ_logistics_military_advisor_1
-			focus = HNZ_planning_military_advisor_1
+			focus = HNZ_motorization_effort_1
 		}
 
-		x = 0
-		y = 3
-		relative_position_id = HNZ_lessons_from_conflict
+		prerequisite = {
+			focus = HNZ_preparedness_2
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = HNZ_preparedness_2
+
+		cost = 6.5
 
 		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
 			add_ideas = HNZ_taubman
-			custom_effect_tooltip = HNZ_OVMSB_tooltip
 			division_template = {
 				name = "OVMSB Brigade"
 				priority = 1
@@ -5906,7 +6131,7 @@ focus_tree = {
 					owner = ROOT
 				}
 				create_unit = {
-					division = "name = \"1st OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+					division = "name = \"2nd OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
 					owner = ROOT
 				}
 			}
@@ -5923,101 +6148,521 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = HNZ_doctrine_2
-		icon = GFX_gunsupply
+		id = HNZ_motorization_effort_3
+		icon = GFX_pig
 
 		prerequisite = {
-			focus = HNZ_logistics_general_boost
-			focus = HNZ_planning_general_boost
+			focus = HNZ_establish_OVMSB
 		}
 
-		x = 0
-		y = 4
-		relative_position_id = HNZ_lessons_from_conflict
+		mutually_exclusive = {
+			focus = HNZ_motorization_effort_4
+		}
+		x = -1
+		y = 1
+		relative_position_id = HNZ_establish_OVMSB
+
 		cost = 6.5
 
 		completion_reward = {
-			army_experience = 20
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_cart
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_motorization_effort_4
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_establish_OVMSB
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_motorization_effort_3
+		}
+		x = 1
+		y = 1
+		relative_position_id = HNZ_establish_OVMSB
+
+		cost = 6.5
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_car
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_motorization_effort_5
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_motorization_effort_3
+			focus = HNZ_motorization_effort_4
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_establish_OVMSB
+
+		cost = 6.5
+
+		completion_reward = {
+			custom_effect_tooltip = unlock_schematic_rail_armored_train
+			hidden_effect = { set_country_flag = unlock_armored_train_tech }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_motorization_effort_6
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_motorization_effort_4
+		}
+
+		x = 2
+		y = 2
+		relative_position_id = HNZ_establish_OVMSB
+
+		cost = 6.5
+
+		completion_reward = {
+			division_template = {
+				name = "Shock Brigade"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					rail_car = { x = 0 y = 0 }
+					rail_car = { x = 1 y = 0 }
+					rail_car = { x = 2 y = 0 }
+					rail_car = { x = 3 y = 0 }
+					rail_car = { x = 4 y = 0 }
+				}
+				support = {
+					logistics_company  = { x = 0 y = 1 }    
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"13th Shock Brigade\" division_template = \"Shock Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+
+			hidden_effect = {
+				remove_trait = {
+					character = HNZ_alexey_terentyev
+					slot = industrial_concern
+					trait = HNZ_alexey_terentyev
+				}
+			}
+
+			add_trait = {
+				character = HNZ_alexey_terentyev
+				slot = industrial_concern
+				trait = HNZ_alexey_terentyev_2
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_motorization_effort_7
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_motorization_effort_5
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_motorization_effort_5
+
+		cost = 6.5
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_invisible_observer_bunker
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_preparedness_1
+		}
+
+		available = {
+			457 = { is_owned_by = RUI }
+		}
+
+		bypass = { 457 = { is_owned_by = ROOT } }
+
+		x = 0
+		y = 3
+		relative_position_id = HNZ_preparedness_1
+
+		cost = 6.5
+
+		completion_reward = {
+			transfer_state = 457
+			457 = {
+				set_state_category = metropolis
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 2
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				set_victory_points = {
+					province = 4957
+					value = 10
+				}
+			}
+			hidden_effect = {
+				country_event = { id = nf_HNZ.4 days = 2 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_invisible_observer_bunker_2
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_invisible_observer_bunker
+		}
+
+		available = {
+			457 = { is_owned_by = ROOT }
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_invisible_observer_bunker
+
+		cost = 6.5
+
+		completion_reward = {
+			custom_effect_tooltip = HNZ_state_457_national_spirit
+			add_ideas = HNZ_ZKP_taganskaya_directorate
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_prep_1
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_preparedness_1
+		}
+
+		x = 3
+		y = 1
+		relative_position_id = HNZ_preparedness_1
+
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = HNZ_world_tension_leand_lease
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_doctrine_1
+		icon = GFX_pig
+
+		available = { has_completed_focus = HNZ_new_quarter }
+
+		x = 8
+		y = 0
+		relative_position_id = HNZ_preparedness_1
+
+		cost = 6.5
+
+		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.5
+				cost_reduction = 0.334
 				uses = 2
 				category = land_doctrine
 			}
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
 		}
 	}
 
-	### War Planning
-
 	focus = {
-		id = HNZ_establish_war_committee
-		icon = GFX_HNZ_colonel
+		id = HNZ_army_general_1
+		icon = GFX_pig
 
-		available = {
-			has_completed_focus = HNZ_lessons_from_conflict
+		prerequisite = {
+			focus = HNZ_doctrine_1
 		}
 
-		x = 39
-		y = 0
-		relative_position_id = HNZ_new_quarter
-		cost = 4.3
+		x = 5
+		y = 1
+		relative_position_id = HNZ_doctrine_1
+
+		cost = 6.5
 
 		completion_reward = {
-			add_ideas = HNZ_war_committee
 
-			add_field_marshal_role = {
-				character = HNZ_leontiy_sergeev
-				skill = 4 
-				attack_skill = 2
-				defense_skill = 2
-				planning_skill = 4
-				logistics_skill = 4
-			}
-			add_corps_commander_role = {
-				character = HNZ_miron_bogdanov
-				skill = 3
-				attack_skill = 2
-				defense_skill = 3
-				planning_skill = 2
-				logistics_skill = 3
-			}
-			add_corps_commander_role = {
-				character = HNZ_stas_zaytsev
-				skill = 2 
-				attack_skill = 3
-				defense_skill = 2
-				planning_skill = 1
-				logistics_skill = 1
-			}
-			add_corps_commander_role = {
-				character = HNZ_grisha_kozlov
-				skill = 2 
-				attack_skill = 3
-				defense_skill = 1
-				planning_skill = 1
-				logistics_skill = 2
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_army_general_2
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_army_general_1
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_army_general_3
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_army_general_1
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_army_general_3
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_army_general_1
+		}
+
+		mutually_exclusive = {
+			focus = HNZ_army_general_2
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_army_general_1
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_army_general_4
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_army_general_3
+			focus = HNZ_army_general_2
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_army_general_1
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_doctrine_2
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_1
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = HNZ_doctrine_1
+
+		cost = 6.5
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.334
+				uses = 2
+				category = land_doctrine
 			}
 		}
 
 		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 5
-				date > "2030.1.1"
-			}
-			modifier = {
-				factor = 25
-				threat > 0.1
-			}
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_doctrine_3
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_2
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_doctrine_2
+
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = HNZ_doctrine_cost_reduction
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_doctrine_4
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_2
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_doctrine_2
+
+		cost = 6.5
+
+		completion_reward = {
+			## TODO Place state modifier defences
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_doctrine_5
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_2
+		}
+
+		x = 3
+		y = 1
+		relative_position_id = HNZ_doctrine_2
+
+		cost = 6.5
+
+		completion_reward = {
+			## TODO Place state modifier defences
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_CP_1
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_1
+		}
+
+		x = -3
+		y = 1
+		relative_position_id = HNZ_doctrine_1
+
+		cost = 6.5
+
+		completion_reward = {
+			add_ideas = HNZ_command_roster
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -6025,19 +6670,24 @@ focus_tree = {
 		id = HNZ_general_foreign_mercenary
 		icon = GFX_HNZ_military_general_mercenary
 
+		prerequisite = {
+			focus = HNZ_CP_1
+		}
+
+		prerequisite = {
+			focus = HNZ_war_prep_1
+		}
+
 		mutually_exclusive = {
 			focus = HNZ_general_grizzled_veteran
 			focus = HNZ_general_russian_badass
 		}
 
-		prerequisite = {
-			focus = HNZ_establish_war_committee
-		}
-		x = 0
+		x = -1
 		y = 1
-		relative_position_id = HNZ_establish_war_committee
+		relative_position_id = HNZ_war_prep_1
 
-		cost = 3.6
+		cost = 4.3
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -6052,40 +6702,6 @@ focus_tree = {
 				logistics_skill = 3
 				legacy_id = -1
 			}
-		}
-
-		ai_will_do = { ## AI for some reason HATES using the branch unique conscription laws
-			factor = 1
-			modifier = {
-				factor = 2
-				date > "2030.1.1"
-			}
-			modifier = {
-				factor = 15
-				threat > 0.1
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_general_foreign_mercenary_oob
-		icon = GFX_HNZ_military_surplus
-
-		prerequisite = {
-			focus =  HNZ_general_foreign_mercenary
-		}
-		x = 0
-		y = 1
-		relative_position_id =  HNZ_general_foreign_mercenary
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = HNZ_foreign_merc_tt
 			division_template = {
 				name = "Mercenaries"
 				priority = 1
@@ -6116,50 +6732,9 @@ focus_tree = {
 				}
 			}
 		}
-	}
 
-	focus = {
-		id = HNZ_mercenary_war_never_changes
-		icon = GFX_HNZ_generic_defence
-
-		prerequisite = {
-			focus =  HNZ_general_foreign_mercenary_oob
-		}
-		x = 0
-		y = 1
-		relative_position_id =  HNZ_general_foreign_mercenary_oob
-
-		cost = 5.8
-		 
 		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			army_experience = 25
-			add_ideas = HNZ_war_never_changes
-		}
-	}
-
-	focus = {
-		id = HNZ_mercenary_merc_army
-		icon = GFX_HNZ_mercenary_army
-
-		prerequisite = {
-			focus =  HNZ_mercenary_war_never_changes
-		}
-		x = 0
-		y = 1
-		relative_position_id =  HNZ_mercenary_war_never_changes
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = HNZ_new_military_laws_tt
+			factor = 5
 		}
 	}
 
@@ -6167,19 +6742,24 @@ focus_tree = {
 		id = HNZ_general_grizzled_veteran
 		icon = GFX_HNZ_military_general_grizzled_veteran
 
+		prerequisite = {
+			focus = HNZ_CP_1
+		}
+
+		prerequisite = {
+			focus = HNZ_war_prep_1
+		}
+
 		mutually_exclusive = {
 			focus = HNZ_general_foreign_mercenary
 			focus = HNZ_general_russian_badass
 		}
 
-		prerequisite = {
-			focus = HNZ_establish_war_committee
-		}
-		x = -3
+		x = 1
 		y = 1
-		relative_position_id = HNZ_establish_war_committee
+		relative_position_id = HNZ_war_prep_1
 
-		cost = 3.6
+		cost = 4.3
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -6193,50 +6773,15 @@ focus_tree = {
 				logistics_skill = 4
 				legacy_id=-1
 			}
-		}
-
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 5
-				date > "2030.1.1"
-			}
-			modifier = {
-				factor = 25
-				threat > 0.1
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_general_grizzled_veteran_oob
-		icon = GFX_HNZ_battle_hardened_brothers
-
-		prerequisite = {
-			focus = HNZ_general_grizzled_veteran
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_general_grizzled_veteran
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = HNZ_grizzled_veterans_tt
 			division_template = {
 				name = "Veterans"
 				priority = 1
 				template_counter = 0
 				regiments = {
-					special_forces =  { x = 0 y = 0 }
-					special_forces =  { x = 1 y = 0 }
-					special_forces =  { x = 2 y = 0 }
-					special_forces =  { x = 3 y = 0 }
-					special_forces =  { x = 4 y = 0 }
+					regulars =  { x = 0 y = 0 }
+					regulars =  { x = 1 y = 0 }
+					regulars =  { x = 2 y = 0 }
+					regulars =  { x = 3 y = 0 }
 				}
 			}
 			capital_scope = {
@@ -6244,104 +6789,24 @@ focus_tree = {
 					division = "name = \"Grizzled Veterans\" division_template = \"Veterans\" start_experience_factor = 0.24 start_equipment_factor = 1"
 					owner = ROOT
 				}
+				create_unit = {
+					division = "name = \"Grizzled Veterans\" division_template = \"Veterans\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
-		}
-	}
 
-	focus = {
-		id = HNZ_grizzled_better_arms
-		icon = GFX_HNZ_veteran_armaments_upgrade
-
-		prerequisite = {
-			focus = HNZ_general_grizzled_veteran_oob
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_general_grizzled_veteran_oob
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_armament_production
-		}
-	}
-
-	focus = {
-		id = HNZ_grizzled_not_another_bloodbath
-		icon = GFX_HNZ_not_another_bloodbath
-
-		prerequisite = {
-			focus = HNZ_grizzled_better_arms
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_grizzled_better_arms
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_lessons_of_conflict 
-		}
-	}
-
-	focus = {
-		id = HNZ_general_conscription_reforms
-		icon = GFX_HNZ_elite_army
-
-
-		prerequisite = {
-			focus = HNZ_general_grizzled_veteran
-			focus = HNZ_general_foreign_mercenary
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_general_grizzled_veteran
-
-		available = {
-			NOT = { 
-				has_completed_focus = HNZ_regimental_drills
+			if = {
+				limit = {
+					NOT = {
+						has_tech = doctrine_B_1
+					}
+				}
+				set_technology = { doctrine_B_1 = 1 }
 			}
 		}
 
-		cost = 5.8
-		 
 		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_conscription_reforms
-		}
-	}
-
-	focus = {
-		id = HNZ_an_elite_army
-		icon = GFX_HNZ_merc_force
-
-
-		prerequisite = {
-			focus = HNZ_general_conscription_reforms
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_general_conscription_reforms
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_elite_forces
+			factor = 5
 		}
 	}
 
@@ -6349,19 +6814,24 @@ focus_tree = {
 		id = HNZ_general_russian_badass
 		icon = GFX_HNZ_military_general_russian_badass
 
+		prerequisite = {
+			focus = HNZ_CP_1
+		}
+
+		prerequisite = {
+			focus = HNZ_war_prep_1
+		}
+
 		mutually_exclusive = {
 			focus = HNZ_general_grizzled_veteran
 			focus = HNZ_general_foreign_mercenary
 		}
 
-		prerequisite = {
-			focus = HNZ_establish_war_committee
-		}
 		x = 3
 		y = 1
-		relative_position_id = HNZ_establish_war_committee
+		relative_position_id = HNZ_war_prep_1
 
-		cost = 3.6
+		cost = 4.3
 
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
@@ -6376,40 +6846,6 @@ focus_tree = {
 				logistics_skill = 2
 				legacy_id = -1
 			}
-		}
-
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 5
-				date > "2030.1.1"
-			}
-			modifier = {
-				factor = 25
-				threat > 0.1
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_general_russian_badass_oob
-		icon = GFX_HNZ_badass_oob
-
-		prerequisite = {
-			focus = HNZ_general_russian_badass
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_general_russian_badass
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = HNZ_heavy_team_tt
 			division_template = {
 				name = "The Heavies"
 				priority = 1
@@ -6419,7 +6855,6 @@ focus_tree = {
 					special_forces = { x = 1 y = 0 }
 					special_forces = { x = 2 y = 0 }
 					special_forces = { x = 3 y = 0 }
-					special_forces = { x = 4 y = 0 }
 				}
 				support = {
 					gatling_support = { x = 0 y = 0 }  
@@ -6431,397 +6866,262 @@ focus_tree = {
 					division = "name = \"'Eavy Team\" division_template = \"The Heavies\" start_experience_factor = 0.24 start_equipment_factor = 1"
 					owner = ROOT
 				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_badass_go_big
-		icon = GFX_HNZ_military_general_russian_badass
-
-		prerequisite = {
-			focus = HNZ_general_russian_badass_oob
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_general_russian_badass_oob
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_go_big_or_go_home
-		}
-	}
-
-	focus = {
-		id = HNZ_general_russian_badass_shock_and_awe
-		icon = GFX_HNZ_badass_shock_and_awe
-
-		prerequisite = {
-			focus = HNZ_badass_go_big
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_badass_go_big
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_shock_and_awe
-		}
-	}
-
-	focus = {
-		id = HNZ_regimental_drills
-		icon = GFX_HNZ_conscription_reforms
-
-		prerequisite = {
-			focus = HNZ_general_russian_badass
-			focus = HNZ_general_foreign_mercenary
-		}
-		available = {
-			NOT = { 
-				has_completed_focus = HNZ_general_conscription_reforms
-			}
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_general_russian_badass
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			army_experience = 20
-			add_ideas = HNZ_regimental_drills_idea
-		}
-	}
-
-	focus = {
-		id = HNZ_recruitment_drives
-		icon = GFX_HNZ_the_draft
-
-		prerequisite = {
-			focus = HNZ_regimental_drills
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_regimental_drills
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_manpower = 50
-			add_ideas = HNZ_recruitment_surge
-		}
-	}
-
-	focus = {
-		id = HNZ_war_committee_war_plans
-		icon = GFX_focus_SOV_panslavic_nationalism
-
-		prerequisite = {
-			focus = HNZ_grizzled_not_another_bloodbath
-			focus = HNZ_mercenary_merc_army
-			focus = HNZ_general_russian_badass_shock_and_awe
-		}
-
-		available = {
-			NOT = {
-				has_idea = HNZ_poor_high_command
-			}
-		}
-		x = 0
-		y = 5
-		relative_position_id = HNZ_establish_war_committee
-
-		cost = 3.6
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			# Decision which allows to initiate 'War Plans' against Potential Foes
-			custom_effect_tooltip = HNZ_committee_war_plans_tt
-		}
-	}
-
-	focus = {
-		id = HNZ_war_committee_war_austerity_effort
-		icon = GFX_HNZ_emplacements
-
-		prerequisite = {
-			focus = HNZ_war_committee_war_plans
-		}
-		x = 0
-		y = 2
-		relative_position_id = HNZ_war_committee_war_plans
-
-		available = {
-			has_war = yes
-		}
-
-		cost = 5.8
-		 
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					is_in_home_area = yes
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				remove_building = {
-    				type = industrial_complex
-    				level = 2
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_in_home_area = yes
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				remove_building = {
-    				type = industrial_complex
-    				level = 2
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_war_mobilization_plans
-		icon = GFX_RCH_stockpile
-
-		prerequisite = {
-			focus = HNZ_war_committee_war_plans
-		}
-		x = 2
-		y = 1
-		relative_position_id = HNZ_war_committee_war_plans
-
-		cost = 6.5
-
-		available = {
-			has_war = no
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_mobilization_law
-		}
-	}
-
-	focus = {
-		id = HNZ_war_games
-		icon = GFX_HNZ_troops
-
-		prerequisite = {
-			focus = HNZ_war_committee_war_plans
-		}
-		x = -2
-		y = 1
-		relative_position_id = HNZ_war_committee_war_plans
-
-		cost = 6.5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			army_experience = 15
-			add_command_power = 15
-		}
-	}
-
-	focus = {
-		id = HNZ_war_polis_joint_operations
-		icon = GFX_HNZ_joint_operations
-
-		prerequisite = {
-			focus = HNZ_war_games
-		}
-		x = 0
-		y = 1
-		relative_position_id = HNZ_war_games
-
-		cost = 6.5
-
-		available = {
-			country_exists = PLS
-			country_exists = SPT
-			has_opinion = {
-    			target = PLS
-    			value > 9
-			}
-			has_opinion = {
-    			target = SPT
-    			value > 9
-			}
-			NOT = {
-				has_war_with = SPT
-				has_war_with = PLS
-			}
-			has_war = no
-		}
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = HNZ_joint_operations_tt
-			army_experience = 5
-			PLS = {
-				country_event = nf_HNZ.26
-				## Joint Special Ops
-			}
-			SPT = {
-				country_event = nf_HNZ.26
-				## Joint Special Ops
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_war_special_forces
-		icon = GFX_HNZ_soldier
-
-		prerequisite = {
-			focus = HNZ_war_polis_joint_operations
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_war_polis_joint_operations
-
-		cost = 6.5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = industrial_bonus
-				bonus = 0.5
-				uses = 1
-				category = stalker
-			}
-		    custom_effect_tooltip = HNZ_stalker_elites_tt
-			division_template = {
-				name = "Stalker Elites"
-				priority = 1
-				template_counter = 0
-				regiments = {
-					special_forces = { x = 0 y = 0 }
-					special_forces = { x = 1 y = 0 }
-					special_forces = { x = 2 y = 0 }
-					special_forces = { x = 3 y = 0 }
-					special_forces = { x = 4 y = 0 }
-				}
-				support = {
-					explosive_support = { x = 0 y = 0 }  
-					gatling_support  = { x = 0 y = 1 }    
-				}
-			}
-			capital_scope = {
 				create_unit = {
-					division = "name = \"Elites\" division_template = \"Stalker Elites\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					division = "name = \"'Eavy Team\" division_template = \"The Heavies\" start_experience_factor = 0.24 start_equipment_factor = 1"
 					owner = ROOT
 				}
 			}
 		}
+
+		ai_will_do = {
+			factor = 5
+		}
 	}
 
 	focus = {
-		id = HNZ_war_drafts
-		icon = GFX_HNZ_colonel
+		id = HNZ_war_planning_4
+		icon = GFX_pig
 
 		prerequisite = {
-			focus = HNZ_war_mobilization_plans
+			focus = HNZ_general_foreign_mercenary
+			focus = HNZ_general_grizzled_veteran
+			focus = HNZ_general_russian_badass
 		}
+
 		x = 0
 		y = 1
-		relative_position_id = HNZ_war_mobilization_plans
+		relative_position_id = HNZ_general_grizzled_veteran
 
 		cost = 6.5
 
-		available = {
-			has_war = no
+		completion_reward = {
+			army_experience = 25
+			remove_ideas = HNZ_poor_high_command
 		}
 
 		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-			add_ideas = HNZ_recruitment_surge
+			factor = 5
 		}
 	}
 
 	focus = {
-		id = HNZ_war_bonds
-		icon = GFX_cog_bulletfactories
+		id = HNZ_war_planning_5
+		icon = GFX_pig
 
 		prerequisite = {
-			focus = HNZ_war_drafts
-		}
-
-		available = {
-			has_war = yes
+			focus = HNZ_war_planning_4
 		}
 
 		x = -1
 		y = 1
-		relative_position_id = HNZ_war_drafts
+		relative_position_id = HNZ_war_planning_4
 
 		cost = 6.5
 
-		ai_will_do = {
-			factor = 2
+		completion_reward = {
+			add_ideas = HNZ_volunteer_foreign_corps
 		}
 
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_planning_6
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_war_planning_5
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = HNZ_war_planning_5
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_invisible_observer_bunker_3
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_invisible_observer_bunker_2
+		}
+
+		prerequisite = {
+			focus = HNZ_war_planning_6
+		}
+
+		available = {
+			457 = { is_owned_by = ROOT }
+		}
+
+		x = 1
+		y = 2
+		relative_position_id = HNZ_invisible_observer_bunker_2
+
+		cost = 6.5
+
 		completion_reward = {
-			add_timed_idea = {
-				idea = HNZ_war_bonds_idea
-				days = 365
+			457 = {
+				set_victory_points = {
+					province = 4957
+					value = 10
+				}
+				add_state_modifier = {
+    				modifier = {
+        				state_bunker_max_level_terrain_limit = 2
+						state_bunker2_max_level_terrain_limit = 2
+						local_intel_to_enemies = -0.9
+						local_factory_sabotage = -0.9
+						enemy_local_supplies = -0.25
+						enemy_army_speed_factor = -0.25
+					}
+				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_planning_7
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_war_planning_4
+		}
+
+		x = 2
+		y = 1
+		relative_position_id = HNZ_war_planning_4
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_planning_8
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_war_planning_7
+		}
+
+		prerequisite = {
+			focus = HNZ_doctrine_3
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_war_planning_7
+
+		cost = 6.5
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.334
+				uses = 2
+				category = land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_plans
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_doctrine_4
+			focus = HNZ_doctrine_5
+		}
+
+		prerequisite = {
+			focus = HNZ_army_general_4
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = HNZ_army_general_4
+
+		cost = 6.5
+
+		completion_reward = {
+			## TODO war plans decisions
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_plans_from_witin
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_war_plans
+		}
+
+		prerequisite = {
+			focus = HNZ_war_plans
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = HNZ_war_plans
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = HNZ_war_plans_from_without
+		icon = GFX_pig
+
+		prerequisite = {
+			focus = HNZ_war_plans
+		}
+
+		prerequisite = {
+			focus = HNZ_war_plans
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = HNZ_war_plans
+
+		cost = 6.5
+
+		completion_reward = {}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 }
