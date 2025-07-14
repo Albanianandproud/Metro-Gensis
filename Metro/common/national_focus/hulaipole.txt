@@ -1,0 +1,2833 @@
+#!gfx:interface\metro_goals.gfx
+## Code above is for VSC HOI4 utility. pls leave ty
+focus_tree = {
+	id = hulaipole
+	country = {
+		factor = 0
+		modifier = {
+			add = 25
+			tag = HUL
+		}
+	}
+	
+	initial_show_position = {
+		x = 47
+		y = 0
+	}
+
+	default = no
+	continuous_focus_position = { x = 0 y = 50 }
+	focus = {
+		id = HUL_1
+		icon = GFX_pig
+		cost = 2.9
+		x = 15
+		y = 0
+		available = {
+			custom_trigger_tooltip = {
+			    tooltip = HUL_fought_aviators_tt	
+			    hidden_trigger = { has_country_flag = fought_aviators }
+			}
+		}
+		mutually_exclusive = { focus = HUL_17 }
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_2
+		icon = GFX_RED_ak
+		prerequisite = { focus = HUL_1 }
+		cost = 6.5
+		relative_position_id = HUL_1
+		x = -1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_3
+		icon = GFX_TRT_gopniks
+		prerequisite = { focus = HUL_1 }
+		cost = 6.5
+		relative_position_id = HUL_1
+		x = 1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_4
+		icon = GFX_generic_playing_cards
+		prerequisite = { focus = HUL_2 }
+		prerequisite = { focus = HUL_3 }
+		cost = 6.5
+		relative_position_id = HUL_1
+		x = 0
+		y = 2
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 250 }
+			add_bullet_with_tooltip_effect = yes
+
+			remove_opinion_modifier = {
+				target = TRT
+				modifier = bandit
+			}
+			remove_opinion_modifier = {
+				target = KTG
+				modifier = bandit
+			}
+			remove_opinion_modifier = {
+				target = MOB
+				modifier = bandit
+			}
+			remove_opinion_modifier = {
+				target = DRY
+				modifier = bandit
+			}
+
+			every_country = {
+				limit = { NOT = { has_country_flag = is_bandit_nation } }
+				add_opinion_modifier = {
+					target = HUL
+					modifier = trade_relations_2 
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_5
+		icon = GFX_generic_motor_parts
+		prerequisite = { focus = HUL_4 }
+		cost = 6.5
+		relative_position_id = HUL_4
+		x = 0
+		y = 1
+		completion_reward = {
+			every_country = {
+				limit = { has_country_flag = is_bandit_nation NOT = { has_war_with = TRT }}
+				HUL = {
+					capital_scope = {
+						add_resource = {
+							type = alloys
+							amount = 2
+						}
+						add_resource = {
+							type = components
+							amount = 2
+						}
+					}
+				}
+				add_ideas = HUL_bandit_trade
+				country_event = { id = nf_HUL.1 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_6
+		icon = GFX_HUL_da_urb
+		prerequisite = { focus = HUL_5 }
+		cost = 6.5
+		relative_position_id = HUL_5
+		x = 0
+		y = 1
+		completion_reward = {
+			## Add new law from excessive drug use
+			add_ideas = HUL_doped_up_army
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_7
+		icon = GFX_generic_soldier
+		prerequisite = { focus = HUL_1 }
+		cost = 6.5
+		relative_position_id = HUL_1
+		x = -3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = clothing_kits
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_8
+		icon = GFX_SAT_armed_cultist_1
+		prerequisite = { focus = HUL_7 }
+		cost = 6.5
+		relative_position_id = HUL_7
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_9
+		icon = GFX_SAT_armed_cultist_2
+		prerequisite = { focus = HUL_7 }
+		cost = 6.5
+		relative_position_id = HUL_7
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = support_weapons_tech_research
+				bonus = 0.5
+				uses = 1
+				category = support_weapons_tech
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_10
+		icon = GFX_generic_bandit_friends_3
+		prerequisite = { focus = HUL_1 }
+		cost = 6.5
+		relative_position_id = HUL_1
+		x = -7
+		y = 1
+		completion_reward = {
+			army_experience = 15
+			country_event = { id = nf_HUL.6 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_11
+		icon = GFX_HNZ_generic_railbike
+		prerequisite = { focus = HUL_10 }
+		cost = 6.5
+		relative_position_id = HUL_10
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = rail_storage
+				category = rail_armor
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_12
+		icon = GFX_generic_bandit_friends_2
+		prerequisite = { focus = HUL_10 }
+		cost = 6.5
+		relative_position_id = HUL_10
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_armaments_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_13
+		icon = GFX_generic_bandit_friends_1
+		prerequisite = { focus = HUL_12 }
+		cost = 6.5
+		relative_position_id = HUL_12
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_armaments_1
+				add_idea = HUL_armaments_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_14
+		icon = GFX_generic_lathe_machine
+		prerequisite = { focus = HUL_11 focus = HUL_8 }
+		cost = 6.5
+		relative_position_id = HUL_11
+		x = 1
+		y = 1
+		completion_reward = {
+			382 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			417 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_15
+		icon = GFX_generic_biofuel
+		prerequisite = { focus = HUL_14 }
+		cost = 6.5
+		relative_position_id = HUL_14
+		x = 0
+		y = 1
+		completion_reward = {
+			modify_building_resources = {
+				building = synthetic_refinery 
+				resource = chemicals
+				amount = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_16
+		icon = GFX_generic_drill_machine
+		prerequisite = { focus = HUL_9 }
+		prerequisite = { focus = HUL_8 }
+		cost = 6.5
+		relative_position_id = HUL_7
+		x = 0
+		y = 2
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = punch_pressing
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_17
+		icon = GFX_pig
+		cost = 2.9
+		x = 25
+		y = 0
+		available = {
+			custom_trigger_tooltip = {
+			    tooltip = HUL_fought_aviators_tt	
+			    hidden_trigger = { has_country_flag = fought_aviators }
+			}
+		}
+		mutually_exclusive = { focus = HUL_1 }
+		completion_reward = {
+			add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_18
+		icon = GFX_pig
+		prerequisite = { focus = HUL_17 }
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_commune_of_hope
+			country_event = { id = nf_HUL.3 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_19
+		icon = GFX_HUL_vote
+		prerequisite = { focus = HUL_17 }
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_safe_zone
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_20
+		icon = GFX_generic_medical_backpack
+		prerequisite = { focus = HUL_17 }
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = 4
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 2
+				category = health
+			}
+			country_event = { id = nf_HUL.4 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_21
+		icon = GFX_pig
+		prerequisite = { focus = HUL_17 }
+		available = {
+			BRK = {
+				exists = yes
+				NOT = { has_completed_focus = BRK_GUL_friendship }
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = 6
+		y = 1
+		completion_reward = {
+			## Deal with BRK
+			BRK = { complete_national_focus = BRK_GUL_friendship }
+			add_political_power = 200
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_22
+		icon = GFX_pig
+		prerequisite = { focus = HUL_18 }
+		cost = 6.5
+		relative_position_id = HUL_18
+		x = 0
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_peoples_militias
+			division_template = {
+				name = "Peoples Militias"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+					irregulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Peoples Militias\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			country_event = { id = nf_HUL.2 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_23
+		icon = GFX_HUL_voice
+		prerequisite = { focus = HUL_19 }
+		cost = 6.5
+		relative_position_id = HUL_19
+		x = 0
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			382 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			417 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_24
+		icon = GFX_generic_campsite
+		prerequisite = { focus = HUL_19 focus = HUL_20 }
+		cost = 6.5
+		relative_position_id = HUL_19
+		x = 2
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_population_watch
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_25
+		icon = GFX_pig
+		prerequisite = { focus = HUL_20 }
+		prerequisite = { focus = HUL_21 }
+		cost = 6.5
+		relative_position_id = HUL_21
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 2
+				category = refinery
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_26
+		icon = GFX_pig
+		prerequisite = { focus = HUL_22 }
+		prerequisite = { focus = HUL_23 }
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = 0
+		y = 3
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 2
+				category = clothing_kits
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_27
+		icon = GFX_generic_guitar
+		prerequisite = { focus = HUL_24 }
+		cost = 6.5
+		relative_position_id = HUL_24
+		x = 0
+		y = 1
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = civics_child_labour_4 }
+				}
+				add_ideas = civics_child_labour_4
+			}
+			else = {
+				add_political_power = 75
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_28
+		icon = GFX_generic_resource_chemicals_1
+		prerequisite = { focus = HUL_25 }
+		cost = 6.5
+		relative_position_id = HUL_25
+		x = 0
+		y = 1
+		completion_reward = {
+			capital_scope = { 
+				add_resource = {
+					type = chemicals
+					amount = 6
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_29
+		icon = GFX_HUL_banditry
+		prerequisite = { focus = HUL_26 }
+		cost = 6.5
+		relative_position_id = HUL_26
+		x = 0
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_imperialists_beware
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_30
+		icon = GFX_generic_sewing_machine
+		prerequisite = { focus = HUL_27 }
+		cost = 6.5
+		relative_position_id = HUL_27
+		x = -1
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			417 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			382 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_31
+		icon = GFX_generic_books
+		prerequisite = { focus = HUL_27 }
+		prerequisite = { focus = HUL_28 }
+		cost = 6.5
+		relative_position_id = HUL_20
+		x = 0
+		y = 3
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_32
+		icon = GFX_pig
+		prerequisite = { focus = HUL_21 }
+		available = {
+			has_completed_focus = HUL_66
+			BRK = { 
+				exists = yes 
+				is_neighbor_of = HUL 
+				has_government = community	
+				is_in_faction = no
+				has_opinion = {
+				    target = HUL
+				    value > 50
+				}
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_21
+		x = 0
+		y = 3
+		completion_reward = {
+			add_to_faction = BRK
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_33
+		icon = GFX_generic_drill_machine
+		prerequisite = { focus = HUL_1 focus = HUL_17 }
+		cost = 6.5
+		relative_position_id = HUL_17
+		x = -5
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				    instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_34
+		icon = GFX_generic_construction
+		prerequisite = { focus = HUL_33 }
+		cost = 6.5
+		relative_position_id = HUL_33
+		x = -1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_35
+		icon = GFX_generic_gears
+		prerequisite = { focus = HUL_33 }
+		cost = 6.5
+		relative_position_id = HUL_33
+		x = 1
+		y = 1
+		completion_reward = {
+			capital_scope = { 
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = alloys
+					amount = 2
+				}
+				add_resource = {
+					type = electronics
+					amount = 2
+				}
+			}	
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_36
+		icon = GFX_generic_construction_2
+		prerequisite = { focus = HUL_34 }
+		cost = 6.5
+		relative_position_id = HUL_34
+		x = -1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_37
+		icon = GFX_generic_mushroom_soup
+		prerequisite = { focus = HUL_34 focus = HUL_35 }
+		cost = 6.5
+		relative_position_id = HUL_33
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = export_focus
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+			}
+			417 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			382 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_38
+		icon = GFX_generic_planks
+		prerequisite = { focus = HUL_35 }
+		cost = 6.5
+		relative_position_id = HUL_35
+		x = 1
+		y = 1
+		completion_reward = {
+			add_timed_idea = {
+				idea = HUL_finger_doodle
+				days = 180
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_39
+		icon = GFX_generic_junk_scrap
+		prerequisite = { focus = HUL_36 }
+		cost = 6.5
+		relative_position_id = HUL_36
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_fixing_the_scraps
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_39A
+		icon = GFX_generic_gears
+		prerequisite = { focus = HUL_39 }
+		cost = 6.5
+		relative_position_id = HUL_39
+		x = -1
+		y = 1
+		completion_reward = {
+			every_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+				add_resource = {
+					type = components
+					amount = 2
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_39B
+		icon = GFX_generic_gun_parts
+		prerequisite = { focus = HUL_39 }
+		cost = 6.5
+		relative_position_id = HUL_39
+		x = -3
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_fixing_the_scraps
+				add_idea = HUL_fixing_the_scraps_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_40
+		icon = GFX_generic_tunnel_clearing
+		prerequisite = { focus = HUL_37 }
+		cost = 6.5
+		relative_position_id = HUL_37
+		x = 0
+		y = 1
+		completion_reward = {
+			add_timed_idea = {
+				idea = HUL_reconstruction_efforts
+				days = 400
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_41
+		icon = GFX_RED_collectivization
+		prerequisite = { focus = HUL_38 }
+		cost = 6.5
+		relative_position_id = HUL_38
+		x = 0
+		y = 2
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = construction
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_41A
+		icon = GFX_generic_tools
+		prerequisite = { focus = HUL_41 }
+		cost = 6.5
+		relative_position_id = HUL_41
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = smithing
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_41B
+		icon = GFX_generic_technician_focus
+		prerequisite = { focus = HUL_41 }
+		cost = 6.5
+		relative_position_id = HUL_41
+		x = 3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = tooling
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_42
+		icon = GFX_HUL_power
+		prerequisite = { focus = HUL_40 }
+		cost = 6.5
+		relative_position_id = HUL_40
+		x = 0
+		y = 2
+		completion_reward = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			417 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			382 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_ideas = HUL_scrap_carts
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_43
+		icon = GFX_generic_motor
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = 0
+		y = 2
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_salvaging
+				category = rail_engine
+				category = rail_armor
+				category = rail_armament
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_44
+		icon = GFX_pig
+		prerequisite = { focus = HUL_43 }
+		cost = 6.5
+		relative_position_id = HUL_43
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = recycling
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_45
+		icon = GFX_generic_wielding
+		prerequisite = { focus = HUL_43 }
+		cost = 6.5
+		relative_position_id = HUL_43
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 2
+				category = construction
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_46
+		icon = GFX_pig
+		prerequisite = { focus = HUL_44 }
+		cost = 6.5
+		relative_position_id = HUL_44
+		x = 0
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_communal_coops
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_47
+		icon = GFX_pig
+		prerequisite = { focus = HUL_45 }
+		cost = 6.5
+		relative_position_id = HUL_45
+		x = 0
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_resource_salvaging
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_48
+		icon = GFX_generic_drill_machine
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = 5
+		y = 1
+		completion_reward = {
+			add_timed_idea = {
+				idea = HUL_mil_factory_idea
+				days = 180
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_49
+		icon = GFX_generic_MRE
+		prerequisite = { focus = HUL_48 }
+		cost = 6.5
+		relative_position_id = HUL_48
+		x = -2
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				ahead_reduction = 1
+				category = support_tech
+			}
+			add_equipment_to_stockpile = {
+		        type = support_equipment 
+		        amount = 15
+		    }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_50
+		icon = GFX_generic_medium_arms_3
+		prerequisite = { focus = HUL_48 }
+		cost = 6.5
+		relative_position_id = HUL_48
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 25
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_51
+		icon = GFX_HUL_maxim
+		prerequisite = { focus = HUL_48 }
+		cost = 6.5
+		relative_position_id = HUL_48
+		x = 2
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = gatling_support_tech
+			}
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_1
+				amount = 15
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_52
+		icon = GFX_generic_strike
+		prerequisite = { focus = HUL_49 }
+		prerequisite = { focus = HUL_50 }
+		prerequisite = { focus = HUL_51 }
+		cost = 6.5
+		relative_position_id = HUL_48
+		x = 0
+		y = 2
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 3
+				uses = 1
+				ahead_reduction = 1
+				technology = tech_explosive_equipment_2 
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_52A
+		icon = GFX_HUL_maxim
+		prerequisite = { focus = HUL_52 }
+		mutually_exclusive = { focus = HUL_52B }
+		mutually_exclusive = { focus = HUL_52C }
+		cost = 6.5
+		relative_position_id = HUL_52
+		x = -2
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = gatling_equipment_2   
+				amount = 30
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_52B
+		icon = GFX_pig
+		prerequisite = { focus = HUL_52 }
+		mutually_exclusive = { focus = HUL_52A }
+		mutually_exclusive = { focus = HUL_52C }
+		cost = 6.5
+		relative_position_id = HUL_52
+		x = 0
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = explosive_equipment_2  
+				amount = 30
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_52C
+		icon = GFX_MDR_mole_bonus_4
+		prerequisite = { focus = HUL_52 }
+		mutually_exclusive = { focus = HUL_52B }
+		mutually_exclusive = { focus = HUL_52A }
+		cost = 6.5
+		relative_position_id = HUL_52
+		x = 2
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_4    
+				amount = 30
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_53
+		icon = GFX_workstation_3
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = -2
+		y = 1
+		completion_reward = {
+			382 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_54
+		icon = GFX_workstation
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = -4
+		y = 1
+		completion_reward = {
+			417 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_55
+		icon = GFX_pig
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = -7
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_motorized_militias_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_56
+		icon = GFX_generic_generator
+		prerequisite = { focus = HUL_55 }
+		cost = 6.5
+		relative_position_id = HUL_55
+		x = -1
+		y = 1
+		completion_reward = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_57
+		icon = GFX_pig
+		prerequisite = { focus = HUL_55 }
+		cost = 6.5
+		relative_position_id = HUL_55
+		x = 1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_motorized_militias_1
+				add_idea = HUL_motorized_militias_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_57A
+		icon = GFX_AVT_revolutionary_brigade
+		prerequisite = { focus = HUL_56 }
+		prerequisite = { focus = HUL_57 }
+		cost = 6.5
+		relative_position_id = HUL_55
+		x = 0
+		y = 3
+		completion_reward = {
+			division_template = {
+				name = "Assault Brigades"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					rail_cart = { x = 0 y = 0 }
+					rail_cart = { x = 1 y = 0 }
+					rail_cart = { x = 2 y = 0 }
+					rail_cart = { x = 3 y = 0 }
+					rail_cart = { x = 4 y = 0 }
+				}
+				support = {
+					logistics_company  = { x = 0 y = 1 }    
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Assault Brigade\" division_template = \"Assault Brigades\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			## Make Commander and unlock advisor
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_58
+		icon = GFX_RCH_draisines
+		prerequisite = { focus = HUL_54 focus = HUL_53 }
+		cost = 6.5
+		relative_position_id = HUL_54
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = rail_car
+				bonus = 0.5
+				uses = 2
+				category = rail_cart
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_59
+		icon = GFX_pig
+		prerequisite = { focus = HUL_58 }
+		cost = 6.5
+		relative_position_id = HUL_58
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = rail_car
+				bonus = 0.5
+				uses = 2
+				category = rail_car
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_60
+		icon = GFX_HUL_machineguns
+		prerequisite = { focus = HUL_59 }
+		prerequisite = { focus = HUL_57 focus = HUL_56 }
+		cost = 8.6
+		relative_position_id = HUL_59
+		x = -2
+		y = 1
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = unlock_rail_cart_tech
+					}
+				}
+				custom_effect_tooltip = unlock_schematic_cart
+				hidden_effect = { set_country_flag = unlock_rail_cart_tech }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_61
+		icon = GFX_generic_respirator
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = 7
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_62
+		icon = GFX_generic_lathe_machine
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = 3
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = punch_pressing
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_63
+		icon = GFX_HUL_anarchism_flag
+		cost = 3
+		x = 47
+		y = 0
+		completion_reward = {
+			army_experience = 20
+			add_command_power = 50
+			hidden_effect = { 
+				HUL = { country_event = { id = nf_HUL.17 days = 50 random_days = 50  } } 
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_64
+		icon = GFX_HUL_nestor
+		prerequisite = { focus = HUL_63 }
+		available = {
+			OR = {
+				has_completed_focus = HUL_1
+				has_completed_focus = HUL_17
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_63
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_65
+		icon = GFX_HUL_makhnovshchina
+		prerequisite = { focus = HUL_64 }
+		mutually_exclusive = { focus = HUL_66 }
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = HUL_109
+				}
+				has_completed_focus = HUL_114
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_64
+		x = -4
+		y = 2
+		completion_reward = {
+			custom_effect_tooltip = HUL_mother_anarchy_loves_her_sons
+			create_faction = MY_FACTION_NAME
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_66
+		icon = GFX_HUL_anarchy
+		prerequisite = { focus = HUL_64 }
+		mutually_exclusive = { focus = HUL_65 }
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = HUL_109
+				}
+				has_completed_focus = HUL_114
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_64
+		x = 2
+		y = 2
+		completion_reward = {
+			custom_effect_tooltip = HUL_intrastational_anarchism
+			create_faction = MY_FACTION_NAME
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_67
+		icon = GFX_generic_bag_of_cement
+		prerequisite = { focus = HUL_63 }
+		cost = 4.4
+		relative_position_id = HUL_63
+		x = -8
+		y = 1
+		completion_reward = {
+			382 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			add_ideas = HUL_defense_against_aviators
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_68
+		icon = GFX_HUL_power
+		prerequisite = { focus = HUL_67 }
+		cost = 6.5
+		relative_position_id = HUL_67
+		x = -2
+		y = 1
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_69
+		icon = GFX_pig
+		prerequisite = { focus = HUL_67 }
+		cost = 6.5
+		relative_position_id = HUL_67
+		x = 0
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 10
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_70
+		icon = GFX_pig
+		prerequisite = { focus = HUL_67 }
+		cost = 6.5
+		relative_position_id = HUL_67
+		x = 2
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 5
+				producer = RUS
+			}
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = rail_engine
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_71
+		icon = GFX_HUL_anti_fascism
+		prerequisite = { focus = HUL_68 }
+		cost = 6.5
+		relative_position_id = HUL_68
+		x = 0
+		y = 1
+		completion_reward = {
+			add_war_support = 0.05
+			add_political_power = 100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_72
+		icon = GFX_pig
+		prerequisite = { focus = HUL_69 }
+		cost = 6.5
+		relative_position_id = HUL_69
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_73
+		icon = GFX_pig
+		prerequisite = { focus = HUL_70 }
+		cost = 6.5
+		relative_position_id = HUL_70
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = rail_armament
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_73A
+		icon = GFX_pig
+		prerequisite = { focus = HUL_73 }
+		cost = 6.5
+		relative_position_id = HUL_73
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.5
+				category = rail_armament
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_74
+		icon = GFX_generic_eletronics
+		prerequisite = { focus = HUL_72 }
+		prerequisite = { focus = HUL_71 focus = HUL_73 }
+		cost = 6.5
+		relative_position_id = HUL_72
+		x = 0
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = HUL_zakharova
+			capital_scope = {
+				add_resource = {
+					type = electronics
+					amount = 6
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_75
+		icon = GFX_pig
+		prerequisite = { focus = HUL_74 }
+		cost = 6.5
+		relative_position_id = HUL_74
+		x = 0
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = HUL_lesya_bilokur
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_76
+		icon = GFX_pig
+		prerequisite = { focus = HUL_65 }
+		cost = 6.5
+		relative_position_id = HUL_65
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_mother_anarchy_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_77
+		icon = GFX_pig
+		prerequisite = { focus = HUL_76 }
+		cost = 6.5
+		relative_position_id = HUL_76
+		x = 0
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 45
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 20
+				producer = RUS
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_78
+		icon = GFX_pig
+		prerequisite = { focus = HUL_77 }
+		cost = 6.5
+		relative_position_id = HUL_77
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_anarchism_maintain_the_torch
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_79
+		icon = GFX_pig
+		prerequisite = { focus = HUL_77 }
+		cost = 6.5
+		relative_position_id = HUL_77
+		x = -1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_mother_anarchy_1
+				add_idea = HUL_mother_anarchy_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_80
+		icon = GFX_pig
+		prerequisite = { focus = HUL_81 }
+		cost = 6.5
+		relative_position_id = HUL_81
+		x = 0
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_mother_anarchy_3
+				add_idea = HUL_mother_anarchy_4
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_81
+		icon = GFX_generic_bullet
+		prerequisite = { focus = HUL_79 }
+		cost = 6.5
+		relative_position_id = HUL_79
+		x = 1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_mother_anarchy_2
+				add_idea = HUL_mother_anarchy_3
+			}
+			army_experience = 25
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_82
+		icon = GFX_pig
+		prerequisite = { focus = HUL_79 }
+		cost = 6.5
+		relative_position_id = HUL_79
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_no_masters
+			army_experience = 25
+		}generic_gas_mask_2
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_83
+		icon = GFX_pig
+		prerequisite = { focus = HUL_82 }
+		cost = 6.5
+		relative_position_id = HUL_82
+		x = 0
+		y = 1
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_84
+		icon = GFX_pig
+		prerequisite = { focus = HUL_78 }
+		cost = 6.5
+		relative_position_id = HUL_78
+		x = 1
+		y = 1
+		completion_reward = {
+			add_war_support = 0.1
+			army_experience = 25
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_84A
+		icon = GFX_pig
+		prerequisite = { focus = HUL_84 }
+		cost = 6.5
+		relative_position_id = HUL_84
+		x = 0
+		y = 1
+		completion_reward = {
+			add_country_leader_trait = AVT_honorary_chair
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_84B
+		icon = GFX_pig
+		prerequisite = { focus = HUL_83 focus = HUL_80 }
+		cost = 6.5
+		relative_position_id = HUL_83
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_84C
+		icon = GFX_pig
+		prerequisite = { focus = HUL_80 focus = HUL_84A }
+		cost = 6.5
+		relative_position_id = HUL_80
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_85
+		icon = GFX_HUL_aviators_1
+		prerequisite = { focus = HUL_71 }
+		available = {
+			date > 2033.1.1
+			custom_trigger_tooltip = {
+			    tooltip = HUL_AVV_do_not_exist	
+			    hidden_trigger = { AVV = { exists = no } }
+			}
+		}
+		cost = 6.5
+		relative_position_id = HUL_71
+		x = 0
+		y = 3
+		completion_reward = {
+			## Aviators
+			add_ideas = HUL_aviator_repair_relationship_1
+			custom_effect_tooltip =  HUL_aviator_relation_missions
+
+			hidden_effect = { set_country_flag = HUL_aviator_missions }
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
+		id = HUL_86
+		icon = GFX_HUL_aviators_3
+		prerequisite = { focus = HUL_85 }
+		cost = 6.5
+		relative_position_id = HUL_85
+		mutually_exclusive = { focus = HUL_87 }
+		x = -1
+		y = 1
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_aviator_repair_relationship_1
+				add_idea = HUL_aviator_repair_relationship_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_87
+		icon = GFX_HUL_aviators_2
+		prerequisite = { focus = HUL_85 }
+		cost = 2
+		relative_position_id = HUL_85
+		available = {
+			has_manpower = 49
+			has_equipment = { infantry_equipment > 49 }
+		}
+		mutually_exclusive = { focus = HUL_86 }
+		x = 1
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = HUL_kill_AVV_tt
+			add_research_slot = 1
+			remove_ideas = HUL_aviator_repair_relationship_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_88
+		icon = GFX_pig
+		prerequisite = { focus = HUL_66 }
+		cost = 6.5
+		relative_position_id = HUL_66
+		x = 0
+		y = 2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_89
+		icon = GFX_pig
+		prerequisite = { focus = HUL_88 }
+		cost = 6.5
+		relative_position_id = HUL_88
+		x = -1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_90
+		icon = GFX_pig
+		prerequisite = { focus = HUL_88 }
+		cost = 6.5
+		relative_position_id = HUL_88
+		x = -2
+		y = 2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_91
+		icon = GFX_pig
+		prerequisite = { focus = HUL_88 }
+		cost = 6.5
+		relative_position_id = HUL_88
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_92
+		icon = GFX_pig
+		prerequisite = { focus = HUL_89 }
+		prerequisite = { focus = HUL_91 }
+		cost = 6.5
+		relative_position_id = HUL_89
+		x = 1
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_93
+		icon = GFX_pig
+		prerequisite = { focus = HUL_92 }
+		cost = 6.5
+		relative_position_id = HUL_92
+		x = -2
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_94
+		icon = GFX_pig
+		prerequisite = { focus = HUL_92 }
+		cost = 6.5
+		relative_position_id = HUL_92
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_95
+		icon = GFX_pig
+		prerequisite = { focus = HUL_92 }
+		cost = 6.5
+		relative_position_id = HUL_92
+		x = 2
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_95A
+		icon = GFX_pig
+		prerequisite = { focus = HUL_93 }
+		prerequisite = { focus = HUL_95 }
+		cost = 6.5
+		relative_position_id = HUL_93
+		x = 2
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_95B
+		icon = GFX_pig
+		prerequisite = { focus = HUL_95A }
+		cost = 6.5
+		relative_position_id = HUL_95A
+		x = 0
+		y = 1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_96
+		icon = GFX_pig
+		prerequisite = { focus = HUL_88 }
+		cost = 6.5
+		relative_position_id = HUL_88
+		x = 2
+		y = 2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_97
+		icon = GFX_pig
+		prerequisite = { focus = HUL_42 }
+		cost = 6.5
+		relative_position_id = HUL_42
+		x = -11
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_retrofit_guns_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_98
+		icon = GFX_pig
+		prerequisite = { focus = HUL_97 }
+		cost = 6.5
+		relative_position_id = HUL_97
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_panzer
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_99
+		icon = GFX_pig
+		prerequisite = { focus = HUL_97 }
+		cost = 6.5
+		relative_position_id = HUL_97
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = rail_cart
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_100
+		icon = GFX_pig
+		prerequisite = { focus = HUL_97 }
+		cost = 6.5
+		relative_position_id = HUL_97
+		x = 0
+		y = 2
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUL_retrofit_guns_1
+				add_idea = HUL_retrofit_guns_2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_101
+		icon = GFX_pig
+		prerequisite = { focus = HUL_98 }
+		mutually_exclusive = { focus = HUL_102 }
+		cost = 6.5
+		relative_position_id = HUL_98
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_scrap_cars
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_102
+		icon = GFX_pig
+		prerequisite = { focus = HUL_99 }
+		mutually_exclusive = { focus = HUL_101 }
+		cost = 6.5
+		relative_position_id = HUL_99
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_scrap_panzer
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_103
+		icon = GFX_HUL_skeleton
+		prerequisite = { focus = HUL_63 }
+		cost = 6.5
+		relative_position_id = HUL_63
+		x = -13
+		y = 1
+		completion_reward = {
+			army_experience = 25
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_104
+		icon = GFX_Generic_wanderer
+		prerequisite = { focus = HUL_103 }
+		cost = 6.5
+		relative_position_id = HUL_103
+		x = -1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 1
+				category = clothing_kits
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_105
+		icon = GFX_HUL_revolutionists
+		prerequisite = { focus = HUL_103 }
+		cost = 6.5
+		relative_position_id = HUL_103
+		available = {
+			AVT = { exists = yes }
+			NOT = { has_war_with = AVT }
+		}
+		x = 1
+		y = 1
+		completion_reward = {
+			add_opinion_modifier = {
+				target = AVT
+				modifier = support
+			}
+			AVT = {
+				add_opinion_modifier = {
+					target = HUL
+					modifier = support
+				}
+			}
+			add_ideas = HUL_back_o_beyond
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_105A
+		icon = GFX_HUL_fedor
+		prerequisite = { focus = HUL_105 }
+		cost = 6.5
+		relative_position_id = HUL_105
+		x = 0
+		y = 1
+		completion_reward = {
+			add_timed_idea = {
+				idea = HUL_army_experience
+				days = 180
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_105B
+		icon = GFX_HUL_soldier_2
+		prerequisite = { focus = HUL_105A }
+		cost = 6.5
+		relative_position_id = HUL_105A
+		mutually_exclusive = { focus = HUL_107 }
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_army_105B
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_106
+		icon = GFX_generic_gas_mask_2
+		prerequisite = { focus = HUL_104 focus = HUL_105 }
+		cost = 6.5
+		relative_position_id = HUL_104
+		x = 0
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 0.5
+				uses = 2
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_107
+		icon = GFX_HUL_soldier
+		prerequisite = { focus = HUL_106 }
+		cost = 6.5
+		relative_position_id = HUL_106
+		mutually_exclusive = { focus = HUL_105B }
+		x = 0
+		y = 2
+		completion_reward = {
+			add_ideas = HUL_army_107
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_108
+		icon = GFX_generic_tunnel_clearing
+		prerequisite = { focus = HUL_106 }
+		cost = 6.5
+		relative_position_id = HUL_106
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_boom_weapons
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_109
+		icon = GFX_pig
+		prerequisite = { focus = HUL_64 }
+		mutually_exclusive = { focus = HUL_66 }
+		cost = 6.5
+		relative_position_id = HUL_64
+		x = 7
+		y = 2
+		completion_reward = {
+			custom_effect_tooltip = HUL_redline_relationship_tt
+			custom_effect_tooltip = HUL_redline_dictatorial_cancel
+			if = {
+				limit = {
+					RED = {
+						has_relation_modifier = {
+    						target = HUL
+    						modifier = RED_betrayed_revolution
+						}
+					}
+				}
+				RED = {
+					remove_opinion_modifier = {
+					    target = HUL
+    					modifier = RED_betrayed_revolution
+					}
+				}
+			}
+			RED = { country_event = { id = nf_HUL.23 } }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_110
+		icon = GFX_pig
+		prerequisite = { focus = HUL_109 }
+		cost = 6.5
+		relative_position_id = HUL_109
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = 0
+		y = 1
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_ideas = HUL_redline_military_advisors
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_111
+		icon = GFX_pig
+		prerequisite = { focus = HUL_110 }
+		cost = 6.5
+		relative_position_id = HUL_110
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = -1
+		y = 1
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 35
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 15
+				producer = RUS
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_111A
+		icon = GFX_pig
+		prerequisite = { focus = HUL_111 }
+		cost = 6.5
+		relative_position_id = HUL_111
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = 0
+		y = 1
+		completion_reward = {
+			add_timed_idea = {
+				idea = HUL_anti_capitalist_solidarity
+				days = 300
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_112
+		icon = GFX_pig
+		prerequisite = { focus = HUL_110 }
+		cost = 6.5
+		relative_position_id = HUL_110
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = 1
+		y = 1
+		completion_reward = {
+			add_tech_bonus = {
+				name = entrench_kit_bonus
+				bonus = 0.5
+				uses = 1
+				category = entrench_kits
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_113
+		icon = GFX_pig
+		prerequisite = { focus = HUL_112 }
+		cost = 6.5
+		relative_position_id = HUL_112
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = 0
+		y = 1
+		completion_reward = {
+			add_timed_idea = { 
+				idea = HUL_red_liason
+				days = 150
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_114
+		icon = GFX_generic_webbing
+		prerequisite = { focus = HUL_113 }
+		cost = 6.5
+		relative_position_id = HUL_113
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = -1
+		y = 1
+		completion_reward = {
+			add_ideas = HUL_red_stalkers
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_115
+		icon = GFX_pig
+		prerequisite = { focus = HUL_113 }
+		cost = 6.5
+		relative_position_id = HUL_113
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = -2
+
+		
+		y = 2
+		completion_reward = {
+			add_to_tech_sharing_group = RED_faction_tech_group
+			add_ideas = HUL_RED_research_initiatives
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_116
+		icon = GFX_pig
+		prerequisite = { focus = HUL_113 }
+		cost = 6.5
+		relative_position_id = HUL_113
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = 0
+		y = 2
+		completion_reward = {
+			add_offsite_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_ideas = HUL_red_extraction_efficiency
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = HUL_117
+		icon = GFX_generic_soviet_armor
+		prerequisite = { focus = HUL_116 }
+		cost = 6.5
+		relative_position_id = HUL_116
+		available = {
+			RED = {
+				has_opinion = {
+    				target = HUL
+    				value > 4
+				}
+			}
+		}
+		x = -1
+		y = 1
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				    instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 3
+				category = stalker
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

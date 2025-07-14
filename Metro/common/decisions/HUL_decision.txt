@@ -1,0 +1,386 @@
+HUL_war_with_aviators_category = {
+
+	HUL_aviator_war_countdown = {
+		priority = 1001
+		icon =fight_AVV
+
+		activation = { has_country_flag = aviators_warning }
+
+		available = {
+			has_civil_war = yes
+		}
+
+		selectable_mission = no
+		is_good = yes
+		fire_only_once = yes
+
+		cancel_trigger = {
+			has_civil_war = yes
+			125 = { NOT = { is_owned_by = ROOT } }
+		}
+
+		days_mission_timeout = 45
+
+		highlight_states = {
+		    highlight_state_targets = {
+		        state = 125
+		    }
+		}
+
+		war_with_on_timeout = AVV
+
+		timeout_effect = {
+			clr_country_flag = aviators_warning
+			
+			hidden_effect = {
+				125 = { add_core_of = AVV }
+			}
+
+			AVV = {
+				transfer_state = 125
+				transfer_state = 39
+				hidden_effect = {
+					39 = { add_core_of = AVV }
+				}
+
+				hidden_effect = {
+
+					39 = {
+						set_victory_points = {
+							province = 3743
+							value = 5
+						}
+
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+						    instant_build = yes
+						}
+					}
+
+					AVV = {
+						add_offsite_building = { type = arms_factory level = 3 }
+						add_equipment_to_stockpile = {
+							type = conventional_infantry_equipment_2
+							amount = 40
+							producer = RUS
+						}
+					
+						add_equipment_to_stockpile = {
+							type = special_forces_equipment_spetsnaz
+							amount = 40
+							producer = RUS
+						}
+
+						create_operative_leader = {
+							name = AVV_baliff_name
+							GFX = "gfx/leaders/AVV/AVV_baliff.dds"
+							traits = { }
+							bypass_recruitment = yes
+							available_to_spy_master = yes
+							nationalities = { AVV }
+						}
+					
+						set_capital = { state = 39 }
+					
+						division_template = {
+							name = "Specops"
+							priority = 1
+							template_counter = 0
+							regiments = {
+								special_forces = { x = 0 y = 0 }
+								special_forces = { x = 0 y = 1 }
+								special_forces = { x = 0 y = 2 }
+							}
+						}
+					
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "division_template = \"Specops\" start_experience_factor = 0.76 start_equipment_factor = 1"
+								owner = AVV
+								count = 3
+							}
+						}
+
+						declare_war_on = {
+            			    target = HUL
+            			   	type = annex_everything
+            			}
+					}
+				}
+			}
+		}
+			
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+HUL_aviator_mission_category = {
+
+	HUL_aviator_mission_give_electronics = {
+		icon = electronics_AVV
+		available = {
+			has_resources_in_country = {
+			    resource = electronics
+			    amount > 14
+			    extracted = yes
+			}
+			NOT = { has_country_flag = HUL_already_assisting_aviators has_completed_focus = HUL_87 }
+		}
+
+		days_remove = 1
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_electronics_cost = 15 }
+			check_variable = {
+				temp_electronics_cost < resource@electronics
+			}
+		}
+		custom_cost_text = "electronics_decisions_cost_text"
+
+		modifier = {
+			country_resource_electronics = -15
+		}
+
+		complete_effect = {
+			set_country_flag = HUL_already_assisting_aviators
+		}
+
+		remove_effect = {
+			country_event = { id = nf_HUL_aviators.1 }
+		}
+
+		cancel_trigger = { has_completed_focus = HUL_87 }
+	}
+
+	HUL_aviator_mission_give_fuel = {
+		icon = energy_AVV
+		available = {
+			has_fuel > 1500
+			NOT = { has_country_flag = HUL_already_assisting_aviators has_completed_focus = HUL_87 }
+			count_triggers = {
+    			amount = 2
+				has_fuel > 1500
+				fuel_silo > 3
+				has_tech = tech_energy_2
+			}
+		}
+
+		days_remove = 1
+		cost = 0
+		fire_only_once = yes
+
+		modifier = {
+			base_fuel_gain_factor = -0.5
+		}
+
+		complete_effect = {
+			set_country_flag = HUL_already_assisting_aviators
+			if = {
+				limit = { has_fuel < 1501 }
+				set_fuel_ratio = 0
+				else_if = {
+					limit = { has_fuel > 1500 }
+					set_fuel_ratio = 0.1
+				}
+			}
+		}
+
+		remove_effect = {
+			country_event = { id = nf_HUL_aviators.2 }
+		}
+
+		cancel_trigger = { has_completed_focus = HUL_87 }
+	}
+
+	HUL_aviator_mission_give_research = {
+		icon = research_AVV
+		available = {
+			count_triggers = {
+    			amount = 2
+				num_researched_technologies > 20
+				amount_research_slots > 3
+				has_civic_education_higher_4 = yes
+
+			}
+			NOT = { has_country_flag = HUL_already_assisting_aviators has_completed_focus = HUL_87 }
+		}
+
+		days_remove = 1
+		cost = 0
+		fire_only_once = yes
+
+		modifier = {
+			research_speed_factor = -0.2
+		}
+
+		complete_effect = {
+			set_country_flag = HUL_already_assisting_aviators
+		}
+
+		remove_effect = {
+			country_event = { id = nf_HUL_aviators.3 }
+		}
+
+		cancel_trigger = { has_completed_focus = HUL_87 }
+	}
+
+	HUL_aviator_mission_final_research_mission = {
+		icon = final_research_AVV
+		visible = { has_country_flag = HUL_aviator_final_decision has_completed_focus = HUL_87 }
+
+		available = {
+			count_triggers = {
+    			amount = 2
+    			has_resources_in_country = {
+				    resource = oil 
+				    amount > 49
+				    extracted = yes
+				}
+				106 = { is_owned_by = ROOT }
+			}
+		}
+
+		days_remove = 14
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			clr_country_flag = HUL_already_assisting_aviators
+		}
+
+		remove_effect = {
+			country_event = { id = nf_HUL_aviators.5 }
+		}
+
+		cancel_trigger = { has_completed_focus = HUL_87 }
+	}
+
+	## Rewards ## 
+
+	HUL_aviator_assistance_give_guns = {
+		icon = AVV_give_guns
+		visible = { hidden_trigger = { has_country_flag = HUL_aviator_buy_guns } }
+
+		available = {
+			is_puppet = no
+		}
+
+		days_remove = 35
+		cost = 75
+		days_re_enable = 105
+
+		complete_effect = {
+			set_country_flag = HUL_assisted_by_aviators
+		}
+
+		modifier = {
+			research_speed_factor = -0.1
+		}
+
+		remove_effect = {
+			clr_country_flag = HUL_assisted_by_aviators
+			if = {
+				limit = {
+					has_country_flag = AVV_improve_guns_decision
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_2
+					amount = 25
+					producer = AVV
+				}
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = AVV_improve_guns_decision } }
+					add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 25
+					producer = AVV
+				}
+			}
+		}
+	}
+
+	HUL_aviator_assistance_gear = {
+		icon = AVV_gear
+		visible = { hidden_trigger = { has_country_flag = HUL_aviator_buy_guns } }
+
+		available = {
+			is_puppet = no
+		}
+
+		days_remove = 35
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = HUL_assisted_by_aviators
+		}
+
+		remove_effect = {
+			clr_country_flag = HUL_assisted_by_aviators
+			add_tech_bonus = {
+				name = hi
+				uses = 1
+				bonus = 1
+				ahead_reduction = 1
+				category = entrench_kits
+			}
+		}
+	}
+
+	HUL_aviator_assistance_industry = {
+		icon = AVV_gear
+		visible = { hidden_trigger = { has_country_flag = HUL_aviator_buy_guns } }
+
+		available = {
+			is_puppet = no
+		}
+
+		days_remove = 35
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = HUL_assisted_by_aviators
+		}
+
+		remove_effect = {
+			clr_country_flag = HUL_assisted_by_aviators
+			add_tech_bonus = {
+				name = hi
+				uses = 1
+				bonus = 1
+				ahead_reduction = 1
+				category = punch_pressing
+			}
+			add_offsite_building = { type = arms_factory level = 1 }
+		}
+	}
+
+	HUL_aviator_assistance_produce_combat_ai = {
+		icon = AVV_robot
+		visible = { has_country_flag = HUL_aviators_can_produce_combat_robots }
+
+		available = {
+			is_puppet = no
+		}
+
+		days_remove = 42
+		cost = 100
+		days_re_enable = 84
+
+		complete_effect = {
+			set_country_flag = HUL_assisted_by_aviators
+		}
+
+		remove_effect = {
+			clr_country_flag = HUL_assisted_by_aviators
+			add_manpower = 25
+		}
+	}
+}

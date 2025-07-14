@@ -119,8 +119,15 @@ NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_STATE_VP = {					-- resistance t
 		50,  50, -- 50 - ...
 	}
 
+NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_POP_LOW = -5.0
+NDefines.NResistance.RESISTANCE_TARGET_MODIFIER_POP_VERY_LOW = -10.0
 NDefines.NResistance.RESISTANCE_POP_LOW_CUTOFF = 5
 NDefines.NResistance.RESISTANCE_POP_VERY_LOW_CUTOFF = 1
+
+NDefines.NResistance.MIN_DAMAGE_TO_GARRISONS_MODIFIER = 0.01
+
+NDefines.NResistance.GARRISON_MANPOWER_LOST_BY_ATTACK = 0.005
+NDefines.NResistance.GARRISON_EQUIPMENT_LOST_BY_ATTACK = 0.05
 
 NDefines.NTechnology.BASE_RESEARCH_POINTS_SAVED = 60.0
 NDefines.NTechnology.MIN_RESEARCH_SPEED = 0.025
@@ -233,6 +240,7 @@ NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.5
 NDefines.NSupply.CAPITAL_SUPPLY_CIVILIAN_FACTORIES = 0.5
 
 NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.05		--- Base is 0.5, less provinces and more cluster VP equals less supply issues. Pending Change
+NDefines.NSupply.CAPITAL_ADDED_PENALTY_PER_PROVINCE = 1.1
 
 NDefines.NSupply.SUPPLY_FLOW_DROP_REDUCTION_AT_MAX_INFRA = 0.8
 NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 1
@@ -255,7 +263,7 @@ NDefines.NSupply.RAILWAY_BASE_FLOW = 20.0
 
 NDefines.NSupply.RAILWAY_FLOW_PER_LEVEL = 1
 
-NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.5	--- Base is 0.35. Attrition is bad in the Metro yo,
+NDefines.NSupply.SUPPLY_THRESHOLD_FOR_ARMY_ATTRITION = 0.334	--- Base is 0.35. Attrition is bad in the Metro yo,
 
 --La Resistance--
 NDefines.NOperatives.AGENCY_CREATION_DAYS = 30			

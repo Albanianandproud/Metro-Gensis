@@ -286,6 +286,386 @@ HNZ_production_shift = {
     }
 }
 
+HNZ_mandates = {
+	## Mandates are decisions which provide bonuses and buffs which cost `Mandate Funding`. Think Stellaris' Edicts, but cost boolet
+
+	HNZ_mandate_production_shift_increase = {
+
+		available = {
+		    has_war_support > 0.24
+			custom_trigger_tooltip = {
+				tooltip = HNZ_shift_in_effect
+				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = HNZ_shift_change_bullet_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = HNZ_shift_change_bullet_cost }
+				add_bullet_with_tooltip_effect = yes
+
+				set_country_flag = HNZ_shift_change 
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 45
+
+		modifier = {
+			production_factory_efficiency_gain_factor = 0.1
+			production_factory_start_efficiency_factor = 0.1
+			line_change_production_efficiency_factor = 0.1
+			party_popularity_stability_factor = -0.25
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = HNZ_shift_change_cost_bullet_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = HNZ_shift_change_bullet_cost
+					value = 250
+				}
+				clr_country_flag = HNZ_shift_change
+			}
+		}
+	}
+
+	HNZ_mandate_production_shift_decrease = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = HNZ_shift_in_effect
+				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = HNZ_shift_change_bullet_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = HNZ_shift_change_bullet_cost }
+				add_bullet_with_tooltip_effect = yes
+
+				set_country_flag = HNZ_shift_change 
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 45
+
+		modifier = {
+			production_factory_efficiency_gain_factor = -0.1
+			production_factory_start_efficiency_factor = -0.1
+			line_change_production_efficiency_factor = -0.1
+			stability_weekly =  0.005
+			political_power_factor = 0.1
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = HNZ_shift_change_cost_bullet_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = HNZ_shift_change_bullet_cost
+					value = 250
+				}
+				clr_country_flag = HNZ_shift_change
+			}
+		}
+	}
+
+	HNZ_mandate_trader_subsidies = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = HNZ_subsidies_in_effect
+				hidden_trigger = { NOT = { has_country_flag = HNZ_mandate_subsidies } }
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = HNZ_subsidies_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = HNZ_subsidies_cost }
+				add_bullet_with_tooltip_effect = yes
+
+				set_country_flag = HNZ_mandate_subsidies 
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 45
+
+		modifier = {
+			consumer_goods_expected_value = -0.15
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = HNZ_subsidies_cost_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = HNZ_trader_subsidies_cost
+					value = 250
+				}
+				clr_country_flag = HNZ_mandate_subsidies
+			}
+		}
+	}
+
+	HNZ_mandate_technician_subsidies = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = HNZ_subsidies_in_effect
+				hidden_trigger = { NOT = { has_country_flag = HNZ_mandate_subsidies } }
+			}
+			has_completed_focus = HNZ_reclamation_train_technicians
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = HNZ_subsidies_cost }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = HNZ_subsidies_cost }
+				add_bullet_with_tooltip_effect = yes
+
+				set_country_flag = HNZ_mandate_subsidies 
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 45
+
+		modifier = {
+			production_speed_arms_factory_factor = 0.15
+			military_spending_cost_factor = 0.25
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = HNZ_subsidies_cost_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = HNZ_trader_subsidies_cost
+					value = 250
+				}
+				clr_country_flag = HNZ_mandate_subsidies
+			}
+		}
+	}
+
+	HNZ_mandate_diplomatic_grands = {
+
+		available = {
+			has_completed_focus = HNZ_external_sphere
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 45
+		days_re_enable = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		remove_effect = {
+			## Add national spirit which improves hanza improve relations
+			add_ideas = HNZ_diplomatic_grants_idea
+			add_political_power = 150
+		}
+	}
+
+	HNZ_mandate_mobilization = {
+
+		available = {
+			has_completed_focus = HNZ_armed_forces_4
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 45
+		days_re_enable = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		remove_effect = {
+			## Add national spirit which improves hanza mobilization
+			add_ideas = HNZ_mandated_mobilization_idea
+		}
+	}
+
+	HNZ_mandate_mobilization_2 = {
+
+		visible = { has_idea = HNZ_mandated_mobilization_idea }
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 60
+		days_re_enable = 180
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		modifier = {
+			training_time_army_factor = -0.1
+			attrition = 0.2
+			experience_gain_army = 0.25
+		}
+	}
+
+	HNZ_mandate_placate_station_autonomy = {
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 150
+		days_re_enable = 150
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		remove_effect = {
+			## something coool here IDFK
+			add_political_power = 100
+		}
+	}
+
+	HNZ_mandate_tax_rebates = {
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 75
+		days_re_enable = 150
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		modifier = {
+			production_speed_buildings_factor = -0.1
+			economy_cost_factor = 0.2
+			consumer_goods_expected_value = -0.15
+		}
+	}
+
+	HNZ_encourage_developments = {
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 30
+		days_re_enable = 0
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		remove_effect = {		## Make it affected by HNZ centralize lines i.e. if centralize southern lines allows those states be placed with modifiers
+			random_owned_state = {
+				limit = { 
+					NOT = { 
+						has_state_category = pastoral 
+					}
+				}
+		    	add_state_modifier = {
+    				modifier = {
+       					local_resources = 0.1
+						local_building_slots = 2
+						state_production_speed_industrial_complex_factor = 0.1
+						state_production_speed_arms_factory_factor = 0.1
+    				}
+				}
+			}
+		}
+	}
+}
+
 HNZ_scavenging_decisions = {
 	
 	scavenge_for_tooling = {

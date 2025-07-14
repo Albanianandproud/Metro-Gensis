@@ -1,0 +1,434 @@
+add_namespace = nf_HUL
+
+## Trade with Anarchists ## 
+country_event = { 
+    id = nf_HUL.1
+    title = nf_HUL.1.t
+    desc = nf_HUL.1.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.1.a
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 15
+			producer = RUS
+		}
+		add_opinion_modifier = {
+			target = HUL
+			modifier = RCH_trading_partners		## Not a bug modifier
+		}
+        ai_chance = {
+            base = 2.5
+        }
+	}
+}
+## Nestor Military Event
+country_event = { 
+    id = nf_HUL.2
+    title = nf_HUL.2.t
+    desc = nf_HUL.2.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.2.a
+		add_country_leader_trait = HUL_military_unifier
+        ai_chance = {
+            base = 2.5
+        }
+	}
+
+	option = {
+		name = nf_HUL.2.b
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 3
+			category = land_doctrine
+			name = oie
+		}
+        ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+## Relation with Revolutionists
+country_event = { 
+    id = nf_HUL.3
+    title = nf_HUL.3.t
+    desc = nf_HUL.3.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.3.a
+	}
+
+	option = {
+		name = nf_HUL.3.b
+        ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+## Drug Problems 1
+country_event = { 
+    id = nf_HUL.4
+    title = nf_HUL.4.t
+    desc = nf_HUL.4.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.4.a
+		add_political_power = 100
+	}
+
+	option = {
+		name = nf_HUL.4.b
+		add_timed_idea = {
+			idea = HUL_cold_turkey
+			days = 320
+		}
+        ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+## Drug Problems 2
+country_event = { 
+    id = nf_HUL.5
+    title = nf_HUL.5.t
+    desc = nf_HUL.5.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.5.a
+		remove_ideas = HUL_narcotics
+		add_stability = 0.05
+	}
+}
+
+country_event = { 
+    id = nf_HUL.6
+    title = nf_HUL.6.t
+    desc = nf_HUL.6.d
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.6.a
+		add_ideas = HUL_militia_front
+	}
+
+	option = {
+		name = nf_HUL.6.b
+		army_experience = 100
+        ai_chance = {
+            base = 2.5
+        }
+	}
+}
+
+## Stalker Disappearances
+country_event = { 
+    id = nf_HUL.17
+    title = nf_HUL.17.t
+    desc = nf_HUL.17.d
+    picture = "GFX_event (159)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.17.a
+		add_stability = -0.05
+		add_command_power = -50
+		hidden_effect = { 
+			HUL = { country_event = { id = nf_HUL.18 days = 25 random_days = 25  } } 
+		}
+		ai_chance = {
+    		base = 2.5
+		}
+	}
+}
+
+## Stalker Disappearances
+country_event = { 
+    id = nf_HUL.18
+    title = nf_HUL.18.t
+    desc = nf_HUL.18.d
+    picture = "GFX_event (166)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.18.a
+		add_stability = -0.05
+		add_command_power = -50
+		add_ideas = BRN_aviator_harassment
+		hidden_effect = { 
+			HUL = { country_event = { id = nf_HUL.19 days = 25 random_days = 25  } } 
+		}
+		ai_chance = {
+    		base = 2.5
+		}
+	}
+}
+
+## Aviators gonna hate 1
+country_event = { 
+    id = nf_HUL.19
+    title = nf_HUL.19.t
+    desc = nf_HUL.19.d
+    picture = "GFX_event (167)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.19.a
+		add_war_support = -0.05
+		add_stability = -0.05
+		hidden_effect = { 
+			HUL = { country_event = { id = nf_HUL.20 days = 25 random_days = 25  } } 
+		}
+		ai_chance = {
+    		base = 2.5
+		}
+	}
+}
+
+## Aviators Warning! 3
+country_event = { 
+    id = nf_HUL.20
+    title = nf_HUL.20.t
+    desc = nf_HUL.20.d
+    picture = "GFX_event (168)"
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = aviators_warning
+	}
+    option = {
+		name = nf_HUL.20.a
+		activate_mission = HUL_aviator_war_countdown
+		
+		ai_chance = {
+    		base = 2.5
+		}
+	}
+}
+
+## Aviators Killed
+country_event = { 
+    id = nf_HUL.21
+    title = nf_HUL.21.t
+    desc = nf_HUL.21.d
+    picture = "GFX_event (207)"
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			39 = { remove_core_of = AVV }
+		}
+	}
+
+    option = {
+		name = nf_HUL.21.a
+		add_political_power = 50
+		remove_ideas = BRN_aviator_harassment
+		HUL = { country_event = { id = nf_HUL.22 } }
+	}
+}
+
+country_event = { 
+    id = nf_HUL.22
+    title = nf_HUL.22.t
+    desc = nf_HUL.22.d
+    picture = "GFX_event (190)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.22.a
+		hidden_effect = { set_country_flag = fought_aviators }
+		custom_effect_tooltip = HUL_can_pick_leadership_path_tt
+	}
+}
+
+country_event = { 
+    id = nf_HUL.23
+    title = nf_HUL.23.t
+    desc = nf_HUL.23.d
+    picture = "GFX_event (190)"
+
+	is_triggered_only = yes
+
+    option = {
+		name = nf_HUL.23.a
+		if = {
+			limit = {
+				has_completed_focus = RED_2030
+			}
+			complete_national_focus = RED_anarchists
+		}
+	}
+}
+
+add_namespace = nf_HUL_aviators
+
+country_event = { 
+    id = nf_HUL_aviators.0
+    title = nf_HUL_aviators.0.t
+    picture = "GFX_event (129)"
+
+	is_triggered_only = yes
+
+	desc = {
+        text = nf_HUL_aviators.0.d.b
+        trigger = {
+            check_variable = {
+   				var = HUL_aviator_assistance_amount
+    			value = 3
+    			compare = equals
+			}
+        }
+    }
+    desc = {
+        text = nf_HUL_aviators.0.d.a
+    }
+
+    option = {
+		name = nf_HUL_aviators.0.a
+		custom_effect_tooltip = HUL_can_help_aviators_again
+		clr_country_flag = HUL_already_assisting_aviators
+		trigger = {
+			check_variable = {
+   				var = HUL_aviator_assistance_amount
+    			value = 3
+    			compare = less_than
+			}
+		}
+	}
+
+	option = {
+		name = nf_HUL_aviators.0.b
+		trigger = {
+			check_variable = {
+   				var = HUL_aviator_assistance_amount
+    			value = 3
+    			compare = equals
+			}
+		}
+		custom_effect_tooltip = HUL_AVV_improved_guns
+		hidden_effect = { set_country_flag = AVV_improve_guns_decision }
+		HUL = { country_event = { id = nf_HUL_aviators.4 days = 40 random_days = 40  } } 
+	}
+}
+
+country_event = { 
+    id = nf_HUL_aviators.1
+    title = nf_HUL_aviators.1.t
+    desc = nf_HUL_aviators.1.d
+    picture = "GFX_event (182)"
+
+	is_triggered_only = yes
+
+	trigger = { NOT = { has_completed_focus = HUL_87 } }
+
+    option = {
+		name = nf_HUL_aviators.1.a
+		set_country_flag = HUL_aviator_buy_guns
+		custom_effect_tooltip = HUL_aviator_can_purchase_firearms
+		HUL = { country_event = { id = nf_HUL_aviators.0 days = 40  } } 
+		add_to_variable = { var = HUL_aviator_assistance_amount amount = 1 }
+		custom_effect_tooltip = HUL_aviator_cooldown
+	}
+}
+
+country_event = { 
+    id = nf_HUL_aviators.2
+    title = nf_HUL_aviators.2.t
+    desc = nf_HUL_aviators.2.d
+    picture = "GFX_event (156)"
+
+	is_triggered_only = yes
+
+	trigger = { NOT = { has_completed_focus = HUL_87 } }
+
+    option = {
+		name = nf_HUL_aviators.2.a
+		custom_effect_tooltip = unlock_schematic_tech_refinery_4
+		hidden_effect = { set_country_flag = unlock_industry_refinery_4_tech }
+		HUL = { country_event = { id = nf_HUL_aviators.0 days = 40 random_days = 40  } } 
+		add_to_variable = { var = HUL_aviator_assistance_amount amount = 1 }
+		custom_effect_tooltip = HUL_aviator_cooldown
+	}
+}
+
+country_event = { 
+    id = nf_HUL_aviators.3
+    title = nf_HUL_aviators.3.t
+    desc = nf_HUL_aviators.3.d
+    picture = "GFX_event (121)"
+
+	is_triggered_only = yes
+
+	trigger = { NOT = { has_completed_focus = HUL_87 } }
+
+    option = {
+		name = nf_HUL_aviators.3.a
+		custom_effect_tooltip = civic_unlock_tier_6
+		set_country_flag = civic_unlock_tier_6
+		HUL = { country_event = { id = nf_HUL_aviators.0 days = 40 random_days = 40  } } 
+		add_to_variable = { var = HUL_aviator_assistance_amount amount = 1 }
+		custom_effect_tooltip = HUL_aviator_cooldown
+	}
+}
+
+country_event = { 
+    id = nf_HUL_aviators.4
+    title = nf_HUL_aviators.4.t
+    desc = nf_HUL_aviators.4.d
+    picture = "GFX_event (182)"
+
+	is_triggered_only = yes
+
+	trigger = { NOT = { has_completed_focus = HUL_87 } }
+
+    option = {
+		name = nf_HUL_aviators.4.a
+		# unlock new and final decision to unlock robot
+		set_country_flag = HUL_aviator_final_decision
+		custom_effect_tooltip = HUL_aviator_final_decision_tooltip
+	}
+}
+
+country_event = { 
+    id = nf_HUL_aviators.5
+    title = nf_HUL_aviators.5.t
+    desc = nf_HUL_aviators.5.d
+    picture = "GFX_event (182)"
+
+	is_triggered_only = yes
+
+	trigger = { NOT = { has_completed_focus = HUL_87 } }
+
+    option = {
+		name = nf_HUL_aviators.5.a
+		set_country_flag = HUL_aviators_can_produce_combat_robots
+		custom_effect_tooltip = HUL_aviators_can_produce_combat_robots_tt
+	}
+}

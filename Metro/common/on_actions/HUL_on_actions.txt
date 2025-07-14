@@ -1,0 +1,26 @@
+on_actions = {
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					has_war_with = FROM
+					FROM.FROM = {
+						is_owned_by = FROM
+						NOT = { has_state_flag = has_fallen }
+					}
+				}
+				if = { ## Biblioteka Im. Lenina
+					limit = { FROM.FROM = { state = 39 } }
+					if = {
+						limit = {
+							ROOT = {
+								NOT = { original_tag = AVV }
+							}
+						}
+						country_event = { id = nf_HUL.21 random_days = 14 }
+					}
+				}
+			}
+		}
+	}
+}

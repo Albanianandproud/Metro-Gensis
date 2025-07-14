@@ -1089,6 +1089,11 @@ scavenging_expeditions = {
 				}
 				scav_failureChance = { #Loss
 					country_event = scavenge_mission.2
+					modifier = {
+            			factor = 5
+						original_tag = HUL
+           				NOT = { has_country_flag = fought_aviators }
+        			}
 				}
 			}
 		}
@@ -1179,139 +1184,172 @@ scavenging_expeditions = {
 		}
     }
 
+	debug_hide_debug_decisions = {
+		visible = { is_debug = yes NOT = { has_country_flag = debug_hide_decisions } }
+		cost = 0
+		complete_effect = {
+			set_country_flag = debug_hide_decisions
+		}
+	}
+
 	execute_scavenge_mission_debug = {
 		icon = electronics
-
 		cost = 0 
-
-		visible = { is_debug = yes }
-
+		visible = { is_debug = yes NOT = { has_country_flag = debug_hide_decisions } }
 		fixed_random_seed = no
 		fire_only_once = no
-
 		complete_effect = { set_country_flag = scavenging_underway }
-
 		days_remove = 1
 		days_re_enable = 0
-
 		remove_effect = {
 			scoped_sound_effect = "bullet_sound"
 			clr_country_flag = scavenging_underway
 			country_event = scavenge_mission.1
 		}
-
 		ai_will_do = {
 			factor = 0
 		}
 	}
-}
 
-hunt_for_D6 = {
-	execute_scavenge_D6_search = {
-		icon = GFX_D6_search
-		visible = {
-			106 = { is_owned_by = RUI }
-			has_global_flag = D6_activate
-		}
-		available = {
-			has_global_flag = D6_activate
-			106 = { is_owned_by = RUI }
-
-			custom_trigger_tooltip = {
-				tooltip = D6_meet_required_threshold
-				NOT = {
-					check_variable = {
-						D6_discovery_threshold > 9
-					}
-				}
-			}
-		}
-
-		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 30 }
-			check_variable = {
-				bullet > temp_bullet_cost
-			}
-		}
-
-		custom_cost_text = "bullet_decisions_cost_text"
-		fixed_random_seed = no
-		fire_only_once = no
+	debug_add_all_the_resource = {
+		visible = { is_debug = yes NOT = { has_country_flag = debug_hide_decisions } }
+		cost = 0
 		complete_effect = {
-			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -30 }
-				add_bullet_with_tooltip_effect = yes
-			}
-			add_manpower = -5
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = -5
-			}
-		}
-		days_remove = 21
-		days_re_enable = 0
-		remove_effect = {
-			random_list = {
-				D6_success_chance = {	## Gives Event to get +1 lead
-					country_event = nf_D6_discovery.2
-					modifier = {
-						factor = 1.2
-						has_country_flag = D6_priority_country_flag		## Lets certain nations like PLS or SPT get an edge in the search
-					}
-					modifier = {
-						factor = 1.1
-						check_variable = {
-							var = D6_discovery_threshold
-							value = 2
-							compare = greater_than_or_equals
-						}
-					}
-					modifier = {
-						factor = 1.1
-						check_variable = {
-							var = D6_discovery_threshold
-							value = 4
-							compare = greater_than_or_equals
-						}
-					}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 10
 				}
-				D6_failure_chance = { 
-					country_event = nf_D6_discovery.3
+				add_resource = {
+					type = electronics
+					amount = 10
 				}
-				D6_breakthrough_chance = {		## Automatically gives +1 lead
-					country_event = nf_D6_discovery.4
-					modifier = {
-						factor = 1.5
-						has_country_flag = D6_breakthrough_country_flag
-					}
+				add_resource = {
+					type = components
+					amount = 10
 				}
-			}
-		}
-		ai_will_do = {
-			factor = 1.5
-			modifier = {
-				factor = 0.05
-				is_major = no
-			}
-			modifier = {
-				factor = 0.05
-				has_manpower < 19
-			}
-			modifier = {
-				factor = 0.01
-				has_country_flag = is_skaven_nation
-				has_country_flag = is_bandit_nation
-			}
-			modifier = {
-				factor = 2.5
-				original_tag = RCH
-				original_tag = RED
-				original_tag = HNZ
-				original_tag = SPT
-				original_tag = PLS
+				add_resource = {
+					type = chemicals
+					amount = 10
+				}
+				add_resource = {
+					type = alloys
+					amount = 10
+				}
+				add_resource = {
+					type = oil
+					amount = 10
+				}
 			}
 		}
 	}
+}
+	hunt_for_D6 = {
+		execute_scavenge_D6_search = {
+			icon = GFX_D6_search
+			visible = {
+				106 = { is_owned_by = RUI }
+				has_global_flag = D6_activate
+			}
+			available = {
+				has_global_flag = D6_activate
+				106 = { is_owned_by = RUI }
+
+				custom_trigger_tooltip = {
+					tooltip = D6_meet_required_threshold
+					NOT = {
+						check_variable = {
+							D6_discovery_threshold > 9
+						}
+					}
+				}
+			}
+
+			custom_cost_trigger = {
+				set_temp_variable = { temp_bullet_cost = 30 }
+				check_variable = {
+					bullet > temp_bullet_cost
+				}
+			}
+
+			custom_cost_text = "bullet_decisions_cost_text"
+			fixed_random_seed = no
+			fire_only_once = no
+			complete_effect = {
+				hidden_effect = { 
+					set_temp_variable = { bullet_to_gain = -30 }
+					add_bullet_with_tooltip_effect = yes
+				}
+				add_manpower = -5
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -5
+				}
+			}
+			days_remove = 21
+			days_re_enable = 0
+			remove_effect = {
+				random_list = {
+					D6_success_chance = {	## Gives Event to get +1 lead
+						country_event = nf_D6_discovery.2
+						modifier = {
+							factor = 1.2
+							has_country_flag = D6_priority_country_flag		## Lets certain nations like PLS or SPT get an edge in the search
+						}
+						modifier = {
+							factor = 1.1
+							check_variable = {
+								var = D6_discovery_threshold
+								value = 2
+								compare = greater_than_or_equals
+							}
+						}
+						modifier = {
+							factor = 1.1
+							check_variable = {
+								var = D6_discovery_threshold
+								value = 4
+								compare = greater_than_or_equals
+							}
+						}
+					}
+					D6_failure_chance = { 
+						country_event = nf_D6_discovery.3
+					}
+					D6_breakthrough_chance = {		## Automatically gives +1 lead
+						country_event = nf_D6_discovery.4
+						modifier = {
+							factor = 1.5
+							has_country_flag = D6_breakthrough_country_flag
+						}
+					}
+				}
+			}
+			ai_will_do = {
+				factor = 1.5
+				modifier = {
+					factor = 0.05
+					is_major = no
+				}
+				modifier = {
+					factor = 0.05
+					has_manpower < 19
+				}
+				modifier = {
+					factor = 0.01
+					has_country_flag = is_skaven_nation
+					has_country_flag = is_bandit_nation
+				}
+				modifier = {
+					factor = 2.5
+					original_tag = RCH
+					original_tag = RED
+					original_tag = HNZ
+					original_tag = SPT
+					original_tag = PLS
+				}
+			}
+		}
 
 	execute_scavenge_METRO_2_search = {
 		icon = GFX_D6_explore_2

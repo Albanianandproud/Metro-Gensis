@@ -13,18 +13,20 @@ scripted_gui = {
 			check_core_button_click = {
 				ROOT = {
 					every_state = { clr_state_flag = core_cost_checked }
-					set_variable = { 
-						cost_to_core = PREV.state_population 
-					}
+
+					set_variable = { cost_to_core_population = PREV.state_population }
+					divide_temp_variable = { cost_to_core_population = 10 }
+					set_variable = { cost_to_core = cost_to_core_population }
+
 					set_variable = { cost_to_core_civs = 0 }
 					set_variable = { cost_to_core_arms = 0 }
 
 					add_to_variable = { cost_to_core_civs = PREV.@industrial_complex }
 					add_to_variable = { cost_to_core_arms = PREV.@arms_factory }
 
-					multiply_variable = { cost_to_core_civs = 5 }
-					multiply_variable = { cost_to_core_arms = 7 }
-					multiply_variable = { cost_to_core_infrastructure = 3 }
+					multiply_variable = { cost_to_core_civs = 2 }
+					multiply_variable = { cost_to_core_arms = 2.5 }
+					multiply_variable = { cost_to_core_infrastructure = 2 }
 					
 					add_to_variable = { cost_to_core = cost_to_core_civs }
 					add_to_variable = { cost_to_core = cost_to_core_arms }
