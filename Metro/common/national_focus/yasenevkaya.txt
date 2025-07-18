@@ -1,0 +1,816 @@
+focus_tree = {
+	id = nf_yasenevskaya
+	
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = YAS
+		}
+	}
+
+	default = no
+	continuous_focus_position = { x = 4400 y = 820 }
+
+	shared_focus = satellite_military
+	shared_focus = satellite_defend_the_bulwark
+	shared_focus = satellite_economy
+	shared_focus = satellite_our_path
+
+	focus = {
+		id = YAS_intro
+		icon = GFX_pig
+		cost = 6.5
+		x = 25
+		y = 0
+
+		completion_reward = {
+			country_event = nf_YAS.1
+			add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 800
+		}
+	}
+
+	focus = {
+		id = YAS_medical_investments
+		icon = GFX_generic_bandages
+		x = -6
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_intro
+		}
+
+		relative_position_id = YAS_intro
+
+		completion_reward = {
+			add_stability = 0.05
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				category = health
+            		}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_a_new_medicine
+		icon = GFX_syringe
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = {
+			focus = YAS_medical_investments
+		}
+
+		relative_position_id = YAS_medical_investments
+
+		available = {
+			date > 2030.01.01
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = health
+            		}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_return_to_novoyasenevskaya_and_bittcevsky_park
+		icon = GFX_station_entrance
+		x = 0
+		y = 1
+		cost = 20
+
+		prerequisite = {
+			focus = YAS_a_new_medicine
+		}
+
+		relative_position_id = YAS_a_new_medicine
+
+		completion_reward = {
+			YAS = {
+				transfer_state = 235
+				transfer_state = 327
+			}
+			235 = { add_manpower = 50 }
+			327 = { add_manpower = 50 }
+			hidden_effect = {
+				RUI = {
+					remove_state_core = 235
+					remove_state_core = 327
+				}
+			}
+			remove_ideas = YAS_plague_legacy
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_reestablish_trade_with_the_antiquarians
+		icon = GFX_scrap_metal_2
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_return_to_novoyasenevskaya_and_bittcevsky_park
+		}
+		available = {
+			ATQ = { exists = yes }
+		}
+
+		relative_position_id = YAS_return_to_novoyasenevskaya_and_bittcevsky_park
+
+		completion_reward = {
+			add_opinion_modifier = {
+				target = ATQ
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = ATQ
+				modifier = VDN_trade
+			}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 1
+				}
+			}
+			ATQ = {
+				252 = {
+					add_resource = {
+						type = scrap
+						amount = 1
+					}
+				}
+			}
+			295 = { add_manpower = 25 }
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_increase_defence
+		icon = GFX_generic_defences
+		x = -2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_intro
+		}
+
+		relative_position_id = YAS_intro
+
+		completion_reward = {
+			add_ideas = YAS_improved_defence
+			102 = {
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 4883
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 4884
+				}
+				add_building_construction = {
+					type = bunker2
+					level = 1
+					instant_build = yes
+					province = 4885
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_alert_reservists
+		icon = GFX_HNZ_conscription_reforms
+		x = 0
+		y = 1
+
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_increase_defence
+		}
+
+		relative_position_id = YAS_increase_defence
+
+		available = { has_war_support > 0.7 }
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = standing_force }
+				}
+				add_ideas = standing_force
+			}
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.334
+				uses = 2
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = YAS_war_on_crime
+		icon = GFX_vdn_soldier
+		x = 0
+		y = 1
+
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_alert_reservists
+		}
+
+		relative_position_id = YAS_alert_reservists
+
+		available = {
+			has_war_support > 0.7
+			has_army_manpower = { size > 149 }
+			is_neighbor_of = MOB
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = MOB
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = YAS_punishment
+		icon = GFX_RCH_trubnaya_core
+		x = -1
+		y = 1
+
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_war_on_crime
+		}
+
+		relative_position_id = YAS_war_on_crime
+
+		mutually_exclusive = {
+			focus = YAS_rehabilitation
+		}
+
+		available = {
+			owns_state = 379
+			has_war = no
+		}
+
+		completion_reward = {
+			379 = {
+				add_manpower = -100
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 236 }
+				}
+				236 = {
+					add_manpower = -100
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 279 }
+				}
+				279 = {
+					add_manpower = -100
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 284 }
+				}
+				284 = {
+					add_manpower = -100
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 287 }
+				}
+				287 = {
+					add_manpower = -100
+					add_core_of = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = YAS_rehabilitation
+		icon = GFX_HNZ_independent_jurisdiction
+		x = 1
+		y = 1
+
+		cost = 10
+
+		prerequisite = {
+			focus = YAS_war_on_crime
+		}
+
+		relative_position_id = YAS_war_on_crime
+
+		mutually_exclusive = {
+			focus = YAS_punishment
+		}
+
+		available = {
+			owns_state = 379
+			has_war = no
+		}
+
+		completion_reward = {
+			379 = {
+				add_manpower = -50
+            			set_compliance = 55
+            			set_resistance = 0
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 236 }
+				}
+				236 = {
+					add_manpower = -50
+            				set_compliance = 55
+            				set_resistance = 0
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 279 }
+				}
+				279 = {
+					add_manpower = -50
+            				set_compliance = 55
+            				set_resistance = 0
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 284 }
+				}
+				284 = {
+					add_manpower = -50
+            				set_compliance = 55
+            				set_resistance = 0
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { owns_state = 287 }
+				}
+				287 = {
+					add_manpower = -50
+            				set_compliance = 55
+            				set_resistance = 0
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	focus = {
+		id = YAS_hanza_trade
+		icon = GFX_generic_support_hanza
+		x = 2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_intro
+		}
+		available = {
+			HNZ = { exists = yes }
+			OR = {
+				is_neighbor_of = HNZ
+				is_neighbor_of = OKT
+			}
+		}
+
+		relative_position_id = YAS_intro
+
+		completion_reward = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = HNZ
+				modifier = VDN_trade
+			}
+			capital_scope = {
+				add_resource = {
+					type = electronics
+					amount = 1
+				}
+			}
+			HNZ = {
+				396 = {
+					add_resource = {
+						type = electronics
+						amount = 1
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_depot
+		icon = GFX_generic_door
+		x = 6
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_intro
+		}
+		available = {
+			OR = {	
+				62 = { is_owned_by = YAS }
+				62 = { is_owned_by = RUI }
+			}
+			date > 2033.01.01
+		}
+		relative_position_id = YAS_intro
+		completion_reward = {
+			YAS = {
+				transfer_state = 62
+				add_state_core = 62
+			}
+			62 = {
+				add_extra_state_shared_building_slots = 4
+				add_resource = {
+					type = scrap
+					amount = 3
+				}
+				add_resource = {
+					type = components
+					amount = 3
+				}
+				add_resource = {
+					type = alloys
+					amount = 3
+				}
+			}
+			hidden_effect = {
+				RUI = {
+					remove_state_core = 62
+				}
+			}	
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_MSU
+		icon = GFX_RED_crush_the_msu
+		x = 4
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_intro
+		}
+		available = { date > 2033.01.01 }
+		relative_position_id = YAS_intro
+		completion_reward = {
+			add_opinion_modifier = {
+				target = MSU
+				modifier = VDN_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = MSU
+				modifier = VDN_trade
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_resource = {
+					type = chemicals
+					amount = 1
+				}
+			}
+			MSU = {
+				301 = {
+					add_extra_state_shared_building_slots = 2
+					add_resource = {
+						type = chemicals
+						amount = 1
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	focus = {
+		id = YAS_intergrate_industries
+		icon = GFX_SPT_generic_gear_repair
+		x = 0
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = satellite_assist_the_rangers
+		}
+		available = {
+			SPT = {
+				exists = yes
+			}
+		}
+		relative_position_id = satellite_assist_the_rangers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_spartan_intergration
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			SPT = {
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YAS_assistance_against_MOB
+		icon = GFX_SPT_generic_soldier_3
+		x = 2
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = satellite_assist_the_rangers
+		}
+		available = {
+			has_war = yes
+		}
+		relative_position_id = satellite_assist_the_rangers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetsnaz
+				amount = 20
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 20
+				producer = RUS
+			}
+		}
+	}
+
+	focus = {
+		id = YAS_ranger_initialisation
+		icon = GFX_SPT_generic_gear
+		x = -1
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = satellite_assist_the_rangers
+		}
+		available = {
+			SPT = { exists = yes }
+		}
+		relative_position_id = satellite_assist_the_rangers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_popularity = {
+				ideology = council
+				popularity = 1
+			}
+			army_experience = 35
+			set_country_flag = allow_spartan_recruitment_laws
+			custom_effect_tooltip = ARB_path_of_ranger
+			add_ideas = SPT_ranger_recruitment
+		}
+	}
+
+	focus = {
+		id = YAS_ranger_spec_ops
+		icon = GFX_SPT_generic_soldier_4
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_ranger_initialisation
+		}
+		available = {
+			SPT = { exists = yes }
+		}
+		relative_position_id = YAS_ranger_initialisation
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			set_technology = {
+				special_forces_spartan_equipment_tech = 1
+			}
+		}
+	}
+
+	focus = {
+		id = YAS_equal_amongst_peers
+		icon = GFX_SPT_generic_logo
+		x = 0
+		y = 2
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_bastion_of_humanity
+			focus = YAS_ranger_spec_ops
+		}
+
+		available = {
+			MOB = {
+				exists = no
+			}
+		}
+		relative_position_id = YAS_ranger_initialisation
+
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_SPT_spec_ops_cap
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = YAS_allow_orderly_recruitment
+		icon = GFX_SPT_generic_ranger
+		x = -1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_equal_amongst_peers
+		}
+		relative_position_id = YAS_equal_amongst_peers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = SPT_ranger_recruitment_station_auxiliary
+			add_manpower = 20
+		}
+	}
+
+	focus = {
+		id = YAS_stalker_intergration
+		icon = GFX_SPT_generic_soldier_5
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_equal_amongst_peers
+		}
+		relative_position_id = YAS_equal_amongst_peers
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			army_experience = 15
+			add_ideas = ARB_SPT_stalker_integration
+		}
+	}
+
+	focus = {
+		id = YAS_bastion_of_humanity
+		icon = GFX_SPT_generic_artyom
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_ranger_initialisation
+		}
+		available = {
+			SPT = { exists = yes }
+		}
+		relative_position_id = YAS_ranger_initialisation
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_ideas = ARB_SPT_bastion_of_humanity
+		}
+	}
+
+	focus = {
+		id = YAS_draw_from_the_commoners
+		icon = GFX_SPT_miller_2
+		x = 1
+		y = 1
+		cost = 6.5
+
+		prerequisite = {
+			focus = YAS_bastion_of_humanity
+		}
+		available = {
+			SPT = { exists = yes }
+		}
+		relative_position_id = YAS_bastion_of_humanity
+		ai_will_do = {
+			factor = 3
+		}
+
+		completion_reward = {
+			add_manpower = 50
+		}
+	}
+}
