@@ -73,6 +73,12 @@ NDefines.NProduction.MAX_CIV_FACTORIES_PER_LINE = 10
 NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
 NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 10
 NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_GAIN = 0.5
+
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_VARIANT_CHANGE_FACTOR = 75		-- Base factor for changing production variants in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_PARENT_CHANGE_FACTOR = 45		-- Base factor for changing production parent<->children in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_FAMILY_CHANGE_FACTOR = 55		-- Base factor for changing production with same family in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_ARCHETYPE_CHANGE_FACTOR = 30 	-- Base factor for changing production with same archetype in %.
 
 
 NDefines.NProduction.RAILWAY_GUN_MAX_MIL_FACTORIES_PER_LINE = 10

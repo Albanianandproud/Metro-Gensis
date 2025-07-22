@@ -384,3 +384,135 @@ HUL_aviator_mission_category = {
 		}
 	}
 }
+
+HUL_newpaper_category = {
+
+	HUL_newspaper_spread_mischief = {
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 7
+		fire_only_once = yes
+
+		target_array = global.countries
+
+		target_trigger = {	
+			FROM = { 
+				NOT = { 
+					has_opinion = {
+						target = HUL
+						value > 10
+					}
+					OR = {
+						is_subject = yes
+						exists = no
+						has_idea = civics_border_4
+
+						original_tag = RUI
+
+						has_country_flag = is_communist_nation
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
+						has_idea = metro_thump_in_the_night
+
+						has_government = community 
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_HUL.24
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = they_will_recieve_tt
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = {
+						idea = HUL_target_of_slander
+						days = 150
+					}
+				}
+			}
+		}
+	}
+
+	HUL_newspaper_spread_support = {
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 100 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		days_remove = 7
+		fire_only_once = yes
+
+		target_array = global.countries
+
+		target_trigger = {
+			FROM = { 
+				NOT = { 
+					has_opinion = {
+						target = HUL
+						value < 10
+					}
+					OR = {
+						is_subject = yes
+						exists = no
+						has_idea = civics_border_4
+
+						original_tag = RUI
+
+						has_country_flag = is_communist_nation
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
+						has_idea = metro_thump_in_the_night
+
+						has_government = oligarchy
+						has_government = dictatorial
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_HUL.25
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = they_will_recieve_tt
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = {
+						idea = HUL_target_of_praise
+						days = 150
+					}
+				}
+			}
+		}
+	}
+}
