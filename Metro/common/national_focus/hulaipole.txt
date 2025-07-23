@@ -235,7 +235,7 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			army_experience = 15
-			country_event = { id = nf_HUL.6 }
+			#country_event = { id = nf_HUL.6 }
 		}
 		ai_will_do = {
 			factor = 1
@@ -300,6 +300,10 @@ focus_tree = {
 		prerequisite = { focus = HUL_11 focus = HUL_8 }
 		cost = 6.5
 		relative_position_id = HUL_11
+		available = {
+			382 = { is_owned_by = ROOT }
+			417 = { is_owned_by = ROOT }
+		}
 		x = 1
 		y = 1
 		completion_reward = {
@@ -394,7 +398,7 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_ideas = HUL_commune_of_hope
-			country_event = { id = nf_HUL.3 }
+			#country_event = { id = nf_HUL.3 }
 		}
 		ai_will_do = {
 			factor = 1
@@ -2183,6 +2187,7 @@ focus_tree = {
 			    	target = BRK
 				}
 			}
+			add_ideas = HUL_interstational_unity
 		}
 		bypass = {
 			has_completed_focus = HUL_21
@@ -2193,7 +2198,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_89
-		icon = GFX_pig
+		icon = GFX_goal_generic_military_sphere
 		prerequisite = { focus = HUL_88 }
 		cost = 6.5
 		relative_position_id = HUL_88
@@ -2229,7 +2234,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_90
-		icon = GFX_pig
+		icon = GFX_goal_generic_forceful_treaty
 		prerequisite = { focus = HUL_88 }
 		cost = 6.5
 		relative_position_id = HUL_88
@@ -2242,6 +2247,14 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			417 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -2249,7 +2262,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_91
-		icon = GFX_pig
+		icon = GFX_goal_generic_military_sphere
 		prerequisite = { focus = HUL_88 }
 		cost = 6.5
 		relative_position_id = HUL_88
@@ -2285,7 +2298,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_92
-		icon = GFX_pig
+		icon = GFX_focus_generic_support_the_left_right
 		prerequisite = { focus = HUL_89 }
 		prerequisite = { focus = HUL_91 }
 		cost = 6.5
@@ -2293,6 +2306,8 @@ focus_tree = {
 		x = 1
 		y = 1
 		completion_reward = {
+			set_war_support = 1
+			add_ideas = HUL_army_of_the_free
 		}
 		ai_will_do = {
 			factor = 1
@@ -2300,13 +2315,14 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_93
-		icon = GFX_pig
+		icon = GFX_focus_generic_spur_communist_revolutions
 		prerequisite = { focus = HUL_92 }
 		cost = 6.5
 		relative_position_id = HUL_92
 		x = -2
 		y = 1
 		completion_reward = {
+			add_ideas = HUL_division_attack
 		}
 		ai_will_do = {
 			factor = 1
@@ -2314,13 +2330,14 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_94
-		icon = GFX_pig
+		icon = GFX_focus_generic_total_war
 		prerequisite = { focus = HUL_92 }
 		cost = 6.5
 		relative_position_id = HUL_92
 		x = 0
 		y = 1
 		completion_reward = {
+			add_ideas = HUL_division_recovery
 		}
 		ai_will_do = {
 			factor = 1
@@ -2328,13 +2345,44 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_95
-		icon = GFX_pig
+		icon = GFX_goal_generic_small_arms
 		prerequisite = { focus = HUL_92 }
 		cost = 6.5
 		relative_position_id = HUL_92
 		x = 2
 		y = 1
 		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = unlock_conventional_infantry_equipment_tech_7
+					}
+				}
+				custom_effect_tooltip = unlock_conventional_infantry_equipment_7
+				hidden_effect = { set_country_flag = unlock_conventional_infantry_equipment_tech_7 }
+			}
+			else_if = {
+				limit = {
+					has_tech = conventional_infantry_equipment_tech_7
+				}
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_4
+					amount = 50
+					producer = HUL
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = unlocked_rpk
+				}
+				add_tech_bonus = {
+					name = infantry_bonus
+					bonus = 0.5
+					uses = 1
+					ahead_reduction = 1
+					category = infantry_weapons
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -2342,7 +2390,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_95A
-		icon = GFX_pig
+		icon = GFX_goal_generic_demand_territory
 		prerequisite = { focus = HUL_93 }
 		prerequisite = { focus = HUL_95 }
 		cost = 6.5
@@ -2387,18 +2435,19 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_threat = 20
 			effect_tooltip = {
 				every_state = {
 					limit = {
 						is_core_of = HNZ
 					}
-					add_core_of = HUL
+					add_claim_by = ROOT
 				}
 				every_state = {
 					limit = {
 						is_core_of = RED
 					}
-					add_core_of = HUL
+					add_claim_by = ROOT
 				}
 			}
 			hidden_effect = {
@@ -2406,13 +2455,13 @@ focus_tree = {
 					limit = {
 						is_core_of = HNZ
 					}
-					add_core_of = HUL
+					add_claim_by = ROOT
 				}
 				every_state = {
 					limit = {
 						is_core_of = RED
 					}
-					add_core_of = HUL
+					add_claim_by = ROOT
 				}
 			}
 		}
@@ -2422,7 +2471,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_96
-		icon = GFX_pig
+		icon = GFX_goal_generic_forceful_treaty
 		prerequisite = { focus = HUL_88 }
 		cost = 6.5
 		relative_position_id = HUL_88
@@ -2434,6 +2483,14 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 1
 				category = land_doctrine
+			}
+			417 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 		ai_will_do = {
@@ -2697,11 +2754,18 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_109
-		icon = GFX_pig
+		icon = GFX_RED_generic_revolution_3
 		prerequisite = { focus = HUL_64 }
 		mutually_exclusive = { focus = HUL_66 }
 		cost = 6.5
 		relative_position_id = HUL_64
+		available = {
+			RED = { exists = yes NOT = { has_war_with = ROOT } }
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
+			}
+		}
 		x = 7
 		y = 2
 		completion_reward = {
@@ -2731,7 +2795,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_110
-		icon = GFX_pig
+		icon = GFX_RED_generic_food
 		prerequisite = { focus = HUL_109 }
 		cost = 6.5
 		relative_position_id = HUL_109
@@ -2741,6 +2805,10 @@ focus_tree = {
     				target = HUL
     				value > 4
 				}
+			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
 			}
 		}
 		x = 0
@@ -2760,7 +2828,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_111
-		icon = GFX_pig
+		icon = GFX_RED_army_conscript
 		prerequisite = { focus = HUL_110 }
 		cost = 6.5
 		relative_position_id = HUL_110
@@ -2770,6 +2838,10 @@ focus_tree = {
     				target = HUL
     				value > 4
 				}
+			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
 			}
 		}
 		x = -1
@@ -2792,7 +2864,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_111A
-		icon = GFX_pig
+		icon = GFX_RED_collectivization_of_tunnels
 		prerequisite = { focus = HUL_111 }
 		cost = 6.5
 		relative_position_id = HUL_111
@@ -2803,13 +2875,17 @@ focus_tree = {
     				value > 4
 				}
 			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
+			}
 		}
 		x = 0
 		y = 1
 		completion_reward = {
 			add_timed_idea = {
 				idea = HUL_anti_capitalist_solidarity
-				days = 300
+				days = 360
 			}
 		}
 		ai_will_do = {
@@ -2818,7 +2894,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_112
-		icon = GFX_pig
+		icon = GFX_RED_chekist
 		prerequisite = { focus = HUL_110 }
 		cost = 6.5
 		relative_position_id = HUL_110
@@ -2829,6 +2905,10 @@ focus_tree = {
     				value > 4
 				}
 			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
+			}
 		}
 		x = 1
 		y = 1
@@ -2836,7 +2916,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = entrench_kit_bonus
 				bonus = 0.5
-				uses = 1
+				uses = 2
 				category = entrench_kits
 			}
 		}
@@ -2846,7 +2926,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_113
-		icon = GFX_pig
+		icon = GFX_RED_interrogation
 		prerequisite = { focus = HUL_112 }
 		cost = 6.5
 		relative_position_id = HUL_112
@@ -2857,13 +2937,17 @@ focus_tree = {
     				value > 4
 				}
 			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
+			}
 		}
 		x = 0
 		y = 1
 		completion_reward = {
 			add_timed_idea = { 
 				idea = HUL_red_liason
-				days = 150
+				days = 180
 			}
 		}
 		ai_will_do = {
@@ -2876,14 +2960,7 @@ focus_tree = {
 		prerequisite = { focus = HUL_113 }
 		cost = 6.5
 		relative_position_id = HUL_113
-		available = {
-			RED = {
-				has_opinion = {
-    				target = HUL
-    				value > 4
-				}
-			}
-		}
+		available = {} # intentional
 		x = -1
 		y = 1
 		completion_reward = {
@@ -2895,7 +2972,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_115
-		icon = GFX_pig
+		icon = GFX_RED_research_slot
 		prerequisite = { focus = HUL_113 }
 		cost = 6.5
 		relative_position_id = HUL_113
@@ -2906,10 +2983,12 @@ focus_tree = {
     				value > 4
 				}
 			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
+			}
 		}
 		x = -2
-
-		
 		y = 2
 		completion_reward = {
 			add_to_tech_sharing_group = RED_faction_tech_group
@@ -2921,7 +3000,7 @@ focus_tree = {
 	}
 	focus = {
 		id = HUL_116
-		icon = GFX_pig
+		icon = GFX_RED_engineering_academy
 		prerequisite = { focus = HUL_113 }
 		cost = 6.5
 		relative_position_id = HUL_113
@@ -2931,6 +3010,10 @@ focus_tree = {
     				target = HUL
     				value > 4
 				}
+			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
 			}
 		}
 		x = 0
@@ -2958,6 +3041,10 @@ focus_tree = {
     				target = HUL
     				value > 4
 				}
+			}
+			NOT = {
+				has_completed_focus = HUL_66
+				has_completed_focus = HUL_65
 			}
 		}
 		x = -1
