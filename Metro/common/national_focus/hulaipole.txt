@@ -35,7 +35,7 @@ focus_tree = {
 			add_war_support = 0.1
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 50
 		}
 	}
 	focus = {
@@ -107,7 +107,7 @@ focus_tree = {
 			}
 
 			every_country = {
-				limit = { NOT = { has_country_flag = is_bandit_nation } }
+				limit = {  has_country_flag = is_bandit_nation }
 				add_opinion_modifier = {
 					target = HUL
 					modifier = trade_relations_2 
@@ -231,14 +231,24 @@ focus_tree = {
 		prerequisite = { focus = HUL_1 }
 		cost = 6.5
 		relative_position_id = HUL_1
+		available = {
+			382 = { is_owned_by = ROOT }
+		}
 		x = -7
 		y = 1
 		completion_reward = {
 			army_experience = 15
-			#country_event = { id = nf_HUL.6 }
+			382 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -258,7 +268,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -291,7 +301,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -325,7 +335,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -385,7 +395,7 @@ focus_tree = {
 			add_stability = 0.1
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 50
 		}
 	}
 	focus = {
@@ -688,7 +698,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -704,7 +714,7 @@ focus_tree = {
 			add_research_slot = 1
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 10
 		}
 	}
 	focus = {
@@ -754,7 +764,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -778,7 +788,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -831,7 +841,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -843,7 +853,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		completion_reward = {
-			add_ideas = export_focus
+			#add_ideas = export_focus
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
 			}
@@ -855,7 +865,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -869,11 +879,11 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 				idea = HUL_finger_doodle
-				days = 180
+				days = 400
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -888,7 +898,7 @@ focus_tree = {
 			add_ideas = HUL_fixing_the_scraps
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -913,7 +923,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -940,6 +950,9 @@ focus_tree = {
 		prerequisite = { focus = HUL_37 }
 		cost = 6.5
 		relative_position_id = HUL_37
+		available = {
+			has_war = no
+		}
 		x = 0
 		y = 1
 		completion_reward = {
@@ -947,9 +960,10 @@ focus_tree = {
 				idea = HUL_reconstruction_efforts
 				days = 400
 			}
+			custom_effect_tooltip = idea_removed_at_war_tt
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -1045,7 +1059,7 @@ focus_tree = {
 			add_ideas = HUL_scrap_carts
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -1153,11 +1167,18 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 				idea = HUL_mil_factory_idea
-				days = 180
+				days = 210
 			}
 		}
 		ai_will_do = {
 			factor = 1
+			modifier = {
+        		factor = 10
+        		OR = {
+					date > 2030.10.1
+					threat > 0.1
+				}
+    		}
 		}
 	}
 	focus = {
@@ -1338,7 +1359,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -1360,7 +1381,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -1673,7 +1694,7 @@ focus_tree = {
 			add_ideas = HUL_defense_against_aviators
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 35
 		}
 	}
 	focus = {
@@ -1857,7 +1878,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -2509,7 +2530,7 @@ focus_tree = {
 			add_ideas = HUL_retrofit_guns_1
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -2567,7 +2588,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -2615,7 +2636,7 @@ focus_tree = {
 			add_command_power = 50
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 20
 		}
 	}
 	focus = {
