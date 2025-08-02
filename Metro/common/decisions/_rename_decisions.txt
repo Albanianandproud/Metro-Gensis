@@ -1234,3 +1234,30 @@ generic_rename_decisions = {
 		ai_will_do = { base = 500 }
 	}
 }
+
+generic_rename_undesirables_decisions = {
+
+	generic_rename_timiryazevskaya = {
+		icon = eng_propaganda_campaigns
+
+		visible = { 
+			NOT = { original_tag = SAT } 
+			303 = { has_state_flag = has_been_denigrated }
+		}
+
+		available = {
+			303 = { is_owned_by = ROOT resistance < 25 }
+			OR = {
+				AND = {
+					303 = {  has_state_flag = has_been_denigrated }
+				}
+			}
+		}
+
+		complete_effect = {
+			303 = { set_state_name = STATE_303 }
+		}
+
+		ai_will_do = { base = 500 }
+	}
+}

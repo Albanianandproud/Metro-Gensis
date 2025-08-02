@@ -1,0 +1,54 @@
+scripted_gui = {
+	D6_open_button_scripted_gui = {
+		window_name = "D6_open_button_container"
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+
+		visible = {
+			ROOT = { 
+				NOT = {
+					has_country_flag = D6_GUI_disabled_flag
+				}
+			}
+			has_state_flag = D6_FLAG
+		}
+
+		effects = {
+			open_button_click = {
+				ROOT = {
+					set_country_flag = D6_show_gui
+				}
+			}
+			close_button_click = {
+				ROOT = {
+					clr_country_flag = D6_show_gui
+				}
+			}
+		}
+
+		triggers = {
+			open_button_visible = {
+				ROOT = {
+					NOT = { has_country_flag = D6_show_gui }
+				}
+			}
+			close_button_visible = {
+				ROOT = {
+					has_country_flag = D6_show_gui
+				}
+			}
+		}
+	}
+
+	D6_window_scripted_gui = {
+		window_name = "D6_window_container"
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+
+		visible = {
+			ROOT = {
+				has_country_flag = D6_show_gui
+			}
+		}
+	}
+}
