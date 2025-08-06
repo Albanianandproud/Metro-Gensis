@@ -19,8 +19,8 @@ ideas = {
 			modifier = {
 				stability_weekly = 0.002
 				party_popularity_stability_factor = 0.1
-				production_factory_efficiency_gain_factor = -0.1 
-				industrial_capacity_factory = -0.1
+				production_factory_efficiency_gain_factor = -0.2
+				industrial_capacity_factory = -0.2
 			}
 
 			cancel_if_invalid = no
@@ -46,8 +46,8 @@ ideas = {
 			modifier = {
 				stability_weekly = 0.001
 				party_popularity_stability_factor = 0.05
-				production_factory_efficiency_gain_factor = -0.05
-				industrial_capacity_factory = -0.05
+				production_factory_efficiency_gain_factor = -0.1
+				industrial_capacity_factory = -0.1
 			}
 
 			cancel_if_invalid = no
@@ -68,7 +68,6 @@ ideas = {
 
 			modifier = {
 				conscription_factor = -0.05
-				party_popularity_stability_factor = -0.05
 				production_factory_efficiency_gain_factor = 0.05
 			}
 
@@ -100,9 +99,9 @@ ideas = {
 				conscription_factor = -0.1
 				party_popularity_stability_factor = -0.1
 				stability_factor = -0.05
-				production_factory_max_efficiency_factor = 0.05
-				production_factory_efficiency_gain_factor = 0.05
-				production_factory_start_efficiency_factor = 0.05
+				production_factory_max_efficiency_factor = 0.075
+				production_factory_efficiency_gain_factor = 0.075
+				production_factory_start_efficiency_factor = 0.075
 			}
 
 			cancel_if_invalid = no
@@ -130,9 +129,9 @@ ideas = {
 				conscription_factor = -0.15
 				party_popularity_stability_factor = -0.15
 				stability_factor = -0.1
-				production_factory_max_efficiency_factor = 0.1
-				production_factory_efficiency_gain_factor = 0.1
-				production_factory_start_efficiency_factor = 0.1
+				production_factory_max_efficiency_factor = 0.15
+				production_factory_efficiency_gain_factor = 0.15
+				production_factory_start_efficiency_factor = 0.15
 			}
 
 			cancel_if_invalid = no
@@ -179,7 +178,6 @@ ideas = {
 			}
 		}
    	}
-
 	civics_child_labour = { 
 		law = yes
 		use_list_view = yes
@@ -200,9 +198,9 @@ ideas = {
 		
 			modifier = {
                 production_speed_buildings_factor = 0.1
-                production_factory_efficiency_gain_factor = 0.16
-                party_popularity_stability_factor = -0.1
-                war_support_factor = -0.1
+                production_factory_efficiency_gain_factor = 0.15
+                party_popularity_stability_factor = -0.15
+                war_support_factor = -0.15
 				custom_modifier_tooltip = civic_child_labour_disapproval
 				military_spending_cost_factor = -0.4
 			}
@@ -260,7 +258,7 @@ ideas = {
 		
 			modifier = {
                 production_factory_efficiency_gain_factor = 0.05
-                party_popularity_stability_factor = -0.05
+                party_popularity_stability_factor = -0.1
 				military_spending_cost_factor = -0.2
 			}
 
@@ -311,7 +309,8 @@ ideas = {
 	   
 		    modifier = {
 				party_popularity_stability_factor = 0.05
-			    political_power_gain = -0.1
+				political_power_factor = -0.1
+				consumer_goods_expected_value = 0.05
                 custom_modifier_tooltip = education_reform_cost_reduction_10
                 ## Reduce Education Timer
 			}
@@ -360,6 +359,7 @@ ideas = {
 		    removal_cost = -1
 
 			modifier = {
+				consumer_goods_expected_value = 0.05
 				offensive_war_stability_factor = 0.1
 			    political_power_gain = 0.1
                 custom_modifier_tooltip = education_reform_cost_reduction_10
@@ -380,7 +380,6 @@ ideas = {
 			}
 		}
    	}
-
 	civics_support = { 
 		law = yes
 		use_list_view = yes
@@ -543,7 +542,6 @@ ideas = {
    			}
    		}
    	}
-
 	civics_property = { 
 		law = yes
 		use_list_view = yes
@@ -748,6 +746,7 @@ ideas = {
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
+			visible = { NOT = { original_tag = HNZ } }
 			cost = 100
 			removal_cost = -1
 			modifier = {
@@ -773,6 +772,7 @@ ideas = {
 					has_cosmetic_tag = EUR_oligarch_DDR
 				}
 			}
+			visible = { NOT = { original_tag = HNZ } }
 			cost = 100
 			removal_cost = -1
 			modifier = {
@@ -791,13 +791,13 @@ ideas = {
    				factor = 2
    			}
    		}
-
 		civics_border_3 = { ## Passport Requirements
 			available = {
 				NOT = {
 					has_country_flag = is_savage_nation
 				}
 			}
+			visible = { NOT = { original_tag = HNZ } }
 			cost = 100
 			removal_cost = -1
 			modifier = {
@@ -816,7 +816,6 @@ ideas = {
    				factor = 2
    			}
    		}
-
 		civics_border_4 = { ## Isolationism
 			available = {
 				NOT = {
@@ -829,6 +828,7 @@ ideas = {
 				}
 				has_idea = closed_economy
 			}
+			visible = { NOT = { original_tag = HNZ } }
 			allowed_to_remove = {
 				NOT = {
 					tag = GWC
@@ -847,7 +847,6 @@ ideas = {
 					GWC = { exists = no }
 				}
 			}
-
 			cost = 100
 			removal_cost = -1
 		
@@ -865,6 +864,42 @@ ideas = {
    				factor = 2
    			}
    		}
+		civics_border_HNZ_1 = {			## Unfiltered Access
+			visible = { original_tag = HNZ }
+			available = { original_tag = HNZ }
+
+			cost = 100
+
+			allowed_to_remove = {
+				has_capitulated = yes
+			}
+
+			removal_cost = -1
+			modifier = {
+				civilian_intel_to_others = 0.5
+				army_intel_to_others = 0.5
+				enemy_operative_detection_chance = -15
+				intelligence_agency_defense = -0.15
+				foreign_subversive_activites = 0.15
+			}
+		}
+		civics_border_HNZ_2 = {			## Passport Requirements
+			visible = { original_tag = HNZ }
+			available = { original_tag = HNZ }
+
+			cost = 100
+
+			allowed_to_remove = {
+				has_capitulated = yes
+			}
+			
+			removal_cost = -1
+			modifier = {
+				bullet_income_factor_from_exports = 0.1
+				intelligence_agency_defense = 0.1
+				foreign_subversive_activites = -0.1
+			}
+		}
 	}
 	civics_education = { 
 		law = yes

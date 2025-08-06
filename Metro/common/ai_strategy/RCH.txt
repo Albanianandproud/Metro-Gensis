@@ -1,149 +1,58 @@
-RCH_default_unit_production = {
-	allowed = {
-		original_tag = RCH  
-	}
 
-	enable = { always = yes }
-	abort = { always = no }
-	ai_strategy = {
-		type = role_ratio
-		id = armor
-		value = 5
-	}
+RCH_default_unit_production = {
+	allowed = { original_tag = RCH }
+
+	enable = { NOT = { has_completed_focus = RCH_rail_armor } }
+	abort = { has_completed_focus = RCH_rail_armor }
+
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 55
+		value = 50
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -200
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -200
 	}
 	ai_strategy = {
 		type = role_ratio
 		id = marines
-		value = 5
+		value = -200
 	}
 }
-
-RED_fuck_bolsheviks = {
+RCH_late_unit_production = {
 	allowed = { original_tag = RCH }
-	enable = {
-		country_exists = RED
-	} 
-	abort = {
-		NOT = { country_exists = RED }
-	}
+
+	enable = { has_completed_focus = RCH_rail_armor }
+	abort = { always = no }
 
 	ai_strategy = {
-		type = antagonize
-		id = "RED"			
-		value = 75
+		type = role_ratio
+		id = infantry
+		value = 40
 	}
 	ai_strategy = {
-		type = contain
-		id = "RED"
-		value = 200
-	}	
-}
-
-RCH_kill_SAV = {
-	enable = {
-		focus_progress = {
-			focus = RCH_expansion
-			progress > 0.01
-		}
-		NOT = {
-			has_completed_focus = RCH_expansion
-		}
-		country_exists = SAV
+		type = role_ratio
+		id = motorized
+		value = 10
 	}
-
-	abort = {
-		OR = {
-			NOT = { country_exists = SAV }
-
-			AND = {
-				RCH = { has_war_with = SAV }
-			}
-		}
-	}
-
 	ai_strategy = {
-		type = conquer
-		id = "SAV"
-		value = 100
+		type = role_ratio
+		id = armor
+		value = 10
 	}
-
 	ai_strategy = {
-    	type = build_building
-    	id = infrastructure
-    	target = 426 
-    	value = 3
+		type = role_ratio
+		id = marines
+		value = -200
 	}
 }
-
-RCH_kill_ULI = {
-	enable = {
-		focus_progress = {
-			focus = RCH_expansion2
-			progress > 0.01
-		}
-		NOT = {
-			has_completed_focus = RCH_expansion2
-		}
-		country_exists = ULI
-	}
-
-	abort = {
-		OR = {
-			NOT = { country_exists = ULI }
-
-			AND = {
-				RCH = { has_war_with = ULI }
-			}
-		}
-	}
-
-	ai_strategy = {
-		type = conquer
-		id = "ULI"
-		value = 100
-	}
-
-	ai_strategy = {
-    	type = build_building
-    	id = infrastructure
-    	target = 428
-    	value = 3
-	}
-}
-
-RCH_kill_PLS = {
-	enable = {
-		focus_progress = {
-			focus = RCH_expansion_pls_annex
-			progress > 0.01
-		}
-		NOT = {
-			has_completed_focus = RCH_expansion_pls_annex
-		}
-		country_exists = PLS
-	}
-
-	abort = {
-		OR = {
-			NOT = { country_exists = PLS }
-
-			AND = {
-				RCH = { has_war_with = PLS }
-			}
-		}
-	}
-
-	ai_strategy = {
-		type = conquer
-		id = "PLS"
-		value = 100
-	}
-}
-
 RCH_focus_on_tanks = {
 	allowed = {
 		original_tag = RCH
@@ -159,5 +68,265 @@ RCH_focus_on_tanks = {
 		type = role_ratio
 		id = armor
 		value = 10
+	}
+}
+RCH_focus_on_armor_when_necessary_research = {
+	allowed = { original_tag = RCH }
+	enable = {
+		has_completed_focus = RCH_rail_armor
+		OR = {
+			num_of_military_factories > 19
+			has_completed_focus = RCH_kampfmachine
+		}
+	}
+	abort = { num_of_military_factories > 16 } 
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 10
+	}
+}
+RCH_hate_bolsheviks = {
+	allowed = { original_tag = RCH }
+	enable = {
+		RED = {
+			has_capitulated = no
+			is_puppet = no
+		}
+	} 
+	abort = {
+		RED = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet = yes
+			}
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "RED"			
+		value = 100
+	}
+	ai_strategy = {
+		type = contain
+		id = "RED"
+		value = 200
+	}	
+}
+RCH_REALLY_hate_mutants = {
+	enable = { always = yes }
+	abort = { always = no }
+
+	ai_strategy = {
+		type = antagonize
+		id = "GWC"			
+		value = 100
+	}
+	ai_strategy = {
+		type = contain
+		id = "GWC"
+		value = 200
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "SAT"			
+		value = 100
+	}
+	ai_strategy = {
+		type = contain
+		id = "SAT"
+		value = 200
+	}
+	ai_strategy = {
+		type = contain
+		id = "SCA"
+		value = 200
+	}
+	ai_strategy = {
+		type = contain
+		id = "SCA"
+		value = 200
+	}
+	ai_strategy = {
+		type = contain
+		id = "HMS"
+		value = 200
+	}
+	ai_strategy = {
+		type = contain
+		id = "HMS"
+		value = 200
+	}
+}
+RCH_all_belongs_to_the_reich = {
+	enable = { always = yes }
+	abort = {
+		RCH = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet = yes
+			}
+		}
+	}
+	reversed = yes
+
+	ai_strategy = {
+		type = conquer
+		id = "RCH"
+		value = 50
+	}
+	ai_strategy = {
+		type = consider_weak
+		id = "RCH"
+		value = 50
+	}
+}
+RCH_kill_SAV = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion
+			progress > 0.01
+		}
+		country_exists = SAV
+	}
+	abort = {
+		SAV = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet = yes
+			}
+		}
+	}
+	ai_strategy = {
+		type = conquer
+		id = "SAV"
+		value = 100
+	}
+	ai_strategy = {
+		type = consider_weak
+		id = "SAV"
+		value = 50
+	}
+	ai_strategy = {
+    	type = build_building
+    	id = infrastructure
+    	target = 426 
+    	value = 100
+	}
+}
+RCH_kill_ULI = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion2
+			progress > 0.01
+		}
+		country_exists = ULI
+	}
+	abort = {
+		ULI = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet = yes
+			}
+		}
+	}
+	ai_strategy = {
+		type = conquer
+		id = "ULI"
+		value = 100
+	}
+	ai_strategy = {
+		type = consider_weak
+		id = "ULI"
+		value = 50
+	}
+	ai_strategy = {
+    	type = build_building
+    	id = infrastructure
+    	target = 428
+    	value = 100
+	}
+}
+RCH_kill_PLS = {
+	enable = {
+		focus_progress = {
+			focus = RCH_expansion_pls_annex
+			progress > 0.01
+		}
+		country_exists = PLS
+	}
+	abort = {
+		PLS = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet = yes
+			}
+		}
+	}
+	ai_strategy = {
+		type = conquer
+		id = "PLS"
+		value = 100
+	}
+	ai_strategy = {
+		type = consider_weak
+		id = "PLS"
+		value = 50
+	}
+}
+RCH_focus_on_redline = {
+	allowed = { tag = RCH }
+	enable = {
+		OR = {
+			has_war_with = RED
+			is_justifying_wargoal_against = RED
+			has_wargoal_against = RED
+			RED = {
+				is_justifying_wargoal_against = RCH
+				has_wargoal_against = RCH
+			}
+		}
+	}
+	abort = {
+		OR = {
+			RCH = { has_capitulated = yes }
+			RCH = { exists = no }
+			RCH = { is_puppet = yes }
+			RED = { has_capitulated = yes }
+			RED = { exists = no }
+			RED = { is_puppet = yes }
+			surrender_progress > 0.5
+		}
+	}
+
+	ai_strategy = { type = area_priority	id = tagansko_krasnopresnenskaya 	value = 2000 }
+	ai_strategy = { type = invade			id = "RED"							value = 5000 }
+
+	ai_strategy = {
+		type = conquer
+		id = "RED"
+		value = 100
+	}
+
+	ai_strategy = {
+		type = antagonize
+		id = "RED"
+		value = 500
+	}
+
+	ai_strategy = {
+	    type = front_control
+	    area = tagansko_krasnopresnenskaya
+	    priority = 1
+	    ratio = 0.2
+	    ordertype = front
+	    execute_order = yes
+		execution_type = careful
 	}
 }

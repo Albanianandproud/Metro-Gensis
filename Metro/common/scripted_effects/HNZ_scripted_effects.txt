@@ -94,32 +94,83 @@ HNZ_mutant_purge_scripted_effect = {
 		hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 	}
 }
-HNZ_eco_laws_upgrade_scripted_effect = {
+
+
+HNZ_moscow_awakes_scripted_effect = {
+	HNZ = {
+		set_cosmetic_tag = HNZ_invisible_observers_tag
+		set_politics = { 
+			ruling_party = dictatorial
+			elections_allowed = no 
+		}
+	}
+	add_threat = 10
+	ROOT = { news_event = { id = global_event.68 } }
+
+	retire_ideology_leader = dictatorial 
+	add_country_leader_role = {
+		character = HNZ_invisible_observer
+		promote_leader = yes
+		country_leader = {
+			ideology = totalitarianism
+			expire = "2999.9.9"
+			traits = { HNZ_russia_government_remnants }
+		}
+	} 
+}
+
+HNZ_civil_war_scripted_effect = {
 	if = {
 		limit = {
-			has_idea = HNZ_slumbering_giant
+			NOT = { has_country_flag = HNZ_bypass_civil_war }
 		}
-		swap_ideas = {
-			remove_idea = HNZ_slumbering_giant
-			add_idea = HNZ_aloof_authority
+		release = SRL
+		add_civil_war_target = SRL
+		declare_war_on = {
+			target = SRL
+			type = civil_war
 		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HNZ_aloof_authority
+		transfer_units_fraction= {
+			target = SRL
+			size = 0.5
+			stockpile_ratio = 0.5
 		}
-		swap_ideas = {
-			remove_idea = HNZ_aloof_authority
-			add_idea = HNZ_peaceful_cooperation
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HNZ_peaceful_cooperation
-		}
-		swap_ideas = {
-			remove_idea = HNZ_peaceful_cooperation
-			add_idea = HNZ_subversive_hegemony
+		hidden_effect = {
+			SRL = {
+				division_template = {
+					name = "Caravan Levies"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars =  { x = 0 y = 0 }
+						irregulars =  { x = 1 y = 0 }
+						irregulars =  { x = 2 y = 0 }
+						irregulars =  { x = 3 y = 0 }
+						irregulars =  { x = 4 y = 0 }
+					}
+					support = {
+						logistics_company  = { x = 0 y = 1 }    
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1st Volunteer Militia\" division_template = \"Caravan Levies\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"2nd Volunteer Militia\" division_template = \"Caravan Levies\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"3rd Volunteer Militia\" division_template = \"Caravan Levies\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"4th Volunteer Militia\" division_template = \"Caravan Levies\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
 		}
 	}
 }

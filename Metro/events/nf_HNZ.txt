@@ -1637,45 +1637,29 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 	
-	option = {	## Central Metro Command Path
+	option = {	## Keep as Hanza
 		name = nf_HNZ.48.a
-		add_political_power = 100
+		add_stability = 0.1
+		custom_effect_tooltip = HNZ_steady_she_goes_branch_unlock_tt
+		hidden_effect = { set_country_flag = HNZ_steady_she_goes_branch_unlock }
 		ai_chance = {
 			factor = 10
 		}
 	}
 
-	option = {	## Invisible Observers
+	option = {	## Revive Anti-Communist Coalition
 		name = nf_HNZ.48.b
-		### Throw a Hidden Event which causes the Observers to pop up
-		custom_effect_tooltip = nf_HNZ.48.b.tt
-		hidden_effect = {
-			country_event = { 
-				id = nf_HNZ.64
-				days = 14
-				random_days = 14
+		add_war_support = 0.1
+		if = {
+			limit = {
+				RED = { has_added_tension_amount < 10 }
 			}
-			retire_ideology_leader = dictatorial 
-			add_country_leader_role = {
-				character = HNZ_invisible_observer
-				promote_leader = yes
-				country_leader = {
-					ideology = totalitarianism
-					expire = "2999.9.9"
-					traits = { HNZ_russia_government_remnants }
-				}
-			} 
+			add_threat = 0.1
 		}
+		custom_effect_tooltip = HNZ_anti_communist_coalition_branch_unlock_tt
+		hidden_effect = { set_country_flag = HNZ_anti_communist_coalition_branch_unlock }
 		ai_chance = {
-			factor = 5
-		}
-	}
-
-	option = {	## Normal Hanza Path
-		name = nf_HNZ.48.c
-		add_political_power = 100
-		ai_chance = {
-			factor = 25
+			factor = 10
 		}
 	}
 }
@@ -2620,6 +2604,96 @@ country_event = {	## Tulskaya Outbreak
 	}
 }
 
+country_event = {
+	id = nf_HNZ.75
+	title = nf_HNZ.75.t
+	desc = nf_HNZ.75.d
+	picture = "GFX_event (28)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_HNZ.75.a
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 10
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value > 50
+				}
+			}
+			modifier = {
+				factor = 2
+				ROOT = {
+					any_home_area_neighbor_country = {
+						original_tag = FROM
+					}
+				}
+			}
+		}
+		FROM = {
+			puppet = ROOT 
+		}
+		ROOT = { news_event = { id = global_event.73 } }
+	}
+	option = {
+		name = nf_HNZ.75.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 5
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				add = 5
+				any_other_country = {
+					is_major = yes
+					is_in_faction_with = ROOT
+				}
+			}
+		}
+
+		FROM = {
+			puppet = ROOT 
+		}
+		FROM = {
+			custom_effect_tooltip = generic_skip_one_line_tt
+			effect_tooltip = {
+				send_embargo = ROOT
+			}
+			country_event = {
+				id = nf_HNZ.76
+				hours = 3
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = nf_HNZ.76
+	title = nf_HNZ.76.t 
+	desc = nf_HNZ.76.d
+	picture = "GFX_event (28)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_HNZ.76.a 
+		send_embargo = FROM
+	}
+}
+
 country_event = {	## invisible observer 1
 	id = nf_HNZ.80
 	title = nf_HNZ.80.t
@@ -2668,6 +2742,125 @@ country_event = {	## invisible observer 1
 		ai_chance = {
 			factor = 10
 		}
+	}
+}
+
+country_event = {
+	id = nf_HNZ.85
+	title = nf_HNZ.85.t
+	desc = nf_HNZ.85.d
+	picture = "GFX_event (14)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.85.a
+		custom_effect_tooltip = nf_HNZ.85.a.tt
+		set_country_flag = HNZ_army_centralization_branch
+	}
+
+	option = {	## Merc
+		name = nf_HNZ.85.b
+		custom_effect_tooltip = nf_HNZ.85.b.tt
+		set_country_flag = HNZ_mercenary_army_branch
+	}
+}
+
+
+country_event = { ## Moscow Unleashed / NATO Alarm path
+	id = nf_HNZ.86
+	title = nf_HNZ.86.t
+	desc = nf_HNZ.86.d
+	picture = "GFX_event (14)"
+
+	trigger = {
+		HNZ_moscow_awakens_criteria = yes 
+	}
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.86.a
+		add_timed_idea = {
+			idea = HNZ_moscow_on_full_alert 
+			days = 45
+		}
+	}
+
+	option = {
+		name = nf_HNZ.86.b
+		add_war_support = -0.3
+	}
+}
+
+country_event = { ## Moscow Unleashed / NATO Alarm path
+	id = nf_HNZ.87
+	title = nf_HNZ.87.t
+	desc = nf_HNZ.87.d
+	picture = "GFX_event (14)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ.87.a
+		hidden_effect = {
+			country_event = { id = nf_HNZ.88 days = 7 }
+			add_political_power = -100
+		}
+	}
+
+	option = {
+		name = nf_HNZ.87.b
+		add_stability = -0.3
+	}
+}
+
+country_event = { ## Moscow Unleashed / NATO Alarm path
+	id = nf_HNZ.88
+	title = nf_HNZ.88.t
+	desc = nf_HNZ.88.d
+	picture = "GFX_event (14)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			HNZ_moscow_awakes_scripted_effect = yes
+			if = {
+				limit = {
+					HNZ_moscow_hanza_civil_war_criteria = yes
+				}
+				country_event = nf_HNZ.89
+			}
+		}
+	}
+
+	option = {
+		name = nf_HNZ.88.a
+		effect_tooltip = {
+			HNZ_moscow_awakes_scripted_effect = yes
+		}
+	}
+}
+
+country_event = { ## Civil War
+	id = nf_HNZ.89
+	title = nf_HNZ.89.t
+	desc = nf_HNZ.89.d
+	picture = "GFX_event (14)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		HNZ_civil_war_scripted_effect = yes 
+	}
+
+	option = {
+		name = nf_HNZ.89.a
+		effect_tooltip = { HNZ_civil_war_scripted_effect = yes }
 	}
 }
 
