@@ -293,6 +293,7 @@ HNZ_mandates = {
 
 		available = {
 		    has_war_support > 0.24
+			has_war = no 
 			custom_trigger_tooltip = {
 				tooltip = HNZ_shift_in_effect
 				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
@@ -305,6 +306,7 @@ HNZ_mandates = {
 				bullet > temp_bullet_cost
 			}
 		}
+
 		custom_cost_text = "bullet_decisions_cost_text"
 
 		complete_effect = {
@@ -316,8 +318,8 @@ HNZ_mandates = {
 			}
 		}
 
-		days_remove = 60
-		days_re_enable = 45
+		days_remove = 84
+		days_re_enable = 140
 
 		modifier = {
 			production_factory_efficiency_gain_factor = 0.1
@@ -341,6 +343,8 @@ HNZ_mandates = {
 	HNZ_mandate_production_shift_decrease = {
 
 		available = {
+			has_stability < 0.75
+			has_war = no 
 			custom_trigger_tooltip = {
 				tooltip = HNZ_shift_in_effect
 				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
@@ -364,8 +368,8 @@ HNZ_mandates = {
 			}
 		}
 
-		days_remove = 60
-		days_re_enable = 45
+		days_remove = 84
+		days_re_enable = 140
 
 		modifier = {
 			production_factory_efficiency_gain_factor = -0.1
@@ -390,6 +394,7 @@ HNZ_mandates = {
 	HNZ_mandate_trader_subsidies = {
 
 		available = {
+			has_war = no 
 			custom_trigger_tooltip = {
 				tooltip = HNZ_subsidies_in_effect
 				hidden_trigger = { NOT = { has_country_flag = HNZ_mandate_subsidies } }
@@ -397,7 +402,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = HNZ_subsidies_cost }
+			set_temp_variable = { temp_bullet_cost = HNZ_trader_subsidies_cost }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -406,18 +411,19 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = HNZ_subsidies_cost }
+				set_temp_variable = { bullet_to_gain = HNZ_trader_subsidies_cost }
 				add_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_mandate_subsidies 
 			}
 		}
 
-		days_remove = 60
-		days_re_enable = 45
+		days_remove = 84
+		days_re_enable = 140
 
 		modifier = {
 			consumer_goods_expected_value = -0.15
+			min_export = 0.1
 		}
 
 		remove_effect = {
@@ -443,7 +449,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = HNZ_subsidies_cost }
+			set_temp_variable = { temp_bullet_cost = HNZ_gunsmith_subsidies_cost }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -452,15 +458,15 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = HNZ_subsidies_cost }
+				set_temp_variable = { bullet_to_gain = HNZ_gunsmith_subsidies_cost }
 				add_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_mandate_subsidies 
 			}
 		}
 
-		days_remove = 60
-		days_re_enable = 45
+		days_remove = 84
+		days_re_enable = 140
 
 		modifier = {
 			production_speed_arms_factory_factor = 0.15
@@ -468,10 +474,10 @@ HNZ_mandates = {
 		}
 
 		remove_effect = {
-			custom_effect_tooltip = HNZ_subsidies_cost_tt
+			custom_effect_tooltip = HNZ_gunsmith_subsidies_cost_tt
 			hidden_effect = {
 				subtract_from_variable = {
-					var = HNZ_trader_subsidies_cost
+					var = HNZ_gunsmith_subsidies_cost
 					value = 250
 				}
 				clr_country_flag = HNZ_mandate_subsidies
@@ -486,7 +492,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -499,7 +505,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -518,7 +524,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -531,7 +537,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -547,7 +553,7 @@ HNZ_mandates = {
 		visible = { has_idea = HNZ_mandated_mobilization_idea }
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -560,7 +566,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -574,8 +580,12 @@ HNZ_mandates = {
 
 	HNZ_mandate_placate_station_autonomy = {
 
+		available = {
+			has_war = no
+		}
+
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -583,26 +593,40 @@ HNZ_mandates = {
 		custom_cost_text = "bullet_decisions_cost_text"
 
 		days_remove = 150
-		days_re_enable = 150
+		days_re_enable = 300
 		fire_only_once = yes
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
 
 		remove_effect = {
 			## something coool here IDFK
-			add_political_power = 100
+			add_political_power = 250
 		}
 	}
 
 	HNZ_mandate_tax_rebates = {
 
+		visible = {
+			NOT = {
+				has_idea = HNZ_economy_law_3
+				has_idea = HNZ_economy_law_2
+				has_idea = HNZ_economy_law_1
+			}
+		}
+		available = {
+			NOT = {
+				has_idea = HNZ_economy_law_3
+				has_idea = HNZ_economy_law_2
+				has_idea = HNZ_economy_law_1
+			}
+		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -614,7 +638,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -629,7 +653,7 @@ HNZ_mandates = {
 	HNZ_encourage_developments = {
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
+			set_temp_variable = { temp_bullet_cost = 15000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -641,7 +665,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
+				set_temp_variable = { bullet_to_gain = -15000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -1533,7 +1557,6 @@ HNZ_agendas = {
 		}
 	}
 }
-
 HNZ_expand_influence_category = {
 	HNZ_expand_influence = {
 		target_array = ROOT.neighbors
@@ -1565,7 +1588,6 @@ HNZ_expand_influence_category = {
 			HNZ = { NOT = { has_war_with = FROM } }
 			FROM = { 
 				is_subject = NO 
-				is_faction_leader = NO 
 				is_in_faction = NO
 			}
 			count_triggers = {
@@ -1585,7 +1607,7 @@ HNZ_expand_influence_category = {
 			}
 		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 750 }
+			set_temp_variable = { temp_bullet_cost = 1500 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -1593,11 +1615,11 @@ HNZ_expand_influence_category = {
 		custom_cost_text = "bullet_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -750 }
+				set_temp_variable = { bullet_to_gain = -1500 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
-		days_remove = 30
+		days_remove = 60
 		fire_only_once = yes
 		remove_effect = {
 			FROM = {
@@ -1645,7 +1667,7 @@ HNZ_annex_puppet_category = {
 			}
 		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1000 }
+			set_temp_variable = { temp_bullet_cost = 2000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -1653,24 +1675,72 @@ HNZ_annex_puppet_category = {
 		custom_cost_text = "bullet_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1000 }
+				set_temp_variable = { bullet_to_gain = -2000 }
 				add_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_already_annexing_station
 			}
 		}
-		days_remove = 60
+		days_remove = 90
 		fire_only_once = yes
 		remove_effect = {
 			annex_country = {
 				target = FROM
 				transfer_troops = yes
 			}
-			add_threat = 2
+			add_threat = 2.5
 
 			hidden_effect = {
 				clr_country_flag = HNZ_already_annexing_station
 			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+}
+
+HNZ_war_committee_category = {
+	HNZ_war_plans = {
+		target_array = global.countries
+		target_trigger = {
+			FROM = {
+				NOT = { 
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					exists = no
+					original_tag = RUI
+				}
+				has_added_tension_amount > 2
+				strength_ratio = {
+				    tag = HNZ
+				    ratio < 0.25
+				}
+				ic_ratio = {
+				    tag = HNZ
+				    ratio < 0.25
+				}
+			}
+		}
+		available = {
+			FROM = { 	
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 75 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
+		custom_cost_text = "command_power_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -75
+			}
+		}
+		days_remove = 180
+		fire_only_once = yes
+		remove_effect = {
 		}
 		ai_will_do = {
 			base = 5
