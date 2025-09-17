@@ -15,6 +15,17 @@ ideas = {
 				command_power_gain = 0.01
 	        }
 	    }
+		MDR_pedestrians_need_not_apply = {
+			picture = MDR_irregulars
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				command_power_gain = 0.01
+				conscription_factor = -0.16
+				modifier_army_sub_unit_irregulars_attack_factor = -0.35
+				modifier_army_sub_unit_irregulars_max_org_factor = -0.35
+			}
+		}
 		MDR_omon = {
 			picture = GFX_idea_MDR_omon
 
@@ -63,15 +74,16 @@ ideas = {
 			modifier = {
 				resistance_target = 0.2
 				custom_modifier_tooltip = RCH_reclusive_state_tt
-	            custom_modifier_tooltip = education_reform_cost_increase_50
+	            #custom_modifier_tooltip = education_reform_cost_increase_50
+				education_reforms_cost_modifier = 0.5
 			}
 
-            on_remove = {
-				subtract_from_variable = { education_reforms_cost_from_modifiers = 0.5 }
-			}
-			on_add = {
-				add_to_variable = { education_reforms_cost_from_modifiers = 0.5 }
-			}
+            #on_remove = {
+			#	subtract_from_variable = { education_reforms_cost_from_modifiers = 0.5 }
+			#}
+			#on_add = {
+			#	add_to_variable = { education_reforms_cost_from_modifiers = 0.5 }
+			#}
 	    }
 		MDR_isolation_2 = {
 			picture = MDR_isolation
@@ -170,7 +182,7 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				consumer_goods_factor = -0.1
+				consumer_goods_expected_factor = -0.15
 	        }
 	    }
 		MDR_scrapper_union_1 = {
@@ -227,8 +239,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				conscription = 0.015
+				conscription = 0.03
 				experience_gain_army_unit_factor = -0.05
+				mobilization_laws_cost_factor = 0.1
 	        }
 	    }
 		MDR_conscription_question_C = {
@@ -239,8 +252,9 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				conscription = 0.03
+				conscription = 0.06
 				experience_gain_army_unit_factor = -0.1
+				mobilization_laws_cost_factor = 0.2
 	        }
 	    }
 		MDR_surplus_question_A = {
@@ -358,7 +372,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				political_power_gain = 0.2
+				command_power_gain_mult = 0.1
+				max_command_power = 20
 	        }
 	    }
 		MDR_serve_ideals = {
@@ -369,7 +384,8 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				party_popularity_stability_factor = 0.2
+				offensive_war_stability_factor = 0.1
+				defensive_war_stability_factor = 0.1
 	        }
 	    }
 		MDR_serve_people = {
@@ -390,7 +406,7 @@ ideas = {
 
 			removal_cost = -1
 			
-			research_bonus = { infantry_tech = 0.1 }
+			research_bonus = { infantry_tech = 0.2 }
 	    }
 		MDR_superior_tactics_idea = {
 			picture = MDR_superior_tactics
@@ -400,8 +416,17 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				land_doctrine_cost_factor = -0.1
+				land_doctrine_cost_factor = -0.2
 	        }
+	    }
+		MDR_superior_firepower_idea = {
+			picture = MDR_superior_gear
+
+			allowed = {}
+
+			removal_cost = -1
+			
+			research_bonus = { support_weapons_tech = 0.2 }
 	    }
 		MDR_old_world_force_to_reckon = {
 			picture = MDR_generic_omon_2
@@ -421,7 +446,7 @@ ideas = {
 			allowed = {}
 			removal_cost = -1
 			modifier = {
-				modifier_army_sub_unit_irregulars_max_org_factor = 0.1
+				modifier_army_sub_unit_irregulars_max_org_factor = 0.2
 	        }	
 		}
 		MDR_regular_OMON_expansion = {
@@ -430,7 +455,16 @@ ideas = {
 			allowed = {}
 			removal_cost = -1
 			modifier = {
-				modifier_army_sub_unit_regulars_max_org_factor = 0.1
+				modifier_army_sub_unit_regulars_max_org_factor = 0.2
+	        }	
+		}
+		MDR_motorized_OMON_expansion = {
+			picture = MDR_generic_omon_2
+			
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				modifier_army_sub_unit_rail_cart_max_org_factor = 0.2
 	        }	
 		}
 		MDR_respect_my_authority = {
@@ -439,8 +473,8 @@ ideas = {
 			allowed = {}
 			removal_cost = -1
 			modifier = {
-				resistance_target = 0.05
-				compliance_growth = 0.05
+				resistance_target = 0.1
+				compliance_growth = 0.1
 	        }	
 		}
 		MDR_respect_my_authority_2 = {
@@ -449,8 +483,8 @@ ideas = {
 			allowed = {}
 			removal_cost = -1
 			modifier = {
-				resistance_target = 0.1
-				compliance_growth = 0.1
+				resistance_target = 0.15
+				compliance_growth = 0.15
 				resistance_damage_to_garrison = -0.1
 	        }	
 		}
@@ -463,7 +497,28 @@ ideas = {
 				special_forces_training_time_factor = -0.1
 	        }	
 		}
-
+		MDR_civic_bastion = {
+			picture = MDR_generic_omon_3
+			
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				modifier_army_sub_unit_special_forces_attack_factor = 0.05
+				modifier_army_sub_unit_special_forces_defence_factor = 0.05
+				intel_network_gain = 0.1
+				encryption_factor = 0.25
+	        }	
+		}
+		add_iron_discipline_the_wastes = {
+			picture = MDR_generic_omon_3
+			
+			allowed = {}
+			removal_cost = -1
+			modifier = {
+				compliance_growth = 0.02
+				resistance_target = -0.1
+	        }	
+		}
 		MDR_pay_homage = {
 			picture = MDR_former_omon
 			
@@ -474,7 +529,6 @@ ideas = {
 				stability_weekly = 0.003
 	        }	
 		}
-
 		MDR_emergency_emergency = {
 			picture = MDR_former_omon
 			
@@ -485,7 +539,6 @@ ideas = {
 				weekly_manpower =1
 	        }	
 		}
-
 		MDR_VSD_sniper_training_1 = {
 			picture = MDR_generic_sniper
 			
@@ -624,10 +677,10 @@ ideas = {
 			removal_cost = -1
 
 			modifier = {
-				monthly_population = -0.2
-				production_speed_buildings_factor = -0.2
+				monthly_population = -0.25
+				production_speed_buildings_factor = -0.25
 				stability_weekly = -0.005
-				political_power_gain = -0.2
+				political_power_gain = -0.25
 	        }
 	    }
 		MDR_disease_aftermath = {

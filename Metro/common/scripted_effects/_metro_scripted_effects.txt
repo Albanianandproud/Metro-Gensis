@@ -112,8 +112,9 @@ set_base_modifiers_education = {
 	set_variable = { education_reform_base_cost_multiplier = 2.5 }
 	set_variable = { education_reforms_cost_from_states_factor = 1.1 }
 	set_variable = { education_reforms_cost_from_population_factor = 1.5 }
+	
 	set_variable = { education_reforms_cost_from_modifiers_factor = 1 }
-	add_to_variable = { education_reforms_cost_from_modifiers_factor = education_reforms_cost_from_modifiers }
+	add_to_variable = { education_reforms_cost_from_modifiers_factor = modifier@education_reforms_cost_modifier }
 
 	set_temp_variable = { education_reforms_modifier_from_states = 1 }
 	add_to_temp_variable = { education_reforms_modifier_from_states = modifier@education_reform_state_cost_reduction_modifier }
@@ -178,10 +179,16 @@ calculate_education_reforms = {
 	}
 	# make cost increase for every education tier we have
 	calculate_education_reform_timer_multiplier = yes
+
+	# Multiply by Tier
 	multiply_variable = { 
 		var = education_reform_undertaking 
 		value = education_reform_tier_multiplier
 	}
+
+	### Finally calculate education_reforms_cost_modifier 
+	multiply_variable = { var = education_reform_undertaking value = education_reforms_cost_from_modifiers_factor }
+
 	round_variable = education_reform_undertaking
 	set_country_flag = improving_education
 }

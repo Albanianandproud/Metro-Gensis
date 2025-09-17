@@ -758,7 +758,7 @@ focus_tree = {
 		id = MDR_repair_shchelkovskaya
 		icon = GFX_generic_winch
 		x = 0
-		y = 1
+		y = 0
 		cost = 6.5
 		available = { has_completed_focus = MDR_1 }
 		completion_reward = {
@@ -1372,7 +1372,7 @@ focus_tree = {
 		id = MDR_old_world_organization
 		icon = GFX_MDR_omon_8
 		x = 25
-		y = 1
+		y = 0
 		cost = 6.5
 		available = { has_completed_focus = MDR_1 }
 		completion_reward = {
@@ -1394,8 +1394,8 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = rallied_men_bonus
-				cost_reduction = 0.5
-				uses = 1
+				cost_reduction = 0.334
+				uses = 2
 				category = land_doctrine
 			}
 		}
@@ -1415,8 +1415,9 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = clothing_kits
-				bonus = 0.5
-				uses = 2
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
 				category = gas_mask
 			}
 		}
@@ -1429,7 +1430,7 @@ focus_tree = {
 		id = MDR_good_old_fashioned_discipline_2
 		icon = GFX_MDR_omon_10
 		x = -1
-		y = 1
+		y = 2
 		cost = 6.5
 		prerequisite = { focus = MDR_good_old_fashioned_discipline }
 		relative_position_id = MDR_good_old_fashioned_discipline
@@ -1451,18 +1452,56 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		available = { 
-			num_of_military_factories > 7
+			num_of_military_factories > 6
 			OR = { 
-				has_completed_focus = MDR_expand_OMON_jurisdiction_irregular
-				has_completed_focus = MDR_expand_OMON_jurisdiction_regular
+				has_completed_focus = MDR_question_of_servitude
 			} 
 		}
 		prerequisite = { focus = MDR_good_old_fashioned_discipline_2 }
 		relative_position_id = MDR_good_old_fashioned_discipline_2
 		completion_reward = {
-			set_technology = { riot_shield_specops = 1 }
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = unlock_special_forces_riot_equipment_tech
+					}
+				}
+				custom_effect_tooltip = unlock_special_forces_riot_equipment
+				hidden_effect = { set_country_flag = unlock_special_forces_riot_equipment_tech }
+				add_tech_bonus = {
+					name = industrial_bonus
+					bonus = 3
+					uses = 1
+					ahead_reduction = 1
+					technology = special_forces_riot_equipment_tech
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = special_forces_riot_equipment_tech
+				}
+				add_equipment_to_stockpile = {
+					type = special_forces_equipment_riot
+					amount = 25
+					producer = HNZ
+				}
+			}
 		}
-
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = MDR_good_old_fashioned_discipline_4
+		icon = GFX_MDR_riot_control
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_good_old_fashioned_discipline_3 }
+		relative_position_id = MDR_good_old_fashioned_discipline_3
+		completion_reward = {
+			add_ideas = MDR_civic_bastion
+		}
 		ai_will_do = {
 			factor = 3
 		}
@@ -1478,7 +1517,6 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = MDR_respect_my_authority
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
@@ -1508,13 +1546,13 @@ focus_tree = {
 	focus = {
 		id = MDR_military_2
 		icon = GFX_generic_hanza_alliance
-		x = -1
+		x = 0
 		y = 1
 		cost = 6.5
 		prerequisite = { focus = MDR_military_1 }
 		relative_position_id = MDR_military_1
 		completion_reward = {
-			army_experience = 20
+			army_experience = 25
 			add_tech_bonus = {
 				name = clothing_kits
 				bonus = 0.5
@@ -1550,7 +1588,7 @@ focus_tree = {
 	}
 	focus = {
 		id = MDR_question_of_conscription
-		icon = GFX_MDR_conscription_question
+		icon = GFX_MDR_conscription_force_question
 		x = -1
 		y = 1
 		cost = 6.5
@@ -1559,6 +1597,7 @@ focus_tree = {
 		prerequisite = { focus = MDR_expand_OMON_jurisdiction }
 		relative_position_id = MDR_expand_OMON_jurisdiction
 		completion_reward = {
+			custom_effect_tooltip = MDR_question_of_conscription_tooltip
 			country_event = nf_MDR.11
 		}
 
@@ -1568,7 +1607,7 @@ focus_tree = {
 	}
 	focus = {
 		id = MDR_question_of_rotation
-		icon = GFX_MDR_rotation_question
+		icon = GFX_MDR_rotation_force_question
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1577,6 +1616,7 @@ focus_tree = {
 		prerequisite = { focus = MDR_question_of_conscription }
 		relative_position_id = MDR_question_of_conscription
 		completion_reward = {
+			custom_effect_tooltip = MDR_question_of_rotation_tooltip
 			country_event = nf_MDR.13
 		}
 
@@ -1595,6 +1635,7 @@ focus_tree = {
 		prerequisite = { focus = MDR_question_of_rotation focus = MDR_question_of_pay }
 		relative_position_id = MDR_question_of_rotation
 		completion_reward = {
+			custom_effect_tooltip = MDR_question_of_servitude_tooltip
 			country_event = nf_MDR.15
 		}
 
@@ -1675,8 +1716,31 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = MDR_expand_OMON_jurisdiction_motorized
+		icon = GFX_MDR_motorized
+		x = 0
+		y = 2
+		cost = 6.5
+		available = { NOT = { has_war = yes } }
+		cancel_if_invalid = yes
+		prerequisite = { focus = MDR_question_of_servitude }
+		relative_position_id = MDR_question_of_servitude
+		completion_reward = {
+			add_ideas = MDR_motorized_OMON_expansion
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 1
+				category = rail_cart
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+		}
+	}
+	focus = {
 		id = MDR_question_of_surplus
-		icon = GFX_MDR_surplus_question
+		icon = GFX_MDR_surplis_question
 		x = 1
 		y = 1
 		cost = 6.5
@@ -1685,6 +1749,7 @@ focus_tree = {
 		prerequisite = { focus = MDR_expand_OMON_jurisdiction }
 		relative_position_id = MDR_expand_OMON_jurisdiction
 		completion_reward = {
+			custom_effect_tooltip = MDR_question_of_surplus_tooltip
 			country_event = nf_MDR.12
 		}
 
@@ -1694,7 +1759,7 @@ focus_tree = {
 	}
 	focus = {
 		id = MDR_question_of_pay
-		icon = GFX_MDR_payment_question
+		icon = GFX_MDR_pay_question
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1703,6 +1768,7 @@ focus_tree = {
 		prerequisite = { focus = MDR_question_of_surplus }
 		relative_position_id = MDR_question_of_surplus
 		completion_reward = {
+			custom_effect_tooltip = MDR_question_of_pay_tooltip
 			country_event = nf_MDR.14
 		}
 
@@ -1713,7 +1779,7 @@ focus_tree = {
 	focus = {
 		id = MDR_tight_knit_security
 		icon = GFX_MDR_omon_1
-		x = 6
+		x = 7
 		y = 1
 		cost = 6.5
 		prerequisite = { focus = MDR_old_world_organization }
@@ -1721,7 +1787,6 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = MDR_tight_knit_defences
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
@@ -1776,9 +1841,9 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 1
-				category = infantry_weapons
+				category = entrench_kits
 			}
 		}
 
@@ -1807,6 +1872,46 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = MDR_gear_explosives
+		icon = GFX_MDR_explosives
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_gearing_the_army }
+		relative_position_id = MDR_gearing_the_army
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = explosive_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
+		id = MDR_gear_sniper
+		icon = GFX_MDR_snipers
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = { focus = MDR_gearing_the_army }
+		relative_position_id = MDR_gearing_the_army
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = piercing_support_tech
+			}
+		}
+		ai_will_do = {
+			factor = 2
+		}
+	}
+	focus = {
 		id = MDR_raid_outer_hinterland
 		icon = GFX_MDR_raid_hinterlands
 		x = 4
@@ -1825,7 +1930,7 @@ focus_tree = {
 	focus = {
 		id = MDR_snipers
 		icon = GFX_MDR_sniper_rifle
-		x = 6
+		x = 7
 		y = 1
 		cost = 6.5
 		prerequisite = { focus = MDR_modified_armaments }
@@ -1868,6 +1973,22 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = MDR_snipers_3
+		icon = GFX_MDR_insignia
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = MDR_snipers_2 }
+		relative_position_id = MDR_snipers_2
+		completion_reward = {
+			add_ideas = add_iron_discipline_the_wastes
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
 		id = MDR_equipment_upgrades
 		icon = GFX_SPT_equipment_2
 		x = 0
@@ -1880,8 +2001,13 @@ focus_tree = {
 				name = clothing_kits
 				bonus = 1
 				uses = 1
-				ahead_reduction = 1
 				category = stalker
+			}
+			add_tech_bonus = {
+				name = clothing_kits
+				bonus = 1
+				uses = 1
+				category = support_tech
 			}
 		}
 
@@ -1893,7 +2019,7 @@ focus_tree = {
 		id = MDR_superior_gear
 		icon = GFX_MDR_superior_gear
 		x = -2
-		y = 1
+		y = 2
 		cost = 6.5
 		mutually_exclusive = { focus = MDR_superior_tactics focus = MDR_superior_firepower }
 		prerequisite = { focus = MDR_gearing_the_army }
@@ -1901,7 +2027,6 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = MDR_superior_gear_idea
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
@@ -1910,15 +2035,14 @@ focus_tree = {
 		id = MDR_superior_firepower
 		icon = GFX_MDR_superior_firepower
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 		mutually_exclusive = { focus = MDR_superior_gear focus = MDR_superior_tactics }
 		prerequisite = { focus = MDR_gearing_the_army }
 		relative_position_id = MDR_gearing_the_army
 		completion_reward = {
-			set_technology = { tech_technician_machining = 1 }
+			add_ideas = MDR_superior_firepower_idea
 		}
-
 		ai_will_do = {
 			factor = 3
 		}
@@ -1927,7 +2051,7 @@ focus_tree = {
 		id = MDR_superior_tactics
 		icon = GFX_MDR_superior_tactics
 		x = 2
-		y = 1
+		y = 2
 		cost = 6.5
 		mutually_exclusive = { focus = MDR_superior_gear focus = MDR_superior_firepower }
 		prerequisite = { focus = MDR_gearing_the_army }
@@ -1953,7 +2077,7 @@ focus_tree = {
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 0.5
-				uses = 1
+				uses = 2
 				category = land_doctrine
 			}
 		}
