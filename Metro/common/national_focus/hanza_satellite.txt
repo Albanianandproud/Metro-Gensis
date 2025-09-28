@@ -55,7 +55,7 @@ shared_focus = {
 }
 shared_focus = {
 	id = hanza_satellite_4
-	icon = GFX_generic_bunker
+	icon = GFX_generic_raider_hunting
 	prerequisite = { focus = hanza_satellite_3 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_3
@@ -156,6 +156,7 @@ shared_focus = {
 			name = infantry_bonus
 			bonus = 1
 			uses = 1
+			ahead_reduction = 1
 			category = support_weapons_tech
 		}
 	}
@@ -337,6 +338,10 @@ shared_focus = {
 shared_focus = {
 	id = hanza_satellite_18
 	icon = GFX_generic_microphone
+	available = {
+		has_stability > 0.54
+		threat > 0.14
+	}
 	prerequisite = { focus = hanza_satellite_4 }
 	mutually_exclusive = { focus = hanza_satellite_17 }
 	cost = 6.5
@@ -386,7 +391,7 @@ shared_focus = {
 shared_focus = {
 	id = hanza_satellite_21
 	icon = GFX_HNZ_generic_star
-	prerequisite = { focus = hanza_satellite_19 }
+	prerequisite = { focus = hanza_satellite_20 focus = hanza_satellite_19 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_19
 	x = 0
@@ -401,7 +406,7 @@ shared_focus = {
 shared_focus = {
 	id = hanza_satellite_22
 	icon = GFX_HNZ_generic_skull_2
-	prerequisite = { focus = hanza_satellite_20 }
+	prerequisite = { focus = hanza_satellite_19 focus = hanza_satellite_20 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_20
 	x = 0
@@ -450,6 +455,7 @@ shared_focus = {
 	y = 0
 	completion_reward = {
 		add_ideas = hanza_satellite_bastion_outpost
+		custom_effect_tooltip = hanza_satellite_24_tooltip
 	}
 	ai_will_do = {
 		factor = 1
@@ -466,6 +472,7 @@ shared_focus = {
 	y = 0
 	completion_reward = {
 		add_ideas = hanza_satellite_commercial_outpost
+		custom_effect_tooltip = hanza_satellite_25_tooltip
 	}
 	ai_will_do = {
 		factor = 1
@@ -482,6 +489,7 @@ shared_focus = {
 	y = 0
 	completion_reward = {
 		add_ideas = hanza_satellite_trade_outpost
+		custom_effect_tooltip = hanza_satellite_26_tooltip
 	}
 	ai_will_do = {
 		factor = 1
@@ -617,6 +625,27 @@ shared_focus = {
 	}
 }
 shared_focus = {
+	id = hanza_satellite_26_F
+	icon = GFX_generic_gas_mask_2
+	prerequisite = { focus = hanza_satellite_26_B }
+	prerequisite = { focus = hanza_satellite_26_C }
+	cost = 6.5
+	relative_position_id = hanza_satellite_26_A
+	x = -2
+	y = 2
+	completion_reward = {
+		add_tech_bonus = {
+			name = clothing_kits_bonus
+			bonus = 1
+			uses = 1
+			category = stalker
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
 	id = hanza_satellite_27
 	icon = GFX_generic_bag_of_cement
 	prerequisite = { focus = hanza_satellite_24 focus = hanza_satellite_25  }
@@ -626,7 +655,7 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		capital_scope = {
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
 				type = industrial_complex
 				level = 1
@@ -703,7 +732,7 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		capital_scope = {
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
 				type = industrial_complex
 				level = 1
@@ -901,7 +930,7 @@ shared_focus = {
 }
 shared_focus = {
 	id = hanza_satellite_34_G
-	icon = GFX_generic_wielder
+	icon = GFX_RCH_factory_hammer
 	prerequisite = { focus = hanza_satellite_34_D }
 	cost = 6.5
 	relative_position_id = hanza_satellite_34_D
@@ -1071,8 +1100,6 @@ shared_focus = {
 	id = hanza_satellite_42
 	icon = GFX_generic_scribbles
 	prerequisite = { focus = hanza_satellite_39 }
-	mutually_exclusive = { focus = hanza_satellite_43 }
-	mutually_exclusive = { focus = hanza_satellite_44 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_39
 	x = 0
@@ -1080,7 +1107,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 1
+			bonus = 0.75
 			uses = 2
 			category = gatling_support_tech
 		}
@@ -1093,8 +1120,6 @@ shared_focus = {
 	id = hanza_satellite_43
 	icon = GFX_generic_scribbles
 	prerequisite = { focus = hanza_satellite_40 }
-	mutually_exclusive = { focus = hanza_satellite_42 }
-	mutually_exclusive = { focus = hanza_satellite_44 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_40
 	x = 0
@@ -1102,7 +1127,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 1
+			bonus = 0.75
 			uses = 2
 			category = support_tech
 		}
@@ -1115,8 +1140,6 @@ shared_focus = {
 	id = hanza_satellite_44
 	icon = GFX_generic_scribbles
 	prerequisite = { focus = hanza_satellite_41 }
-	mutually_exclusive = { focus = hanza_satellite_42 }
-	mutually_exclusive = { focus = hanza_satellite_43 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_41
 	x = 0
@@ -1124,7 +1147,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 1
+			bonus = 0.75
 			uses = 2
 			category = infantry_weapons
 		}
@@ -1235,6 +1258,168 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		add_ideas = hanza_satellite_ring_of_steel
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_51
+	icon = GFX_HNZ_hanza_generic
+	mutually_exclusive = { focus = hanza_satellite_52 }
+	available = { has_completed_focus = hanza_satellite_6 }
+	cost = 6.5
+	x = 29
+	y = 0
+	completion_reward = {
+		## Our Committment to the League
+		custom_effect_tooltip = hanza_satellite_51_tooltip
+		modify_tech_sharing_bonus = {
+			id = HNZ_faction_tech_group
+			bonus = 0.05
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_51_A
+	icon = GFX_HNZ_hanza_generic
+	prerequisite = { focus = hanza_satellite_51 }
+	cost = 6.5
+	relative_position_id = hanza_satellite_51
+	x = -1
+	y = 1
+	completion_reward = {
+		## Influence of the Eagle
+		custom_effect_tooltip = hanza_satellite_51_A_tooltip
+		add_autonomy_ratio = {
+			value = 0.1
+			localization = hanza_satellite_lobbied_for_arms
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_51_B
+	icon = GFX_HNZ_hanza_generic
+	prerequisite = { focus = hanza_satellite_51 }
+	available = { threat > 0.14 }
+	cost = 6.5
+	relative_position_id = hanza_satellite_51
+	x = 1
+	y = 1
+	completion_reward = {
+		## Lobby Hanza for armaments
+		custom_effect_tooltip = hanza_satellite_51_B_tooltip
+		add_autonomy_ratio = {
+			value = 0.1
+			localization = hanza_satellite_lobbied_for_soldats
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_51_C
+	icon = GFX_HNZ_hanza_generic
+	prerequisite = { focus = hanza_satellite_51 }
+	cost = 6.5
+	relative_position_id = hanza_satellite_51
+	x = 0
+	y = 3
+	completion_reward = {
+		## Lobby Hanza for armaments
+		add_autonomy_ratio = {
+			value = 0.1
+			localization = hanza_satellite_lobby_for_defense_spending
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_52
+	icon = GFX_HNZ_hanza_generic
+	mutually_exclusive = { focus = hanza_satellite_51 }
+	available = { has_completed_focus = hanza_satellite_6 }
+	cost = 6.5
+	x = 33
+	y = 0
+	completion_reward = {
+		# Lobby for Self Autonomy
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_52_A
+	icon = GFX_HNZ_hanza_generic
+	prerequisite = { focus = hanza_satellite_52 }
+	cost = 8.6
+	relative_position_id = hanza_satellite_52
+	x = 0
+	y = 1
+	completion_reward = {
+		## Curb influence of the Eagle
+
+		add_autonomy_score = {
+    		value = -500
+    		localization = EXAMPLE
+		}
+
+		add_ideas = hanza_satellite_curb_hanza_interference
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_52_B
+	icon = GFX_HNZ_hanza_generic
+	prerequisite = { focus = hanza_satellite_52_A }
+	cost = 8.6
+	relative_position_id = hanza_satellite_52_A
+	x = 0
+	y = 2
+	completion_reward = {
+		## Consolidate station autonomy
+
+		add_autonomy_score = {
+    		value = -500
+    		localization = EXAMPLE
+		}
+		add_timed_idea = {
+			idea = hanza_satellite_consolidate_authority
+			days = 360
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_52_C
+	icon = GFX_HNZ_hanza_generic
+	available = { NOT = { has_idea = hanza_satellite_consolidate_authority } }
+	prerequisite = { focus = hanza_satellite_52_B }
+	cost = 8.6
+	relative_position_id = hanza_satellite_52_B
+	x = 0
+	y = 2
+	completion_reward = {
+		## break free from Eagles chain
+
+		add_autonomy_score = {
+    		value = -500
+    		localization = EXAMPLE
+		}
 	}
 	ai_will_do = {
 		factor = 1

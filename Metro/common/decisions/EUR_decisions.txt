@@ -1,5 +1,28 @@
 
-EUR_council_gui_decision_category = {	
+EUR_council_gui_decision_category = {
+	EUR_decision_decrease_military_inefficiency = {
+		visible = {
+			OR = {
+				has_idea = EUR_mil_power_5
+				has_idea = EUR_mil_power_4
+				has_idea = EUR_mil_power_3
+				has_idea = EUR_mil_power_2
+				has_idea = EUR_mil_power_1
+			}
+		}
+		custom_cost_text = command_power_50
+		custom_cost_trigger = { command_power > 49.9 }
+		days_remove = 50
+		complete_effect = {
+			hidden_effect = { add_command_power = -50 }
+		}
+		remove_effect = {
+			EUR_improve_military_efficiency_idea = yes
+		}
+		modifier = {
+			political_power_factor = -0.1
+		}
+	}
 	EUR_decision_add_council_low = {
 		visible = { NOT = { has_completed_focus = EUR_ostalgie has_completed_focus = EUR_italian_influence } }
 		available = { has_completed_focus = EUR_remain_centralized NOT = { has_country_flag = EUR_changing_ideology} }
@@ -145,29 +168,6 @@ EUR_council_gui_decision_category = {
 		}
 		remove_effect = {
 			clr_country_flag = EUR_disable_budget
-		}
-	}
-	EUR_decision_decrease_military_inefficiency = {
-		visible = {
-			OR = {
-				has_idea = EUR_mil_power_5
-				has_idea = EUR_mil_power_4
-				has_idea = EUR_mil_power_3
-				has_idea = EUR_mil_power_2
-				has_idea = EUR_mil_power_1
-			}
-		}
-		custom_cost_text = command_power_50
-		custom_cost_trigger = { command_power > 49.9 }
-		days_remove = 50
-		complete_effect = {
-			hidden_effect = { add_command_power = -50 }
-		}
-		remove_effect = {
-			EUR_improve_military_efficiency_idea = yes
-		}
-		modifier = {
-			political_power_factor = -0.1
 		}
 	}
 	EUR_decision_add_slavery_industry	= {

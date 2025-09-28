@@ -1,0 +1,117 @@
+hanza_satellite_immigrant_processing_category = {
+
+	hanza_satellite_immigrant_processing_countdown_until_wave = {
+		icon = GFX
+		priority = 1001
+
+		activation  = {
+			has_idea = hanza_satellite_immigrant_at_the_gates
+			hidden_trigger = { has_country_flag = hanza_satellite_immigrant_processing_country_flag }
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = hanza_satellite_immigrant_processing_country_flag
+				has_idea = hanza_satellite_immigrant_at_the_gates
+			}
+		}
+
+		selectable_mission = no
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			OR = {
+				has_idea = civics_border_4
+				NOT = { has_country_flag = hanza_satellite_immigrant_processing_country_flag }
+			}
+		}
+
+		#timeout_effect = {
+		#	country_event = { id = nf_MDR.24 }
+		#}
+
+		days_mission_timeout = 150
+
+		timeout_effect = {
+			custom_effect_tooltip = hanza_satellite_immigrant_countdown_tooltip
+			country_event = { id = nf_hanza_satellite.2 }
+		}
+
+		ai_will_do = {
+			factor = 101
+		}
+	}
+
+	hanza_satellite_immigrant_processing_increase_regulations = {
+		icon = generic_research
+
+		visible = {
+			has_active_mission = hanza_satellite_immigrant_processing_countdown_until_wave
+		}
+		available = {
+			hidden_trigger = { has_country_flag = hanza_satellite_immigrant_processing_country_flag }
+			has_idea = hanza_satellite_immigrant_at_the_gates
+		}
+		
+		fire_only_once = no
+
+		complete_effect = {
+			add_days_mission_timeout = {
+			    mission = hanza_satellite_immigrant_processing_countdown_until_wave
+			    days = 60
+			}
+			hidden_effect = {
+				random_list = {
+					30 = { country_event = { id = nf_hanza_satellite.3 } }
+					70 = {  }
+				}
+			}
+		}
+		
+		days_remove = 3
+		days_re_enable = 150
+		cost = 50
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	hanza_satellite_immigrant_processing_bar_the_gates = {
+		icon = generic_research
+
+		visible = {
+			has_active_mission = hanza_satellite_immigrant_processing_countdown_until_wave
+		}
+		available = { 
+			OR = {
+				threat > 0.3
+				has_stability < 0.4
+			}
+			hidden_trigger = { has_country_flag = hanza_satellite_immigrant_processing_country_flag }
+			has_idea = hanza_satellite_immigrant_at_the_gates
+		}
+
+		fire_only_once = yes
+
+		days_remove = 3
+
+		cost = 100
+
+		complete_effect = {
+			remove_ideas = hanza_satellite_immigrant_at_the_gates
+			hidden_effect = {
+				clr_country_flag = hanza_satellite_immigrant_processing_country_flag
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+}
+
+hanza_satellite_trade_category = {
+
+	hanza_satellite_trade_launch_caravan = {}
+}
