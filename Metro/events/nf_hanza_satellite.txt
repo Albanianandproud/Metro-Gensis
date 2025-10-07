@@ -1,47 +1,38 @@
 add_namespace = nf_hanza_satellite
 
-
 country_event = {
 	id = nf_hanza_satellite.1
 	title = nf_hanza_satellite.1.t
 	desc = nf_hanza_satellite.1.d
 	picture = "GFX_event (28)"
-
 	trigger = { threat > 0.1 }
-
 	mean_time_to_happen = { days = 100 }
-
 	fire_only_once = yes
-
 	option = {
 		name = nf_hanza_satellite.1.a
 		add_ideas = hanza_satellite_immigrant_at_the_gates
 		hidden_effect = { set_country_flag = hanza_satellite_immigrant_processing_country_flag }
 		ai_chance = { factor = 1 }
 	}
-
-	option = { ## Use this to our advantage ... /Break from Hanza path
-		name = nf_hanza_satellite.2.a
+	option = { 
+		name = nf_hanza_satellite.1.b
 		add_ideas = hanza_satellite_immigrant_at_the_gates
 		add_stability = -0.1
-		custom_effect_tooltip = nf_hanza_satellite.2.a_tooltip
+		custom_effect_tooltip = nf_hanza_satellite.1.b_tooltip
 		hidden_effect = { 
 			set_country_flag = hanza_satellite_immigrant_processing_country_flag
-			set_country_flag = nf_hanza_satellite.2.a_country_flag
+			set_country_flag = nf_hanza_satellite.1.b_country_flag
 		}
 		ai_chance = { factor = 1 }
 	}
 }
-
 country_event = {
 	id = nf_hanza_satellite.2
 	title = nf_hanza_satellite.2.t
 	desc = nf_hanza_satellite.2.d
 	picture = "GFX_event (164)"
-
 	is_triggered_only = yes
 	fire_only_once = yes
-	
 	option = {
 		name = nf_hanza_satellite.2.a
 		add_stability = -0.03
@@ -49,7 +40,6 @@ country_event = {
 			factor = 1
 		}
 	}
-
 	option = {
 		name = nf_hanza_satellite.2.b
 		add_stability = -0.04
@@ -60,7 +50,6 @@ country_event = {
 			factor = 1
 		}
 	}
-
 	option = {
 		name = nf_hanza_satellite.2.c
 		add_stability = -0.05
@@ -73,7 +62,6 @@ country_event = {
 		}
 	}
 }
-
 country_event = {
 	id = nf_hanza_satellite.3
 	title = nf_hanza_satellite.3.t
@@ -89,6 +77,220 @@ country_event = {
 			remove_idea = hanza_satellite_immigrant_at_the_gates
 			add_idea = hanza_satellite_immigrant_tightened_security
 		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+add_namespace = nf_hanza_satellite_trade
+
+country_event = {
+	id = nf_hanza_satellite_trade.1
+	title = nf_hanza_satellite_trade.1.t
+	desc = nf_hanza_satellite_trade.1.d
+	picture = "GFX_event (193)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_trade.1.a
+
+
+		hanza_satellite_trade_bastion_scripted_effect = yes 
+		FROM = {
+			set_temp_variable = { bullet_to_gain = 50 }
+			add_bullet_with_tooltip_effect = yes
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	option = {
+		name = nf_hanza_satellite_trade.1.b
+
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+country_event = {
+	id = nf_hanza_satellite_trade.2
+	title = nf_hanza_satellite_trade.2.t
+	desc = nf_hanza_satellite_trade.2.d
+	picture = "GFX_event (193)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_trade.2.a
+
+
+		hanza_satellite_trade_commerce_scripted_effect = yes 
+		FROM = {
+			set_temp_variable = { bullet_to_gain = 50 }
+			add_bullet_with_tooltip_effect = yes
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	option = {
+		name = nf_hanza_satellite_trade.1.b
+
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+country_event = {
+	id = nf_hanza_satellite_trade.3
+	title = nf_hanza_satellite_trade.3.t
+	desc = nf_hanza_satellite_trade.3.d
+	picture = "GFX_event (193)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_trade.2.a
+
+		hanza_satellite_trade_trade_scripted_effect = yes 
+		FROM = {
+			set_temp_variable = { bullet_to_gain = 50 }
+			add_bullet_with_tooltip_effect = yes
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	option = {
+		name = nf_hanza_satellite_trade.1.b
+
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+add_namespace = nf_hanza_satellite_puppet
+
+country_event = {
+	id = nf_hanza_satellite_puppet.1
+	title = nf_hanza_satellite_puppet.1.t
+	desc = nf_hanza_satellite_puppet.1.d
+	picture = "GFX_event (156)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_puppet.1.a
+		add_timed_idea = {
+			idea = hanza_satellite_bandit_woes days = 150
+		}
+		hidden_effect = {
+			country_event = { 
+				id = nf_hanza_satellite_puppet.2
+				days = 60
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = nf_hanza_satellite_puppet.1.a
+		add_equipment_to_stockpile = {
+			type = conventional_infantry_equipment_1
+			amount = 20
+			producer = RUS
+		}
+		OKT = {
+			add_opinion_modifier = {
+				target = TRT
+				modifier = hanza_satellite_looking_the_other_way
+			}
+		}
+		hidden_effect = {
+			country_event = { 
+				id = nf_hanza_satellite_puppet.2
+				days = 60
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+country_event = {
+	id = nf_hanza_satellite_puppet.2
+	title = nf_hanza_satellite_puppet.2.t
+	desc = nf_hanza_satellite_puppet.2.d
+	picture = "GFX_event (152)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_puppet.2.a
+		add_timed_idea = {
+			idea = hanza_satellite_bandit_infiltration days = 300
+		}
+		custom_effect_tooltip = nf_hanza_satellite_puppet.2.a.tt
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = nf_hanza_satellite_puppet.2.b
+		add_political_power = -75
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = nf_hanza_satellite_puppet.3
+	title = nf_hanza_satellite_puppet.3.t
+	desc = nf_hanza_satellite_puppet.3.d
+	picture = "GFX_event (193)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = nf_hanza_satellite_puppet.3.a
+		add_war_support = 0.05
+		OKT = { add_war_support = 0.05 }
+		end_puppet = OKT
+		remove_from_faction = OKT
+		create_wargoal = {
+		    type = take_state_focus
+		    target = OKT
+		    generator = { 406 }
+		    expire = 365
+		}
+		add_opinion_modifier = {
+			target = OKT
+			modifier = hanza_satellite_our_patience_thins
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = nf_hanza_satellite_puppet.3.b
+		add_political_power = -75
 		ai_chance = {
 			factor = 1
 		}

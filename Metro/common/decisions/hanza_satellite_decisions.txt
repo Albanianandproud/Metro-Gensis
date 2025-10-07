@@ -27,11 +27,7 @@ hanza_satellite_immigrant_processing_category = {
 			}
 		}
 
-		#timeout_effect = {
-		#	country_event = { id = nf_MDR.24 }
-		#}
-
-		days_mission_timeout = 150
+		days_mission_timeout = 180
 
 		timeout_effect = {
 			custom_effect_tooltip = hanza_satellite_immigrant_countdown_tooltip
@@ -76,10 +72,8 @@ hanza_satellite_immigrant_processing_category = {
 			base = 5
 		}
 	}
-
 	hanza_satellite_immigrant_processing_bar_the_gates = {
 		icon = generic_research
-
 		visible = {
 			has_active_mission = hanza_satellite_immigrant_processing_countdown_until_wave
 		}
@@ -91,27 +85,216 @@ hanza_satellite_immigrant_processing_category = {
 			hidden_trigger = { has_country_flag = hanza_satellite_immigrant_processing_country_flag }
 			has_idea = hanza_satellite_immigrant_at_the_gates
 		}
-
 		fire_only_once = yes
-
 		days_remove = 3
-
 		cost = 100
-
 		complete_effect = {
 			remove_ideas = hanza_satellite_immigrant_at_the_gates
 			hidden_effect = {
 				clr_country_flag = hanza_satellite_immigrant_processing_country_flag
 			}
 		}
-
 		ai_will_do = {
 			base = 5
 		}
 	}
 }
-
 hanza_satellite_trade_category = {
+	hanza_satellite_bastion_launch_caravan = {
+		visible = {
+			has_completed_focus = hanza_satellite_24
+		}
+		available = { 
+			has_war = no
+			has_manpower > 4 
+			has_equipment = { rail_cart_equipment > 0 } 
+			FROM = {
+				has_war = no
+				NOT = {
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
+				}
+			}
+		} 
+		days_remove = 7
+		days_re_enable = 360
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		target_array = global.countries
+		target_trigger = {
+			FROM = { 
+				NOT = { 
+					has_opinion = {
+						target = ROOT
+						value < 0
+					}
+					OR = {
+						is_subject = yes
+						exists = no
+						has_idea = civics_border_4
 
-	hanza_satellite_trade_launch_caravan = {}
+						original_tag = RUI
+						is_major = yes
+
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
+					}
+				}
+			}
+		}
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.1
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				FROM = {
+					hanza_satellite_trade_bastion_scripted_effect = yes
+				}
+				hanza_satellite_improve_relations_scripted_effect = yes
+			}
+		}
+	}
+	hanza_satellite_commerce_launch_caravan = {
+		visible = {
+			has_completed_focus = hanza_satellite_25
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		target_array = global.countries
+		target_trigger = {
+			FROM = { 
+				NOT = { 
+					has_opinion = {
+						target = ROOT
+						value < 0
+					}
+					OR = {
+						is_subject = yes
+						exists = no
+						has_idea = civics_border_4
+
+						original_tag = RUI
+						is_major = yes
+
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
+					}
+				}
+			}
+		}
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.2
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				FROM = {
+					hanza_satellite_trade_commerce_scripted_effect = yes
+				}
+				hanza_satellite_improve_relations_scripted_effect = yes
+			}
+		}
+	}
+	hanza_satellite_trade_launch_caravan = {
+		visible = {
+			has_completed_focus = hanza_satellite_25
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		target_array = global.countries
+		target_trigger = {
+			FROM = { 
+				NOT = { 
+					has_opinion = {
+						target = ROOT
+						value < 0
+					}
+					OR = {
+						is_subject = yes
+						exists = no
+						has_idea = civics_border_4
+
+						original_tag = RUI
+						is_major = yes
+
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_skaven_nation
+						has_country_flag = is_scientist_nation
+						has_country_flag = is_savage_nation
+						has_country_flag = is_cultist_nation
+
+					}
+				}
+			}
+		}
+		complete_effect = {
+			FROM = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.3
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				FROM = {
+					hanza_satellite_trade_trade_scripted_effect = yes
+				}
+				hanza_satellite_improve_relations_scripted_effect = yes
+			}
+		}
+	}
 }
