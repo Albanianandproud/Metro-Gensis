@@ -83,10 +83,43 @@ shared_focus = {
 	prerequisite = { focus = hanza_satellite_2 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_2
-	x = 0
+	x = -1
 	y = 1
 	completion_reward = {
 		add_ideas = hanza_satellite_hub_of_opportunity
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_5_A
+	icon = GFX_generic_telephone
+	prerequisite = { focus = hanza_satellite_5 }
+	cost = 6.5
+	relative_position_id = hanza_satellite_5
+	x = 0
+	y = 1
+	completion_reward = {
+		add_ideas = hanza_satellite_repugnant_diplomats_1
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = hanza_satellite_5_B
+	icon = GFX_generic_stalker_expedition
+	prerequisite = { focus = hanza_satellite_5_A }
+	cost = 6.5
+	relative_position_id = hanza_satellite_5_A
+	x = 0
+	y = 2
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = hanza_satellite_repugnant_diplomats_1
+			add_idea = hanza_satellite_repugnant_diplomats_2
+		}
 	}
 	ai_will_do = {
 		factor = 1
@@ -191,7 +224,7 @@ shared_focus = {
 	prerequisite = { focus = hanza_satellite_7 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_7
-	x = 4
+	x = 3
 	y = 1
 	completion_reward = {
 		set_temp_variable = { bullet_to_gain = 250 }
@@ -207,7 +240,7 @@ shared_focus = {
 	prerequisite = { focus = hanza_satellite_2 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_2
-	x = -3
+	x = -4
 	y = 1
 	completion_reward = {
 		set_temp_variable = { bullet_to_gain = 25 }
@@ -271,7 +304,7 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		capital_scope = {
-			add_extra_state_shared_building_slots = 3
+			add_extra_state_shared_building_slots = 2
 		}
 	}
 	ai_will_do = {
@@ -330,7 +363,7 @@ shared_focus = {
 	mutually_exclusive = { focus = hanza_satellite_18 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_4
-	x = 2
+	x = 1
 	y = 1
 	completion_reward = {
 		add_stability = 0.1
@@ -351,7 +384,7 @@ shared_focus = {
 	mutually_exclusive = { focus = hanza_satellite_17 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_4
-	x = 4
+	x = 3
 	y = 1
 	completion_reward = {
 		add_stability = -0.15
@@ -368,7 +401,7 @@ shared_focus = {
 	mutually_exclusive = { focus = hanza_satellite_20 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_6
-	x = 3
+	x = 2
 	y = 1
 	completion_reward = {
 		add_ideas = hanza_satellite_military_staff_roster
@@ -382,9 +415,14 @@ shared_focus = {
 	icon = GFX_HNZ_generic_imperial
 	prerequisite = { focus = hanza_satellite_6 }
 	mutually_exclusive = { focus = hanza_satellite_19 }
+	available = {
+		NOT = {
+			has_country_flag = hanza_satellite_break_free_flag
+		}
+	}
 	cost = 6.5
 	relative_position_id = hanza_satellite_6
-	x = 5
+	x = 4
 	y = 1
 	completion_reward = {
 		add_ideas = HNZ_direct_ties_with_hanza
@@ -434,7 +472,7 @@ shared_focus = {
 	prerequisite = { focus = hanza_satellite_3 }
 	cost = 6.5
 	relative_position_id = hanza_satellite_3
-	x = 3
+	x = 2
 	y = 1
 	completion_reward = {
 		set_temp_variable = { bullet_to_gain = -25 }
@@ -860,7 +898,13 @@ shared_focus = {
 	x = -4
 	y = 1
 	completion_reward = {
-		add_research_slot = 1
+		# Change to social tech in future
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 0.5
+			uses = 3
+			category = industry
+		}
 	}
 	ai_will_do = {
 		factor = 1
@@ -1035,10 +1079,18 @@ shared_focus = {
 	x = 0
 	y = 1
 	completion_reward = {
+		capital_scope = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
 		add_tech_bonus = {
 			name = industrial_bonus
 			bonus = 1
-			uses = 2
+			uses = 1
 			category = industry
 		}
 	}
@@ -1069,7 +1121,7 @@ shared_focus = {
 	icon = GFX_generic_hansa_alliance
 	available = { has_completed_focus = hanza_satellite_1 }
 	cost = 6.5
-	x = -1
+	x = -2
 	y = 0
 	completion_reward = {
 		add_timed_idea = {
@@ -1311,7 +1363,7 @@ shared_focus = {
 	mutually_exclusive = { focus = hanza_satellite_52 }
 	available = { has_completed_focus = hanza_satellite_6 }
 	cost = 6.5
-	x = 29
+	x = 30
 	y = 0
 	completion_reward = {
 		## Our Committment to the League
@@ -1391,10 +1443,14 @@ shared_focus = {
 	mutually_exclusive = { focus = hanza_satellite_51 }
 	available = { has_completed_focus = hanza_satellite_6 }
 	cost = 6.5
-	x = 33
+	x = 35
 	y = 0
 	completion_reward = {
 		# Lobby for Self Autonomy
+		custom_effect_tooltip = hanza_satellite_51_tooltip
+		hidden_effect = {
+			set_country_flag = hanza_satellite_break_free_flag
+		}
 	}
 	ai_will_do = {
 		factor = 1
