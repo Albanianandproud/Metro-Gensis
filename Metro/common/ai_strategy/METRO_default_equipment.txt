@@ -11,7 +11,6 @@ METRO_stop_death_spiral_production = {
 		value = 1
 	}
 }
-
 METRO_default_surplus_management = {
 	enable = { always = yes }
 	abort_when_not_enabled = yes
@@ -28,7 +27,6 @@ METRO_default_surplus_management = {
 		value = 5
 	}
 }
-
 METRO_default_stockpile_management = {
 	enable = { num_divisions > 11 }
 	abort = { num_divisions < 10 }
@@ -37,7 +35,6 @@ METRO_default_stockpile_management = {
 		value = 5
 	}
 }
-
 METRO_focus_less_on_guns = {
 	enable = {
 		OR = {
@@ -63,8 +60,6 @@ METRO_focus_less_on_guns = {
 		value = 5
 	}
 }
-
-
 METRO_dont_build_armor_if_low_ic_count = {
 	enable = { num_of_military_factories < 15 }
 	abort = { num_of_military_factories > 16 }
@@ -79,7 +74,6 @@ METRO_dont_build_armor_if_low_ic_count = {
 		value = -200
 	}
 }
-
 METRO_upgrade_production_line_infantry_equipment = {
 	enable = { has_equipment = { infantry_equipment < 100 } }
 	abort_when_not_enabled = yes
@@ -90,7 +84,6 @@ METRO_upgrade_production_line_infantry_equipment = {
 		value = -100 
 	}
 }
-
 METRO_upgrade_production_line_flamethrower_equipment = {
 	enable = { has_equipment = { flamethrower_equipment < 50 } }
 	abort_when_not_enabled = yes
@@ -101,7 +94,6 @@ METRO_upgrade_production_line_flamethrower_equipment = {
 		value = -100 
 	}
 }
-
 METRO_upgrade_production_line_gatling_equipment = {
 	enable = { has_equipment = { gatling_equipment < 50 } }
 	abort_when_not_enabled = yes
@@ -112,7 +104,6 @@ METRO_upgrade_production_line_gatling_equipment = {
 		value = -100 
 	}
 }
-
 METRO_upgrade_production_line_explosive_equipment = {
 	enable = { has_equipment = { explosive_equipment < 50 } }
 	abort_when_not_enabled = yes
@@ -123,7 +114,6 @@ METRO_upgrade_production_line_explosive_equipment = {
 		value = -100 
 	}
 }
-
 METRO_produce_trains_whilst_at_war = {
 	enable = { is_major = yes has_war = yes }
 	abort_when_not_enabled = yes
@@ -134,7 +124,6 @@ METRO_produce_trains_whilst_at_war = {
 		value = 1 
 	}
 }
-
 METRO_dont_buy_revolvers = {
 	enable = { always = yes }
 	abort_when_not_enabled = yes
@@ -145,4 +134,39 @@ METRO_dont_buy_revolvers = {
     	value = -50000  
 	}
 }
-
+METRO_dont_buy_early_market_stuff = {
+	enable = {
+		OR = {
+			tag = RED
+			tag = RCH
+			tag = HNZ
+			tag = PLS
+			tag = SPT
+			tag = ARB
+			tag = ULI
+		}
+		date < 2033.1.1
+		has_war = no
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_market_spend_factories
+		value = -200 
+	}
+	ai_strategy = {
+		type = equipment_market_buying_threshold
+		id = infantry_equipment
+		value = -50000
+	}
+	ai_strategy = {
+		type = equipment_market_buying_threshold
+		id = support_equipment
+		value = -50000
+	}
+	ai_strategy = {
+		type = equipment_market_buying_threshold
+		id = rail_cart
+		value = -50000
+	}
+}
+	
