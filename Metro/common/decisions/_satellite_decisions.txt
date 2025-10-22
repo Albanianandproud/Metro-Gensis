@@ -7,8 +7,8 @@ _satellite_against_fascism_decisions = {
 			NOT = { has_war = yes }
 		}
 
-		cost = 45
-		days_remove = 30
+		cost = 50
+		days_remove = 14
 		fire_only_once = yes
 
 		modifier = {
@@ -33,11 +33,11 @@ _satellite_against_fascism_decisions = {
 			has_war_support > 0.3
 		}
 		cost = 50
-		days_remove = 45
-		days_re_enable = 90
+		days_remove = 30
+		days_re_enable = 120
 
 		modifier = {
-			production_factory_efficiency_gain_factor = 0.15
+			production_factory_efficiency_gain_factor = 0.25
 			war_support_weekly = -0.005
 		}
 		ai_will_do = {
@@ -63,17 +63,21 @@ _satellite_against_fascism_decisions = {
 		}
 
 		complete_effect = { 
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 10
+				producer = RUS
+			}
 			random_owned_state = {
 				limit = { NOT = { has_state_category = pastoral } }
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
 		}
-
 		ai_will_do = {
 			factor = 1.5
 		}
@@ -94,15 +98,19 @@ _satellite_against_fascism_decisions = {
 		}
 
 		visible = {
-			has_completed_focus = satellite_antifascist_decisions
+			has_completed_focus = satellite_counterattacks
 		}
 
 		days_remove = 14
 		war_with_on_remove = RCH
-		days_re_enable = 150
+		days_re_enable = 300
 
-		custom_cost_text = command_power_25
-		custom_cost_trigger = { command_power > 24.9 }
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 50 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
 
 		remove_effect = {
 			start_border_conflict_with_reich = yes
@@ -121,12 +129,15 @@ _satellite_against_fascism_decisions = {
 
 		complete_effect = { 
 			RCH = { country_event = nf_satellite.0 }
+			hidden_effect = {
+				add_command_power = -75
+			}
 		}
 
 		ai_will_do = {
 			factor = 1
 			modifier = {
-				date < 2030.1.1
+				date < 2034.1.1
 				factor = 0
 			}
 		}

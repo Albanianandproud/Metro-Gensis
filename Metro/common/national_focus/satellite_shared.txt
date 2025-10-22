@@ -1919,7 +1919,6 @@ shared_focus = {
 	x = 46
 	y = 0
 	cost = 6.5
-
 	available = { 
 		RCH = { exists = yes } 
 		if = { 
@@ -1927,7 +1926,6 @@ shared_focus = {
 			has_completed_focus = ULI_focus_1
 		}
 	}
-
 	completion_reward = {
 		add_war_support = 0.1
 		if = {
@@ -1969,17 +1967,15 @@ shared_focus = {
 			}
 		}
 	}
-
 	ai_will_do = {
 		factor = 10
 	}
 }
-
 shared_focus = {
 	id = satellite_antifascist_army
 	icon = GFX_stalker1
 	x = 0
-	y = 1
+	y = 2
 	cost = 6.5
 
 	available = { 
@@ -1996,24 +1992,27 @@ shared_focus = {
 	relative_position_id = satellite_defence_against_fascism
 
 	completion_reward = {
-		division_template = {
-			name = "Special Forces"
-			priority = 1
-			template_counter = 0
-			regiments = {
-				special_forces = { x = 0 y = 0 }
-				special_forces = { x = 0 y = 1 }
-				special_forces = { x = 0 y = 2 }
-				special_forces = { x = 0 y = 3 }
+		custom_effect_tooltip = satellite_antifascist_army_tt
+		hidden_effect = {
+			division_template = {
+				name = "Special Forces"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 0 y = 1 }
+					special_forces = { x = 0 y = 2 }
+					special_forces = { x = 0 y = 3 }
+				}
+				support = {
+					field_hospital = { x = 0 y = 0 }
+				}
 			}
-			support = {
-				field_hospital = { x = 0 y = 0 }
-			}
-		}
-		capital_scope = {
-			create_unit = {
-				division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
-				owner = ROOT
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 	}
@@ -2024,9 +2023,70 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = satellite_antifascist_army_2
+	icon = GFX_HNZ_generic_star
+	x = 1
+	y = 1
+	cost = 3
+
+	available = { 
+		has_war_with = RCH
+	}
+	cancel_if_invalid = yes
+
+	prerequisite = { 
+		focus = satellite_antifascist_army
+	}
+	mutually_exclusive = { focus = satellite_antifascist_army_3 }
+
+	relative_position_id = satellite_antifascist_army
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = satellite_no_surrender
+			days = 120
+		}
+	}
+
+	ai_will_do = {
+		factor = 50
+	}
+}
+shared_focus = {
+	id = satellite_antifascist_army_3
+	icon = GFX_HNZ_generic_star
+	x = -1
+	y = 1
+	cost = 3
+
+	available = { 
+		has_war_with = RCH
+	}
+	cancel_if_invalid = yes
+
+	prerequisite = { 
+		focus = satellite_antifascist_army
+	}
+	mutually_exclusive = { focus = satellite_antifascist_army_2 }
+
+	relative_position_id = satellite_antifascist_army
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = satellite_no_retreat
+			days = 120
+		}
+	}
+
+	ai_will_do = {
+		factor = 50
+	}
+}
+
+shared_focus = {
 	id = satellite_antifascist_decisions
 	icon = GFX_RCH_generic_anti
-	x = 2
+	x = 3
 	y = 1
 	cost = 6.5
 
@@ -2135,7 +2195,7 @@ shared_focus = {
 	icon = GFX_RED_to_victory
 	x = 0
 	y = 1
-	cost = 6.5
+	cost = 8.6
 
 	available = { 
 		RCH = { exists = yes } AND = { RED = { exists = yes }} 
@@ -2148,25 +2208,28 @@ shared_focus = {
 
 	completion_reward = {
 		army_experience = 25
-		division_template = {
-			name = "Regulars"
-			priority = 1
-			template_counter = 0
-			regiments = {
-				regulars = { x = 0 y = 0 }
-				regulars = { x = 0 y = 1 }
-				regulars = { x = 0 y = 2 }
-				regulars = { x = 0 y = 3 }
+		custom_effect_tooltip = satellite_seek_help_from_the_redline_2_tt
+		hidden_effect = {
+			division_template = {
+				name = "Regulars"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					regulars = { x = 0 y = 0 }
+					regulars = { x = 0 y = 1 }
+					regulars = { x = 0 y = 2 }
+					regulars = { x = 0 y = 3 }
+				}
 			}
-		}
-		capital_scope = {
-			create_unit = {
-				division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
-				owner = ROOT
-			}
-			create_unit = {
-				division = "name = \"2nd Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
-				owner = ROOT
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"2nd Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+					owner = ROOT
+				}
 			}
 		}
 	}
@@ -2229,6 +2292,7 @@ shared_focus = {
 			producer = RUS
 		}
 		add_timed_idea = { idea = satellite_rapid_production days = 180 }
+		custom_effect_tooltip = PAG_peace_war
 	}
 	ai_will_do = {
 		factor = 2
@@ -2239,28 +2303,28 @@ shared_focus = {
 	id = satellite_counterattacks
 	icon = GFX_generic_stalker_1
 	x = 0
-	y = 3
+	y = 2
 	cost = 6.5
-
-	available = {
-		has_war = no
-		RCH = { exists = yes }
-		has_army_manpower = {
-			size > 399
-		}
-		has_war_support > 0.69
-	}
-
 	prerequisite = { 
 		focus = satellite_antifascist_decisions
 	}
-
-	relative_position_id = satellite_defence_against_fascism
-
+	available = {
+		has_war = no
+		RCH = { exists = yes }
+		has_army_manpower = { size > 199 }
+		has_war_support > 0.69
+		count_triggers = {
+			amount = 1
+			RCH = {
+				has_completed_focus = RCH_proclamation_of_slavic_unity
+			}
+			RCH = { has_added_tension_amount > 4 }
+		}
+	}
+	relative_position_id = satellite_antifascist_decisions
 	completion_reward = {
 		add_ideas = satellite_stand_firm_against_fascism
 	}
-
 	ai_will_do = {
 		factor = 0.5
 		modifier = {
