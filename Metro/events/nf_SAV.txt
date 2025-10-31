@@ -102,3 +102,403 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+    id = nf_SAV.4
+    title = nf_SAV.4.t
+    desc = nf_SAV.4.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV.4.a
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = 0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV.5
+    title = nf_SAV.5.t
+    desc = nf_SAV.5.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = SAV.5.a
+		capital_scope = {
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+	option = {
+		name = nf_SAV.5.a
+		custom_effect_tooltip = SAV.6.a.tt
+		add_ideas = SAV_flamethrower_tinkering
+		hidden_effect = {
+			country_event = {
+				id = nf_SAV.6 random_days = 200
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV.6
+    title = nf_SAV.6.t
+    desc = nf_SAV.6.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV.6
+		remove_ideas = SAV_flamethrower_tinkering
+		capital_scope = {
+			add_resource = {
+				type = scrap
+				amount = 2
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+	option = {
+		name = nf_SAV.6.a
+		custom_effect_tooltip = nf_SAV.6.a.tt
+		swap_ideas = {
+			remove_idea = SAV_flamethrower_tinkering
+			add_idea = SAV_flamethrower_tinkering_2
+		}
+		hidden_effect = {
+			country_event = {
+				id = nf_SAV.7 random_days = 200
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV.7
+    title = nf_SAV.7.t
+    desc = nf_SAV.7.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV.7
+		swap_ideas = {
+			remove_idea = SAV_flamethrower_tinkering_2
+			add_idea = SAV_flamethrower_tinkering_3
+		}
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 1
+			uses = 1
+			ahead_reduction = 3
+			technology = tech_flamethrower_equipment_2
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+add_namespace = nf_SAV_trade
+
+country_event = {
+    id = nf_SAV_trade.1
+    title = nf_SAV_trade.1.t
+    desc = nf_SAV_trade.1.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # accept
+		name = nf_SAV_trade.1.a
+		add_opinion_modifier = {
+			target = MEN
+			modifier = PLS_support
+		}
+		reverse_add_opinion_modifier = {
+			target = SAV
+			modifier = PLS_support
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+add_namespace = nf_SAV_dimitrovskaya
+
+country_event = {
+    id = nf_SAV_dimitrovskaya.1
+    title = nf_SAV_dimitrovskaya.1.t
+    desc = nf_SAV_dimitrovskaya.1.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SAV_dimitrovskaya.1.a
+		368 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+			    instant_build = yes
+			}
+		}
+		country_event = {
+			id = nf_SAV_dimitrovskaya.2 random_days = 100
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV_dimitrovskaya.2
+    title = nf_SAV_dimitrovskaya.2.t
+    desc = nf_SAV_dimitrovskaya.2.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SAV_dimitrovskaya.2.a
+		368 = {
+			add_manpower = 20
+		}
+		hidden_effect = {
+			country_event = {
+				id = nf_SAV_dimitrovskaya.3 random_days = 180
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV_dimitrovskaya.3
+    title = nf_SAV_dimitrovskaya.3.t
+    desc = nf_SAV_dimitrovskaya.3.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SAV_dimitrovskaya.3.a
+		add_stability = -0.05
+		custom_effect_tooltip = nf_SAV_dimitrovskaya.3.a.tt
+		hidden_effect = {
+			set_country_flag = SAV_satanist_country_flag
+			country_event = {
+				id = nf_SAV_dimitrovskaya.4 random_days = 360
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+    id = nf_SAV_dimitrovskaya.4
+    title = nf_SAV_dimitrovskaya.4.t
+    desc = nf_SAV_dimitrovskaya.4.d
+    picture = ccc_mutant
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SAV_dimitrovskaya.4.a
+		custom_effect_tooltip = nf_SAV_dimitrovskaya.4.a.tt
+		add_stability = -0.1
+		add_war_support = 0.05
+		368 = {
+			add_manpower = -10
+		}
+		hidden_effect = {
+			set_country_flag = SAV_satanist_disappearance_country_flag
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+add_namespace = nf_SAV_puppet
+
+country_event = {
+    id = nf_SAV_puppet.1
+    title = nf_SAV_puppet.1.t
+    desc = nf_SAV_puppet.1.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV_puppet.1.a
+		SAV = { puppet = ROOT }
+		ai_chance = {
+			factor = 0.5
+			modifier = {
+    			factor = 50
+    			strength_ratio = {
+    				tag = SAV
+    				ratio < 0.26
+				}
+    		}
+		}
+	}
+	option = {
+		name = nf_SAV_puppet.2.a
+		SAV = {
+			country_event = { id = nf_SAV_puppet.2 days = 2 }
+		}
+		ai_chance = {
+			factor = 0.5
+			modifier = {
+    			factor = 50
+    			strength_ratio = {
+    				tag = SAV
+    				ratio > 0.24
+				}
+    		}
+		}
+	}
+}
+country_event = {
+    id = nf_SAV_puppet.2
+    title = nf_SAV_puppet.2.t
+    desc = nf_SAV_puppet.2.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV_puppet.2.a
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+add_namespace = nf_SAV_politics 
+
+country_event = {
+    id = nf_SAV_politics.1
+    title = nf_SAV_politics.1.t
+    desc = nf_SAV_politics.1.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_SAV_politics.1.a
+		add_popularity = {
+			ideology = community
+			popularity = -0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+
+	option = {
+		name = nf_SAV_politics.1.b
+		add_popularity = {
+			ideology = council
+			popularity = 0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+
+	option = {
+		name = nf_SAV_politics.1.c
+		add_popularity = {
+			ideology = oligarch
+			popularity = 0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+country_event = {
+    id = nf_SAV_politics.2
+    title = nf_SAV_politics.2.t
+    desc = nf_SAV_politics.2.d
+    picture = ccc_mutant
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV_politics.2.a
+		set_politics = { 
+			ruling_party = council
+		 	elections_allowed = no 
+		}
+		add_popularity = {
+			ideology = council
+			popularity = 0.2
+		}
+		add_political_power = 50
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+	option = {
+		name = nf_SAV_politics.2.b
+		set_politics = { 
+			ruling_party = oligarch
+		 	elections_allowed = no 
+		}
+		add_popularity = {
+			ideology = oligarch
+			popularity = 0.2
+		}
+		add_political_power = 50
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}

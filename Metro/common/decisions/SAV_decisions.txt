@@ -1,0 +1,284 @@
+SAV_decision_category_alliance_mission = {
+
+	SAV_decision_category_grow_economy_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			has_built = {
+    			type = industrial_complex
+    			value > 9
+			}
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 50
+		}
+	}
+	SAV_decision_category_buildup_military_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			count_triggers = {
+				amount = 2
+				has_built = {
+    				type = arms_factory
+    				value > 9
+				}
+				has_army_manpower = {
+    				size > 149
+				}
+				OR = {
+					has_tech = entrench_kits_2032
+					has_tech = conventional_infantry_equipment_tech_2
+				}
+			}
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+			army_experience = 50
+		}
+	}
+	SAV_decision_category_connect_stations_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			AND = {
+				312 = {
+					infrastructure > 4
+				}
+				111 = {
+					infrastructure > 4
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SAV_station_infrastructure_tooltip
+				368 = { infrastructure > 4 }
+				312 = { infrastructure > 4 }
+			}
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+		}
+	}
+	SAV_decision_category_repopulate_dimitrovskaya_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			368 = { is_core_of = ROOT }
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+		}
+	}
+	SAV_decision_category_stabilize_sector_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			has_stability > 0.79
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_political_power = -50
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 50
+		}
+	}
+	SAV_decision_category_timiryazevskaya_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_screams_from_timiryazevskaya }
+		is_good = no
+
+		selectable_mission = no
+		fire_only_once = yes
+
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+
+		available = {	## We will complete the mission if these are triggered
+			count_triggers = {
+				amount = 1
+				SAT = { exists = no }
+				SAT = { capital_scope = { is_owned_by = ROOT } }
+				368 = {
+					any_province_building_level = {
+    					province = {
+							id = 3133
+							id = 3134
+        					limit_to_border = yes
+    					}
+   	 					building = bunker
+						level < 1
+					}
+					any_province_building_level = {
+    					province = {
+							id = 3133
+							id = 3134
+        					limit_to_border = yes
+    					}
+   	 					building = bunker2
+						level < 1
+					}
+				}
+			}
+		}
+
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			## Abandon Dimitrovskaya
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.1
+			}
+		}
+
+		complete_effect = {
+			army_experience = 50
+		}
+	}
+}
+SAV_decision_category_exert_influence = {
+	SAV_decision_exert_influence_MEN = {
+		visible = { MEN = { exists = yes } }
+		available = { MEN = { exists = yes is_subject = no } }
+
+		cost = 20
+		fire_only_once = yes
+		complete_effect = {
+			MEN = {
+				if = {
+					limit = { ROOT = { has_government = community } }
+					add_timed_idea = { idea = SAV_community_interference days = 1080 }
+				}
+				if = {
+					limit = { ROOT = { has_government = council } }
+					add_timed_idea = { idea = SAV_council_interference days = 1080 }
+				}
+				if = {
+					limit = { ROOT = { has_government = oligarch  } }
+					add_timed_idea = { idea = SAV_oligarch_interference days = 1080 }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+	SAV_decision_exert_influence_demand_submit = {
+		icon = eng_propaganda_campaigns
+
+		available = {
+			FROM = { NOT = { has_idea = civics_border_3 } }
+		}
+	
+		cost = 0
+		days_remove = 7
+		fire_only_once = yes 
+		target_array = global.countries
+	
+		target_trigger = {
+			FROM = { 
+				custom_trigger_tooltip = {
+					tooltip = currently_being_influenced
+					hidden_trigger = {
+						OR = {
+							has_idea = SAV_community_interference
+							has_idea = SAV_council_interference
+							has_idea = SAV_oligarch_interference
+						}
+					}
+				}
+				AND = { is_neighbor_of = ROOT } 
+			}
+		}
+		complete_effect = {
+			FROM = {
+				country_event = { id = nf_SAV_puppet.1 days = 2 }
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				puppet = FROM
+			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+}
+		

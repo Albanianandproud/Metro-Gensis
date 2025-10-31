@@ -1,0 +1,95 @@
+SAV_power_balance_category = {
+
+	SAV_power_balance_push_centralization_small = {
+		icon = GFX_SAV_centralization_small
+		priority = 100
+		available = { 
+			power_balance_value = {
+    			id = SAV_power_balance
+    			value > -0.667
+			}
+		}
+		cost = 100
+		fire_only_once = yes
+		complete_effect = {
+			add_stability = -0.05
+			add_war_support = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.1
+			}
+		}
+	}
+	SAV_power_balance_push_centralization_large = {
+		icon = GFX_SAV_centralization_large
+		priority = 99
+		available = { 
+			power_balance_value = {
+    			id = SAV_power_balance
+    			value > -0.667
+			}
+		}
+		cost = 200
+		fire_only_once = yes
+		complete_effect = {
+			add_stability = -0.1
+			add_war_support = -0.1
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.2
+			}
+		}
+	}
+	SAV_power_balance_gather_support_station_bureaucrats = {
+		icon = GFX_SAV_station_bureaucrats
+		priority = 5
+		available = { 
+			power_balance_value = {
+    			id = SAV_power_balance
+    			value > -0.667
+			}
+		}
+		cost = 100
+		days_re_enable = 360
+		days_remove = 70
+		modifier = {
+			power_balance_daily = 0.004
+		}
+	}
+	SAV_power_balance_station_unity = {
+		icon = GFX_SAV_unity
+		priority = 2
+		available = { 
+			has_stability > 0.334
+		}
+		cost = 85
+		days_re_enable = 360
+		days_remove = 84
+		modifier = {
+			power_balance_daily = 0.004
+		}
+	}
+	SAV_power_balance_seek_compromise_with_bulvar = {
+		icon = GFX_SAV_compromise
+		priority = 3
+		available = { 
+			power_balance_value = {
+    			id = SAV_power_balance
+    			value < 0.334
+			}
+		}
+		visible = {
+			OR = {
+				has_completed_focus = SAV_focus_steady_hand_and_guidance
+				has_completed_focus = SAV_focus_change_of_leadership
+			}
+		}
+		cost = 10
+		days_re_enable = 360
+		days_remove = 84
+		modifier = {
+			power_balance_daily = 0.004
+			political_power_factor = -0.15
+		}
+	}
+}

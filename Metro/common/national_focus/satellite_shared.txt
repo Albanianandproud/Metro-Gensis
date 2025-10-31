@@ -3,7 +3,7 @@
 shared_focus = {
 	id = satellite_military
 	icon = GFX_generic_equipment_gasmask_4
-	x = -10
+	x = -12
 	y = 0
 	cost = 6.5
 
@@ -35,7 +35,12 @@ shared_focus = {
 	x = 0
 	y = 2
 	cost = 6.5
-
+	available = {
+		if = { 
+			limit = { original_tag = SAV }
+			has_completed_focus = SAV_focus_joint_station_committee
+		}
+	}
 	prerequisite = { focus = satellite_military }
 
 	relative_position_id = satellite_military
@@ -440,6 +445,10 @@ shared_focus = {
 			limit = { original_tag = ULI }
 			has_completed_focus = ULI_focus_1
 		}
+		if = { 
+			limit = { original_tag = SAV }
+			has_completed_focus = SAV_focus_joint_station_committee
+		}
 	}
 
 	completion_reward = {
@@ -830,7 +839,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_economy
 	icon = GFX_generic_construction
-	x = 8
+	x = 7
 	y = 0
 	cost = 6.5
 
@@ -842,6 +851,10 @@ shared_focus = {
 		if = { 
 			limit = { original_tag = ULI }
 			has_completed_focus = ULI_focus_1
+		}
+		if = { 
+			limit = { original_tag = SAV }
+			has_completed_focus = SAV_focus_joint_station_committee
 		}
 	}
 
@@ -1231,7 +1244,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_economy_5
-	icon = GFX_workers
+	icon = GFX_generic_tools
 	x = -1
 	y = 2
 	cost = 6.5
@@ -1337,7 +1350,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_arsenal
-	icon = GFX_generic_ammunition_1
+	icon = GFX_generic_bullet_cartridges
 	x = 5
 	y = 1
 	cost = 6.5
@@ -1469,7 +1482,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_investment_domestics
-	icon = GFX_generic_domestics
+	icon = GFX_generic_soviet_gear
 	x = -2
 	y = 2
 	cost = 6.5
@@ -1549,7 +1562,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_investment_arsenal
-	icon = GFX_generic_armaments
+	icon = GFX_generic_gun_parts
 	x = 2
 	y = 2
 	cost = 6.5
@@ -1679,12 +1692,16 @@ shared_focus = {
 	completion_reward = {
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
-			add_extra_state_shared_building_slots = 4
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = arms_factory
 				level = 1
 				instant_build = yes
 			}
+		}
+		random_owned_state = {
+			limit = { NOT = { has_state_category = pastoral } }
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = industrial_complex
 				level = 1
@@ -1701,7 +1718,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_investment_alone
 	icon = GFX_equipment_backpack
-	x = 1
+	x = 2
 	y = 1
 	cost = 6.5
 
@@ -1734,8 +1751,8 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_investment_alone_3
-	icon = GFX_station_entrance
-	x = 3
+	icon = GFX_generic_rail
+	x = 2
 	y = 1
 	cost = 6.5
 
@@ -1764,7 +1781,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_our_own_technicians
 	icon = GFX_generic_technician_focus
-	x = 1
+	x = 0
 	y = 1
 	cost = 6.5
 
@@ -1787,7 +1804,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_specialised_production
-	icon = GFX_generic_armaments_parts
+	icon = GFX_generic_lathe_machine
 	x = -1
 	y = 1
 	cost = 6.5
@@ -1818,7 +1835,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_chemicals
-	icon = GFX_generic_technician_medical
+	icon = GFX_generic_chemist_station
 	x = 1
 	y = 1
 	cost = 6.5
@@ -1915,15 +1932,22 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_defence_against_fascism
-	icon = GFX_soldier_2
-	x = 46
+	icon = GFX_generic_night_vision
+	x = 49
 	y = 0
 	cost = 6.5
 	available = { 
-		RCH = { exists = yes } 
 		if = { 
 			limit = { original_tag = ULI }
 			has_completed_focus = ULI_focus_1
+		}
+		if = { 
+			limit = { original_tag = SAV }
+			has_completed_focus = SAV_focus_joint_station_committee
+		}
+		RCH = {
+			has_added_tension_amount > 0
+			exists = yes
 		}
 	}
 	completion_reward = {
@@ -2269,7 +2293,7 @@ shared_focus = {
 
 shared_focus = {
 	id = satellite_militarization
-	icon = GFX_bullets_2
+	icon = GFX_generic_stalker_expedition
 	x = 1
 	y = 1
 	cost = 6.5
@@ -2378,7 +2402,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_our_path
 	icon = GFX_HNZ_committee_centralisation
-	x = 37
+	x = 39
 	y = 0
 	cost = 6.5
 
@@ -2416,7 +2440,7 @@ shared_focus = {
 shared_focus = {
 	id = satellite_winds_of_change
 	icon = GFX_generic_political
-	x = -3
+	x = -4
 	y = 1
 	cost = 6.5
 	prerequisite = { 

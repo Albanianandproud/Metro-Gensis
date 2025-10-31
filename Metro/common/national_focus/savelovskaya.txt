@@ -1,8 +1,9 @@
+#!gfx:interface\metro_goals.gfx
 focus_tree = {
 	id = nf_savyolovskaya
 	
 	country = {
-		factor = 0
+		factor = 1
 		modifier = {
 			add = 20
 			tag = SAV
@@ -15,1925 +16,1076 @@ focus_tree = {
 	shared_focus = satellite_military
 	shared_focus = satellite_defend_the_bulwark
 	shared_focus = satellite_economy
+	shared_focus = satellite_our_path
+	shared_focus = satellite_defence_against_fascism
 
+	## Intro
 	focus = {
-		id = SAV_intro
+		id = SAV_focus_joint_station_committee
+		icon = GFX_HNZ_support_SAV
+		x = 24
+		y = 0
+		cost = 4.3
+		completion_reward = {
+			custom_effect_tooltip = SAV_focus_joint_station_committee_tooltip
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 75
+			hidden_effect = {
+				country_event = {
+					id = SAV_trade.1 random_days = 20
+				}
+				country_event = {
+					id = SAV_dimitrovskaya.1 random_days = 80
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	focus = {
+		id = SAV_focus_kindle_an_identity
 		icon = GFX_HNZ_support_SAV
 		cost = 6.5
-		x = 25
-		y = 0
-
-		completion_reward = {
-			country_event = nf_SAV.1
-			add_political_power = 50
-		}
-
-		ai_will_do = {
-			factor = 800
-		}
-	}
-
-	focus = {
-		id = SAV_flamethrower_boost
-		icon = GFX_flamethrower_arms_1
-		x = -6
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_intro
-		}
-
-		relative_position_id = SAV_intro
-
-		completion_reward = {
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 4
-				category = flamethrower_support_tech
-            		}
-			add_tech_bonus = {
-				ahead_reduction = 1
-				uses = 1
-				category = flamethrower_support_tech
-            		}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_experimental_flamethrower
-		icon = GFX_flamethrower
-		x = 0
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = SAV_flamethrower_boost
-		}
-
-		relative_position_id = SAV_flamethrower_boost
-
+		prerequisite = { focus = SAV_focus_joint_station_committee }
 		available = {
-			date > 2032.01.01
+			has_any_power_balance = yes
 		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				bonus = 0.5
-				ahead_reduction = 2
-				uses = 1
-				category = flamethrower_support_tech
-            		}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_diplomatic_missions
-		icon = GFX_generic_political
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_intro
-		}
-
-		relative_position_id = SAV_intro
-
-		completion_reward = {
-			add_political_power = 75
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_mission_redline
-		icon = GFX_generic_support_redline
-		x = -3
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_diplomatic_missions
-		}
-
-		available = { 
-			RED = { exists = yes }
-			NOT  = { has_war_with = RED }
-		}
-
-		relative_position_id = SAV_diplomatic_missions
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = RED
-				modifier = support
-			}
-			RED = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = support
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_soviet_nostalgia
-		icon = GFX_generic_soviet
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_mission_redline
-		}
-
-		available = { 
-			RED = { exists = yes }
-			NOT  = { has_war_with = RED }
-		}
-
-		relative_position_id = SAV_mission_redline
-
-		completion_reward = {
-			add_ideas = satellite_soviet_nostalgia
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_mission_polis
-		icon = GFX_generic_support_polis
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_diplomatic_missions
-		}
-
-		available = { 
-			PLS = { exists = yes }
-			NOT  = { has_war_with = PLS }
-		}
-
-		relative_position_id = SAV_diplomatic_missions
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = PLS
-				modifier = support
-			}
-			PLS = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = support
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_study_polis_libraries
-		icon = GFX_generic_market
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_mission_polis
-		}
-
-		available = { 
-			PLS = { exists = yes }
-			NOT  = { has_war_with = PLS }
-		}
-
-		relative_position_id = SAV_mission_polis
-
-		completion_reward = {
-			set_country_flag = allow_access_polis_education_decision
-			custom_effect_tooltip = access_polis_education_decision
-			capital_scope = {
-				limit = { NOT = { has_state_category = pastoral } }
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_mission_hanza
-		icon = GFX_generic_support_hanza
 		x = 3
 		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_diplomatic_missions
-		}
-
-		available = { 
-			HNZ = { exists = yes } 
-			NOT  = { has_war_with = HNZ } 
-		}
-
-		relative_position_id = SAV_diplomatic_missions
-
+		relative_position_id = SAV_focus_joint_station_committee
 		completion_reward = {
-			add_opinion_modifier = {
-				target = HNZ
-				modifier = support
-			}
-			HNZ = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = support
-				}
+			custom_effect_tooltip = SAV_focus_kindle_an_identity_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_timed_idea = {
+				idea = SAV_an_identity
+				days = 360
 			}
 		}
 		ai_will_do = {
-			factor = 7
+			factor = 1
 		}
 	}
-
 	focus = {
-		id = SAV_hanza_trade
-		icon = GFX_generic_support_hanza
-		x = 0
-		y = 1
+		id = SAV_focus_trubnaya_exert_influence
+		icon = GFX_HNZ_support_SAV
 		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_mission_hanza
-		}
+		prerequisite = { focus = SAV_focus_kindle_an_identity }
 		available = {
-			HNZ = { exists = yes }
-			NOT  = { has_war_with = HNZ }
-			OR = {
-				is_neighbor_of = HNZ
-				is_neighbor_of = MEN
-			}
+			is_subject = no
+			TRB = { exists = yes is_puppet = no }
+			266 = { is_owned_by = ROOT }
+			has_country_flag = SAV_has_chosen_leader
 		}
-
-		relative_position_id = SAV_mission_hanza
-
+		x = 2
+		y = 2
+		relative_position_id = SAV_focus_kindle_an_identity
 		completion_reward = {
-			add_opinion_modifier = {
-				target = HNZ
-				modifier = VDN_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = HNZ
-				modifier = VDN_trade
-			}
-			capital_scope = {
-				add_resource = {
-					type = electronics
-					amount = 1
+			TRB = {
+				if = {
+					limit = { ROOT = { has_government = community } }
+					add_timed_idea = { idea = SAV_community_interference days = 1080 }
+				}
+				if = {
+					limit = { ROOT = { has_government = council } }
+					add_timed_idea = { idea = SAV_council_interference days = 1080 }
+				}
+				if = {
+					limit = { ROOT = { has_government = oligarch  } }
+					add_timed_idea = { idea = SAV_oligarch_interference days = 1080 }
 				}
 			}
-			HNZ = {
-				376 = {
-					add_resource = {
-						type = electronics
-						amount = 1
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_colonize_east_wings
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_trubnaya_exert_influence }
+		available = { 
+			109 = { is_owned_by = RUI }
+			OR = {
+				TRB = { is_puppet_of = ROOT }
+				373 = { is_core_of = ROOT }
+			}
+			OR = {
+				249 = { is_owned_by = RUI }
+				AND = {
+					249 = { is_owned_by = DSE }
+					DSE = { is_subject = no }
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SAV_is_unified_tooltip
+				hidden_trigger = {
+					NOT = {
+						has_any_power_balance = yes
 					}
 				}
 			}
+			has_manpower > 9
+			has_equipment = { infantry_equipment > 9 }
 		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_political_alignment
-		icon = GFX_HNZ_committee_centralisation
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_soviet_nostalgia
-			focus = SAV_study_polis_libraries
-			focus = SAV_hanza_trade
-		}
-		available = {
-			date > 2032.01.01
-		}
-
-		relative_position_id = SAV_study_polis_libraries
-
-		completion_reward = {
-			add_political_power = 100
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_align_redline
-		icon = GFX_generic_support_redline
-		x = -3
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_alignment
-		}
-
-		available = { 
-			RED = { exists = yes }
-			NOT  = { has_war_with = RED }
-		}
-
-		mutually_exclusive = { focus = SAV_armed_neutrality }
-		mutually_exclusive = { focus = SAV_align_hanza }
-
-		relative_position_id = SAV_political_alignment
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = RED
-				modifier = jointoperations
-			}
-			RED = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = jointoperations
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_armed_neutrality
-		icon = GFX_generic_defences
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_alignment
-		}
-
-		mutually_exclusive = { focus = SAV_align_redline }
-		mutually_exclusive = { focus = SAV_align_hanza }
-
-		relative_position_id = SAV_political_alignment
-
-		completion_reward = {
-			add_stability = 0.1
-			add_war_support = 0.1
-			add_command_power = 25
-			army_experience = 25
-			add_ideas = satellite_our_own_way
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = SAV_align_hanza
-		icon = GFX_generic_support_hanza
-		x = 3
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_alignment
-		}
-
-		available = { 
-			HNZ = { exists = yes }
-			NOT  = { has_war_with = HNZ }
-		}
-
-		mutually_exclusive = { focus = SAV_align_redline }
-		mutually_exclusive = { focus = SAV_armed_neutrality }
-
-		relative_position_id = SAV_political_alignment
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = HNZ
-				modifier = jointoperations
-			}
-			HNZ = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = jointoperations
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_soviet_help
-		icon = GFX_RED_troops2
-		x = -4
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_align_redline
-		}
-
-		available = { 
-			RED = { exists = yes }
-			NOT  = { has_war_with = RED }
-		}
-
-		relative_position_id = SAV_align_redline
-
-		completion_reward = {
-			## get an advisor or general or smth from redline
-			army_experience = 15
+		select_effect = {
+			add_manpower = -10
 			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 20
-				producer = RUS
-			}
-			RED = { army_experience = 10 }
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_kick_out_foreign_merchants
-		icon = GFX_RED_deter_capitalism
-		x = -2
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_align_redline
-		}
-
-		available = { 
-			HNZ = { exists = yes }
-		}
-
-		relative_position_id = SAV_align_redline
-
-		completion_reward = {
-			satellite_remove_hanza_dependency = yes
-			add_timed_idea = { idea = _satellite_expunged_merchants days = 180 }
-			HNZ = { country_event = { id = nf_satellite.9 } }
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+				type = infantry_equipment
+				amount = 10
 			}
 		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_deal_with_the_devil
-		icon = GFX_generic_redline_alliance
 		x = 0
 		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_align_redline
-		}
-
-		available = { 
-			HNZ = { exists = yes }
-			RED = { exists = yes }
-			is_neighbor_of = HNZ
-		}
-
-		mutually_exclusive = { focus = SAV_strike_the_hanseatic_league }
-
-		relative_position_id = SAV_align_redline
-
+		relative_position_id = SAV_focus_trubnaya_exert_influence
 		completion_reward = {
-			## we'll declare war on HNZ IF Redline does so
-			custom_effect_tooltip = _satellite_kill_hanza_assistance
-			custom_effect_tooltip = _satellite_redline_assistance
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.25
-				uses = 1
-				category = land_doctrine
-			}
-			add_tech_bonus = {
-				name = clothing_kits
-				bonus = 0.25
-				uses = 1
-				category = clothing_kits
-			}
-			army_experience = 15
-		}
-		ai_will_do = {
-			factor = 5
-			date > 2034.1.1
-		}
-	}
-
-	focus = {
-		id = SAV_strike_the_hanseatic_league
-		icon = GFX_RED_anti_fascism_2
-		x = 2
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_align_redline
-			focus = SAV_armed_neutrality
-		}
-
-		available = { 
-			HNZ = { exists = yes }
-			RED = { exists = yes }
-			is_neighbor_of = HNZ
-			strength_ratio = {
-				tag = HNZ
-				ratio > 0.49
-			}
-		}
-
-		mutually_exclusive = { focus = SAV_deal_with_the_devil }
-
-		relative_position_id = SAV_align_redline
-
-		completion_reward = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = HNZ
-			}	
-		}
-		ai_will_do = {
-			factor = 5
-			date > 2034.1.1
-		}
-	}
-
-	focus = {
-		id = SAV_de_sovietization
-		icon = GFX_generic_de_sovietization
-		x = 3
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_armed_neutrality
-			focus = SAV_align_hanza
-		}
-
-		available = { 
-			RED = { exists = yes }
-		}
-		relative_position_id = SAV_armed_neutrality
-
-		completion_reward = {
-			add_ideas = satellite_de_sovietization
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_strike_the_redline
-		icon = GFX_generic_anti_communist_focus
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_de_sovietization
-		}
-		prerequisite = {
-			focus = SAV_armed_neutrality
-		}
-
-		mutually_exclusive = { focus = SAV_in_the_interests_of_the_anti_revolution }
-
-		available = { 
-			RED = { exists = yes }
-			is_neighbor_of = RED
-			strength_ratio = {
-				tag = RED
-				ratio > 0.49
-			}
-		}
-
-		relative_position_id = SAV_de_sovietization
-
-		completion_reward = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = RED
-			}	
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_in_the_interests_of_the_anti_revolution
-		icon = GFX_generic_hanza_alliance
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_de_sovietization
-		}
-		prerequisite = {
-			focus = SAV_align_hanza
-		}
-
-		mutually_exclusive = { focus = SAV_strike_the_redline }
-
-		available = { 
-			RED = { exists = yes }
-			HNZ = { exists = yes }
-			is_neighbor_of = RED
-		}
-		relative_position_id = SAV_de_sovietization
-		completion_reward = {
-			## we'll declare war on RED IF Hanza does so
-			custom_effect_tooltip = _satellite_kill_redline_assistance
-			custom_effect_tooltip = _satellite_hanza_assistance
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.25
-				uses = 1
-				category = land_doctrine
-			}
-			add_tech_bonus = {
-				name = clothing_kits
-				bonus = 0.25
-				uses = 1
-				category = clothing_kits
-			}
-			army_experience = 15
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_mendeleyevskaya
-		icon = GFX_HNZ_generic_agreement
-		x = 2
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_align_hanza
-		}
-
-		available = {
-			is_neighbor_of = HNZ
-			111 = {
-				is_owned_by = SAV
-			}
-			266 = {
-				OR = {
-					is_owned_by = MEN
-					is_owned_by = HNZ
+			if = {
+				limit = {
+					109 = {
+						is_owned_by = RUI
+					}
 				}
+				transfer_state = 109
 			}
-			HNZ = { exists = yes }
-		}
-		relative_position_id = SAV_align_hanza
-
-		completion_reward = {
-			HNZ = {
-				country_event = nf_SAV.3
-			}
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_a_new_power_dawns
-		icon = GFX_generic_a_new_power_dawns
-		x = 0
-		y = 2
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_armed_neutrality
-		}
-
-		available = { 
-			is_major = yes
-		}
-		relative_position_id = SAV_armed_neutrality
-
-		completion_reward = {
-			set_rule = { can_create_factions = yes }
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_assist_the_rangers
-		icon = GFX_SPT_patch_guns
-		x = 1
-		y = 3
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_armed_neutrality
-		}
-
-		available = { 
-			is_major = yes
-		}
-		relative_position_id = SAV_armed_neutrality
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = SPT
-				modifier = support 
-			}
-			SPT = {
-				add_opinion_modifier = {
-					target = ROOT
-				modifier = support 
-			}
-		}
-		custom_effect_tooltip = _satellite_receive_spartan_character
-		}
-		ai_will_do = {
-			factor = 2.5
-		}
-	}
-
-	focus = {
-		id = SAV_intergrate_industries
-		icon = GFX_SPT_generic_gear_repair
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_assist_the_rangers
-		}
-		available = {
-			SPT = {
-				exists = yes
-			}
-		}
-		relative_position_id = SAV_assist_the_rangers
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = ARB_spartan_intergration
-			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
+			if = {
+				limit = {
+					DSE = {
+						exists = yes 
+					}
 				}
-			}
-			SPT = {
-				capital_scope = {
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = arms_factory
-						level = 2
-						instant_build = yes
+				DSE = {
+					if = {
+						limit = { ROOT = { has_government = community } }
+						add_timed_idea = { idea = SAV_community_interference days = 1080 }
+					}
+					if = {
+						limit = { ROOT = { has_government = council } }
+						add_timed_idea = { idea = SAV_council_interference days = 1080 }
+					}
+					if = {
+						limit = { ROOT = { has_government = oligarch  } }
+						add_timed_idea = { idea = SAV_oligarch_interference days = 1080 }
 					}
 				}
 			}
-		}
-	}
-
-	focus = {
-		id = SAV_assistance_against_MOB
-		icon = GFX_SPT_generic_soldier_3
-		x = 2
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_assist_the_rangers
-		}
-		available = {
-			has_war = yes
-		}
-		relative_position_id = SAV_assist_the_rangers
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = special_forces_equipment_spetsnaz
-				amount = 20
-				producer = RUS
-			}
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_3
-				amount = 20
-				producer = RUS
+			else_if = {
+				limit = { 
+					DSE = { exists = no }
+				}
+				transfer_state = 249
 			}
 		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
 	}
-
 	focus = {
-		id = SAV_ranger_initialisation
-		icon = GFX_SPT_generic_gear
-		x = -1
-		y = 2
+		id = SAV_focus_consolidation_2
+		icon = GFX_HNZ_support_SAV
 		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_assist_the_rangers
-		}
-		available = {
-			SPT = { exists = yes }
-		}
-		relative_position_id = SAV_assist_the_rangers
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_popularity = {
-				ideology = council
-				popularity = 1
-			}
-			army_experience = 35
-			set_country_flag = allow_spartan_recruitment_laws
-			custom_effect_tooltip = ARB_path_of_ranger
-			add_ideas = SPT_ranger_recruitment
-		}
-	}
-
-	focus = {
-		id = SAV_ranger_spec_ops
-		icon = GFX_SPT_generic_soldier_4
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_ranger_initialisation
-		}
-		available = {
-			SPT = { exists = yes }
-		}
-		relative_position_id = SAV_ranger_initialisation
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			set_technology = {
-				special_forces_spartan_equipment_tech = 1
-			}
-		}
-	}
-
-	focus = {
-		id = SAV_equal_amongst_peers
-		icon = GFX_SPT_generic_logo
-		x = 0
-		y = 2
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_bastion_of_humanity
-			focus = SAV_ranger_spec_ops
-		}
-
-		available = {
-			MOB = {
-				exists = no
-			}
-		}
-		relative_position_id = SAV_ranger_initialisation
-
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = ARB_SPT_spec_ops_cap
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
-			}
-		}
-	}
-
-	focus = {
-		id = SAV_allow_orderly_recruitment
-		icon = GFX_SPT_generic_ranger
-		x = -1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_equal_amongst_peers
-		}
-		relative_position_id = SAV_equal_amongst_peers
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = SPT_ranger_recruitment_station_auxiliary
-			add_manpower = 20
-		}
-	}
-
-	focus = {
-		id = SAV_stalker_intergration
-		icon = GFX_SPT_generic_soldier_5
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_equal_amongst_peers
-		}
-		relative_position_id = SAV_equal_amongst_peers
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			army_experience = 15
-			add_ideas = ARB_SPT_stalker_integration
-		}
-	}
-
-	focus = {
-		id = SAV_bastion_of_humanity
-		icon = GFX_SPT_generic_artyom
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_ranger_initialisation
-		}
-		available = {
-			SPT = { exists = yes }
-		}
-		relative_position_id = SAV_ranger_initialisation
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_ideas = ARB_SPT_bastion_of_humanity
-		}
-	}
-
-	focus = {
-		id = SAV_draw_from_the_commoners
-		icon = GFX_SPT_miller_2
-		x = 1
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_bastion_of_humanity
-		}
-		available = {
-			SPT = { exists = yes }
-		}
-		relative_position_id = SAV_bastion_of_humanity
-		ai_will_do = {
-			factor = 3
-		}
-
-		completion_reward = {
-			add_manpower = 50
-		}
-	}
-
-	focus = {
-		id = SAV_active_measures
-		icon = GFX_gangster
-		x = 6
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = SAV_intro
-		}
-
-		relative_position_id = SAV_intro
-
-		completion_reward = {
-			add_threat = 2
-			add_ideas = satellite_stake_our_claim_in_the_world
-			add_ideas = RED_nkvd_spy_networks
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_defence_against_fascism
-		icon = GFX_soldier_2
-		x = 8
-		y = 3
-		cost = 10
-
+		prerequisite = { focus = SAV_focus_kindle_an_identity }
 		available = { 
-			RCH = { exists = yes }
-			OR = {
-				date > 2030.1.1
-				has_war_with = RCH
-			}
+			312 = { is_owned_by = ROOT }
+			has_idea = SAV_an_identity 
+			has_any_power_balance = yes
 		}
-
-		relative_position_id = SAV_intro
-
+		x = 1
+		y = 1
+		relative_position_id = SAV_focus_kindle_an_identity
 		completion_reward = {
-			add_war_support = 0.1
-			181 = {
+			312 = {
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_tech_bonus = {
+			name = industrial_bonus
+				bonus = 1
+				uses = 1
+				category = construction
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_consolidation_1
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_kindle_an_identity }
+		available = { 
+			368 = { is_owned_by = ROOT }
+			has_idea = SAV_an_identity 
+			has_any_power_balance = yes
+		}
+		x = -1
+		y = 1
+		relative_position_id = SAV_focus_kindle_an_identity
+		completion_reward = {
+			368 = {
 				add_building_construction = {
-					type = supply_node
+					type = infrastructure
 					level = 1
-					province = 3697
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_victory_points = {
+					province = 3189
+					value = 2
+				}
+				add_compliance = 50
+				add_resistance = -50
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_broker_administration
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_consolidation_2 }
+		prerequisite = {  focus = SAV_focus_consolidation_1 }
+		available = { has_idea = SAV_an_identity 
+			has_any_power_balance = yes
+		}
+		x = 1
+		y = 1
+		relative_position_id = SAV_focus_consolidation_1
+		completion_reward = {
+			modify_timed_idea = {
+				idea = SAV_an_identity
+				days = 90
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_oligarch_leader_tt
+			effect_tooltip = {
+				add_political_power = 200
+				add_stability = -0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = oligarch
+					}
+					add_political_power = 200
+					add_stability = -0.05
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_screams_from_timiryazevskaya
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = {  focus = SAV_focus_joint_station_committee }
+		available = { 
+			NOT = { has_war_with = SAT }
+			has_country_flag = SAV_satanist_country_flag 
+		}
+		x = 1
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee
+		completion_reward = {
+			add_war_support = 0.05
+			368 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
 					instant_build = yes
 				}
 			}
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = satellite_antifascist_army
-		icon = GFX_stalker1
-		x = 1
-		y = 1
-		cost = 6.5
-
-		available = { 
-			RCH = { exists = yes } 
-			AND = {
-			has_tech = spec_ops_equipment_1_tech
-			}
-		}
-
-		prerequisite = { 
-			focus = SAV_defence_against_fascism
-		}
-
-		relative_position_id = SAV_defence_against_fascism
-
-		completion_reward = {
-			division_template = {
-				name = "Special Forces"
-				priority = 1
-				template_counter = 0
-				regiments = {
-					special_forces = { x = 0 y = 0 }
-					special_forces = { x = 0 y = 1 }
-					special_forces = { x = 0 y = 2 }
-					special_forces = { x = 0 y = 3 }
+			if = {
+				limit = {
+					113 = { is_owned_by = ROOT }
 				}
-				support = {
-					field_hospital = { x = 0 y = 0 }
-				}
-			}
-			capital_scope = {
-				create_unit = {
-					division = "name = \"Special Forces\" division_template = \"Special Forces\" start_experience_factor = 1 start_equipment_factor = 1"
-					owner = ROOT
+				113 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = { all_provinces = yes }
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
 				}
 			}
 		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-
-	focus = {
-		id = SAV_antifascist_decisions
-		icon = GFX_RCH_generic_anti
-		x = 3
-		y = 1
-		cost = 6.5
-
-		available = { RCH = { exists = yes } }
-
-		prerequisite = { 
-			focus = SAV_defence_against_fascism
-		}
-
-		relative_position_id = SAV_defence_against_fascism
-
-		completion_reward = {
-			custom_effect_tooltip = satellite_enable_antifascist_decisions
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-
-	focus = {
-		id = SAV_seek_help_from_the_redline
-		icon = GFX_RED_collectivization_of_tunnels
-		x = -3
-		y = 1
-		cost = 6.5
-
-		available = {
-			RCH = { exists = yes }
-			AND = { RED = { exists = yes }}
-			has_completed_focus = SAV_align_redline
-		}
-
-		prerequisite = { focus = SAV_defence_against_fascism }
-
-		mutually_exclusive = { focus = satellite_struggle_alone }
-
-		relative_position_id = SAV_defence_against_fascism
-
-		completion_reward = {
-			RED = { country_event = nf_satellite.5 }
-		}
-
-		ai_will_do = {
-			factor = 2
-
-			modifier = {
-				factor = 2
-				tag = RED
-			}
-		}
-	}
-
-	focus = {
-		id = SAV_seek_help_from_the_redline_2
-		icon = GFX_RED_to_victory
-		x = 0
-		y = 1
-		cost = 6.5
-
-		available = { 
-			RCH = { exists = yes } AND = { RED = { exists = yes }} 
-			has_tech = entrench_kits_2031
-		}
-
-		prerequisite = { focus = SAV_seek_help_from_the_redline }
-
-		relative_position_id = SAV_seek_help_from_the_redline
-
-		completion_reward = {
-			army_experience = 25
-			division_template = {
-				name = "Regulars"
-				priority = 1
-				template_counter = 0
-				regiments = {
-					regulars = { x = 0 y = 0 }
-					regulars = { x = 0 y = 1 }
-					regulars = { x = 0 y = 2 }
-					regulars = { x = 0 y = 3 }
-				}
-			}
-			capital_scope = {
-				create_unit = {
-					division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
-					owner = ROOT
-				}
-				create_unit = {
-					division = "name = \"2nd Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
-					owner = ROOT
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 4
-		}
-	}
-
-	focus = {
-		id = SAV_struggle_alone_2
-		icon = GFX_tunnel_surplus
-		x = -1
-		y = 1
-		cost = 6.5
-
-		available = {
-			RCH = { exists = yes }
-			has_completed_focus = SAV_armed_neutrality
-		}
-
-		prerequisite = { 
-			focus = SAV_defence_against_fascism
-		}
-		relative_position_id = SAV_defence_against_fascism
-
-		completion_reward = {
-			add_timed_idea = { idea = satellite_tunnel_supply days = 240 }
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-
-	focus = {
-		id = SAV_commander_buff
-		icon = GFX_tunnel_bunker
-		x = -1
-		y = 1
-		cost = 6.5
-
-		available = {
-			has_war = no
-			RCH = { exists = yes }
-		}
-
-		prerequisite = { focus = SAV_antifascist_decisions }
-
-		relative_position_id = SAV_antifascist_decisions
-
-		completion_reward = {
-			every_unit_leader = {
-				gain_xp = 500
-				add_planning = 1
-				add_defense = 1
-			}
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = SAV_militarization
-		icon = GFX_bullets_2
-		x = 1
-		y = 1
-		cost = 6.5
-
-		available = {
-			has_war = no
-			RCH = { exists = yes }
-			has_stability > 0.59
-		}
-
-		prerequisite = { focus = SAV_antifascist_decisions }
-
-		relative_position_id = SAV_antifascist_decisions
-
-		completion_reward = {
-			add_stability = -0.1
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 10
-				producer = RUS
-			}
-			add_timed_idea = { idea = satellite_rapid_production days = 180 }
-		}
-		ai_will_do = {
-			factor = 2
-		}
-	}
-
-	focus = {
-		id = SAV_counterattacks
-		icon = GFX_generic_stalker_1
-		x = 0
-		y = 2
-		cost = 6.5
-
-		available = {
-			has_war = no
-			RCH = { exists = yes }
-			has_army_manpower = {
-				size > 399
-			}
-			has_war_support > 0.69
-		}
-
-		prerequisite = { 
-			focus = SAV_antifascist_decisions
-		}
-
-		relative_position_id = SAV_defence_against_fascism
-
-		completion_reward = {
-			add_ideas = satellite_stand_firm_against_fascism
-		}
-
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 10
-				date > 2033.10.1
-			}
-		}
-	}
-
-	focus = {
-		id = SAV_attack_the_reich
-		icon = GFX_generic_3
-		x = 0
-		y = 1
-		cost = 6.5
-
-		available = {
-			has_war = no
-			RCH = { exists = yes }
-			strength_ratio = {
-				tag = RCH
-				ratio > 0.49
-			}
-			AND = { is_neighbor_of = RCH date > 2033.10.1 }
-		}
-
-		will_lead_to_war_with = RCH
-
-		prerequisite = { focus = SAV_counterattacks }
-
-		relative_position_id = SAV_counterattacks
-
-		completion_reward = {
-			create_wargoal = {
-				type = take_state_focus
-				target = RCH
-				expire = 0
-				generator = { 28 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 10
-				date > 2034.10.1
-			}
-		}
-	}
-
-	focus = {
-		id = SAV_the_screams_from_timiryazevskaya
-		icon = GFX_cog_infrastructure
-		x = 14
-		y = 3
-		cost = 10
-
-		available = { 
-			RCH = { exists = yes }
-			OR = {
-				date > 2033.1.1
-				has_war_with = SAT
-			}
-		}
-
-		relative_position_id = SAV_intro
-
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	focus = {
-		id = SAV_war_on_satan
-		icon = GFX_generic_spec_ops_2
-		x = 0
-		y = 1
-		cost = 6.5
-
-		available = { 
-			RCH = { exists = yes }
-			OR = {
-				date > 2033.1.1
-				has_war_with = SAT
-			}
-		}
-
-		prerequisite = {
-			focus = SAV_the_screams_from_timiryazevskaya
-		}
-
-		relative_position_id = SAV_the_screams_from_timiryazevskaya
-
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 7
-		}
-	}
-
-	## Political ##
-
-	focus = {
-		id = SAV_political_effort
-		icon = GFX_focus_generic_support_the_left_right
-		x = 45
-		y = 0
-		cost = 6.5
-
-		ai_will_do = {
-			factor = 2
-		}
-
-		completion_reward = {
-		    add_political_power = 150
-		}
-	}
-
-    ## community ##
-
-	focus = {
-		id = SAV_community_1
-		icon = GFX_goal_generic_national_unity
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_effort 
-		}
-
-		mutually_exclusive = {
-		    focus = SAV_council_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_dictatorial_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_oligarch_1
-		}
-
-		x = -3
-		y = 1
-		relative_position_id = SAV_political_effort
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = community }
-			}
-		}
-
-		completion_reward = {
-			add_ideas = community
-		    add_political_power = 60
-		}
-	}
-
-	focus = {
-		id = SAV_community_ideology_change
-		icon = GFX_goal_generic_national_unity
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_community_1
-		}
-
-		available = {
-			community > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_community_1
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = community }
-			}
-		}
-
-		completion_reward = {
-			set_politics = { 
-				ruling_party = community
-			 	elections_allowed = no 
-			}
-			add_popularity = {
-				ideology = community
-				popularity = 0.2
-			}
-		    add_political_power = 45
-		}
-	}
-
-	focus = {
-		id = SAV_swing_trubnaya
-		icon = GFX_generic_microphone
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_community_ideology_change
-		}
-
-		available = {
-			date > 2034.1.1
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_community_ideology_change
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = community }
-			}
-		}
-
-		completion_reward = {
-		}
-	}
-
-    ## council ##
-
-	focus = {
-		id = SAV_council_1
-		icon = GFX_goal_anschluss
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_effort 
-		}
-
-		mutually_exclusive = {
-		    focus = SAV_community_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_dictatorial_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_oligarch_1
-		}
-		
-		x = -1
-		y = 1
-		relative_position_id = SAV_political_effort
-
+		cancel_if_invalid = yes
 		ai_will_do = {
 			factor = 1
 		}
-
-		completion_reward = {
-			add_ideas = council
-		    add_political_power = 60
-		}
 	}
-
 	focus = {
-		id = SAV_council_ideology_change
-		icon = GFX_goal_anschluss
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_council_1
-		}
-
-		available = {
-			council > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_council_1
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = council }
-			}
-		}
-
-		completion_reward = {
-			set_politics = { 
-				ruling_party = council
-			 	elections_allowed = no 
-			}
-		    add_popularity = {
-				ideology = council
-				popularity = 0.2
-			}
-		    add_political_power = 45
-		}
-	}
-
-	focus = {
-		id = SAV_ally_trubnaya
-		icon = GFX_HNZ_generic_agreement
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_council_ideology_change
-		}
-
-		available = {
-			council > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_council_ideology_change
-
-		ai_will_do = {
-			factor = 1
-		}
-
-		completion_reward = {
-		}
-	}
-
-    ## oligarch ##
-
-	focus = {
-		id = SAV_oligarch_1
-		icon = GFX_goal_generic_major_alliance
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_effort 
-		}
-
-		mutually_exclusive = {
-		    focus = SAV_community_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_dictatorial_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_council_1
-		}
-		
-		x = 1
-		y = 1
-		relative_position_id = SAV_political_effort
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = oligarch }
-			}
-		}
-
-		completion_reward = {
-			add_ideas = oligarch
-		    add_political_power = 60
-		}
-	}
-
-	focus = {
-		id = SAV_oligarch_ideology_change
-		icon = GFX_goal_generic_major_alliance
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_oligarch_1
-		}
-
-		available = {
-			oligarch > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_oligarch_1
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = oligarch }
-			}
-		}
-
-		completion_reward = {
-			set_politics = { 
-				ruling_party = oligarch
-			 	elections_allowed = no 
-			}
-		    add_popularity = {
-				ideology = oligarch
-				popularity = 0.2
-			}
-		    add_political_power = 45
-		}
-	}
-
-	focus = {
-		id = SAV_influence_trubnaya
-		icon = GFX_generic_radio
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_oligarch_ideology_change
-		}
-
-		available = {
-			oligarch > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_oligarch_ideology_change
-
-		ai_will_do = {
-			factor = 1
-		}
-
-		completion_reward = {
-		}
-	}
-
-    ## dictatorial ##
-
-	focus = {
-		id = SAV_dictatorial_1
-		icon = GFX_goal_demand_sudetenland
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_political_effort 
-		}
-
-		mutually_exclusive = {
-		    focus = SAV_community_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_oligarch_1
-		}
-		mutually_exclusive = {
-		    focus = SAV_council_1
-		}
-		
-		x = 3
-		y = 1
-		relative_position_id = SAV_political_effort
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = dictatorial }
-			}
-		}
-
-		completion_reward = {
-			add_ideas = dictatorial
-		    add_political_power = 60
-		}
-	}
-
-	focus = {
-		id = SAV_dictatorial_ideology_change
-		icon = GFX_goal_demand_sudetenland
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_dictatorial_1
-		}
-
-		available = {
-			dictatorial > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_dictatorial_1
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { has_government = dictatorial }
-			}
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = SAV_annex_trubnaya
-		icon = GFX_generic_strike
-		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_dictatorial_ideology_change
-		}
-
-		available = {
-			dictatorial > 0.3
-		}
-
-		x = 0
-		y = 1
-		relative_position_id = SAV_dictatorial_ideology_change
-
-		ai_will_do = {
-			factor = 1
-		}
-
-		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = SAV_incorporate_trubnaya
+		id = SAV_focus_timiryazevskaya_lockdown
 		icon = GFX_HNZ_support_SAV
 		cost = 6.5
-
-		prerequisite = {
-			focus = SAV_swing_trubnaya
-			focus = SAV_ally_trubnaya
-			focus = SAV_influence_trubnaya
-			focus = SAV_annex_trubnaya
+		prerequisite = {  focus = SAV_focus_screams_from_timiryazevskaya }
+		available = { 
+			has_war_support > 0.59
 		}
-
-		available = {
-			dictatorial > 0.3
+		x = 0
+		y = 2
+		relative_position_id = SAV_focus_screams_from_timiryazevskaya
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = mandatory_service }
+				}
+				add_ideas = mandatory_service
+				add_stability = -0.1
+			}
+			else_if = { 
+				limit = {
+					has_idea = mandatory_service
+				}
+				random_owned_state = {
+					limit = { NOT = { has_state_category = pastoral } }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_council_leader_tt
+			effect_tooltip = {
+				add_equipment_to_stockpile = {
+					type = conventional_infantry_equipment_1
+					amount = 10
+					producer = RUS
+				}
+				random_owned_state = {
+					limit = { NOT = { has_state_category = pastoral } }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = council
+					}
+					add_equipment_to_stockpile = {
+						type = conventional_infantry_equipment_1
+						amount = 10
+						producer = RUS
+					}
+					random_owned_state = {
+						limit = { NOT = { has_state_category = pastoral } }
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
 		}
-
-		x = 3
-		y = 1
-		relative_position_id = SAV_swing_trubnaya
-
+		cancel_if_invalid = yes
 		ai_will_do = {
 			factor = 1
 		}
-
+	}
+	focus = {
+		id = SAV_focus_saint_nor_sinner_left
+		icon = GFX_HNZ_support_SAV
+		cost = 8.6
+		prerequisite = {  focus = SAV_focus_timiryazevskaya_lockdown }
+		available = {
+			NOT = { has_war = yes }
+			SAT = { exists = yes }
+			is_neighbor_of = SAT
+			has_country_flag = SAV_satanist_disappearance_country_flag
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAV_focus_timiryazevskaya_lockdown
+		will_lead_to_war_with = SAT
 		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = SAT
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			SAT = {
+				capital_scope = {
+					add_claim_by = ROOT
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_convene_upon_dire_times
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = {  focus = SAV_focus_joint_station_committee }
+		available = { 
+			OR = {
+				has_war = yes
+				threat > 0.19
+				date > 2031.1.1
+			}
+		}
+		x = 0
+		y = 2
+		relative_position_id = SAV_focus_joint_station_committee
+		completion_reward = {
+			country_event = nf_SAV.4
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_steady_hand_and_guidance
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = {  focus = SAV_focus_joint_station_committee }
+		mutually_exclusive = { focus = SAV_focus_change_of_leadership }
+		available = { 
+			has_country_flag = SAV_leadership_doubt_country_flag 
+		}
+		x = -6
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee
+		completion_reward = {
+			swap_ruler_traits = { remove = _SAV_vasyurkov add = _SAV_vasyurkov_2 }
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_change_of_leadership
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = {  focus = SAV_focus_joint_station_committee }
+		mutually_exclusive = { focus = SAV_focus_steady_hand_and_guidance }
+		available = { 
+			has_country_flag = SAV_leadership_doubt_country_flag 
+		}
+		x = -2
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee
+		completion_reward = {
+			custom_effect_tooltip = SAV_focus_change_of_leadership_tt
+			country_event = nf_SAV_politics.2
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_wary_of_the_hanza
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_steady_hand_and_guidance focus = SAV_focus_change_of_leadership }
+		available = { }
+		x = 2
+		y = 1
+		relative_position_id = SAV_focus_steady_hand_and_guidance
+		completion_reward = {
+			add_opinion_modifier = {
+				target = HNZ
+				modifier = ARB_assistance
+			}
+			reverse_add_opinion_modifier = {
+				target = SAV
+				modifier = ARB_assistance
+			}
+			diplomatic_relation = {
+				country = SAV
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_cordiality_diplomacy
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
+		available = { }
+		x = 0
+		y = 1
+		relative_position_id = SAV_focus_wary_of_the_hanza
+		completion_reward = {
+			add_stability = 0.1
+			every_owned_state = {
+				limit = { NOT = { has_state_category = pastoral } }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_community_leader_tt
+			effect_tooltip = {
+				capital_scope = {
+					add_resource = {
+			        type = scrap
+			        amount = 4
+			    	}
+					add_resource = {
+						type = alloys
+						amount = 4
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = community
+					}
+					capital_scope = {
+						add_resource = {
+			    	    type = scrap
+			    	    amount = 4
+			    		}
+						add_resource = {
+							type = alloys
+							amount = 4
+						}
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_joint_station_committee6
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_cordiality_diplomacy }
+		x = 0
+		y = 1
+		relative_position_id = SAV_focus_cordiality_diplomacy
+		completion_reward = {
+			add_victory_points = {
+				province = 3127
+				value = 5
+			}
+			capital_scope =  {
+				set_state_category = large_town
+				add_state_modifier = {
+    				modifier = {
+    					local_supplies = 0.1
+						local_resources = 0.1
+					}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_oligarch_leader_tt
+			effect_tooltip = {
+				266 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = oligarch
+					}
+					266 = {
+					add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_joint_station_committee7
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
+		available = { }
+		x = 2
+		y = 1
+		relative_position_id = SAV_focus_wary_of_the_hanza
+		completion_reward = {
+			army_experience = 25
+			add_ideas = SAV_defense_infrastructure
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_council_leader_tt
+			effect_tooltip = {
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 0.5
+					uses = 1
+					category = land_doctrine
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = council
+					}
+					add_doctrine_cost_reduction = {
+						name = land_doc_bonus
+						cost_reduction = 0.5
+						uses = 1
+						category = land_doctrine
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_joint_station_committee8
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_joint_station_committee7 }
+		available = { 
+			has_army_manpower = {
+    			size > 119
+			}
+			OR = {
+				RCH = { has_completed_focus = RCH_proclamation_of_slavic_unity }
+				SAT = { has_completed_focus = SAT_inner_sphere_5 }
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee7
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAV_rock_and_hard_place
+				add_idea = SAV_rock_and_hard_place_2
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_community_leader_tt
+			effect_tooltip = {
+				add_ideas = mobilise 
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = community
+					}
+					add_ideas = mobilise 
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_joint_station_committee9
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_joint_station_committee8 }
+		available = { 
+			has_defensive_war = yes
+		}
+		x = -1
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee8
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 25
+				producer = RUS
+			}
+			add_timed_idea = {
+				idea = SAV_emergency_conversion
+				days = 300
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_council_leader_tt
+			effect_tooltip = {
+				add_ideas = gun_production_boost_idea
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = council
+					}
+					add_ideas = gun_production_boost_idea
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_imperishable_alliance
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_convene_upon_dire_times }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = SAV_all_cores_intact
+				date > 2033.1.1
+				312 = { is_owned_by = ROOT }
+				368 = { is_owned_by = ROOT }
+				266 = { is_owned_by = ROOT }
+				NOT = {
+					has_any_power_balance = yes
+				}
+			}
+		}
+		x = 0
+		y = 3
+		relative_position_id = SAV_focus_convene_upon_dire_times
+		completion_reward = {
+			add_political_power = 250
+			add_research_slot = 1
+			swap_ideas = {
+				remove_idea = SAV_alliance
+				add_idea = SAV_alliance_2
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_ratmen_menace
+		icon = GFX_HNZ_support_SAV
+		cost = 8.6
+		prerequisite = { focus = SAV_focus_imperishable_alliance }
+		available = { 
+			is_subject = no
+			NOT = {
+				is_in_faction_with = ISL
+				is_in_faction_with = SCA
+			}
+			SAT = { exists = no }
+		}
+		x = -1
+		y = 1
+		relative_position_id = SAV_focus_imperishable_alliance
+		will_lead_to_war_with = ISL
+		will_lead_to_war_with = SCA
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = ISL
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			ISL = {
+				capital_scope = {
+					add_claim_by = ROOT
+				}
+			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = SCA
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			SCA = {
+				capital_scope = {
+					add_claim_by = ROOT
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_fascist_menace
+		icon = GFX_HNZ_support_SAV
+		cost = 8.6
+		prerequisite = { focus = SAV_focus_imperishable_alliance }
+		available = { 
+			is_subject = no
+			NOT = {
+				is_in_faction_with = RCH
+			}
+			SAT = { exists = no }
+		}
+		x = 1
+		y = 1
+		relative_position_id = SAV_focus_imperishable_alliance
+		will_lead_to_war_with = RCH
+		completion_reward = {
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = RCH
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			RCH = {
+				capital_scope = {
+					add_claim_by = ROOT
+				}
+			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = SCA
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
+			SCA = {
+				capital_scope = {
+					add_claim_by = ROOT
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_defense
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_joint_station_committee8 }
+		available = { 
+			threat > 0.1
+		}
+		x = -3
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee8
+		completion_reward = {
+			add_ideas = SAV_resist_and_bite
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_focus_defense2
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
+		available = { 
+			threat > 0.1
+		}
+		x = -2
+		y = 0
+		relative_position_id = SAV_focus_joint_station_committee6
+		completion_reward = {
+			add_ideas = SAV_mobilization
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_oligarch_leader_tt
+			effect_tooltip = {
+				division_template = {
+					name = "Hired Thugs"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						irregulars = { x = 0 y = 0 }
+						irregulars = { x = 0 y = 1 }
+						irregulars = { x = 0 y = 2 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Brothel Goons\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Bratki Gangers\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = oligarch
+					}
+					division_template = {
+						name = "Hired Thugs"
+						priority = 1
+						template_counter = 0
+						regiments = {
+							irregulars = { x = 0 y = 0 }
+							irregulars = { x = 0 y = 1 }
+							irregulars = { x = 0 y = 2 }
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "name = \"Brothel Goons\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_administrative_centralized
+		icon = GFX_HNZ_support_SAV
+		cost = 8.6
+		prerequisite = { focus = SAV_focus_broker_administration }
+		available = { has_idea = SAV_an_identity 
+			has_any_power_balance = yes
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAV_focus_broker_administration
+		completion_reward = {
+			add_political_power = 90
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.15
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SAV_if_oligarch_leader_tt
+			effect_tooltip = {
+				add_stability = -0.05
+				add_power_balance_value = {
+					id = SAV_power_balance
+					value = 0.05
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = oligarch
+					}
+					add_stability = -0.05
+					add_power_balance_value = {
+						id = SAV_power_balance
+						value = 0.05
+					}
+				}
+			}
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_a_new_power_rises
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_administrative_centralized }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = SAV_all_cores_intact
+				date > 2033.1.1
+				312 = { is_owned_by = ROOT }
+				368 = { is_owned_by = ROOT }
+				266 = { is_owned_by = ROOT }
+				NOT = {
+					has_any_power_balance = yes
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAV_administrative_centralized
+		completion_reward = {
+			add_ideas = SAV_new_dawning_power
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	focus = {
+		id = SAV_flamethrower_experts
+		icon = GFX_HNZ_support_SAV
+		cost = 6.5
+		prerequisite = { focus = SAV_focus_joint_station_committee }
+		available = { 
+			NOT = {
+				has_idea = flamethrower_restriction_ban 
+			}
+			has_tech = tech_flamethrower_equipment_1
+		}
+		x = 5
+		y = 1
+		relative_position_id = SAV_focus_joint_station_committee
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 1
+				uses = 2
+				ahead_reduction = 1
+				category = flamethrower_support_tech
+			}
+			country_event = nf_SAV.5
+		}
+		cancel_if_invalid = yes
+		ai_will_do = {
+			factor = 2
 		}
 	}
 }

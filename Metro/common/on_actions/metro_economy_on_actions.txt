@@ -50,4 +50,19 @@ on_actions = {
 			}
 		}
 	}
+
+	on_annex = {
+		effect = {
+			if = {
+				limit = { NOT = { has_country_flag = is_savage_nation } }
+				scoped_sound_effect = "bullet_sound"
+				set_temp_variable = { annexation_bullet = FROM.bullet }
+				divide_temp_variable = { annexation_bullet = 2 }
+				clamp_temp_variable = { var = annexation_bullet min = 0 max = 10000 }
+				round_temp_variable = annexation_bullet
+				set_temp_variable = { bullet_to_gain = annexation_bullet }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+	}
 }
