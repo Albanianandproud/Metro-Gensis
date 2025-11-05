@@ -7,6 +7,26 @@ education_practise = {
 	### However as people become more intellectual, they'll become less likely to follow government
 	### I.E. More maluses from war, less political power gain
 
+	education_cooldown = {
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		priority = 1001
+
+		is_good = yes
+		days_mission_timeout = 300
+
+		timeout_effect = {                 
+            country_event = nf_metro_education.6
+            custom_effect_tooltip = education_cooldown_finished
+        }
+	}
+
 	improve_education_normal = {
 
 		allowed = {}
@@ -33,10 +53,12 @@ education_practise = {
 			NOT = { has_country_flag = is_bandit_nation }
 			NOT = { has_idea = civics_education_level_5 }
 			hidden_trigger = { NOT = { has_country_flag = improving_education } }
+
+			NOT = { has_active_mission = education_cooldown }
 		}
 
 		cost = 0
-		days_re_enable = 360
+		days_re_enable = 0
 
 		complete_effect = {
 			hidden_effect = {
@@ -76,6 +98,8 @@ education_practise = {
 			NOT = { has_country_flag = is_bandit_nation }
 			has_idea = civics_education_level_5 
 			hidden_trigger = { NOT = { has_country_flag = improving_education } }
+
+			NOT = { has_active_mission = education_cooldown }
 		}
 
 		cost = 0

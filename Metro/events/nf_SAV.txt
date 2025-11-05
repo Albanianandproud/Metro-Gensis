@@ -4,7 +4,7 @@ country_event = {
     id = nf_SAV.1
     title = nf_SAV.1.t
     desc = nf_SAV.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (42)"
 	trigger = {
 		RCH = {
 			controls_state = 312
@@ -63,7 +63,7 @@ country_event = {
     id = nf_SAV.3
     title = nf_SAV.3.t
     desc = nf_SAV.3.d
-    picture = "GFX_event (181)"
+    picture = "GFX_event (207)"
 
 	trigger = {
 		date > 2033.1.1
@@ -100,54 +100,61 @@ country_event = {
 			set_country_flag = SAV_disintegrated_flag
 			SAV_set_disintegrated_cosmetic_tag = yes
 		}
+
+		if = {
+			limit = {
+				has_country_leader = {
+					character = SAV_vasyurkov
+					ruling_only = yes
+				}
+			}
+			retire_character = SAV_vasyurkov
+			add_country_leader_role = {
+			    character = SAV_sergey_mikhailovich_reznitsyn
+			    promote_leader = yes
+			    country_leader = {
+			        ideology = democratic_republic
+			        expire = "2100.1.1"
+			        traits = { SAV_sergey_mikhailovich_reznitsyn_leader_trait }
+			    }
+			}
+		}
 	}
 }
 
-country_event = {
-    id = nf_SAV.4
-    title = nf_SAV.4.t
-    desc = nf_SAV.4.d
-    picture = ccc_mutant
-	is_triggered_only = yes
-	fire_only_once = yes
-	option = {
-		name = nf_SAV.4.a
-		add_power_balance_value = {
-			id = SAV_power_balance
-			value = 0.1
-		}
-		ai_chance = {
-			factor = 5
-		}
-	}
-}
+#country_event = {
+#    id = nf_SAV.4
+#    title = nf_SAV.4.t
+#    desc = nf_SAV.4.d
+#    picture = ccc_mutant
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = nf_SAV.4.a
+#		add_power_balance_value = {
+#			id = SAV_power_balance
+#			value = 0.1
+#		}
+#		ai_chance = {
+#			factor = 5
+#		}
+#	}
+#}
 
 country_event = {
     id = nf_SAV.5
     title = nf_SAV.5.t
     desc = nf_SAV.5.d
-    picture = ccc_mutant
+    picture = "GFX_event (164)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
-		name = SAV.5.a
-		capital_scope = {
-			add_resource = {
-				type = scrap
-				amount = 2
-			}
-		}
-		ai_chance = {
-			factor = 5
-		}
-	}
-	option = {
-		name = nf_SAV.5.a
-		custom_effect_tooltip = SAV.6.a.tt
+		name = nf_SAV.5.b
+		custom_effect_tooltip = nf_SAV.5.b.tt
 		add_ideas = SAV_flamethrower_tinkering
 		hidden_effect = {
 			country_event = {
-				id = nf_SAV.6 random_days = 200
+				id = nf_SAV.6 days = 200 random_days = 200
 			}
 		}
 		ai_chance = {
@@ -160,11 +167,11 @@ country_event = {
     id = nf_SAV.6
     title = nf_SAV.6.t
     desc = nf_SAV.6.d
-    picture = ccc_mutant
+    picture = "GFX_event (91)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
-		name = nf_SAV.6
+		name = nf_SAV.6.a
 		remove_ideas = SAV_flamethrower_tinkering
 		capital_scope = {
 			add_resource = {
@@ -177,15 +184,15 @@ country_event = {
 		}
 	}
 	option = {
-		name = nf_SAV.6.a
-		custom_effect_tooltip = nf_SAV.6.a.tt
+		name = nf_SAV.6.b
+		custom_effect_tooltip = nf_SAV.6.b.tt
 		swap_ideas = {
 			remove_idea = SAV_flamethrower_tinkering
 			add_idea = SAV_flamethrower_tinkering_2
 		}
 		hidden_effect = {
 			country_event = {
-				id = nf_SAV.7 random_days = 200
+				id = nf_SAV.7 days = 200 random_days = 200
 			}
 		}
 		ai_chance = {
@@ -198,11 +205,11 @@ country_event = {
     id = nf_SAV.7
     title = nf_SAV.7.t
     desc = nf_SAV.7.d
-    picture = ccc_mutant
+    picture = "GFX_event (40)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
-		name = nf_SAV.7
+		name = nf_SAV.7.a
 		swap_ideas = {
 			remove_idea = SAV_flamethrower_tinkering_2
 			add_idea = SAV_flamethrower_tinkering_3
@@ -220,13 +227,31 @@ country_event = {
 	}
 }
 
+country_event = {
+    id = nf_SAV.8
+    title = nf_SAV.8.t
+    desc = nf_SAV.8.d
+    picture = "GFX_event (55)"
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nf_SAV.8.a
+		add_political_power = 100
+		add_stability = 0.1
+		set_cosmetic_tag = SAV_commonwealth
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
 add_namespace = nf_SAV_trade
 
 country_event = {
     id = nf_SAV_trade.1
     title = nf_SAV_trade.1.t
     desc = nf_SAV_trade.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (56)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -237,9 +262,11 @@ country_event = {
 			target = MEN
 			modifier = PLS_support
 		}
-		reverse_add_opinion_modifier = {
-			target = SAV
-			modifier = PLS_support
+		MEN = {
+			add_opinion_modifier = {
+				target = SAV
+				modifier = PLS_support
+			}
 		}
 		ai_chance = {
 			base = 50
@@ -253,10 +280,18 @@ country_event = {
     id = nf_SAV_dimitrovskaya.1
     title = nf_SAV_dimitrovskaya.1.t
     desc = nf_SAV_dimitrovskaya.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (114)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			368 = {
+				add_core_of = DIM
+			}
+		}
+	}
 
 	option = {
 		name = nf_SAV_dimitrovskaya.1.a
@@ -274,7 +309,7 @@ country_event = {
 			}
 		}
 		country_event = {
-			id = nf_SAV_dimitrovskaya.2 random_days = 100
+			id = nf_SAV_dimitrovskaya.2 days = 100 random_days = 100
 		}
 		ai_chance = {
 			base = 50
@@ -286,7 +321,7 @@ country_event = {
     id = nf_SAV_dimitrovskaya.2
     title = nf_SAV_dimitrovskaya.2.t
     desc = nf_SAV_dimitrovskaya.2.d
-    picture = ccc_mutant
+    picture = "GFX_event (146)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -298,7 +333,7 @@ country_event = {
 		}
 		hidden_effect = {
 			country_event = {
-				id = nf_SAV_dimitrovskaya.3 random_days = 180
+				id = nf_SAV_dimitrovskaya.3 days = 180 random_days = 180
 			}
 		}
 		ai_chance = {
@@ -311,7 +346,7 @@ country_event = {
     id = nf_SAV_dimitrovskaya.3
     title = nf_SAV_dimitrovskaya.3.t
     desc = nf_SAV_dimitrovskaya.3.d
-    picture = ccc_mutant
+    picture = "GFX_event (173)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -319,11 +354,21 @@ country_event = {
 	option = {
 		name = nf_SAV_dimitrovskaya.3.a
 		add_stability = -0.05
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.05
+		}
 		custom_effect_tooltip = nf_SAV_dimitrovskaya.3.a.tt
 		hidden_effect = {
 			set_country_flag = SAV_satanist_country_flag
 			country_event = {
-				id = nf_SAV_dimitrovskaya.4 random_days = 360
+				id = nf_SAV_dimitrovskaya.4 days = 360 random_days = 360
+			}
+			country_event = {
+				id = nf_SAV_politics.1 days = 150 random_days = 150
+			}
+			country_event = {
+				id = nf_SAV_politics.1 days = 90 random_days = 90
 			}
 		}
 		ai_chance = {
@@ -336,7 +381,7 @@ country_event = {
     id = nf_SAV_dimitrovskaya.4
     title = nf_SAV_dimitrovskaya.4.t
     desc = nf_SAV_dimitrovskaya.4.d
-    picture = ccc_mutant
+    picture = "GFX_event (122)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -346,6 +391,10 @@ country_event = {
 		custom_effect_tooltip = nf_SAV_dimitrovskaya.4.a.tt
 		add_stability = -0.1
 		add_war_support = 0.05
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.05
+		}
 		368 = {
 			add_manpower = -10
 		}
@@ -364,7 +413,7 @@ country_event = {
     id = nf_SAV_puppet.1
     title = nf_SAV_puppet.1.t
     desc = nf_SAV_puppet.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (7)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -382,9 +431,9 @@ country_event = {
 		}
 	}
 	option = {
-		name = nf_SAV_puppet.2.a
+		name = nf_SAV_puppet.1.b
 		SAV = {
-			country_event = { id = nf_SAV_puppet.2 days = 2 }
+			country_event = { id = nf_SAV_puppet.2 random_days = 2 days = 2 }
 		}
 		ai_chance = {
 			factor = 0.5
@@ -402,7 +451,7 @@ country_event = {
     id = nf_SAV_puppet.2
     title = nf_SAV_puppet.2.t
     desc = nf_SAV_puppet.2.d
-    picture = ccc_mutant
+    picture = "GFX_event (17)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -419,7 +468,7 @@ country_event = {
     id = nf_SAV_politics.1
     title = nf_SAV_politics.1.t
     desc = nf_SAV_politics.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (15)"
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -429,27 +478,9 @@ country_event = {
 			ideology = community
 			popularity = -0.1
 		}
-		ai_chance = {
-			factor = 5
-		}
-	}
-
-	option = {
-		name = nf_SAV_politics.1.b
-		add_popularity = {
-			ideology = council
-			popularity = 0.1
-		}
-		ai_chance = {
-			factor = 5
-		}
-	}
-
-	option = {
-		name = nf_SAV_politics.1.c
-		add_popularity = {
-			ideology = oligarch
-			popularity = 0.1
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.1
 		}
 		ai_chance = {
 			factor = 5
@@ -460,7 +491,7 @@ country_event = {
     id = nf_SAV_politics.2
     title = nf_SAV_politics.2.t
     desc = nf_SAV_politics.2.d
-    picture = ccc_mutant
+    picture = "GFX_event (36)"
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -497,6 +528,78 @@ country_event = {
 			id = SAV_power_balance
 			value = -0.1
 		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+	option = {
+		name = nf_SAV_politics.2.b
+			
+		retire_character = SAV_vasyurkov
+		add_political_power = 50
+		add_country_leader_role = {
+		    character = SAV_sergey_mikhailovich_reznitsyn
+		    promote_leader = yes
+		    country_leader = {
+		        ideology = democratic_republic
+		        expire = "2100.1.1"
+		        traits = { SAV_sergey_mikhailovich_reznitsyn_leader_trait }
+		    }
+		}
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.1
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+country_event = {
+    id = nf_SAV_politics.3
+    title = nf_SAV_politics.3.t
+    desc = nf_SAV_politics.3.d
+    picture = "GFX_event (36)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Vasyurkovs Infidelity
+		name = nf_SAV_politics.3.a
+		add_popularity = {
+			ideology = community
+			popularity = -0.1
+		}
+		add_power_balance_value = {
+			id = SAV_power_balance
+			value = -0.1
+		}
+		hidden_effect = {
+			country_event = {
+				id = nf_SAV_politics.4 days = 20 random_days = 20
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+country_event = {
+    id = nf_SAV_politics.4
+    title = nf_SAV_politics.4.t
+    desc = nf_SAV_politics.4.d
+    picture = "GFX_event (48)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = SAV_leadership_doubt_country_flag
+		}
+	}
+	option = {
+		name = nf_SAV_politics.4.a
+		custom_effect_tooltip = nf_SAV_politics.4.a.tt
+		add_stability = -0.05
 		ai_chance = {
 			factor = 5
 		}

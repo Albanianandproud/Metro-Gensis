@@ -22,7 +22,7 @@ focus_tree = {
 	## Intro
 	focus = {
 		id = SAV_focus_joint_station_committee
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_committee
 		x = 24
 		y = 0
 		cost = 4.3
@@ -32,10 +32,10 @@ focus_tree = {
 			add_political_power = 75
 			hidden_effect = {
 				country_event = {
-					id = SAV_trade.1 random_days = 20
+					id = nf_SAV_trade.1 days = 20 random_days = 20
 				}
 				country_event = {
-					id = SAV_dimitrovskaya.1 random_days = 80
+					id = nf_SAV_dimitrovskaya.1 days = 80 random_days = 80
 				}
 			}
 		}
@@ -45,8 +45,8 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_kindle_an_identity
-		icon = GFX_HNZ_support_SAV
-		cost = 6.5
+		icon = GFX_SAV_an_identity
+		cost = 8.6
 		prerequisite = { focus = SAV_focus_joint_station_committee }
 		available = {
 			has_any_power_balance = yes
@@ -59,7 +59,11 @@ focus_tree = {
 			custom_effect_tooltip = generic_skip_one_line_tt
 			add_timed_idea = {
 				idea = SAV_an_identity
-				days = 360
+				days = 400
+			}
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.05
 			}
 		}
 		ai_will_do = {
@@ -68,7 +72,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_trubnaya_exert_influence
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_puppet
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_kindle_an_identity }
 		available = {
@@ -81,6 +85,7 @@ focus_tree = {
 		y = 2
 		relative_position_id = SAV_focus_kindle_an_identity
 		completion_reward = {
+			add_threat = 1.5
 			TRB = {
 				if = {
 					limit = { ROOT = { has_government = community } }
@@ -103,7 +108,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_colonize_east_wings
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_colonize
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_trubnaya_exert_influence }
 		available = { 
@@ -136,6 +141,7 @@ focus_tree = {
 				type = infantry_equipment
 				amount = 10
 			}
+			add_threat = 0.5
 		}
 		x = 0
 		y = 1
@@ -184,7 +190,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_consolidation_2
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_TSV
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_kindle_an_identity }
 		available = { 
@@ -202,7 +208,12 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 			add_tech_bonus = {
 			name = industrial_bonus
@@ -218,7 +229,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_consolidation_1
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_DIM
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_kindle_an_identity }
 		available = { 
@@ -236,7 +247,12 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 				add_victory_points = {
 					province = 3189
 					value = 2
@@ -252,11 +268,12 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_broker_administration
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_administration
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_consolidation_2 }
 		prerequisite = {  focus = SAV_focus_consolidation_1 }
-		available = { has_idea = SAV_an_identity 
+		available = { 
+			has_idea = SAV_an_identity 
 			has_any_power_balance = yes
 		}
 		x = 1
@@ -267,7 +284,10 @@ focus_tree = {
 				idea = SAV_an_identity
 				days = 90
 			}
-
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.05
+			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = SAV_if_oligarch_leader_tt
 			effect_tooltip = {
@@ -291,7 +311,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_screams_from_timiryazevskaya
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_timiryazevskaya
 		cost = 6.5
 		prerequisite = {  focus = SAV_focus_joint_station_committee }
 		available = { 
@@ -342,7 +362,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_timiryazevskaya_lockdown
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_lockdown_dimitrovskaya
 		cost = 6.5
 		prerequisite = {  focus = SAV_focus_screams_from_timiryazevskaya }
 		available = { 
@@ -420,7 +440,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_saint_nor_sinner_left
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_attack_satanist
 		cost = 8.6
 		prerequisite = {  focus = SAV_focus_timiryazevskaya_lockdown }
 		available = {
@@ -453,7 +473,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_convene_upon_dire_times
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_dire_times
 		cost = 6.5
 		prerequisite = {  focus = SAV_focus_joint_station_committee }
 		available = { 
@@ -467,7 +487,10 @@ focus_tree = {
 		y = 2
 		relative_position_id = SAV_focus_joint_station_committee
 		completion_reward = {
-			country_event = nf_SAV.4
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = 0.1
+			}
 		}
 		cancel_if_invalid = yes
 		ai_will_do = {
@@ -476,7 +499,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_steady_hand_and_guidance
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_vasyurkov_power
 		cost = 6.5
 		prerequisite = {  focus = SAV_focus_joint_station_committee }
 		mutually_exclusive = { focus = SAV_focus_change_of_leadership }
@@ -496,7 +519,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_change_of_leadership
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_leadership_power
 		cost = 6.5
 		prerequisite = {  focus = SAV_focus_joint_station_committee }
 		mutually_exclusive = { focus = SAV_focus_steady_hand_and_guidance }
@@ -517,7 +540,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_wary_of_the_hanza
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_wary_of_the_hanza
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_steady_hand_and_guidance focus = SAV_focus_change_of_leadership }
 		available = { }
@@ -546,7 +569,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_cordiality_diplomacy
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_diplomacy
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
 		available = { }
@@ -602,7 +625,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_joint_station_committee6
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_prosperity
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_cordiality_diplomacy }
 		x = 0
@@ -657,7 +680,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_joint_station_committee7
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_edge_of_civilization
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
 		available = { }
@@ -698,7 +721,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_joint_station_committee8
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_ropes
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_joint_station_committee7 }
 		available = { 
@@ -739,7 +762,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_joint_station_committee9
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_emergency_guns
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_joint_station_committee8 }
 		available = { 
@@ -779,7 +802,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_imperishable_alliance
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_centralize
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_convene_upon_dire_times }
 		available = { 
@@ -812,7 +835,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_ratmen_menace
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_attack_skaven
 		cost = 8.6
 		prerequisite = { focus = SAV_focus_imperishable_alliance }
 		available = { 
@@ -859,7 +882,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_fascist_menace
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_attack_reich
 		cost = 8.6
 		prerequisite = { focus = SAV_focus_imperishable_alliance }
 		available = { 
@@ -904,7 +927,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_defense
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_resist_and_bite
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_joint_station_committee8 }
 		available = { 
@@ -923,7 +946,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_focus_defense2
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_emergency_mob
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_wary_of_the_hanza }
 		available = { 
@@ -978,6 +1001,10 @@ focus_tree = {
 							division = "name = \"Brothel Goons\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
 							owner = ROOT
 						}
+						create_unit = {
+							division = "name = \"Brothel Goons\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
+							owner = ROOT
+						}
 					}
 				}
 			}
@@ -989,10 +1016,11 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_administrative_centralized
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_centralization
 		cost = 8.6
 		prerequisite = { focus = SAV_focus_broker_administration }
-		available = { has_idea = SAV_an_identity 
+		available = { 
+			has_idea = SAV_an_identity 
 			has_any_power_balance = yes
 		}
 		x = 0
@@ -1033,9 +1061,12 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_a_new_power_rises
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_new_power
 		cost = 6.5
-		prerequisite = { focus = SAV_administrative_centralized }
+		prerequisite = { 
+			focus = SAV_administrative_centralized 
+			focus = SAV_focus_imperishable_alliance
+		}
 		available = { 
 			custom_trigger_tooltip = {
 				tooltip = SAV_all_cores_intact
@@ -1049,7 +1080,7 @@ focus_tree = {
 			}
 		}
 		x = 0
-		y = 1
+		y = 2
 		relative_position_id = SAV_administrative_centralized
 		completion_reward = {
 			add_ideas = SAV_new_dawning_power
@@ -1061,7 +1092,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SAV_flamethrower_experts
-		icon = GFX_HNZ_support_SAV
+		icon = GFX_SAV_flamethrower
 		cost = 6.5
 		prerequisite = { focus = SAV_focus_joint_station_committee }
 		available = { 

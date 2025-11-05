@@ -1,8 +1,188 @@
 SAV_power_balance_category = {
-
+	SAV_decision_category_grow_economy_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			industrial_complex > 9
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			add_political_power = 50
+		}
+	}
+	SAV_decision_category_buildup_military_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			count_triggers = {
+				amount = 2
+				arms_factory > 7
+				has_army_manpower = {
+    				size > 149
+				}
+				OR = {
+					has_tech = entrench_kits_2032
+					has_tech = conventional_infantry_equipment_tech_2
+				}
+			}
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			army_experience = 30
+		}
+	}
+	SAV_decision_category_connect_stations_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			AND = {
+				312 = {
+					infrastructure > 5
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SAV_station_infrastructure_tooltip
+				312 = { infrastructure > 5 }
+			}
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			312 = {
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+			}
+		}
+	}
+	SAV_decision_category_repopulate_dimitrovskaya_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			368 = { is_core_of = ROOT }
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			368 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	SAV_decision_category_stabilize_sector_timer_mission = {
+		days_mission_timeout = 1440
+		activation = { has_completed_focus = SAV_focus_joint_station_committee }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			has_stability > 0.79
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			add_political_power = -50
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			add_political_power = 50
+		}
+	}
+	SAV_decision_category_timiryazevskaya_timer_mission = {
+		days_mission_timeout = 1080
+		activation = { has_completed_focus = SAV_focus_screams_from_timiryazevskaya }
+		is_good = no
+		selectable_mission = no
+		fire_only_once = yes
+		cancel_trigger = { SAV_alliance_is_dead = yes }
+		available = {	## We will complete the mission if these are triggered
+			count_triggers = {
+				amount = 2
+				SAT = { exists = no }
+				SAT = { capital_scope = { is_owned_by = ROOT } }
+				368 = {
+					any_province_building_level = {
+    					province = {
+							id = 3133
+							id = 3134
+        					limit_to_border = yes
+    					}
+   	 					building = bunker
+						level < 1
+					}
+					any_province_building_level = {
+    					province = {
+							id = 3133
+							id = 3134
+        					limit_to_border = yes
+    					}
+   	 					building = bunker2
+						level < 1
+					}
+				}
+			}
+		}
+		timeout_effect = { 
+			custom_effect_tooltip = HNZ_agenda_failure
+			## Abandon Dimitrovskaya
+			add_power_balance_value = {
+				id = SAV_power_balance
+				value = -0.2
+			}
+		}
+		complete_effect = {
+			army_experience = 30
+		}
+	}
 	SAV_power_balance_push_centralization_small = {
 		icon = GFX_SAV_centralization_small
-		priority = 100
+		priority = 75
 		available = { 
 			power_balance_value = {
     			id = SAV_power_balance
@@ -29,7 +209,7 @@ SAV_power_balance_category = {
     			value > -0.667
 			}
 		}
-		cost = 200
+		cost = 125
 		fire_only_once = yes
 		complete_effect = {
 			add_stability = -0.1
@@ -49,7 +229,7 @@ SAV_power_balance_category = {
     			value > -0.667
 			}
 		}
-		cost = 100
+		cost = 75
 		days_re_enable = 360
 		days_remove = 70
 		modifier = {
@@ -62,9 +242,9 @@ SAV_power_balance_category = {
 		available = { 
 			has_stability > 0.334
 		}
-		cost = 85
+		cost = 75
 		days_re_enable = 360
-		days_remove = 84
+		days_remove = 70
 		modifier = {
 			power_balance_daily = 0.004
 		}
@@ -84,9 +264,9 @@ SAV_power_balance_category = {
 				has_completed_focus = SAV_focus_change_of_leadership
 			}
 		}
-		cost = 10
+		cost = 25
 		days_re_enable = 360
-		days_remove = 84
+		days_remove = 70
 		modifier = {
 			power_balance_daily = 0.004
 			political_power_factor = -0.15
