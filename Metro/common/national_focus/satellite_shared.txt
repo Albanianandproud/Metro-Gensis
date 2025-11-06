@@ -49,8 +49,8 @@ shared_focus = {
 		army_experience = 20
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
-			cost_reduction = 0.25
-			uses = 2
+			cost_reduction = 0.5
+			uses = 1
 			category = land_doctrine
 		}
 	}
@@ -75,7 +75,7 @@ shared_focus = {
 		army_experience = 20
 		add_doctrine_cost_reduction = {
 			name = land_doc_bonus
-			cost_reduction = 0.25
+			cost_reduction = 0.5
 			uses = 2
 			category = land_doctrine
 		}
@@ -205,7 +205,7 @@ shared_focus = {
 		add_tech_bonus = {
 			name = infantry_bonus
 			bonus = 0.5
-			uses = 1
+			uses = 2
 			category = infantry_weapons
 		}
 	}
@@ -254,7 +254,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = clothing_kits_bonus
-			bonus = 0.25
+			bonus = 0.5
 			uses = 2
 			category = clothing_kits
 		}
@@ -304,7 +304,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = clothing_kits_bonus
-			bonus = 0.5
+			bonus = 1
 			uses = 2
 			category = stalker
 		}
@@ -333,7 +333,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.25
+			bonus = 0.5
 			uses = 3
 			category = explosive_support_tech
 		}
@@ -362,7 +362,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.25
+			bonus = 0.5
 			uses = 3
 			category = gatling_support_tech
 		}
@@ -390,7 +390,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.25
+			bonus = 0.5
 			uses = 3
 			category = support_tech
 		}
@@ -417,7 +417,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = infantry_bonus
-			bonus = 0.5
+			bonus = 1
 			uses = 2
 			category = support_tech
 		}
@@ -736,10 +736,18 @@ shared_focus = {
 
 	completion_reward = {
 		random_owned_state = {
+			limit = { NOT = { is_capital = yes  has_state_category = pastoral } }
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
 			limit = { has_state_category = pastoral }
 			add_building_construction = {
 				type = infrastructure
-				level = 2
+				level = 1
 				instant_build = yes
 			}
 		}
@@ -779,27 +787,21 @@ shared_focus = {
 
 	completion_reward = {
 		random_owned_state = {
-			limit = { NOT = { has_state_category = pastoral } }
+			limit = { has_state_category = pastoral }
 			add_building_construction = {
-				type = infrastructure
-				level = 2
+				type = improvised_minefield 
+				level = 1
 				instant_build = yes
+				province = { all_provinces = yes }
 			}
 		}
 		random_owned_state = {
-			limit = { NOT = { has_state_category = pastoral } }
+			limit = { has_state_category = pastoral }
 			add_building_construction = {
-				type = infrastructure
+				type = improvised_minefield 
 				level = 1
 				instant_build = yes
-			}
-		}
-		random_owned_state = {
-			limit = { NOT = { has_state_category = pastoral } }
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
+				province = { all_provinces = yes }
 			}
 		}
 	}
@@ -883,9 +885,15 @@ shared_focus = {
 			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = infrastructure
-				level = 2
+				level = 1
 				instant_build = yes
 			}
+		}
+		add_tech_bonus = {
+			name = industrial_bonus
+			bonus = 1
+			uses = 1
+			category = industry
 		}
 	}
 
@@ -935,11 +943,10 @@ shared_focus = {
 	completion_reward = {
 		add_ideas = satellite_construction_civilian_1
 		random_owned_state = {
-			add_extra_state_shared_building_slots = 2
 			limit = { NOT = { has_state_category = pastoral } }
 			add_resource = {
 				type = scrap
-				amount = 2
+				amount = 4
 			}
 		}
 	}
@@ -974,7 +981,7 @@ shared_focus = {
 	completion_reward = {
 		_satellite_upgrade_mil_idea = yes
 		add_equipment_to_stockpile = {
-			type = scrap_infantry_equipment_2
+			type = scrap_infantry_equipment_1
 			amount = 20
 			producer = RUS
 		}
@@ -1064,7 +1071,7 @@ shared_focus = {
 		_satellite_upgrade_mil_idea = yes
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 3
 			add_building_construction = {
 				type = arms_factory
 				level = 2
@@ -1106,7 +1113,7 @@ shared_focus = {
 		_satellite_upgrade_civ_idea = yes
 		random_owned_state = {
 			limit = { NOT = { has_state_category = pastoral } }
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 3
 			add_building_construction = {
 				type = industrial_complex
 				level = 2
@@ -1201,7 +1208,7 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = entrench_kit_bonus
-			bonus = 0.75
+			bonus = 1
 			uses = 1
 			category = casting
 		}
