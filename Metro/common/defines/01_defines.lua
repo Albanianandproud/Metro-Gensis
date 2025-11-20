@@ -1,6 +1,9 @@
 ---Game Date---
 NDefines.NGame.START_DATE = "2028.1.1.12"
 NDefines.NGame.END_DATE = "2055.1.1.1"
+NDefines.NGame.OIL_RESOURCE= "oil"							
+NDefines.NGame.FUEL_RESOURCE = "oil"						
+NDefines.NGame.ENERGY_RESOURCE = "oil"						
 
 ---Map scale---
 NDefines.NGame.MAP_SCALE_PIXEL_TO_KM = 0.01804242424
@@ -239,7 +242,17 @@ NDefines.NAI.STOP_TRAINING_EQUIPMENT_LEVEL = 0.6
 NDefines.NAI.DEPLOY_MIN_EQUIPMENT_PEACE_FACTOR = 0.9
 NDefines.NAI.DEPLOY_MIN_EQUIPMENT_WAR_FACTOR = 0.78
 
+NDefines.NAI.MIN_FACTORIES_TO_WANT_TO_IMPORT = {  -- minimum number of civilian factories the AI must have to consider importing a resource - per strategic resource. Default 0, array -should- be updated with new resources, or if the order changes.
+		3, -- oil
+		0, -- alloys
+		0, -- scrap
+		0, -- components
+		0, -- electronics
+		0, -- chemicals
+	}
+
 NDefines.NAI.MANPOWER_RATIO_REQUIRED_TO_PRIO_MOBILIZATION_LAW = 0.35
+
 ---Supply Stuff---
 NDefines.NSupply.MAX_RAILWAY_LEVEL = 1		--- Base is 5. Pending Change.
 NDefines.NSupply.CAPITAL_SUPPLY_MILITARY_FACTORIES = 0.5
@@ -253,12 +266,12 @@ NDefines.NSupply.NODE_FLOW_BONUS_PER_RAIL_LEVEL = 1
 NDefines.NSupply.SUPPLY_HUB_FULL_MOTORIZATION_BONUS = 1.5
 NDefines.NSupply.SUPPLY_HUB_FULL_MOTORIZATION_TRUCK_COST = 10
 
-NDefines.NSupply.INFRA_TO_SUPPLY = 1.5
-NDefines.NSupply.VP_TO_SUPPLY_BASE = 1.5
-NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.15
+NDefines.NSupply.INFRA_TO_SUPPLY = 2
+NDefines.NSupply.VP_TO_SUPPLY_BASE = 2
+NDefines.NSupply.SUPPLY_FROM_DAMAGED_INFRA = 0.1
 NDefines.NSupply.SUPPLY_DISRUPTION_DAILY_RECOVERY = 1
 
-NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 5
+NDefines.NSupply.SUPPLY_POINTS_PER_TRAIN = 10
 NDefines.NSupply.NUM_RAILWAYS_TRAIN_FACTOR = 0.15
 
 

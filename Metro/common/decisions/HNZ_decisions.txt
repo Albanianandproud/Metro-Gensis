@@ -46,254 +46,13 @@ HNZ_passport_enforcement = {
 	}
 }
 
-HNZ_production_shift = {
-    HNZ_shift_increase = {
-		icon = GFX_HNZ_increase_industrial_shift
-		visible = { always = yes }
-
-		available = {
-		    has_war_support > 0.39
-			custom_trigger_tooltip = {
-				tooltip = HNZ_shift_in_effect
-				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
-			}
-		}
-
-		cost = shift_increment
-		days_remove = 50
-		days_re_enable = shift_increment
-
-		complete_effect = {
-			hidden_effect = { set_country_flag = HNZ_shift_change }
-		}
-
-		modifier = {
-			production_factory_efficiency_gain_factor = 0.1
-		}
-		
-		remove_effect = {
-			custom_effect_tooltip = shift_increment_tt
-			hidden_effect = {
-				add_to_variable = {
-					var = shift_increment
-					value = 15
-				}
-				clamp_variable = {
-					var = shift_increment
-					min = 15
-					max = 150
-				}
-				clr_country_flag = HNZ_shift_change
-			}
-		}
-    }
-    HNZ_shift_decrease = {
-		icon = GFX_HNZ_decrease_industrial_shift
-		visible = { always = yes }
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = HNZ_shift_in_effect
-				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
-			}
-		}
-
-		cost = shift_increment
-		days_remove = 50
-		days_re_enable = shift_increment
-
-		complete_effect = {
-			hidden_effect = { set_country_flag = HNZ_shift_change }
-		}
-
-		modifier = {
-			production_factory_efficiency_gain_factor = -0.15
-			war_support_weekly = 0.005
-		}
-		
-		remove_effect = {
-			custom_effect_tooltip = shift_subtract_increment_tt
-			hidden_effect = {
-				subtract_from_variable = {
-					var = shift_increment
-					value = 15
-				}
-				clamp_variable = {
-					var = shift_increment
-					min = 15
-					max = 150
-				}
-				clr_country_flag = HNZ_shift_change
-			}
-		}
-    }
-    HNZ_shift_industrial_reforms = {
-		icon = GFX_HNZ_industrial_renovation
-		visible = { always = yes }
-		available = {
-		    has_war = no
-			custom_trigger_tooltip = {
-				tooltip = HNZ_shift_in_effect
-				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
-			}
-		}
-
-		cost = shift_increment
-		days_remove = 50
-		days_re_enable = shift_increment
-
-		complete_effect = {
-			hidden_effect = { set_country_flag = HNZ_shift_change }
-		}
-
-		modifier = {
-			consumer_goods_factor = 0.1
-			industrial_capacity_factory = -0.1
-			stability_weekly = 0.005
-		}
-		
-		remove_effect = {
-			custom_effect_tooltip = shift_increment_tt
-			hidden_effect = {
-				add_to_variable = {
-					var = shift_increment
-					value = 15
-				}
-				clamp_variable = {
-					var = shift_increment
-					min = 15
-					max = 150
-				}
-				clr_country_flag = HNZ_shift_change
-			}
-		}
-    }
-    HNZ_privatize_industrial_sectors = {
-		icon = GFX_HNZ_privatise_land_share
-		visible = { always = yes }
-		available = {
-			has_war = no 
-			has_stability > 0.39
-			custom_trigger_tooltip = {
-				tooltip = HNZ_appropriation_in_effect
-				hidden_trigger = { NOT = { has_country_flag = HNZ_appropriation_in_effect } }
-			}
-		}
-
-		cost = reappropriate_sectors
-		days_remove = 50
-		days_re_enable = reappropriate_sectors
-
-		complete_effect = {
-			random_owned_state = {
-				limit = { free_building_slots = { building = arms_factory size > 0 include_locked = yes } }
-		    	add_extra_state_shared_building_slots = -1
-			}
-			set_country_flag = HNZ_appropriation_in_effect
-		}
-
-		remove_effect = {
-			custom_effect_tooltip = reappropriate_subtract_sectors_tt
-			hidden_effect = {
-				subtract_from_variable = {
-					var = reappropriate_sectors
-					value = 10
-				}
-				clamp_variable = {
-					var = reappropriate_sectors
-					min = 10
-					max = 200
-				}
-				clr_country_flag = HNZ_appropriation_in_effect
-			}
-			add_stability = 0.025
-		}
-    }
-    HNZ_reappropriate_sectors = {
-		icon = GFX_HNZ_nationalise_infrastructure
-		visible = { always = yes }
-		available = {
-			has_war = no 
-			has_stability > 0.39
-			custom_trigger_tooltip = {
-				tooltip = HNZ_appropriation_in_effect
-				hidden_trigger = { NOT = { has_country_flag = HNZ_appropriation_in_effect } }
-			}
-		}
-
-		cost = reappropriate_sectors
-		days_remove = 50
-		days_re_enable = reappropriate_sectors
-
-		complete_effect = {
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
-		    	add_extra_state_shared_building_slots = 1
-			}
-			hidden_effect = { set_country_flag = HNZ_appropriation_in_effect }
-			## Perhaps spending Authority could double yield?
-		}
-
-		remove_effect = {
-			custom_effect_tooltip = reappropriate_sectors_tt
-			hidden_effect = {
-				add_to_variable = {
-					var = reappropriate_sectors
-					value = 20
-				}
-				clamp_variable = {
-					var = extend_administration_length
-					min = 20
-					max = 200
-				}
-			}
-			clr_country_flag = HNZ_appropriation_in_effect
-		}
-    }
-    HNZ_extend_station_administration = {
-		icon = GFX_HNZ_extend_station_administration
-		visible = { always = yes }
-
-		available = { 
-			has_war = no 
-		}
-
-		cost = extend_administration_length
-		days_remove = 50
-		days_re_enable = extend_administration_length
-
-		modifier = {
-			political_advisor_cost_factor = -0.1
-			high_command_cost_factor = -0.1
-			theorist_cost_factor = -0.1
-			economy_cost_factor = -0.1
-			materiel_manufacturer_cost_factor = -0.1
-			industrial_concern_cost_factor = -0.1
-		}
-		
-		remove_effect = {
-			custom_effect_tooltip = extend_administration_length_tt
-			hidden_effect = {
-				add_to_variable = {
-					var = extend_administration_length
-					value = 20
-				}
-				clamp_variable = {
-					var = extend_administration_length
-					min = 20
-					max = 150
-				}
-			}
-		}
-    }
-}
-
 HNZ_mandates = {
 	## Mandates are decisions which provide bonuses and buffs which cost `Mandate Funding`. Think Stellaris' Edicts, but cost boolet
 
 	HNZ_mandate_production_shift_increase = {
 
 		available = {
-		    has_war_support > 0.24
+		    NOT = { has_idea = HNZ_exhausted_economy }
 			has_war = no 
 			custom_trigger_tooltip = {
 				tooltip = HNZ_shift_in_effect
@@ -320,7 +79,7 @@ HNZ_mandates = {
 		}
 
 		days_remove = 84
-		days_re_enable = 140
+		days_re_enable = 150
 
 		modifier = {
 			production_factory_efficiency_gain_factor = 0.1
@@ -344,12 +103,13 @@ HNZ_mandates = {
 	HNZ_mandate_production_shift_decrease = {
 
 		available = {
-			has_stability < 0.75
+			has_stability < 0.8
 			has_war = no 
 			custom_trigger_tooltip = {
 				tooltip = HNZ_shift_in_effect
 				hidden_trigger = { NOT = { has_country_flag = HNZ_shift_change } }
 			}
+			
 		}
 
 		custom_cost_trigger = {
@@ -362,15 +122,15 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = HNZ_shift_change_bullet_cost }
-				add_bullet_with_tooltip_effect = yes
+				set_temp_variable = { bullet_to_lose = HNZ_shift_change_bullet_cost }
+				remove_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_shift_change 
 			}
 		}
 
 		days_remove = 84
-		days_re_enable = 140
+		days_re_enable = 150
 
 		modifier = {
 			production_factory_efficiency_gain_factor = -0.1
@@ -383,7 +143,7 @@ HNZ_mandates = {
 		remove_effect = {
 			custom_effect_tooltip = HNZ_shift_change_cost_bullet_tt
 			hidden_effect = {
-				subtract_from_variable = {
+				add_to_variable = {
 					var = HNZ_shift_change_bullet_cost
 					value = 250
 				}
@@ -412,18 +172,20 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = HNZ_trader_subsidies_cost }
-				add_bullet_with_tooltip_effect = yes
+				set_temp_variable = { bullet_to_lose = HNZ_trader_subsidies_cost }
+				remove_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_mandate_subsidies 
 			}
 		}
 
 		days_remove = 84
-		days_re_enable = 140
+		days_re_enable = 180
 
 		modifier = {
-			consumer_goods_expected_value = -0.15
+			bullet_income_factor_from_exports = -0.25
+			consumer_goods_factor = -0.15
+
 			min_export = 0.1
 		}
 
@@ -442,6 +204,7 @@ HNZ_mandates = {
 	HNZ_mandate_technician_subsidies = {
 
 		available = {
+			NOT = { has_idea = HNZ_exhausted_economy }
 			custom_trigger_tooltip = {
 				tooltip = HNZ_subsidies_in_effect
 				hidden_trigger = { NOT = { has_country_flag = HNZ_mandate_subsidies } }
@@ -459,15 +222,15 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = HNZ_gunsmith_subsidies_cost }
-				add_bullet_with_tooltip_effect = yes
+				set_temp_variable = { bullet_to_lose = HNZ_gunsmith_subsidies_cost }
+				remove_bullet_with_tooltip_effect = yes
 
 				set_country_flag = HNZ_mandate_subsidies 
 			}
 		}
 
 		days_remove = 84
-		days_re_enable = 140
+		days_re_enable = 150
 
 		modifier = {
 			production_speed_arms_factory_factor = 0.15
@@ -493,7 +256,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 15000 }
+			set_temp_variable = { temp_bullet_cost = 25000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -506,7 +269,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -15000 }
+				set_temp_variable = { bullet_to_gain = -25000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -525,7 +288,7 @@ HNZ_mandates = {
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 15000 }
+			set_temp_variable = { temp_bullet_cost = 25000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -538,7 +301,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -15000 }
+				set_temp_variable = { bullet_to_gain = -25000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -554,7 +317,7 @@ HNZ_mandates = {
 		visible = { has_idea = HNZ_mandated_mobilization_idea }
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 15000 }
+			set_temp_variable = { temp_bullet_cost = 25000 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -567,7 +330,7 @@ HNZ_mandates = {
 
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -15000 }
+				set_temp_variable = { bullet_to_gain = -20000 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -634,8 +397,8 @@ HNZ_mandates = {
 		}
 		custom_cost_text = "bullet_decisions_cost_text"
 
-		days_remove = 75
-		days_re_enable = 150
+		days_remove = 70
+		days_re_enable = 180
 
 		complete_effect = {
 			hidden_effect = { 
@@ -645,13 +408,18 @@ HNZ_mandates = {
 		}
 
 		modifier = {
-			production_speed_buildings_factor = -0.1
+			political_power_factor = -0.2
 			economy_cost_factor = 0.2
 			consumer_goods_expected_value = -0.15
 		}
 	}
 
 	HNZ_encourage_developments = {
+
+		available = {
+			has_completed_focus = HNZ_rebuild_koltsevskaya
+			num_of_available_civilian_factories > 3
+		}
 
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 15000 }
@@ -671,21 +439,29 @@ HNZ_mandates = {
 			}
 		}
 
+		modifier = {
+			civilian_factory_use = 4
+		}
+
 		remove_effect = {		## Make it affected by HNZ centralize lines i.e. if centralize southern lines allows those states be placed with modifiers
 			random_owned_state = {
 				limit = { 
 					NOT = { 
 						has_state_category = pastoral 
+						has_state_flag = HNZ_already_developed
+						OR = { region = 6 region = 15 }
 					}
 				}
+				add_extra_state_shared_building_slots = 2
 		    	add_state_modifier = {
     				modifier = {
        					local_resources = 0.1
-						local_building_slots = 2
-						state_production_speed_industrial_complex_factor = 0.1
-						state_production_speed_arms_factory_factor = 0.1
+						state_production_speed_industrial_complex_factor = 0.15
+						state_production_speed_arms_factory_factor = 0.15
+						state_production_speed_infrastructure_factor = 0.15
     				}
 				}
+				set_state_flag = HNZ_already_developed
 			}
 		}
 	}
@@ -1700,7 +1476,6 @@ HNZ_annex_puppet_category = {
 		}
 	}
 }
-
 HNZ_war_committee_category = {
 	HNZ_war_plans = {
 		target_array = global.countries

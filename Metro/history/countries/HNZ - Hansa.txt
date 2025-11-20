@@ -8,15 +8,15 @@ set_country_flag = allow_hanza_recruitment_laws
 
 set_politics = {
 	ruling_party = oligarch
-	last_election = "1933.7.1"
-	election_frequency = 48
-	elections_allowed = no
+	last_election = "2021.10.1"
+	election_frequency = 132
+	elections_allowed = yes
 }
 
 set_popularities = {
-	oligarch = 65
+	oligarch = 75
     community = 10
-    council = 25
+    council = 15
 }
 
 add_timed_idea = {
@@ -24,10 +24,41 @@ add_timed_idea = {
 	days = 1440
 }
 
-set_variable = { var = HNZ_shift_change_bullet_cost value = -250 }
-set_variable = { var = HNZ_trader_subsidies_cost value = -250 }
-set_variable = { var = HNZ_technician_subsidies_cost value = -250 }
-set_variable = { var = HNZ_gunsmith_subsidies_cost value = -250 }
+set_variable = { var = HNZ_shift_change_bullet_cost value = 250 }
+set_variable = { var = HNZ_trader_subsidies_cost value = 250 }
+set_variable = { var = HNZ_technician_subsidies_cost value = 250 }
+set_variable = { var = HNZ_gunsmith_subsidies_cost value = 250 }
+
+#REMINDER to always update the fake NS if these numbers are altered!
+set_variable = { HNZ_tax_efficiency_modifier = -0.5 }
+set_variable = { HNZ_political_power_factor = -0.3 }
+set_variable = { HNZ_production_factory_max_efficiency_factor = -0.15 }
+set_variable = { HNZ_production_speed_arms_factory_factor = 0 }
+set_variable = { HNZ_industrial_production_factory_efficiency_gain_factor = -0.15 }
+set_variable = { HNZ_industrial_production_factory_start_efficiency_factor = 0 }
+add_dynamic_modifier = { modifier = HNZ_decentralized_commonwealth }
+
+#REMINDER to always update the fake NS if these numbers are altered!
+set_variable = { HNZ_consumer_goods_factor = 0.1 }
+set_variable = { HNZ_production_speed_buildings_factor = 0.05 }
+set_variable = { HNZ_trade_opinion_factor = 0.25 }
+add_dynamic_modifier = { modifier = HNZ_trade_economy }
+
+#REMINDER to always update the fake NS if these numbers are altered!
+set_variable = { HNZ_party_popularity_stability_factor = 0.1 }
+set_variable = { HNZ_political_power_gain = -0.15 }
+set_variable = { HNZ_justify_war_goal_time = 0.5 }
+add_dynamic_modifier = { modifier = HNZ_board_versus_council }
+
+#REMINDER to always update the fake NS if these numbers are altered!
+set_variable = { HNZ_land_doctrine_cost_factor = 0.2 }
+set_variable = { HNZ_max_command_power_mult = -0.2 }
+set_variable = { HNZ_experience_gain_factor = -0.35 }
+set_variable = { HNZ_army_core_defence_factor = 0.1 }
+set_variable = { HNZ_dig_in_speed_factor = 0.25 }
+set_variable = { HNZ_max_dig_in_factor = 0.25 }
+set_variable = { HNZ_army_org_factor = -0.2 }
+add_dynamic_modifier = { modifier = HNZ_defense_doctrine }
 
 diplomatic_relation = { 
 	country = ARB
@@ -66,74 +97,14 @@ puppet = MEN
 puppet = OKT
 puppet = PRO
 
-#if = {
-#	limit = {
-#		OR = {
-#			has_dlc = "Together for Victory"
-#			has_dlc = "Man the Guns"
-#		}
-#	}
-#	set_autonomy = {
-#		target = ARB
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = ULI
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = BAU
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = BRK
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = SAV
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = SEV
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = PVL
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = PEC
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = KAL
-#		autonomous_state = autonomy_satellite_independent
-#		freedom_level = 0.8
-#	}
-#	set_autonomy = {
-#		target = OKT
-#		autonomous_state = autonomy_satellite_puppet
-#		freedom_level = 0.4
-#	}
-#}
-
 add_ideas = {
-	## hanseatic_league
 	HNZ_mobilization_law_6
 	HNZ_economy_law_6
 	HNZ_gateway_to_the_metro
-	HNZ_poor_high_command
-	HNZ_decentralized_commonwealth
 	civics_border_HNZ_1
 	civics_property_1
+
+	HNZ_ring_line_secured
 }
 
 add_timed_idea = {
@@ -167,9 +138,9 @@ send_embargo = PAG
 send_embargo = SAT
 send_embargo = GWC
 
-recruit_character = HNZ_whataburger_will
 recruit_character = HNZ_loginov
-##recruit_character = HNZ_general_manager
+recruit_character = HNZ_zvorykine
+recruit_character = HNZ_kovalenko
 recruit_character = HNZ_foreign_soldier
 recruit_character = HNZ_russian_badass
 recruit_character = HNZ_dedushka
@@ -179,7 +150,6 @@ recruit_character = HNZ_artur_makarovich
 recruit_character = HNZ_radyyon_zhuk
 recruit_character = HNZ_eduard_kavalski
 recruit_character = HNZ_alexey_terentyev
-		##	Military 	##
 recruit_character = HNZ_planning_minister_3
 recruit_character = HNZ_planning_minister_2
 recruit_character = HNZ_planning_minister_1
@@ -187,24 +157,22 @@ recruit_character = HNZ_logistic_minister_1
 recruit_character = HNZ_logistic_minister_2
 recruit_character = HNZ_logistic_minister_3
 recruit_character = HNZ_taubman
-
+recruit_character = HNZ_whataburger_will
 recruit_character = HNZ_invisible_observer
-
 recruit_character = HNZ_leontiy_sergeev
 recruit_character = HNZ_miron_bogdanov
 recruit_character = HNZ_stas_zaytsev
 recruit_character = HNZ_grisha_kozlov
-
 recruit_character = HNZ_aleh_karikis
 recruit_character = HNZ_mihail_turetsky
 recruit_character = HNZ_poindexter
 recruit_character = HNZ_mirsky
 recruit_character = HNZ_george_maksimenko
+recruit_character = HNZ_rauschenbach
+recruit_character = HNZ_astafiev
+recruit_character = HNZ_bajenov
+recruit_character = HNZ_khoudiakov
+recruit_character = HNZ_kornievsky
 
-### Factions ### 
-create_faction = Hanza_League_NAME 
+create_faction_from_template = faction_template_hanza
 add_to_faction = HNZ
-
-### The Commonwealth of Stations of the Koltsevaya Line
-
-##add_ideas = HNZ_general_manager

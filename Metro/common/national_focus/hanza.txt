@@ -1110,21 +1110,22 @@ focus_tree = {
 	focus = {
 		id = HNZ_external_sphere
 		icon = GFX_HNZ_external_affairs
-		x = 1
+		x = 0
 		y = 0
 		cost = 6.5
 
 		available = { has_completed_focus = HNZ_new_quarter }
 
 		completion_reward = {
-			## Event where set border status to passport only
-			## Event which makes all neighbours HAVE to set to passport
 			country_event = nf_HNZ.52
 			swap_ideas = {
 				remove_idea = civics_border_HNZ_1
 				add_idea = civics_border_HNZ_2
 			}
 			custom_effect_tooltip = HNZ_passport_projection
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = HNZ_rauschenbach
 		}
 
 		ai_will_do = {
@@ -1230,11 +1231,17 @@ focus_tree = {
 		}
 		available = {
 			NOT = { has_war_with = PEC }
+			PEC = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
 		}
 		bypass = {
 			PEC = { exists = no }
 		}
-		x = -3
+		x = -4
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 5.8
@@ -1277,11 +1284,17 @@ focus_tree = {
 		}
 		available = {
 			NOT = { has_war_with = KAL }
+			KAL = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
 		}
 		bypass = {
 			KAL = { exists = no }
 		}
-		x = -5
+		x = -6
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 5.8
@@ -1408,7 +1421,7 @@ focus_tree = {
 			focus = HNZ_new_friends_3
 		}
 		available = {
-			date > 2034.1.1
+			threat > 0.1
 			NOT = { 
 				has_war_with = PEC
 				has_war_with = KAL
@@ -1418,7 +1431,7 @@ focus_tree = {
 				KAL = { exists = yes }
 			}
 		}
-		x = 1
+		x = 0
 		y = 2
 		relative_position_id = HNZ_new_friends_3
 		cost = 8.6
@@ -1504,11 +1517,17 @@ focus_tree = {
 		}
 		available = {
 			NOT = { has_war_with = ARB }
+			ARB = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
 		}
 		bypass = {
 			ARB = { exists = no }
 		}
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 5.8
@@ -1542,6 +1561,12 @@ focus_tree = {
 		}
 		available = {
 			NOT = { has_war_with = PLS }
+			PLS = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
 		}
 		bypass = {
 			PLS = { exists = no }
@@ -1594,11 +1619,20 @@ focus_tree = {
 		}
 		available = {
 			NOT = { has_war_with = VDN }
+			VDN = {
+				exists = yes
+			}
+			VDN = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
 		}
 		bypass = {
 			VDN = { exists = no }
 		}
-		x = 2
+		x = 1
 		y = 1
 		relative_position_id = HNZ_reaffirm_polis_state
 		cost = 5.8
@@ -1638,7 +1672,19 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_reaffirm_polis_state
 		}
-		x = 0
+		available = {
+			NOT = { has_war_with = SPT }
+			SPT = {
+				exists = yes
+			}
+			SPT = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
+		}
+		x = -1
 		y = 1
 		relative_position_id = HNZ_reaffirm_polis_state
 		cost = 5.8
@@ -1689,9 +1735,9 @@ focus_tree = {
 				ARB = { is_subject_of = HNZ }
 			}
 		}
-		x = -2
+		x = -1
 		y = 1
-		relative_position_id = HNZ_reaffirm_polis_state
+		relative_position_id = HNZ_old_comrades
 		cost = 5.8
 
 		completion_reward = {
@@ -1717,18 +1763,18 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = HNZ_external_sphere_5
 		}
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HNZ_old_comrades
 		cost = 5.8
 
 		completion_reward = {
-			add_political_power = 5
+			add_political_power = 50
 			add_command_power = 20
 			ARB = {
 				add_equipment_to_stockpile = {
 					type = conventional_infantry_equipment_1
-					amount = 20
+					amount = 25
 					producer = RUS
 				}
 			}
@@ -1746,9 +1792,21 @@ focus_tree = {
 			focus = HNZ_support_the_VDNKh_commonwealth
 			focus = HNZ_assistance_to_the_rangers
 		}
-		x = -2
+		available = {
+			NOT = { has_war_with = SPT }
+			SPT = {
+				exists = yes
+			}
+			SPT = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
+		}
+		x = 0
 		y = 1
-		relative_position_id = HNZ_support_the_VDNKh_commonwealth
+		relative_position_id = HNZ_assistance_to_the_rangers
 		cost = 5.8
 
 		completion_reward = {
@@ -1871,6 +1929,18 @@ focus_tree = {
 			focus = HNZ_support_the_VDNKh_commonwealth
 		}
 		bypass = { SEV = { exists = no } }
+		available = {
+			NOT = { has_war_with = SEV }
+			SEV = {
+				exists = yes
+			}
+			SEV = {
+				has_opinion = {
+					target = HNZ
+					value > 5
+				}
+			}
+		}
 		x = 0
 		y = 1
 		relative_position_id = HNZ_support_the_VDNKh_commonwealth
@@ -1988,7 +2058,7 @@ focus_tree = {
 			focus = HNZ_old_comrades1
 		}
 		mutually_exclusive = { focus = HNZ_organized_mobsters_war }
-		x = -1
+		x = -3
 		y = 1
 		relative_position_id = HNZ_old_comrades1
 		cost = 5.8
@@ -2031,7 +2101,7 @@ focus_tree = {
 		icon = GFX_TRT_gopniks
 		prerequisite = {focus = HNZ_old_comrades1 }
 		mutually_exclusive = { focus = HNZ_organized_mobsters_trade }
-		x = -3
+		x = -5
 		y = 1
 		relative_position_id = HNZ_old_comrades1
 		cost = 7.2
@@ -2098,17 +2168,11 @@ focus_tree = {
 		}
 		available = {
 			has_war = no
-			AND = { date > 2033.1.1 }
-			NOT = {
-				has_idea = HNZ_slumbering_giant
-				has_idea = HNZ_aloof_authority
-			}
 		}
-		x = 1
+		x = 0
 		y = 4
 		relative_position_id = HNZ_external_sphere
-		cost = 7.2
-
+		cost = 8.6
 		completion_reward = {
 			custom_effect_tooltip = HNZ_bind_to_influence
 			every_neighbor_country = { 
@@ -2152,6 +2216,9 @@ focus_tree = {
 				RIZ = { is_puppet_of = VDN }
 			}
 		}
+		available = {
+			359 = { is_owned_by = ROOT }
+		}
 		x = -1
 		y = 1
 		relative_position_id = HNZ_old_comrades0
@@ -2163,7 +2230,6 @@ focus_tree = {
 			ALK = { add_timed_idea = { idea = HNZ_encroachment days = 400 } }
 			VDN = { country_event = nf_HNZ.61 }
 		}
-
 		ai_will_do = {
 			factor = 2
 		}
@@ -2522,7 +2588,7 @@ focus_tree = {
 				is_in_faction = no
 			}
 		}
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HNZ_PVL_1
 		cost = 6.5
@@ -2598,11 +2664,10 @@ focus_tree = {
 				BRN = { is_puppet = yes }
 			}
 		}
-		x = 3
+		x = -1
 		y = 1
 		relative_position_id = HNZ_old_comrades1
 		cost = 5.8
-
 		completion_reward = {
 			puppet = BRN
 			add_named_threat = {
@@ -2638,7 +2703,7 @@ focus_tree = {
 				BRN = { is_puppet_of = BRK }
 			}
 		}
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HNZ_BRN_1
 		cost = 6.5
@@ -2684,7 +2749,7 @@ focus_tree = {
 
 		available = { has_completed_focus = HNZ_new_quarter }
 
-		x = -26
+		x = -28
 		y = 0
 		relative_position_id = HNZ_new_quarter
 		cost = 6.5
@@ -2909,7 +2974,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = industrial_bonus
 				bonus = 0.5
-				uses = 1
+				uses = 2
 				category = industry
 			}
 			add_ideas = HNZ_engineering_academy_idea
@@ -3012,7 +3077,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				ahead_reduction = 1
 				category = support_weapons_tech
@@ -3480,30 +3545,15 @@ focus_tree = {
 					add_idea = HNZ_tunnel_cleansers_2
 				}
 			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
+			every_owned_state = {
+				limit = { has_state_category = pastoral }
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
 			}
-			random_owned_controlled_state = {
-				limit = {
-					NOT = {
-					    has_state_category = pastoral
-					}
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			HNZ_decentralized_commonwealth_political_modify = yes
 		}
 	}
 
@@ -3884,6 +3934,9 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_establish_reclamation_bureau
 		}
+		available = {
+			always = no
+		}
 		x = -13
 		y = 1
 		relative_position_id = HNZ_establish_reclamation_bureau
@@ -4162,1872 +4215,1012 @@ focus_tree = {
 		}
 	}
 
-	## Ring of Steel Branch
-
 	focus = {
-		id = HNZ_ring_of_steel
-		icon = GFX_station_entrance
-
-		available = {
-			has_completed_focus = HNZ_new_quarter
-		}
+		id = HNZ_rebuild_koltsevskaya
+		icon = GFX_HNZ_league_of_steel
+		available = { has_completed_focus = HNZ_new_quarter }
 		x = 27
 		y = 0
-		cost = 5.8
-
+		cost = 3
 		completion_reward = {
-			every_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = HNZ_kornievsky
 		}
-
 		ai_will_do = {
-			factor = 15
+			factor = 5
 		}
 	}
-
 	focus = {
-		id = HNZ_northern_arc
-		icon = GFX_HNZ_a_ring_of_steel
-	
-		prerequisite = {
-			focus = HNZ_ring_of_steel
-		}
-
+		id = HNZ_north_arc_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_rebuild_koltsevskaya }
 		available = {
-			401 = {
-                is_owned_by = ROOT
-			}
-			376 = {
-                is_owned_by = ROOT
-			}
-			258 = {
-                is_owned_by = ROOT
-			}
-			304 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
 			custom_trigger_tooltip = { tooltip = must_complete_centralisation_tt }
 			hidden_trigger = { NOT = { has_country_flag = HNZ_centralisation_underway } }
 		}
-
-		x = 2
+		x = 5
 		y = 1
-		relative_position_id = HNZ_ring_of_steel
-		cost = 5.8
-	
-		completion_reward = {
-			376 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			258 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			304 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			359 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			266 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			400 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			hidden_effect = {
-				set_country_flag = HNZ_centralisation_underway
-			}
-		}
-
-		ai_will_do = {
-			factor = 15
-		}
-	}
-
-	focus = {
-		id = HNZ_north_arsenals
-		icon = GFX_workstation
-	
-		prerequisite = {
-			focus = HNZ_northern_arc
-		}
-		mutually_exclusive = {
-			focus = HNZ_north_civilian
-		}
-
-		available = {
-			359 = {
-            	is_owned_by = ROOT
-			}
-			266= {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-		
-		x = 1
-		y = 1
-		relative_position_id = HNZ_northern_arc
 		cost = 6.5
-	
+		relative_position_id = HNZ_rebuild_koltsevskaya
 		completion_reward = {
-			359  = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-				    instant_build = yes
-				}
-			}
-			266 = { 
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-				    instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_VDNKh_trade
-		icon = GFX_barscene
-	
-		prerequisite = {
-			focus = HNZ_north_arsenals
-		}
-		available = { 
-			VDN = { exists = yes } 
-			AND = {
-				has_opinion = {
-					target = HNZ
-					value > 9
-				}
-			}
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_north_arsenals
-		cost = 6.5
-	
-		completion_reward = {
-			add_timed_idea = { idea = HNZ_mushroom_tea days = 260 }
-		}
-
-		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
-			factor = 5
-			modifier = {
-				factor = 0
-				OR = {
-					has_war_with = VDN
-					has_opinion = {
-						target = VDN
-						value > 5
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_SAV_help
-		icon = GFX_flamethrower_arms_1
-	
-		prerequisite = {
-			focus = HNZ_capital_resources
-		}
-		available = { 
-			SAV = { exists = yes } 
-		}
-		bypass = { SAV = { exists = no } }
-		x = 0
-		y = 2
-		relative_position_id = HNZ_north_arsenals
-		cost = 6.5
-	
-		completion_reward = {
-			add_equipment_to_stockpile = {
-		        type = flamethrower_equipment
-		        amount = 25
-				producer = RUS
-		    }
-			SAV = { 
-				add_equipment_to_stockpile = {
-					type = conventional_infantry_equipment_1
-					amount = 25
-					producer = RUS
-				}
-			}
-			add_opinion_modifier = {
-				target = SAV
-				modifier = SEV_assistance
-			}
-			reverse_add_opinion_modifier = {
-				target = HNZ
-				modifier = SEV_assistance
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_north_civilian
-		icon = GFX_workstation_2
-		
-		available = {
-			401 = {
-            	is_owned_by = ROOT
-			}
-			258 = {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-	
-		prerequisite = {
-			focus = HNZ_northern_arc
-		}
-		mutually_exclusive = {
-			focus = HNZ_north_arsenals
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_northern_arc
-		cost = 6.5
-	
-		completion_reward = {
-			401 = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-				    instant_build = yes
-				}
-			}
-			258 = { 
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_capital_resources
-		icon = GFX_scrap_metal
-	
-		prerequisite = {
-			focus = HNZ_north_civilian
-			focus = HNZ_north_arsenals
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_north_civilian
-		cost = 6.5
-	
-		completion_reward = {
-			capital_scope = {
+			every_owned_state = {
+				limit = { region = 6 }
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
-			    add_resource = {
-			        type = chemicals
-			        amount = 3
-			    }
-			    add_resource = {
-			        type = electronics
-			        amount = 3
-			    }
-			    add_resource = {
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_north_arc_trade_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_1 }
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_north_arc_1
+		completion_reward = {
+			every_owned_state = {
+				limit = { region = 6 NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_tax_modify = yes 
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_north_arc_industry_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_1 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_north_arc_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_north_arc_military_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_1 }
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_north_arc_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_militarisation_modify = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_north_arc_trade_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_trade_1 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_north_arc_trade_1
+		completion_reward = {
+			every_owned_state = {
+				limit = { region = 6 NOT = { has_state_category = pastoral } }
+				add_resource = {
 			        type = components
-			        amount = 3
+			        amount = 2
 			    }
 			    add_resource = {
 			        type = alloys
-			        amount = 3
+			        amount = 2
 			    }
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_trade_economy_modify = yes
 		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_defend_from_dark
-		icon = GFX_cog_infrastructure
-		prerequisite = { focus = HNZ_north_civilian }
-		x = -1
-		y = 1
-		relative_position_id = HNZ_capital_resources
-		cost = 7.2
-		available = {
-			has_war = no
-			258 = { is_owned_by = ROOT }
-		}
-
-		completion_reward = {
-			258 = {
-				add_building_construction = {
-					type = bunker2
-					level = 1
-					instant_build = yes
-					province = 4527
-				}
-				add_building_construction = {
-					type = bunker2
-					level = 1
-					instant_build = yes
-					province = 4528
-				}
-				add_building_construction = {
-					type = bunker2
-					level = 1
-					instant_build = yes
-					province = 4529
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_north_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_north_centralise
-		icon = GFX_HNZ_political_centralisation
-	
-		prerequisite = { 
-			focus = HNZ_defend_from_dark
-			focus = HNZ_SAV_help
-		}
+		id = HNZ_north_arc_industry_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_industry_1 }
+		mutually_exclusive = { focus = HNZ_north_arc_military_2 }
 		x = 0
-		y = 2
-		relative_position_id = HNZ_capital_resources
-		cost = 6.5
-	
-		completion_reward = {
-			centralise_commonwealth = yes 
-			clr_country_flag = HNZ_centralisation_underway
-		}
-
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	focus = {
-		id = HNZ_southern_arc
-		icon = GFX_HNZ_a_ring_of_steel
-	
-		prerequisite = {
-			focus = HNZ_ring_of_steel
-		}
-		x = -2
 		y = 1
-		relative_position_id = HNZ_ring_of_steel
-		cost = 5.8
-	
-		available = {
-			396 = {
-                is_owned_by = ROOT
-			}
-			231 = {
-                is_owned_by = ROOT
-			}
-			296 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
-			custom_trigger_tooltip = { tooltip = must_complete_centralisation_tt }
-			hidden_trigger = { NOT = { has_country_flag = HNZ_centralisation_underway } }
-		}
-	
-		completion_reward = {
-			396 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			231 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			296 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			363 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			405 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-		    			add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			405 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			375 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			hidden_effect = {
-				set_country_flag = HNZ_centralisation_underway
-			}
-		}
-
-		ai_will_do = {
-			factor = 15
-		}
-	}
-
-	focus = {
-		id = HNZ_south_civilian
-		icon = GFX_workstation_armory_1
-	
-		prerequisite = {
-			focus = HNZ_southern_arc
-		}
-		mutually_exclusive = {
-			focus = HNZ_south_arc_military
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_southern_arc
 		cost = 6.5
-
-		available = {
-			396 = {
-            	is_owned_by = ROOT
-			}
-			231 = {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-	
+		relative_position_id = HNZ_north_arc_industry_1
 		completion_reward = {
-			396  = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-				    instant_build = yes
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
-			}
-			231 = { 
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
-				    instant_build = yes
+					instant_build = yes
 				}
 			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_northern_arc
-				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_annex_oktyabrskaya
-		icon = GFX_PLS_generic_military_doctrine
-	
-		prerequisite = {
-			focus = HNZ_south_civilian
-			focus = HNZ_south_arc_military
-		}
-		available = {
-			OKT = { is_puppet_of = ROOT }
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_south_civilian
-		cost = 6.5
-	
-		completion_reward = {
-			406 = { add_core_of = ROOT }
-			annex_country = {
-				target = OKT
-				transfer_troops = yes
-			}
-			add_named_threat = {
-				threat = 2
-				name = HNZ_ANNEX_OKT
-			}
-		}
-
-		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
-			factor = 5
-		}
-	}
-
-	focus = {
-		id = HNZ_clearing_southern_tunnels
-		icon = GFX_generic_hanza_alliance
-	
-		prerequisite = {
-			focus = HNZ_south_civilian
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_south_civilian
-		cost = 6.5
-
-		ai_will_do = {
-			factor = 5
-		}
-
-		available = {
-			date > 2035.01.01
-			OR = {
-				AND = {
-					controls_state = 405
-					404 = { is_owned_by = RUI }
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
-				AND = {
-					controls_state = 363
-					405 = { is_owned_by = RUI }
-					404 = { is_owned_by = RUI }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
 				}
 			}
-		}
-
-		bypass = { 404 = { is_owned_by = ROOT } }
-	
-		completion_reward = {
-			HNZ = {
-				transfer_state = 76
-				add_state_core = 76
-				transfer_state = 404
-				add_state_core = 404
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy
+				days = -150
 			}
 			if = {
 				limit = {
-					RUI = { owns_state = 75 }
+					NOT = { has_idea = HNZ_exhausted_economy }
 				}
-				HNZ = {
-					add_state_core = 75
-					transfer_state = 75
-				}
-			}
-			if = {
-				limit = {
-					RUI = { owns_state = 405 }
-				}
-				HNZ = {
-					add_state_core = 405
-					transfer_state = 405
-				}
-			}
-			hidden_effect = {
-				RUI = {
-					remove_state_core = 76
-					remove_state_core = 404
-				}
-				404 = {
-					add_manpower = 50
-				}
-				SRL = {
-					add_state_core = 76
-					add_state_core = 404
-				}
-				if = {
+				random_owned_state = {
 					limit = {
-						RUI = { owns_state = 75 }
+						region = 6
+						NOT = {
+						    has_state_category = pastoral
+						}
 					}
-					RUI = { remove_state_core = 75 }
-				}
-				if = {
-					limit = {
-						RUI = { owns_state = 405 }
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
 					}
-					RUI = { remove_state_core = 405 }
 				}
-			}
-		}
-
-		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
-			factor = 1
-		}
-	}
-
-	focus = {
-		id = HNZ_contact_YAS
-		icon = GFX_generic_equipment_gasmask_1
-	
-		prerequisite = {
-			focus = HNZ_annex_oktyabrskaya
-		}
-		x = 0
-		y = 2
-		relative_position_id = HNZ_south_civilian
-		cost = 6.5
-	
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			YAS = { exists = yes }
-		}
-
-		bypass = { YAS = { exists = no } }
-	
-		completion_reward = {
-			add_opinion_modifier = {
-				target = YAS
-				modifier = SEV_assistance
-			}
-			reverse_add_opinion_modifier = {
-				target = YAS
-				modifier = SEV_assistance
-			}
-			YAS = {
 				add_tech_bonus = {
-					name = hygiene_boost
-					uses = 2
+				name = industrial_bonus
 					bonus = 1
+					uses = 1
 					ahead_reduction = 1
-					category = health
+					category = industry
 				}
 			}
-			add_tech_bonus = {
-				name = hygiene_boost
-				uses = 1
-				bonus = 1
-				ahead_reduction = 1
-				category = recycling
-			}
+		}
+		ai_will_do = {
+			factor = 5
 		}
 	}
-
 	focus = {
-		id = HNZ_south_arc_military
-		icon = GFX_workshop_2
-	
-		prerequisite = {
-			focus = HNZ_southern_arc
-		}
-		mutually_exclusive = {
-			focus = HNZ_south_civilian
-		}
-		x = 1
+		id = HNZ_north_arc_military_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_military_1 }
+		mutually_exclusive = { focus = HNZ_north_arc_industry_2 }
+		x = 0
 		y = 1
-		relative_position_id = HNZ_southern_arc
 		cost = 6.5
-	
-		available = {
-			396 = {
-            	is_owned_by = ROOT
-			}
-			231 = {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-	
+		relative_position_id = HNZ_north_arc_military_1
 		completion_reward = {
-			396  = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-				    instant_build = yes
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
-			}
-			231 = { 
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
 					level = 1
-				    instant_build = yes
+					instant_build = yes
 				}
 			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_arms_factory_modify = yes
 		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_southern_arc
-				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_develop_serpukhovsko_timiryazevskaya
-		icon = GFX_station_entrance
-	
-		prerequisite = {
-			focus = HNZ_south_arc_military
-		}
-		x = 1
+		id = HNZ_north_arc_trade_3
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_trade_2 }
+		x = 0
 		y = 1
-		relative_position_id = HNZ_south_arc_military
 		cost = 6.5
-	
-		available = {
-			363 = {
-            	is_owned_by = ROOT
-			}
-			75 = {
-            	is_owned_by = ROOT
-			}
-			405 = {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-	
+		relative_position_id = HNZ_north_arc_trade_2
 		completion_reward = {
-			363 = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				    instant_build = yes
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
 				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
-				}
-			}
-			75 = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				    instant_build = yes
-				}
-			}
-			405 = { 
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-				    instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-				    instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_southern_arc
-				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_tulskaya_defence
-		icon = GFX_generic_medium_arms_2
-	
-		prerequisite = {
-			focus = HNZ_annex_oktyabrskaya
-			focus = HNZ_develop_serpukhovsko_timiryazevskaya
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_develop_serpukhovsko_timiryazevskaya
-		cost = 6.5
-
-		available = {
-			405 = {
-            	is_owned_by = ROOT
-			}
-			has_war = no
-		}
-	
-		completion_reward = {
-			405 = { 
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-				    instant_build = yes
-				}
-				add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_southern_arc
-				AND = { NOT = { has_completed_focus = HNZ_south_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_south_centralise
-		icon = GFX_HNZ_political_centralisation
-	
-
-		prerequisite = { 
-			focus = HNZ_tulskaya_defence
-			focus = HNZ_contact_YAS
-		}
-		x = -2
-		y = 2
-		relative_position_id = HNZ_develop_serpukhovsko_timiryazevskaya
-		cost = 6.5
-	
-		completion_reward = {
-			centralise_commonwealth = yes 
-			clr_country_flag = HNZ_centralisation_underway
-		}
-
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	focus = {
-		id = HNZ_western_arc
-		icon = GFX_HNZ_a_ring_of_steel
-	
-		prerequisite = {
-			focus = HNZ_ring_of_steel
-		}
-		x = -6
-		y = 1
-		relative_position_id = HNZ_ring_of_steel
-		cost = 5.8
-
-		available = {
-			285 = {
-                is_owned_by = ROOT
-			}
-			398 = {
-                is_owned_by = ROOT
-			}
-			274 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
-			custom_trigger_tooltip = { tooltip = must_complete_centralisation_tt }
-			hidden_trigger = { NOT = { has_country_flag = HNZ_centralisation_underway } }
-		}
-	
-		completion_reward = {
-			285 = { 
 				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			398 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			274 = { 
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			418 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			421 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			399 = { 
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			hidden_effect = {
-				set_country_flag = HNZ_centralisation_underway
-			}
-		}
-
-		ai_will_do = {
-			factor = 15
-		}
-	}
-
-	focus = {
-		id = HNZ_krasnopresnenskaya_trade
-		icon = GFX_campfire_2
-	
-		prerequisite = {
-			focus = HNZ_western_arc
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_western_arc
-		cost = 6.5
-
-		available = {
-			285 = { is_owned_by = ROOT }
-			has_war = no
-		}
-	
-		completion_reward = {
-			285 = {
-				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = salvage_hub
 					level = 1
 					instant_build = yes
 				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 6
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = infrastructure
+					type = salvage_hub
 					level = 1
 					instant_build = yes
 				}
-			    add_resource = {
-			        type = chemicals
-			        amount = 6
-			    }
-			    add_resource = {
-			        type = electronics
-			        amount = 6
-			    }
-			    add_resource = {
-			        type = components
-			        amount = 6
-			    }
-			    add_resource = {
-			        type = alloys
-			        amount = 6
-			    }
 			}
 		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_western_arc
-				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_kievskaya_trade
-		icon = GFX_scrap_metal_3
-	
-		prerequisite = {
-			focus = HNZ_krasnopresnenskaya_trade
-		}
-		x = -1
-		y = 1
-		relative_position_id = HNZ_krasnopresnenskaya_trade
-		cost = 6.5
-	
-		available = {
-			398 = { is_owned_by = ROOT }
-			has_war = no
-		}
-
-		bypass = { NOT = { 398 = { is_owned_by = ROOT } } }
-	
-		completion_reward = {
-			398 = { 
-		    	add_extra_state_shared_building_slots = 2
-		    	add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-				add_resource = {
-			        type = scrap
-			        amount = 8
-			    }
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_western_arc
-				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_military_fund
-		icon = GFX_RCH_reinburse_the_stockpile
-	
-		prerequisite = {
-			focus = HNZ_krasnopresnenskaya_trade
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_krasnopresnenskaya_trade
-		cost = 6.5
-	
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = conventional_infantry_equipment_1
-				amount = 25
-				producer = RUS
-			}
-		    add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.5
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_western_arc
-				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_protection_against_the_reds
-		icon = GFX_tunnel_bunker
-	
-		prerequisite = {
-			focus = HNZ_western_arc
-		}
-		x = 1
-		y = 1
-		relative_position_id = HNZ_western_arc
-		cost = 6.5
-
-		available = {
-			274 = { is_owned_by = ROOT }
-			304 = { is_owned_by = ROOT }
-			NOT = { has_war_with = RED }
-		}
-	
-		completion_reward = {
-			274 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			    add_building_construction = {
-    				type = bunker
-   					level = 2
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 1730
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 3540
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 1274
-				}
-			}
-			304 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			    add_building_construction = {
-    				type = bunker
-   					level = 2
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 2876
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 3705
-				}
-				add_building_construction = {
-				    type = improvised_minefield 
-				    level = 1
-				    instant_build = yes
-				    province = 2861
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_western_arc
-				AND = { NOT = { has_completed_focus = HNZ_west_centralise }}
-			}
-		}
-	}
-
-	focus = {
-		id = HNZ_trade_with_reich
-		icon = GFX_goal_molotov_ribbentrop_pact
-	
-		prerequisite = {
-			focus = HNZ_protection_against_the_reds
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_pressure_reich
-		}
-
-		x = 0
-		y = 2
-		relative_position_id = HNZ_protection_against_the_reds
-		cost = 6.5
-	
-		ai_will_do = {
-			factor = 2
-		}
-	
-		completion_reward = {
-			# decisions to peacefully trade with Reich. No relation penalties will incur !
-			custom_effect_tooltip = HNZ_trade_with_reich_tt
-		}
-	}
-
-	focus = {
-		id = HNZ_pressure_reich
-		icon = GFX_HNZ_pressure_reich
-	
-		prerequisite = {
-			focus = HNZ_kievskaya_trade
-			focus = HNZ_military_fund
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_trade_with_reich
-		}
-		
-		x = -2
-		y = 0
-		relative_position_id = HNZ_trade_with_reich
-		cost = 6.5
-	
-		ai_will_do = {
-			factor = 2
-		}
-
-		available = {
-			ic_ratio = {
-    			tag = RCH
-    			ratio > 2
-			}
-			strength_ratio = {
-    			tag = RCH
-   				 ratio > 2
-			}
-		}
-	
-		completion_reward = {
-			# decisions to 'gunboat' diplomacy Reich into committing Trade Relations with us!
-			custom_effect_tooltip = HNZ_pressure_reich_tt
-		}
-	}
-
-	focus = {
-		id = HNZ_west_centralise
-		icon = GFX_HNZ_political_centralisation
-	
-		prerequisite = {
-			focus = HNZ_trade_with_reich
-			focus = HNZ_pressure_reich
+		id = HNZ_north_arc_centralize
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_north_arc_trade_2 focus = HNZ_north_arc_military_2 }
+		prerequisite = { focus = HNZ_north_arc_trade_2 focus = HNZ_north_arc_industry_2 }
+		available = { 
 		}
 		x = 0
-		y = 2
-		relative_position_id = HNZ_military_fund
-		cost = 6.5
-	
+		y = 4
+		cost = 8.6
+		relative_position_id = HNZ_north_arc_1
 		completion_reward = {
-			centralise_commonwealth = yes 
+			HNZ_decentralized_commonwealth_political_modify = yes
 			clr_country_flag = HNZ_centralisation_underway
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_south_arc_centralize_factory_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					region = 6
+					infrastructure > 4
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
-
 		ai_will_do = {
-			factor = 50
+			factor = 5
 		}
 	}
-
 	focus = {
-		id = HNZ_eastern_arc
-		icon = GFX_HNZ_a_ring_of_steel
-	
-		prerequisite = {
-			focus = HNZ_ring_of_steel
-		}
-		x = 6
-		y = 1
-		relative_position_id = HNZ_ring_of_steel
-		cost = 5.8
-
+		id = HNZ_south_arc_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_rebuild_koltsevskaya }
 		available = {
-			365 = {
-                is_owned_by = ROOT
-			}
-			259 = {
-                is_owned_by = ROOT
-			}
-			has_war = no
 			custom_trigger_tooltip = { tooltip = must_complete_centralisation_tt }
 			hidden_trigger = { NOT = { has_country_flag = HNZ_centralisation_underway } }
 		}
-	
-		completion_reward = {
-			365 = {
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			259 = {
-				add_extra_state_shared_building_slots = 1
-				add_resource = {
-			        type = scrap
-			        amount = 2
-			    }
-			}
-			299 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			265 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			308 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			355 = {
-				if = {
-					limit = { is_controlled_by = ROOT }
-					add_extra_state_shared_building_slots = 1
-					add_resource = {
-					type = scrap
-					amount = 2
-				}
-			    }
-			}
-			hidden_effect = {
-				set_country_flag = HNZ_centralisation_underway
-			}
-		}
-
-		ai_will_do = {
-			factor = 15
-		}
-	}
-
-	focus = {
-		id = HNZ_eastern_industry_1
-		icon = GFX_workshop_3
-	
-		prerequisite = {
-			focus = HNZ_eastern_arc
-		}
-		x = 1
+		x = -5
 		y = 1
-		relative_position_id = HNZ_eastern_arc
 		cost = 6.5
-	
-		available = {
-			265 = {
-                is_owned_by = ROOT
-			}
-			299 = {
-                is_owned_by = ROOT
-			}
-		}
-	
+		relative_position_id = HNZ_rebuild_koltsevskaya
 		completion_reward = {
-			265 = {
-				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
+			every_owned_state = {
+				limit = { region = 15 }
+				add_building_construction = {
+					type = infrastructure
 					level = 1
 					instant_build = yes
-				}
-			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HNZ_eastern_industry_2 }
-				}
-				265 = {
-					add_resource = {
-						type = scrap
-						amount = 4
-					}
-					add_resource = {
-						type = alloys
-						amount = 4
-					}
-				}
-			}
-			299 = {
-				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HNZ_eastern_industry_2 }
-				}
-				299 = {
-					add_resource = {
-						type = scrap
-						amount = 2
-					}
-					add_resource = {
-						type = components
-						amount = 2
-					}
 				}
 			}
 		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_taganskaya_shooting_range
-		icon = GFX_HNZ_shooting_range_military
-		prerequisite = { focus = HNZ_eastern_industry_1 }
-		x = -1
+		id = HNZ_south_arc_trade_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_1 }
+		x = 2
 		y = 1
-		relative_position_id = HNZ_eastern_industry_1
 		cost = 6.5
+		relative_position_id = HNZ_south_arc_1
 		completion_reward = {
-			308 = {
-				add_extra_state_shared_building_slots = 3
+			every_owned_state = {
+				limit = { region = 15 NOT = { has_state_category = pastoral } }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_tax_modify = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_south_arc_industry_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_1 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_south_arc_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_south_arc_military_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_1 }
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_south_arc_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
 					level = 1
 					instant_build = yes
 				}
 			}
-			army_experience = 15
-			add_timed_idea = {
-				idea = HNZ_shooting_range
-				days = 1095
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_militarisation_modify = yes
 		}
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_kurskaya_defence_effort
-		icon = GFX_HNZ_military_surplus
-	
-		prerequisite = {
-			focus = HNZ_eastern_industry_1
-		}
-		x = 1
+		id = HNZ_south_arc_trade_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_trade_1 }
+		x = 0
 		y = 1
-		relative_position_id = HNZ_eastern_industry_1
 		cost = 6.5
-
-		available = {
-			259 = {
-                is_owned_by = ROOT
-			}
-			299 = {
-                is_owned_by = ROOT
-			}
-			265 = {
-                is_owned_by = ROOT
-			}
-		}
-	
+		relative_position_id = HNZ_south_arc_trade_1
 		completion_reward = {
-			259 = {
-				add_extra_state_shared_building_slots = 2
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = bunker2
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
+			every_owned_state = {
+				limit = { region = 15 NOT = { has_state_category = pastoral } }
+				add_resource = {
+			        type = components
+			        amount = 2
+			    }
+			    add_resource = {
+			        type = alloys
+			        amount = 2
+			    }
+				add_resource = {
+					type = scrap
+					amount = 2
 				}
 			}
-			299 = {
-				add_extra_state_shared_building_slots = 2
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = bunker2
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
-				}
-			}
-			265 = {
-				add_extra_state_shared_building_slots = 2
-			    add_building_construction = {
-    				type = bunker
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = bunker2
-   					level = 1
-    				instant_build = yes
-    				province = {
-       					all_provinces = yes
-   					}
-				}
-				add_building_construction = {
-    				type = infrastructure
-    				level = 1
-    				instant_build = yes
-				}
-			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_trade_economy_modify = yes
 		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
-			}
 		}
 	}
-
 	focus = {
-		id = HNZ_eastern_industry_2
-		icon = GFX_workstation_4
-	
-		prerequisite = {
-			focus = HNZ_eastern_arc
+		id = HNZ_south_arc_industry_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_industry_1 }
+		mutually_exclusive = { focus = HNZ_south_arc_military_2 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_south_arc_industry_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_timed_idea = {
+				idea = HNZ_exhausted_economy
+				days = -150
+			}
+			if = {
+				limit = {
+					NOT = { has_idea = HNZ_exhausted_economy }
+				}
+				random_owned_state = {
+					limit = {
+						region = 15
+						NOT = {
+						    has_state_category = pastoral
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				add_tech_bonus = {
+				name = industrial_bonus
+					bonus = 1
+					uses = 1
+					ahead_reduction = 1
+					category = industry
+				}
+			}
 		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_south_arc_military_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_military_1 }
+		mutually_exclusive = { focus = HNZ_south_arc_industry_2 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_south_arc_military_1
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_decentralized_commonwealth_arms_factory_modify = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_south_arc_trade_3
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_trade_2 }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_south_arc_trade_2
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					region = 15
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = salvage_hub
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_south_arc_centralize
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_south_arc_trade_2 focus = HNZ_south_arc_industry_2 }
+		prerequisite = { focus = HNZ_south_arc_trade_2 focus = HNZ_south_arc_military_2 }
+		x = 0
+		y = 4
+		cost = 8.6
+		relative_position_id = HNZ_south_arc_1
+		completion_reward = {
+			HNZ_decentralized_commonwealth_political_modify = yes
+			clr_country_flag = HNZ_centralisation_underway
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_south_arc_centralize_factory_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					region = 15
+					infrastructure > 4
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_1
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_rebuild_koltsevskaya }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_rebuild_koltsevskaya
+		completion_reward = {
+			## give mandate decision to upgrade state_category at a cost of boolets
+			add_political_power = 150
+			capital_scope = {
+				set_state_category = metropolis
+				set_building_level = {
+					type = infrastructure
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_2
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_1 }
+		mutually_exclusive = { focus = HNZ_internal_branch_3 }
 		x = -1
 		y = 1
-		relative_position_id = HNZ_eastern_arc
 		cost = 6.5
-	
-		available = {
-			355 = {
-                is_owned_by = ROOT
-			}
-			308 = {
-                is_owned_by = ROOT
+		relative_position_id = HNZ_internal_branch_1
+		completion_reward = {
+			add_ideas = HNZ_inner_politics
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_2A
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_2 }
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_2
+		completion_reward = {
+			add_political_power = 250
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_3
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_1 }
+		mutually_exclusive = { focus = HNZ_internal_branch_2 }
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_1
+		completion_reward = {
+			add_ideas = HNZ_materiel_manufacturers
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_3A
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_3 }
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_3
+		completion_reward = {
+			add_tech_bonus = {
+				name = INDUSTRY
+				uses = 3
+				bonus = 1
+				category = industry
 			}
 		}
-	
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_internal_branch_4
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_2 focus = HNZ_internal_branch_3 }
+		available = { NOT = { has_idea = HNZ_exhausted_economy } }
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_1
 		completion_reward = {
-			355 = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+					    has_state_category = pastoral
+					}
+				}
 				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
+				add_building_construction = {
+					type = arms_factory
 					level = 1
 					instant_build = yes
 				}
 			}
-			if = {
+			random_owned_state = {
 				limit = {
-					NOT = { has_completed_focus = HNZ_eastern_industry_1 }
-				}
-				355 = {
-					add_resource = {
-						type = scrap
-						amount = 4
+					NOT = {
+					    has_state_category = pastoral
 					}
 				}
-			}
-			308 = {
 				add_extra_state_shared_building_slots = 1
-		    	add_building_construction = {
-					type = industrial_complex
+				add_building_construction = {
+					type = arms_factory
 					level = 1
 					instant_build = yes
 				}
 			}
-			if = {
+			random_owned_state = {
 				limit = {
-					NOT = { has_completed_focus = HNZ_eastern_industry_1 }
-				}
-				308 = {
-					add_resource = {
-						type = alloys
-						amount = 4
+					NOT = {
+					    has_state_category = pastoral
 					}
 				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
 			}
+			HNZ_decentralized_commonwealth_max_efficiency_modify = yes
 		}
-
 		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
-			}
+			factor = 15
 		}
 	}
-
 	focus = {
-		id = HNZ_east_gatling_boost
-		icon = GFX_gatling_arms_1
-	
-		prerequisite = {
-			focus = HNZ_eastern_industry_2
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_east_explosive_boost
-		}
-
+		id = HNZ_internal_branch_5
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_2A focus = HNZ_internal_branch_3A }
+		prerequisite = { focus = HNZ_internal_branch_4 }
 		x = 0
-		y = 2
-		relative_position_id = HNZ_eastern_industry_2
-		cost = 6.5
-	
+		y = 4
+		cost = 8.6
+		relative_position_id = HNZ_internal_branch_1
 		completion_reward = {
-			add_ideas = HNZ_gatling_boost
-			add_equipment_to_stockpile = {
-		        type = gatling_equipment_1
-		        amount = 25
-				producer = RUS
-		    }
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
+			HNZ_decentralized_commonwealth_political_modify = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			every_owned_state = {
+				limit = { 
+					NOT = { has_state_category = pastoral } 
+					OR = { region = 15 region = 6 }
+				}
+				add_extra_state_shared_building_slots = 2
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_east_centralise
-		icon = GFX_HNZ_political_centralisation
-	
-		prerequisite = {
-			focus = HNZ_east_gatling_boost
-			focus = HNZ_east_explosive_boost
-		}
-		x = 0
-		y = 2
-		relative_position_id = HNZ_taganskaya_shooting_range
-		cost = 6.5
-	
-		completion_reward = {
-			centralise_commonwealth = yes 
-			clr_country_flag = HNZ_centralisation_underway
-		}
-
-		ai_will_do = {
-			factor = 50
-		}
-	}
-
-	focus = {
-		id = HNZ_east_explosive_boost
-		icon = GFX_explosive_arms_1
-	
-		prerequisite = {
-			focus = HNZ_taganskaya_shooting_range
-			focus = HNZ_kurskaya_defence_effort
-		}
-
-		mutually_exclusive = {
-			focus = HNZ_east_gatling_boost
-		}
-		
-		x = 2
-		y = 0
-		relative_position_id = HNZ_east_gatling_boost
-		cost = 6.5
-	
-		completion_reward = {
-			add_ideas = HNZ_explosive_boost
-			add_equipment_to_stockpile = {
-		        type = explosive_equipment_1
-		        amount = 25
-				producer = RUS
-		    }
-		}
-
 		ai_will_do = {
 			factor = 5
-			modifier = {
-				factor = 15
-				has_completed_focus = HNZ_eastern_arc
-				AND = { NOT = { has_completed_focus = HNZ_east_centralise }}
-			}
 		}
 	}
-
+	focus = {
+		id = HNZ_all_power_to_the_board
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_5 }
+		prerequisite = { focus = HNZ_south_arc_centralize }
+		prerequisite = { focus = HNZ_north_arc_centralize }
+		mutually_exclusive = { focus = HNZ_all_power_to_general_manager }
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_5
+		completion_reward = {
+			HNZ_board_versus_council_board_modify = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_all_power_to_general_manager
+		icon = GFX_HNZ_league_of_steel
+		prerequisite = { focus = HNZ_internal_branch_5 }
+		prerequisite = { focus = HNZ_south_arc_centralize }
+		prerequisite = { focus = HNZ_north_arc_centralize }
+		mutually_exclusive = { focus = HNZ_all_power_to_the_board }
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = HNZ_internal_branch_5
+		completion_reward = {
+			HNZ_board_versus_council_manager_modify = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
 	focus = {
 		id = HNZ_armed_forces_1
 		icon = GFX_HNZ_high_command
 		available = { has_completed_focus = HNZ_new_quarter }
 		x = 39
 		y = 0
-		cost = 6.5
+		cost = 3
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
@@ -6037,7 +5230,7 @@ focus_tree = {
 			}
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
-				amount = 50
+				amount = 30
 				producer = RUS
 			}
 		}
@@ -6056,7 +5249,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				category = clothing_kits
 			}
@@ -6076,7 +5269,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				category = entrench_kits
 			}
@@ -6140,7 +5333,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				category = support_tech
 			}
@@ -6160,7 +5353,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industrial_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				category = support_weapons_tech
 			}
@@ -6226,16 +5419,50 @@ focus_tree = {
 				}
 				add_equipment_to_stockpile = {
 					type = special_forces_equipment_heavy
-					amount = 50
+					amount = 20
 					producer = HNZ
 				}
 			}
-
-			## TODO Check is Russian Badass is recruited
-			## IF so, provide additional buffs 
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_russian_badass_focus
+			effect_tooltip = {
+				add_tech_bonus = {
+				name = explosive_bonus
+					bonus = 1
+					uses = 1
+					category = explosive_support_tech
+				}
+				add_equipment_to_stockpile = {
+		    		type = explosive_equipment_1
+		    		amount = 25
+					producer = RUS
+		   		}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_russian_badass
+					}
+					add_tech_bonus = {
+					name = explosive_bonus
+						bonus = 1
+						uses = 1
+						category = explosive_support_tech
+					}
+					add_equipment_to_stockpile = {
+		    	    	type = explosive_equipment_1
+		    	    	amount = 25
+						producer = RUS
+		   			}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_russian_badass 
+			}
 		}
 	}
 	focus = {
@@ -6328,10 +5555,20 @@ focus_tree = {
 		relative_position_id = HNZ_armed_forces_8
 		cost = 6.5
 		completion_reward = {
-			add_ideas = HNZ_go_big_or_go_home
-
-			## TODO Check is Russian Badass is recruited
-			## IF so, provide additional buffs 
+			add_ideas = HNZ_go_big_or_go_home                                                                                                                         
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_russian_badass_focus
+			effect_tooltip = {
+				add_ideas = HNZ_explosive_boost
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_russian_badass
+					}
+					add_ideas = HNZ_explosive_boost
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6366,13 +5603,17 @@ focus_tree = {
 				}
 				add_equipment_to_stockpile = {
 					type = special_forces_equipment_heavy
-					amount = 50
+					amount = 40
 					producer = HNZ
 				}
 			}
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_russian_badass 
+			}
 		}
 	}
 	focus = {
@@ -6405,10 +5646,15 @@ focus_tree = {
 		relative_position_id = HNZ_prepatory_department
 		cost = 6.5
 		completion_reward = {
-			army_experience = 10
+			army_experience = 15
 			add_timed_idea = {
 				idea = HNZ_prepare_conflict_resolutions
 				days = 360
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
 			}
 		}
 		ai_will_do = {
@@ -6437,6 +5683,11 @@ focus_tree = {
 		cost = 6.5
 		completion_reward = {
 			add_ideas = HNZ_secret_rearmament_schemes
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6462,6 +5713,11 @@ focus_tree = {
 				category = rail_engine
 				category = rail_armor
 				category = rail_armament
+			}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_2
+				amount = 15
+				producer = RUS
 			}
 		}
 		ai_will_do = {
@@ -6499,6 +5755,7 @@ focus_tree = {
 					logistics_company  = { x = 0 y = 1 }    
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			capital_scope = {
 				create_unit = {
 					division = "name = \"1st OVMSB Brigade\" division_template = \"OVMSB Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
@@ -6509,6 +5766,7 @@ focus_tree = {
 					owner = ROOT
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			create_corps_commander = {
 				name = "Yakov Borisovich"
 				picture = "HNZ_taubmam.dds"
@@ -6546,6 +5804,11 @@ focus_tree = {
 				category = rail_cart
 			}
 			add_ideas = HNZ_rail_cart_improvement_modifier
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_2
+				amount = 10
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6572,6 +5835,11 @@ focus_tree = {
 				category = rail_car
 			}
 			add_ideas = HNZ_rail_car_improvement_modifier
+			add_equipment_to_stockpile = {
+				type = rail_car_equipment_1
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6632,13 +5900,13 @@ focus_tree = {
 				remove_trait = {
 					character = HNZ_alexey_terentyev
 					slot = industrial_concern
-					trait = HNZ_alexey_terentyev
+					trait = HNZ_alexey_terentyev_trait
 				}
 			}
 			add_trait = {
 				character = HNZ_alexey_terentyev
 				slot = industrial_concern
-				trait = HNZ_alexey_terentyev_2
+				trait = HNZ_alexey_terentyev_2_trait
 			}
 		}
 		ai_will_do = {
@@ -6671,6 +5939,11 @@ focus_tree = {
 		}
 		available = {
 			457 = { is_owned_by = RUI }
+			num_of_civilian_factories_available_for_projects > 2
+			is_subject = no
+		}
+		select_effect = {
+			add_ideas = HNZ_bunker_efforts
 		}
 		bypass = { 457 = { is_owned_by = ROOT } }
 		x = 0
@@ -6678,6 +5951,14 @@ focus_tree = {
 		relative_position_id = HNZ_prepatory_department
 		cost = 6.5
 		completion_reward = {
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = {
+				add_ideas = HNZ_bunker_efforts
+			}
+			hidden_effect = {
+				remove_ideas = HNZ_bunker_efforts
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			transfer_state = 457
 			457 = {
 				set_state_category = metropolis
@@ -6720,15 +6001,28 @@ focus_tree = {
 		}
 		available = {
 			457 = { is_owned_by = ROOT }
+			num_of_civilian_factories_available_for_projects > 2
+			is_subject = no
+		}
+		select_effect = {
+			add_ideas = HNZ_bunker_efforts
 		}
 		x = 0
 		y = 2
 		relative_position_id = HNZ_invisible_observer_bunker
 		cost = 6.5
 		completion_reward = {
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = {
+				add_ideas = HNZ_bunker_efforts
+			}
+			hidden_effect = {
+				remove_ideas = HNZ_bunker_efforts
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = HNZ_state_457_national_spirit
 			add_ideas = HNZ_ZKP_taganskaya_directorate
-			add_political_power = 100
+			add_political_power = 150
 		}
 		ai_will_do = {
 			factor = 5
@@ -6780,12 +6074,12 @@ focus_tree = {
 		x = 5
 		y = 1
 		relative_position_id = HNZ_doctrine_1
-		cost = 6.5
+		cost = 3
 
 		completion_reward = {
-			army_experience = 35
-			add_war_support = 0.05
+			army_experience = 10
 			country_event = nf_HNZ.85
+			custom_effect_tooltip = generic_skip_one_line_tt
 		}
 		ai_will_do = {
 			factor = 5
@@ -6832,7 +6126,6 @@ focus_tree = {
 		completion_reward = {
 			## Centralize Army
 			custom_effect_tooltip = HNZ_centralization_army_tt
-
 		}
 		ai_will_do = {
 			factor = 5
@@ -6877,12 +6170,53 @@ focus_tree = {
 				uses = 1
 				category = stalker
 			}
-
-			## TODO Check is Foreign Mercenary Leader is recruited
-			## IF so, provide additional buffs 
+			every_unit_leader = {
+				add_attack = 1
+				add_defense = 1
+				gain_xp = 300
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_foreign_mercenary_focus
+			effect_tooltip = {
+				add_tech_bonus = {
+					name = entrench_kit_bonus
+					bonus = 1
+					uses = 1
+					category = gatling_support_tech
+				}
+				add_equipment_to_stockpile = {
+		    		type = gatling_equipment_1
+		    		amount = 25
+					producer = RUS
+		    	}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_foreign_mercenary
+					}
+					add_tech_bonus = {
+						name = entrench_kit_bonus
+						bonus = 1
+						uses = 1
+						category = gatling_support_tech
+					}
+					add_equipment_to_stockpile = {
+		    	   		type = gatling_equipment_1
+		    	    	amount = 25
+						producer = RUS
+		    		}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_defense_doctrine_army_competency = yes
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_foreign_mercenary 
+			}
 		}
 	}
 	focus = {
@@ -6897,12 +6231,33 @@ focus_tree = {
 		cost = 6.5
 		completion_reward = {
 			add_ideas = HNZ_mercenary_army_modifier
-
-			## TODO Check is Foreign Mercenary Leader is recruited
-			## IF so, provide additional buffs 
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_foreign_mercenary_focus
+			effect_tooltip = {
+				add_ideas = HNZ_gatling_boost
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_foreign_mercenary
+					}
+					add_ideas = HNZ_gatling_boost
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_defense_doctrine_army_competency = yes
+			every_unit_leader = {
+				add_planning = 1
+				add_logistics = 1
+				gain_xp = 300
+			}
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_foreign_mercenary 
+			}
 		}
 	}
 	focus = {
@@ -6913,10 +6268,23 @@ focus_tree = {
 		}
 		x = 1
 		y = 1
+		available = {
+			has_army_manpower = { size > 749 }
+				
+			custom_trigger_tooltip = {
+			 	tooltip = HNZ_army_centralization_2_tt
+			 	check_variable = { num_equipment_in_armies@infantry_equipment > 749 }
+			}
+		}
 		relative_position_id = HNZ_army_centralization
 		cost = 8.6
 		completion_reward = {
 			add_ideas = HNZ_army_centralization_modifier_1
+			every_unit_leader = {
+				gain_xp = 250
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_defense_doctrine_army_competency = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -6930,12 +6298,25 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
+		available = {
+			has_army_manpower = { size > 1499 }
+				
+			custom_trigger_tooltip = {
+			 	tooltip = HNZ_army_centralization_3_tt
+			 	check_variable = { num_equipment_in_armies@infantry_equipment > 1499 }
+			}
+		}
 		relative_position_id = HNZ_army_centralization_2
 		cost = 8.6
 		completion_reward = {
 			swap_ideas = {
 				remove_idea = HNZ_army_centralization_modifier_1
 				add_idea = HNZ_army_centralization_modifier_2
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			HNZ_defense_doctrine_army_competency = yes
+			every_unit_leader = {
+				gain_xp = 250
 			}
 		}
 		ai_will_do = {
@@ -6950,6 +6331,14 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
+		available = {
+			has_army_manpower = { size > 1499 }
+				
+			custom_trigger_tooltip = {
+			 	tooltip = HNZ_army_centralization_3_tt
+			 	check_variable = { num_equipment_in_armies@infantry_equipment > 1499 }
+			}
+		}
 		relative_position_id = HNZ_army_centralization_3
 		cost = 8.6
 		completion_reward = {
@@ -6979,12 +6368,34 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
-
-			## TODO Check if Grizzled Veteran is recruited
-			## IF so, provide additional buffs!
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_grizzled_veteran_focus
+			effect_tooltip = {
+				army_experience = 20
+				every_unit_leader = {
+					add_planning = 1
+					gain_xp = 400
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_grizzled_veteran
+					}
+					army_experience = 20
+					every_unit_leader = {
+						add_logistics = 1
+						gain_xp = 400
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_grizzled_veteran 
+			}
 		}
 	}
 	focus = {
@@ -6998,7 +6409,8 @@ focus_tree = {
 		relative_position_id = HNZ_doctrine_2
 		cost = 6.5
 		completion_reward = {
-			add_ideas = HNZ_doctrine_cost_reduction
+			#add_ideas = HNZ_doctrine_cost_reduction
+			HNZ_defense_doctrine_military_competency = yes
 			## TODO Add Event to ask SPT for doctrine support.
 			## We will provide them additional manpower
 
@@ -7370,8 +6782,8 @@ focus_tree = {
 		relative_position_id = HNZ_general_grizzled_veteran
 		cost = 6.5
 		completion_reward = {
-			army_experience = 25
-			remove_ideas = HNZ_poor_high_command
+			army_experience = 30
+			HNZ_defense_doctrine_military_competency = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -7423,14 +6835,27 @@ focus_tree = {
 			focus = HNZ_war_planning_6
 		}
 		available = {
-			457 = { is_owned_by = ROOT }
+			457 = { is_owned_by = RUI }
+			num_of_civilian_factories_available_for_projects > 2
+			is_subject = no
+		}
+		select_effect = {
+			add_ideas = HNZ_bunker_efforts
 		}
 		x = 1
 		y = 2
 		relative_position_id = HNZ_invisible_observer_bunker_2
 		cost = 6.5
 		completion_reward = {
-			add_political_power = 100
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = {
+				add_ideas = HNZ_bunker_efforts
+			}
+			hidden_effect = {
+				remove_ideas = HNZ_bunker_efforts
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 200
 			457 = {
 				set_victory_points = {
 					province = 4957
@@ -7489,12 +6914,34 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
-
-			## TODO Check if Grizzled Veteran is recruited
-			## IF so, provide additional buffs!
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_if_grizzled_veteran_focus
+			effect_tooltip = {
+				army_experience = 20
+				every_unit_leader = {
+					add_planning = 1
+					gain_xp = 400
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_completed_focus = HNZ_general_grizzled_veteran
+					}
+					army_experience = 20
+					every_unit_leader = {
+						add_planning = 1
+						gain_xp = 400
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				factor = 25
+				has_completed_focus = HNZ_general_grizzled_veteran 
+			}
 		}
 	}
 	focus = {
@@ -7510,9 +6957,9 @@ focus_tree = {
 		cost = 6.5
 		completion_reward = {
 			custom_effect_tooltip = HNZ_war_plans_tt
-
+			add_command_power = 25
+			army_experience = 10
 			## TODO Use USA Germany Hybrid war decisions 
-			## Give a little war support also.
 		}
 		ai_will_do = {
 			factor = 5

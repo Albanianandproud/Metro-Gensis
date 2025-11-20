@@ -30,6 +30,38 @@ add_bullet_with_tooltip_effect = {
 	}
 }
 
+remove_bullet_with_tooltip_effect = {
+	if = {
+		limit = { check_variable = { bullet_to_lose > 0 } }
+		custom_effect_tooltip = LOSE_bullet_TT
+	}
+	else = { custom_effect_tooltip = GAIN_bullet_TT }
+	hidden_effect = {
+		scoped_sound_effect = "bullet_sound"
+		set_temp_variable = { bullet_temp = bullet }
+		subtract_from_variable = { bullet = bullet_to_lose }
+		clamp_variable = {
+			var = bullet
+			min = -2000000
+			max = 2000000
+		}
+		if = {
+			limit = {
+				check_variable = { bullet_to_lose < 0 }
+				check_variable = { bullet > bullet_temp }
+			}
+			set_variable = { bullet = 2000000 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { bullet_to_lose < 0 }
+				check_variable = { bullet < bullet_temp }
+			}
+			set_variable = { bullet = -2000000 }
+		}
+	}
+}
+
 # example usage:
 ## set_temp_variable = { bullet_to_gain = 100 }
 ## add_bullet_with_inflation_included_with_tooltip_effect = yes

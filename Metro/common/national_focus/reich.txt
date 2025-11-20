@@ -5463,7 +5463,12 @@ focus_tree = {
 		completion_reward = {
 			RCH_reclusive_upgrade_idea = yes
 			
-			add_threat = 5
+			RCH = {
+				add_named_threat = {
+					threat = 5
+					name = RCH_reclusive_threat
+				}
+			}
 
 			every_neighbor_country = {
 				limit = {
@@ -5543,6 +5548,15 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = RCH_outwards
 		completion_reward = {
+
+			RCH = {
+				add_named_threat = {
+					threat = 1
+					name = RCH_mayakovskaya_threat
+				}
+			}
+
+
 			if = {
 				limit = {
 					316 = {
@@ -5928,8 +5942,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = RCH_unlock_max_tier_mobilization
 			add_political_power = 100
-			add_threat = 5
-
+			
 			news_event = { id = global_event.40 }
 		}
 		ai_will_do = {
@@ -5959,6 +5972,12 @@ focus_tree = {
 		y = 1
 		relative_position_id = RCH_proclamation_of_slavic_unity
 		completion_reward = {
+			RCH = {
+				add_named_threat = {
+					threat = 5
+					name = RCH_war_threat
+				}
+			}
 			if = {
 				limit = {
 					NOT = {
@@ -6058,6 +6077,10 @@ focus_tree = {
 		ai_will_do = {
 			factor = 50
 			modifier = {
+		        factor = 0.05
+				date < 2033.10.1
+		    }
+			modifier = {
 		        add = 1000
 				date > 2033.10.1
 		    }
@@ -6118,6 +6141,10 @@ focus_tree = {
 		ai_will_do = {
 			factor = 50
 			modifier = {
+		        factor = 0.05
+				date < 2033.10.1
+		    }
+			modifier = {
 		        add = 1000
 				date > 2033.10.1
 		    }
@@ -6143,9 +6170,9 @@ focus_tree = {
 			puppet = BRN
 		}
 		ai_will_do = {
-			factor = 0.1
+			factor = 2
 			modifier = {
-				factor = 2
+				factor = 25
 				has_completed_focus = RCH_expansion_trubnaya_core
 			}
 		}
@@ -6177,10 +6204,18 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 0.1
+			factor = 2
 			modifier = {
 				factor = 2
 				has_completed_focus = RCH_expansion_trubnaya_core
+			}
+			modifier = {
+				factor = 20
+				BRN = {
+					NOT = {
+						is_subject_of = HNZ
+					}
+				}
 			}
 		}
 	}
@@ -6236,9 +6271,9 @@ focus_tree = {
 			custom_effect_tooltip =  RCH_KUZ_borderwar_tooltip
 		}
 		ai_will_do = {
-			factor = 0.1
+			factor = 25
 			modifier = {
-				factor = 2
+				factor = 200
 				has_completed_focus = RCH_expansion_barrikadnaya_core
 			}
 		}
@@ -6269,9 +6304,9 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 0.1
+			factor = 2
 			modifier = {
-				factor = 2
+				factor = 25
 				has_completed_focus = RCH_expansion_barrikadnaya_core
 			}
 		}
@@ -6362,6 +6397,10 @@ focus_tree = {
 		ai_will_do = {
 			factor = 50
 			modifier = {
+		        factor = 0.05
+				date < 2034.10.1
+		    }
+			modifier = {
 		        add = 1000
 				date > 2034.10.1
 		    }
@@ -6422,8 +6461,12 @@ focus_tree = {
 		ai_will_do = {
 			factor = 50
 			modifier = {
+		        factor = 0.05
+				date < 2034.10.1
+		    }
+			modifier = {
 		        add = 1000
-				date > 2034.1.1
+				date > 2034.10.1
 		    }
 		}
 	}

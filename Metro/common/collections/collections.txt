@@ -1,0 +1,35 @@
+########################################     
+
+world_at_peace_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_war = no 
+		}
+	}
+	name = COLLECTION_COUNTRIES_AT_PEACE
+}
+
+faction_owned_core_states = {
+	input = game:scope
+	operators = {
+		faction_members
+		owned_states
+		limit = {
+			is_core_of = PREV 
+		}
+	}
+	name = COLLECTION_FACTION_OWNED_CORE_STATES
+}
+
+faction_controlled_non_core_states = {
+	input = game:scope
+	operators = {
+		faction_members
+		controlled_states
+		limit = {
+			NOT = { is_core_of = PREV }
+		}
+	}
+	name = COLLECTION_FACTION_CONTROLLED_NON_CORE_STATES
+}

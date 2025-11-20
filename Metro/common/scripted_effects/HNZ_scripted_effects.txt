@@ -31,41 +31,6 @@ expeditions_improve = {
 		}
 	}
 }
-centralise_commonwealth = {
-	if = {
-		limit = {
-			has_idea = HNZ_decentralized_commonwealth
-		}
-		swap_ideas = {
-			remove_idea = HNZ_decentralized_commonwealth
-			add_idea = HNZ_decentralized_commonwealth_3
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HNZ_decentralized_commonwealth_3
-		}
-		swap_ideas = {
-			remove_idea = HNZ_decentralized_commonwealth_3
-			add_idea = HNZ_decentralized_commonwealth_2
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HNZ_decentralized_commonwealth_2
-		}
-		swap_ideas = {
-			remove_idea = HNZ_decentralized_commonwealth_2
-			add_idea = HNZ_decentralized_commonwealth_1
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HNZ_decentralized_commonwealth_1
-		}
-		remove_ideas = HNZ_decentralized_commonwealth_1
-	}
-}
 HNZ_mutant_purge_scripted_effect = {
 	if = {
 		limit = {
@@ -94,7 +59,6 @@ HNZ_mutant_purge_scripted_effect = {
 		hidden_effect = { add_to_variable = { var = HNZ_political_authority value = 1 } }
 	}
 }
-
 
 HNZ_moscow_awakes_scripted_effect = {
 	HNZ = {
@@ -176,4 +140,54 @@ HNZ_civil_war_scripted_effect = {
 }
 
 ## HNZ Mandates
+
+HNZ_decentralized_commonwealth_tax_modify = {
+	custom_effect_tooltip = HNZ_decentralized_commonwealth_modify_tt
+	add_to_variable = { HNZ_tax_efficiency_modifier = 0.1 tooltip = tax_efficiency_modifier_tt }
+}
+HNZ_decentralized_commonwealth_political_modify = {
+	custom_effect_tooltip = HNZ_decentralized_commonwealth_modify_tt
+	add_to_variable = { HNZ_political_power_factor = 0.1 tooltip = political_power_gain_tt }
+}
+HNZ_decentralized_commonwealth_arms_factory_modify = {
+	custom_effect_tooltip = HNZ_decentralized_commonwealth_modify_tt
+	add_to_variable = { HNZ_production_speed_arms_factory_factor = 0.05 tooltip = production_speed_arms_factory_factor_tt }
+}
+HNZ_decentralized_commonwealth_max_efficiency_modify = {
+	custom_effect_tooltip = HNZ_decentralized_commonwealth_modify_tt
+	add_to_variable = { HNZ_production_factory_max_efficiency_factor = 0.15 tooltip = production_factory_max_efficiency_factor_tt }
+}
+HNZ_decentralized_commonwealth_militarisation_modify = {
+	custom_effect_tooltip = HNZ_decentralized_commonwealth_modify_tt
+	add_to_variable = { HNZ_industrial_production_factory_efficiency_gain_factor = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+	add_to_variable = { HNZ_industrial_production_factory_start_efficiency_factor = 0.05 tooltip = production_factory_start_efficiency_factor_tt }
+}
+
+HNZ_trade_economy_modify = {
+	custom_effect_tooltip = HNZ_trade_economy_modify_tt
+	add_to_variable = { HNZ_consumer_goods_factor = -0.05 tooltip = consumer_goods_factor_tt }
+}
+
+HNZ_board_versus_council_manager_modify = {
+	custom_effect_tooltip = HNZ_board_versus_council_modify_tt
+	add_to_variable = { HNZ_political_power_gain = -0.1 tooltip = political_power_gain_tt }
+}
+HNZ_board_versus_council_board_modify = {
+	custom_effect_tooltip = HNZ_board_versus_council_modify_tt
+	add_to_variable = { HNZ_party_popularity_stability_factor = -0.05 tooltip = party_popularity_stability_factor_tt }
+}
+
+
+HNZ_defense_doctrine_military_competency = {
+	custom_effect_tooltip = HNZ_defense_doctrine_modify_tt
+	add_to_variable = { HNZ_land_doctrine_cost_factor = -0.1 tooltip = land_doctrine_cost_factor_tt }
+	add_to_variable = { HNZ_max_command_power_mult = 0.1 tooltip = max_command_power_mult_tt }
+	add_to_variable = { HNZ_experience_gain_factor = 0.1 tooltip = experience_gain_army_factor_tt }
+}
+HNZ_defense_doctrine_army_competency = {
+	custom_effect_tooltip = HNZ_defense_doctrine_modify_tt
+	add_to_variable = { HNZ_army_org_factor = 0.1 tooltip = army_org_factor_tt }
+}
+
+
 
