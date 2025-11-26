@@ -51,7 +51,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.25
+		research_cost = 2
 		start_year = 2020
 		folder = {
 			name = industry_folder
@@ -428,7 +428,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.25
+		research_cost = 2
 		start_year = 2020
 		folder = {
 			name = industry_folder
@@ -592,12 +592,13 @@ technologies = {
 		production_factory_max_efficiency_factor = 0.05
 		production_factory_start_efficiency_factor = 0.05
 
+		factory_energy_consumption = 0.05
+
 		path = {
 			leads_to_tech = tech_tooling_specialised_tools
 			research_cost_coeff = 1
 		}
 
-		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.55
 		start_year = 2033
@@ -625,6 +626,8 @@ technologies = {
 		}
 		production_factory_max_efficiency_factor = 0.05
 		production_factory_start_efficiency_factor = 0.05
+
+		factory_energy_consumption = 0.05
 
 		path = {
 			leads_to_tech = tech_tooling_advanced_tools
@@ -658,6 +661,8 @@ technologies = {
 
 		production_factory_max_efficiency_factor = 0.05
 		production_factory_start_efficiency_factor = 0.05
+
+		factory_energy_consumption = 0.05
 		
 		research_cost = 2.8
 		start_year = 2035
@@ -828,6 +833,8 @@ technologies = {
 	    line_change_production_efficiency_factor = 0.05
 		production_factory_efficiency_gain_factor = 0.05
 
+		factory_energy_consumption = 0.05
+
 		path = {
 			leads_to_tech = tech_smithing_hydraulic_press
 			research_cost_coeff = 1
@@ -838,7 +845,6 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.7
 		start_year = 2033
@@ -867,6 +873,8 @@ technologies = {
 		
 		line_change_production_efficiency_factor = 0.05
 		production_factory_efficiency_gain_factor = 0.05
+
+		factory_energy_consumption = 0.05
 
 		path = {
 			leads_to_tech = tech_smithing_machine_pressing
@@ -900,6 +908,8 @@ technologies = {
 		
 		line_change_production_efficiency_factor = 0.05
 		production_factory_efficiency_gain_factor = 0.05
+
+		factory_energy_consumption = 0.05
 		
 		research_cost = 3
 		start_year = 2036
@@ -930,12 +940,12 @@ technologies = {
 			}
         }
 
+		factory_energy_consumption = 0.05
+
 		path = {
 			leads_to_tech = tech_pressing_hydraulic_punch_press
 			research_cost_coeff = 1
 		}
-
-		dependencies = { tech_energy_3 = 1 }
 		
 		research_cost = 2.8
 		start_year = 2033
@@ -963,6 +973,8 @@ technologies = {
 				value = 1
 			}
         }
+
+		factory_energy_consumption = 0.05
 
 		path = {
 			leads_to_tech = tech_pressing_laser_machining
@@ -995,6 +1007,7 @@ technologies = {
 				value = 1
 			}
         }
+		factory_energy_consumption = 0.05
 		
 		research_cost = 3
 		start_year = 2036
@@ -1230,7 +1243,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 1.95
+		research_cost = 1.25
 		start_year = 2020
 		folder = {
 			name = industry_folder
@@ -1264,7 +1277,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 1.95
+		research_cost = 1.25
 		start_year = 2028
 		folder = {
 			name = industry_folder
@@ -1301,7 +1314,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.35
+		research_cost = 1.25
 		start_year = 2030
 		folder = {
 			name = industry_folder
@@ -1349,7 +1362,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.35
+		research_cost = 1.25
 		start_year = 2031
 		folder = {
 			name = industry_folder
@@ -1391,7 +1404,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.5
+		research_cost = 1.25
 		start_year = 2033
 		folder = {
 			name = industry_folder
@@ -1430,7 +1443,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2.5
+		research_cost = 1.25
 		start_year = 2035
 		folder = {
 			name = industry_folder
@@ -1736,7 +1749,7 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2
+		research_cost = 1.25
 		start_year = 2020
 		folder = {
 			name = industry_folder
@@ -2127,7 +2140,10 @@ technologies = {
 
 	tech_technician_pressing = {
 		
-		production_factory_efficiency_gain_factor = 0.08
+		line_change_production_efficiency_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.05
+
+		factory_energy_consumption = 0.05
 
 		on_research_complete = {
 			custom_effect_tooltip = has_unlocked_required_schematics
@@ -2159,6 +2175,8 @@ technologies = {
 		on_research_complete = {
             punch_press_research = yes
         }
+
+		factory_energy_consumption = 0.05
 
 		on_research_complete = {
 			custom_effect_tooltip = has_unlocked_required_schematics
@@ -2397,19 +2415,27 @@ technologies = {
 
 		enable_building = {
             building = fuel_silo
-            level = 1
+            level = 2
         }
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 2
+			}
+		}
 
 		path = {
 			leads_to_tech = tech_energy_2
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2
-		start_year = 2029
+		research_cost = 1.25
+		start_year = 2020
 		folder = {
 			name = industry_folder
-			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2029_Y }
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2020_Y }
 		}
 		
 		ai_will_do = { factor = 2 }
@@ -2421,11 +2447,16 @@ technologies = {
 
 	tech_energy_2 = {
 
+		enable_building = {
+            building = fuel_silo
+            level = 3
+        }
+
 		on_research_complete = {
 			modify_building_resources = {
 				building = fuel_silo
 				resource = oil
-				amount = 1
+				amount = 2
 			}
 		}
 
@@ -2434,11 +2465,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2
-		start_year = 2031
+		research_cost = 1.75
+		start_year = 2030
 		folder = {
 			name = industry_folder
-			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2031_Y }
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2030_Y }
 		}
 		
 		ai_will_do = { factor = 2 }
@@ -2450,11 +2481,16 @@ technologies = {
 
 	tech_energy_3 = {
 
+		enable_building = {
+            building = fuel_silo
+            level = 4
+        }
+
 		on_research_complete = {
 			modify_building_resources = {
 				building = fuel_silo
 				resource = oil
-				amount = 1
+				amount = 2
 			}
 		}
 
@@ -2463,11 +2499,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 		
-		research_cost = 2
-		start_year = 2033
+		research_cost = 1.75
+		start_year = 2032
 		folder = {
 			name = industry_folder
-			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2033_Y }
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2032_Y }
 		}
 		
 		ai_will_do = { factor = 2 }
@@ -2479,19 +2515,24 @@ technologies = {
 
 	tech_energy_4 = {
 
+		enable_building = {
+            building = fuel_silo
+            level = 5
+        }
+
 		on_research_complete = {
 			modify_building_resources = {
 				building = fuel_silo
 				resource = oil
-				amount = 1
+				amount = 2
 			}
 		}
 		
-		research_cost = 2
-		start_year = 2035
+		research_cost = 1.75
+		start_year = 2034
 		folder = {
 			name = industry_folder
-			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2035_Y }
+			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2034_Y }
 		}
 		
 		ai_will_do = { factor = 2 }

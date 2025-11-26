@@ -1,3 +1,11 @@
+########################################
+
+ ##   ##  #  # #  # ### ###  ### ###  ##     
+#  # #  # #  # ## #  #  #  #  #  #   #       
+#    #  # #  # # ##  #  ###   #  ##   #      
+#  # #  # #  # #  #  #  #  #  #  #     #     
+ ##   ##   ##  #  #  #  #  # ### ### ## 
+
 ########################################     
 
 world_at_peace_countries = {
@@ -32,4 +40,83 @@ faction_controlled_non_core_states = {
 		}
 	}
 	name = COLLECTION_FACTION_CONTROLLED_NON_CORE_STATES
+}
+
+country_and_all_subjects_controlled_non_core_states = {
+	input = game:scope
+	operators = {
+		country_and_all_subjects
+		controlled_states
+		limit = {
+			NOT = { is_core_of = PREV }
+		}
+	}
+	name = COLLECTION_COUNTRY_AND_SUBJECTS_CONTROLLED_NON_CORE_STATES
+}
+
+faction_states_on_my_continent = {
+	input = game:all_states
+	operators = {
+		limit = {
+			is_on_same_continent_as = ROOT
+			is_controlled_by_ROOT_or_ally = yes 
+		}
+	}
+	name = COLLECTION_FACTION_STATES_MY_CONTINENT
+}
+
+states_on_my_continent = {
+	input = game:all_states
+	operators = {
+		limit = {
+			is_on_same_continent_as = ROOT
+		}
+	}
+	name = COLLECTION_STATES_MY_CONTINENT
+}
+
+states_controlled_by_faction_member_and_core_holder = {
+	input = game:scope
+	operators = {
+		faction_members
+		controlled_states
+		limit = {
+			is_core_of = controller
+		}
+	}
+	name = COLLECTION_STATES_CONTROLLED_BY_FACTION_MEMBER_AND_CORE_HOLDER
+}
+
+countries_my_continent = {
+	input = game:all_countries
+	name = COLLECTION_ALL_SAME_CONTINENT_COUNTRIES
+	operators = {
+		limit = {
+			is_on_same_continent_as = ROOT
+		}
+	}
+}
+
+neighboring_states_to_leader = {
+	input = game:all_states
+	name = COLLECTION_NEIGHBORING_STATES
+	operators = {
+		limit = {
+			any_neighbor_state = {
+				is_owned_by = ROOT 
+			}	
+		}
+	}
+}
+
+puppet_controlled_border_states = {
+	input = collection:neighboring_states_to_leader
+	name = COLLECTION_CONTROLLED_PUPPET_BORDER_STATES
+	operators = {
+		limit = {
+			controller = {
+				is_subject_of = ROOT
+			}
+		}
+	}
 }

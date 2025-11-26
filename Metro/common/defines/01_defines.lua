@@ -1,8 +1,8 @@
 ---Game Date---
 NDefines.NGame.START_DATE = "2028.1.1.12"
 NDefines.NGame.END_DATE = "2055.1.1.1"
-NDefines.NGame.OIL_RESOURCE= "oil"							
-NDefines.NGame.FUEL_RESOURCE = "oil"						
+NDefines.NGame.OIL_RESOURCE= "gasoline"							
+NDefines.NGame.FUEL_RESOURCE = "gasoline"						
 NDefines.NGame.ENERGY_RESOURCE = "oil"						
 
 ---Map scale---
@@ -71,9 +71,19 @@ NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 	}
 
 ---Production Stuff---
+
+NDefines.NProduction.RESOURCE_TO_ENERGY_COEFFICIENT = 10.0
+NDefines.NProduction.BASE_COUNTRY_ENERGY_PRODUCTION = 0
+NDefines.NProduction.ENERGY_SCALING_COST_BY_FACTORY_COUNT = 0.05
+NDefines.NProduction.BASE_ENERGY_COST = 0.5
+
+NDefines.NProduction.BASE_FACTORY_SPEED = 5
+NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
+NDefines.NProduction.POWERED_FACTORY_SPEED = 1.5
+NDefines.NProduction.POWERED_FACTORY_SPEED_MIL = 1.5
+
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
 NDefines.NProduction.MAX_CIV_FACTORIES_PER_LINE = 10
-NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
 NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 10
 NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
 NDefines.NProduction.BASE_FACTORY_EFFICIENCY_GAIN = 0.5
