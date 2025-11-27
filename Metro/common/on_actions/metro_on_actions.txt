@@ -37,6 +37,18 @@ on_actions = {
     on_startup = {
 		effect = {
 			every_country = {
+				limit = { 
+					num_of_owned_factories < 14 
+					NOT = { 
+						has_country_flag = is_mutant_nation 
+						has_country_flag = is_savage_nation 
+					}
+				}
+				add_ideas = backwards_industry
+			}
+		}
+		effect = {
+			every_country = {
 				limit = { original_tag = RUI }
 				country_event = { id = nf_RUI.2 }
 			}
