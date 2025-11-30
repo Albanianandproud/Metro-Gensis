@@ -1,6 +1,46 @@
 #!gfx:interface\metro_goals.gfx
 
 shared_focus = {
+	id = satellite_defend_the_bulwark
+	icon = GFX_generic_construction_2
+	x = -7
+	y = 0
+	cost = 6.5
+
+	available = { 
+		if = { 
+			limit = { original_tag = PEC }
+			has_completed_focus = PEC_1
+		}
+		if = { 
+			limit = { original_tag = ULI }
+			has_completed_focus = ULI_focus_1
+		}
+		if = { 
+			limit = { original_tag = SAV }
+			has_completed_focus = SAV_focus_joint_station_committee
+		}
+	}
+
+	completion_reward = {
+		capital_scope = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				instant_build = yes
+				province = { all_provinces = yes }
+			}
+		}
+	}
+
+	relative_position_id = satellite_economy
+
+	ai_will_do = {
+		factor = 2.5
+	}
+}
+
+shared_focus = {
 	id = satellite_military
 	icon = GFX_generic_equipment_gasmask_4
 	x = -12
@@ -422,47 +462,6 @@ shared_focus = {
 			category = support_tech
 		}
 	}
-
-	ai_will_do = {
-		factor = 2.5
-	}
-}
-
-
-shared_focus = {
-	id = satellite_defend_the_bulwark
-	icon = GFX_generic_construction_2
-	x = -7
-	y = 0
-	cost = 6.5
-
-	available = { 
-		if = { 
-			limit = { original_tag = PEC }
-			has_completed_focus = PEC_1
-		}
-		if = { 
-			limit = { original_tag = ULI }
-			has_completed_focus = ULI_focus_1
-		}
-		if = { 
-			limit = { original_tag = SAV }
-			has_completed_focus = SAV_focus_joint_station_committee
-		}
-	}
-
-	completion_reward = {
-		capital_scope = {
-			add_building_construction = {
-				type = bunker
-				level = 2
-				instant_build = yes
-				province = { all_provinces = yes }
-			}
-		}
-	}
-
-	relative_position_id = satellite_economy
 
 	ai_will_do = {
 		factor = 2.5
