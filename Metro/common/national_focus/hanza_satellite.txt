@@ -1061,9 +1061,9 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		add_stability = 0.05
-		add_political_power = 80
+		add_political_power = 100
 		capital_scope = {
-			set_state_category = large_city
+			set_state_category = city
 		}
 	}
 	ai_will_do = {
@@ -1108,12 +1108,12 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		add_autonomy_score = {
-    		value = 1500
+    		value = -500
     		localization = EXAMPLE
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		factor = 0
 	}
 }
 shared_focus = {
@@ -1368,10 +1368,9 @@ shared_focus = {
 	completion_reward = {
 		## Our Committment to the League
 		custom_effect_tooltip = hanza_satellite_51_tooltip
-		modify_tech_sharing_bonus = {
-			id = HNZ_faction_tech_group
-			bonus = 0.05
-		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		add_political_power = 75 
+		add_ideas = HNZ_satellite_research_education
 	}
 	ai_will_do = {
 		factor = 1
@@ -1388,9 +1387,15 @@ shared_focus = {
 	completion_reward = {
 		## Influence of the Eagle
 		custom_effect_tooltip = hanza_satellite_51_A_tooltip
+		custom_effect_tooltip = generic_skip_one_line_tt
 		add_autonomy_ratio = {
-			value = 0.1
+			value = -0.05
 			localization = hanza_satellite_lobbied_for_arms
+		}
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 10
+			producer = RUS
 		}
 	}
 	ai_will_do = {
@@ -1409,10 +1414,12 @@ shared_focus = {
 	completion_reward = {
 		## Lobby Hanza for armaments
 		custom_effect_tooltip = hanza_satellite_51_B_tooltip
+		custom_effect_tooltip = generic_skip_one_line_tt
 		add_autonomy_ratio = {
-			value = 0.1
+			value = -0.05
 			localization = hanza_satellite_lobbied_for_soldats
 		}
+		army_experience = 5
 	}
 	ai_will_do = {
 		factor = 1
@@ -1428,10 +1435,15 @@ shared_focus = {
 	y = 3
 	completion_reward = {
 		## Lobby Hanza for armaments
+		custom_effect_tooltip = hanza_satellite_51_C_tooltip
+		custom_effect_tooltip = generic_skip_one_line_tt
 		add_autonomy_ratio = {
-			value = 0.1
+			value = -0.05
 			localization = hanza_satellite_lobby_for_defense_spending
 		}
+		set_temp_variable = { bullet_to_gain = 25 }
+		add_bullet_with_tooltip_effect = yes
+
 	}
 	ai_will_do = {
 		factor = 1
@@ -1448,6 +1460,7 @@ shared_focus = {
 	completion_reward = {
 		# Lobby for Self Autonomy
 		custom_effect_tooltip = hanza_satellite_51_tooltip
+		custom_effect_tooltip = generic_skip_one_line_tt
 		hidden_effect = {
 			set_country_flag = hanza_satellite_break_free_flag
 		}

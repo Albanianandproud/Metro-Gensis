@@ -95,7 +95,7 @@ hanza_satellite_immigrant_processing_category = {
 			}
 		}
 		ai_will_do = {
-			base = 5
+			base = 50
 		}
 	}
 }
@@ -174,6 +174,23 @@ hanza_satellite_trade_category = {
 				hanza_satellite_improve_relations_scripted_effect = yes
 			}
 		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
 	}
 	hanza_satellite_commerce_launch_caravan = {
 		visible = {
@@ -235,6 +252,23 @@ hanza_satellite_trade_category = {
 				hanza_satellite_improve_relations_scripted_effect = yes
 			}
 		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
 	}
 	hanza_satellite_trade_launch_caravan = {
 		visible = {
@@ -294,6 +328,242 @@ hanza_satellite_trade_category = {
 					hanza_satellite_trade_trade_scripted_effect = yes
 				}
 				hanza_satellite_improve_relations_scripted_effect = yes
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
+	}
+}
+hanza_satellite_lobby_for_arms_category = {
+
+	hanza_satellite_lobby_for_guns = {
+		available = {
+			has_completed_focus = hanza_satellite_51_A
+			is_subject_of = HNZ
+		}
+
+		cost = 25
+		days_remove = 7
+		days_re_enable = 120
+
+		complete_effect = {
+			HNZ = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.4
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_equipment_to_stockpile = { 
+					type = infantry_equipment
+					amount = 25
+					producer = HNZ
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 3
+				has_equipment = { infantry_equipment < 25 } 
+			}
+		}
+	}
+	hanza_satellite_lobby_for_support = {
+		available = {
+			has_completed_focus = hanza_satellite_51_A
+			is_subject_of = HNZ
+		}
+
+		cost = 25
+		days_remove = 7
+		days_re_enable = 120
+
+		complete_effect = {
+			HNZ = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.5
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_equipment_to_stockpile = { 
+					type = support_equipment
+					amount = 20
+					producer = HNZ
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 3
+				has_equipment = { support_equipment < 20 } 
+			}
+		}
+	}
+	hanza_satellite_lobby_for_manpower = {
+		available = {
+			has_completed_focus = hanza_satellite_51_B
+			is_subject_of = HNZ
+		}
+
+		complete_effect = {
+			HNZ = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.6
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_manpower = 15
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 3
+				has_manpower > 15 
+			}
+		}
+	}
+	hanza_satellite_lobby_for_advisor = {
+		available = {
+			has_completed_focus = hanza_satellite_51_B
+			is_subject_of = HNZ
+		}
+
+		cost = 100
+		days_remove = 7
+		fire_only_once = yes
+
+		complete_effect = {
+			generate_character = {
+				token_base = metro_small_arms_manufacturer
+				advisor = {
+					allowed = {
+            			is_subject_of = HNZ
+       				}
+					slot = materiel_manufacturer
+					traits = { _hanza_satellite_manufacturer }
+					cost = 50
+					available = {
+						custom_trigger_tooltip = {
+							tooltip = bullet_sum_amount
+							check_variable = {
+								bullet > 49
+							}
+						}
+					}
+					on_add = { 
+						hidden_effect = { 
+							set_temp_variable = { bullet_to_gain = -50 }
+							add_bullet_with_tooltip_effect = yes
+						}	
+					}
+				}
+				portraits = { 
+					army = { small = GFX_idea_HNZ_generic_minister_10 }
+				}
+			}
+    	}
+	}
+	hanza_satellite_lobby_for_defense_spending = {
+		available = {
+			has_completed_focus = hanza_satellite_51_C
+			is_subject_of = HNZ
+		}
+
+		cost = 50
+		days_remove = 7
+		days_re_enable = 180
+
+		complete_effect = {
+			HNZ = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.7
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_timed_idea = { idea = HNZ_satellite_defense_spending days = 180 }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 3
+				OR = {
+					threat > 0.15
+					date > 2030.4.1
+				}
+			}
+		}
+	}
+	hanza_satellite_lobby_for_contracts = {
+		available = {
+			has_completed_focus = hanza_satellite_51_C
+			is_subject_of = HNZ
+		}
+
+		cost = 50
+		days_remove = 7
+		days_re_enable = 180
+
+		complete_effect = {
+			HNZ = {
+				country_event = { 
+					id = nf_hanza_satellite_trade.8
+					days = 1
+					random_days = 1
+				}
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_tech_bonus = {
+					name = infantry_bonus
+					bonus = 1
+					uses = 2
+					category = infantry_tech
+					ahead_reduction = 0.5
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 3
+				OR = {
+					threat > 0.1
+					date > 2029.4.1
+				}
 			}
 		}
 	}
