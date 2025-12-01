@@ -1,0 +1,33 @@
+every_possible_country = {
+	limit = {
+		is_subject_of = HNZ
+	}
+	generate_character = {
+		token_base = satellite_hanza_manufacturer
+		advisor = {
+			slot = materiel_manufacturer
+			traits = { _hanza_satellite_manufacturer }
+			research_bonus = { industry = 0.1 }
+			cost = 50
+			available = {
+				is_subject_of = HNZ
+				custom_trigger_tooltip = {
+					tooltip = bullet_sum_amount
+					check_variable = {
+						bullet > 49
+					}
+				}
+				hidden_trigger = { has_country_flag = hanza_satellite_unlock_advisor }
+			}
+			on_add = { 
+				hidden_effect = { 
+					set_temp_variable = { bullet_to_gain = -50 }
+					add_bullet_with_tooltip_effect = yes
+				}	
+			}
+		}
+		portraits = { 
+			army = { small = GFX_idea_HNZ_minister_10 }
+		}
+	}
+}

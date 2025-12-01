@@ -119,7 +119,7 @@ hanza_satellite_trade_category = {
 		days_remove = 7
 		days_re_enable = 360
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
+			set_temp_variable = { temp_bullet_cost = 25 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -128,18 +128,20 @@ hanza_satellite_trade_category = {
 		fire_only_once = no
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
+				set_temp_variable = { bullet_to_gain = -25 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
 		target_array = global.countries
 		target_trigger = {
+			ROOT = {
+				has_opinion = {
+					target = FROM
+					value > -11
+				}
+			}
 			FROM = { 
 				NOT = { 
-					has_opinion = {
-						target = ROOT
-						value < 0
-					}
 					OR = {
 						is_subject = yes
 						exists = no
@@ -154,6 +156,7 @@ hanza_satellite_trade_category = {
 						has_country_flag = is_savage_nation
 						has_country_flag = is_cultist_nation
 
+						has_idea = hanza_satellite_trade_bastion_modifier
 					}
 				}
 			}
@@ -197,7 +200,7 @@ hanza_satellite_trade_category = {
 			has_completed_focus = hanza_satellite_25
 		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
+			set_temp_variable = { temp_bullet_cost = 25 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -206,18 +209,20 @@ hanza_satellite_trade_category = {
 		fire_only_once = no
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
+				set_temp_variable = { bullet_to_gain = -25 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
 		target_array = global.countries
 		target_trigger = {
+			ROOT = {
+				has_opinion = {
+					target = FROM
+					value > -11
+				}
+			}
 			FROM = { 
 				NOT = { 
-					has_opinion = {
-						target = ROOT
-						value < 0
-					}
 					OR = {
 						is_subject = yes
 						exists = no
@@ -232,6 +237,7 @@ hanza_satellite_trade_category = {
 						has_country_flag = is_savage_nation
 						has_country_flag = is_cultist_nation
 
+						has_idea = hanza_satellite_trade_commerce_modifier
 					}
 				}
 			}
@@ -272,10 +278,10 @@ hanza_satellite_trade_category = {
 	}
 	hanza_satellite_trade_launch_caravan = {
 		visible = {
-			has_completed_focus = hanza_satellite_25
+			has_completed_focus = hanza_satellite_26
 		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
+			set_temp_variable = { temp_bullet_cost = 25 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -284,18 +290,20 @@ hanza_satellite_trade_category = {
 		fire_only_once = no
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
+				set_temp_variable = { bullet_to_gain = -25 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
 		target_array = global.countries
 		target_trigger = {
+			ROOT = {
+				has_opinion = {
+					target = FROM
+					value > -11
+				}
+			}
 			FROM = { 
 				NOT = { 
-					has_opinion = {
-						target = ROOT
-						value < 0
-					}
 					OR = {
 						is_subject = yes
 						exists = no
@@ -310,6 +318,7 @@ hanza_satellite_trade_category = {
 						has_country_flag = is_savage_nation
 						has_country_flag = is_cultist_nation
 
+						has_idea = hanza_satellite_trade_trade_modifier
 					}
 				}
 			}
@@ -319,15 +328,14 @@ hanza_satellite_trade_category = {
 				country_event = { 
 					id = nf_hanza_satellite_trade.3
 					days = 1
-					random_days = 1
 				}
 			}
 			custom_effect_tooltip = if_they_accept_tt
 			effect_tooltip = {
 				FROM = {
 					hanza_satellite_trade_trade_scripted_effect = yes
+					hanza_satellite_improve_relations_scripted_effect = yes
 				}
-				hanza_satellite_improve_relations_scripted_effect = yes
 			}
 		}
 		ai_will_do = {
@@ -364,7 +372,7 @@ hanza_satellite_lobby_for_arms_category = {
 		complete_effect = {
 			HNZ = {
 				country_event = { 
-					id = nf_hanza_satellite_trade.4
+					id = nf_hanza_satellite.4
 					days = 1
 					random_days = 1
 				}
@@ -399,7 +407,7 @@ hanza_satellite_lobby_for_arms_category = {
 		complete_effect = {
 			HNZ = {
 				country_event = { 
-					id = nf_hanza_satellite_trade.5
+					id = nf_hanza_satellite.5
 					days = 1
 					random_days = 1
 				}
@@ -428,10 +436,14 @@ hanza_satellite_lobby_for_arms_category = {
 			is_subject_of = HNZ
 		}
 
+		cost = 50
+		days_remove = 7
+		days_re_enable = 180
+
 		complete_effect = {
 			HNZ = {
 				country_event = { 
-					id = nf_hanza_satellite_trade.6
+					id = nf_hanza_satellite.6
 					days = 1
 					random_days = 1
 				}
@@ -461,34 +473,8 @@ hanza_satellite_lobby_for_arms_category = {
 		fire_only_once = yes
 
 		complete_effect = {
-			generate_character = {
-				token_base = metro_small_arms_manufacturer
-				advisor = {
-					allowed = {
-            			is_subject_of = HNZ
-       				}
-					slot = materiel_manufacturer
-					traits = { _hanza_satellite_manufacturer }
-					cost = 50
-					available = {
-						custom_trigger_tooltip = {
-							tooltip = bullet_sum_amount
-							check_variable = {
-								bullet > 49
-							}
-						}
-					}
-					on_add = { 
-						hidden_effect = { 
-							set_temp_variable = { bullet_to_gain = -50 }
-							add_bullet_with_tooltip_effect = yes
-						}	
-					}
-				}
-				portraits = { 
-					army = { small = GFX_idea_HNZ_generic_minister_10 }
-				}
-			}
+			custom_effect_tooltip = hanza_satellite_unlock_advisor_tt
+			hidden_effect = { set_country_flag = hanza_satellite_unlock_advisor }
     	}
 	}
 	hanza_satellite_lobby_for_defense_spending = {
@@ -504,7 +490,7 @@ hanza_satellite_lobby_for_arms_category = {
 		complete_effect = {
 			HNZ = {
 				country_event = { 
-					id = nf_hanza_satellite_trade.7
+					id = nf_hanza_satellite.7
 					days = 1
 					random_days = 1
 				}
@@ -539,7 +525,7 @@ hanza_satellite_lobby_for_arms_category = {
 		complete_effect = {
 			HNZ = {
 				country_event = { 
-					id = nf_hanza_satellite_trade.8
+					id = nf_hanza_satellite.8
 					days = 1
 					random_days = 1
 				}
