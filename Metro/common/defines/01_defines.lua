@@ -79,8 +79,8 @@ NDefines.NProduction.BASE_ENERGY_COST = 0.5
 
 NDefines.NProduction.BASE_FACTORY_SPEED = 5
 NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
-NDefines.NProduction.POWERED_FACTORY_SPEED = 1.5
-NDefines.NProduction.POWERED_FACTORY_SPEED_MIL = 1.5
+NDefines.NProduction.POWERED_FACTORY_SPEED = 5.5
+NDefines.NProduction.POWERED_FACTORY_SPEED_MIL = 5.5
 
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
 NDefines.NProduction.MAX_CIV_FACTORIES_PER_LINE = 10
