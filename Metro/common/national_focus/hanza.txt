@@ -5438,11 +5438,17 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			add_ideas = HNZ_poindexter
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_tech_bonus = {
 				name = industrial_bonus
 				bonus = 0.5
 				uses = 2
 				category = stalker
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_2
+				amount = 10
+				producer = RUS
 			}
 		}
 		ai_will_do = {
@@ -5669,6 +5675,8 @@ focus_tree = {
 					producer = HNZ
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_ideas = HNZ_combined_operations
 		}
 		ai_will_do = {
 			factor = 5
@@ -5687,7 +5695,7 @@ focus_tree = {
 		relative_position_id = HNZ_armed_forces_1
 		cost = 6.5
 		completion_reward = {
-			add_war_support = 0.1
+			add_war_support = 0.05
 			army_experience = 25
 		}
 		ai_will_do = {
@@ -5730,10 +5738,11 @@ focus_tree = {
 			focus = HNZ_encourage_inter_cooperation
 		}
 		available = {
-			has_war_support > 0.39
-			OR = {
-				threat > 0.29
-				date > 2031.1.1
+			count_triggers = {
+				amount = 2
+				has_war_support > 0.24
+				threat > 0.14
+				date > 2032.1.1
 			}
 		}
 		bypass = {
@@ -5924,6 +5933,13 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = unlock_schematic_rail_armored_train
 			hidden_effect = { set_country_flag = unlock_armored_train_tech }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_tech_bonus = {
+				name = rail_armored_train_tech 
+				ahead_reduction = 2
+				bonus = 1
+				technology = rail_armored_train_tech 
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -6136,15 +6152,19 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_doctrine_1
 		}
+		available = {
+			has_idea = HNZ_mobilization_law_4
+		}
 		x = 5
 		y = 1
 		relative_position_id = HNZ_doctrine_1
-		cost = 3
+		cost = 3.6
 
 		completion_reward = {
 			army_experience = 10
 			country_event = nf_HNZ.85
 			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = HNZ_army_general_1_tt
 		}
 		ai_will_do = {
 			factor = 5
@@ -6334,11 +6354,11 @@ focus_tree = {
 		x = 1
 		y = 1
 		available = {
-			has_army_manpower = { size > 749 }
+			has_army_manpower = { size > 599 }
 				
 			custom_trigger_tooltip = {
 			 	tooltip = HNZ_army_centralization_2_tt
-			 	check_variable = { num_equipment_in_armies@infantry_equipment > 749 }
+			 	check_variable = { num_equipment_in_armies@infantry_equipment > 599 }
 			}
 		}
 		relative_position_id = HNZ_army_centralization
@@ -6364,11 +6384,11 @@ focus_tree = {
 		x = 0
 		y = 2
 		available = {
-			has_army_manpower = { size > 1499 }
+			has_army_manpower = { size > 999 }
 				
 			custom_trigger_tooltip = {
 			 	tooltip = HNZ_army_centralization_3_tt
-			 	check_variable = { num_equipment_in_armies@infantry_equipment > 1499 }
+			 	check_variable = { num_equipment_in_armies@infantry_equipment > 999 }
 			}
 		}
 		relative_position_id = HNZ_army_centralization_2
@@ -7023,7 +7043,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = HNZ_war_plans_tt
 			add_command_power = 25
-			army_experience = 10
+			army_experience = 15
 			## TODO Use USA Germany Hybrid war decisions 
 		}
 		ai_will_do = {
@@ -7040,12 +7060,21 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_war_plans
 		}
+		available = {
+		}
 		x = -1
 		y = 1
 		relative_position_id = HNZ_war_plans
-		cost = 8.6
+		cost = 5
 		completion_reward = {
 			## War Plans against PLS, RED, RCH and Venice
+			custom_effect_tooltip = HNZ_war_plans_from_within_tt
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = HNZ_planning_war_within_bonus
+					days = 400
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -7063,9 +7092,16 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = HNZ_war_plans
-		cost = 8.6
+		cost = 5
 		completion_reward = {
-			## War Plans against OUTSIDERS
+			## War Plans against PLS, RED, RCH and Venice
+			custom_effect_tooltip = HNZ_war_plans_from_without_tt
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = HNZ_planning_war_without_bonus
+					days = 400
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5

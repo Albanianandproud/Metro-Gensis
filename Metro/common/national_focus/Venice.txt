@@ -1628,7 +1628,15 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
-		bypass = { MOB = { exists = no } }
+		bypass = {
+			AND = {
+				MOB = { exists = no }
+				SHA = { exists = no }
+				LEN = { exists = no }
+				SHR = { exists = no }
+				NCH = { exists = no }
+			}
+		}
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
@@ -1647,7 +1655,13 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = TRT_reorganize_the_bar
-		bypass = { KTG = { exists = no } }
+		bypass = {
+			AND = {
+				KTG = { exists = no }
+				CAU = { exists = no }
+				SLA = { exists = no }
+			}
+		}
 		prerequisite = { 
 			focus = TRT_reorganize_the_bar
 		}
@@ -1722,12 +1736,48 @@ focus_tree = {
 		y = 2
 		cost = 8.6
 		available = {
-			is_neighbor_of = MOB
-			MOB = {
-				has_government = dictatorial
-				has_opinion = {
-					target = ROOT
-					value > 39
+			OR = {
+				is_neighbor_of = MOB
+				is_neighbor_of = SHA
+				is_neighbor_of = LEN
+				is_neighbor_of = SHR
+				is_neighbor_of = NCH
+			}
+			OR = {
+				MOB = {
+					has_government = dictatorial
+					has_opinion = {
+						target = ROOT
+						value > 39
+					}
+				}
+				SHA = {
+					has_government = dictatorial
+					has_opinion = {
+						target = ROOT
+						value > 39
+					}
+				}
+				LEN = {
+					has_government = dictatorial
+					has_opinion = {
+						target = ROOT
+						value > 39
+					}
+				}
+				SHR = {
+					has_government = dictatorial
+					has_opinion = {
+						target = ROOT
+						value > 39
+					}
+				}
+				NCH = {
+					has_government = dictatorial
+					has_opinion = {
+						target = ROOT
+						value > 39
+					}
 				}
 			}
 		}
@@ -1735,6 +1785,10 @@ focus_tree = {
 		prerequisite = { focus = TRT_oktyabrskaya_annex }
 		completion_reward = {
 			add_to_faction = MOB
+			add_to_faction = SHA
+			add_to_faction = LEN
+			add_to_faction = SHR
+			add_to_faction = NCH
 		}
 		ai_will_do = {
 			factor = 100
@@ -1748,14 +1802,40 @@ focus_tree = {
 		y = 1
 		cost = 8.6
 		available = {
-			is_neighbor_of = KTG
+			OR = {
+				is_neighbor_of = KTG
+				is_neighbor_of = CAU
+				is_neighbor_of = SLA
+			}
 			date > 2033.1.1
-			KTG = {
-				has_government = ROOT
+			OR = {
+				KTG = {
+					has_government = ROOT
+					AND = {
+						strength_ratio = {
+							tag = TRT
+							ratio < 0.5
+						}
+					}
+				}
 				AND = {
-					strength_ratio = {
-						tag = TRT
-						ratio < 0.5
+					CAU = {
+						has_government = ROOT
+						AND = {
+							strength_ratio = {
+								tag = TRT
+								ratio < 0.25
+							}
+						}
+					}
+					SLA = {
+						has_government = ROOT
+						AND = {
+							strength_ratio = {
+								tag = TRT
+								ratio < 0.25
+							}
+						}
 					}
 				}
 			}
@@ -1766,9 +1846,32 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = TRT_coming_together
 			add_threat = 10
-			annex_country = {
-				target = KTG
-				transfer_troops = yes
+			if = {
+				limit = {
+					KTG = { exists = yes }
+				}
+				annex_country = {
+					target = KTG
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					CAU = { exists = yes }
+				}
+				annex_country = {
+					target = CAU
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					SLA = { exists = yes }
+				}
+				annex_country = {
+					target = SLA
+					transfer_troops = yes
+				}
 			}
 		}
 		ai_will_do = {
@@ -1788,16 +1891,34 @@ focus_tree = {
 		mutually_exclusive = { focus = TRT_into_china_town }
 		available = {
 			has_war = no
-			is_neighbor_of = KTG
+			OR = {
+				is_neighbor_of = KTG
+				is_neighbor_of = CAU
+				is_neighbor_of = SLA
+			}
 		}
         will_lead_to_war_with = KTG
+        will_lead_to_war_with = CAU
+        will_lead_to_war_with = SLA
 		completion_reward = {
 			add_threat = 1
 			create_wargoal = {
  				type = take_state_focus
  				target = KTG
  				expire = 0
- 				generator = { 28 }
+ 				generator = { 353 315 }
+ 			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = CAU
+ 				expire = 0
+ 				generator = { 315 }
+ 			}
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target =SLA
+ 				expire = 0
+ 				generator = { 353 }
  			}
 		}
 		ai_will_do = {
@@ -1818,8 +1939,9 @@ focus_tree = {
 		}
 		available = {
 			KTG = { exists = no }
+			CAU = { exists = no }
+			SLA = { exists = no }
 			353 = { is_owned_by = ROOT }
-			200 = { is_owned_by = ROOT }
 			315 = { is_owned_by = ROOT }
 		}
 		completion_reward = {

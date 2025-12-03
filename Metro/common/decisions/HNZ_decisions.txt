@@ -1462,23 +1462,29 @@ HNZ_war_committee_category = {
 					exists = no
 					original_tag = RUI
 				}
-				has_added_tension_amount > 2
-				strength_ratio = {
-				    tag = HNZ
-				    ratio < 0.25
-				}
-				ic_ratio = {
-				    tag = HNZ
-				    ratio < 0.25
+
+				count_triggers = {
+					amount = 2
+					has_added_tension_amount > 2
+					has_opinion = {
+    					target = ROOT
+    					value < 10
+					}
+					is_embargoed_by = ROOT
 				}
 			}
 		}
 		available = {
-			FROM = { 	
+			OR = {
+				ROOT = { has_war_with = FROM }
+				ROOT = { 
+					is_justifying_wargoal_against = FROM 
+					has_annex_war_goal = FROM
+				}
 			}
 		}
 		custom_cost_trigger = {
-			set_temp_variable = { temp_command_power_cost = 75 }
+			set_temp_variable = { temp_command_power_cost = 50 }
 			check_variable = {
 				command_power > temp_command_power_cost
 			}
@@ -1486,12 +1492,15 @@ HNZ_war_committee_category = {
 		custom_cost_text = "command_power_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = {
-				add_command_power = -75
+				add_command_power = -50
 			}
 		}
-		days_remove = 180
+		days_remove = 200
 		fire_only_once = yes
-		remove_effect = {
+		targeted_modifier = {
+    		tag = FROM    # this can also take a variable that stores a scope
+    		attack_bonus_against = 0.1
+    		defense_bonus_against = 0.1
 		}
 		ai_will_do = {
 			base = 5

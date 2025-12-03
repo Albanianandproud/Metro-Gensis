@@ -1,0 +1,1090 @@
+add_namespace = nf_MOB
+country_event = {
+	id = nf_MOB.1
+	title = nf_MOB.1.t
+	desc = nf_MOB.1.desc
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # cease the infight
+		name = nf_MOB.1.a
+		ai_chance = {
+			base = 20
+		}
+		if = {
+			limit = { original_tag = SHA } #send offer to LEN SHR NCH
+			LEN = {
+				country_event = {
+					id = nf_MOB.2A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.2B
+					hours = 18
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.2C
+					hours = 36
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = LEN } #send offer to SHA SHR NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.2A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.2B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.2C
+					hours = 18
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = SHR } #send offer to SHA LEN NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.2A
+					hours = 18
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.2B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.2C
+					hours = 6
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = NCH } #send offer to SHA LEN SHR
+			SHA = {
+				country_event = {
+					id = nf_MOB.2A
+					hours = 36
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.2B
+					hours = 18
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.2C
+					hours = 6
+				}
+			}
+		}
+	}
+	option = { # alliance
+		name = nf_MOB.1.b
+		ai_chance = {
+			base = 50
+		}
+		set_rule = { can_create_factions = yes }
+		if = {
+			limit = { has_dlc = "No Compromise, No Surrender" }
+			create_faction_from_template = faction_template_mob
+			add_faction_initiative = 1
+		}
+		else = {
+			create_faction_from_template = faction_template_mob
+		}
+		if = {
+			limit = { original_tag = SHA } #send offer to LEN SHR NCH
+			LEN = {
+				country_event = {
+					id = nf_MOB.3A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.3B
+					hours = 18
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.3C
+					hours = 36
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = LEN } #send offer to SHA SHR NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.3A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.3B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.3C
+					hours = 18
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = SHR } #send offer to SHA LEN NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.3A
+					hours = 18
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.3B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.3C
+					hours = 6
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = NCH } #send offer to SHA LEN SHR
+			SHA = {
+				country_event = {
+					id = nf_MOB.3A
+					hours = 36
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.3B
+					hours = 18
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.3C
+					hours = 6
+				}
+			}
+		}
+	}
+	option = { # demand submission
+		name = nf_MOB.1.c
+		ai_chance = {
+			base = 20
+		}
+		set_rule = { can_create_factions = yes }
+		if = {
+			limit = { has_dlc = "No Compromise, No Surrender" }
+			create_faction_from_template = faction_template_mob
+			add_faction_initiative = 1
+		}
+		else = {
+			create_faction_from_template = faction_template_mob
+		}
+		if = {
+			limit = { original_tag = SHA } #send offer to LEN SHR NCH
+			LEN = {
+				country_event = {
+					id = nf_MOB.4A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.4B
+					hours = 18
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.4C
+					hours = 36
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = LEN } #send offer to SHA SHR NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.4A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.4B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.4C
+					hours = 18
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = SHR } #send offer to SHA LEN NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.4A
+					hours = 18
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.4B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.4C
+					hours = 6
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = NCH } #send offer to SHA LEN SHR
+			SHA = {
+				country_event = {
+					id = nf_MOB.4A
+					hours = 36
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.4B
+					hours = 18
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.4C
+					hours = 6
+				}
+			}
+		}
+	}
+	option = { # demand annexation
+		name = nf_MOB.1.d
+		ai_chance = {
+			base = 10
+		}
+		set_rule = { can_create_factions = yes }
+		if = {
+			limit = { has_dlc = "No Compromise, No Surrender" }
+			create_faction_from_template = faction_template_mob
+			add_faction_initiative = 1
+		}
+		else = {
+			create_faction_from_template = faction_template_mob
+		}
+		if = {
+			limit = { original_tag = SHA } #send offer to LEN SHR NCH
+			LEN = {
+				country_event = {
+					id = nf_MOB.5A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.5B
+					hours = 18
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.5C
+					hours = 36
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = LEN } #send offer to SHA SHR NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.5A
+					hours = 6
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.5B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.5C
+					hours = 18
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = SHR } #send offer to SHA LEN NCH
+			SHA = {
+				country_event = {
+					id = nf_MOB.5A
+					hours = 18
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.5B
+					hours = 6
+				}
+			}
+			NCH = {
+				country_event = {
+					id = nf_MOB.5C
+					hours = 6
+				}
+			}
+		}
+		else_if = {
+			limit = { original_tag = NCH } #send offer to SHA LEN SHR
+			SHA = {
+				country_event = {
+					id = nf_MOB.5A
+					hours = 36
+				}
+			}
+			LEN = {
+				country_event = {
+					id = nf_MOB.5B
+					hours = 18
+				}
+			}
+			SHR = {
+				country_event = {
+					id = nf_MOB.5C
+					hours = 6
+				}
+			}
+		}
+	}
+}
+
+#events with the same id can't be triggered from the same event apparently so there must be 3 copies
+
+country_event = {
+	id = nf_MOB.2A
+	title = nf_MOB.2.t
+	desc = nf_MOB.2.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.2.a
+		FROM = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+				active = yes
+			}
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = ROOT
+				value = 100
+			}
+		}
+		ROOT = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = FROM
+				value = 100
+			}
+		}
+		ai_chance = {
+			base = 75
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.25
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.2.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.2B
+	title = nf_MOB.2.t
+	desc = nf_MOB.2.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.2.a
+		FROM = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+				active = yes
+			}
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = ROOT
+				value = 100
+			}
+		}
+		ROOT = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = FROM
+				value = 100
+			}
+		}
+		ai_chance = {
+			base = 75
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.25
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.2.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.2C
+	title = nf_MOB.2.t
+	desc = nf_MOB.2.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.2.a
+		FROM = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+				active = yes
+			}
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = ROOT
+				value = 100
+			}
+		}
+		ROOT = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = guarantee
+				active = yes
+			}
+			add_ai_strategy = { 
+				type = befriend 
+				id = FROM
+				value = 100
+			}
+		}
+		ai_chance = {
+			base = 75
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.25
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.2.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.3A
+	title = nf_MOB.3.t
+	desc = nf_MOB.3.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.3.a
+
+		FROM = {
+			add_to_faction = ROOT
+			add_ai_strategy = { 
+				type = alliance
+				id = ROOT
+				value = 200
+			}
+		}
+		ROOT = {
+			add_ai_strategy = { 
+				type = alliance
+				id = FROM
+				value = 200
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.5
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.3.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.3B
+	title = nf_MOB.3.t
+	desc = nf_MOB.3.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.3.a
+
+		FROM = {
+			add_to_faction = ROOT
+			add_ai_strategy = { 
+				type = alliance
+				id = ROOT
+				value = 200
+			}
+		}
+		ROOT = {
+			add_ai_strategy = { 
+				type = alliance
+				id = FROM
+				value = 200
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.5
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.3.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.3C
+	title = nf_MOB.3.t
+	desc = nf_MOB.3.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.3.a
+
+		FROM = {
+			add_to_faction = ROOT
+			add_ai_strategy = { 
+				type = alliance
+				id = ROOT
+				value = 200
+			}
+		}
+		ROOT = {
+			add_ai_strategy = { 
+				type = alliance
+				id = FROM
+				value = 200
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 25
+				}
+				factor = 0.5
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.3.b
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.4A
+	title = nf_MOB.4.t
+	desc = nf_MOB.4.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.4.a
+
+		FROM = {
+			puppet = ROOT
+			add_to_faction = ROOT
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 1.25
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 2
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 4
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.4.b
+		FROM = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.4B
+	title = nf_MOB.4.t
+	desc = nf_MOB.4.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.4.a
+
+		FROM = {
+			puppet = ROOT
+			add_to_faction = ROOT
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 1.25
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 2
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 4
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.4.b
+		FROM = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.4C
+	title = nf_MOB.4.t
+	desc = nf_MOB.4.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.4.a
+
+		FROM = {
+			puppet = ROOT
+			add_to_faction = ROOT
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 1.25
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 2
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 4
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.4.b
+		FROM = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.5A
+	title = nf_MOB.5.t
+	desc = nf_MOB.5.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.5.a
+
+		FROM = {
+			annex_country = { target = ROOT transfer_troops = yes }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 2.5
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 5
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 10
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.5.b
+		FROM = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.5B
+	title = nf_MOB.5.t
+	desc = nf_MOB.5.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.5.a
+
+		FROM = {
+			annex_country = { target = ROOT transfer_troops = yes }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 2.5
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 5
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 10
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.5.b
+		FROM = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+country_event = {
+	id = nf_MOB.5C
+	title = nf_MOB.5.t
+	desc = nf_MOB.5.d
+	picture = "GFX_event (154)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # ok
+		name = nf_MOB.5.a
+
+		FROM = {
+			annex_country = { target = ROOT transfer_troops = yes }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FROM ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FROM ratio > 2 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FROM ratio > 3 }
+			}
+			modifier = {
+				factor = 2.5
+				strength_ratio = { tag = FROM ratio < 1 }
+			}
+			modifier = {
+				factor = 5
+				strength_ratio = { tag = FROM ratio < 0.5 }
+			}
+			modifier = {
+				factor = 10
+				strength_ratio = { tag = FROM ratio < 0.1 }
+			}
+		}
+	}
+	option = { # no
+		name = nf_MOB.5.b
+		FROM = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
