@@ -9,7 +9,7 @@ focus_tree = {
 			tag = HNZ
 		}
 	}
-	continuous_focus_position = { x = 100 y = 700}
+	continuous_focus_position = { x = 100 y = 1100}
 	default = no
 
 	initial_show_position = {
@@ -30,7 +30,10 @@ focus_tree = {
 
 		select_effect = {
 			## Introduction to Hanza / Loginov's Demons
-			country_event = nf_HNZ.1
+			country_event = {
+				id = nf_HNZ.2
+				days = 7
+			}
 		}
 
 		completion_reward = {
@@ -711,11 +714,12 @@ focus_tree = {
 		available = { has_completed_focus = HNZ_new_quarter }
 
 		completion_reward = {
-			country_event = nf_HNZ.52
 			swap_ideas = {
 				remove_idea = civics_border_HNZ_1
 				add_idea = civics_border_HNZ_2
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			country_event = nf_HNZ.52
 			custom_effect_tooltip = HNZ_passport_projection
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = available_political_advisor
@@ -1773,18 +1777,27 @@ focus_tree = {
 				limit = {
 					NOT = {
 						has_country_flag = is_savage_nation
+						has_country_flag = is_mutant_nantion
 						has_country_flag = is_communist_nation
+						has_country_flag = is_bandit_nation
+
+						original_tag = RUI
+
+						is_justifying_wargoal_against = HNZ
+						has_war_with = HNZ
+
 						has_opinion = {
 							target = ROOT
 							value < 9
 						}
+
 						OR = {
 							is_ally_with = RED
 							is_ally_with = RCH
 						}
 					}
 				}
-				add_timed_idea = { idea = HNZ_subversion days = 370 }
+				add_timed_idea = { idea = HNZ_subversion days = 400 }
 			}
 		}
 
@@ -3483,7 +3496,13 @@ focus_tree = {
 		cost = 7.2
 
 		completion_reward = {
-			reclamation_improve = yes
+			hidden_effect = { reclamation_improve = yes }
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = HNZ_reclamation_bureau
+					add_idea = HNZ_reclamation_bureau_2
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -3528,7 +3547,7 @@ focus_tree = {
 		prerequisite = {
 			focus = HNZ_establish_reclamation_bureau
 		}
-		available = {
+		allow_branch = {
 			always = no
 		}
 		x = -13
@@ -4203,6 +4222,10 @@ focus_tree = {
 		prerequisite = { focus = HNZ_north_arc_trade_2 focus = HNZ_north_arc_military_2 }
 		prerequisite = { focus = HNZ_north_arc_trade_2 focus = HNZ_north_arc_industry_2 }
 		available = { 
+			any_state = {
+				region = 6
+				infrastructure > 4
+			}
 		}
 		x = 0
 		y = 4
@@ -4595,6 +4618,12 @@ focus_tree = {
 		icon = GFX_HNZ_league_of_steel
 		prerequisite = { focus = HNZ_south_arc_trade_2 focus = HNZ_south_arc_industry_2 }
 		prerequisite = { focus = HNZ_south_arc_trade_2 focus = HNZ_south_arc_military_2 }
+		available = { 
+			any_state = {
+				region = 15
+				infrastructure > 4
+			}
+		}
 		x = 0
 		y = 4
 		cost = 8.6
@@ -4656,6 +4685,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = HNZ_internal_branch_1
 		completion_reward = {
+			add_popularity = { ideology = council popularity = -0.05 }
 			add_ideas = HNZ_inner_politics
 		}
 		ai_will_do = {
@@ -4665,14 +4695,15 @@ focus_tree = {
 	focus = {
 		id = HNZ_internal_branch_2A
 		icon = GFX_HNZ_league_of_steel
-		prerequisite = { focus = HNZ_internal_branch_2 }
+		prerequisite = { focus = HNZ_internal_branch_2 focus = HNZ_internal_branch_3 }
 		x = 0
 		y = 2
 		cost = 6.5
 		relative_position_id = HNZ_internal_branch_2
 		completion_reward = {
-			add_political_power = 250
-			## will do something better
+			add_popularity = { ideology = community popularity = -0.05 }
+
+			add_ideas = HNZ_no_vagrancy_laws
 		}
 		ai_will_do = {
 			factor = 5
@@ -4688,6 +4719,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = HNZ_internal_branch_1
 		completion_reward = {
+			add_popularity = { ideology = council popularity = -0.05 }
 			add_ideas = HNZ_materiel_manufacturers
 		}
 		ai_will_do = {
@@ -4697,19 +4729,15 @@ focus_tree = {
 	focus = {
 		id = HNZ_internal_branch_3A
 		icon = GFX_HNZ_league_of_steel
-		prerequisite = { focus = HNZ_internal_branch_3 }
+		prerequisite = { focus = HNZ_internal_branch_3 focus = HNZ_internal_branch_2 }
 		x = 0
 		y = 2
 		cost = 6.5
 		relative_position_id = HNZ_internal_branch_3
 		completion_reward = {
-			add_tech_bonus = {
-				name = INDUSTRY
-				uses = 3
-				bonus = 1
-				category = industry
-			}
-			## WILL DO SOMETHING BETTER
+			add_popularity = { ideology = community popularity = -0.05 }
+			
+			add_ideas = HNZ_institute_no_begging
 		}
 		ai_will_do = {
 			factor = 5

@@ -2,32 +2,25 @@ HNZ_passport_enforcement = {
 	HNZ_enforce_passports = {
 		icon = eng_propaganda_campaigns
 
-		available = {
-			FROM = { NOT = { has_idea = civics_border_3 } }
-		}
-	
 		cost = 5
 		days_remove = 1
 		days_re_enable = 14
 	
-		target_array = global.countries
-	
-		target_trigger = {
-			FROM = { 
-				NOT = { has_idea = civics_border_3 
-					OR = { 
-						original_tag = RUI 
-					} 
-					has_country_flag = is_bandit_nation
-					has_country_flag = is_mutant_nation 
-				}
-				AND = { is_neighbor_of = HNZ } 
-			}
-		}
 	
 		complete_effect = {
-			custom_effect_tooltip = HNZ_enforce_passport_tooltip
-			FROM = {
+			custom_effect_tooltip = NF_HNZ.52.a.tooltip
+			custom_effect_tooltip = generic_skip_one_line_tt
+			every_neighbor_country = { 
+				limit = {
+					NOT = {
+						has_country_flag = is_savage_nation
+						has_country_flag = is_mutant_nation
+						original_tag = RUI
+						OR = {
+							has_idea = civics_border_4
+						}
+					}
+				}
 				country_event = { 
 					id = nf_HNZ.54
 					days = 1

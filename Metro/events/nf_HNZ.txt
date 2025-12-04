@@ -71,11 +71,11 @@ country_event = {		## Role as Chairman / What did he get elected chiefly from?
 		complete_national_focus = HNZ_year_1_economic_priority
 
 		hidden_effect = {
-			country_event = { 
-				id = nf_HNZ.3
-				days = 3
-				random_days = 4
-			}
+			#country_event = { 
+			#	id = nf_HNZ.3
+			#	days = 3
+			#	random_days = 4
+			#}
 		}
 		ai_chance = {
 			factor = 15
@@ -1748,13 +1748,15 @@ country_event = { ## External Sphere Event
 	
 	option = {
 		name = nf_HNZ.52.a
-		add_ideas = civics_border_3
-		custom_effect_tooltip = NF_HNZ.52.a.tooltip
 		every_neighbor_country = { 
 			limit = {
 				NOT = {
 					has_country_flag = is_savage_nation
-					OR = { has_idea = civics_border_4 }
+					has_country_flag = is_mutant_nation
+					original_tag = RUI
+					OR = {
+						has_idea = civics_border_4
+					}
 				}
 			}
 			country_event = { 
@@ -1763,6 +1765,8 @@ country_event = { ## External Sphere Event
 				random_days = 1
 			}
 		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = NF_HNZ.52.a.tooltip
 		ai_chance = {
 			factor = 10
 		}
@@ -1776,11 +1780,13 @@ country_event = { ## External Sphere Event
 	picture = "GFX_event (164)"
 
 	is_triggered_only = yes
-	fire_only_once = yes
 	
 	option = {
 		name = nf_HNZ.53.a
 		add_ideas = civics_border_3
+		HNZ = {
+			add_political_power = 10
+		}
 		ai_chance = {
 			factor = 10
 		}
@@ -1801,13 +1807,16 @@ country_event = { ## Force to take the passport requirement
 	picture = "GFX_event (162)"
 
 	is_triggered_only = yes
-	fire_only_once = yes
 	
 	option = {
 		name = nf_HNZ.54.a ## Compliance
 		add_ideas = civics_border_3
 		HNZ = { country_event = nf_HNZ.55 }
-
+		effect_tooltip = {
+			HNZ = {
+				add_political_power = 10
+			}
+		}
 		ai_chance = {
 			base = 2
 			modifier = {
@@ -1867,7 +1876,7 @@ country_event = { ## FROM Complies
 	
 	option = {
 		name = nf_HNZ.55.a
-		add_political_power = 20
+		add_political_power = 10
 		ai_chance = {
 			factor = 10
 		}
