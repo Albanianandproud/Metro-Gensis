@@ -592,12 +592,16 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			OR = {
-				bunker > 14
-				bunker2 > 14
+			has_built = {
+    			type = bunker
+    			value > 10
+			}
+			has_built = {
+    			type = bunker2
+    			value > 10
 			}
 			AND = {
-				capital_scope = { infrastructure > 7 }
+				capital_scope = { infrastructure > 4 }
 			}
 		}
 
@@ -627,22 +631,25 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			num_of_civilian_factories > 54
-			AND = {
-				has_resources_in_country = {
-					resource = scrap
-					amount > 59
-					extracted = yes
-				}
-				has_resources_in_country = {
-					resource = alloys
-					amount > 54
-					extracted = yes
-				}
-				has_resources_in_country = {
-					resource = components
-					amount > 54
-					extracted = yes
+			count_triggers = {
+				amount = 1
+				num_of_available_civilian_factories > 59
+				OR = {
+					has_resources_in_country = {
+						resource = scrap
+						amount > 49
+						extracted = yes
+					}
+					has_resources_in_country = {
+						resource = alloys
+						amount > 49
+						extracted = yes
+					}
+					has_resources_in_country = {
+						resource = components
+						amount > 49
+						extracted = yes
+					}
 				}
 			}
 		}
@@ -714,10 +721,11 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			OR = {
-				num_divisions > 59
+			count_triggers = {
+				amount = 1
+				num_divisions > 34
 				has_army_manpower = {
-					size > 1499
+					size > 799
 				}
 			}
 		}
@@ -748,12 +756,30 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			has_equipment = { infantry_equipment > 249 }
-			has_equipment = { support_equipment > 49 }
-			OR = {
-				has_equipment = { flamethrower_equipment > 49 }
-				has_equipment = { explosive_equipment > 49 }
-				has_equipment = { gatling_equipment > 49 }
+			count_triggers = {
+				amount = 2
+				custom_trigger_tooltip = {
+			 		tooltip = HNZ_infantry_equipment_priority
+			 		check_variable = { num_equipment_in_armies@infantry_equipment > 799 }
+				}
+				custom_trigger_tooltip = {
+			 		tooltip = HNZ_support_equipment_priority
+			 		check_variable = { num_equipment_in_armies@support_equipment > 49 }
+				}
+				OR = {
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_flamethrower_equipment_priority
+			 			check_variable = { num_equipment_in_armies@flamethrower_equipment > 49 }
+					}
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_explosive_equipment_priority
+			 			check_variable = { num_equipment_in_armies@explosive_equipment > 49 }
+					}
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_gatling_equipment_priority
+			 			check_variable = { num_equipment_in_armies@gatling_equipment > 49 }
+					}
+				}
 			}
 		}
 
@@ -787,7 +813,7 @@ HNZ_agendas = {
 
 		available = {	## We will complete the agenda if said requirements are met
 			OR = {
-				has_completed_focus = HNZ_reclamation_stalker_jackpot
+				has_completed_focus = HNZ_reclamation_electric_cables
 				has_completed_focus = HNZ_reclamation_bureau_2_improve
 			}
 		}
@@ -849,14 +875,27 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			OR = {
-				has_equipment = { rail_cart_equipment  > 34 }
-				has_equipment = { rail_car_equipment  > 24 }
-				has_equipment = { rail_panzer_equipment  > 19 }
-			}
-			OR = {
-				has_tech = rail_armor_tech_2032
-				has_tech = rail_armament_tech_2032
+			count_triggers = {
+				amount = 2
+				OR = {
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_rail_cart_equipment_priority
+			 			check_variable = { num_equipment_in_armies@rail_cart_equipment > 34 }
+					}
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_rail_car_equipment_priority
+			 			check_variable = { num_equipment_in_armies@rail_car_equipment > 34 }
+					}
+					custom_trigger_tooltip = {
+			 			tooltip = HNZ_rail_panzer_equipment_priority
+			 			check_variable = { num_equipment_in_armies@rail_panzer_equipment > 19 }
+					}
+				}
+				OR = {
+					has_tech = rail_armor_tech_2032
+					has_tech = rail_armament_tech_2032
+				}
+				has_completed_focus = HNZ_establish_OVMSB
 			}
 		}
 
