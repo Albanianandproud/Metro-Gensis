@@ -43,7 +43,7 @@ NDefines.NBuildings.RADAR_INTEL_EFFECT = 10
 
 ---Nation Stuff---
 NDefines.NCountry.BASE_RESEARCH_SLOTS = 2
-NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0
+NDefines.NCountry.POPULATION_YEARLY_GROWTH_BASE = 0.01
 NDefines.NCountry.BASE_SURRENDER_LIMIT = 0.6
 NDefines.NCountry.BASE_MOBILIZATION_SPEED = 0.1
 NDefines.NCountry.BASE_COMMAND_POWER_GAIN = 0.25
@@ -56,9 +56,9 @@ NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
 NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 
 	NDefines.NCountry.STARTING_FUEL_RATIO = 0						-- starting fuel ratio compared to max fuel for countries
-	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 0.4167				-- base amount of fuel gained hourly per excess oil
+	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 0.20835				-- base amount of fuel gained hourly per excess oil
 	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
-	NDefines.NCountry.BASE_FUEL_CAPACITY = 500					-- base amount of fuel capacity
+	NDefines.NCountry.BASE_FUEL_CAPACITY = 1000					-- base amount of fuel capacity
 
 	NDefines.FEMALE_UNIT_LEADER_BASE_CHANCE = {
 		-- applies as a factor to female unit leader randomization
