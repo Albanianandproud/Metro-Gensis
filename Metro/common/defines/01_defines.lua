@@ -58,7 +58,7 @@ NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 	NDefines.NCountry.STARTING_FUEL_RATIO = 0						-- starting fuel ratio compared to max fuel for countries
 	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 0.4167				-- base amount of fuel gained hourly per excess oil
 	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
-	NDefines.NCountry.BASE_FUEL_CAPACITY = 1000							-- base amount of fuel capacity
+	NDefines.NCountry.BASE_FUEL_CAPACITY = 500					-- base amount of fuel capacity
 
 	NDefines.FEMALE_UNIT_LEADER_BASE_CHANCE = {
 		-- applies as a factor to female unit leader randomization
