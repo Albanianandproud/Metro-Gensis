@@ -1,17 +1,3 @@
-#	Example:
-#
-#	example_trigger = {
-#		tag = GER
-#		is_ai = no
-#	}
-#
-#
-#	In a script file:
-#
-#	trigger = {
-#		example_trigger = yes
-#	}
-#
 
 can_ROOT_get_wargoal_on_THIS = {
 	exists = yes
@@ -117,6 +103,18 @@ is_not_controlled_by_ROOT_or_ally = {
 		}
 	}
 }
+
+is_available_to_collaboration_government = { # occupied_countries.1 should be updated along with this
+	is_subject = no
+	NOT = {
+		any_country_with_original_tag = {
+			original_tag_to_check = FROM
+			is_puppet_of = PREV # if already created one do not create another
+			has_autonomy_state = autonomy_collaboration_government
+		}
+	}
+}
+
 has_large_ally_not_pick_closed_economy = {
 	any_of_scopes = {
 		array = faction_members
@@ -161,6 +159,7 @@ is_core_or_compliance_60 = {
 		}
 	}
 }
+
 has_same_ideology = {
 	custom_trigger_tooltip = {
 		tooltip = has_same_ideology_tt
@@ -170,16 +169,16 @@ has_same_ideology = {
 				ROOT = { has_government = community }
 			}
 			AND = {
-				has_government = dictatorial
-				ROOT = { has_government = dictatorial }
-			}
-			AND = {
 				has_government = council
 				ROOT = { has_government = council }
 			}
 			AND = {
 				has_government = oligarch
 				ROOT = { has_government = oligarch }
+			}
+			AND = {
+				has_government = dictatorial
+				ROOT = { has_government = dictatorial }
 			}
 		}
 	}
@@ -272,33 +271,6 @@ state_is_fully_controlled_by_ROOT_subject_or_faction_member = {
 	}
 }
 
-is_alpine_state = {
-	custom_trigger_tooltip = {
-		tooltip = is_alpine_TT
-	}
-	hidden_trigger = {
-		OR = {
-			state = 21 #Bouche-du-Rhone - FRA
-			state = 851 #Var - FRA 
-			state = 735 #Savoy - FRA 
-			state = 32 #Alpes - FRA 
-			state = 158 #Piemonte - ITA
-			state = 159 #Lombardia - ITA 
-			state = 850 #Trentino - ITA 
-			state = 39 #Alto Adige - ITA
-			state = 847 #Western Swiss Alps - SWI
-			state = 151 #Eastern Swiss Alps - SWI 
-			state = 846 #Ticino - SWI
-			state = 848 #Vorarlberg - AUS
-			state = 153 #Tyrol - AUS 
-			state = 152 #Upper Austria - AUS 
-			state = 4 #Lower Austria 
-			state = 975 #Burgenland
-			state = 976 #Steiermark-Kömten 
-		}
-	}
-}
-
 state_has_any_resource = {
 	OR = {
 		has_resources_amount = {
@@ -306,11 +278,19 @@ state_has_any_resource = {
 			amount > 0
 		}
 		has_resources_amount = {
-			resource = electronics
+			resource = gasoline
 			amount > 0
 		}
 		has_resources_amount = {
 			resource = scrap
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = chemicals
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = electronics
 			amount > 0
 		}
 		has_resources_amount = {
@@ -319,14 +299,6 @@ state_has_any_resource = {
 		}
 		has_resources_amount = {
 			resource = components
-			amount > 0
-		}
-		has_resources_amount = {
-			resource = chemicals
-			amount > 0
-		}
-		has_resources_amount = {
-			resource = gasoline
 			amount > 0
 		}
 	}
@@ -358,45 +330,7 @@ has_hide_rule = {
 	}
 }
 
-
-###########################################################################################
-###########################################################################################
-###########################################################################################
-
-							########    ###       ###    ######## 
-							   ##      ## ##     ## ##      ##    
-							   ##     ##   ##   ##   ##     ##    
-							   ##    ##     ## ##     ##    ##    
-							   ##    ######### #########    ##    
-							   ##    ##     ## ##     ##    ##    
-							   ##    ##     ## ##     ##    ##    
-
-###########################################################################################
-###########################################################################################
-###########################################################################################
-
-has_aat = {
-	has_dlc = "Arms Against Tyranny"
-}
-
-mio_original_country_exists_and_not_at_war_with_ROOT = { #Used for MIO decisions visibility - THIS is original country
-	exists = yes
-	has_capitulated = no
-	NOT = { has_war_with = ROOT }
-}
-
-mio_original_country_available_with_opinion_subject_and_war_requirements_fulfilled = { #Used for MIO decisions availability - THIS is original country
-	has_opinion = {
-		target = ROOT
-		value > 49
-	}
-	OR = {
-		is_subject = no
-		is_subject_of = ROOT
-	}
-	has_capitulated = no
-	NOT = { has_war_with = ROOT }
-}
+# These are to make strength comparisons easier 
 
 FROM_is_stronger = {
 	strength_ratio = {
@@ -426,12 +360,4 @@ FROM_is_twice_as_weak = {
 	}
 }
 
-### Neutrality Act - only trade with countries at peace 
-trade_partner_not_at_war = {
-	custom_trigger_tooltip = {
-		tooltip = trade_partner_not_at_war_tt
-		FROM = { 
-			has_war = yes 
-		}
-	}
-}
+
