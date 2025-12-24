@@ -9,7 +9,7 @@ elite_doctrine = {
         always = yes
     }
 
-    xp_cost = 100
+    xp_cost = 75
     xp_type = army
 
     tracks = {
@@ -20,10 +20,12 @@ elite_doctrine = {
     }
 
     # EFFECTS
+    enable_tactic = tactic_unexpected_thrust
 	
     milestones = {
         {
             #doctrine_track_soldiers
+            out_of_supply_factor = -0.1
             effect = {
                 if = {
                     limit = {
@@ -39,33 +41,18 @@ elite_doctrine = {
             }
         }
         {
-			#doctrine_track_command
-            effect = {
-                if = {
-                    limit = {
-                        NOT = {
-                            has_variable = support_milestone_var
-                        }
-                    }
-                    set_variable = { support_milestone_var = 1 }
-                }
-                else = {
-                    add_to_variable = { support_milestone_var = 1 }
-                }
-            }
-        }
-        {
 			#doctrine_track_combat_support
+            max_command_power = 50
             effect = {
                 if = {
                     limit = {
-                        NOT = { has_variable = armor_milestone_var
+                        NOT = { has_variable = command_milestone_var
                         }
                     }
-                    set_variable = { armor_milestone_var = 1 }
+                    set_variable = { command_milestone_var = 1 }
                 }
                 else = {
-                    add_to_variable = { armor_milestone_var = 1 }
+                    add_to_variable = { command_milestone_var = 1 }
                 }
             }
         }
@@ -110,7 +97,7 @@ conventional_doctrine = {
         always = yes
     }
 
-    xp_cost = 100
+    xp_cost = 75
     xp_type = army
 
     tracks = {
@@ -121,10 +108,12 @@ conventional_doctrine = {
     }
 
     # EFFECTS
+    enable_tactic = tactic_planned_attack
 	
     milestones = {
         {
             #doctrine_track_soldiers
+            max_dig_in_factor = 0.1
             effect = {
                 if = {
                     limit = {
@@ -140,33 +129,18 @@ conventional_doctrine = {
             }
         }
         {
-			#doctrine_track_command
-            effect = {
-                if = {
-                    limit = {
-                        NOT = {
-                            has_variable = support_milestone_var
-                        }
-                    }
-                    set_variable = { support_milestone_var = 1 }
-                }
-                else = {
-                    add_to_variable = { support_milestone_var = 1 }
-                }
-            }
-        }
-        {
 			#doctrine_track_combat_support
+            max_command_power = 50
             effect = {
                 if = {
                     limit = {
-                        NOT = { has_variable = armor_milestone_var
+                        NOT = { has_variable = command_milestone_var
                         }
                     }
-                    set_variable = { armor_milestone_var = 1 }
+                    set_variable = { command_milestone_var = 1 }
                 }
                 else = {
-                    add_to_variable = { armor_milestone_var = 1 }
+                    add_to_variable = { command_milestone_var = 1 }
                 }
             }
         }
@@ -211,7 +185,7 @@ overwhelm_doctrine = {
         always = yes
     }
 
-    xp_cost = 100
+    xp_cost = 75
     xp_type = army
 
     tracks = {
@@ -222,10 +196,12 @@ overwhelm_doctrine = {
     }
 
     # EFFECTS
-	
+	enable_tactic = tactic_breakthrough
+
     milestones = {
         {
             #doctrine_track_soldiers
+            pocket_penalty = -0.2
             effect = {
                 if = {
                     limit = {
@@ -241,33 +217,18 @@ overwhelm_doctrine = {
             }
         }
         {
-			#doctrine_track_command
-            effect = {
-                if = {
-                    limit = {
-                        NOT = {
-                            has_variable = support_milestone_var
-                        }
-                    }
-                    set_variable = { support_milestone_var = 1 }
-                }
-                else = {
-                    add_to_variable = { support_milestone_var = 1 }
-                }
-            }
-        }
-        {
 			#doctrine_track_combat_support
+            max_command_power = 50
             effect = {
                 if = {
                     limit = {
-                        NOT = { has_variable = armor_milestone_var
+                        NOT = { has_variable = command_milestone_var
                         }
                     }
-                    set_variable = { armor_milestone_var = 1 }
+                    set_variable = { command_milestone_var = 1 }
                 }
                 else = {
-                    add_to_variable = { armor_milestone_var = 1 }
+                    add_to_variable = { command_milestone_var = 1 }
                 }
             }
         }

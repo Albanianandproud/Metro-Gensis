@@ -3,7 +3,7 @@
 
 focus_tree = {
 	id = bandit_focus
-	continuous_focus_position = { x = 2250 y = 800 }
+	continuous_focus_position = { x = 2250 y = 1000 }
 	country = {
 		base = 0
 		modifier = {
@@ -29,6 +29,12 @@ focus_tree = {
 		cost = 6.5
 		completion_reward = {
 			army_experience = 15
+
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_1
+				amount = 15
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -60,6 +66,16 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_focus_2
 		completion_reward = {
+			## Extortion / Blackmail path
+			add_ideas = bandit_extortion_enterprise
+
+			every_country = {
+				limit = {  has_country_flag = is_bandit_nation }
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = bandit_brothers_in_arms  
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -243,6 +259,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_focus_2
 		completion_reward = {
+			## Proper Banditry path
+			add_ideas = bandit_proper_banditry
 		}
 		ai_will_do = {
 			factor = 5
@@ -254,9 +272,40 @@ focus_tree = {
 		prerequisite = { focus = bandit_focus_4 }
 		x = 2
 		y = 2
+		available = {
+			if = { limit = { has_government = community } community > 0.74 }
+			if = { limit = { has_government = council } council > 0.74 }
+			if = { limit = { has_government = oligarch } oligarch > 0.74 }
+			if = { limit = { has_government = dictatorial } dictatorial > 0.74 }
+		}
 		cost = 6.5
 		relative_position_id = bandit_focus_4
 		completion_reward = {
+			division_template = {
+				name = "The Boss' Retinue"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					irregulars = { x = 0 y = 0 }
+					irregulars = { x = 0 y = 1 }
+					irregulars = { x = 0 y = 2 }
+					irregulars = { x = 0 y = 3 }
+					irregulars = { x = 0 y = 4 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Personal Guard\" division_template = \"Hired Thugs\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+			add_tech_bonus = {
+				name = guns
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = infantry_tech
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -271,6 +320,14 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_focus_4
 		completion_reward = {
+			add_tech_bonus = {
+				name = guns
+				bonus = 0.5
+				uses = 3
+				category = entrench_kits
+				category = clothing_kits
+				category = gas_mask
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -285,6 +342,34 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_focus_4B
 		completion_reward = {
+			if = {
+				limit = {
+					has_war_support > 0.6
+				}
+				add_war_support = 0.1
+			}
+			else = {
+				add_war_support = 0.05
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = bandit_law_1
+					}
+				}
+				army_experience = 35
+				add_mastery = {
+    				amount = 50
+    				folder = land
+    				track = doctrine_track_soldiers
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = bandit_law_1
+				}
+				add_ideas = bandit_law_2
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -294,11 +379,23 @@ focus_tree = {
 		id = bandit_focus_4D
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4C }
-		x = -2
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4C
 		completion_reward = {
+			add_timed_idea = {
+				idea = bandit_get_in_line
+				days = 360
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -308,11 +405,23 @@ focus_tree = {
 		id = bandit_focus_4E
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4C }
-		x = 2
+		x = 1
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4C
 		completion_reward = {
+			add_timed_idea = {
+				idea = bandit_stealing_and_looting
+				days = 360
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				    instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -336,7 +445,7 @@ focus_tree = {
 		id = bandit_focus_4G
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4D }
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4D
@@ -350,7 +459,7 @@ focus_tree = {
 		id = bandit_focus_4I
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4E }
-		x = 0
+		x = 1
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4E
@@ -479,7 +588,11 @@ focus_tree = {
 		relative_position_id = bandit_internal_focus_3
 		completion_reward = {
 			## king of the underground
-			
+			add_mastery = {
+    			amount = 50
+    			folder = land
+    			track = doctrine_track_command
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -527,7 +640,6 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_internal_focus_6
 		completion_reward = {
-
 			if = { limit = { has_government = community } add_popularity = { ideology = community popularity = -0.05 } }
 			if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
 			if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
@@ -566,6 +678,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_internal_focus_7
 		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 350 }
+			add_bullet_with_tooltip_effect = yes
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -635,7 +749,7 @@ focus_tree = {
 		relative_position_id = bandit_internal_focus_10
 		completion_reward = {
 			capital_scope = {
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
     				type = bunker2
     				level = 2
@@ -686,20 +800,6 @@ focus_tree = {
 				    instant_build = yes
 				}
 			}
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_internal_focus_15
-		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_14 }
-		x = 0
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_internal_focus_14
-		completion_reward = {
 		}
 		ai_will_do = {
 			factor = 5
@@ -794,7 +894,7 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_ecopomo323333 }
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		relative_position_id = bandit_internal_focus_ecopomo323333
 		completion_reward = {
@@ -915,21 +1015,73 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = bandit_internal_focus_egypt_2
+		icon = GFX_pig
+		prerequisite = { focus = bandit_internal_focus_egypt }
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_internal_focus_egypt
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = bandit_improvised_weapons
+				add_idea = bandit_improvised_weapons_2
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_internal_focus_egypt_3
+		icon = GFX_pig
+		prerequisite = { focus = bandit_internal_focus_egypt }
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_internal_focus_egypt
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_resource = {
+    				type = components 
+    				amount = 4
+    			}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					NOT = { has_state_category = pastoral }
+				}
+				add_resource = {
+    				type = scrap 
+    				amount = 4
+    			}
+			}
+			add_tech_bonus = {
+				name = guns
+				bonus = 0.5
+				uses = 1
+				category = recycling
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = bandit_internal_focus_ggeo
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_ecopomogerjge focus = bandit_internal_focus_egypt }
 		x = 0
-		y = 2
+		y = 3
 		cost = 6.5
 		relative_position_id = bandit_internal_focus_ecopomo323
 		completion_reward = {
 			add_ideas = bandit_big_thinking
 
 			custom_effect_tooltip = generic_skip_one_line_tt
-			add_offsite_building = {
-				type = arms_factory
-				level = 2
-			}
 		}
 		ai_will_do = {
 			factor = 5

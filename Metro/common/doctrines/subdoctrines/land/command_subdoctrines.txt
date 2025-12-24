@@ -4,7 +4,7 @@ meritocracy = {
     description = SUBDOCTRINE_MERITOCRACY_DESC
     icon = GFX_doctrine_meritocracy_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -12,18 +12,29 @@ meritocracy = {
     }
 
 	## Base Reward
-	skill_bonus_factor = 0.1
-
+	effect = {
+		every_army_leader = {
+			limit = {
+				skill < 6
+			}
+			add_skill_level = 1
+		}
+	}
 	## Checkpoint Rewards
 	rewards = {
 		accomplished_acclaims = {
-			trait_educated_commander_trait_xp_gain_factor = 0.2
+			skill_bonus_factor = 0.1
 		}
 		positive_commitment = {
 			wounded_chance_factor = -0.2
 		}
 		innovation = {
-			trait_innovative_assign_trait_xp_gain_factor = 0.2
+			initiative_factor = 0.1
+			effect = {
+				every_army_leader = {	
+					gain_xp = 550
+				}
+			}
 		}
 		demonstrated_willpower = {
 			experience_gain_army_unit_factor = 0.15
@@ -47,7 +58,7 @@ infallable_beliefs = {
     description = SUBDOCTRINE_INFALLABLE_BELIEFS_DESC
     icon = GFX_doctrine_infallable_beliefs_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -55,12 +66,12 @@ infallable_beliefs = {
     }
 
 	## Base Reward
-	grant_medal_cost_factor = -0.3
-
+	grant_medal_cost_factor = -0.25
+	
 	## Checkpoint Rewards
 	rewards = {
 		party_zealotry = {
-			trait_zealous_assign_trait_xp_gain_factor = 0.5
+			army_leader_cost_factor = -0.25 
 		}
 		medal_ceremonies = {
 			field_officer_promotion_penalty = -1.0
@@ -69,10 +80,18 @@ infallable_beliefs = {
 			planning_speed = 0.1
 		}
 		fanaticism = {
-			trait_decisive_assign_trait_xp_gain_factor = 0.2
+			effect = {
+				every_army_leader = {
+					limit = {
+						attack_skill_level < 5
+					}
+					add_attack = 1
+				}
+			}
 		}
 		failure_in_shame = {
-			trait_unyielding_assign_trait_xp_gain_factor = 0.2
+			max_surrender_limit_offset = 0.15
+			weekly_casualties_war_support = 0.005
 		}
 	}
 
@@ -90,7 +109,7 @@ cult_of_personality = {
     description = SUBDOCTRINE_CULT_OF_PERSONALITY_DESC
     icon = GFX_doctrine_cult_of_personality_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -98,13 +117,16 @@ cult_of_personality = {
     }
 
 	## Base Reward
+	command_power_gain = 0.05
 	effect = { 
 		custom_effect_tooltip = cult_of_personality_tt
 	}
 	## Checkpoint Rewards
 	rewards = {
 		brutal_hazing = {
-			doctrine_track_command_track_mastery_gain_factor = 0.25
+			doctrine_track_command_track_mastery_gain_factor = 0.2
+			doctrine_track_soldiers_track_mastery_gain_factor = 0.2
+			doctrine_track_tactics_track_mastery_gain_factor = 0.2
 		}
 		desire_to_impress = {
 			planning_speed = 0.15
@@ -117,7 +139,14 @@ cult_of_personality = {
 			max_command_power_mult = 0.15
 		}
 		intimidation = {
-			trait_unyielding_assign_trait_xp_gain_factor = 0.2
+			effect = {
+				every_army_leader = {
+					limit = {
+						planning_skill_level < 5
+					}	
+					add_planning = 1
+				}
+			}
 		}
 	}
 
@@ -135,7 +164,7 @@ ideological_loyalty = {
     description = SUBDOCTRINE_IDEOLOGICAL_LOYALTY_DESC
     icon = GFX_doctrine_ideological_loyalty_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -148,7 +177,7 @@ ideological_loyalty = {
 	## Checkpoint Rewards
 	rewards = {
 		collective_onus = {
-			political_power_factor = 0.1
+			war_stability_factor = 0.1
 		}
 		crush_individualism = {
 			command_power_gain_mult = 0.2
@@ -159,7 +188,6 @@ ideological_loyalty = {
 		}
 		propagated_solidarity = {
 			automatic_grant_medal_chance = 0.25
-			unit_medal_effectiveness = 0.1
 		}
 		fear_demands_loyalty = {
 			max_command_power = 25
@@ -181,7 +209,7 @@ old_world_emulation = {
     description = SUBDOCTRINE_OLD_WORLD_EMULATION_DESC
     icon = GFX_doctrine_old_world_emulation_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -200,7 +228,14 @@ old_world_emulation = {
 			command_abilities_cost_factor = -0.25
 		}
 		military_theorem = {
-			trait_insightful_commander_trait_xp_gain_factor = 0.2
+			effect = {
+				every_army_leader = {
+					limit = {
+						logistics_skill_level < 5
+					}	
+					add_logistics = 1
+				}
+			}
 		}
 		rememberance = {
 			max_command_power_mult = 0.1
@@ -224,7 +259,7 @@ unorthodox_strategem = {
     description = SUBDOCTRINE_UNORTHODOX_STRATEGEM_DESC
     icon = GFX_unorthodox_strategem_medium
 
-	xp_cost = 50
+	xp_cost = 75
     xp_type = army
 
     available = {
@@ -232,7 +267,7 @@ unorthodox_strategem = {
     }
 
 	## Base Reward
-	trait_unorthodox_assign_trait_xp_gain_factor = 0.3
+	command_abilities_cost_factor = -0.4
 
 	## Checkpoint Rewards
 	rewards = {
@@ -243,7 +278,14 @@ unorthodox_strategem = {
 			initiative_factor = 0.1
 		}
 		flexible_doctrine = {
-			trait_flexible_assign_trait_xp_gain_factor = 0.2 
+			effect = {
+				every_army_leader = {	
+					limit = {
+						attack_skill_level < 6
+					}
+					add_max_trait = 1
+				}
+			}
 		}
 		know_thy_enemy = {
 			planning_speed = 0.1
