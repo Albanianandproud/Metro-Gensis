@@ -924,306 +924,295 @@ warfare_drastic_measures = {
 
 military_theory_committee = {
 	establish_military_committee = {
-
 		icon = hol_war_on_pacifism
-
-		available = { command_power > 19.9 }
-
-		custom_cost_text = command_power_20
 		custom_cost_trigger = {
-			command_power > 20
+			set_temp_variable = { temp_command_power_cost = 50 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
 		}
-
-		days_remove = 50
-
-		fire_only_once = yes
-
+		custom_cost_text = "command_power_decisions_cost_text"
 		complete_effect = {
-			hidden_effect = { add_command_power = -20 }
+			hidden_effect = {
+				add_command_power = -50
+			}
 			custom_effect_tooltip = allow_to_conduct_war_operations
 		}
-
+		fire_only_once = yes
 		remove_effect = {
 			hidden_effect = { set_country_flag = held_military_committee }
 		}
-	}
-
-	hold_exercise_routines = {
-
-		icon = hol_war_on_pacifism
-
-		days_remove = 45
-			
-		custom_cost_text = command_power_20
-		custom_cost_trigger = {
-			command_power > 19.9
-		}
-
-		available = {
-			command_power > 19.9
-			has_war = no
-			hidden_trigger = {
-				has_country_flag = held_military_committee
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 5
+				command_power > 49
+			}
+			modifier = {
+				add = 10
+				date > 2030.1.1
 			}
 		}
-
-		cancel_trigger = {
-            has_war = yes
-        }
-
+	}
+	hold_exercise_routines = {
+		icon = hol_war_on_pacifism
+		days_remove = 45
+		days_re_enable = 90
 		visible = {
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
-		modifier = {
-			command_power_gain_mult = -0.2
-			training_time_factor = -0.2
+		available = {
+			has_war = no
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
 		}
-
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 20 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
+		custom_cost_text = "command_power_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = {
 				add_command_power = -20
 			}
 		}
-
-		remove_effect = {
-			army_experience = 20
+		cancel_trigger = {
+            has_war = yes
+        }
+		modifier = {
+			training_time_factor = -0.1
+			experience_gain_army = 0.225
+		}
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 10
+				command_power > 20
+				has_army_experience < 20
+			}
+			modifier = {
+				add = 45
+				command_power > 20
+				has_army_experience < 20
+			}
 		}
 	}
-
 	centralise_military_command = {
-		
 		icon = hol_war_on_pacifism
-
-		days_remove = 50
-
-		custom_cost_text = command_power_20
+		days_remove = 90
+		fire_only_once = yes
 		custom_cost_trigger = {
-			command_power > 19.9
+			set_temp_variable = { temp_command_power_cost = 25 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
 		}
-
+		custom_cost_text = "command_power_decisions_cost_text"
 		available = {
-			command_power > 20
 			has_war = no
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
 		cancel_trigger = {
             has_war = yes
         }
-
 		visible = {
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
 		modifier = {
+			custom_modifier_tooltip = ONE_TIME_DECISION_TT
 			high_command_cost_factor = -0.15
 			army_chief_cost_factor = -0.15
+			theorist_cost_factor = -0.15
 		}
-
-		complete_effect = {
-			hidden_effect = { add_command_power = -20 }
-		}
-
-		remove_effect = {
-			army_experience = 5
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 20
+				command_power > 24
+			}
 		}
 	}
-
 	conduct_war_games = {
-
 		icon = hol_war_on_pacifism
-
-		days_remove = 50
-
-		available = {
-			has_war = no
-			command_power > 50
-			hidden_trigger = {
-				has_country_flag = held_military_committee
-			}
-		}
-
-		cancel_trigger = {
-            has_war = yes
-        }
-
-		visible = {
-			hidden_trigger = {
-				has_country_flag = held_military_committee
-			}
-		}
-
-		custom_cost_text = command_power_50
+		days_remove = 45
+		fire_only_once = yes
 		custom_cost_trigger = {
-			command_power > 49.9
+			set_temp_variable = { temp_command_power_cost = 50 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
 		}
-
-		modifier = {
-			army_org_regain = -0.1
-			command_power_gain_mult = -0.5
-		}
-
+		custom_cost_text = "command_power_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = {
 				add_command_power = -50
 			}
 		}
-
+		cancel_trigger = {
+            has_war = yes
+        }
+		visible = {
+			hidden_trigger = {
+				has_country_flag = held_military_committee
+			}
+		}
+		modifier = {
+			custom_modifier_tooltip = ONE_TIME_DECISION_TT
+		}
 		remove_effect = {
-			army_experience = 20
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
+			add_mastery = {
+    			amount = 50
+    			folder = land
+    			track = doctrine_track_soldiers
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 15
+				command_power > 49
 			}
 		}
 	}
-
 	military_theory_analysis = {
-
 		icon = hol_war_on_pacifism
-
-		days_remove = 35
-
-		days_re_enable = 95
-
-		available = {
-			has_army_experience > 5
-			hidden_trigger = {
-				has_country_flag = held_military_committee
+		days_remove = 45
+		fire_only_once = yes
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 50 }
+			check_variable = {
+				command_power > temp_command_power_cost
 			}
 		}
-
+		custom_cost_text = "command_power_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -50
+			}
+		}
+		cancel_trigger = {
+            has_war = yes
+        }
 		visible = {
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
-		custom_cost_text = army_experience_5
-		custom_cost_trigger = {
-			has_army_experience > 4.9
-		}
-
 		modifier = {
-			command_power_gain_mult = -0.15
+			custom_modifier_tooltip = ONE_TIME_DECISION_TT
 		}
-
-		complete_effect = {
-			hidden_effect = {
-				army_experience = -5
+		remove_effect = {
+			add_mastery = {
+    			amount = 50
+    			folder = land
+    			track = doctrine_track_command
 			}
 		}
-
-		remove_effect = {
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.2
-				uses = 1
-				category = land_doctrine
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 15
+				command_power > 49
 			}
 		}
 	}
-
 	conduct_r_and_d = {
-
 		icon = hol_war_on_pacifism
-
-		days_remove = 30
-
-		days_re_enable = 360
-
+		days_remove = 7
+		fire_only_once = yes
 		available = {
-			has_army_experience > 10
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
 		visible = {
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
-		custom_cost_text = army_experience_10
 		custom_cost_trigger = {
-			has_army_experience > 9.9
-		}
-
-		modifier = {
-			research_speed_factor = -0.05
-		}
-
-		complete_effect = {
-			hidden_effect = {
-				army_experience = -5
+			set_temp_variable = { temp_command_power_cost = 50 }
+			check_variable = {
+				command_power > temp_command_power_cost
 			}
 		}
-
+		custom_cost_text = "command_power_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -50
+			}
+		}
+		modifier = {
+			custom_modifier_tooltip = ONE_TIME_DECISION_TT
+		}
 		remove_effect = {
 			add_tech_bonus = {
 				name = clothing
-				bonus = 0.35
+				bonus = 1
 				uses = 1
-				category = clothing_kits
+				ahead_reduction = 1
+				category = entrench_kits
 			}
-			add_tech_bonus = {
-				name = clothing
-				bonus = 0.35
-				uses = 1
-				category = gas_mask
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 15
+				command_power > 49
 			}
 		}
 	}
-
 	train_the_troops = {
-
 		icon = hol_war_on_pacifism
-
 		days_remove = 90
-
-		days_re_enable = 270
-
+		days_re_enable = 180
 		available = {
-			has_army_experience > 20
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
 		visible = {
 			hidden_trigger = {
 				has_country_flag = held_military_committee
 			}
 		}
-
-		custom_cost_text = army_experience_20
 		custom_cost_trigger = {
-			has_army_experience > 19.9
+			set_temp_variable = { temp_army_experience_cost = 20 }
+			check_variable = {
+				command_power > temp_army_experience_cost
+			}
 		}
-
-		modifier = {
-			training_time_army_factor = -0.2
-			minimum_training_level = -0.1
-		}
-
+		custom_cost_text = "army_experience_decisions_cost_text"
 		complete_effect = {
 			hidden_effect = {
 				army_experience = -20
 			}
 		}
-
-		remove_effect = {
-			army_experience = 5
+		modifier = {
+			training_time_army_factor = -0.2
+			minimum_training_level = -0.1
+		}
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 10
+				has_army_experience > 19.9
+				amount_manpower_in_deployment_queue > 49
+			}
+			modifier = {
+				add = 45
+				has_army_experience > 19.9
+				amount_manpower_in_deployment_queue > 74
+			}
 		}
 	}
 }
