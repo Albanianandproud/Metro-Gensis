@@ -2107,23 +2107,408 @@ flush_scavenge_reward_equipment = {
 	clr_country_flag = scav_reward_eq_spec_ops_stat_buff
 	clr_country_flag = scav_reward_eq_tech_support
 
-clr_country_flag = scav_reward_eq_basic_flamethrower
-clr_country_flag = scav_reward_eq_flamethrower_2
-clr_country_flag = scav_reward_eq_flamethrower_1
-clr_country_flag = scav_reward_eq_flamethrower_buff
-clr_country_flag = scav_reward_eq_flamethrower_stat_buff
+	clr_country_flag = scav_reward_eq_basic_flamethrower
+	clr_country_flag = scav_reward_eq_flamethrower_2
+	clr_country_flag = scav_reward_eq_flamethrower_1
+	clr_country_flag = scav_reward_eq_flamethrower_buff
+	clr_country_flag = scav_reward_eq_flamethrower_stat_buff
 
-clr_country_flag = scav_reward_eq_basic_gatling
-clr_country_flag = scav_reward_eq_gatling_1
-clr_country_flag = scav_reward_eq_gatling_2
-clr_country_flag = scav_reward_eq_gatling_production_buff
-clr_country_flag = scav_reward_eq_gatling_stat_buff
+	clr_country_flag = scav_reward_eq_basic_gatling
+	clr_country_flag = scav_reward_eq_gatling_1
+	clr_country_flag = scav_reward_eq_gatling_2
+	clr_country_flag = scav_reward_eq_gatling_production_buff
+	clr_country_flag = scav_reward_eq_gatling_stat_buff
 
-clr_country_flag = scav_reward_eq_basic_explosive
-clr_country_flag = scav_reward_eq_explosive_1
-clr_country_flag = scav_reward_eq_explosive_2
-clr_country_flag = scav_reward_eq_explosive_production_buff
-clr_country_flag = scav_reward_eq_explosive_stat_buff
+	clr_country_flag = scav_reward_eq_basic_explosive
+	clr_country_flag = scav_reward_eq_explosive_1
+	clr_country_flag = scav_reward_eq_explosive_2
+	clr_country_flag = scav_reward_eq_explosive_production_buff
+	clr_country_flag = scav_reward_eq_explosive_stat_buff
 
 log = "flushed equipment reward chances"
 }
+
+
+
+scavenge_initialize_scripted_variables_effect = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = has_initialized_scavenge_variables }
+		}
+		## Initialize vars here
+		# Scavenge_success/failure
+		set_variable = { scavenge_success_chance_var = 0 }
+		set_variable = { scavenge_failure_chance_var = 0 }
+		# Scavenge_colossal_failure
+		set_variable = { scavenge_colossal_failure_chance_var = 0 }
+		# Scavenge_POI_found
+		set_variable = { scavenge_poi_chance_var = 0 }
+		# Scavenge_horror
+		set_variable = { scavenge_horror_chance_var = 0 }
+
+		## Tooltip display loc
+		set_variable = { scavenge_success_chance_display_var = 0 }
+		set_variable = { scavenge_fail_chance_display_var = 0 }
+		set_variable = { scavenge_poi_chance_display_var = 0 }
+
+		## Set vars here
+		# Scavenge_success/failure
+		set_variable = { scavenge_success_chance_var = 20 }
+		set_variable = { scavenge_failure_chance_var = 15 }
+		# Scavenge_colossal_failure
+		set_variable = { scavenge_colossal_failure_chance_var = 5 }
+		# Scavenge_POI_found
+		set_variable = { scavenge_poi_chance_var = 5 }
+		# Scavenge_horror
+		set_variable = { scavenge_horror_chance_var = 5 }
+
+		scavenge_update_display_var_tooltips = yes
+
+		set_country_flag = has_initialized_scavenge_variables
+	}
+}
+
+scavenge_update_display_var_tooltips = {
+	## Tooltip display loc
+	## Scavenge Success
+	add_to_variable = { scavenge_success_chance_display_var = scavenge_success_chance_var }
+
+	add_to_variable = { scavenge_fail_chance_display_var = scavenge_failure_chance_var }
+	add_to_variable = { scavenge_fail_chance_display_var = scavenge_colossal_failure_chance_var }
+	add_to_variable = { scavenge_fail_chance_display_var = scavenge_horror_chance_var }
+
+	add_to_variable = { scavenge_poi_chance_display_var = scavenge_poi_chance_var }
+}
+
+scavenge_update_modifiers = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = has_initialized_scavenge_variables }
+		}
+		## Initialize vars here
+		# Scavenge_success/failure
+		add_to_variable = { scavenge_success_chance_var = scavenge_add_success_chance_var }
+		add_to_variable = { scavenge_failure_chance_var = scavenge_add_failure_chance_var }
+		# Scavenge_colossal_failure
+		add_to_variable = { scavenge_colossal_failure_chance_var = scavenge_add_colossal_failure_chance_var }
+		# Scavenge_POI_found
+		add_to_variable = { scavenge_poi_chance_var = scavenge_add_poi_chance_var }
+		# Scavenge_horror
+		add_to_variable = { scavenge_horror_chance_var = scavenge_add_horror_chance_var }
+
+		scavenge_update_display_var_tooltips = yes
+
+	}
+}
+
+scavenge_roll_outcome = {
+	random_list = {
+		scavenge_success_chance_var = {
+			custom_effect_tooltip = scavenge_success_tt
+
+			country_event = scavenge_mission_success.1
+
+			modifier = {
+				factor = 0.8
+				original_tag = HUL
+				NOT = { has_country_flag = fought_aviators }
+			}
+		}
+		scavenge_failure_chance_var = {
+			custom_effect_tooltip = scavenge_failure_tt
+			
+			#country_event = scavenge_mission_failure.1
+			custom_effect_tooltip = scavenge_failure_no_reward_tt
+			modifier = {
+            	factor = 1.3
+				has_country_flag = scavenge_failure_chance_increase_flag
+       		}
+		}
+		scavenge_colossal_failure_chance_var = {
+			custom_effect_tooltip = scavenge_colossal_failure_tt
+			
+			country_event = scavenge_mission_colossal_failure.1
+		}
+		scavenge_horror_chance_var = {
+			custom_effect_tooltip = scavenge_horror_tt
+			
+			country_event = scavenge_mission_horror.1
+		}
+		scavenge_poi_chance_var = {
+			custom_effect_tooltip = scavenge_poi_tt
+			
+			country_event = scavenge_mission_poi.1
+		}
+	}
+}
+
+scavenge_roll_reward_success = {} 
+
+scavenge_roll_poi_location = {
+	random_list = {
+		## Common
+		10 = { 
+			set_country_flag = scavenge_poi_common_unmarked_building
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_unmarked_building
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_unmarked_building }
+		}
+		10 = { 
+			set_country_flag = scavenge_poi_common_construction_yard 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_construction_yard
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_construction_yard }
+		}
+		10 = { 
+			set_country_flag = scavenge_poi_common_warehouse 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_warehouse
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_warehouse }
+		}
+		10 = { 
+			set_country_flag = scavenge_poi_common_police_station 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_police_station
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_police_station }
+		}
+		10 = { 
+			set_country_flag = scavenge_poi_common_hospital 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_hospital
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_hospital }
+		}
+		10 = { 
+			set_country_flag = scavenge_poi_common_hardware_store 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_common_hardware_store
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_common_hardware_store }
+		}
+		## Uncommon
+		5 = { 
+			set_country_flag = scavenge_poi_uncommon_church 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_uncommon_church
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_uncommon_church }
+		}
+		5 = { 
+			set_country_flag = scavenge_poi_uncommon_parkinglot 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_uncommon_parkinglot
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_uncommon_parkinglot }
+		}
+		5 = { 
+			set_country_flag = scavenge_poi_uncommon_parkinglot_inhabited 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_uncommon_parkinglot_inhabited
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_uncommon_parkinglot_inhabited }
+		}
+		5 = { 
+			set_country_flag = scavenge_poi_uncommon_research_institute 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_uncommon_research_institute
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_uncommon_research_institute }
+		}
+		## Rare
+		2.5 = { 
+			set_country_flag = scavenge_poi_rare_embassy 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_rare_embassy
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_rare_embassy }
+		}
+		2.5 = { 
+			set_country_flag = scavenge_poi_rare_bunker 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_rare_bunker
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_rare_bunker }
+		}
+		## Exotic
+		1 = { 
+			set_country_flag = scavenge_poi_exotic_labyrinth 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_exotic_labyrinth
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_exotic_labyrinth }
+		}
+		1 = { 
+			set_country_flag = scavenge_poi_exotic_military_base 
+			modifier = {
+            	factor = 0
+            	has_country_flag = scavenge_poi_exotic_military_base
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_exotic_military_base }
+		}
+		1 = { 
+			set_country_flag = scavenge_poi_exotic_missile_silo 
+			modifier = {
+            	factor = 0
+            	has_global_flag = poi_missile_discovered
+        	}
+			if = { limit = { is_debug = yes } custom_effect_tooltip = scavenge_poi_exotic_missile_silo }
+		}
+		## Unique
+	}
+}
+
+scavenge_poi_event = {
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_unmarked_building
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_unmarked_building.1 }
+			10 = { country_event = scavenge_poi_common_unmarked_building.2 }
+			10 = { country_event = scavenge_poi_common_unmarked_building.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_construction_yard
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_construction_yard.1 }
+			10 = { country_event = scavenge_poi_common_construction_yard.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_warehouse
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_warehouse.1 }
+			10 = { country_event = scavenge_poi_common_warehouse.2 }
+			10 = { country_event = scavenge_poi_common_warehouse.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_police_station
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_police_station.1 }
+			10 = { country_event = scavenge_poi_common_police_station.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_hospital
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_hospital.1 }
+			10 = { country_event = scavenge_poi_common_hospital.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_common_hardware_store
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_common_hardware_store.1 }
+			10 = { country_event = scavenge_poi_common_hardware_store.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_uncommon_church
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_uncommon_church.1 }
+			10 = { country_event = scavenge_poi_uncommon_church.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_uncommon_parkinglot
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_uncommon_parkinglot.1 }
+			10 = { country_event = scavenge_poi_uncommon_parkinglot.2 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_uncommon_parkinglot_inhabited
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_uncommon_parkinglot_inhabited.1 }
+			10 = { country_event = scavenge_poi_uncommon_parkinglot_inhabited.2 }
+			10 = { country_event = scavenge_poi_uncommon_parkinglot_inhabited.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_uncommon_research_institute
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_uncommon_research_institute.1 }
+			10 = { country_event = scavenge_poi_uncommon_research_institute.2 }
+			10 = { country_event = scavenge_poi_uncommon_research_institute.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_rare_embassy
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_rare_embassy.1 }
+			10 = { country_event = scavenge_poi_rare_embassy.2 }
+			10 = { country_event = scavenge_poi_rare_embassy.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_rare_bunker
+		}
+		random_list = {
+			10 = { country_event = scavenge_poi_rare_bunker.1 }
+			10 = { country_event = scavenge_poi_rare_bunker.2 }
+			10 = { country_event = scavenge_poi_rare_bunker.3 }
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_exotic_labyrinth
+		}
+		country_event = scavenge_poi_exotic_labyrinth.1
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_exotic_military_base
+		}
+		country_event = scavenge_poi_exotic_military_base.1
+	}
+	if = {
+		limit = {
+			has_country_flag = scavenge_poi_exotic_missile_silo
+		}
+		country_event = scavenge_poi_exotic_missile_silo.1
+	}
+}
+
+# Unused/ rewards are given via events
+scavenge_roll_reward_poi = {}
+

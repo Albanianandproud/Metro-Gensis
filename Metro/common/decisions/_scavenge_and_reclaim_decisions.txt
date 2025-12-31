@@ -1036,40 +1036,35 @@ reclaim_metro = {
 	}
 }
 scavenging_expeditions = {
-	execute_scavenge_mission = {
-		icon = electronics
+	establish_stalking_group = {
+		icon = hol_war_on_pacifism
+		days_remove = 14
+		fire_only_once = yes
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 25 }
+			set_temp_variable = { temp_bullet_cost = 250 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
 		}
 		custom_cost_text = "bullet_decisions_cost_text"
 		available = {
-			hidden_trigger = {
-				NOT = { has_country_flag = free_scavenging_cost }
-				NOT = { has_country_flag = scavenging_underway }
-				NOT = { has_country_flag = scavenging_disabled }
-			}
-
 			has_manpower > 4
 			has_equipment = {
 				infantry_equipment > 4
 			}
-		}
-		visible = {
-			hidden_trigger = {
-				NOT = { original_tag = MSU }
-				NOT = { original_tag = GWC }
-				NOT = { original_tag = MUT }
-				NOT = { original_tag = PAG }
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+			custom_trigger_tooltip = {
+				tooltip = scavenging_been_disabled_tt
+				hidden_trigger = {
+					NOT = { has_country_flag = scavenging_disabled }
+				}
 			}
 		}
-		fixed_random_seed = no
-		fire_only_once = no
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -25 }
+				set_temp_variable = { bullet_to_gain = -250 }
 				add_bullet_with_tooltip_effect = yes
 			}
 			add_manpower = -5
@@ -1077,42 +1072,332 @@ scavenging_expeditions = {
 				type = infantry_equipment
 				amount = -5
 			}
-			set_country_flag = scavenging_underway
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+			custom_effect_tooltip = allow_to_conduct_scavenging_mission_tt
 		}
-		days_remove = 50
-		days_re_enable = 0
 		remove_effect = {
-			clr_country_flag = scavenging_underway
-			random_list = {
-				scav_successChance = { #Found something
-					country_event = scavenge_mission.1
-				}
-				scav_failureChance = { #Loss
-					country_event = scavenge_mission.2
-					modifier = {
-            			factor = 5
-						original_tag = HUL
-           				NOT = { has_country_flag = fought_aviators }
-        			}
-				}
+			hidden_effect = { 
+				set_country_flag = has_established_scavenge_base 
+
+				scavenge_initialize_scripted_variables_effect = yes
 			}
 		}
 		ai_will_do = {
-			factor = 5
-			modifier = {
-				factor = 0.05
-				has_war = yes
-			}
-			modifier = {
-				factor = 0.05
-				has_manpower < 19
-			}
-			modifier = {
-				factor = 5
-				has_manpower > 79
-			}
+			base = 20
 		}
 	}
+
+	launch_scavenging_team_mission = {
+		icon = electronics
+		priority = 100
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		available = { NOT = { has_country_flag = active_scavenger_mission } }
+		visible = { 
+			has_country_flag = has_established_scavenge_base 
+			NOT = { has_country_flag = active_scavenger_mission }
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = active_scavenger_mission_tt
+			hidden_effect = {
+				set_country_flag = active_scavenger_mission
+				add_ideas = scavenging_mission_cost
+			}
+			activate_mission = scavenger_team_mission_countdown
+		}
+	}
+
+	scavenger_team_mission_countdown = {
+		icon = GFX
+		priority = 1001
+
+		activation  = {
+			has_country_flag = active_scavenger_mission
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = active_scavenger_mission
+			}
+		}
+
+		selectable_mission = no
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = scavenger_team_mission_countdown
+			}
+		}
+
+		days_mission_timeout = 30
+		fixed_random_seed = no
+
+		timeout_effect = {
+			## Launch Sortie
+			hidden_effect = {
+				activate_mission = scavenger_team_mission_countdown
+			}
+			scavenge_roll_outcome = yes
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+
+	scavenger_team_mission_establish_surface_waypoints = {
+		icon = electronics
+		priority = 100
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 750 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 30
+		available = { NOT = { has_active_mission = scavenger_team_mission_countdown } }
+		visible = { 
+			has_country_flag = has_established_scavenge_base 
+			NOT = { has_country_flag = active_scavenger_mission }
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -750 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = place_surface_waypoint_tt
+			## Slightly increase the chance of a successful expedition
+			set_temp_variable = { scavenge_add_success_chance_var = 5 }
+			scavenge_update_modifiers = yes
+		}
+	}
+
+	scavenger_team_recall = {
+		icon = electronics
+		available = { has_country_flag = active_scavenger_mission  }
+		visible = { 
+			has_active_mission = scavenger_team_mission_countdown
+		}
+		cost = 0
+		complete_effect = {
+			hidden_effect = { 
+				clr_country_flag = active_scavenger_mission 
+				remove_ideas = scavenging_mission_cost
+			}
+			add_manpower = 5
+		}
+	}
+
+	scavenger_mission_rescue = {
+		icon = electronics
+
+		activation  = {
+			has_country_flag = scavenger_mission_needs_rescue
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = active_scavenger_mission
+			}
+		}
+
+		selectable_mission = yes
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			NOT = {
+				has_country_flag = scavenger_mission_needs_rescue
+			}
+		}
+
+		days_mission_timeout = 30
+		fixed_random_seed = no
+
+		timeout_effect = {
+			## Launch Sortie
+			country_event = scavenge_mission_colossal_failure.3
+		}
+
+		complete_effect = {
+			country_event = scavenge_mission_colossal_failure.2
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+
+	launch_scavenging_poi_team_mission = {
+		icon = electronics
+		priority = 100
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		available = { 
+			has_country_flag = scavenge_poi_discovery 
+		}
+		visible = { 
+			NOT = { has_active_mission = scavenger_team_mission_poi_countdown }
+			has_country_flag = has_established_scavenge_base 
+			has_country_flag = scavenge_poi_discovery 
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = active_scavenger_mission_poi_tt
+			hidden_effect = {
+				set_country_flag = active_scavenger_mission_poi
+				if = {
+					limit = {
+						NOT = {
+							has_idea = scavenging_mission_cost
+						}
+					}
+					add_ideas = scavenging_mission_cost
+				}
+			}
+			activate_mission = scavenger_team_mission_poi_countdown
+		}
+	}
+
+	scavenger_team_mission_poi_countdown = {
+		icon = GFX
+		priority = 1001
+
+		activation  = {
+			has_country_flag = active_scavenger_mission_poi
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = active_scavenger_mission_poi
+			}
+		}
+
+		selectable_mission = no
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = scavenger_team_mission_countdown
+			}
+		}
+
+		days_mission_timeout = 30
+
+		timeout_effect = {
+			## Launch Sortie
+			clr_country_flag = scavenge_poi_discovery
+			scavenge_poi_event = yes
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+
+
+	#execute_scavenge_mission = {
+	#	icon = electronics
+	#	custom_cost_trigger = {
+	#		set_temp_variable = { temp_bullet_cost = 50 }
+	#		check_variable = {
+	#			bullet > temp_bullet_cost
+	#		}
+	#	}
+	#	visible = {
+	#		has_country_flag = has_established_scavenge_base
+	#	}
+	#	custom_cost_text = "bullet_decisions_cost_text"
+	#	available = {
+	#		hidden_trigger = {
+	#			NOT = { has_country_flag = free_scavenging_cost }
+	#			NOT = { has_country_flag = scavenging_underway }
+	#			NOT = { has_country_flag = scavenging_disabled }
+	#		}
+	#	}
+	#	visible = {
+	#		hidden_trigger = {
+	#			NOT = { original_tag = MSU }
+	#			NOT = { original_tag = GWC }
+	#			NOT = { original_tag = MUT }
+	#			NOT = { original_tag = PAG }
+	#		}
+	#	}
+	#	fixed_random_seed = no
+	#	fire_only_once = no
+	#	complete_effect = {
+	#		hidden_effect = { 
+	#			set_temp_variable = { bullet_to_gain = -50 }
+	#			add_bullet_with_tooltip_effect = yes
+	#		}
+	#		add_manpower = -5
+	#		add_equipment_to_stockpile = {
+	#			type = infantry_equipment
+	#			amount = -5
+	#		}
+	#		set_country_flag = scavenging_underway
+	#	}
+	#	days_remove = 50
+	#	days_re_enable = 0
+	#	remove_effect = {
+	#		clr_country_flag = scavenging_underway
+	#		random_list = {
+	#			scav_successChance = { #Found something
+	#				country_event = scavenge_mission.1
+	#			}
+	#			scav_failureChance = { #Loss
+	#				country_event = scavenge_mission.2
+	#				modifier = {
+    #        			factor = 5
+	#					original_tag = HUL
+    #       				NOT = { has_country_flag = fought_aviators }
+    #    			}
+	#			}
+	#		}
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#		modifier = {
+	#			factor = 0.05
+	#			has_war = yes
+	#		}
+	#		modifier = {
+	#			factor = 0.05
+	#			has_manpower < 19
+	#		}
+	#		modifier = {
+	#			factor = 5
+	#			has_manpower > 79
+	#		}
+	#	}
+	#}
 
 	execute_scavenge_mission_free = {
 		icon = electronics

@@ -249,12 +249,13 @@ calculate_bullet_expenses = {
 	# Other Income:
 	set_temp_variable = { expenses_from_other_sources = modifier@bullet_expense }
 	add_to_temp_variable = { expenses_from_other_sources = modifier@bullet_expense_from_ideas }
-	if = {
-		limit = {
-			check_variable = { expenses_from_other_sources < 0 }
-		}
-		set_temp_variable = { expenses_from_other_sources = 0 }
-	}
+	multiply_temp_variable = { expenses_from_other_sources = -1 }
+	#if = {
+	#	limit = {
+	#		check_variable = { expenses_from_other_sources < 0 }
+	#	}
+	#	set_temp_variable = { expenses_from_other_sources = 0 }
+	#}
 	add_to_temp_variable = { total_expenses_temp = expenses_from_other_sources }
 
 	# Expenses Affecting Modifiers:
