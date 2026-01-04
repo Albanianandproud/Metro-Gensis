@@ -1039,7 +1039,7 @@ scavenging_expeditions = {
 	establish_stalking_group = {
 		icon = hol_war_on_pacifism
 		days_remove = 14
-		fire_only_once = yes
+		fire_only_once = no
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 250 }
 			check_variable = {
@@ -1047,6 +1047,11 @@ scavenging_expeditions = {
 			}
 		}
 		custom_cost_text = "bullet_decisions_cost_text"
+		visible = {
+			NOT = {
+				has_country_flag = has_established_scavenge_base
+			}
+		}
 		available = {
 			has_manpower > 4
 			has_equipment = {
@@ -1094,7 +1099,7 @@ scavenging_expeditions = {
 		icon = electronics
 		priority = 100
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
+			set_temp_variable = { temp_bullet_cost = 100 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -1103,11 +1108,14 @@ scavenging_expeditions = {
 		available = { NOT = { has_country_flag = active_scavenger_mission } }
 		visible = { 
 			has_country_flag = has_established_scavenge_base 
-			NOT = { has_country_flag = active_scavenger_mission }
+			NOT = { 
+				has_country_flag = active_scavenger_mission 
+				has_country_flag = scavenger_mission_needs_rescue
+			}
 		}
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
+				set_temp_variable = { bullet_to_gain = -100 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -1132,6 +1140,12 @@ scavenging_expeditions = {
 		available = {
 			NOT = {
 				has_country_flag = active_scavenger_mission
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = scavenger_mission_needs_rescue
 			}
 		}
 
@@ -1169,24 +1183,54 @@ scavenging_expeditions = {
 				bullet > temp_bullet_cost
 			}
 		}
+		available = {
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+		}
 		custom_cost_text = "bullet_decisions_cost_text"
 		days_remove = 30
 		available = { NOT = { has_active_mission = scavenger_team_mission_countdown } }
 		visible = { 
 			has_country_flag = has_established_scavenge_base 
-			NOT = { has_country_flag = active_scavenger_mission }
+			NOT = { 
+				has_country_flag = active_scavenger_mission 
+				has_country_flag = scavenger_mission_needs_rescue
+			}
 		}
 		complete_effect = {
 			hidden_effect = { 
 				set_temp_variable = { bullet_to_gain = -750 }
 				add_bullet_with_tooltip_effect = yes
 			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
 		}
 		remove_effect = {
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = 5
+			}
 			custom_effect_tooltip = place_surface_waypoint_tt
 			## Slightly increase the chance of a successful expedition
-			set_temp_variable = { scavenge_add_success_chance_var = 5 }
-			scavenge_update_modifiers = yes
+			scavenge_increase_success_roll_chance = yes
 		}
 	}
 
@@ -1217,6 +1261,13 @@ scavenging_expeditions = {
 			NOT = {
 				has_country_flag = active_scavenger_mission
 			}
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
 		}
 
 		selectable_mission = yes
@@ -1233,12 +1284,20 @@ scavenging_expeditions = {
 		fixed_random_seed = no
 
 		timeout_effect = {
-			## Launch Sortie
 			country_event = scavenge_mission_colossal_failure.3
 		}
 
 		complete_effect = {
 			country_event = scavenge_mission_colossal_failure.2
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
 		}
 		ai_will_do = {
 			factor = 101
@@ -1249,7 +1308,7 @@ scavenging_expeditions = {
 		icon = electronics
 		priority = 100
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 50 }
+			set_temp_variable = { temp_bullet_cost = 100 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -1257,6 +1316,13 @@ scavenging_expeditions = {
 		custom_cost_text = "bullet_decisions_cost_text"
 		available = { 
 			has_country_flag = scavenge_poi_discovery 
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
 		}
 		visible = { 
 			NOT = { has_active_mission = scavenger_team_mission_poi_countdown }
@@ -1265,8 +1331,17 @@ scavenging_expeditions = {
 		}
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -50 }
+				set_temp_variable = { bullet_to_gain = -100 }
 				add_bullet_with_tooltip_effect = yes
+			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
 			}
 		}
 		remove_effect = {
@@ -1316,6 +1391,16 @@ scavenging_expeditions = {
 			## Launch Sortie
 			clr_country_flag = scavenge_poi_discovery
 			scavenge_poi_event = yes
+
+			add_manpower = 5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = 5
+			}
 		}
 		ai_will_do = {
 			factor = 101

@@ -2129,7 +2129,6 @@ log = "flushed equipment reward chances"
 }
 
 
-
 scavenge_initialize_scripted_variables_effect = {
 	if = {
 		limit = {
@@ -2153,14 +2152,14 @@ scavenge_initialize_scripted_variables_effect = {
 
 		## Set vars here
 		# Scavenge_success/failure
-		set_variable = { scavenge_success_chance_var = 20 }
-		set_variable = { scavenge_failure_chance_var = 15 }
+		add_to_variable = { scavenge_success_chance_var = 20 }
+		add_to_variable = { scavenge_failure_chance_var = 15 }
 		# Scavenge_colossal_failure
-		set_variable = { scavenge_colossal_failure_chance_var = 5 }
+		add_to_variable = { scavenge_colossal_failure_chance_var = 5 }
 		# Scavenge_POI_found
-		set_variable = { scavenge_poi_chance_var = 5 }
+		add_to_variable = { scavenge_poi_chance_var = 5 }
 		# Scavenge_horror
-		set_variable = { scavenge_horror_chance_var = 5 }
+		add_to_variable = { scavenge_horror_chance_var = 5 }
 
 		scavenge_update_display_var_tooltips = yes
 
@@ -2170,6 +2169,11 @@ scavenge_initialize_scripted_variables_effect = {
 
 scavenge_update_display_var_tooltips = {
 	## Tooltip display loc
+		## First flush all add_chance_var variables
+		set_variable = { scavenge_success_chance_display_var = 0 }
+		set_variable = { scavenge_fail_chance_display_var = 0 }
+		set_variable = { scavenge_poi_chance_display_var = 0 }
+
 	## Scavenge Success
 	add_to_variable = { scavenge_success_chance_display_var = scavenge_success_chance_var }
 
@@ -2183,9 +2187,9 @@ scavenge_update_display_var_tooltips = {
 scavenge_update_modifiers = {
 	if = {
 		limit = {
-			NOT = { has_country_flag = has_initialized_scavenge_variables }
+			has_country_flag = has_initialized_scavenge_variables 
 		}
-		## Initialize vars here
+		### First flush all chance_var variables
 		# Scavenge_success/failure
 		add_to_variable = { scavenge_success_chance_var = scavenge_add_success_chance_var }
 		add_to_variable = { scavenge_failure_chance_var = scavenge_add_failure_chance_var }
@@ -2197,8 +2201,31 @@ scavenge_update_modifiers = {
 		add_to_variable = { scavenge_horror_chance_var = scavenge_add_horror_chance_var }
 
 		scavenge_update_display_var_tooltips = yes
-
 	}
+}
+
+scavenge_increase_success_roll_chance = {
+	set_variable = { scavenge_add_success_chance_var = 0 }
+	add_to_variable = { scavenge_add_success_chance_var = 5 }
+	scavenge_update_modifiers = yes
+}
+
+scavenge_increase_poi_roll_chance = {
+	set_variable = { scavenge_add_poi_chance_var = 0 }
+	add_to_variable = { scavenge_add_poi_chance_var = 5 }
+	scavenge_update_modifiers = yes
+}
+
+scavenge_increase_colossal_failure_roll_chance = {
+	set_variable = { scavenge_add_colossal_failure_chance_var = 0 }
+	add_to_variable = { scavenge_add_colossal_failure_chance_var = 10 }
+	scavenge_update_modifiers = yes
+}
+
+scavenge_increase_horror_roll_chance = {
+	set_variable = { scavenge_add_horror_chance_var = 0 }
+	add_to_variable = { scavenge_add_horror_chance_var = 10 }
+	scavenge_update_modifiers = yes
 }
 
 scavenge_roll_outcome = {
@@ -2511,4 +2538,305 @@ scavenge_poi_event = {
 
 # Unused/ rewards are given via events
 scavenge_roll_reward_poi = {}
+
+
+## REWARDS ##
+## It looks like spaghetti code i know, but this is currently the best method of displaying all equipment.
+## The number is not the chance, but the weight for each option, as they don't have to add up to 100 or any number. 
+## meaning that new equipment can easily be added.
+scavenge_select_success_roll = {
+	hidden_effect = {
+		random_list = {
+			## Infantry Gun
+			2 = {	set_country_flag = scavenge_basic_infantry_equipment				modifier = { factor = 0 OR = { has_tech = scrap_infantry_equipment_tech_1 has_tech = shotgun_infantry_equipment_tech_1 } } } 
+			2 = {	set_country_flag = scavenge_scrap_infantry_equipment_1				modifier = { factor = 0 OR = { has_tech = scrap_infantry_equipment_tech_2 has_tech = shotgun_infantry_equipment_tech_2 } } } 
+			2 = {	set_country_flag = scavenge_scrap_infantry_equipment_2	}
+			2 = {	set_country_flag = scavenge_shotgun_infantry_equipment_1			modifier = { factor = 0 OR = { has_tech = scrap_infantry_equipment_tech_2 has_tech = shotgun_infantry_equipment_tech_2 } } }
+			2 = {	set_country_flag = scavenge_shotgun_infantry_equipment_2	}
+			2 = {	set_country_flag = scavenge_conventional_infantry_equipment_1	}
+			2 = {	set_country_flag = scavenge_conventional_infantry_equipment_2	}
+			2 = {	set_country_flag = scavenge_conventional_infantry_equipment_3	}
+			2 = {	set_country_flag = scavenge_pneumatic_infantry_equipment_1	}
+			2 = {	set_country_flag = scavenge_pneumatic_infantry_equipment_2	}
+			2 = {	set_country_flag = scavenge_shotgun_infantry_equipment_3			modifier = { factor = 0.5 NOT = { has_tech = shotgun_infantry_equipment_tech_4 } } }
+			2 = {	set_country_flag = scavenge_shotgun_infantry_equipment_4			modifier = { factor = 0.5 NOT = { has_tech = shotgun_infantry_equipment_tech_5 } } }
+			2 = {	set_country_flag = scavenge_conventional_infantry_equipment_4		modifier = { factor = 0.5 NOT = { has_tech = conventional_infantry_equipment_tech_7 } } } 
+			2 = {	set_country_flag = scavenge_laser_infantry_equipment_1				modifier = { factor = 0.5 NOT = { has_tech = laser_infantry_equipment_1_tech } } } 
+			## Spec ops Gear / Regular Gear
+			2 = {	set_country_flag = scavenge_special_forces_equipment_1	}
+			2 = {	set_country_flag = scavenge_special_forces_equipment_2	}
+			2 = {	set_country_flag = scavenge_special_forces_equipment_3	}
+			2 = {	set_country_flag = scavenge_special_forces_equipment_heavy			modifier = { factor = 0.5 NOT = { has_tech = special_forces_heavy_equipment_tech } } }
+			2 = {	set_country_flag = scavenge_special_forces_equipment_spartan		modifier = { factor = 0.5 NOT = { has_tech = special_forces_spartan_equipment_tech } } }
+			2 = {	set_country_flag = scavenge_special_forces_equipment_riot			modifier = { factor = 0.5 NOT = { has_tech = special_forces_riot_equipment_tech } } }
+			2 = {	set_country_flag = scavenge_special_forces_equipment_spetsnaz		modifier = { factor = 0.5 NOT = { has_tech = special_forces_spetsnaz_equipment_tech } } }
+			2 = {	set_country_flag = scavenge_infantry_gear_equipment_1				modifier = { factor = 0 NOT = { has_tech = clothing_kits_2030 } } } 
+			2 = {	set_country_flag = scavenge_infantry_gear_equipment_2				modifier = { factor = 0 NOT = { has_tech = clothing_kits_2030 } } }
+			2 = {	set_country_flag = scavenge_infantry_gear_equipment_3				modifier = { factor = 0 NOT = { has_tech = clothing_kits_2030 } } }
+			## Support Equipment + Gear
+			2 = {	set_country_flag = scavenge_support_equipment_1	}
+			2 = {	set_country_flag = scavenge_basic_flamethrower_equipment	}
+			2 = {	set_country_flag = scavenge_flamethrower_equipment_1	}
+			2 = {	set_country_flag = scavenge_flamethrower_equipment_2	}
+			2 = {	set_country_flag = scavenge_basic_explosive_equipment	}
+			2 = {	set_country_flag = scavenge_explosive_equipment_1	}
+			2 = {	set_country_flag = scavenge_explosive_equipment_2	}
+			2 = {	set_country_flag = scavenge_basic_gatling_equipment	}
+			2 = {	set_country_flag = scavenge_gatling_equipment_1	}
+			2 = {	set_country_flag = scavenge_gatling_equipment_2	}
+			2 = {	set_country_flag = scavenge_piercing_equipment	}
+			2 = {	set_country_flag = scavenge_piercing_equipment_1	}
+			## Other stuff
+			2 = { set_country_flag = scavenge_bullet_250 								modifier = { factor = 0 NOT = { has_country_flag = scavenge_passive_bullet_flag } } }
+			2 = { set_country_flag = scavenge_bullet_500 								modifier = { factor = 0 NOT = { has_country_flag = scavenge_passive_bullet_flag } } }
+			2 = { set_country_flag = scavenge_bullet_750 								modifier = { factor = 0 NOT = { has_country_flag = scavenge_passive_bullet_flag } } }
+			2 = { set_country_flag = scavenge_bullet_1000 								modifier = { factor = 0 NOT = { has_country_flag = scavenge_passive_bullet_flag } } }
+		}
+	}
+}
+
+scavenge_give_success_roll = {
+	if = {
+		limit = { has_country_flag = scavenge_basic_infantry_equipment }
+		add_equipment_to_stockpile = {	type = basic_infantry_equipment		amount = 15	producer = RUS	}
+		clr_country_flag = scavenge_basic_infantry_equipment
+		if = { limit = { is_debug = yes } log = "scavenge_basic_infantry_equipment" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_scrap_infantry_equipment_1 }
+		add_equipment_to_stockpile = {	type = scrap_infantry_equipment_1	amount = 15	producer = RUS	}
+		clr_country_flag = scavenge_scrap_infantry_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_scrap_infantry_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_scrap_infantry_equipment_2 }
+		add_equipment_to_stockpile = {	type = scrap_infantry_equipment_2	amount = 15	producer = RUS	}
+		clr_country_flag = scavenge_scrap_infantry_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_scrap_infantry_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_shotgun_infantry_equipment_1 }
+		add_equipment_to_stockpile = {	type = shotgun_infantry_equipment_1	amount = 15	producer = RUS	}
+		clr_country_flag = scavenge_shotgun_infantry_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_shotgun_infantry_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_shotgun_infantry_equipment_2 }
+		add_equipment_to_stockpile = {	type = shotgun_infantry_equipment_2	amount = 15	producer = RUS	}
+		clr_country_flag = scavenge_shotgun_infantry_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_shotgun_infantry_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_conventional_infantry_equipment_1 }
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_conventional_infantry_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_conventional_infantry_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_conventional_infantry_equipment_2 }
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_2	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_conventional_infantry_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_conventional_infantry_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_conventional_infantry_equipment_3 }
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_3	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_conventional_infantry_equipment_3
+		if = { limit = { is_debug = yes } log = "scavenge_conventional_infantry_equipment_3" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_pneumatic_infantry_equipment_1 }
+		add_equipment_to_stockpile = {	type = pneumatic_infantry_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_pneumatic_infantry_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_pneumatic_infantry_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_pneumatic_infantry_equipment_2 }
+		add_equipment_to_stockpile = {	type = pneumatic_infantry_equipment_2	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_pneumatic_infantry_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_pneumatic_infantry_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_shotgun_infantry_equipment_3 }
+		add_equipment_to_stockpile = {	type = shotgun_infantry_equipment_3	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_shotgun_infantry_equipment_3
+		if = { limit = { is_debug = yes } log = "scavenge_shotgun_infantry_equipment_3" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_shotgun_infantry_equipment_4 }
+		add_equipment_to_stockpile = {	type = shotgun_infantry_equipment_4	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_shotgun_infantry_equipment_4
+		if = { limit = { is_debug = yes } log = "scavenge_shotgun_infantry_equipment_4" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_conventional_infantry_equipment_4 }
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_4	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_conventional_infantry_equipment_4
+		if = { limit = { is_debug = yes } log = "scavenge_conventional_infantry_equipment_4" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_laser_infantry_equipment_1 }
+		add_equipment_to_stockpile = {	type = laser_infantry_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_laser_infantry_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_laser_infantry_equipment_1" }
+	}
+	#
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_1 }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_2 }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_2	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_3 }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_3	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_3
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_3" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_heavy }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_heavy	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_heavy
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_heavy" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_riot }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_riot	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_riot
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_riot" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_spartan }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_spartan	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_spartan
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_spartan" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_special_forces_equipment_spetsnaz }
+		add_equipment_to_stockpile = {	type = special_forces_equipment_spetsnaz	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_special_forces_equipment_spetsnaz
+		if = { limit = { is_debug = yes } log = "scavenge_special_forces_equipment_spetsnaz" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_infantry_gear_equipment_1 }
+		add_equipment_to_stockpile = {	type = infantry_gear_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_infantry_gear_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_infantry_gear_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_infantry_gear_equipment_2 }
+		add_equipment_to_stockpile = {	type = infantry_gear_equipment_2	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_infantry_gear_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_infantry_gear_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_infantry_gear_equipment_3 }
+		add_equipment_to_stockpile = {	type = infantry_gear_equipment_3	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_infantry_gear_equipment_3
+		if = { limit = { is_debug = yes } log = "scavenge_infantry_gear_equipment_3" }
+	}
+	#
+	if = {
+		limit = { has_country_flag = scavenge_support_equipment_1 }
+		add_equipment_to_stockpile = {	type = support_equipment_1	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_support_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_support_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_basic_flamethrower_equipment }
+		add_equipment_to_stockpile = {	type = basic_flamethrower_equipment	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_basic_flamethrower_equipment
+		if = { limit = { is_debug = yes } log = "scavenge_basic_flamethrower_equipment" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_flamethrower_equipment_1 }
+		add_equipment_to_stockpile = {	type = flamethrower_equipment_1	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_flamethrower_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_flamethrower_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_flamethrower_equipment_2 }
+		add_equipment_to_stockpile = {	type = flamethrower_equipment_2	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_flamethrower_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_flamethrower_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_basic_explosive_equipment }
+		add_equipment_to_stockpile = {	type = basic_explosive_equipment	amount = 10	producer = RUS	}
+		clr_country_flag = scavenge_basic_explosive_equipment
+		if = { limit = { is_debug = yes } log = "scavenge_basic_explosive_equipment" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_explosive_equipment_1 }
+		add_equipment_to_stockpile = {	type = explosive_equipment_1	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_explosive_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_flamethrower_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_explosive_equipment_2 }
+		add_equipment_to_stockpile = {	type = explosive_equipment_2	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_explosive_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_explosive_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_basic_gatling_equipment }
+		add_equipment_to_stockpile = {	type = basic_gatling_equipment	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_basic_gatling_equipment
+		if = { limit = { is_debug = yes } log = "scavenge_basic_gatling_equipment" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_gatling_equipment_1 }
+		add_equipment_to_stockpile = {	type = gatling_equipment_1	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_gatling_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_gatling_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_gatling_equipment_2 }
+		add_equipment_to_stockpile = {	type = gatling_equipment_2	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_gatling_equipment_2
+		if = { limit = { is_debug = yes } log = "scavenge_gatling_equipment_2" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_piercing_equipment }
+		add_equipment_to_stockpile = {	type = piercing_equipment	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_piercing_equipment
+		if = { limit = { is_debug = yes } log = "scavenge_piercing_equipment" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_piercing_equipment_1 }
+		add_equipment_to_stockpile = {	type = piercing_equipment_1	amount = 5	producer = RUS	}
+		clr_country_flag = scavenge_piercing_equipment_1
+		if = { limit = { is_debug = yes } log = "scavenge_piercing_equipment_1" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_bullet_250 }
+		set_temp_variable = { bullet_to_gain = 250 } add_bullet_with_tooltip_effect = yes
+		clr_country_flag = scavenge_bullet_250
+		if = { limit = { is_debug = yes } log = "scavenge_bullet_250" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_bullet_500 }
+		set_temp_variable = { bullet_to_gain = 500 } add_bullet_with_tooltip_effect = yes
+		clr_country_flag = scavenge_bullet_500
+		if = { limit = { is_debug = yes } log = "scavenge_bullet_500" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_bullet_750 }
+		set_temp_variable = { bullet_to_gain = 750 } add_bullet_with_tooltip_effect = yes
+		clr_country_flag = scavenge_bullet_750
+		if = { limit = { is_debug = yes } log = "scavenge_bullet_750" }
+	}
+	if = {
+		limit = { has_country_flag = scavenge_bullet_1000 }
+		set_temp_variable = { bullet_to_gain = 1000 } add_bullet_with_tooltip_effect = yes
+		clr_country_flag = scavenge_bullet_1000
+		if = { limit = { is_debug = yes } log = "scavenge_bullet_1000" }
+	}
+}
 
