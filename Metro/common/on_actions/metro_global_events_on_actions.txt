@@ -5,8 +5,24 @@ on_actions = {
 			## D6
 		}
 		effect = {
-            every_country = {
-				country_event = { id = nf_D6_discovery.1 days = 1830 }
+			## Scavenge #
+
+			set_variable = { global.scavenge_success_chance_var  = 20}
+			set_variable = { global.scavenge_failure_chance_var = 15}
+			# Scavenge_colossal_failure
+			set_variable = { global.scavenge_colossal_failure_chance_var = 5 }
+			# Scavenge_POI_found
+			set_variable = { global.scavenge_poi_chance_var = 5}
+			# Scavenge_horror
+			set_variable = { global.scavenge_horror_chance_var = 5 }
+
+
+            every_country = {	## Happens 2033 Approx
+				country_event = { id = nf_D6_discovery.1 days = 1830 }		
+				
+				news_event = { id = global_scavenge_event.1 days = 640 random_days = 90 }
+				news_event = { id = global_scavenge_event.2 days = 1350 random_days = 90 }
+				news_event = { id = global_scavenge_event.3 days = 2070 random_days = 90 }
             }
         }
 	}

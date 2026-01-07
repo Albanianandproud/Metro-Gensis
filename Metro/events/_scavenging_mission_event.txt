@@ -192,11 +192,18 @@ country_event = {
 			clr_country_flag = active_scavenger_mission
 			clr_country_flag = scavenger_mission_needs_rescue
 			clr_country_flag = has_established_scavenge_base
+			if = {
+				limit = {
+					has_country_flag = scavenge_equipped_support_weapons
+				}
+				clr_country_flag = scavenge_equipped_support_weapons
+			}
 		}
 	}
 
 	option = {
 		name = scavenge_mission_colossal_failure.3.a
+		add_stability = -0.01
 	}
 }
 
@@ -206,7 +213,7 @@ country_event = {
 	id = scavenge_mission_horror.1
 	title = scavenge_mission_horror.1.t
 	desc = scavenge_mission_horror.1.d
-	picture = "GFX_event (320)"
+	picture = "GFX_event (220)"
 
 	is_triggered_only = yes
 
@@ -217,6 +224,127 @@ country_event = {
 
 	option = {
 		name = scavenge_mission_horror.1.a
+		custom_effect_tooltip = scavenge_mission_horror.1.a.tt
+		add_manpower = 5
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5
+		}
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment
+			amount = 5
+		}
+	}
+
+	option = {
+		name = scavenge_mission_horror.1.b
+		custom_effect_tooltip = scavenge_mission_horror.1.b.tt
+		random_list = {
+			50 = {		## Fought off Mutants
+				country_event = { id = scavenge_mission_horror.2 random_hours = 3 }
+				modifier = { factor = 15 has_country_flag = scavenge_equipped_support_weapons }
+			}
+			50 = {	## Make it back with loot reward, but too deteriorated to continue
+				country_event = { id = scavenge_mission_horror.3 random_hours = 3 }
+			}
+			50 = {	## Make it back, too deteriorated to continue without loot reward
+				country_event = { id = scavenge_mission_horror.4 random_hours = 3 }
+				modifier = { factor = 10 has_country_flag = scavenge_2030_global_flag }
+				modifier = { factor = 10 has_country_flag = scavenge_2032_global_flag }
+			}
+		}
+	}
+
+	#option = {
+	#	name = scavenge_mission_horror.1.c
+	#
+	#	trigger = {
+	#		has_country_flag = scavenge_equipped_support_weapons
+	#	}
+	#}
+}
+
+country_event = {
+	id = scavenge_mission_horror.2
+	title = scavenge_mission_horror.2.t
+	desc = scavenge_mission_horror.2.d
+	picture = "GFX_event (220)"
+
+	is_triggered_only = yes
+
+	immediate = {
+		ROOT = {
+			scavenge_select_success_roll = yes
+		}
+	}
+
+	option = {
+		name = scavenge_mission_horror.2.a
+		scavenge_give_success_roll = yes
+
+		custom_effect_tooltip = scavenge_mission_horror.2.tt
+		hidden_effect = {
+			clr_country_flag = scavenge_equipped_support_weapons
+		}
+	}
+}
+
+country_event = {
+	id = scavenge_mission_horror.3
+	title = scavenge_mission_horror.3.t
+	desc = scavenge_mission_horror.3.d
+	picture = "GFX_event (220)"
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = active_scavenger_mission
+			clr_country_flag = has_established_scavenge_base
+			if = {
+				limit = {
+					has_country_flag = scavenge_equipped_support_weapons
+				}
+				clr_country_flag = scavenge_equipped_support_weapons
+			}
+		}
+		ROOT = {
+			scavenge_select_success_roll = yes
+		}
+	}
+
+	option = {
+		name = scavenge_mission_horror.3.a
+		scavenge_give_success_roll = yes
+
+		custom_effect_tooltip = scavenge_mission_horror.3.tt
+	}
+}
+
+country_event = {
+	id = scavenge_mission_horror.4
+	title = scavenge_mission_horror.4.t
+	desc = scavenge_mission_horror.4.d
+	picture = "GFX_event (220)"
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = active_scavenger_mission
+			clr_country_flag = has_established_scavenge_base
+			if = {
+				limit = {
+					has_country_flag = scavenge_equipped_support_weapons
+				}
+				clr_country_flag = scavenge_equipped_support_weapons
+			}
+		}
+	}
+
+	option = {
+		name = scavenge_mission_horror.4.a
+		custom_effect_tooltip = scavenge_mission_horror.4.tt
 	}
 }
 

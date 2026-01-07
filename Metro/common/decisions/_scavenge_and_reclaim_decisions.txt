@@ -1037,7 +1037,7 @@ reclaim_metro = {
 }
 scavenging_expeditions = {
 	establish_stalking_group = {
-		icon = hol_war_on_pacifism
+		icon = decision_stalker
 		days_remove = 14
 		fire_only_once = no
 		custom_cost_trigger = {
@@ -1096,7 +1096,7 @@ scavenging_expeditions = {
 	}
 
 	launch_scavenging_team_mission = {
-		icon = electronics
+		icon = decision_flag
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 100 }
@@ -1130,7 +1130,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_countdown = {
-		icon = GFX
+		icon = decision_binoculars
 		priority = 1001
 
 		activation  = {
@@ -1175,7 +1175,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_establish_surface_waypoints = {
-		icon = electronics
+		icon = decision_compass
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 750 }
@@ -1234,8 +1234,58 @@ scavenging_expeditions = {
 		}
 	}
 
+	scavenger_team_mission_equip_support_weapons = {
+		icon = decision_equipment
+		priority = 100
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 250 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		available = {
+			count_triggers = {
+				amount = 1
+				OR = {
+					has_equipment = { flamethrower_equipment_1  	> 4 }
+					has_equipment = { flamethrower_equipment_2   	> 4 }
+				}
+				OR = {
+					has_equipment = { explosive_equipment_1   		> 4 }
+					has_equipment = { explosive_equipment_2   		> 4 }
+				}
+				OR = {
+					has_equipment = { basic_piercing_equipment    	> 4 }
+					has_equipment = { piercing_equipment_1 			> 4 }
+				}
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 2
+		available = { NOT = { has_active_mission = scavenger_team_mission_countdown } }
+		visible = { 
+			has_country_flag = has_established_scavenge_base 
+			NOT = { 
+				has_country_flag = active_scavenger_mission 
+				has_country_flag = scavenger_mission_needs_rescue
+
+				has_country_flag = scavenge_equipped_support_weapons
+			}
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -250 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = give_stalkers_support_weapons_tt
+			set_country_flag = scavenge_equipped_support_weapons
+		}
+	}
+
 	scavenger_team_recall = {
-		icon = electronics
+		icon = decision_compass
 		available = { has_country_flag = active_scavenger_mission  }
 		visible = { 
 			has_active_mission = scavenger_team_mission_countdown
@@ -1251,7 +1301,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_mission_rescue = {
-		icon = electronics
+		icon = decision_flag
 
 		activation  = {
 			has_country_flag = scavenger_mission_needs_rescue
@@ -1280,7 +1330,7 @@ scavenging_expeditions = {
 			}
 		}
 
-		days_mission_timeout = 30
+		days_mission_timeout = 15
 		fixed_random_seed = no
 
 		timeout_effect = {
@@ -1305,7 +1355,7 @@ scavenging_expeditions = {
 	}
 
 	launch_scavenging_poi_team_mission = {
-		icon = electronics
+		icon = decision_binoculars
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 100 }
@@ -1362,7 +1412,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_poi_countdown = {
-		icon = GFX
+		icon = decision_compass
 		priority = 1001
 
 		activation  = {
