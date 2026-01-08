@@ -1,6 +1,6 @@
 reclaim_metro = {
 	reclaim_this_state = {
-	   	icon = decision_generic_military
+	   	icon = generic_military
 	   	custom_cost_text = command_power_50
 	   	custom_cost_trigger = { command_power > 49.9 }
 	   	days_remove = 35
@@ -338,7 +338,7 @@ reclaim_metro = {
 		}
     }
     GWC_reclaim_this_state = { 
-	   	icon = decision_generic_military
+	   	icon = generic_military
 
 	   	custom_cost_text = command_power_50
 	   	custom_cost_trigger = { command_power > 49.9 }
@@ -778,7 +778,7 @@ reclaim_metro = {
 	}
 
 	reclaim_mission_send_soldiers = {
-		icon = decision_generic_reorganize_irregulars
+		icon = generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
 		custom_cost_trigger = { has_manpower > 4 }
 		days_re_enable = 21
@@ -805,7 +805,7 @@ reclaim_metro = {
 	}
 
 	reclaim_mission_send_soldiers_savage = {
-		icon = decision_generic_reorganize_irregulars
+		icon = generic_reorganize_irregulars
 		custom_cost_text = reclaim_manpower_10
 		custom_cost_trigger = { has_manpower > 4 }
 		days_re_enable = 21
@@ -1037,7 +1037,7 @@ reclaim_metro = {
 }
 scavenging_expeditions = {
 	establish_stalking_group = {
-		icon = decision_stalker
+		icon = stalker
 		days_remove = 14
 		fire_only_once = no
 		custom_cost_trigger = {
@@ -1096,7 +1096,7 @@ scavenging_expeditions = {
 	}
 
 	launch_scavenging_team_mission = {
-		icon = decision_flag
+		icon = flag
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 100 }
@@ -1130,7 +1130,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_countdown = {
-		icon = decision_binoculars
+		icon = binoculars
 		priority = 1001
 
 		activation  = {
@@ -1175,7 +1175,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_establish_surface_waypoints = {
-		icon = decision_compass
+		icon = compass
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 750 }
@@ -1235,7 +1235,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_equip_support_weapons = {
-		icon = decision_equipment
+		icon = equipment
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 250 }
@@ -1284,8 +1284,79 @@ scavenging_expeditions = {
 		}
 	}
 
+	scavenger_team_mission_establish_surface_outpost = {
+		icon = equipment
+		priority = 100
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 1500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		available = {
+			hidden_trigger = { has_country_flag = scavenge_may_establish_surface_outpost }
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+			has_equipment = {
+				support_equipment > 4
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		days_remove = 30
+		available = { NOT = { has_active_mission = scavenger_team_mission_countdown } }
+		visible = { 
+			has_country_flag = has_established_scavenge_base 
+			has_country_flag = scavenge_may_establish_surface_outpost
+			NOT = { 
+				has_country_flag = active_scavenger_mission 
+				has_country_flag = scavenger_mission_needs_rescue
+			}
+		}
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -1500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_manpower = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = -5
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -5
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = scavenge_has_surface_outpost_tt#
+			clr_country_flag = scavenge_may_establish_surface_outpost
+			set_country_flag = scavenge_has_surface_outpost
+			hidden_effect = {
+				scavenge_increase_poi_roll_chance = yes
+			}
+			add_manpower = 5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment
+				amount = 5
+			}
+		}
+	}
+
 	scavenger_team_recall = {
-		icon = decision_compass
+		icon = compass
 		available = { has_country_flag = active_scavenger_mission  }
 		visible = { 
 			has_active_mission = scavenger_team_mission_countdown
@@ -1301,7 +1372,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_mission_rescue = {
-		icon = decision_flag
+		icon = flag
 
 		activation  = {
 			has_country_flag = scavenger_mission_needs_rescue
@@ -1355,7 +1426,7 @@ scavenging_expeditions = {
 	}
 
 	launch_scavenging_poi_team_mission = {
-		icon = decision_binoculars
+		icon = binoculars
 		priority = 100
 		custom_cost_trigger = {
 			set_temp_variable = { temp_bullet_cost = 100 }
@@ -1412,7 +1483,7 @@ scavenging_expeditions = {
 	}
 
 	scavenger_team_mission_poi_countdown = {
-		icon = decision_compass
+		icon = compass
 		priority = 1001
 
 		activation  = {
@@ -1450,6 +1521,66 @@ scavenging_expeditions = {
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment
 				amount = 5
+			}
+		}
+		ai_will_do = {
+			factor = 101
+		}
+	}
+
+	## POI related decisions
+
+	scavenger_team_mission_parkinglot = {
+		icon = flag
+
+		activation  = {
+			has_country_flag = scavenger_mission_parkinglot_retrieve
+		}
+
+		available = {
+			has_manpower > 4
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				special_forces_equipment > 4
+			}
+			has_equipment = {
+				support_equipment > 14
+			}
+		}
+
+		selectable_mission = yes
+		is_good = yes
+		fire_only_once = no
+
+		cancel_trigger = {
+			NOT = {
+				has_country_flag = scavenger_mission_parkinglot_retrieve
+			}
+		}
+
+		days_mission_timeout = 90
+		fixed_random_seed = no
+
+		timeout_effect = {
+			clr_country_flag = scavenger_mission_parkinglot_retrieve
+		}
+
+		complete_effect = {
+			clr_country_flag = scavenger_mission_parkinglot_retrieve
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					NOT = {
+						has_state_category = pastoral
+					}
+				}
+				add_manpower = 35
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -15
 			}
 		}
 		ai_will_do = {

@@ -412,6 +412,9 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_unmarked_building.1.a
+		capital_scope = {
+			add_extra_state_shared_building_slots = 1
+		}
 	}
 }
 country_event = {
@@ -430,6 +433,15 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_unmarked_building.2.a
+		set_temp_variable = { bullet_to_gain = 350 }
+		add_bullet_with_tooltip_effect = yes
+		add_tech_bonus = {
+			name = scavenge_poi_common_unmarked_building.2.a
+			bonus = 0.2
+			uses = 3
+			ahead_reduction = 1
+			category = infantry_weapons
+		}
 	}
 }
 country_event = {
@@ -443,11 +455,13 @@ country_event = {
 	immediate = {
 		ROOT = {
 			clr_country_flag = scavenge_poi_common_unmarked_building
+			scavenge_select_success_roll = yes
 		}
 	}
 
 	option = {
 		name = scavenge_poi_common_unmarked_building.3.a
+		scavenge_give_success_roll = yes
 	}
 }
 
@@ -469,6 +483,18 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_construction_yard.1.a
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+				type = scrap
+				amount = 6
+			}
+		}
 	}
 }
 country_event = {
@@ -487,6 +513,20 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_construction_yard.2.a
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = fuel_silo
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 }
 
@@ -508,6 +548,22 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_warehouse.1.a
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+				type = components
+				amount = 2
+			}
+			add_resource = {
+				type = alloys
+				amount = 3
+			}
+		}
 	}
 }
 country_event = {
@@ -526,6 +582,13 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_warehouse.2.a
+		add_tech_bonus = {
+			name = industrial
+			bonus = 1
+			uses = 1
+			ahead_reduction = 1
+			category = industry
+		}
 	}
 }
 country_event = {
@@ -544,6 +607,23 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_warehouse.3.a
+		if = {
+			limit = {
+				NOT = {
+					has_idea = scavenge_reward_warehouse_national_spirit
+				}
+			}
+			add_ideas = scavenge_reward_warehouse_national_spirit
+		}
+		else = {
+			add_tech_bonus = {
+				name = industrial
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = industry
+			}
+		}
 	}
 }
 
@@ -565,6 +645,7 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_police_station.1.a
+		add_equipment_to_stockpile = {	type = infantry_gear_equipment_1	amount = 15	producer = RUS	}
 	}
 }
 country_event = {
@@ -583,6 +664,13 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_police_station.2.a
+		add_tech_bonus = {
+			name = industrial
+			bonus = 1
+			uses = 1
+			ahead_reduction = 1
+			category = clothing_kits
+		}
 	}
 }
 add_namespace = scavenge_poi_common_hospital
@@ -603,6 +691,15 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_hospital.1.a
+		add_equipment_to_stockpile = {	type = support_equipment_1	amount = 5	producer = RUS	}
+		add_tech_bonus = {
+			name = industrial
+			bonus = 1
+			uses = 1
+			ahead_reduction = 1
+			category = health
+			category = hospital_tech
+		}
 	}
 }
 country_event = {
@@ -621,6 +718,23 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_hospital.2.a
+		if = {
+			limit = {
+				NOT = {
+					has_idea = scavenge_reward_warehouse_national_spirit
+				}
+			}
+			add_ideas = scavenge_reward_hospital_national_spirit
+		}
+		else = {
+			add_tech_bonus = {
+				name = industrial
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = health
+			}
+		}
 	}
 }
 
@@ -642,6 +756,13 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_hardware_store.1.a
+		add_tech_bonus = {
+			name = industrial
+			bonus = 0.5
+			uses = 2
+			ahead_reduction = 1
+			category = construction
+		}
 	}
 }
 country_event = {
@@ -660,6 +781,13 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_common_hardware_store.2.a
+		add_tech_bonus = {
+			name = industrial
+			bonus = 0.5
+			uses = 2
+			ahead_reduction = 1
+			category = tooling
+		}
 	}
 }
 
@@ -681,6 +809,8 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_church.1.a
+		set_temp_variable = { bullet_to_gain = 500 }
+		add_bullet_with_tooltip_effect = yes
 	}
 }
 country_event = {
@@ -699,6 +829,8 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_church.2.a
+		custom_effect_tooltip = scavenge_poi_uncommon_church.2.a.tt
+		set_country_flag = scavenge_may_establish_surface_outpost
 	}
 }
 
@@ -720,6 +852,13 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_parkinglot.1.a
+		add_tech_bonus = {
+			name = industrial
+			bonus = 2
+			uses = 1
+			ahead_reduction = 1
+			category = rail_salvaging
+		}
 	}
 }
 country_event = {
@@ -737,7 +876,27 @@ country_event = {
 	}
 
 	option = {
-		name = scavenge_poi_uncommon_parkinglot.2.a
+		name = scavenge_poi_uncommon_parkinglot.2.
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+				type = components
+				amount = 2
+			}
+			add_resource = {
+				type = alloys
+				amount = 3
+			}
+			add_resource = {
+				type = scrap
+				amount = 3
+			}
+		}
 	}
 }
 
@@ -759,6 +918,10 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_parkinglot_inhabited.1.a
+		hidden_effect = {
+			set_country_flag = scavenger_mission_parkinglot_retrieve
+		}
+		activate_mission = scavenger_team_mission_parkinglot
 	}
 }
 country_event = {
@@ -777,6 +940,9 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_parkinglot_inhabited.2.a
+		add_manpower = 5
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_1	amount = 5	producer = RUS	}
+		add_equipment_to_stockpile = {	type = special_forces_equipment_2	amount = 5	producer = RUS	}
 	}
 }
 country_event = {
@@ -795,6 +961,22 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_parkinglot_inhabited.3.a
+		division_template = {
+			name = "Turncoat Stalkers"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				special_forces = { x = 0 y = 0 }
+				special_forces = { x = 0 y = 1 }
+				special_forces = { x = 0 y = 2 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"1st Standing Guard\" division_template = \"Turncoat Stalkers\" start_experience_factor = 0.24 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
 	}
 }
 
@@ -816,6 +998,18 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_research_institute.1.a
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_resource = {
+				type = chemicals
+				amount = 4
+			}
+		}
 	}
 }
 country_event = {
@@ -834,6 +1028,18 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_research_institute.2.a
+		if = {
+			limit = {
+				amount_research_slots > 5
+			}
+			add_research_slot = 1
+		}
+		else = {
+			add_timed_idea = {
+				idea = scavenge_reward_institute_temporary_national_spirit
+				days = 270
+			}
+		}
 	}
 }
 country_event = {
@@ -852,6 +1058,26 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_uncommon_research_institute.3.a
+		if = {
+			limit = {
+				original_research_slots > 3
+			}
+			add_research_slot = 1
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_idea = scavenge_reward_warehouse_national_spirit
+				}
+			}
+			add_ideas = scavenge_reward_warehouse_national_spirit
+		}
+		else = {
+			add_timed_idea = {
+				idea = scavenge_reward_institute_temporary_national_spirit
+				days = 180
+			}
+		}
 	}
 }
 
@@ -873,6 +1099,8 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_embassy.1.a
+		add_equipment_to_stockpile = {	type = special_forces_equipment_3	amount = 10	producer = RUS	}
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_2	amount = 10	producer = RUS	}	## To Do. Change equipment to a NATO equivalent
 	}
 }
 country_event = {
@@ -891,6 +1119,15 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_embassy.2.a
+		random_owned_controlled_state = {
+			limit = {
+				is_in_home_area = yes
+				NOT = {
+					has_state_category = pastoral
+				}
+			}
+			add_manpower = 20
+		}
 	}
 }
 country_event = {
@@ -909,6 +1146,7 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_embassy.3.a
+		add_ideas = scavenge_reward_embassy_national_spirit
 	}
 }
 
@@ -930,6 +1168,8 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_bunker.1.a
+		set_temp_variable = { bullet_to_gain = 5000 }
+		add_bullet_with_tooltip_effect = yes
 	}
 }
 country_event = {
@@ -948,6 +1188,23 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_bunker.2.a
+		if = {
+			limit = {
+				NOT = { has_tech = gas_mask_military  }
+			}
+			custom_effect_tooltip = unlock_gas_mask_military
+			hidden_effect = { set_country_flag = unlock_gas_mask_military_tech }	
+		}
+		if = {
+			limit = {
+				has_tech = gas_mask_military 
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetsnaz
+				amount = 5
+				producer = RUS
+			}
+		}
 	}
 }
 country_event = {
@@ -966,6 +1223,23 @@ country_event = {
 
 	option = {
 		name = scavenge_poi_rare_bunker.3.a
+		if = {
+			limit = {
+				NOT = { has_tech = special_forces_spetsnaz_equipment_tech }
+			}
+			custom_effect_tooltip = unlock_special_forces_spetsnaz_equipment
+			hidden_effect = { set_country_flag = unlock_special_forces_spetsnaz_equipment_tech }	
+		}
+		if = {
+			limit = {
+				has_tech = special_forces_spetsnaz_equipment_tech
+			}
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetsnaz
+				amount = 20
+				producer = RUS
+			}
+		}
 	}
 }
 
@@ -983,10 +1257,12 @@ country_event = {
 		ROOT = {
 			clr_country_flag = scavenge_poi_exotic_labyrinth
 		}
+		news_event = { id = global_scavenge_event_poi.1 hours = 6 }
 	}
 
 	option = {
 		name = scavenge_poi_exotic_labyrinth.1.a
+		add_ideas = scavenge_reward_labyrinth_national_spirit
 	}
 }
 
@@ -1004,10 +1280,14 @@ country_event = {
 		ROOT = {
 			clr_country_flag = scavenge_poi_exotic_military_base
 		}
+		news_event = { id = global_scavenge_event_poi.2 hours = 6 }
 	}
 
 	option = {
 		name = scavenge_poi_exotic_military_base.1.a
+		add_equipment_to_stockpile = {	type = infantry_gear_equipment_3	amount = 50	producer = RUS	}
+		add_equipment_to_stockpile = {	type = special_forces_equipment_spetsnaz	amount = 50	producer = RUS	}
+		add_equipment_to_stockpile = {	type = conventional_infantry_equipment_4	amount = 100	producer = RUS	}
 	}
 }
 
@@ -1025,10 +1305,13 @@ country_event = {
 		ROOT = {
 			clr_country_flag = scavenge_poi_exotic_missile_silo
 		}
+		news_event = { id = global_scavenge_event_poi.3 hours = 6 }
 		set_global_flag = poi_missile_discovered
 	}
 
 	option = {
 		name = scavenge_poi_exotic_missile_silo.1.a
+		custom_effect_tooltip = "Reward WIP"
+		add_offsite_building = { type = arms_factory level = 5 }
 	}
 }
