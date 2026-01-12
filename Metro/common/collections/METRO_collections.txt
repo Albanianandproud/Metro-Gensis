@@ -1,0 +1,149 @@
+community_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_government = community
+		}
+	}
+	name = COLLECTION_COMMUNITY_FACTION_MEMBERS
+}
+world_community_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_government = community
+		}
+	}
+	name = COLLECTION_WORLD_COMMUNITY_COUNTRIES
+}
+council_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_government = council
+		}
+	}
+	name = COLLECTION_COUNCIL_FACTION_MEMBERS
+}
+world_council_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_government = council
+		}
+	}
+	name = COLLECTION_WORLD_COUNCIL_COUNTRIES
+}
+oligarch_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_government = oligarch
+		}
+	}
+	name = COLLECTION_OLIGARCH_FACTION_MEMBERS
+}
+world_oligarch_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_government = oligarch
+		}
+	}
+	name = COLLECTION_WORLD_OLIGARCH_COUNTRIES
+}
+dictatorial_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_government = dictatorial
+		}
+	}
+	name = COLLECTION_DICTATORIAL_FACTION_MEMBERS
+}
+world_dictatorial_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_government = dictatorial
+		}
+	}
+	name = COLLECTION_WORLD_DICTATORIAL_COUNTRIES
+}
+bandit_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_country_flag = is_bandit_nation
+		}
+	}
+	name = COLLECTION_BANDIT_FACTION_MEMBERS
+}
+world_bandit_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_country_flag = is_bandit_nation
+		}
+	}
+	name = COLLECTION_WORLD_BANDIT_COUNTRIES
+}
+communist_faction_members = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_country_flag = is_communist_nation
+		}
+	}
+	name = COLLECTION_COMMUNIST_FACTION_MEMBERS
+}
+world_communist_countries = {
+	input = game:all_countries
+	operators = {
+		limit = {
+			has_country_flag = is_communist_nation
+		}
+	}
+	name = COLLECTION_WORLD_COMMUNIST_COUNTRIES
+}
+
+
+neighboring_states_to_leader = {
+	input = game:all_states
+	name = COLLECTION_NEIGHBORING_STATES
+	operators = {
+		limit = {
+			any_neighbor_state = {
+				is_owned_by = ROOT 
+			}	
+		}
+	}
+}
+puppet_controlled_border_states = {
+	input = collection:neighboring_states_to_leader
+	name = COLLECTION_CONTROLLED_PUPPET_BORDER_STATES
+	operators = {
+		limit = {
+			controller = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+faction_members_education_level_2 = {
+	input = game:scope
+	operators = {
+		faction_members
+		limit = {
+			has_civic_education_higher_2 = yes
+		}
+	}
+	name = COLLECTION_FACTION_MEMBERS_EDUCATION_2
+}

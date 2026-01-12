@@ -1,6 +1,3 @@
-
-
-
 faction_goal_unlock_research = {
 	name = faction_goal_unlock_research_name
 	description = faction_goal_unlock_research_desc
@@ -238,3 +235,85 @@ faction_goal_spy_master = {
 		}
 	}
 }
+
+#faction_goal_short_research_guns = {}
+#faction_goal_short_research_rail = {}
+#faction_goal_short_research_industry = {}
+#faction_goal_short_research_exotic = {}
+#faction_goal_short_infrastructure = {}
+#faction_goal_short_stability_and_war_support = {}
+#faction_goal_short_standing_army = {}
+#faction_goal_short_draisine_fleet = {}
+
+faction_goal_short_research_doctrine = {
+	name = faction_goal_short_research_doctrine
+	description = faction_goal_short_research_doctrine_desc
+	group = FOCUS_FILTER_INTERNAL_AFFAIRS
+	category = short_term
+	available = {
+		num_faction_members > 2
+	}
+	allowed = {}
+	visible = {
+		NOT = {
+			has_country_flag = is_bandit_nation
+			has_country_flag = is_savage_nation
+		}
+	}
+	completed = {
+		all_allied_country = {
+			count_triggers = {
+				amount = 1
+				has_completed_track = doctrine_track_soldiers
+				has_completed_track = doctrine_track_command
+				has_completed_track = doctrine_track_tactics
+			}
+		}
+	}
+	complete_effect = {
+		add_faction_power_projection = 200
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = THE_FACTION_LEADER
+		add_faction_initiative = 1
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 1
+		}
+	}
+}
+faction_goal_short_education = {
+	name = faction_goal_short_education
+	description = faction_goal_short_education_desc
+	group = FOCUS_FILTER_INTERNAL_AFFAIRS
+	category = short_term
+	available = {
+		num_faction_members > 2
+	}
+	allowed = {}
+	visible = {
+		NOT = {
+			has_country_flag = is_bandit_nation
+			has_country_flag = is_savage_nation
+		}
+	}
+	completed = {
+		all_allied_country = {
+			has_civic_education_higher_3 = yes
+		}
+	}
+	complete_effect = {
+		add_faction_power_projection = 200
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = THE_FACTION_LEADER
+		add_faction_initiative = 1
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 1
+		}
+	}
+}
+
