@@ -9,23 +9,67 @@ SPT_instigate_revolution_in_mobsters = {
 	allowed = { original_tag = SPT }
 
 	available = { 
-		MOB = {
-			NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
-			has_government = dictatorial
+		OR = {
+			MOB = {
+				NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+				has_government = dictatorial
+			}
+			SHA = {
+				NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+				has_government = dictatorial
+			}
+			LEN = {
+				NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+				has_government = dictatorial
+			}
+			SHR = {
+				NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+				has_government = dictatorial
+			}
+			NCH = {
+				NOT = { has_war_with = ROOT is_in_faction_with = ROOT is_subject_of = ROOT }
+				has_government = dictatorial
+			}
 		}
 	}
 
 	visible = {
 		has_country_flag = SPT_can_operate_MOB
-		FROM = { tag = MOB }
+		OR = {
+			FROM = { tag = MOB }
+			FROM = { tag = SHA }
+			FROM = { tag = LEN }
+			FROM = { tag = SHR }
+			FROM = { tag = NCH }
+		}
 	}
 
 	operatives = 1
 	network_strength = 50
 
 	requirements = {
-		NOT = { has_war_with = MOB }
-		MOB = { has_government = dictatorial }
+		OR = {
+			AND = {
+				NOT = { has_war_with = MOB }
+				MOB = { has_government = dictatorial }
+			}
+			AND = {
+				NOT = { has_war_with = SHA }
+				SHA = { has_government = dictatorial }
+			} 
+			AND = {
+				NOT = { has_war_with = LEN }
+				LEN = { has_government = dictatorial }
+			} 
+			AND = {
+				NOT = { has_war_with = SHR }
+				SHR = { has_government = dictatorial }
+			} 
+			AND = {
+				NOT = { has_war_with = NCH }
+				NCH = { has_government = dictatorial }
+			} 
+		}
 	}
 	
 	equipment = {
@@ -45,10 +89,50 @@ SPT_instigate_revolution_in_mobsters = {
 				ideology = COMMUNITY
 			}
 		}
+		SHA = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		LEN = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		SHR = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		NCH = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
 	}
 
 	outcome_execute = {
 		MOB = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		SHA = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		LEN = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		SHR = {
+			start_civil_war = {
+				ideology = COMMUNITY
+			}
+		}
+		NCH = {
 			start_civil_war = {
 				ideology = COMMUNITY
 			}
