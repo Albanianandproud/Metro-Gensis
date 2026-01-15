@@ -3,26 +3,26 @@
 # These names can NOT be removed or changes, as the code uses them....
 
 weather_rain_light = { # on Region 
-	local_org_regain = -0.02
-	army_speed_factor = -0.02
+	local_org_regain = -0.2
+	army_speed_factor = -0.2
 }
 weather_rain_heavy = { # on Region 
-	local_org_regain = -0.04
-	army_speed_factor = -0.04
+	local_org_regain = -0.4
+	army_speed_factor = -0.4
 }
 weather_snow = { # on Region 
-	local_org_regain = -0.1
-	army_speed_factor = -0.1
-	winter_attrition = 0.1
+	local_org_regain = -0.3
+	army_speed_factor = -0.3
+	winter_attrition = 0.3
 }
 weather_blizzard = { # on Region 
-	local_org_regain = -0.25
-	army_speed_factor = -0.25
-	winter_attrition = 0.25
-	local_supplies = -0.1
-	air_detection = -0.15
-	supply_factor = -0.1
-	truck_attrition_factor = 0.1
+	local_org_regain = -0.55
+	army_speed_factor = -0.55
+	winter_attrition = 0.55
+	local_supplies = -0.5
+	air_detection = -0.55
+	supply_factor = -0.5
+	truck_attrition_factor = 0.5
 }
 weather_sandstorm = { # on Region 
 	local_org_regain = -0.1
@@ -35,26 +35,26 @@ weather_arctic_water = { # on Region
 	positioning = -0.2
 }
 weather_mud = { # on Province
-	attrition = 0.2
-	army_speed_factor = -0.2
+	attrition = 0.25
+	army_speed_factor = -0.25
 }
 weather_extreme_cold = { # on Province
+	local_supplies = -0.4
+	winter_attrition = 0.5
+	dig_in_speed_factor = -0.7
+	local_org_regain = -0.2
+	army_attack_factor = -0.2
+	supply_consumption_factor = 0.4
+	supply_factor = -0.2
+}
+weather_very_cold = { # on Province
 	local_supplies = -0.2
-	winter_attrition = 0.25
-	dig_in_speed_factor = -0.35
+	winter_attrition = 0.2
+	dig_in_speed_factor = -0.3
 	local_org_regain = -0.1
 	army_attack_factor = -0.1
 	supply_consumption_factor = 0.2
 	supply_factor = -0.1
-}
-weather_very_cold = { # on Province
-	local_supplies = -0.1
-	winter_attrition = 0.1
-	dig_in_speed_factor = -0.15
-	local_org_regain = -0.05
-	army_attack_factor = -0.05
-	supply_consumption_factor = 0.1
-	supply_factor = -0.05
 }
 
 weather_very_hot = { # on Province
@@ -68,16 +68,16 @@ weather_extreme_hot = { # on Province
 	army_attack_factor = -0.1
 }
 weather_ground_snow_medium = { # on Province
-	local_supplies = -0.1
-	winter_attrition = 0.1
-	army_speed_factor = -0.2
-	army_attack_factor = -0.1
-}
-weather_ground_snow_high = { # on Province
 	local_supplies = -0.2
 	winter_attrition = 0.2
-	army_speed_factor = -0.3
+	army_speed_factor = -0.4
 	army_attack_factor = -0.2
+}
+weather_ground_snow_high = { # on Province
+	local_supplies = -0.4
+	winter_attrition = 0.4
+	army_speed_factor = -0.6
+	army_attack_factor = -0.4
 }
 
 flooded = { # on Province
@@ -156,11 +156,11 @@ stability_good_modifier = {
     production_speed_buildings_factor = 0.2
 	consumer_goods_factor = -0.05
 	industrial_capacity_factory = 0.1
-	tax_efficiency_modifier = 0.1
+	monthly_population = 0.2
 }
 
 # applies when stability < 50%
-	stability_bad_modifier = {
+stability_bad_modifier = {
     local_resources_factor = -0.2
     production_speed_buildings_factor = -0.2
 	political_power_factor = -0.5
@@ -169,17 +169,23 @@ stability_good_modifier = {
 }
 
 war_support_good_modifier = {
-	mobilization_speed = 0.5
-	command_power_gain_mult = 0.1
-	industrial_capacity_factory = 0.1
+	training_time_factor = -0.1
+
+	land_reinforce_rate = 0.05
+	army_org_regain = 0.05
+	army_org_factor = 0.05
 }
 
 war_support_bad_modifier = {
 	mobilization_speed = -0.500 # Reduce mobilization speed by half.
-	army_attack_factor = -0.25
-	army_defence_factor = -0.25
-	training_time_factor = 0.25
-	industrial_capacity_factory = -0.25
+
+	army_org_factor = -0.25
+	army_org_regain = -0.25
+	org_loss_at_low_org_factor = 0.25
+
+		
+	justify_war_goal_time = 2
+	justify_war_goal_when_in_major_war_time = 2
 }
 
 war_support_during_war = { 
@@ -193,26 +199,22 @@ attache_sent = {
 # Difficulty modifiers
 
 diff_very_easy_player = {
-	army_spending_cost_factor = -0.25
-	military_spending_cost_factor = -0.25
+	army_spending_cost_factor = -0.5
+	military_spending_cost_factor = -0.5
 }
 
 diff_easy_player = {
-	army_spending_cost_factor = -0.2
-	military_spending_cost_factor = -0.2
+	army_spending_cost_factor = -0.15
+	military_spending_cost_factor = -0.15
 }
 
 diff_normal_player = {
 }
 
 diff_hard_player = {
-	stability_weekly_factor = -0.001
-	war_support_weekly_factor = -0.001
 }
 
 diff_very_hard_player = {
-	stability_weekly_factor = -0.002
-	war_support_weekly_factor = -0.002
 }
 
 diff_very_easy_ai = {
@@ -414,12 +416,12 @@ intel_network_state_level_penalty = {
 # modifiers enabled by the creation of the intelligence agency
 created_intelligence_agency = {
 	operative_slot = 1
-	new_operative_slot_bonus = 3
+	new_operative_slot_bonus = 2
 }
 
 # Modifiers enabled at state level when an operative is assigned to the root out resistance mission
 root_out_resistance_mission_modifier = {
-	resistance_target = -0.1
+	resistance_target = -0.2
 }
 
 # modifiers active when an operative has the nationality of the nation it is performing a mission in.

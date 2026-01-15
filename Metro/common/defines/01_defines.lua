@@ -55,6 +55,10 @@ NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.0001		--- Adding is done manually 
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 5
 NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 
+NDefines.NCountry.WAR_SUPPORT_OFFNSIVE_WAR = -0.2
+NDefines.NCountry.WAR_SUPPORT_DEFENSIVE_WAR = 0
+NDefines.NCountry.WAR_SUPPORT_TENSION_IMPACT = -0.2
+
 	NDefines.NCountry.STARTING_FUEL_RATIO = 0						-- starting fuel ratio compared to max fuel for countries
 	NDefines.NCountry.BASE_FUEL_GAIN_PER_OIL = 0.20835				-- base amount of fuel gained hourly per excess oil
 	NDefines.NCountry.BASE_FUEL_GAIN = 0								-- base amount of fuel gained hourly, independent of excess oil
@@ -74,7 +78,7 @@ NDefines.NCountry.SCORCHED_EARTH_STATE_COST = 15		--- Original 5
 
 NDefines.NProduction.RESOURCE_TO_ENERGY_COEFFICIENT = 5.0
 NDefines.NProduction.BASE_COUNTRY_ENERGY_PRODUCTION = 0
-NDefines.NProduction.ENERGY_SCALING_COST_BY_FACTORY_COUNT = 0.1
+NDefines.NProduction.ENERGY_SCALING_COST_BY_FACTORY_COUNT = 0.075
 NDefines.NProduction.BASE_ENERGY_COST = 0.5
 
 NDefines.NProduction.BASE_FACTORY_SPEED = 5
