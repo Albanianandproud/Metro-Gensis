@@ -54,7 +54,15 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
+			modifier = {
+				add = 5
+				date > 2032.1.1
+			}
+			modifier = {
+				add = 20
+				date > 2033.6.1
+			}
 		}
 	}
 	focus = {
@@ -73,7 +81,15 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
+			modifier = {
+				add = 5
+				date > 2032.1.1
+			}
+			modifier = {
+				add = 20
+				date > 2033.6.1
+			}
 		}
 	}
 	focus = {
@@ -115,7 +131,15 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
+			modifier = {
+				add = 5
+				date > 2032.1.1
+			}
+			modifier = {
+				add = 20
+				date > 2033.6.1
+			}
 		}
 	}
 	focus = {
@@ -146,7 +170,15 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
+			modifier = {
+				add = 10
+				date > 2032.1.1
+			}
+			modifier = {
+				add = 20
+				date > 2033.6.1
+			}
 		}
 	}
 	focus = {
@@ -162,7 +194,15 @@ focus_tree = {
 			add_ideas = HUL_doped_up_army
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 5
+			modifier = {
+				add = 5
+				date > 2032.1.1
+			}
+			modifier = {
+				add = 20
+				date > 2033.6.1
+			}
 		}
 	}
 	focus = {
@@ -196,7 +236,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				category = infantry_weapons
 			}
@@ -216,7 +256,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = support_weapons_tech_research
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				category = support_weapons_tech
 			}
@@ -469,7 +509,15 @@ focus_tree = {
 			country_event = { id = nf_HUL.4 }
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 15
+			modifier = {
+				add = 5
+				date > 2030.1.1
+			}
+			modifier = {
+				add = 25
+				date > 2032.6.1
+			}
 		}
 	}
 	focus = {
@@ -720,7 +768,15 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 15
+			modifier = {
+				add = 5
+				date > 2030.1.1
+			}
+			modifier = {
+				add = 25
+				date > 2032.6.1
+			}
 		}
 	}
 	focus = {
@@ -787,6 +843,20 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				add = 5
+				OR = {
+					threat > 0.2
+					date > 2032.1.1
+				}
+			}
+			modifier = {
+				add = 20
+				OR = {
+					threat > 0.4
+					date > 2033.6.1
+				}
+			}
 		}
 	}
 	focus = {
@@ -1758,7 +1828,7 @@ focus_tree = {
 			add_ideas = HUL_defense_against_aviators
 		}
 		ai_will_do = {
-			factor = 35
+			factor = 200
 		}
 	}
 	focus = {
@@ -1773,9 +1843,6 @@ focus_tree = {
 			add_stability = 0.05
 			add_political_power = 50
 		}
-		ai_will_do = {
-			factor = 1
-		}
 	}
 	focus = {
 		id = HUL_69
@@ -1786,6 +1853,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		completion_reward = {
+			add_manpower = 5
 			add_equipment_to_stockpile = {
 				type = conventional_infantry_equipment_1
 				amount = 15
@@ -1799,6 +1867,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 1
+			modifier = {
+				add = 20
+				NOT = { has_country_flag = fought_aviators }
+			}
 		}
 	}
 	focus = {
@@ -1818,6 +1890,7 @@ focus_tree = {
 			add_tech_bonus = {
 				uses = 1
 				bonus = 0.5
+				ahead_reduction = 1
 				category = rail_engine
 			}
 		}
@@ -1854,11 +1927,16 @@ focus_tree = {
 			add_tech_bonus = {
 				bonus = 0.5
 				uses = 1
+				ahead_reduction = 1
 				category = support_tech
 			}
 		}
 		ai_will_do = {
 			factor = 1
+			modifier = {
+				add = 20
+				NOT = { has_country_flag = fought_aviators }
+			}
 		}
 	}
 	focus = {
@@ -1873,7 +1951,9 @@ focus_tree = {
 			add_tech_bonus = {
 				uses = 1
 				bonus = 0.5
+				ahead_reduction = 1
 				category = rail_armament
+				category = rail_cart
 			}
 		}
 		ai_will_do = {
@@ -1890,8 +1970,9 @@ focus_tree = {
 		y = 1
 		completion_reward = {
 			add_tech_bonus = {
-				uses = 1
+				uses = 2
 				bonus = 0.5
+				ahead_reduction = 1
 				category = rail_car
 			}
 		}
@@ -1933,6 +2014,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = HUL_lesya_bilokur
+			custom_effect_tooltip = generic_skip_one_line_tt
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -1944,6 +2026,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 5
+			modifier = {
+				add = 20
+				NOT = { has_country_flag = fought_aviators }
+			}
 		}
 	}
 	focus = {
