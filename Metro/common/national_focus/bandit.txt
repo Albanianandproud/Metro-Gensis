@@ -26,7 +26,7 @@ focus_tree = {
 		icon = GFX_pig
 		x = 0
 		y = 0
-		cost = 6.5
+		cost = 3
 		completion_reward = {
 			army_experience = 15
 
@@ -37,7 +37,7 @@ focus_tree = {
 			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 10
 		}
 	}
 	focus = {
@@ -46,14 +46,19 @@ focus_tree = {
 		prerequisite = { focus = bandit_focus_1 }
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 3
 		relative_position_id = bandit_focus_1
 		completion_reward = {
-			add_command_power = 25
+			if = {
+				limit = {
+					command_power < 50
+				}
+				add_command_power = 50
+			}
 			custom_effect_tooltip = bandit_enable_border_conflicts
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 20
 		}
 	}
 	focus = {
@@ -180,76 +185,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_focus_3H
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_3F }
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_3F
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_3I
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_3F }
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_3F
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_3J
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_3I }
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_3I
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_3K
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_3I }
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_3I
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_3L
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_3I }
-		x = 3
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_3I
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
 		id = bandit_focus_4
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_2 }
@@ -261,6 +196,23 @@ focus_tree = {
 		completion_reward = {
 			## Proper Banditry path
 			add_ideas = bandit_proper_banditry
+
+			every_country = {
+				limit = {
+					NOT = {
+						original_tag = RUI
+						is_subject_of = ROOT
+						is_in_faction_with = ROOT
+
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+					}
+				}
+				add_opinion_modifier = {
+    				target = ROOT
+   					modifier = RED_bandit_scum  
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -271,7 +223,7 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4 }
 		x = 2
-		y = 2
+		y = 1
 		available = {
 			if = { limit = { has_government = community } community > 0.74 }
 			if = { limit = { has_government = council } council > 0.74 }
@@ -337,7 +289,7 @@ focus_tree = {
 		id = bandit_focus_4C
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_4B }
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4B
@@ -351,17 +303,17 @@ focus_tree = {
 			else = {
 				add_war_support = 0.05
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			if = {
 				limit = {
 					NOT = {
 						has_idea = bandit_law_1
 					}
 				}
-				army_experience = 35
+				army_experience = 25
 				add_mastery = {
-    				amount = 50
-    				folder = land
-    				track = doctrine_track_soldiers
+    				amount = 75
+    				track = doctrine_track_command
 				}
 			}
 			else_if = {
@@ -378,41 +330,15 @@ focus_tree = {
 	focus = {
 		id = bandit_focus_4D
 		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4C }
-		x = -1
-		y = 1
+		prerequisite = { focus = bandit_focus_4B }
+		x = -2
+		y = 2
 		cost = 6.5
-		relative_position_id = bandit_focus_4C
-		completion_reward = {
-			add_timed_idea = {
-				idea = bandit_get_in_line
-				days = 360
-			}
-			capital_scope = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-				    instant_build = yes
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_4E
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4C }
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_4C
+		relative_position_id = bandit_focus_4B
 		completion_reward = {
 			add_timed_idea = {
 				idea = bandit_stealing_and_looting
-				days = 360
+				days = 480
 			}
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
@@ -428,86 +354,60 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = bandit_focus_4I
+		icon = GFX_pig
+		prerequisite = { focus = bandit_focus_4A }
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_focus_4A
+		completion_reward = {
+			army_experience = 25
+			add_mastery = {
+				amount = 75
+				track = doctrine_track_command
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
 		id = bandit_focus_4F
 		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4C }
-		x = 0
-		y = 2
+		prerequisite = { focus = bandit_focus_4C focus = bandit_focus_4I }
+		x = 1
+		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_4C
 		completion_reward = {
+			add_ideas = bandit_powder_kegs
 		}
 		ai_will_do = {
 			factor = 5
 		}
 	}
 	focus = {
-		id = bandit_focus_4G
+		id = bandit_focus_4E
 		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4D }
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_4D
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_4I
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4E }
+		prerequisite = { focus = bandit_focus_4I }
 		x = 1
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_focus_4E
+		relative_position_id = bandit_focus_4I
 		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_4H
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4F focus = bandit_focus_4I }
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_4F
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_4J
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4G }
-		mutually_exclusive = { focus = bandit_focus_4J }
-		x = -1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_4G
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = bandit_focus_4K
-		icon = GFX_pig
-		prerequisite = { focus = bandit_focus_4G }
-		mutually_exclusive = { focus = bandit_focus_4K }
-		x = 1
-		y = 1
-		cost = 6.5
-		relative_position_id = bandit_focus_4G
-		completion_reward = {
+			add_timed_idea = {
+				idea = bandit_get_in_line
+				days = 480
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				    instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -529,7 +429,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_1
+		id = bandit_internal_internal_hazing
 		icon = GFX_pig
 		x = 15
 		y = 0
@@ -542,17 +442,17 @@ focus_tree = {
 			if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 10
 		}
 	}
 	focus = {
 		id = bandit_internal_focus_2
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_1 }
+		prerequisite = { focus = bandit_internal_internal_hazing }
 		x = 5
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_1
+		relative_position_id = bandit_internal_internal_hazing
 		completion_reward = {
 			add_timed_idea = {
 				idea = bandit_listen_to_the_boss
@@ -582,17 +482,51 @@ focus_tree = {
 		id = bandit_internal_focus_4
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_3 }
+		available = {
+			num_of_controlled_states > 9
+		}
 		x = 0
-		y = 1
+		y = 2
 		cost = 6.5
 		relative_position_id = bandit_internal_focus_3
 		completion_reward = {
 			## king of the underground
 			add_mastery = {
-    			amount = 50
+    			amount = 100
     			folder = land
-    			track = doctrine_track_command
 			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_internal_focus_4_1
+		icon = GFX_pig
+		prerequisite = { focus = bandit_internal_focus_4 }
+		mutually_exclusive = { focus = bandit_internal_focus_4_2 }
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_internal_focus_4
+		completion_reward = {
+			add_ideas = bandit_really_strong_spirit_1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_internal_focus_4_2
+		icon = GFX_pig
+		prerequisite = { focus = bandit_internal_focus_4 }
+		mutually_exclusive = { focus = bandit_internal_focus_4_1 }
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_internal_focus_4
+		completion_reward = {
+			add_ideas = bandit_really_strong_spirit_2
 		}
 		ai_will_do = {
 			factor = 5
@@ -601,11 +535,11 @@ focus_tree = {
 	focus = {
 		id = bandit_internal_focus_5
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_1 }
+		prerequisite = { focus = bandit_internal_internal_hazing }
 		x = 2
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_1
+		relative_position_id = bandit_internal_internal_hazing
 		completion_reward = {
 			add_ideas = bandit_finger_in_pie
 		}
@@ -616,11 +550,11 @@ focus_tree = {
 	focus = {
 		id = bandit_internal_focus_6
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_1 }
+		prerequisite = { focus = bandit_internal_internal_hazing }
 		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_1
+		relative_position_id = bandit_internal_internal_hazing
 		completion_reward = {
 			set_temp_variable = { bullet_to_gain = -50 }
 			add_bullet_with_tooltip_effect = yes
@@ -710,7 +644,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_10
+		id = bandit_internal_internal_hazing0
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_5 }
 		x = 1
@@ -725,7 +659,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_11
+		id = bandit_internal_internal_hazing1
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_5 }
 		x = -1
@@ -740,13 +674,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_12
+		id = bandit_internal_internal_hazing2
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_10 }
+		prerequisite = { focus = bandit_internal_internal_hazing0 }
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_10
+		relative_position_id = bandit_internal_internal_hazing0
 		completion_reward = {
 			capital_scope = {
 				add_extra_state_shared_building_slots = 2
@@ -769,13 +703,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_13
+		id = bandit_internal_internal_hazing3
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_9 focus = bandit_internal_focus_12 }
+		prerequisite = { focus = bandit_internal_focus_9 focus = bandit_internal_internal_hazing2 }
 		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_12
+		relative_position_id = bandit_internal_internal_hazing2
 		completion_reward = {
 			add_ideas = bandit_hired_murderers
 		}
@@ -784,7 +718,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_14
+		id = bandit_internal_internal_hazing4
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_8 focus = bandit_internal_focus_8A }
 		x = 0
@@ -806,13 +740,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_15
+		id = bandit_internal_internal_hazing5
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_14 }
+		prerequisite = { focus = bandit_internal_internal_hazing4 }
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_14
+		relative_position_id = bandit_internal_internal_hazing4
 		completion_reward = {
 			set_temp_variable = { bullet_to_gain = -250 }
 			add_bullet_with_tooltip_effect = yes
@@ -823,13 +757,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_ecopomo
+		id = bandit_internal_the_new_blood
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_1 }
+		prerequisite = { focus = bandit_internal_internal_hazing }
 		x = -6
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_1
+		relative_position_id = bandit_internal_internal_hazing
 		completion_reward = {
 			army_experience = 5
 			add_timed_idea = {
@@ -842,13 +776,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_ecopomo323
+		id = bandit_internal_supply_arms
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomo }
+		prerequisite = { focus = bandit_internal_the_new_blood }
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo
+		relative_position_id = bandit_internal_the_new_blood
 		completion_reward = {
 			add_ideas = bandit_improvised_weapons
 		}
@@ -857,13 +791,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_ecopomo323333
+		id = bandit_internal_purchase_arms
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomo }
+		prerequisite = { focus = bandit_internal_the_new_blood }
 		x = 2
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo
+		relative_position_id = bandit_internal_the_new_blood
 		completion_reward = {
 			set_temp_variable = { bullet_to_gain = -50 }
 			add_bullet_with_tooltip_effect = yes
@@ -890,13 +824,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_5322
+		id = bandit_internal_contract_technicians
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomo323333 }
+		prerequisite = { focus = bandit_internal_purchase_arms }
 		x = 0
 		y = 3
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo323333
+		relative_position_id = bandit_internal_purchase_arms
 		completion_reward = {
 			set_temp_variable = { bullet_to_gain = -50 }
 			add_bullet_with_tooltip_effect = yes
@@ -923,9 +857,9 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_ecopomogerjge
+		id = bandit_internal_improvised_death
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomo323 }
+		prerequisite = { focus = bandit_internal_supply_arms }
 		available = {
 			any_controlled_state = {
 				has_resources_amount = {
@@ -938,7 +872,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo323
+		relative_position_id = bandit_internal_supply_arms
 		completion_reward = {
 			random_owned_controlled_state = {
 				add_resource = {
@@ -974,9 +908,9 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_egypt
+		id = bandit_internal_ramshackle_arms
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomo323 }
+		prerequisite = { focus = bandit_internal_supply_arms }
 		available = {
 			any_controlled_state = {
 				has_resources_amount = {
@@ -989,7 +923,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo323
+		relative_position_id = bandit_internal_supply_arms
 		completion_reward = {
 			random_owned_controlled_state = {
 				add_resource = {
@@ -1015,13 +949,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_egypt_2
+		id = bandit_internal_ramshackle_arms_2
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_egypt }
+		prerequisite = { focus = bandit_internal_ramshackle_arms }
 		x = 0
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_egypt
+		relative_position_id = bandit_internal_ramshackle_arms
 		completion_reward = {
 			swap_ideas = {
 				remove_idea = bandit_improvised_weapons
@@ -1033,13 +967,14 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_egypt_3
+		id = bandit_internal_waste_not
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_egypt }
+		prerequisite = { focus = bandit_internal_ramshackle_arms }
+		prerequisite = { focus = bandit_internal_improvised_death }
 		x = -2
 		y = 1
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_egypt
+		relative_position_id = bandit_internal_ramshackle_arms
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
@@ -1073,11 +1008,11 @@ focus_tree = {
 	focus = {
 		id = bandit_internal_focus_ggeo
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_ecopomogerjge focus = bandit_internal_focus_egypt }
+		prerequisite = { focus = bandit_internal_improvised_death focus = bandit_internal_ramshackle_arms }
 		x = 0
 		y = 3
 		cost = 6.5
-		relative_position_id = bandit_internal_focus_ecopomo323
+		relative_position_id = bandit_internal_supply_arms
 		completion_reward = {
 			add_ideas = bandit_big_thinking
 
@@ -1088,9 +1023,9 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_internal_focus_gge33o
+		id = bandit_internal_the_good_stuff
 		icon = GFX_pig
-		prerequisite = { focus = bandit_internal_focus_5322 }
+		prerequisite = { focus = bandit_internal_contract_technicians }
 		prerequisite = { focus = bandit_internal_focus_ggeo }
 		x = 1
 		y = 1
@@ -1102,6 +1037,164 @@ focus_tree = {
 				amount = 35
 				producer = RUS
 			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_focus_menace_of_the_metro
+		icon = GFX_pig
+		prerequisite = { focus = bandit_focus_5 }
+		available = {
+			is_major = yes
+			count_triggers = {
+				amount = 2
+				has_added_tension_amount > 4
+				AND = {
+					num_of_military_factories > 9
+					has_army_manpower = { size > 199 }
+				}
+			}
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = bandit_focus_5
+		completion_reward = {
+			add_research_slot = 1
+			every_country = {
+				limit = {
+					is_major = yes
+				}
+				add_opinion_modifier = {
+    				target = ROOT
+   					modifier = bandit_metro_menace   
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	## Political. Nation Exclusive ##
+	## Generic ## 
+	focus = {
+		id = bandit_big_things_in_store
+		icon = GFX_pig
+		x = 26
+		y = 0
+		cost = 6.5
+		allow_branch = { 
+			has_country_flag = is_bandit_nation
+		}
+		completion_reward = {
+			hidden_effect = {
+				set_country_flag = bandit_internal_decision_timed_mission
+			}
+			custom_effect_tooltip = bandit_big_things_in_store_tt
+			activate_mission = bandit_internal_decision_timed_mission
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = bandit_external_1
+		icon = GFX_pig
+		prerequisite = { focus = bandit_big_things_in_store }
+		mutually_exclusive = { focus = bandit_external_2 }
+		x = 2
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_big_things_in_store
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = 0.1
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = bandit_external_1_tt
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_1A
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_1 }
+		available = {
+			has_country_flag = bandit_external_1_flag_completed
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_external_1
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = bandit_whipped_into_frenzy
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_2
+		icon = GFX_pig
+		prerequisite = { focus = bandit_big_things_in_store }
+		mutually_exclusive = { focus = bandit_external_1 }
+		x = -2
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_big_things_in_store
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = -0.1
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = bandit_external_2_tt
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_2A
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_2 }
+		available = {
+			has_country_flag = bandit_external_2_flag_completed
+		}
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_external_2
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = bandit_homefront_secured
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_3
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_2 focus = bandit_external_1 }
+		x = 0
+		y = 3
+		available = {
+			count_triggers = {
+				amount = 1
+				date > 2033.1.1
+				threat > 0.29
+			}
+		}
+		cost = 6.5
+		relative_position_id = bandit_big_things_in_store
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = -0.1
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = bandit_external_2_tt
 		}
 		ai_will_do = {
 			factor = 5

@@ -1,7 +1,7 @@
 PAG_decision_category = {
 	PAG_1 = {
 		icon = GFX_PAG_1
-		available = { has_stability < 0.7 has_war = no }	
+		available = { has_stability < 0.71 has_war = no }	
 		fire_only_once = no
 		cost = 50
 		days_remove = 70
@@ -12,7 +12,7 @@ PAG_decision_category = {
 	}
 	PAG_2 = {
 		icon = GFX_PAG_2
-		available = { has_stability < 0.6 has_war = yes }	
+		available = { has_war_support < 0.71 has_war = yes }	
 		fire_only_once = no
 		cost = 50
 		days_remove = 70
@@ -29,7 +29,14 @@ PAG_decision_category = {
 		modifier = { research_speed_factor = -0.1 }
 		days_remove = 45
 		days_re_enable = 180
-		remove_effect = { army_experience = 30 }
+		remove_effect = { 
+			add_mastery = {
+    			amount = 75
+    			folder = land
+			}
+			army_experience = 10
+			add_command_power = 30
+		}
 		ai_will_do = { base = 2 }
 	}
 	PAG_4 = {
@@ -65,10 +72,10 @@ PAG_decision_category = {
 		cost = 50
 		days_remove = 45
 		days_re_enable = 180
-		modifier = {  consumer_goods_factor = 0.1 industrial_capacity_factory = -0.1 economy_cost_factor = -0.5 }
+		modifier = {  consumer_goods_factor = 0.1 production_factory_max_efficiency_factor = -0.1 economy_cost_factor = -0.5 }
 		remove_effect = { 
 			add_tech_bonus = {
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				category = savage_society
 			}
@@ -90,10 +97,15 @@ PAG_decision_category = {
 		icon = GFX_PAG_8
 		available = { has_war = yes  }	
 		cost = 50
-		days_remove = 90
 		days_re_enable = 270
-		modifier = { land_doctrine_cost_factor = -0.125 }
-		cancel_trigger = { has_war = no }
+		fire_only_once = yes
+		complete_effect = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = savage_military
+			}
+		}
 		ai_will_do = { base = 2 }
 	}
 	PAG_9 = {
