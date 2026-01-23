@@ -1,0 +1,179 @@
+add_namespace = bandit_event
+
+country_event = {	## Join Bandit Faction
+    id = bandit_event.1  
+    title = bandit_event.1.t
+    desc = bandit_event.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event.1.a
+
+		trigger = {
+			FROM = { is_ai = no }
+		}
+
+		faction_leader = {
+			add_to_faction = FROM
+		}
+
+		add_ai_strategy = {
+			type = alliance
+			id = FROM
+			value = 200
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				FROM = {
+					has_opinion = { target = ROOT value < 30 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = bandit_event.1.b
+
+		trigger = {
+			FROM = { is_ai = yes }
+		}
+
+		puppet = FROM
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				FROM = {
+					is_ai = no
+				}
+			}
+		}
+	}
+
+	option = {
+		name = bandit_event.1.c
+
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				FROM = {
+					has_opinion = { target = ROOT value < 31 }
+				}
+			}
+		}
+	}
+}
+
+country_event = {	## Bandit Turf
+    id = bandit_event.2  
+    title = bandit_event.2.t
+    desc = bandit_event.2.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event.2.a
+
+		bandit_joint_raiding_planning_scripted_effect = yes
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				FROM = {
+					has_opinion = { target = ROOT value < 30 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = bandit_event.2.a
+		FROM = { country_event = { id = bandit_event.2 } }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				FROM = {
+					has_opinion = { target = ROOT value < 31 }
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+    id = bandit_event.3  
+    title = bandit_event.3.t
+    desc = bandit_event.3.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event.3.a
+	}
+}
+
+country_event = {
+    id = bandit_event.4
+    title = bandit_event.4.t
+    desc = bandit_event.4.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event.4.a
+		add_mastery = {
+    		amount = 50
+    		folder = land
+		}
+		army_experience = 25
+		add_ideas = bandit_ambush_tactics
+	}
+}
+
+country_event = {
+    id = bandit_event.5  
+    title = bandit_event.5.t
+    desc = bandit_event.5.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event.5.a
+	}
+}
+
+add_namespace = bandit_event_internal
+
+
+country_event = {
+    id = bandit_event_internal.1
+    title = bandit_event_internal.1.t
+    desc = bandit_event_internal.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event_internal.1.a
+		custom_effect_tooltip = bandit_event_internal.1.a
+		hidden_effect = {
+			set_country_flag = bandit_may_pursue_aims
+			set_country_flag = bandit_internal_aim_timed_mission_flag
+		}
+
+		activate_mission = bandit_internal_aim_timed_mission
+	}
+}

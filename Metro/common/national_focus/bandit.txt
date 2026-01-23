@@ -18,7 +18,7 @@ focus_tree = {
 				original_tag = SHR
 				original_tag = NCH
 			}
-			add = 0
+			add = 35
 		}
 	}
 	focus = {
@@ -66,12 +66,15 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_2 }
 		mutually_exclusive = { focus = bandit_focus_4 }
+		available = {
+			has_country_flag = bandit_may_pursue_aims
+		}
 		x = -4
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_2
 		completion_reward = {
-			## Extortion / Blackmail path
+			custom_effect_tooltip = bandit_path_extortion_tt
 			add_ideas = bandit_extortion_enterprise
 
 			every_country = {
@@ -189,12 +192,15 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_focus_2 }
 		mutually_exclusive = { focus = bandit_focus_3 }
+		available = {
+			has_country_flag = bandit_may_pursue_aims
+		}
 		x = 4
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_2
 		completion_reward = {
-			## Proper Banditry path
+			custom_effect_tooltip = bandit_path_proper_banditry_tt
 			add_ideas = bandit_proper_banditry
 
 			every_country = {
@@ -211,6 +217,16 @@ focus_tree = {
 				add_opinion_modifier = {
     				target = ROOT
    					modifier = RED_bandit_scum  
+				}
+				add_ai_strategy = {
+					type = conquer
+					id = ROOT
+					value = 50
+				}
+				add_ai_strategy = {
+					type = antagonize
+					id = ROOT
+					value = 50
 				}
 			}
 		}
@@ -440,6 +456,10 @@ focus_tree = {
 			if = { limit = { has_government = council } add_popularity = { ideology = council popularity = -0.05 } }
 			if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = -0.05 } }
 			if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = -0.05 } }
+			add_timed_idea = {
+				idea = bandits_brutal_hazing
+				days = 270
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -456,7 +476,7 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 				idea = bandit_listen_to_the_boss
-				days = 144
+				days = 190
 			}
 		}
 		ai_will_do = {
@@ -467,6 +487,12 @@ focus_tree = {
 		id = bandit_internal_focus_3
 		icon = GFX_pig
 		prerequisite = { focus = bandit_internal_focus_2 }
+		available = {
+			NOT = {
+				has_idea = bandit_listen_to_the_boss
+			}
+			has_stability > 0.59
+		}
 		x = 0
 		y = 2
 		cost = 6.5
@@ -491,10 +517,42 @@ focus_tree = {
 		relative_position_id = bandit_internal_focus_3
 		completion_reward = {
 			## king of the underground
+			custom_effect_tooltip = bandit_claim_underground_supremacy_tt
+			every_country = {
+				limit = {
+					has_country_flag = is_bandit_nation
+					NOT = {
+						is_subject_of = ROOT
+						is_in_faction_with = ROOT
+						has_idea = bandit_king_of_the_metro
+					}	
+				}
+				add_opinion_modifier = {
+    				target = ROOT
+   					modifier = bandit_clash_of_interests_opinion
+				}
+			}
+			every_country = {
+				limit = {
+					has_idea = bandit_king_of_the_metro
+				}
+				add_ai_strategy = {
+					type = conquer
+					id = ROOT
+					value = 200
+				}
+				add_opinion_modifier = {
+    				target = ROOT
+   					modifier = bandit_rival_interest_opinion
+				}
+			}
 			add_mastery = {
     			amount = 100
     			folder = land
 			}
+			add_war_support = 0.1
+			add_ideas = bandit_king_of_the_metro
+			
 		}
 		ai_will_do = {
 			factor = 5
@@ -1071,6 +1129,16 @@ focus_tree = {
     				target = ROOT
    					modifier = bandit_metro_menace   
 				}
+				add_ai_strategy = {
+					type = conquer
+					id = ROOT
+					value = 200
+				}
+				add_ai_strategy = {
+					type = antagonize
+					id = ROOT
+					value = 200
+				}
 			}
 		}
 		ai_will_do = {
@@ -1082,7 +1150,7 @@ focus_tree = {
 	focus = {
 		id = bandit_big_things_in_store
 		icon = GFX_pig
-		x = 26
+		x = 27
 		y = 0
 		cost = 6.5
 		allow_branch = { 
@@ -1104,7 +1172,7 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_big_things_in_store }
 		mutually_exclusive = { focus = bandit_external_2 }
-		x = 2
+		x = 4
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_big_things_in_store
@@ -1142,7 +1210,7 @@ focus_tree = {
 		icon = GFX_pig
 		prerequisite = { focus = bandit_big_things_in_store }
 		mutually_exclusive = { focus = bandit_external_1 }
-		x = -2
+		x = -4
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_big_things_in_store
@@ -1176,11 +1244,12 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = bandit_external_3
+		id = bandit_external_our_own_outfit
 		icon = GFX_pig
 		prerequisite = { focus = bandit_external_2 focus = bandit_external_1 }
-		x = 0
-		y = 3
+		mutually_exclusive = { focus = bandit_loyalty_to_tretyakov_triangle }
+		x = -2
+		y = 2
 		available = {
 			count_triggers = {
 				amount = 1
@@ -1188,14 +1257,199 @@ focus_tree = {
 				threat > 0.29
 			}
 		}
-		cost = 6.5
+		cost = 4
 		relative_position_id = bandit_big_things_in_store
 		completion_reward = {
-			add_stability = 0.1
-			add_war_support = -0.1
-			custom_effect_tooltip = generic_skip_one_line_tt
-			custom_effect_tooltip = bandit_external_2_tt
+			create_faction_from_template = faction_template_bandit_generic
+			add_to_faction = ROOT
 		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_our_own_outfit_1
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_our_own_outfit }
+		mutually_exclusive = { focus = bandit_external_our_own_outfit_2 }
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_external_our_own_outfit
+		completion_reward = {
+			## create faction
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_our_own_outfit_2
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_our_own_outfit }
+		mutually_exclusive = { focus = bandit_external_our_own_outfit_1 }
+		x = -1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_external_our_own_outfit
+		completion_reward = {
+			## create faction
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_our_own_outfit_3
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_our_own_outfit_1 focus = bandit_external_our_own_outfit_2 }
+		x = 0
+		y = 3
+		cost = 6.5
+		relative_position_id = bandit_external_our_own_outfit
+		completion_reward = {
+			## create faction
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_loyalty_to_tretyakov_triangle
+		icon = GFX_pig
+		prerequisite = { focus = bandit_external_2 focus = bandit_external_1 }
+		mutually_exclusive = { focus = bandit_external_our_own_outfit }
+		available = {
+			TRT = { exists = yes }
+			NOT = {
+				is_justifying_wargoal_against = TRT
+				TRT = { 
+					is_subject = yes 
+					has_war_with = ROOT
+				}
+			}
+		}
+		x = 2
+		y = 2
+		cost = 4
+		relative_position_id = bandit_big_things_in_store
+		completion_reward = {
+			if = {
+				limit = {
+					TRT = {
+						exists = yes
+					}
+				}
+				add_opinion_modifier = {
+    				target = TRT
+   					modifier = bandit_paying_respects   
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				add = 2
+				threat > 0.7
+			}
+		}
+	}
+	focus = {
+		id = bandit_tretyakov_2
+		icon = GFX_pig
+		prerequisite = { focus = bandit_loyalty_to_tretyakov_triangle }
+		available = {
+			TRT = { exists = yes }
+			NOT = {
+				is_justifying_wargoal_against = TRT
+				TRT = { 
+					is_subject = yes 
+					has_war_with = ROOT
+				}
+			}
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_loyalty_to_tretyakov_triangle
+		completion_reward = {
+			TRT = { country_event = { id = bandit_event.2 } }
+			custom_effect_tooltip = if_they_accept_tt
+			bandit_joint_raiding_planning_scripted_effect_tooltip = yes
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_tretyakov_3
+		icon = GFX_pig
+		prerequisite = { focus = bandit_tretyakov_2 }
+		available = {
+			TRT = { exists = yes }
+			NOT = {
+				is_justifying_wargoal_against = TRT
+				TRT = { 
+					is_subject = yes 
+					has_war_with = ROOT
+				}
+			}
+		}
+		x = 1
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_tretyakov_2
+		completion_reward = {
+			generate_character = {
+				token_base = bandit_tretyakov_advisor
+				name = bandit_tretyakov_advisor
+				advisor = {
+					slot = theorist
+					cost = 175
+					idea_token = bandit_tretyakov_advisor
+					traits = {
+						_bandit_tretyakov_advisor
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_tretyakov_4
+		icon = GFX_pig
+		prerequisite = { focus = bandit_tretyakov_2 }
+		available = {
+			TRT = {
+				is_faction_leader = yes
+			}	
+			NOT = {
+				is_justifying_wargoal_against = TRT
+				TRT = { 
+					is_subject = yes 
+					has_war_with = ROOT
+				}
+			}
+		}
+		x = 0
+		y = 2
+		cost = 6.5
+		relative_position_id = bandit_tretyakov_2
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			TRT = { country_event = { id = bandit_event.1 } }
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				TRT = { add_to_faction = FROM }
+			}
+		}
+
 		ai_will_do = {
 			factor = 5
 		}

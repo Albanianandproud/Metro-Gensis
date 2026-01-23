@@ -734,7 +734,6 @@ reclaim_metro = {
 				    }
 			    }
 			}
-		    #num_of_controlled_factories > 7
 	    }
 	   	complete_effect = {
 			add_manpower = -10
@@ -753,7 +752,9 @@ reclaim_metro = {
 					value = FROM
 				}
 			}
-			ROOT = { country_event = reclamation_event.2 }
+			#ROOT = { country_event = reclamation_event.2 }
+			transfer_state = ROOT.state_colonized_id
+			RUI = { remove_state_core = ROOT.state_colonized_id }
 			FROM = { clr_state_flag = state_being_colonized }
 	    }
 		ai_will_do = {
@@ -768,7 +769,7 @@ reclaim_metro = {
 			}
 			modifier = {
 				add = -10
-				num_of_controlled_states < 3
+				num_of_controlled_states < 4
 			}
 			modifier = {
 				add = 5
@@ -1940,6 +1941,12 @@ scavenging_expeditions = {
 		available = {
 			NOT = {
 				has_country_flag = active_scavenger_mission_poi
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = scavenger_mission_needs_rescue
 			}
 		}
 
