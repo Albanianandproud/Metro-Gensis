@@ -823,7 +823,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_internal_internal_hazing
 		completion_reward = {
-			army_experience = 5
+			army_experience = 10
 			add_timed_idea = {
 				idea = bandit_recruiting_new_blood
 				days = 400
@@ -998,7 +998,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = guns
 				bonus = 1
-				uses = 1
+				uses = 2
 				category = infantry_weapons
 			}
 		}
@@ -1055,7 +1055,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = guns
 				bonus = 0.5
-				uses = 1
+				uses = 2
 				category = recycling
 			}
 		}
@@ -1138,6 +1138,36 @@ focus_tree = {
 					type = antagonize
 					id = ROOT
 					value = 200
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_moscow_is_our_turf
+		icon = GFX_pig
+		prerequisite = { focus = bandit_focus_menace_of_the_metro }
+		available = {
+			has_completed_focus = bandit_internal_focus_4
+		}
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = bandit_focus_menace_of_the_metro
+		completion_reward = {
+			every_country = {
+				limit = {
+					has_country_flag = is_bandit_nation
+				}
+				every_owned_state = {
+					limit = {
+						NOT = { is_claimed_by = ROOT }
+					}
+					ROOT = {	
+						add_state_claim = PREV
+					}
 				}
 			}
 		}
@@ -1251,10 +1281,12 @@ focus_tree = {
 		x = -2
 		y = 2
 		available = {
+			num_of_factories > 9
 			count_triggers = {
 				amount = 1
 				date > 2033.1.1
-				threat > 0.29
+				threat > 0.24
+				has_added_tension_amount > 0.04
 			}
 		}
 		cost = 4

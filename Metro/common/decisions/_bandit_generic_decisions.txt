@@ -763,6 +763,15 @@ bandit_internal_decision_category = {
 			count_triggers = {
 				amount = 1
 				has_war = yes
+
+
+				custom_trigger_tooltip = {
+					tooltip = "has_specific_amount_of_bullet_text"
+					set_temp_variable = { has_specific_amount_of_bullet  = 2000 }
+					check_variable = {
+						bullet > has_specific_amount_of_bullet 
+					}
+				}
 			}
 		}
 
@@ -782,10 +791,15 @@ bandit_internal_decision_category = {
 			}
 		}
 
-		days_mission_timeout = 360
+		days_mission_timeout = 720
 
 		timeout_effect = {
-			add_political_power = 100
+			add_political_power = 200
+
+			if = { limit = { has_government = community } add_popularity = { ideology = community popularity = 0.1 } }
+			if = { limit = { has_government = council } add_popularity = { ideology = council popularity = 0.1 } }
+			if = { limit = { has_government = oligarch } add_popularity = { ideology = oligarch popularity = 0.1 } }
+			if = { limit = { has_government = dictatorial } add_popularity = { ideology = dictatorial popularity = 0.1 } }
 		}
 
 		ai_will_do = {
