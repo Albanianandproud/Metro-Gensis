@@ -32,11 +32,11 @@ focus_tree = {
 			has_war_support > 0.24
 		}
 		completion_reward = {
-			army_experience = 15
+			add_manpower = 10
 
 			add_equipment_to_stockpile = {
 				type = shotgun_infantry_equipment_1
-				amount = 15
+				amount = 10
 				producer = RUS
 			}
 
@@ -609,7 +609,7 @@ focus_tree = {
 			NOT = {
 				has_idea = bandit_listen_to_the_boss
 			}
-			has_stability > 0.59
+			has_stability > 0.29
 		}
 		x = 0
 		y = 2
@@ -1459,7 +1459,7 @@ focus_tree = {
 		icon = GFX_pig
 		x = 30
 		y = 0
-		cost = 6.5
+		cost = 3
 		allow_branch = { 
 			has_country_flag = is_bandit_nation
 		}
@@ -1472,7 +1472,7 @@ focus_tree = {
 			}
 			custom_effect_tooltip = bandit_big_things_in_store_tt
 			activate_mission = bandit_internal_decision_timed_mission
-			add_political_power = 60
+			add_political_power = 45
 		}
 		ai_will_do = {
 			factor = 10
@@ -1485,13 +1485,14 @@ focus_tree = {
 		mutually_exclusive = { focus = bandit_external_2 }
 		x = 4
 		y = 1
-		cost = 6.5
+		cost = 3.6
 		relative_position_id = bandit_big_things_in_store
 		completion_reward = {
 			add_stability = -0.1
 			add_war_support = 0.1
 			custom_effect_tooltip = generic_skip_one_line_tt
-			custom_effect_tooltip = bandit_external_1_tt
+			set_country_flag = bandit_internal_decision_2_timed_mission_flag
+			activate_mission = bandit_internal_decision_2_timed_mission
 		}
 		ai_will_do = {
 			factor = 5
@@ -1523,13 +1524,14 @@ focus_tree = {
 		mutually_exclusive = { focus = bandit_external_1 }
 		x = -4
 		y = 1
-		cost = 6.5
+		cost = 3.6
 		relative_position_id = bandit_big_things_in_store
 		completion_reward = {
 			add_stability = 0.1
 			add_war_support = -0.1
 			custom_effect_tooltip = generic_skip_one_line_tt
-			custom_effect_tooltip = bandit_external_2_tt
+			set_country_flag = bandit_internal_decision_2_timed_mission_flag
+			activate_mission = bandit_internal_decision_2_timed_mission
 		}
 		ai_will_do = {
 			factor = 5
@@ -1662,6 +1664,7 @@ focus_tree = {
 		prerequisite = { focus = bandit_external_2 focus = bandit_external_1 }
 		mutually_exclusive = { focus = bandit_external_our_own_outfit }
 		available = {
+			date > 2030.1.1
 			TRT = { exists = yes }
 			NOT = {
 				is_justifying_wargoal_against = TRT
@@ -1715,7 +1718,7 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_loyalty_to_tretyakov_triangle
 		completion_reward = {
-			TRT = { country_event = { id = bandit_event.2 } }
+			TRT = { country_event = { id = bandit_event.2 random_hours = 12 } }
 			custom_effect_tooltip = if_they_accept_tt
 			bandit_joint_raiding_planning_scripted_effect_tooltip = yes
 		}
@@ -1742,18 +1745,8 @@ focus_tree = {
 		cost = 6.5
 		relative_position_id = bandit_tretyakov_2
 		completion_reward = {
-			generate_character = {
-				token_base = bandit_tretyakov_advisor
-				name = bandit_tretyakov_advisor
-				advisor = {
-					slot = theorist
-					cost = 175
-					idea_token = bandit_tretyakov_advisor
-					traits = {
-						_bandit_tretyakov_advisor
-					}
-				}
-			}
+			custom_effect_tooltip = available_theorist
+			show_ideas_tooltip = bandit_tretyakov_advisor_tooltip
 		}
 		ai_will_do = {
 			factor = 5
@@ -1785,7 +1778,7 @@ focus_tree = {
 		available_if_capitulated = no
 
 		completion_reward = {
-			TRT = { country_event = { id = bandit_event.1 } }
+			TRT = { country_event = { id = bandit_event.1 random_hours = 12 } }
 			custom_effect_tooltip = if_they_accept_tt
 			effect_tooltip = {
 				TRT = { add_to_faction = FROM }

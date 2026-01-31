@@ -1,16 +1,7 @@
 every_possible_country = {
 	limit = {
 		OR = {
-			original_tag = ALT
-			original_tag = KTG
-			original_tag = MOB
-			original_tag = TRT
-			original_tag = DRY
-			original_tag = SLA
-			original_tag = CAU
-			original_tag = NCH
-			original_tag = SHR
-			original_tag = SHA
+			has_country_flag = is_bandit_nation
 		}
 	}
 	generate_character = {
@@ -286,6 +277,35 @@ every_possible_country = {
 		}
 		portraits = { 
 			army = { small = GFX_idea_generic_minister_18 }
+		}
+	}
+	generate_character = {
+		token_base = bandit_tretyakov_advisor
+		advisor = {
+			slot = theorist
+			traits = { _bandit_tretyakov_advisor }
+			cost = 175
+			available = {
+				has_completed_focus = bandit_tretyakov_2
+				custom_trigger_tooltip = {
+					tooltip = bullet_sum_amount
+					check_variable = {
+						bullet > 199
+					}
+				}
+			}
+			on_add = { 
+				hidden_effect = { 
+					set_temp_variable = { bullet_to_gain = -200 }
+					add_bullet_with_tooltip_effect = yes
+				}	
+			}
+			ai_will_do = {
+				factor = 50
+			}
+		}
+		portraits = { 
+			army = { small = GFX_idea_dregs_portrait_idea_1 }
 		}
 	}
 	## Manufacturers
