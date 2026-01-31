@@ -3,6 +3,240 @@
 @border_conflict_escalate_to_war_countdown = 45
 @border_conflict_time_until_cancelled = 60
 
+bandit_generic_decision_category = {
+
+	bandit_generic_raiding_decision = {
+		available = {
+			has_completed_focus = bandit_focus_1
+			has_war = no
+			has_manpower > 9
+			has_equipment = {
+				infantry_equipment > 9
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			bullet_income_from_ideas = 30
+		}
+
+		days_remove = 120
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 30 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
+		custom_cost_text = "command_power_decisions_cost_text"
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -30
+			}
+			add_manpower = -10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10
+			}
+		}
+		remove_effect = {
+			add_manpower = 10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10
+			}
+			## We can give flat bullets here on particular focus rewards.
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	bandit_generic_improve_homefront_decision = {
+		icon = category_spr_the_seeds_of_revolution
+
+		available = {
+			has_stability < 0.71
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+			industrial_capacity_factory = -0.15
+		}
+
+		days_remove = 90
+		days_re_enable = 180
+
+		cost = 50
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 2
+				has_stability < 0.69
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.59
+			}
+		}
+	}
+
+	bandit_generic_war_tax_decision = {
+
+		icon = category_spr_the_seeds_of_revolution
+
+		available = {
+			has_stability > 0.31
+			has_war_support > 0.31
+
+			has_completed_focus = bandit_internal_focus_3
+		}
+
+		fire_only_once = no
+
+		cost = 75
+
+		modifier = {
+			stability_weekly = -0.008
+		    war_support_weekly = -0.008
+			bullet_income_from_ideas = 45
+		}
+
+		days_remove = 60
+		days_re_enable = 360
+
+		cancel_trigger = {
+			OR = {
+				has_stability < 0.31
+				has_war_support < 0.31			
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 2
+				has_stability < 0.59
+				has_war_support < 0.59
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.49
+				has_war_support < 0.49
+			}
+		}
+	}
+
+	bandit_generic_fall_in_line_decision = {
+
+		icon = category_spr_the_seeds_of_revolution
+
+		available = {
+			dictatorial > 0.24
+			political_power_daily > 0.5
+		}
+
+		visible = { has_government = dictatorial }
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 50 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		fire_only_once = no
+
+		modifier = {
+			dictatorial_drift = 0.5
+			political_power_factor = -0.2
+		}
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = 50 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 2
+				has_stability < 0.59
+				has_war_support < 0.59
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.49
+				has_war_support < 0.49
+			}
+		}
+	}
+
+	bandit_generic_rouse_people_decision = {
+
+		icon = category_spr_the_seeds_of_revolution
+
+		available = {
+			has_stability < 0.71
+			has_war_support < 0.71
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 300 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+		    war_support_weekly = 0.005
+		}
+
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -300 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+
+		days_remove = 84
+		days_re_enable = 140
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 2
+				has_stability < 0.59
+				has_war_support < 0.59
+			}
+			modifier = {
+				add = 5
+				has_stability < 0.49
+				has_war_support < 0.49
+			}
+		}
+	}
+}
+
 bandit_borderwars_decision_category = {
 
 	bandit_borderwars_create_incident = {
@@ -718,6 +952,11 @@ bandit_internal_decision_category = {
 					}
 					has_war_support > 0.79
 				}
+				custom_trigger_tooltip = {
+					tooltip = "has_specified_party_popularity"
+					set_temp_variable = { party_popularity_percentage = 0.8 }
+					has_specified_party_popularity = yes
+				}
 			}
 		}
 
@@ -741,6 +980,15 @@ bandit_internal_decision_category = {
 
 		timeout_effect = {
 			country_event = { id = bandit_event.5 }
+
+			if = {
+				limit = {
+					set_temp_variable = { party_popularity_percentage = 0.8 }
+					has_specified_party_popularity = yes
+				}
+				complete_national_focus = bandit_external_1A
+				complete_national_focus = bandit_external_2A
+			}
 		}
 
 		ai_will_do = {
@@ -804,6 +1052,185 @@ bandit_internal_decision_category = {
 
 		ai_will_do = {
 			factor = 101
+		}
+	}
+}
+
+bandit_coercion_decision_category = {
+
+	bandit_coercion_demand_tribute = {
+		available = {
+			has_completed_focus = bandit_focus_3
+		}
+
+		target_array = neighbors
+
+		target_trigger = {
+			FROM = {
+				NOT = { 
+					original_tag = RUI
+					has_country_flag = is_savage_nation
+					has_country_flag = is_mutant_nation
+					is_acting_performer = yes 
+				}
+			}
+		}
+
+		cost = 100
+		days_remove = 2
+		days_re_enable = 180
+
+		remove_effect = {
+			custom_effect_tooltip = bandit_coercion_demand_tribute_tt
+			## tooltip to show if FROM submits
+			FROM = { country_event = { id = bandit_event_coercion.1 } }
+			custom_effect_tooltip = if_they_accept_tt
+			bandit_coercion_demand_tribute_scripted_effect_tooltip = yes
+		}
+
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				## check army strength ratio, if less than 50% pursue
+			}
+		}
+	}
+
+	bandit_coercion_demand_subjugation = {
+		target_array = neighbors
+
+		target_trigger = {
+			FROM = {
+				has_country_flag = bandit_can_subjugate@PREV
+			}
+		}
+
+		cost = 100
+
+		remove_effect = {
+			custom_effect_tooltip = bandit_coercion_demand_subjugation_tt
+			## tooltip to show if FROM submits
+			FROM = { country_event = { id = bandit_event_coercion.4 } }
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				ROOT = { puppet = FROM }
+			}
+		}
+	}
+
+	bandit_coercion_demand_tribute_retaliation_mission = {
+
+		target_array = neighbors
+
+		target_trigger = {
+			FROM = {
+				has_country_flag = bandit_can_tribute_retaliate
+			}
+		}
+
+		available = {
+			FROM = {
+				any_owned_state = {
+					is_controlled_by = FROM
+					impassable = no
+					any_neighbor_state = {
+						#state_is_fully_controlled_by_ROOT_or_subject = yes
+						set_temp_variable = { var:attacker_state_temp = id }
+						has_ROOT_at_least_1_div_in_current_state_scope = yes
+						hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+					}
+					NOT = { has_state_flag = border_incident_active }
+					set_temp_variable = { var:defender_state_temp = id }
+				}
+			}
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = FROM.defender_state_vs_@ROOT
+					AND = {
+						is_owned_and_controlled_by = FROM
+						impassable = no
+						hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+						any_neighbor_state = {
+							hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+							has_ROOT_at_least_1_div_in_current_state_scope = yes
+							#state_is_fully_controlled_by_ROOT_or_subject = yes
+						}
+					}
+				}
+			}
+		}
+
+		cost = 0
+		days_remove = 7
+
+		war_with_target_on_remove = yes
+
+		remove_effect = {
+			hidden_effect = {
+				FROM = {
+					random_owned_controlled_state = {
+						limit = {
+							impassable = no
+							hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+							any_neighbor_state = {
+								hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+								has_ROOT_at_least_1_div_in_current_state_scope = yes
+								#state_is_fully_controlled_by_ROOT_or_subject = yes
+							}
+						}
+						save_event_target_as = defender_state
+						set_variable = { FROM.defender_state_vs_@ROOT = id }
+						set_temp_variable = { defender_state_temp = id }
+						set_state_flag = border_incident_active
+					}
+				}
+				random_state = {
+					limit = {
+						impassable = no
+						#state_is_fully_controlled_by_ROOT_or_subject = yes
+						hidden_trigger = { NOT = { has_state_flag = border_incident_active } }
+						has_ROOT_at_least_1_div_in_current_state_scope = yes
+						any_neighbor_state = {
+							state = var:FROM.defender_state_vs_@ROOT
+						}
+					}
+					save_event_target_as = attacker_state
+					set_variable = { FROM.attacker_state_vs_@ROOT = id }
+					set_temp_variable = { attacker_state_temp = id }
+					set_state_flag = border_incident_active
+				}
+			}
+		}
+
+		complete_effect = {
+			start_border_war = {
+				change_state_after_war = no
+				attacker = {
+					state = var:FROM.attacker_state_vs_@ROOT
+					num_provinces = 3
+					on_win = bandit_border_conflict_won_attacker.1
+					on_lose = bandit_border_conflict_lost_attacker.1
+					on_cancel = wtt_border_conflict_canceled_attacker.1
+				}
+				
+				defender = {
+					state = var:FROM.defender_state_vs_@ROOT
+					num_provinces = 3
+					on_win = bandit_border_conflict_won_defender.1
+					on_lose = bandit_border_conflict_lost_defender.1
+					on_cancel = wtt_border_conflict_canceled_defender.1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 5
+			modifier = {
+				## check army strength ratio, if less than 50% pursue
+			}
 		}
 	}
 }

@@ -157,7 +157,6 @@ country_event = {
 
 add_namespace = bandit_event_internal
 
-
 country_event = {
     id = bandit_event_internal.1
     title = bandit_event_internal.1.t
@@ -175,5 +174,156 @@ country_event = {
 		}
 
 		activate_mission = bandit_internal_aim_timed_mission
+	}
+}
+
+add_namespace = bandit_event_coercion
+
+country_event = {
+    id = bandit_event_coercion.1
+    title = bandit_event_coercion.1.t
+    desc = bandit_event_coercion.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event_coercion.1.a
+		FROM = { country_event = { id = bandit_event_coercion.2 } }
+		set_temp_variable = { bullet_to_gain = -250 }
+		add_bullet_with_tooltip_effect = yes
+	}
+
+	option = {
+		name = bandit_event_coercion.2.a
+		FROM = { country_event = { id = bandit_event_coercion.3 } }
+		set_country_flag = {
+    		flag = bandit_can_tribute_retaliate
+    		days = 120
+		}
+	}
+}
+
+country_event = {
+    id = bandit_event_coercion.2
+    title = bandit_event_coercion.2.t
+    desc = bandit_event_coercion.2.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event_coercion.2.a
+		set_temp_variable = { bullet_to_gain = 250 }
+		add_bullet_with_tooltip_effect = yes
+		FROM = {
+			set_country_flag = {
+    			flag = bandit_can_subjugate@PREV
+    			days = 360
+			}
+		}
+	}
+}
+
+country_event = {
+    id = bandit_event_coercion.3
+    title = bandit_event_coercion.3.t
+    desc = bandit_event_coercion.3.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event_coercion.3.a
+
+		## Activate a timer mission to retaliate raid them
+		activate_targeted_decision = {
+    		target = FROM
+    		decision = bandit_coercion_demand_tribute_retaliation_mission
+		}
+	}
+
+	option = {
+		name = bandit_event_coercion.3.b
+		add_war_support = -0.05
+		add_political_power = -50
+	}
+}
+
+country_event = {
+    id = bandit_event_coercion.4
+    title = bandit_event_coercion.4.t
+    desc = bandit_event_coercion.4.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_event_coercion.4.a
+		FROM = { puppet = ROOT }
+	}
+
+	option = {
+		name = bandit_event_coercion.4.a
+	}
+}
+
+add_namespace = bandit_border_conflict_won_attacker
+
+country_event = {
+    id = bandit_border_conflict_won_attacker.1
+    title = bandit_border_conflict_won_attacker.1.t
+    desc = bandit_border_conflict_won_attacker.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_border_conflict_won_attacker.1.a
+	}
+}
+
+add_namespace = bandit_border_conflict_won_defender
+
+country_event = {
+    id = bandit_border_conflict_won_defender.1
+    title = bandit_border_conflict_won_defender.1.t
+    desc = bandit_border_conflict_won_defender.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_border_conflict_won_defender.1.a
+	}
+}
+
+add_namespace = bandit_border_conflict_lost_attacker
+
+country_event = {
+    id = bandit_border_conflict_lost_attacker.1
+    title = bandit_border_conflict_lost_attacker.1.t
+    desc = bandit_border_conflict_lost_attacker.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_border_conflict_lost_attacker.1.a
+	}
+}
+
+add_namespace = bandit_border_conflict_lost_defender
+
+country_event = {
+    id = bandit_border_conflict_lost_defender.1
+    title = bandit_border_conflict_lost_defender.1.t
+    desc = bandit_border_conflict_lost_defender.1.d
+    picture = "GFX_event (189)"
+	
+	fire_only_once = yes
+
+	option = {
+		name = bandit_border_conflict_lost_defender.1.a
 	}
 }
