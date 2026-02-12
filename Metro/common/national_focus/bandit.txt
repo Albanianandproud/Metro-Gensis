@@ -24,7 +24,7 @@ focus_tree = {
 	focus = {
 		id = bandit_focus_1
 		icon = GFX_generic_bandit_hunting
-		x = -2
+		x = -3
 		y = 0
 		cost = 5
 		available = {
@@ -69,6 +69,39 @@ focus_tree = {
 			factor = 20
 		}
 	}
+	focus = {
+		id = bandit_focus_bullets_1
+		icon = GFX_generic_bullet
+		prerequisite = { focus = bandit_focus_1 focus = bandit_internal_internal_hazing }
+		x = 8
+		y = 1
+		cost = 8.6
+		relative_position_id = bandit_focus_1
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 150 }
+			add_bullet_with_tooltip_effect = yes
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	focus = {
+		id = bandit_focus_bullets_2
+		icon = GFX_generic_bullet_cartridges
+		prerequisite = { focus = bandit_focus_bullets_1 }
+		x = 0
+		y = 1
+		cost = 8.6
+		relative_position_id = bandit_focus_bullets_1
+		completion_reward = {
+			set_temp_variable = { bullet_to_gain = 200 }
+			add_bullet_with_tooltip_effect = yes
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
 	focus = {
 		id = bandit_focus_3
 		icon = GFX_generic_bandit_extortion
@@ -130,7 +163,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_3C
-		icon = GFX_pig
+		icon = GFX_generic_bandit_puppet_king
 		prerequisite = { focus = bandit_focus_3A focus = bandit_focus_3B }
 		x = 0
 		y = 1
@@ -145,7 +178,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_3D
-		icon = GFX_pig
+		icon = GFX_generic_bandit_doctrine
 		prerequisite = { focus = bandit_focus_3B focus = bandit_focus_3A }
 		x = 0
 		y = 1
@@ -160,7 +193,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_3E
-		icon = GFX_pig
+		icon = GFX_workstation
 		prerequisite = { focus = bandit_focus_3C }
 		available = {
 			num_subjects > 0
@@ -201,7 +234,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_3F
-		icon = GFX_pig
+		icon = GFX_generic_bandit_knife
 		prerequisite = { focus = bandit_focus_3C focus = bandit_focus_3D }
 		x = 1
 		y = 1
@@ -216,7 +249,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_3G
-		icon = GFX_pig
+		icon = GFX_workshop_3
 		prerequisite = { focus = bandit_focus_3D }
 		available = {
 			num_subjects > 0
@@ -257,7 +290,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4
-		icon = GFX_pig
+		icon = GFX_generic_banditry
 		prerequisite = { focus = bandit_focus_2 }
 		mutually_exclusive = { focus = bandit_focus_3 }
 		available = {
@@ -310,7 +343,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4A
-		icon = GFX_pig
+		icon = GFX_generic_bandit_armor
 		prerequisite = { focus = bandit_focus_4 }
 		x = 2
 		y = 1
@@ -355,7 +388,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4B
-		icon = GFX_pig
+		icon = GFX_generic_bandit_soldier_4
 		prerequisite = { focus = bandit_focus_4 }
 		x = 0
 		y = 1
@@ -377,7 +410,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4C
-		icon = GFX_pig
+		icon = GFX_generic_bandit_soldier_3
 		prerequisite = { focus = bandit_focus_4B }
 		x = -1
 		y = 1
@@ -421,7 +454,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4D
-		icon = GFX_pig
+		icon = GFX_generic_lathe_machine
 		prerequisite = { focus = bandit_focus_4B }
 		x = -2
 		y = 2
@@ -445,7 +478,7 @@ focus_tree = {
 	}
 	focus = {
 		id = bandit_focus_4I
-		icon = GFX_pig
+		icon = GFX_generic_bandit_mask
 		prerequisite = { focus = bandit_focus_4A }
 		x = -1
 		y = 1
@@ -737,6 +770,7 @@ focus_tree = {
 		icon = GFX_camp
 		prerequisite = { focus = bandit_internal_internal_hazing }
 		available = {
+			has_stability > 0.14
 			set_temp_variable = { has_specific_amount_of_bullet = 50 }
 			has_specific_amount_of_bullet = yes
 		}
@@ -1052,6 +1086,9 @@ focus_tree = {
 		id = bandit_internal_the_new_blood
 		icon = GFX_generic_bandit_friends_1
 		prerequisite = { focus = bandit_internal_internal_hazing }
+		available = {
+			has_stability > 0.14
+		}
 		x = -7
 		y = 1
 		cost = 6.5
@@ -1458,7 +1495,7 @@ focus_tree = {
 	## Generic ## 
 	focus = {
 		id = bandit_big_things_in_store
-		icon = GFX_pig
+		icon = GFX_generic_scribbles
 		x = 30
 		y = 0
 		cost = 3

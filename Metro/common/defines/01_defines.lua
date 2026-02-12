@@ -81,21 +81,22 @@ NDefines.NProduction.BASE_COUNTRY_ENERGY_PRODUCTION = 0
 NDefines.NProduction.ENERGY_SCALING_COST_BY_FACTORY_COUNT = 0.05
 NDefines.NProduction.BASE_ENERGY_COST = 1
 
-NDefines.NProduction.BASE_FACTORY_SPEED = 5
-NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 5
-NDefines.NProduction.POWERED_FACTORY_SPEED = 5.5
-NDefines.NProduction.POWERED_FACTORY_SPEED_MIL = 5.5
+NDefines.NProduction.BASE_FACTORY_SPEED = 4
+NDefines.NProduction.BASE_FACTORY_SPEED_MIL = 3.5
+NDefines.NProduction.POWERED_FACTORY_SPEED = 5
+NDefines.NProduction.POWERED_FACTORY_SPEED_MIL = 4.5
 
 NDefines.NProduction.MAX_EQUIPMENT_RESOURCES_NEED = 5
 NDefines.NProduction.MAX_CIV_FACTORIES_PER_LINE = 10
-NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 10
-NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.5
-NDefines.NProduction.BASE_FACTORY_EFFICIENCY_GAIN = 0.5
+NDefines.NProduction.BASE_FACTORY_START_EFFICIENCY_FACTOR = 5
+NDefines.BASE_FACTORY_MAX_EFFICIENCY_FACTOR = 25
+NDefines.NProduction.PRODUCTION_RESOURCE_LACK_PENALTY = -0.75
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_GAIN = 0.25
 
-NDefines.NProduction.BASE_FACTORY_EFFICIENCY_VARIANT_CHANGE_FACTOR = 75		-- Base factor for changing production variants in %.
-NDefines.NProduction.BASE_FACTORY_EFFICIENCY_PARENT_CHANGE_FACTOR = 45		-- Base factor for changing production parent<->children in %.
-NDefines.NProduction.BASE_FACTORY_EFFICIENCY_FAMILY_CHANGE_FACTOR = 55		-- Base factor for changing production with same family in %.
-NDefines.NProduction.BASE_FACTORY_EFFICIENCY_ARCHETYPE_CHANGE_FACTOR = 30 	-- Base factor for changing production with same archetype in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_VARIANT_CHANGE_FACTOR = 50		-- Base factor for changing production variants in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_PARENT_CHANGE_FACTOR = 25		-- Base factor for changing production parent<->children in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_FAMILY_CHANGE_FACTOR = 25		-- Base factor for changing production with same family in %.
+NDefines.NProduction.BASE_FACTORY_EFFICIENCY_ARCHETYPE_CHANGE_FACTOR = 15 	-- Base factor for changing production with same archetype in %.
 
 
 NDefines.NProduction.RAILWAY_GUN_MAX_MIL_FACTORIES_PER_LINE = 10
