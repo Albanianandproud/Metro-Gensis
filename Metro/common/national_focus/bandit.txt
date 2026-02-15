@@ -17,6 +17,7 @@ focus_tree = {
 				original_tag = LEN
 				original_tag = SHR
 				original_tag = NCH
+				original_tag = PRT
 			}
 			add = 35
 		}
@@ -90,7 +91,7 @@ focus_tree = {
 		icon = GFX_generic_bullet_cartridges
 		prerequisite = { focus = bandit_focus_bullets_1 }
 		x = 0
-		y = 1
+		y = 2
 		cost = 8.6
 		relative_position_id = bandit_focus_bullets_1
 		completion_reward = {
@@ -108,16 +109,21 @@ focus_tree = {
 		prerequisite = { focus = bandit_focus_2 }
 		mutually_exclusive = { focus = bandit_focus_4 }
 		available = {
-			has_country_flag = bandit_may_pursue_aims
+			OR = {
+				has_country_flag = bandit_may_pursue_aims
+				date > 2032.1.1
+			}
 		}
 		x = -4
 		y = 1
 		cost = 6.5
 		relative_position_id = bandit_focus_2
 		completion_reward = {
-			add_ideas = bandit_extortion_enterprise
-
 			unlock_decision_category_tooltip = bandit_coercion_decision_category
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = bandit_extortion_enterprise
 
 			every_country = {
 				limit = {  has_country_flag = is_bandit_nation }
@@ -294,7 +300,10 @@ focus_tree = {
 		prerequisite = { focus = bandit_focus_2 }
 		mutually_exclusive = { focus = bandit_focus_3 }
 		available = {
-			has_country_flag = bandit_may_pursue_aims
+			OR = {
+				has_country_flag = bandit_may_pursue_aims
+				date > 2032.1.1
+			}
 		}
 		x = 4
 		y = 1
@@ -302,8 +311,9 @@ focus_tree = {
 		relative_position_id = bandit_focus_2
 		completion_reward = {
 			custom_effect_tooltip = bandit_path_proper_banditry_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_ideas = bandit_proper_banditry
-
+			custom_effect_tooltip = generic_skip_one_line_tt
 			every_country = {
 				limit = {
 					NOT = {
@@ -673,6 +683,7 @@ focus_tree = {
 		completion_reward = {
 			## king of the underground
 			custom_effect_tooltip = bandit_claim_underground_supremacy_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
 			every_country = {
 				limit = {
 					has_country_flag = is_bandit_nation
@@ -687,6 +698,7 @@ focus_tree = {
    					modifier = bandit_clash_of_interests_opinion
 				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			every_country = {
 				limit = {
 					has_idea = bandit_king_of_the_metro
@@ -770,7 +782,7 @@ focus_tree = {
 		icon = GFX_camp
 		prerequisite = { focus = bandit_internal_internal_hazing }
 		available = {
-			has_stability > 0.14
+			#has_stability > 0.14
 			set_temp_variable = { has_specific_amount_of_bullet = 50 }
 			has_specific_amount_of_bullet = yes
 		}
@@ -874,6 +886,9 @@ focus_tree = {
 		id = bandit_internal_internal_hazing0
 		icon = GFX_barscene
 		prerequisite = { focus = bandit_internal_focus_5 }
+		available = {
+			has_stability > 0.09
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -922,6 +937,11 @@ focus_tree = {
 			add_equipment_to_stockpile = {
 				type = gatling_equipment
 				amount = 5
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = shotgun_infantry_equipment_1
+				amount = 10
 				producer = RUS
 			}
 		}
@@ -1532,6 +1552,8 @@ focus_tree = {
 			custom_effect_tooltip = generic_skip_one_line_tt
 			set_country_flag = bandit_internal_decision_2_timed_mission_flag
 			activate_mission = bandit_internal_decision_2_timed_mission
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = bandit_decision_missions_tooltip
 		}
 		ai_will_do = {
 			factor = 5
@@ -1571,6 +1593,8 @@ focus_tree = {
 			custom_effect_tooltip = generic_skip_one_line_tt
 			set_country_flag = bandit_internal_decision_2_timed_mission_flag
 			activate_mission = bandit_internal_decision_2_timed_mission
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = bandit_decision_missions_tooltip
 		}
 		ai_will_do = {
 			factor = 5
@@ -1625,7 +1649,6 @@ focus_tree = {
 		id = bandit_external_our_own_outfit_1
 		icon = GFX_generic_newspaper
 		prerequisite = { focus = bandit_external_our_own_outfit }
-		mutually_exclusive = { focus = bandit_external_our_own_outfit_2 }
 		available = {
 			is_faction_leader = yes
 		}
@@ -1642,7 +1665,7 @@ focus_tree = {
 				name = guns
 				bonus = 1
 				uses = 2
-				ahead_reduction = 2
+				ahead_reduction = 1
 				category = infantry_weapons
 			}
 		}
@@ -1654,7 +1677,6 @@ focus_tree = {
 		id = bandit_external_our_own_outfit_2
 		icon = GFX_generic_newspaper
 		prerequisite = { focus = bandit_external_our_own_outfit }
-		mutually_exclusive = { focus = bandit_external_our_own_outfit_1 }
 		available = {
 			is_faction_leader = yes
 		}
@@ -1669,10 +1691,10 @@ focus_tree = {
 			}
 			add_tech_bonus = {
 				name = guns
-				bonus = 3
-				uses = 1
+				bonus = 1
+				uses = 2
 				ahead_reduction = 1
-				category = infantry_weapons
+				category = support_weapons_tech
 			}
 		}
 		ai_will_do = {
@@ -1687,11 +1709,46 @@ focus_tree = {
 			is_faction_leader = yes
 		}
 		x = 0
-		y = 3
+		y = 2
 		cost = 6.5
 		relative_position_id = bandit_external_our_own_outfit
 		completion_reward = {
 			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = bandit_external_our_own_outfit_4
+		icon = GFX_TRT_civil_war
+		prerequisite = { focus = bandit_external_our_own_outfit_3 }
+		available = {
+			is_faction_leader = yes
+		}
+		x = 0
+		y = 1
+		cost = 8.6
+		relative_position_id = bandit_external_our_own_outfit_3
+		available = {
+			has_war = no
+			is_neighbor_of = TRT
+			TRT = {
+				NOT = {
+					is_subject_of = ROOT
+					is_in_faction_with = ROOT
+				}
+			}
+		}
+        will_lead_to_war_with = TRT
+		completion_reward = {
+			add_threat = 5
+			create_wargoal = {
+ 				type = take_state_focus
+ 				target = TRT
+ 				expire = 0
+ 				generator = { 28 }
+ 			}
 		}
 		ai_will_do = {
 			factor = 5
