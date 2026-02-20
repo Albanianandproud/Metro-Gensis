@@ -4,6 +4,49 @@ ideas = {
 			picture = station_2
 			allowed = {}
 			removal_cost = -1
+			available = {
+				NOT = {
+					count_triggers = {
+						amount = 1
+						if = {
+							limit = {
+								original_tag = CAU
+							}
+							353 = { is_owned_by = ROOT }
+						}
+						if = {
+							limit = {
+								original_tag = CAU
+							}
+							SLA = { is_puppet_of = ROOT }
+						}
+						if = {
+							limit = {
+								original_tag = CAU
+							}
+							SLA = { is_in_faction_with = ROOT }
+						}
+						if = {
+							limit = {
+								original_tag = SLA
+							}
+							315 = { is_owned_by = ROOT }
+						}
+						if = {
+							limit = {
+								original_tag = SLA
+							}
+							CAU = { is_puppet_of = ROOT }
+						}
+						if = {
+							limit = {
+								original_tag = SLA
+							}
+							CAU = { is_in_faction_with = ROOT }
+						}
+					}
+				}
+			}
 			modifier = {
 				supply_combat_penalties_on_core_factor = -0.1
 				enemy_justify_war_goal_time = -0.2

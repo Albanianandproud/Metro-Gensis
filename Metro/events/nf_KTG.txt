@@ -85,7 +85,7 @@ country_event = {
 	id = nf_KTG.2
 	title = nf_KTG.2.t
 	desc = nf_KTG.2.d
-	picture = "GFX_event (154)"
+	picture = "GFX_event (48)"
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -145,7 +145,7 @@ country_event = {
 	id = nf_KTG.3
 	title = nf_KTG.3.t
 	desc = nf_KTG.3.d
-	picture = "GFX_event (154)"
+	picture = "GFX_event (38)"
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -202,7 +202,7 @@ country_event = {
 	id = nf_KTG.4
 	title = nf_KTG.4.t
 	desc = nf_KTG.4.d
-	picture = "GFX_event (154)"
+	picture = "GFX_event (37)"
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -253,3 +253,151 @@ country_event = {
 		}
 	}
 }
+
+add_namespace = nf_KTG_internal
+
+country_event = {
+	id = nf_KTG_internal.1
+	title = nf_KTG_internal.1.t
+	desc = nf_KTG_internal.1.d
+	picture = "GFX_event (36)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KTG_internal.1.a
+		add_political_power = 50
+		hidden_effect = {
+			country_event = { id = nf_KTG_internal.2 days = 420 }
+		}
+	}
+}
+
+country_event = {
+	id = nf_KTG_internal.2
+	title = nf_KTG_internal.2.t
+	desc = nf_KTG_internal.2.d
+	picture = "GFX_event (23)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = nf_KTG_internal.5 days = 420 }
+		}
+	}
+
+	option = { ## Friendly?
+		name = nf_KTG_internal.2.a
+		if = {
+			limit = {
+				original_tag = SLA
+			}
+			add_opinion_modifier = {
+    			target = CAU
+   				modifier = bandit_KTG_friendly   
+			}
+
+			CAU = { country_event = { id = nf_KTG_internal.3 hours = 12 } }
+		}
+		if = {
+			limit = {
+				original_tag = CAU
+			}
+			add_opinion_modifier = {
+    			target = SLA
+   				modifier = bandit_KTG_friendly   
+			}
+
+			SLA = { country_event = { id = nf_KTG_internal.3 hours = 12 } }
+		}
+
+		hidden_effect = {
+			country_event = { id = nf_KTG_internal.6 days = 600 }
+		}
+	}
+
+	option = { ## Hostile
+		name = nf_KTG_internal.2.b
+		if = {
+			limit = {
+				original_tag = SLA
+			}
+			add_opinion_modifier = {
+    			target = CAU
+   				modifier = bandit_KTG_unfriendly   
+			}
+
+			CAU = { country_event = { id = nf_KTG_internal.4 hours = 12 } }
+		}
+		if = {
+			limit = {
+				original_tag = CAU
+			}
+			add_opinion_modifier = {
+    			target = SLA
+   				modifier = bandit_KTG_unfriendly   
+			}
+
+			SLA = { country_event = { id = nf_KTG_internal.4 hours = 12 } }
+		}
+	}
+}
+
+country_event = {
+	id = nf_KTG_internal.3
+	title = nf_KTG_internal.3.t
+	desc = nf_KTG_internal.3.d
+	picture = "GFX_event (26)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KTG_internal.3.a
+	}
+}
+
+country_event = {
+	id = nf_KTG_internal.4
+	title = nf_KTG_internal.4.t
+	desc = nf_KTG_internal.4.d
+	picture = "GFX_event (15)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KTG_internal.4.a
+	}
+}
+
+country_event = {
+	id = nf_KTG_internal.5
+	title = nf_KTG_internal.5.t
+	desc = nf_KTG_internal.5.d
+	picture = "GFX_event (16)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KTG_internal.5.a
+
+		hidden_effect = { set_country_flag = bandit_internal_KTG_aim_timed_mission_flag }
+		activate_mission = bandit_internal_decision_timed_mission
+	}
+}
+
+country_event = {
+	id = nf_KTG_internal.6
+	title = nf_KTG_internal.6.t
+	desc = nf_KTG_internal.6.d
+	picture = "GFX_event (17)"
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = nf_KTG_internal.6.a
+		hidden_effect = { set_country_flag = bandit_internal_KTG_aim_timed_2_mission }
+		activate_mission = bandit_internal_decision_2_timed_mission
+	}
+}
+
