@@ -10,39 +10,36 @@ country_event = {	## Stortbeker spawns somewhere in the south
 	fire_only_once = yes
 	immediate = {
 		hidden_effect = {
+			407 = {
+				set_state_flag = STB_starting_point
+				STB = { set_capital = { state = PREV } }
+			}
 			random_list = {
 				25 = {
 					407 = {
 						add_manpower = 50
-						set_state_flag = STB_starting_point
-						STB = { set_capital = { state = PREV } }
 					}
 				}
 				25 = {
-					240 = {
-						add_manpower = 50
-						set_state_flag = STB_starting_point
-						STB = { set_capital = { state = PREV } }
+					407 = {
+						add_manpower = 45
 					}
 				}
 				25 = {
-					380 = {
-						add_manpower = 50
-						set_state_flag = STB_starting_point
-						STB = { set_capital = { state = PREV } }
+					407 = {
+						add_manpower = 40
 					}
 				}
 				25= {
-					388 = {
-						add_manpower = 50
-						set_state_flag = STB_starting_point
-						STB = { set_capital = { state = PREV } }
+					407 = {
+						add_manpower = 35
 					}
 				}
 			}
 			every_state = {
 				limit = { has_state_flag = STB_starting_point }
 				add_core_of = STB
+				clr_state_flag = STB_starting_point
 			}
 		}
 		every_possible_country = {
@@ -54,7 +51,7 @@ country_event = {	## Stortbeker spawns somewhere in the south
 					original_tag = ATQ
 				}
 			}		
-			country_event = nf_metro.4
+			country_event = { id = nf_metro.4 hours = 12 }
 		}
 		RCH = { country_event = nf_metro.5 }	
 	}
@@ -64,7 +61,7 @@ country_event = {	## Stortbeker spawns somewhere in the south
 		RUI = { release = STB }
 		STB = {
 			add_manpower = 35
-            add_offsite_building = { type = arms_factory level = 3 }
+            add_offsite_building = { type = arms_factory level = 1 }
             add_equipment_to_stockpile = { type = infantry_equipment amount = 35 }
 			add_field_marshal_role = {
 				character = STB_stortbeker
@@ -93,16 +90,6 @@ country_event = {	## Stortbeker spawns somewhere in the south
 						gatling_support = { x = 0 y = 1 }
 					}
 				}
-				#capital_scope = {
-				#	create_unit = {
-				#		division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
-				#		owner = ROOT
-				#	}
-				#	create_unit = {
-				#		division = "name = \"Metromacht\" division_template = \"Deathsquad\" start_experience_factor = 1 start_equipment_factor = 1"
-				#		owner = ROOT
-				#	}
-				#}	
 			}
 		}
 		ai_chance = {
@@ -128,10 +115,6 @@ country_event = {	## Stortbeker spawns somewhere in the south
 					type = infrastructure
 					damage = 1
 				}
-				#damage_building = {
-				#	type = rail_way
-				#	damage = 1
-				#}
 			}
 		}
 	}

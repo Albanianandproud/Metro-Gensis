@@ -114,6 +114,14 @@ NDefines.NMilitary.TRAINING_MAX_DAILY_COUNTRY_EXP = 0.2				--- Maximum army XP g
 NDefines.NMilitary.FIELD_EXPERIENCE_SCALE = 0.0005
 NDefines.NMilitary.FIELD_EXPERIENCE_MAX_PER_DAY = 0.7
 
+
+NDefines.NMilitary.NEW_COMMANDER_RANDOM_PERSONALITY_TRAIT_CHANCES = {  
+	1,
+	0.5,
+	0.25,
+	0.125,
+}
+
 NDefines.BASE_CAPTURE_EQUIPMENT_RATIO = 0.334	
 
 ---Characters
