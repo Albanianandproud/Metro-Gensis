@@ -730,95 +730,262 @@ focus_tree = {
 	}
 
 	focus = {
-		id = HNZ_reich_stance
-		icon = GFX_RCH_generic
+		id = HNZ_deal_with_PRT
+		icon = GFX_generic_bandit_symbol
 		prerequisite = {
 			focus = HNZ_external_sphere
 		}
-		available = {
-			NOT = { has_war_with = RCH }
-			RCH = { exists = yes }
-		}
-		x = 9
-		y = 1
-		relative_position_id = HNZ_external_sphere
-		cost = 5.8
-
-		completion_reward = {
-			country_event = nf_HNZ.59
-			custom_effect_tooltip = HNZ_reich_relation_decisions
-		}
-
-		ai_will_do = {
-			factor = 2
-			modifier = {
-				factor = 0 
-				has_war_with = RCH
+		available = { 
+			is_neighbor_of = PRT
+			NOT = {
+				is_in_faction_with = PRT
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_trade_with_MOB
-		icon = GFX_TRT_bandit_sitdown
-	
-		prerequisite = {
-			focus = HNZ_external_sphere
-		}
-		x = 5
+		x = 6
 		y = 1
 		relative_position_id = HNZ_external_sphere
 		cost = 6.5
 	
 		completion_reward = {
-			# Decision list to trade with the Mobsters
-			custom_effect_tooltip = HNZ_trade_with_mobsters_tt
+			country_event = { id = nf_HNZ_PRT.1 hours = 18 }
 		}
 
-		ai_will_do = { ## since its an acessory focus. AI does not REQUIRE to comple this focus
+		ai_will_do = {
 			factor = 5
 			modifier = {
-				factor = 0
+				add = 10
+				date > 2028.10.1
+			}
+		}
+	}
+	focus = {
+		id = HNZ_deal_with_PRT_1A
+		icon = GFX_TRT_bandit_sitdown
+		prerequisite = {
+			focus = HNZ_deal_with_PRT
+		}
+		available = { 
+			is_neighbor_of = PRT
+			NOT = {
+				is_in_faction_with = PRT
+			}
+			has_country_flag = PRT_accepts_subjugation
+		}
+		mutually_exclusive = { focus = HNZ_deal_with_PRT_1B }
+		x = 1
+		y = 1
+		relative_position_id = HNZ_deal_with_PRT
+		cost = 5
+	
+		completion_reward = {
+			add_opinion_modifier = {
+				target = PRT
+				modifier = trade_relations_3 
+			}
+			reverse_add_opinion_modifier = {
+				target = PRT
+				modifier = trade_relations_3 
+			}
+			PRT = {
+				capital_scope = {
+					add_resource = {
+						type = scrap
+						amount = 8
+					}
+				}
+			}
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 8
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_deal_with_PRT_1B
+		icon = GFX_generic_bandit_putting_foot_down
+		prerequisite = {
+			focus = HNZ_deal_with_PRT
+		}
+		available = { 
+			is_neighbor_of = PRT
+			NOT = {
+				is_in_faction_with = PRT
+			}
+			has_country_flag = PRT_refuses_subjugation
+		}
+		mutually_exclusive = { focus = HNZ_deal_with_PRT_1A }
+		x = -1
+		y = 1
+		relative_position_id = HNZ_deal_with_PRT
+		cost = 4
+	
+		completion_reward = {
+			add_stability = -0.05
+			add_war_support = 0.025
+
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_2
+				amount = 20
+				producer = RUS
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 5.5
+				PRT = { is_ai = no }
+			}
+		}
+	}
+	focus = {
+		id = HNZ_deal_with_PRT_2A
+		icon = GFX_generic_banditry
+		prerequisite = {
+			focus = HNZ_deal_with_PRT_1A
+		}
+		available = { 
+			is_neighbor_of = PRT
+			NOT = {
+				is_in_faction_with = PRT
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = HNZ_deal_with_PRT_1A
+		cost = 5
+	
+		completion_reward = {
+			## Execute event to deal with PRT
+			puppet = PRT
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = HNZ_deal_with_PRT_2B
+		icon = GFX_HNZ_prepatory_effort
+		prerequisite = {
+			focus = HNZ_deal_with_PRT_1B
+		}
+		available = { 
+			is_neighbor_of = PRT
+			NOT = {
+				is_in_faction_with = PRT
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = HNZ_deal_with_PRT_1B
+		cost = 6.5
+	
+		will_lead_to_war_with = PRT
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = PRT
+				generator = { 368 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				add = 5.5
+				PRT = { is_ai = no }
+			}
+		}
+	}
+	focus = {
+		id = HNZ_deal_with_PRT_3
+		icon = GFX_HNZ_prospekt_mira
+		prerequisite = {
+			focus = HNZ_deal_with_PRT_2A
+			focus = HNZ_deal_with_PRT_2B
+		}
+		available = { 
+			NOT = {
+				has_war_with = PRT
+			}
+			253 = {
 				OR = {
-					has_war_with = MOB
-					has_opinion = {
-						target = MOB
-						value > 5
+					is_owned_by = ROOT
+					owner = { 
+						is_subject_of = ROOT
+					}
+				}
+			}
+			416 = {
+				OR = {
+					is_owned_by = ROOT
+					owner = { 
+						is_subject_of = ROOT
 					}
 				}
 			}
 		}
-	}
-
-	focus = {
-		id = HNZ_redline_stance
-		icon = GFX_RED_the_thing_1
-		prerequisite = {
-			focus = HNZ_external_sphere
-		}
-		available = {
-			NOT = { has_war_with = RED }
-			RED = { exists = yes }
-		}
-		x = 7
-		y = 1
-		relative_position_id = HNZ_external_sphere
-		cost = 5.8
-
+		x = 0
+		y = 3
+		relative_position_id = HNZ_deal_with_PRT
+		cost = 6.5
+	
 		completion_reward = {
-			country_event = nf_HNZ.60
-			custom_effect_tooltip = HNZ_redline_relation_decisions
+			253 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			416 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
-			factor = 2
+			factor = 10
 			modifier = {
-				factor = 0 
-				has_war_with = RED
+				add = 5
+				PRT = {
+					is_ai = NO
+				}
 			}
 		}
 	}
-
 	focus = {
 		id = HNZ_new_friends
 		icon = GFX_generic_support_pec
@@ -826,6 +993,7 @@ focus_tree = {
 			focus = HNZ_external_sphere
 		}
 		available = {
+			has_completed_focus = HNZ_deal_with_PRT_3
 			NOT = { has_war_with = PEC }
 			PEC = {
 				has_opinion = {
@@ -879,6 +1047,7 @@ focus_tree = {
 			focus = HNZ_external_sphere
 		}
 		available = {
+			has_completed_focus = HNZ_deal_with_PRT_3
 			NOT = { has_war_with = KAL }
 			KAL = {
 				has_opinion = {

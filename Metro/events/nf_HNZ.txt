@@ -2885,3 +2885,169 @@ country_event = { ## Civil War
 	}
 }
 
+add_namespace = nf_HNZ_PRT
+
+country_event = { 
+	id = nf_HNZ_PRT.1
+	title = nf_HNZ_PRT.1.t
+	desc = nf_HNZ_PRT.1.d
+	picture = "GFX_event (161)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ_PRT.1.a	## Demand 'Protection'
+		custom_effect_tooltip = nf_HNZ_PRT.1.a.tt
+		PRT = {
+			country_event = { id = nf_HNZ_PRT.2 hours = 18 }
+		}
+
+		ai_chance = {
+		    base = 2
+				
+		    modifier = { 
+				PRT = {
+					is_ai = no
+				}
+				factor = 20
+			}
+		}
+	}
+
+	option = {
+		name = nf_HNZ_PRT.1.b	## No Dealings with Bandits
+		custom_effect_tooltip = nf_HNZ_PRT.1.b.tt
+		PRT = {
+			country_event = { id = nf_HNZ_PRT.3 hours = 18 }
+		}
+
+		ai_chance = {
+		    base = 5
+		}
+	}
+}
+
+country_event = { 	## Hanza Demands 'Protection'
+	id = nf_HNZ_PRT.2
+	title = nf_HNZ_PRT.2.t
+	desc = nf_HNZ_PRT.2.d
+	picture = "GFX_event (224)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ_PRT.2.a	## Accept
+		custom_effect_tooltip = nf_HNZ_PRT.2.a.tt
+		HNZ = {
+			country_event = { id = nf_HNZ_PRT.4 hours = 18 }
+		}
+
+		ai_chance = {
+		    base = 1.5
+			modifier = { 
+				OR = {
+					HNZ = {
+						num_of_military_factories < 16
+					}
+					num_of_military_factories > 5
+				}
+				add = 5
+			}	
+		    modifier = { 
+				strength_ratio = {
+    				tag = HNZ
+    				ratio > 0.2
+				}
+				factor = 0.5
+			}
+		}
+	}
+
+	option = {
+		name = nf_HNZ_PRT.2.b	## Refuse
+		custom_effect_tooltip = nf_HNZ_PRT.2.b.tt
+		HNZ = {
+			country_event = { id = nf_HNZ_PRT.5 hours = 18 }
+		}
+		hidden_effect = {
+			set_country_flag = PRT_HANZA_encroachment_unlock
+		}
+
+		ai_chance = {
+		    base = 1.5
+			modifier = { 
+				OR = {
+					HNZ = {
+						num_of_military_factories > 15
+					}
+					num_of_military_factories < 6
+				}
+				add = 5
+			}
+			modifier = { 
+				date < 2030.1.1
+				add = 5
+			}
+		    modifier = { 
+				strength_ratio = {
+    				tag = HNZ
+    				ratio > 0.21
+				}
+				factor = 0.5
+			}
+		}
+	}
+}
+
+country_event = { ## Hanza seeks to annex us!
+	id = nf_HNZ_PRT.3
+	title = nf_HNZ_PRT.3.t
+	desc = nf_HNZ_PRT.3.d
+	picture = "GFX_event (218)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ_PRT.3.a
+		hidden_effect = {
+			set_country_flag = PRT_HANZA_encroachment_unlock
+		}
+	}
+}
+
+country_event = { ## PRT Accepts
+	id = nf_HNZ_PRT.4
+	title = nf_HNZ_PRT.4.t
+	desc = nf_HNZ_PRT.4.d
+	picture = "GFX_event (126)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ_PRT.4.a
+		hidden_effect = {
+			set_country_flag = PRT_accepts_subjugation
+		}
+	}
+}
+
+country_event = { ## PRT Refuses
+	id = nf_HNZ_PRT.5
+	title = nf_HNZ_PRT.5.t
+	desc = nf_HNZ_PRT.5.d
+	picture = "GFX_event (126)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_HNZ_PRT.5.a
+		hidden_effect = {
+			set_country_flag = PRT_refuses_subjugation
+		}
+	}
+}
