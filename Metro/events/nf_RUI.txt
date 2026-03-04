@@ -41,64 +41,74 @@ country_event = {	## Stortbeker spawns somewhere in the south
 				add_core_of = STB
 				clr_state_flag = STB_starting_point
 			}
+
+			every_possible_country = {
+				limit = {
+					OR = {
+						original_tag = DMD
+						original_tag = AVT
+						original_tag = SEV
+						original_tag = ATQ
+					}
+				}		
+				country_event = { id = nf_metro.4 random_hours = 12 }
+			}
+			RCH = { country_event = { id = nf_metro.5 random_hours = 12 } }
 		}
-		every_possible_country = {
-			limit = {
-				OR = {
-					original_tag = DMD
-					original_tag = AVT
-					original_tag = SEV
-					original_tag = ATQ
-				}
-			}		
-			country_event = { id = nf_metro.4 hours = 12 }
-		}
-		RCH = { country_event = nf_metro.5 }	
 	}
 
 	option = { 
 		name = nf_RUI.1.a
 		RUI = { release = STB }
 		STB = {
-			add_manpower = 35
-            add_offsite_building = { type = arms_factory level = 1 }
+			set_temp_variable = { bullet_to_gain = 200 }
+			add_bullet_with_tooltip_effect = yes
+			add_manpower = 10
             add_equipment_to_stockpile = { type = infantry_equipment amount = 35 }
 			add_field_marshal_role = {
 				character = STB_stortbeker
-				skill = 5
-				attack_skill = 3
+				skill = 2
+				traits = { cruel_personality_trait craven_personality_trait unorthodox_assign_trait  }
+				attack_skill = 2
 				defense_skill = 2
-				planning_skill = 4
-				logistics_skill = 4
+				planning_skill = 2
+				logistics_skill = 2
 			}
-			complete_national_focus = dictatorial_1
-			complete_national_focus = dictatorial_ideology_change
-			hidden_effect = {
-				division_template = {
-					name = "Deathsquad"
-					priority = 1
-					template_counter = 0
-					regiments = {
-						special_forces = { x = 0 y = 0 }
-						special_forces = { x = 0 y = 1 }
-						special_forces = { x = 0 y = 2 }
-						special_forces = { x = 0 y = 3 }
-						special_forces = { x = 0 y = 4 }
-					}
-					support = {
-						field_hospital = { x = 0 y = 0 }
-						gatling_support = { x = 0 y = 1 }
-					}
-				}
+			add_corps_commander_role = {
+				character = STB_orel
+				skill = 1
+				traits = { brave_personality_trait impatient_personality_trait irrational_personality_trait }
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = STB_tod
+				skill = 1
+				traits = { cruel_personality_trait  craven_personality_trait  irrational_personality_trait }
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				character = STB_mykhailo
+				skill = 1
+				traits = { fearless_personality_trait  paranoid_personality_trait  irrational_personality_trait }
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
 			}
 		}
 		ai_chance = {
-			base = 55
+			base = 50
 		}
 	}
 }
 
-country_event = {	## Stortbeker spawns somewhere in the south
+country_event = {
     id = nf_RUI.2
     title = nf_RUI.2.t
     desc = nf_RUI.2.d
