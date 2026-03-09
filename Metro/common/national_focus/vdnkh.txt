@@ -9,7 +9,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 00
 			tag = VDN
 		}
 	}
@@ -118,7 +118,7 @@ focus_tree = {
 				template_counter = 0
 				regiments = {
 					sentries = { x = 0 y = 0 }
-					sentries = { x = 0 y = 1 }
+					sentries = { x = 1 y = 0 }
 				}
 			}
 			capital_scope = {
@@ -167,6 +167,8 @@ focus_tree = {
 		}
 		available = {
 			5 = { is_owned_by = ROOT }
+			set_temp_variable = { has_specific_amount_of_bullet = 25 }
+			has_specific_amount_of_bullet = yes
 		}
 		relative_position_id = VDN_branching_out
 		completion_reward = {
@@ -304,6 +306,7 @@ focus_tree = {
 		relative_position_id = VDN_establish_defensive_watch_3
 		completion_reward = {
 			custom_effect_tooltip = VDNK_botanical
+			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = { id = nf_VDNK.5 hours = 2 }
 		}
 		ai_will_do = {
@@ -417,6 +420,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_social_support
 		completion_reward = {
+			add_stability = 0.05
 			add_tech_bonus = {
 				bonus = 0.5
 				uses = 1
@@ -524,22 +528,17 @@ focus_tree = {
 			focus = VDN_mushroom_tea_industry
 		}
 		available = {
-			custom_trigger_tooltip = {
-			tooltip = bullet_sum_amount
-				check_variable = {
-					bullet > 100
-				}
-			}
+			#has_stability > 0.14
+			set_temp_variable = { has_specific_amount_of_bullet = 100 }
+			has_specific_amount_of_bullet = yes
 			has_civic_education_higher_2 = yes
-		}
-		select_effect = {
-			set_temp_variable = { bullet_to_gain = -100 }
 		}
 		relative_position_id = VDN_mushroom_tea_industry
 		completion_reward = {
 			add_ideas = VDN_pig_sty
+			set_temp_variable = { bullet_to_gain = -100 }
 			capital_scope = { 
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -558,17 +557,11 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		available = {
-			custom_trigger_tooltip = {
-			tooltip = bullet_sum_amount
-				check_variable = {
-					bullet > 200
-				}
-			}
+			set_temp_variable = { has_specific_amount_of_bullet = 200 }
+			has_specific_amount_of_bullet = yes
 			has_civic_education_higher_2 = yes
 		}
 		select_effect = {
-			set_temp_variable = { bullet_to_gain = -200 }
-			add_bullet_with_tooltip_effect = yes
 			hidden_effect = { country_event = { id = nf_VDNK.3 days = 14 } }
 		}
 		prerequisite = {
@@ -576,6 +569,8 @@ focus_tree = {
 		}
 		relative_position_id = VDN_establish_libraries
 		completion_reward = {
+			set_temp_variable = { bullet_to_gain = -200 }
+			add_bullet_with_tooltip_effect = yes
 			custom_effect_tooltip = VDN_trade_for_research
 		}
 		ai_will_do = {
@@ -736,7 +731,7 @@ focus_tree = {
 		relative_position_id = VDN_citizens_to_work
 		completion_reward = {
 			capital_scope = {
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = salvage_hub
 					level = 1
@@ -851,17 +846,18 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = VDN_resources
 			capital_scope = {
+				add_extra_state_shared_building_slots = 2
 				add_resource = {
 					type = scrap
-					amount = 2
+					amount = 3
 				}
 				add_resource = {
 					type = alloys
-					amount = 2
+					amount = 3
 				}
 				add_resource = {
 					type = electronics
-					amount = 2
+					amount = 3
 				}
 			}
 			country_event = { id = nf_VDNK.2 days = 2 }
@@ -1670,6 +1666,10 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_threat_from_botanical
+		}
+		available = {
+			set_temp_variable = { has_specific_amount_of_bullet = 50 }
+			has_specific_amount_of_bullet = yes
 		}
 		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
@@ -2560,8 +2560,8 @@ focus_tree = {
 	focus = {
 		id = VDN_novo_homo
 		icon = GFX_VDN_flag
-		x = 6
-		y = 10
+		x = 5
+		y = 14
 		cost = 6.5
 		available = {
 			always = no
@@ -2736,7 +2736,7 @@ focus_tree = {
 	focus = {
 		id = VDN_macrophage
 		icon = GFX_VDN_flag
-		x = 7
+		x = 8
 		y = 0
 		cost = 6.5
 		available = {
@@ -2930,7 +2930,7 @@ focus_tree = {
 	focus = {
 		id = VDN_artyom
 		icon = GFX_VDN_flag
-		x = -1
+		x = -2
 		y = 2
 		cost = 6.5
 		prerequisite = {
@@ -2947,8 +2947,8 @@ focus_tree = {
 	focus = {
 		id = VDN_the_tower
 		icon = GFX_VDN_flag
-		x = 2
-		y = 1
+		x = 0
+		y = 2
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_homo_3
@@ -2958,7 +2958,7 @@ focus_tree = {
 			focus = VDN_eliminate_dark_ones
 			focus = VDN_artyom
 		}
-		relative_position_id = VDN_homo_3
+		relative_position_id = VDN_artyom
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -2970,7 +2970,7 @@ focus_tree = {
 		id = VDN_humanitys_fate
 		icon = GFX_VDN_flag
 		x = 0
-		y = 1
+		y = 2
 		cost = 1
 		available = {
 			always = no
@@ -2996,7 +2996,7 @@ focus_tree = {
 	focus = {
 		id = VDN_and_nothing_was_learned
 		icon = GFX_VDN_flag
-		x = 4
+		x = 5
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -3095,7 +3095,7 @@ focus_tree = {
 	focus = {
 		id = VDN_genesis
 		icon = GFX_VDN_flag
-		x = -3
+		x = -4
 		y = 1
 		cost = 6.5
 		prerequisite = {
@@ -3185,6 +3185,253 @@ focus_tree = {
 			focus = VDN_and_now
 		}
 		relative_position_id = VDN_the_dark_ones_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	## VDKH Form Branch
+
+	focus = {
+		id = VDN_commonwealth_formed_focus_1
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		relative_position_id = VDN_commonwealth_telecommunications_5
+		allow_branch = { 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
+		completion_reward = {
+			army_experience = 20
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_2
+		icon = GFX_VDN_flag
+		x = -6
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_1
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_3
+		icon = GFX_VDN_flag
+		x = 5
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_1
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_1
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_1
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_2
+		icon = GFX_VDN_flag
+		x = -2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_1
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_3
+		icon = GFX_VDN_flag
+		x = 2
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_1
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_1
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_4
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_3
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_5
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_3
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_3
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_6
+		icon = GFX_VDN_flag
+		x = -1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_2
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_7
+		icon = GFX_VDN_flag
+		x = 1
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_2
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_2
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_8
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_7
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_7
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_9
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_5
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_5
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_commonwealth_formed_focus_4_economic_10
+		icon = GFX_VDN_flag
+		x = 0
+		y = 4
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_9
+		}
+		prerequisite = {
+			focus = VDN_commonwealth_formed_focus_4_economic_8
+		}
+		available = {
+		}
+		relative_position_id = VDN_commonwealth_formed_focus_4_economic_1
 		completion_reward = {
 		}
 		ai_will_do = {

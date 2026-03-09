@@ -48,7 +48,7 @@ HUL_war_with_aviators_category = {
 					39 = {
 						set_victory_points = {
 							province = 3743
-							value = 5
+							value = 1
 						}
 
 						add_extra_state_shared_building_slots = 1
@@ -60,18 +60,21 @@ HUL_war_with_aviators_category = {
 					}
 
 					AVV = {
-						add_equipment_to_stockpile = {
-							type = conventional_infantry_equipment_1
-							amount = 15
-							producer = RUS
+						if = {
+							limit = {
+								HUL = { is_ai = no }
+							}
+							add_equipment_to_stockpile = {
+								type = conventional_infantry_equipment_1
+								amount = 15
+								producer = RUS
+							}
+							add_equipment_to_stockpile = {
+								type = special_forces_equipment_2 
+								amount = 15
+								producer = RUS
+							}
 						}
-					
-						add_equipment_to_stockpile = {
-							type = special_forces_equipment_2 
-							amount = 15
-							producer = RUS
-						}
-
 						create_operative_leader = {
 							name = AVV_baliff_name
 							GFX = "gfx/leaders/AVV/AVV_baliff.dds"
