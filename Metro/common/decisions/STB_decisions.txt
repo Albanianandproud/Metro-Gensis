@@ -1,0 +1,144 @@
+
+STB_education_decision_category = {
+
+	STB_education_adopt_research_decision = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = STB_research_renovate_enable_tooltip
+
+				NOT = { has_country_flag = STB_research_cooldown }
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = STB_research_cooldown
+			}
+		}
+
+		cost = 100
+		days_remove = 1
+		days_re_enable = 0
+
+		complete_effect = {
+			activate_decision = STB_education_renovate_research_mission
+		}
+	}
+
+	STB_education_renovate_research_mission = {
+		
+		visible = {
+			always = no 
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+
+			## Check var of raided targets
+
+			custom_trigger_tooltip = {
+				tooltip = STB_raids_tooltip
+				check_variable = {
+					var = STB_raids_variable
+					value = STB_raids_value
+					compare = greater_than_or_equals
+				}
+			}
+		}
+
+		priority = 1001
+
+		cost = 0
+		days_remove = 7 
+
+		complete_effect = {
+			## their method of improving research rate
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	STB_questionable_ethics_research_decision = {
+		### Parent decision where all succes/fail var edits are made
+		cost = 100
+		days_remove = 14
+		days_re_enable = 0
+
+		complete_effect = {
+			STB_questionable_ethics_scripted_effect = yes
+		}
+	}
+
+	STB_questionable_ethics_ubermensch_timed_decision = {
+	}
+
+	STB_questionable_ethics_ubermensch_decision = {
+
+		available = {
+			#custom_trigger_tooltip = {
+			#	tooltip = STB_ubermensch_unlock_flag
+			#	has_country_flag = STB_ubermensch_unlock_flag
+			#}
+
+			has_manpower > 9
+		}
+
+		#visible = {
+		#	hidden_trigger = { has_country_flag = STB_ubermensch_unlock_flag }
+		#}
+
+		cost = 100
+		days_remove = 14
+		days_re_enable = 0
+
+		remove_effect = {
+			## success do dynamic modifier
+			STB_ubermensch_projekt_scripted_effect = yes
+		}
+
+		complete_effect = {
+			add_manpower = -10
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	STB_questionable_ethics_cloning_decision = {
+
+		available = {
+			#custom_trigger_tooltip = {
+			#	tooltip = STB_cloning_unlock_flag
+			#	has_country_flag = STB_cloning_unlock_flag
+			#}
+
+			has_manpower > 9
+		}
+
+		#visible = {
+		#	hidden_trigger = { has_country_flag = STB_cloning_unlock_flag }
+		#}
+
+		cost = 100
+		days_remove = 14
+		days_re_enable = 0
+
+		remove_effect = {
+			## success do dynamic modifier
+			STB_cloning_projekt_scripted_effect = yes
+		}
+
+		complete_effect = {
+			add_manpower = -10
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+	}
+}
+
