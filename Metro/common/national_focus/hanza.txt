@@ -725,7 +725,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 20
+			factor = 350
 		}
 	}
 
@@ -816,8 +816,8 @@ focus_tree = {
 			is_neighbor_of = PRT
 			NOT = {
 				is_in_faction_with = PRT
+				has_country_flag = PRT_accepts_subjugation 
 			}
-			has_country_flag = PRT_refuses_subjugation
 		}
 		mutually_exclusive = { focus = HNZ_deal_with_PRT_1A }
 		x = -1
@@ -827,7 +827,7 @@ focus_tree = {
 	
 		completion_reward = {
 			add_stability = -0.05
-			add_war_support = 0.025
+			add_war_support = 0.05
 
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_2
@@ -837,9 +837,9 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			factor = 15
 			modifier = {
-				add = 250
+				add = 15
 				PRT = { is_ai = no }
 			}
 		}
@@ -894,13 +894,21 @@ focus_tree = {
 				target = PRT
 				generator = { 368 }
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_timed_idea = {
+				idea = HNZ_cleanse_PRT_idea days = 90
+			}
 		}
 
 		ai_will_do = {
-			factor = 5
+			factor = 15
 			modifier = {
-				add = 250
+				add = 15
 				PRT = { is_ai = no }
+			}
+			modifier = {
+				factor = 0.5
+				has_war_support < 0.17
 			}
 		}
 	}
