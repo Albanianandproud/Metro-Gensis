@@ -18,7 +18,7 @@ focus_tree = {
 		icon = GFX_RCH_vanguard_militia
 		x = 0
 		y = 0
-		cost = 6.5
+		cost = 2
 		available = {
 		}
 		completion_reward = {
@@ -629,6 +629,9 @@ focus_tree = {
 		icon = GFX_RCH_expedition
 		prerequisite = { focus = STB_focus_12A  focus = STB_focus_12C focus = STB_focus_12B }
 		mutually_exclusive = { focus = STB_focus_13A }
+		available = {
+			has_country_flag = STB_todorov_mutant_infantry_flag
+		}
 		x = -1
 		y = 1
 		cost = 6.5
@@ -639,6 +642,47 @@ focus_tree = {
 				remove_idea = STB_genetic_supremacy
 				add_idea = STB_genetic_supremacy_allow_mutants
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = STB_focus_13B_flag
+			effect_tooltip = {
+				division_template = {
+					name = "Nachtjäger"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						mutant_infantry = { x = 0 y = 0 }
+						mutant_infantry = { x = 1 y = 0 }
+						mutant_infantry = { x = 2 y = 0 }
+						mutant_infantry = { x = 3 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Infantry\" division_template = \"Nachtjäger\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+			hidden_effect= {
+				division_template = {
+					name = "Nachtjäger"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						mutant_infantry = { x = 0 y = 0 }
+						mutant_infantry = { x = 1 y = 0 }
+						mutant_infantry = { x = 2 y = 0 }
+						mutant_infantry = { x = 3 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Infantry\" division_template = \"Nachtjäger\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+
 		}
 		ai_will_do = {
 			factor = 10
@@ -647,12 +691,12 @@ focus_tree = {
 	focus = {
 		id = STB_focus_14
 		icon = GFX_RCH_expedition
-		prerequisite = { focus = STB_focus_10C }
+		prerequisite = { focus = STB_focus_10C focus = STB_focus_9B }
 		available = {
 			is_neighbor_of = PVL
 			has_war_support > 0.49
 		}
-		x = 0
+		x = -1
 		y = 1
 		cost = 6.5
 		relative_position_id = STB_focus_10C
@@ -725,7 +769,7 @@ focus_tree = {
 		}
 		x = 18
 		y = 0
-		cost = 6.5
+		cost = 3
 		completion_reward = {
 			add_ideas = STB_1
 		}
@@ -742,7 +786,7 @@ focus_tree = {
 		}
 		x = 20
 		y = 0
-		cost = 6.5
+		cost = 3
 		completion_reward = {
 			add_ideas = STB_2
 		}
@@ -754,12 +798,18 @@ focus_tree = {
 		id = STB_internal_focus_2A
 		icon = GFX_RCH_elitearmy
 		prerequisite = { focus = STB_internal_focus_1A focus = STB_internal_focus_1B }
+		available = {
+			has_completed_focus = STB_political_focus_path_1
+		}
 		x = -3
 		y = 1
 		cost = 6.5
 		relative_position_id = STB_internal_focus_1A
 		completion_reward = {
 			add_manpower = 15
+
+			custom_effect_tooltip = STB_internal_focus_2A_tt
+			country_event = { id = nf_STB_supplies.1 days = 180 }
 		}
 		ai_will_do = {
 			factor = 10
@@ -769,6 +819,9 @@ focus_tree = {
 		id = STB_internal_focus_2B
 		icon = GFX_RCH_stockpile
 		prerequisite = { focus = STB_internal_focus_1A focus = STB_internal_focus_1B }
+		available = {
+			has_completed_focus = STB_political_focus_path_1
+		}
 		x = -1
 		y = 1
 		cost = 6.5
@@ -779,6 +832,9 @@ focus_tree = {
 				amount = 15
 				producer = RUS
 			}
+
+			custom_effect_tooltip = STB_internal_focus_2B_tt
+			country_event = { id = nf_STB_supplies.2 days = 180 }
 		}
 		ai_will_do = {
 			factor = 10
@@ -788,6 +844,9 @@ focus_tree = {
 		id = STB_internal_focus_2C
 		icon = GFX_equipment_electrical
 		prerequisite = { focus = STB_internal_focus_1A focus = STB_internal_focus_1B }
+		available = {
+			has_completed_focus = STB_political_focus_path_1
+		}
 		x = 1
 		y = 1
 		cost = 6.5
@@ -798,6 +857,9 @@ focus_tree = {
 				amount = 15
 				producer = RUS
 			}
+
+			custom_effect_tooltip = STB_internal_focus_2C_tt
+			country_event = { id = nf_STB_supplies.3 days = 180 }
 		}
 		ai_will_do = {
 			factor = 10
@@ -807,6 +869,9 @@ focus_tree = {
 		id = STB_internal_focus_2D
 		icon = GFX_generic_defences_2
 		prerequisite = { focus = STB_internal_focus_1A focus = STB_internal_focus_1B }
+		available = {
+			has_completed_focus = STB_political_focus_path_1
+		}
 		x = 3
 		y = 1
 		cost = 6.5
@@ -817,6 +882,9 @@ focus_tree = {
 				amount = 15
 				producer = RUS
 			}
+
+			custom_effect_tooltip = STB_internal_focus_2D_tt
+			country_event = { id = nf_STB_supplies.4 days = 180 }
 		}
 		ai_will_do = {
 			factor = 10
@@ -1145,15 +1213,29 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_1
-		icon = GFX_RCH_expedition
+		icon = GFX_RCH_commander2
 		available = {
 			has_completed_focus = STB_focus_2
 		}
 		x = 9
 		y = 0
-		cost = 6.5
+		cost = 2
 		completion_reward = {
 			country_event = { id = nf_STB.3 random_hours = 12 }
+
+			if = {
+				limit = {
+					has_intelligence_agency = no
+
+					AND = {
+						has_dlc = "La Resistance"
+					}
+				}
+				create_intelligence_agency = {
+					name = "Wolfsnetzwerk"
+					icon = GFX_intelligence_agency_logo_agency
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1161,8 +1243,13 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_2
-		icon = GFX_RCH_expedition
+		icon = GFX_RCH_science
 		prerequisite = { focus = STB_political_focus_path_1 }
+		available = {
+			STB_todorov = {
+				is_hired_as_advisor = yes
+			}
+		}
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1176,13 +1263,17 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_3
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_strength
 		prerequisite = { focus = STB_political_focus_path_2 }
+		available = {
+			has_civic_education_higher_3 = yes
+		}
 		x = -2
 		y = 1
 		cost = 6.5
 		relative_position_id = STB_political_focus_path_2
 		completion_reward = {
+			add_ideas = STB_research_superstrength_1
 		}
 		ai_will_do = {
 			factor = 10
@@ -1190,16 +1281,26 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_4
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_needle
 		prerequisite = { focus = STB_political_focus_path_2 }
+		available = {
+			has_civic_education_higher_3 = yes
+		}
 		x = 2
 		y = 1
 		cost = 6.5
 		relative_position_id = STB_political_focus_path_2
 		completion_reward = {
+			add_tech_bonus = {
+				name = guns
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = health
+			}
 			add_equipment_to_stockpile = {
 				type = support_equipment
-				amount = 25
+				amount = 30
 				producer = RUS
 			}
 		}
@@ -1209,8 +1310,11 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_5
-		icon = GFX_RCH_expedition
+		icon = GFX_RCH_barrikadnaya_core
 		prerequisite = { focus = STB_political_focus_path_2 }
+		available = {
+			has_civic_education_higher_4 = yes
+		}
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1224,13 +1328,20 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_6
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_strength
 		prerequisite = { focus = STB_political_focus_path_3 }
+		available = {
+			has_civic_education_higher_4 = yes
+		}
 		x = 0
 		y = 1
 		cost = 6.5
 		relative_position_id = STB_political_focus_path_3
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = STB_research_superstrength_1
+				add_idea = STB_research_superstrength_2
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1238,8 +1349,11 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_7
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_needle
 		prerequisite = { focus = STB_political_focus_path_4 }
+		available = {
+			has_civic_education_higher_4 = yes
+		}
 		x = 0
 		y = 1
 		cost = 6.5
@@ -1254,9 +1368,12 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_8
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_DNA
 		prerequisite = { focus = STB_political_focus_path_5 }
 		prerequisite = { focus = STB_political_focus_path_6 focus = STB_political_focus_path_7 }
+		available = {
+			has_civic_education_higher_4 = yes
+		}
 		x = 0
 		y = 2
 		cost = 6.5
@@ -1270,8 +1387,11 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_9
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_supersoldat
 		prerequisite = { focus = STB_political_focus_path_8 }
+		available = {
+			has_civic_education_higher_5 = yes
+		}
 		x = 0
 		y = 2
 		cost = 6.5
@@ -1285,8 +1405,11 @@ focus_tree = {
 	}
 	focus = {
 		id = STB_political_focus_path_10
-		icon = GFX_RCH_expedition
+		icon = GFX_STB_questionable_ethics
 		prerequisite = { focus = STB_political_focus_path_9 }
+		available = {
+			has_civic_education_higher_5 = yes
+		}
 		x = 0
 		y = 2
 		cost = 6.5

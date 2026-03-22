@@ -19,7 +19,7 @@ country_event = {
 				level = 1
 			}
 		}
-		country_event = { id = nf_STB.2 random_hours = 12 }
+		country_event = { id = nf_STB.2 random_days = 20 }
 	}
 }
 
@@ -46,6 +46,8 @@ country_event = {
 
 	option = {
 		name = nf_STB.3.a
+		custom_effect_tooltip = available_theorist
+		show_ideas_tooltip = STB_todorov
 	}
 }
 
@@ -59,6 +61,22 @@ country_event = {
 
 	option = {
 		name = nf_STB.4.a
+		country_event = { id = nf_STB_todorov.1 random_days = 80 }
+		trigger = {
+			NOT = {
+				has_completed_focus = STB_focus_13B
+			}
+		}
+		add_stability = -0.05
+		random_owned_controlled_state = {
+			limit = { state_population > 14 }
+			add_manpower = -15
+		}
+	}
+
+	option = {
+		name = nf_STB.4.b
+		add_political_power = 100
 	}
 }
 
@@ -67,6 +85,12 @@ country_event = {
     title = nf_STB.5.t
     desc = nf_STB.5.d
     picture = "GFX_event (142)"
+
+	immediate = {
+		hidden_effect = {
+			STB_ubermensch_projekt_initiate_vars = yes
+		}
+	}
 
 	is_triggered_only = yes
 
@@ -96,7 +120,125 @@ country_event = {
 
 	is_triggered_only = yes
 
+	immediate = {
+		hidden_effect = {
+			STB_cloning_projekt_initiate_vars = yes
+		}
+	}
+
 	option = {
 		name = nf_STB.7.a
+
+		set_country_flag = unlock_industry_cloning_tech
+		custom_effect_tooltip = unlock_industry_cloning
+	}
+}
+
+add_namespace = nf_STB_todorov
+
+country_event = {	
+    id = nf_STB_todorov.1
+    title = nf_STB_todorov.1.t
+    desc = nf_STB_todorov.1.d
+    picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_STB_todorov.1.a
+
+		hidden_effect = { set_country_flag = STB_todorov_mutant_infantry_flag }
+		set_technology = {
+    		human_mutant_infantry_unlock_tech = 1
+		}
+
+		division_template = {
+			name = "Nachtjäger"
+			priority = 1
+			is_locked = yes
+			template_counter = 0
+			regiments = {
+				mutant_infantry = { x = 0 y = 0 }
+				mutant_infantry = { x = 1 y = 0 }
+				mutant_infantry = { x = 2 y = 0 }
+				mutant_infantry = { x = 3 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Infantry\" division_template = \"Nachtjäger\" start_experience_factor = 0.85 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+}
+
+add_namespace = nf_STB_supplies
+
+country_event = {	
+    id = nf_STB_supplies.1
+    title = nf_STB_supplies.1.t
+    desc = nf_STB_supplies.1.d
+    picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_STB_supplies.1.a
+		add_manpower = 15
+	}
+}
+
+country_event = {	
+    id = nf_STB_supplies.2
+    title = nf_STB_supplies.2.t
+    desc = nf_STB_supplies.2.d
+    picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_STB_supplies.2.a
+		add_equipment_to_stockpile = {
+			type = scrap_infantry_equipment_2
+			amount = 15
+			producer = RUS
+		}
+	}
+}
+
+country_event = {	
+    id = nf_STB_supplies.3
+    title = nf_STB_supplies.3.t
+    desc = nf_STB_supplies.3.d
+    picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_STB_supplies.3.a
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 15
+			producer = RUS
+		}
+	}
+}
+
+country_event = {	
+    id = nf_STB_supplies.4
+    title = nf_STB_supplies.4.t
+    desc = nf_STB_supplies.4.d
+    picture = "GFX_event (142)"
+
+	is_triggered_only = yes
+
+	option = {
+		name = nf_STB_supplies.4.a
+		add_equipment_to_stockpile = {
+			type = gatling_equipment_1
+			amount = 15
+			producer = RUS
+		}
 	}
 }

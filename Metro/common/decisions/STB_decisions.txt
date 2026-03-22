@@ -29,7 +29,7 @@ STB_education_decision_category = {
 	STB_education_renovate_research_mission = {
 		
 		visible = {
-			always = no 
+			#always = no 
 		}
 
 		available = {
@@ -39,9 +39,9 @@ STB_education_decision_category = {
 
 			custom_trigger_tooltip = {
 				tooltip = STB_raids_tooltip
-				check_variable = {
-					var = STB_raids_variable
-					value = STB_raids_value
+				check_variable = { 
+					var = STB_raids_value
+					value = STB_raids_variable
 					compare = greater_than_or_equals
 				}
 			}
@@ -73,6 +73,36 @@ STB_education_decision_category = {
 	}
 
 	STB_questionable_ethics_ubermensch_timed_decision = {
+	}
+
+	STB_questionable_supersoldaten_decision = {
+
+		available = {
+			#custom_trigger_tooltip = {
+			#	tooltip = STB_ubermensch_unlock_flag
+			#	has_country_flag = STB_ubermensch_unlock_flag
+			#}
+		}
+
+		#visible = {
+		#	hidden_trigger = { has_country_flag = STB_ubermensch_unlock_flag }
+		#}
+
+		cost = 100
+		days_remove = 14
+		days_re_enable = 0
+
+		remove_effect = {
+			## success do dynamic modifier
+			STB_supersoldaten_projekt_scripted_effect = yes
+		}
+
+		complete_effect = {
+		}
+
+		ai_will_do = {
+			base = 20
+		}
 	}
 
 	STB_questionable_ethics_ubermensch_decision = {
@@ -108,20 +138,49 @@ STB_education_decision_category = {
 		}
 	}
 
-	STB_questionable_ethics_cloning_decision = {
+	STB_questionable_ethics_cloning_launcher_decision = {
 
 		available = {
-			#custom_trigger_tooltip = {
-			#	tooltip = STB_cloning_unlock_flag
-			#	has_country_flag = STB_cloning_unlock_flag
-			#}
+			custom_trigger_tooltip = {
+				tooltip = STB_cloning_unlock_flag
+				has_country_flag = STB_cloning_unlock_flag
+			}
 
-			has_manpower > 9
+			## Need to own a military complex state_category. 
+			## Either D6 / Moscow University or a Metro-2 state
+
+			## Completion reward unlocks cloning
 		}
 
-		#visible = {
-		#	hidden_trigger = { has_country_flag = STB_cloning_unlock_flag }
-		#}
+		visible = {
+			hidden_trigger = { has_country_flag = STB_cloning_unlock_flag }
+		}
+
+		cost = 0
+		days_remove = 7
+		days_re_enable = 0
+
+		remove_effect = {
+			## Initiate
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	STB_questionable_ethics_cloning_finisher_decision = {
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = STB_cloning_unlock_flag
+				has_country_flag = STB_cloning_unlock_flag
+			}
+		}
+
+		visible = {
+			hidden_trigger = { has_country_flag = STB_cloning_unlock_flag }
+		}
 
 		cost = 100
 		days_remove = 14

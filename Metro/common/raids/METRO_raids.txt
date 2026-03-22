@@ -14,45 +14,30 @@ types = {
 
      	unit_model = { entity = RCH_special_forces_entity }
 
-     	command_power = 50
+     	command_power = 25
 
      	fire_only_once = no
 
      	visible = { always = yes }
 
-     	show_target = {
-			FROM = {
-				NOT = {
-					has_country_flag = is_mutant_nation
-					has_country_flag = is_savage_nation
-					original_tag = RUI
-					original_tag = SUF
-					original_tag = GWC
-
-					is_in_faction_with = ROOT
-					is_subject_of = ROOT
-
-					has_idea = metro_thump_in_the_night
-				}
-
-				has_opinion = {
-    				target = ROOT
-    				value < 11
-				}
-			}
+		show_target = {
+			NOT = { is_in_faction_with = FROM }
 		}
-
+	
 		available = {
-			has_war = no
-			
-			FROM = {
-				has_war = no
+			NOT = {
+				is_in_faction_with = FROM
 			}
 		}
-
+	
 		launchable = {
 			NOT = { has_war_with = FROM }
+			var:target_state = {
+				NOT = { has_state_category = pastoral }
+			}
 		}
+
+		allowed = {}
 
 		starting_point = {
 		    building_types = { supply_node }
@@ -71,23 +56,33 @@ types = {
 		}
 
 		target_type = {
-			building = {
-				type = supply_node
+			
+			state = {
+				state_population > 49
+
+				controller = {
+					NOT = {
+						has_country_flag = is_savage_nation
+						has_country_flag = is_mutant_nation
+						original_tag = RUI
+						original_tag = MUT
+					}
+				}
 			}
 		}
 
 		success_factors = {
 			success = {
-				base = 0.65
+				base = 0.5
 				# Raiding unit modifiers
 				experience = {
-					weight = 0.2
-					start_weight = -0.2
+					weight = 0.1
+					start_weight = -0.1
 					reference = 1.0
 				}
 				organisation = {
-					weight = 0.15
-					start_weight = -0.15
+					weight = 0.1
+					start_weight = -0.1
 					reference = 100
 				}
 				strength = {
@@ -96,20 +91,22 @@ types = {
 					reference = 1
 				}
 				recon = {
-					weight = 0.1
+					weight = 0.25
+					start_weight = -0.1
 					reference = 10
 				}
 				resistance = {
-					reference = 100
-					start_reference = 15
-					weight = 0.4
+					weight = 0.25
+					start_weight = -0.1
+					reference = 10
 				}
 				enemy_units = {
+					weight = -0.25
 					reference = 4 
-					weight = -0.4
 				}
 				intel = {
-					weight = 0.25
+					weight = 0.4
+					start_weight = -0.1
 					reference = 100
 				}
 			}
@@ -117,18 +114,6 @@ types = {
 
 		success_levels = {
 			failure = {
-			    victim_effects = {
-					var:target_state = {
-						IF = {
-							limit = { supply_node > 0 }
-							damage_building = {
-								type = supply_node
-								damage = 1 # levels of damage
-								province = var:ROOT.target_province
-							}
-						}
-					}
-			    }
 				actor_effects = {
 					# Damage to unit
 					raid_damage_units = {
@@ -136,13 +121,6 @@ types = {
 						str_damage = 0.5
 						ratio = yes
 					}
-					# Unit Experience
-					raid_add_unit_experience = 0.05
-					add_raid_history_entry = yes
-				}
-				# Other unit effects
-				division_effects = {
-					add_divisional_commander_xp = 150
 				}
 				visual_effect = {
 					entity = "raid_failed_entity"
@@ -150,35 +128,19 @@ types = {
 				}
 			}
 			limited_success = {
-			    victim_effects = {
-					var:target_state = {
-						IF = {
-							limit = { supply_node > 0 }
-							damage_building = {
-								type = supply_node
-								damage = 1 # levels of damage
-								province = var:ROOT.target_province
-								repair_speed_modifier = -0.1
-							}
-						}
-					}
-				}
 				actor_effects = {
-					
-					# Damage to unit
 					raid_damage_units = {
-						org_damage = 0.3
-						str_damage = 0.2
+						org_damage = 0.25
+						str_damage = 0.25
 						ratio = yes
 					}
-
 					# Unit Experience
-					raid_add_unit_experience = 0.15
+					raid_add_unit_experience = 0.1
 					add_raid_history_entry = yes
 				}
 				# Other unit effects
 				division_effects = {
-					add_divisional_commander_xp = 150
+					add_divisional_commander_xp = 50
 				}
 				visual_effect = {
 					entity = "land_raids_limited_success_entity"
@@ -201,23 +163,23 @@ types = {
 					}
 				}
 				actor_effects = {
-					# Damage to unit
 					raid_damage_units = {
-						org_damage = 0.45
-						str_damage = 0.2
+						org_damage = 0.25
+						str_damage = 0.25
 						ratio = yes
 					}
-
 					# Unit Experience
-					raid_add_unit_experience = 0.2
+					raid_add_unit_experience = 0.1
 					add_raid_history_entry = yes
+
+					STB_research_raid_scripted_effect = yes
 				}
 				# Other unit effects
 				division_effects = {
-					add_divisional_commander_xp = 150
+					add_divisional_commander_xp = 50
 				}
 				visual_effect = {
-					entity = "land_raids_success_entity"
+					entity = "land_raids_limited_success_entity"
 					animation = "attack"
 				}
 			}
@@ -236,25 +198,20 @@ types = {
 					}
 				}
 				actor_effects = {
-					# Damage to unit
 					raid_damage_units = {
 						org_damage = 0.25
-						str_damage = 0.15
+						str_damage = 0.25
 						ratio = yes
 					}
-
-					var:actor_country = {
-						custom_effect_tooltip = steal_research_raid_critical_success_tt
-						add_political_power = 10
-					}
-					
 					# Unit Experience
-					raid_add_unit_experience = 0.35
+					raid_add_unit_experience = 0.15
 					add_raid_history_entry = yes
+
+					STB_research_raid_scripted_effect = yes
 				}
 				# Other unit effects
 				division_effects = {
-					add_divisional_commander_xp = 250
+					add_divisional_commander_xp = 75
 				}
 				visual_effect = {
 					entity = "land_raids_critical_success_entity"

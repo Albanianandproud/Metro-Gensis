@@ -31,3 +31,69 @@ STB_cloning_projekt_scripted_effect = {
 	custom_effect_tooltip = STB_cloning_projekt_modify_tt
 	add_to_variable = { STB_weekly_manpower = 1 tooltip = weekly_manpower_tt }
 }
+
+STB_supersoldaten_projekt_scripted_effect = {
+
+	## custom_effect_tooltip ## 
+	every_unit_leader = {
+		if = {
+			limit = {
+				has_trait = fainthearted_personality_trait
+			}
+			remove_unit_leader_trait = fainthearted_personality_trait
+		}
+		if = {
+			limit = {
+				has_trait = paranoid_personality_trait
+			}
+			remove_unit_leader_trait = paranoid_personality_trait
+		}
+		if = {
+			limit = {
+				has_trait = irrational_personality_trait
+			}
+			remove_unit_leader_trait = irrational_personality_trait
+		}
+		if = {
+			limit = {
+				has_trait = spineless_personality_trait
+			}
+			remove_unit_leader_trait = spineless_personality_trait
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					has_trait = supersoldaten_personality_trait
+				}
+			}
+			add_trait = {
+				trait = supersoldaten_personality_trait
+			}
+
+			add_skill_level = 1
+		}
+
+		if = {
+			limit = {
+				has_trait = supersoldaten_personality_trait
+			}
+			hidden_effect = { remove_unit_leader_trait = supersoldaten_personality_trait }
+			add_unit_leader_trait = supersoldaten_personality_trait_2
+
+			add_skill_level = 1
+		}
+	}
+}
+
+
+STB_research_raid_scripted_effect = {
+	custom_effect_tooltip = GIOWRHGEW
+	add_political_power = 30
+	set_temp_variable = {
+		STB_add_to_raids_value = 1
+	}
+	add_to_variable = {
+		var = STB_raids_value value = STB_add_to_raids_value
+	}
+}
