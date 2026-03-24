@@ -12,6 +12,7 @@ STB_education_decision_category = {
 		}
 
 		visible = {
+			has_country_flag = STB_can_adopt_research_flag
 			NOT = {
 				has_country_flag = STB_research_cooldown
 			}
@@ -47,13 +48,22 @@ STB_education_decision_category = {
 			}
 		}
 
+		custom_cost_text = STB_raids_cost_text
+		custom_cost_trigger = {
+			check_variable = { 
+				var = STB_raids_value
+				value = STB_raids_variable
+				compare = greater_than_or_equals
+			}
+		}
+
 		priority = 1001
 
-		cost = 0
 		days_remove = 7 
 
 		complete_effect = {
 			## their method of improving research rate
+			set_country_flag = STB_can_adopt_research_flag
 		}
 
 		ai_will_do = {
@@ -73,6 +83,15 @@ STB_education_decision_category = {
 	}
 
 	STB_questionable_ethics_ubermensch_timed_decision = {
+
+		complete_effect = {
+			set_temp_variable = {
+				STB_add_to_raids_value = 1
+			}
+			add_to_variable = {
+				var = STB_raids_value value = STB_add_to_raids_value
+			}
+		}
 	}
 
 	STB_questionable_supersoldaten_decision = {
