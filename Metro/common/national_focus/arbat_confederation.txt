@@ -3,7 +3,7 @@
 
 focus_tree = {
     id = arbat_confederation
-	continuous_focus_position = { x = 6450 y = 150 }
+	continuous_focus_position = { x = 6550 y = 150 }
 	country = {
 		base = 0
 		modifier = {
@@ -18,7 +18,7 @@ focus_tree = {
 		id = ARB_political
 		icon = GFX_HNZ_generic_treaty
 		x = -2
-		y = 1
+		y = 0
 		cost = 3
 		available = {
 			NOT = {
@@ -2111,23 +2111,82 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ARB_restore_tunnel
-		icon = GFX_RCH_tunnel_excavation
-		x = -13
-		y = 7
-		cost = 8.6
+		id = ARB_claim_GWC
+		icon = GFX_generic_door
+		x = 43
+		y = 5
+		cost = 5
 		available = { 
-			date > 2033.01.01
-			444 = {
-				is_owned_by = ROOT
+			OR = {
+				has_war_support > 0.34
+				has_stability > 0.34
 			}
+
+
+			set_temp_variable = { party_popularity_percentage = 0.35 }
+			has_specified_party_popularity = yes
 		}
 		relative_position_id = ARB_political
 		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = partial_economic_mobilisation
+					}
+				}
+				add_ideas = partial_economic_mobilisation
+			}
+			else_if = {
+				limit = {
+					has_idea = partial_economic_mobilisation
+					has_idea = war_economy
+					has_idea = tot_economic_mobilisation
+				}
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 20
+				date > 2033.10.1
+			}
+		}
+	}
+	focus = {
+		id = ARB_restore_tunnel
+		icon = GFX_gates_of_hell
+		x = -2
+		y = 1
+		prerequisite = { focus = ARB_claim_GWC }
+		cost = 6.5
+		available = { 
+			435 = { is_owned_by = ROOT }
+			197 = { is_owned_by = RUI }
+
+			num_of_civilian_factories_available_for_projects > 2
+			is_subject = no
+		}
+		relative_position_id = ARB_claim_GWC
+		select_effect = {
+			add_ideas = YAS_recolonization_efforts
+		}
+		completion_reward = {
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = { add_ideas = YAS_recolonization_efforts }
+			custom_effect_tooltip = generic_skip_one_line_tt
 			197 = { set_demilitarized_zone = no }
 			transfer_state = 197
 			add_state_core = 197
+			custom_effect_tooltip = generic_skip_one_line_tt
 			197 = { set_state_name = STATE_TUN }
+
 			197 = {
 				add_building_construction = {
 					type = infrastructure
@@ -2135,15 +2194,13 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			build_railway = {
-				path = { 3892 4420 3884 }
-			}
-			build_railway = {
-				path = { 3897 4423 3886 }
-			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			build_railway = { path = { 3892 4420 3884 } }
+			build_railway = { path = { 3897 4423 3886 } }
+
 			hidden_effect = {
+				remove_ideas = YAS_recolonization_efforts
 				RUI = { remove_state_core = 197 }
-				GWC = { remove_state_core = 197 }
 			}
 		}
 		ai_will_do = {
@@ -2154,52 +2211,55 @@ focus_tree = {
 			}
 		}
 	}
-
 	focus = {
-		id = ARB_claim_GWC
-		icon = GFX_mutant_death
-		x = -11
-		y = 6
-		cost = 8.6
+		id = ARB_restore_tunnel2
+		icon = GFX_station_entrance
+		x = 2
+		y = 1
+		prerequisite = { focus = ARB_claim_GWC }
+		cost = 6.5
 		available = { 
-			GWC = { exists = yes }
-			date > 2033.01.01
-			is_neighbor_of = GWC
+			has_idea = bump_in_the_night
+			has_war_support > 0.5
+
+			custom_trigger_tooltip = {
+				tooltip = "has_specified_party_popularity"
+				set_temp_variable = { party_popularity_percentage = 0.5 }
+				has_specified_party_popularity = yes
+			}
 		}
-		relative_position_id = ARB_political
+		relative_position_id = ARB_claim_GWC
+		completion_reward = {
+			remove_ideas = bump_in_the_night
+		}
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 20
+				date > 2033.10.1
+			}
+		}
+	}
+	focus = {
+		id = ARB_what_of_them
+		icon = GFX_RCH_trubnaya_core
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = { focus = ARB_claim_GWC }
+		available = {
+			GWC = { exists = yes }
+			OR = {
+				197 = { is_owned_by = ROOT }
+				is_neighbor_of = GWC
+			}
+		}
+		relative_position_id = ARB_claim_GWC
 		completion_reward = {
 			create_wargoal = {
 				type = take_state_focus
 				target = GWC
 			}
-		}
-		ai_will_do = {
-			factor = 0.5
-			modifier = {
-				factor = 20
-				date > 2033.10.1
-			}
-		}
-	}
-
-	focus = {
-		id = ARB_what_of_them
-		icon = GFX_RCH_trubnaya_core
-		x = 0
-		y = 1
-		cost = 6.5
-
-		prerequisite = {
-			focus = ARB_claim_GWC
-		}
-		available = {
-			334 = {
-				is_owned_by = ROOT
-			}
-		}
-		relative_position_id = ARB_claim_GWC
-		completion_reward = {
-			country_event = nf_ARB.11
 		}
 		ai_will_do = {
 			factor = 3
@@ -2211,7 +2271,7 @@ focus_tree = {
 		icon = GFX_camp
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 5
 
 		prerequisite = {
 			focus = ARB_what_of_them
@@ -2220,12 +2280,41 @@ focus_tree = {
 			334 = {
 				is_owned_by = ROOT
 			}
+			NOT = {
+				has_war_with = GWC
+			}
 		}
 		relative_position_id = ARB_what_of_them
+	
+		completion_reward = {
+			country_event = nf_ARB.11
+		}
+
 		ai_will_do = {
 			factor = 3
 		}
+	}
 
+	focus = {
+		id = ARB_what_of_them3
+		icon = GFX_stalker1
+		x = 0
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = ARB_what_of_them2
+		}
+		available = {
+			334 = {
+				is_owned_by = ROOT
+			}
+			NOT = {
+				has_war_with = GWC
+			}
+		}
+		relative_position_id = ARB_what_of_them2
+	
 		completion_reward = {
 			effect_tooltip = {
 				every_owned_state = {
@@ -2233,12 +2322,14 @@ focus_tree = {
 						is_core_of = GWC
 						is_owned_by = ARB
 					}
-					add_core_of = PREV
+					add_compliance = 35
+					add_extra_state_shared_building_slots = 2
 				}
 				GWC = {
 					every_owned_state = {
 						limit = { is_core_of = GWC }
-						add_core_of = ARB
+						add_compliance = 35
+						add_extra_state_shared_building_slots = 2
 					}
 				}
 			}
@@ -2248,10 +2339,15 @@ focus_tree = {
 						is_core_of = GWC
 						is_owned_by = ARB
 					}
-					add_core_of = PREV
+					add_compliance = 35
+					add_extra_state_shared_building_slots = 2
 					remove_core_of = GWC
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
@@ -2323,8 +2419,8 @@ focus_tree = {
 		id = ARB_stalker_civilian_prioritisation
 		icon = GFX_RED_allow_station_autonomy
 		x = 17
-		y = 1
-		cost = 5
+		y = 0
+		cost = 6.5
 
 		ai_will_do = {
 			factor = 50
@@ -2449,7 +2545,7 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = { 
 				idea = ARB_scrapping_the_refuse
-				days = 400
+				days = 410
 			}
 		}
 	}
@@ -2718,11 +2814,11 @@ focus_tree = {
 				}
 				add_resource = {
 					type = alloys
-					amount = 2
+					amount = 3
 				}
 				add_resource = {
 					type = chemicals
-					amount = 1
+					amount = 3
 				}
 			}
 		}
@@ -3360,8 +3456,8 @@ focus_tree = {
 	focus = {
 		id = ARB_economic_revitalisation
 		icon = GFX_generic_consumer_goods
-		x = 30
-		y = 1
+		x = 31
+		y = 0
 		cost = 6.5
 
 		ai_will_do = {
@@ -3373,6 +3469,7 @@ focus_tree = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = ARB_arman
 			
+			custom_effect_tooltip = generic_skip_one_line_tt
 			set_temp_variable = { bullet_to_gain = 50 }
 			add_bullet_with_tooltip_effect = yes
 		}
@@ -3398,13 +3495,14 @@ focus_tree = {
 			add_tech_bonus = {
 				name = teamsters
 				uses = 1
-				bonus = 0.25
+				bonus = 0.5
 				category = construction
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			capital_scope = {
 				add_resource = {
 					type = scrap
-					amount = 2
+					amount = 5
 				}
 			}
 		}
@@ -3415,7 +3513,7 @@ focus_tree = {
 		icon = GFX_generic_planks
 		x = 0
 		y = 1
-		cost = 2.9
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation
@@ -3443,7 +3541,7 @@ focus_tree = {
 				}
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -3475,7 +3573,7 @@ focus_tree = {
 				}
 				add_resource = {
 					type = alloys
-					amount = 2
+					amount = 5
 				}
 			}
 		}
@@ -3486,7 +3584,7 @@ focus_tree = {
 		icon = GFX_HNZ_league_of_steel
 		x = 0
 		y = 1
-		cost = 2.9
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation_2
@@ -3504,8 +3602,10 @@ focus_tree = {
 				target = HNZ
 				modifier = support
 			}
-			add_political_power = 10
 			add_stability = 0.025
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { bullet_to_gain = 25 }
+			add_bullet_with_tooltip_effect = yes
 		}
 	}
 
@@ -3514,7 +3614,7 @@ focus_tree = {
 		icon = GFX_goal_generic_neutrality_focus
 		x = -1
 		y = 1
-		cost = 2.9
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation_contact_hanza
@@ -3545,7 +3645,7 @@ focus_tree = {
 		icon = GFX_goal_generic_national_unity
 		x = 1
 		y = 1
-		cost = 2.9
+		cost = 3
 
 		prerequisite = {
 			focus = ARB_economic_revitalisation_contact_hanza
@@ -3576,7 +3676,7 @@ focus_tree = {
 		icon = GFX_anti_gwc
 		x = 0
 		y = 6
-		cost = 1
+		cost = 1.5
 
 		prerequisite = {
 			focus = ARB_mitigate_travel
@@ -3586,9 +3686,6 @@ focus_tree = {
 
 		available = {
 			has_war_with = GWC
-			NOT = {
-				has_idea = ARB_devastation
-			}
 		}
 
 		relative_position_id = ARB_economic_revitalisation_3
@@ -3598,8 +3695,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			if = {
+				limit = {
+					has_idea = ARB_deastation
+				}
+				remove_ideas = ARB_devastation
+			}
 			custom_effect_tooltip = ARB_war_with_GWC_decisions
-			remove_ideas = ARB_devastation
+			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_ARB.4
 		}
 	}
@@ -3607,7 +3710,7 @@ focus_tree = {
 	focus = {
 		id = ARB_do_or_die
 		icon = GFX_anti_gwc_2
-		x = -1
+		x = -2
 		y = 1
 		cost = 3
 
@@ -3621,15 +3724,21 @@ focus_tree = {
 
 		relative_position_id = ARB_oh_its_on
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
 			add_equipment_to_stockpile = {
 				type = special_forces_equipment_spetsnaz
 				amount = 20
 				producer = RUS
+			}
+			add_war_support = 0.05
+			add_command_power = 15
+		}
+
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 100
+				has_war_with = GWC
 			}
 		}
 	}
@@ -3637,7 +3746,7 @@ focus_tree = {
 	focus = {
 		id = ARB_cleanse_park_pobedy
 		icon = GFX_RCH_hans_get_ze_flammenwerfer
-		x = 1
+		x = 2
 		y = 1
 		cost = 3
 
@@ -3651,20 +3760,23 @@ focus_tree = {
 
 		relative_position_id = ARB_oh_its_on
 
-		ai_will_do = {
-			factor = 3
-		}
-
 		completion_reward = {
-			#country_event = nf_ARB.12
-			army_experience = 10
 			add_equipment_to_stockpile = {
 				type = flamethrower_equipment
 				amount = 20
 				producer = RUS
 			}
 			334 = { add_manpower = -50 }
-			add_stability = 0.035
+			add_war_support = 0.05
+			add_command_power = 15
+		}
+
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 100
+				has_war_with = GWC
+			}
 		}
 	}
 
@@ -4032,8 +4144,8 @@ focus_tree = {
 	focus = {
 		id = ARB_standing_guard
 		icon = GFX_ARB_fireteam
-		x = 38
-		y = 1
+		x = 40
+		y = 0
 		cost = 6.5
 
 		completion_reward = {
@@ -4043,6 +4155,7 @@ focus_tree = {
 				amount = 10
 				producer = RUS
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_ideas = ARB_fireteam_emplacements
 		}
 
@@ -4103,13 +4216,18 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6.5
-		available = { has_completed_focus = ARB_mandatory_draft }
+		available = { 
+			OR = {
+				has_completed_focus = ARB_mandatory_draft 
+				threat > 0.19
+			}
+		}
 		prerequisite = { focus = ARB_deploy_conscripts }
 		relative_position_id = ARB_deploy_conscripts
 
 		completion_reward = {
 			add_war_support = 0.1
-			add_timed_idea = { idea = ARB_mobilization days = 100 } 
+			add_timed_idea = { idea = ARB_mobilization days = 200 } 
 		}
 
 		ai_will_do = {
@@ -4135,11 +4253,13 @@ focus_tree = {
 
 		completion_reward = {
 			army_experience = 5
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
+			add_mastery = {
+    			amount = 25
+    			track = doctrine_track_soldiers
+			}
+			add_mastery = {
+    			amount = 25
+    			track = doctrine_track_command
 			}
 		}
 
@@ -4159,7 +4279,8 @@ focus_tree = {
 		relative_position_id = ARB_standing_guard
 
 		completion_reward = {
-			add_timed_idea = { idea = ARB_theorist_hiring days = 90 } 
+			army_experience = 5
+			add_timed_idea = { idea = ARB_theorist_hiring days = 300 } 
 		}
 
 		ai_will_do = {
