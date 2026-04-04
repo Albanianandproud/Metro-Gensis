@@ -2435,7 +2435,7 @@ focus_tree = {
 			capital_scope = {
 				add_extra_state_shared_building_slots = 2
 			}
-			add_stability = 0.1
+			add_stability = 0.05
 		}
 	}
 
@@ -2578,7 +2578,7 @@ focus_tree = {
 
 		completion_reward = {
 			ARB_get_more_expertise = yes
-			add_stability = 0.075
+			add_stability = 0.05
 		}
 	}
 
@@ -2681,7 +2681,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			add_stability = 0.075
+			add_stability = 0.05
 		}
 	}
 
@@ -2907,7 +2907,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.075
+			add_stability = 0.05
 			random_owned_state = {
 				limit = {
 					NOT = {
@@ -3128,7 +3128,7 @@ focus_tree = {
 				amount = 10
 				producer = RUS
 			}
-			add_stability = 0.075
+			add_stability = 0.05
 		}
 	}
 
@@ -3602,7 +3602,6 @@ focus_tree = {
 				target = HNZ
 				modifier = support
 			}
-			add_stability = 0.025
 			custom_effect_tooltip = generic_skip_one_line_tt
 			set_temp_variable = { bullet_to_gain = 25 }
 			add_bullet_with_tooltip_effect = yes
@@ -3703,7 +3702,17 @@ focus_tree = {
 			}
 			custom_effect_tooltip = ARB_war_with_GWC_decisions
 			custom_effect_tooltip = generic_skip_one_line_tt
-			country_event = nf_ARB.4
+			#country_event = nf_ARB.4
+
+			add_corps_commander_role = {
+            	character = ARB_khandukht
+				traits = { determined_personality_trait fearless_personality_trait brazen_commander_trait  }
+            	skill = 2
+           		attack_skill = 3
+           		defense_skill = 2
+           		planning_skill = 2
+           		logistics_skill = 2
+        	}
 		}
 	}
 
@@ -3854,10 +3863,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.075
+			add_stability = 0.05
 			add_timed_idea = { 
 				idea = ARB_soothe_population
-				days = 270
+				days = 300
 			}
 		}
 	}
@@ -3873,16 +3882,23 @@ focus_tree = {
 			focus = ARB_the_cover_up
 		}
 
+		available = {
+			has_stability > 0.29
+		}
+
 		relative_position_id = ARB_the_cover_up
 
-		ai_will_do = {
-			factor = 3
+		select_effect = {
+			add_stability = -0.05
 		}
 
 		completion_reward = {
 			add_manpower = 25
-			add_stability = -0.05
 			add_ideas = ARB_the_draft
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 
@@ -3939,8 +3955,21 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = civics_border_3
-			add_stability = 0.05
+			if = {
+				limit = {
+					NOT = {
+						has_idea = civics_border_3
+						has_idea = civics_border_4
+					}
+				}
+				add_ideas = civics_border_3
+			}
+			if = {
+				limit = {
+					has_idea = civics_border_3
+				}
+				add_ideas = civics_border_4
+			}
 		}
 	}
 

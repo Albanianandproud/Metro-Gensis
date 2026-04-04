@@ -9,6 +9,10 @@ elite_doctrine = {
         always = yes
     }
 
+    visible = {
+        NOT = { has_country_flag = is_savage_nation }
+    }
+
     xp_cost = 75
     xp_type = army
 
@@ -95,6 +99,10 @@ conventional_doctrine = {
 
     available = {
         always = yes
+    }
+
+    visible = {
+        NOT = { has_country_flag = is_savage_nation }
     }
 
     xp_cost = 75
@@ -185,6 +193,10 @@ overwhelm_doctrine = {
         always = yes
     }
 
+    visible = {
+        NOT = { has_country_flag = is_savage_nation }
+    }
+
     xp_cost = 75
     xp_type = army
 
@@ -260,6 +272,90 @@ overwhelm_doctrine = {
 			original_tag = HNZ
 			original_tag = PLS
 			original_tag = MDR
+        }
+    }
+}
+feral_doctrine = {
+    folder = land
+
+    name = GRAND_DOCTRINE_FERAL
+    description = GRAND_DOCTRINE_FERAL_DESC
+    icon = GFX_doctrine_feral_medium
+
+    available = {
+        always = yes
+    }
+
+    visible = {
+        has_country_flag = is_savage_nation
+    }
+
+    xp_cost = 75
+    xp_type = army
+
+    tracks = {
+        doctrine_track_savage
+    }
+
+    # EFFECTS
+	enable_tactic = tactic_breakthrough
+
+    milestones = {
+        {
+            #doctrine_track_soldiers
+            pocket_penalty = -0.2
+            effect = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_variable = infantry_milestone_var
+                        }
+                    }
+                    set_variable = { infantry_milestone_var = 1 }
+                }
+                else = {
+                    add_to_variable = { infantry_milestone_var = 1 }
+                }
+            }
+        }
+        {
+			#doctrine_track_combat_support
+            max_command_power = 50
+            effect = {
+                if = {
+                    limit = {
+                        NOT = { has_variable = command_milestone_var
+                        }
+                    }
+                    set_variable = { command_milestone_var = 1 }
+                }
+                else = {
+                    add_to_variable = { command_milestone_var = 1 }
+                }
+            }
+        }
+        {
+			#doctrine_track_tactics
+            effect = {
+                if = {
+                    limit = {
+                        NOT = {  has_variable = operations_milestone_var }
+                    }
+                    set_variable = { operations_milestone_var = 1 }
+                }
+                else = {
+                    add_to_variable = { operations_milestone_var = 1 }
+                }
+            }
+        }
+    }
+
+	ai_will_do = {
+        base = 1
+		modifier = {
+            factor = 5
+            original_tag = GWC
+            original_tag = PAG
         }
     }
 }

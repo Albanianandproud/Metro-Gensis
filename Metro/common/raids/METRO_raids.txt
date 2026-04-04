@@ -1,5 +1,4 @@
 types = {
-	
 	METRO_steal_research_raid = {
 		days_to_prepare = 45
 		speed_multiplier = 1
@@ -221,6 +220,235 @@ types = {
 						add_to_variable = {
 							var = STB_raids_value value = STB_add_to_raids_value
 						}
+					}
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 75
+				}
+				visual_effect = {
+					entity = "land_raids_critical_success_entity"
+					animation = "attack"
+				}
+			}
+		}
+
+     	ai_will_do = {
+			base = 5 
+		}
+	}
+
+	METRO_wormcult_kidnap = {
+		days_to_prepare = 45
+		speed_multiplier = 1
+
+		category = GWC_raids
+		custom_map_icon = GFX_raid_target_icon_guerilla_raid
+		target_icon = GFX_other_target_icon
+		target_loc_key = raid_target_wormcult_kidnap
+		launch_sound = raid_land_launchable_sound
+
+		arrow = { type = land }
+
+     	#unit_model = { entity = RCH_special_forces_entity }
+
+     	command_power = 60
+
+     	fire_only_once = no
+
+     	visible = { always = yes }
+
+		show_target = {
+			NOT = { is_in_faction_with = FROM }
+		}
+	
+		available = {
+			NOT = {
+				is_in_faction_with = FROM
+			}
+		}
+	
+		launchable = {
+			NOT = { has_war_with = FROM }
+			var:target_state = {
+				NOT = { has_state_category = pastoral }
+			}
+		}
+
+		allowed = {}
+
+		starting_point = {
+		    building_types = { supply_node }
+		    allow_faction_buildings = yes
+		}
+
+		unit_requirements = {
+			battalion_types = {
+				underzealots = { min = 2 }
+			}
+
+			#equipment = {
+			#	type = { support_equipment }
+			#	amount = { min = 5 }
+			#}
+		}
+
+		target_type = {
+			
+			state = {
+				state_population > 49
+
+				controller = {
+					NOT = {
+						has_country_flag = is_savage_nation
+						has_country_flag = is_mutant_nation
+						original_tag = RUI
+						original_tag = MUT
+					}
+				}
+			}
+		}
+
+		success_factors = {
+			success = {
+				base = 0.55
+				# Raiding unit modifiers
+				experience = {
+					weight = 0.25
+					start_weight = -0.1
+					reference = 1.0
+				}
+				organisation = {
+					weight = 0.1
+					start_weight = -0.1
+					reference = 100
+				}
+				strength = {
+					weight = 0.1
+					start_weight = -0.1
+					reference = 1
+				}
+				recon = {
+					weight = 0.35
+					start_weight = -0.1
+					reference = 10
+				}
+				resistance = {
+					weight = 0.25
+					start_weight = -0.1
+					reference = 10
+				}
+				enemy_units = {
+					weight = -0.25
+					reference = 4 
+				}
+				intel = {
+					weight = 0.5
+					start_weight = -0.1
+					reference = 100
+				}
+			}
+		}
+
+		success_levels = {
+			failure = {
+				actor_effects = {
+					# Damage to unit
+					raid_damage_units = {
+						org_damage = 0.75
+						str_damage = 0.75
+						ratio = yes
+					}
+				}
+				visual_effect = {
+					entity = "raid_failed_entity"
+					animation = "attack"
+				}
+			}
+			limited_success = {
+				actor_effects = {
+					raid_damage_units = {
+						org_damage = 0.55
+						str_damage = 0.55
+						ratio = yes
+					}
+					# Unit Experience
+					raid_add_unit_experience = 0.1
+					add_raid_history_entry = yes
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "land_raids_limited_success_entity"
+					animation = "attack"
+				}
+			}
+			success = {
+			    victim_effects = {
+					var:target_state = {
+						IF = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 4 # levels of damage
+								province = var:ROOT.target_province
+								repair_speed_modifier = -0.25
+							}
+						}
+
+					}
+				}
+				actor_effects = {
+					raid_damage_units = {
+						org_damage = 0.3
+						str_damage = 0.3
+						ratio = yes
+					}
+					# Unit Experience
+					raid_add_unit_experience = 0.1
+					add_raid_history_entry = yes
+
+					var:actor_country = {
+						## Do stuff here
+					}
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "land_raids_limited_success_entity"
+					animation = "attack"
+				}
+			}
+			critical_success = {
+			    victim_effects = {
+					var:target_state = {
+						IF = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 6 # levels of damage
+								province = var:ROOT.target_province
+								repair_speed_modifier = -0.4
+							}
+						}
+					}
+				}
+				actor_effects = {
+					raid_damage_units = {
+						org_damage = 0.3
+						str_damage = 0.3
+						ratio = yes
+					}
+					# Unit Experience
+					raid_add_unit_experience = 0.15
+					add_raid_history_entry = yes
+
+					var:actor_country = {
+						## Do stuff here
 					}
 				}
 				# Other unit effects

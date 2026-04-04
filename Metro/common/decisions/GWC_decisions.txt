@@ -21,7 +21,6 @@ GWC_burn_technology = {
 			base = 2500
 		}
 	}
-
 	GWC_announce_a_day_of_worship = {
 		icon = generic_research
 
@@ -42,12 +41,11 @@ GWC_burn_technology = {
 			base = 2
 		}
 	}
-
 	GWC_burn_technology_chemicals = {
 		icon = generic_research
 
 		available = {
-			has_completed_focus = GWC_focus_1
+			has_completed_focus = GWC_focus_decrees_of_priest
 			any_controlled_state = {
 				has_resources_amount = {
     				resource = chemicals
@@ -65,31 +63,27 @@ GWC_burn_technology = {
 		}
 		fire_only_once = no
 
-		modifier = {
-			war_support_weekly = 0.0075
-		}
-		cost = 25
-		days_remove = 14
-		complete_effect = {
-			random_owned_state = {
-				limit = {
-		    		has_resources_amount = {
-						resource = chemicals
-						amount > 0
-					}
+		#modifier = { war_support_weekly = 0.0075 }
+
+		remove_effect = {
+			every_owned_state = {
+                limit = {
+					has_state_flag = chemicals_remove_state_flag
 				}
-		    	add_resource = {
-    				type = chemicals 
-    				amount = -1
-    			}
+            	set_temp_variable = { chemicals_amount = resource@chemicals }
+				multiply_temp_variable = { chemicals_amount = -1 }
+
+				add_resource = {
+					type = chemicals
+    				amount = chemicals_amount
+				}
+
+				clr_state_flag = chemicals_remove_state_flag
 			}
 			if = {
 				limit = { has_completed_focus = GWC_rid_the_machines }
 				add_war_support = 0.01
 			}
-		}
-
-		remove_effect = {
 			if = {
 				limit = { has_completed_focus = GWC_worm_military_6 }
 				add_command_power = 5
@@ -100,16 +94,31 @@ GWC_burn_technology = {
 			}
 		}
 
+		cost = 20
+		days_remove = 14
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+		    		has_resources_amount = {
+						resource = chemicals
+						amount > 0
+					}
+				}
+				set_state_flag = chemicals_remove_state_flag
+			}
+		}
+
 		ai_will_do = {
 			base = 25
 		}
 	}
-
 	GWC_burn_technology_electronics = {
 		icon = generic_research
 
 		available = {
-			has_completed_focus = GWC_focus_1
+			has_completed_focus = GWC_focus_decrees_of_priest
 			any_controlled_state = {
 				has_resources_amount = {
     				resource = electronics
@@ -126,37 +135,49 @@ GWC_burn_technology = {
 			}
 		}
 		fire_only_once = no
-		modifier = { war_support_weekly = 0.0075 }
+		#modifier = { war_support_weekly = 0.0075 }
 		cost = 25
 		days_remove = 14
 
-		complete_effect = {
-			random_owned_state = {
-				limit = {
-		    		has_resources_amount = {
-						resource = electronics
-						amount > 0
-					}
+		remove_effect = {
+			every_owned_state = {
+                limit = {
+					has_state_flag = electronics_remove_state_flag
 				}
-		    	add_resource = {
-    				type = electronics
-    				amount = -1
-    			}
+            	set_temp_variable = { electronics_amount = resource@electronics }
+				multiply_temp_variable = { electronics_amount = -1 }
+
+				add_resource = {
+					type = electronics
+    				amount = electronics_amount
+				}
+
+				clr_state_flag = electronics_remove_state_flag
 			}
 			if = {
 				limit = { has_completed_focus = GWC_rid_the_machines }
 				add_war_support = 0.01
 			}
-		}
-
-		remove_effect = {
 			if = {
 				limit = { has_completed_focus = GWC_worm_military_6 }
 				add_command_power = 5
 			}
 			if = {
-				limit = { has_completed_focus = GWC_focus_north_3}
+				limit = { has_completed_focus = GWC_focus_north_3 }
 				army_experience = 5
+			}
+		}
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+		    		has_resources_amount = {
+						resource = electronics
+						amount > 0
+					}
+				}
+				set_state_flag = electronics_remove_state_flag
 			}
 		}
 
@@ -164,14 +185,13 @@ GWC_burn_technology = {
 			base = 25
 		}
 	}
-
 	GWC_burn_technology_guns = {
 		icon = generic_research
 
 		available = {
-			has_completed_focus = GWC_focus_1
+			has_completed_focus = GWC_focus_decrees_of_priest
 			has_equipment = { infantry_equipment > 9 }
-		}	
+		}
 		fire_only_once = no
 
 		modifier = {
@@ -205,6 +225,7 @@ GWC_burn_technology = {
 	}
 }
 
+### Use Raids Instead LMAO ### 
 GWC_infiltration_LR = {
 	GWC_LR_infiltration = {
 		custom_cost_text = command_power_25
@@ -711,7 +732,6 @@ GWC_infiltration_LR = {
 		}
 	}
 }
-
 GWC_militarization = {
 
 	GWC_purchase_military_buff_1 = {

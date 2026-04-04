@@ -47,14 +47,23 @@ country_event = {
     id = nf_GWC.3
     title = nf_GWC.3.t
     desc = nf_GWC.3.d
-    picture = "GFX_event (113)"
+    picture = "GFX_event (218)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
 		name = nf_GWC.3.a
-		add_political_power = 40
+		capital_scope = {
+			add_resource = {
+				type = components
+				amount = 2
+			}
+			add_resource = {
+				type = electronics
+				amount = 2
+			}
+		}
 		hidden_effect = { country_event = { id = nf_GWC.4 days = 7 random_days = 7 } }
 		ai_chance = {
             base = 2.5
@@ -75,14 +84,15 @@ country_event = {
     id = nf_GWC.4
     title = nf_GWC.4.t
     desc = nf_GWC.4.d
-	picture = "GFX_event (109)"
+	picture = "GFX_event (228)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
 		name = nf_GWC.4.a
-		add_country_leader_trait = GWC_priest_justify_time
+		#add_country_leader_trait = GWC_priest_justify_time
+		add_stability = 0.1
 		hidden_effect = { country_event = { id = nf_GWC.5 days = 7 random_days = 7 } }
 		ai_chance = {
             base = 2.5
@@ -91,7 +101,8 @@ country_event = {
 
 	option = {
 		name = nf_GWC.4.b
-		add_country_leader_trait = GWC_priest_organization
+		#add_country_leader_trait = GWC_priest_organization
+		add_war_support = 0.1
 		hidden_effect = { country_event = { id = nf_GWC.5 days = 7 random_days = 7 } }
 		ai_chance = {
             base = 4
@@ -103,34 +114,38 @@ country_event = {
     id = nf_GWC.5
     title = nf_GWC.5.t
     desc = nf_GWC.5.d
-    picture = "GFX_event (30)"
+    picture = "GFX_event (235)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
 		name = nf_GWC.5.a
-		random_owned_state = {
-			limit = {
-				NOT = { has_state_category = pastoral }
-			}
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-			}
-		}
+
+		hidden_effect = { country_event = { id = nf_GWC.5 days = 40 random_days = 40 } }
 		ai_chance = {
             base = 5
         }
 	}
+}
+
+country_event = {
+    id = nf_GWC.5a
+    title = nf_GWC.5a.t
+    desc = nf_GWC.5a.d
+    picture = "GFX_event (206)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
-		name = nf_GWC.5.b
-		army_experience = 25
+		name = nf_GWC.5a.a
+
+		add_ideas = GWC_metro_2
+		custom_effect_tooltip = GWC_metro_2_modifier_tt
+	
 		ai_chance = {
-            base = 3
+            base = 5
         }
 	}
 }
@@ -139,7 +154,7 @@ country_event = {
     id = nf_GWC.6
     title = nf_GWC.6.t
     desc = nf_GWC.6.d
-    picture = "GFX_event (113)"
+    picture = "GFX_event (235)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -151,11 +166,6 @@ country_event = {
             base = 2.5
         }
 	}
-
-	#option = {
-	#	name = nf_GWC.6.b
-	#	
-	#}
 }
 
 country_event = {
@@ -263,12 +273,11 @@ country_event = {
 
 	option = {
 		name = nf_GWC.10.a
-		swap_ideas = {
-			remove_idea = GWC_sickened_3
-			add_idea = GWC_sickened_2
-		}
+		
+		GWC_sickness_scripted_effect = yes 
+		
 		hidden_effect = { 
-			ROOT = { country_event = {  id = nf_GWC.11 days = 90 random_days = 90  } } 
+			ROOT = { country_event = {  id = nf_GWC.11 days = 200 random_days = 200  } } 
 		}
 	}
 }
@@ -285,10 +294,7 @@ country_event = {
 	option = {
 		name = nf_GWC.11.a
 		add_stability = 0.05
-		swap_ideas = {
-			remove_idea = GWC_sickened_2
-			add_idea = GWC_sickened_1
-		}
+		GWC_sickness_scripted_effect = yes
 	}
 }
 
@@ -605,6 +611,117 @@ country_event = {	## Purging of the Worm Cult
 	option = {
 		name = nf_GWC.50.a
 		add_timed_idea = { idea = GWC_purged_cannibals days = 360 }
+		ai_chance = {
+            base = 100
+        }
+	}
+}
+
+add_namespace = nf_GWC_raid
+
+country_event = {	
+    id = nf_GWC_raid.1
+    title = nf_GWC_raid.1.t
+    desc = nf_GWC_raid.1.d
+    picture = "GFX_event (41)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			236 = {
+				damage_building = {
+  					type = infrastructure
+  					state = 236
+  					damage = 1
+				}
+				damage_building = {
+  					type = arms_factory
+  					state = 236
+  					damage = 1
+				}
+				add_manpower = -25
+			}
+			GWC = { country_event = {  id = nf_GWC_raid.2 days = 15 random_days = 15  } } 
+		}
+	}
+
+	option = {
+		name = nf_GWC_raid.1.a
+
+		add_stability = -0.1
+		add_war_support = -0.1
+
+		effect_tooltip = {
+			236 = {
+				damage_building = {
+  					type = infrastructure
+  					state = 236
+  					damage = 1
+				}
+				damage_building = {
+  					type = arms_factory
+  					state = 236
+  					damage = 1
+				}
+				add_manpower = -25
+			}
+		}
+
+		ai_chance = {
+            base = 100
+        }
+	}
+
+	option = {
+		name = nf_GWC_raid.1.b
+
+		add_political_power = -150
+		add_ideas = civics_border_4
+		add_ideas = closed_economy
+
+		effect_tooltip = {
+			236 = {
+				damage_building = {
+  					type = infrastructure
+  					state = 236
+  					damage = 1
+				}
+				damage_building = {
+  					type = arms_factory
+  					state = 236
+  					damage = 1
+				}
+				add_manpower = -25
+			}
+		}
+
+		ai_chance = {
+            base = 100
+        }
+	}
+}
+
+country_event = {	
+    id = nf_GWC_raid.2
+    title = nf_GWC_raid.2.t
+    desc = nf_GWC_raid.2.d
+    picture = "GFX_event (41)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_GWC_raid.2.a
+
+		army_experience = 15
+
+		add_mastery = {
+			amount = 15
+			track = doctrine_track_savage
+		}
+
 		ai_chance = {
             base = 100
         }
