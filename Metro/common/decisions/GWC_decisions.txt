@@ -42,151 +42,131 @@ GWC_burn_technology = {
 		}
 	}
 	GWC_burn_technology_chemicals = {
-		icon = generic_research
+		icon = resource_chemicals
 
 		available = {
 			has_completed_focus = GWC_focus_decrees_of_priest
-			any_controlled_state = {
-				has_resources_amount = {
-    				resource = chemicals
-    				amount > 0
-				}
-			}
 		}	
-		visible = {
-			any_controlled_state = {
+
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = ROOT
 				has_resources_amount = {
     				resource = chemicals
     				amount > 0
 				}
 			}
 		}
-		fire_only_once = no
 
-		#modifier = { war_support_weekly = 0.0075 }
+		state_target = yes
+
+		highlight_states = {
+           	highlight_state_targets = {
+				state = FROM
+			}
+    	}
+
+		fire_only_once = no
+		days_remove = 10
 
 		remove_effect = {
-			every_owned_state = {
-                limit = {
-					has_state_flag = chemicals_remove_state_flag
-				}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			FROM = {
             	set_temp_variable = { chemicals_amount = resource@chemicals }
+
 				multiply_temp_variable = { chemicals_amount = -1 }
 
 				add_resource = {
 					type = chemicals
     				amount = chemicals_amount
 				}
-
-				clr_state_flag = chemicals_remove_state_flag
 			}
+
+			multiply_temp_variable = { chemicals_amount = -10 }
+			add_political_power = chemicals_amount
+
 			if = {
 				limit = { has_completed_focus = GWC_rid_the_machines }
-				add_war_support = 0.01
+				add_war_support = chemicals_amount
 			}
 			if = {
 				limit = { has_completed_focus = GWC_worm_military_6 }
-				add_command_power = 5
+				add_command_power = chemicals_amount
 			}
 			if = {
 				limit = { has_completed_focus = GWC_focus_north_3 }
-				army_experience = 5
+				army_experience = chemicals_amount
 			}
 		}
-
-		cost = 20
-		days_remove = 14
-
-		complete_effect = {
-			random_owned_state = {
-				limit = {
-					is_fully_controlled_by = ROOT
-		    		has_resources_amount = {
-						resource = chemicals
-						amount > 0
-					}
-				}
-				set_state_flag = chemicals_remove_state_flag
-			}
-		}
-
+		cancel_trigger = { FROM = { NOT = { is_owned_by = ROOT } } }
 		ai_will_do = {
 			base = 25
 		}
 	}
 	GWC_burn_technology_electronics = {
-		icon = generic_research
+		icon = resource_electronics
 
 		available = {
 			has_completed_focus = GWC_focus_decrees_of_priest
-			any_controlled_state = {
-				has_resources_amount = {
-    				resource = electronics
-    				amount > 0
-				}
-			}
 		}	
-		visible = {
-			any_controlled_state = {
+
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = ROOT
 				has_resources_amount = {
     				resource = electronics
     				amount > 0
 				}
 			}
 		}
+
+		state_target = yes
+
+		highlight_states = {
+           	highlight_state_targets = {
+				state = FROM
+			}
+    	}
+
 		fire_only_once = no
-		#modifier = { war_support_weekly = 0.0075 }
-		cost = 25
-		days_remove = 14
+		days_remove = 10
 
 		remove_effect = {
-			every_owned_state = {
-                limit = {
-					has_state_flag = electronics_remove_state_flag
-				}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			FROM = {
             	set_temp_variable = { electronics_amount = resource@electronics }
+
 				multiply_temp_variable = { electronics_amount = -1 }
 
 				add_resource = {
 					type = electronics
     				amount = electronics_amount
 				}
-
-				clr_state_flag = electronics_remove_state_flag
 			}
+
+			multiply_temp_variable = { electronics_amount = -10 }
+			add_political_power = electronics_amount
+
 			if = {
 				limit = { has_completed_focus = GWC_rid_the_machines }
-				add_war_support = 0.01
+				add_war_support = electronics_amount
 			}
 			if = {
 				limit = { has_completed_focus = GWC_worm_military_6 }
-				add_command_power = 5
+				add_command_power = electronics_amount
 			}
 			if = {
 				limit = { has_completed_focus = GWC_focus_north_3 }
-				army_experience = 5
+				army_experience = electronics_amount
 			}
 		}
-
-		complete_effect = {
-			random_owned_state = {
-				limit = {
-					is_fully_controlled_by = ROOT
-		    		has_resources_amount = {
-						resource = electronics
-						amount > 0
-					}
-				}
-				set_state_flag = electronics_remove_state_flag
-			}
-		}
-
+		cancel_trigger = { FROM = { NOT = { is_owned_by = ROOT } } }
 		ai_will_do = {
 			base = 25
 		}
 	}
 	GWC_burn_technology_guns = {
-		icon = generic_research
+		icon = resource_gun
 
 		available = {
 			has_completed_focus = GWC_focus_decrees_of_priest
@@ -194,28 +174,32 @@ GWC_burn_technology = {
 		}
 		fire_only_once = no
 
-		modifier = {
-			war_support_weekly = 0.0075
-		}
-
-		cost = 25 
-		days_remove = 14
+		days_remove = 10
 
 		complete_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
-				amount = -10
+				amount = num_equipment@infantry_equipment
 			}
 		}
 
 		remove_effect = {
+			custom_effect_tooltip = generic_skip_one_line_tt
+            	set_temp_variable = { guns_amount = num_equipment@infantry_equipment }
+			
+			add_political_power = guns_amount
+
+			if = {
+				limit = { has_completed_focus = GWC_rid_the_machines }
+				add_war_support = guns_amount
+			}
 			if = {
 				limit = { has_completed_focus = GWC_worm_military_6 }
-				add_command_power = 5
+				add_command_power = guns_amount
 			}
 			if = {
 				limit = { has_completed_focus = GWC_focus_north_3 }
-				army_experience = 5
+				army_experience = guns_amount
 			}
 		}
 
@@ -862,11 +846,6 @@ GWC_scourge_decision = {
 		}
 	}
 }
-
-
-
-
-
 
 
 GWC_militarization = {
