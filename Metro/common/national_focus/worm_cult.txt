@@ -43,20 +43,19 @@ focus_tree = {
 		prerequisite = { focus = GWC_followers_of_the_worm }
 		relative_position_id = GWC_followers_of_the_worm
 		completion_reward = {
-			army_experience = 15
+			army_experience = 10
 			division_template = {
-				name = "Underzealot Followers"
+				name = "Underzealots"
 				priority = 1
 				template_counter = 0
 				regiments = {
 					underzealots = { x = 0 y = 0 }
-					underzealots = { x = 0 y = 1 }
-					underzealots = { x = 0 y = 2 }
+					underzealots = { x = 1 y = 0 }
 				}
 			}
 			capital_scope = {
 				create_unit = {
-					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 1 start_equipment_factor = 1"
+					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
 					owner = ROOT
 				}
 			}
@@ -74,10 +73,10 @@ focus_tree = {
 		prerequisite = { focus = GWC_branching_from_park_pobedy }
 		relative_position_id = GWC_branching_from_park_pobedy
 		completion_reward = {
-			army_experience = 15
+			army_experience = 10
 			capital_scope = {
 				create_unit = {
-					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 1 start_equipment_factor = 1"
+					division = "name = \"Flock of the Worm\" division_template = \"Underzealot Followers\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
 					owner = ROOT
 				}
 			}
@@ -267,7 +266,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			custom_effect_tooltip = generic_skip_one_line_tt
-			custom_effect_tooltip = GWC_focus_decrees_of_priest_tooltip
+			custom_effect_tooltip = GWC_call_to_war
 			custom_effect_tooltip = generic_skip_one_line_tt
 			unlock_decision_tooltip = GWC_burn_technology_chemicals
 			unlock_decision_tooltip = GWC_burn_technology_electronics
@@ -292,8 +291,9 @@ focus_tree = {
 				}
 				add_command_power = 50
 			}
-			add_political_power = 50
-			custom_effect_tooltip = GWC_focus_decrees_of_priest_2
+			add_war_support = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GWC_focus_decrees_of_priest_2_tooltip
 		}
 		ai_will_do = {
 			factor = 20
@@ -312,6 +312,7 @@ focus_tree = {
 		completion_reward = {
 			## Event which raids bandits
 			custom_effect_tooltip = GWC_focus_decrees_of_priest_2A_tooltip
+			custom_effect_tooltip = generic_skip_one_line_tt
 			SHR = { country_event = nf_GWC_raid.1 }
 		}
 		ai_will_do = {
@@ -331,6 +332,7 @@ focus_tree = {
 		prerequisite = { focus = GWC_focus_decrees_of_priest_2A }
 		relative_position_id = GWC_focus_decrees_of_priest_2A
 		completion_reward = {
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_focus_decrees_of_priest_2B_tooltip
 			hidden_effect = { set_country_flag = GWC_raids_flag }
 		}
@@ -353,7 +355,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			hidden_effect = { 
-				ROOT = { country_event = {  id = nf_GWC.10 days = 90 random_days = 90  } } 
+				ROOT = { country_event = {  id = nf_GWC.10 days = 120 random_days = 120  } } 
 			}
 		}
 		ai_will_do = {
@@ -373,7 +375,6 @@ focus_tree = {
 
 		completion_reward = {
 			add_war_support = 0.05
-			custom_effect_tooltip = GWC_call_to_war
 			
 			if = {
 				limit = { has_dlc = "La Resistance" }
@@ -384,6 +385,13 @@ focus_tree = {
 				upgrade_intelligence_agency = upgrade_discrete_operations
 				upgrade_intelligence_agency = upgrade_espionage_ability
 			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_dynamic_modifier = {
+				modifier = GWC_war_against_enemies_dynamic_modifier
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			GWC_war_against_enemies_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 20
@@ -406,6 +414,9 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = GWC_supremacy_of_wit_1
 			add_war_support = 0.05
+
+			custom_effect_tooltip = GWC_supremacy_of_force_tootlip
+			set_country_flag = GWC_supremacy_of_wit_flag
 		}
 
 		ai_will_do = {
@@ -615,7 +626,10 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GWC_supremacy_of_force_1
-			army_experience = 5
+			add_war_support = 0.05
+
+			custom_effect_tooltip = GWC_supremacy_of_force_tootlip
+			set_country_flag = GWC_supremacy_of_force_flag
 		}
 
 		ai_will_do = {
@@ -765,10 +779,13 @@ focus_tree = {
 		relative_position_id = GWC_focus_8a
 
 		completion_reward = {
-			army_experience = 15
+			add_mastery = {
+				amount = 25
+				track = doctrine_track_savage
+			}
 			add_timed_idea = {
 				idea = GWC_drums_snare
-				days = 120
+				days = 360
 			}
 		}
 
@@ -787,7 +804,7 @@ focus_tree = {
 		mutually_exclusive = { focus = GWC_focus_8c }
 		relative_position_id = GWC_focus_8b
 		completion_reward = {
-			army_experience = 5
+			add_war_support = 0.1
 			add_timed_idea = {
 				idea = GWC_drums_snare
 				days = 360
@@ -808,7 +825,8 @@ focus_tree = {
 		relative_position_id = GWC_focus_1
 		completion_reward = {
 			custom_effect_tooltip = GWC_enable_northern_infiltration
-			add_war_support = 0.025
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 2
@@ -825,7 +843,7 @@ focus_tree = {
 		relative_position_id = GWC_focus_1
 		completion_reward = {
 			custom_effect_tooltip = GWC_enable_eastern_infiltration
-			add_war_support = 0.025
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 2
@@ -903,9 +921,14 @@ focus_tree = {
 		available = { 
 			OR = {
 				106 = { is_owned_by = ROOT }
+				106 = { is_owned_by = RUI }
+			}
+			OR = {
 				has_war_with = HNZ
 				has_war_with = RED
 				has_war_with = RCH
+				has_war_with = SPT
+				has_war_with = PLS
 			}
 		}
 
@@ -971,6 +994,7 @@ focus_tree = {
 		relative_position_id = GWC_focus_north_1
 		completion_reward = {
 			add_ideas = GWC_rend_for_worm
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_focus_north_3_tt
 		}
 		ai_will_do = {
@@ -1109,6 +1133,7 @@ focus_tree = {
 		prerequisite = { focus = GWC_focus_10 }
 		relative_position_id = GWC_focus_10
 		completion_reward = {
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_enable_eastern_conflict
 			EUR = { set_country_flag = GWC_enable_infiltration }
 			ARB = { set_country_flag = GWC_enable_infiltration }
@@ -1130,6 +1155,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = GWC_herald_of_the_worm
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_ideas = GWC_warriors_unleashed
 		}
 		ai_will_do = {
@@ -1323,6 +1349,7 @@ focus_tree = {
 				uses = 1
 				category = savage_society
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_rid_machines_improve_decision
 		}
 		ai_will_do = {
@@ -1368,6 +1395,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5
+
+		available = {
+			334 = { is_owned_by = ROOT }
+		}
 
 		prerequisite = {
 			focus = GWC_heart_of_darkness
@@ -1433,6 +1464,11 @@ focus_tree = {
 		y = 1
 		cost = 2.9
 
+		available = {
+			280 = { is_owned_by = ROOT }
+			334 = { is_owned_by = ROOT }
+		}
+
 		prerequisite = {
 			focus = GWC_heart_of_darkness
 		}
@@ -1444,10 +1480,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			capital_scope = {
+			every_owned_state = {
+				limit = {
+					is_core_of = ROOT
+				}
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 1
 				}
 			}
 		}
@@ -1465,6 +1504,10 @@ focus_tree = {
 			focus = GWC_ind_4
 		}
 
+		available = {
+			num_of_controlled_states > 4
+		}
+
 		relative_position_id = GWC_ind_3
 
 		ai_will_do = {
@@ -1472,8 +1515,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.025
+			add_war_support = 0.05
 			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -1488,6 +1534,9 @@ focus_tree = {
 				}
 			}
 			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -1666,18 +1715,27 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 				}
 			}
 			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 				}
 			}
 			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -1952,31 +2010,55 @@ focus_tree = {
 
 		completion_reward = {
 			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
+				limit = { is_capital = no }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+			random_owned_state = {
+				limit = { is_capital = no }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+			random_owned_state = {
+				limit = { has_state_category = pastoral }
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 				}
 			}
 			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
+				limit = { has_state_category = pastoral }
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 				}
-			}
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
 				add_building_construction = {
-					type = infrastructure
+					type = bunker
 					level = 1
-				}
-			}
-			random_owned_state = {
-				limit = { NOT = { has_state_category = pastoral } }
-				add_building_construction = {
-					type = infrastructure
-					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
 				}
 			}
 		}
@@ -2009,10 +2091,10 @@ focus_tree = {
 				limit = {
 					NOT = { has_state_category = pastoral }
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -2111,10 +2193,10 @@ focus_tree = {
 				limit = {
 					NOT = { has_state_category = pastoral }
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -2146,14 +2228,14 @@ focus_tree = {
 					    has_state_category = pastoral
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
-
+			custom_effect_tooltip = generic_skip_one_line_tt
 			set_technology = { GWC_unique_tech_3 = 1 }
 		}
 	}
@@ -2611,11 +2693,11 @@ focus_tree = {
 
 		completion_reward = {
 			GWC_warrior = { promote_leader = yes }
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = doctrine_overwhelm
+			add_mastery = {
+				amount = 25
+				track = doctrine_track_savage
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_worm_military_6_tt
 		}
 
@@ -2656,10 +2738,9 @@ focus_tree = {
 		relative_position_id = GWC_worm_military_6
 
 		completion_reward = {
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
+			add_mastery = {
+				amount = 50
+				track = doctrine_track_savage
 			}
 		}
 
@@ -2681,6 +2762,7 @@ focus_tree = {
 
 		completion_reward = {
 			army_experience = 5
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_exchange_XP_for_bonuses
 		}
 
