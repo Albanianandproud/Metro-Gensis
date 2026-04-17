@@ -39,7 +39,7 @@ focus_tree = {
 		icon = GFX_GWC_tunnels
 		x = 0
 		y = 1
-		cost = 6.5
+		cost = 4.3
 		prerequisite = { focus = GWC_followers_of_the_worm }
 		relative_position_id = GWC_followers_of_the_worm
 		completion_reward = {
@@ -69,7 +69,7 @@ focus_tree = {
 		icon = GFX_GWC_worm_cult_symbol_11
 		x = 0
 		y = 2
-		cost = 6.5
+		cost = 4.3
 		prerequisite = { focus = GWC_branching_from_park_pobedy }
 		relative_position_id = GWC_branching_from_park_pobedy
 		completion_reward = {
@@ -103,6 +103,12 @@ focus_tree = {
 					remove_state_core = 167
 				}
 			}
+			hidden_effect = {
+				country_event = {
+					id = nf_GWC.385
+					days = 7 
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 20
@@ -114,6 +120,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6.5
+		available = { 167 = { is_owned_by = ROOT } 385 = { is_owned_by = ROOT }}
 		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar }
 		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar
 		completion_reward = {
@@ -139,7 +146,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GWC_focus_colonization_of_slaviansky_bulvar_4
-		icon = GFX_GWC_skull_2
+		icon = GFX_GWC_mould
 		x = 2
 		y = 1
 		cost = 6.5
@@ -153,6 +160,12 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
+			}
+
+			custom_effect_tooltip = GWC_focus_colonization_of_slaviansky_bulvar_4_tooltip
+			GWC_sickness_scripted_effect = yes
+			hidden_effect = { 
+				ROOT = { country_event = {  id = nf_GWC.10 days = 120 random_days = 120  } } 
 			}
 		}
 		ai_will_do = {
@@ -169,6 +182,12 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6.5
+		available = {
+			OR = {	
+				has_tech = savage_ranged_equipment_1_tech
+				is_researching_technology = savage_ranged_equipment_1_tech
+			}
+		}
 		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_4 }
 		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_4
 		completion_reward = {
@@ -236,9 +255,13 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6.5
+		available = { 167 = { is_owned_by = ROOT } 385 = { is_owned_by = ROOT }}
 		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_2 }
 		relative_position_id = GWC_focus_colonization_of_slaviansky_bulvar_2
 		completion_reward = {
+			167 = { 
+				add_core_of = ROOT
+			}
 			385 = { 
 				add_core_of = ROOT
 				add_resource = {
@@ -271,6 +294,9 @@ focus_tree = {
 			unlock_decision_tooltip = GWC_burn_technology_chemicals
 			unlock_decision_tooltip = GWC_burn_technology_electronics
 			unlock_decision_tooltip = GWC_burn_technology_guns
+
+
+			## TO DO : EVENT REGARDING IMPRESSIONABLE MASSES
 		}
 		ai_will_do = {
 			factor = 20
@@ -294,6 +320,8 @@ focus_tree = {
 			add_war_support = 0.05
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_focus_decrees_of_priest_2_tooltip
+
+			add_ideas = civics_child_labour_5 
 		}
 		ai_will_do = {
 			factor = 20
@@ -354,9 +382,8 @@ focus_tree = {
 		relative_position_id = GWC_focus_decrees_of_priest_2
 		completion_reward = {
 			add_stability = 0.05
-			hidden_effect = { 
-				ROOT = { country_event = {  id = nf_GWC.10 days = 120 random_days = 120  } } 
-			}
+
+			add_popularity = { ideology = dictatorial popularity = 0.05 }
 		}
 		ai_will_do = {
 			factor = 30
@@ -367,7 +394,7 @@ focus_tree = {
 		icon = GFX_GWC_worm_cult_symbol_2
 		x = 0
 		y = 5
-		cost = 6.5
+		cost = 5
 		prerequisite = { focus = GWC_branching_from_park_pobedy_2 }
 		prerequisite = { focus = GWC_focus_decrees_of_priest_3 }
 		prerequisite = { focus = GWC_focus_colonization_of_slaviansky_bulvar_3 }
@@ -391,7 +418,8 @@ focus_tree = {
 				modifier = GWC_war_against_enemies_dynamic_modifier
 			}
 			custom_effect_tooltip = generic_skip_one_line_tt
-			GWC_war_against_enemies_scripted_effect = yes
+
+			#GWC_war_against_enemies_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 20
@@ -414,7 +442,7 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = GWC_supremacy_of_wit_1
 			add_war_support = 0.05
-
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_supremacy_of_force_tootlip
 			set_country_flag = GWC_supremacy_of_wit_flag
 		}
@@ -627,7 +655,7 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = GWC_supremacy_of_force_1
 			add_war_support = 0.05
-
+			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = GWC_supremacy_of_force_tootlip
 			set_country_flag = GWC_supremacy_of_force_flag
 		}
@@ -1310,15 +1338,16 @@ focus_tree = {
 		icon = GFX_GWC_effigy_4
 		x = 16
 		y = 1
-		cost = 6.5
+		cost = 4.3
 		available = { has_completed_focus = GWC_focus_1 }
 		relative_position_id = GWC_followers_of_the_worm
 		completion_reward = {
+
 			add_war_support = 0.05
 			capital_scope = {
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 				add_building_construction = {
@@ -2244,14 +2273,20 @@ focus_tree = {
 		icon = GFX_GWC_warfare_devolved2
 		x = -14
 		y = 1
-		cost = 6.5
+		cost = 4.3
 		available = { 
 			has_completed_focus = GWC_focus_1 
 			has_war_support > 0.04
 		}
 		relative_position_id = GWC_followers_of_the_worm
 		completion_reward = {
+
 			add_war_support = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = GWC_warrior
+
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_corps_commander_role = {
     			character = GWC_warrior
     			skill = 2
@@ -2260,8 +2295,6 @@ focus_tree = {
     			planning_skill = 2
     			logistics_skill = 1
 			}
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = GWC_warrior
 		}
 
 		ai_will_do = {
@@ -2274,9 +2307,11 @@ focus_tree = {
 		x = 5
 		y = 1
 		cost = 6.5
-		available = { 
-			has_tech = savage_spec_ops_equipment_1_tech 
-			has_war_support > 0.24
+		available = {
+			OR = {	
+				has_tech = savage_spec_ops_equipment_1_tech
+				is_researching_technology = savage_spec_ops_equipment_1_tech
+			}
 		}
 		prerequisite = { focus = GWC_worm_military_1 }
 		relative_position_id = GWC_worm_military_1
@@ -2579,7 +2614,6 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GWC_doped_shrooms
-			## TODO Add an event down the line to forbid the idea
 		}
 
 		ai_will_do = {
@@ -2620,7 +2654,12 @@ focus_tree = {
 		relative_position_id = GWC_worm_military_2
 
 		completion_reward = {
-			GWC_warrior = { gain_xp = 2500 }
+			GWC_warrior = { 
+				gain_xp = 1000
+
+				add_unit_leader_trait = brazen_commander_trait 
+				add_unit_leader_trait = resilient_commander_trait 
+			}
 		}
 
 		ai_will_do = {
@@ -2641,7 +2680,13 @@ focus_tree = {
 		mutually_exclusive = { focus = GWC_worm_military_4 }
 
 		completion_reward = {
-			GWC_warrior = { add_logistics = 2 }
+
+			GWC_warrior = { 
+				add_logistics = 2 
+
+				add_unit_leader_trait = grizzled_commander_trait  
+				add_unit_leader_trait = fearsome_commander_trait  
+			}
 		}
 
 		ai_will_do = {
