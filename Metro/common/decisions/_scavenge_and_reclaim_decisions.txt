@@ -1,18 +1,37 @@
+@temp_command_power_cost_ai = 25
+@temp_command_power_cost = 50
+
 reclaim_metro = {
 	reclaim_this_state = {
 	   	icon = generic_military
 	   	custom_cost_text = "command_power_decisions_cost_text"
 		custom_cost_trigger = {
-			set_temp_variable = { temp_command_power_cost = 50 }
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+			}
+			else_if = {
+				limit = {
+					is_ai = no
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+			}
 			check_variable = {
 				command_power > temp_command_power_cost
 			}
 		}
-	   	days_remove = 35
+		days_remove = 30
 	  	days_re_enable = 0
 	  	on_map_mode = map_only
 	   	state_target = yes
 	    visible = {
+			FROM = {
+				NOT = {
+					region = 14
+				}
+			}
 			NOT = {
 				OR = {
 					has_idea = RCH_reclusive_nazis
@@ -61,8 +80,25 @@ reclaim_metro = {
 			}
 			set_country_flag = reclamation_underway
 			FROM = { set_state_flag = state_being_colonized }
-			hidden_effect = { add_command_power = -50 }
-	    }
+			hidden_effect = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}
+				else_if = {
+					limit = {
+						is_ai = no
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}	
+			}
+		}
 	   	remove_effect = {
 			ROOT = {
 				set_variable = {
@@ -183,267 +219,28 @@ reclaim_metro = {
 			}
 		}
     }
-	## Depreciated ##
-	reclaim_timed_decision = {
-		activation = { always = no }
-		available = { }
-		is_good = no
-		days_mission_timeout = 35
-		selectable_mission = yes
-
-		cancel_trigger = {
-			hidden_trigger = { has_country_flag = cancel_reclaim }
-			var:state_colonized_id = { resistance > 95 }
-		}
-		custom_cost_text = reclaim_cost_text
+	reclaim_remove_tunnel_blockers = {
+		icon = trade_unions_demand
+		available = { num_of_civilian_factories_available_for_projects > 9 }
+		custom_cost_text = "command_power_decisions_cost_text"
 		custom_cost_trigger = {
-			check_variable = { 
-				var = reclaim_cost
-				value = reclaim_cost_requirement
-				compare = greater_than_or_equals  
-			}
-		}
-		timeout_effect = {
-			ROOT = { clr_country_flag = reclamation_underway clr_country_flag = reclaim_mission_activated }
-			IF = {
+			if = {
 				limit = {
-					check_variable = { 
-						var = reclaim_cost
-						value = reclaim_cost_requirement
-						compare = less_than_or_equals  
-					}
+					is_ai = yes
 				}
-				RUI = { transfer_state = ROOT.state_colonized_id }
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
 			}
 			else_if = {
 				limit = {
-					check_variable = { 
-						var = reclaim_cost
-						value = reclaim_cost_requirement
-						compare = greater_than_or_equals  
-					}
+					is_ai = no
 				}
-				custom_effect_tooltip = hello
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+			}
+			check_variable = {
+				command_power > temp_command_power_cost
 			}
 		}
-		complete_effect = {
-			ROOT = { clr_country_flag = reclamation_underway clr_country_flag = reclaim_mission_activated }
-		}
-	}
-	reclaim_mission_build_defences = {
-		icon = protection 
-		cost = 20
-		days_remove = 7
-		days_re_enable = 20
-
-		visible = { has_country_flag = reclaim_mission_activated }
-		available = { num_of_civilian_factories_available_for_projects > 1 }
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		modifier = { civilian_factory_use = 2 }
-
-		remove_effect = { 
-			custom_effect_tooltip = reclaim_cost_10
-			add_to_variable = {
-				var = reclaim_cost
-				value = 10
-			}
-			var:state_colonized_id = {
-				add_building_construction = {
-					type = bunker
-					level = 1
-					instant_build = yes
-					province = {
-						limit_to_victory_point > 1
-					}
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	reclaim_exert_authority = {
-		icon = generic_police_action
-		custom_cost_text = command_power_10
-		custom_cost_trigger = { command_power > 9.9 }
-		days_re_enable = 15
-
-		visible = { has_country_flag = reclaim_mission_activated }
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		complete_effect = { 
-			custom_effect_tooltip = reclaim_cost_10
-			add_to_variable = {
-				var = reclaim_cost
-				value = 10
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	reclaim_extend_influence_further = {
-		icon = generic_political_discourse
-		custom_cost_text = command_power_20
-		custom_cost_trigger = { command_power > 19.9 }
-		days_re_enable = 21
-
-		visible = { has_country_flag = reclaim_mission_activated }
-		available = { command_power_daily > 0.15 }
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-
-		complete_effect = { 
-			add_days_mission_timeout = {
-				mission = reclaim_timed_decision
-				days = 20
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	reclaim_mission_send_soldiers = {
-		icon = generic_reorganize_irregulars
-		custom_cost_text = reclaim_manpower_10
-		custom_cost_trigger = { has_manpower > 4 }
-		days_re_enable = 21
-
-		visible = { NOT = { has_country_flag = is_savage_nation } has_country_flag = reclaim_mission_activated }
-		available = { has_manpower > 4 has_equipment = { infantry_equipment > 4 } } 
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		complete_effect = {
-			custom_effect_tooltip = reclaim_cost_10 
-			add_to_variable = {
-				var = reclaim_cost
-				value = 10
-			}
-			add_equipment_to_stockpile = {
-				type = infantry_equipment
-				amount = -5
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	reclaim_mission_send_soldiers_savage = {
-		icon = generic_reorganize_irregulars
-		custom_cost_text = reclaim_manpower_10
-		custom_cost_trigger = { has_manpower > 4 }
-		days_re_enable = 21
-
-		visible = {  has_country_flag = is_savage_nation has_country_flag = reclaim_mission_activated }
-		available = { has_manpower > 4 has_equipment = { savage_equipment > 4 } } 
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		complete_effect = {
-			custom_effect_tooltip = reclaim_cost_10 
-			add_to_variable = {
-				var = reclaim_cost
-				value = 10
-			}
-			add_equipment_to_stockpile = {
-				type = savage_equipment
-				amount = -5
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	reclaim_mission_build_up_station = {
-		icon = generic_mountain_fortification
-		cost = 35
-		days_remove = 7
-		days_re_enable = 50
-
-		visible = { has_country_flag = reclaim_mission_activated }
-		available = { 
-			num_of_civilian_factories_available_for_projects > 2 
-		}
-		cancel_trigger = { NOT = { has_country_flag = reclaim_mission_activated } }
-
-		modifier = { civilian_factory_use = 2 }
-
-		complete_effect = { 
-			custom_effect_tooltip = reclaim_cost_15
-			add_to_variable = {
-				var = reclaim_cost
-				value = 15
-			}
-			add_political_power = 10
-		}
-
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	#reclaim_relocate_citizens = {
-	#	icon = eng_blackshirt_march
-	#	custom_cost_trigger = {
-	#		set_temp_variable = { temp_bullet_cost = 50 }
-	#		check_variable = {
-	#			bullet > temp_bullet_cost
-	#		}
-	#	}
-	#	custom_cost_text = "bullet_decisions_cost_text"
-	#	complete_effect = {
-	#		hidden_effect = { 
-	#			set_temp_variable = { bullet_to_gain = -50 }
-	#			add_bullet_with_tooltip_effect = yes
-	#		}
-	#	}
-	#	days_remove = 21
-	#	days_re_enable = 100
-	#
-	#	visible = { NOT = { has_country_flag = reclaim_mission_activated } }
-	#
-	#	available = { 
-	#		NOT = { has_country_flag = reclaim_mission_activated }
-	#		any_controlled_state = {
-	#			NOT = { has_state_category = pastoral }
-	#			infrastructure > 1
-	#			NOT = { is_core_of = ROOT }
-	#			state_population < 70
-	#		}
-	#		any_controlled_state = { state_population > 100 is_core_of = ROOT }
-	#	}
-	#
-	#	modifier = {
-	#		political_power_gain = -0.2
-	#	}
-	#
-	#	complete_effect = {
-	#		random_owned_state = {
-	#			limit = {
-	#				is_core_of = ROOT
-	#				state_population > 70
-	#				NOT = { has_state_category = pastoral has_state_category = rural }
-	#			}
-	#			add_manpower = -20
-	#		}
-	#		random_owned_state = {
-	#			limit = { NOT = { is_core_of = ROOT has_state_category = pastoral has_state_category = rural } }
-	#			add_manpower = 20
-	#			add_compliance = 20
-	#		}
-	#	}
-	#}
-	reclaim_remove_tunnel_blockers = {
-		icon = trade_unions_demand
-		available = { num_of_civilian_factories_available_for_projects > 4 }
-		custom_cost_text = command_power_30
-	    custom_cost_trigger = { command_power > 29.9 }
-		cost = 0
-		days_remove = 60
+		days_remove = 30
 		on_map_mode = map_only
 	    state_target = yes
 	   
@@ -481,7 +278,6 @@ reclaim_metro = {
 		}
 
 		available = {
-			date > 2034.06.01
 		    hidden_trigger = {
 			    NOT = {
 				   original_tag = GWC
@@ -502,14 +298,31 @@ reclaim_metro = {
 			}
 		}
 	
-		modifier = { civilian_factory_use = 5 }
+		modifier = { civilian_factory_use = 10 }
 
 		complete_effect = {
-			hidden_effect = { add_command_power = -30 }
-	    }
+			hidden_effect = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}
+				else_if = {
+					limit = {
+						is_ai = no
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}	
+			}
+		}
 	
 		remove_effect = {
-			FROM = { set_demilitarized_zone = no  }
+			FROM = { set_demilitarized_zone = no transfer_state_to = ROOT }
 		}
 	
 		ai_will_do = {
@@ -557,6 +370,111 @@ reclaim_metro = {
 				remove_dynamic_modifier = { modifier = flooded_state_modifier } 
 				add_claim_by = ROOT 
 			}
+		}
+	}
+	reclaim_METRO_2_COLONIZE = {
+		icon = trade_unions_demand
+		available = { 
+			num_of_civilian_factories_available_for_projects > 4 
+			hidden_trigger = {
+				has_country_flag = can_now_find_D6
+			}
+		}
+		custom_cost_text = "command_power_decisions_cost_text"
+		custom_cost_trigger = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+			}
+			else_if = {
+				limit = {
+					is_ai = no
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+			}
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
+		days_remove = 30
+		on_map_mode = map_only
+	    state_target = yes
+
+		visible = {
+			has_country_flag = can_now_find_D6
+		    FROM = {
+				region = 14
+				is_owned_by = RUI				
+				count_triggers = {
+    				amount = 1
+					any_neighbor_state = {
+				  		is_fully_controlled_by = ROOT
+						state_population > 5
+					}
+					any_neighbor_state = {
+				  		is_fully_controlled_by = ROOT
+						has_state_flag = METRO_2_state_colonized_flag
+					}
+				}
+			}
+		}
+
+		available = {
+		    hidden_trigger = {
+			    NOT = {
+				   original_tag = GWC
+				   original_tag = PAG
+				   #original_tag = AVT
+			    }
+		    }
+		    FROM = { is_owned_by = RUI }
+		    has_manpower > 10
+		    NOT = {
+			   ROOT = { has_country_flag = reclamation_underway }
+			    FROM = {
+				    OR = {
+					   has_state_flag = state_being_colonized
+					   state = 1
+				    }
+			    }
+			}
+		}
+	
+		modifier = { civilian_factory_use = 5 }
+
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}
+				else_if = {
+					limit = {
+						is_ai = no
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}	
+			}
+		}
+	
+		remove_effect = {
+			FROM = { 
+				set_demilitarized_zone = no 
+				transfer_state_to = ROOT 
+				set_state_flag = METRO_2_state_colonized_flag
+			}
+		}
+	
+		ai_will_do = {
+			base = 51
 		}
 	}
 }
@@ -1310,7 +1228,7 @@ scavenging_expeditions = {
 	}
 }
 hunt_for_D6 = {
-		execute_scavenge_D6_search = {
+	execute_scavenge_D6_search = {
 			icon = GFX_D6_search
 			visible = {
 				106 = { is_owned_by = RUI }
@@ -1414,8 +1332,7 @@ hunt_for_D6 = {
 					original_tag = PLS
 				}
 			}
-		}
-
+	}
 	execute_scavenge_METRO_2_search = {
 		icon = GFX_D6_explore_2
 		available = {
