@@ -111,6 +111,13 @@ reclaim_metro = {
 			RUI = { remove_state_core = ROOT.state_colonized_id }
 			FROM = { clr_state_flag = state_being_colonized }
 			ROOT = { clr_country_flag = reclamation_underway }
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10
+			}
 	    }
 		ai_will_do = {
 			base = 1
@@ -144,12 +151,23 @@ reclaim_metro = {
 	   	icon = generic_military
 	   	custom_cost_text = "command_power_decisions_cost_text"
 		custom_cost_trigger = {
-			set_temp_variable = { temp_command_power_cost = 40 }
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+			}
+			else_if = {
+				limit = {
+					is_ai = no
+				}
+				set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+			}
 			check_variable = {
 				command_power > temp_command_power_cost
 			}
 		}
-	   	days_remove = 35
+	   	days_remove = 30
 	  	days_re_enable = 0
 	  	on_map_mode = map_only
 	   	state_target = yes
@@ -165,9 +183,13 @@ reclaim_metro = {
 	    available = {
 		    hidden_trigger = {
 				has_country_flag = disable_reclamation_mechanic
-				NOT = { has_country_flag = is_savage_nation }
+				has_country_flag = is_savage_nation 
 		    }
-		    FROM = { is_owned_by = RUI }
+		    FROM = { 
+				NOT = {
+					region = 14
+				}
+			}
 		    has_manpower > 4
 		   	has_equipment = { savage_equipment > 4 }
 		    NOT = {
@@ -183,12 +205,34 @@ reclaim_metro = {
 	   	complete_effect = {
 			add_manpower = -5
 			add_equipment_to_stockpile = {
-				type = infantry_equipment
+				type = savage_equipment
 				amount = -5
 			}
 			set_country_flag = reclamation_underway
 			FROM = { set_state_flag = state_being_colonized }
-			hidden_effect = { add_command_power = -40 }
+			hidden_effect = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost_ai }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}
+				else_if = {
+					limit = {
+						is_ai = no
+					}
+					set_temp_variable = { temp_command_power_cost = @temp_command_power_cost }
+					multiply_temp_variable = { temp_command_power_cost = -1 }
+					add_command_power = temp_command_power_cost
+				}	
+			}
+			add_manpower = 5
+			add_equipment_to_stockpile = {
+				type = savage_equipment
+				amount = 5
+			}
 	    }
 	   	remove_effect = {
 			ROOT = {
@@ -197,7 +241,6 @@ reclaim_metro = {
 					value = FROM
 				}
 			}
-			#ROOT = { country_event = reclamation_event.2 }
 			transfer_state = ROOT.state_colonized_id
 			RUI = { remove_state_core = ROOT.state_colonized_id }
 			FROM = { clr_state_flag = state_being_colonized }
