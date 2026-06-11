@@ -320,17 +320,17 @@ focus_tree = {
 		x = 5
 		y = 7
 		cost = 6.5
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		completion_reward = {
 			country_event = nf_VDN.1
 		}
@@ -356,7 +356,7 @@ focus_tree = {
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
 			add_tech_bonus = {
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				ahead_reduction = 1
 				category = farming
@@ -399,7 +399,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_tech_bonus = {
-				bonus = 0.5
+				bonus = 1
 				uses = 2
 				ahead_reduction = 1
 				category = health
@@ -422,13 +422,13 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_tech_bonus = {
-				bonus = 0.5
+				bonus = 1
 				uses = 1
 				ahead_reduction = 1
 				category = health
 			}
 			add_tech_bonus = {
-				bonus = 3
+				bonus = 2
 				uses = 1
 				ahead_reduction = 2
 				category = hospital_tech
@@ -672,7 +672,7 @@ focus_tree = {
 			6 = { 
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -703,8 +703,8 @@ focus_tree = {
 				add_state_modifier = {
 					modifier = {
 						local_resources = 0.15
-						state_production_speed_infrastructure_factor = 0.2
-						state_production_speed_industrial_complex_factor = 0.1
+						state_production_speed_infrastructure_factor = 0.15
+						state_production_speed_industrial_complex_factor = 0.15
 					}
 				}
 			}
@@ -780,7 +780,7 @@ focus_tree = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -1588,24 +1588,24 @@ focus_tree = {
 		x = 23
 		y = 7
 		cost = 6.5
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		completion_reward = {
-			army_experience = 20
+			army_experience = 25
 		}
 		ai_will_do = {
 			factor = 5
 		}
-	}	
+	}
 	focus = {
 		id = VDN_threat_from_botanical
 		icon = GFX_VDN_flag
@@ -1626,10 +1626,19 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_military_0
 		}
+		select_effect = {
+			add_stability = -0.1
+		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
-			add_stability = -0.1
+			add_war_support = 0.05
 			add_manpower = 25
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1647,12 +1656,6 @@ focus_tree = {
 		relative_position_id = VDN_military_0
 		completion_reward = {
 			add_ideas = VDN_equipment_standards
-			add_tech_bonus = {
-				name = infantry_bonus
-				bonus = 0.25
-				uses = 1
-				category = entrench_kits
-			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -1666,6 +1669,7 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_threat_from_botanical
+			focus = VDN_hunter_arrives_2
 		}
 		available = {
 			set_temp_variable = { has_specific_amount_of_bullet = 50 }
@@ -1798,11 +1802,9 @@ focus_tree = {
 		}
 		relative_position_id = VDN_threat_from_botanical
 		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.25
-				uses = 1
-				category = land_doctrine
+			add_mastery = {
+				amount = 50
+				track = doctrine_track_soldiers 
 			}
 			6 = {
 				add_building_construction = {
@@ -1871,12 +1873,123 @@ focus_tree = {
 		}
 		relative_position_id = VDN_defence_beyond_thresholds
 		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
+			add_mastery = {
+				amount = 50
+				track = doctrine_track_soldiers 
 			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_fighting_tooth_and_nail
+		icon = GFX_VDN_flag
+		x = 4
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_into_botanical
+			focus = VDN_hunter_arrives_4
+		}
+		available = {
+			## If not listened to Hunter, Dark ones must NOT exist
+		}
+		relative_position_id = VDN_into_botanical
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_recolonize_botanical
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_fighting_tooth_and_nail
+		}
+		available = {
+			## If not listened to Hunter, Dark ones must NOT exist
+		}
+		relative_position_id = VDN_fighting_tooth_and_nail
+		completion_reward = {
+			## Botanical is shallow, so the station cannot be ACTIVELY properly recolonized
+			## however, give improvements somehow
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_hunter_arrives
+		icon = GFX_VDN_flag
+		x = 38
+		y = 7
+		cost = 6.5
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = VDN_hunter_arrives_2
+		icon = GFX_VDN_flag
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = VDN_hunter_arrives
+		}
+		relative_position_id = VDN_hunter_arrives
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_hunter_arrives_3
+		icon = GFX_VDN_flag
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = VDN_hunter_arrives_2
+		}
+		relative_position_id = VDN_hunter_arrives_2
+		completion_reward = {
+			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = VDN_hunter_arrives_4
+		icon = GFX_VDN_flag
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = VDN_hunter_arrives_3
+		}
+		relative_position_id = VDN_hunter_arrives_3
+		completion_reward = {
 		}
 		ai_will_do = {
 			factor = 10
@@ -1985,6 +2098,15 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_1
 		completion_reward = {
+			add_tech_bonus = {
+				name = guns
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = punch_pressing
+				category = smithing
+				category = casting
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2001,6 +2123,13 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_defence_1
 		completion_reward = {
+			add_tech_bonus = {
+				name = guns
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = infantry_weapons
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2017,6 +2146,13 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_defence_2
 		completion_reward = {
+			add_tech_bonus = {
+				name = guns
+				bonus = 1
+				uses = 1
+				ahead_reduction = 1
+				category = infantry_weapons
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2051,6 +2187,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_3
 		completion_reward = {
+			add_dynamic_modifier = { modifier = VDN_commonwealth_army_dynamic_modifier }
 		}
 		ai_will_do = {
 			factor = 10
@@ -2068,6 +2205,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_offence_2
 		completion_reward = {
+			VDN_commonwealth_army_dynamic_modifier_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -2112,6 +2250,12 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_4
 		completion_reward = {
+			add_tech_bonus = {
+				name = support_weapons_tech_research
+				bonus = 1
+				uses = 2
+				category = support_weapons_tech
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2128,6 +2272,11 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_4
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_2
+				amount = 10
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2160,6 +2309,12 @@ focus_tree = {
 		}
 		relative_position_id = VDN_military_economy_6
 		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 3
+				category = stalker
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2217,9 +2372,15 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.25
+				bonus = 0.75
 				uses = 1
 				category = clothing_kits
+			}
+			add_tech_bonus = {
+				name = infantry_bonus
+				bonus = 0.75
+				uses = 1
+				category = entrench_kits
 			}
 		}
 		ai_will_do = {
@@ -2239,9 +2400,10 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 0.75
 				uses = 1
 				category = clothing_kits
+				category = entrench_kits
 			}
 		}
 		ai_will_do = {
@@ -2261,9 +2423,10 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_bonus
-				bonus = 0.5
+				bonus = 0.75
 				uses = 1
 				category = clothing_kits
+				category = entrench_kits
 			}
 		}
 		ai_will_do = {
@@ -2281,17 +2444,17 @@ focus_tree = {
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
 		}
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
 			diplomatic_relation = {
@@ -2852,6 +3015,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_macrophage
 		completion_reward = {
+			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -3201,19 +3365,19 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		relative_position_id = VDN_commonwealth_telecommunications_5
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		completion_reward = {
-			army_experience = 20
+			add_political_power = 150
 		}
 		ai_will_do = {
 			factor = 5
@@ -3222,16 +3386,26 @@ focus_tree = {
 	focus = {
 		id = VDN_commonwealth_formed_focus_2
 		icon = GFX_VDN_flag
-		x = -6
-		y = 1
+		x = -4
+		y = 2
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_commonwealth_formed_focus_1
 		}
 		available = {
+			424 = { is_owned_by = ROOT }
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_1
 		completion_reward = {
+			424 = { 
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.15
+						state_production_speed_infrastructure_factor = 0.15
+						state_production_speed_industrial_complex_factor = 0.15
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3240,16 +3414,26 @@ focus_tree = {
 	focus = {
 		id = VDN_commonwealth_formed_focus_3
 		icon = GFX_VDN_flag
-		x = 5
-		y = 1
+		x = 4
+		y = 2
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_commonwealth_formed_focus_1
 		}
 		available = {
+			317 = { is_owned_by = ROOT }
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_1
 		completion_reward = {
+			317 = { 
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.15
+						state_production_speed_infrastructure_factor = 0.15
+						state_production_speed_industrial_complex_factor = 0.15
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3268,6 +3452,30 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_1
 		completion_reward = {
+			317 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			424 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3304,6 +3512,17 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_1
 		completion_reward = {
+			every_owned_state = {
+				limit = {
+					has_state_category = pastoral
+					infrastructure < 5
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3322,6 +3541,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_3
 		completion_reward = {
+			add_war_support = 0.1
 		}
 		ai_will_do = {
 			factor = 10
@@ -3358,6 +3578,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_2
 		completion_reward = {
+			add_stability = 0.1
 		}
 		ai_will_do = {
 			factor = 10
@@ -3433,6 +3654,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_1
 		completion_reward = {
+			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
