@@ -2,14 +2,14 @@
 ## Code above is for VSC HOI4 utility. pls leave ty
 
 ## Originally made by Slouchmeister
-## Edited by Heavy
+## Edited & Rework by Heavy
 
 focus_tree = {
 	id = vdnkh_tree
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 60
 			tag = VDN
 		}
 	}
@@ -509,10 +509,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_social_support
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = VDN_mushroom_cultivations
-				add_idea = VDN_mushroom_cultivations_2
-			}
+			VDN_mushroom_cultivations_dynamic_modifier_consumer_goods_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -957,10 +954,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = VDN_mushroom_cultivations
-				add_idea = VDN_mushroom_cultivations_3
-			}
+			VDN_mushroom_cultivations_dynamic_modifier_consumer_goods_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1210,7 +1204,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_political_2
+		id = VDN_soviet_ideals_path
 		icon = GFX_VDN_flag
 		x = -5
 		y = 1
@@ -1219,8 +1213,8 @@ focus_tree = {
 			focus = VDN_political_1
 		}
 		mutually_exclusive = {
-			focus = VDN_political_3
-			focus = VDN_political_4
+			focus = VDN_collective_path
+			focus = VDN_capitalism_path
 		}
 		relative_position_id = VDN_political_1
 		completion_reward = {
@@ -1230,7 +1224,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_political_3
+		id = VDN_collective_path
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
@@ -1239,18 +1233,19 @@ focus_tree = {
 			focus = VDN_political_1
 		}
 		mutually_exclusive = {
-			focus = VDN_political_2
-			focus = VDN_political_4
+			focus = VDN_soviet_ideals_path
+			focus = VDN_capitalism_path
 		}
 		relative_position_id = VDN_political_1
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_centralize_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_political_4
+		id = VDN_capitalism_path
 		icon = GFX_VDN_flag
 		x = 5
 		y = 1
@@ -1259,29 +1254,31 @@ focus_tree = {
 			focus = VDN_political_1
 		}
 		mutually_exclusive = {
-			focus = VDN_political_3
-			focus = VDN_political_2
+			focus = VDN_collective_path
+			focus = VDN_soviet_ideals_path
 		}
 		relative_position_id = VDN_political_1
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_capitalist_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_political_5
+		id = VDN_centralize_station_authority
 		icon = GFX_VDN_flag
 		x = 0
 		y = 2
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_2
-			focus = VDN_political_3
-			focus = VDN_political_4
+			focus = VDN_soviet_ideals_path
+			focus = VDN_collective_path
+			focus = VDN_capitalism_path
 		}
 		relative_position_id = VDN_political_1
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_complex_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1294,9 +1291,9 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_5
+			focus = VDN_centralize_station_authority
 		}
-		relative_position_id = VDN_political_5
+		relative_position_id = VDN_centralize_station_authority
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1310,9 +1307,9 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_5
+			focus = VDN_centralize_station_authority
 		}
-		relative_position_id = VDN_political_5
+		relative_position_id = VDN_centralize_station_authority
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1353,6 +1350,7 @@ focus_tree = {
 			factor = 10
 		}
 	}
+	
 	focus = {
 		id = VDN_political_9A
 		icon = GFX_VDN_flag
@@ -1363,8 +1361,9 @@ focus_tree = {
 			focus = VDN_political_9
 			focus = VDN_political_8
 		}
-		relative_position_id = VDN_political_5
+		relative_position_id = VDN_centralize_station_authority
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_construction_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1377,11 +1376,17 @@ focus_tree = {
 		y = 3
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_5
-			focus = VDN_political_4
+			focus = VDN_centralize_station_authority
+			focus = VDN_capitalism_path
 		}
-		relative_position_id = VDN_political_4
+		relative_position_id = VDN_capitalism_path
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment_1
+				amount = 5
+				producer = RUS
+			}
+			add_ideas = VDN_strongarm_merchant_caravants
 		}
 		ai_will_do = {
 			factor = 10
@@ -1398,6 +1403,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_political_10
 		completion_reward = {
+			add_ideas = VDN_economic_power
 		}
 		ai_will_do = {
 			factor = 10
@@ -1410,10 +1416,11 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_4
+			focus = VDN_capitalism_path
 		}
-		relative_position_id = VDN_political_4
+		relative_position_id = VDN_capitalism_path
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_resources_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1430,13 +1437,14 @@ focus_tree = {
 		}
 		relative_position_id = VDN_political_12
 		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	focus = {
-		id = VDN_political_14
+		id = VDN_export_economy
 		icon = GFX_VDN_flag
 		x = 1
 		y = 1
@@ -1446,6 +1454,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_political_12
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_exports_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1458,9 +1467,9 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_14
+			focus = VDN_export_economy
 		}
-		relative_position_id = VDN_political_14
+		relative_position_id = VDN_export_economy
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1474,10 +1483,11 @@ focus_tree = {
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_2
+			focus = VDN_soviet_ideals_path
 		}
-		relative_position_id = VDN_political_2
+		relative_position_id = VDN_soviet_ideals_path
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_construction_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -1490,11 +1500,12 @@ focus_tree = {
 		y = 3
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_2
-			focus = VDN_political_5
+			focus = VDN_soviet_ideals_path
+			focus = VDN_centralize_station_authority
 		}
-		relative_position_id = VDN_political_2
+		relative_position_id = VDN_soviet_ideals_path
 		completion_reward = {
+			add_ideas = VDN_prioritize_internal_citizens
 		}
 		ai_will_do = {
 			factor = 10
@@ -1533,7 +1544,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_political_20
+		id = VDN_self_sufficiency
 		icon = GFX_VDN_flag
 		x = -1
 		y = 1
@@ -1549,15 +1560,15 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_political_21
+		id = VDN_soviet_ideals_path1
 		icon = GFX_VDN_flag
 		x = 1
 		y = 1
 		cost = 6.5
 		prerequisite = {
-			focus = VDN_political_20
+			focus = VDN_self_sufficiency
 		}
-		relative_position_id = VDN_political_20
+		relative_position_id = VDN_self_sufficiency
 		completion_reward = {
 		}
 		ai_will_do = {
@@ -1565,7 +1576,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = VDN_POLATIOK
+		id = VDN_burgeoning_power
 		icon = GFX_VDN_flag
 		x = 0
 		y = 1
@@ -1970,6 +1981,9 @@ focus_tree = {
 		cost = 3
 		prerequisite = {
 			focus = VDN_hunter_arrives_2
+		}
+		available = {
+			has_country_flag = VDN_hunter_leadership_available_country_flag
 		}
 		relative_position_id = VDN_hunter_arrives_2
 		completion_reward = {
@@ -2727,7 +2741,7 @@ focus_tree = {
 		y = 14
 		cost = 6.5
 		available = {
-			always = no
+			has_country_flag = VDN_sukhoi_as_or_leader_country_flag
 		}
 		allow_branch = { 
 			if = {
@@ -2903,7 +2917,7 @@ focus_tree = {
 		y = 0
 		cost = 6.5
 		available = {
-			always =  no
+			has_country_flag = VDN_hunter_as_or_leader_country_flag
 		}
 		allow_branch = { 
 			if = {
@@ -3166,6 +3180,9 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_humanitys_fate
 		}
+		available = {
+			has_country_flag = dark_ones_dead_country_flag
+		}
 		relative_position_id = VDN_humanitys_fate
 		completion_reward = {
 		}
@@ -3264,6 +3281,9 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_humanitys_fate
+		}
+		available = {
+			has_country_flag = dark_ones_saved_country_flag
 		}
 		relative_position_id = VDN_humanitys_fate
 		completion_reward = {
