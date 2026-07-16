@@ -1262,3 +1262,50 @@ news_event = {
 		}
 	}
 }
+
+add_namespace = nf_VDN_immigration
+
+country_event = { # Commonwealth Forms
+    id = nf_VDN_immigration.1
+    title = nf_VDN_immigration.1.t
+    desc = nf_VDN_immigration.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_immigration.1.a
+		custom_effect_tooltip = nf_VDN_immigration.1_tt
+		unlock_decision_category_tooltip = VDN_immigration_category
+
+		hidden_effect = {
+			set_variable = {
+				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
+			}
+		}
+	}
+}
+
+country_event = { # Commonwealth Forms
+    id = nf_VDN_immigration.2
+    title = nf_VDN_immigration.2.t
+    desc = nf_VDN_immigration.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_immigration.2.a
+
+		VDN_immigrants_arrive_scripted_effect = yes
+		hidden_effect = {
+			set_country_flag = VDN_immigration_decision_activation_flag
+
+			set_variable = {
+				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
+			}
+		}
+	}
+}

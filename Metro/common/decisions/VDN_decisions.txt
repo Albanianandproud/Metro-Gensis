@@ -1,4 +1,467 @@
-VDN_mushroom_trade_category = {
 
-	VDN_mushroom_trade = {}
+# Trade variables are activated in history file
+#@VDN_mushroom_trade_civ_cost = 1
+#@VDN_mushroom_trade_reward_mult = 2
+
+VDN_mushroom_trade_category = {
+	VDN_mushroom_trade_organize_caravan = {
+		available = {
+			custom_trigger_tooltip = {
+			    tooltip = 359_owned_by_hanza_subject		
+			    OR = {
+					359 = { is_owned_and_controlled_by = HNZ }
+					359 = { is_owned_and_controlled_by = PRO }
+					359 = { is_owned_and_controlled_by = VDN }
+				}
+			}
+			num_of_civilian_factories_available_for_projects > VDN_mushroom_trade_civ_cost
+
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 25 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -25 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_manpower = -5
+		}
+		#modifier = {
+		#	civilian_factory_use = @VDN_mushroom_trade_civ_cost
+		#}
+		days_remove = 15
+		#days_re_enable = 180
+		remove_effect = {
+
+			set_temp_variable = { bullet_to_gain = VDN_mushroom_trade_independent_reward }
+			add_bullet_with_tooltip_effect = yes
+
+			#FROM = {
+			#	country_event = { 
+			#		id = nf_hanza_satellite_trade.3
+			#		hours = 6
+			#	}
+			#}
+			#custom_effect_tooltip = if_they_accept_tt
+			#effect_tooltip = {
+			#	FROM = {
+			#		hanza_satellite_trade_trade_scripted_effect = yes
+			#		hanza_satellite_improve_relations_scripted_effect = yes
+			#	}
+			#}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_manpower = 5
+
+			hidden_effect = {
+				add_to_variable = {
+					var = VDN_mushroom_trade_civ_cost value = 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
+	}
+
+	VDN_mushroom_trade_sell_directly_to_hanza = {
+		visible = {
+			HNZ = { exists = yes }
+		}
+		available = {
+			custom_trigger_tooltip = {
+			    tooltip = 359_owned_by_hanza_subject		
+			    OR = {
+					359 = { is_owned_and_controlled_by = HNZ }
+					359 = { is_owned_and_controlled_by = PRO }
+					359 = { is_owned_and_controlled_by = VDN }
+				}
+			}
+			HNZ = {
+				exists = yes
+				NOT = { is_embargoing = VDN has_war_with = VDN }
+			}
+			num_of_civilian_factories_available_for_projects > VDN_mushroom_trade_civ_cost
+
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+		#custom_cost_trigger = {
+		#	set_temp_variable = { temp_bullet_cost = 10 }
+		#	check_variable = {
+		#		bullet > temp_bullet_cost
+		#	}
+		#}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			#hidden_effect = { 
+			#	set_temp_variable = { bullet_to_gain = -25 }
+			#	add_bullet_with_tooltip_effect = yes
+			#}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_manpower = -5
+		}
+		#modifier = {
+		#	civilian_factory_use = VDN_mushroom_trade_civ_cost
+		#}
+		days_remove = 3
+		#days_re_enable = 180
+		remove_effect = {
+
+			set_temp_variable = { bullet_to_gain = VDN_mushroom_trade_hanza_reward }
+			add_bullet_with_tooltip_effect = yes
+
+			#FROM = {
+			#	country_event = { 
+			#		id = nf_hanza_satellite_trade.3
+			#		hours = 6
+			#	}
+			#}
+			#custom_effect_tooltip = if_they_accept_tt
+			#effect_tooltip = {
+			#	FROM = {
+			#		hanza_satellite_trade_trade_scripted_effect = yes
+			#		hanza_satellite_improve_relations_scripted_effect = yes
+			#	}
+			#}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_manpower = 5
+
+			hidden_effect = {
+				add_to_variable = {
+					var = VDN_mushroom_trade_civ_cost value = 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
+	}
+
+	VDN_mushroom_trade_research_caravan = {
+		visible = {
+			HNZ = { exists = yes }
+		}
+		available = {
+			has_completed_focus = VDN_fund_bookreading
+
+			num_of_civilian_factories_available_for_projects > VDN_mushroom_trade_research_civ_cost
+
+			has_equipment = {
+				infantry_equipment > 4
+			}
+			has_equipment = {
+				rail_cart_equipment > 0
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 200 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -200 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = -1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5
+			}
+			add_manpower = -5
+		}
+		#modifier = {
+		#	civilian_factory_use = VDN_mushroom_trade_research_civ_cost
+		#}
+		days_remove = 3
+		#days_re_enable = 180
+		remove_effect = {
+			
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_equipment_to_stockpile = {
+				type = rail_cart_equipment
+				amount = 1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5
+			}
+			add_manpower = 5
+
+			hidden_effect = {
+				add_to_variable = {
+					var = VDN_mushroom_trade_research_civ_cost value = 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 10
+				set_temp_variable = { temp_bullet_cost = 300 }
+				check_variable = {
+					bullet > temp_bullet_cost	
+				}
+			}
+			modifier = {
+				factor = 0
+				set_temp_variable = { temp_bullet_cost = 299 }
+				check_variable = {
+					bullet < temp_bullet_cost	
+				}
+			}
+		}
+	}
+}
+
+VDN_immigration_category = {
+	VDN_immigration_arrival_countdown_mission = {
+
+		activation = {
+			has_country_flag = VDN_immigration_decision_activation_flag
+		}
+
+		##
+		## TODO Make decision scale timer based on factors like stability, world tension &
+		## dark one and internal issues as such
+		##
+
+		icon = ger_mefo_bills
+		priority = 1001
+
+		available = {
+			NOT = { has_country_flag = VDN_immigration_decision_activation_flag }
+		}
+
+		days_mission_timeout = VDN_immigrant_countdown_length
+		is_good = yes
+
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { has_country_flag = VDN_immigration_decision_activation_flag }
+			}
+		}
+		
+		remove_effect = {}
+
+		complete_effect = {}
+
+		timeout_effect = {
+			effect_tooltip = {
+				VDN_immigrants_arrive_scripted_effect = yes
+			}
+			country_event = nf_VDN_immigration.2
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+
+		##
+		## TODO Make decisions to reduce time, thus increasing appeal for immigrants
+		## cannonically, vdnkh has like 500 people by 2033/34, starts game with only 200
+		##
+
+		## Decisions should also become available / unavaiable via focuses and game progression
+
+	VDN_immigration_arrival_countdown_attract_immigrants = {
+		icon = generic_research
+
+		visible = {
+			has_active_mission = VDN_immigration_arrival_countdown_mission
+		}
+		available = {
+			hidden_trigger = { has_country_flag = VDN_immigration_decision_activation_flag }
+		}
+		
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 75 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = -0.05
+			political_power_factor = -0.15
+		}
+
+		complete_effect = {
+			add_days_mission_timeout = {
+			    mission = VDN_immigration_arrival_countdown_mission
+			    days = VDN_immigrant_reduction
+			}
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -75 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		
+		days_remove = 7
+		days_re_enable = 90
+		cost = 50
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+
+	VDN_immigration_arrival_countdown_invite_immigrants = {
+		icon = generic_research
+
+		visible = {
+			has_active_mission = VDN_immigration_arrival_countdown_mission
+		}
+		available = {
+			hidden_trigger = { has_country_flag = VDN_immigration_decision_activation_flag }
+		}
+		
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = -0.05
+			political_power_factor = -0.15
+		}
+
+		complete_effect = {
+			add_days_mission_timeout = {
+			    mission = VDN_immigration_arrival_countdown_mission
+			    days = VDN_immigrant_reduction
+			}
+		}
+		
+		days_remove = 7
+		days_re_enable = 90
+		cost = 50
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	VDN_immigration_arrival_countdown_citizen_care_package = {
+		icon = generic_research
+
+		visible = {
+			has_active_mission = VDN_immigration_arrival_countdown_mission
+		}
+		available = {
+			hidden_trigger = { has_country_flag = VDN_immigration_decision_activation_flag }
+		}
+		
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 200 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		
+		fire_only_once = no
+
+		complete_effect = {
+			add_days_mission_timeout = {
+			    mission = VDN_immigration_arrival_countdown_mission
+			    days = VDN_immigrant_reduction
+			}
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -200 }
+				add_bullet_with_tooltip_effect = yes
+			}
+		}
+		
+		days_remove = 7
+		days_re_enable = 90
+		cost = 50
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+
 }
