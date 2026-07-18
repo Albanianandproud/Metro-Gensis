@@ -174,6 +174,18 @@ NDefines.NMilitary.BASE_DIVISION_BRIGADE_GROUP_COST = 10
 NDefines.NMilitary.BASE_DIVISION_BRIGADE_CHANGE_COST = 10
 NDefines.NMilitary.BASE_DIVISION_SUPPORT_SLOT_COST = 10
 
+	NDefines.NMilitary.MAX_REGIMENTAL_SUPPORT_WIDTH = 1									-- Max width of regimental supports in division designer.
+	NDefines.NMilitary.MAX_REGIMENTAL_SUPPORT_HEIGHT = 1								-- Max height of regimental supports in division designer.
+	NDefines.NMilitary.MAX_HQ_BATTALION_WIDTH = 1										-- Max width of regiments in division designer (Army HQ templates).
+	NDefines.NMilitary.MAX_HQ_BATTALION_HEIGHT = 4										-- Max height of regiments in division designer (Army HQ templates).
+	NDefines.NMilitary.MAX_HQ_SUPPORT_WIDTH = 1											-- Max width of support in division designer (Army HQ templates).
+	NDefines.NMilitary.MAX_HQ_SUPPORT_HEIGHT = 4										-- Max height of support in division designer (Army HQ templates).
+	NDefines.NMilitary.MAX_HQ_REGIMENTAL_SUPPORT_WIDTH = 0								-- Max width of regimental supports in division designer (Army HQ templates).
+	NDefines.NMilitary.MAX_HQ_REGIMENTAL_SUPPORT_HEIGHT = 0								-- Max height of regimental supports in division designer (Army HQ templates).
+	NDefines.NMilitary.REGIMENTAL_SUPPORT_REQUIRED_BATTALIONS = { 2 } 					-- For each regimental support row, how many battalions are required in the regiment to be able to place a support in that row.
+
+	NDefines.NMilitary.AI_BATTALION_BUILD_ORDER = { 1, 2, 3, 4, 5 } 
+
 
 	NDefines.NMilitary.ENCIRCLED_PENALTY = -0.15
 
