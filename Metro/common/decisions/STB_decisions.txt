@@ -15,8 +15,9 @@ STB_education_decision_category = {
 			has_country_flag = STB_can_adopt_research_flag
 			NOT = {
 				has_country_flag = STB_research_cooldown
+				has_active_mission = STB_education_adopt_research_countdown
 			}
-			has_active_mission = STB_education_adopt_research_countdown
+			#has_active_mission = STB_education_adopt_research_countdown
 		}
 
 		cost = 100
@@ -41,13 +42,14 @@ STB_education_decision_category = {
 		priority = 1001
 
 		is_good = yes
-		days_mission_timeout = 90
+		days_mission_timeout = 60
 
 		timeout_effect = {                 
             country_event = nf_metro_education.1
             custom_effect_tooltip = STB_education_adopt_research_countdown_tooltip
             hidden_effect = {
             	clr_country_flag = improving_education
+				clr_country_flag = STB_can_adopt_research_flag
             }
         }
 	}
@@ -55,11 +57,16 @@ STB_education_decision_category = {
 	STB_education_renovate_research_mission = {
 		
 		visible = {
-			#always = no 
+			NOT = {
+				has_active_mission = STB_education_adopt_research_countdown
+			}
 		}
 
 		available = {
 
+			STB_todorov = {
+				is_hired_as_advisor = yes
+			}
 			## Check var of raided targets
 
 			custom_trigger_tooltip = {
@@ -79,7 +86,7 @@ STB_education_decision_category = {
 
 		priority = 1001
 
-		days_remove = 7 
+		days_remove = 3
 		fire_only_once = no
 		days_re_enable = 30
 
@@ -90,7 +97,8 @@ STB_education_decision_category = {
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = STB_adopt_research_tooltip
 
-			hidden_effect = { clear_variable = STB_raids_value }
+			#hidden_effect = { clear_variable = STB_raids_value }
+			STB_raids_increase_threshold = yes
 		}
 
 		ai_will_do = {
@@ -124,18 +132,14 @@ STB_education_decision_category = {
 	STB_questionable_ethics_ubermensch_timed_decision = {
 
 		available = {
-			custom_trigger_tooltip = {
-				tooltip = STB_research_renovate_enable_tooltip
-
-				NOT = { has_country_flag = STB_research_cooldown }
+			has_civic_education_higher_4 = yes
+			STB_todorov = {
+				is_hired_as_advisor = yes
 			}
 		}
 
 		visible = {
-			has_country_flag = STB_can_adopt_research_flag
-			NOT = {
-				has_country_flag = STB_research_cooldown
-			}
+			has_completed_focus = STB_political_focus_path_8
 		}
 
 		complete_effect = {
@@ -270,6 +274,28 @@ STB_education_decision_category = {
 
 		ai_will_do = {
 			base = 20
+		}
+	}
+
+	STB_debug_add_research_decision = {
+		
+		visible = { is_debug = yes }
+
+		fire_only_once = no
+
+		complete_effect = {
+			add_to_variable = {
+				var = STB_raids_value value = 1
+			}
+		}
+	}
+
+	STB_debug_increase_raid_threshhold_cost_descision = {
+		visible = { is_debug = yes }
+		fire_only_once = no
+
+		complete_effect = {
+			STB_raids_increase_threshold = yes
 		}
 	}
 }

@@ -107,11 +107,6 @@ RCH_KUZ_borderwar_decision = {
 				has_non_aggression_pact_with = KUZ
 				RCH = { is_puppet_of = KUZ }
 			}
-			214 = {
-				any_neighbor_state = {
-					is_controlled_by = RED
-				}
-			}
 		}
 		highlight_states = {
 			highlight_state_targets = {
@@ -120,9 +115,16 @@ RCH_KUZ_borderwar_decision = {
 			} 
 		}
 		fire_only_once = no
-		cost = 20
 		days_remove = 7
 		days_re_enable = 90
+
+		custom_cost_trigger = {
+			set_temp_variable = { temp_command_power_cost = 20 }
+			check_variable = {
+				command_power > temp_command_power_cost
+			}
+		}
+		custom_cost_text = "command_power_decisions_cost_text"
 
 		ai_will_do = {
 			factor = 1
@@ -140,20 +142,23 @@ RCH_KUZ_borderwar_decision = {
 		}
 		war_with_on_remove = KUZ
 		complete_effect = {
+			hidden_effect = {
+				add_command_power = -20
+			}
 			KUZ = { country_event = nf_TRT.18 }
 		}
 		remove_effect = {
-			add_threat = 0.01
+			add_threat = 1.5
 			start_border_war = {
 				attacker = {
-					state = 431
+					state = 430
 					num_provinces = 3
 					on_win = nf_TRT.19
 					on_lose = nf_TRT.20
 					modifier = 0.1
 				}	
 				defender = {
-					state = 214
+					state = 431
 					num_provinces = 3
 					on_win = nf_TRT.19
 					on_lose = nf_TRT.20
