@@ -1,0 +1,43 @@
+on_actions = {
+
+	on_startup = {
+		effect = {
+
+			set_variable = { global.INFESTATION_RESISTANCE_THRESHOLD = 25 }
+
+			set_variable = { global.INFESTATION_DAYS_RANDOM_ENABLE = 1 }
+
+			set_variable = { global.INFESTATION_SPAWN_ENABLE = 1 }
+		}
+	}
+	
+	on_daily = {
+		effect = {
+			every_owned_state = {
+			    limit = {
+					resistance > 5
+					state_population < 5
+			        any_neighbor_state = {
+			            any_neighbor_state = {
+						    is_owned_by = RUI
+						}
+			        }
+					has_resistance = yes
+					#NOT = { resistance < global.INFESTATION_RESISTANCE_THRESHOLD }
+					#check_variable = { risedup_day = 0 }
+			    }
+				transfer_state_to = ZZY
+				create_infest_unit = yes
+			}
+		}
+
+		effect = {
+			every_country = {
+				limit = {
+					NOT = { has_war_with = ZZY }
+				}
+				declare_war_on_mutants = yes
+			}
+		}
+	}
+}
