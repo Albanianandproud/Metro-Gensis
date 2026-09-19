@@ -1,0 +1,84 @@
+scripted_gui = {
+
+	infestation_message_popup_place = {
+		context_type = player_context
+		window_name = "infestation_message_bg"
+		
+		visible = {
+			has_variable  = metro_infestation_popup
+			NOT = {
+				all_of = { 
+					array = infested_state
+					check_variable = { v = 0 }
+				}
+			}
+		}
+		
+		dynamic_lists = {
+			popup_window_list = {
+				array = infested_state
+				change_scope = yes
+				entry_container = infestation_message_base_window
+		
+				ai_weights = {
+					goto_button_click = {
+						ai_will_do = {
+							factor = 0
+						}
+					}
+					ok_button_click = {
+						ai_will_do = {
+							factor = 200
+						}
+					}
+				}
+				
+			}
+		}
+		
+		properties = {
+			sender_flag = {
+				image = "[This.Owner.GetFlag]"
+			}
+			receiver_flag = {
+				image = "[ROOT.GetFlag]"
+			}
+		}
+		
+		effects = {
+			
+			goto_button_click = {
+				ROOT = { 
+					goto_state = PREV
+					remove_from_array = { 
+					array = infested_state
+					index = i
+					}
+				}
+			}
+			ok_button_click = {
+				remove_from_array = { 
+					array = ROOT.infested_state
+					index = i
+				}
+				clear_variable  = metro_infestation_popup
+			}
+		}
+		
+		triggers = {
+			goto_button_click_enabled = {
+			}
+			ok_button_click_enabled = {
+			}
+		}
+		
+		ai_enabled = {
+			always = yes
+		}
+		
+		ai_check = {
+			always = yes
+		}
+		
+	}
+}

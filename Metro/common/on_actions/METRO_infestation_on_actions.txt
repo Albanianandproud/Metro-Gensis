@@ -1,35 +1,69 @@
 on_actions = {
-
 	on_startup = {
 		effect = {
+			if = {
+				limit = { has_game_rule = { rule = infestation_states option = ENABLED } }
+				set_variable = { global.INFESTATION_RESISTANCE_THRESHOLD = 25 }
 
-			set_variable = { global.INFESTATION_RESISTANCE_THRESHOLD = 25 }
+				set_variable = { global.INFESTATION_DAYS_RANDOM_ENABLE = 1 }
 
-			set_variable = { global.INFESTATION_DAYS_RANDOM_ENABLE = 1 }
+				set_variable = { global.INFESTATION_SPAWN_ENABLE = 1 }
 
-			set_variable = { global.INFESTATION_SPAWN_ENABLE = 1 }
-		}
-	}
-	
-	on_daily = {
-		effect = {
-			every_owned_state = {
-			    limit = {
-					resistance > 5
-					state_population < 5
-			        any_neighbor_state = {
-			            any_neighbor_state = {
-						    is_owned_by = RUI
-						}
-			        }
-					has_resistance = yes
-					#NOT = { resistance < global.INFESTATION_RESISTANCE_THRESHOLD }
-					#check_variable = { risedup_day = 0 }
-			    }
-				transfer_state_to = ZZY
-				create_infest_unit = yes
+				set_variable = { global.INFESTATION_DAYS = 90 }
 			}
 		}
+	}
+
+
+	on_daily = {
+	    effect = {
+			if = {
+				limit = { has_game_rule = { rule = infestation_states option = ENABLED } }
+				
+	        	every_owned_state = {
+	        	    limit = { 
+						resistance > global.INFESTATION_RESISTANCE_THRESHOLD
+						state_population < 5
+						NOT = { is_owned_by = ZZY }
+					}
+				
+	        	    if = {
+	        	        limit = {
+	        	            NOT = {
+	        	                has_variable = infestation_countdown
+	        	            }
+	        	        }
+						random_list = {
+							1 = { set_variable = { infestation_countdown = 15 	} }
+							2 = { set_variable = { infestation_countdown = 30 	} }
+							3 = { set_variable = { infestation_countdown = 45 	} }
+							4 = { set_variable = { infestation_countdown = 60 	} }
+							5 = { set_variable = { infestation_countdown = 75 	} }
+							6 = { set_variable = { infestation_countdown = 90 	} }
+							7 = { set_variable = { infestation_countdown = 105 	} }
+							8 = { set_variable = { infestation_countdown = 120 	} }
+						}
+	        	    }
+					if = {
+						limit = {
+							has_variable = infestation_countdown
+						}
+						subtract_from_variable = { infestation_countdown = 1 }
+					}
+				
+				
+	        	    if = {
+	        	        limit = {
+							check_variable = { infestation_countdown < 1 }
+	        	        }
+						set_variable = { metro_infestation_popup = 1 }
+						trigger_infestation = yes
+
+	        	        clear_variable = infestation_countdown
+	        	    }
+	        	}
+			}
+	    }
 
 		effect = {
 			every_country = {
