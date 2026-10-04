@@ -615,6 +615,63 @@ ideas = {
 		    ai_will_do = { factor = 2 } 
 		}
 
+		civics_support_5 = { # Elite Wages / SPT 
+			
+			allowed = {
+				NOT = { has_country_flag = has_bullets_disabled }
+			}
+
+		    visible = {
+				hidden_trigger = {
+					has_country_flag = civics_support_5_unlock_flag
+				}
+			}
+
+			available = {
+				custom_trigger_tooltip = {
+					NOT = {
+						has_country_flag = {
+							flag = military_wages_lock
+							value = 1
+						}
+					}
+					tooltip = military_wages_cooldown_tooltip
+				}
+			}
+
+			on_add = {
+				set_country_flag = {
+					flag = military_wages_lock
+					value = 1
+					days = 120
+				}
+				custom_effect_tooltip = military_wages_cooldown_set
+			}
+
+			level = 5
+		    cost = 100
+		    removal_cost = -1
+	   
+		    modifier = {
+			   army_spending_cost_factor = 0.25
+			   army_org_regain = 0.15
+			   army_morale_factor = 0.15
+			   experience_gain_army_unit_factor = 0.15
+			   initiative_factor = 0.15
+			   max_training = 0.1
+			   experience_gain_army_factor = 0.25
+
+			   consumer_goods_expected_value = 0.075
+			   special_forces_min = 20
+			   special_forces_out_of_supply_factor = -0.15
+			   special_forces_no_supply_grace = 24
+		    }
+
+		   cancel_if_invalid = no
+
+		    ai_will_do = { factor = 2 } 
+		}
+
 		civics_support_savage = {
 			
 			allowed = {

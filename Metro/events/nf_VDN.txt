@@ -20,6 +20,8 @@ country_event = { # Commonwealth Forms
 		#add_timed_idea = { idea = VDNK_commonwealth_formed days = 480 }
 		#hidden_effect = { set_country_flag = vdnk_achievement }
 		#news_event = { id = global_event.51 days = 1 }
+
+		country_event = nf_VDNK.10
 		ai_chance = { base = 2500 }
 	}
 }
@@ -205,6 +207,57 @@ country_event = { # Hanza pull back funding
 			target = HNZ
 			modifier = trade_relations_1
 		}
+	}
+}
+
+country_event = { # Election
+    id = nf_VDNK.10
+    title = nf_VDNK.10.t
+    desc = nf_VDNK.10.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK.10.a
+			
+		retire_country_leader = yes
+
+		add_country_leader_role = {
+		    character = VDN_alexander_sukhoi
+		    promote_leader = yes
+		    country_leader = {
+		        ideology = confederation  
+		        expire = "2060.1.1.1"
+		    }
+		}
+		ai_chance = { base = 2500 }
+	}
+
+	option = {
+		name = nf_VDNK.10.b
+			
+		retire_country_leader = yes
+
+		set_politics = {
+		    ruling_party = dictatorial
+		    elections_allowed = no
+		}
+
+		add_country_leader_role = {
+		    character = VDN_hunter
+		    promote_leader = yes
+		    country_leader = {
+		        ideology = totalitarianism
+		        expire = "2060.1.1.1"
+		    }
+		}
+
+		trigger = {
+			has_country_flag = VDN_hunter_leadership_available_country_flag
+		}
+		ai_chance = { base = 2500 }
 	}
 }
 

@@ -9,7 +9,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 60
 			tag = VDN
 		}
 	}
@@ -598,7 +598,7 @@ focus_tree = {
 		completion_reward = {
 			set_temp_variable = { bullet_to_gain = -200 }
 			add_bullet_with_tooltip_effect = yes
-			custom_effect_tooltip = VDN_trade_for_research
+			unlock_decision_tooltip = VDN_mushroom_trade_research_caravan
 
 			custom_effect_tooltip = generic_skip_one_line_tt
 			custom_effect_tooltip = available_political_advisor
@@ -908,11 +908,15 @@ focus_tree = {
 			focus = VDN_burgeoning_station
 		}
 		available = {
-			has_completed_focus = VDN_shared_tooling
+			has_completed_focus = VDN_shared_tooling  
+			OR = {
+				359 = { is_owned_by = HNZ }
+				359 = { is_owned_by = PRO }
+				359 = { is_owned_by = ROOT }
+			}
 		}
 		relative_position_id = VDN_burgeoning_station
 		completion_reward = {
-			custom_effect_tooltip = VDN_economy_2_tt
 			add_ideas = VDN_mushroom_economy
 		}
 		ai_will_do = {
@@ -1882,13 +1886,8 @@ focus_tree = {
 		y = 1
 		cost = 3
 		available = {
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
 				has_country_flag = VDNK_threat_from_botanical
 			}
 		}
@@ -2195,6 +2194,12 @@ focus_tree = {
 		x = 2
 		y = 2
 		cost = 6.5
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDN_hunter_leadership_available_country_flag_toolip
+				has_country_flag = VDN_hunter_leadership_available_country_flag
+			}
+		}
 		prerequisite = {
 			focus = VDN_aggressive_containment
 			focus = VDN_safe_distance
@@ -2269,6 +2274,28 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = VDN_recolonize_botanical_2
+		icon = GFX_volunteer_expedition
+		x = 0
+		y = 2
+		cost = 6.5
+		prerequisite = {
+			focus = VDN_recolonize_botanical
+		}
+		available = {
+			307 = { is_owned_by = ROOT is_core_of = ROOT }
+		}
+		relative_position_id = VDN_recolonize_botanical
+		completion_reward = {
+			272 = { add_claim_by = ROOT }
+			248 = { add_claim_by = ROOT }
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = VDN_hunter_arrives
 		icon = GFX_SPT_hunter
 		x = 38
@@ -2286,7 +2313,10 @@ focus_tree = {
 		#	}
 		#}
 		available = {
-			always = no
+			custom_trigger_tooltip = {
+				tooltip = VDN_hunter_arrival_tooltip
+				has_country_flag = VDN_hunter_arrival_country_flag
+			}
 		}
 		completion_reward = {
 			country_event = nf_VDN_hunter.1
@@ -2325,7 +2355,10 @@ focus_tree = {
 			focus = VDN_hunter_arrives_2
 		}
 		available = {
-			has_country_flag = VDN_hunter_leadership_available_country_flag
+			custom_trigger_tooltip = {
+				tooltip = VDN_hunter_leadership_available_country_flag_toolip
+				has_country_flag = VDN_hunter_leadership_available_country_flag
+			}
 		}
 		relative_position_id = VDN_hunter_arrives_2
 		completion_reward = {
@@ -2342,6 +2375,12 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 1
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDN_hunter_leadership_available_country_flag_toolip
+				has_country_flag = VDN_hunter_leadership_available_country_flag
+			}
+		}
 		prerequisite = {
 			focus = VDN_hunter_arrives_3
 		}
@@ -2361,12 +2400,6 @@ focus_tree = {
 		cost = 3
 		prerequisite = {
 			focus = VDN_military_0
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = VDNKh_threat_from_botanical
-				has_country_flag = VDNK_threat_from_botanical
-			}
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
@@ -2388,12 +2421,6 @@ focus_tree = {
 		cost = 3
 		prerequisite = {
 			focus = VDN_military_0
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = VDNKh_threat_from_botanical
-				has_country_flag = VDNK_threat_from_botanical
-			}
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
@@ -2448,12 +2475,6 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_economy_1
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = VDNKh_threat_from_botanical
-				has_country_flag = VDNK_threat_from_botanical
-			}
 		}
 		relative_position_id = VDN_military_economy_1
 		completion_reward = {
@@ -2576,6 +2597,12 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 6.5
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VDNKh_threat_from_botanical
+				has_country_flag = VDNK_threat_from_botanical
+			}
+		}
 		prerequisite = {
 			focus = VDN_military_economy_3
 		}
@@ -2711,8 +2738,10 @@ focus_tree = {
 			focus = VDN_military_economy_9
 		}
 		available = {
-			has_war = yes
-			threat > 0.45
+			OR = {
+				has_war = yes
+				threat > 0.45
+			}
 		}
 		relative_position_id = VDN_military_economy_7
 		completion_reward = {
@@ -2738,12 +2767,6 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_military_0
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = VDNKh_threat_from_botanical
-				has_country_flag = VDNK_threat_from_botanical
-			}
 		}
 		relative_position_id = VDN_military_0
 		completion_reward = {
@@ -3104,19 +3127,22 @@ focus_tree = {
 		y = 12
 		cost = 6.5
 		available = {
-			has_country_flag = VDN_sukhoi_as_or_leader_country_flag
-		}
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
+			OR = {
+				VDN_alexander_nikolaevich_kalyapin = { is_country_leader = yes }
+				VDN_alexander_sukhoi = { is_country_leader = yes }
 			}
 		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
 			country_event = nf_VDN.1
@@ -3280,22 +3306,26 @@ focus_tree = {
 		y = 0
 		cost = 6.5
 		available = {
-			has_country_flag = VDN_hunter_as_or_leader_country_flag
+			VDN_hunter = { is_country_leader = yes }
 		}
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
+		#allow_branch = { 
+		#	if = {
+		#		limit = {
+		#			has_game_rule = {
+		#				rule = obsolete_focus_branches_visibility
+		#				option = HIDE
+		#			}
+		#		}
+		#		has_country_flag = VDNK_threat_from_botanical
+		#	}
+		#}
 		relative_position_id = VDN_novo_homo
 		completion_reward = {
 			country_event = nf_VDN.1
+			VDN_hunter = {
+				add_skill_level = 2	
+				add_attack = 2
+			}
 		}
 		ai_will_do = {
 			factor = 5
@@ -3312,6 +3342,16 @@ focus_tree = {
 		}
 		relative_position_id = VDN_macrophage
 		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = special_forces_equipment_spetsnaz
+				amount = 20
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {
+				type = conventional_infantry_equipment_3
+				amount = 20
+				producer = RUS
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3327,7 +3367,9 @@ focus_tree = {
 			focus = VDN_macrophage_2
 		}
 		relative_position_id = VDN_macrophage_2
-		completion_reward = {
+			completion_reward = {
+			custom_effect_tooltip = unlock_special_forces_spartan_equipment
+			hidden_effect = { set_country_flag = unlock_special_forces_spartan_equipment_tech }
 		}
 		ai_will_do = {
 			factor = 10
@@ -3339,11 +3381,17 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6.5
+		available = {
+			has_tech = special_forces_spartan_equipment_tech
+		}
 		prerequisite = {
 			focus = VDN_macrophage_3
 		}
 		relative_position_id = VDN_macrophage_3
 		completion_reward = {
+			custom_effect_tooltip = generic_unlock_law_tooltip
+			add_ideas = civics_support_5
+			set_country_flag = civics_support_5_unlock_flag
 		}
 		ai_will_do = {
 			factor = 10
@@ -3355,11 +3403,15 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6.5
+		available = {
+			has_tech = special_forces_spartan_equipment_tech
+		}
 		prerequisite = {
 			focus = VDN_macrophage_3
 		}
 		relative_position_id = VDN_macrophage_3
 		completion_reward = {
+			add_ideas = VDN_home_developed_armor
 		}
 		ai_will_do = {
 			factor = 10
@@ -3409,6 +3461,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_threat_of_the_dark_ones
 		completion_reward = {
+			add_war_support = 0.1
 		}
 		ai_will_do = {
 			factor = 10
@@ -3425,6 +3478,25 @@ focus_tree = {
 		}
 		relative_position_id = VDN_threat_of_the_dark_ones
 		completion_reward = {
+			add_ideas = PLS_assistance_from_SPARTA_military
+			division_template = {
+				name = "Rangers"
+				priority = 1
+				template_counter = 0
+				regiments = {
+					special_forces = { x = 0 y = 0 }
+					special_forces = { x = 1 y = 0 }
+					special_forces = { x = 2 y = 0 }
+					special_forces = { x = 3 y = 0 }
+					special_forces = { x = 4 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"1st Ranger\" division_template = \"Rangers\" start_experience_factor = 1 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
