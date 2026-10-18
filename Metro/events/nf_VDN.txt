@@ -163,6 +163,7 @@ country_event = { ## Real Event
 		216 = { remove_core_of = ROOT }
 		5 = { transfer_state_to = RUI }
 		216 = { transfer_state_to = RUI }
+		custom_effect_tooltip = generic_skip_one_line_tt
 		307 = { add_dynamic_modifier = { modifier = infested_station_modifier } }
 		complete_national_focus = VDN_the_VDNKH
 	}
@@ -261,16 +262,618 @@ country_event = { # Election
 	}
 }
 
+add_namespace = nf_VDN_immigration
+
+country_event = { 
+    id = nf_VDN_immigration.1
+    title = nf_VDN_immigration.1.t
+    desc = nf_VDN_immigration.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = VDN_immigration_decision_activation_flag
+		}
+	}
+
+	option = {
+		name = nf_VDN_immigration.1.a
+		custom_effect_tooltip = nf_VDN_immigration.1_tt
+		unlock_decision_category_tooltip = VDN_immigration_category
+
+		hidden_effect = {
+			set_variable = {
+				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
+			}
+		}
+	}
+}
+
+country_event = {
+    id = nf_VDN_immigration.2
+    title = nf_VDN_immigration.2.t
+    desc = nf_VDN_immigration.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_immigration.2.a
+
+		VDN_immigrants_arrive_scripted_effect = yes
+		hidden_effect = {
+			set_country_flag = VDN_immigration_decision_activation_flag
+
+			set_variable = {
+				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
+			}
+		}
+	}
+}
+
+add_namespace = nf_VDN_hunter
+
+country_event = { 
+    id = nf_VDN_hunter.1
+    title = nf_VDN_hunter.1.t
+    desc = nf_VDN_hunter.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_party_name = {
+    			ideology = dictatorial
+    			long_name = VDN_dictatorial_hunter_long
+    			name = VDN_dictatorial_hunter
+			}
+
+			add_country_leader_role = {
+    			character = VDN_hunter
+    			promote_leader = yes
+    			country_leader = {
+    			    ideology = totalitarianism 
+    			    expire = "1965.1.1.1"
+    			    traits = { VDN_hunter_trait }
+    			}
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_hunter.1.a
+		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
+		set_temp_variable = { temp_popularity = 0.1 }
+		add_country_ruling_party_popularity = yes
+		
+	}
+
+	option = {
+		name = nf_VDN_hunter.1.b
+		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
+		set_temp_variable = { temp_popularity = -0.1 }
+		add_country_ruling_party_popularity = yes
+	}
+}
+
+country_event = {
+    id = nf_VDN_hunter.2
+    title = nf_VDN_hunter.2.t
+    desc = nf_VDN_hunter.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.2.a
+	}
+
+	option = {
+		name = nf_VDN_hunter.2.b
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.3
+    title = nf_VDN_hunter.3.t
+    desc = nf_VDN_hunter.3.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.3.a
+
+		VDN_hunter = {
+			add_corps_commander_role = {
+				traits = { named_character spartan_personality_trait }
+				skill = 4
+				legacy_id=-1
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_hunter.3.b
+
+		VDN_hunter = {
+			add_corps_commander_role = {
+				traits = { named_character spartan_personality_trait }
+				skill = 4
+				legacy_id=-1
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+		}
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.4
+    title = nf_VDN_hunter.4.t
+    desc = nf_VDN_hunter.4.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.4.a
+		add_stability = 0.1
+	}
+
+	option = {
+		name = nf_VDN_hunter.4.b
+		add_stability = -0.2
+		add_mastery = {
+			amount = 50
+			track = doctrine_track_soldiers 
+		}
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment_spartan
+			amount = 20
+			producer = RUS
+		}
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.5
+    title = nf_VDN_hunter.5.t
+    desc = nf_VDN_hunter.5.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.5.a
+		add_political_power = -200
+		add_stability = -0.2
+
+
+		hidden_effect = {
+			country_event = { 
+				id = nf_VDN_hunter.5A
+				days = 90
+				random_days = 90
+			}
+		}
+		custom_effect_tooltip = nf_VDN_hunter.5.a.tt
+	}
+
+	option = {
+		name = nf_VDN_hunter.5.b
+		remove_country_leader_role = {
+    		character = VDN_hunter
+    		ideology = totalitarianism
+		}
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.5A
+    title = nf_VDN_hunter.5A.t
+    desc = nf_VDN_hunter.5A.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.5A.a
+
+		hidden_effect = {
+			set_country_flag = nf_VDN_hunter.5A_flag
+		}
+		add_field_marshal_role = {
+		    Character = VDN_hunter
+		    skill = 8
+		    attack_skill = 5
+		    defense_skill = 5
+		    planning_skill = 5
+		    logistics_skill = 5
+		}
+		add_popularity = {
+    		ideology = dictatorial
+    		popularity = 0.15
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		division_template = {
+			name = "Exhibition Stalkers"
+			priority = 1
+			template_counter = 0
+			regiments = {
+				special_forces = { x = 0 y = 0 }
+				special_forces = { x = 1 y = 0 }
+				special_forces = { x = 2 y = 0 }
+				special_forces = { x = 3 y = 0 }
+				special_forces = { x = 4 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Vengeance\" division_template = \"Exhibition Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.6
+    title = nf_VDN_hunter.6.t
+    desc = nf_VDN_hunter.6.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.6.a
+	}
+}
+
+
+add_namespace = nf_VDN_commonwealth
+
+country_event = { 
+    id = nf_VDN_commonwealth.1
+    title = nf_VDN_commonwealth.1.t
+    desc = nf_VDN_commonwealth.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_commonwealth.1.a
+		custom_effect_tooltip = nf_VDN_commonwealth.1_tt
+
+		hidden_effect = {
+			set_country_flag = VDN_commonwealth_activator_flag
+		}
+	}
+}
+
+
+add_namespace = nf_VDN_PRO
+
+country_event = { 
+    id = nf_VDN_PRO.1
+    title = nf_VDN_PRO.1.t
+    desc = nf_VDN_PRO.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_PRO.1.a
+	}
+}
+
+add_namespace = nf_VDN_neighbors
+
+## ALK 1 : Mushroom Economy Collapse
+
+country_event = { 
+    id = nf_VDN_neighbors.1
+    title = nf_VDN_neighbors.1.t
+    desc = nf_VDN_neighbors.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_neighbors.1.a
+
+		ALK = {
+			add_timed_idea = {
+				idea =  ALK_mushroom_economy_collapse
+				days = 480
+			}
+			capital_scope = {
+				remove_building = {
+    				type = industrial_complex
+    				level = 2
+				}
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_neighbors.1.b
+		add_political_power = -35
+		ALK = {
+			add_timed_idea = {
+				idea =  ALK_mushroom_economy_collapse
+				days = 240
+			}
+			add_opinion_modifier = {
+    			target = VDN
+    			modifier = VDN_assistance
+			}
+		}
+	}
+}
+
+## ALK 2 : Inept Garrison
+
+country_event = { 
+    id = nf_VDN_neighbors.2
+    title = nf_VDN_neighbors.2.t
+    desc = nf_VDN_neighbors.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_neighbors.2.a
+
+		ALK = {
+			add_timed_idea = {
+				idea =  ALK_struggling_garrison
+				days = 360
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_neighbors.2.b
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -20
+		}
+		ALK = {
+			add_timed_idea = {
+				idea =  ALK_struggling_garrison
+				days = 240
+			}
+			add_opinion_modifier = {
+    			target = VDN
+    			modifier = VDN_assistance_2
+			}
+		}
+	}
+}
+
+## RIZ 1 : Tension
+
+country_event = { 
+    id = nf_VDN_neighbors.3
+    title = nf_VDN_neighbors.3.t
+    desc = nf_VDN_neighbors.3.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_neighbors.3.a
+
+		RIZ = {
+			add_timed_idea = {
+				idea =  RIZ_tension_idea
+				days = 480
+			}
+			capital_scope = {
+				remove_building = {
+    				type = arms_factory
+    				level = 2
+				}
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_neighbors.3.b
+		add_manpower = -10
+		RIZ = {
+			add_timed_idea = {
+				idea = RIZ_tension_idea
+				days = 240
+			}
+			add_opinion_modifier = {
+    			target = VDN
+    			modifier = VDN_assistance
+			}
+		}
+	}
+}
+
+## Dark Ones Initializer / Event Chain
+
+add_namespace = nf_VDNK_darkones
+
+country_event = { 
+    id = nf_VDNK_darkones.1
+    title = nf_VDNK_darkones.1.t
+    desc = nf_VDNK_darkones.1.d
+    picture = "GFX_event (105)"
+
+	trigger = {
+        threat > 0.4
+		has_global_flag = darkones_emergence_global_flag
+    }
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK_darkones.1.a
+		# 
+		SPT = { country_event = { id = nf_VDNK_darkones.2 days = 720 } }
+	}
+}
+
+country_event = { 	## SPT event / Retire Hunter as a leader / Advisor
+    id = nf_VDNK_darkones.2
+    title = nf_VDNK_darkones.2.t
+    desc = nf_VDNK_darkones.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK_darkones.2.a
+		custom_effect_tooltip = nf_VDNK_darkones.2.a.tt
+		retire_character = SPT_hunter
+		VDN = { country_event = { id = nf_VDNK_darkones.3 days = 20 } }
+	}
+}
+
+country_event = { 	## Hunter Arrives to VDNKh
+    id = nf_VDNK_darkones.3
+    title = nf_VDNK_darkones.3.t
+    desc = nf_VDNK_darkones.3.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDNK_darkones.3.a
+
+		add_advisor_role = {
+		    character = VDN_hunter
+		    activate = yes
+		    advisor = {
+		        slot = army_chief
+		        cost = 150
+		        idea_token = VDN_hunter
+		        traits = {
+		            _SPT_hunter_trait
+		        }
+		    }
+		}
+	}
+}
+
+add_namespace = nf_VDN_mutant_incursion
+
+country_event = { 
+    id = nf_VDN_mutant_incursion.1
+    title = nf_VDN_mutant_incursion.1.t
+    desc = nf_VDN_mutant_incursion.1.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = nf_VDN_mutant_incursion.1.a
+
+		## Send soldiers into tunnels / random chance of succeeding or failing
+		random_list = {
+			50 = {	## Successful excursion
+				country_event = { id = nf_VDN_mutant_incursion.2 hours = 4 }
+			}
+			50 = {	## Fall-back!
+				country_event = { id = nf_VDN_mutant_incursion.3 hours = 4 }
+			}
+		}
+	}
+
+	option = {
+		name = nf_VDN_mutant_incursion.1.a
+		
+		## Start borderwar 
+	}
+}
+
+country_event = { 
+    id = nf_VDN_mutant_incursion.2
+    title = nf_VDN_mutant_incursion.2.t
+    desc = nf_VDN_mutant_incursion.2.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = VDN_mutant_incursion_countdown 
+				days = 90
+			}	
+		}
+	}
+
+	option = {
+		name = nf_VDN_mutant_incursion.2.a
+		effect_tooltip = {
+			add_days_mission_timeout = {
+				mission = VDN_mutant_incursion_countdown 
+				days = 90
+			}	
+		}
+	}
+}
+
+country_event = { 
+    id = nf_VDN_mutant_incursion.3
+    title = nf_VDN_mutant_incursion.3.t
+    desc = nf_VDN_mutant_incursion.3.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = nf_VDN_mutant_incursion.3.a
+		add_war_support = -0.025
+	}
+}
 
 ## DEPCRECIATE EVERYTHING BELOW
-
-
 # the commonwealth starter event
 country_event = {
     id = nf_VDN.1
     title = nf_VDN.1.t
     desc = nf_VDN.1.d
-    picture = ccc_mutant
+    picture = "GFX_event (16)"
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -281,6 +884,8 @@ country_event = {
 
 	option = { # accept
 		name = nf_VDN.1.a
+
+		add_political_power = 45
 		ai_chance = {
 			base = 50
 		}
@@ -292,7 +897,7 @@ country_event = {
     id = nf_VDN.2
     title = nf_VDN.2.t
     desc = nf_VDN.2.d
-    picture = ccc_mutant
+    picture = "GFX_event (16)"
 
 	is_triggered_only = yes
 
@@ -312,7 +917,7 @@ country_event = {
     id = nf_VDN.3
     title = nf_VDN.3.t
     desc = nf_VDN.3.d
-    picture = ccc_mutant
+    picture = "GFX_event (16)"
 
 	is_triggered_only = yes
 
@@ -333,7 +938,7 @@ country_event = {
     id = nf_VDN.4
     title = nf_VDN.4.t
     desc = nf_VDN.4.d
-    picture = ccc_mutant
+    picture = "GFX_event (16)"
 
 	is_triggered_only = yes
 
@@ -361,7 +966,7 @@ country_event = {
     id = nf_VDN.5
     title = nf_VDN.5.t
     desc = nf_VDN.5.d
-    picture = ccc_mutant
+    picture = "GFX_event (16)"
 
 	is_triggered_only = yes
 
@@ -1297,432 +1902,6 @@ news_event = {
 		hidden_effect = {
 			clr_country_flag = alliance_inviter@FROM
 			clr_country_flag = alliance_applicant@FROM
-		}
-	}
-}
-
-add_namespace = nf_VDN_immigration
-
-country_event = { 
-    id = nf_VDN_immigration.1
-    title = nf_VDN_immigration.1.t
-    desc = nf_VDN_immigration.1.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_immigration.1.a
-		custom_effect_tooltip = nf_VDN_immigration.1_tt
-		unlock_decision_category_tooltip = VDN_immigration_category
-
-		hidden_effect = {
-			set_variable = {
-				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
-			}
-		}
-	}
-}
-
-country_event = {
-    id = nf_VDN_immigration.2
-    title = nf_VDN_immigration.2.t
-    desc = nf_VDN_immigration.2.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_immigration.2.a
-
-		VDN_immigrants_arrive_scripted_effect = yes
-		hidden_effect = {
-			set_country_flag = VDN_immigration_decision_activation_flag
-
-			set_variable = {
-				variable = VDN_immigrant_countdown_length value = VDN_immigrant_countdown_initial_length
-			}
-		}
-	}
-}
-
-add_namespace = nf_VDN_hunter
-
-country_event = { 
-    id = nf_VDN_hunter.1
-    title = nf_VDN_hunter.1.t
-    desc = nf_VDN_hunter.1.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	immediate = {
-		hidden_effect = {
-			set_party_name = {
-    			ideology = dictatorial
-    			long_name = VDN_dictatorial_hunter_long
-    			name = VDN_dictatorial_hunter
-			}
-
-			add_country_leader_role = {
-    			character = VDN_hunter
-    			promote_leader = yes
-    			country_leader = {
-    			    ideology = totalitarianism 
-    			    expire = "1965.1.1.1"
-    			    traits = { VDN_hunter_trait }
-    			}
-			}
-		}
-	}
-
-	option = {
-		name = nf_VDN_hunter.1.a
-		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
-		set_temp_variable = { temp_popularity = 0.1 }
-		add_country_ruling_party_popularity = yes
-		
-	}
-
-	option = {
-		name = nf_VDN_hunter.1.b
-		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
-		set_temp_variable = { temp_popularity = -0.1 }
-		add_country_ruling_party_popularity = yes
-	}
-}
-
-country_event = {
-    id = nf_VDN_hunter.2
-    title = nf_VDN_hunter.2.t
-    desc = nf_VDN_hunter.2.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.2.a
-	}
-
-	option = {
-		name = nf_VDN_hunter.2.b
-	}
-}
-
-country_event = { 
-    id = nf_VDN_hunter.3
-    title = nf_VDN_hunter.3.t
-    desc = nf_VDN_hunter.3.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.3.a
-	}
-
-	option = {
-		name = nf_VDN_hunter.3.b
-	}
-}
-
-country_event = { 
-    id = nf_VDN_hunter.4
-    title = nf_VDN_hunter.4.t
-    desc = nf_VDN_hunter.4.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.4.a
-		add_stability = 0.1
-	}
-
-	option = {
-		name = nf_VDN_hunter.4.b
-		add_stability = -0.2
-		add_mastery = {
-			amount = 50
-			track = doctrine_track_soldiers 
-		}
-		add_equipment_to_stockpile = {
-			type = special_forces_equipment_spartan
-			amount = 20
-			producer = RUS
-		}
-	}
-}
-
-country_event = { 
-    id = nf_VDN_hunter.5
-    title = nf_VDN_hunter.5.t
-    desc = nf_VDN_hunter.5.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.5.a
-		add_political_power = -200
-		add_stability = -0.2
-
-
-		hidden_effect = {
-			country_event = { 
-				id = nf_VDN_hunter.5A
-				days = 90
-				random_days = 90
-			}
-		}
-		custom_effect_tooltip = nf_VDN_hunter.5.a.tt
-	}
-
-	option = {
-		name = nf_VDN_hunter.5.b
-		remove_country_leader_role = {
-    		character = VDN_hunter
-    		ideology = totalitarianism
-		}
-	}
-}
-
-country_event = { 
-    id = nf_VDN_hunter.5A
-    title = nf_VDN_hunter.5A.t
-    desc = nf_VDN_hunter.5A.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.5A.a
-
-		hidden_effect = {
-			set_country_flag = nf_VDN_hunter.5A_flag
-		}
-		add_field_marshal_role = {
-		    Character = VDN_hunter
-		    skill = 8
-		    attack_skill = 5
-		    defense_skill = 5
-		    planning_skill = 5
-		    logistics_skill = 5
-		}
-		add_popularity = {
-    		ideology = dictatorial
-    		popularity = 0.15
-		}
-		custom_effect_tooltip = generic_skip_one_line_tt
-		division_template = {
-			name = "Exhibition Stalkers"
-			priority = 1
-			template_counter = 0
-			regiments = {
-				special_forces = { x = 0 y = 0 }
-				special_forces = { x = 1 y = 0 }
-				special_forces = { x = 2 y = 0 }
-				special_forces = { x = 3 y = 0 }
-				special_forces = { x = 4 y = 0 }
-			}
-		}
-		capital_scope = {
-			create_unit = {
-				division = "name = \"Vengeance\" division_template = \"Exhibition Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
-				owner = ROOT
-			}
-		}
-	}
-}
-
-country_event = { 
-    id = nf_VDN_hunter.6
-    title = nf_VDN_hunter.6.t
-    desc = nf_VDN_hunter.6.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_hunter.6.a
-	}
-}
-
-
-add_namespace = nf_VDN_commonwealth
-
-country_event = { 
-    id = nf_VDN_commonwealth.1
-    title = nf_VDN_commonwealth.1.t
-    desc = nf_VDN_commonwealth.1.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_commonwealth.1.a
-		custom_effect_tooltip = nf_VDN_commonwealth.1_tt
-
-		hidden_effect = {
-			set_country_flag = VDN_commonwealth_activator_flag
-		}
-	}
-}
-
-
-add_namespace = nf_VDN_PRO
-
-country_event = { 
-    id = nf_VDN_PRO.1
-    title = nf_VDN_PRO.1.t
-    desc = nf_VDN_PRO.1.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_PRO.1.a
-	}
-}
-
-add_namespace = nf_VDN_neighbors
-
-## ALK 1 : Mushroom Economy Collapse
-
-country_event = { 
-    id = nf_VDN_neighbors.1
-    title = nf_VDN_neighbors.1.t
-    desc = nf_VDN_neighbors.1.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_neighbors.1.a
-
-		ALK = {
-			add_timed_idea = {
-				idea =  ALK_mushroom_economy_collapse
-				days = 480
-			}
-			capital_scope = {
-				remove_building = {
-    				type = industrial_complex
-    				level = 2
-				}
-			}
-		}
-	}
-
-	option = {
-		name = nf_VDN_neighbors.1.b
-		add_political_power = -35
-		ALK = {
-			add_timed_idea = {
-				idea =  ALK_mushroom_economy_collapse
-				days = 240
-			}
-			add_opinion_modifier = {
-    			target = VDN
-    			modifier = VDN_assistance
-			}
-		}
-	}
-}
-
-## ALK 2 : Inept Garrison
-
-country_event = { 
-    id = nf_VDN_neighbors.2
-    title = nf_VDN_neighbors.2.t
-    desc = nf_VDN_neighbors.2.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_neighbors.2.a
-
-		ALK = {
-			add_timed_idea = {
-				idea =  ALK_struggling_garrison
-				days = 360
-			}
-		}
-	}
-
-	option = {
-		name = nf_VDN_neighbors.2.b
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = -20
-		}
-		ALK = {
-			add_timed_idea = {
-				idea =  ALK_struggling_garrison
-				days = 240
-			}
-			add_opinion_modifier = {
-    			target = VDN
-    			modifier = VDN_assistance_2
-			}
-		}
-	}
-}
-
-## RIZ 1 : Tension
-
-country_event = { 
-    id = nf_VDN_neighbors.3
-    title = nf_VDN_neighbors.3.t
-    desc = nf_VDN_neighbors.3.d
-    picture = "GFX_event (105)"
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = nf_VDN_neighbors.3.a
-
-		RIZ = {
-			add_timed_idea = {
-				idea =  RIZ_tension_idea
-				days = 480
-			}
-			capital_scope = {
-				remove_building = {
-    				type = arms_factory
-    				level = 2
-				}
-			}
-		}
-	}
-
-	option = {
-		name = nf_VDN_neighbors.3.b
-		add_manpower = -10
-		RIZ = {
-			add_timed_idea = {
-				idea = RIZ_tension_idea
-				days = 240
-			}
-			add_opinion_modifier = {
-    			target = VDN
-    			modifier = VDN_assistance
-			}
 		}
 	}
 }
