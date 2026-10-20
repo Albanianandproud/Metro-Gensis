@@ -593,13 +593,24 @@ HNZ_agendas = {
 		custom_cost_text = HNZ_agenda_requirement
 
 		available = {	## We will complete the agenda if said requirements are met
-			has_built = {
-    			type = bunker
-    			value > 14
-			}
-			has_built = {
-    			type = bunker2
-    			value > 14
+			count_triggers = {
+				amount = 2
+				has_built = {
+    				type = bunker
+    				value > 11
+				}
+				has_built = {
+    				type = bunker2
+    				value > 11
+				}
+				has_built = {
+    				type = infrastructure
+    				value > 9
+				}
+				has_built = {
+					type = radar_station
+					value > 2
+				}
 			}
 		}
 
@@ -631,22 +642,27 @@ HNZ_agendas = {
 		available = {	## We will complete the agenda if said requirements are met
 			count_triggers = {
 				amount = 3
-				num_of_available_civilian_factories > 69
+				num_of_available_civilian_factories > 59
 				OR = {
 					has_resources_in_country = {
 						resource = scrap
 						amount > 99
-						extracted = yes
 					}
 					has_resources_in_country = {
 						resource = alloys
 						amount > 99
-						extracted = yes
 					}
 					has_resources_in_country = {
 						resource = components
 						amount > 99
-						extracted = yes
+					}
+					has_resources_in_country = {
+						resource = electronics
+						amount > 49
+					}
+					has_resources_in_country = {
+						resource = chemicals
+						amount > 24
 					}
 				}
 			}
@@ -683,7 +699,7 @@ HNZ_agendas = {
 				## we'll need to move this to another bracket.
 				tooltip = HNZ_mission_neutrality_condition
 				has_offensive_war = yes
-				has_added_tension_amount < 1
+				has_added_tension_amount < 5
 			}
 		}
 
@@ -721,7 +737,7 @@ HNZ_agendas = {
 		available = {	## We will complete the agenda if said requirements are met
 			count_triggers = {
 				amount = 1
-				num_divisions > 34
+				num_divisions > 29
 				has_army_manpower = {
 					size > 499
 				}
@@ -813,6 +829,8 @@ HNZ_agendas = {
 			OR = {
 				has_completed_focus = HNZ_reclamation_electric_cables
 				has_completed_focus = HNZ_reclamation_bureau_2_improve
+		
+				salvage_hub > 5
 			}
 		}
 
