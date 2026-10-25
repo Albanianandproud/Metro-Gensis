@@ -324,7 +324,7 @@ VDN_immigration_category = {
 			NOT = { has_country_flag = VDN_immigration_decision_activation_flag }
 		}
 
-		days_mission_timeout = VDN_immigrant_countdown_length
+		days_mission_timeout = 270
 		is_good = yes
 
 		cancel_trigger = {
@@ -341,6 +341,7 @@ VDN_immigration_category = {
 			effect_tooltip = {
 				VDN_immigrants_arrive_scripted_effect = yes
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_VDN_immigration.2
 		}
 
@@ -351,7 +352,7 @@ VDN_immigration_category = {
 
 		##
 		## TODO Make decisions to reduce time, thus increasing appeal for immigrants
-		## cannonically, vdnkh has like 500 people by 2033/34, starts game with only 200
+		## cannonically, vdnkh commonwealth has like 500 people by 2033/34, starts game with only 200
 		##
 
 		## Decisions should also become available / unavaiable via focuses and game progression
@@ -367,7 +368,7 @@ VDN_immigration_category = {
 		}
 		
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 75 }
+			set_temp_variable = { temp_bullet_cost = 50 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -377,17 +378,17 @@ VDN_immigration_category = {
 		fire_only_once = no
 
 		modifier = {
-			stability_weekly = -0.05
+			stability_weekly = -0.025
 			political_power_factor = -0.15
 		}
 
 		complete_effect = {
 			add_days_mission_timeout = {
 			    mission = VDN_immigration_arrival_countdown_mission
-			    days = VDN_immigrant_reduction
+			    days = 35
 			}
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -75 }
+				set_temp_variable = { bullet_to_gain = -50 }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
@@ -399,8 +400,6 @@ VDN_immigration_category = {
 			base = 5
 		}
 	}
-
-
 	VDN_immigration_arrival_countdown_invite_immigrants = {
 		icon = generic_research
 
@@ -414,25 +413,24 @@ VDN_immigration_category = {
 		fire_only_once = no
 
 		modifier = {
-			stability_weekly = -0.05
+			stability_weekly = -0.02
 			political_power_factor = -0.15
 		}
 
 		complete_effect = {
 			add_days_mission_timeout = {
 			    mission = VDN_immigration_arrival_countdown_mission
-			    days = VDN_immigrant_reduction
+			    days = 35
 			}
 		}
 		
-		days_remove = 7
+		days_remove = 2
 		days_re_enable = 90
 		cost = 50
 		ai_will_do = {
 			base = 5
 		}
 	}
-
 	VDN_immigration_arrival_countdown_citizen_care_package = {
 		icon = generic_research
 
@@ -444,7 +442,7 @@ VDN_immigration_category = {
 		}
 		
 		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 200 }
+			set_temp_variable = { temp_bullet_cost = 150 }
 			check_variable = {
 				bullet > temp_bullet_cost
 			}
@@ -456,23 +454,21 @@ VDN_immigration_category = {
 		complete_effect = {
 			add_days_mission_timeout = {
 			    mission = VDN_immigration_arrival_countdown_mission
-			    days = VDN_immigrant_reduction
+			    days = 35
 			}
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -200 }
+				set_temp_variable = { bullet_to_gain = -150  }
 				add_bullet_with_tooltip_effect = yes
 			}
 		}
 		
-		days_remove = 7
+		days_remove = 2
 		days_re_enable = 90
 		cost = 50
 		ai_will_do = {
 			base = 5
 		}
 	}
-
-
 }
 
 VDN_commonwealth_category = {
