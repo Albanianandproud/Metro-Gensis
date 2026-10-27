@@ -22,9 +22,8 @@ metro_no_occupation = {
 	
 	state_modifier = {
 		no_compliance_gain = 1
-		resistance_target               =  0.75
-		required_garrison_factor 	    =  0
-		#compliance_gain 				=  0
+		required_garrison_factor = -1
+
 		local_manpower 					= -1
 		local_resources 				= -1
 		local_factories					= -1
@@ -32,10 +31,10 @@ metro_no_occupation = {
 	}
 
 	ai_will_do = {
-		base = 0
+		base = 0.5
 		modifier = {
 			FROM = {
-				has_manpower < 10
+				has_manpower < 24
 			}
 			add = 100
 		}
@@ -49,18 +48,25 @@ metro_tunnel_sentries = {
 	starting_law = yes
 
 	state_modifier = {
-		resistance_target               = -0.1
-		resistance_damage_to_garrison 	= -0.1
-		required_garrison_factor 	    =  0.5
-		compliance_gain 				=  0.05
-		local_manpower 					= -1
-		local_resources 				= -0.8
-		local_factories					= -0.8
-		local_building_slots_factor     = -0.8
+		resistance_target 				= -0.15
+
+		compliance_gain 				=  0.1
+
+		#required_garrison_factor 		= 0.1
+		#resistance_damage_to_garrison 	= 0.1
+
+		local_manpower 					= 0.1
+		local_resources 				= 0.1
+		local_factories					= 0.1
+		local_building_slots_factor     = 0.1
 	}
 
 	ai_will_do = {
-		base = 25
+		base = 120
+		modifier = {
+			check_variable  = { resistance_target_without_law > 0.05}
+			add = 100
+		}
 	}
 }
 
@@ -69,33 +75,38 @@ metro_militia_oversight = {
 	sound_effect = "Martial_Law_Interface_No_Garrison"
 
 	state_modifier = {
-		resistance_target               = -0.15
-		resistance_damage_to_garrison   = -0.2
-		required_garrison_factor 	    =  0.75
-		compliance_gain 				=  0.1
-		local_manpower 					= -1
-		local_resources 				= -0.7
-		local_factories					= -0.7
-		local_building_slots_factor     = -0.7
+		resistance_target 				= -0.3
+
+		compliance_gain 				=  0.2
+
+		required_garrison_factor 		= 0.25
+		resistance_damage_to_garrison 	= -0.1
+
+		local_manpower 					= 0.2
+		local_resources 				= 0.2
+		local_factories					= 0.2
+		local_building_slots_factor     = 0.2
 	}
 
 	ai_will_do = {
-		base = 15
+		base = 100
 		modifier = {
-			check_variable = {
-				var = compliance
-				value = 80
-				compare = greater_than
-			}
-			add = 20
+			check_variable  = { resistance_target_without_law > 0.09}
+			add = 200
 		}
+
+
 		modifier = {
-			check_variable = {
-				var = resistance
-				value = 25
-				compare = greater_than
+			check_variable  = { resistance_target_without_law > 0.34}
+
+			set_temp_variable = { requirement_limit = 0.25 }
+			if = {
+				limit = { occupation_law = metro_militia_oversight }
+				set_temp_variable = { requirement_limit = 0.45 }
 			}
-			add = -40
+			check_variable = { garrison_min_support_ratio < requirement_limit }
+
+			add = 350
 		}
 	}
 }
@@ -105,34 +116,40 @@ metro_curfew = {
 	sound_effect = "Martial_Law_Interface_No_Garrison"
 
 	state_modifier = {
-		resistance_target               = -0.2
-		resistance_damage_to_garrison   = -0.4
-		required_garrison_factor 	    =  1
-		compliance_gain 				=  0.15
-		local_manpower 					= -0.8
-		local_resources 				= -0.6
-		local_factories					= -0.6
-		local_building_slots_factor     = -0.6
+		resistance_target 				= -0.45
+
+		compliance_gain 				=  0.3
+
+		required_garrison_factor 		= 0.5
+		resistance_damage_to_garrison 	= -0.2
+
+		local_manpower 					= 0.3
+		local_resources 				= 0.3
+		local_factories					= 0.3
+		local_building_slots_factor     = 0.3
 	}
 
 	ai_will_do = {
-		base = 10
+		base = 0
+
 		modifier = {
-			check_variable = {
-				var = compliance
-				value = 60
-				compare = greater_than
-			}
-			add = -10
+			check_variable  = { resistance_target_without_law > 0.24}
+			add = 400
 		}
+		
 		modifier = {
-			check_variable = {
-				var = resistance
-				value = 20
-				compare = greater_than
+			check_variable  = { resistance_target_without_law > 0.34}
+
+			set_temp_variable = { requirement_limit = 0.25 }
+			if = {
+				limit = { occupation_law = metro_curfew }
+				set_temp_variable = { requirement_limit = 0.45 }
 			}
-			add = 50
+			check_variable = { garrison_min_support_ratio < requirement_limit }
+
+			add = 400
 		}
+		
 	}
 }
 
@@ -141,39 +158,36 @@ metro_martial_law = {
 	sound_effect = "Martial_Law_Interface_No_Garrison"
 	
 	state_modifier = {
-		resistance_target               = -0.25
-		resistance_damage_to_garrison   = -0.6
-		required_garrison_factor 	    =  1.5
-		compliance_gain 				=  0.2
-		local_manpower 					= -0.8
-		local_resources 				= -0.5
-		local_factories					= -0.5
-		local_building_slots_factor     = -0.5
+		resistance_target 				= -0.6
+
+		compliance_gain 				=  0.4
+
+		required_garrison_factor 		= 1
+		resistance_damage_to_garrison 	= -0.3
+
+		local_manpower 					= 0.3
+		local_resources 				= 0.3
+		local_factories					= 0.3
+		local_building_slots_factor     = 0.3
 	}
 
 	ai_will_do = {
 		base = 0
+
 		modifier = {
-			check_variable = {
-				var = resistance
-				value = 25
-				compare = greater_than
+			check_variable = { resistance_target_without_law > 0.44}
+
+			set_temp_variable = { resistance_limit = 40 }
+			set_temp_variable = { requirement_limit = 0.65 }
+			if = {
+				limit = { occupation_law = metro_martial_law }
+				set_temp_variable = { resistance_limit = 35 }
+				set_temp_variable = { requirement_limit = 0.5 }
 			}
-			add = 50
-		}
-		modifier = {
-			FROM = {
-				has_manpower < 10
-			}
-			add = -500
-		}
-		modifier = {
-			check_variable = {
-				var = compliance
-				value = 60
-				compare = greater_than
-			}
-			add = -50
+			check_variable = { garrison_min_support_ratio > requirement_limit }
+			resistance > resistance_limit
+
+			add = 500
 		}
 	}
 }
