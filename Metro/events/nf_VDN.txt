@@ -21,7 +21,7 @@ country_event = { # Commonwealth Forms
 		#hidden_effect = { set_country_flag = vdnk_achievement }
 		#news_event = { id = global_event.51 days = 1 }
 
-		country_event = nf_VDNK.10
+		country_event = { id = nf_VDNK.10 hours = 20 }
 		ai_chance = { base = 2500 }
 	}
 }
@@ -49,14 +49,6 @@ country_event = { # Settlers Arrive
 
 	option = {
 		name = nf_VDNK.2.b
-		336 = { 
-			add_manpower = 50 
-			add_state_modifier = {
-				modifier = {
-					state_production_speed_industrial_complex_factor = 0.1
-				}
-			}
-		}
 	}
 }
 
@@ -255,6 +247,8 @@ country_event = { # Election
 		    }
 		}
 
+		add_stability = -0.1
+
 		trigger = {
 			has_country_flag = VDN_hunter_leadership_available_country_flag
 		}
@@ -408,22 +402,6 @@ country_event = {
 
 	option = {
 		name = nf_VDN_hunter.3.a
-
-		VDN_hunter = {
-			add_corps_commander_role = {
-				traits = { named_character spartan_personality_trait }
-				skill = 4
-				legacy_id=-1
-				attack_skill = 3
-				defense_skill = 3
-				planning_skill = 3
-				logistics_skill = 2
-			}
-		}
-	}
-
-	option = {
-		name = nf_VDN_hunter.3.b
 
 		VDN_hunter = {
 			add_corps_commander_role = {
@@ -822,18 +800,21 @@ country_event = {
 		## Send soldiers into tunnels / random chance of succeeding or failing
 		random_list = {
 			50 = {	## Successful excursion
-				country_event = { id = nf_VDN_mutant_incursion.2 hours = 4 }
+				country_event = { id = nf_VDN_mutant_incursion.2 hours = 36 }
 			}
 			50 = {	## Fall-back!
-				country_event = { id = nf_VDN_mutant_incursion.3 hours = 4 }
+				country_event = { id = nf_VDN_mutant_incursion.3 hours = 36 }
 			}
 		}
 	}
 
 	option = {
-		name = nf_VDN_mutant_incursion.1.a
-		
-		## Start borderwar 
+		name = nf_VDN_mutant_incursion.1.b
+		custom_effect_tooltip = nf_VDN_mutant_incursion.1.b.tt
+
+		hidden_effect = {
+			country_event = { id = nf_VDN_mutant_incursion.4 hours = 36 }
+		}
 	}
 }
 
@@ -880,7 +861,57 @@ country_event = {
 
 	option = {
 		name = nf_VDN_mutant_incursion.3.a
+		custom_effect_tooltip = nf_VDN_mutant_incursion.1.b.tt
+
+		hidden_effect = {
+			country_event = { id = nf_VDN_mutant_incursion.4 hours = 36 }
+		}
 		add_war_support = -0.025
+	}
+}
+
+country_event = { 
+    id = nf_VDN_mutant_incursion.4
+    title = nf_VDN_mutant_incursion.4.t
+    desc = nf_VDN_mutant_incursion.4.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = nf_VDN_mutant_incursion.4.a
+		if = {
+			limit = {
+				5 = {
+					is_owned_by = RUI
+				}
+			}
+			hidden_effect = {
+				5 = { trigger_infestation = yes }
+			}
+		}
+		else_if = {
+			limit = {
+				5 = { is_owned_by = VDN }
+				216 = { is_owned_by = RUI }
+			}
+			hidden_effect = {
+				216 = { trigger_infestation = yes }
+			}
+		}
+		else_if = {
+			limit = {
+				5 = { is_owned_by = VDN }
+				216 = { is_owned_by = VDN }
+			}
+			hidden_effect = {
+				207 = { trigger_infestation = yes }
+			}
+		}
 	}
 }
 
