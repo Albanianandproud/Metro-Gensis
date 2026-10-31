@@ -1380,48 +1380,37 @@ HNZ_expand_influence_category = {
 		}
 		visible = {
 			FROM = {
-				NOT = {
-					has_completed_focus = satellite_equal_opportunity_member
+				is_neighbor_of = ROOT
+				if = {
+					limit = {
+						is_ai = no
+					}
+					NOT = {
+						has_completed_focus = satellite_equal_opportunity_member
+					}
 				}
 			}
 		}
 		available = {
-			HNZ = { NOT = { has_war_with = FROM } }
+			NOT = { has_war_with = FROM } 
 			FROM = { 
+				is_major = no
 				is_subject = no
 				is_in_faction = no
-			}
-			count_triggers = {
-				amount = 2 
-				FROM = {
-					strength_ratio = {
-					    tag = HNZ
-					    ratio < 0.2
-					}
+				strength_ratio = {
+				    tag = HNZ
+				    ratio < 0.25
 				}
-				FROM = {
-					ic_ratio = {
-					    tag = HNZ
-					    ratio < 0.25
-					}
+				ic_ratio = {
+				    tag = HNZ
+				    ratio < 0.25
 				}
 			}
 		}
-		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 1500 }
-			check_variable = {
-				bullet > temp_bullet_cost
-			}
-		}
-		custom_cost_text = "bullet_decisions_cost_text"
-		complete_effect = {
-			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -1500 }
-				add_bullet_with_tooltip_effect = yes
-			}
-		}
-		days_remove = 60
-		fire_only_once = yes
+		cost = 200
+		days_remove = 21
+		fire_only_once = no
+		days_re_enable = 180
 		remove_effect = {
 			FROM = {
 				country_event = {
@@ -1450,51 +1439,100 @@ HNZ_annex_puppet_category = {
 			}
 		}
 		available = {
-			NOT = { has_country_flag = HNZ_already_annexing_station }
-			count_triggers = {
-				amount = 2 
-				FROM = {
-					strength_ratio = {
-					    tag = HNZ
-					    ratio < 0.2
-					}
-				}
-				FROM = {
-					ic_ratio = {
-					    tag = HNZ
-					    ratio < 0.2
-					}
-				}
+			NOT = {
+				has_country_flag = HNZ_already_annexing_station 
+			}
+			FROM = {
+				has_autonomy_state = autonomy_hanza_satellite_dependent
 			}
 		}
-		custom_cost_trigger = {
-			set_temp_variable = { temp_bullet_cost = 2000 }
-			check_variable = {
-				bullet > temp_bullet_cost
-			}
-		}
-		custom_cost_text = "bullet_decisions_cost_text"
+		cost = HNZ_annex_puppets_cost
+
 		complete_effect = {
 			hidden_effect = { 
-				set_temp_variable = { bullet_to_gain = -2000 }
-				add_bullet_with_tooltip_effect = yes
-
 				set_country_flag = HNZ_already_annexing_station
 			}
 		}
-		days_remove = 90
+
+		days_remove = HNZ_annex_puppets_days
 		fire_only_once = yes
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
 		remove_effect = {
 			annex_country = {
 				target = FROM
 				transfer_troops = yes
 			}
-			add_threat = 2.5
+			FROM = {
+				every_core_state = {
+					add_core_of = ROOT
+				}
+			}
+			
+			add_named_threat = {
+			    threat = 2.5
+			    name = HNZ_annex_puppet_named_threat
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			every_country = {
+				limit = {
+					NOT = {
+						has_country_flag = is_mutant_nation
+						has_country_flag = is_savage_nation
+					}
+				}
+				news_event = { 
+					id = global_event.73
+					hours = 12
+				}
+			}
 
 			hidden_effect = {
 				clr_country_flag = HNZ_already_annexing_station
 			}
 		}
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+}
+HNZ_puppet_training_category = {
+	HNZ_train_puppets = {
+		target_array = ROOT.subjects
+		target_trigger = {
+			FROM = {
+				has_civil_war = no
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = HNZ_already_annexing_station 
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { temp_bullet_cost = 500 }
+			check_variable = {
+				bullet > temp_bullet_cost
+			}
+		}
+		custom_cost_text = "bullet_decisions_cost_text"
+		fire_only_once = no
+		complete_effect = {
+			hidden_effect = { 
+				set_temp_variable = { bullet_to_gain = -500 }
+				add_bullet_with_tooltip_effect = yes
+			}
+			FROM = { add_timed_idea = { idea = HNZ_puppet_autonomy_idea days = 120 } }
+		}
+
+		days_re_enable = 120
+		fire_only_once = no
+
+
 		ai_will_do = {
 			base = 5
 		}
