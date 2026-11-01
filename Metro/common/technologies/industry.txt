@@ -27,8 +27,9 @@
 @TECH_COLUMN_REFINERY = 15
 @TECH_COLUMN_REFINERY_FUEL = 14
 @TECH_COLUMN_REFINERY_COST = 16
-@TECH_COLUMN_ELECTRICITY = 18
-@TECH_COLUMN_FARMING = 20
+@TECH_COLUMN_ELECTRICITY_EFFICIENCY = 18
+@TECH_COLUMN_ELECTRICITY = 20
+@TECH_COLUMN_FARMING = 22
 
 technologies = {
 
@@ -1503,7 +1504,7 @@ technologies = {
 
 	tech_refinery_2 = {
 		
-		production_speed_synthetic_refinery_factor = 0.1
+		production_speed_synthetic_refinery_factor = 0.15
 
         on_research_complete = {
 			modify_building_resources = {
@@ -1512,15 +1513,14 @@ technologies = {
     			amount = 1
 			}
 
-			#modify_building_resources = {
-    		#	building = synthetic_refinery
-    		#	resource = gasoline
-    		#	amount = 2
-			#}
-			
+			modify_building_resources = {
+    			building = synthetic_refinery
+    			resource = gasoline
+    			amount = 1
+			}
 		}
 
-		fuel_gain_factor = 0.2
+		fuel_gain_factor = 0.33
 
 		on_research_complete = {
 			add_to_variable = {
@@ -1557,15 +1557,22 @@ technologies = {
 
 	tech_refinery_fuel_1 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
-		#fuel_gain_factor = 0.25
+		#production_speed_synthetic_refinery_factor = 0.15
 
 		enable_building = {
             building = synthetic_refinery 
             level = 2
         }
 
-		fuel_gain_factor = 0.2
+        on_research_complete = {
+			modify_building_resources = {
+    			building = synthetic_refinery
+    			resource = gasoline
+    			amount = 1
+			}
+		}
+
+		#fuel_gain_factor = 0.33
 
 		on_research_complete = {
 			add_to_variable = {
@@ -1601,15 +1608,22 @@ technologies = {
 
 	tech_refinery_fuel_2 = {
 
-		production_speed_synthetic_refinery_factor = 0.1
-		#fuel_gain_factor = 0.25
+		#production_speed_synthetic_refinery_factor = 0.15
 
 		enable_building = {
             building = synthetic_refinery 
             level = 3
         }
 
-		fuel_gain_factor = 0.2
+       on_research_complete = {
+			modify_building_resources = {
+    			building = synthetic_refinery
+    			resource = gasoline
+    			amount = 1
+			}
+		}
+
+		#fuel_gain_factor = 0.33
 
 		on_research_complete = {
 			add_to_variable = {
@@ -1651,6 +1665,8 @@ technologies = {
 			}
 		}
 
+		#fuel_gain_factor = 0.33
+
 		XOR = {
             tech_refinery_fuel_1
         }
@@ -1685,7 +1701,7 @@ technologies = {
             level = 3
         }
 
-		on_research_complete = {
+		 on_research_complete = {
 			modify_building_resources = {
     			building = synthetic_refinery
     			resource = chemicals
@@ -2454,6 +2470,11 @@ technologies = {
 			leads_to_tech = tech_energy_3
 			research_cost_coeff = 1
 		}
+
+		path = {
+			leads_to_tech = tech_energy_efficiency_1
+			research_cost_coeff = 1
+		}
 		
 		research_cost = 2
 		start_year = 2030
@@ -2523,6 +2544,82 @@ technologies = {
 		folder = {
 			name = industry_folder
 			position = { x = @TECH_COLUMN_ELECTRICITY  y = @TECH_YEAR_2034_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			energy
+		}
+	}
+
+	tech_energy_efficiency_1 = {
+
+		#energy_gain_factor = 0.33
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
+		}
+
+		path = {
+			leads_to_tech = tech_energy_efficiency_2
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2032
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY_EFFICIENCY  y = @TECH_YEAR_2032_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			energy
+		}
+	}
+
+	tech_energy_efficiency_2 = {
+
+		#energy_gain_factor = 0.33
+
+		production_speed_fuel_silo_factor = 0.15
+
+		path = {
+			leads_to_tech = tech_energy_efficiency_3
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2034
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY_EFFICIENCY  y = @TECH_YEAR_2034_Y }
+		}
+		
+		ai_will_do = { factor = 2 }
+		
+		categories = {
+			energy
+		}
+	}
+
+	tech_energy_efficiency_3 = {
+
+		energy_gain_factor = 0.33
+
+		#production_speed_fuel_silo_factor = 0.15
+		
+		research_cost = 2
+		start_year = 2036
+		folder = {
+			name = industry_folder
+			position = { x = @TECH_COLUMN_ELECTRICITY_EFFICIENCY  y = @TECH_YEAR_2036_Y }
 		}
 		
 		ai_will_do = { factor = 2 }
