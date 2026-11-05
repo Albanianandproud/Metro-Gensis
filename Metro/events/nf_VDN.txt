@@ -252,6 +252,8 @@ country_event = { # Election
 		trigger = {
 			has_country_flag = VDN_hunter_leadership_available_country_flag
 		}
+
+		country_event = nf_VDN_hunter.7
 		ai_chance = { base = 2500 }
 	}
 }
@@ -400,7 +402,6 @@ country_event = {
 
 	option = {
 		name = nf_VDN_hunter.1.a
-		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
 		set_temp_variable = { temp_popularity = 0.1 }
 		add_country_ruling_party_popularity = yes
 		
@@ -411,9 +412,11 @@ country_event = {
 		custom_effect_tooltip = nf_VDN_hunter.1.a.tt
 		set_temp_variable = { temp_popularity = -0.1 }
 		add_country_ruling_party_popularity = yes
+		set_country_flag = VDN_hunter_leadership_available_country_flag
 	}
 }
 
+## Depreciated. WIP
 country_event = {
     id = nf_VDN_hunter.2
     title = nf_VDN_hunter.2.t
@@ -443,7 +446,9 @@ country_event = {
 
 	option = {
 		name = nf_VDN_hunter.3.a
-
+		trigger = {
+			has_country_flag = VDN_hunter_leadership_available_country_flag
+		}
 		VDN_hunter = {
 			add_corps_commander_role = {
 				traits = { named_character spartan_personality_trait }
@@ -455,6 +460,12 @@ country_event = {
 				logistics_skill = 2
 			}
 		}
+	}
+
+	option = {
+		name = nf_VDN_hunter.3.b
+		add_stability = 0.1
+		add_political_power = 100
 	}
 }
 
@@ -549,24 +560,25 @@ country_event = {
     		popularity = 0.15
 		}
 		custom_effect_tooltip = generic_skip_one_line_tt
-		division_template = {
-			name = "Exhibition Stalkers"
-			priority = 1
-			template_counter = 0
-			regiments = {
-				special_forces = { x = 0 y = 0 }
-				special_forces = { x = 1 y = 0 }
-				special_forces = { x = 2 y = 0 }
-				special_forces = { x = 3 y = 0 }
-				special_forces = { x = 4 y = 0 }
-			}
-		}
-		capital_scope = {
-			create_unit = {
-				division = "name = \"Vengeance\" division_template = \"Exhibition Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
-				owner = ROOT
-			}
-		}
+		country_event = { id = nf_VDN_hunter.6 days = 20 }
+		#division_template = {
+		#	name = "Exhibition Stalkers"
+		#	priority = 1
+		#	template_counter = 0
+		#	regiments = {
+		#		special_forces = { x = 0 y = 0 }
+		#		special_forces = { x = 1 y = 0 }
+		#		special_forces = { x = 2 y = 0 }
+		#		special_forces = { x = 3 y = 0 }
+		#		special_forces = { x = 4 y = 0 }
+		#	}
+		#}
+		#capital_scope = {
+		#	create_unit = {
+		#		division = "name = \"Vengeance\" division_template = \"Exhibition Stalkers\" start_experience_factor = 1 start_equipment_factor = 1"
+		#		owner = ROOT
+		#	}
+		#}
 	}
 }
 
@@ -581,6 +593,51 @@ country_event = {
 
 	option = {
 		name = nf_VDN_hunter.6.a
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.7
+    title = nf_VDN_hunter.7.t
+    desc = nf_VDN_hunter.7.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.7.a
+		army_experience = 50
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.8
+    title = nf_VDN_hunter.8.t
+    desc = nf_VDN_hunter.8.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.8.a
+		add_stability = 0.05
+	}
+}
+
+country_event = { 
+    id = nf_VDN_hunter.9
+    title = nf_VDN_hunter.9.t
+    desc = nf_VDN_hunter.9.d
+    picture = "GFX_event (105)"
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nf_VDN_hunter.9.a
+		add_stability = 0.05
 	}
 }
 
@@ -772,6 +829,8 @@ country_event = {
 
 	option = {
 		name = nf_VDNK_darkones.1.a
+
+		VDN_mutant_incursion_reduce_timeout_days = yes
 		# 
 		SPT = { country_event = { id = nf_VDNK_darkones.2 days = 720 } }
 	}
@@ -790,11 +849,11 @@ country_event = { 	## SPT event / Retire Hunter as a leader / Advisor
 		name = nf_VDNK_darkones.2.a
 		custom_effect_tooltip = nf_VDNK_darkones.2.a.tt
 		retire_character = SPT_hunter
-		VDN = { country_event = { id = nf_VDNK_darkones.3 days = 20 } }
+		#VDN = { country_event = { id = nf_VDNK_darkones.3 days = 20 } }
 	}
 }
 
-country_event = { 	## Hunter Arrives to VDNKh
+country_event = { 	## Artyom Event Opening WIP
     id = nf_VDNK_darkones.3
     title = nf_VDNK_darkones.3.t
     desc = nf_VDNK_darkones.3.d
@@ -805,19 +864,6 @@ country_event = { 	## Hunter Arrives to VDNKh
 
 	option = {
 		name = nf_VDNK_darkones.3.a
-
-		add_advisor_role = {
-		    character = VDN_hunter
-		    activate = yes
-		    advisor = {
-		        slot = army_chief
-		        cost = 150
-		        idea_token = VDN_hunter
-		        traits = {
-		            _SPT_hunter_trait
-		        }
-		    }
-		}
 	}
 }
 

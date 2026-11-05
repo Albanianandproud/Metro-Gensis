@@ -784,6 +784,10 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
 			}
 		}
 		ai_will_do = {
@@ -807,6 +811,12 @@ focus_tree = {
 				ahead_reduction = 1
                 category = tooling
             }
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -829,6 +839,10 @@ focus_tree = {
 					type = industrial_complex
 					level = 2
 					instant_build = yes
+				}
+				add_resource = {
+					type = scrap
+					amount = 2
 				}
 			}
 		}
@@ -874,6 +888,12 @@ focus_tree = {
 				ahead_reduction = 1
                 category = construction
             }
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 2
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2314,7 +2334,12 @@ focus_tree = {
 			remove_ideas = VDN_lack_of_stalkers
 			custom_effect_tooltip = generic_skip_one_line_tt
 
-			country_event = nf_VDN_hunter.5
+			if = {
+				limit = {
+					has_country_flag = VDN_hunter_leadership_available_country_flag
+				}
+				country_event = nf_VDN_hunter.5
+			}
 
 			hidden_effect = {
 				if = {
@@ -2351,7 +2376,7 @@ focus_tree = {
 		completion_reward = {
 			## Botanical is shallow, so the station cannot be ACTIVELY properly recolonized
 			## however, give improvements somehow
-			country_event = nf_VDN_hunter.6
+			#country_event = nf_VDN_hunter.6
 		}
 		ai_will_do = {
 			factor = 10
@@ -2412,23 +2437,23 @@ focus_tree = {
 			factor = 5
 		}
 	}
-	focus = {
-		id = VDN_hunter_arrives_2
-		icon = GFX_HNZ_not_another_bloodbath
-		x = 0
-		y = 1
-		cost = 1
-		prerequisite = {
-			focus = VDN_hunter_arrives
-		}
-		relative_position_id = VDN_hunter_arrives
-		completion_reward = {
-			country_event = nf_VDN_hunter.2
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	#focus = {
+	#	id = VDN_hunter_arrives_2
+	#	icon = GFX_HNZ_not_another_bloodbath
+	#	x = 0
+	#	y = 1
+	#	cost = 1
+	#	prerequisite = {
+	#		focus = VDN_hunter_arrives
+	#	}
+	#	relative_position_id = VDN_hunter_arrives
+	#	completion_reward = {
+	#		country_event = nf_VDN_hunter.2
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
 	focus = {
 		id = VDN_hunter_arrives_3
 		icon = GFX_SPT_rangers_4
@@ -2436,7 +2461,7 @@ focus_tree = {
 		y = 2
 		cost = 1
 		prerequisite = {
-			focus = VDN_hunter_arrives_2
+			focus = VDN_hunter_arrives
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -2444,7 +2469,7 @@ focus_tree = {
 				has_country_flag = VDN_hunter_leadership_available_country_flag
 			}
 		}
-		relative_position_id = VDN_hunter_arrives_2
+		relative_position_id = VDN_hunter_arrives
 		completion_reward = {
 			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
 			country_event = nf_VDN_hunter.3
@@ -3538,13 +3563,13 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = VDN_future_content_update_tt
 			custom_effect_tooltip = generic_skip_one_line_tt
-			country_event = nf_VDN.1
+			country_event = nf_VDN_hunter.8
 			VDN_hunter = {
 				add_skill_level = 2	
 				add_attack = 2
 			}
 			custom_effect_tooltip = generic_skip_one_line_tt
-			add_research_slot = 1
+			#add_research_slot = 1
 		}
 		ai_will_do = {
 			factor = 5
@@ -3575,6 +3600,7 @@ focus_tree = {
     			amount = 50
     			track = doctrine_track_soldiers
 			}
+			country_event = nf_VDN_hunter.9
 		}
 		ai_will_do = {
 			factor = 10
