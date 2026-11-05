@@ -882,7 +882,7 @@ VDN_mutant_incursion_category = {
 			NOT = { has_country_flag = VDNK_threat_from_botanical }
 		}
 
-		days_mission_timeout = 180
+		days_mission_timeout = VDN_mutant_incursion_timeout_days
 		is_good = yes
 
 		cancel_trigger = {
@@ -938,7 +938,7 @@ VDN_mutant_incursion_category = {
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = VDN_mutant_incursion_countdown 
-				days = 45
+				days = VDN_mutant_incursion_increase_timeout_days
 			}
 		}
 
@@ -968,7 +968,7 @@ VDN_mutant_incursion_category = {
 		remove_effect = {
 			add_days_mission_timeout = {
 				mission = VDN_mutant_incursion_countdown 
-				days = 45
+				days = VDN_mutant_incursion_increase_timeout_days
 			}
 		}
 
@@ -1031,6 +1031,39 @@ VDN_mutant_incursion_category = {
 
 		remove_effect = {
 			add_command_power = 10
+		}
+	}
+}
+VDN_hydroelectricity_category_tooltip = {
+	VDN_hydroelectricity_build_hydroelectric_plant = {
+
+		icon = generic_construction
+
+		cost = 0
+		fire_only_once = yes
+
+		days_remove = 200
+
+		available = {
+			5 = { is_owned_by = ROOT }
+			has_civic_education_higher_4 = yes
+		}
+
+		modifier = {
+			civilian_factory_use = 8
+		}
+
+		complete_effect = {
+			5 = {
+				add_building_construction = {
+					type = hydroelectric_turbine
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		cancel_trigger = {
+			5 = { NOT = { is_owned_by = ROOT } }
 		}
 	}
 }

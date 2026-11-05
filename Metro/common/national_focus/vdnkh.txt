@@ -9,7 +9,7 @@ focus_tree = {
 	country = {
 		factor = 0
 		modifier = {
-			add = 0
+			add = 40
 			tag = VDN
 		}
 	}
@@ -365,7 +365,7 @@ focus_tree = {
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
 
-			unlock_decision_category_tooltip = VDN_commercialized_fungiculture
+			unlock_decision_category_tooltip = VDN_mushroom_trade_category
 			add_tech_bonus = {
 				bonus = 1
 				uses = 2
@@ -470,8 +470,13 @@ focus_tree = {
 		relative_position_id = VDN_health_hygiene
 		completion_reward = {
 			add_ideas = VDN_triage_hubs
+			custom_effect_tooltip = generic_skip_one_line_tt
 			capital_scope = {
 				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
 			}
 		}
 		ai_will_do = {
@@ -980,15 +985,19 @@ focus_tree = {
 			capital_scope = {
 				add_resource = {
 					type = scrap
-					amount = 4
+					amount = 5
 				}
 				add_resource = {
 					type = components
-					amount = 4
+					amount = 5
 				}
 				add_resource = {
 					type = alloys
-					amount = 4
+					amount = 5
+				}
+				add_resource = {
+					type = electronics
+					amount = 5
 				}
 			}
 		}
@@ -1089,6 +1098,9 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_economy_6
 			focus = VDN_economy_5
+		}
+		available = {
+			has_completed_focus = VDN_commonwealth_formed_focus_1
 		}
 		relative_position_id = VDN_economy_6
 		completion_reward = {
@@ -1260,6 +1272,18 @@ focus_tree = {
 					type = salvage_hub
 					level = 1
 					instant_build = yes
+				}
+				add_resource = {
+					type = scrap
+					amount = 1
+				}
+				add_resource = {
+					type = components
+					amount = 1
+				}
+				add_resource = {
+					type = alloys
+					amount = 1
 				}
 			}
 		}
@@ -1877,6 +1901,11 @@ focus_tree = {
 		available = {
 			has_completed_focus = VDN_the_VDNKH
 		}
+		offset = {
+			x = 0
+			y = -7
+			trigger = { has_country_flag = VDNK_threat_from_botanical }
+		}
 		#allow_branch = { 
 		#	if = {
 		#		limit = {
@@ -1905,6 +1934,18 @@ focus_tree = {
 			add_stability = 0.05
 			custom_effect_tooltip = generic_skip_one_line_tt
 			add_manpower = 10
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					has_active_mission = VDN_mutant_incursion_countdown
+				}
+				add_days_mission_timeout = {
+					mission = VDN_mutant_incursion_countdown 
+					days = VDN_mutant_incursion_increase_timeout_days
+				}
+			}
+			VDN_mutant_incursion_increase_timeout_days_tt = yes
 		}
 		ai_will_do = {
 			factor = 5
@@ -2274,6 +2315,18 @@ focus_tree = {
 			custom_effect_tooltip = generic_skip_one_line_tt
 
 			country_event = nf_VDN_hunter.5
+
+			hidden_effect = {
+				if = {
+					limit = {
+						date < 2034.1.1
+					}
+					country_event = {
+						id = nf_VDNK.11
+						random_days = 80
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2617,6 +2670,17 @@ focus_tree = {
 		relative_position_id = VDN_military_offence_2
 		completion_reward = {
 			VDN_commonwealth_army_dynamic_modifier_scripted_effect = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			capital_scope = {
+				add_resource = {
+					type = chemicals
+					amount = 2
+				}
+				add_resource = {
+					type = electronics
+					amount = 2
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -2697,6 +2761,20 @@ focus_tree = {
 				uses = 1
 				category = stalker
 			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					has_active_mission = VDN_mutant_incursion_countdown
+				}
+				add_days_mission_timeout = {
+					mission = VDN_mutant_incursion_countdown 
+					days = VDN_mutant_incursion_increase_timeout_days
+				}
+			}
+			VDN_mutant_incursion_increase_timeout_days_tt = yes
+
+			add_stability = -0.05
 		}
 		ai_will_do = {
 			factor = 10
@@ -2714,6 +2792,19 @@ focus_tree = {
 		relative_position_id = VDN_military_economy_6
 		completion_reward = {
 			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					has_active_mission = VDN_mutant_incursion_countdown
+				}
+				add_days_mission_timeout = {
+					mission = VDN_mutant_incursion_countdown 
+					days = VDN_mutant_incursion_increase_timeout_days
+				}
+			}
+			VDN_mutant_incursion_increase_timeout_days_tt = yes
+
+			add_stability = -0.05
 		}
 		ai_will_do = {
 			factor = 10
@@ -2736,6 +2827,19 @@ focus_tree = {
 				uses = 3
 				category = stalker
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					has_active_mission = VDN_mutant_incursion_countdown
+				}
+				add_days_mission_timeout = {
+					mission = VDN_mutant_incursion_countdown 
+					days = VDN_mutant_incursion_increase_timeout_days
+				}
+			}
+			VDN_mutant_incursion_increase_timeout_days_tt = yes
+
+			add_stability = -0.05
 		}
 		ai_will_do = {
 			factor = 10
@@ -2874,6 +2978,11 @@ focus_tree = {
 			has_completed_focus = VDN_the_VDNKH
 			ALK = { exists = yes }
 			RIZ = { exists = yes }
+		}
+		offset = {
+			x = 0
+			y = -7
+			trigger = { has_country_flag = VDNK_threat_from_botanical }
 		}
 		#allow_branch = { 
 		#	if = {
@@ -3181,7 +3290,11 @@ focus_tree = {
 		#}
 		relative_position_id = VDN_the_VDNKH
 		completion_reward = {
-			country_event = nf_VDN.1
+			custom_effect_tooltip = VDN_future_content_update_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 150
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_research_slot = 1
 		}
 		ai_will_do = {
 			factor = 5
@@ -3198,6 +3311,13 @@ focus_tree = {
 		}
 		relative_position_id = VDN_novo_homo
 		completion_reward = {
+			add_ideas = VDN_commonwealth_military
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_equipment_to_stockpile = {
+				type = infantry_gear_equipment_1
+				amount = 20
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3214,6 +3334,21 @@ focus_tree = {
 		}
 		relative_position_id = VDN_novo_homo
 		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = generic_skip_one_line_tt
+			VDN_mushroom_cultivations_dynamic_modifier_communist_scripted_effect = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			capital_scope = {
+				add_resource = {
+					type = scrap
+					amount = 8
+				}
+			}
+			modify_building_resources = {
+				building = fuel_silo
+				resource = oil
+				amount = 1
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3230,6 +3365,17 @@ focus_tree = {
 		}
 		relative_position_id = VDN_homo_1
 		completion_reward = {
+			custom_effect_tooltip = VDN_political_15_tt
+
+			multiply_variable = {
+				var = VDN_mushroom_trade_hanza_reward value = VDN_mushroom_trade_reward_mult
+			}
+			multiply_variable = {
+				var = VDN_mushroom_trade_independent_reward value = VDN_mushroom_trade_reward_mult
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { bullet_to_gain = 250 }
+			add_bullet_with_tooltip_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -3246,6 +3392,15 @@ focus_tree = {
 		}
 		relative_position_id = VDN_novo_homo
 		completion_reward = {
+			add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                category = farming
+            }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			capital_scope = {
+				add_extra_state_shared_building_slots = 5
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3262,6 +3417,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_homo_1
 		completion_reward = {
+			unlock_decision_category_tooltip = VDN_hydroelectricity_category_tooltip
 		}
 		ai_will_do = {
 			factor = 10
@@ -3276,8 +3432,12 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_homo_2
 		}
+		available = {
+			always = no 
+		}
 		relative_position_id = VDN_homo_2
 		completion_reward = {
+			custom_effect_tooltip = VDN_dark_ones_tt
 		}
 		ai_will_do = {
 			factor = 10
@@ -3294,6 +3454,7 @@ focus_tree = {
 		}
 		relative_position_id = VDN_economic_ties_1
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_consumer_goods_scripted_effect = yes
 		}
 		ai_will_do = {
 			factor = 10
@@ -3310,6 +3471,18 @@ focus_tree = {
 		}
 		relative_position_id = VDN_economic_ties_1
 		completion_reward = {
+			VDN_mushroom_cultivations_dynamic_modifier_construction_scripted_effect = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			capital_scope = {
+				add_resource = {
+					type = components
+					amount = 6
+				}
+				add_resource = {
+					type = alloys
+					amount = 6
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3321,6 +3494,11 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 6.5
+		available = {
+			424 = { is_core_of = ROOT }
+			
+			317 = { is_core_of = ROOT }
+		}
 		prerequisite = {
 			focus = VDN_economic_ties_2
 			focus = VDN_economic_ties_3
@@ -3358,11 +3536,15 @@ focus_tree = {
 		#}
 		relative_position_id = VDN_novo_homo
 		completion_reward = {
+			custom_effect_tooltip = VDN_future_content_update_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
 			country_event = nf_VDN.1
 			VDN_hunter = {
 				add_skill_level = 2	
 				add_attack = 2
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_research_slot = 1
 		}
 		ai_will_do = {
 			factor = 5
@@ -3388,6 +3570,10 @@ focus_tree = {
 				type = conventional_infantry_equipment_3
 				amount = 20
 				producer = RUS
+			}
+			add_mastery = {
+    			amount = 50
+    			track = doctrine_track_soldiers
 			}
 		}
 		ai_will_do = {
@@ -3483,6 +3669,10 @@ focus_tree = {
 		relative_position_id = VDN_macrophage
 		completion_reward = {
 			VDN_commonwealth_army_dynamic_modifier_efficiency_scripted_effect = yes
+			add_mastery = {
+    			amount = 50
+    			track = doctrine_track_command
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3500,6 +3690,10 @@ focus_tree = {
 		relative_position_id = VDN_threat_of_the_dark_ones
 		completion_reward = {
 			add_war_support = 0.1
+			add_mastery = {
+    			amount = 50
+    			track = doctrine_track_tactics
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3572,52 +3766,58 @@ focus_tree = {
 		prerequisite = {
 			focus = VDN_macrophage_4
 		}
-		relative_position_id = VDN_threat_of_the_dark_ones_1
-		completion_reward = {
-			##
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_artyom
-		icon = GFX_VDN_flag
-		x = -4
-		y = 2
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_homo_2
-			focus = VDN_threat_of_the_dark_ones_1
+		available = {
+			always = no 
 		}
 		relative_position_id = VDN_threat_of_the_dark_ones_1
 		completion_reward = {
+			custom_effect_tooltip = VDN_dark_ones_tt
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	focus = {
-		id = VDN_the_tower
-		icon = GFX_VDN_flag
-		x = 0
-		y = 2
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_homo_3
-			focus = VDN_artyom
-		}
-		prerequisite = {
-			focus = VDN_eliminate_dark_ones
-			focus = VDN_artyom
-		}
-		relative_position_id = VDN_artyom
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	#focus = {
+	#	id = VDN_artyom
+	#	icon = GFX_VDN_flag
+	#	x = -4
+	#	y = 2
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_homo_2
+	#		focus = VDN_threat_of_the_dark_ones_1
+	#	}
+	#	available = {
+	#		always = no
+	#	}
+	#	relative_position_id = VDN_threat_of_the_dark_ones_1
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_the_tower
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 2
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_homo_3
+	#		focus = VDN_artyom
+	#	}
+	#	prerequisite = {
+	#		focus = VDN_eliminate_dark_ones
+	#		focus = VDN_artyom
+	#	}
+	#	relative_position_id = VDN_artyom
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
 
 	focus = {
 		id = VDN_humanitys_fate
@@ -4224,7 +4424,17 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_7
 		completion_reward = {
-			317 = { set_state_category = city }
+			317 = { 
+				set_state_category = city 
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = components
+					amount = 4
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -4247,7 +4457,17 @@ focus_tree = {
 		}
 		relative_position_id = VDN_commonwealth_formed_focus_4_economic_5
 		completion_reward = {
-			424 = { set_state_category = city }
+			424 = { 
+				set_state_category = city 
+				add_resource = {
+					type = scrap
+					amount = 4
+				}
+				add_resource = {
+					type = components
+					amount = 4
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
