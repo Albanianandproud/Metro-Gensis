@@ -1707,28 +1707,36 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6.5
-		available = { NOT = { has_war = yes } }
+		available = { 
+			NOT = { has_war = yes } 
+			has_tech = clothing_kits_2030 
+		}
 		cancel_if_invalid = yes
 		prerequisite = { focus = MDR_question_of_servitude }
 		relative_position_id = MDR_question_of_servitude
 		completion_reward = {
 			add_ideas = MDR_regular_OMON_expansion
-			division_template = {
-				name = "Regulars"
-				priority = 1
-				template_counter = 0
-				regiments = {
-					regulars = { x = 0 y = 0 }
-					regulars = { x = 1 y = 0 }
-					regulars = { x = 2 y = 0 }
-					regulars = { x = 3 y = 0 }
-					regulars = { x = 4 y = 0 }
+			if = {
+				limit = {
+					has_tech = clothing_kits_2030
 				}
-			}
-			capital_scope = {
-				create_unit = {
-					division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
-					owner = ROOT
+				division_template = {
+					name = "Regulars"
+					priority = 1
+					template_counter = 0
+					regiments = {
+						regulars = { x = 0 y = 0 }
+						regulars = { x = 1 y = 0 }
+						regulars = { x = 2 y = 0 }
+						regulars = { x = 3 y = 0 }
+						regulars = { x = 4 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1st Standing Guard\" division_template = \"Regulars\" start_experience_factor = 0.24 start_equipment_factor = 1"
+						owner = ROOT
+					}
 				}
 			}
 		}

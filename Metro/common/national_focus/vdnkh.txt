@@ -112,7 +112,7 @@ focus_tree = {
 		relative_position_id = VDN_branching_out
 		completion_reward = {
 			add_stability = -0.05
-			add_political_power = -10
+			add_political_power = -20
 			division_template = {
 				name = "Tunnel Sentries"
 				priority = 1
@@ -271,6 +271,7 @@ focus_tree = {
 				idea = VDNKh_funding_expansions
 				months = 6
 			}
+			add_political_power = -20
 		}
 		ai_will_do = {
 			factor = 10
@@ -366,9 +367,11 @@ focus_tree = {
 		completion_reward = {
 
 			unlock_decision_category_tooltip = VDN_mushroom_trade_category
+			custom_effect_tooltip = VDN_commercialized_fungiculture_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_tech_bonus = {
 				bonus = 1
-				uses = 2
+				uses = 3
 				ahead_reduction = 1
 				category = farming
 			}
@@ -2029,7 +2032,7 @@ focus_tree = {
 		cost = 6.5
 		prerequisite = {
 			focus = VDN_threat_from_botanical
-			focus = VDN_hunter_arrives_2
+			#focus = VDN_hunter_arrives_2
 		}
 		available = {
 			set_temp_variable = { has_specific_amount_of_bullet = 50 }
@@ -2426,6 +2429,11 @@ focus_tree = {
 				tooltip = VDN_hunter_arrival_tooltip
 				has_country_flag = VDN_hunter_arrival_country_flag
 			}
+		}
+		offset = {
+			x = 0
+			y = -7
+			trigger = { has_country_flag = VDNK_threat_from_botanical }
 		}
 		completion_reward = {
 			country_event = nf_VDN_hunter.1
@@ -3151,8 +3159,23 @@ focus_tree = {
 		relative_position_id = VDN_commonwealth
 		completion_reward = {
 			custom_effect_tooltip = VDNK_commonwealth_forming
+			custom_effect_tooltip = generic_skip_one_line_tt
 			RIZ = { add_to_tech_sharing_group = VDN_faction_tech_group }
 			ALK = { add_to_tech_sharing_group = VDN_faction_tech_group }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			every_country = {
+				limit = {
+					original_tag = ALK
+					original_tag = RIZ
+					original_tag = VDN
+				}
+				add_political_power = 75
+					add_tech_bonus = {
+					bonus = 0.75
+					uses = 1
+					category = support_tech
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 0
@@ -3845,237 +3868,237 @@ focus_tree = {
 	#	}
 	#}
 
-	focus = {
-		id = VDN_humanitys_fate
-		icon = GFX_VDN_flag
-		x = 0
-		y = 2
-		cost = 1
-		available = {
-			always = no
-		}
-		allow_branch = { 
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = obsolete_focus_branches_visibility
-						option = HIDE
-					}
-				}
-				has_country_flag = VDNK_threat_from_botanical
-			}
-		}
-		relative_position_id = VDN_the_tower
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 5
-		}
-	}
-	focus = {
-		id = VDN_and_nothing_was_learned
-		icon = GFX_VDN_flag
-		x = 5
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_humanitys_fate
-		}
-		available = {
-			has_country_flag = dark_ones_dead_country_flag
-		}
-		relative_position_id = VDN_humanitys_fate
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_commonwealth_grows
-		icon = GFX_VDN_flag
-		x = 2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_and_nothing_was_learned
-		}
-		relative_position_id = VDN_and_nothing_was_learned
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_commonwealth_grows_2
-		icon = GFX_VDN_flag
-		x = 0
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_commonwealth_grows
-		}
-		relative_position_id = VDN_commonwealth_grows
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_saviour_of_metro
-		icon = GFX_VDN_flag
-		x = -2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_and_nothing_was_learned
-		}
-		relative_position_id = VDN_and_nothing_was_learned
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_saviour_of_the_metro_2
-		icon = GFX_VDN_flag
-		x = 0
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_saviour_of_metro
-		}
-		relative_position_id = VDN_saviour_of_metro
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_commonwealth_last_light
-		icon = GFX_VDN_flag
-		x = 2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_commonwealth_grows_2
-		}
-		prerequisite = {
-			focus = VDN_saviour_of_the_metro_2
-		}
-		relative_position_id = VDN_saviour_of_the_metro_2
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_genesis
-		icon = GFX_VDN_flag
-		x = -4
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_humanitys_fate
-		}
-		available = {
-			has_country_flag = dark_ones_saved_country_flag
-		}
-		relative_position_id = VDN_humanitys_fate
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_our_future
-		icon = GFX_VDN_flag
-		x = 2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_genesis
-		}
-		relative_position_id = VDN_genesis
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_and_now
-		icon = GFX_VDN_flag
-		x = 0
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_our_future
-		}
-		relative_position_id = VDN_our_future
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_the_dark_ones
-		icon = GFX_VDN_flag
-		x = -2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_genesis
-		}
-		relative_position_id = VDN_genesis
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_the_dark_ones_2
-		icon = GFX_VDN_flag
-		x = 0
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_the_dark_ones
-		}
-		relative_position_id = VDN_the_dark_ones
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = VDN_dying_dreams
-		icon = GFX_VDN_flag
-		x = 2
-		y = 1
-		cost = 6.5
-		prerequisite = {
-			focus = VDN_the_dark_ones_2
-		}
-		prerequisite = {
-			focus = VDN_and_now
-		}
-		relative_position_id = VDN_the_dark_ones_2
-		completion_reward = {
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	#focus = {
+	#	id = VDN_humanitys_fate
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 2
+	#	cost = 1
+	#	available = {
+	#		always = no
+	#	}
+	#	allow_branch = { 
+	#		if = {
+	#			limit = {
+	#				has_game_rule = {
+	#					rule = obsolete_focus_branches_visibility
+	#					option = HIDE
+	#				}
+	#			}
+	#			has_country_flag = VDNK_threat_from_botanical
+	#		}
+	#	}
+	#	relative_position_id = VDN_the_tower
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_and_nothing_was_learned
+	#	icon = GFX_VDN_flag
+	#	x = 5
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_humanitys_fate
+	#	}
+	#	available = {
+	#		has_country_flag = dark_ones_dead_country_flag
+	#	}
+	#	relative_position_id = VDN_humanitys_fate
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_commonwealth_grows
+	#	icon = GFX_VDN_flag
+	#	x = 2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_and_nothing_was_learned
+	#	}
+	#	relative_position_id = VDN_and_nothing_was_learned
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_commonwealth_grows_2
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_commonwealth_grows
+	#	}
+	#	relative_position_id = VDN_commonwealth_grows
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_saviour_of_metro
+	#	icon = GFX_VDN_flag
+	#	x = -2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_and_nothing_was_learned
+	#	}
+	#	relative_position_id = VDN_and_nothing_was_learned
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_saviour_of_the_metro_2
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_saviour_of_metro
+	#	}
+	#	relative_position_id = VDN_saviour_of_metro
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_commonwealth_last_light
+	#	icon = GFX_VDN_flag
+	#	x = 2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_commonwealth_grows_2
+	#	}
+	#	prerequisite = {
+	#		focus = VDN_saviour_of_the_metro_2
+	#	}
+	#	relative_position_id = VDN_saviour_of_the_metro_2
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_genesis
+	#	icon = GFX_VDN_flag
+	#	x = -4
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_humanitys_fate
+	#	}
+	#	available = {
+	#		has_country_flag = dark_ones_saved_country_flag
+	#	}
+	#	relative_position_id = VDN_humanitys_fate
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_our_future
+	#	icon = GFX_VDN_flag
+	#	x = 2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_genesis
+	#	}
+	#	relative_position_id = VDN_genesis
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_and_now
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_our_future
+	#	}
+	#	relative_position_id = VDN_our_future
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_the_dark_ones
+	#	icon = GFX_VDN_flag
+	#	x = -2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_genesis
+	#	}
+	#	relative_position_id = VDN_genesis
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_the_dark_ones_2
+	#	icon = GFX_VDN_flag
+	#	x = 0
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_the_dark_ones
+	#	}
+	#	relative_position_id = VDN_the_dark_ones
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
+	#focus = {
+	#	id = VDN_dying_dreams
+	#	icon = GFX_VDN_flag
+	#	x = 2
+	#	y = 1
+	#	cost = 6.5
+	#	prerequisite = {
+	#		focus = VDN_the_dark_ones_2
+	#	}
+	#	prerequisite = {
+	#		focus = VDN_and_now
+	#	}
+	#	relative_position_id = VDN_the_dark_ones_2
+	#	completion_reward = {
+	#	}
+	#	ai_will_do = {
+	#		factor = 10
+	#	}
+	#}
 
 	## VDKH Form Branch
 
