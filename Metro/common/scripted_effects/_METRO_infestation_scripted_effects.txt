@@ -1,6 +1,8 @@
 trigger_infestation = {
 	transfer_state_to = ZZY
 	create_infest_unit = yes
+	set_resistance = 0 
+	set_compliance = 0
 }
 
 create_infest_unit = {
@@ -260,5 +262,13 @@ mutants_automatic_peace = {
 			}
 		}
 		white_peace = ZZY
+		every_state = {
+    	    limit = {
+    	        is_controlled_by = ROOT
+    	        NOT = { is_owned_by = ZZY }
+    	    }
+
+    	    transfer_state_to = ROOT
+    	}
 	}
 }
