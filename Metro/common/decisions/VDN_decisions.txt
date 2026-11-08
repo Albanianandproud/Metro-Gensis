@@ -1019,10 +1019,14 @@ VDN_mutant_incursion_category = {
 
 		available = {
 			has_completed_focus = VDN_fighting_tooth_and_nail
+
+			307 = {
+				is_owned_by = RUI
+			}
 		}
 
 		custom_cost_trigger = {
-			set_temp_variable = { temp_command_power_cost = 50 }
+			set_temp_variable = { temp_command_power_cost = 75 }
 			check_variable = {
 				command_power > temp_command_power_cost
 			}
@@ -1033,12 +1037,36 @@ VDN_mutant_incursion_category = {
 
 		complete_effect = {
 			hidden_effect = {
-				add_command_power = -50
+				add_command_power = -75
 			}
 		}
 
 		remove_effect = {
-			add_command_power = 10
+			transfer_state = 307
+			307 = {
+				set_compliance = 25
+				remove_dynamic_modifier = { modifier = infested_tunnel_modifier  }
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					216 = {
+						is_owned_by = RUI
+					}
+				}
+				transfer_state = 216
+				216 = { set_compliance = 25 }
+			}
+
+			if = {
+				limit = {
+					5 = {
+						is_owned_by = RUI
+					}
+				}
+				transfer_state = 5
+				5 = { set_compliance = 25 }
+			}
 		}
 	}
 }
@@ -1053,7 +1081,7 @@ VDN_hydroelectricity_category_tooltip = {
 		days_remove = 200
 
 		available = {
-			5 = { is_owned_by = ROOT }
+			5 = { is_owned_by = ROOT is_core_of = ROOT }
 			has_civic_education_higher_4 = yes
 			336 = {
 				electronics > 14
