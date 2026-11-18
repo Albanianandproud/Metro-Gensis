@@ -38,9 +38,17 @@ country_event = {
 		}
 		else_if = {
 			limit = { 
-				has_country_flag = can_do_advanced_education 
-				has_civic_education_higher_4 = yes
-			} 
+				OR = {
+					AND = {
+					has_country_flag = can_do_advanced_education 
+					has_civic_education_higher_4 = yes
+					}
+					AND = {
+					has_country_flag = civic_unlock_tier_6
+					has_idea = civics_education_level_5
+					}
+				}
+			}
 	
 			upgrade_education_tier_advanced = yes
 			effect_tooltip = {
