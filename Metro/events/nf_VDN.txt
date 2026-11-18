@@ -386,6 +386,7 @@ country_event = {
     			ideology = dictatorial
     			long_name = VDN_dictatorial_hunter_long
     			name = VDN_dictatorial_hunter
+				set_country_flag = VDN_hunter_arrival_country_flag
 			}
 
 			add_country_leader_role = {
@@ -413,6 +414,7 @@ country_event = {
 		set_temp_variable = { temp_popularity = -0.1 }
 		add_country_ruling_party_popularity = yes
 		set_country_flag = VDN_hunter_leadership_available_country_flag
+		complete_national_focus = VDN_hunter_arrives
 	}
 }
 
@@ -822,10 +824,12 @@ country_event = {
     picture = "GFX_event (105)"
 
 	trigger = {
+		tag = VDN
         threat > 0.4
 		has_global_flag = darkones_emergence_global_flag
     }
 	fire_only_once = yes
+	mean_time_to_happen = { days = 1 }
 
 	option = {
 		name = nf_VDNK_darkones.1.a
@@ -849,7 +853,7 @@ country_event = { 	## SPT event / Retire Hunter as a leader / Advisor
 		name = nf_VDNK_darkones.2.a
 		custom_effect_tooltip = nf_VDNK_darkones.2.a.tt
 		retire_character = SPT_hunter
-		#VDN = { country_event = { id = nf_VDNK_darkones.3 days = 20 } }
+		VDN = { country_event = { id = nf_VDN_hunter.1 days = 20 } }
 	}
 }
 
