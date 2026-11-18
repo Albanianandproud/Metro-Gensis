@@ -81,16 +81,25 @@ education_practise = {
 	improve_education_normal_advanced = {
 
 		allowed = {}
-
+## Hi, Jiven here, this mess is an attempt to make the later research laws achievable for the people who can get them, but also not let people get cutting edge who shouldn't be able to
 		available = {
 			custom_trigger_tooltip = {
    				tooltip = is_not_bandit_nation
    				NOT = { has_country_flag = is_bandit_nation }
+				hidden_trigger = { NOT = { has_idea = civics_education_level_7 } }
    			}
    			custom_trigger_tooltip = {
    				tooltip = has_civics_education_level_5
-				has_idea = civics_education_level_5
-				has_country_flag = civic_unlock_tier_6
+					OR = {
+						AND = {
+							has_country_flag = civic_unlock_tier_6 
+							has_idea = civics_education_level_5
+						}
+						AND = {
+							has_country_flag = can_do_advanced_research 
+							has_idea = has_civic_education_higher_4
+						}
+					}
    			}
 		}
 
